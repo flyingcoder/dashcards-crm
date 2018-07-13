@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    Fresh VUE Application
     <router-view></router-view>
   </v-app>
 </template>
