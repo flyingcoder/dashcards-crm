@@ -1,0 +1,100 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "./variables";
+
+// Vuetify
+@import "~vuetify/dist/vuetify.css";
+
+// General 
+@import "global/general";
+
+// Header 
+@import "global/header";
+
+// Push Menu 
+@import "global/push-menu";
+
+// Sidebar 
+@import "./global/sidebar";
+
+// Login 
+@import "pages/login";
+
+// Dashboard 
+@import "pages/dashboard";
+
+// Projects 
+@import "pages/projects";
+
+// Project HQ
+// @import "project-hq/menu";
+// @import "project-hq/overview";
+// @import "project-hq/files";
+// @import "project-hq/milestones";
+// @import "project-hq/tasks";
+// @import "project-hq/messages";
+// @import "project-hq/invoices";
+// @import "project-hq/members";
+// @import "project-hq/timers";
+// @import "project-hq/reports";
+
+// Clients
+@import "pages/clients";
+
+// Calendar
+@import "pages/calendar";
+
+// Milestones Template
+@import "pages/milestones";
+
+// Forms
+@import "pages/forms";
+
+// Invoice
+@import "pages/invoice";
+
+// Payments
+@import "pages/payments";
+
+// Timers
+@import "pages/timers";
+
+// Cloud
+@import "pages/cloud";
+
+// Teams
+@import "pages/teams";
+@import "pages/profile";
+
+// Groups
+@import "pages/groups";
+
+// Chat
+@import "pages/chat";
+
+// Reports
+@import "pages/reports";
+
+// Supports
+@import "pages/support";
+
+// Bugs
+@import "pages/bugs";
+
+// Services
+@import "pages/services";
+
+// Settings
+@import "pages/settings";
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.el-loading-mask {
+  z-index: 500 !important;
+}
