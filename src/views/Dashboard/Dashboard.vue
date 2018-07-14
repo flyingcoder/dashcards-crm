@@ -1,7 +1,7 @@
 <template>
     <div class="dashboard__container">
         <div class="d__header"><dashboard-header></dashboard-header></div>
-        <div class="d__sidebar">SIDEBAR</div>
+        <div class="d__sidebar"><dashboard-sidebar></dashboard-sidebar></div>
         <div class="d__content">CONTENT</div>
     </div>
 </template>
