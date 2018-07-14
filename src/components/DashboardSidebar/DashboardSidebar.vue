@@ -11,15 +11,17 @@
 
         <v-list class="s__items">
             <v-list-tile
+                class="s__list"
                 v-for="item in items"
                 :key="item.title"
             >
-                <v-list-tile-action>
-                    <img :src="item.icon" />
+                <!-- <div class="s__icons" fill-height> -->
+                <v-list-tile-action class="s__icons">
+                    <img class="responsive-img" :src="item.icon" />
                 </v-list-tile-action>
 
-                <v-list-tile-content>
-                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                <v-list-tile-content class="s__content">
+                    <v-list-tile-title class="s__title">{{ item.title }}</v-list-tile-title>
                 </v-list-tile-content>
             </v-list-tile>
         </v-list>
