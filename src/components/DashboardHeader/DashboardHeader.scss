@@ -1,0 +1,22 @@
+.header {
+  display: grid;
+  grid-template-areas: 's s s s s w w w w w d d';
+  height: 100%;
+  width: 100%;
+}
+
+.h__search {
+  grid-area: s;
+  background: #8b94bf;
+}
+
+.h__widgets {
+  grid-area: w;
+  background: #01a7e5;
+}
+
+.h__dropdown {
+  grid-area: d;
+  background: #313751;
+  color: white;
+}
