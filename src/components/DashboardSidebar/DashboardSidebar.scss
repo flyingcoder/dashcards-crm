@@ -6,15 +6,18 @@
 }
 
 .s__title {
-  grid-area: 1 / 1 / -1 / span 1;
+  grid-area: 1 / 1 / 1 / span 1;
   background: #6a7784;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 1fr;
 }
 
 .t__logo {
   grid-area: 1 / 1 / span 10 / -1;
   background: #dae1e7;
+  display: grid;
+  grid-template-columns: 20px [end];
 }
 
 .t__hamburger {
@@ -26,4 +29,10 @@
 .s__items {
   grid-area: 2 / 1 / -1 / -1;
   background: chartreuse;
+}
+
+.responsive-img {
+  width: 65%;
+  height: auto;
+  grid-area: end;
 }
