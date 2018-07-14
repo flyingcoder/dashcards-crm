@@ -4,7 +4,7 @@
             <div class="t__logo">LOGO HERE</div>
             <div class="t__hamburger">Hamburger Here</div>
         </div>
-        <div class="s__items"></div>
+        <div class="s__items">ITEMS HERE</div>
     </div>
 </template>
 <script src="./DashboardSidebar.js"></script>
