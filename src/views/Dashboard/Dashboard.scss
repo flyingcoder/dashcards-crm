@@ -1,36 +1,26 @@
 .dashboard__container {
   display: grid;
-  grid-template-areas:
-  's s s h h h h h h h h h'
-  's s s c c c c c c c c c'
-  's s s c c c c c c c c c'
-  's s s c c c c c c c c c'
-  's s s c c c c c c c c c'
-  's s s c c c c c c c c c'
-  's s s c c c c c c c c c'
-  's s s c c c c c c c c c'
-  's s s c c c c c c c c c'
-  's s s c c c c c c c c c'
-  's s s c c c c c c c c c'
-  's s s c c c c c c c c c'; // s => sidebar, h => header, c => content
+  grid-template: repeat(12, 1fr) / repeat(12, 1fr); //grid with 12 row and 12 columns
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: blue;
 }
 
+
 .d__header {
-  grid-area: h;
-  grid-row: 1 / span 3;
-  background: white;
-  border: 1px solid black;
+  grid-area: 1 / 4 / 1 / -1;
+  background: #b2e5ee;
+  overflow: hidden;
 }
 
 .d__sidebar {
-  grid-area: s;
-  background: blue;
+  grid-area: 1 / 1 / -1 / span 3;
+  background: #29abef;
+  overflow: hidden;
 }
 
 .d__content {
-  grid-area: c;
+  grid-area: 2 / 4 / -1 / -1;
   background: white;
+  overflow: hidden;
 }
