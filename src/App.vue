@@ -1,6 +1,5 @@
 <template>
-  <v-app>
-    Fresh VUE Application
+  <v-app class="buzzooka">
     <router-view></router-view>
   </v-app>
 </template>
