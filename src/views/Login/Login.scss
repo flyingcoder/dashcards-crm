@@ -1,0 +1,36 @@
+$blue: #3b589e;
+$white: #ffffff;
+
+.login{
+   
+    h1{
+        color:$blue;
+    }
+    .buzz-form{
+        .buzz-input{
+            .v-input__prepend-outer{
+                text-align: center;
+                background: $blue !important;
+                padding: 5px 10px !important;
+                margin: 0 !important;
+                .v-input__icon{
+                    i{
+                        color: $white;
+                    }
+                }
+            }
+            label{
+                text-indent: 10px;
+            }
+            input{
+                text-indent: 10px;
+            }
+        }
+        .submit{
+            background: $blue;
+            color: $white;
+        }
+    }
+    
+}
+
