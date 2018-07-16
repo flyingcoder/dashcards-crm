@@ -21,7 +21,7 @@
                 </v-list-tile-action>
 
                 <v-list-tile-content class="s__content">
-                    <v-list-tile-title class="s__title">{{ item.title }}</v-list-tile-title>
+                    <span class="s__title">{{ item.title }}</span>
                 </v-list-tile-content>
             </v-list-tile>
         </v-list>

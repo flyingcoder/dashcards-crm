@@ -46,15 +46,16 @@
       .s__icons{
         width: 35%;
         img{
-          width: 60%;
+          width: 50%;
           height: auto;
           grid-area: end;
         }
       }
       .s__content{
         .s__title{
-          text-indent: 10px;
-          transition: none;
+          // transition: none;
+          font-size: 14px !important;
+          font-family: $lato-semi;
         }
       }
     }
