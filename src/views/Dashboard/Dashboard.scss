@@ -7,19 +7,19 @@
 
 
 .d__header {
-  grid-area: 1 / 4 / 1 / -1;
+  grid-area: 1 / 3 / 1 / -1;
   background: #b2e5ee;
   overflow: hidden;
 }
 
 .d__sidebar {
-  grid-area: 1 / 1 / -1 / span 3;
+  grid-area: 1 / 1 / -1 / span 2;
   background: #29abef;
   overflow: hidden;
 }
 
 .d__content {
-  grid-area: 2 / 4 / -1 / -1;
+  grid-area: 2 / 3 / -1 / -1;
   background: white;
   overflow: hidden;
 }
