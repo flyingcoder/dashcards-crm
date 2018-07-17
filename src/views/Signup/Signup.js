@@ -2,27 +2,25 @@ import LoginComponent from '@/common/LoginComponent/LoginComponent.vue'
 import CustomField from '@/common/CustomField/CustomField.vue'
 
 export default {
-  name: 'Login',
+  name: 'Signup',
   components: {LoginComponent, CustomField},
 
   data: () => ({
+    full_name: '',
+    company: '',
     email: '',
     password: '',
-    remember_me: false,
-    error: {
-      status: false,
-      message: ''
-    }
+    input_type: 'password'
   }),
 
   methods: {
     set_checkbox(new_value) {
-      this.remember_me =  new_value
+      new_value ? this.input_type = 'text' : this.input_type = 'password'
     },
 
-    login() {
-      //TODO implement login
-      console.log('login clicked')
-    },
+    signup() {
+      //TODO implement sign up
+      console.log('sign up clicked')
+    }
   }
 }

@@ -1,80 +1,39 @@
 <template>
-  <v-container class="login" fluid fill-height>
-    <v-layout row wrap align-center justify-center >
-      <v-flex xs5 sm8 md4>
-        <v-card elevation-12 align-center color="white">
-          <v-card-text align-center > 
-            <div class="logo">
-              <img src="./../../assets/logo/buzzooka-blue.png" class="img-responsive">
-            </div>
-            <div class="title">
-              <h1> Log In </h1> 
-            </div>
-            <v-form class="buzz-form" ref="form" v-model="valid" lazy-validation>
-              <v-layout row wrap>
-                <v-flex xs12 sm12 md12>
-                  <v-text-field
-                    class="buzz-input"
-                    v-model="email"
-                    :rules="emailRules"
-                    label="E-mail"
-                    prepend-icon="email"
-                    required
-                  ></v-text-field> 
-                </v-flex>
+  <div class="login__container">
+    <login-component
+            title-text="Log in"
+            button-text="LOG IN"
+            :has-forgot-password="true"
+            checkbox-text="Remember Me"
+            footer-text="Not a member yet?"
+            footer-link="/signup"
+            link-text="Sign up"
+            @checkbox-changed="set_checkbox"
+            @button-clicked="login"
+    >
 
-                <v-flex xs12 sm12 md12>  
-                  <v-text-field
-                    class="buzz-input"
-                    v-model="password"
-                    :rules="passwordRules"
-                    label="Password"
-                    type="password"
-                    prepend-icon="lock"
-                    required
-                  ></v-text-field> 
-                </v-flex>
+      <template slot="fields">
+        <div class="l__labels">
+          <custom-field
+                  className="field__icon"
+                  icon="login/loginemail.png"
+                  input-type="email"
+                  placeholder="Email"
+                  v-model="email"
+          ></custom-field>
 
-                <v-flex xs6 sm6 md6>  
-                  <v-checkbox
-                    v-model="checkbox"
-                    label="Remember Me"
-                  ></v-checkbox>   
-                </v-flex>
+          <custom-field
+                  className="field__icon"
+                  icon="login/loginpass.png"
+                  input-type="password"
+                  placeholder="Password"
+                  v-model="password"
+          ></custom-field>
+        </div>
+      </template>
 
-                <v-flex xs6 sm6 md6>   
-                   <v-btn
-                    @click="forgot"
-                    >
-                    Forgot Password
-                    </v-btn>   
-                </v-flex>  
-
-                <v-flex xs12 sm12 md12>   
-                  <v-btn
-                    class="submit"
-                    :disabled="!valid"
-                    @click="submit"
-                    >
-                    Log In
-                  </v-btn>
-                </v-flex>  
-
-                <v-flex xs12 sm12 md12>  
-                  <span>Not a member yet?</span> 
-                  <v-btn
-                    @click="signup"
-                    >
-                    Signup
-                  </v-btn>
-                </v-flex> 
-              </v-layout>  
-            </v-form>
-          </v-card-text>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+    </login-component>
+  </div>
 </template>
 <script src="./Login.js"></script>
 <style lang="scss" scoped src="./Login.scss"></style>
