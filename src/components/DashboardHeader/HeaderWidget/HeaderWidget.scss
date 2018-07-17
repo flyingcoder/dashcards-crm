@@ -1,0 +1,21 @@
+.widget{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    grid-gap: 0.5em;
+    .w__content{
+        display: grid;
+        justify-items: center;
+        justify-content: center;
+        .w__icon{
+            width: 75%;
+            .icon{
+                width: 100%;
+                height: auto;
+                
+            }
+        }
+    }
+}

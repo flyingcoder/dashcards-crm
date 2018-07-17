@@ -4,7 +4,9 @@
             <div class="t__logo">
                 <img class="responsive-img" src="@/assets/logo/buzzooka-white.png" alt="">
             </div>
-            <div class="t__hamburger">Hamburger Here</div>
+            <div class="t__hamburger">
+                <button>click me</button>
+            </div>
         </div>
 
         <v-divider></v-divider>

@@ -17,25 +17,24 @@
   
   .t__logo {
     grid-area: 1 / 1 / span 10 / -1;
-    // background: #dae1e7;
     display: grid;
     grid-template-columns: 20px [end];
   }
   
   .t__hamburger {
     grid-area: 1 / auto / -1 / -1;
-    background: yellow;
     overflow: hidden;
   }
   
   .s__items {
     grid-area: 2 / 1 / -1 / -1;
-    background: $blue !important;
+    background: $blue;
     color: $white;
     list-style-type: none;
     padding: 8px 0;
     -webkit-transition: height .3s cubic-bezier(.4,0,.2,1);
     transition: height .3s cubic-bezier(.4,0,.2,1);
+    overflow: hidden;
     .s__list{
       margin-left: 10px;
       &:hover{
@@ -53,8 +52,7 @@
       }
       .s__content{
         .s__title{
-          // transition: none;
-          font-size: 14px !important;
+          font-size: 15px;
           font-family: $lato-semi;
         }
       }

@@ -1,0 +1,36 @@
+.user{
+    display: flex;
+    .activator{
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        justify-items: center;
+        .chevron{
+            justify-self: start;
+        }
+    }
+    .user-dropdown{
+        width: 100%;
+    }
+}
+
+.buzzooka{
+    .v-menu__content{
+        top: 70px;
+    }
+    .h__list{
+        margin: 5px 0;
+        .h__icons{
+            display: flex;
+            justify-content: center;
+            .icon{
+                height: auto;
+                width: 50%;
+            }
+        }
+        .h__title{
+            text-indent: 10px;
+        }
+    }
+}

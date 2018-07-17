@@ -1,6 +1,10 @@
 <template>
     <div class="search">
-        Search Component
+        <v-text-field
+        flat
+        label="Search"
+        prepend-icon="search"
+      ></v-text-field>
     </div>
 </template>
 <script src="./HeaderSearch.js"></script>

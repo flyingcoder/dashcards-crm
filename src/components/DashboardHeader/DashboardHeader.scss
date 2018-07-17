@@ -1,21 +1,25 @@
+@import "./../../sass/variables";
+
 .header {
   display: grid;
   width: 100%;
   height: 100%;
   grid-template-columns: repeat(12, 1fr);
+  background: $white;
 }
 
 .h__search {
   grid-area: 1 / 1 / 1 / span 5;
-  background: #50b4aa;
 }
 
 .h__widgets {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   grid-area: 1 / 6 / auto / span 5;
-  background: #9daab2;
 }
 
-.h__dropdown {
+.h__user{
+  display: grid;
   grid-area: 1 / auto / 1 / span 2;
-  background: #6a7784;
 }
