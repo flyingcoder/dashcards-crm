@@ -20,7 +20,7 @@ export default {
 
     signup() {
       //TODO implement sign up
-      console.log('sign up clicked')
+      this.$event.$emit('open_snackbar', 'sign up clicked')
     }
   }
 }

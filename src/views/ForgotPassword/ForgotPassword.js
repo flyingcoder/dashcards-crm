@@ -12,7 +12,7 @@ export default {
   methods: {
     send_email() {
       //TODO implement send email
-      console.log('send clicked')
+      this.$event.$emit('open_snackbar', 'send clicked')
     }
   }
 }

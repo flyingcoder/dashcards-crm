@@ -22,7 +22,7 @@ export default {
 
     login() {
       //TODO implement login
-      console.log('login clicked')
+      this.$event.$emit('open_snackbar', 'Login Clicked')
     },
   }
 }
