@@ -1,25 +1,16 @@
 <template>
     <div class="sidebar">
-        <div class="s__title">
-            <div class="t__logo">
-                <img class="responsive-img" src="@/assets/logo/buzzooka-white.png" alt="">
-            </div>
-            <div class="t__hamburger">
-                <button>click me</button>
-            </div>
-        </div>
-
-        <v-divider></v-divider>
-
         <v-list class="s__items">
             <v-list-tile
                 class="s__list"
                 v-for="item in items"
                 :key="item.title"
             >
-                <!-- <div class="s__icons" fill-height> -->
                 <v-list-tile-action class="s__icons">
-                    <img class="responsive-img" :src="item.icon" />
+                    <!-- <img class="responsive-img" :src="item.icon" /> -->
+                    <svg viewBox="0 0 250 250">
+                        <path class="icon" :d="item.icon"/>
+                    </svg>
                 </v-list-tile-action>
 
                 <v-list-tile-content class="s__content">

@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Home from './views/Home/Home.vue'
 import Login from './views/Login/Login.vue'
 import Dashboard from './views/Dashboard/Dashboard.vue'
+import Groups from './views/Groups/Groups.vue'
 import Signup from './views/Signup/Signup.vue'
 import ForgotPassword from './views/ForgotPassword/ForgotPassword.vue'
 
@@ -39,6 +40,12 @@ export default new Router({
       path: '/dashboard',
       name: 'dashboard',
       component: Dashboard
+    },
+    
+    {
+      path: '/groups',
+      name: 'groups',
+      component: Groups
     }
   ],
   mode: 'history'
