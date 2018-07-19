@@ -1,0 +1,48 @@
+@import "./_variables";
+
+.dashboard__container{
+    display: grid;
+    width: 100%;
+    height: 100%;
+
+    // Border
+    .buzz-border{
+        border: $border-buzz;
+        border-radius: 10px;
+    }
+
+    // Button
+    button{
+        outline: none;
+    }
+
+    // Transition
+    .toggle-transition{
+        -webkit-transition: all 0.3s ease;
+		-moz-transition: all 0.3s ease;
+		transition: all 0.3s ease;
+    }
+   
+    @media (min-width: 1025px) {
+        grid-template-columns: 15% auto;
+        grid-template-rows: 75px auto;
+    }
+}
+
+
+@media (max-width: 1024px) {
+    .dashboard__container{
+        display: flex;
+        flex-wrap: wrap;
+        .d__logo{
+            width: 20%;
+        }
+        .d__header{
+            width: 80%;
+        }
+        .d__sidebar{
+            display: none;
+        }
+    }
+}
+
