@@ -1,6 +1,6 @@
 <template>
     <div>
-        Here is the not found page
+        This page does not exists
     </div>
 </template>
 <script src="./NotFound.js"></script>

@@ -5,11 +5,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-      is_user_logged: !!localStorage.getItem('token'),
       user: null
     },
     getters: {
-      is_user_logged: state => state.is_user_logged,
+      is_user_logged: state => !!state.user,
       user: state => state.user
     },
     mutations: {
@@ -17,7 +16,6 @@ export default new Vuex.Store({
     },
     actions: {
       login({commit}, payload) {
-        localStorage.setItem('token', payload.token)
         commit('set_user', payload.user)
       }
     },
