@@ -10,7 +10,7 @@ import store from '../store/store'
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 let config = {
-  baseURL: 'http://localhost:8000', //process.env.baseURL || process.env.apiUrl || ""
+  baseURL: 'http://api.bizzooka.ca', //process.env.baseURL || process.env.apiUrl || ""
   timeout: 5000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
 };

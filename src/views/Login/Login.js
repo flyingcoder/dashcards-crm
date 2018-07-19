@@ -6,8 +6,8 @@ export default {
   components: {LoginComponent, CustomField},
 
   data: () => ({
-    email: '',
-    password: '',
+    email: 'ross.buzzooka@gmail.com',
+    password: 'gDQsa7nUyadmin',
     remember_me: false,
     error: {
       status: false,
@@ -21,8 +21,11 @@ export default {
     },
 
     login() {
-      //TODO implement login
-      this.$event.$emit('open_snackbar', 'Login Clicked')
+      if (!this.email || !this.password) {
+        this.$event.$emit('open_snackbar', 'Wrong email or password')
+        return
+      }
+      this.$auth.login({ email: this.email, password: this.password })
     },
   }
 }

@@ -1,21 +1,33 @@
-import store from '../store/store'
+import Vue from 'vue'
+import store from '@/store/store'
+import make_request_to from '@/services/makeRequestTo'
+import router from '@/router'
 
-export default function (Vue) {
-  Vue.auth = {
+const auth = {
     isAuthenticated () {
-      return store.getters.isLogged
+      return store.getters.is_user_logged
     },
-    logout () {
 
+    logout() {
+
+    },
+
+    login({ email, password }) {
+      make_request_to.login({ email, password })
+        .then(async response => {
+          await store.dispatch('login', response.data)
+          router.push({ name: 'dashboard' })
+        })
     }
-  }
-
-  Object.defineProperties(Vue.prototype, {
-    $auth: {
-      get () {
-        return Vue.auth
-      }
-    }
-  })
-
 }
+
+
+const Authentication = {
+  install: (Vue, options) => {
+    Vue.prototype.$auth = auth
+  }
+}
+
+Vue.use(Authentication)
+
+export default Authentication
