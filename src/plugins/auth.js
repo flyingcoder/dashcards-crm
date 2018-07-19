@@ -22,7 +22,6 @@ const auth = {
     login({ email, password }) {
       make_request_to.login({ email, password })
         .then(async response => {
-          console.log(response)
           localStorage.setItem('token', response.data.token)
           localStorage.setItem('user', JSON.stringify(response.data.user))
           await store.dispatch('login', response.data)
