@@ -2,7 +2,7 @@
 @import "./../../sass/_variables";
 
 .pricing{
-    background: linear-gradient(-45deg,#00b1b3,#1d5086);
+    background: linear-gradient(-45deg, #0092b3, #3b589e);
     color: $white;
     height: 100%;
     padding: 2em;
@@ -20,7 +20,6 @@
             display: flex;
             flex-direction: column;
             flex-basis: 20%;
-            height: 40vh;
             padding: 2em;
             text-align: center;
             background: #f9f9f9;
@@ -33,7 +32,7 @@
               vertical-align: baseline;
               h3{
                 color: #00b1b3;
-                font-size: 24px;
+                font-size: 2vw;
                 font-weight: 500;
                 text-transform: uppercase;
               }
@@ -41,7 +40,7 @@
             .plan__price{
               display: flex;
               flex: 1;
-              line-height: 1;
+              line-height: 2;
               align-items: center;
               font-weight: lighter;
               justify-content: center;
@@ -56,7 +55,7 @@
                 font-size: 4vw;
               }
             }
-            .pricing__description{
+            .plan__description{
               p{
                 padding: 1em 0;
               }
