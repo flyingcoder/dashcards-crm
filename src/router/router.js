@@ -4,11 +4,12 @@ import {check_user} from "./route_guard"
 
 import Home from '@/views/Home/Home.vue'
 import Login from '@/views/Login/Login.vue'
-import Dashboard from '@/views/Dashboard/Dashboard.vue'
-import Groups from '@/views/Groups/Groups.vue'
 import Signup from '@/views/Signup/Signup.vue'
 import ForgotPassword from '@/views/ForgotPassword/ForgotPassword.vue'
 import NotFound from '@/views/NotFound/NotFound.vue'
+import Dashboard from '@/views/Dashboard/Dashboard.vue'
+import Groups from '@/views/Groups/Groups.vue'
+import Pricing from '@/views/Pricing/Pricing.vue'
 
 Vue.use(Router)
 
@@ -78,6 +79,20 @@ export default new Router({
         }
       }
     },
+
+    {
+      path: '/pricing',
+      name: 'pricing',
+      component: Pricing,
+       beforeEnter(to, from, next) {
+          if (check_user.is_user_logged()) {
+            next()
+          }else {
+            next({name: 'not_found'})
+          }
+       }
+    },
+
     {
       path: '/groups',
       name: 'groups',
@@ -90,6 +105,7 @@ export default new Router({
           }
        }
     },
+
     {
       path: '/404',
       alias: '*',
