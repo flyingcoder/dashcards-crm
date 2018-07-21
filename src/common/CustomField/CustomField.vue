@@ -7,9 +7,10 @@
 
         <input
                 :type="inputType"
-                :placeholder="placeholder"
                 :value="value"
-                @input="emit_input_value"
+                :class="{ invalid: !valid }"
+                v-on="listeners"
+                v-bind="$attrs"
         >
 
     </div>

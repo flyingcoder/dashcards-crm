@@ -4,10 +4,11 @@ import './plugins/axios'
 import './plugins/vuetify'
 import './plugins/auth'
 import './plugins/eventbus'
+import './plugins/vuelidate'
 import App from './App.vue'
 import router from './router/router'
 import store from './store/store'
-import lodash from 'lodash';
+import lodash from 'lodash'
 
 Vue.config.productionTip = false
 

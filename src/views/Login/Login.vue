@@ -1,5 +1,11 @@
 <template>
   <div class="login__container">
+
+      For email use: ross.buzzooka@gmail.com <br>
+      For password use: gDQsa7nUyadmin
+
+      {{$v}}
+
     <login-component
             title-text="Log in"
             button-text="LOG IN"
@@ -8,6 +14,7 @@
             footer-text="Not a member yet?"
             footer-link="/signup"
             link-text="Sign up"
+            :error="error"
             @checkbox-changed="set_checkbox"
             @button-clicked="login"
     >
@@ -19,7 +26,10 @@
                   icon="login/loginemail.png"
                   input-type="email"
                   placeholder="Email"
-                  v-model="email"
+                  v-model.trim="email"
+                  :valid="is_email_valid"
+                  @blur="handle_validation('email')"
+                  @focus="is_email_valid = true"
           ></custom-field>
 
           <custom-field
@@ -28,6 +38,9 @@
                   input-type="password"
                   placeholder="Password"
                   v-model="password"
+                  :valid="is_password_valid"
+                  @blur="handle_validation('password')"
+                  @focus="is_password_valid = true"
           ></custom-field>
         </div>
       </template>

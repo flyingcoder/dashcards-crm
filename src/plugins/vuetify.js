@@ -12,5 +12,8 @@ Vue.use(Vuetify, {
     success: '#4CAF50',
     warning: '#FFC107'
   },
-  iconfont: 'md', //using material design,
+  iconfont: 'md', //using material design
+  icons: {
+    'notification': 'notification_important'
+  }
 })

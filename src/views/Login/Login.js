@@ -1,13 +1,17 @@
 import LoginComponent from '@/common/LoginComponent/LoginComponent.vue'
 import CustomField from '@/common/CustomField/CustomField.vue'
+import { validations } from "./local_mixins/validations";
 
 export default {
   name: 'Login',
+  mixins: [validations],
   components: {LoginComponent, CustomField},
 
   data: () => ({
-    email: 'ross.buzzooka@gmail.com',
-    password: 'gDQsa7nUyadmin',
+    email: '',
+    password: '',
+    is_email_valid: true,
+    is_password_valid: true,
     remember_me: false,
     error: {
       status: false,
@@ -21,11 +25,8 @@ export default {
     },
 
     login() {
-      if (!this.email || !this.password) {
-        this.$event.$emit('open_snackbar', 'Wrong email or password')
-        return
-      }
-      this.$auth.login({ email: this.email, password: this.password })
+      this.all_validations_passed() && this.$auth.login({ email: this.email, password: this.password })
     },
+
   }
 }

@@ -11,6 +11,7 @@ export default {
     'footer-text': String,
     'footer-link': String,
     'link-text': String,
+    error: Object,
     'has-tools': {
       default: true
     },
@@ -21,10 +22,6 @@ export default {
 
   data: () => ({
     checkbox: false,
-    error: {
-      status: false,
-      message: ''
-    }
   }),
 
   watch: {
