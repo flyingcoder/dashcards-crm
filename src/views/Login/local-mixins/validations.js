@@ -48,7 +48,7 @@ export const validations = {
       if (this.has_error_the_field('email', 'email', false, 'Please type a valid email')) return false
 
       if (this.has_error_the_field('password', 'required', false, 'Password is required')) return false
-      if (this.has_error_the_field('password', 'minLength', false, 'Password length must be at least 6 chars')) return false
+      if (this.has_error_the_field('password', 'minLength', false, 'Password length must be at least 6 characters')) return false
 
       if (! /\d/.test(this.password)) {
         this.$event.$emit('open_snackbar', 'Password must contain at least one number', 'error')

@@ -1,6 +1,6 @@
 import LoginComponent from '@/common/LoginComponent/LoginComponent.vue'
 import CustomField from '@/common/CustomField/CustomField.vue'
-import { validations } from "./local_mixins/validations";
+import { validations } from "./local-mixins/validations";
 
 export default {
   name: 'Login',
@@ -13,10 +13,6 @@ export default {
     is_email_valid: true,
     is_password_valid: true,
     remember_me: false,
-    error: {
-      status: false,
-      message: ''
-    }
   }),
 
   methods: {

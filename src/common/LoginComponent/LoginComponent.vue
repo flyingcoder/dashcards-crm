@@ -1,7 +1,7 @@
 <template>
     <div class="login__container">
 
-        <div class="login__card">
+        <div class="login__card" :style="{ height: cardHeight }">
 
             <div class="l__logo">
                 <img src="@/assets/logo/buzzooka-blue.png">
@@ -13,13 +13,14 @@
 
             <slot name="fields"></slot>
 
-            <div class="l__errors" v-if="error.status">
-                <div class="error__container">
-                    <div class="e__message"><strong>{{error.message}}
-                    </strong></div>
-                    <div class="e__divider"></div>
-                </div>
-            </div>
+            <!--TODO the old logic for errors should refactor-->
+            <!--<div class="l__errors" v-if="error.status">-->
+                <!--<div class="error__container">-->
+                    <!--<div class="e__message"><strong>{{error.message}}-->
+                    <!--</strong></div>-->
+                    <!--<div class="e__divider"></div>-->
+                <!--</div>-->
+            <!--</div>-->
 
             <div class="l__tools" v-if="hasTools">
                 <div class="checkbox">

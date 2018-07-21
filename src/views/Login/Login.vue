@@ -12,7 +12,6 @@
             footer-text="Not a member yet?"
             footer-link="/signup"
             link-text="Sign up"
-            :error="error"
             @checkbox-changed="set_checkbox"
             @button-clicked="login"
     >
@@ -35,7 +34,7 @@
                   icon="login/loginpass.png"
                   input-type="password"
                   placeholder="Password"
-                  v-model="password"
+                  v-model.trim="password"
                   :valid="is_password_valid"
                   @blur="handle_validation('password')"
                   @focus="is_password_valid = true"

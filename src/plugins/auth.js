@@ -10,6 +10,13 @@ import router from '@/router/router'
   }
 })()
 
+async function set_to_localStorage({data}) {
+	localStorage.setItem('token', data.token)
+	localStorage.setItem('user', JSON.stringify(data.user))
+	await store.dispatch('login', data)
+	router.push({ name: 'dashboard' })
+}
+
 const auth = {
     isAuthenticated () {
       return store.getters.is_user_logged
@@ -21,13 +28,13 @@ const auth = {
 
     login({ email, password }) {
       make_request_to.login({ email, password })
-        .then(async response => {
-          localStorage.setItem('token', response.data.token)
-          localStorage.setItem('user', JSON.stringify(response.data.user))
-          await store.dispatch('login', response.data)
-          router.push({ name: 'dashboard' })
-        })
-    }
+        .then(response => set_to_localStorage(response))
+    },
+
+    register(fields) {
+      make_request_to.register(fields)
+        .then(response => set_to_localStorage(response))
+    },
 }
 
 

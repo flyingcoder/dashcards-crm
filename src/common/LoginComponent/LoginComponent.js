@@ -11,7 +11,7 @@ export default {
     'footer-text': String,
     'footer-link': String,
     'link-text': String,
-    error: Object,
+    'card-height': String,
     'has-tools': {
       default: true
     },
