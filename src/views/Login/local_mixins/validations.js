@@ -16,30 +16,46 @@ export const validations = {
 
     handle_validation(type) {
       if (type === 'email') {
-        this.validate_field('email', 'is_email_valid', 'email')
-      }else {
-        this.validate_field('password', 'is_password_valid', 'minLength')
-      }
-    },
+        if (this.$v.email.required === false) {
+          this.is_email_valid = false
+          return
+        }
 
-    validate_field(type, property , validation) { //making red border for input fields
-      this.$v[type].$touch()
-      if (this.$v[type].required === false) {
-        this[property] = false
-        return
+        if (this.$v.email.email === false) {
+          this.is_email_valid = false
+        }
+      }else {
+        if (this.$v.password.required === false) {
+          this.is_password_valid = false
+          return
+        }
+
+        if (this.$v.password.minLength === false) {
+          this.is_password_valid = false
+          return
+        }
+
+        if (! /\d/.test(this.password)) {
+          this.is_password_valid = false
+        }
       }
-      if (!this.$v[type][validation]) this[property] = false
     },
 
     all_validations_passed() {
       this.$v.$touch()
-      if (!this.$v.$invalid) return true //if fields are valid return true
 
       if (this.has_error_the_field('email', 'required', false, 'Email is required')) return false
       if (this.has_error_the_field('email', 'email', false, 'Please type a valid email')) return false
 
       if (this.has_error_the_field('password', 'required', false, 'Password is required')) return false
-      return !this.has_error_the_field('password', 'minLength', false, 'Password length must be at least 6 chars')
+      if (this.has_error_the_field('password', 'minLength', false, 'Password length must be at least 6 chars')) return false
+
+      if (! /\d/.test(this.password)) {
+        this.$event.$emit('open_snackbar', 'Password must contain at least one number', 'error')
+        return false
+      }
+
+      return true
     },
 
     has_error_the_field(type, validation, condition, error_message) {

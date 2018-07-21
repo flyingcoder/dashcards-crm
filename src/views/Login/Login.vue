@@ -4,8 +4,6 @@
       For email use: ross.buzzooka@gmail.com <br>
       For password use: gDQsa7nUyadmin
 
-      {{$v}}
-
     <login-component
             title-text="Log in"
             button-text="LOG IN"
