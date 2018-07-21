@@ -9,8 +9,6 @@
                 >
                 <v-avatar
                     class="user-icon responsive-img"
-                    :tile="tile"
-                    :size="avatarSize"
                     >
                     <img  class="responsive-img" src="@/assets/temp/atomic.png" alt="user">
                 </v-avatar>
@@ -22,6 +20,7 @@
                     class="h__list"
                     v-for="(item, index) in items"
                     :key="index"
+                    @click="handle_action(item.action)"
                     >
                     <v-list-tile-action class="h__icons">
                         <img class="responsive-img icon" :src="item.icon" />

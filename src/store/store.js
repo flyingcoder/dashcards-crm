@@ -12,11 +12,15 @@ export default new Vuex.Store({
       user: state => state.user
     },
     mutations: {
-      set_user: (state, payload) => state.user = payload
+      set_user: (state, payload) => state.user = payload,
+      remove_user: state => state.user = null
     },
     actions: {
       login({commit}, payload) {
         commit('set_user', payload.user)
+      },
+      logout({commit}) {
+        commit('remove_user')
       }
     },
     strict: process.env.NODE_ENV !== 'production'

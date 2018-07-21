@@ -22,8 +22,11 @@ const auth = {
       return store.getters.is_user_logged
     },
 
-    logout() {
-
+    async logout() {
+			localStorage.removeItem('token')
+			localStorage.removeItem('user')
+			await store.dispatch('logout')
+			router.push({ name: 'login' })
     },
 
     login({ email, password }) {

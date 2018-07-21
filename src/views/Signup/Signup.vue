@@ -1,8 +1,6 @@
 <template>
   <div class="signup">
 
-    {{$v.repeat_password}}
-
     <login-component
             title-text="Sign up"
             button-text="Register"
