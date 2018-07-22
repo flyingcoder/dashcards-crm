@@ -16,7 +16,7 @@
                             <img src="@/assets/icons/dashboard/save.svg" class="responsive-img" alt="save" />
                         </div>
                         <div class="title">
-                            <span> Save </span> 
+                            <span> Save </span>
                         </div>
                     </button>
                 </div>

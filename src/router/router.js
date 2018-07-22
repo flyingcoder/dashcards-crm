@@ -6,6 +6,7 @@ import Home from '@/views/Home/Home.vue'
 import Login from '@/views/Login/Login.vue'
 import Signup from '@/views/Signup/Signup.vue'
 import ForgotPassword from '@/views/ForgotPassword/ForgotPassword.vue'
+import DefaultDashboard from '@/views/DashboardContent/DashboardContent.vue'
 import NotFound from '@/views/NotFound/NotFound.vue'
 import Dashboard from '@/views/Dashboard/Dashboard.vue'
 import Groups from '@/views/Groups/Groups.vue'
@@ -69,8 +70,70 @@ export default new Router({
 
     {
       path: '/dashboard',
-      name: 'dashboard',
       component: Dashboard,
+      children: [
+        {
+          path: '',
+          name: 'default-content',
+          component: DefaultDashboard
+        },
+        {
+          path: 'projects',
+          name: 'projects'
+        },
+				{
+					path: 'clients',
+					name: 'clients'
+				},
+				{
+					path: 'calendar',
+					name: 'calendar'
+				},
+				{
+					path: 'milestones',
+					name: 'milestones'
+				},
+				{
+					path: 'forms',
+					name: 'forms'
+				},
+				{
+					path: 'invoice',
+					name: 'invoice'
+				},
+				{
+					path: 'payment',
+					name: 'payment'
+				},
+				{
+					path: 'timers',
+					name: 'timers'
+				},
+				{
+					path: 'cloud',
+					name: 'cloud'
+				},
+				{
+					path: 'team',
+					name: 'team'
+				},
+				{
+					path: 'chat',
+					name: 'chat'
+				},
+        {
+					path: 'reports',
+					name: 'reports'
+				},
+        {
+					path: 'support',
+					name: 'support'
+				},
+        {
+					path: 'services',
+					name: 'services'
+				},
+      ],
       beforeEnter(to, from, next) {
         if (check_user.is_user_logged()) {
           next()

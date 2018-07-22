@@ -14,7 +14,7 @@ async function set_to_localStorage({data}) {
 	localStorage.setItem('token', data.token)
 	localStorage.setItem('user', JSON.stringify(data.user))
 	await store.dispatch('login', data)
-	router.push({ name: 'dashboard' })
+	router.push({ name: 'default-content' })
 }
 
 const auth = {
