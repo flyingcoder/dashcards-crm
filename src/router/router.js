@@ -109,7 +109,13 @@ export default new Router({
 				},
 				{
 					path: 'team',
-					name: 'team'
+          name: 'team',
+          component: all_views.Teams
+				},
+				{
+					path: 'team/groups',
+          name: 'team/groups',
+          component: all_views.Groups
 				},
 				{
 					path: 'chat',

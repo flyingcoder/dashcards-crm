@@ -1,2 +1,59 @@
 @import "./../../sass/_general";
 @import "./../../sass/_variables";
+
+.groups{
+    .buzz__tables{
+        table{
+            thead{
+                th{
+                    &:nth-child(3){
+                        text-align: left;
+                    }
+                }
+            }
+            tbody{
+                td{
+                    &:nth-child(2){
+                        text-align: center;
+                    }
+                    &:last-child{
+                        text-align: center;
+                    }
+                }
+                .btn{
+                    display: flex;
+                    color: $white;
+                    padding: 5px 10px;
+                    align-items: center;
+                    justify-content: space-between;
+                    border-radius: 3.2px;
+                    cursor: pointer;
+                    .btn__name{
+                        text-indent: 5px;
+                    }
+                }
+                .permissions___btn{
+                    background: #50b4aa;
+                }
+                .migrate__btn{
+                    background: #a085d6;
+                }
+                .members__btn{
+                    background: #01a7e5;
+                }
+                .edit__btn{
+                    background: #1fb868;
+                }
+                .delete__btn{
+                    background: #ff7f7e;
+                }
+                .actions{
+                    display: flex;
+                    height: inherit;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+            }
+        }
+    }
+}

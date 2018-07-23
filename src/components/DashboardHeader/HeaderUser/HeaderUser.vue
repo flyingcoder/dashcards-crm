@@ -9,6 +9,7 @@
                 >
                 <v-avatar
                     class="user-icon responsive-img"
+                    :size="avatarSize"
                     >
                     <img  class="responsive-img" src="@/assets/temp/atomic.png" alt="user">
                 </v-avatar>

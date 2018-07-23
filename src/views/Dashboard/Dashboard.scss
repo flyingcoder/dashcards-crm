@@ -1,25 +1,10 @@
 @import "./../../sass/_variables";
+@import "./../../sass/_general";
 
 .dashboard__container{
   display: grid;
   width: 100%;
   height: 100%;
-
-  .d__logo {
-    background: $blue;
-  }
-  
-  .d__header {
-    background: #b2e5ee;
-  }
-
-  .d__sidebar {
-    background: $blue;
-  }
-
-  .d__content {
-    background: #f2f1f7;
-  }
 
   @media (min-width: 1025px) {
     grid-template-columns: 15% auto;

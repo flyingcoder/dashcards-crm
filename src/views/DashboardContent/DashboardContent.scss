@@ -2,21 +2,6 @@
 @import "../../sass/variables";
 
 .content{
-    height: 100%;
-    padding: 0 30px;
-    .row{
-        display: flex;
-        margin: 1.5em 0;
-    }
-    .breadcrumbs{
-        flex: 1;
-        .v-breadcrumbs{
-            padding: 0;
-        }
-        .page__title{
-            font-size: 4vmin;
-        }
-    }
     .page__options{
         display: flex;
         flex: 1;
