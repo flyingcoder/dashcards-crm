@@ -2,15 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import {check_user} from "./route_guard"
 
-import Home from '@/views/Home/Home.vue'
-import Login from '@/views/Login/Login.vue'
-import Signup from '@/views/Signup/Signup.vue'
-import ForgotPassword from '@/views/ForgotPassword/ForgotPassword.vue'
-import DefaultDashboard from '@/views/DashboardContent/DashboardContent.vue'
-import NotFound from '@/views/NotFound/NotFound.vue'
-import Dashboard from '@/views/Dashboard/Dashboard.vue'
-import Groups from '@/views/Groups/Groups.vue'
-import Pricing from '@/views/Pricing/Pricing.vue'
+import {import_all_views} from "../services/importAll"
+let all_views = import_all_views()
 
 Vue.use(Router)
 
@@ -19,7 +12,7 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login,
+      component: all_views.Login,
       beforeEnter(to, from, next) {
         if (check_user.is_user_logged()) {
           next({name: 'not_found'})
@@ -32,7 +25,7 @@ export default new Router({
     {
       path: '/signup',
       name: 'signup',
-      component: Signup,
+      component: all_views.Signup,
       beforeEnter(to, from, next) {
         if (check_user.is_user_logged()) {
           next({name: 'not_found'})
@@ -45,7 +38,7 @@ export default new Router({
     {
       path: '/forgot-password',
       name: 'forgot_password',
-      component: ForgotPassword,
+      component: all_views.ForgotPassword,
       beforeEnter(to, from, next) {
         if (check_user.is_user_logged()) {
           next({name: 'not_found'})
@@ -58,7 +51,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home,
+      component: all_views.Home,
       beforeEnter(to, from, next) {
         if (check_user.is_user_logged()) {
           next()
@@ -70,16 +63,17 @@ export default new Router({
 
     {
       path: '/dashboard',
-      component: Dashboard,
+      component: all_views.Dashboard,
       children: [
         {
           path: '',
           name: 'default-content',
-          component: DefaultDashboard
+          component: all_views.DashboardContent
         },
         {
           path: 'projects',
-          name: 'projects'
+          name: 'projects',
+					component: all_views.Projects
         },
 				{
 					path: 'clients',
@@ -146,7 +140,7 @@ export default new Router({
     {
       path: '/pricing',
       name: 'pricing',
-      component: Pricing,
+      component: all_views.Pricing,
        beforeEnter(to, from, next) {
           if (check_user.is_user_logged()) {
             next()
@@ -159,7 +153,7 @@ export default new Router({
     {
       path: '/groups',
       name: 'groups',
-      component: Groups,
+      component: all_views.Groups,
        beforeEnter(to, from, next) {
           if (check_user.is_user_logged()) {
             next()
@@ -173,7 +167,7 @@ export default new Router({
       path: '/404',
       alias: '*',
       name: 'not_found',
-      component: NotFound,
+      component: all_views.NotFound,
     }
   ],
   mode: 'history'
