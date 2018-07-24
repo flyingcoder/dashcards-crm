@@ -43,6 +43,14 @@
         }
       }
     }
+    .active{
+      background: $white;
+      color: $blue;
+      border-radius: 5px 0 0 5px;
+        svg{
+          fill: $blue;
+        }
+    }
   }
   .responsive-img {
     width: 90%;
