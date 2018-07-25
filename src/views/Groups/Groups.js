@@ -1,112 +1,77 @@
+import makeRequestTo from '@/services/makeRequestTo'
+
 export default {
-  data: () => ({
-      dialog: false,
-      groups: '',
-      page: 1,
-      paths: [
-      { text: 'Dashboard', disabled: false },
-      { text: 'Teams', disabled: false },
-      { text: 'Groups', disabled: true },
+  name: 'Groups',
+	data () {
+		return {
+			loading: false,
+		  headers: [
+        { id: 1, text: 'ID', value: 'id', width: '5%' },
+        { id: 2, text: 'Group Name', value: 'group_name', width: '5%' },
+        { id: 4, is_action: true, width: '90%' },
       ],
-      headers: [
-          { text: 'ID', align: 'left', value: 'id' },
-          { text: 'Group Name', align: 'left', value: 'name' },
-          { text: 'Team', value: 'team' },
-      ],
-      groups: [],
-      editedIndex: -1,
-      editedGroup: {
-          group_name: '',
-      },
-      defaultItem: {
-          group_name: '',
-      }
-  }),
+			groups: null,
+			pagination: {
+				sortBy: 'id'
+			}
+		}
+	},
+
+  created() {
+		this.get_data_from_api()
+  },
+
+	watch: {
+  	pagination: {
+  		handler() {
+  			//do pagination
+			},
+			deep: true
+		}
+	},
 
   computed: {
-    formTitle () {
-      return this.editedIndex === -1 ? 'New Group' : 'Edit Group'
+    rows() {
+      if (this.groups)
+        return this.groups.data
+    },
+    total_items() {
+      if (this.groups)
+        return this.groups.total
+      return 0
     }
-  },
-
-  watch: {
-    dialog (val) {
-      val || this.close()
-    }
-  },
-
-  created () {
-    this.initialize()
   },
 
   methods: {
-    initialize () {
-      this.groups = [
-        {
-          id: 1,
-          name: 'Administrator',
-          team: 2,
-        },
-        {
-          id: 2,
-          name: 'Agent',
-          team: 2,
-        },
-        {
-          id: 3,
-          name: 'Manager',
-          team: 2,
-        },
-        {
-          id: 4,
-          name: 'Sales',
-          team: 2,
-        },
-        {
-          id: 5,
-          name: 'Staff',
-          team: 2,
-        },
-      ]
+  	get_data_from_api() {
+  		this.loading = true
+			makeRequestTo.get_groups()
+				.then(response => {
+					this.loading = false
+					this.groups = response.data
+				})
+		},
+
+    get_actions(group_slug) {
+      if (group_slug.includes('default-admin'))
+        return [{ text: 'Group', value: 'group_members', tooltip: 'Group Members' },]
+      else
+        return [
+          { text: 'Permissions', value: 'permissions', tooltip: 'Permissions', icon: require(`@/${'assets/icons/groups/permissions.svg'}`) },
+          { text: 'Migrate', value: 'migrate_members', tooltip: 'Migrate Members', icon: require(`@/${'assets/icons/groups/migrate.svg'}`) },
+          { text: 'Group', value: 'group_members', tooltip: 'Group Members', icon: require(`@/${'assets/icons/groups/members.svg'}`)  },
+          { text: 'Edit', value: 'edit_settings', tooltip: 'Edit Settings', icon: require(`@/${'assets/icons/groups/edit.svg'}`) },
+          { text: 'Delete', value: 'delete_group', tooltip: 'Delete Group', icon: require(`@/${'assets/icons/groups/delete.svg'}`) },
+        ]
     },
 
-    toggleAll () {
-      if (this.selected.length) this.selected = []
-      else this.selected = this.groups.slice()
-    },
-
-    permissionsItem (item) {
-      this.editedIndex = this.groups.indexOf(item)
-      this.editedGroup = Object.assign({}, item)
-      this.dialog = true
-    },
-
-    editItem (item) {
-      this.editedIndex = this.groups.indexOf(item)
-      this.editedGroup = Object.assign({}, item)
-      this.dialog = true
-    },
-
-    deleteItem (item) {
-      const index = this.groups.indexOf(item)
-      confirm('Are you sure you want to delete this group?') && this.groups.splice(index, 1)
-    },
-
-    close () {
-      this.dialog = false
-      setTimeout(() => {
-        this.editedGroup = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      }, 300)
-    },
-
-    save () {
-      if (this.editedIndex > -1) {
-        Object.assign(this.groups[this.editedIndex], this.editedGroup)
-      } else {
-        this.groups.push(this.editedGroup)
-      }
-      this.close()
-    }
+		changeSort (column) {
+			if (this.pagination.sortBy === column) {
+				this.pagination.descending = !this.pagination.descending
+			} else {
+				this.pagination.sortBy = column
+				this.pagination.descending = false
+			}
+		}
   }
 }

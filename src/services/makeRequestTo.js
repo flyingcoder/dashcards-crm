@@ -5,7 +5,12 @@ export default {
   login({ email, password }) {
     return request.post('/api/login', { email, password })
   },
+
   register({ company_name, company_email, first_name, email, password }) {
     return request.post('/api/register' ,{ company_name, company_email, first_name, email, password })
+  },
+
+  get_groups() {
+    return request.get('/api/groups')
   }
 }
