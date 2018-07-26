@@ -10,7 +10,7 @@ export default {
     return request.post('/api/register' ,{ company_name, company_email, first_name, email, password })
   },
 
-  get_groups() {
-    return request.get('/api/groups')
+  get_groups(page) {
+    return request.get(`/api/groups?page=${page}`)
   }
 }

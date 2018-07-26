@@ -25,6 +25,7 @@
                             :pagination.sync="pagination"
                             :total-items="total_items"
                             :loading="loading"
+                            :rows-per-page-items="rows_per_page"
                     >
                         <template slot="headers" slot-scope="props">
                             <tr>

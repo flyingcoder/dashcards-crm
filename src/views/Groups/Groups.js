@@ -8,11 +8,11 @@ export default {
 		  headers: [
         { id: 1, text: 'ID', value: 'id', width: '5%' },
         { id: 2, text: 'Group Name', value: 'group_name', width: '5%' },
-        { id: 4, is_action: true, width: '90%' },
+        { id: 3, is_action: true, width: '90%' },
       ],
 			groups: null,
 			pagination: {
-				sortBy: 'id'
+				sortBy: 'id',
 			}
 		}
 	},
@@ -22,11 +22,14 @@ export default {
   },
 
 	watch: {
-  	pagination: {
-  		handler() {
-  			//do pagination
-			},
-			deep: true
+  	'pagination.page'(new_page) {
+			this.$router.push({ name: 'team/groups', query: { page: new_page }})
+			this.get_data_from_api(new_page)
+		},
+		'$route.query'(query) {
+			if(query && query.page) {
+				this.pagination.page = query.page
+			}
 		}
 	},
 
@@ -39,13 +42,20 @@ export default {
       if (this.groups)
         return this.groups.total
       return 0
-    }
+    },
+		rows_per_page() {
+    	let config = {"text":"$vuetify.dataIterator.rowsPerPageAll","value":-1}
+    	if (this.total_items < 10)
+    		return [8, {"text":"$vuetify.dataIterator.rowsPerPageAll","value":-1}]
+			else
+				return [10, {"text":"$vuetify.dataIterator.rowsPerPageAll","value":-1}]
+		}
   },
 
   methods: {
-  	get_data_from_api() {
+  	get_data_from_api(page = 1) {
   		this.loading = true
-			makeRequestTo.get_groups()
+			makeRequestTo.get_groups(page)
 				.then(response => {
 					this.loading = false
 					this.groups = response.data
