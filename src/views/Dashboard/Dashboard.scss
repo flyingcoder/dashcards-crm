@@ -1,21 +1,2 @@
 @import "./../../sass/_variables";
 @import "./../../sass/_general";
-
-.dashboard__container{
-  display: grid;
-  width: 100%;
-  height: 100%;
-
-  @media (min-width: 1025px) {
-    grid-template-columns: 15% auto;
-    grid-template-rows: 75px auto;
-  }
-
-  @media (max-width: 1024px) {
-      grid-template-rows: auto auto;
-      .test__sidebar{
-          display: none;
-      }
-  }
-
-}
