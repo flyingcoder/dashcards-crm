@@ -6,6 +6,7 @@ export default {
 	},
 
 	methods: {
+		// To be Review
 		collapse() {
            	 	document.getElementById("buzzooka").classList.toggle("collapse");
 		},
