@@ -93,7 +93,6 @@ export default {
 			if (action === 'logout')
 				this.$auth.logout()
 			else
-			console.log(action);
 				this.$router.push({ name: action })
 				this.selected = action
 		},

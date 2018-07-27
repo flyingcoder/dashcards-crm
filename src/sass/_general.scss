@@ -14,7 +14,10 @@
                 display: block;
             }
             .logo__sm{
-                display: none;
+                position: absolute;
+                top: 15px;
+                left: 5px;
+                opacity: 0;
             }
         }
     }
@@ -137,6 +140,15 @@
                 }
                 .logo__sm{
                     display: block;
+                    opacity: 1;
+                    width: 4%;
+                    transition: opacity 1s;
+                }
+            }
+            .t__hamburger{
+                .t__toggle{
+                    left: 25px;
+                    transition: 1s;
                 }
             }
         }
