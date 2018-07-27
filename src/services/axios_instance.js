@@ -1,4 +1,5 @@
 import axios from 'axios'
+import store from '@/store/store'
 
 const request = axios.create({
   baseURL: 'http://api.bizzooka.ca',
@@ -20,7 +21,7 @@ request.interceptors.request.use(request => {
 request.interceptors.response.use(response => {
   return response
 }, error => {
-  //TODO Handle error from backend here
+  store.commit('open_snackbar', { status: true, message: error.response.data.error })
 })
 
 export default request
