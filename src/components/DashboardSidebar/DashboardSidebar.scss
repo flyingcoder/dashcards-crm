@@ -1,3 +1,4 @@
+@import "./../../sass/_general";
 @import "./../../sass/_variables";
 
 .sidebar {
@@ -16,6 +17,7 @@
     overflow: hidden;
     .s__list{
       margin-left: 10px;
+      @extend .toggle-transition;
       &:hover{
         background: $white;
         color: $blue;
@@ -42,6 +44,17 @@
           font-family: $lato-semi;
         }
       }
+    }
+    .active{
+      background: $white;
+      color: $blue;
+      border-radius: 5px 0 0 5px;
+      -webkit-box-shadow: -10px 2px 15px 0px rgba(0,0,0,0.4);
+      -moz-box-shadow: -10px 2px 15px 0px rgba(0,0,0,0.4);
+      box-shadow: -10px 2px 15px 0px rgba(0,0,0,0.4);
+        svg{
+          fill: $blue;
+        }
     }
   }
   .responsive-img {

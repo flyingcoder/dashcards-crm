@@ -1,5 +1,5 @@
 <template>
-  <v-app class="buzzooka">
+  <v-app class="buzzooka" id="buzzooka">
     <snackbar></snackbar>
     <router-view></router-view>
   </v-app>

@@ -139,11 +139,12 @@
         }
     }
     .d__tiles{
+        display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
         .tiles__content{
             display: flex;
-            flex-basis: 15%;
             align-items: center;
             justify-content: center;
             @extend .buzz-border;
@@ -170,9 +171,6 @@
                 flex: 1;
                 justify-content: center;
                 align-items: center;
-                .icon{
-                    width: 75%;
-                }
             }
             .tiles__info{
                 flex: 2;
@@ -211,6 +209,89 @@
                 margin: 1em 0;
                 border: 1px solid #dce1e5;
            }
+        }
+    }
+}
+
+@media (max-width: 319px) {
+    .d__tiles{
+        .tiles__content{
+            flex-basis: 30%;
+            .tiles__icon{
+                .icon{
+                    width: 49%;
+                }
+            }
+        }
+    }
+    .content{
+        .d__cards{
+            .d__box{
+                width: 100%;
+            }
+        }    
+    }    
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .d__tiles{
+        .tiles__content{
+            .icon{
+                width: 49%;
+            }
+        }
+    }
+    .content{
+        .d__cards{
+            .d__box{
+                width: 100%;
+            }
+        }    
+    }    
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .d__tiles{
+        .tiles__content{
+            flex-basis: 30%;
+            .tiles__icon{
+                .icon{
+                    width: 40%;
+                }
+            }
+        }
+    }
+    .content{
+        .d__cards{
+            .d__box{
+                width: 100%;
+            }
+        }    
+    } 
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .d__tiles{
+        .tiles__content{
+            flex-basis: 30%;
+            .tiles__icon{
+                .icon{
+                    width: 40%;
+                }
+            }
+        } 
+    }
+}
+
+@media (min-width: 1024px){
+    .d__tiles{
+        .tiles__content{
+            flex-basis: 15%;
+            .tiles__icon{
+                .icon{
+                    width: 75%;
+                }
+            }
         }
     }
 }

@@ -7,6 +7,7 @@
     justify-content: center;
     .s__title {
         display: flex;
+        align-items: center;
         justify-content: center;
         .t__logo {
             width: 85%;
@@ -18,7 +19,6 @@
             width: 5%;
             button{
                 position: relative;
-                top: 5px;
                 left: 7px;
                 background: $white;
                 width: 27px;
@@ -26,7 +26,7 @@
                 border-radius: 50%;
                 border: 1px solid $toggle-border;
                 box-shadow: 0px 4px 3px 0px rgba(173, 183, 196, 0.13);
-                @extend .toggle-transition;
+                transition: 1s;
                 .icon{
                     position: relative;
                     top: 3px;

@@ -2,6 +2,7 @@ export default {
 	name: 'DashboardSidebar',
 	data() {
 		return {
+			selected: 'default-content',
 			items: [
 				{
 					title: 'Dashboard',
@@ -93,6 +94,7 @@ export default {
 				this.$auth.logout()
 			else
 				this.$router.push({ name: action })
-		}
+				this.selected = action
+		},
 	}
 }

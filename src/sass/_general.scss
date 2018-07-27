@@ -1,21 +1,39 @@
 @import "./_variables";
 
 .dashboard__container{
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     width: 100%;
     height: 100%;
 
     .d__logo {
         background: $blue;
+        background: $blue;
+        .t__logo{
+            .logo__lg{
+                display: block;
+            }
+            .logo__sm{
+                position: absolute;
+                top: 15px;
+                left: 5px;
+                opacity: 0;
+            }
+        }
     }
     .d__header {
         background: #b2e5ee;
     }
     .d__sidebar {
         background: $blue;
+        .sidebar{
+            a{
+                right: 0;
+                @extend .toggle-transition;
+            }
+        }
     }
     .d__content {
-        width: 100%;
         background: #f2f1f7;
     }
 
@@ -95,8 +113,56 @@
     }
    
     @media (min-width: 1025px) {
-        grid-template-columns: 15% auto;
-        grid-template-rows: 75px auto;
+        .d__logo, .d__sidebar {
+            flex-basis: 15%;
+            transition: flex-basis 500ms ease-in-out;
+        }
+        .d__header, .d__content {
+            flex-basis: 85%;
+            transition: flex-basis 500ms ease-in-out;
+        }
+    }
+}
+
+.collapse{
+    .dashboard__container{
+        .d__logo, .d__sidebar  {
+            flex-basis: 5%;
+        }
+        .d__header, .d__content {
+            flex-basis: 95%;
+        }
+        .d__logo {
+            background: $blue;
+            .t__logo{
+                .logo__lg{
+                    display: none;
+                }
+                .logo__sm{
+                    display: block;
+                    opacity: 1;
+                    width: 4%;
+                    transition: opacity 1s;
+                }
+            }
+            .t__hamburger{
+                .t__toggle{
+                    left: 25px;
+                    transition: 1s;
+                }
+            }
+        }
+        .d__sidebar{
+            .sidebar{
+                .s__list{
+                    margin-left: 0;
+                    .s__content{
+                        // display: none;
+                        // opacity: 0;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -106,14 +172,13 @@
         display: flex;
         flex-wrap: wrap;
         .d__logo{
-            width: 20%;
+            width: 15%;
         }
         .d__header{
-            width: 80%;
+            width: 85%;
         }
         .d__sidebar{
             display: none;
         }
     }
 }
-
