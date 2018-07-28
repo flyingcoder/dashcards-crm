@@ -5,15 +5,21 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-      user: null
+      user: null,
+      snackbar: {
+        status: false,
+        message: ''
+      },
     },
     getters: {
       is_user_logged: state => !!state.user,
-      user: state => state.user
+      user: state => state.user,
+      snackbar: state => state.snackbar
     },
     mutations: {
       set_user: (state, payload) => state.user = payload,
-      remove_user: state => state.user = null
+      remove_user: state => state.user = null,
+      open_snackbar: (state, payload) => state.snackbar = payload
     },
     actions: {
       login({commit}, payload) {

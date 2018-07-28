@@ -1,6 +1,8 @@
 <template>
     <div class="content teams">
+
         <div class="row">
+
             <div class="breadcrumbs">
                 <v-breadcrumbs>
                     <v-icon slot="divider">chevron_right</v-icon>
@@ -14,6 +16,7 @@
                     </v-breadcrumbs-item>
                 </v-breadcrumbs>
             </div>
+
             <div class="page__options">
                 <v-dialog v-model="dialog" max-width="500px">
                     <v-btn slot="activator" class="add__btn">New Member</v-btn>
@@ -25,32 +28,41 @@
 
                     <v-card-text>
                         <v-container grid-list-md>
-                        <v-layout wrap>
-                            <v-flex xs12 sm6 md6>
-                            <v-text-field v-model="editedMember.first_name" label="First Name"></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm6 md6>
-                            <v-text-field v-model="editedMember.last_name" label="Last Name"></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm6 md6>
-                            <v-select v-model="editedMember.group_name" :group="groups" label="Standard"></v-select>
-                            </v-flex>
-                            <v-flex xs12 sm6 md6>
-                            <v-text-field v-model="editedMember.job_title" label="Job Title"></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm6 md6>
-                            <v-text-field v-model="editedMember.email" label="Email Address"></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm6 md6>
-                            <v-text-field v-model="editedMember.telephone" label="Contact No."></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm6 md6>
-                            <v-text-field v-model="editedMember.password" label="Password"></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm6 md6>
-                            <v-text-field v-model="editedMember.check_pass" label="Confirm Password"></v-text-field>
-                            </v-flex>
-                        </v-layout>
+                            <v-layout wrap>
+
+                                <v-flex xs12 sm6 md6>
+                                    <v-text-field v-model="editedMember.first_name" label="First Name"></v-text-field>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 md6>
+                                    <v-text-field v-model="editedMember.last_name" label="Last Name"></v-text-field>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 md6>
+                                    <v-select v-model="editedMember.group_name" :group="groups" label="Standard"></v-select>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 md6>
+                                    <v-text-field v-model="editedMember.job_title" label="Job Title"></v-text-field>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 md6>
+                                    <v-text-field v-model="editedMember.email" label="Email Address"></v-text-field>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 md6>
+                                    <v-text-field v-model="editedMember.telephone" label="Contact No."></v-text-field>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 md6>
+                                    <v-text-field v-model="editedMember.password" label="Password"></v-text-field>
+                                </v-flex>
+
+                                <v-flex xs12 sm6 md6>
+                                    <v-text-field v-model="editedMember.check_pass" label="Confirm Password"></v-text-field>
+                                </v-flex>
+
+                            </v-layout>
                         </v-container>
                     </v-card-text>
 
@@ -63,8 +75,10 @@
                 </v-dialog>
             </div>
         </div>
+
         <div class="content__wrapper">
             <div class="row buzz__tables">
+
                 <v-toolbar flat color="white">
                     <v-toolbar-title>Members</v-toolbar-title>
                     <v-divider
@@ -74,6 +88,7 @@
                     ></v-divider>
                     <v-spacer></v-spacer>
                 </v-toolbar>
+
                 <v-data-table
                     :headers="headers"
                     :items="members"
@@ -103,8 +118,10 @@
                             </th>
                         </tr>
                     </template>
+
                     <template slot="items" slot-scope="props">
                         <tr :active="props.selected" @click="props.selected = !props.selected">
+
                             <td>
                                 <v-checkbox
                                     :input-value="props.selected"
@@ -112,40 +129,40 @@
                                     hide-details
                                 ></v-checkbox>
                             </td>
-                            <td class="text-xs-left">
+
+                            <td class="text-xs-left"> <!--TODO fill image with dynamic data from backend-->
                                 <div class="member__image">
-                                    <img :src="props.item.image" />
+                                    <img :src="require('@/assets/temp/user.png')" /> &nbsp;
                                 </div>
                                 <div class="member__name">
-                                    {{ props.item.name }}
+                                    {{ props.item.first_name }}
                                 </div>
                             </td>
-                            <td class="text-xs-center">{{ props.item.position }}</td>
+
+                            <td class="text-xs-center">{{ props.item.job_title }}</td>
                             <td class="text-xs-center">{{ props.item.tasks }}</td>
                             <td class="text-xs-center">{{ props.item.projects }}</td>
+
                             <td>
-                            <v-icon
-                                small
-                                class="mr-2"
-                                @click="editItem(props.item)"
-                                >
-                                edit
-                            </v-icon>
-                            <v-icon
-                                small
-                                @click="deleteItem(props.item)"
-                                >
-                                delete
-                            </v-icon>
+                                <v-icon small class="mr-2" @click="editItem(props.item)">
+                                    edit
+                                </v-icon>
+
+                                <v-icon small @click="deleteItem(props.item)">
+                                    delete
+                                </v-icon>
                             </td>
+
                         </tr>
                     </template>
+
                     <template slot="no-data">
                         <v-alert :value="true" color="error" icon="warning">
                             Sorry, nothing to display here :(
                     </v-alert>
                     </template>
                 </v-data-table>
+
                 <div class="table__pagination text-xs-center">
                     <v-pagination
                     class="buzz__pagination"
@@ -154,6 +171,7 @@
                     circle
                     ></v-pagination>
                 </div>
+
             </div>
         </div>
     </div>

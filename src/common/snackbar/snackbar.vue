@@ -30,6 +30,18 @@
         this.timeout = timeout
         this.icon = this.$vuetify.icons[icon]
       })
+    },
+
+    computed: {
+    	snackbar_store() {
+    		return this.$store.getters.snackbar
+      }
+    },
+    
+    watch: {
+      snackbar_store(snackbar) {
+				snackbar.status && this.$event.$emit('open_snackbar', snackbar.message, 'red')
+      },
     }
 
   }
