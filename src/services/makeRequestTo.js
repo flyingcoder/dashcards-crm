@@ -12,5 +12,9 @@ export default {
 
   get_groups(page) {
     return request.get(`/api/groups?page=${page}`)
+  },
+
+  get_teams() {
+    return request.get('api/company/teams')
   }
 }

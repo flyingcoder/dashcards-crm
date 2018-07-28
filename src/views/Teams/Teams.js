@@ -1,4 +1,7 @@
+import makeRequestTo from '@/services/makeRequestTo'
+
 export default {
+  name: 'Teams',
   data: () => ({
       dialog: false,
       groups: '',
@@ -50,43 +53,13 @@ export default {
   },
 
   created () {
-    this.initialize()
+    makeRequestTo.get_teams()
+      .then(response => {
+        this.members = response.data.data
+      })
   },
 
   methods: {
-    initialize () {
-      this.members = [
-        {
-          name: 'Brian Howard',
-          image: require('@/assets/temp/user.png'),
-          position: 'UI/UX Designer',
-          tasks: 6,
-          projects: 24,
-        },
-        {
-          name: 'Brian Howard',
-          image: require('@/assets/temp/atomic.png'),
-          position: 'UI/UX Designer',
-          tasks: 6,
-          projects: 24,
-        },
-        {
-          name: 'Brian Howard',
-          image: require('@/assets/temp/user.png'),
-          position: 'UI/UX Designer',
-          tasks: 6,
-          projects: 24,
-        },
-        {
-          name: 'Brian Howard',
-          image: require('@/assets/temp/atomic.png'),
-          position: 'UI/UX Designer',
-          tasks: 6,
-          projects: 24,
-        },
-      ]
-    },
-
     toggleAll () {
       if (this.selected.length) this.selected = []
       else this.selected = this.members.slice()
