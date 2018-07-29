@@ -8,7 +8,8 @@ export default {
 		  headers: [
         { id: 1, text: 'ID', value: 'id', width: '5%' },
         { id: 2, text: 'Group Name', value: 'group_name', width: '5%' },
-        { id: 3, is_action: true, width: '90%' },
+        { id: 3, text: 'Description', value: 'description', width: '5%' },
+        { id: 4, is_action: true, width: '85%' },
       ],
 			groups: null,
 			pagination: {
