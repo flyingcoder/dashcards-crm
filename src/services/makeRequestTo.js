@@ -16,5 +16,9 @@ export default {
 
   get_teams() {
     return request.get('api/company/teams')
+  },
+
+  get_services() {
+    return request.get('/api/services')
   }
 }
