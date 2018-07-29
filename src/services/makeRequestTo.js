@@ -18,6 +18,10 @@ export default {
     return request.get('api/company/teams')
   },
 
+  get_searched_groups(keyword) {
+    return request.get(`/api/groups?search=${keyword}`)
+  },
+
   get_services() {
     return request.get('/api/services')
   }
