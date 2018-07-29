@@ -131,7 +131,8 @@ export default new Router({
 				},
         {
 					path: 'services',
-					name: 'services'
+					name: 'services',
+					component: all_views.Services
 				},
       ],
       beforeEnter(to, from, next) {

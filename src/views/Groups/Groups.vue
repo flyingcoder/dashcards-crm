@@ -52,8 +52,9 @@
                         <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
 
                         <template slot="items" slot-scope="{item}">
-                            <td class="text-xs-left">{{ item.id }}</td>
-                            <td class="text-xs-left">{{ item.name }}</td>
+                            <td class="text-xs-center">{{ item.id }}</td>
+                            <td class="text-xs-center">{{ item.name }}</td>
+                            <td class="text-xs-center">{{ item.description }}</td>
                             <td class="actions">
                                 <template v-for="action of get_actions(item.slug)">
                                     <v-tooltip bottom>
