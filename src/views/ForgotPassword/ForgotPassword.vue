@@ -10,7 +10,7 @@
             <template slot="fields">
                 <div class="l__labels">
 
-                    <p>We'll send you an email with further
+                    <p class="l__message">We'll send you an email with further
                         instructions on how to reset your
                         password.</p>
 

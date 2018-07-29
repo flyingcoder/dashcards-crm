@@ -1,5 +1,5 @@
 <template>
-  <div class="login__container">
+  <div class="login">
 
       For email use: ross.buzzooka@gmail.com <br>
       For password use: gDQsa7nUyadmin
