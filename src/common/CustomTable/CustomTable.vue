@@ -1,6 +1,7 @@
 <template>
   <v-data-table
           v-bind="$attrs"
+          :pagination.sync="pagination"
   >
 
     <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear> <!-- LOADING  PROGRESS BAR-->

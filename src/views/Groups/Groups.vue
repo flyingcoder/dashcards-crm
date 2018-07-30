@@ -21,7 +21,13 @@
                     </v-card-title>
 
                     <custom-table
-                        v-bind="_table_options"
+                        :headers="headers"
+                        :items="rows"
+                        :total-items="total_items"
+                        :loading="loading"
+                        :rows-per-page-items="rows_per_page"
+                        :pagination.sync="pagination"
+                        item-key="id"
                     >
 
                         <template slot="headers">
