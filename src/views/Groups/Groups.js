@@ -38,11 +38,16 @@ export default {
 		},
 		'$route.query': {
   		handler(query) {
-				if(!_.isEmpty(query)) {
-					if (query.page)	this.current_page = Number(query.page)
+				if(query.page || query.search) {
+					
+					if (query.page)	{
+						this.current_page = Number(query.page)
+					}
+					
 					if (query.search) {
 						this.search = query.search
 					}
+					
 				}else {
 					this.get_data_from_api()
 				}
@@ -122,6 +127,7 @@ export default {
 		},
 
 		action_clicked() {
+			//TODO implement actions of groups table
 			alert('Action Clicked')
 		}
 

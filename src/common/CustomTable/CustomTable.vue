@@ -14,7 +14,7 @@
 
     <template slot="headers" slot-scope="props"> <!-- HEADERS -->
       <tr>
-        <th>
+        <th v-if="$props.hasCheckbox">
           <v-checkbox
                   :input-value="props.all"
                   :indeterminate="props.indeterminate"
@@ -44,7 +44,7 @@
 
     <template slot="items" slot-scope="props"> <!-- ITEMS -->
       <tr :active="props.selected" @click.self="props.selected = !props.selected">
-        <td>
+        <td v-if="$props.hasCheckbox">
           <v-checkbox
                   :input-value="props.selected"
                   primary
