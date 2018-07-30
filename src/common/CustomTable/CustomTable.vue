@@ -30,7 +30,14 @@
                 :width="header.width"
                 @click="changeSort(header.value)"
         >
-          <template v-if="header.is_action">
+          <template v-if="header.text === 'Icon'">
+            <v-btn fab small color="blue" depressed
+                   :disabled="tableActionDisabled">
+              <img src="@/assets/icons/groups/delete.svg" alt="">
+            </v-btn>
+          </template>
+
+          <template v-else-if="header.is_action">
             <img src="@/assets/icons/table/menu.svg" />
           </template>
 
@@ -43,8 +50,8 @@
     </template>
 
     <template slot="items" slot-scope="props"> <!-- ITEMS -->
-      <tr :active="props.selected" @click.self="props.selected = !props.selected">
-        <td v-if="$props.hasCheckbox">
+      <tr :active="props.selected">
+        <td v-if="$props.hasCheckbox" @click="props.selected = !props.selected">
           <v-checkbox
                   :input-value="props.selected"
                   primary
