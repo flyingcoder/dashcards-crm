@@ -1,8 +1,11 @@
 import makeRequestTo from '@/services/makeRequestTo'
+import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import _ from 'lodash'
 
 export default {
   name: 'Groups',
+	components: {CustomTable},
+
 	data () {
 		return {
 			loading: false,
@@ -114,6 +117,6 @@ export default {
 				this.pagination.sortBy = column
 				this.pagination.descending = false
 			}
-		},
+		}
   }
 }
