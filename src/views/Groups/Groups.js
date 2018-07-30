@@ -76,6 +76,7 @@ export default {
 	},
 
   methods: {
+
 		debounce: _.debounce(function(value) {
 			if (!value) {
 				this.get_data_from_api()
@@ -88,6 +89,7 @@ export default {
 					this.groups = response.data
 				})
 		}, 500),
+
   	get_data_from_api(page = 1) {
   		this.loading = true
 			makeRequestTo.get_groups(page)
@@ -117,6 +119,11 @@ export default {
 				this.pagination.sortBy = column
 				this.pagination.descending = false
 			}
+		},
+
+		action_clicked() {
+			alert('Action Clicked')
 		}
-  }
+
+  },
 }

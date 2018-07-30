@@ -1,27 +1,96 @@
 <template>
+
   <v-data-table
-          v-bind="$attrs"
+          v-model="selected"
+          :headers="headers"
+          :items="items"
+          :loading="loading"
           :pagination.sync="pagination"
+          select-all
+          :total-items="totalItems"
+          :rows-per-page-items="rowsPerPageItems"
   >
+    <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear> <!-- LOADING -->
 
-    <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear> <!-- LOADING  PROGRESS BAR-->
+    <template slot="headers" slot-scope="props"> <!-- HEADERS -->
+      <tr>
+        <th>
+          <v-checkbox
+                  :input-value="props.all"
+                  :indeterminate="props.indeterminate"
+                  primary
+                  hide-details
+                  @click.self="toggleAll"
+          ></v-checkbox>
+        </th>
+        <th
+                v-for="header in props.headers"
+                :key="header.id"
+                :class="['column sortable', pagination.descending ? 'desc' : 'asc', header.value === pagination.sortBy ? 'active' : '']"
+                :width="header.width"
+                @click="changeSort(header.value)"
+        >
+          <template v-if="header.is_action">
+            <img src="@/assets/icons/table/menu.svg" />
+          </template>
 
-    <template slot="headers" slot-scope="props">
-      <slot name="headers"></slot>
+          <template v-else>
+            <v-icon small>arrow_upward</v-icon>
+            {{header.text}}
+          </template>
+        </th>
+      </tr>
     </template>
 
-    <template slot="items" slot-scope="props">
-      <slot name="items" :items="props"></slot>
+    <template slot="items" slot-scope="props"> <!-- ITEMS -->
+      <tr :active="props.selected" @click.self="props.selected = !props.selected">
+        <td>
+          <v-checkbox
+                  :input-value="props.selected"
+                  primary
+                  hide-details
+          ></v-checkbox>
+        </td>
+
+        <slot name="custom-item" :item="props.item"></slot>
+
+      </tr>
     </template>
 
-    <template slot="no-data">
+    <template slot="no-data"> <!-- DISPLAYED WHEN NO ITEMS -->
       <v-alert :value="true" color="error" icon="warning">
         Sorry, nothing to display here :(
-        <pre>{{$props}}</pre>
       </v-alert>
     </template>
 
   </v-data-table>
+
+
+
+
+  <!--<v-data-table-->
+          <!--v-bind="$attrs"-->
+          <!--:pagination.sync="pagination"-->
+  <!--&gt;-->
+
+    <!--<v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear> &lt;!&ndash; LOADING  PROGRESS BAR&ndash;&gt;-->
+
+    <!--<template slot="headers" slot-scope="props">-->
+      <!--<slot name="headers"></slot>-->
+    <!--</template>-->
+
+    <!--<template slot="items" slot-scope="props">-->
+      <!--<slot name="items" :items="props"></slot>-->
+    <!--</template>-->
+
+    <!--<template slot="no-data">-->
+      <!--<v-alert :value="true" color="error" icon="warning">-->
+        <!--Sorry, nothing to display here :(-->
+        <!--<pre>{{$props}}</pre>-->
+      <!--</v-alert>-->
+    <!--</template>-->
+
+  <!--</v-data-table>-->
 </template>
 <script src="./CustomTable.js"></script>
 <style lang="scss" scoped src="./CustomTable.scss"></style>
