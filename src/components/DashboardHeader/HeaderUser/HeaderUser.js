@@ -2,7 +2,7 @@ export default {
   name: 'HeaderUser',
 
   data: () => ({
-    avatarSize: '3vw',
+    avatarSize: '35px',
     items: [
       {
         title: 'Profile',

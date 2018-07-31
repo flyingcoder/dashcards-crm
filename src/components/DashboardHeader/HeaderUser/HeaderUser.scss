@@ -1,24 +1,26 @@
 .user{
     display: flex;
     .activator{
-        display: grid;
+        display: flex;
         width: 100%;
-        grid-template-columns: 1fr 1fr;
         align-items: center;
         justify-items: center;
+        justify-content: space-evenly;
         .chevron{
-            justify-self: start;
+            justify-self: flex-end;
+            width: 30px;
         }
     }
     .user-dropdown{
         width: 100%;
+        .user-chevron{
+            display: flex;
+            margin-left: 10px;
+        }
     }
 }
 
 .buzzooka{
-    .v-menu__content{
-        top: 70px;
-    }
     .h__list{
         margin: 5px 0;
         .h__icons{

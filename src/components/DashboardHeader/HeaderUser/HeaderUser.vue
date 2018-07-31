@@ -2,7 +2,10 @@
    <div class="user">
         <v-menu class="user-dropdown"
             transition="slide-y-transition"
+            :nudge-width="100"
+            :nudge-bottom="20"
             bottom
+            offset-y
             >
             <div class="activator"
                 slot="activator"
@@ -13,7 +16,9 @@
                     >
                     <img  class="responsive-img" src="@/assets/temp/atomic.png" alt="user">
                 </v-avatar>
-                <img src="@/assets/icons/header/chevron-down.svg" class="chevron responsive-img" alt="chevron">
+                <div class="user-chevron">
+                    <img src="@/assets/icons/header/chevron-down.svg" class="chevron responsive-img" alt="chevron">
+                </div>
             </div>
 
             <v-list>

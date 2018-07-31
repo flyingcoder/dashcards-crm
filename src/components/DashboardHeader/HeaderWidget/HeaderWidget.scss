@@ -1,20 +1,55 @@
 .widget{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
     text-align: center;
     justify-content: center;
     align-items: center;
-    grid-gap: 0.5em;
     .w__content{
-        display: grid;
+        display: flex;
         justify-items: center;
         justify-content: center;
+        margin: 0 3px 0 15px;
         .w__icon{
-            width: 75%;
             .icon{
-                width: 100%;
                 height: auto;
-                
+            }
+            .default{
+                display: block;
+            }
+            .colored{
+                display: none;
+            }
+            &:hover{
+                .default{
+                    display: none;
+                }
+                .colored{
+                    display: block;
+                }
+                &:nth-child(2){
+                    img{
+                        width: 40px;
+                    }
+                }
+            }
+        }
+        &:first-child{
+            .icon{
+                width: 30px;
+            }
+        }
+        &:nth-child(2){
+            .icon{
+                width: 35px;
+            }
+        }
+        &:nth-child(3){
+            .icon{
+                width: 30px;
+            }
+        }
+        &:last-child{
+            .icon{
+                width: 25px;
             }
         }
     }
