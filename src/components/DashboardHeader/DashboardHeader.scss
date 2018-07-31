@@ -1,25 +1,42 @@
 @import "./../../sass/_variables";
 
 .header {
-  display: grid;
+  display: flex;
   width: 100%;
   height: 100%;
-  grid-template-columns: repeat(12, 1fr);
   background: $white;
+  padding: 0 2.5%;
 }
 
 .h__search {
-  grid-area: 1 / 1 / 1 / span 5;
+  display: flex;
+  flex-basis: 50%;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .h__widgets {
   display: flex;
+  flex-basis: 45%;
   justify-content: flex-end;
   align-items: center;
-  grid-area: 1 / 6 / auto / span 5;
+  margin-right: 2%;
 }
 
 .h__user{
-  display: grid;
-  grid-area: 1 / auto / 1 / span 2;
+  display: flex;
+  flex-basis: 5%;
+  justify-content: center;
+  align-items: center;
 }
+
+
+@media only screen and (max-width: 600px) {
+  .h__widgets{
+      display: none;
+  }
+  .h__user{
+    flex-basis: 50%;
+    justify-content: flex-end;
+  }
+} 

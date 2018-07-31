@@ -9,7 +9,6 @@
                 @click="sidebar_item_clicked(item.action)"
             >
                 <v-list-tile-action class="s__icons">
-                    <!-- <img class="responsive-img" :src="item.icon" /> -->
                     <svg viewBox="0 0 250 250">
                         <path class="icon" :d="item.icon"/>
                     </svg>

@@ -1,7 +1,7 @@
 <template>
     <div class="content">
 
-        <div class="row">
+        <div class="row d__breadcrumbs">
             <div class="breadcrumbs">
                 <v-breadcrumbs>
                     <v-breadcrumbs-item class="page__title">
@@ -10,17 +10,15 @@
                 </v-breadcrumbs>
             </div>
             <div class="page__options">
-                <div class="save">
-                    <button>
-                        <div class="icon">
-                            <img src="@/assets/icons/dashboard/save.svg" class="responsive-img" alt="save" />
-                        </div>
-                        <div class="title">
-                            <span> Save  </span>
-                        </div>
-                    </button>
+                <div class="option save">
+                    <div class="icon">
+                        <img src="@/assets/icons/dashboard/save.svg" class="responsive-img" alt="save" />
+                    </div>
+                    <div class="title">
+                        <span> Save  </span>
+                    </div>
                 </div>
-                <div class="status">
+                <div class="option status">
                     <div class="left">
                         <label class="switch">
                             <input type="checkbox">
@@ -31,13 +29,11 @@
                         <span>Log on</span>
                     </div>
                 </div>
-                <div class="themes">
-                    <button>
-                        <div class="color"></div>
-                        <div class="title">
-                            <span>Themes</span>
-                        </div>
-                    </button>
+                <div class="option themes">
+                    <div class="color"></div>
+                    <div class="title">
+                        <span>Themes</span>
+                    </div>
                 </div>
             </div>
         </div>

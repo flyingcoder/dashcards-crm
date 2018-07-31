@@ -8,41 +8,34 @@
 
     .d__logo {
         background: $blue;
-        background: $blue;
-        .t__logo{
-            .logo__lg{
-                display: block;
-            }
-            .logo__sm{
-                position: absolute;
-                top: 15px;
-                left: 5px;
-                opacity: 0;
-                width: 100px;
-            }
-        }
     }
     .d__header {
         background: #b2e5ee;
     }
     .d__sidebar {
         background: $blue;
+        overflow: hidden;
         .sidebar{
             a{
                 right: 0;
                 @extend .toggle-transition;
+                .s__content{
+                    opacity: 1;
+                    transition: opacity 2s ease-in-out;
+                }
             }
         }
     }
     .d__content {
         background: #f2f1f7;
+        width: 100%;
+        height: 100%;
     }
 
     .content{
-        padding: 0 30px;
+        padding: 10px 2.5%;
         .row{
             display: flex;
-            margin: 1.5em 0;
         }
         .breadcrumbs{
             flex: 1;
@@ -50,7 +43,7 @@
                 padding: 0;
             }
             .page__title{
-                font-size: 4vmin;
+                font-size: 25px;
                 a{
                     color: #bcc2cf;
                     &:hover{
@@ -133,33 +126,12 @@
         .d__header, .d__content {
             flex-basis: 95%;
         }
-        .d__logo {
-            background: $blue;
-            .t__logo{
-                .logo__lg{
-                    display: none;
-                }
-                .logo__sm{
-                    display: block;
-                    opacity: 1;
-                    width: 4%;
-                    transition: opacity 1s;
-                }
-            }
-            .t__hamburger{
-                .t__toggle{
-                    left: 25px;
-                    transition: 1s;
-                }
-            }
-        }
         .d__sidebar{
             .sidebar{
                 .s__list{
                     margin-left: 0;
                     .s__content{
-                        // display: none;
-                        // opacity: 0;
+                        opacity: 0;
                     }
                 }
             }
@@ -173,13 +145,16 @@
         display: flex;
         flex-wrap: wrap;
         .d__logo{
-            width: 15%;
+            flex-basis: 15%;
         }
         .d__header{
-            width: 85%;
+            flex-basis: 85%;
         }
         .d__sidebar{
             display: none;
+        }
+        .d__content{
+            flex-basis: 100%;
         }
     }
 }
