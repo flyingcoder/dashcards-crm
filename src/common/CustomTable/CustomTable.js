@@ -1,6 +1,15 @@
 export default {
 	name: 'CustomTable',
-	props: ['headers', 'items', 'loading', 'total-items', 'rows-per-page-items', 'has-checkbox', 'table-action-disabled'],
+	props: [
+		'headers',
+		'items',
+		'loading',
+		'total-items',
+		'rows-per-page-items',
+		'has-checkbox',
+		'table-action-disabled',
+		'has-header-icon'
+	],
 
 	data: () => ({
 		pagination: {},

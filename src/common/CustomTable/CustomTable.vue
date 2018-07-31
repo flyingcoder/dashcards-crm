@@ -46,6 +46,11 @@
             {{header.text}}
           </template>
         </th>
+
+        <th v-if="hasHeaderIcon">
+          <img src="@/assets/icons/table/menu.svg" />
+        </th>
+
       </tr>
     </template>
 

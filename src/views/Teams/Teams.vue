@@ -89,79 +89,39 @@
                     <v-spacer></v-spacer>
                 </v-toolbar>
 
-                <v-data-table
-                    :headers="headers"
-                    :items="members"
-                    hide-actions
-                    select-all
-                    class="elevation-1"
-                    >
-                    <template slot="headers" slot-scope="props">
-                        <tr>
-                            <th>
-                                <v-checkbox
-                                    :input-value="props.all"
-                                    :indeterminate="props.indeterminate"
-                                    primary
-                                    hide-details
-                                    @click.native="toggleAll"
-                                ></v-checkbox>
-                            </th>
-                            <th
-                                v-for="header in props.headers"
-                                :key="header.text"
-                                >
-                                {{ header.text }}
-                            </th>
-                            <th>
-                                <img src="@/assets/icons/table/menu.svg" />
-                            </th>
-                        </tr>
+                <custom-table
+                        :headers="headers"
+                        :items="members"
+                        :has-checkbox="true"
+                        :has-header-icon="true"
+                >
+
+                    <template slot="custom-item" slot-scope="item">
+                        <td class="text-xs-left"> <!--TODO fill image with dynamic data from backend-->
+                            <div class="member__image">
+                                <img :src="require('@/assets/temp/user.png')" /> &nbsp;
+                            </div>
+                            <div class="member__name">
+                                {{ item.item.first_name }}
+                            </div>
+                        </td>
+
+                        <td class="text-xs-center">{{ item.item.job_title }}</td>
+                        <td class="text-xs-center">{{ item.item.tasks }}</td>
+                        <td class="text-xs-center">{{ item.item.projects }}</td>
+
+                        <td>
+                            <v-icon class="mr-2" @click="editItem(props.item)">
+                                edit
+                            </v-icon>
+
+                            <v-icon @click="deleteItem(props.item)">
+                                delete
+                            </v-icon>
+                        </td>
                     </template>
 
-                    <template slot="items" slot-scope="props">
-                        <tr :active="props.selected" @click="props.selected = !props.selected">
-
-                            <td>
-                                <v-checkbox
-                                    :input-value="props.selected"
-                                    primary
-                                    hide-details
-                                ></v-checkbox>
-                            </td>
-
-                            <td class="text-xs-left"> <!--TODO fill image with dynamic data from backend-->
-                                <div class="member__image">
-                                    <img :src="require('@/assets/temp/user.png')" /> &nbsp;
-                                </div>
-                                <div class="member__name">
-                                    {{ props.item.first_name }}
-                                </div>
-                            </td>
-
-                            <td class="text-xs-center">{{ props.item.job_title }}</td>
-                            <td class="text-xs-center">{{ props.item.tasks }}</td>
-                            <td class="text-xs-center">{{ props.item.projects }}</td>
-
-                            <td>
-                                <v-icon small class="mr-2" @click="editItem(props.item)">
-                                    edit
-                                </v-icon>
-
-                                <v-icon small @click="deleteItem(props.item)">
-                                    delete
-                                </v-icon>
-                            </td>
-
-                        </tr>
-                    </template>
-
-                    <template slot="no-data">
-                        <v-alert :value="true" color="error" icon="warning">
-                            Sorry, nothing to display here :(
-                    </v-alert>
-                    </template>
-                </v-data-table>
+                </custom-table>
 
                 <div class="table__pagination text-xs-center">
                     <v-pagination
