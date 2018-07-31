@@ -1,8 +1,11 @@
 import makeRequestTo from '@/services/makeRequestTo'
+import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import _ from 'lodash'
 
 export default {
   name: 'Groups',
+	components: {CustomTable},
+
 	data () {
 		return {
 			loading: false,
@@ -35,11 +38,16 @@ export default {
 		},
 		'$route.query': {
   		handler(query) {
-				if(!_.isEmpty(query)) {
-					if (query.page)	this.current_page = Number(query.page)
+				if(query.page || query.search) {
+					
+					if (query.page)	{
+						this.current_page = Number(query.page)
+					}
+					
 					if (query.search) {
 						this.search = query.search
 					}
+					
 				}else {
 					this.get_data_from_api()
 				}
@@ -73,6 +81,7 @@ export default {
 	},
 
   methods: {
+
 		debounce: _.debounce(function(value) {
 			if (!value) {
 				this.get_data_from_api()
@@ -85,6 +94,7 @@ export default {
 					this.groups = response.data
 				})
 		}, 500),
+
   	get_data_from_api(page = 1) {
   		this.loading = true
 			makeRequestTo.get_groups(page)
@@ -115,5 +125,11 @@ export default {
 				this.pagination.descending = false
 			}
 		},
-  }
+
+		action_clicked() {
+			//TODO implement actions of groups table
+			alert('Action Clicked')
+		}
+
+  },
 }
