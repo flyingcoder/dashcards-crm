@@ -8,6 +8,11 @@
 
     .d__logo {
         background: $blue;
+        .s__logo{
+            .b__icon{
+                display: none;
+            }
+        }
     }
     .d__header {
         background: #b2e5ee;
@@ -125,6 +130,15 @@
         }
         .d__header, .d__content {
             flex-basis: 95%;
+        }
+        .d__logo{
+            .s__title{
+                .s__logo{
+                    .logo__img{
+                        width: 85%;
+                    }
+                }
+            }
         }
         .d__sidebar{
             .sidebar{

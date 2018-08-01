@@ -1,7 +1,10 @@
 import makeRequestTo from '@/services/makeRequestTo'
+import CustomTable from '@/common/CustomTable/CustomTable.vue'
 
 export default {
   name: 'Teams',
+  components: { CustomTable },
+
   data: () => ({
       dialog: false,
       groups: '',
@@ -14,7 +17,7 @@ export default {
           { text: 'Member', align: 'left', value: 'name' },
           { text: 'Position',  value: 'position' },
           { text: 'Tasks', value: 'tasks' },
-          { text: 'Projects', value: 'projects' },
+          { text: 'Projects', value: 'projects' }
       ],
       members: [],
       editedIndex: -1,

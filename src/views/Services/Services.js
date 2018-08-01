@@ -1,9 +1,13 @@
 import makeRequestTo from '@/services/makeRequestTo'
+import CustomTable from '@/common/CustomTable/CustomTable.vue'
 
 export default {
 	name: 'Services',
+	components: { CustomTable },
+
 	data () {
 		return {
+			loading: false,
 			headers: [
 				{ id: 1, text: 'Service', value: 'service', sortable: true, align: 'left' },
 				{ id: 2, text: 'Created By', value: 'created_by', sortable: true, align: 'left' },
@@ -25,7 +29,6 @@ export default {
 
 			search: '',
 			selected: [],
-			desserts: []
 		}
 	},
 	
@@ -43,16 +46,22 @@ export default {
 	},
 
 	methods: {
+
 		get_data_from_api() {
+			this.loading = true
 			makeRequestTo.get_services()
 				.then(response => {
+					this.loading = false
+					//TODO fill the table with api data
 					console.log(response.data)
 				})
 		},
+
 		toggleAll () {
 			if (this.selected.length) this.selected = []
 			else this.selected = this.items.slice()
 		},
+
 		changeSort (column) {
 			if (this.pagination.sortBy === column) {
 				this.pagination.descending = !this.pagination.descending
@@ -61,5 +70,6 @@ export default {
 				this.pagination.descending = false
 			}
 		}
-	}
+
+	},
 }
