@@ -2,8 +2,9 @@
     <div class="s__title"> <!-- s stands for sidebar-->
 
         <div class="s__logo">
-            <img class="logo__img" src="@/assets/logo/buzzooka-white.png" width="20px" height="20px">
+            <img class="logo__img w__icon" src="@/assets/logo/buzzooka-white.png" width="20px" height="20px">
             <img class="logo__img hidden" src="@/assets/logo/mini-white.png" width="20px" height="20px" alt="logo">
+            <img class="logo__img b__icon" src="@/assets/logo/buzzooka-blue.png" width="20px" height="20px">
         </div>
 
         <div class="s__hamburger">

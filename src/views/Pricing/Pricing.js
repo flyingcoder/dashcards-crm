@@ -1,12 +1,17 @@
+import DashboardLogo from '@/components/DashboardLogo/DashboardLogo.vue'
+import DashboardHeader from '@/components/DashboardHeader/DashboardHeader.vue'
+
 export default {
-    name: 'DashboardContent',
-    data () {
-      return {
-        prices: [
-          { type: 'Free', price: '0.00', description: 'Free Subscription Limited Access', button: 'GET IT NOW' },
-          { type: 'Monthly', price: '10.00', description: 'Monthly Subscription Use All You Want', button: 'SUBSCRIBE NOW' },
-          { type: 'Yearly', price: '99.99', description: 'Yearly Subscription Use All You Want With Discount', button: 'SUBSCRIBE NOW' },
-        ],
-      }
-  }
-  }
+  components: {DashboardLogo, DashboardHeader},
+  data () {
+    // TODO review by roland making it functional component
+    return {
+      prices: [
+        { type: 'Pro', price: '$14.99', discount: '($290/year - You save $8)', description: 'A limited number of reports to monitor up to 3 locations', button: 'SELECT PLAN' },
+        { type: 'Business', price: '$24.99', discount: '($290/year - You save $8)', description: 'A limited number of reports to monitor up to 3 locations', button: 'SELECT PLAN' },
+        { type: 'Guro', price: '$49.99', discount: '($290/year - You save $8)', description: 'A limited number of reports to monitor up to 3 locations', button: 'SELECT PLAN' },
+        { type: 'Enterprise', price: 'Need More?', discount: '', description: 'A limited number of reports to monitor up to 3 locations', button: 'SELECT PLAN' },
+      ],
+    }
+  },
+}

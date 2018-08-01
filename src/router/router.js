@@ -156,7 +156,7 @@ export default new Router({
           }
        }
     },
-
+    
     {
       path: '/groups',
       name: 'groups',
