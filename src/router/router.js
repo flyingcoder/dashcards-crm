@@ -161,14 +161,27 @@ export default new Router({
       path: '/groups',
       name: 'groups',
       component: all_views.Groups,
-       beforeEnter(to, from, next) {
+		  beforeEnter(to, from, next) {
           if (check_user.is_user_logged()) {
             next()
           }else {
             next({name: 'not_found'})
           }
-       }
+      }
     },
+
+		{
+			path: '/checkout',
+			name: 'checkout',
+			component: all_views.Checkout,
+			beforeEnter(to, from, next) {
+				if (check_user.is_user_logged()) {
+					next()
+				}else {
+					next({name: 'not_found'})
+				}
+			}
+		},
 
     {
       path: '/404',
