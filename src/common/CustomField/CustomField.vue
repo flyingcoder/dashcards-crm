@@ -6,11 +6,11 @@
         </div>
 
         <input
-                :type="inputType"
-                :value="value"
-                :class="{ invalid: !valid }"
-                v-on="listeners"
-                v-bind="$attrs"
+            :type="inputType"
+            :value="value"
+            :class="{ invalid: !valid }"
+            v-on="listeners"
+            v-bind="$attrs"
         >
 
     </div>

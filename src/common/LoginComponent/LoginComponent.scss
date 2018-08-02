@@ -1,14 +1,115 @@
 @import "../../sass/variables";
 
-.login__container {
+.login__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 25vw;
   height: 100%;
+}
+
+.l__logo {
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.l__title {
+  display: flex;
+  height: 11vh;
+  font-size: 2.5vw;
+  font-weight: bold;
+  align-items: center;
+}
+
+.l__divider{
+  width: 3vw;
+  height: 1vh;
+  border-radius: 5px;
+  background-color: $white;
+}
+
+.l__labels{
+  display: flex;
+  height: 20vh;
   width: 100%;
-  background: #ecf1f5;
-  color: black;
-  font-size: 25px;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-top: 2vh;
+}
+
+.l__tools {
+  display: flex;
+  justify-content: space-between;
+  height: 8vh;
+  .checkbox {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-start;
+    input{
+      width: 1vw;
+      height: 2vh;
+    }
+    label {
+      position: relative;
+      font-size: 1vw;
+      left: 0.5vw;
+    }
+  }
+  .forgot__password {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
+      a{
+        font-size: 1vw;
+        color: $white;
+        text-decoration: none;
+    }
+  }
+}
+
+.l__button {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 1vh;
+  button {
+    width: 100%;
+    height: 7vh;
+    background: $blue;
+    font-family: "OpenSans";
+    font-size: 1vw;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 2px;
+    text-align: center;
+    outline: none;
+    border-radius: 10px;
+    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+  }
+}
+
+.l__signup {
+  display: flex;
+  width: 100%;
+  height: 8vh;
+  font-weight: 300;
+  font-family: HelveticaLTStd;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1vw;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  a{
+    color: $white;
+  }
 }
 
 // Error area
@@ -16,7 +117,6 @@
   position: relative;
   width: 100%;
   height: 8%;
-  background: white;
   display: flex;
   justify-content: center;
 
@@ -27,7 +127,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: white;
   }
 
   .e__message {
@@ -42,151 +141,5 @@
     width: 100%;
     height: 5%;
     background: #e6e6e6;
-  }
-}
-
-// Login button
-.l__button {
-  width: 73%;
-  height: 17%;
-  background: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  > button {
-    width: 100%;
-    height: 40px;
-    background: $blue;
-    font-family: "OpenSans";
-    font-size: 13.5px;
-    font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: 1px;
-    text-align: center;
-    color: #ffffff;
-    outline: none;
-    border-radius: 10px;
-    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
-  }
-}
-
-//Signup
-.l__signup {
-  display: flex;
-  width: 73%;
-  height: 10%;
-  justify-content: center;
-  align-items: flex-start;
-  color: #6f6f6f;
-  font-size: 16px;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  font-family: HelveticaLTStd;
-  a {
-    color: #636b6f;
-  }
-}
-
-.login__card {
-  width: 380px;
-  height: 508px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: white;
-  color: white;
-  box-shadow: 0px 10px 10px 0 rgba(173, 183, 196, 0.75);
-  border: solid 1px #dce1e5;
-}
-
-.l__logo {
-  position: relative;
-  height: 18%;
-  width: 100%;
-  background: white;
-  color: black;
-  font-size: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-
-  > img {
-    position: absolute;
-    width: 66%;
-    height: auto;
-    top: 40px;
-  }
-}
-
-.l__title {
-  position: relative;
-  height: 10%;
-  width: 100%;
-  background: white;
-  display: flex;
-  align-items: flex-end;
-  p {
-    position: absolute;
-    width: 100%;
-    height: 37px;
-    left: 63px;
-    font-family: Gotham;
-    font-size: 30px;
-    font-weight: bold;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #00a7e5;
-  }
-}
-
-.l__tools {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 73%;
-  height: 11%;
-  background: white;
-  color: black;
-  font-size: 12px;
-
-  > .checkbox {
-    display: flex;
-    align-items: center;
-    > label {
-        width: 110px;
-        height: 13px;
-        font-family: HelveticaLTStd;
-        margin-left: 5px;
-        font-size: 13px;
-        font-weight: bold;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        color: #6f6f6f;
-    }
-  }
-  > .forgot__password {
-      width: 129px;
-      height: 16px;
-      font-family: HelveticaLTStd;
-      font-size: 13px;
-      font-weight: 300;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: normal;
-    > a{
-      color: #636b6f;
-      text-decoration: none;
-    }
   }
 }
