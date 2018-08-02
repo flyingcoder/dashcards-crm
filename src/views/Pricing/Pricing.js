@@ -1,12 +1,13 @@
 import DashboardLogo from '@/components/DashboardLogo/DashboardLogo.vue'
 import DashboardHeader from '@/components/DashboardHeader/DashboardHeader.vue'
+import PricingCard from '@/components/PricingCard/PricingCard.vue'
 
 export default {
-  components: {DashboardLogo, DashboardHeader},
+  components: {DashboardLogo, DashboardHeader, PricingCard},
   data () {
     // TODO review by roland making it functional component
     return {
-      prices: [
+      cards: [
         { type: 'Pro', price: '$14.99', discount: '($290/year - You save $8)', description: 'A limited number of reports to monitor up to 3 locations', button: 'SELECT PLAN' },
         { type: 'Business', price: '$24.99', discount: '($290/year - You save $8)', description: 'A limited number of reports to monitor up to 3 locations', button: 'SELECT PLAN' },
         { type: 'Guro', price: '$49.99', discount: '($290/year - You save $8)', description: 'A limited number of reports to monitor up to 3 locations', button: 'SELECT PLAN' },
