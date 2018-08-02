@@ -2,51 +2,64 @@
 
 // Field (email and password)
 .field {
-  position: relative;
-  width: 100%;
-  height: 40px;
   display: flex;
+  height: 6vh;
+  width: 100%;
   justify-content: center;
   align-items: center;
-  top: 13px;
-  color: black;
-  font-size: 15px;
-  margin-bottom: 5px;
 
-  > .v-icon {
-    position: absolute;
-    width: 17%;
+  .v-icon {
+    flex-basis: 20%;
     height: 100%;
-    left: 0;
     background: $blue;
     border-radius: 5px 0 0 5px;
   }
-
-  > input {
-    position: absolute;
-    right: 0;
-    width: 83%;
+ 
+  input {
+    flex-basis: 80%;
     height: 100%;
+    color: #b3b3b3;
+    background: $white;
     font-family: HelveticaLTStd;
-    font-size: 15px;
+    font-size: 1vw;
+    text-indent: 1vw;
     font-weight: 300;
     font-style: normal;
-    font-stretch: normal;
-    line-height: 0.2;
     letter-spacing: normal;
-    color: #636b6f;
-    border: solid 1px #636b6f;
-    background: $white;
-    padding-left: 5px;
-    border-radius: 0 5px 5px 0;
     outline: none;
+    border: solid 2px #e6e6e6;
+    border-radius: 0 5px 5px 0;
     transition : border 500ms ease-out; 
+    &::placeholder{
+      text-indent: 1vw;
+      font-weight: 300;
+      color: #b3b3b3;
+    }
+    
+  }
+
+  &:first-child{
+    .v-icon{
+      img{
+        width: 2vw;
+      }
+    }
+  }
+
+  &:last-child{
+    .v-icon{
+      img{
+        width: 1.4vw;
+        height: 4vh;
+      }
+    }
   }
 
   input.invalid {
     border: 2px solid $red;
     transition : border 500ms ease-out; 
   }
+  
 }
 
 .signup__field {
