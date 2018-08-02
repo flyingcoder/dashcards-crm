@@ -24,9 +24,20 @@ let style = {
 };
 
 export default {
+	name: 'Checkout',
+	props: {
+		price: {
+			required: true
+		}
+	},
+
 	data: () => ({
 		card: null
 	}),
+	
+	created() {
+		if (!this.price) this.$router.replace({ name: 'not_found' })
+	},
 
 	mounted() {
 		this.card = elements.create('card', {style: style});
@@ -44,6 +55,10 @@ export default {
 
 	},
 
+	beforeDestroy() {
+		delete this.$options.components.Checkout
+	},
+
 	methods: {
 		submit_payment() {
 			stripe.createToken(this.card).then(function(result) {
@@ -57,5 +72,6 @@ export default {
 				}
 			});
 		}
-	}
+	},
+	
 }

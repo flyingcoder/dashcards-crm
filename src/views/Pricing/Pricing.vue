@@ -20,11 +20,8 @@
 
                 </div>
 
-                <div class="price__list">
-                    <template v-for="card in cards">
-                        <pricing-card :card="card"></pricing-card>
-                    </template>
-                </div>
+                <pricing-cards :pricing-cards="pricing_cards" @click="go_to_checkout"></pricing-cards>
+
             </div>
         </div>
 
