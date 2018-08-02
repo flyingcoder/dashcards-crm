@@ -174,6 +174,7 @@ export default new Router({
 			path: '/checkout',
 			name: 'checkout',
 			component: all_views.Checkout,
+			props: true,
 			beforeEnter(to, from, next) {
 				if (check_user.is_user_logged()) {
 					next()

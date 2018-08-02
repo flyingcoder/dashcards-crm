@@ -1,6 +1,7 @@
 <template>
   <div class="checkout">
     <div class="payment__container">
+      <h1>You are going to pay {{ price }}</h1>
       <form id="payment-form">
         <div class="form-row">
           <label for="card-element">
