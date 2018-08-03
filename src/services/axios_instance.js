@@ -2,7 +2,7 @@ import axios from 'axios'
 import store from '@/store/store'
 
 const request = axios.create({
-  baseURL: 'https://api.bizzooka.ca',
+  baseURL: 'http://api.bizzooka.ca',
   timeout: 5000,
 })
 
