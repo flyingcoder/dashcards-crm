@@ -27,7 +27,7 @@
     font-style: normal;
     letter-spacing: normal;
     outline: none;
-    border: solid 2px #e6e6e6;
+    border: solid 0.1vw #e6e6e6;
     border-radius: 0 5px 5px 0;
     transition : border 500ms ease-out; 
     &::placeholder{
@@ -56,16 +56,17 @@
   }
 
   input.invalid {
-    border: 2px solid $red;
+    border: 0.2vw solid #ff9a9a;
     transition : border 500ms ease-out; 
   }
   
 }
 
 .signup__field {
-  > .v-icon {display: none}
-  > input {
-    width: 100%;
-    border-radius: 5px;
+  .v-icon {
+    display: none
+  }
+  input{
+    flex-basis: 100%;
   }
 }
