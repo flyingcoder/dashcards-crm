@@ -17,8 +17,9 @@
 
                 <template slot="fields">
                         <div class="l__labels">
-
-                        <!-- This 2 fields will be updated in the CRM Settings when the user first login -->
+                                
+                        <!-- KINDLY VERIFY ROLAND -->
+                        <!-- This 2 fields will be updated in the CRM Settings when the user first login-->
 
                         <!-- <custom-field
                                 className="signup__field"
