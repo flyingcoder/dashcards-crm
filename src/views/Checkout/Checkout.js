@@ -1,3 +1,5 @@
+import makeRequestTo from '@/services/makeRequestTo'
+
 // Create a Stripe client.
 const stripe = Stripe('pk_test_IaFgoMQAWbVsxO7GjyW5OhJY');
 
@@ -68,10 +70,14 @@ export default {
 					errorElement.textContent = result.error.message;
 				} else {
 					// Send the token to your server.
-					stripeTokenHandler(result.token);
+					console.log(result.token)
+					makeRequestTo.checkout(result.token)
+						.then(response => {
+							console.log(response);
+						});
 				}
 			});
-		}
+		},
 	},
 	
 }

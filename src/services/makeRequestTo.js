@@ -24,5 +24,9 @@ export default {
 
   get_services() {
     return request.get('/api/services')
+  },
+
+  checkout(token) {
+    return request.post('/api/upgrade/checkout', {token})
   }
 }
