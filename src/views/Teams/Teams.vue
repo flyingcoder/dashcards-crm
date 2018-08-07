@@ -107,8 +107,8 @@
                         </td>
 
                         <td class="text-xs-center">{{ item.item.job_title }}</td>
-                        <td class="text-xs-center">{{ item.item.tasks }}</td>
-                        <td class="text-xs-center">{{ item.item.projects }}</td>
+                        <td class="text-xs-center">{{ item.item.tasks.length == 0 ? 'no tasks assigned' : item.item.tasks.length  }}</td>
+                        <td class="text-xs-center">{{ item.item.projects.length == 0 ? 'no projects assigned' : item.item.projects.length }}</td>
 
                         <td>
                             <v-icon class="mr-2" @click="editItem(props.item)">
