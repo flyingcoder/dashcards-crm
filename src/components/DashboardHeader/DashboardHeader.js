@@ -1,8 +1,8 @@
+import HeaderHamburger from './HeaderHamburger/HeaderHamburger.vue'
 import HeaderSearch from './HeaderSearch/HeaderSearch.vue'
-import HeaderWidget from './HeaderWidget/HeaderWidget.vue'
-import HeaderUser from './HeaderUser/HeaderUser.vue'
+import HeaderMenu from './HeaderMenu/HeaderMenu.vue'
 
 export default {
   name: 'DashboardHeader',
-  components: {HeaderSearch, HeaderWidget, HeaderUser}
+  components: {HeaderHamburger, HeaderSearch, HeaderMenu}
 }

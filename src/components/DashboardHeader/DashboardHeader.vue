@@ -1,8 +1,8 @@
 <template>
     <div class="header">
+        <div class="h__hamburger"><header-hamburger></header-hamburger></div> 
         <div class="h__search"><header-search></header-search></div>
-        <div class="h__widgets"><header-widget></header-widget></div>
-        <div class="h__user"><header-user></header-user></div>
+        <div class="h__menu"><header-menu></header-menu></div>
     </div>
 </template>
 <script src="./DashboardHeader.js"></script>
