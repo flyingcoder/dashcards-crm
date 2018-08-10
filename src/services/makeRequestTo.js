@@ -18,6 +18,14 @@ export default {
     return request.get('api/company/teams')
   },
 
+  post_teams(teams) {
+    return request.post('api/company/teams', teams)
+  },
+
+  put_teams(teams) {
+    return request.put(`api/company/teams/${teams.id}`, teams)
+  },
+
   get_searched_groups(keyword) {
     return request.get(`/api/groups?search=${keyword}`)
   },
@@ -28,5 +36,5 @@ export default {
 
   checkout(token) {
     return request.post('/api/upgrade/checkout', {token})
-  }
+  },
 }

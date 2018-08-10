@@ -7,7 +7,7 @@ export default {
 
   data: () => ({
       dialog: false,
-      groups: '',
+      groups: 'asdf',
       page: 1,
       paths: [
       { text: 'Dashboard', disabled: false },
@@ -29,7 +29,7 @@ export default {
         email: '',
         telephone: '',
         password: '',
-        check_pass: '',
+        password_confirmation: '',
       },
       defaultItem: {
         first_name: '',
@@ -89,9 +89,16 @@ export default {
 
     save () {
       if (this.editedIndex > -1) {
-        Object.assign(this.members[this.editedIndex], this.editedMember)
+        makeRequestTo.put_teams(this.editedMember)
+          .then(response => {
+            Object.assign(this.members[this.editedIndex], this.editedMember)
+        })
       } else {
-        this.members.push(this.editedMember)
+        makeRequestTo.post_teams(this.editedMember)
+          .then(response => {
+            this.members.push(this.editedMember)
+            console.log(response)
+          })
       }
       this.close()
     }

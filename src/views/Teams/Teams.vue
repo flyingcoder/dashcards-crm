@@ -111,11 +111,11 @@
                         <td class="text-xs-center">{{ item.item.projects.length == 0 ? 'no projects assigned' : item.item.projects.length }}</td>
 
                         <td>
-                            <v-icon class="mr-2" @click="editItem(props.item)">
+                            <v-icon class="mr-2" @click="editItem(item.item)">
                                 edit
                             </v-icon>
 
-                            <v-icon @click="deleteItem(props.item)">
+                            <v-icon @click="deleteItem(item.item)">
                                 delete
                             </v-icon>
                         </td>
