@@ -1,52 +1,105 @@
 import makeRequestTo from '@/services/makeRequestTo'
+import CustomField from '@/common/CustomField/CustomField.vue'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
+import {validations} from "./local-mixins/validations"
 
 export default {
   name: 'Teams',
-  components: { CustomTable },
+  mixins: [validations],
+  components: { CustomTable, CustomField },
 
   data: () => ({
-      dialog: false,
-      groups: 'asdf',
-      page: 1,
-      paths: [
+    // Form Data
+    dialog: false,
+    editedIndex: -1,
+    first_name: {
+      text: '',
+      is_valid: true,
+      error_messages: ['First name is required'],
+      validations: ['required']
+    },
+    last_name: {
+      text: '',
+      is_valid: true,
+      error_messages: ['Last name is required'],
+      validations: ['required']
+    },
+    group_name: {
+      text: '',
+      items: [
+        'Admin',
+        'Developer',
+        'Staff',
+        'Manager'
+      ],
+      is_valid: true,
+      error_messages: ['Group is required'],
+      validations: ['required']
+    },
+    job_title: {
+      text: '',
+      is_valid: true,
+      error_messages: ['Job Title is required'],
+      validations: ['required']
+    },
+    email: {
+      text: '',
+      is_valid: true,
+      error_messages: [
+        'Email is required', 
+        'Please type a valid email'
+      ],
+      validations: ['required', 'email']
+    },
+    telephone: {
+      text: '',
+      is_valid: true,
+      error_messages: [
+        'Contact Number is required', 
+        'Please type a valid contact number'
+        ],
+      validations: ['required', 'numeric']
+    },
+    password: {
+      text: '',
+      is_valid: true,
+      error_messages: [
+        'Password is required',
+        'Password must have minimum 6 characters',
+        'Password must contains at least one number'
+      ],
+      validations: ['required', 'minLength', 'containsNumber']
+    },
+    repeat_password: {
+      text: '',
+      is_valid: true,
+      error_messages: ['Passwords do not match'],
+      validations: ['matchPassword']
+    },
+    input_type: 'password',
+     
+    // Breadcrumbs Data
+    paths: [
       { text: 'Dashboard', disabled: false },
       { text: 'Teams', disabled: true }
-      ],
-      headers: [
-          { text: 'Member', align: 'left', value: 'name' },
-          { text: 'Position',  value: 'position' },
-          { text: 'Tasks', value: 'tasks' },
-          { text: 'Projects', value: 'projects' }
-      ],
-      members: [],
-      editedIndex: -1,
-      editedMember: {
-        first_name: '',
-        last_name: '',
-        group_name: '',
-        job_title: '',
-        email: '',
-        telephone: '',
-        password: '',
-        password_confirmation: '',
-      },
-      defaultItem: {
-        first_name: '',
-        last_name: '',
-        group_name: '',
-        job_title: '',
-        email: '',
-        telephone: '',
-        password: '',
-        check_pass: '',
-      }
+    ],
+    
+    // Table Data
+    members: [],
+    page: 1,
+    headers: [
+        { text: 'Member', align: 'left', value: 'name' },
+        { text: 'Position',  value: 'position' },
+        { text: 'Tasks', value: 'tasks' },
+        { text: 'Projects', value: 'projects' }
+    ],
+    
   }),
 
   computed: {
     formTitle () {
       return this.editedIndex === -1 ? 'New Member' : 'Edit Member'
-    }
+    },
   },
 
   watch: {
@@ -70,7 +123,7 @@ export default {
 
     editItem (item) {
       this.editedIndex = this.members.indexOf(item)
-      this.editedMember = Object.assign({}, item)
+      this.form = Object.assign({}, item)
       this.dialog = true
     },
 
@@ -82,25 +135,43 @@ export default {
     close () {
       this.dialog = false
       setTimeout(() => {
-        this.editedMember = Object.assign({}, this.defaultItem)
+        this.form = Object.assign({}, this.defaultItem)
         this.editedIndex = -1
       }, 300)
     },
 
-    save () {
-      if (this.editedIndex > -1) {
-        makeRequestTo.put_teams(this.editedMember)
+    save: function  () {
+      if (this.all_validations_passed()) {
+        const fields = {
+          first_name: this.first_name.text,
+          last_name: this.last_name.text,
+          group_name: this.group_name.text,
+          job_title: this.job_title.text,
+          email: this.email.text,
+          telephone: this.telephone.text,
+          password: this.password.text,
+        }
+        console.log(fields)
+        makeRequestTo.post_teams(fields)
           .then(response => {
-            Object.assign(this.members[this.editedIndex], this.editedMember)
-        })
-      } else {
-        makeRequestTo.post_teams(this.editedMember)
-          .then(response => {
-            this.members.push(this.editedMember)
-            console.log(response)
+            this.members.push(fields)
           })
       }
-      this.close()
+ 
+      
+      // if (this.editedIndex > -1) {
+      //   makeRequestTo.put_teams(this.form)
+      //     .then(response => {
+      //       Object.assign(this.members[this.editedIndex], this.form)
+      //   })
+      // } else {
+      //    console.log(this.form)
+      //   makeRequestTo.post_teams(this.form)
+      //     .then(response => {
+      //       this.members.push(this.form)
+      //       // console.log(response)
+      //     })
+      // }
     }
   }
 }

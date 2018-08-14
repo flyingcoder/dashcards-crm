@@ -2,7 +2,6 @@
     <div class="content teams">
 
         <div class="row">
-
             <div class="breadcrumbs">
                 <v-breadcrumbs>
                     <v-icon slot="divider">chevron_right</v-icon>
@@ -26,51 +25,99 @@
                         <span class="headline">{{ formTitle }}</span>
                     </v-card-title>
 
-                    <v-card-text>
-                        <v-container grid-list-md>
-                            <v-layout wrap>
+                    <v-container grid-list-md>
+                        <v-layout wrap>     
+      
+                            <custom-field
+                                className="newMember_field"
+                                v-model.trim="first_name.text"
+                                :valid="first_name.is_valid"
+                                input-type="text"
+                                placeholder="First Name"
+                                @blur="validate_field('first_name')"
+                                @focus="first_name.is_valid = true"
+                            ></custom-field>
 
-                                <v-flex xs12 sm6 md6>
-                                    <v-text-field v-model="editedMember.first_name" label="First Name"></v-text-field>
-                                </v-flex>
+                            <custom-field
+                                className="newMember_field"
+                                v-model.trim="last_name.text"
+                                :valid="last_name.is_valid"
+                                input-type="text"
+                                placeholder="Last Name"
+                                @blur="validate_field('last_name')"
+                                @focus="last_name.is_valid = true"
+                            ></custom-field>
 
-                                <v-flex xs12 sm6 md6>
-                                    <v-text-field v-model="editedMember.last_name" label="Last Name"></v-text-field>
-                                </v-flex>
+                            <custom-field
+                                className="newMember_field"
+                                v-model.trim="group_name.text"
+                                :items="group_name.items"
+                                :valid="group_name.is_valid"
+                                input-type="select"
+                                placeholder="Groups"
+                                @blur="validate_field('group_name')"
+                                @focus="group_name.is_valid = true"
+                            ></custom-field>
 
-                                <v-flex xs12 sm6 md6>
-                                    <v-select v-model="editedMember.group_name" :group="groups" label="Standard"></v-select>
-                                </v-flex>
+                            <custom-field
+                                className="newMember_field"
+                                v-model.trim="job_title.text"
+                                :valid="job_title.is_valid"
+                                input-type="text"
+                                placeholder="Job Title"
+                                @blur="validate_field('job_title')"
+                                @focus="job_title.is_valid = true"
+                            ></custom-field>
 
-                                <v-flex xs12 sm6 md6>
-                                    <v-text-field v-model="editedMember.job_title" label="Job Title"></v-text-field>
-                                </v-flex>
+                            <custom-field
+                                className="newMember_field"
+                                v-model.trim="email.text"
+                                :valid="email.is_valid"
+                                input-type="email"
+                                placeholder="Email"
+                                @blur="validate_field('email')"
+                                @focus="email.is_valid = true"
+                            ></custom-field>
 
-                                <v-flex xs12 sm6 md6>
-                                    <v-text-field v-model="editedMember.email" label="Email Address"></v-text-field>
-                                </v-flex>
+                            <custom-field
+                                className="newMember_field"
+                                v-model.trim="telephone.text"
+                                :valid="telephone.is_valid"
+                                input-type="text"
+                                placeholder="Contact Number"
+                                @blur="validate_field('telephone')"
+                                @focus="telephone.is_valid = true"
+                            ></custom-field>
 
-                                <v-flex xs12 sm6 md6>
-                                    <v-text-field v-model="editedMember.telephone" label="Contact No."></v-text-field>
-                                </v-flex>
+                            <custom-field
+                                className="newMember_field"
+                                v-model.trim="password.text"
+                                :valid="password.is_valid"
+                                :input-type="input_type"
+                                placeholder="Password"
+                                @blur="validate_field('password')"
+                                @focus="password.is_valid = true"
+                            ></custom-field>
 
-                                <v-flex xs12 sm6 md6>
-                                    <v-text-field v-model="editedMember.password" label="Password"></v-text-field>
-                                </v-flex>
+                            <custom-field
+                                className="newMember_field"
+                                v-model.trim="repeat_password.text"
+                                :valid="repeat_password.is_valid"
+                                :input-type="input_type"
+                                placeholder="Repeat Password"
+                                @blur="validate_field('repeat_password')"
+                                @focus="repeat_password.is_valid = true"
+                            ></custom-field>
 
-                                <v-flex xs12 sm6 md6>
-                                    <v-text-field v-model="editedMember.check_pass" label="Confirm Password"></v-text-field>
-                                </v-flex>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn class="cancel__btn" flat @click.native="close">Cancel</v-btn>
+                                <v-btn class="save__btn" flat @click.native="save">Save</v-btn>
+                            </v-card-actions>
 
-                            </v-layout>
-                        </v-container>
-                    </v-card-text>
+                        </v-layout>     
+                    </v-container>
 
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn class="cancel__btn" flat @click.native="close">Cancel</v-btn>
-                        <v-btn class="save__btn" flat @click.native="save">Save</v-btn>
-                    </v-card-actions>
                     </v-card>
                 </v-dialog>
             </div>
@@ -123,17 +170,18 @@
 
                 </custom-table>
 
-                <div class="table__pagination text-xs-center">
+                <!-- <div class="table__pagination text-xs-center">
                     <v-pagination
                     class="buzz__pagination"
                     v-model="page"
                     :length="4"
                     circle
                     ></v-pagination>
-                </div>
+                </div> -->
 
             </div>
         </div>
+        
     </div>
 </template>
 <style lang="scss" src="./Teams.scss"></style>

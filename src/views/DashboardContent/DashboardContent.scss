@@ -3,7 +3,7 @@
 
 .content{
     .d__breadcrumbs{
-        margin-bottom: 1em;
+        margin-bottom: 1vw;
         .page__options{
             display: flex;
             flex: 1;
@@ -14,11 +14,10 @@
             .option{
                 display: flex;
                 flex-basis: 31%;
-                height: 100%;
+                height: 3vw;
                 align-items: center;
                 justify-content: space-between;
                 @extend .buzz-border;
-                
             }
             .save{
                 display: flex;
@@ -150,7 +149,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1em;
+            margin-bottom: 1vw;
             height: auto;
             @extend .buzz-border;
             .tiles__icon{
@@ -166,7 +165,7 @@
                 flex: 2;
                 text-align: center;
                 background: $white;
-                border-radius: 0 9px 9px 0;
+                border-radius: 0 0.9vw 0.9vw  0;
                 .counter{
                     font-size: 1.7vw;
                 }
@@ -222,62 +221,25 @@
 }
 
 @media (max-width: 480px) {
-    .content{
-        .d__breadcrumbs{
-            flex-direction: column;
-            .page__options{
-                display: flex;
-                flex-wrap: wrap;
-                margin-left: 0;
-                height: 8vw;
-                .option{
-                    flex-basis: 48%;
-                    .title{
-                        span{
-                            font-size: 2vw;  
-                        }
-                    }
-                }
-                .save{
-                    display: none;
-                } 
-            }
-        }
-        .d__tiles{
-            .tiles__content{
-                flex-basis: 48%;
-                height: 8vw;
-                .tiles__icon{
-                    .icon{
-                        width: 50%;
-                    }
-                }
-                .tiles__info{
-                    display: flex;
-                    align-items: center;
-                    .counter{
-                        display: flex;
-                        flex: 1;
-                        justify-content: center;
-                        font-size: 3vw;  
-                        text-indent: 1pc;
-                    }
-                    .tile__title{
-                        flex: 2;
-                        font-size: 2vw;  
-                    }
-                }
-            }
-        }
-        .d__cards{
-            .d__box{
-                width: 100%;
-            }
-        }    
-    }    
+ 
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
+
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+
+}
+
+@media (min-width: 1024px){
+
+}
+
+
+
+// Mobile Phone - Tablet
+@media only screen and (min-width: 320px) and (max-width: 767px){
     .content{
         .d__breadcrumbs{
             flex-wrap: wrap;
@@ -340,32 +302,16 @@
     } 
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+// Small Laptop - Large Desktop
+@media only screen and (min-width: 768px) {
     .content{
-        .d__tiles{
-            .tiles__content{
-                flex-basis: 15%;
-                .tiles__icon{
-                    .icon{
-                        width: 65%;
-                    }
-                }
-            } 
-        }
-    }
-}
-
-@media (min-width: 1024px){
-    .content{
-        .d__tiles{
-            .tiles__content{
-                flex-basis: 15%;
-                .tiles__icon{
-                    .icon{
-                        width: 75%;
-                    }
+        .tiles__content{
+            flex-basis: 15%;
+            .tiles__icon{
+                .icon{
+                    width: 2.5vw;
                 }
             }
-        }
+        } 
     }
 }
