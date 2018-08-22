@@ -151,27 +151,12 @@ export default {
           telephone: this.telephone.text,
           password: this.password.text,
         }
-        console.log(fields)
         makeRequestTo.post_teams(fields)
-          .then(response => {
-            this.members.push(fields)
-          })
+        console.log('pass')
       }
- 
-      
-      // if (this.editedIndex > -1) {
-      //   makeRequestTo.put_teams(this.form)
-      //     .then(response => {
-      //       Object.assign(this.members[this.editedIndex], this.form)
-      //   })
-      // } else {
-      //    console.log(this.form)
-      //   makeRequestTo.post_teams(this.form)
-      //     .then(response => {
-      //       this.members.push(this.form)
-      //       // console.log(response)
-      //     })
-      // }
+      else{
+        console.log('fail')
+      }
     }
   }
 }

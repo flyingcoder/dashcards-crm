@@ -4,43 +4,12 @@ export const validations = {
 
 	validations: {
 
-		first_name: { 
-      text: {	
-        required 
-      } 
-		},
-		
-		last_name: { 
-      text: { 
-        required 
-      } 
-		},
-		
-		group_name: { 
-      text: { 
-        required,
-      } 
-		},
-		
-    job_title: { 
-      text: { 
-        required 
-      } 
-		},
-		
-		email: { 
-      text: { 
-        required,
-        email 
-      } 
-		},
-		
-    telephone: { 
-      text: { 
-        required,
-        numeric
-      } 
-		},
+		first_name: { text: {	required } },	
+		last_name: { text: { required } },
+		group_name: { text: { required, } },
+    job_title: { text: { required } },
+		email: { text: { required, email } },
+    telephone: { text: { required,numeric} },
 		
 		password: {
 			text: {
@@ -52,7 +21,6 @@ export const validations = {
 				}
 			}
 		},
-
 		repeat_password: {
 			required,
 			text: {
