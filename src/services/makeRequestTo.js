@@ -14,6 +14,18 @@ export default {
     return request.get(`/api/groups?page=${page}`)
   },
 
+  get_clients() {
+    return request.get('api/clients')
+  },
+
+  post_clients(clients) {
+    return request.post('api/clients', clients)
+  },
+
+  put_clients(clients) {
+    return request.put(`api/clients/${clients.id}`, clients)
+  },
+
   get_teams() {
     return request.get('api/company/teams')
   },
