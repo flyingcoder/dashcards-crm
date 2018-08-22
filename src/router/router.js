@@ -78,7 +78,7 @@ export default new Router({
 				{
 					path: 'clients',
           name: 'clients',
-          component: all_views.Clients
+          // component: all_views.Clients
 				},
 				{
 					path: 'calendar',

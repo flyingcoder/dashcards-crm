@@ -38,14 +38,22 @@ export default {
     return request.put(`api/company/teams/${teams.id}`, teams)
   },
 
+  get_services() {
+    return request.get('api/services')
+  },
+
+  post_services({ name }) {
+    return request.post('api/services', { name });
+  },
+
+  put_services(services) {
+    return request.put(`api/services/${services.id}`, services)
+  },
+
   get_searched_groups(keyword) {
     return request.get(`/api/groups?search=${keyword}`)
   },
-
-  get_services() {
-    return request.get('/api/services')
-  },
-
+ 
   checkout(token) {
     return request.post('/api/upgrade/checkout', {token})
   },
