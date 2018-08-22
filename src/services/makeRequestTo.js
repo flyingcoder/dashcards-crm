@@ -18,8 +18,8 @@ export default {
     return request.get('api/clients')
   },
 
-  post_clients(clients) {
-    return request.post('api/clients', clients)
+  post_clients({ first_name, last_name, company_name, telephone, email, status, password}) {
+    return request.post('api/clients', { first_name, last_name, company_name, telephone, email, status, password})
   },
 
   put_clients(clients) {
