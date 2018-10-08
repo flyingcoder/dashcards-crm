@@ -56,7 +56,7 @@ export default new Router({
         if (check_user.is_user_logged()) {
           next()
         }else {
-          next({name: 'not_found'})
+          next({name: 'login'})
         }
       }
     },
