@@ -30,8 +30,8 @@ export default {
     return request.get('api/company/teams')
   },
 
-  post_teams(teams) {
-    return request.post('api/company/teams', teams)
+  post_teams({ first_name, last_name, group_name, job_title, email, telephone, password }) {
+    return request.post('api/company/teams', { first_name, last_name, group_name, job_title, email, telephone, password })
   },
 
   put_teams(teams) {
