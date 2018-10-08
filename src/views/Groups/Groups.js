@@ -8,6 +8,7 @@ export default {
 
 	data () {
 		return {
+			add_new_group_dialog: false,
 			loading: false,
 		  headers: [
         { id: 1, text: 'ID', value: 'id', width: '5%' },
@@ -20,7 +21,11 @@ export default {
 				sortBy: 'id',
 			},
 			current_page: null,
-			search: null
+			search: null,
+			new_item: {
+				name: '',
+				description: ''
+			}
 		}
 	},
 
@@ -129,7 +134,15 @@ export default {
 		action_clicked() {
 			//TODO implement actions of groups table
 			alert('Action Clicked')
-		}
+		},
+
+	  close_add_new_group_dialog() {
+		  console.log('close dialog') //TODO close dialog
+	  },
+
+	  save_add_new_group_dialog() {
+		  console.log('save dialog') //TODO save dialog
+	  }
 
   },
 }
