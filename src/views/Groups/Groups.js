@@ -25,6 +25,9 @@ export default {
 			new_item: {
 				name: '',
 				description: ''
+			},
+			rules: {
+				required: value => !!value || 'Required.',
 			}
 		}
 	},
@@ -76,7 +79,7 @@ export default {
 			if (this.total_items > 10) {
 				let items = [10]
 				if (this.total_items / 15 >= 1) items.push(15)
-				if (this.total_items < 25 && this.total_items > 15) items.push(total_items)
+				if (this.total_items < 25 && this.total_items > 15) items.push(this.total_items)
 				if (this.total_items > 25) items.push(25)
 
 				return items
@@ -137,11 +140,22 @@ export default {
 		},
 
 	  close_add_new_group_dialog() {
-		  console.log('close dialog') //TODO close dialog
+		  this.add_new_group_dialog = false
 	  },
 
 	  save_add_new_group_dialog() {
-		  console.log('save dialog') //TODO save dialog
+		  if (this.new_item.name && this.new_item.description) {
+		  	makeRequestTo.add_new_group({ name: this.new_item.name, description: this.new_item. description })
+				  .then(response => {
+				  	this.groups.data.push(response.data)
+					  this.close_add_new_group_dialog()
+					  this.$event.$emit('open_snackbar', 'Group Added Successfully!')
+					  this.new_item = {
+						  name: '',
+						  description: ''
+					  }
+				  })
+		  }
 	  }
 
   },

@@ -14,6 +14,10 @@ export default {
     return request.get(`/api/groups?page=${page}`)
   },
 
+  add_new_group(group) {
+    return request.post('api/groups', group)
+  },
+
   get_clients() {
     return request.get('api/clients')
   },

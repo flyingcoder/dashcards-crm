@@ -29,7 +29,11 @@
 										<v-layout wrap>
 
 											<v-flex xs12 sm12 md12>
-												<v-text-field v-model.trim="new_item.name" label="Name"></v-text-field>
+												<v-text-field
+														v-model.trim="new_item.name"
+														label="Name"
+														:rules="[rules.required]"
+												/>
 											</v-flex>
 
 											<v-flex xs12 sm12 md12>
@@ -37,7 +41,8 @@
 														label="Description"
 														v-model.trim="new_item.description"
 														hint="Hint text"
-												></v-textarea>
+														:rules="[rules.required]"
+												/>
 											</v-flex>
 
 										</v-layout>
@@ -86,67 +91,6 @@
 						</template>
 
 					</custom-table>
-
-					<!--<custom-table-->
-					<!--:headers="headers"-->
-					<!--:items="rows"-->
-					<!--:total-items="total_items"-->
-					<!--:loading="loading"-->
-					<!--:rows-per-page-items="rows_per_page"-->
-					<!--:pagination.sync="pagination"-->
-					<!--item-key="id"-->
-					<!--&gt;-->
-
-					<!--<template slot="headers">-->
-					<!--<tr>-->
-					<!--<th-->
-					<!--v-for="header in headers"-->
-					<!--:key="header.id"-->
-					<!--:width="header.width"-->
-					<!--:class="['column sortable', pagination.descending ? 'desc' : 'asc', header.value === pagination.sortBy ? 'active' : '']"-->
-					<!--@click="changeSort(header.value)"-->
-					<!--&gt;-->
-					<!--<template v-if="header.is_action">-->
-					<!--<img src="@/assets/icons/table/menu.svg"/>-->
-					<!--</template>-->
-
-					<!--<template v-else>-->
-					<!--<v-icon small>arrow_upward</v-icon>-->
-					<!--{{header.text}}-->
-					<!--</template>-->
-
-					<!--</th>-->
-					<!--</tr>-->
-					<!--</template>-->
-
-					<!--<template slot="items" slot-scope="items">-->
-					<!--<tr>-->
-					<!--<td>{{items.items.item.id}}</td>-->
-					<!--<td class="text-xs-center">{{-->
-					<!--items.items.item.name }}-->
-					<!--</td>-->
-					<!--<td class="text-xs-center">{{-->
-					<!--items.items.item.description }}-->
-					<!--</td>-->
-					<!--<td class="actions">-->
-					<!--<template-->
-					<!--v-for="action of get_actions(items.items.item.slug)">-->
-					<!--<v-tooltip bottom>-->
-					<!--<v-btn-->
-					<!--slot="activator"-->
-					<!--color="blue"-->
-					<!--&gt;-->
-					<!--<img :src="action.icon"/> &nbsp;-->
-					<!--{{ action.text }}-->
-					<!--</v-btn>-->
-					<!--<span>{{action.tooltip}}</span>-->
-					<!--</v-tooltip>-->
-					<!--</template>-->
-					<!--</td>-->
-					<!--</tr>-->
-					<!--</template>-->
-
-					<!--</custom-table>-->
 				</v-card>
 
 			</v-flex>
