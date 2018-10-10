@@ -54,7 +54,7 @@
                         @click="handle_action(item.action)"
                         >
                         <v-list-tile-action class="h__icons">
-                            <img class="responsive-img icon" :src="item.icon" />
+                            <v-img max-width="25px" :src="item.icon" />
                         </v-list-tile-action>
 
                         <v-list-tile-title class="h__title">{{ item.title }}</v-list-tile-title>
