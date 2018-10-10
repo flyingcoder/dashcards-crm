@@ -18,6 +18,14 @@ export default {
     return request.post('api/groups', group)
   },
 
+  update_group(id, group) {
+    return request.put(`api/groups/${id}`, group)
+  },
+
+  delete_group(id) {
+    return request.delete(`api/groups/${id}`)
+  },
+
   get_clients() {
     return request.get('api/clients')
   },

@@ -18,45 +18,31 @@
 
 						<v-btn @click="add_new_group_dialog = true">Add New Group</v-btn>
 
-						<v-dialog v-model="add_new_group_dialog" max-width="500px">
-							<v-card>
-								<v-card-title>
-									<span class="headline">Add New Group</span>
-								</v-card-title>
+						<groups-dialog
+								:modal-status.sync="add_new_group_dialog"
+								title="Add New Group"
+								ref="add_group_dialog"
+								@save="add_new_group"
+						/>
 
-								<v-card-text>
-									<v-container grid-list-md>
-										<v-layout wrap>
+						<groups-dialog
+								:modal-status.sync="edit_group_dialog"
+								title="Edit Group"
+								ref="edit_group_dialog"
+								:id="edit_item.id"
+								:name="edit_item.name"
+								:description="edit_item.description"
+								@save="update_group"
+						/>
 
-											<v-flex xs12 sm12 md12>
-												<v-text-field
-														v-model.trim="new_item.name"
-														label="Name"
-														:rules="[rules.required]"
-												/>
-											</v-flex>
-
-											<v-flex xs12 sm12 md12>
-												<v-textarea
-														label="Description"
-														v-model.trim="new_item.description"
-														hint="Hint text"
-														:rules="[rules.required]"
-												/>
-											</v-flex>
-
-										</v-layout>
-									</v-container>
-								</v-card-text>
-
-								<v-card-actions>
-									<v-spacer></v-spacer>
-									<v-btn color="blue darken-1" flat @click="close_add_new_group_dialog">Cancel</v-btn>
-									<v-btn color="blue darken-1" flat @click="save_add_new_group_dialog">Save</v-btn>
-								</v-card-actions>
-
-							</v-card>
-						</v-dialog>
+						<groups-dialog
+								:modal-status.sync="delete_group_dialog"
+								title="Delete Group"
+								dialog-content="Are you sure you want to delete this group?"
+								does-not-has-fields
+								ref="delete_group_dialog"
+								@save="delete_group"
+						/>
 
 					</v-card-title>
 
@@ -79,7 +65,7 @@
 										<v-btn
 												slot="activator"
 												color="blue"
-												@click="action_clicked"
+												@click="action_clicked(action.value, item.item)"
 										>
 											<img :src="action.icon"/> &nbsp;
 											{{ action.text }}

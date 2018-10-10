@@ -1,14 +1,18 @@
+//TODO refactor this component
 import makeRequestTo from '@/services/makeRequestTo'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
+import GroupsDialog from '@/common/GroupsDialog/GroupsDialog.vue'
 import _ from 'lodash'
 
 export default {
   name: 'Groups',
-	components: {CustomTable},
+	components: {CustomTable, GroupsDialog},
 
 	data () {
 		return {
 			add_new_group_dialog: false,
+			edit_group_dialog: false,
+			delete_group_dialog: false,
 			loading: false,
 		  headers: [
         { id: 1, text: 'ID', value: 'id', width: '5%' },
@@ -20,15 +24,14 @@ export default {
 			pagination: {
 				sortBy: 'id',
 			},
+			edit_item: {
+				id: null,
+				name: null,
+				description: null
+			},
+			delete_item_id: null,
 			current_page: null,
 			search: null,
-			new_item: {
-				name: '',
-				description: ''
-			},
-			rules: {
-				required: value => !!value || 'Required.',
-			}
 		}
 	},
 
@@ -134,28 +137,50 @@ export default {
 			}
 		},
 
-		action_clicked() {
-			//TODO implement actions of groups table
-			alert('Action Clicked')
+		action_clicked(action, { id, name, description }) {
+			if (action === 'edit_settings') {
+				this.edit_group_dialog = true
+				this.edit_item.id = id
+				this.edit_item.name = name
+				this.edit_item.description = description
+			}else if (action === 'delete_group') {
+				this.delete_item_id = id
+				this.delete_group_dialog = true
+			}
+
 		},
 
-	  close_add_new_group_dialog() {
-		  this.add_new_group_dialog = false
+	  add_new_group(payload) {
+		  makeRequestTo.add_new_group(payload)
+			  .then(response => {
+				  this.groups.data.push(response.data)
+				  this.$event.$emit('open_snackbar', 'Group Added Successfully!')
+				  this.$refs.add_group_dialog.clear_fields()
+			  })
 	  },
 
-	  save_add_new_group_dialog() {
-		  if (this.new_item.name && this.new_item.description) {
-		  	makeRequestTo.add_new_group({ name: this.new_item.name, description: this.new_item. description })
-				  .then(response => {
-				  	this.groups.data.push(response.data)
-					  this.close_add_new_group_dialog()
-					  this.$event.$emit('open_snackbar', 'Group Added Successfully!')
-					  this.new_item = {
-						  name: '',
-						  description: ''
-					  }
+	  update_group(payload) {
+		  makeRequestTo.update_group(this.edit_item.id, payload)
+			  .then(response => {
+				  const groups = this.groups.data.map(item => {
+				  	if (item.id === this.edit_item.id)
+				  		item = response.data
+					  return item
 				  })
-		  }
+				  this.groups.data = groups
+				  this.$event.$emit('open_snackbar', 'Group updated successfully!')
+				  this.$refs.edit_group_dialog.clear_fields()
+			  })
+	  },
+
+	  delete_group() {
+			makeRequestTo.delete_group(this.delete_item_id)
+				.then(response => {
+					const groups = this.groups.data.filter(group => group.id !== this.delete_item_id)
+					this.groups.data = groups
+					this.$event.$emit('open_snackbar', 'Group Deleted Successfully!')
+					this.$refs.delete_group_dialog.clear_fields()
+				})
 	  }
 
   },
