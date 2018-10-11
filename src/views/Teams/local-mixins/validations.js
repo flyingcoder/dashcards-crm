@@ -50,7 +50,7 @@ export const validations = {
 		all_validations_passed() {
 			const FIELDS = ['first_name', 'last_name', 'group_name', 'job_title', 'email', 'telephone', 'password', 'repeat_password']
 
-			for (let field of FIELDS) { //calling validate
+			for (let field of FIELDS) {
 				if (!this.validate_field(field)) //if any validation is false
 					return false
 			}

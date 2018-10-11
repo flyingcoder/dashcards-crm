@@ -1,7 +1,8 @@
+//NOTE: HERE WE WILL HAVE ALL THE API REQUESTS
+
 import request from '@/services/axios_instance'
 
 export default {
-  //HERE WE WILL HAVE ALL THE API REQUESTS
   login({ email, password }) {
     return request.post('/api/login', { email, password })
   },
@@ -42,8 +43,8 @@ export default {
     return request.get('api/company/teams')
   },
 
-  post_teams({ first_name, last_name, group_name, job_title, email, telephone, password }) {
-    return request.post('api/company/teams', { first_name, last_name, group_name, job_title, email, telephone, password })
+  add_new_team({ first_name, last_name, group_name, job_title, email, telephone, password, password_confirmation }) {
+    return request.post('api/company/teams', { first_name, last_name, group_name, job_title, email, telephone, password, password_confirmation })
   },
 
   put_teams(teams) {
