@@ -29,6 +29,13 @@ export const validations = {
 		
 	},
 
+	created(){
+		if (this.isEditDialog) { //if is edit dialog don't consider password & repeat_password
+			delete this.$options.validations.password
+			delete this.$options.validations.repeat_password
+		}
+	},
+
 	methods: {
 
 		on_blur_field(field) {

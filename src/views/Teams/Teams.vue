@@ -122,6 +122,7 @@
                 <!--</v-dialog>-->
             </div>
 
+
             <teams-dialog
                 ref="add_dialog"
                 title="Add New Member"
@@ -132,6 +133,8 @@
                 ref="edit_dialog"
                 title="Edit Member"
                 :dialog.sync="edit_dialog"
+                :edit-item="edit_item"
+                is-edit-dialog
                 @member-updated="update_member"
             />
 
@@ -174,8 +177,8 @@
                         </td>
 
                         <td class="text-xs-center">{{ item.item.job_title }}</td>
-                        <td class="text-xs-center">{{ item.item.tasks.length == 0 ? 'no tasks assigned' : item.item.tasks.length  }}</td>
-                        <td class="text-xs-center">{{ item.item.projects.length == 0 ? 'no projects assigned' : item.item.projects.length }}</td>
+                        <td class="text-xs-center">{{ tasks_text(item.item) }}</td>
+                        <td class="text-xs-center">{{ projects_text(item.item) }}</td>
 
                         <td>
                             <v-icon class="mr-2" @click="editItem(item.item)">

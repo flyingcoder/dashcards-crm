@@ -43,12 +43,12 @@ export default {
     return request.get('api/company/teams')
   },
 
-  add_new_team({ first_name, last_name, group_name, job_title, email, telephone, password, password_confirmation }) {
-    return request.post('api/company/teams', { first_name, last_name, group_name, job_title, email, telephone, password, password_confirmation })
+  add_new_team(payload) {
+    return request.post('api/company/teams', payload)
   },
 
-  put_teams(teams) {
-    return request.put(`api/company/teams/${teams.id}`, teams)
+  update_team(payload) {
+    return request.put(`api/company/teams/${payload.id}`, payload.team)
   },
 
   get_services() {

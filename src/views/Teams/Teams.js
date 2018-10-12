@@ -1,10 +1,10 @@
 import makeRequestTo from '@/services/makeRequestTo'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
-import TeamsDialog from '@/common/TeamsDialog/TeamsDialog.vue'
+// import TeamsDialog from '@/common/TeamsDialog/TeamsDialog.vue'
 
 export default {
   name: 'Teams',
-  components: { CustomTable, TeamsDialog },
+  components: { CustomTable, TeamsDialog: () => import('@/common/TeamsDialog/TeamsDialog.vue') },
 
   data: () => ({
     add_dialog: false,
@@ -21,6 +21,8 @@ export default {
         { text: 'Tasks', value: 'tasks' },
         { text: 'Projects', value: 'projects' }
     ],
+    edit_item: null
+
     
   }),
 
@@ -36,15 +38,28 @@ export default {
 	  add_new_member(new_item) {
       this.members.unshift(new_item)
       this.$refs.add_dialog.clear_fields()
+      this.$event.$emit('open_snackbar', 'New member added successfully!')
+    },
+
+    tasks_text(member) {
+	    return !member.tasks ? 'no tasks assigned' : member.tasks.length
+    },
+
+    projects_text(member) {
+	    return !member.projects ? 'no projects assigned' : member.projects.length
     },
 
 	  update_member(updated_member){
 	    let members = this.members.slice()
 	    const index = members.findIndex(member => member.id === updated_member.id)
       if (~index) {
-	      members.splice(index, 1, updated_member.member)
+	      members.splice(index, 1, updated_member)
         this.members = members
       }
+
+      this.$event.$emit('open_snackbar', 'Member updated successfully!')
+      this.$refs.edit_dialog.clear_fields()
+      this.edit_item = null
     },
 
     toggleAll () {
@@ -54,7 +69,7 @@ export default {
 
 	  editItem(item) {
 		  this.edit_dialog = true
-		  console.log(item)
+		  this.edit_item = item
     },
 
   }

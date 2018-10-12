@@ -69,7 +69,7 @@
 								></v-text-field>
 							</v-flex>
 
-							<v-flex xs12 sm6>
+							<v-flex xs12 sm6 v-if="!isEditDialog">
 								<v-text-field
 										@blur="on_blur_field('password')"
 										:error="$v.password.$error"
@@ -79,7 +79,7 @@
 								></v-text-field>
 							</v-flex>
 
-							<v-flex xs12 sm6>
+							<v-flex xs12 sm6 v-if="!isEditDialog">
 								<v-text-field
 										@blur="on_blur_field('repeat_password')"
 										:error="$v.repeat_password.$error"
@@ -99,7 +99,7 @@
 				<v-card-actions>
 					<v-spacer></v-spacer>
 					<v-btn color="blue darken-1" flat @click="cancel">Cancel</v-btn>
-					<v-btn color="blue darken-1" flat :disabled="$v.$invalid" @click="save">Save</v-btn>
+					<v-btn color="blue darken-1" flat :disabled="$v.$invalid" @click="handle_save">Save</v-btn>
 				</v-card-actions>
 
 			</v-card>
