@@ -153,7 +153,7 @@ export default {
 	  add_new_group(payload) {
 		  makeRequestTo.add_new_group(payload)
 			  .then(response => {
-				  this.groups.data.push(response.data)
+				  this.groups.data.unshift(response.data)
 				  this.$event.$emit('open_snackbar', 'Group Added Successfully!')
 				  this.$refs.add_group_dialog.clear_fields()
 			  })
