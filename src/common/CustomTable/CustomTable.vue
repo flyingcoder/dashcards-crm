@@ -26,7 +26,7 @@
         <th
                 v-for="header in props.headers"
                 :key="header.id"
-                :class="['column sortable', pagination.descending ? 'desc' : 'asc', header.value === pagination.sortBy ? 'active' : '']"
+                :class="['column sortable', table_pagination.descending ? 'desc' : 'asc', header.value === table_pagination.sortBy ? 'active' : '']"
                 :width="header.width"
                 @click="changeSort(header.value)"
         >
