@@ -11,8 +11,9 @@ export default {
     return request.post('/api/register' ,{ company_name, company_email, first_name, email, password })
   },
 
-  get_groups(page) {
-    return request.get(`/api/groups?page=${page}`)
+  /* groups page api */
+  get_groups(query) {
+    return request.get(`/api/groups?${query}`)
   },
 
   add_new_group(group) {
@@ -27,12 +28,14 @@ export default {
     return request.delete(`api/groups/${id}`)
   },
 
+	/* groups page api */
+
   get_clients() {
     return request.get('api/clients')
   },
 
-  post_clients({ first_name, last_name, company_name, telephone, email, status, password}) {
-    return request.post('api/clients', { first_name, last_name, company_name, telephone, email, status, password})
+  post_clients(payload) {
+    return request.post('api/clients', payload)
   },
 
   put_clients(clients) {

@@ -2,7 +2,8 @@
 import makeRequestTo from '@/services/makeRequestTo'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import GroupsDialog from '@/common/GroupsDialog/GroupsDialog.vue'
-import _ from 'lodash'
+import isEmpty from 'lodash/isEmpty'
+import debounce from 'lodash/debounce'
 
 export default {
   name: 'Groups',
@@ -23,6 +24,7 @@ export default {
 			groups: null,
 			pagination: {
 				sortBy: 'id',
+				page: 1
 			},
 			edit_item: {
 				id: null,
@@ -36,6 +38,7 @@ export default {
 	},
 
 	watch: {
+
 		current_page(new_page) {
   		let query = { page: new_page }
   		if (this.search) query.search = this.search
@@ -43,29 +46,38 @@ export default {
 			this.$router.push({ name: 'team/groups', query: query })
 			this.get_data_from_api(new_page)
 		},
-		search(new_value) {
-			this.$router.push({ name:'team/groups', query: { search: new_value } })
-			this.debounce(new_value)
+		search: 'debounce',
+		
+		'pagination.page'(new_val) {
+			this.$router.replace({ name: 'team/groups', query: { page: new_val } })
 		},
+
 		'$route.query': {
-  		handler(query) {
-				if(query.page || query.search) {
-					
-					if (query.page)	{
-						this.current_page = Number(query.page)
-					}
-					
-					if (query.search) {
-						this.search = query.search
-					}
-					
-				}else {
-					this.get_data_from_api()
+			handler(query) {
+				if (isEmpty(query)) //if we don't have query
+					this.get_data_from_api('page=1')
+				
+				const query_fe = Object.assign({}, query)
+				let query_api = {}
+
+				if ('page' in query_fe)
+					query_api.page = query_fe.page
+				if ('sort' in query_fe)
+					query_api.sort = query_fe.sort
+				if ('search' in query_fe) {
+					this.search = query_fe.search
+					query_api.search = query_fe.search
 				}
+
+				if (isEmpty(query_api)) //if query does not have page or sort or search
+					return
+
+				const api_url = this.get_api_url_from_query(query_api)
+				this.get_data_from_api(api_url)
 			},
-			deep: true,
 			immediate: true
-		},
+		}
+
 	},
 
   computed: {
@@ -78,37 +90,38 @@ export default {
 				return this.groups.total
 			return 0
 		},
-		rows_per_page() {
-			if (this.total_items > 10) {
-				let items = [10]
-				if (this.total_items / 15 >= 1) items.push(15)
-				if (this.total_items < 25 && this.total_items > 15) items.push(this.total_items)
-				if (this.total_items > 25) items.push(25)
-
-				return items
-			}
-			return [5]
-		},
+	  //Note don't delete until make sure it is not needed anymore TODO inspect
+		// rows_per_page() {
+		// 	if (this.total_items > 10) {
+		// 		let items = [10]
+		// 		if (this.total_items / 15 >= 1) items.push(15)
+		// 		if (this.total_items < 25 && this.total_items > 15) items.push(this.total_items)
+		// 		if (this.total_items > 25) items.push(25)
+		//
+		// 		return items
+		// 	}
+		// 	return [5]
+		// },
 	},
 
   methods: {
 
-		debounce: _.debounce(function(value) {
-			if (!value) {
-				this.get_data_from_api()
-				return
-			}
-			this.loading = true
-			makeRequestTo.get_searched_groups(value)
-				.then(response => {
-					this.loading = false
-					this.groups = response.data
-				})
+		debounce: debounce(function(value) {
+			this.$router.push({ name:'team/groups', query: { search: value } })
 		}, 500),
 
-  	get_data_from_api(page = 1) {
+	  get_api_url_from_query(query) {
+		  return Object.keys(query).reduce((api_url, current_key, index) => {
+			  if (index > 0)
+				  api_url += '&'
+			  api_url += `${current_key}=${query[current_key]}`
+			  return api_url
+		  }, '')
+	  },
+	  
+  	get_data_from_api(api_url) {
   		this.loading = true
-			makeRequestTo.get_groups(page)
+			makeRequestTo.get_groups(api_url)
 				.then(response => {
 					this.loading = false
 					this.groups = response.data

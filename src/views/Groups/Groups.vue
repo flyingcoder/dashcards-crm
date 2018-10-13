@@ -51,8 +51,9 @@
 							:items="rows"
 							:loading="loading"
 							:total-items="total_items"
-							:rows-per-page-items="rows_per_page"
+							:rows-per-page-items="[10, 15]"
 							:search="search"
+							:pagination.sync="pagination"
 					>
 
 						<template slot="custom-item" slot-scope="item">

@@ -5,7 +5,7 @@
           :headers="headers"
           :items="items"
           :loading="loading"
-          :pagination.sync="pagination"
+          :pagination.sync="table_pagination"
           select-all
           :total-items="totalItems"
           :rows-per-page-items="rowsPerPageItems"
