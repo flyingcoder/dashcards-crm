@@ -51,6 +51,10 @@ export default {
     return request.put(`api/company/teams/${payload.id}`, payload.team)
   },
 
+  delete_team(id) {
+    return request.delete(`api/company/teams/${id}`)
+  },
+
   get_services() {
     return request.get('api/services')
   },

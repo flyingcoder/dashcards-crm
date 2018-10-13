@@ -138,6 +138,13 @@
                 @member-updated="update_member"
             />
 
+            <delete-dialog
+                :open-dialog.sync="delete_dialog"
+                title="Delete Member"
+                text-content="Are you sure you want to delete this member?"
+                @delete="delete_member"
+            />
+
         </div>
 
         <div class="content__wrapper">
@@ -181,11 +188,11 @@
                         <td class="text-xs-center">{{ projects_text(item.item) }}</td>
 
                         <td>
-                            <v-icon class="mr-2" @click="editItem(item.item)">
+                            <v-icon class="mr-2" @click="edit_member(item.item)">
                                 edit
                             </v-icon>
 
-                            <v-icon @click="deleteItem(item.item)">
+                            <v-icon @click="open_delete_dialog(item.item)">
                                 delete
                             </v-icon>
                         </td>

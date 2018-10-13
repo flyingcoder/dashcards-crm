@@ -44,7 +44,7 @@
 		},
 
 		methods: {
-			cancel_clicked() { this.$emit('cancel') },
+			cancel_clicked() { this.dialog = false },
 			delete_clicked() { this.$emit('delete') },
 		}
 

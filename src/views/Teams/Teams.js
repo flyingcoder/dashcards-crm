@@ -1,14 +1,16 @@
 import makeRequestTo from '@/services/makeRequestTo'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
-// import TeamsDialog from '@/common/TeamsDialog/TeamsDialog.vue'
+import TeamsDialog from '@/common/TeamsDialog/TeamsDialog.vue'
+import DeleteDialog from '@/common/DeleteDialog.vue'
 
 export default {
   name: 'Teams',
-  components: { CustomTable, TeamsDialog: () => import('@/common/TeamsDialog/TeamsDialog.vue') },
+  components: { CustomTable, TeamsDialog, DeleteDialog },
 
   data: () => ({
     add_dialog: false,
     edit_dialog: false,
+    delete_dialog: false,
     paths: [
       { text: 'Dashboard', disabled: false },
       { text: 'Teams', disabled: true }
@@ -21,9 +23,8 @@ export default {
         { text: 'Tasks', value: 'tasks' },
         { text: 'Projects', value: 'projects' }
     ],
-    edit_item: null
-
-    
+    edit_item: null,
+    delete_item_id: null
   }),
 
   created () {
@@ -67,9 +68,27 @@ export default {
       else this.selected = this.members.slice()
     },
 
-	  editItem(item) {
+	  edit_member(item) {
 		  this.edit_dialog = true
 		  this.edit_item = item
+    },
+
+	  open_delete_dialog(item) {
+		  this.delete_item_id = item.id
+      this.delete_dialog = true
+    },
+
+	  delete_member() {
+      makeRequestTo.delete_team(this.delete_item_id)
+        .then(response => this.member_deleted())
+    },
+
+    member_deleted() {
+	    let members = this.members.filter(member => member.id !== this.delete_item_id)
+	    this.$event.$emit('open_snackbar', 'Member deleted successfully!')
+	    this.members = members
+	    this.delete_item_id = null
+      this.delete_dialog = false
     },
 
   }
