@@ -35,14 +35,22 @@
 								@save="update_group"
 						/>
 
-						<groups-dialog
-								:modal-status.sync="delete_group_dialog"
+
+						<delete-dialog
+								:open-dialog.sync="delete_group_dialog"
 								title="Delete Group"
-								dialog-content="Are you sure you want to delete this group?"
-								does-not-has-fields
-								ref="delete_group_dialog"
-								@save="delete_group"
+								text-content="Are you sure you want to delete this group?"
+								@delete="delete_group"
 						/>
+
+						<!--<groups-dialog-->
+								<!--:modal-status.sync="delete_group_dialog"-->
+								<!--title="Delete Group"-->
+								<!--dialog-content="Are you sure you want to delete this group?"-->
+								<!--does-not-has-fields-->
+								<!--ref="delete_group_dialog"-->
+								<!--@save="delete_group"-->
+						<!--/>-->
 
 					</v-card-title>
 

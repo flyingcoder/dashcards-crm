@@ -4,10 +4,11 @@ import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import GroupsDialog from '@/common/GroupsDialog/GroupsDialog.vue'
 import isEmpty from 'lodash/isEmpty'
 import debounce from 'lodash/debounce'
+import DeleteDialog from '@/common/DeleteDialog.vue'
 
 export default {
   name: 'Groups',
-	components: {CustomTable, GroupsDialog},
+	components: {CustomTable, GroupsDialog, DeleteDialog},
 
 	data () {
 		return {
@@ -192,7 +193,8 @@ export default {
 					const groups = this.groups.data.filter(group => group.id !== this.delete_item_id)
 					this.groups.data = groups
 					this.$event.$emit('open_snackbar', 'Group Deleted Successfully!')
-					this.$refs.delete_group_dialog.clear_fields()
+					this.delete_group_dialog = false
+					this.delete_item_id = null
 				})
 	  }
 
