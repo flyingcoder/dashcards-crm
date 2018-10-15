@@ -9,6 +9,7 @@
           select-all
           :total-items="totalItems"
           :rows-per-page-items="rowsPerPageItems"
+          disable-initial-sort
   >
     <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear> <!-- LOADING -->
 
