@@ -8,11 +8,7 @@
 
 			<v-card-text>
 
-				<span v-if="doesNotHasFields">
-					{{ dialogContent }}
-				</span>
-
-				<v-container grid-list-md v-else>
+				<v-container grid-list-md>
 					<v-layout wrap>
 
 						<v-flex xs12 sm12 md12>
@@ -56,7 +52,6 @@
 			id: [Number, String],
 			name: String,
 			description: String,
-			doesNotHasFields: { type: Boolean, default: false },
 			dialogContent: String
 		},
 
@@ -74,7 +69,6 @@
 
 		computed: {
 			are_fields_valid() {
-				if (this.doesNotHasFields) return true
 				return !!(this.item.name && this.item.description) && this.does_something_changed
 			},
 			does_something_changed() {
@@ -99,10 +93,6 @@
 			},
 
 			save() {
-				if (this.doesNotHasFields) {
-					this.$emit('save')
-					return
-				}
 				if (this.item.name && this.item.description) {
 					if (!this.does_something_changed) {
 						this.$event.$emit('open_snackbar', 'Nothing Changed!')

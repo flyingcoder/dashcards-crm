@@ -12,8 +12,8 @@ export default {
     edit_dialog: false,
     delete_dialog: false,
     paths: [
-      { text: 'Dashboard', disabled: false },
-      { text: 'Teams', disabled: true }
+      { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+      { text: 'Teams', disabled: true, router_name: null }
     ],
     members: [],
     page: 1,
@@ -90,6 +90,10 @@ export default {
 	    this.delete_item_id = null
       this.delete_dialog = false
     },
+
+	  navigate_from_breadcrumb(router_name) {
+		  router_name && this.$router.push({ name: router_name })
+	  }
 
   }
 }
