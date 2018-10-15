@@ -73,9 +73,11 @@
 								<v-text-field
 										@blur="on_blur_field('password')"
 										:error="$v.password.$error"
+										:append-icon="show_password ? 'visibility_off' : 'visibility'"
 										label="Password"
-										type="password"
+										:type="show_password ? 'text' : 'password'"
 										v-model.trim="password"
+										@click:append="show_password = !show_password"
 								></v-text-field>
 							</v-flex>
 
@@ -83,9 +85,11 @@
 								<v-text-field
 										@blur="on_blur_field('repeat_password')"
 										:error="$v.repeat_password.$error"
+										:append-icon="show_repeat_password ? 'visibility_off' : 'visibility'"
 										label="Repeat Password"
-										type="password"
+										:type="show_repeat_password ? 'text' : 'password'"
 										v-model.trim="repeat_password"
+										@click:append="show_repeat_password = !show_repeat_password"
 								></v-text-field>
 							</v-flex>
 

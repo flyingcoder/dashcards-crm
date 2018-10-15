@@ -26,6 +26,8 @@ export default {
 		password: '',
 		repeat_password: '',
 		group_items: [ 'Admin', 'Developer', 'Staff', 'Manager' ],
+		show_password: false,
+		show_repeat_password: false
 	}),
 
 	watch: {
