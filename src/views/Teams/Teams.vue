@@ -40,6 +40,13 @@
                 @delete="delete_member"
             />
 
+            <div class="page__options">
+                  <div class='newAdd__btn' @click="add_dialog = true">
+                    <i class="addIcon__btn material-icons">add_icon</i>
+                    <span class="addText__btn">Add New</span>
+                  </div>
+            </div>
+
         </div>
 
         <div class="content__wrapper">
@@ -56,8 +63,6 @@
                     ></v-divider>
 
                     <v-spacer></v-spacer>
-
-                    <v-btn @click="add_dialog = true">New Member</v-btn>
 
                 </v-toolbar>
 

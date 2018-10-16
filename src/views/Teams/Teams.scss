@@ -1,43 +1,121 @@
 @import "./../../sass/_general";
 @import "./../../sass/_variables";
 
-.teams{
-    .buzz__tables{
-        table{
-            thead{
-                th{
-                    &:nth-child(2){
-                        text-align: left;
-                    }
-                }
-            }
-            tbody{
-                td{
-                    .member__image{
-                        display: flex;
-                        align-items: center;
-                        flex: 1;
-                        img{
-                            width: 3vw;
-                            border-radius: 50%;
-                        }
-                    }
-                    .member__name{
-                        flex: 3;
-                    }
-                    &:nth-child(2){
-                        display: flex;
-                        align-items: center;
-                        height: inherit;
-                    }
-                    &:last-child{
-                        text-align: center;
-                    }
-                }
-            }
+//newAdd__btn class for temporary
+.newAdd__btn {
+    background: $blue;
+    font-weight: bold;
+    border-radius: 40px;
+    line-height: 40px;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    cursor: pointer;
+    color: $white;
+    display: inline-block;
+    .addIcon__btn{
+            opacity: 1;
+            font-size: 38px;
+            padding-left: 1px;
+    }
+    .addText__btn{
+        font-size: 18px;
+        display:none;
+    }
+    &:hover{
+            width: 100px;
+        .addText__btn{
+            display:block;
+            border-radius: 5px;
+        }
+        .addIcon__btn{
+             display:none;
         }
     }
 }
+
+.teams{
+    .buzz__tables{
+        th:nth-child(2){
+            text-align: left;
+        }
+    }
+    td{
+        .member__image{
+            display: flex;
+            align-items: center;
+            flex: 1;
+            img{
+                width: 3vw;
+                border-radius: 50%;
+            }
+        }
+        .member__name{
+            flex: 3;
+        }
+        &:nth-child(2){
+            display: flex;
+            align-items: center;
+            height: inherit;
+        }
+        &:last-child{
+            text-align: center;
+        }
+    }
+}
+
+
+// .teams{
+//     .buzz__tables{
+//         table{
+//             thead{
+//                 th{
+//                     &:nth-child(2){
+//                         text-align: left;
+//                     }
+//                 }
+//             }
+//             tbody{
+//                 td{
+//                     .member__image{
+//                         display: flex;
+//                         align-items: center;
+//                         flex: 1;
+//                         img{
+//                             width: 3vw;
+//                             border-radius: 50%;
+//                         }
+//                     }
+//                     .member__name{
+//                         flex: 3;
+//                     }
+//                     &:nth-child(2){
+//                         display: flex;
+//                         align-items: center;
+//                         height: inherit;
+//                     }
+//                     &:last-child{
+//                         text-align: center;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// .newAdd__btn{
+//     width: 24px;
+//     .addText__btn{
+//         opacity: 0;
+//         display: 
+//     }
+//     .addIcon__btn {
+//             width: 24px; 
+//             display: block;
+//             text-align: center;
+//             font-size: 24px;
+//     }
+// }
 
 //.v-dialog{
 //    .layout{
