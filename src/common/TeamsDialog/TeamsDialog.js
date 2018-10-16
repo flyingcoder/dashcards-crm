@@ -104,7 +104,7 @@ export default {
 		update_fields(field) {
 			this.first_name = field.first_name
 			this.last_name = field.last_name
-			this.group_name = field.group_name
+			this.group_name = field.teams[0].name
 			this.job_title = field.job_title
 			this.email = field.email
 			this.contact_number = field.telephone || ''
