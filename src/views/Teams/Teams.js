@@ -2,10 +2,11 @@ import makeRequestTo from '@/services/makeRequestTo'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import TeamsDialog from '@/common/TeamsDialog/TeamsDialog.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
+import Breadcrumb from '@/common/Breadcrumb.vue'
 
 export default {
   name: 'Teams',
-  components: { CustomTable, TeamsDialog, DeleteDialog },
+  components: { CustomTable, TeamsDialog, DeleteDialog, Breadcrumb },
 
   data: () => ({
     add_dialog: false,
@@ -90,10 +91,6 @@ export default {
 	    this.delete_item_id = null
       this.delete_dialog = false
     },
-
-	  navigate_from_breadcrumb(router_name) {
-		  router_name && this.$router.push({ name: router_name })
-	  }
 
   }
 }

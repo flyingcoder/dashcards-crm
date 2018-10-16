@@ -3,6 +3,8 @@
 		<v-layout row>
 			<v-flex xs12>
 
+				<breadcrumb :paths="paths" />
+
 				<v-card>
 					<v-card-title>
 						<v-text-field

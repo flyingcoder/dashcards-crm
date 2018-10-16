@@ -2,21 +2,8 @@
     <div class="content teams">
 
         <div class="row">
-            <div class="breadcrumbs">
-                <v-breadcrumbs>
-                    <v-icon slot="divider">chevron_right</v-icon>
 
-                    <v-breadcrumbs-item class="page__title"
-                        v-for="path in paths"
-                        :disabled="path.disabled"
-                        :key="path.text"
-                    >
-                        <span @click="navigate_from_breadcrumb(path.router_name)">
-                            {{ path.text }}
-                        </span>
-                    </v-breadcrumbs-item>
-                </v-breadcrumbs>
-            </div>
+            <breadcrumb :paths="paths" />
 
             <teams-dialog
                 ref="add_dialog"
