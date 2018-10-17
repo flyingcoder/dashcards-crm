@@ -96,6 +96,7 @@
 						</v-layout>
 					</v-container>
 
+					<small>Password must have atleast 6 letters</small><br>
 					<small>All fields are required</small>
 
 				</v-card-text>
