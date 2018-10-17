@@ -5,10 +5,11 @@
           :headers="headers"
           :items="items"
           :loading="loading"
-          :pagination.sync="pagination"
+          :pagination.sync="table_pagination"
           select-all
           :total-items="totalItems"
           :rows-per-page-items="rowsPerPageItems"
+          disable-initial-sort
   >
     <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear> <!-- LOADING -->
 
@@ -26,7 +27,7 @@
         <th
                 v-for="header in props.headers"
                 :key="header.id"
-                :class="['column sortable', pagination.descending ? 'desc' : 'asc', header.value === pagination.sortBy ? 'active' : '']"
+                :class="['column sortable', table_pagination.descending ? 'desc' : 'asc', header.value === table_pagination.sortBy ? 'active' : '']"
                 :width="header.width"
                 @click="changeSort(header.value)"
         >

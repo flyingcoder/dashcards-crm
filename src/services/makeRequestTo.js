@@ -1,7 +1,8 @@
+//NOTE: HERE WE WILL HAVE ALL THE API REQUESTS
+
 import request from '@/services/axios_instance'
 
 export default {
-  //HERE WE WILL HAVE ALL THE API REQUESTS
   login({ email, password }) {
     return request.post('/api/login', { email, password })
   },
@@ -10,16 +11,31 @@ export default {
     return request.post('/api/register' ,{ company_name, company_email, first_name, email, password })
   },
 
-  get_groups(page) {
-    return request.get(`/api/groups?page=${page}`)
+  /* groups page api */
+  get_groups(query) {
+    return request.get(`/api/groups?${query}`)
   },
+
+  add_new_group(group) {
+    return request.post('api/groups', group)
+  },
+
+  update_group(id, group) {
+    return request.put(`api/groups/${id}`, group)
+  },
+
+  delete_group(id) {
+    return request.delete(`api/groups/${id}`)
+  },
+
+	/* groups page api */
 
   get_clients() {
     return request.get('api/clients')
   },
 
-  post_clients({ first_name, last_name, company_name, telephone, email, status, password}) {
-    return request.post('api/clients', { first_name, last_name, company_name, telephone, email, status, password})
+  post_clients(payload) {
+    return request.post('api/clients', payload)
   },
 
   put_clients(clients) {
@@ -30,12 +46,16 @@ export default {
     return request.get('api/company/teams')
   },
 
-  post_teams(teams) {
-    return request.post('api/company/teams', teams)
+  add_new_team(payload) {
+    return request.post('api/company/teams', payload)
   },
 
-  put_teams(teams) {
-    return request.put(`api/company/teams/${teams.id}`, teams)
+  update_team(payload) {
+    return request.put(`api/company/teams/${payload.id}`, payload.team)
+  },
+
+  delete_team(id) {
+    return request.delete(`api/company/teams/${id}`)
   },
 
   get_services() {

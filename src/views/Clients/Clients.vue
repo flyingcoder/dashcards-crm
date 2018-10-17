@@ -2,19 +2,7 @@
   <div class="content clients">
     <div class="row">
 
-      <div class="breadcrumbs">
-          <v-breadcrumbs>
-              <v-icon slot="divider">chevron_right</v-icon>
-
-              <v-breadcrumbs-item class="page__title"
-                  v-for="path in paths"
-                  :disabled="path.disabled"
-                  :key="path.text"
-              >
-                  {{ path.text }}
-              </v-breadcrumbs-item>
-          </v-breadcrumbs>
-      </div>
+      <breadcrumb :paths="paths" />
 
       <div class="page__options">
           <v-dialog v-model="dialog" max-width="500px">

@@ -21,7 +21,7 @@ request.interceptors.request.use(request => {
 request.interceptors.response.use(response => {
   return response
 }, error => {
-  store.commit('open_snackbar', { status: true, message: error.response.data.error })
+  store.commit('open_snackbar', { status: true, message: error.response.data.message })
 })
 
 export default request

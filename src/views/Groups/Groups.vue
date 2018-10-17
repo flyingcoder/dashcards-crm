@@ -1,125 +1,98 @@
 <template>
-    <v-container fluid>
-        <v-layout row>
-            <v-flex xs12>
+	<v-container fluid>
+		<v-layout row>
+			<v-flex xs12>
 
-                <v-card>
-                    <v-card-title>
-                        Table
+				<breadcrumb :paths="paths" />
 
-                        <v-spacer></v-spacer>
-                        <v-spacer></v-spacer>
-                        <v-spacer></v-spacer>
+				<v-card>
+					<v-card-title>
+						<v-text-field
+								placeholder="Search on the table"
+								append-icon="search"
+								v-model.trim="search"
+								@keydown.esc="search = ''"
+						></v-text-field>
 
-                        <v-text-field
-                                placeholder="Search on the table"
-                                append-icon="search"
-                                v-model.trim="search"
-                                @keydown.esc="search = ''"
-                        ></v-text-field>
+						<v-spacer></v-spacer>
+						<v-spacer></v-spacer>
+						<v-spacer></v-spacer>
 
-                    </v-card-title>
+						<v-btn @click="add_new_group_dialog = true">Add New Group</v-btn>
 
-                    <custom-table
-                            :headers="headers"
-                            :items="rows"
-                            :loading="loading"
-                            :total-items="total_items"
-                            :rows-per-page-items="rows_per_page"
-                            :search="search"
-                    >
+						<groups-dialog
+								:modal-status.sync="add_new_group_dialog"
+								title="Add New Group"
+								ref="add_group_dialog"
+								@save="add_new_group"
+						/>
 
-                        <template slot="custom-item" slot-scope="item">
-                            <td class="text-xs-center">{{item.item.id}}</td>
-                            <td class="text-xs-center">{{item.item.name}}</td>
-                            <td class="text-xs-center">{{item.item.description}}</td>
-                            <td class="actions">
-                                <template v-for="action of get_actions(item.item.slug)">
-                                    <v-tooltip bottom>
-                                        <v-btn
-                                                slot="activator"
-                                                color="blue"
-                                                @click="action_clicked"
-                                        >
-                                            <img :src="action.icon"/> &nbsp;
-                                            {{ action.text }}
-                                        </v-btn>
-                                        <span>{{action.tooltip}}</span>
-                                    </v-tooltip>
-                                </template>
-                            </td>
-                        </template>
-
-                    </custom-table>
+						<groups-dialog
+								:modal-status.sync="edit_group_dialog"
+								title="Edit Group"
+								ref="edit_group_dialog"
+								:id="edit_item.id"
+								:name="edit_item.name"
+								:description="edit_item.description"
+								@save="update_group"
+						/>
 
 
-                    <!--<custom-table-->
-                        <!--:headers="headers"-->
-                        <!--:items="rows"-->
-                        <!--:total-items="total_items"-->
-                        <!--:loading="loading"-->
-                        <!--:rows-per-page-items="rows_per_page"-->
-                        <!--:pagination.sync="pagination"-->
-                        <!--item-key="id"-->
-                    <!--&gt;-->
+						<delete-dialog
+								:open-dialog.sync="delete_group_dialog"
+								title="Delete Group"
+								text-content="Are you sure you want to delete this group?"
+								@delete="delete_group"
+						/>
 
-                        <!--<template slot="headers">-->
-                            <!--<tr>-->
-                                <!--<th-->
-                                        <!--v-for="header in headers"-->
-                                        <!--:key="header.id"-->
-                                        <!--:width="header.width"-->
-                                        <!--:class="['column sortable', pagination.descending ? 'desc' : 'asc', header.value === pagination.sortBy ? 'active' : '']"-->
-                                        <!--@click="changeSort(header.value)"-->
-                                <!--&gt;-->
-                                    <!--<template v-if="header.is_action">-->
-                                        <!--<img src="@/assets/icons/table/menu.svg"/>-->
-                                    <!--</template>-->
+						<!--<groups-dialog-->
+								<!--:modal-status.sync="delete_group_dialog"-->
+								<!--title="Delete Group"-->
+								<!--dialog-content="Are you sure you want to delete this group?"-->
+								<!--does-not-has-fields-->
+								<!--ref="delete_group_dialog"-->
+								<!--@save="delete_group"-->
+						<!--/>-->
 
-                                    <!--<template v-else>-->
-                                        <!--<v-icon small>arrow_upward</v-icon>-->
-                                        <!--{{header.text}}-->
-                                    <!--</template>-->
+					</v-card-title>
 
-                                <!--</th>-->
-                            <!--</tr>-->
-                        <!--</template>-->
+					<custom-table
+							:headers="headers"
+							:items="rows"
+							:loading="loading"
+							:total-items="total_items"
+							:rows-per-page-items="[10, 15]"
+							:search="search"
+							:pagination.sync="pagination"
+					>
 
-                        <!--<template slot="items" slot-scope="items">-->
-                        <!--<tr>-->
-                            <!--<td>{{items.items.item.id}}</td>-->
-                            <!--<td class="text-xs-center">{{-->
-                                <!--items.items.item.name }}-->
-                            <!--</td>-->
-                            <!--<td class="text-xs-center">{{-->
-                                <!--items.items.item.description }}-->
-                            <!--</td>-->
-                            <!--<td class="actions">-->
-                                <!--<template-->
-                                        <!--v-for="action of get_actions(items.items.item.slug)">-->
-                                    <!--<v-tooltip bottom>-->
-                                        <!--<v-btn-->
-                                                <!--slot="activator"-->
-                                                <!--color="blue"-->
-                                        <!--&gt;-->
-                                            <!--<img :src="action.icon"/> &nbsp;-->
-                                            <!--{{ action.text }}-->
-                                        <!--</v-btn>-->
-                                        <!--<span>{{action.tooltip}}</span>-->
-                                    <!--</v-tooltip>-->
-                                <!--</template>-->
-                            <!--</td>-->
-                        <!--</tr>-->
-                    <!--</template>-->
+						<template slot="custom-item" slot-scope="item">
+							<td class="text-xs-center">{{item.item.id}}</td>
+							<td class="text-xs-center">{{item.item.name}}</td>
+							<td class="text-xs-center">{{item.item.description}}</td>
+							<td class="actions">
+								<template v-for="action of get_actions(item.item.slug)">
+									<v-tooltip bottom>
+										<v-btn
+												slot="activator"
+												color="blue"
+												@click="action_clicked(action.value, item.item)"
+										>
+											<img :src="action.icon"/> &nbsp;
+											{{ action.text }}
+										</v-btn>
+										<span>{{action.tooltip}}</span>
+									</v-tooltip>
+								</template>
+							</td>
+						</template>
 
-                    <!--</custom-table>-->
-                </v-card>
+					</custom-table>
+				</v-card>
 
-
-
-            </v-flex>
-        </v-layout>
-    </v-container>
+			</v-flex>
+		</v-layout>
+	</v-container>
 </template>
 
 <script src="./Groups.js"></script>

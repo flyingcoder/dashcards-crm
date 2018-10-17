@@ -1,59 +1,32 @@
 import makeRequestTo from '@/services/makeRequestTo'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
+import TeamsDialog from '@/common/TeamsDialog/TeamsDialog.vue'
+import DeleteDialog from '@/common/DeleteDialog.vue'
+import Breadcrumb from '@/common/Breadcrumb.vue'
 
 export default {
   name: 'Teams',
-  components: { CustomTable },
+  components: { CustomTable, TeamsDialog, DeleteDialog, Breadcrumb },
 
   data: () => ({
-      dialog: false,
-      groups: 'asdf',
-      page: 1,
-      paths: [
-      { text: 'Dashboard', disabled: false },
-      { text: 'Teams', disabled: true }
-      ],
-      headers: [
-          { text: 'Member', align: 'left', value: 'name' },
-          { text: 'Position',  value: 'position' },
-          { text: 'Tasks', value: 'tasks' },
-          { text: 'Projects', value: 'projects' }
-      ],
-      members: [],
-      editedIndex: -1,
-      editedMember: {
-        first_name: '',
-        last_name: '',
-        group_name: '',
-        job_title: '',
-        email: '',
-        telephone: '',
-        password: '',
-        password_confirmation: '',
-      },
-      defaultItem: {
-        first_name: '',
-        last_name: '',
-        group_name: '',
-        job_title: '',
-        email: '',
-        telephone: '',
-        password: '',
-        check_pass: '',
-      }
+    add_dialog: false,
+    edit_dialog: false,
+    delete_dialog: false,
+    paths: [
+      { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+      { text: 'Teams', disabled: true, router_name: null }
+    ],
+    members: [],
+    page: 1,
+    headers: [
+        { text: 'Member', align: 'left', value: 'name' },
+        { text: 'Position',  value: 'position' },
+        { text: 'Tasks', value: 'tasks' },
+        { text: 'Projects', value: 'projects' }
+    ],
+    edit_item: null,
+    delete_item_id: null
   }),
-
-  computed: {
-    formTitle () {
-      return this.editedIndex === -1 ? 'New Member' : 'Edit Member'
-    }
-  },
-
-  watch: {
-    dialog (val) {
-      val || this.close()
-    }
-  },
 
   created () {
     makeRequestTo.get_teams()
@@ -63,44 +36,61 @@ export default {
   },
 
   methods: {
+
+	  add_new_member(new_item) {
+      this.members.unshift(new_item)
+      this.$refs.add_dialog.clear_fields()
+      this.$event.$emit('open_snackbar', 'New member added successfully!')
+    },
+
+    tasks_text(member) {
+	    return !member.tasks ? 'no tasks assigned' : member.tasks.length
+    },
+
+    projects_text(member) {
+	    return !member.projects ? 'no projects assigned' : member.projects.length
+    },
+
+	  update_member(updated_member){
+	    let members = this.members.slice()
+	    const index = members.findIndex(member => member.id === updated_member.id)
+      if (~index) {
+	      members.splice(index, 1, updated_member)
+        this.members = members
+      }
+
+      this.$event.$emit('open_snackbar', 'Member updated successfully!')
+      this.$refs.edit_dialog.clear_fields()
+      this.edit_item = null
+    },
+
     toggleAll () {
       if (this.selected.length) this.selected = []
       else this.selected = this.members.slice()
     },
 
-    editItem (item) {
-      this.editedIndex = this.members.indexOf(item)
-      this.editedMember = Object.assign({}, item)
-      this.dialog = true
+	  edit_member(item) {
+		  this.edit_dialog = true
+		  this.edit_item = item
     },
 
-    deleteItem (item) {
-      const index = this.members.indexOf(item)
-      confirm('Are you sure you want to delete this item?') && this.members.splice(index, 1)
+	  open_delete_dialog(item) {
+		  this.delete_item_id = item.id
+      this.delete_dialog = true
     },
 
-    close () {
-      this.dialog = false
-      setTimeout(() => {
-        this.editedMember = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      }, 300)
+	  delete_member() {
+      makeRequestTo.delete_team(this.delete_item_id)
+        .then(response => this.member_deleted())
     },
 
-    save () {
-      if (this.editedIndex > -1) {
-        makeRequestTo.put_teams(this.editedMember)
-          .then(response => {
-            Object.assign(this.members[this.editedIndex], this.editedMember)
-        })
-      } else {
-        makeRequestTo.post_teams(this.editedMember)
-          .then(response => {
-            this.members.push(this.editedMember)
-            console.log(response)
-          })
-      }
-      this.close()
-    }
+    member_deleted() {
+	    let members = this.members.filter(member => member.id !== this.delete_item_id)
+	    this.$event.$emit('open_snackbar', 'Member deleted successfully!')
+	    this.members = members
+	    this.delete_item_id = null
+      this.delete_dialog = false
+    },
+
   }
 }

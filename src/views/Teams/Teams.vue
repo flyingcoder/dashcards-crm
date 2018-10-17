@@ -3,90 +3,54 @@
 
         <div class="row">
 
-            <div class="breadcrumbs">
-                <v-breadcrumbs>
-                    <v-icon slot="divider">chevron_right</v-icon>
+            <breadcrumb :paths="paths" />
 
-                    <v-breadcrumbs-item class="page__title"
-                        v-for="path in paths"
-                        :disabled="path.disabled"
-                        :key="path.text"
-                    >
-                        {{ path.text }}
-                    </v-breadcrumbs-item>
-                </v-breadcrumbs>
-            </div>
+            <teams-dialog
+                ref="add_dialog"
+                title="Add New Member"
+                :dialog.sync="add_dialog"
+                @new-member-added="add_new_member"
+            />
+            <teams-dialog
+                ref="edit_dialog"
+                title="Edit Member"
+                :dialog.sync="edit_dialog"
+                :edit-item="edit_item"
+                is-edit-dialog
+                @member-updated="update_member"
+            />
+
+            <delete-dialog
+                :open-dialog.sync="delete_dialog"
+                title="Delete Member"
+                text-content="Are you sure you want to delete this member?"
+                @delete="delete_member"
+            />
 
             <div class="page__options">
-                <v-dialog v-model="dialog" max-width="500px">
-                    <v-btn slot="activator" class="add__btn">New Member</v-btn>
-                    <v-card>
-
-                    <v-card-title>
-                        <span class="headline">{{ formTitle }}</span>
-                    </v-card-title>
-
-                    <v-card-text>
-                        <v-container grid-list-md>
-                            <v-layout wrap>
-
-                                <v-flex xs12 sm6 md6>
-                                    <v-text-field v-model="editedMember.first_name" label="First Name"></v-text-field>
-                                </v-flex>
-
-                                <v-flex xs12 sm6 md6>
-                                    <v-text-field v-model="editedMember.last_name" label="Last Name"></v-text-field>
-                                </v-flex>
-
-                                <v-flex xs12 sm6 md6>
-                                    <v-select v-model="editedMember.group_name" :group="groups" label="Standard"></v-select>
-                                </v-flex>
-
-                                <v-flex xs12 sm6 md6>
-                                    <v-text-field v-model="editedMember.job_title" label="Job Title"></v-text-field>
-                                </v-flex>
-
-                                <v-flex xs12 sm6 md6>
-                                    <v-text-field v-model="editedMember.email" label="Email Address"></v-text-field>
-                                </v-flex>
-
-                                <v-flex xs12 sm6 md6>
-                                    <v-text-field v-model="editedMember.telephone" label="Contact No."></v-text-field>
-                                </v-flex>
-
-                                <v-flex xs12 sm6 md6>
-                                    <v-text-field v-model="editedMember.password" label="Password"></v-text-field>
-                                </v-flex>
-
-                                <v-flex xs12 sm6 md6>
-                                    <v-text-field v-model="editedMember.check_pass" label="Confirm Password"></v-text-field>
-                                </v-flex>
-
-                            </v-layout>
-                        </v-container>
-                    </v-card-text>
-
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn class="cancel__btn" flat @click.native="close">Cancel</v-btn>
-                        <v-btn class="save__btn" flat @click.native="save">Save</v-btn>
-                    </v-card-actions>
-                    </v-card>
-                </v-dialog>
+                  <div class='newAdd__btn' @click="add_dialog = true">
+                    <i class="addIcon__btn material-icons">add_icon</i>
+                    <span class="addText__btn">Add New</span>
+                  </div>
             </div>
+
         </div>
 
         <div class="content__wrapper">
             <div class="row buzz__tables">
 
                 <v-toolbar flat color="white">
+
                     <v-toolbar-title>Members</v-toolbar-title>
+
                     <v-divider
                         class="mx-2"
                         inset
                         vertical
                     ></v-divider>
+
                     <v-spacer></v-spacer>
+
                 </v-toolbar>
 
                 <custom-table
@@ -107,15 +71,15 @@
                         </td>
 
                         <td class="text-xs-center">{{ item.item.job_title }}</td>
-                        <td class="text-xs-center">{{ item.item.tasks.length == 0 ? 'no tasks assigned' : item.item.tasks.length  }}</td>
-                        <td class="text-xs-center">{{ item.item.projects.length == 0 ? 'no projects assigned' : item.item.projects.length }}</td>
+                        <td class="text-xs-center">{{ tasks_text(item.item) }}</td>
+                        <td class="text-xs-center">{{ projects_text(item.item) }}</td>
 
                         <td>
-                            <v-icon class="mr-2" @click="editItem(item.item)">
+                            <v-icon class="mr-2" @click="edit_member(item.item)">
                                 edit
                             </v-icon>
 
-                            <v-icon @click="deleteItem(item.item)">
+                            <v-icon @click="open_delete_dialog(item.item)">
                                 delete
                             </v-icon>
                         </td>
@@ -123,17 +87,9 @@
 
                 </custom-table>
 
-                <div class="table__pagination text-xs-center">
-                    <v-pagination
-                    class="buzz__pagination"
-                    v-model="page"
-                    :length="4"
-                    circle
-                    ></v-pagination>
-                </div>
-
             </div>
         </div>
+        
     </div>
 </template>
 <style lang="scss" src="./Teams.scss"></style>
