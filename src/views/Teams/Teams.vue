@@ -16,7 +16,7 @@
                 title="Edit Member"
                 :dialog.sync="edit_dialog"
                 :edit-item="edit_item"
-                is-edit-dialog
+                :is-edit-dialog="edit_dialog"
                 @member-updated="update_member"
             />
 
