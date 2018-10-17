@@ -77,4 +77,22 @@ export default {
   checkout(token) {
     return request.post('/api/upgrade/checkout', {token})
   },
+
+  get_milestones(api_url) {
+    return request.get('/api/template')
+  },
+
+	add_new_milestone(payload) {
+  	return request.post('/api/template', payload)
+	},
+
+	edit_milestone(id, payload) {
+  	return request.put(`/api/template/${id}`, payload)
+	},
+
+  delete_milestone(id) {
+    return request.delete(`/api/template/${id}`)
+  }
+
+
 }

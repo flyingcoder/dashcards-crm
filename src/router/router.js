@@ -86,7 +86,8 @@ export default new Router({
 				},
 				{
 					path: 'milestones',
-					name: 'milestones'
+					name: 'milestones',
+					component: all_views.Milestone
 				},
 				{
 					path: 'forms',

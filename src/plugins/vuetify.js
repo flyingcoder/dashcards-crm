@@ -14,6 +14,7 @@ Vue.use(Vuetify, {
   },
   iconfont: 'md', //using material design
   icons: {
-    'notification': 'notification_important'
+    'notification': 'notification_important',
+    'success': 'check'
   }
 })
