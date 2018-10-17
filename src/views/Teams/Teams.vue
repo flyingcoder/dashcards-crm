@@ -29,8 +29,8 @@
 
             <div class="page__options">
                   <div class='newAdd__btn' @click="add_dialog = true">
-                    <i class="addIcon__btn material-icons">add_icon</i>
-                    <span class="addText__btn">Add New</span>
+                    <v-icon class="addIcon__btn">add_icon</v-icon>
+                    <div class="addText__btn"><span>Add New</span></div>
                   </div>
             </div>
 
