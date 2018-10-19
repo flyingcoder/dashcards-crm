@@ -1,9 +1,14 @@
 @import "./../../sass/_general";
 @import "./../../sass/_variables";
 
+$tableBlue: #f8f9fb;
+$tableDarkText: #4c5561;
+$tableBlueText: #8090aa;
+$tableBorder: #dce1e5;
+$tableTitle: #667280;
+
 .newAdd__btn {
     font-weight: bold;
-    border-radius: 40px;
     height: 40px;
     width: 40px;
     text-align: center;
@@ -37,7 +42,6 @@
         }
     }
     &:hover{
-        border-radius: 0 3px 3px 0;
         .addText__btn{
             width: 100px;
             left: -100px;
@@ -48,32 +52,102 @@
     }
 }
 
-.teams{
+
+//table-style
+.content__wrapper{
     .buzz__tables{
-        th:nth-child(2){
-            text-align: left;
-        }
-    }
-    td{
-        .member__image{
-            display: flex;
-            align-items: center;
-            flex: 1;
-            img{
-                width: 3vw;
-                border-radius: 50%;
+        flex-direction: column;
+        background: $white;
+        padding: 24px;
+        border-radius: 10px;
+        border: 1px solid $tableBorder;
+
+        .buzz__tablesTwo{
+            padding: 24px;
+            border: 1px solid $tableBorder;
+            background-color: $tableBlue;
+            .table__toolbar{
+                background-color: $tableBlue;
+                .table__toolbar-title{
+                    color: $tableTitle;
+                    text-align: left;
+                    font-size: 30px;
+                }
             }
-        }
-        .member__name{
-            flex: 3;
-        }
-        &:nth-child(2){
-            display: flex;
-            align-items: center;
-            height: inherit;
-        }
-        &:last-child{
-            text-align: center;
+            .custom__table{
+                border: 1px solid $tableBorder;
+                .table__inside{
+                    border: 1px solid $tableBorder;
+                }
+                thead{
+                    tr{
+                        background-color: $tableBlue;
+                        th{
+                            padding: 0 13px;
+                            color: $tableBlueText;
+                            font-size: 16px;
+                            .v-icon{
+                                color: $tableDarkText;
+                                font-size: 30px;
+                            }
+                         }
+                        th:nth-child(2){
+                            text-align: left;
+                        }
+                    }
+                }
+                tbody{
+                    tr{
+                        td{
+                            padding: 0 13px;
+                            &:nth-child(2){
+                                display: flex;
+                                align-items: center;
+                                height: inherit;
+                            }
+                            &:last-child{
+                                text-align: center;
+                            }
+                        }
+                        .v-icon{
+                            color: $tableDarkText;
+                            font-size: 30px;
+                        }
+                        height: 95px;
+                        .member__name{
+                            color: $tableBlueText;
+                            font-weight: 500;
+                            font-size: 14px;
+                            flex: 3;
+                        }
+                        .member__image{
+                            display: flex;
+                            align-items: center;
+                            flex: 1;
+                            img{
+                                height: 52px;
+                                border-radius: 50%;
+                                margin-right: 30px;
+                            }
+                        }
+                        .team__position, .team__tasks, .team__projects{
+                            font-size: 14px;
+                            color: $tableDarkText;
+                        }
+                        .team__option{
+                            .v-icon{
+                            color: $tableBlueText;
+                            }
+                        }
+                        &:nth-child(odd){
+                        background-color: $white;
+                        }
+                        &:nth-child(even){
+                        background-color: $tableBlue;
+                        }
+                    }
+                }
+            }
         }
     }
 }

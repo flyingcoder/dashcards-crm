@@ -67,27 +67,27 @@
                     border-radius: 10px;
                 }
             }
-            .content__wrapper{
-                .buzz__tables{
-                    flex-direction: column;
-                    background: $white;
-                    padding: 1em 2em 2em;
-                    table{
-                        tr{
-                            height: 5em;
-                        }
-                    }
-                }
-                .table__pagination{
-                    display: flex;
-                    justify-content: flex-end;
-                    align-items: center;
-                    height: 5em;
-                    .v-pagination__item--active{
-                        background: $blue;
-                    }
-                }
-            }
+            // .content__wrapper{
+            //     .buzz__tables{
+            //         flex-direction: column;
+            //         background: $white;
+            //         padding: 1em 2em 2em;
+            //         table{
+            //             tr{
+            //                 height: 5em;
+            //             }
+            //         }
+            //     }
+            //     .table__pagination{
+            //         display: flex;
+            //         justify-content: flex-end;
+            //         align-items: center;
+            //         height: 5em;
+            //         .v-pagination__item--active{
+            //             background: $blue;
+            //         }
+            //     }
+            // }
         }
 
         // Border
