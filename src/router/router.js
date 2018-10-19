@@ -85,10 +85,22 @@ export default new Router({
 					name: 'calendar'
 				},
 				{
-					path: 'milestones',
-					name: 'milestones',
-					component: all_views.Milestone
+					path: 'templates',
+					name: 'templates',
+					component: all_views.MilestoneTemplate,
 				},
+	      {
+		      path: 'templates/:id/milestone',
+		      name: 'templates/milestone',
+		      props: true,
+		      component: all_views.Milestone
+	      },
+	      {
+		      path: 'templates/:id/milestone/:id2/task',
+		      name: 'templates/milestone/task',
+		      props: true,
+		      component: all_views.MilestoneTask
+	      },
 				{
 					path: 'forms',
 					name: 'forms'
