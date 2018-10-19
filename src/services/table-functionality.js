@@ -19,8 +19,8 @@ export const table_functionality = {
 
 	methods: {
 
-		add_item(api_name, item) {
-			makeRequestTo[api_name](item)
+		add_item(api_name, item, dynamic_api = null) {
+			makeRequestTo[api_name](item, dynamic_api)
 				.then(response => {
 					this.items.unshift(response.data)
 					this.add_dialog = false
@@ -28,8 +28,8 @@ export const table_functionality = {
 				})
 		},
 		
-		update_item(api_name, item) {
-			makeRequestTo[api_name](this.edit_item.id, item)
+		update_item(api_name, item, dynamic_api = null) {
+			makeRequestTo[api_name](this.edit_item.id, item, dynamic_api)
 				.then(response => {
 					const index = this.items.findIndex(data_item => data_item.id === response.data.id)
 					if (~index)
@@ -43,8 +43,8 @@ export const table_functionality = {
 				})
 		},
 
-		delete_item(api_name) {
-			makeRequestTo[api_name](this.delete_item_id)
+		delete_item(api_name, dynamic_api = null) {
+			makeRequestTo[api_name](this.delete_item_id, dynamic_api)
 				.then(response => {
 					const index = this.items.findIndex(data_item => data_item.id === this.delete_item_id)
 					console.log(index)
@@ -68,9 +68,9 @@ export const table_functionality = {
 		},
 
 
-		fill_table(api_name, nested_response) {
+		fill_table(api_name, nested_response = false, dynamic_api = null) {
 			this.loading = true
-			makeRequestTo[api_name]()
+			makeRequestTo[api_name](dynamic_api)
 				.then(response => {
 					this.loading = false
 					if (nested_response) {

@@ -1,35 +1,19 @@
 export default {
-	name: 'MilestoneDialog',
+	name: 'MilestoneTemplateDialog',
 
 	props: {
 		dialog: Boolean,
-		dialogTitle: String,
+		title: String,
 		isEditDialog: Boolean,
 		fieldsToEdit: { type: Object, default: () => {} }
 	},
 
 	data: () => ({
 		open: false,
-		title: null,
+		name: null,
 		status: null,
-		days_init_value: 1,
 	}),
-
-	computed: {
-		days: {
-			get: function () {
-				return this.days_init_value
-			},
-			set: function (newValue) {
-				if (parseInt(newValue) < 1) {
-					this.days_init_value = 1
-					return
-				}
-				this.days_init_value = newValue
-			}
-		}
-	},
-
+	
 	watch: {
 		dialog(new_val) { this.open = new_val },
 		open(new_val) { this.$emit('update:dialog', new_val) },
@@ -46,18 +30,16 @@ export default {
 		cancel() { this.open = false },
 		save() {
 			const fields_to_save = {
-				title: this.title,
+				name: this.name,
 				status: this.status,
-				days: this.days,
 			}
 			this.$emit('save', fields_to_save)
 		},
 
 		update_fields({fields}) {
 			const new_fields = Object.assign({}, fields)
-			this.title = new_fields.title
+			this.name = new_fields.name
 			this.status = new_fields.status
-			this.days = new_fields.days
 		}
 
 	}
