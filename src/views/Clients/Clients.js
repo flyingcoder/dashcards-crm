@@ -3,6 +3,7 @@ import CustomField from '@/common/CustomField/CustomField.vue'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import {validations} from "./local-mixins/validations"
+import isEmpty from 'lodash/isEmpty'
 
 export default {
   name: 'Clients',
@@ -95,7 +96,7 @@ export default {
 			return this.clients.total
 		},
 		table_action_disabled() {
-			return this._.isEmpty(this.selected)
+			return isEmpty(this.selected)
 		}
   },
 
@@ -125,22 +126,6 @@ export default {
         this.form_edited = -1
       }, 300)
     },
-
-    // save () {
-    //   if (this.editedIndex > -1) {
-    //     makeRequestTo.put_teams(this.editedMember)
-    //       .then(response => {
-    //         Object.assign(this.members[this.editedIndex], this.editedMember)
-    //     })
-    //   } else {
-    //     makeRequestTo.post_teams(this.editedMember)
-    //       .then(response => {
-    //         this.members.push(this.editedMember)
-    //         console.log(response)
-    //       })
-    //   }
-    //   this.close()
-    // },
 
     save() {
 			if (this.all_validations_passed()) {
