@@ -38,7 +38,20 @@ export default {
 
 	created() {
 		this.fill_table('get_milestones', true, this.dynamic_api)
-	}
+	},
 
+	methods: {
+		navigate_to_milestone_page(item) {
+			this.$router.push(
+				{
+					name: 'templates/milestone/task',
+					params: {
+						milestone_id: item.id,
+						template_id: this.id
+					}
+				}
+			)
+		}
+	},
 
 }

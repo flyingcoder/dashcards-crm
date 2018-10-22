@@ -54,9 +54,14 @@
 									edit
 								</v-icon>
 
-								<v-icon @click="open_delete_dialog(item.item)">
+								<v-icon class="mr-2" @click="open_delete_dialog(item.item)">
 									delete
 								</v-icon>
+
+								<v-icon @click="navigate_to_milestone_page(item.item)" title="Open milestone table">
+									pageview
+								</v-icon>
+
 							</td>
 						</template>
 					</custom-table>

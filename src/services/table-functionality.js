@@ -47,7 +47,6 @@ export const table_functionality = {
 			makeRequestTo[api_name](this.delete_item_id, dynamic_api)
 				.then(response => {
 					const index = this.items.findIndex(data_item => data_item.id === this.delete_item_id)
-					console.log(index)
 					if (~index)
 						this.items.splice(index, 1)
 					this.delete_item_id = null
