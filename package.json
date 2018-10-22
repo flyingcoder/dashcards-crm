@@ -8,17 +8,17 @@
   },
   "dependencies": {
     "date-fns": "^1.29.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.11",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
     "vuelidate": "^0.7.4",
-    "vuetify": "^1.1.9",
+    "vuetify": "^1.2.8",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@babel/polyfill": "^7.0.0-beta.55",
-    "@vue/cli-plugin-babel": "^3.0.0-rc.10",
-    "@vue/cli-service": "^3.0.0-rc.10",
+    "@babel/polyfill": "^7.0.0",
+    "@vue/cli-plugin-babel": "^3.0.5",
+    "@vue/cli-service": "^3.0.5",
     "axios": "^0.18.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
