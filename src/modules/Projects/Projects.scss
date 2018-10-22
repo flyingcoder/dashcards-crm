@@ -15,7 +15,7 @@
     justify-content: space-evenly;
     align-items: center;
 
-    > img {
+     img {
       height: 70%;
     }
   }
@@ -23,7 +23,6 @@
 
 .newAdd__btn {
     font-weight: bold;
-    border-radius: 40px;
     height: 40px;
     width: 40px;
     text-align: center;
@@ -31,7 +30,6 @@
     position: relative;
     line-height: 38px;
     background: $blue;
-    transition: border-radius 0 ease;
     .addIcon__btn{
         font-size: 38px;
         padding-left: 1px;
@@ -57,12 +55,84 @@
         }
     }
     &:hover{
-        border-radius: 0 3px 3px 0;
         .addText__btn{
             width: 100px;
             left: -100px;
             span{
                 opacity: 1;
+            }
+        }
+    }
+}
+
+.content__wrapper{
+    .buzz__tables{
+        flex-direction: column;
+        background: $white;
+        padding: 24px;
+        border-radius: 10px;
+        border: 1px solid $tableBorderBlue;
+
+        .buzz__tablesTwo{
+            padding: 24px;
+            border: 1px solid $tableBorderBlue;
+            background-color: $tableBlueBg;
+            .table__toolbar{
+                background-color: $tableBlueBg;
+                .table__toolbar-title{
+                    color: $tableTitleBlue;
+                    text-align: left;
+                    font-size: 30px;
+                }
+            }
+            .custom__table{
+                border: 1px solid $tableBorderBlue;
+                .table__inside{
+                    border: 1px solid $tableBorderBlue;
+                }
+                thead{
+                    tr{
+                        background-color: $tableBlueBg;
+                        th{
+                            padding: 0 13px;
+                            color: $tableBlueText;
+                            font-size: 16px;
+                            .v-icon{
+                                color: $tableDarkText;
+                                font-size: 30px;
+                            }
+                         }
+                        th:nth-child(2){
+                            text-align: left;
+                        }
+                    }
+                }
+                tbody{
+                    tr{
+                        height: 95px;
+                        td{
+                            padding: 0 13px;
+                            &:nth-child(2){
+                                display: flex;
+                                align-items: center;
+                                height: inherit;
+                            }
+                            &:last-child{
+                                text-align: center;
+                            }
+                        }
+                        .v-icon{
+                            color: $tableDarkText;
+                            font-size: 30px;
+                        }
+                        &:nth-child(odd){
+                        background-color: $white;
+                        }
+                        &:nth-child(even){
+                        background-color: $tableBlueBg;
+                        }
+                    }
+                }
             }
         }
     }
