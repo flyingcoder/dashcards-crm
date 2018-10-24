@@ -4,7 +4,7 @@
             class="s__list"
             v-for="item in items"
             :key="item.title"
-            :class="{active:item.action == selected}" 
+            :class="{active: item.action === selected_route_name}"
             @click="sidebar_item_clicked(item.action)"
         >
             <v-list-tile-action class="s__icons">

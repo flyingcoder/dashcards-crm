@@ -2,7 +2,7 @@ export default {
 	name: 'DashboardSidebar',
 	data() {
 		return {
-			selected: 'default-content',
+			selected_route_name: 'default-content',
 			items: [
 				{
 					title: 'Dashboard',
@@ -87,6 +87,16 @@ export default {
 			],
 		}
 	},
+	
+	watch: {
+		'$route': {
+			handler(newVal) {
+				this.selected_route_name = newVal.name
+			},
+			immediate: true,
+			deep: true
+		}
+	},
 
 	methods: {
 		sidebar_item_clicked(action) {
@@ -94,7 +104,6 @@ export default {
 				this.$auth.logout()
 			else
 				this.$router.push({ name: action })
-				this.selected = action
 		},
 	}
 }
