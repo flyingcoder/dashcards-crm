@@ -38,30 +38,25 @@
 
         <div class="content__wrapper">
             <div class="row buzz__tables">
+                <div class="buzz__tablesTwo">
 
-                <v-toolbar flat color="white">
+                <v-toolbar flat class="table__toolbar">
 
-                    <v-toolbar-title>Members</v-toolbar-title>
-
-                    <v-divider
-                        class="mx-2"
-                        inset
-                        vertical
-                    ></v-divider>
+                    <v-toolbar-title class="table__toolbar-title" padding="0">Members</v-toolbar-title>
 
                     <v-spacer></v-spacer>
 
                 </v-toolbar>
-
                 <custom-table
                         :headers="headers"
                         :items="members"
                         :has-checkbox="true"
                         :has-header-icon="true"
+                        class="custom__table"
                 >
 
-                    <template slot="custom-item" slot-scope="item">
-                        <td class="text-xs-left"> <!--TODO fill image with dynamic data from backend-->
+                    <template slot="custom-item" slot-scope="item" class="template-table">
+                        <td class="text-xs-left team__member"> <!--TODO fill image with dynamic data from backend-->
                             <div class="member__image">
                                 <img :src="require('@/assets/temp/user.png')" /> &nbsp;
                             </div>
@@ -70,11 +65,11 @@
                             </div>
                         </td>
 
-                        <td class="text-xs-center">{{ item.item.job_title }}</td>
-                        <td class="text-xs-center">{{ tasks_text(item.item) }}</td>
-                        <td class="text-xs-center">{{ projects_text(item.item) }}</td>
+                        <td class="text-xs-center team__position">{{ item.item.job_title }}</td>
+                        <td class="text-xs-center team__tasks">{{ tasks_text(item.item) }}</td>
+                        <td class="text-xs-center team__projects">{{ projects_text(item.item) }}</td>
 
-                        <td>
+                        <td class="team__option">
                             <v-icon class="mr-2" @click="edit_member(item.item)">
                                 edit
                             </v-icon>
@@ -87,6 +82,7 @@
 
                 </custom-table>
 
+                </div>
             </div>
         </div>
         
