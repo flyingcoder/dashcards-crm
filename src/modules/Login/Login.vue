@@ -1,7 +1,7 @@
 <template>
   <div class="login">
-
-    <div class="l__form">
+    <v-layout row wrap justify-center align-center class="login__content">
+      <v-flex md6 xs12 fill-height class="l__form">
       <span style="position: absolute; top: 0;">
         For email use: ross.buzzooka@gmail.com <br />
         For password use: gDQsa7nUyadmin
@@ -44,16 +44,17 @@
           </div>
         </template>
       </login-component>
-    </div>
+    </v-flex>
 
-    <div class="l__gallery">
+    <v-flex md6 xs12 fill-height class="l__gallery">
       <div class="gallery__text">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium <br /> assumenda et rem architecto eum, </p>
       </div>
       <div class="gallery__images">
            <img src="@/assets/login/gallery.png">
       </div>
-    </div>
+    </v-flex>
+    </v-layout>
     
   </div>
 </template>

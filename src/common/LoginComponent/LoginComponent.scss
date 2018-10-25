@@ -1,70 +1,63 @@
 @import "../../sass/variables";
 
 .login__card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 22vw;
-  height: 100%;
+  .login__cardIn{
+    width: 70%;
+  }
+
 }
 
 .l__logo {
   img {
     width: 100%;
-    height: auto;
+    margin-bottom: 20px;
   }
 }
 
 .l__title {
-  display: flex;
-  height: 11vh;
-  font-size: 2.5vw;
-  font-weight: bold;
-  align-items: center;
+  height: 35px;
+  font-size: 24px;
+  font-weight: 500;
 }
 
 .l__divider{
-  width: 3vw;
-  height: 1vh;
+  width: 35px;
+  height: 4px;
   border-radius: 5px;
   background-color: $white;
 }
 
 .l__labels{
   display: flex;
-  height: 20vh;
+  // height: 40px;
   width: 100%;
   flex-direction: column;
   justify-content: space-evenly;
-  margin-top: 2vh;
+  margin-top: 20px;
+}
+.field__icon{
+  &:first-child{
+    .v-icon{
+      img{
+        width: auto;
+        height: auto;
+      }
+    }
+  }
 }
 
 .l__tools {
-  display: flex;
-  justify-content: space-between;
-  height: 8vh;
+  margin:20px 0;
   .checkbox {
-    display: flex;
-    flex: 1;
-    align-items: center;
-    justify-content: flex-start;
-    input{
-      width: 1vw;
-      height: 2vh;
-    }
     label {
       position: relative;
-      font-size: 1vw;
-      left: 0.5vw;
+      font-size: 14px;
+      margin-left: 10px;
     }
   }
   .forgot__password {
-    display: flex;
-    flex: 1;
-    justify-content: flex-end;
-    align-items: center;
       a{
-        font-size: 1vw;
+        font-size: 14px;
         color: $white;
         text-decoration: none;
     }
@@ -75,21 +68,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 1vh;
   button {
     width: 100%;
-    height: 7vh;
+    padding: 15px 0;
     background: $blue;
     font-family: "OpenSans";
-    font-size: 1vw;
+    font-size: 14px;
     font-weight: 500;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
-    letter-spacing: 0.1vw;
+    letter-spacing: 2px;
     text-align: center;
     outline: none;
-    border-radius: 1vw;
+    border-radius: 10px;
     box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
   }
 }
@@ -97,12 +89,12 @@
 .l__signup {
   display: flex;
   width: 100%;
-  height: 8vh;
+  margin: 20px auto;
   font-weight: 300;
   font-family: HelveticaLTStd;
   justify-content: center;
   align-items: center;
-  font-size: 1.1vw;
+  font-size: 16px;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
@@ -151,4 +143,15 @@
   .l__message{
     font-size: 1vw;
   }
+}
+
+//Tablet View
+@media(max-width: 768px) {
+  .login__card {
+  }
+}
+
+//Tablet View
+@media(max-width: 600px) {
+  
 }
