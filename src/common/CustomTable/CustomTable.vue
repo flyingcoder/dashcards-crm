@@ -10,6 +10,7 @@
           :total-items="totalItems"
           :rows-per-page-items="rowsPerPageItems"
           disable-initial-sort
+          v-bind="$attrs"
   >
     <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear> <!-- LOADING -->
 

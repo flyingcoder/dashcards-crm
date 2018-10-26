@@ -231,3 +231,22 @@ $navbar-default-bg: #fff;
     $tableBlueText: #8090aa;
     $tableBorderBlue: #dce1e5;
     $tableTitleBlue: #667280;
+
+@mixin styledScrollFor ($selector) {
+    /* width */
+    #{$selector}::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    /* Track */
+    #{$selector}::-webkit-scrollbar-track {
+        background: #DAE1E7;
+        border-radius: 15px;
+    }
+
+    /* Handle */
+    #{$selector}::-webkit-scrollbar-thumb {
+        background: #B4B6C3;
+        border-radius: 10px;
+    }
+}

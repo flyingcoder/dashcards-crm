@@ -12,10 +12,17 @@ import GroupsDialog from './components/GroupsDialog/GroupsDialog'
 
 export default {
   name: 'Groups',
-	components: {CustomTable, GroupsDialog, DeleteDialog, Breadcrumb},
+	components: {
+  	CustomTable,
+		GroupsDialog,
+		DeleteDialog,
+		Breadcrumb,
+		PermissionsDialog: () => import('./components/PermissionsDialog/PermissionsDialog.vue')
+	},
 
 	data () {
 		return {
+			permissions_dialog: '',
 			add_new_group_dialog: false,
 			edit_group_dialog: false,
 			delete_group_dialog: false,
@@ -168,6 +175,8 @@ export default {
 			}else if (action === 'delete_group') {
 				this.delete_item_id = id
 				this.delete_group_dialog = true
+			}else if (action === 'permissions') {
+				this.permissions_dialog = 'PermissionsDialog'
 			}
 
 		},

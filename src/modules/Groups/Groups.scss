@@ -1,8 +1,14 @@
-.actions {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.groups {
+    position: relative;
+
+    .actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
+
+
 
 
 //@import "./../../sass/_general";
