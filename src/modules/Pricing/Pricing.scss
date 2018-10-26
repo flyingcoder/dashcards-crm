@@ -1,5 +1,4 @@
 @import "~@/sass/_variables";
-@import "~@/sass/_general";
 
 .buzzooka{
   .pricing{
@@ -34,7 +33,7 @@
         padding: 0;
         .pricing__cover{
           display: flex;
-          height: 50vh;
+          height: 320px;
           background: #f3f3f2;;
           justify-content: center;
           align-items: center;
@@ -43,7 +42,7 @@
             flex-basis: 40%;
             h1{
                 font-family: Lato;
-                font-size: 5vh;
+                font-size: 32px;
                 font-weight: bold;
                 font-style: normal;
                 font-stretch: normal;
@@ -54,7 +53,7 @@
             }
             span{
                 font-family: Lato;
-                font-size: 3vh;
+                font-size: 18px;
                 font-weight: 300;
                 font-style: normal;
                 font-stretch: normal;

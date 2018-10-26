@@ -1,5 +1,4 @@
 @import "~@/sass/_variables";
-@import "~@/sass/_general";
 
 .price__list{
   display: flex;
@@ -9,7 +8,7 @@
 
   .price__card{
     display: block;
-    width: 20vw;
+    width: 22%;
     text-align: center;
     justify-content: center;
     box-shadow: 0px 1px 1px 0 rgba(2, 3, 3, 0.1);
@@ -21,9 +20,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 10vh;
       font-family: Lato;
-      font-size: 4vh;
+      font-size: 25px;
       font-weight: 500;
       font-style: normal;
       font-stretch: normal;
@@ -31,16 +29,19 @@
       letter-spacing: normal;
       text-align: center;
       color: #8f94a8;
+      margin-top: 15px;
+      margin-bottom: 25px;
     }
     .plan__price{
       display: flex;
-      height: 10vh;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      margin-bottom: 20px;
+      min-height: 49px;
       .price{
         font-family: Lato;
-        font-size: 4.5vh;
+        font-size: 28px;
         font-weight: bold;
         font-style: normal;
         font-stretch: normal;
@@ -50,7 +51,7 @@
       }
       .monthly{
         font-family: Lato;
-        font-size: 4vh;
+        font-size: 25px;
         font-weight: 500;
         font-style: normal;
         font-stretch: normal;
@@ -59,7 +60,7 @@
         color: #8f94a8;
       }
       .discount{
-        font-size: 1.8vh;
+        font-size: 12px;
         font-family: Lato;
         font-weight: 500;
         font-style: normal;
@@ -71,11 +72,11 @@
     }
     .plan__description{
       display: flex;
-      height: 15vh;
-      padding: 2vh;
+      margin-bottom: 20px;
+      padding: 13px;
       p{
         font-family: Lato;
-        font-size: 2.3vh;
+        font-size: 14px;
         font-weight: 500;
         font-style: normal;
         font-stretch: normal;

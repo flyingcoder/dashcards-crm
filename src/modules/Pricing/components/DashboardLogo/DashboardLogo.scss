@@ -1,4 +1,3 @@
-@import "~@/sass/_general";
 @import "~@/sass/_variables";
 
 .s__title {
@@ -30,8 +29,6 @@
 @media (min-width: 320px) and (max-width: 767px) {
     .s__title {
         .logo__img{
-            width: 25vw;
-            height: 5vw;
             display: none;
         }
         .w__icon{

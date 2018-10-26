@@ -11,15 +11,6 @@
 
         <slot name="fields"></slot>
 
-        <!--TODO the old logic for errors should refactor-->
-        <!--<div class="l__errors" v-if="error.status">-->
-            <!--<div class="error__container">-->
-                <!--<div class="e__message"><strong>{{error.message}}-->
-                <!--</strong></div>-->
-                <!--<div class="e__divider"></div>-->
-            <!--</div>-->
-        <!--</div>-->
-
         <v-layout row wrap justify-space-between class="l__tools" v-if="hasTools">
             <v-flex class="checkbox">
                 <input type="checkbox" id="checkbox" v-model="checkbox">

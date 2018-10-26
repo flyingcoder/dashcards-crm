@@ -1,9 +1,8 @@
-@import "../../sass/general";
 @import "../../sass/variables";
 
 .content{
     .d__breadcrumbs{
-        margin-bottom: 1vw;
+        margin-bottom: 14px;
         .page__options{
             display: flex;
             flex: 1;
@@ -14,10 +13,10 @@
             .option{
                 display: flex;
                 flex-basis: 31%;
-                height: 3vw;
+                height: 40px;
                 align-items: center;
                 justify-content: space-between;
-                @extend .buzz-border;
+                border-radius: 14px;
             }
             .save{
                 display: flex;
@@ -41,7 +40,7 @@
                     align-items: center;
                     justify-content: center;
                     span{
-                        font-size: 1.1vw;
+                        font-size: 15px;
                     }
                 }
             }
@@ -111,14 +110,13 @@
                     justify-content: center;
                     align-items: center;
                     span{
-                       font-size: 1.1vw;
+                       font-size: 15px;
                     }
                 }
             }
             .themes{
                 display: flex;
                 background: $blue;
-                @extend .buzz-border;
                 .color{
                     display: flex;
                     flex: 1;
@@ -134,7 +132,7 @@
                     background: $white;
                     border-radius: 0 8px 8px 0;
                     span{
-                        font-size: 1.1vw;
+                        font-size: 15px;
                     }
                 }
             }
@@ -149,9 +147,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1vw;
+            margin-bottom: 14px;
             height: auto;
-            @extend .buzz-border;
+            border-radius: 9px;
             .tiles__icon{
                 display: flex;
                 flex: 1;
@@ -165,12 +163,12 @@
                 flex: 2;
                 text-align: center;
                 background: $white;
-                border-radius: 0 0.9vw 0.9vw  0;
+                border-radius: 0 8px 8px  0;
                 .counter{
-                    font-size: 1.7vw;
+                    font-size: 23px;
                 }
                 .tile__title{
-                    font-size: 1.1vw;
+                    font-size: 15px;
                 }
             }
             &:first-child{
@@ -203,7 +201,7 @@
            width: 49%; 
            background: $white;
            padding: 20px;
-           @extend .buzz-border;
+           border-radius: 14px;
            height: 500px;
            margin: 10px 0;
            .d__box__header{
@@ -213,49 +211,27 @@
                }
            }
            .d__box__content{
-                margin: 1em 0;
+                margin: 14px 0;
                 border: 1px solid #dce1e5;
            }
         }
     }
 }
 
-@media (max-width: 480px) {
- 
-}
-
-@media (min-width: 481px) and (max-width: 767px) {
-
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-
-}
-
-@media (min-width: 1024px){
-
-}
-
-
-
-// Mobile Phone - Tablet
-@media only screen and (min-width: 320px) and (max-width: 767px){
+// Tablet
+@media only screen and (max-width: 767px){
     .content{
         .d__breadcrumbs{
             flex-wrap: wrap;
-            .breadcrumbs{
-                flex-basis: 100%;
-            }
+            flex-direction: column;
             .page__options{
                 margin-left: 0;
-                margin-top: 1em;
-                height: 6vw;
+                margin-top: 14px;
                 .option{
                     flex-basis: 30%;
-                    height: 100%;
                     .title{
                         span{
-                            font-size: 1.7vw;
+                            font-size: 12px;
                         }
                     }
                 }
@@ -271,7 +247,7 @@
         .d__tiles{
             .tiles__content{
                 flex-basis: 30%;
-                height: 6vw;
+                height: 40px;
                 .tiles__icon{
                     .icon{
                         width: 50%;
@@ -284,12 +260,13 @@
                         display: flex;
                         flex: 1;
                         justify-content: center;
-                        font-size: 2.5vw;  
-                        text-indent: 1pc;
+                        font-size: 18px;  
+                        text-indent: 12px;
                     }
                     .tile__title{
                         flex: 2;
-                        font-size: 1.7vw;
+                        font-size: 12px;
+                        text-indent: 6px;
                     }
                 }
             }
@@ -309,9 +286,49 @@
             flex-basis: 15%;
             .tiles__icon{
                 .icon{
-                    width: 2.5vw;
+                    width: 34px;
+                    min-width: 26px;
                 }
             }
         } 
+    }
+}
+
+// Mobile Phone
+@media only screen and (max-width: 480px) {
+    .content{
+        .d__breadcrumbs{
+            .page__options{
+                .option{
+                    flex-basis: 30%;
+                    .title{
+                        span{
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+        }
+        .d__tiles{
+            .tiles__content{
+                .tiles__icon{
+                    .icon{
+                        min-width: 20px;
+                    }
+                }
+                .tiles__info{
+                    flex-direction:column;
+                    .counter{
+                        font-size: 14px;
+                        text-indent: 0;
+                        margin-bottom: 6px;
+                    }
+                    .tile__title{
+                        font-size: 11px;
+                        text-indent: 0;
+                    }
+                }
+            }
+        }
     }
 }
