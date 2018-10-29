@@ -26,7 +26,7 @@
                 .icon{
                     display: flex;
                     flex: 1;
-                    border-right: $border-buzz;
+                    border-right: 1px solid $tile-border ;
                     align-items: center;
                     justify-content: center;
                     img{
@@ -54,7 +54,7 @@
                     flex: 1;
                     align-items: center;
                     justify-content: center;
-                    border-right: $border-buzz;
+                    border-right: 1px solid $tile-border;
                 }
                 .switch{
                     position: relative;
@@ -121,7 +121,7 @@
                     display: flex;
                     flex: 1;
                     height: 100%;
-                    border-right: $border-buzz;
+                    border-right: 1px solid $tile-border;
                 }
                 .title{
                     display: flex;
