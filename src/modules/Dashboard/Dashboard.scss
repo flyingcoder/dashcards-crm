@@ -20,6 +20,7 @@
         }
         .d__sidebar {
             background: $blue;
+            z-index: 1;
             .sidebar{
                 a{
                     padding: 0;
