@@ -77,6 +77,16 @@
       </v-alert>
     </template>
 
+    <div slot="actions-prepend" class="something" v-if="hasCheckbox">
+        <v-btn color="indigo"
+               dark
+               outline
+               :disabled="disableDeleteAllButton"
+               @click="$emit('delete-selected')">
+          Delete Selected
+        </v-btn>
+    </div>
+
   </v-data-table>
 
 </template>

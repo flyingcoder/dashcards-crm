@@ -15,15 +15,28 @@ export const table_functionality = {
 			fields: null
 		},
 		delete_item_id: null,
+		disable_delete_all_button: true,
+		selected_ids: []
 	}),
+
+	watch: {
+		selected_ids(new_val) {
+			new_val.length > 0 ? this.disable_delete_all_button = false : this.disable_delete_all_button = true
+		}
+	},
 
 	methods: {
 
 		add_item(api_name, item, dynamic_api = null) {
 			makeRequestTo[api_name](item, dynamic_api)
 				.then(response => {
-					this.items.unshift(response.data)
-					this.add_dialog = false
+					const new_items = response.data
+					if (Array.isArray(new_items)) {
+						new_items.reverse().forEach(new_item => this.items.unshift(new_item))
+					}else {
+						this.items.unshift(new_items)
+					}
+					this.$refs.add_dialog.clear_and_close()
 					this.$event.$emit('open_snackbar', this.table_config.add_message, 'red', 'success')
 				})
 		},
@@ -80,6 +93,10 @@ export const table_functionality = {
 				})
 		},
 
+		delete_selected() {
+
+		},
+		
 	}
 
 }

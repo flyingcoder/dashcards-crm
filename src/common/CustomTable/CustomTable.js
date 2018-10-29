@@ -9,7 +9,8 @@ export default {
 		'has-checkbox',
 		'table-action-disabled',
 		'has-header-icon',
-		'pagination'
+		'pagination',
+		'disable-delete-all-button'
 	],
 
 	data: () => ({
@@ -19,7 +20,11 @@ export default {
 
 	watch: {
 
-		table_pagination(new_val) { this.$emit('update:pagination', new_val) }
+		table_pagination(new_val) { this.$emit('update:pagination', new_val) },
+		selected(newVal) {
+			const selected_ids = newVal.map(item => item.id)
+			this.$emit('items-selected', selected_ids)
+		}
 
 	},
 

@@ -1,128 +1,80 @@
 <template>
-  <div class="services">
+	<div class="services">
 
-    <div class="row">
-      <div class="breadcrumbs">
-          <v-breadcrumbs>
-              <v-icon slot="divider">chevron_right</v-icon>
+		<services-add-dialog
+				:dialog.sync="add_dialog"
+				ref="add_dialog"
+				title="New New Services"
+				@save="add_item('add_new_services', $event)"
+		/>
 
-              <v-breadcrumbs-item class="page__title"
-                  v-for="path in paths"
-                  :disabled="path.disabled"
-                  :key="path.text"
-              >
-                  {{ path.text }}
-              </v-breadcrumbs-item>
-          </v-breadcrumbs>
-      </div>
+		<services-edit-dialog
+				:dialog.sync="edit_dialog"
+				ref="edit_dialog"
+				title="Edit Service"
+				:is-edit-dialog="edit_dialog"
+				:fields-to-edit="edit_item"
+				@save="update_item('update_service', $event)"
+		/>
 
-      <div class="page__options">
-          <v-dialog v-model="dialog" max-width="500px">
-              <v-btn slot="activator" class="add__btn">New Service</v-btn>
-              <v-card>
+		<delete-dialog
+				:open-dialog.sync="delete_dialog"
+				title="Delete Service"
+				text-content="Are you sure you want to delete this service?"
+				@delete="delete_item('delete_service')"
+		/>
 
-              <v-card-title>
-                  <span class="headline">{{ form_title }}</span>
-              </v-card-title>
+		<breadcrumb :paths="paths"/>
 
-              <v-card-text>
-                  <v-container grid-list-md>
-                      <v-layout wrap>
+		<div class="content__wrapper">
+			<div class="row buzz__tables">
 
-                          <custom-field
-                            className="signup__field"
-                            v-model.trim="name.text"
-                            :valid="name.is_valid"
-                            input-type="text"
-                            placeholder="Service Name"
-                            @blur="validate_field('name')"
-                            @focus="name.is_valid = true"
-                        ></custom-field>
+				<v-toolbar flat color="white">
+					<v-toolbar-title>Services</v-toolbar-title>
+					<v-spacer></v-spacer>
+					<v-btn @click="add_dialog = true">Add New</v-btn>
+				</v-toolbar>
 
-                      </v-layout>
-                  </v-container>
-              </v-card-text>
+				<custom-table
+						:headers="headers"
+						:items="items"
+						:has-checkbox="true"
+						:has-header-icon="true"
+						:disable-delete-all-button="disable_delete_all_button"
+						@items-selected="selected_ids = $event"
+						@delete-selected="delete_selected()"
+				>
 
-              <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn class="cancel__btn" flat @click.native="close">Cancel</v-btn>
-                  <v-btn class="save__btn" flat @click.native="save">Save</v-btn>
-              </v-card-actions>
-              </v-card>
-          </v-dialog>
-      </div>
-    </div>
+					<template slot="custom-item" slot-scope="item">
+						<td class="text-xs-left pl-5">{{ item.item.service_name }}</td>
 
-    <div class="content__wrapper">
-            <div class="row buzz__tables">
+						<td class="text-xs-left pl-5">{{ item.item.name }}</td>
 
-                <v-toolbar flat color="white">
-                    <v-toolbar-title>Services</v-toolbar-title>
-                    <v-divider
-                        class="mx-2"
-                        inset
-                        vertical
-                    ></v-divider>
-                    <v-spacer></v-spacer>
-                </v-toolbar>
+						<td class="text-xs-left pl-5">{{ item.item.service_created_at }}</td>
 
-      <!-- <custom-table
-              v-model="selected"
-              :headers="headers"
-              :items="services"
-              :total-items="total_items"
-              :loading="loading"
-              select-all
-              :has-checkbox="true"
-              :table-action-disabled.sync="table_action_disabled"
-      > -->
-      <custom-table
-                          :headers="headers"
-                          :items="services"
-                          :has-checkbox="true"
-                          :has-header-icon="true"
-                  >
+						<td class="text-xs-center">
 
-        <template slot="custom-item" slot-scope="item">
-          <td class="text-xs-left pl-5">{{ item.item.name }}</td>
+							<v-btn fab small color="blue" depressed
+							       @click="open_edit_dialog(item.item)"
+							>
+								<img src="@/assets/icons/groups/edit.svg" alt="">
+							</v-btn>
 
-          <td class="text-xs-left pl-5">{{ item.item.name }}</td>
+							<v-btn fab small color="blue" depressed
+							       @click="open_delete_dialog(item.item)"
+							>
+								<img src="@/assets/icons/groups/delete.svg" alt="">
+							</v-btn>
 
-          <td class="text-xs-left pl-5">{{ item.item.company }}</td>
+						</td>
+					</template>
 
-          <td class="text-xs-left pl-5">{{ item.item.date_created }}</td>
+				</custom-table>
 
-          <td class="text-xs-center">
-            <v-btn fab small color="blue" depressed
-                  :disabled="!table_action_disabled"
-                  @click="editItem(item.item)"
-                  >
-              <img src="@/assets/icons/groups/edit.svg" alt="">
-            </v-btn>
-            <v-btn fab small color="blue" depressed
-                  :disabled="!table_action_disabled"
-                  @click="deleteItem(item.item)"
-                  >
-              <img src="@/assets/icons/groups/delete.svg" alt="">
-            </v-btn>
-          </td>
-        </template>
+			</div>
+		</div>
 
-      </custom-table>
-
-      <div class="table__pagination text-xs-center">
-              <v-pagination
-              class="buzz__pagination"
-              v-model="page"
-              :length="4"
-              circle
-              ></v-pagination>
-          </div>
-
-      </div>
-    </div>
-
-  </div>
+	</div>
 </template>
 <script src="./Services.js"></script>
 <style lang="scss" scoped src="./Services.scss"></style>
