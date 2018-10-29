@@ -5,11 +5,15 @@ export const services_api = {
 		return request.get('api/services')
 	},
 
-	post_services({ name }) {
-		return request.post('api/services', { name });
+	add_new_services(services) {
+		return request.post('api/services', services);
 	},
 
-	put_services(services) {
-		return request.put(`api/services/${services.id}`, services)
+	update_service(id, new_name) {
+		return request.put(`api/services/${id}`, new_name)
+	},
+
+	delete_service(id) {
+		return request.delete(`api/services/${id}`)
 	},
 }
