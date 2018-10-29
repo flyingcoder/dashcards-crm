@@ -131,6 +131,36 @@
         }
     }
 }
+@media only screen and (max-width: 990px){
+    .buzzooka{
+        .d__sidebar{
+            .s__list{
+                .s__content{
+                    font-size:12px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .buzzooka{
+        .d__sidebar{
+            .s__list{
+                .s__icons{
+                    min-width: 40px;
+                    svg{
+                        width: 20px;
+                        margin: 0 auto;
+                    }
+                }
+                .s__content{
+                    font-size:11px;
+                }
+            }
+        }
+    }
+}
 
 // Mobile Phone - Tablet
 @media only screen and (min-width: 320px) and (max-width: 767px){
@@ -141,7 +171,7 @@
         }
         .d__sidebar{
             position: absolute;
-            top: 35px;
+            top: -20px;
             transform: translate(-150px, 120px);
             transition: all 0.5s ease;
         }
