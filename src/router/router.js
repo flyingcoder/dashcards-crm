@@ -18,6 +18,7 @@ import { milestoneTasks } from "./routes/milestoneTasks";
 import { projects } from "./routes/projects";
 import { services } from "./routes/services";
 import { teams } from "./routes/teams";
+import { permissions } from "./routes/permissions";
 
 Vue.use(Router)
 
@@ -36,6 +37,7 @@ export default new Router({
 				projects,// path: /dashboard/projects
 				services, // path: /dashboard/services
 				teams,// path: /dashboard/team
+				permissions,// path: /dashboard/permissions
 		  ]
 	  },
 
