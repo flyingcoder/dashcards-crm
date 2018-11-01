@@ -56,7 +56,8 @@
 				},
 				{
 					title: 'Settings',
-					icon: require('@/assets/icons/header/user/settings.svg')
+					icon: require('@/assets/icons/header/user/settings.svg'),
+					action: 'navigate_to_settings'
 				},
 				{
 					title: 'Help',
@@ -75,12 +76,19 @@
 		}),
 
 		methods: {
+
 			handle_action (action) {
 				this[action]() //i.e the action is logout will call this.logout()
 			},
+
 			logout() {
 				this.$auth.logout()
 			},
+
+			navigate_to_settings() {
+				this.$router.push({name: 'settings'})
+			}
+
 		}
 
 	}

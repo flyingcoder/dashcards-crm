@@ -19,6 +19,7 @@ import { projects } from "./routes/projects";
 import { services } from "./routes/services";
 import { teams } from "./routes/teams";
 import { permissions } from "./routes/permissions";
+import { settings } from './routes/settings'
 
 Vue.use(Router)
 
@@ -37,14 +38,9 @@ export default new Router({
 				projects,// path: /dashboard/projects
 				services, // path: /dashboard/services
 				teams,// path: /dashboard/team
+				permissions,// path: /dashboard/settings/permissions
+			  settings, // path: /dashboard/settings
 		  ]
-	  },
-	  {
-		path: '/dashboard/settings',
-		component: () => import('@/modules/Dashboard/Dashboard.vue'), //for temporary since the settings page is not available
-		children: [
-			  permissions,// path: /dashboard/settings/permissions
-		]
 	  },
 
 	  home, // path: /
