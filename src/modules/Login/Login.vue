@@ -26,9 +26,7 @@
                     input-type="email"
                     placeholder="Email"
                     v-model.trim="email"
-                    :valid="is_email_valid"
-                    @blur="handle_validation('email')"
-                    @focus="is_email_valid = true"
+                    @keyup.enter="login"
             ></custom-field>
 
             <custom-field
@@ -37,9 +35,7 @@
                     input-type="password"
                     placeholder="Password"
                     v-model.trim="password"
-                    :valid="is_password_valid"
-                    @blur="handle_validation('password')"
-                    @focus="is_password_valid = true"
+                    @keyup.enter="login"
             ></custom-field>
           </div>
         </template>
