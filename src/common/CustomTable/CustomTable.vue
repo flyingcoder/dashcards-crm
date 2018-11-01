@@ -5,10 +5,7 @@
           :headers="headers"
           :items="items"
           :loading="loading"
-          :pagination.sync="table_pagination"
           select-all
-          :total-items="totalItems"
-          :rows-per-page-items="rowsPerPageItems"
           disable-initial-sort
           v-bind="$attrs"
   >
@@ -28,7 +25,7 @@
         <th
                 v-for="header in props.headers"
                 :key="header.id"
-                :class="['column sortable', table_pagination.descending ? 'desc' : 'asc', header.value === table_pagination.sortBy ? 'active' : '']"
+                :class="['column sortable', sort.descending ? 'desc' : 'asc', header.value === sort.sortBy ? 'active' : '']"
                 :width="header.width"
                 @click="changeSort(header.value)"
         >
@@ -77,15 +74,11 @@
       </v-alert>
     </template>
 
-    <div slot="actions-prepend" class="something" v-if="hasCheckbox">
-        <v-btn color="indigo"
-               dark
-               outline
-               :disabled="disableDeleteAllButton"
-               @click="$emit('delete-selected')">
-          Delete Selected
-        </v-btn>
-    </div>
+    <template slot="footer">
+      <td colspan="100%" style="padding: 0;">
+        <slot name="table-actions">Hello</slot>
+      </td>
+    </template>
 
   </v-data-table>
 

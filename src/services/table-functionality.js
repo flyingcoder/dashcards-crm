@@ -8,21 +8,57 @@ export const table_functionality = {
 		delete_dialog: false,
 		loading: false,
 		items: [],
-		total_items: 0,
 		items_response: null,
 		edit_item: {
 			id: null,
 			fields: null
 		},
 		delete_item_id: null,
-		disable_delete_all_button: true,
-		selected_ids: []
+		show_delete_selected: false,
+		selected_ids: [],
+		rows_per_page: 10,
+		rows_per_page_items: [5, 10, 15, 20, 25],
+		page: 1,
+		sort: {
+			sortBy: null,
+			descending: false
+		},
+		search: ''
 	}),
+
+	computed: {
+		total_items() {
+			return this.items_response ? Math.ceil(this.items_response.total / this.rows_per_page) : 0
+		},
+		query_for_sorting() {
+			if (!this.sort.sortBy)
+				return ''
+			return `${this.sort.sortBy}|${this.sort.descending ? 'desc' : 'asc'}`
+		},
+		api_query() {
+			return `?
+							 page=${this.page}&
+							 per_page=${this.rows_per_page}&
+							 search=${this.search}&
+							 sort=${this.query_for_sorting}
+						 `
+		}
+	},
 
 	watch: {
 		selected_ids(new_val) {
-			new_val.length > 0 ? this.disable_delete_all_button = false : this.disable_delete_all_button = true
-		}
+			new_val.length > 0 ? this.show_delete_selected = true : this.show_delete_selected = false
+		},
+		api_query(query) {
+			this.$router.replace({ name: this.table_config.route_name, query: {
+					page: this.page,
+					per_page: this.rows_per_page,
+					search: this.search,
+					sort: this.query_for_sorting
+				}})
+			this.loading = true
+			this.refresh_table(query)
+		},
 	},
 
 	methods: {
@@ -79,24 +115,56 @@ export const table_functionality = {
 			this.delete_item_id = item.id
 		},
 
-
 		fill_table(api_name, nested_response = false, dynamic_api = null) {
 			this.loading = true
 			makeRequestTo[api_name](dynamic_api)
 				.then(response => {
+					this.items_response = response.data
 					this.loading = false
 					if (nested_response) {
-						this.items = this.items_response = response.data.data
+						this.items = response.data.data
 					}else {
-						this.items = this.items_response = response.data
+						this.items = response.data
 					}
 				})
 		},
 
-		delete_selected() {
-
+		changeSort (column) {
+			if (this.sort.sortBy === column) {
+				this.sort.descending = !this.sort.descending
+			} else {
+				this.sort.sortBy = column
+				this.sort.descending = false
+			}
 		},
-		
+
+		refresh_table(query) {
+			makeRequestTo[this.table_config.refresh_table_api_name](query)
+				.then(response => {
+					this.$event.$emit('open_snackbar', this.table_config.refresh_table_message, 'red', 'success')
+					this.loading = false
+					this.items_response = response.data
+					this.items = response.data.data
+				})
+		},
+
+		update_table_actions(query) {
+			if (query.page)
+				this.page = Number(query.page)
+			if (query.per_page)
+				this.rows_per_page = Number(query.per_page)
+			if (query.search)
+				this.search = query.search
+			if (query.sort) {
+				const sort = query.sort.split('|')
+				this.sort.sortBy = sort[0]
+				if (sort[1] === 'asc')
+					this.sort.descending = false
+				else if (sort[1] === 'desc')
+					this.sort.descending = true
+			}
+		},
+
 	}
 
 }

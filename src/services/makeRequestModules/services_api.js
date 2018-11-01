@@ -16,4 +16,8 @@ export const services_api = {
 	delete_service(id) {
 		return request.delete(`api/services/${id}`)
 	},
+
+	paginate_services_table(qyery) {
+		return request.get(`api/services${qyery}`)
+	}
 }

@@ -1,10 +1,8 @@
 import LoginComponent from '@/common/LoginComponent/LoginComponent.vue'
 import CustomField from '@/common/CustomField/CustomField.vue'
-import { validations } from "./local-mixins/validations";
 
 export default {
   name: 'Login',
-  mixins: [validations],
   components: {LoginComponent, CustomField},
 
   data: () => ({
@@ -21,7 +19,7 @@ export default {
     },
 
     login() {
-      this.all_validations_passed() && this.$auth.login({ email: this.email, password: this.password })
+      this.$auth.login({ email: this.email, password: this.password })
     },
 
   }
