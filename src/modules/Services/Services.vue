@@ -38,11 +38,13 @@
 				<custom-table
 						:headers="headers"
 						:items="items"
+						:loading="loading"
+						:sort="sort"
 						:has-checkbox="true"
 						:has-header-icon="true"
-						:disable-delete-all-button="disable_delete_all_button"
+						hide-actions
 						@items-selected="selected_ids = $event"
-						@delete-selected="delete_selected()"
+						@sorted="changeSort"
 				>
 
 					<template slot="custom-item" slot-scope="item">
@@ -69,7 +71,32 @@
 						</td>
 					</template>
 
+					<template slot="table-actions">
+
+						<div class="actions-wrapper">
+
+							<div class="bulk-delete">
+								<v-btn color="indigo" dark outline :disabled="!show_delete_selected">
+									Delete Selected
+								</v-btn>
+							</div>
+
+							<div class="rows-per-page-dropdown">
+								Rows per page: <v-select :items="rows_per_page_items" menu-props="auto" v-model="rows_per_page"></v-select>
+							</div>
+
+							<div class="pagination">
+								<div class="text-xs-center pt-2">
+									<v-pagination :length="total_items" :total-visible="5" v-model="page"></v-pagination>
+								</div>
+							</div>
+
+						</div>
+					</template>
+
 				</custom-table>
+
+
 
 			</div>
 		</div>
