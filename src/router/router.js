@@ -37,14 +37,8 @@ export default new Router({
 				projects,// path: /dashboard/projects
 				services, // path: /dashboard/services
 				teams,// path: /dashboard/team
+				permissions,// path: /dashboard/permissions
 		  ]
-	  },
-	  {
-		path: '/dashboard/settings',
-		component: () => import('@/modules/Dashboard/Dashboard.vue'), //for temporary since the settings page is not available
-		children: [
-			  permissions,// path: /dashboard/settings/permissions
-		]
 	  },
 
 	  home, // path: /

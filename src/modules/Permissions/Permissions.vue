@@ -28,10 +28,13 @@
 
 			<custom-table
 						:headers="headers"
+						:items="items"
 						:has-checkbox="true"
 						:has-header-icon="true"
+						:disable-delete-all-button="disable_delete_all_button"
 						@items-selected="selected_ids = $event"
-            class="custom__table"
+						@delete-selected="delete_selected()"
+            			class="custom__table"
 				>
 
 					<template slot="custom-item" slot-scope="item">
