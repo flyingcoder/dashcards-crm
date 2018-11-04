@@ -1,5 +1,13 @@
-@import "./../../sass/_variables";
+@import "~@/sass/_variables";
 
+.permissions-table {
+    padding: 25px;
+
+    @include customTableRow; //css used for styling the last row of the table
+}
+
+
+//TODO the whole css below should be refactored in a cleaner way
 .permessions {
   position: relative;
   width: 100%;

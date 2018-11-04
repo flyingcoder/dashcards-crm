@@ -6,6 +6,7 @@ import { services_api } from './makeRequestModules/services_api'
 import { templates_api } from './makeRequestModules/templates_api'
 import { templates_milestone_api } from './makeRequestModules/templates_milestone_api'
 import { milestone_tasks_api } from "./makeRequestModules/milestone_tasks_api";
+import { permissions_api } from "./makeRequestModules/permissions_api";
 
 export default {
   login({ email, password }) {
@@ -27,5 +28,6 @@ export default {
   ...templates_api,
   ...templates_milestone_api,
   ...milestone_tasks_api,
+  ...permissions_api,
 
 }

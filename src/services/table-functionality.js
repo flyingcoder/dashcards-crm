@@ -36,12 +36,10 @@ export const table_functionality = {
 			return `${this.sort.sortBy}|${this.sort.descending ? 'desc' : 'asc'}`
 		},
 		api_query() {
-			return `?
-							 page=${this.page}&
-							 per_page=${this.rows_per_page}&
-							 search=${this.search}&
-							 sort=${this.query_for_sorting}
-						 `
+			return `page=${this.page}&
+							per_page=${this.rows_per_page}&
+							search=${this.search}&
+							sort=${this.query_for_sorting}`
 		}
 	},
 

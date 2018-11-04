@@ -18,6 +18,6 @@ export const services_api = {
 	},
 
 	paginate_services_table(qyery) {
-		return request.get(`api/services${qyery}`)
+		return request.get(`api/services?${qyery}`)
 	}
 }

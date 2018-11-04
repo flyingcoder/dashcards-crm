@@ -37,7 +37,6 @@ export default {
 	},
 
 	created () {
-
 		const query = this.$route.query
 		if (isEmpty(query)) {
 			this.fill_table('get_services', true)
