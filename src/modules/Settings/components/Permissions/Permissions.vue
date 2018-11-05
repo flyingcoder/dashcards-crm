@@ -1,6 +1,22 @@
 <template>
   <div class="permissions-table">
 
+	  <permissions-dialog
+			  :dialog.sync="add_dialog"
+			  ref="add_dialog"
+			  title="Add Permission"
+			  @save="add_item('add_new_permission', $event)"
+	  />
+
+	  <permissions-dialog
+			  :dialog.sync="edit_dialog"
+			  ref="edit_dialog"
+			  title="Edit Permission"
+			  :is-edit-dialog="edit_dialog"
+			  :fields-to-edit="edit_item"
+			  @save="update_item('update_permission', $event)"
+	  />
+
     <v-layout row justify-space-between>
 
       <v-flex xs12>
@@ -9,7 +25,7 @@
 
       <v-flex>
         <div class="page__options">
-          <div class='newAdd__btn'>
+          <div class='newAdd__btn' @click="add_dialog = true">
             <v-icon class="addIcon__btn">add_icon</v-icon>
             <div class="addText__btn"><span>Add New</span></div>
           </div>

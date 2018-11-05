@@ -1,13 +1,15 @@
 import {table_functionality} from "@/services/table-functionality";
+import isEmpty from "lodash/isEmpty";
+//Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue';
 import Breadcrumb from '@/common/Breadcrumb.vue'
-import isEmpty from "lodash/isEmpty";
+import PermissionsDialog from './components/PermissionsDialog/PermissionsDialog.vue'
 
 export default {
 	name: 'PermissionsTable',
 	mixins: [table_functionality],
 	components: {
-		CustomTable, Breadcrumb
+		CustomTable, Breadcrumb, PermissionsDialog
 	},
 
 	data: () => ({
