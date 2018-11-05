@@ -5,11 +5,15 @@ export const clients_api = {
 		return request.get('api/clients')
 	},
 
-	post_clients(payload) {
+	add_new_client(payload) {
 		return request.post('api/clients', payload)
 	},
 
-	put_clients(clients) {
-		return request.put(`api/clients/${clients.id}`, clients)
+	update_client(id, new_client) {
+		return request.put(`api/clients/${id}`, new_client)
 	},
+
+	delete_client(id) {
+		return request.put(`api/clients/${id}`)
+	}
 }
