@@ -39,10 +39,12 @@
 					<custom-table
 							:headers="headers"
 							:items="items"
-							:total-items="total_items"
 							:loading="loading"
-							has-checkbox
-							has-header-icon
+							:sort="sort"
+							:has-checkbox="true"
+							hide-actions
+							@items-selected="selected_ids = $event"
+							@sorted="changeSort"
 					>
 						<template slot="custom-item" slot-scope="item"> <!-- Table Items -->
 							<td class="text-xs-center">{{ item.item.title }}</td>
@@ -60,6 +62,30 @@
 								</v-icon>
 							</td>
 						</template>
+
+						<template slot="table-actions">
+
+							<div class="actions-wrapper">
+
+								<div class="bulk-delete">
+									<v-btn color="indigo" dark outline :disabled="!show_delete_selected">
+										Delete Selected
+									</v-btn>
+								</div>
+
+								<div class="rows-per-page-dropdown">
+									Rows per page: <v-select :items="rows_per_page_items" menu-props="auto" v-model="rows_per_page"></v-select>
+								</div>
+
+								<div class="pagination">
+									<div class="text-xs-center pt-2">
+										<v-pagination :length="total_items" :total-visible="5" v-model="page"></v-pagination>
+									</div>
+								</div>
+
+							</div>
+						</template>
+
 					</custom-table>
 				</v-flex>
 			</v-layout>
@@ -68,3 +94,10 @@
 </template>
 
 <script src="./MilestoneTask.js"></script>
+<style lang="scss" scoped>
+	@import "~@/sass/variables";
+
+	.milestone-task {
+		@include customTableRow; //css used for styling the last row of the table
+	}
+</style>
