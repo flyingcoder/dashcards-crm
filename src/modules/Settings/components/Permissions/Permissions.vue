@@ -59,7 +59,7 @@
 
 			        <td class="text-xs-left pl-5">{{ item.item.description }}</td>
 
-			        <td class="text-xs-left pl-5">{{ item.item.capability }}</td>
+			        <td class="text-xs-left pl-5">{{ capability_column(item.item.slug) }}</td>
 
 			        <td class="text-xs-center">
 

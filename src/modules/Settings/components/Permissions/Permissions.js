@@ -63,6 +63,21 @@ export default {
 			else this.selected = this.items.slice()
 		},
 
+		capability_column(slug) {
+			switch (true) {
+				case slug.view  && !slug.create && !slug.update && !slug.delete:
+					return 1
+				case slug.view && slug.create && !slug.update && !slug.delete:
+					return 2
+				case slug.view && slug.create && slug.update && !slug.delete:
+					return 3
+				case slug.view && slug.create && slug.update && slug.delete:
+					return 4
+				default:
+					return 0
+			}
+		}
+
 	},
 
 }
