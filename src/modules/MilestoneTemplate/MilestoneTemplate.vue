@@ -1,6 +1,7 @@
 <template>
 	<div class="milestone-template">
 
+
 		<milestone-template-dialog
 			:dialog.sync="add_dialog"
 			ref="add_dialog"
@@ -28,13 +29,7 @@
 			<v-layout row>
 				<v-flex xs12>
 
-					<v-toolbar flat color="white">
-
-						<v-spacer></v-spacer>
-
-						<v-btn @click="add_dialog = true">Add New</v-btn>
-
-					</v-toolbar>
+					<table-header :paths="paths" @click="add_dialog = true" />
 
 					<custom-table
 							:headers="headers"

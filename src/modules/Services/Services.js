@@ -8,11 +8,14 @@ import Breadcrumb from '@/common/Breadcrumb.vue'
 import ServicesAddDialog from './components/ServicesAddDialog/ServicesAddDialog.vue'
 import ServicesEditDialog from './components/ServicesEditDialog/ServicesEditDialog.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
+import TableHeader from '@/common/TableHeader.vue'
 
 export default {
 	name: 'Services',
 	mixins: [table_functionality],
-	components: { CustomTable, Breadcrumb, ServicesAddDialog, ServicesEditDialog, DeleteDialog },
+	components: {
+		CustomTable, Breadcrumb, ServicesAddDialog, ServicesEditDialog, DeleteDialog, TableHeader
+	},
 
 	data () {
 		return {

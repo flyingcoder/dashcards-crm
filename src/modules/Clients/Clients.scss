@@ -2,14 +2,4 @@
 
 .clients {
   padding: 0 20px;
-
-  .c-header {
-    display: grid;
-    grid-auto-flow: column;
-    justify-content: space-between;
-    align-items: center;
-
-    @include addNewButtonStyle;
-  }
-
 }

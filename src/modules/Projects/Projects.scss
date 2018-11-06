@@ -18,9 +18,9 @@
       height: 70%;
     }
   }
-}
 
- @include addNewButtonStyle;
+  @include customTableRow;
+}
 
 .content__wrapper{
     .buzz__tables{

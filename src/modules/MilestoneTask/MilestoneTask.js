@@ -3,12 +3,13 @@ import { table_functionality } from "@/services/table-functionality"
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
+import TableHeader from '@/common/TableHeader.vue'
 import TaskDialog from './components/TasksDialog/TasksDialog.vue'
 
 export default {
 	name: 'Milestone',
 	mixins: [table_functionality],
-	components: { CustomTable, DeleteDialog, TaskDialog },
+	components: { CustomTable, DeleteDialog, TaskDialog, TableHeader },
 
 	props: {
 		template_id: [Number, String], //route param
@@ -16,6 +17,10 @@ export default {
 	},
 
 	data: () => ({
+		paths: [
+			{text: 'Dashboard', disabled: false, router_name: 'default-content'},
+			{text: 'Milestone Task', disabled: true, router_name: null}
+		],
 		headers: [
 			{ text: 'Title', value: 'title' },
 			{ text: 'Description', value: 'description' },

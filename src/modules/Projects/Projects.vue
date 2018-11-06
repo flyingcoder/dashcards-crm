@@ -1,22 +1,7 @@
 <template>
   <div class="content projects">
 
-    <v-layout row justify-space-between>
-
-      <v-flex xs12>
-          <breadcrumb :paths="paths" />
-      </v-flex>
-
-      <v-flex>
-        <div class="page__options">
-          <div class='newAdd__btn'>
-            <v-icon class="addIcon__btn">add_icon</v-icon>
-            <div class="addText__btn"><span>Add New</span></div>
-          </div>
-        </div>
-      </v-flex>
-      
-    </v-layout>
+  <table-header :paths="paths" @click="add_dialog = true" />
 
     <div class="content__wrapper">
       <div class="row buzz__tables">

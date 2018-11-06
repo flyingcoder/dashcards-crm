@@ -3,11 +3,12 @@ import { table_functionality } from "@/services/table-functionality";
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import Breadcrumb from '@/common/Breadcrumb.vue'
+import TableHeader from '@/common/TableHeader.vue'
 
 export default {
 	name: 'Projects',
 	mixins: [table_functionality],
-	components: { CustomTable, Breadcrumb },
+	components: { CustomTable, Breadcrumb, TableHeader },
 
 	data: () => ({
 		paths: [

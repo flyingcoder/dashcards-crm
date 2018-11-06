@@ -3,14 +3,15 @@ import isEmpty from "lodash/isEmpty";
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue';
 import Breadcrumb from '@/common/Breadcrumb.vue'
-import PermissionsDialog from './components/PermissionsDialog/PermissionsDialog.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
+import TableHeader from '@/common/TableHeader.vue'
+import PermissionsDialog from './components/PermissionsDialog/PermissionsDialog.vue'
 
 export default {
 	name: 'PermissionsTable',
 	mixins: [table_functionality],
 	components: {
-		CustomTable, Breadcrumb, PermissionsDialog, DeleteDialog
+		CustomTable, Breadcrumb, PermissionsDialog, DeleteDialog, TableHeader
 	},
 
 	data: () => ({

@@ -1,6 +1,8 @@
 <template>
 	<div class="services">
 
+		<table-header :paths="paths" @click="add_dialog = true" />
+
 		<services-add-dialog
 				:dialog.sync="add_dialog"
 				ref="add_dialog"
@@ -24,16 +26,8 @@
 				@delete="delete_item('delete_service')"
 		/>
 
-		<breadcrumb :paths="paths"/>
-
 		<div class="content__wrapper">
 			<div class="row buzz__tables">
-
-				<v-toolbar flat color="white">
-					<v-toolbar-title>Services</v-toolbar-title>
-					<v-spacer></v-spacer>
-					<v-btn @click="add_dialog = true">Add New</v-btn>
-				</v-toolbar>
 
 				<custom-table
 						:headers="headers"
