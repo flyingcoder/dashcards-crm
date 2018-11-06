@@ -17,6 +17,13 @@
 			  @save="update_item('update_permission', $event)"
 	  />
 
+	  <delete-dialog
+			  :open-dialog.sync="delete_dialog"
+			  title="Delete Permission"
+			  text-content="Are you sure you want to delete this permission?"
+			  @delete="delete_item('delete_permission')"
+	  />
+
     <v-layout row justify-space-between>
 
       <v-flex xs12>
