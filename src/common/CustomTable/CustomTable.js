@@ -32,6 +32,19 @@ export default {
 
 		changeSort (column) {
 			this.$emit('sorted', column)
+		},
+
+		headerClasses(header) {
+			let classes = ['column']
+
+			if ('sortable' in header) {
+				classes.push('sortable')
+				this.sort.descending ? classes.push('desc') : classes.push('asc')
+				if (header.value === this.sort.sortBy)
+					classes.push('active')
+			}
+
+			return classes
 		}
 
 	},

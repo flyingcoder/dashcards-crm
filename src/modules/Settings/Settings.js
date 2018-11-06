@@ -34,9 +34,11 @@ export default {
 	watch: {
 		active_tab: {
 			handler(new_val) {
-				const name = this.$route.name
+				let query = {...this.$route.query}
+				const name = query.name
 				const tab = this.component.toLocaleLowerCase()
-				this.$router.replace({ name, query: { tab } })
+				query.tab = tab
+				this.$router.replace({ name, query: query })
 			},
 			immediate: true
 		}

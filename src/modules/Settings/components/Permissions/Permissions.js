@@ -22,7 +22,7 @@ export default {
 		headers: [
 			{ text: 'Name', value: 'name', sortable: true, align: 'left' },
 			{ text: 'Description', value: 'description', sortable: true, align: 'left' },
-			{ text: 'Capability', value: 'capability', sortable: true, align: 'left' },
+			{ text: 'Capability', value: 'capability', sortable: false, align: 'left' },
 		],
 		table_config: {
 			route_name: 'settings',

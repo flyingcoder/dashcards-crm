@@ -25,9 +25,9 @@
         <th
                 v-for="header in props.headers"
                 :key="header.id"
-                :class="['column sortable', sort.descending ? 'desc' : 'asc', header.value === sort.sortBy ? 'active' : '']"
+                :class="headerClasses(header)"
                 :width="header.width"
-                @click="changeSort(header.value)"
+                @click="header.sortable && changeSort(header.value)"
         >
           <template v-if="header.text === 'Icon'">
             <v-btn fab small color="blue" depressed
@@ -41,7 +41,7 @@
           </template>
 
           <template v-else>
-            <v-icon small>arrow_upward</v-icon>
+            <v-icon small v-if="header.sortable">arrow_upward</v-icon>
             {{header.text}}
           </template>
         </th>
