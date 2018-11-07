@@ -33,6 +33,10 @@ export default {
 		},
 	}),
 
+	created() {
+		this.fill_table('get_groups', true)
+	},
+
 	methods: {
 
 		action_clicked(action, {id, name, description}) {
