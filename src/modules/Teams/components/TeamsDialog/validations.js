@@ -1,5 +1,5 @@
 import { required, numeric, minLength, email } from 'vuelidate/lib/validators'
-import _ from "lodash";
+import upperFirst from "lodash/upperFirst";
 
 export const validations = {
 
@@ -29,19 +29,12 @@ export const validations = {
 		
 	},
 
-	created(){
-		if (this.isEditDialog) { //if is edit dialog don't consider password & repeat_password
-			delete this.$options.validations.password
-			delete this.$options.validations.repeat_password
-		}
-	},
-
 	methods: {
 
 		on_blur_field(field) {
 			this.$v[field].$touch()
 			if (this.$v[field].$invalid) {
-				const field_name = field.split('_').map(_.upperFirst).join(' ')
+				const field_name = field.split('_').map(upperFirst).join(' ')
 				this.$event.$emit('open_snackbar', `${field_name} is invalid`, 'error')
 			}
 		},

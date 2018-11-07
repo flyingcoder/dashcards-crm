@@ -9,11 +9,15 @@ export const teams_api = {
 		return request.post('api/company/teams', payload)
 	},
 
-	update_team(payload) {
-		return request.put(`api/company/teams/${payload.id}`, payload.team)
+	update_team(id, payload) {
+		return request.put(`api/company/teams/${id}`, payload)
 	},
 
 	delete_team(id) {
 		return request.delete(`api/company/teams/${id}`)
 	},
+
+	paginate_teams_table(query) {
+		return request.get(`api/company/teams?${query}`)
+	}
 }

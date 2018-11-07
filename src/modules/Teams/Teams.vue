@@ -1,38 +1,32 @@
 <template>
-    <div class="content teams">
+    <div class="teams-page">
 
         <div class="row">
-
-            <breadcrumb :paths="paths" />
 
             <teams-dialog
                 ref="add_dialog"
                 title="Add New Member"
                 :dialog.sync="add_dialog"
-                @new-member-added="add_new_member"
+                @save="add_item('add_new_team', $event)"
             />
+
             <teams-dialog
                 ref="edit_dialog"
                 title="Edit Member"
                 :dialog.sync="edit_dialog"
-                :edit-item="edit_item"
+                :fields-to-edit="edit_item"
                 :is-edit-dialog="edit_dialog"
-                @member-updated="update_member"
+                @save="update_item('update_team', $event)"
             />
 
             <delete-dialog
                 :open-dialog.sync="delete_dialog"
                 title="Delete Member"
                 text-content="Are you sure you want to delete this member?"
-                @delete="delete_member"
+                @delete="delete_item('delete_team', $event)"
             />
 
-            <div class="page__options">
-                  <div class='newAdd__btn' @click="add_dialog = true">
-                    <v-icon class="addIcon__btn">add_icon</v-icon>
-                    <div class="addText__btn"><span>Add New</span></div>
-                  </div>
-            </div>
+            <table-header :paths="paths" @click="add_dialog = true" />
 
         </div>
 
@@ -40,19 +34,17 @@
             <div class="row buzz__tables">
                 <div class="buzz__tablesTwo">
 
-                <v-toolbar flat class="table__toolbar">
-
-                    <v-toolbar-title class="table__toolbar-title" padding="0">Members</v-toolbar-title>
-
-                    <v-spacer></v-spacer>
-
-                </v-toolbar>
                 <custom-table
-                        :headers="headers"
-                        :items="members"
-                        :has-checkbox="true"
-                        :has-header-icon="true"
-                        class="custom__table"
+                    :headers="headers"
+                    :items="items"
+                    :loading="loading"
+                    :sort="sort"
+                    :has-checkbox="true"
+                    :has-header-icon="true"
+                    hide-actions
+                    @items-selected="selected_ids = $event"
+                    @sorted="changeSort"
+                    class="custom__table"
                 >
 
                     <template slot="custom-item" slot-scope="item" class="template-table">
@@ -70,7 +62,7 @@
                         <td class="text-xs-center team__projects">{{ projects_text(item.item) }}</td>
 
                         <td class="team__option">
-                            <v-icon class="mr-2" @click="edit_member(item.item)">
+                            <v-icon class="mr-2" @click="open_edit_dialog(item.item)">
                                 edit
                             </v-icon>
 
@@ -78,6 +70,29 @@
                                 delete
                             </v-icon>
                         </td>
+                    </template>
+
+                    <template slot="table-actions">
+
+                        <div class="actions-wrapper">
+
+                            <div class="bulk-delete">
+                                <v-btn color="indigo" dark outline :disabled="!show_delete_selected">
+                                    Delete Selected
+                                </v-btn>
+                            </div>
+
+                            <div class="rows-per-page-dropdown">
+                                Rows per page: <v-select :items="rows_per_page_items" menu-props="auto" v-model="rows_per_page"></v-select>
+                            </div>
+
+                            <div class="pagination">
+                                <div class="text-xs-center pt-2">
+                                    <v-pagination :length="total_items" :total-visible="5" v-model="page"></v-pagination>
+                                </div>
+                            </div>
+
+                        </div>
                     </template>
 
                 </custom-table>

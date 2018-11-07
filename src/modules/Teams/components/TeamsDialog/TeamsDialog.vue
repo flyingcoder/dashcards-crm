@@ -7,8 +7,6 @@
 					<span class="headline">{{ title }}</span>
 				</v-card-title>
 
-
-
 				<v-card-text>
 					<v-container grid-list-md>
 						<v-layout wrap>
@@ -104,7 +102,7 @@
 				<v-card-actions>
 					<v-spacer></v-spacer>
 					<v-btn color="blue darken-1" flat @click="cancel">Cancel</v-btn>
-					<v-btn color="blue darken-1" flat :disabled="$v.$invalid" @click="handle_save">Save</v-btn>
+					<v-btn color="blue darken-1" flat :disabled="$v.$invalid" @click="save">Save</v-btn>
 				</v-card-actions>
 
 			</v-card>
