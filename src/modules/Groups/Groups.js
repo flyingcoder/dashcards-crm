@@ -2,13 +2,15 @@ import {table_functionality} from "@/services/table-functionality";
 
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
+import TableHeader from '@/common/TableHeader.vue'
+import GroupsDialog from './components/GroupsDialog/GroupsDialog.vue'
 
 export default {
 	name: 'Groups',
 	mixins: [table_functionality],
 	components: {
 		PermissionsDialog: () => import('./components/PermissionsDialog/PermissionsDialog.vue'),
-		CustomTable
+		CustomTable, GroupsDialog, TableHeader
 	},
 
 	data: () => ({
@@ -40,11 +42,9 @@ export default {
 	methods: {
 
 		action_clicked(action, {id, name, description}) {
+			console.log(action)
 			if (action === 'edit_settings') {
-				this.edit_group_dialog = true
-				this.edit_item.id = id
-				this.edit_item.name = name
-				this.edit_item.description = description
+				this.open_edit_dialog({ id, name, description })
 			} else if (action === 'delete_group') {
 				this.delete_item_id = id
 				this.delete_group_dialog = true

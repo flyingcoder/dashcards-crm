@@ -1,9 +1,26 @@
 <template>
 	<div class="groups">
 		<component :is="permissions_dialog" @close-dialog="permissions_dialog = ''" something="bla"></component>
+		<groups-dialog
+				:dialog.sync="add_dialog"
+				ref="add_dialog"
+				title="Add Group"
+				@save="add_item('add_new_group', $event)"
+		/>
+		<groups-dialog
+				:dialog.sync="edit_dialog"
+				ref="edit_dialog"
+				title="Edit Group"
+				:is-edit-dialog="edit_dialog"
+				:fields-to-edit="edit_item"
+				@save="update_item('update_group', $event)"
+		/>
+
 		<v-container fluid>
 			<v-layout row>
 				<v-flex xs12>
+
+					<table-header :paths="paths" @click="add_dialog = true" />
 
 					<v-card>
 						<v-card-title>
