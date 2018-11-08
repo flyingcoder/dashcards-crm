@@ -15,7 +15,6 @@
 								<v-text-field
 										v-model.trim="name"
 										label="Name"
-										:rules="[rules.required]"
 								/>
 							</v-flex>
 
@@ -23,8 +22,6 @@
 								<v-textarea
 										label="Description"
 										v-model.trim="description"
-										hint="Hint text"
-										:rules="[rules.required]"
 								/>
 							</v-flex>
 

@@ -14,7 +14,6 @@ export default {
 		open: false,
 		name: '',
 		description: '',
-		rules: { required: value => !!value || 'Required.', },
 	}),
 
 	computed: {
@@ -23,7 +22,7 @@ export default {
 		},
 		does_something_changed() {
 			if (!this.isEditDialog) return true //if it is not Edit Dialog
-			return !(this.name === this.fieldsToEdit.name && this.description === this.fieldsToEdit.description)
+			return (this.name !== this.fieldsToEdit.fields.name || this.description !== this.fieldsToEdit.fields.description)
 		},
 	},
 
@@ -67,6 +66,6 @@ export default {
 			this.cancel() //close the modal
 		},
 
-	}
+	},
 
 }
