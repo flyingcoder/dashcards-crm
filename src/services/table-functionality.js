@@ -163,6 +163,11 @@ export const table_functionality = {
 			}
 		},
 
+		toggleAll () {
+			if (this.selected.length) this.selected = []
+			else this.selected = this.items.slice()
+		},
+
 	}
 
 }
