@@ -3,26 +3,25 @@
 /deep/ .v-datatable__actions {
   justify-content: space-between;
 }
-
-thead{
-  tr.table__head{
-    background-color: $tableBlueBg;
-    th{
-      text-align: left;
-      color: $tableBlueText;
-      font-size: 13px;
-      font-weight: 700;
-      &:last-child{
-        text-align: center;
+.buzzooka__table{
+    tr.table__head{
+      background-color: $tableBlueBg;
+      th{
+        text-align: left;
+        color: $tableBlueText;
+        font-size: 13px;
+        font-weight: 700;
+        &:last-child{
+          text-align: center;
+        }
       }
     }
-  }
-}
-.table__body-row{
-  &:nth-child(odd){
-    background-color: $white;
-  }
-  &:nth-child(even){
-    background-color: $tableBlueBg;
+  .table__body-row{
+    &:nth-child(odd){
+      background-color: $white;
+    }
+    &:nth-child(even){
+      background-color: $tableBlueBg;
+    }
   }
 }

@@ -1,31 +1,12 @@
 <template functional>
 	<div class="table-header">
-		<components :is="injections.components.Breadcrumb" :paths="props.paths"/>
+		<component :is="injections.components.Breadcrumb" :paths="props.paths"/>
 		
-		<v-speed-dial
-        v-model="fab"
-		top
-		right
-        direction="left"
-        hover
-        slide-y-reverse-transition
-      >
-        <v-btn
-          slot="activator"
-          v-model="fab"
-          class="more__btn"
-          fab
-		  small
-        >
+		<v-speed-dial v-model="fab" direction="left" hover   slide-y-reverse-transition>
+        <v-btn slot="activator" v-model="fab" class="more__btn" fab small>
           <v-icon>more_horiz</v-icon>
         </v-btn>
-        <v-btn
-          fab
-          dark
-          small
-          class="add__btn"
-		  v-on="listeners"
-        >
+        <v-btn fab dark small class="add__btn" v-on="listeners">
           <v-icon>add</v-icon>
         </v-btn>
       </v-speed-dial>
@@ -65,14 +46,19 @@
 		justify-content: space-between;
 		align-items: center;
 
-		@include addNewButtonStyle;
+		button.add__btn.v-btn.v-btn--floating.v-btn--small{
+      background-color: $blue;
+      .v-icon{
+          color: $white;
+      }
+    }
 
-		.v-speed-dial {
-		position: absolute;
-		}
-	
-		.v-btn--floating {
-			position: relative;
-		}
+    button.more__btn.v-btn.v-btn--floating.v-btn--small{
+      background-color: $white;
+      border: 1px solid $white;
+      .v-icon{
+        color: $tableDarkText;
+      }
+    }
 	}
 </style>
