@@ -1,4 +1,5 @@
 import makeRequestTo from '@/services/makeRequestTo'
+import debounce from "lodash/debounce";
 
 export const table_functionality = {
 
@@ -167,6 +168,10 @@ export const table_functionality = {
 			if (this.selected.length) this.selected = []
 			else this.selected = this.items.slice()
 		},
+
+		debounce: debounce(function (value) {
+			this.search = value
+		}, 500),
 
 	}
 

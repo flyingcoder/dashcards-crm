@@ -35,7 +35,8 @@
 								<v-text-field
 										placeholder="Search on the table"
 										append-icon="search"
-										v-model.trim="search"
+										@input="debounce"
+										:value="search"
 										@keydown.esc="search = ''"
 								></v-text-field>
 							</v-flex>
