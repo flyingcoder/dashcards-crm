@@ -16,6 +16,13 @@
 				@save="update_item('update_group', $event)"
 		/>
 
+		<delete-dialog
+				:open-dialog.sync="delete_dialog"
+				title="Delete Group"
+				text-content="Are you sure you want to delete this group?"
+				@delete="delete_item('delete_group')"
+		/>
+
 		<v-container fluid>
 			<v-layout row>
 				<v-flex xs12>

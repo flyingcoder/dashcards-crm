@@ -3,6 +3,7 @@ import {table_functionality} from "@/services/table-functionality";
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import TableHeader from '@/common/TableHeader.vue'
+import DeleteDialog from '@/common/DeleteDialog.vue'
 import GroupsDialog from './components/GroupsDialog/GroupsDialog.vue'
 
 export default {
@@ -10,7 +11,7 @@ export default {
 	mixins: [table_functionality],
 	components: {
 		PermissionsDialog: () => import('./components/PermissionsDialog/PermissionsDialog.vue'),
-		CustomTable, GroupsDialog, TableHeader
+		CustomTable, GroupsDialog, TableHeader, DeleteDialog
 	},
 
 	data: () => ({
@@ -42,15 +43,12 @@ export default {
 	methods: {
 
 		action_clicked(action, {id, name, description}) {
-			console.log(action)
-			if (action === 'edit_settings') {
-				this.open_edit_dialog({ id, name, description })
-			} else if (action === 'delete_group') {
-				this.delete_item_id = id
-				this.delete_group_dialog = true
-			} else if (action === 'permissions') {
+			if (action === 'edit_settings')
+				this.open_edit_dialog({id, name, description})
+			else if (action === 'delete_group')
+				this.open_delete_dialog({id, name, description})
+			else if (action === 'permissions')
 				this.permissions_dialog = 'PermissionsDialog'
-			}
 		},
 
 		get_actions(group_slug) {
