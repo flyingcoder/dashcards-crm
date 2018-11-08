@@ -39,47 +39,19 @@
 }
 
 @mixin addNewButtonStyle () {
-    .newAdd__btn {
-        font-weight: bold;
-        height: 40px;
-        width: 40px;
-        text-align: center;
-        cursor: pointer;
-        position: relative;
-        line-height: 38px;
-        background: $blue;
-        .addIcon__btn {
-            font-size: 38px;
-            padding-left: 1px;
+    
+    button.add__btn.v-btn.v-btn--floating.v-btn--small{
+        background-color: $blue;
+        .v-icon{
             color: $white;
-            left: 0;
-            max-width: 40px;
-            display: block;
         }
-        .addText__btn {
-            background: $blue;
-            font-size: 18px;
-            color: $white;
-            position: absolute;
-            top: 0;
-            left: 0;
-            border-radius: 3px 0 0 3px;
-            height: 40px;
-            transition: width 0.5s ease, left 0.5s ease;
-            width: 0;
-            span {
-                opacity: 0;
-                transition: opacity 0.5s ease;
-            }
-        }
-        &:hover {
-            .addText__btn {
-                width: 100px;
-                left: -100px;
-                span {
-                    opacity: 1;
-                }
-            }
+    }
+
+    button.more__btn.v-btn.v-btn--floating.v-btn--small{
+        background-color: $white;
+        border: 1px solid $white;
+        .v-icon{
+            color: $tableDarkText;
         }
     }
 }

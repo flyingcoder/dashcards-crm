@@ -1,11 +1,34 @@
 <template functional>
 	<div class="table-header">
 		<components :is="injections.components.Breadcrumb" :paths="props.paths"/>
-
-		<div class='newAdd__btn' v-on="listeners">
-			<v-icon class="addIcon__btn">add_icon</v-icon>
-			<div class="addText__btn"><span>Add New</span></div>
-		</div>
+		
+		<v-speed-dial
+        v-model="fab"
+		top
+		right
+        direction="left"
+        hover
+        slide-y-reverse-transition
+      >
+        <v-btn
+          slot="activator"
+          v-model="fab"
+          class="more__btn"
+          fab
+		  small
+        >
+          <v-icon>more_horiz</v-icon>
+        </v-btn>
+        <v-btn
+          fab
+          dark
+          small
+          class="add__btn"
+		  v-on="listeners"
+        >
+          <v-icon>add</v-icon>
+        </v-btn>
+      </v-speed-dial>
 	</div>
 </template>
 
@@ -16,7 +39,12 @@
 		name: 'TableHeader',
 		functional: true,
 		props: {
-			paths: Array
+			paths: Array,
+		},
+		data (){
+			return{
+				fab: false,
+			}
 		},
 		inject: {
 			components: {
@@ -38,5 +66,13 @@
 		align-items: center;
 
 		@include addNewButtonStyle;
+
+		.v-speed-dial {
+		position: absolute;
+		}
+	
+		.v-btn--floating {
+			position: relative;
+		}
 	}
 </style>

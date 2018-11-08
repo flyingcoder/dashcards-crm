@@ -12,7 +12,7 @@
     <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear> <!-- LOADING -->
 
     <template slot="headers" slot-scope="props"> <!-- HEADERS -->
-      <tr>
+      <tr class="table__head">
         <th v-if="$props.hasCheckbox">
           <v-checkbox
                   :input-value="props.all"
@@ -30,7 +30,7 @@
                 @click="header.sortable && changeSort(header.value)"
         >
           <template v-if="header.text === 'Icon'">
-            <v-btn fab small color="blue" depressed
+            <v-btn fab small depressed
                    :disabled="tableActionDisabled">
               <img src="@/assets/icons/groups/delete.svg" alt="">
             </v-btn>
@@ -41,8 +41,8 @@
           </template>
 
           <template v-else>
-            <v-icon small v-if="header.sortable">arrow_upward</v-icon>
             {{header.text}}
+            <v-icon small v-if="header.sortable">arrow_upward</v-icon>
           </template>
         </th>
 
@@ -54,7 +54,7 @@
     </template>
 
     <template slot="items" slot-scope="props"> <!-- ITEMS -->
-      <tr :active="props.selected">
+      <tr :active="props.selected" class="table__body-row">
         <td v-if="$props.hasCheckbox" @click="props.selected = !props.selected">
           <v-checkbox
                   :input-value="props.selected"

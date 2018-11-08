@@ -3,6 +3,7 @@
 .teams-page {
     padding: 25px;
     @include customTableRow;
+    position: relative;
 }
 
 //TODO refactor css below (DOES not follows readability, clean code)

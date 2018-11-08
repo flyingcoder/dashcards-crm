@@ -24,9 +24,9 @@ export default {
 				{text: 'Services', disabled: true, router_name: null}
 			],
 			headers: [
-				{ id: 1, text: 'Service', value: 'service_name', sortable: true, align: 'left' },
-				{ id: 2, text: 'Created By', value: 'name', sortable: true, align: 'left' },
-				{ id: 3, text: 'Date Created', value: 'service_created_at', sortable: true, align: 'left' },
+				{ id: 1, text: 'Service', value: 'service_name', sortable: true},
+				{ id: 2, text: 'Created By', value: 'name', sortable: true},
+				{ id: 3, text: 'Date Created', value: 'service_created_at', sortable: true},
 			],
 			table_config: {
 				route_name: 'services',

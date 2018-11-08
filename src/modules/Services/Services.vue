@@ -28,68 +28,74 @@
 
 		<div class="content__wrapper">
 			<div class="row buzz__tables">
+				<div class="buzz__tablesTwo">
 
-				<custom-table
-						:headers="headers"
-						:items="items"
-						:loading="loading"
-						:sort="sort"
-						:has-checkbox="true"
-						:has-header-icon="true"
-						hide-actions
-						@items-selected="selected_ids = $event"
-						@sorted="changeSort"
-				>
+					<v-toolbar flat class="table__toolbar">
+						<v-toolbar-title class="table__toolbar-title">Services</v-toolbar-title>
+					</v-toolbar>
 
-					<template slot="custom-item" slot-scope="item">
-						<td class="text-xs-left pl-5">{{ item.item.service_name }}</td>
+					<custom-table
+							:headers="headers"
+							:items="items"
+							:loading="loading"
+							:sort="sort"
+							:has-checkbox="true"
+							:has-header-icon="true"
+							hide-actions
+							@items-selected="selected_ids = $event"
+							@sorted="changeSort"
+							class="custom__table"
+					>
 
-						<td class="text-xs-left pl-5">{{ item.item.name }}</td>
+						<template slot="custom-item" slot-scope="item">
+							<td class="service__name">{{ item.item.service_name }}</td>
 
-						<td class="text-xs-left pl-5">{{ item.item.service_created_at }}</td>
+							<td>{{ item.item.name }}</td>
 
-						<td class="text-xs-center">
+							<td>{{ item.item.service_created_at }}</td>
 
-							<v-btn fab small color="blue" depressed
-							       @click="open_edit_dialog(item.item)"
-							>
-								<img src="@/assets/icons/groups/edit.svg" alt="">
-							</v-btn>
+							<td class="text-xs-center">
 
-							<v-btn fab small color="blue" depressed
-							       @click="open_delete_dialog(item.item)"
-							>
-								<img src="@/assets/icons/groups/delete.svg" alt="">
-							</v-btn>
-
-						</td>
-					</template>
-
-					<template slot="table-actions">
-
-						<div class="actions-wrapper">
-
-							<div class="bulk-delete">
-								<v-btn color="indigo" dark outline :disabled="!show_delete_selected">
-									Delete Selected
+								<v-btn fab small color="#d6d6e2" depressed
+									@click="open_edit_dialog(item.item)"
+								>
+									<img src="@/assets/icons/groups/edit.svg" alt="">
 								</v-btn>
-							</div>
 
-							<div class="rows-per-page-dropdown">
-								Rows per page: <v-select :items="rows_per_page_items" menu-props="auto" v-model="rows_per_page"></v-select>
-							</div>
+								<v-btn fab small color="#d6d6e2" depressed
+									@click="open_delete_dialog(item.item)"
+								>
+									<img src="@/assets/icons/groups/delete.svg" alt="">
+								</v-btn>
 
-							<div class="pagination">
-								<div class="text-xs-center pt-2">
-									<v-pagination :length="total_items" :total-visible="5" v-model="page"></v-pagination>
+							</td>
+						</template>
+
+						<template slot="table-actions">
+
+							<div class="actions-wrapper">
+
+								<div class="bulk-delete">
+									<v-btn color="indigo" dark outline :disabled="!show_delete_selected">
+										Delete Selected
+									</v-btn>
 								</div>
+
+								<div class="rows-per-page-dropdown">
+									Rows per page: <v-select :items="rows_per_page_items" menu-props="auto" v-model="rows_per_page"></v-select>
+								</div>
+
+								<div class="pagination">
+									<div class="text-xs-center pt-2">
+										<v-pagination :length="total_items" :total-visible="5" v-model="page"></v-pagination>
+									</div>
+								</div>
+
 							</div>
+						</template>
 
-						</div>
-					</template>
-
-				</custom-table>
-
+					</custom-table>
+				</div>
 			</div>
 		</div>
 
@@ -97,3 +103,5 @@
 </template>
 <script src="./Services.js"></script>
 <style lang="scss" scoped src="./Services.scss"></style>
+
+

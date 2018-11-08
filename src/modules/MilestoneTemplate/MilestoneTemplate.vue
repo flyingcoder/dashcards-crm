@@ -98,6 +98,7 @@
 	@import '~@/sass/_variables';
 
 	.milestone-template {
+		position: relative;
 
 		.cell-with-icon {
 			display: flex;

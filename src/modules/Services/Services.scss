@@ -1,6 +1,7 @@
 @import '~@/sass/_variables';
 
 .services {
+font-family: Roboto Slab, sans-serif;
   position: relative;
   width: 100%;
   height: 100%;
@@ -21,4 +22,36 @@
 
   @include customTableRow; //css used for styling the last row of the table
 
+}
+
+//table-style
+.content__wrapper{
+  .buzz__tables{
+      background: $white;
+      padding: 24px;
+      border-radius: 10px;
+      border: 1px solid $tableBorderBlue;
+
+      .buzz__tablesTwo{
+          padding: 24px;
+          border: 1px solid $tableBorderBlue;
+          background-color: $tableBlueBg;
+          .table__toolbar{
+              background-color: $tableBlueBg;
+              .table__toolbar-title{
+                  color: $tableTitleBlue;
+                  text-align: left;
+                  font-size: 30px;
+                  font-weight: 700;
+              }
+          }
+          .custom__table{
+              border: 1px solid $tableBorderBlue;
+              .service__name{
+                  color: $tableBlueText;
+                  font-weight: 700;
+              }
+          }
+      }
+  }
 }
