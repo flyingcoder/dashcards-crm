@@ -77,7 +77,7 @@
 
     <template slot="footer">
       <td colspan="100%" style="padding: 0;">
-        <slot name="table-actions">Hello</slot>
+        <slot name="table-actions"></slot>
       </td>
     </template>
 
