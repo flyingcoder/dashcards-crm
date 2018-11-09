@@ -18,17 +18,9 @@
                         <span> Save  </span>
                     </div>
                 </div>
-                <div class="option status">
-                    <div class="left">
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
-                    <div class="title">
-                        <span>Log on</span>
-                    </div>
-                </div>
+
+               <logon-label /> <!--custom component-->
+
                 <div class="option themes">
                     <div class="color"></div>
                     <div class="title">

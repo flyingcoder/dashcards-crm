@@ -21,6 +21,10 @@ export default {
     return request.post('/api/upgrade/checkout', {token})
   },
 
+  change_timer(type) {
+    return request.get(`api/timer/${type}`)
+  },
+
   ...groups_api,
   ...clients_api,
   ...teams_api,

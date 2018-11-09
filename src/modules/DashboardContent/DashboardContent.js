@@ -1,5 +1,9 @@
+import LogonLabel from './components/LonOnLabel.vue'
+
 export default {
   name: 'DashboardContent',
+  components: {LogonLabel},
+
   data () {
     return {
       tiles: [
