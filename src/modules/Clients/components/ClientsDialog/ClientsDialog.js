@@ -69,7 +69,7 @@ export default {
 		},
 
 		clear_and_close() {
-			this.first_name = this.last_name = this.company_name
+			this.first_name = this.last_name = this.company_name = ''
 			this.telephone = this.email = this.status = ''
 			this.password = this.repeat_password = ''
 			this.cancel() //close the modal
