@@ -6,7 +6,7 @@
 		<services-add-dialog
 				:dialog.sync="add_dialog"
 				ref="add_dialog"
-				title="New New Services"
+				title="Add New Service(s)"
 				@save="add_item('add_new_services', $event)"
 		/>
 
