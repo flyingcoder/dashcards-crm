@@ -1,9 +1,10 @@
 @import '~@/sass/_variables';
 
-/deep/ .v-datatable__actions {
-  justify-content: space-between;
-}
+
 .buzzooka__table{
+  /deep/ .v-datatable__actions {
+    justify-content: space-between;
+  }
     tr.table__head{
       background-color: $tableBlueBg;
       th{
