@@ -5,7 +5,7 @@
 				:dialog.sync="add_dialog"
 				ref="add_dialog"
 				dialog-title="Add Client"
-				@save="add_item('add_new_client', $event, dynamic_api)"
+				@save="add_item('add_new_client', $event)"
 		 />
 
 		<clients-dialog

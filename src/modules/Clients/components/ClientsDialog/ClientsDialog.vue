@@ -56,15 +56,21 @@
 
 							<v-flex xs12 sm6 v-if="!isEditDialog">
 								<v-text-field
+										:append-icon="show_password ? 'visibility_off' : 'visibility'"
+										:type="show_password ? 'text' : 'password'"
 										label="Password"
 										v-model.trim="password"
+										@click:append="show_password = !show_password"
 								></v-text-field>
 							</v-flex>
 
 							<v-flex xs12 sm6 v-if="!isEditDialog">
 								<v-text-field
+										:append-icon="show_repeat_password ? 'visibility_off' : 'visibility'"
+										:type="show_repeat_password ? 'text' : 'password'"
 										label="Repeat Password"
 										v-model.trim="repeat_password"
+										@click:append="show_repeat_password = !show_repeat_password"
 								></v-text-field>
 							</v-flex>
 
