@@ -57,9 +57,9 @@
                             </div>
                         </td>
 
-                        <td class="text-xs-center team__position">{{ item.item.job_title }}</td>
-                        <td class="text-xs-center team__tasks">{{ tasks_text(item.item) }}</td>
-                        <td class="text-xs-center team__projects">{{ projects_text(item.item) }}</td>
+                        <td class="team__position">{{ item.item.job_title }}</td>
+                        <td class="team__tasks">{{ tasks_text(item.item) }}</td>
+                        <td class="team__projects">{{ projects_text(item.item) }}</td>
 
                         <td class="team__option">
                             <v-icon class="mr-2" @click="open_edit_dialog(item.item)">

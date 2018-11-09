@@ -8,6 +8,7 @@
           select-all
           disable-initial-sort
           v-bind="$attrs"
+          class="buzzooka__table"
   >
     <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear> <!-- LOADING -->
 
