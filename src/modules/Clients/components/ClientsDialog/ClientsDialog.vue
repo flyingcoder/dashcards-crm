@@ -35,6 +35,7 @@
 							<v-flex xs12 sm6>
 								<v-text-field
 										label="Telephone"
+										mask="phone"
 										v-model.trim="telephone"
 								></v-text-field>
 							</v-flex>
