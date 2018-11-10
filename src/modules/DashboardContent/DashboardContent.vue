@@ -3,11 +3,7 @@
 
         <div class="row d__breadcrumbs">
             <div class="breadcrumbs">
-                <v-breadcrumbs>
-                    <v-breadcrumbs-item class="page__title">
-                        Dashboard
-                    </v-breadcrumbs-item>
-                </v-breadcrumbs>
+                <breadcrumb :paths="paths" />
             </div>
             <div class="page__options">
                 <div class="option save">

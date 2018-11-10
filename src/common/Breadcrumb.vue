@@ -1,19 +1,17 @@
 <template>
 	<div class="breadcrumb-wrapper">
-		<v-breadcrumbs>
+		<v-breadcrumbs :items="paths">
+
 			<v-icon slot="divider">chevron_right</v-icon>
 
-			<v-breadcrumbs-item
-					class="page__title"
-					v-for="path in paths"
-					:disabled="path.disabled"
-					:key="path.text"
-			>
-      <span
-		      @click="navigate_from_breadcrumb(path.router_name)">
-          {{ path.text }}
-      </span>
-			</v-breadcrumbs-item>
+			<template slot="item" slot-scope="{item}">
+				<v-breadcrumbs-item class="page__title" :disabled="item.disabled">
+	        <span @click="navigate_from_breadcrumb(item.router_name)">
+	          {{ item.text }}
+	        </span>
+				</v-breadcrumbs-item>
+			</template>
+
 		</v-breadcrumbs>
 	</div>
 </template>

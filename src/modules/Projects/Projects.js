@@ -15,8 +15,8 @@ export default {
 
 	data: () => ({
 		paths: [
-			{text: 'Dashboard', disabled: false},
-			{text: 'Projects', disabled: true}
+			{ text: 'Dashboard', disabled: false, router_name: 'default-content' },
+			{ text: 'Projects', disabled: true, router_name: null }
 		],
 		headers: [
 			{text: 'Service', value: 'project', sortable: true, align: 'left'},
