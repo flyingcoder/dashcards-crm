@@ -1,39 +1,62 @@
 <template>
 	<v-layout row justify-center>
 		<v-dialog v-model="open" persistent max-width="600px">
-			<v-card class="permissions-dialog">
+
+			<v-card class="projects-dialog">
 
 				<v-card-title>
-					<span class="headline">{{ title }}</span>
+					<div class="dialog-header">
+						<span class="headline">{{ title }}</span>
+						<v-icon @click="cancel">cancel</v-icon>
+					</div>
 				</v-card-title>
 
-				<v-card-text>
-					<v-container grid-list-md>
-						<v-layout wrap>
+				<div class="dialog-buttons">
 
-							<v-flex xs12 sm6>
-								<v-text-field
-										label="Name"
-										v-model.trim="name"
-								></v-text-field>
-							</v-flex>
+					<div class="clients-dropdown">
+						<v-select label="Select Client"></v-select>
+					</div>
 
-							<v-flex xs12 sm6>
-								<v-text-field
-										label="Description"
-										v-model.trim="description"
-								></v-text-field>
-							</v-flex>
+					<div class="location-field">
+						<v-text-field label="Location"></v-text-field>
+					</div>
 
-						</v-layout>
-					</v-container>
+					<div class="services-dropdown">
+						<v-select label="Select Service"></v-select>
+					</div>
 
-				</v-card-text>
+					<div class="due-date-dropdown">
+						<v-select label="Select Due Date"></v-select>
+					</div>
+
+					<div class="members-dropdown">
+						<v-select label="Select Member"></v-select>
+					</div>
+
+					<div class="attachment">
+						<v-btn>Attachment</v-btn>
+					</div>
+
+				</div>
+
+				<div class="project-title">
+					<v-text-field label="Untitled Project"></v-text-field>
+				</div>
+
+				<div class="project-description">
+					<v-textarea box label="Add Description"></v-textarea>
+				</div>
+
+				<div class="project-comment">
+					<h3>Add Comment</h3>
+					<v-textarea box></v-textarea>
+				</div>
 
 				<v-card-actions>
-					<v-spacer></v-spacer>
-					<v-btn color="blue darken-1" flat @click="cancel">Cancel</v-btn>
-					<v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+					<div class="dialog-actions">
+						<v-btn>Save</v-btn>
+						<v-btn @click="cancel">Cancel</v-btn>
+					</div>
 				</v-card-actions>
 
 			</v-card>
@@ -42,3 +65,4 @@
 </template>
 
 <script src="./ProjectsDialog.js"></script>
+<style lang="scss" scoped src="./ProjectsDialog.scss"></style>

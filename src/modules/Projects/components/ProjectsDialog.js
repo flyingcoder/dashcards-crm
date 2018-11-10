@@ -10,8 +10,6 @@ export default {
 
 	data: () => ({
 		open: false,
-		name: null,
-		description: null,
 	}),
 
 	watch: {
@@ -30,22 +28,15 @@ export default {
 		cancel() { this.open = false },
 		save() {
 			const fields_to_save = {
-				name: this.name,
-				description: this.description,
 			}
 			this.$emit('save', fields_to_save)
 		},
 
 		update_fields({fields}) {
 			const new_fields = {...fields}
-			this.name = new_fields.name
-			this.description = new_fields.description
-			this.slug = new_fields.slug
 		},
 
 		clear_and_close() {
-			this.name = ''
-			this.description = ''
 			this.cancel() //close the modal
 		}
 
