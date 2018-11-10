@@ -1,11 +1,16 @@
+import Breadcrumb from '@/common/Breadcrumb.vue'
 import LogonLabel from './components/LonOnLabel.vue'
 
 export default {
   name: 'DashboardContent',
-  components: {LogonLabel},
+  components: {
+    Breadcrumb, LogonLabel
+  },
 
-  data () {
-    return {
+  data: () => ({
+      paths: [
+        {text: 'Dashboard', disabled: true, router_name: null},
+      ],
       tiles: [
         { title: 'Projects', counter: '33', icon: require('@/assets/icons/sidebar/projects.svg') },
         { title: 'Open Tasks', counter: '12', icon: require('@/assets/icons/sidebar/templates.svg') },
@@ -14,6 +19,5 @@ export default {
         { title: 'Inbound', counter: '799', icon: require('@/assets/icons/sidebar/templates.svg') },
         { title: 'Outbound', counter: '847', icon: require('@/assets/icons/sidebar/templates.svg') },
       ],
-    }
-}
+    })
 }
