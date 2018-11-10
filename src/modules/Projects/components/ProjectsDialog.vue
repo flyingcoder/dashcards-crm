@@ -44,7 +44,14 @@
 				</div>
 
 				<div class="project-description">
-					<v-textarea box label="Add Description"></v-textarea>
+					<div class="quill-editor-example">
+						<quill-editor v-model="quill_editor.content"
+						              :options="quill_editor.editorOption"
+						              @blur=""
+						              @focus=""
+						              @ready="">
+						</quill-editor>
+					</div>
 				</div>
 
 				<div class="project-comment">
