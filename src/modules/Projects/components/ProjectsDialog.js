@@ -1,5 +1,15 @@
+// vue-quill-editor require styles
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
+import { quillEditor } from 'vue-quill-editor'
+
 export default {
 	name: 'ProjectsDialog',
+	components: {
+		quillEditor
+	},
 
 	props: {
 		dialog: Boolean,
@@ -10,6 +20,19 @@ export default {
 
 	data: () => ({
 		open: false,
+		quill_editor: {
+			content: '',
+			editorOption: {
+				placeholder: "Add description",
+				modules: {
+					toolbar: [
+						['bold', 'italic', 'underline', 'strike'],
+						['link', 'image'],
+						[{ 'align': [] }],
+					],
+				}
+			}
+		}
 	}),
 
 	watch: {
