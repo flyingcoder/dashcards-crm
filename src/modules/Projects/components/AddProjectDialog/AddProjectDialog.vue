@@ -14,7 +14,13 @@
 				<div class="dialog-buttons">
 
 					<div class="clients-dropdown">
-						<v-select label="Select Client"></v-select>
+						<auto-complete
+								v-model="client.selected"
+								:items="client.items"
+								:is-loading="client.loading"
+								label="Search Client"
+								@searched="get_searched_items('client', $event)"
+						/>
 					</div>
 
 					<div class="location-field">
@@ -22,7 +28,13 @@
 					</div>
 
 					<div class="services-dropdown">
-						<v-select label="Select Service"></v-select>
+						<auto-complete
+								v-model="service.selected"
+								:items="service.items"
+								:is-loading="service.loading"
+								label="Search Service"
+								@searched="get_searched_items('service', $event, true)"
+						/>
 					</div>
 
 					<div class="due-date-dropdown">
@@ -30,7 +42,13 @@
 					</div>
 
 					<div class="members-dropdown">
-						<v-select label="Select Member"></v-select>
+						<auto-complete
+								v-model="member.selected"
+								:items="member.items"
+								:is-loading="member.loading"
+								label="Search Member"
+								@searched="get_searched_items('member', $event)"
+						/>
 					</div>
 
 					<div class="attachment">
@@ -71,5 +89,5 @@
 	</v-layout>
 </template>
 
-<script src="./ProjectsDialog.js"></script>
-<style lang="scss" scoped src="./ProjectsDialog.scss"></style>
+<script src="./AddProjectDialog.js"></script>
+<style lang="scss" scoped src="./AddProjectDialog.scss"></style>

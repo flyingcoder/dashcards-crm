@@ -4,13 +4,13 @@ import { table_functionality } from "@/services/table-functionality";
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import TableHeader from '@/common/TableHeader.vue'
-import ProjectsDialog from './components/ProjectsDialog.vue'
+import AddProjectDialog from './components/AddProjectDialog/AddProjectDialog.vue'
 
 export default {
 	name: 'Projects',
 	mixins: [table_functionality],
 	components: {
-		CustomTable, Breadcrumb, TableHeader, ProjectsDialog
+		CustomTable, Breadcrumb, TableHeader, AddProjectDialog
 	},
 
 	data: () => ({
