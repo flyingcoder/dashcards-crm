@@ -14,7 +14,15 @@
 				<div class="dialog-buttons">
 
 					<div class="clients-dropdown">
-						<v-select label="Select Client"></v-select>
+						<auto-complete
+								v-model="client.selected"
+								:items="client.items"
+								@searched="get_searched_items('client', $event)"
+								:is-loading="is_autocomplete_loading"
+								return-object
+								hide-no-data
+								cache-items
+						/>
 					</div>
 
 					<div class="location-field">
