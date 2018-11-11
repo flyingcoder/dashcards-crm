@@ -2,7 +2,7 @@
 	<div class="content projects">
 
 		<table-header :paths="paths" @click="add_dialog = true"/>
-		<projects-dialog
+		<add-project-dialog
 				:dialog.sync="add_dialog"
 				ref="add_dialog"
 				title="Add New Project"

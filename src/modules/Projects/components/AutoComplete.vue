@@ -5,6 +5,10 @@
 				:items="items"
 				:loading="isLoading"
 				:search-input.sync="search"
+				return-object
+				hide-no-data
+				no-filter
+				cache-items
 				v-bind="$attrs"
 				@change="changed"
 		></v-autocomplete>

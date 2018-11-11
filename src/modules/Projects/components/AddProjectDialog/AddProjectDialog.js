@@ -4,8 +4,8 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 import { quillEditor } from 'vue-quill-editor'
 //Components
-import AutoComplete from './AutoComplete'
-import makeRequesTo from '@/services/makeRequestTo'
+import AutoComplete from '../AutoComplete'
+import makeRequestTo from '@/services/makeRequestTo'
 
 export default {
 	name: 'ProjectsDialog',
@@ -22,7 +22,18 @@ export default {
 		open: false,
 		client: {
 			selected: null,
-			items: []
+			items: [],
+			loading: false
+		},
+		service: {
+			selected: null,
+			items: [],
+			loading: false
+		},
+		member: {
+			selected: null,
+			items: [],
+			loading: false
 		},
 		is_autocomplete_loading: false,
 		quill_editor: {
@@ -58,17 +69,29 @@ export default {
 			this.cancel() //close the modal
 		},
 
-		get_searched_items(action, keyword) {
-			this.is_autocomplete_loading = true
-			makeRequesTo.fill_dropdown(action, keyword)
-				.then(response => this.update_items(response.data, action))
-				.finally(() => this.is_autocomplete_loading = false)
+		get_searched_items(action, keyword, is_service = false) {
+			this[action].loading = true
+			makeRequestTo.fill_dropdown(action, keyword)
+				.then(response => this.update_items(response.data, action, is_service))
+				.finally(() => this[action].loading = false)
 		},
 
-		update_items(new_items, action) {
+		update_items(new_items, action, is_service) {
+			if (is_service) {
+				this.update_service_items(new_items, action)
+				return
+			}
 			let items = []
 			new_items.forEach(({id, first_name, last_name}) => {
 				items.push({text: `${first_name} ${last_name}`, value: id})
+			})
+			this[action].items = items
+		},
+
+		update_service_items(new_items, action) {
+			let items = []
+			new_items.forEach(({id, service_name}) => {
+				items.push({text: `${service_name}`, value: id})
 			})
 			this[action].items = items
 		}
