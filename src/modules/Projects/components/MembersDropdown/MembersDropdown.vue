@@ -5,32 +5,35 @@
 				:items="items"
 				:loading="is_loading"
 				:search-input.sync="search"
-				return-object
 				hide-no-data
 				no-filter
+				item-value="id"
 				chips
 				multiple
-				v-bind="$attrs"
 		>
 			<template slot="selection" slot-scope="data">
 				<v-chip
 						:selected="data.selected"
-						close
+						outline
 						class="chip--select-multi"
 				>
-					{{data.item.text}} tick
+					<img :src="require('@/assets/temp/user.png')" width="30" height="30">
+					&nbsp;{{data.item.first_name}}
 				</v-chip>
 			</template>
-			<template
-					slot="item"
-					slot-scope="data"
-			>
-				<template>
-					<v-list-tile-content>
-						{{data.item.text}}
-					</v-list-tile-content>
-				</template>
+
+			<template slot="item" slot-scope="{item}">
+					<div class="member-avatar">
+						<img :src="require('@/assets/temp/user.png')" width="30" height="30">
+					</div>
+					<div class="member-full-name">
+						{{item.first_name}} {{item.last_name}}
+					</div>
+					<div class="checked-icon" v-if="is_item_active(item.id)">
+						<v-icon color="green">check_circle</v-icon>
+					</div>
 			</template>
+
 		</v-autocomplete>
 	</div>
 </template>
@@ -61,22 +64,19 @@
 			debounce: debounce(function(val){
 				this.is_loading = true
 				makeRequestTo.fill_dropdown('member', val)
-					.then(response => this.update_items(response.data))
+					.then(response => this.items = response.data)
 					.finally(() => this.is_loading = false)
 			}, 500),
 
-			update_items(new_items) {
-				let items = []
-				new_items.forEach(({id, first_name, last_name}) => {
-					items.push({text: `${first_name} ${last_name}`, value: id})
-				})
-				this.items = items
+			is_item_active(id) {
+				return this.members.includes(id)
 			}
+
 		}
 
 	}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>
