@@ -37,17 +37,9 @@
 						/>
 					</div>
 
-					<date-pickers />
+					<date-pickers /> <!--Due Date field-->
 
-					<div class="members-dropdown">
-						<auto-complete
-								v-model="member.selected"
-								:items="member.items"
-								:is-loading="member.loading"
-								label="Search Member"
-								@searched="get_searched_items('member', $event)"
-						/>
-					</div>
+					<members-dropdown />
 
 					<div class="attachment">
 						<v-btn>Attachment</v-btn>
