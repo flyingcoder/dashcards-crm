@@ -6,11 +6,12 @@ import { quillEditor } from 'vue-quill-editor'
 //Components
 import AutoComplete from '../AutoComplete'
 import makeRequestTo from '@/services/makeRequestTo'
+import DatePickers from '../DatePickers/DatePickers.vue'
 
 export default {
 	name: 'ProjectsDialog',
 	components: {
-		quillEditor, AutoComplete
+		quillEditor, AutoComplete, DatePickers
 	},
 
 	props: {

@@ -7,7 +7,6 @@
 		>
 			<v-text-field
 					slot="activator"
-					prepend-icon="event"
 					label="Select Start & End Date"
 					readonly
 					:value="text_field_label"
