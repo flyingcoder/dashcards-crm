@@ -32,7 +32,7 @@
                 :key="tile.title">
 
                 <div class="tiles__icon">
-                    <img class="responsive-img icon" :src="tile.icon" />
+                    <img class="responsive-img icon tiles__image" :src="tile.icon" />
                 </div>
 
                 <div class="tiles__info">

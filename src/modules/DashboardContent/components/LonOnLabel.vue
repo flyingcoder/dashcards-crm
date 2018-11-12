@@ -1,10 +1,12 @@
 <template>
-	<div class="logon-label">
-		<v-switch :value="switch1" :disabled="disabled" @change="switch1_changed">
-			<template slot="label">
-				<span class="label">Log on</span>
-			</template>
-		</v-switch>
+	<div class="option logon-label">
+		<div class="icon">
+			<v-switch :value="switch1" :disabled="disabled" @change="switch1_changed">
+			</v-switch>
+		</div>
+		<div class="title">
+			<span class="label">Log on</span>
+		</div>
 	</div>
 </template>
 
@@ -36,25 +38,44 @@
 </script>
 
 <style lang="scss" scoped>
+@import "../../../sass/variables";
 	.logon-label {
 		background: white;
 		height: 40px;
-		display: flex;
 		justify-content: center;
 		align-items: center;
-		padding: 0 8px;
+		padding: 0 5px;
 		border-radius: 14px;
-
-		.label {
-			font-family: "Roboto", sans-serif;
-			font-size: 15px;
-			font-weight: 500;
-			letter-spacing: .02em;
-			line-height: 1;
-			padding-left: 10px;
-			border-left: 1px solid #dce1e5;
-			color: black;
+		.icon{
+            display: flex;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
 		}
-
+		.title{
+            display: flex;
+            flex: 2;
+            height: 100%;
+            border-left: 1px solid $tile-border ;
+            align-items: center;
+            justify-content: center;
+            .label {
+				font-size: 15px;
+				font-weight: 500;
+				letter-spacing: .02em;
+				line-height: 1;
+				padding-left: 5px;
+				color: black;
+			}
+		}
+	}
+	@media only screen and (max-width: 480px) {
+		.logon-label{
+			.title{
+				.label{
+					font-size: 12px;
+				}
+			}
+		}
 	}
 </style>
