@@ -7,7 +7,8 @@ export default {
 		'loading',
 		'has-checkbox',
 		'has-header-icon',
-		'sort'
+		'sort',
+		'toolbar-title'
 	],
 
 	data: () => ({

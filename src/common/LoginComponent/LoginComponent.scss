@@ -146,3 +146,11 @@
 @media(max-width: 600px) {
   
 }
+
+@media (max-width: 480px){
+  .login__card {
+    .login__cardIn{
+      margin: 77px 0;
+    }
+  }
+}

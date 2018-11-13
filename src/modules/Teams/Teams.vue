@@ -30,11 +30,7 @@
 
         </div>
 
-        <div class="content__wrapper">
-            <div class="row buzz__tables">
-                <div class="buzz__tablesTwo">
-
-                <custom-table
+        <custom-table
                     :headers="headers"
                     :items="items"
                     :loading="loading"
@@ -43,6 +39,7 @@
                     :has-header-icon="true"
                     hide-actions
                     @items-selected="selected_ids = $event"
+				    toolbar-title="Members"
                     @sorted="changeSort"
                     class="custom__table"
                 >
@@ -96,10 +93,6 @@
                     </template>
 
                 </custom-table>
-
-                </div>
-            </div>
-        </div>
         
     </div>
 </template>

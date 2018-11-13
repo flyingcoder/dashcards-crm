@@ -129,5 +129,32 @@
       }
     }
   }
+}
 
+// Tablet View
+@media only screen and (max-width: 768px) and (min-width: 481px){
+  .s__info{
+    .s__top{
+      .info__count{
+        font-size: 56px;
+      }
+    }
+  }
+}
+
+// Mobile View
+@media only screen and (max-width: 480px){
+  .signup{
+    flex-direction: column;
+    .login__card {
+      margin: 77px 0;
+    }
+    .s__info{
+      .s__top{
+        .info__count{
+          font-size: 56px;
+        }
+      }
+    }
+  }
 }

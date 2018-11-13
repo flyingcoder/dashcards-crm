@@ -1,28 +1,99 @@
 @import '~@/sass/_variables';
 
-
-.buzzooka__table{
-  /deep/ .v-datatable__actions {
-    justify-content: space-between;
-  }
-    tr.table__head{
+.content__wrapper{
+  .buzz__tables{
+    background: $white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid $tableBorderBlue;
+    .buzz__tablesTwo{
+      padding: 20px;
+      border: 1px solid $tableBorderBlue;
       background-color: $tableBlueBg;
-      th{
-        text-align: left;
-        color: $tableBlueText;
-        font-size: 13px;
-        font-weight: 700;
-        &:last-child{
-          text-align: center;
+      .table__toolbar{
+        background-color: $tableBlueBg;
+        .table__toolbar-title{
+            color: $tableTitleBlue;
+            text-align: left;
+            font-size: 30px;
+        }
+      }
+      .buzzooka__table{
+        border: 1px solid $tableBorderBlue;
+        /deep/ .v-datatable__actions {
+          justify-content: space-between;
+        }
+          tr.table__head{
+            background-color: $tableBlueBg;
+            th{
+              text-align: left;
+              color: $tableBlueText;
+              font-size: 13px;
+              font-weight: 500;
+              &:last-child{
+                text-align: center;
+              }
+            }
+          }
+        .table__body-row{
+          &:nth-child(odd){
+            background-color: $white;
+          }
+          &:nth-child(even){
+            background-color: $tableBlueBg;
+          }
         }
       }
     }
-  .table__body-row{
-    &:nth-child(odd){
-      background-color: $white;
-    }
-    &:nth-child(even){
-      background-color: $tableBlueBg;
+  }
+}
+
+//For Mobile Version
+@media only screen and (max-width: 480px){
+  .content__wrapper{
+    .buzz__tables{
+      padding: 0;
+      .buzz__tablesTwo{
+        padding: 0;
+        .table__toolbar{
+          height: auto;
+          .table__toolbar-title{
+              color: $tableTitleBlue;
+              text-align: left;
+              font-size: 16px;
+          }
+        }
+        .buzzooka__table{
+          /deep/ .v-datatable__actions {
+            justify-content: space-between;
+          }
+          table.v-table thead tr{
+            height: auto;  
+          }
+            tr.table__head{
+              th{
+                font-size: 12px;
+                font-weight: 500;
+                padding:8px;
+                &:last-child{
+                  text-align: center;
+                }
+              }
+            }
+            tr.table__body-row{
+              /deep/ td{
+                padding:8px;
+              }
+              /deep/ td:first-child{
+                  padding:8px;
+                }
+            }
+            /deep/ table.v-table tbody td:first-child, /deep/ table.v-table tbody td:not(:first-child){
+              padding:8px;
+            }
+            
+        }
+      }
     }
   }
 }

@@ -50,6 +50,7 @@
 								:has-checkbox="true"
 								hide-actions
 								@items-selected="selected_ids = $event"
+								toolbar-title="Groups"
 								@sorted="changeSort"
 						>
 

@@ -38,6 +38,7 @@
 							:has-checkbox="true"
 							hide-actions
 							@items-selected="selected_ids = $event"
+							toolbar-title="Tasks"
 							@sorted="changeSort"
 					>
 						<template slot="custom-item" slot-scope="item"> <!-- Table Items -->

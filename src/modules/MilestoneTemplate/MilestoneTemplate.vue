@@ -39,11 +39,12 @@
 							:has-checkbox="true"
 							hide-actions
 							@items-selected="selected_ids = $event"
+							toolbar-title="Milestone Templates"
 							@sorted="changeSort"
 					>
 						<template slot="custom-item" slot-scope="item"> <!-- Table Items -->
-							<td class="text-xs-center">{{ item.item.name }}</td>
-							<td class="text-xs-center">{{ item.item.status }}</td>
+							<td>{{ item.item.name }}</td>
+							<td>{{ item.item.status }}</td>
 
 							<td class="text-xs-center">
 								<v-icon class="mr-2" @click="open_edit_dialog(item.item)">

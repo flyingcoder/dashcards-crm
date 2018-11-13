@@ -19,7 +19,7 @@
 				<v-flex xs6>
 
 					<div class="user-chevron">
-						<img src="@/assets/icons/header/chevron-down.svg" width="25px" class="chevron responsive-img" alt="chevron">
+						<img src="@/assets/icons/header/chevron-down.svg" class="chevron responsive-img" alt="chevron">
 					</div>
 				</v-flex>
 			</v-layout>
@@ -96,12 +96,27 @@
 
 <style lang="scss" scoped>
 	.user-dropdown {
-		.atomic-icon {
-			width: 30px;
-		}
-
 		.dropdown {
 			width: 75px;
+			.atomic-icon {
+				width: 30px;
+			}
+			.user-chevron img{
+				width: 25px;
+			}
+		}
+	}
+	@media only screen and (max-width: 480px){
+		.user-dropdown {
+			.dropdown {
+				width: 50px;
+				.atomic-icon {
+					width: 22px;
+				}
+				.user-chevron img{
+					width: 20px;
+				}
+			}
 		}
 	}
 </style>

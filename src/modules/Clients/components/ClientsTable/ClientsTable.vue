@@ -24,11 +24,6 @@
 				@delete="delete_item('delete_client')"
 		/>
 
-		<v-toolbar flat color="white">
-			<v-toolbar-title>Clients</v-toolbar-title>
-			<v-spacer></v-spacer>
-		</v-toolbar>
-
 		<custom-table
 				:headers="headers"
 				:items="items"
@@ -38,6 +33,7 @@
 				:has-header-icon="true"
 				hide-actions
 				@items-selected="selected_ids = $event"
+				toolbar-title="Clients"
 				@sorted="changeSort"
 		>
 
@@ -51,9 +47,9 @@
 					</div>
 				</td>
 
-				<td class="text-xs-left pl-5">{{ item.item.telephone }}</td>
-				<td class="text-xs-left pl-5">{{ item.item.email }}</td>
-				<td class="text-xs-left pl-5">{{ item.item.status }}</td>
+				<td>{{ item.item.telephone }}</td>
+				<td>{{ item.item.email }}</td>
+				<td>{{ item.item.status }}</td>
 
 				<td class="text-xs-center">
 					<v-btn fab small color="blue" depressed @click="open_edit_dialog(item.item)">

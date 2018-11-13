@@ -26,6 +26,7 @@
 		.icon {
 			height: 30px;
 			width: 35px;
+			margin: 0 10px 0 0;
 		}
 
 		&:hover .icon.hovered {
@@ -40,5 +41,16 @@
 			display: none;
 		}
 
+	}
+
+	@media only screen and (max-width: 480px){
+		.header-icon {
+			height: 20px;
+			.icon {
+				height: 20px;
+				width: 25px;
+				margin: 0 7px 0 0;
+			}
+		}
 	}
 </style>
