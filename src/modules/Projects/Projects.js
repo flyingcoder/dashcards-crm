@@ -5,6 +5,7 @@ import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import AddProjectDialog from './components/AddProjectDialog/AddProjectDialog.vue'
+import isEmpty from "lodash/isEmpty";
 
 export default {
 	name: 'Projects',
@@ -27,5 +28,22 @@ export default {
 			{text: 'Time Spent', value: 'time-spent', sortable: true, align: 'left'},
 			{text: 'Status', value: 'status', sortable: true, align: 'left'},
 		],
+		table_config: {
+			route_name: 'projects',
+			add_message: 'New Project added successfully!',
+			update_message: 'Project updated successfully!',
+			delete_message: 'Project deleted successfully!',
+			refresh_table_message: 'Table refreshed',
+			refresh_table_api_name: 'paginate_projects_table'
+		},
 	}),
+
+	created() {
+		const query = { ...this.$route.query }
+		if (isEmpty(query))
+			this.fill_table('get_projects', true)
+		else
+			this.update_table_actions(query)
+	},
+
 }
