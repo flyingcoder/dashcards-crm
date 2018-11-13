@@ -24,7 +24,7 @@
 					</div>
 
 					<div class="location-field">
-						<v-text-field label="Location"></v-text-field>
+						<v-text-field v-model.trim="location" label="Location"></v-text-field>
 					</div>
 
 					<div class="services-dropdown">
@@ -37,9 +37,12 @@
 						/>
 					</div>
 
-					<date-pickers /> <!--Due Date field-->
+					<date-pickers
+							:start-date.sync="date_pickers.start_date"
+							:end-date.sync="date_pickers.end_date"
+					/> <!--Due Date field-->
 
-					<members-dropdown />
+					<members-dropdown :members.sync="members" />
 
 					<div class="attachment">
 						<v-btn>Attachment</v-btn>
@@ -48,7 +51,7 @@
 				</div>
 
 				<div class="project-title">
-					<v-text-field label="Untitled Project"></v-text-field>
+					<v-text-field v-model.trim="project_title" label="Project Title"></v-text-field>
 				</div>
 
 				<div class="project-description">
@@ -64,12 +67,12 @@
 
 				<div class="project-comment">
 					<h3>Add Comment</h3>
-					<v-textarea box></v-textarea>
+					<v-textarea box v-model.trim="comment"></v-textarea>
 				</div>
 
 				<v-card-actions>
 					<div class="dialog-actions">
-						<v-btn>Save</v-btn>
+						<v-btn @click="save">Save</v-btn>
 						<v-btn @click="cancel">Cancel</v-btn>
 					</div>
 				</v-card-actions>

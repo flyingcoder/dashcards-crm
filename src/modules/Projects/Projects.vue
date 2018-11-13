@@ -6,7 +6,7 @@
 				:dialog.sync="add_dialog"
 				ref="add_dialog"
 				title="Add New Project"
-				@save="add_item('add_new_services', $event)"
+				@save="add_item('add_new_project', $event)"
 		/>
 
 		<div class="content__wrapper">
@@ -32,10 +32,12 @@
 
 						<template slot="custom-item" slot-scope="item">
 							<td class="text-xs-left pl-5">{{ item.item.service_name }}</td>
-
-							<td class="text-xs-left pl-5">{{ item.item.name }}</td>
-
-							<td class="text-xs-left pl-5">{{ item.item.service_created_at }}
+							<td class="text-xs-left pl-5">{{ item.item.client_name }}</td>
+							<td class="text-xs-left pl-5">{{ item.item.manager_name }}
+							<td class="text-xs-left pl-5">{{ item.item.started_at }}
+							<td class="text-xs-left pl-5">{{ item.item.progress }}
+							<td class="text-xs-left pl-5">{{ item.item.total_time }}
+							<td class="text-xs-left pl-5">{{ item.item.status }}
 							</td>
 
 							<td class="text-xs-center">

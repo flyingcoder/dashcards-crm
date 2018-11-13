@@ -1,5 +1,9 @@
 export default {
 	name: 'DatePickers',
+	props: {
+		startDate: String,
+		endDate: String
+	},
 
 	data: () => ({
 		date_picker: {
@@ -15,9 +19,15 @@ export default {
 
 			const start_date = this.date_picker.start_date
 			const end_date = this.date_picker.end_date
-			const date_text = end_date ? `${start_date} until ${end_date}` : `${start_date} until forever`
-			return date_text
+			return end_date ? `${start_date} until ${end_date}` : `${start_date} until forever`
 		}
+	},
+
+	watch: {
+		startDate(val) { this.date_picker.start_date = val },
+		endDate(val) { this.date_picker.end_date = val },
+		'date_picker.start_date'(val){ this.$emit('update:startDate', val) },
+		'date_picker.end_date'(val){ this.$emit('update:endDate', val) }
 	},
 
 	methods: {
