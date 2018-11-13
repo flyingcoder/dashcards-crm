@@ -8,4 +8,8 @@ export const projects_api = {
 	add_new_project(new_project) {
 		return request.post('api/projects', new_project);
 	},
+
+	paginate_projects_table(query) {
+		return request.get(`api/projects?${query}`)
+	}
 }

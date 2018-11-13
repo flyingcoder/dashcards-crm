@@ -17,7 +17,7 @@ export const groups_api = {
 		return request.delete(`api/groups/${id}`)
 	},
 
-	paginate_groups_table(qyery) {
-		return request.get(`api/groups?${qyery}`)
+	paginate_groups_table(query) {
+		return request.get(`api/groups?${query}`)
 	}
 }

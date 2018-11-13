@@ -17,7 +17,7 @@ export const permissions_api = {
 		return request.delete(`api/permission/${id}`)
 	},
 
-	paginate_permissions_table(qyery) {
-		return request.get(`api/permission?${qyery}`)
+	paginate_permissions_table(query) {
+		return request.get(`api/permission?${query}`)
 	}
 }
