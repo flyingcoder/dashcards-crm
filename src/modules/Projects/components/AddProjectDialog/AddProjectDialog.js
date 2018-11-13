@@ -10,7 +10,7 @@ import DatePickers from '../DatePickers/DatePickers.vue' //used for Due Date fie
 import MembersDropdown from '../MembersDropdown/MembersDropdown.vue'
 
 export default {
-	name: 'ProjectsDialog',
+	name: 'AddProjectDialog',
 	components: {
 		quillEditor, AutoComplete, DatePickers, MembersDropdown
 	},
@@ -32,11 +32,14 @@ export default {
 			items: [],
 			loading: false
 		},
-		member: {
-			selected: null,
-			items: [],
-			loading: false
+		members: [],
+		location: '',
+		comment: '',
+		date_pickers: {
+			start_date: '',
+			end_date: ''
 		},
+		project_title: '',
 		is_autocomplete_loading: false,
 		quill_editor: {
 			content: '',
@@ -63,11 +66,21 @@ export default {
 		cancel() { this.open = false },
 		save() {
 			const fields_to_save = {
+				title: this.project_title,
+				client_id: this.client.selected.value || null,
+				service_id: this.service.selected.value || null,
+				start_at: this.date_pickers.start_date,
+				end_at: this.date_pickers.end_date,
+				location: this.location,
+				description: this.quill_editor.content,
+				comment: this.comment,
+				members: this.members
 			}
 			this.$emit('save', fields_to_save)
 		},
 
 		clear_and_close() {
+			this.$data = Object.assign(this.$data, this.$options.data.apply(this))
 			this.cancel() //close the modal
 		},
 

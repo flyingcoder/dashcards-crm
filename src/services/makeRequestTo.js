@@ -8,6 +8,7 @@ import { templates_milestone_api } from './makeRequestModules/templates_mileston
 import { milestone_tasks_api } from "./makeRequestModules/milestone_tasks_api";
 import { permissions_api } from "./makeRequestModules/permissions_api";
 import { autocomplete_api } from "./makeRequestModules/autocomplete_api";
+import { projects_api } from "./makeRequestModules/projects_api";
 
 export default {
   login({ email, password }) {
@@ -35,4 +36,5 @@ export default {
   ...milestone_tasks_api,
   ...permissions_api,
   ...autocomplete_api,
+  ...projects_api,
 }

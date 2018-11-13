@@ -1,6 +1,7 @@
 <template>
 	<div class="members-dropdown">
 		<v-autocomplete
+				label="Search Members"
 				v-model="members"
 				:items="items"
 				:loading="is_loading"
@@ -46,17 +47,21 @@
 		name: 'MembersDropdown',
 		inheritAttrs: false,
 
+		props: {
+			members: Array
+		},
+
 		data: () => ({
 			items: [],
 			is_loading: false,
 			search: null,
-			members: []
+			selected_members: []
 		}),
 
 		watch: {
-			search (val) {
-				val && this.debounce(val)
-			}
+			members(val) { this.selected_members = val },
+			search (val) { val && this.debounce(val) },
+			selected_members(val) { this.$emit('update:members', val) }
 		},
 
 		methods: {
@@ -69,7 +74,7 @@
 			}, 500),
 
 			is_item_active(id) {
-				return this.members.includes(id)
+				return this.selected_members.includes(id)
 			}
 
 		}
