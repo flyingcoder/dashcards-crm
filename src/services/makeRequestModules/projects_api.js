@@ -9,6 +9,10 @@ export const projects_api = {
 		return request.post('api/projects', new_project);
 	},
 
+	delete_project(id) {
+		return request.delete(`api/projects/${id}`)
+	},
+
 	paginate_projects_table(query) {
 		return request.get(`api/projects?${query}`)
 	}

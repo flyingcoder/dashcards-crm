@@ -9,6 +9,13 @@
 				@save="add_item('add_new_project', $event)"
 		/>
 
+		<delete-dialog
+				:open-dialog.sync="delete_dialog"
+				title="Delete Project"
+				text-content="Are you sure you want to delete this project?"
+				@delete="delete_item('delete_project')"
+		/>
+
 		<div class="content__wrapper">
 			<div class="row buzz__tables">
 				<div class="buzz__tablesTwo">

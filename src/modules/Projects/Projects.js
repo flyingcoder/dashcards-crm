@@ -4,6 +4,7 @@ import { table_functionality } from "@/services/table-functionality";
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import TableHeader from '@/common/TableHeader.vue'
+import DeleteDialog from '@/common/DeleteDialog.vue'
 import AddProjectDialog from './components/AddProjectDialog/AddProjectDialog.vue'
 import isEmpty from "lodash/isEmpty";
 
@@ -11,7 +12,7 @@ export default {
 	name: 'Projects',
 	mixins: [table_functionality],
 	components: {
-		CustomTable, Breadcrumb, TableHeader, AddProjectDialog
+		CustomTable, Breadcrumb, TableHeader, AddProjectDialog, DeleteDialog
 	},
 
 	data: () => ({
