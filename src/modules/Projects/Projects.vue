@@ -62,22 +62,25 @@
 							<div class="actions-wrapper">
 
 								<div class="bulk-delete">
-									<v-btn color="indigo" dark outline
-									       :disabled="!show_delete_selected">
+									<v-btn color="indigo" dark outline :disabled="!show_delete_selected">
 										Delete Selected
 									</v-btn>
 								</div>
 
 								<div class="rows-per-page-dropdown">
 									Rows per page:
-									<v-select :items="rows_per_page_items" menu-props="auto"
-									          v-model="rows_per_page"></v-select>
+									<v-select :items="rows_per_page_items"
+									          menu-props="auto"
+									          v-model="rows_per_page"
+									></v-select>
 								</div>
 
 								<div class="pagination">
 									<div class="text-xs-center pt-2">
-										<v-pagination :length="total_items" :total-visible="5"
-										              v-model="page"></v-pagination>
+										<v-pagination :length="total_items"
+										              :total-visible="5"
+										              v-model="page"
+										></v-pagination>
 									</div>
 								</div>
 
