@@ -46,5 +46,11 @@ export default {
 		else
 			this.update_table_actions(query)
 	},
+	
+	methods: {
+		navigate_to_view_project(id) {
+			this.$router.push(`dashboard/projects/{id}`)
+		}
+	}
 
 }
