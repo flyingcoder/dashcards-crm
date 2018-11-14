@@ -34,7 +34,7 @@
 		watch: {
 			search (val) {
 				val && this.is_val_diff_from_selected(val) && this.debounce(val)
-			}
+			},
 		},
 		
 		methods: {

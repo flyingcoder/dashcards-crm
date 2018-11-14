@@ -8,6 +8,7 @@ import AutoComplete from '../AutoComplete'
 import makeRequestTo from '@/services/makeRequestTo'
 import DatePickers from '../DatePickers/DatePickers.vue' //used for Due Date field
 import MembersDropdown from '../MembersDropdown/MembersDropdown.vue'
+import cloneDeep from "lodash/cloneDeep";
 
 export default {
 	name: 'ProjectDialog',
@@ -18,6 +19,8 @@ export default {
 	props: {
 		dialog: Boolean,
 		title: String,
+		isEditDialog: Boolean,
+		fieldsToEdit: { type: Object, default: () => {} }
 	},
 
 	data: () => ({
@@ -32,8 +35,10 @@ export default {
 			items: [],
 			loading: false
 		},
-		members: [],
-		location: '',
+		members: {
+			items: [],
+			selected: []
+		},
 		comment: '',
 		date_pickers: {
 			start_date: '',
@@ -59,6 +64,12 @@ export default {
 	watch: {
 		dialog(new_val) { this.open = new_val },
 		open(new_val) { this.$emit('update:dialog', new_val) },
+		fieldsToEdit: {
+			handler(new_val) {
+				this.isEditDialog && this.update_fields(new_val)
+			},
+			deep: true
+		}
 	},
 
 	methods: {
@@ -71,12 +82,27 @@ export default {
 				service_id: this.service.selected.value || null,
 				start_at: this.date_pickers.start_date,
 				end_at: this.date_pickers.end_date,
-				location: this.location,
 				description: this.quill_editor.content,
 				comment: this.comment,
-				members: this.members
+				members: this.members.selected
 			}
 			this.$emit('save', fields_to_save)
+		},
+
+		update_fields({fields}) {
+			console.log(fields)
+			const new_fields = cloneDeep(fields)
+			this.$set(this.service, 'items', [{ text: new_fields.service_name, value: new_fields.service_id }])
+			this.$set(this.service, 'selected', { text: new_fields.service_name, value: new_fields.service_id })
+			this.$set(this.client, 'selected', { text: new_fields.client_name, value: new_fields.client_id })
+			this.$set(this.client, 'items', [{ text: new_fields.client_name, value: new_fields.client_id }])
+			this.$set(this.date_pickers, 'start_date', new_fields.started_at.split(' ')[0])
+			this.$set(this.date_pickers, 'end_date', new_fields.end_at.split(' ')[0])
+			this.$set(this.members, 'items', new_fields.members)
+			this.$set(this.members, 'selected', new_fields.members.map(member => member.id))
+			this.comment = new_fields.comment
+			this.project_title = new_fields.title
+			this.$set(this.quill_editor, 'content', new_fields.description)
 		},
 
 		clear_and_close() {

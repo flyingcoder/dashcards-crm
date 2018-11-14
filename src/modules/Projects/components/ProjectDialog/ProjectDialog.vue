@@ -23,10 +23,6 @@
 						/>
 					</div>
 
-					<div class="location-field">
-						<v-text-field v-model.trim="location" label="Location"></v-text-field>
-					</div>
-
 					<div class="services-dropdown">
 						<auto-complete
 								v-model="service.selected"
@@ -42,7 +38,9 @@
 							:end-date.sync="date_pickers.end_date"
 					/> <!--Due Date field-->
 
-					<members-dropdown :members.sync="members" />
+					<members-dropdown :members.sync="members.selected"
+					                  :member-items="members.items"
+					/>
 
 					<div class="attachment">
 						<v-btn>Attachment</v-btn>
