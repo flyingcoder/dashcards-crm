@@ -18,7 +18,8 @@ import { milestoneTasks } from "./routes/milestoneTasks";
 import { projects } from "./routes/projects";
 import { services } from "./routes/services";
 import { teams } from "./routes/teams";
-import { settings } from './routes/settings'
+import { settings } from './routes/settings';
+import { projectHQ } from "./routes/projectHQ";
 
 Vue.use(Router)
 
@@ -37,7 +38,8 @@ export default new Router({
 				projects,// path: /dashboard/projects
 				services, // path: /dashboard/services
 				teams,// path: /dashboard/team
-			  settings, // path: /dashboard/settings
+			  settings, // path: /dashboard/settings,
+			  projectHQ, //path: /dashboard/project-hq
 		  ]
 	  },
 

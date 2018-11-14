@@ -49,7 +49,7 @@ export default {
 	
 	methods: {
 		navigate_to_view_project(id) {
-			this.$router.push(`dashboard/projects/{id}`)
+			this.$router.push({ name: 'projectHQ', params: { project_id: id } })
 		}
 	}
 
