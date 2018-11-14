@@ -90,7 +90,6 @@ export default {
 		},
 
 		update_fields({fields}) {
-			console.log(fields)
 			const new_fields = cloneDeep(fields)
 			this.$set(this.service, 'items', [{ text: new_fields.service_name, value: new_fields.service_id }])
 			this.$set(this.service, 'selected', { text: new_fields.service_name, value: new_fields.service_id })
@@ -106,7 +105,7 @@ export default {
 		},
 
 		clear_and_close() {
-			this.$data = Object.assign(this.$data, this.$options.data.apply(this))
+			Object.assign(this.$data, this.$options.data.apply(this))
 			this.cancel() //close the modal
 		},
 
