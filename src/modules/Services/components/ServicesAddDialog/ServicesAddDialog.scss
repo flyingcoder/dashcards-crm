@@ -1,0 +1,101 @@
+@import '~@/sass/_variables';
+
+.addService__dialog.v-card.theme--light{
+    border-radius: 15px;
+    background-color: $modalBgGray;
+    padding: 24px;
+    .v-card__title{
+        padding: 0;
+        margin-bottom: 28px;
+        .dialog__title{
+            font-size:24px;
+            font-weight: 500;
+            color: $modalTitle;
+        }
+    }
+    .v-card__text{
+        padding: 0;
+        /deep/.theme--light.v-input:not(.v-input--is-disabled) input{
+            color: $modalTitle;
+            caret-color: $modalTitle;
+        }
+        /deep/ label.v-label.theme--light{
+            font-size: 20px;
+            opacity: 0.8;
+        }
+        .service__input{
+            font-size: 20px;
+            font-weight: 500;
+            color: $modalTitle;
+            margin-right: 18px;
+            .v-text-field.v-text-field--solo .v-input__control{
+                min-height: 65px;
+            }
+            .v-input__slot{
+                border-radius:8px;
+                border: 1px solid #dce1e5;
+                max-height: 65px;
+                padding: 24px 26px;
+            }
+        }
+        
+        button.addService__btn.v-btn.v-btn--depressed.theme--light, button.addService__btn.v-btn.theme--light, button.deleteService__btn.v-btn.theme--light{
+            height: 65px;
+            max-width: 65px;
+            border-radius: 8px;
+            margin: 0;
+        }
+        
+        button.addService__btn.v-btn.theme--light{
+            .v-icon{
+                font-size: 45px;            
+                color: $green;
+            }
+        }
+
+       button.addService__btn.v-btn.v-btn--depressed.theme--light{
+            .v-icon{          
+                color: $green !important;
+                opacity: 0.5;
+            }
+        }
+
+        
+        button.deleteService__btn.v-btn.theme--light{
+            .v-icon{
+                font-size: 45px;            
+                color: $red;
+            }
+        }
+
+        button.addService__btn.v-btn.v-btn--depressed.theme--light:hover, button.addService__btn.v-btn.theme--light:hover{
+            background-color: $green;
+            border-color: $green;
+            .v-icon{
+                color: $white !important;
+            }
+        }
+
+        button.deleteService__btn.v-btn.v-btn--depressed.theme--light:hover, button.deleteService__btn.v-btn.theme--light:hover{
+            background-color: $red;
+            border-color: $red;
+            .v-icon{
+                color:$white !important;
+            }
+        }
+    }
+    .service__actions{
+        justify-content: center;
+        .service__actions_btn.v-btn{
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #dce1e5;
+            color: $modalTitle;
+            background-color: $white;
+            height: auto;
+            width: 130px;
+            margin: 0 9px;
+        }
+    }
+}
