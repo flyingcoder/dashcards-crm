@@ -5,14 +5,14 @@ import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
-import AddProjectDialog from './components/AddProjectDialog/AddProjectDialog.vue'
+import ProjectDialog from './components/ProjectDialog/ProjectDialog.vue'
 import isEmpty from "lodash/isEmpty";
 
 export default {
 	name: 'Projects',
 	mixins: [table_functionality],
 	components: {
-		CustomTable, Breadcrumb, TableHeader, AddProjectDialog, DeleteDialog
+		CustomTable, Breadcrumb, TableHeader, ProjectDialog, DeleteDialog
 	},
 
 	data: () => ({

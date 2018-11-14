@@ -10,7 +10,7 @@ import DatePickers from '../DatePickers/DatePickers.vue' //used for Due Date fie
 import MembersDropdown from '../MembersDropdown/MembersDropdown.vue'
 
 export default {
-	name: 'AddProjectDialog',
+	name: 'ProjectDialog',
 	components: {
 		quillEditor, AutoComplete, DatePickers, MembersDropdown
 	},
@@ -111,7 +111,6 @@ export default {
 			this[action].items = items
 		}
 
-	}
-
+	},
 
 }

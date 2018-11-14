@@ -82,5 +82,5 @@
 	</v-layout>
 </template>
 
-<script src="./AddProjectDialog.js"></script>
-<style lang="scss" scoped src="./AddProjectDialog.scss"></style>
+<script src="./ProjectDialog.js"></script>
+<style lang="scss" scoped src="./ProjectDialog.scss"></style>
