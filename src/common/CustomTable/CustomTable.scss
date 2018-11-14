@@ -30,18 +30,26 @@
               color: $tableBlueText;
               font-size: 13px;
               font-weight: 500;
+              padding: 8px;
               &:last-child{
                 text-align: center;
               }
             }
           }
-        .table__body-row{
+        tr.table__body-row{
+          /deep/ td{
+            padding:8px;
+          }
           &:nth-child(odd){
             background-color: $white;
           }
           &:nth-child(even){
             background-color: $tableBlueBg;
           }
+        }
+        
+        /deep/ table.v-table tbody td:first-child, /deep/ table.v-table tbody td:not(:first-child){
+          padding: 8px;
         }
       }
     }
