@@ -9,6 +9,10 @@ export const projects_api = {
 		return request.post('api/projects', new_project);
 	},
 
+	update_project(id, project) {
+		return request.put(`api/projects/${id}`, project)
+	},
+
 	delete_project(id) {
 		return request.delete(`api/projects/${id}`)
 	},

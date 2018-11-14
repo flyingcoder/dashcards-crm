@@ -15,7 +15,7 @@
 				title="Edit Project"
 				:is-edit-dialog="edit_dialog"
 				:fields-to-edit="edit_item"
-				@save="update_item('update_permission', $event)"
+				@save="update_item('update_project', $event)"
 		/>
 
 		<custom-table
