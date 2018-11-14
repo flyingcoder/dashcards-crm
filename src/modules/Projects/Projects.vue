@@ -25,65 +25,49 @@
 			<template slot="custom-item" slot-scope="item">
 				<td>{{ item.item.service_name }}</td>
 				<td>{{ item.item.client_name }}</td>
-				<td>{{ item.item.manager_name }}
-				<td>{{ item.item.started_at }}
-				<td>{{ item.item.progress }}
-				<td>{{ item.item.total_time }}
-				<td>{{ item.item.status }}
+				<td>{{ item.item.manager_name }}</td>
+				<td>{{ item.item.started_at }}</td>
+				<td>{{ item.item.progress }}</td>
+				<td>{{ item.item.total_time }}</td>
+				<td>{{ item.item.status }}</td>
+
+				<td class="text-xs-center">
+
+					<v-btn fab small color="#d6d6e2" depressed
+						@click="open_edit_dialog(item.item)">
+						<img src="@/assets/icons/groups/edit.svg" alt="">
+					</v-btn>
+
+					<v-btn fab small color="#d6d6e2" depressed
+						@click="open_delete_dialog(item.item)">
+						<img src="@/assets/icons/groups/delete.svg" alt="">
+					</v-btn>
+
 				</td>
-
-			<td>{{ item.item.service_created_at }}
-			</td>
-
-			<td class="text-xs-center">
-
-				<v-btn fab small color="blue" depressed
-						@click="open_edit_dialog(item.item)"
-				>
-					<img src="@/assets/icons/groups/edit.svg" alt="">
-				</v-btn>
-
-				<v-btn fab small color="blue" depressed
-						@click="open_delete_dialog(item.item)"
-				>
-					<img src="@/assets/icons/groups/delete.svg" alt="">
-				</v-btn>
-
-			</td>
 		</template>
 
 		<template slot="table-actions">
 
-			<div class="bulk-delete">
-				<v-btn color="indigo" dark outline :disabled="!show_delete_selected">
-					Delete Selected
-				</v-btn>
-			</div>
+				<div class="actions-wrapper">
 
-			<div class="rows-per-page-dropdown">
-				Rows per page:
-				<v-select :items="rows_per_page_items"
-						menu-props="auto"
-						v-model="rows_per_page"
-				></v-select>
-			</div>
+					<div class="bulk-delete">
+						<v-btn color="indigo" dark outline :disabled="!show_delete_selected">
+							Delete Selected
+						</v-btn>
+					</div>
 
-			<div class="pagination">
-				<div class="text-xs-center pt-2">
-					<v-pagination :length="total_items"
-								:total-visible="5"
-								v-model="page"
-					></v-pagination>
+					<div class="rows-per-page-dropdown">
+						Rows per page: <v-select :items="rows_per_page_items" menu-props="auto" v-model="rows_per_page"></v-select>
+					</div>
+
+					<div class="pagination">
+						<div class="text-xs-center pt-2">
+							<v-pagination :length="total_items" :total-visible="5" v-model="page"></v-pagination>
+						</div>
+					</div>
+
 				</div>
-			</div>
-
-			<div class="pagination">
-				<div class="text-xs-center pt-2">
-					<v-pagination :length="total_items" :total-visible="5"
-									v-model="page"></v-pagination>
-				</div>
-			</div>
-		</template>
+			</template>
 
 	</custom-table>
 
