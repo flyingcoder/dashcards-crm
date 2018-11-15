@@ -1,5 +1,8 @@
+import { is_screen_medium_and_down } from "@/global_utils/is_screen_medium_and_down";
+
 export default {
 	name: 'settings',
+	mixins: [is_screen_medium_and_down],
 	components: {
 		Permissions: () => import('./components/Permissions/Permissions.vue')
 	},
@@ -21,9 +24,6 @@ export default {
 	}),
 
 	computed: {
-		is_medium_screen_and_down() {
-			return this.$vuetify.breakpoint.mdAndDown
-		},
 		component() {
 			if (this.active_tab) {
 				return this.tabs[this.active_tab].name

@@ -1,7 +1,7 @@
 <template>
 	<div class="settings">
 
-		<v-tabs class="tabs" grow hide-slider height="60px" v-model="active_tab" :show-arrows="is_medium_screen_and_down">
+		<v-tabs class="tabs" grow hide-slider height="60px" v-model="active_tab" :show-arrows="is_screen_medium_and_down">
 			<v-tab
 					v-for="tab in tabs"
 					:key="tab.name"
