@@ -19,7 +19,7 @@ import { projects } from "./routes/projects";
 import { services } from "./routes/services";
 import { teams } from "./routes/teams";
 import { settings } from './routes/settings';
-import { projectHQ } from "./routes/projectHQ";
+import { project_preview } from "./routes/projectPreview";
 
 Vue.use(Router)
 
@@ -39,7 +39,7 @@ export default new Router({
 				services, // path: /dashboard/services
 				teams,// path: /dashboard/team
 			  settings, // path: /dashboard/settings,
-			  projectHQ, //path: /dashboard/project-hq
+			  project_preview, //path: /dashboard/project-preview
 		  ]
 	  },
 
