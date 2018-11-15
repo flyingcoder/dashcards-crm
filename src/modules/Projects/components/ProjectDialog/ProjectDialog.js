@@ -3,12 +3,13 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 import { quillEditor } from 'vue-quill-editor'
+import cloneDeep from 'lodash/cloneDeep'
+import isEmpty from 'lodash/isEmpty'
 //Components
-import AutoComplete from '../AutoComplete'
 import makeRequestTo from '@/services/makeRequestTo'
+import AutoComplete from '../AutoComplete'
 import DatePickers from '../DatePickers/DatePickers.vue' //used for Due Date field
 import MembersDropdown from '../MembersDropdown/MembersDropdown.vue'
-import cloneDeep from "lodash/cloneDeep";
 
 export default {
 	name: 'ProjectDialog',
@@ -63,7 +64,7 @@ export default {
 
 	computed: {
 		disabled() {
-			if (!this.client.selected || !this.members.selected) return false
+			if (isEmpty(this.client.selected) || isEmpty(this.members.selected)) return false
 
 			if (this.members.selected.includes(this.client.selected.value)) {
 				this.$event.$emit('open_snackbar', `Client can't be a member`, 'error', 'notification')
