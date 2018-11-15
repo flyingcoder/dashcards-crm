@@ -1,6 +1,10 @@
 export default {
 	name: 'ProjectPreview',
 
+	components: {
+		HQ: () => import('./components/ProjectHQ/ProjectHQ.vue')
+	},
+
 	props: {
 		project_id: [Number, String], //from route prop
 	},
@@ -19,6 +23,10 @@ export default {
 		]
 	}),
 
-	methods: {},
+	computed: {
+		component() {
+			return this.tabs[this.active_tab].name
+		}
+	}
 
 }

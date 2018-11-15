@@ -1,5 +1,5 @@
 <template>
-	<div class="project-hq">
+	<div class="project-preview">
 
 		<v-tabs class="tabs" grow hide-slider height="60px" v-model="active_tab">
 			<v-tab
@@ -11,12 +11,10 @@
 		</v-tabs>
 
 		<v-tabs-items v-model="component">
-			<v-tab-item :key="component" :id="component">
+			<v-tab-item :key="component" :value="component">
 
 				<v-card flat>
-
 					<component :is="component"></component>
-
 				</v-card>
 
 			</v-tab-item>
