@@ -16,7 +16,7 @@
 						</v-layout>
 				</v-card-title>
 
-				<v-card-text scrollable style="max-height:600px">
+				<v-card-text scrollable>
 						<v-layout row wrap>
 
 							<v-flex xs10>
