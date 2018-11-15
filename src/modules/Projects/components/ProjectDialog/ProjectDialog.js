@@ -61,6 +61,18 @@ export default {
 		},
 	}),
 
+	computed: {
+		disabled() {
+			if (!this.client.selected || !this.members.selected) return false
+
+			if (this.members.selected.includes(this.client.selected.value)) {
+				this.$event.$emit('open_snackbar', `Client can't be a member`, 'error', 'notification')
+				return true
+			}
+			return false
+		}
+	},
+
 	watch: {
 		dialog(new_val) { this.open = new_val },
 		open(new_val) { this.$emit('update:dialog', new_val) },
@@ -75,7 +87,9 @@ export default {
 	methods: {
 
 		cancel() { this.open = false },
+
 		save() {
+			if (this.disabled) return
 			const fields_to_save = {
 				title: this.project_title,
 				client_id: this.client.selected.value || null,
@@ -83,9 +97,11 @@ export default {
 				start_at: this.date_pickers.start_date,
 				end_at: this.date_pickers.end_date,
 				description: this.quill_editor.content,
-				comment: this.comment,
 				members: this.members.selected
 			}
+			if (!this.isEditDialog)
+				fields_to_save.comment = this.comment
+
 			this.$emit('save', fields_to_save)
 		},
 
@@ -99,7 +115,6 @@ export default {
 			this.$set(this.date_pickers, 'end_date', new_fields.end_at.split(' ')[0])
 			this.$set(this.members, 'items', new_fields.members)
 			this.$set(this.members, 'selected', new_fields.members.map(member => member.id))
-			this.comment = new_fields.comment
 			this.project_title = new_fields.title
 			this.$set(this.quill_editor, 'content', new_fields.description)
 		},
@@ -134,7 +149,7 @@ export default {
 				items.push({text: `${service_name}`, value: id})
 			})
 			this[action].items = items
-		}
+		},
 
 	},
 

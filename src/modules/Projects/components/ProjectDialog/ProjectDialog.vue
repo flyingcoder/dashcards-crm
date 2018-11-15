@@ -63,14 +63,14 @@
 					</div>
 				</div>
 
-				<div class="project-comment">
+				<div class="project-comment" v-if="!isEditDialog">
 					<h3>Add Comment</h3>
 					<v-textarea box v-model.trim="comment"></v-textarea>
 				</div>
 
 				<v-card-actions>
 					<div class="dialog-actions">
-						<v-btn @click="save">Save</v-btn>
+						<v-btn :disabled="disabled" @click="save">Save</v-btn>
 						<v-btn @click="cancel">Cancel</v-btn>
 					</div>
 				</v-card-actions>
