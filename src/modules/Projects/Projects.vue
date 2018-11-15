@@ -2,11 +2,20 @@
 	<div class="projects">
 
 		<table-header :paths="paths" @click="add_dialog = true"/>
-		<add-project-dialog
+		<project-dialog
 				:dialog.sync="add_dialog"
 				ref="add_dialog"
 				title="Add New Project"
 				@save="add_item('add_new_project', $event)"
+		/>
+
+		<project-dialog
+				:dialog.sync="edit_dialog"
+				ref="edit_dialog"
+				title="Edit Project"
+				:is-edit-dialog="edit_dialog"
+				:fields-to-edit="edit_item"
+				@save="update_item('update_project', $event)"
 		/>
 
 		<custom-table

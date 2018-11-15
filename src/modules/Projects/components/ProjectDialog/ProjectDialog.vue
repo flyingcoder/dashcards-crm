@@ -23,10 +23,6 @@
 						/>
 					</div>
 
-					<div class="location-field">
-						<v-text-field v-model.trim="location" label="Location"></v-text-field>
-					</div>
-
 					<div class="services-dropdown">
 						<auto-complete
 								v-model="service.selected"
@@ -42,7 +38,9 @@
 							:end-date.sync="date_pickers.end_date"
 					/> <!--Due Date field-->
 
-					<members-dropdown :members.sync="members" />
+					<members-dropdown :members.sync="members.selected"
+					                  :member-items="members.items"
+					/>
 
 					<div class="attachment">
 						<v-btn>Attachment</v-btn>
@@ -65,14 +63,14 @@
 					</div>
 				</div>
 
-				<div class="project-comment">
+				<div class="project-comment" v-if="!isEditDialog">
 					<h3>Add Comment</h3>
 					<v-textarea box v-model.trim="comment"></v-textarea>
 				</div>
 
 				<v-card-actions>
 					<div class="dialog-actions">
-						<v-btn @click="save">Save</v-btn>
+						<v-btn :disabled="disabled" @click="save">Save</v-btn>
 						<v-btn @click="cancel">Cancel</v-btn>
 					</div>
 				</v-card-actions>
@@ -82,5 +80,5 @@
 	</v-layout>
 </template>
 
-<script src="./AddProjectDialog.js"></script>
-<style lang="scss" scoped src="./AddProjectDialog.scss"></style>
+<script src="./ProjectDialog.js"></script>
+<style lang="scss" scoped src="./ProjectDialog.scss"></style>
