@@ -14,7 +14,7 @@
 			<v-tab-item :key="component" :value="component">
 
 				<v-card flat>
-					<component :is="component"></component>
+					<component :id="project_id" :is="component"></component>
 				</v-card>
 
 			</v-tab-item>

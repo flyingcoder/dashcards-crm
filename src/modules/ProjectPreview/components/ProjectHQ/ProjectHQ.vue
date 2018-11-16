@@ -1,6 +1,6 @@
 <template>
 	<div class="project-hq">
-		<h3>This is the project HQ tab</h3>
+		<project-overview-card :id="id" />
 	</div>
 </template>
 
