@@ -14,9 +14,7 @@
 			:count-behind="count_behind_tasks"
 	/>
 
-	<task-custom-table
-			:tasks="tasks"
-	/>
+	<task-custom-table :tasks="tasks"	/>
 
 	</div>
 </template>
@@ -57,32 +55,31 @@
 		watch: {
 			tab: {
 				handler(val) {
-					this.tab === 'MyTasks' ? this.get_my_tasks() : this.get_all_tasks()
+					let api_url = 'api/task'
+					if (this.id) {
+						api_url = `api/projects/${this.id}/tasks`
+					}
+					if (val === 'MyTasks')
+						api_url += '/mine'
+					this.get_tasks(api_url)
 				},
 				immediate: true
 			}
 		},
 
 		methods: {
-			get_my_tasks() {
+			get_tasks(api_url) {
 				this.loading = true
-				request.get('api/projects/' + this.id + '/tasks/mine')
+				request.get(api_url)
 					.then(({data}) => this.tasks = data.data)
 					.finally(() => this.loading = false)
 			},
-			get_all_tasks() {
-				this.loading = true
-				request.get('api/projects/' + this.id + '/tasks')
-					.then(({data}) => this.tasks = data.data)
-					.finally(() => this.loading = false)
-			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
 	.tasks-tab {
-		max-height: 300x;
-		overflow: auto;
+
 	}
 </style>

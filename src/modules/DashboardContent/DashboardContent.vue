@@ -44,14 +44,8 @@
         </div>
 
         <div class="row d__cards">
-            <div class="d__box">
-                <div class="d__box__header">
-                    <label>Tasks</label>
-                </div>
-                <div class="d__box__content">
-                    test
-                </div>
-            </div>
+            <tasks-card />
+
             <div class="d__box">
                 <div class="d__box__header">
                     <label>Timeline</label>

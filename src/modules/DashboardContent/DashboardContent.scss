@@ -127,7 +127,7 @@
         height: 100%;
         justify-content: space-between;
         .d__box{
-           width: 49%; 
+           width: 49%;
            background: $white;
            padding: 20px;
            border-radius: 14px;
@@ -171,7 +171,7 @@
                     font-size: 12px;
                 }
             }
-        } 
+        }
     }
 }
 @media only screen and (max-width: 940px) and (min-width: 768px){
@@ -224,7 +224,7 @@
                         display: flex;
                         flex: 1;
                         justify-content: center;
-                        font-size: 18px;  
+                        font-size: 18px;
                         text-indent: 12px;
                     }
                     .tile__title{
@@ -239,8 +239,8 @@
             .d__box{
                 width: 100%;
             }
-        }   
-    } 
+        }
+    }
 }
 
 // Mobile Phone
