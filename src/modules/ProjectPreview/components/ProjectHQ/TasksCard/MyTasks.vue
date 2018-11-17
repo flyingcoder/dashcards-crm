@@ -2,22 +2,22 @@
 	<div class="my-tasks">
 		<div class="chips">
 			<v-chip small color="orange" text-color="white">
-				<v-avatar class="teal">14</v-avatar>
+				<v-avatar class="teal">{{ this.tasks.length }}</v-avatar>
 				All
 			</v-chip>
 
 			<v-chip small color="orange" text-color="white">
-				<v-avatar class="teal">9</v-avatar>
+				<v-avatar class="teal">{{ count_completed_tasks }}</v-avatar>
 				Completed
 			</v-chip>
 
 			<v-chip small color="orange" text-color="white">
-				<v-avatar class="teal">3</v-avatar>
+				<v-avatar class="teal">{{ count_pending_tasks }}</v-avatar>
 				Pending
 			</v-chip>
 
 			<v-chip small color="orange" text-color="white">
-				<v-avatar class="teal">2</v-avatar>
+				<v-avatar class="teal">{{ count_behind_tasks }}</v-avatar>
 				Behind
 			</v-chip>
 		</div>
@@ -52,6 +52,17 @@
 				type: Array,
 				default: () => []
 			}
+		},
+		computed: {
+			count_completed_tasks() {
+				return this.tasks.filter(task => task.status === 'completed').length
+			},
+			count_pending_tasks() {
+				return this.tasks.filter(task => task.status === 'pending').length
+			},
+			count_behind_tasks() {
+				return this.tasks.filter(task => task.status === 'behind').length
+			},
 		}
 	}
 </script>
