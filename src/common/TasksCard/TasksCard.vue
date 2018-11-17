@@ -11,7 +11,7 @@
 </template>
 
 <script>
-	import DashCard from '../../DashCard/DashCard.vue'
+	import DashCard from '@/common/DashCard.vue'
 	import TasksContent from './TasksContent.vue'
 
 	export default {

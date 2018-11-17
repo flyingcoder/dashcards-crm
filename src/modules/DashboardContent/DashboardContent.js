@@ -1,10 +1,11 @@
 import Breadcrumb from '@/common/Breadcrumb.vue'
+import TasksCard from '@/common/TasksCard/TasksCard.vue'
 import LogonLabel from './components/LonOnLabel.vue'
 
 export default {
   name: 'DashboardContent',
   components: {
-    Breadcrumb, LogonLabel
+    Breadcrumb, LogonLabel, TasksCard
   },
 
   data: () => ({
