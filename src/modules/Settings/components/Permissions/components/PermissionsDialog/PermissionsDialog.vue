@@ -35,12 +35,12 @@
 
 								<div class="items">
 											<v-switch
-													label="Create"
-													v-model="slug.create"
-											></v-switch>
-											<v-switch
 													label="View"
 													v-model="slug.view"
+											></v-switch>
+											<v-switch
+													label="Create"
+													v-model="slug.create"
 											></v-switch>
 											<v-switch
 													label="Update"

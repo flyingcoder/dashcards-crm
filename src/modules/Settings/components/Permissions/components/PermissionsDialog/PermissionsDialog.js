@@ -30,6 +30,21 @@ export default {
 				this.isEditDialog && this.update_fields(new_val)
 			},
 			deep: true
+		},
+		'slug.create'(val) {
+			if (val) {
+				this.slug.view = true
+			}
+		},
+		'slug.update'(val) {
+			if (val) {
+				this.slug.create = true
+			}
+		},
+		'slug.delete'(val) {
+			if (val) {
+				this.slug.update = true
+			}
 		}
 	},
 
