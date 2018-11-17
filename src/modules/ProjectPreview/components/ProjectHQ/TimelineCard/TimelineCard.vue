@@ -20,7 +20,7 @@
 </template>
 
 <script>
-	import DashCard from '../../DashCard/DashCard.vue'
+	import DashCard from '@/common/DashCard.vue'
 	import request from '@/services/axios_instance'
 
 	export default {
