@@ -7,9 +7,6 @@
             <v-btn fab small class="add__btn" @click="$emit('click')">
             <v-icon>add</v-icon>
             </v-btn>
-            <v-btn class="more__btn" fab small>
-                <v-icon>more_horiz</v-icon>
-            </v-btn>
         </v-flex>
     </v-layout>
 </template>
