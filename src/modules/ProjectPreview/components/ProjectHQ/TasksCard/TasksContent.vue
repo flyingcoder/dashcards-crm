@@ -15,7 +15,7 @@
 		<v-tabs-items v-model="active_tab">
 			<v-tab-item v-for="tab of tabs" :key="tab.id" :value="tab.name">
 				<v-card flat>
-					<component :tasks="tasks" :is="active_tab"></component>
+					<tasks-tab :tab="active_tab" :id="id" />
 				</v-card>
 			</v-tab-item>
 		</v-tabs-items>
@@ -23,17 +23,16 @@
 </template>
 
 <script>
-	import MyTasks from './MyTasks.vue'
-	import AllTasks from './AllTasks.vue'
+	import TasksTab from './TasksTab.vue'
 
 	export default {
 		name: 'TasksContent',
 		components: {
-			MyTasks, AllTasks
+			TasksTab
 		},
 
 		props: {
-			tasks: Array
+			id: [Number, String]
 		},
 
 		data: () => ({
