@@ -19,6 +19,11 @@
 			<v-avatar class="teal">{{ props.countBehind }}</v-avatar>
 			Behind
 		</v-chip>
+
+		<v-chip small color="orange" text-color="white">
+			<v-avatar class="teal">{{ props.countOpen }}</v-avatar>
+			Open
+		</v-chip>
 	</div>
 </template>
 
@@ -29,7 +34,8 @@
 			countAll: Number,
 			countCompleted: Number,
 			countPending: Number,
-			countBehind: Number
+			countBehind: Number,
+			countOpen: Number,
 		}
 	}
 </script>

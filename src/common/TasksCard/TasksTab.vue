@@ -12,6 +12,7 @@
 			:count-completed="count_completed_tasks"
 			:count-pending="count_pending_tasks"
 			:count-behind="count_behind_tasks"
+			:count-open="count_open_tasks"
 	/>
 
 	<task-custom-table :tasks="tasks"	/>
@@ -50,6 +51,9 @@
 			count_behind_tasks() {
 				return this.tasks.filter(task => task.status === 'behind').length
 			},
+			count_open_tasks() {
+				return this.tasks.filter(task => task.status === 'open').length
+			}
 		},
 
 		watch: {
