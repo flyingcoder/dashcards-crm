@@ -1,16 +1,17 @@
 <template>
-    <div class="table-header">
-        <breadcrumb :paths="paths"/>
-        
-        <v-speed-dial direction="left" slide-y-reverse-transition >
-            <v-btn slot="activator" fab small class="add__btn" @click="$emit('click')">
-                <v-icon>add</v-icon>
+    <v-layout row wrap class="table-header">
+        <v-flex>
+            <breadcrumb :paths="paths"/>
+        </v-flex>
+        <v-flex>
+            <v-btn fab small class="add__btn" @click="$emit('click')">
+            <v-icon>add</v-icon>
             </v-btn>
-            <v-btn slot="activator" class="more__btn" fab small>
+            <v-btn class="more__btn" fab small>
                 <v-icon>more_horiz</v-icon>
             </v-btn>
-        </v-speed-dial>
-    </div>
+        </v-flex>
+    </v-layout>
 </template>
 
 <script>
@@ -41,10 +42,11 @@
 		align-items: center;
 
 		button.add__btn.v-btn.v-btn--floating.v-btn--small{
-      background-color: $blue;
-      .v-icon{
-          color: $white;
-      }
+        background-color: $blue;
+        .v-icon{
+            color: $white;
+            font-size: 24px;
+        }
     }
 
     button.more__btn.v-btn.v-btn--floating.v-btn--small{
@@ -52,6 +54,7 @@
       border: 1px solid $white;
       .v-icon{
         color: $tableDarkText;
+        font-size: 24px;
       }
     }
 	}

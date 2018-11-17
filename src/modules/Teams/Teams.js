@@ -18,6 +18,24 @@ export default {
 			{text: 'Dashboard', disabled: false, router_name: 'default-content'},
 			{text: 'Teams', disabled: true, router_name: null}
 		],
+		sortList: [
+			{
+				title: 'Sort by member',
+			},
+			{
+				title: 'Sort by position',
+			},
+			{
+				title: 'Sort by location',
+			},
+			{
+				title: 'Sort by total hours',
+			},
+			{
+				title: 'Sort by total amount',
+			}
+		],
+
 		headers: [
 			{text: 'Member', align: 'left', value: 'name'},
 			{text: 'Position', value: 'position'},

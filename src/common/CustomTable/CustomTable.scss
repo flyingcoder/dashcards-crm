@@ -12,10 +12,21 @@
       background-color: $tableBlueBg;
       .table__toolbar{
         background-color: $tableBlueBg;
+        :global(.v-toolbar__content){
+          padding:0;
+        }
         .table__toolbar-title{
             color: $tableTitleBlue;
             text-align: left;
             font-size: 30px;
+        }
+        .sort__option{
+          border: 1px solid #b2b6c0;
+          background-color: $white;
+          .v-icon{
+            font-size: 24px;
+            color: #b2b6c0;
+          }
         }
       }
       .buzzooka__table{
@@ -31,6 +42,14 @@
               font-size: 13px;
               font-weight: 500;
               padding: 8px;
+              &:first-child{
+                /deep/ .v-icon{
+                  font-size: 35px;
+                }
+                /deep/ .theme--light.v-icon{
+                  color: $tableIconGray;
+                }
+              }
               &:last-child{
                 text-align: center;
               }
@@ -48,13 +67,32 @@
           }
         }
         
+        /deep/ .theme--light.v-table tbody tr:first-child:hover:not(.v-datatable__expand-row){
+          background: transparent;
+        }
+        
         /deep/ table.v-table tbody td:first-child, /deep/ table.v-table tbody td:not(:first-child){
           padding: 8px;
+          .v-icon{
+            color: $tableIconGray;
+          }
+          &:first-child{
+            .v-icon{
+              font-size: 35px;
+            }
+          }
+          .v-btn--active:before, .v-btn:focus:before, .v-btn:hover:before{
+            background-color: inherit;
+          }
+          .v-btn:hover{
+            border: 1px solid $tableIconGray;
+          }
         }
       }
     }
   }
 }
+    
 
 //For Mobile Version
 @media only screen and (max-width: 480px){

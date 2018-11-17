@@ -5,7 +5,21 @@
     @include customTableRow;
 }
 
+@include sortOptionStyle;
+
 .custom__table{
+    
+    .table__toolbar-title{
+        color: $tableTitleBlue;
+        text-align: left;
+        font-size: 30px;
+    }
+    .member__option{
+        .v-icon{
+            font-size: 24px;
+            color: $sortOptionGray;
+        }
+    }
     tbody{
         tr{
             height: 95px;

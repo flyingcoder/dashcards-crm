@@ -8,6 +8,13 @@
             <v-toolbar-title class="table__toolbar-title">
               {{toolbarTitle}}
             </v-toolbar-title>
+            <v-spacer></v-spacer>
+
+            <v-toolbar-items class="member__option">
+              <v-btn fab flat small class="sort__option" slot="activator">
+                <v-icon>more_horiz</v-icon>
+              </v-btn>
+            </v-toolbar-items>
           </v-toolbar>
         </slot>
           

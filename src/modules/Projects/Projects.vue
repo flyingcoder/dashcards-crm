@@ -42,19 +42,19 @@
 
 				<td class="text-xs-center">
 
-					<v-btn fab small color="#d6d6e2" depressed
+					<v-btn fab small flat depressed
 						@click="open_edit_dialog(item.item)"
 					>
 						<img src="@/assets/icons/groups/edit.svg" alt="">
 					</v-btn>
 
-					<v-btn fab small color="#d6d6e2" depressed
+					<v-btn fab small flat depressed
 						@click="open_delete_dialog(item.item)"
 					>
 						<img src="@/assets/icons/groups/delete.svg" alt="">
 					</v-btn>
 
-					<v-btn fab small color="#d6d6e2" depressed
+					<v-btn fab flat small depressed
 			       @click="navigate_to_view_project(item.item.id)"
 					>
 						<v-icon>pageview</v-icon>
