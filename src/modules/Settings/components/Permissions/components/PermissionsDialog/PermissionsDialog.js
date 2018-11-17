@@ -34,16 +34,30 @@ export default {
 		'slug.create'(val) {
 			if (val) {
 				this.slug.view = true
+			}else {
+				this.slug.update = false
 			}
 		},
 		'slug.update'(val) {
 			if (val) {
 				this.slug.create = true
+			}else {
+				this.slug.delete = false
 			}
 		},
 		'slug.delete'(val) {
 			if (val) {
 				this.slug.update = true
+			}
+		},
+		'slug.view'(val) {
+			if (!val) {
+				this.slug = {
+					create: false,
+					view: false,
+					update: false,
+					delete: false,
+				}
 			}
 		}
 	},
@@ -79,7 +93,6 @@ export default {
 			this.cancel() //close the modal
 		}
 
-	}
-
+	},
 
 }
