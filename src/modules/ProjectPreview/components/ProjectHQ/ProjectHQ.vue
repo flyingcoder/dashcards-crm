@@ -1,6 +1,8 @@
 <template>
 	<div class="project-hq">
 		<project-overview-card :id="id" />
+		<timeline-card :id="id" />
+		<tasks-card :id="id" />
 	</div>
 </template>
 

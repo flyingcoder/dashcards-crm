@@ -23,7 +23,7 @@
 </template>
 
 <script>
-	import DashCard from '../DashCard/DashCard.vue'
+	import DashCard from '../../DashCard/DashCard.vue'
 	import ProjectRow from './ProjectRow.vue'
 	import request from '@/services/axios_instance'
 	import { format } from 'date-fns'
