@@ -19,21 +19,11 @@ export default {
 			{text: 'Teams', disabled: true, router_name: null}
 		],
 		sortList: [
-			{
-				title: 'Sort by member',
-			},
-			{
-				title: 'Sort by position',
-			},
-			{
-				title: 'Sort by location',
-			},
-			{
-				title: 'Sort by total hours',
-			},
-			{
-				title: 'Sort by total amount',
-			}
+			{ title: 'Sort by member', },
+			{ title: 'Sort by position', },
+			{ title: 'Sort by location', },
+			{ title: 'Sort by total hours', },
+			{ title: 'Sort by total amount', }
 		],
 
 		headers: [
