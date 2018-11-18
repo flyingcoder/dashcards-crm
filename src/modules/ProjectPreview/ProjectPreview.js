@@ -13,7 +13,7 @@ export default {
 	},
 
 	data: () => ({
-		active_tab: null,
+		active_tab: 'HQ',
 		tabs: [
 			{ id: 1, name: 'HQ' },
 			{ id: 2, name: 'Files' },
@@ -26,27 +26,18 @@ export default {
 		]
 	}),
 
-	computed: {
-		component() {
-			if (this.active_tab !== null) {
-				return this.tabs[this.active_tab].name
-			}
-			return ''
-		}
-	},
-	
 	watch: {
-		'$route': {
-			handler({query}) {
-				if ('tab' in query) {
-					//TODO a url visited manually in the browser, so get the tab query and load corresponding component
-				}else {
-					this.active_tab = 0 //making project HQ default tab
-				}
-			},
-			deep: true,
-			immediate: true
-		}
+		// '$route': {
+		// 	handler({query}) {
+		// 		if ('tab' in query) {
+		// 			//TODO a url visited manually in the browser, so get the tab query and load corresponding component
+		// 		}else {
+		// 			this.active_tab = 'HQ' //making project HQ default tab
+		// 		}
+		// 	},
+		// 	deep: true,
+		// 	immediate: true
+		// }
 	}
 
 }
