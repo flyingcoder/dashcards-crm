@@ -9,6 +9,7 @@ import { milestone_tasks_api } from "./makeRequestModules/milestone_tasks_api";
 import { permissions_api } from "./makeRequestModules/permissions_api";
 import { autocomplete_api } from "./makeRequestModules/autocomplete_api";
 import { projects_api } from "./makeRequestModules/projects_api";
+import { project_overview_tab_members } from "./makeRequestModules/project-overview-tab-members";
 
 export default {
   login({ email, password }) {
@@ -37,4 +38,5 @@ export default {
   ...permissions_api,
   ...autocomplete_api,
   ...projects_api,
+  ...project_overview_tab_members,
 }

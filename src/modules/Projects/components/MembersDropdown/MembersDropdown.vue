@@ -61,7 +61,7 @@
 
 		watch: {
 			search (val) { val && this.debounce(val) },
-			memberItems (val) { this.items = [...val] }
+			memberItems (val) { this.items = [...val] },
 		},
 
 		methods: {
@@ -73,7 +73,10 @@
 			debounce: debounce(function(val){
 				this.is_loading = true
 				makeRequestTo.fill_dropdown('member', val)
-					.then(response => this.items = response.data)
+					.then(response => {
+						this.items = response.data
+						this.$emit('items-updated', response.data)
+					})
 					.finally(() => this.is_loading = false)
 			}, 500),
 

@@ -1,5 +1,21 @@
 <template>
 	<div class="members">
+
+		<add-dialog
+				:dialog.sync="add_dialog"
+				ref="add_dialog"
+				title="Add Member(s)"
+				@save="add_item('add_members', $event, dynamic_api)"
+				:all-members="items"
+		/>
+
+		<delete-dialog
+				:open-dialog.sync="delete_dialog"
+				title="Delete Member"
+				text-content="Are you sure you want to delete this member?"
+				@delete="delete_item('delete_member', dynamic_api)"
+		/>
+
 		<custom-table
 				:headers="headers"
 				:items="items"
@@ -19,7 +35,7 @@
 
 					<v-toolbar-items class="member__option">
 
-						<v-btn fab flat small class="list__view">
+						<v-btn fab flat small class="list__view" @click="add_dialog = true">
 							<v-icon>add</v-icon>
 						</v-btn>
 						<v-btn fab flat small class="list__view">
@@ -49,6 +65,19 @@
 					</v-toolbar-items>
 				</v-toolbar>
 			</template>
+
+			<template slot="custom-item" slot-scope="{item}">
+				<td>{{ item.first_name + ' ' + item.last_name }}</td>
+				<td>{{ item.email }}</td>
+				<td>{{ item.telephone }}</td>
+				<td>{{ item.job_title }}</td>
+				<td>{{ item.tasks.length }}</td>
+
+				<v-btn fab small flat depressed @click="open_delete_dialog(item)">
+					<img src="@/assets/icons/groups/delete.svg" alt="">
+				</v-btn>
+			</template>
+
 		</custom-table>
 	</div>
 </template>
