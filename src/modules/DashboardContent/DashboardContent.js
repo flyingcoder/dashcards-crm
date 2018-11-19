@@ -20,5 +20,5 @@ export default {
         { title: 'Inbound', counter: '799', icon: require('@/assets/icons/sidebar/templates.svg') },
         { title: 'Outbound', counter: '847', icon: require('@/assets/icons/sidebar/templates.svg') },
       ],
-    })
+    }),
 }

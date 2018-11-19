@@ -1,12 +1,10 @@
 <template>
 	<div class="tasks-content">
-		<v-tabs class="tabs" grow hide-slider height="60px" v-model="active_tab">
+		<v-tabs class="tabs" centered grow hide-slider height="60px" v-model="active_tab">
 			<v-tab
-					centered
 					v-for="tab in tabs"
 					:key="tab.name"
 					:href="`#${tab.name}`"
-					v-model="active_tab"
 			>
 				{{ tab.name }}
 			</v-tab>
@@ -15,7 +13,7 @@
 		<v-tabs-items v-model="active_tab">
 			<v-tab-item v-for="tab of tabs" :key="tab.id" :value="tab.name">
 				<v-card flat>
-					<tasks-tab :tab="active_tab" :id="id" />
+					<tasks-tab :tab="active_tab" v-if="active_tab === tab.name" :id="id" />
 				</v-card>
 			</v-tab-item>
 		</v-tabs-items>

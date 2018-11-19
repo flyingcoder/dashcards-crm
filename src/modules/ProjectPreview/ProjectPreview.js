@@ -5,7 +5,8 @@ export default {
 	mixins: [is_screen_medium_and_down],
 
 	components: {
-		HQ: () => import('./components/ProjectHQ/ProjectHQ.vue')
+		HQ: () => import('./components/ProjectHQ/ProjectHQ.vue'),
+		Members: () => import('./components/Members/Members.vue'),
 	},
 
 	props: {
@@ -13,7 +14,7 @@ export default {
 	},
 
 	data: () => ({
-		active_tab: null,
+		active_tab: 'HQ',
 		tabs: [
 			{ id: 1, name: 'HQ' },
 			{ id: 2, name: 'Files' },
@@ -26,26 +27,28 @@ export default {
 		]
 	}),
 
-	computed: {
-		component() {
-			if (this.active_tab !== null) {
-				return this.tabs[this.active_tab].name
-			}
-			return ''
-		}
-	},
-	
 	watch: {
 		'$route': {
 			handler({query}) {
 				if ('tab' in query) {
-					//TODO a url visited manually in the browser, so get the tab query and load corresponding component
+					this.handle_tab_by_url(query.tab)
 				}else {
-					this.active_tab = 0 //making project HQ default tab
+					this.active_tab = 'HQ' //making project HQ default tab
 				}
 			},
 			deep: true,
 			immediate: true
+		}
+	},
+
+	methods: {
+		handle_tab_by_url(tab_in_query) {
+			const tab_exists = this.tabs.find(tab => tab.name === tab_in_query)
+			if (tab_exists) {
+				this.active_tab = tab_in_query
+			}else {
+				this.$router.replace({ name: 'not_found' })
+			}
 		}
 	}
 
