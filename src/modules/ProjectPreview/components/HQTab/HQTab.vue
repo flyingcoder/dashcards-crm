@@ -6,5 +6,5 @@
 	</div>
 </template>
 
-<script src="./ProjectHQ.js"></script>
-<style lang="scss" scoped src="./ProjectHQ.scss"></style>
+<script src="./HQTab.js"></script>
+<style lang="scss" scoped src="./HQTab.scss"></style>

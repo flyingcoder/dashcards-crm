@@ -3,7 +3,7 @@ import TimelineCard from './TimelineCard/TimelineCard.vue'
 import TasksCard from '@/common/TasksCard/TasksCard.vue'
 
 export default {
-	name: 'ProjectHQ',
+	name: 'HQTab',
 	components: {
 		ProjectOverviewCard, TimelineCard, TasksCard
 	},
