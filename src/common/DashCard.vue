@@ -20,7 +20,7 @@
 		</div>
 
 		<div class="card-footer">
-			VIEW MORE
+			<slot name="footer">VIEW MORE</slot>
 		</div>
 
 	</div>
