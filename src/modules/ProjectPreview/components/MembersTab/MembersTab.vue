@@ -1,5 +1,5 @@
 <template>
-	<div class="members">
+	<div class="members-tab">
 
 		<add-dialog
 				:dialog.sync="add_dialog"
