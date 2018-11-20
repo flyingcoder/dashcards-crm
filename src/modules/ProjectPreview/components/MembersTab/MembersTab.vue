@@ -1,5 +1,5 @@
 <template>
-	<div class="members">
+	<div class="members-tab">
 
 		<add-dialog
 				:dialog.sync="add_dialog"
@@ -82,5 +82,5 @@
 	</div>
 </template>
 
-<script src="./Members.js"></script>
-<style lang="scss" scoped src="./Members.scss"></style>
+<script src="./MembersTab.js"></script>
+<style lang="scss" scoped src="./MembersTab.scss"></style>

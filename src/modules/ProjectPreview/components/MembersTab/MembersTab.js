@@ -4,7 +4,7 @@ import AddDialog from './AddDialog/AddDialog.vue'
 import { table_functionality } from "@/services/table-functionality";
 
 export default {
-	name: 'Members',
+	name: 'MembersTab',
 	mixins: [table_functionality],
 	components: {
 		CustomTable, AddDialog, DeleteDialog
