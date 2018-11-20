@@ -1,6 +1,6 @@
 <template>
 	<div class="milestones-tab">
-		<h1>Hi</h1>
+		<blank-box-card :id="id" />
 	</div>
 </template>
 

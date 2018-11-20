@@ -13,11 +13,7 @@
 
 		<v-tabs-items v-model="active_tab">
 			<v-tab-item v-for="tab of tabs" :key="tab.id" :value="tab.name">
-
-				<v-card flat>
-					<component :id="project_id" :is="active_tab" v-if="active_tab === tab.name"></component>
-				</v-card>
-
+				<component :id="project_id" :is="active_tab" v-if="active_tab === tab.name"></component>
 			</v-tab-item>
 		</v-tabs-items>
 

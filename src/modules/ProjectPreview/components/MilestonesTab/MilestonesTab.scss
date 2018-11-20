@@ -1,3 +1,6 @@
 .milestones-tab {
-
+  display: grid;
+  grid-template-columns: repeat(2, minmax(410px, 1fr));
+  grid-gap: 20px;
+  padding: 20px 30px;
 }
