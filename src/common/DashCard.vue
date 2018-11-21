@@ -1,29 +1,29 @@
 <template>
-	<div class="dash-card">
 
-		<div class="card-header">
-			<div class="title">{{title}}</div>
-
+	<v-container class="dash__card">
+		<v-layout row wrap class="card__header" align-center>
+			<v-flex xs6 class="card__title">
+				{{title}}
+			</v-flex>
 			<slot name="actions">
-				<div class="actions">
-					<v-icon class="action">crop</v-icon>
-					<v-icon class="action">minimize</v-icon>
-					<v-icon class="action">zoom_out_map</v-icon>
-					<v-icon class="action">cancel</v-icon>
-				</div>
+				<v-flex xs6 class="actions text-xs-right">
+					<v-btn fab small flat class="action">
+						<v-icon>close</v-icon>
+					</v-btn>
+				</v-flex>
 			</slot>
+		</v-layout>
 
-		</div>
-
-		<div class="card-content">
+		<v-flex xs12 class="card__content">
 			<slot name="content" />
-		</div>
+		</v-flex>
 
-		<div class="card-footer">
-			<slot name="footer">VIEW MORE</slot>
-		</div>
-
-	</div>
+		<v-flex xs12 class="card__footer text-xs-center">
+			<v-btn flat class="view__more_btn">
+				<slot name="footer">VIEW MORE</slot>
+			</v-btn>
+		</v-flex>
+	</v-container>
 </template>
 
 <script>
@@ -35,34 +35,4 @@
 	}
 </script>
 
-<style lang="scss" scoped>
-	.dash-card {
-		padding: 10px;
-		border: 1px solid darkseagreen;
-		border-radius: 10px;
-		display: grid;
-		grid-template-rows: 40px 1fr 40px;
-
-		.card-header {
-			display: grid;
-			grid-template-columns: 5fr 3fr;
-			align-items: center;
-		}
-
-		.actions {
-			display: flex;
-			justify-content: space-around;
-			> .action {
-				cursor: pointer;
-			}
-		}
-
-		.card-footer {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			cursor: pointer;
-		}
-
-	}
-</style>
+<style lang="scss" scoped src="./DashCard.scss"></style>
