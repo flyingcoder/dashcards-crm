@@ -53,7 +53,6 @@
 		@include styledScrollFor('.body'); //style the scroll
 
 		.body {
-			/*max-height: 200px;*/
 			overflow: auto;
 			.row {
 				display: grid;
