@@ -7,7 +7,8 @@ export default {
 	components: {
 		HQ: () => import('./components/HQTab/HQTab.vue'),
 		Members: () => import('./components/MembersTab/MembersTab.vue'),
-		Milestones: () => import('./components/MilestonesTab/MilestonesTab.vue')
+		Milestones: () => import('./components/MilestonesTab/MilestonesTab.vue'),
+		Task: () => import('./components/TaskTab/TaskTab.vue')
 	},
 
 	props: {
