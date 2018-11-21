@@ -99,3 +99,5 @@
 </template>
 <script src="./CustomTable.js"></script>
 <style lang="scss" scoped src="./CustomTable.scss"></style>
+
+<style scoped src="./CustomTable.css"></style>

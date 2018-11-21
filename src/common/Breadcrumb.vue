@@ -34,56 +34,60 @@
 </script>
 
 <style lang="scss" scoped>
-	.breadcrumb-wrapper{
-		//TODO add styling for breadcrumb
-		/deep/ ul{
-			li.page__title {
-				font-size: 26px;
-				font-weight: 500;
-				&:first-child a{
-					color: #bcc2ce;
-				}
-				&:nth-last-child(1) a{
-					color: #667280;
-				}
+.breadcrumb-wrapper{
+	ul.v-breadcrumbs.theme--light{
+		li.page__title {
+			font-size: 26px;
+			font-weight: 500;
+			&:first-child a.v-breadcrumbs__item span{
+				color: #bcc2ce;
 			}
-			li.v-breadcrumbs__divider{
-				padding: 0;
+			&:last-child a.v-breadcrumbs__item span{
+				color: #667280;
 			}
-			li .v-icon{
+		}
+		li.v-breadcrumbs__divider{
+			i{
 				font-size: 50px;
 				color: #bcc2ce;
 			}
 		}
 	}
+}
 	
-	// Tablet View
-	@media only screen and (max-width: 768px) and (min-width: 481px){
-		.breadcrumb-wrapper{
-		//TODO add styling for breadcrumb
-			/deep/ ul{
-				li.page__title {
-					font-size: 20px;
-				}
-				li .v-icon{
-					font-size: 30px;
-				}
+// Tablet View
+@media only screen and (max-width: 768px) and (min-width: 481px){
+	.breadcrumb-wrapper{
+	//TODO add styling for breadcrumb
+		ul.v-breadcrumbs.theme--light{
+			li.page__title {
+				font-size: 20px;
+			}
+			li .v-icon{
+				font-size: 30px;
 			}
 		}
 	}
+}
 
-	// Mobile View
-	@media only screen and (max-width: 480px){
-		.breadcrumb-wrapper{
-		//TODO add styling for breadcrumb
-			/deep/ ul{
-				li.page__title {
-					font-size: 12px;
-				}
-				li .v-icon{
-					font-size: 20px;
-				}
+// Mobile View
+@media only screen and (max-width: 480px){
+	.breadcrumb-wrapper{
+	//TODO add styling for breadcrumb
+		ul.v-breadcrumbs.theme--light{
+			li.page__title {
+				font-size: 14px;
+			}
+			li .v-icon{
+				font-size: 20px;
 			}
 		}
 	}
+}
+</style>
+
+<style scoped>
+>>> li.v-breadcrumbs__divider{
+	padding: 0;
+}
 </style>
