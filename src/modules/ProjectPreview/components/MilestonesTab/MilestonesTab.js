@@ -15,12 +15,17 @@ export default {
 
 	data: () => ({
 		add_dialog: false,
+		edit_dialog: false,
 		delete_dialog: false,
 		boxes: [],
 		loading: false,
 		direction: 'top',
 		is_open_speed_dial: false,
 		id_to_delete: null,
+		edit_item: {
+			id: null,
+			fields: null
+		},
 	}),
 
 	created() {
@@ -55,6 +60,30 @@ export default {
 				.finally(() => this.loading = false)
 			this.$event.$emit('open_snackbar', 'Milestone deleted successfully', 'red', 'success', 3000)
 			this.id_to_delete = null
+		},
+
+		open_edit_dialog(item_to_edit) {
+			const { id, title, status, days } = item_to_edit
+			this.edit_item.id = id
+			this.edit_item.fields = { title, status, days }
+			this.edit_dialog = true
+		},
+
+		async update_milestone(updated_fields) {
+			this.loading = true
+			this.edit_dialog = false
+			await request.put(`api/project/${this.id}/milestone/${this.edit_item.id}`, updated_fields)
+				.then(({data}) => {
+					const index = this.boxes.findIndex(item => item.id === data.id)
+					if (~index)
+						this.boxes.splice(index, 1, data)
+				})
+				.finally(() => this.loading = false)
+			this.$event.$emit('open_snackbar', 'Milestone updated successfully', 'red', 'success', 3000)
+			this.edit_item = {
+				id: null,
+				fields: null
+			}
 		}
 
 	}

@@ -3,7 +3,7 @@
 		<dash-card :title="validate_title(box.title)">
 			<template slot="actions">
 				<div class="actions">
-					<v-icon class="action">edit</v-icon>
+					<v-icon class="action" @click="$emit('edit', box)">edit</v-icon>
 					<v-icon class="action">zoom_out_map</v-icon>
 					<v-icon class="action" @click="$emit('delete', box.id)">cancel</v-icon>
 				</div>
