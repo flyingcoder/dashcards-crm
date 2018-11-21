@@ -8,11 +8,18 @@
 				@save="add_new_milestone"
 		/>
 
+		<delete-dialog
+				:open-dialog.sync="delete_dialog"
+				title="Delete Milestone"
+				text-content="Are you sure you want to delete this milestone?"
+				@delete="delete_milestone"
+		/>
+
 		<v-progress-linear v-show="loading" :indeterminate="true"></v-progress-linear>
 
 		<div class="boxes-wrapper">
 			<div v-for="box of boxes" :key="box.id">
-				<dynamic-box :id="id" :box="box" />
+				<dynamic-box @delete="open_delete_confirmation" :id="id" :box="box" />
 			</div>
 		</div>
 

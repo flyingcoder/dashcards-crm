@@ -5,7 +5,7 @@
 				<div class="actions">
 					<v-icon class="action">edit</v-icon>
 					<v-icon class="action">zoom_out_map</v-icon>
-					<v-icon class="action">cancel</v-icon>
+					<v-icon class="action" @click="$emit('delete', box.id)">cancel</v-icon>
 				</div>
 			</template>
 			<div class="content" slot="content"></div>

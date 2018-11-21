@@ -1,3 +1,4 @@
+import DeleteDialog from '@/common/DeleteDialog.vue'
 import DynamicBox from './DynamicBox/DynamicBox.vue'
 import MilestoneDialog from '@/modules/Milestone/components/MilestoneDialog/MilestoneDialog.vue'
 import request from '@/services/axios_instance'
@@ -5,7 +6,7 @@ import request from '@/services/axios_instance'
 export default {
 	name: 'MilestonesTab',
 	components: {
-		DynamicBox, MilestoneDialog
+		DynamicBox, MilestoneDialog, DeleteDialog
 	},
 
 	props: {
@@ -14,10 +15,12 @@ export default {
 
 	data: () => ({
 		add_dialog: false,
+		delete_dialog: false,
 		boxes: [],
 		loading: false,
 		direction: 'top',
 		is_open_speed_dial: false,
+		id_to_delete: null,
 	}),
 
 	created() {
@@ -29,6 +32,7 @@ export default {
 	},
 	
 	methods: {
+
 		async add_new_milestone(milestone) {
 			this.loading = true
 			this.$refs.add_dialog.clear_and_close()
@@ -36,6 +40,22 @@ export default {
 				.then(({data}) => this.boxes.push(data))
 				.finally(() => this.loading = false)
 			this.$event.$emit('open_snackbar', 'New Milestone added successfully', 'red', 'success', 3000)
+		},
+
+		open_delete_confirmation(id) {
+			this.id_to_delete = id
+			this.delete_dialog = true
+		},
+
+		async delete_milestone() {
+			this.loading = true
+			this.delete_dialog = false
+			await request.delete(`api/project/${this.id}/milestone/${this.id_to_delete}`)
+				.then(response => this.boxes = this.boxes.filter(item => item.id !== this.id_to_delete))
+				.finally(() => this.loading = false)
+			this.$event.$emit('open_snackbar', 'Milestone deleted successfully', 'red', 'success', 3000)
+			this.id_to_delete = null
 		}
+
 	}
 }
