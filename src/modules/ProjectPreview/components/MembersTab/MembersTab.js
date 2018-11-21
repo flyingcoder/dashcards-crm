@@ -51,4 +51,10 @@ export default {
 		this.$router.replace({ name: 'project_preview', query: { tab: 'Members' }})
 		this.fill_table('get_members', true, this.dynamic_api)
 	},
+
+	methods: {
+		can_be_deleted(item) {
+			return !(item.job_title === 'Administrator' || item.job_title === 'Client')
+		}
+	}
 }

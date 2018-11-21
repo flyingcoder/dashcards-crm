@@ -73,9 +73,11 @@
 				<td>{{ item.job_title }}</td>
 				<td>{{ item.tasks.length }}</td>
 
-				<v-btn fab small flat depressed @click="open_delete_dialog(item)">
-					<img src="@/assets/icons/groups/delete.svg" alt="">
-				</v-btn>
+				<td>
+					<v-btn v-if="can_be_deleted(item)" fab small flat depressed @click="open_delete_dialog(item)">
+						<img src="@/assets/icons/groups/delete.svg" alt="">
+					</v-btn>
+				</td>
 			</template>
 
 		</custom-table>
