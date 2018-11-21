@@ -15,11 +15,25 @@
 				@delete="delete_milestone"
 		/>
 
+		<milestone-dialog
+				:dialog.sync="edit_dialog"
+				ref="edit_dialog"
+				dialog-title="Edit Milestone"
+				:is-edit-dialog="edit_dialog"
+				:fields-to-edit="edit_item"
+				@save="update_milestone"
+		/>
+
 		<v-progress-linear v-show="loading" :indeterminate="true"></v-progress-linear>
 
 		<div class="boxes-wrapper">
 			<div v-for="box of boxes" :key="box.id">
-				<dynamic-box @delete="open_delete_confirmation" :id="id" :box="box" />
+				<dynamic-box
+						:id="id"
+						:box="box"
+						@edit="open_edit_dialog"
+						@delete="open_delete_confirmation"
+				/>
 			</div>
 		</div>
 
