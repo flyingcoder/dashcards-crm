@@ -58,7 +58,12 @@ export default {
 			this.title = new_fields.title
 			this.status = new_fields.status
 			this.days = new_fields.days
-		}
+		},
+
+		clear_and_close() {
+			Object.assign(this.$data, this.$options.data.apply(this))
+			this.cancel() //close the modal
+		},
 
 	}
 

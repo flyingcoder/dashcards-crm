@@ -1,9 +1,16 @@
 <template>
 	<div class="milestones-tab">
 
+		<milestone-dialog
+				:dialog.sync="add_dialog"
+				ref="add_dialog"
+				dialog-title="Add Milestone"
+				@save="add_new_milestone"
+		/>
+
 		<v-progress-linear v-show="loading" :indeterminate="true"></v-progress-linear>
 
-		<div v-show="!loading" class="boxes-wrapper">
+		<div class="boxes-wrapper">
 			<div v-for="box of boxes" :key="box.id">
 				<dynamic-box :id="id" :box="box" />
 			</div>
@@ -18,7 +25,7 @@
 		>
 			<v-btn
 					slot="activator"
-					v-model="fab"
+					v-model="is_open_speed_dial"
 					color="blue darken-2"
 					dark
 					fab
@@ -27,7 +34,7 @@
 				<v-icon>close</v-icon>
 			</v-btn>
 
-			<div class="speed-dial-item">
+			<div class="speed-dial-item" @click="add_dialog = true">
 				Add Milestone
 				<v-btn slot="activator" color="indigo" dark small fab>
 					<v-icon>add</v-icon>
