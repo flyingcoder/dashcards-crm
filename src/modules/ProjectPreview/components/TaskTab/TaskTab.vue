@@ -1,14 +1,23 @@
 <template>
 	<div class="tasks-tab">
-		<h2>Hello</h2>
+		<tasks-card :id="id" />
 	</div>
 </template>
 
 <script>
+	import TasksCard from '@/common/TasksCard/TasksCard.vue'
+
 	export default {
 		name: 'TasksTab',
+		components: {
+			TasksCard
+		},
 		props: {
 			id: [Number, String]
+		},
+
+		provide: {
+			bodyMaxHeight: '700px'
 		},
 
 		created() {
@@ -19,6 +28,9 @@
 
 <style lang="scss" scoped>
 	.tasks-tab {
-
+		display: grid;
+		grid-template-columns: repeat(2, 500px);
+		grid-gap: 20px;
+		padding: 20px 30px;
 	}
 </style>

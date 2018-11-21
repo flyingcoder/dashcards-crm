@@ -5,7 +5,7 @@
 			<div class="col">Project</div>
 			<div class="col">Status</div>
 		</div>
-		<div class="body">
+		<div class="body" :style="{ maxHeight: bodyMaxHeight }">
 			<div class="row" v-for="task in tasks" :key="tasks.id">
 				<div class="assignee-col">
 					<v-img :src="require('@/assets/temp/user.png')" height="40" width="40" />
@@ -26,6 +26,12 @@
 		name: 'TaskCustomTable',
 		props: {
 			tasks: Array
+		},
+		inject: {
+			bodyMaxHeight: {
+				from: 'bodyMaxHeight',
+				default: '200px'
+			}
 		}
 	}
 </script>
@@ -47,7 +53,6 @@
 		@include styledScrollFor('.body'); //style the scroll
 
 		.body {
-			max-height: 200px;
 			overflow: auto;
 			.row {
 				display: grid;

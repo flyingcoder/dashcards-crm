@@ -20,7 +20,7 @@
 			DashCard, TasksContent
 		},
 
-		props: { id: [Number, String] },
+		props: { id: [Number, String], },
 
 	}
 </script>
