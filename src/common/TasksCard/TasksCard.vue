@@ -1,13 +1,15 @@
 <template>
-	<div class="tasks-card">
-		<dash-card title="Tasks">
-			<div class="content-wrapper" slot="content">
-					<div class="tasks-items">
-						<tasks-content :id="id" />
-					</div>
-			</div>
-		</dash-card>
-	</div>
+	<v-flex md6 xs12 class="tasks-card">
+		<div class="tasks__content">
+			<dash-card title="Tasks" class="task__content">
+				<div class="content-wrapper" slot="content">
+						<div class="tasks-items">
+							<tasks-content :id="id" />
+						</div>
+				</div>
+			</dash-card>
+		</div>
+	</v-flex>
 </template>
 
 <script>
@@ -27,6 +29,8 @@
 
 <style lang="scss" scoped>
 	.tasks-card {
-
+		.tasks__content{
+			margin: 12px;
+		}
 	}
 </style>

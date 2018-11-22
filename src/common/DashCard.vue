@@ -2,11 +2,11 @@
 
 	<v-container class="dash__card">
 		<v-layout row wrap class="card__header" align-center>
-			<v-flex xs6 class="card__title">
+			<v-flex xs8 class="card__title">
 				{{title}}
 			</v-flex>
 			<slot name="actions">
-				<v-flex xs6 class="actions text-xs-right">
+				<v-flex xs4 class="actions text-xs-right">
 					<v-btn fab small flat class="action">
 						<v-icon>close</v-icon>
 					</v-btn>

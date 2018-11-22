@@ -1,6 +1,6 @@
 <template>
 	<div class="tasks-content">
-		<v-tabs class="tabs" centered grow hide-slider height="60px" v-model="active_tab">
+		<v-tabs class="tabs" centered grow hide-slider v-model="active_tab">
 			<v-tab
 					v-for="tab in tabs"
 					:key="tab.name"
@@ -34,10 +34,10 @@
 		},
 
 		data: () => ({
-			active_tab: 'MyTasks',
+			active_tab: 'My Tasks',
 			tabs: [
-				{ id: 1, name: 'MyTasks' },
-				{ id: 2, name: 'AllTasks' },
+				{ id: 1, name: 'My Tasks' },
+				{ id: 2, name: 'All Tasks' },
 			]
 		}),
 
@@ -46,6 +46,8 @@
 
 <style lang="scss" scoped>
 	.tasks-content {
-
+		.tabs{
+			margin: 8px;
+		}
 	}
 </style>
