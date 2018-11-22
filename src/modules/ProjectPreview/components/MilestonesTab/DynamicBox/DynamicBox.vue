@@ -2,7 +2,7 @@
 	<div class="dynamic-card">
 		<dash-card :title="validate_title(box.title)">
 			<template slot="actions">
-				<v-flex xs6 class="actions text-xs-right">
+				<v-flex xs4 class="actions text-xs-right">
 					<v-btn fab flat small class="action">
 						<v-icon  @click="$emit('edit', box)">edit</v-icon>
 					</v-btn>
@@ -54,6 +54,26 @@
 		}
 		.add__new_btn{
 			font-size: 12px;
+		}
+	}
+	@media only screen and (max-width: 480px){
+		.dynamic-card {
+			.actions{
+				.v-btn--floating.v-btn--small {
+					height: 30px;
+					width: 30px;
+				}
+				.v-btn{
+					margin:6px;
+				}
+			}
+			.content {
+				height: 400px;
+				border: 1px solid $tableBorderBlue;
+			}
+			.add__new_btn{
+				font-size: 12px;
+			}
 		}
 	}
 </style>
