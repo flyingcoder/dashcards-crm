@@ -6,7 +6,7 @@
 			<div class="col">Status</div>
 		</div>
 		<div class="body" :style="{ maxHeight: bodyMaxHeight }">
-			<div class="row" v-for="task in tasks" :key="tasks.id">
+			<div class="row" v-for="task in tasks" :key="tasks.id" @click="row_clicked(task)">
 				<div class="assignee-col">
 					<v-img :src="require('@/assets/temp/user.png')" height="40" width="40" />
 				</div>
@@ -31,6 +31,11 @@
 			bodyMaxHeight: {
 				from: 'bodyMaxHeight',
 				default: '200px'
+			}
+		},
+		methods: {
+			row_clicked(row) {
+				this.$event.$emit('task-row-clicked', row)
 			}
 		}
 	}
@@ -60,6 +65,7 @@
 				border-bottom: 1px solid gray;
 				grid-gap: 5px;
 				padding: 10px;
+				cursor: pointer;
 			}
 		}
 	}
