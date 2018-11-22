@@ -1,18 +1,14 @@
-.milestones-tab {
-  padding: 5px 15px;
-  .boxes-wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 500px);
-    justify-content: space-evenly;
-    grid-gap: 20px;
-    padding: 20px 30px;
+.milestones__tab {
+  padding: 24px;
+  .milestone__box{
+    margin: 0 12px;
   }
-  .speed-dial-item {
+  .speed__dial_item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    margin-right: 60px;
+    margin-right: 105px;
     width: 160px;
   }
 }

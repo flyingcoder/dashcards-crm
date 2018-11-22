@@ -1,5 +1,5 @@
 <template>
-	<div class="milestones-tab">
+	<div class="milestones__tab">
 
 		<milestone-dialog
 				:dialog.sync="add_dialog"
@@ -26,16 +26,16 @@
 
 		<v-progress-linear v-show="loading" :indeterminate="true"></v-progress-linear>
 
-		<div class="boxes-wrapper">
-			<div v-for="box of boxes" :key="box.id">
+		<v-layout row class="boxes__wrapper">
+			<v-flex xs6 class="milestone__box" v-for="box of boxes" :key="box.id">
 				<dynamic-box
 						:id="id"
 						:box="box"
 						@edit="open_edit_dialog"
 						@delete="open_delete_confirmation"
 				/>
-			</div>
-		</div>
+			</v-flex>
+		</v-layout>
 
 		<v-speed-dial
 				v-model="is_open_speed_dial"
@@ -55,14 +55,14 @@
 				<v-icon>close</v-icon>
 			</v-btn>
 
-			<div class="speed-dial-item" @click="add_dialog = true">
+			<div class="speed__dial_item" @click="add_dialog = true">
 				Add Milestone
 				<v-btn slot="activator" color="indigo" dark small fab>
 					<v-icon>add</v-icon>
 				</v-btn>
 			</div>
 
-			<div class="speed-dial-item">
+			<div class="speed__dial_item">
 				Select Milestone
 				<v-btn slot="activator" color="indigo" dark small fab>
 					<v-icon>touch_app</v-icon>

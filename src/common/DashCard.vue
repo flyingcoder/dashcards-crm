@@ -19,9 +19,9 @@
 		</v-flex>
 
 		<v-flex xs12 class="card__footer text-xs-center">
-			<v-btn flat class="view__more_btn">
-				<slot name="footer">VIEW MORE</slot>
-			</v-btn>
+			<slot name="footer">
+				<v-btn flat class="view__more_btn">VIEW MORE</v-btn>
+			</slot>
 		</v-flex>
 	</v-container>
 </template>

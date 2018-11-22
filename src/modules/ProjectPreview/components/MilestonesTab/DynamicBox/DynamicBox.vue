@@ -2,14 +2,19 @@
 	<div class="dynamic-card">
 		<dash-card :title="validate_title(box.title)">
 			<template slot="actions">
-				<div class="actions">
-					<v-icon class="action" @click="$emit('edit', box)">edit</v-icon>
-					<v-icon class="action">zoom_out_map</v-icon>
-					<v-icon class="action" @click="$emit('delete', box.id)">cancel</v-icon>
-				</div>
+				<v-flex xs6 class="actions text-xs-right">
+					<v-btn fab flat small class="action">
+						<v-icon  @click="$emit('edit', box)">edit</v-icon>
+					</v-btn>
+					<v-btn fab flat small class="action">
+						<v-icon @click="$emit('delete', box.id)">close</v-icon>
+					</v-btn>
+				</v-flex>
 			</template>
 			<div class="content" slot="content"></div>
-			<v-btn large slot="footer" round color="indigo" dark>ADD NEW</v-btn>
+			<v-btn large slot="footer" round class="add__new_btn" color="#3b589e" dark>
+				ADD NEW
+			</v-btn>
 		</dash-card>
 	</div>
 </template>
@@ -34,17 +39,21 @@
 	}
 </script>
 <style lang="scss" scoped>
+@import '~@/sass/_variables';
 	.dynamic-card {
-		.actions {
-			display: grid;
-			justify-content: end;
-			grid-auto-flow: column;
-			grid-gap: 10px;
+		.action{
+			background-color: $tableBlueBg;
+			border: 1px solid $tableBorderBlue;
+			.v-btn__content .v-icon{
+				color: $tableTitleBlue;
+			}
 		}
 		.content {
 			height: 400px;
-			margin: 15px;
-			border: 1px solid darkgrey;
+			border: 1px solid $tableBorderBlue;
+		}
+		.add__new_btn{
+			font-size: 12px;
 		}
 	}
 </style>
