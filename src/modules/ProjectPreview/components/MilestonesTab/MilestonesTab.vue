@@ -26,14 +26,16 @@
 
 		<v-progress-linear v-show="loading" :indeterminate="true"></v-progress-linear>
 
-		<v-layout row class="boxes__wrapper">
-			<v-flex xs6 class="milestone__box" v-for="box of boxes" :key="box.id">
-				<dynamic-box
-						:id="id"
-						:box="box"
-						@edit="open_edit_dialog"
-						@delete="open_delete_confirmation"
-				/>
+		<v-layout row wrap class="boxes__wrapper">
+			<v-flex md6 xs12 class="milestone__box" v-for="box of boxes" :key="box.id">
+				<div class="milestone__dynamic_box">
+					<dynamic-box
+							:id="id"
+							:box="box"
+							@edit="open_edit_dialog"
+							@delete="open_delete_confirmation"
+					/>
+				</div>
 			</v-flex>
 		</v-layout>
 
