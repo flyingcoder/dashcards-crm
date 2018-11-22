@@ -1,22 +1,24 @@
 <template>
-	<div class="timeline-card">
-		<dash-card title="Timeline">
-			<div class="content-wrapper" slot="content">
-				<template v-if="loading">
-					<v-progress-linear :indeterminate="true"></v-progress-linear>
-					LOADING...
-				</template>
-				<template v-else>
-					<div class="no-data" v-if="is_timeline_empty">
-						<h2>No Data</h2>
-					</div>
-					<div class="timeline-items" v-else>
+	<v-flex md6 xs12 class="timeline-card">
+		<div class="timeline__content">
+			<dash-card title="Timeline">
+				<div class="content-wrapper" slot="content">
+					<template v-if="loading">
+						<v-progress-linear :indeterminate="true"></v-progress-linear>
+						LOADING...
+					</template>
+					<template v-else>
+						<div class="no-data" v-if="is_timeline_empty">
+							<h2>No Data</h2>
+						</div>
+						<div class="timeline-items" v-else>
 
-					</div>
-				</template>
-			</div>
-		</dash-card>
-	</div>
+						</div>
+					</template>
+				</div>
+			</dash-card>
+		</div>
+	</v-flex>
 </template>
 
 <script>
@@ -55,6 +57,9 @@
 
 <style lang="scss" scoped>
 	.timeline-card {
+		.timeline__content{
+			margin: 12px;
+		}
 		.no-data {
 			text-align: center;
 		}

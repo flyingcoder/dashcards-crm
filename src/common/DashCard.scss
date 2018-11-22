@@ -35,3 +35,18 @@
     }
 
 }
+//Mobile View
+@media only screen and (max-width: 480px){
+    .dash__card {
+        padding: 10px 15px 15px 15px;
+        .card__header {
+            .card__title{
+                font-size: 18px;
+            }
+        }
+        
+        .card__content{
+            margin-bottom: 18px;
+        }
+    }
+}

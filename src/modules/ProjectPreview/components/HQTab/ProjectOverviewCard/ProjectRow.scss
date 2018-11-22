@@ -32,3 +32,25 @@
         align-items: center;
     }
 }
+
+//Mobile View
+@media only screen and (max-width: 480px){
+    .project__overview_row {
+        .project__label, .project__value {
+            padding: 9px 6px;
+            font-size: 12px;
+        }
+        .project__label {
+            .project__label_icon{
+                flex-basis: 30%;
+                svg{
+                    width: 22px;
+                }
+            }
+            .project__label_title{
+                flex-basis: 70%;
+            }
+                
+        }
+    }
+}

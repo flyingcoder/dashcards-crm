@@ -1,9 +1,9 @@
 <template>
-	<div class="hq-tab">
+	<v-layout row wrap class="hq-tab">
 		<project-overview-card :id="id" />
 		<timeline-card :id="id" />
 		<tasks-card :id="id" />
-	</div>
+	</v-layout>
 </template>
 
 <script src="./HQTab.js"></script>
