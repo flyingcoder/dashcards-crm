@@ -24,6 +24,11 @@
 				@save="update_milestone"
 		/>
 
+		<select-template-dialog
+				:open.sync="select_template_dialog"
+				@save="add_template"
+		/>
+
 		<v-progress-linear v-show="loading" :indeterminate="true"></v-progress-linear>
 
 		<v-layout row wrap class="boxes__wrapper">
@@ -64,10 +69,10 @@
 				</v-btn>
 			</div>
 
-			<div class="speed__dial_item">
-				Select Milestone
-				<v-btn slot="activator" color="indigo" dark small fab>
-					<v-icon>touch_app</v-icon>
+			<div class="speed__dial_item" @click="open_select_template_dialog">
+				Select Template
+				<v-btn slot="activator" :disabled="boxes.length > 0" color="indigo" small fab>
+					<v-icon color="white">touch_app</v-icon>
 				</v-btn>
 			</div>
 		</v-speed-dial>

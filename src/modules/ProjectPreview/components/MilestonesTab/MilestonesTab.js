@@ -2,11 +2,12 @@ import DeleteDialog from '@/common/DeleteDialog.vue'
 import DynamicBox from './DynamicBox/DynamicBox.vue'
 import MilestoneDialog from '@/modules/Milestone/components/MilestoneDialog/MilestoneDialog.vue'
 import request from '@/services/axios_instance'
+import SelectTemplateDialog from './SelectTemplateDialog.vue'
 
 export default {
 	name: 'MilestonesTab',
 	components: {
-		DynamicBox, MilestoneDialog, DeleteDialog
+		DynamicBox, MilestoneDialog, DeleteDialog, SelectTemplateDialog
 	},
 
 	props: {
@@ -17,6 +18,7 @@ export default {
 		add_dialog: false,
 		edit_dialog: false,
 		delete_dialog: false,
+		select_template_dialog: false,
 		boxes: [],
 		loading: false,
 		direction: 'top',
@@ -30,13 +32,17 @@ export default {
 
 	created() {
 		this.$router.replace({ name: 'project_preview', query: { tab: 'Milestones' }})
-		this.loading = true
-		request.get(`api/project/${this.id}/milestone`)
-			.then(({data}) => this.boxes = data.data)
-			.finally(() => this.loading = false)
+		this.get_dynamic_boxes()
 	},
 	
 	methods: {
+
+		get_dynamic_boxes() {
+			this.loading = true
+			request.get(`api/project/${this.id}/milestone`)
+				.then(({data}) => this.boxes = data.data)
+				.finally(() => this.loading = false)
+		},
 
 		async add_new_milestone(milestone) {
 			this.loading = true
@@ -84,6 +90,20 @@ export default {
 				id: null,
 				fields: null
 			}
+		},
+
+		open_select_template_dialog() {
+			if (this.boxes.length > 0) return
+			this.select_template_dialog = true
+		},
+
+		async add_template(template) {
+			this.select_template_dialog = false
+			this.loading = true
+			await request.post(`api/projects/${this.id}/milestone-import`, {
+				template_id: template
+			})
+			this.get_dynamic_boxes()
 		}
 
 	}
