@@ -1,13 +1,13 @@
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import DynamicBox from './DynamicBox/DynamicBox.vue'
-import MilestoneDialog from '@/modules/Milestone/components/MilestoneDialog/MilestoneDialog.vue'
+import MilestoneTabDialog from './MilestoneTabDialog/MilestoneTabDialog.vue'
 import request from '@/services/axios_instance'
 import SelectTemplateDialog from './SelectTemplateDialog.vue'
 
 export default {
 	name: 'MilestonesTab',
 	components: {
-		DynamicBox, MilestoneDialog, DeleteDialog, SelectTemplateDialog
+		DynamicBox, MilestoneTabDialog, DeleteDialog, SelectTemplateDialog
 	},
 
 	props: {
@@ -69,9 +69,9 @@ export default {
 		},
 
 		open_edit_dialog(item_to_edit) {
-			const { id, title, status, days } = item_to_edit
+			const { id, title, status, days, started_at, end_at } = item_to_edit
 			this.edit_item.id = id
-			this.edit_item.fields = { title, status, days }
+			this.edit_item.fields = { title, status, days, started_at, end_at }
 			this.edit_dialog = true
 		},
 

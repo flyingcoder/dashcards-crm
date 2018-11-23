@@ -1,7 +1,7 @@
 <template>
 	<div class="milestones__tab">
 
-		<milestone-dialog
+		<milestone-tab-dialog
 				:dialog.sync="add_dialog"
 				ref="add_dialog"
 				dialog-title="Add Milestone"
@@ -15,7 +15,7 @@
 				@delete="delete_milestone"
 		/>
 
-		<milestone-dialog
+		<milestone-tab-dialog
 				:dialog.sync="edit_dialog"
 				ref="edit_dialog"
 				dialog-title="Edit Milestone"
