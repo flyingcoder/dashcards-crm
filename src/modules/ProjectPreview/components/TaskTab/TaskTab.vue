@@ -1,8 +1,8 @@
 <template>
-	<div class="tasks-tab">
+	<v-layout row wrap class="tasks-tab">
 		<tasks-card :id="id" />
 		<preview-card :id="id" :task="task" />
-	</div>
+	</v-layout>
 </template>
 
 <script>
@@ -38,9 +38,11 @@
 
 <style lang="scss" scoped>
 	.tasks-tab {
-		display: grid;
-		grid-template-columns: repeat(2, 500px);
-		grid-gap: 20px;
-		padding: 20px 30px;
+		padding: 12px 24px;
+	}
+	@media only screen and (max-width: 480px){
+		.tasks-tab {
+			padding: 12px;
+		}
 	}
 </style>

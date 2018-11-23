@@ -18,11 +18,11 @@
             font-size: 30px;
         }
         .sort__option{
-          border: 1px solid #b2b6c0;
+          border: 1px solid $borderGray;
           background-color: $white;
           .v-icon{
             font-size: 24px;
-            color: #b2b6c0;
+            color: $borderGray;
           }
         }
       }

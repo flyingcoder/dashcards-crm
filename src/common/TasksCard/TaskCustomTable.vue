@@ -1,22 +1,34 @@
 <template>
 	<div class="task-custom-table">
-		<div class="header">
-			<div class="col">Assignee</div>
-			<div class="col">Project</div>
-			<div class="col">Status</div>
-		</div>
+		<v-layout row class="header">
+			<v-flex xs3 class="task__tableHead">Assignee</v-flex>
+			<v-flex xs6 class="task__tableHead">Project</v-flex>
+			<v-flex xs3 class="task__tableHead">Status</v-flex>
+		</v-layout>
 		<div class="body" :style="{ maxHeight: bodyMaxHeight }">
-			<div class="row" v-for="task in tasks" :key="tasks.id" @click="row_clicked(task)">
-				<div class="assignee-col">
+			<v-layout row align-center class="task__tableBody" v-for="task in tasks" :key="tasks.id" @click="row_clicked(task)">
+				<v-flex xs3 class="assignee__col">
 					<v-img :src="require('@/assets/temp/user.png')" height="40" width="40" />
-				</div>
-				<div class="project-col">
+				</v-flex>
+				<v-flex xs6 class="project__col">
 					{{ task.description.length > 25 ? task.description.slice(0, 40) : task.description }}
-				</div>
-				<div class="status-col">
+				</v-flex>
+				<v-flex xs3 class="status__col">
 					{{task.status}}
-				</div>
-			</div>
+					<div v-if="task.status === 'completed'">
+						<div class="status__completed"></div>
+					</div>
+					<div v-if="task.status === 'pending'">
+						<div class="status__pending"></div>
+					</div>
+					<div v-if="task.status === 'behind'">
+						<div class="status__behind"></div>
+					</div>
+					<div v-if="task.status === 'open'">
+						<div class="status__open"></div>
+					</div>
+				</v-flex>
+			</v-layout>
 		</div>
 	</div>
 </template>
@@ -42,31 +54,104 @@
 </script>
 
 <style lang="scss" scoped>
-	@import "~@/sass/variables";
+@import "~@/sass/variables";
 
-	.task-custom-table {
-		border: 1px solid grey;
-		.header {
-			display: grid;
-			grid-template-columns: 1fr 3fr 1fr;
-			border-bottom: 1px solid grey;
-			.col {
-				padding: 10px;
-			}
+.task-custom-table {
+	.header {
+		border-bottom: 1px solid $borderGray;
+		background-color: $tableBlueBg;
+		.task__tableHead {
+			padding: 10px;
+			color: $tableTitleBlue;
+			font-size: 15px;
+			font-weight: 500;
 		}
+	}
 
-		@include styledScrollFor('.body'); //style the scroll
+	@include styledScrollFor('.body'); //style the scroll
 
-		.body {
-			overflow: auto;
-			.row {
-				display: grid;
-				grid-template-columns: 1fr 3fr 1fr;
-				border-bottom: 1px solid gray;
-				grid-gap: 5px;
+	.body {
+		overflow: auto;
+		background-color: $tableBlueBg;
+		.task__tableBody {
+			border-bottom: 1px solid $borderGray;
+			cursor: pointer;
+			&:hover{
+				background-color: $white;
+			}
+			.assignee__col, .project__col{
 				padding: 10px;
-				cursor: pointer;
+				font-size: 17px;
+				font-weight: 400;
+			}
+			.status__col{
+				font-size: 12px;
+				font-weight: 400;
+				opacity: 0.8;
+				color: $textGray;
+				.status__completed{
+					height: 4px;
+					width: 60px;
+					border-radius: 10px;
+					background-color: $green;
+				}
+				.status__pending{
+					height: 4px;
+					width: 60px;
+					border-radius: 10px;
+					background-color: $orange;
+				}
+				.status__behind{
+					height: 4px;
+					width: 60px;
+					border-radius: 10px;
+					background-color: $red;
+				}
+				.status__open{
+					height: 4px;
+					width: 60px;
+					border-radius: 10px;
+					background-color: $textGray;
+				}
 			}
 		}
 	}
+}
+//Laptop - Tablet View
+@media only screen and (max-width: 1200px) and (min-width: 960px){
+	.task-custom-table {
+		.header {
+			.task__tableHead {
+				font-size: 12px;
+			}
+		}
+
+		.body {
+			.task__tableBody {
+				.assignee__col, .project__col{
+					font-size: 14px;
+				}
+			}
+		}
+	}
+}
+
+//Mobile View
+@media only screen and (max-width: 480px){
+	.task-custom-table {
+		.header {
+			.task__tableHead {
+				font-size: 12px;
+			}
+		}
+
+		.body {
+			.task__tableBody {
+				.assignee__col, .project__col{
+					font-size: 12px;
+				}
+			}
+		}
+	}
+}
 </style>
