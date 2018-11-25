@@ -50,7 +50,7 @@ export default {
 			await request.post(`api/project/${this.id}/milestone`, milestone)
 				.then(({data}) => this.boxes.push(data))
 				.finally(() => this.loading = false)
-			this.$event.$emit('open_snackbar', 'New Milestone added successfully', 'red', 'success', 3000)
+			this.$event.$emit('open_snackbar', 'New Milestone added successfully', 'red', 'success', 2000)
 		},
 
 		open_delete_confirmation(id) {
@@ -64,7 +64,7 @@ export default {
 			await request.delete(`api/project/${this.id}/milestone/${this.id_to_delete}`)
 				.then(response => this.boxes = this.boxes.filter(item => item.id !== this.id_to_delete))
 				.finally(() => this.loading = false)
-			this.$event.$emit('open_snackbar', 'Milestone deleted successfully', 'red', 'success', 3000)
+			this.$event.$emit('open_snackbar', 'Milestone deleted successfully', 'red', 'success', 2000)
 			this.id_to_delete = null
 		},
 
@@ -85,7 +85,7 @@ export default {
 						this.boxes.splice(index, 1, data)
 				})
 				.finally(() => this.loading = false)
-			this.$event.$emit('open_snackbar', 'Milestone updated successfully', 'red', 'success', 3000)
+			this.$event.$emit('open_snackbar', 'Milestone updated successfully', 'red', 'success', 2000)
 			this.edit_item = {
 				id: null,
 				fields: null
@@ -104,6 +104,18 @@ export default {
 				template_id: template
 			})
 			this.get_dynamic_boxes()
+		},
+
+		remove_task(box_index, { task_index, task_id }) {
+			this.loading = true
+			request.delete(`api/task/${task_id}`)
+				.then(response => {
+					let boxes = [...this.boxes]
+					boxes[box_index].tasks.splice(task_index, 1)
+					this.boxes = boxes
+					this.$event.$emit('open_snackbar', 'Task deleted successfully', 'red', 'success', 2000)
+				})
+				.finally(() => this.loading = false)
 		}
 
 	}

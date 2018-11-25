@@ -32,13 +32,14 @@
 		<v-progress-linear v-show="loading" :indeterminate="true"></v-progress-linear>
 
 		<v-layout row wrap class="boxes__wrapper">
-			<v-flex md6 xs12 class="milestone__box" v-for="box of boxes" :key="box.id">
+			<v-flex md6 xs12 class="milestone__box" v-for="(box, index) of boxes" :key="box.id">
 				<div class="milestone__dynamic_box">
 					<dynamic-box
 							:id="id"
 							:box="box"
 							@edit="open_edit_dialog"
 							@delete="open_delete_confirmation"
+							@remove-task="remove_task(index, $event)"
 					/>
 				</div>
 			</v-flex>
