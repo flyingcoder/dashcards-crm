@@ -59,10 +59,10 @@
 								</v-flex>
 
 								<v-flex xs12>
-									<v-textarea
-											label="Add task description"
-											v-model.trim="description"
-									></v-textarea>
+									<rich-editor
+											placeholder="Description"
+											v-model="description"
+									/>
 								</v-flex>
 
 							</v-layout>
