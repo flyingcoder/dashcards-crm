@@ -1,13 +1,15 @@
+import request from '@/services/axios_instance'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import DynamicBox from './DynamicBox/DynamicBox.vue'
 import MilestoneTabDialog from './MilestoneTabDialog/MilestoneTabDialog.vue'
-import request from '@/services/axios_instance'
 import SelectTemplateDialog from './SelectTemplateDialog.vue'
+import AddTaskDialog from './AddTaskDialog/AddTaskDialog.vue'
 
 export default {
 	name: 'MilestonesTab',
 	components: {
-		DynamicBox, MilestoneTabDialog, DeleteDialog, SelectTemplateDialog
+		DynamicBox, MilestoneTabDialog, DeleteDialog, SelectTemplateDialog,
+		AddTaskDialog
 	},
 
 	props: {
@@ -19,6 +21,7 @@ export default {
 		edit_dialog: false,
 		delete_dialog: false,
 		select_template_dialog: false,
+		add_task_dialog: false,
 		boxes: [],
 		loading: false,
 		direction: 'top',
@@ -28,6 +31,7 @@ export default {
 			id: null,
 			fields: null
 		},
+		box_id_to_add_task: null
 	}),
 
 	created() {
@@ -116,6 +120,26 @@ export default {
 					this.$event.$emit('open_snackbar', 'Task deleted successfully', 'red', 'success', 2000)
 				})
 				.finally(() => this.loading = false)
+		},
+
+		open_add_task_dialog(box_id) {
+			this.box_id_to_add_task = box_id
+			this.add_task_dialog = true
+		},
+
+		add_new_task(payload) {
+			this.loading = true
+			this.$refs.add_task_dialog.clear_and_close()
+			request.post(`api/milestone/${this.box_id_to_add_task}/task`, payload)
+				.then(({data}) => {
+					const box_index = this.boxes.findIndex(box => box.id === this.box_id_to_add_task)
+					this.boxes[box_index].tasks.push(data)
+					this.$event.$emit('open_snackbar', 'Task added successfully', 'red', 'success', 2000)
+				})
+				.finally(() => {
+					this.loading = false
+					this.box_id_to_add_task = null
+				})
 		}
 
 	}

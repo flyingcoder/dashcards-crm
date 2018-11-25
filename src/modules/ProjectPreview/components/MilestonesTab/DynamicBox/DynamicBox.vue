@@ -24,7 +24,7 @@
 					{{ task.title }} 󠁿󠁿󠁿<span @click="open_delete_dialog({ task_index: index, task_id: task.id })" class="remove-icon">🗙</span>
 				</div>
 			</div>
-			<v-btn large slot="footer" round class="add__new_btn" color="#3b589e" dark>
+			<v-btn large slot="footer" round class="add__new_btn" color="#3b589e" dark @click="$emit('add-task', box.id)">
 				ADD NEW
 			</v-btn>
 		</dash-card>
