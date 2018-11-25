@@ -45,6 +45,11 @@
 				default: '200px'
 			}
 		},
+
+		created() {
+			this.$event.$emit('task-row-clicked', this.tasks[0])
+		},
+
 		methods: {
 			row_clicked(row) {
 				this.$event.$emit('task-row-clicked', row)
