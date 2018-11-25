@@ -1,11 +1,12 @@
-import DatePicker from '@/common/DatePicker.vue'
 import moment from "moment/moment";
+import DatePicker from '@/common/DatePicker.vue'
+import RichEditor from '@/common/RichEditor.vue'
 
 export default {
 	name: 'AddTaskDialog',
 
 	components: {
-		DatePicker
+		DatePicker, RichEditor
 	},
 
 	props: {
