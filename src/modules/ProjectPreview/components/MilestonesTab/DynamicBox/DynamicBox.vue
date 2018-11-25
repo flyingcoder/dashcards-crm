@@ -1,5 +1,13 @@
 <template>
 	<div class="dynamic-card">
+
+		<delete-dialog
+				:open-dialog.sync="delete_dialog"
+				title="Delete Task"
+				text-content="Are you sure you want to delete this task?"
+				@delete="delete_task(item_to_delete)"
+		/>
+
 		<dash-card :title="validate_title(box.title)">
 			<template slot="actions">
 				<v-flex xs4 class="actions text-xs-right">
@@ -12,8 +20,8 @@
 				</v-flex>
 			</template>
 			<div class="content" slot="content">
-				<div class="task" v-for="task of box.tasks" :key="task.id">
-					{{ task.title }} 󠁿󠁿󠁿<span class="remove-icon">🗙</span>
+				<div class="task" v-for="(task, index) of box.tasks" :key="task.id">
+					{{ task.title }} 󠁿󠁿󠁿<span @click="open_delete_dialog({ task_index: index, task_id: task.id })" class="remove-icon">🗙</span>
 				</div>
 			</div>
 			<v-btn large slot="footer" round class="add__new_btn" color="#3b589e" dark>
@@ -25,19 +33,35 @@
 
 <script>
 	import  DashCard from '@/common/DashCard.vue'
+	import DeleteDialog from '@/common/DeleteDialog.vue'
 
 	export default {
-		name: 'BlankBoxCard',
+		name: 'DynamicBox',
 		components: {
-			DashCard
+			DashCard, DeleteDialog
 		},
 		props: {
 			id: [Number, String],
 			box: Object
 		},
+
+		data: () => ({
+			delete_dialog: false,
+			item_to_delete: null
+		}),
+
 		methods: {
 			validate_title(title) {
 				return title.length > 18 ? title.slice(0, 18) + '...' : title
+			},
+			open_delete_dialog(task) {
+				this.delete_dialog = true
+				this.item_to_delete = task
+			},
+			delete_task({task_index, task_id}) {
+				this.$emit('remove-task', { task_index, task_id })
+				this.delete_dialog = false
+				this.item_to_delete = null
 			}
 		}
 	}
