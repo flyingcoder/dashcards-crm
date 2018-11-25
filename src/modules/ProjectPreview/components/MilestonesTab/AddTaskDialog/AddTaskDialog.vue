@@ -19,7 +19,7 @@
 									></v-text-field>
 								</v-flex>
 
-								<v-flex xs12 md6>
+								<v-flex xs10 md4>
 									<v-select
 											label="Select Status"
 											v-model.trim="status"
@@ -27,20 +27,13 @@
 									></v-select>
 								</v-flex>
 
-								<v-flex xs12 md6>
+								<v-flex xs2 md2>
 									<v-text-field
-											label="Add days"
+											label="Days"
 											v-model.number="days"
 											type="number"
-											min="1"
+											min="0"
 									></v-text-field>
-								</v-flex>
-
-								<v-flex xs12 md6>
-									<v-textarea
-											label="Add task description"
-											v-model.trim="description"
-									></v-textarea>
 								</v-flex>
 
 								<v-flex xs12 md6>
@@ -48,19 +41,28 @@
 											label="Start Date"
 											prepend-icon="event"
 											readonly
-											v-model="start_date"
+											:value="start_date"
+											@input="start_date_changed"
 											:max="end_date"
 									/>
 								</v-flex>
 
-								<v-flex xs12 sm6>
+								<v-flex xs12 md6>
 									<date-picker
 											label="End Date"
 											prepend-icon="event"
 											readonly
-											v-model="end_date"
+											:value="end_date"
+											@input="end_date_changed"
 											:min="start_date"
 									/>
+								</v-flex>
+
+								<v-flex xs12>
+									<v-textarea
+											label="Add task description"
+											v-model.trim="description"
+									></v-textarea>
 								</v-flex>
 
 							</v-layout>

@@ -29,6 +29,13 @@
 				@save="add_template"
 		/>
 
+		<add-task-dialog
+				:dialog.sync="add_task_dialog"
+				ref="add_task_dialog"
+				dialog-title="Add Task"
+				@save="add_new_task"
+		/>
+
 		<v-progress-linear v-show="loading" :indeterminate="true"></v-progress-linear>
 
 		<v-layout row wrap class="boxes__wrapper">
@@ -40,6 +47,7 @@
 							@edit="open_edit_dialog"
 							@delete="open_delete_confirmation"
 							@remove-task="remove_task(index, $event)"
+							@add-task="open_add_task_dialog"
 					/>
 				</div>
 			</v-flex>
