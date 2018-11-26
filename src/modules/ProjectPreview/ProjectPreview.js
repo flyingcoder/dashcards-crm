@@ -8,7 +8,8 @@ export default {
 		HQ: () => import('./components/HQTab/HQTab.vue'),
 		Members: () => import('./components/MembersTab/MembersTab.vue'),
 		Milestones: () => import('./components/MilestonesTab/MilestonesTab.vue'),
-		Task: () => import('./components/TaskTab/TaskTab.vue')
+		Task: () => import('./components/TaskTab/TaskTab.vue'),
+		Files: () => import('./components/FilesTab/FilesTab.vue')
 	},
 
 	props: {

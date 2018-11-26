@@ -1,0 +1,69 @@
+@import '~@/sass/_variables';
+.files__tab{
+    padding: 24px;
+    .drop__files{
+        background-color: $white;
+        border: 1px solid $tableBorderBlue;
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 22px;
+        .drop__files_body{
+            background-color: $tableBlueBg;
+            border: 1px solid $tableBorderBlue;
+            .drop__files_content{
+                height: 500px;
+                .file__icon{
+                    .v-icon{
+                        font-size: 120px;
+                        color: #b3b7c3;
+                    }
+                }
+                .drop__title{
+                    font-size: 17px;
+                    color: $tableDarkText;
+                }
+                .drop__text{
+                    font-size: 12px;
+                    color: $tableDarkText;
+                }
+            }
+        }
+    }    
+    .file__list_header{
+        margin-bottom: 17px;
+        .file__tab{
+            .v-btn{
+                border: 1px solid #b3b7c3;
+                border-radius: 5px;
+                height: 50px;
+                width: 125px;
+                &:hover{
+                    .all.v-icon{
+                        color: #a186d7;
+                    }
+                    .image.v-icon{
+                        color: #1fb868;
+                    }
+                    .video.v-icon{
+                        color: #ff7f7c;
+                    }
+                    .docs.v-icon{
+                        color: #01a7e5;
+                    }
+                    .other.v-icon{
+                        color: #50b4aa;
+                    }
+                }
+            }
+        }
+
+        @include sortOptionStyle;
+
+        .file__option{
+            .v-icon{
+                font-size: 24px;
+                color: $sortOptionGray;
+            }
+        }
+    }
+}
