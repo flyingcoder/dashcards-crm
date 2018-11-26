@@ -2,195 +2,55 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import {check_user} from "./route_guard"
 
-import {import_all_views} from "../services/importAll"
-let all_views = import_all_views()
+import { home } from "./routes/home";
+import { checkout } from "./routes/checkout";
+import { notFound } from "./routes/notFound";
+import { login } from "./routes/login";
+import { signup } from "./routes/signup";
+import { forgotPassword } from "./routes/forgotPassword";
+import { pricing } from "./routes/pricing";
+import { dashboard } from "./routes/dashboard";
+import { clients } from "./routes/clients";
+import { groups } from "./routes/groups";
+import { templates } from "./routes/templates";
+import { milestones } from "./routes/milestones";
+import { milestoneTasks } from "./routes/milestoneTasks";
+import { projects } from "./routes/projects";
+import { services } from "./routes/services";
+import { teams } from "./routes/teams";
+import { settings } from './routes/settings';
+import { project_preview } from "./routes/projectPreview";
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/login',
-      name: 'login',
-      component: all_views.Login,
-      beforeEnter(to, from, next) {
-        if (check_user.is_user_logged()) {
-          next({name: 'not_found'})
-        }else {
-          next()
-        }
-      }
-    },
+	  {
+		  path: '/dashboard',
+		  component: () => import('@/modules/Dashboard/Dashboard.vue'),
+		  children: [
+			  dashboard, // path: '' => info the path is empty because is the default component for the parent
+				clients, // path: /dashboard/clients
+				groups, // path: /dashboard/team/groups
+			  templates, // path: /dashboard/templates
+			  milestones, // path: /dashboard/templates/:id/milestone
+			  milestoneTasks, // path: /dashboard/templates/:id/milestone/:id2/task
+				projects,// path: /dashboard/projects
+				services, // path: /dashboard/services
+				teams,// path: /dashboard/team
+			  settings, // path: /dashboard/settings,
+			  project_preview, //path: /dashboard/project-preview
+		  ]
+	  },
 
-    {
-      path: '/signup',
-      name: 'signup',
-      component: all_views.Signup,
-      beforeEnter(to, from, next) {
-        if (check_user.is_user_logged()) {
-          next({name: 'not_found'})
-        }else {
-          next()
-        }
-      }
-    },
+	  home, // path: /
+	  checkout, // path: /checkout
+	  notFound, // path: /404
+	  login, // path: /login
+	  signup, // path: /signup
+	  forgotPassword, // path: /forgot-password
+	  pricing, // path: /pricing
 
-    {
-      path: '/forgot-password',
-      name: 'forgot_password',
-      component: all_views.ForgotPassword,
-      beforeEnter(to, from, next) {
-        if (check_user.is_user_logged()) {
-          next({name: 'not_found'})
-        }else {
-          next()
-        }
-      }
-    },
-
-    {
-      path: '/',
-      name: 'home',
-      component: all_views.Home,
-      beforeEnter(to, from, next) {
-        if (check_user.is_user_logged()) {
-          next()
-        }else {
-          next({name: 'not_found'})
-        }
-      }
-    },
-
-    {
-      path: '/dashboard',
-      component: all_views.Dashboard,
-      children: [
-        {
-          path: '',
-          name: 'default-content',
-          component: all_views.DashboardContent
-        },
-        {
-          path: 'projects',
-          name: 'projects',
-					component: all_views.Projects
-        },
-				{
-					path: 'clients',
-          name: 'clients',
-          component: all_views.Clients
-				},
-				{
-					path: 'calendar',
-					name: 'calendar'
-				},
-				{
-					path: 'milestones',
-					name: 'milestones'
-				},
-				{
-					path: 'forms',
-					name: 'forms'
-				},
-				{
-					path: 'invoice',
-					name: 'invoice'
-				},
-				{
-					path: 'payment',
-					name: 'payment'
-				},
-				{
-					path: 'timers',
-					name: 'timers'
-				},
-				{
-					path: 'cloud',
-					name: 'cloud'
-				},
-				{
-					path: 'team',
-          name: 'team',
-          component: all_views.Teams
-				},
-				{
-					path: 'team/groups',
-          name: 'team/groups',
-          component: all_views.Groups
-				},
-				{
-					path: 'chat',
-					name: 'chat'
-				},
-        {
-					path: 'reports',
-					name: 'reports'
-				},
-        {
-					path: 'support',
-					name: 'support'
-				},
-        {
-					path: 'services',
-					name: 'services',
-					component: all_views.Services
-				},
-      ],
-      beforeEnter(to, from, next) {
-        if (check_user.is_user_logged()) {
-          next()
-        }else {
-          next({name: 'not_found'})
-        }
-      }
-    },
-
-    {
-      path: '/pricing',
-      name: 'pricing',
-      component: all_views.Pricing,
-       beforeEnter(to, from, next) {
-          if (check_user.is_user_logged()) {
-            next()
-          }else {
-            next({name: 'not_found'})
-          }
-       }
-    },
-    
-    {
-      path: '/groups',
-      name: 'groups',
-      component: all_views.Groups,
-		  beforeEnter(to, from, next) {
-          if (check_user.is_user_logged()) {
-            next()
-          }else {
-            next({name: 'not_found'})
-          }
-      }
-    },
-
-		{
-			path: '/checkout',
-			name: 'checkout',
-			component: all_views.Checkout,
-			props: true,
-			beforeEnter(to, from, next) {
-				if (check_user.is_user_logged()) {
-					next()
-				}else {
-					next({name: 'not_found'})
-				}
-			}
-		},
-
-    {
-      path: '/404',
-      alias: '*',
-      name: 'not_found',
-      component: all_views.NotFound,
-    }
   ],
   mode: 'history'
 })

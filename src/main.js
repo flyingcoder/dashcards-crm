@@ -1,4 +1,3 @@
-import '@babel/polyfill'
 import Vue from 'vue'
 import './plugins/axios'
 import './plugins/vuetify'
@@ -8,12 +7,8 @@ import './plugins/vuelidate'
 import App from './App.vue'
 import router from './router/router'
 import store from './store/store'
-import lodash from 'lodash'
 
 Vue.config.productionTip = false
-
-// setting up the lodash library
-Object.defineProperty(Vue.prototype, '_', { value: lodash });
 
 new Vue({
   router,

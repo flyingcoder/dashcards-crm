@@ -22,7 +22,8 @@
     },
 
     created() {
-      this.$event.$on('open_snackbar', (text = 'Default Text', color = '', icon = 'notification', timeout = 6000, mode = '') => {
+      this.$event.$on('open_snackbar', (text, color = '', icon = 'notification', timeout = 6000, mode = '') => {
+      	if (!text) return
         this.snackbar = true
         this.text = text
         this.color = color || ''

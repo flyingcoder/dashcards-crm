@@ -17,7 +17,7 @@ async function set_to_localStorage({data}) {
 	router.push({ name: 'default-content' })
 }
 
-const auth = {
+export const auth = {
     isAuthenticated () {
       return store.getters.is_user_logged
     },

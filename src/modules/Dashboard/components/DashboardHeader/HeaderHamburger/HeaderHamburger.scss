@@ -1,0 +1,76 @@
+@import "~@/sass/_variables";
+
+.h__hamburger {
+    button{
+        position: relative;
+        background: $white;
+        border-radius: 50%;
+        border: 1px solid $toggle-border;
+        box-shadow: 0 4px 3px 0 rgba(173, 183, 196, 0.13);
+        transform: rotateZ(180deg);
+        transition: transform .5s ease-in-out;
+        .icon {
+            display: flex;  
+            justify-content: center;
+            align-items: center;
+            img{
+                position: relative;
+            }
+        }
+    }
+
+    .sidebar__collapse.opened {
+        transform: rotateZ(180deg);
+    }
+
+    .sidebar__collapse.closed {
+        transform: rotateZ(-360deg);
+    }
+}
+
+// Small Laptop - Large Desktop
+@media only screen and (min-width: 768px) {
+    .h__hamburger {
+        button{
+            width: 20px;
+            height: 20px;
+            right: 9px;
+            img{
+                width: 10px;
+            }
+            .chevron{
+                display: block;
+            }
+            .menu{
+                display: none;
+            }
+        }
+        .sidebar__collapse.opened {
+            img{
+                left: 1px;
+            }
+        }
+    }
+}
+
+
+// Mobile Phone - Tablet
+@media only screen and (min-width: 320px) and (max-width: 767px){
+    .h__hamburger {
+        button{
+            width: 25px;
+            height: 25px;
+            img{
+                width: 10px;
+            }
+            .chevron{
+                display: none;
+            }
+            .menu{
+                display: block;
+            }
+        }
+    }
+}
+
+

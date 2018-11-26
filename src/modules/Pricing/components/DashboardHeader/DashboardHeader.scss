@@ -1,0 +1,49 @@
+@import "~@/sass/_variables";
+
+.header {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: $white;
+  padding-right: 2.5%;
+}
+
+.h__hamburger{
+  display: flex;
+  align-items: center;
+}
+
+.h__search {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.h__menu {
+  display: flex;
+  flex-basis: 25%;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+// Small Laptop - Large Desktop
+@media only screen and (min-width: 768px) {
+  .h__hamburger{
+    flex-basis: 5%;
+    justify-content: flex-start;
+  } 
+  .h__search {
+    flex-basis: 70%;
+  }
+}
+
+// Mobile Phone - Tablet
+@media only screen and (min-width: 320px) and (max-width: 767px){
+  .h__hamburger{
+    flex-basis: 10%;
+    justify-content: center;
+  } 
+  .h__search {
+    flex-basis: 65%;
+  }
+}

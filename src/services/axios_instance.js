@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '@/store/store'
+import { auth } from '@/plugins/auth'
 
 const request = axios.create({
   baseURL: 'https://api.bizzooka.ca',
@@ -21,7 +22,19 @@ request.interceptors.request.use(request => {
 request.interceptors.response.use(response => {
   return response
 }, error => {
-  store.commit('open_snackbar', { status: true, message: error.response.data.error })
+	if (error.response.status === 401) { // Unauthenticated
+		auth.logout()
+    return
+  }
+  //TODO: refactor this to have best practise. -roland review
+  var res = error.response;
+  if(error.response.status == 422) {
+    for(error in res.data.errors) {
+      store.commit('open_snackbar', { status: true, message: res.data.errors[error][0] })
+    }
+  } else {
+    store.commit('open_snackbar', { status: true, message: res.data.message })
+  }  
 })
 
 export default request
