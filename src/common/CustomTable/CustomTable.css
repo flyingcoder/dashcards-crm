@@ -1,0 +1,35 @@
+>>> .table__toolbar .v-toolbar__content{
+    padding:0;
+}
+>>> .buzzooka__table .v-datatable__actions{
+    justify-content: space-between;
+}
+>>> tr.table__head th:first-child .v-icon{
+    font-size: 35px;
+}
+>>> tr.table__head th:first-child .theme--light.v-icon{
+    color: #d3d5e1;
+}
+
+>>> .buzzooka__table .theme--light.v-table tbody tr:first-child:hover:not(.v-datatable__expand-row){
+    background: transparent;
+}
+>>> .buzzooka__table table.v-table tbody td:first-child, 
+>>> .buzzooka__table table.v-table tbody td:not(:first-child){
+    padding: 8px;
+}
+>>> .buzzooka__table table.v-table tbody td:first-child .v-icon, 
+>>> .buzzooka__table table.v-table tbody td:not(:first-child) .v-icon{
+    color: #d3d5e1;
+}
+>>> .buzzooka__table table.v-table tbody td:first-child .v-icon{
+    font-size: 35px;
+}
+>>> .buzzooka__table table.v-table tbody td:not(:first-child) .v-btn--active:before,
+>>> .buzzooka__table table.v-table tbody td:not(:first-child) .v-btn:focus:before,
+>>> .buzzooka__table table.v-table tbody td:not(:first-child) .v-btn:hover:before {
+    background-color: inherit;
+}
+>>> .buzzooka__table table.v-table tbody td:not(:first-child) .v-btn:hover{
+    border: 1px solid #d3d5e1;
+}

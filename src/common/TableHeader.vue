@@ -1,0 +1,58 @@
+<template>
+    <v-layout row wrap class="table-header">
+        <v-flex>
+            <breadcrumb :paths="paths"/>
+        </v-flex>
+        <v-flex>
+            <v-btn fab small class="add__btn" @click="$emit('click')">
+            <v-icon>add</v-icon>
+            </v-btn>
+        </v-flex>
+    </v-layout>
+</template>
+
+<script>
+    import Breadcrumb from '@/common/Breadcrumb.vue'
+
+    export default {
+        name: 'TableHeader',
+        props: {
+            paths: Array,
+        },
+        data (){
+            return{
+                fab: true,
+            }
+        },
+        components: {
+            Breadcrumb
+        }
+    }
+</script>
+<style lang="scss" scoped>
+	@import "~@/sass/variables";
+
+	.table-header {
+		display: grid;
+		grid-auto-flow: column;
+		justify-content: space-between;
+		align-items: center;
+
+		button.add__btn.v-btn.v-btn--floating.v-btn--small{
+        background-color: $blue;
+        .v-icon{
+            color: $white;
+            font-size: 24px;
+        }
+    }
+
+    button.more__btn.v-btn.v-btn--floating.v-btn--small{
+      background-color: $white;
+      border: 1px solid $white;
+      .v-icon{
+        color: $tableDarkText;
+        font-size: 24px;
+      }
+    }
+	}
+</style>

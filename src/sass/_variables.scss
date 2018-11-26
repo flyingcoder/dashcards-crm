@@ -1,226 +1,121 @@
-
-// Body
-$body-bg: #f2f1f7;
-
 // Typography
-$font-family-sans-serif: "lato semibold";
-$font-size-base: 12px;
-$line-height-base: 1.6;
-$text-color: #636b6f;
-
-// Navbar
-$navbar-default-bg: #fff;
-
-// Buttons
-    $btn-default-color: $text-color;
-
-// Panels
-    $panel-default-heading-bg: #fff;
-
-// Font Family
     $lato: "lato";
     $lato-semi: "lato semibold";
     $lato-heavy: "lato heavy";
     $lato-mid: "lato medium";
     $myriad: "myriad pro";
 
-// Text
-    $text: #667381;
-    $text-title: #667383;
-    $side-text: #fcfcfd;
-    $side-hover: #6a7784;
-    $fade-text: #dcdcdc;
-    $awesome: #9098a3;
-    $title-path: rgb(188, 194, 207);
 
-// Table
-    $table-head: rgb(127, 145, 168);
-    $table-data: rgb(102, 115, 129);
-    $progress-bg: rgb(236, 241, 245);
-    $progress-value: rgb(59, 88, 158);
-    $table-active: rgb(31, 184, 104);
-    $table-closed: #ff7f80;
-    $table-hold: #ed8566;
-    $table-status-text:  rgb(179, 182, 195);
-    $table-hover: #f7f8ff;
-
-// Color
+// Colors
     $white: #ffffff;
-    $black: #000000;
     $blue: #3b589e;
-    $blue-2: #2b3245;
-    $gray: #242329;
-    $gray-2: #9095a9;
-    $gray-3: #657186;
-    $gray-4: #bcc2cf;
-    $gray-5: rgb(243, 244, 249);
-    $gray-icon: #667381;
-    $gray-bg: #f8f9fb;
-    $gray-toggle: #dae1e7;
-    $gray-scroll: #b3b6c3;
-    $gray-action: #d4d6df;
-    $gray-payment: #7f91a8;
-    $green: #1fb868;
-    $online: #23bd6b;
-    $offline: #bfbfbf;
-    $red: rgb(255, 127, 126);
-    $warning: rgb(255, 0, 0);
-
-    $orange-tile-1: #ed8564;
-    $green-tile-2: #50b4aa;
-    $purple-tile-3: #a085d5;
-    $green-tile-4: #1fb868;
-    $blue-tile-5: #00a7e5;
-    $orange-tile-6: #ff7f7e;
-
-    $active-tab: #F5F5F5;
-    $login: #00a7e5;
-    $forgot: rgb(111, 111, 111);
-    $divider: rgb(230, 230, 230);
-
-// Action
-    $action: rgb(212, 214, 224);
-    $action-hover: rgb(179, 182, 195);
-    $option-hover: rgb(114, 126, 138);
-    $action-move: #a186d3;
-    $action-delete: #ff7f7e;
-    $action-hover-delete: #e52828;
-    $action-edit: #1fb868;
-
-// V Modal
-    $modal-bg: #eeeff2;
-    $modal-title: rgb(101, 113, 134);
-    $modal-icon: rgb(188, 194, 207);
-    $modal-hover: rgb(144, 149, 169);
-    $modal-input: rgb(248, 249, 251);
-
-// Header Dropdown
-    $header-dropdown-bg: rgb(232, 234, 246);
-    $circle-checkbox: #8b94bf;
-    $template-icon: rgb(139, 148, 191);
-    $template-box: #ced3eb;
-    $template-text: rgb(140, 149, 191);
-    $template-border: 2px solid rgb(139, 148, 191);;
-    $template-hover: rgb(53, 53, 53);
-    $notification-text: rgb(101, 113, 134);
-
-// HQ Menu
-    $hq-icon: rgb(188, 194, 207);
-    $hq-menu-bg: #4c69ae;
-
-// Border Color
+    $green: #4caf50;
+    $red: #ff5252;
+    $orange: #ff7f27;
+    $textGray: #9095AB;
+    $chipGray: #9196ac;
+    $chipDark: #2b3244;
+    $chipBlue: #3e5aa3;
+    $borderGray: #b2b6c0;
     $toggle-border: #e3e6eb;
     $tile-border: #dce1e5;
-    $table-border-color: rgb(220, 225, 229);
+    $sortOptionGray: #b2b6c0;
+    $sortListBgBlue:#e8eaf6;
+    $sortListBgWhite: #f8f8ff;
+    $sortListDarkTxt:#727d91;
+    $tableBlueBg: #f5f7fa;
+    $tableDarkText: #4c5561;
+    $tableBlueText: #8090aa;
+    $tableBorderBlue: #dce1e5;
+    $tableTitleBlue: #667280;
+    $tableIconGray:#d3d5e1;
+    $modalBgGray:#eeeef3;
+    $modalTitle: #667187;
 
-// Border
-    $border-buzz: 1px solid $tile-border;
-    $body-border: 1px solid rgb(220, 225, 229);
-    $section-border: 1px solid rgb(235, 238, 241);
-    $table-border: 1px solid rgb(220, 225, 229);
+// Mixin for styled scroll
 
-// Box Shadow
-    $body-shadow: 0px 4px 3px 0px rgba(173, 183, 196, 0.13);
-    $hover-shadow: 0px 10px 10px 0px rgba(173, 183, 196, 0.75);
-    $option-shadow: 0px 4px 3px 0px rgba(173, 183, 196, 0.13);
-    $add-shadow: 0px 5px 5px 0px rgba(173, 183, 196, 0.75);
+@mixin styledScrollFor ($selector) {
+    /* width */
+    #{$selector}::-webkit-scrollbar {
+        width: 10px;
+    }
 
-// Form
-    $input-text: rgb(102, 115, 129);
-    $input-bg: #fbfcfd;
-    $input2-bg: rgb(251, 252, 253);
-    $input-border: 1px solid rgb(192, 192, 192);
-    $input-border-2: 1px solid rgb(215, 215, 215);
-    $box-shadow-inset: inset 0px 1px 1px 0px rgba(154, 157, 160, 0.35);
-    $form-button: rgb(59, 88, 158);
-    $form-button-hover: rgb(76, 105, 174);
-    $form-caret-bg: rgb(241, 241, 247);
-    $form-caret-color: rgb(192, 192, 192);
+    /* Track */
+    #{$selector}::-webkit-scrollbar-track {
+        background: #DAE1E7;
+        border-radius: 15px;
+    }
 
-// Milestone
-    $milestone-title: rgb(101, 113, 134);
+    /* Handle */
+    #{$selector}::-webkit-scrollbar-thumb {
+        background: #B4B6C3;
+        border-radius: 10px;
+    }
+}
+// Mixin for custom table pagination row
 
-// Member
-    $settings-icon: rgb(212, 214, 224);
-    $member-position: rgb(66, 69, 76);
-    $member-profile: rgb(186, 188, 200);
-    $member-info: rgb(179, 182, 195);
+@mixin customTableRow {
+    .actions-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 160px 320px;
+        justify-content: space-between;
+        align-items: center;
 
-// Files
-    $drop-text: rgb(124, 124, 124);
-    $file-icon-active: rgb(114, 126, 138);
-    $file-icon: rgb(179, 182, 195);
-    $file-all: rgb(160, 133, 214);
-    $file-image: #1fb868;
-    $file-video: #ff7f7e;
-    $file-document: #01a7e5;
-    $file-others: #50b4aa;
-    $file-uploadby: rgb(101, 113, 134);
-    $file-dropdown: rgb(232, 234, 246);
-    $file-dropdown-bg: #f0f1fb;
-    $file-dropdown-text: rgb(114, 125, 146);
-    $dropdown-border: rgba(0, 0, 0, 0.15);
+        .rows-per-page-dropdown {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            align-items: center;
+            justify-content: center;
+        }
 
-// Invoice
-    $invoice-title: rgb(213, 212, 211);
-    $border-circle: rgb(248, 249, 251);
-    $highlight-bg: #e8f1fa;
-    $invoice-fill-progress: #667381;
-    $invoice-progress-bg: rgb(241, 241, 247);
-    $invoice-circle-bg: #f1f1f7;
+        .pagination {
+            justify-self: end;
+        }
 
-// Profile
-    $feed-text: rgb(43, 50, 69);
-    $add-photo-bg: rgb(0, 0, 0);
-    $social-hover: #313751;
+    }
+}
+@mixin sortOptionStyle {
+    
+    .sort__option{
+        border: 1px solid $sortOptionGray;
+        background-color: $white;
+        .v-icon{
+         font-size: 24px;
+         color: $sortOptionGray;
+       }
+    }
+    .v-menu__content.theme--light.menuable__content__active{
+        box-shadow: 0 15px 5px -3px rgba(0,0,0,.2), 0 18px 10px -3px rgba(0,0,0,.14), 0 13px 14px -3px rgba(0,0,0,.12);
+        
+    }
 
-// Passbox
-    $passbox: rgb(0, 167, 229);
-    $passbox-input: rgb(251, 252, 253);
+    // List
+    .sort__list{
+        padding: 0;
+        margin-top:20px;
+        &:after{
+            content: "";
+            position:absolute;
+            margin-top:-45px;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 15px solid $sortListBgBlue;
+            border-top: 15px solid transparent;
+            right: 10px;
+            bottom: 239px;
+        }
+        .sort__list_tile{
+            background-color: $sortListBgBlue;
+            .v-list__tile--link:hover{
+                background-color: $sortListBgWhite;
+            }
+            .sort__list_item{
+                color: $sortListDarkTxt;
+                font-size: 14px;
+                font-weight: 500;
+                margin: 0 10px;
+            }
+        }
+    }
+}
 
-// Chat
-    $chat-text: rgb(122, 148, 169);
-    $chat-name: rgb(101, 113, 134);
-    $chat-tip-name: rgb(66, 69, 76);
-    $chat-position: rgb(188, 194, 207);
-// Calendar
-    $default: #9daab2;
-    $event-1: #a085d5;
-    $event-2: #ff7f7e;
-    $event-3: #1fb868;
-    $event-4: #00a7e5;
-    $event-5: #ed8564;
-    $event-6: #50b4aa;
-    $calendar-tab: #ededf2;
-    $calendar-tab-text: rgb(173, 175, 177);
-    $event-time: rgb(188, 194, 207);
-
-// Cron
-    $cron-input: rgb(166, 173, 181);
-    $cron-warning: #f2dede;
-    $cron-job: #d9edf7;
-    $cron-text: #3080ab;
-    $cron-text2: #cc7a7a;
-    $cron-info: #524f51;
-    $cron-border: #b2e5ee;
-    $cron-border2: #edd2d5;
-
-// Timer
-    $time-border: 1px solid  rgb(204, 211, 223);
-
-// Support
-    $advanced-bg: #ceedff;
-    $apidocs-bg: #f6fafd;
-    $support-border: 1px solid rgb(171, 212, 235);
-    $support-inset: inset 0px 1px 1px 0px rgba(35, 120, 170, 0.35);
-    $support-text:  rgb(59, 88, 158);
-    $build-border: 2px solid rgb(230, 237, 244);;
-    $support-icon: rgb(195, 208, 216);
-    $supp-icon-bg: rgb(243, 244, 246);;
-
-// Group
-    $permission-grp: #50b4aa;
-    $migrate-grp: #a085d6;
-    $members-grp: #01a7e5;
-    $edit-grp: #1fb868;
-    $delete-grp: #ff7f7e;

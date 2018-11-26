@@ -1,0 +1,9 @@
+.search{
+    width: 50%;
+}
+@media only screen and (max-width: 480px){
+    .search{
+        width: auto;
+        margin-right: 10px;
+    }
+}

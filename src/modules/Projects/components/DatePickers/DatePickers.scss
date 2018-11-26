@@ -1,0 +1,24 @@
+.pickers-container {
+  background: white;
+  font-size: 12px;
+
+  .header-titles {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-around;
+    padding: 10px;
+  }
+
+  .due-date-pickers {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 10px;
+  }
+
+  .actions {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: end;
+  }
+
+}
