@@ -5,20 +5,15 @@
 			<v-tab
 					v-for="tab in tabs"
 					:key="tab.name"
+					:href="`#${tab.name}`"
 			>
 				{{ tab.name }}
 			</v-tab>
 		</v-tabs>
 
-		<v-tabs-items v-model="component">
-			<v-tab-item :key="component" :id="component">
-
-				<v-card flat>
-
-					<component :is="component"></component>
-
-				</v-card>
-
+		<v-tabs-items v-model="active_tab">
+			<v-tab-item v-for="tab of tabs" :key="tab.id" :value="tab.name">
+				<component :is="active_tab" v-if="active_tab === tab.name"></component>
 			</v-tab-item>
 		</v-tabs-items>
 

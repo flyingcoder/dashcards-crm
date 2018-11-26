@@ -8,7 +8,7 @@ export default {
 	},
 
 	data: () => ({
-		active_tab: 3,
+		active_tab: 'Permissions',
 		tabs: [
 			{ id: 1, name: 'General' },
 			{ id: 2, name: 'Company' },
@@ -23,25 +23,16 @@ export default {
 		]
 	}),
 
-	computed: {
-		component() {
-			if (this.active_tab) {
-				return this.tabs[this.active_tab].name
+	created() {
+		const query = { ...this.$route.query }
+		if ('tab' in query) {
+			const tab_found = this.tabs.find(tab => tab.name.toLowerCase() === query.tab)
+			if (tab_found) {
+				this.active_tab = query.tab.charAt(0).toUpperCase() + query.tab.slice(1)
 			}
 		}
-	},
-
-	watch: {
-		active_tab: {
-			handler(new_val) {
-				let query = {...this.$route.query}
-				const name = query.name
-				const tab = this.component.toLocaleLowerCase()
-				query.tab = tab
-				this.$router.replace({ name, query: query })
-			},
-			immediate: true
-		}
+		query.tab = this.active_tab
+		this.$router.replace({ name: 'settings', query: query})
 	}
 
 }
