@@ -3,18 +3,23 @@ import makeRequestTo from '@/services/makeRequestTo'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import GroupsDialog from '@/common/GroupsDialog/GroupsDialog.vue'
 import isEmpty from 'lodash/isEmpty'
-import debounce from 'lodash/debounce'
 import DeleteDialog from '@/common/DeleteDialog.vue'
+import Breadcrumb from '@/common/Breadcrumb.vue'
+import debounce from 'lodash/debounce'
 
 export default {
   name: 'Groups',
-	components: {CustomTable, GroupsDialog, DeleteDialog},
+	components: {CustomTable, GroupsDialog, DeleteDialog, Breadcrumb},
 
 	data () {
 		return {
 			add_new_group_dialog: false,
 			edit_group_dialog: false,
 			delete_group_dialog: false,
+			paths: [
+				{ text: 'Dashboard', disabled: false, router_name: 'default-content' },
+				{ text: 'Groups', disabled: true, router_name: null }
+			],
 			loading: false,
 		  headers: [
         { id: 1, text: 'ID', value: 'id', width: '5%' },

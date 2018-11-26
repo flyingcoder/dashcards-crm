@@ -2,21 +2,8 @@
     <div class="content teams">
 
         <div class="row">
-            <div class="breadcrumbs">
-                <v-breadcrumbs>
-                    <v-icon slot="divider">chevron_right</v-icon>
 
-                    <v-breadcrumbs-item class="page__title"
-                        v-for="path in paths"
-                        :disabled="path.disabled"
-                        :key="path.text"
-                    >
-                        <span @click="navigate_from_breadcrumb(path.router_name)">
-                            {{ path.text }}
-                        </span>
-                    </v-breadcrumbs-item>
-                </v-breadcrumbs>
-            </div>
+            <breadcrumb :paths="paths" />
 
             <teams-dialog
                 ref="add_dialog"
@@ -40,6 +27,13 @@
                 @delete="delete_member"
             />
 
+            <div class="page__options">
+                  <div class='newAdd__btn' @click="add_dialog = true">
+                    <v-icon class="addIcon__btn">add_icon</v-icon>
+                    <div class="addText__btn"><span>Add New</span></div>
+                  </div>
+            </div>
+
         </div>
 
         <div class="content__wrapper">
@@ -56,8 +50,6 @@
                     ></v-divider>
 
                     <v-spacer></v-spacer>
-
-                    <v-btn @click="add_dialog = true">New Member</v-btn>
 
                 </v-toolbar>
 

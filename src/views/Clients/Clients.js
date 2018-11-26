@@ -1,18 +1,19 @@
 import makeRequestTo from '@/services/makeRequestTo'
 import CustomField from '@/common/CustomField/CustomField.vue'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
+import Breadcrumb from '@/common/Breadcrumb.vue'
 import {validations} from "./local-mixins/validations"
 
 export default {
   name: 'Clients',
   mixins: [validations],
-  components: { CustomTable, CustomField },
+  components: { CustomTable, CustomField, Breadcrumb },
 
   data: () => ({
     // Breadcrumbs
     paths: [
-      { text: 'Dashboard', disabled: false },
-      { text: 'Clients', disabled: true }
+      { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+      { text: 'Clients', disabled: true, router_name: null }
     ],
 
     // Form
