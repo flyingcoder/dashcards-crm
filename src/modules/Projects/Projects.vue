@@ -77,7 +77,7 @@
 						Rows per page: <v-select :items="rows_per_page_items" menu-props="auto" v-model="rows_per_page"></v-select>
 					</div>
 
-					<div class="pagination">
+					<div class="pagination" v-show="should_show_pagination">
 						<div class="text-xs-center pt-2">
 							<v-pagination :length="total_items" :total-visible="5" v-model="page"></v-pagination>
 						</div>
