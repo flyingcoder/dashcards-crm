@@ -1,7 +1,7 @@
 <template>
 	<v-flex md6 xs12 class="tasks-card">
 		<div class="tasks__content">
-			<dash-card title="Tasks" class="task__content">
+			<dash-card title="Tasks" :view-more-link="viewMoreLink" class="task__content">
 				<div class="content-wrapper" slot="content">
 						<div class="tasks-items">
 							<tasks-content :id="id" />
@@ -22,7 +22,7 @@
 			DashCard, TasksContent
 		},
 
-		props: { id: [Number, String], },
+		props: { id: [Number, String], viewMoreLink: Object },
 
 	}
 </script>

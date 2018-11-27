@@ -12,6 +12,10 @@ export default {
 		id: [Number, String]
 	},
 
+	data: () => ({
+		taskPath: { name: 'project_preview', query: { tab: 'Task' } }
+	}),
+
 	created() {
 		this.$router.replace({ name: 'project_preview', query: { tab: 'HQ' }})
 	},
