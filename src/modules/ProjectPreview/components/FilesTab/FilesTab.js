@@ -17,4 +17,8 @@ export default {
 		],
 	}),
 
+	created() {
+		this.$router.replace({ name: 'project_preview', query: { tab: 'Files' }})
+	}
+
 }
