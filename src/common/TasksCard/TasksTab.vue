@@ -13,9 +13,10 @@
 			:count-pending="count_pending_tasks"
 			:count-behind="count_behind_tasks"
 			:count-open="count_open_tasks"
+			:active-chip.sync="active_chip"
 	/>
 
-	<task-custom-table :tasks="tasks"	/>
+	<task-custom-table :tasks="filtered_tasks"	/>
 
 	</div>
 </template>
@@ -35,10 +36,16 @@
 
 		data: () => ({
 			tasks: [],
-			loading: false
+			loading: false,
+			active_chip: 'all'
 		}),
 
 		computed: {
+			filtered_tasks() {
+				if (this.active_chip === 'all')
+					return this.tasks
+				return this.tasks.filter(task => task.status.toLowerCase() === this.active_chip)
+			},
 			tasks_are_empty() {
 				return !this.loading && this.tasks.length === 0
 			},
