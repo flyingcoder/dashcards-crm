@@ -18,9 +18,9 @@
 			<slot name="content" />
 		</v-flex>
 
-		<v-flex v-if="viewMoreLink" xs12 class="card__footer text-xs-center">
+		<v-flex xs12 class="card__footer text-xs-center">
 			<slot name="footer">
-				<v-btn flat class="view__more_btn" @click="reroute">VIEW MORE</v-btn>
+				<v-btn v-if="viewMoreLink" flat class="view__more_btn" @click="reroute">VIEW MORE</v-btn>
 			</slot>
 		</v-flex>
 
