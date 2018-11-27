@@ -19,7 +19,7 @@
 		},
 
 		provide: {
-			bodyMaxHeight: '700px'
+			bodyMaxHeight: '1200px'
 		},
 
 		data: () => ({

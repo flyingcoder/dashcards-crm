@@ -33,25 +33,25 @@
         margin-bottom: 17px;
         .file__tab{
             .v-btn{
-                border: 1px solid #b3b7c3;
+                border: 1px solid $btnGray;
                 border-radius: 5px;
                 height: 50px;
                 width: 125px;
                 &:hover{
                     .all.v-icon{
-                        color: #a186d7;
+                        color: $violet;
                     }
                     .image.v-icon{
-                        color: #1fb868;
+                        color: $green;
                     }
                     .video.v-icon{
-                        color: #ff7f7c;
+                        color: $red;
                     }
                     .docs.v-icon{
-                        color: #01a7e5;
+                        color: $lightBlue;
                     }
                     .other.v-icon{
-                        color: #50b4aa;
+                        color: $lightGreen;
                     }
                 }
             }

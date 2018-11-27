@@ -1,82 +1,64 @@
 <template>
-	<div class="task-tab-preview-card" v-if="task">
-		<dash-card title="Preview Task">
-			<div class="actions" slot="actions">
-					<v-icon class="action">cancel</v-icon>
-			</div>
-			<div class="content" slot="content">
+	<v-flex md6 xs12 class="task__tab_preview_card" v-if="task">
+		<div class="task__preview_content">
+			<div class="card__content" slot="content">
 				<v-progress-linear v-if="loading" :indeterminate="true"></v-progress-linear>
 				<template v-else>
-					<div class="header">
-						Header
+					<v-layout row class="task__header text-xs-left">
+						<v-flex xs5 class="assignee">
+							<v-flex xs4><v-img :src="require('@/assets/temp/user.png')" height="45" width="45" /></v-flex>
+							<v-flex xs8 class="assignee__name">{{ full_name }}</v-flex>
+						</v-flex>
+						<v-flex xs5 class="date text-xs-left">
+							<v-flex xs3><v-icon class="date__icon">date_range</v-icon></v-flex>
+							<v-flex xs9 class="date__text">{{ date_created(content.created_at) }}</v-flex>
+						</v-flex>
+						<v-flex xs2 class="more__button text-xs-right">
+							<v-btn fab flat small class="action">
+								<v-icon>more_horiz</v-icon>
+							</v-btn>
+						</v-flex>
+					</v-layout>
+					<div class="task__sub_header">
+						<div class="boxes job__title"> <span class="box__content">{{ job_title() }}</span></div>
+						<div class="boxes status"> <span class="box__content">{{ content.status }}</span></div>
+						<div class="hours__box">
+							<div class="box1 box"><v-icon small color="white">pause</v-icon></div>
+							<div class="box2 box">{{ get_hours(content.total_time) }} <span>HR</span></div>
+							<div class="box3 box">{{ get_mins(content.total_time) }} <span>M</span></div>
+							<div class="box4 box">{{ get_secs(content.total_time) }} <span>S</span></div>
+						</div>
 					</div>
-					<div class="sub-header">
-						Sub Header
+					<div class="task__content">
+
+						<div class="task__title">{{ content.title }}</div>
+						<div class="task__description">{{ content.description }}</div>
+
+						<div class="task__comment_section">
+							<v-divider></v-divider>
+							<div class="task__description">Comment Here!</div>
+						</div>
+
 					</div>
-					<div class="text-content">
-						<div class="text">Text</div>
-						<div class="comments">Comments</div>
-					</div>
-					<div class="comment-editor">
-						Editor
+					<div class="task__comments">
+						<v-flex xs2><v-img :src="require('@/assets/temp/user.png')" height="45" width="45" /></v-flex>
+						<v-flex xs10 class="rich__editor">
+							<rich-editor
+								placeholder="Add Comment"
+								v-model="comment"
+							/>
+						</v-flex>
+						
 					</div>
 				</template>
 			</div>
-		</dash-card>
-	</div>
+			
+			<v-flex xs12 class="card__footer text-xs-center">
+				<v-btn flat class="view__more_btn">VIEW MORE</v-btn>
+			</v-flex>
+		</div>
+	</v-flex>
 </template>
 
-<script>
-	import DashCard from '@/common/DashCard.vue'
-	import request from '@/services/axios_instance'
-
-	export default {
-		name: 'TaskTabPreviewCard',
-		components: {
-			DashCard
-		},
-		props: {
-			id: [Number, String],
-			task: Object,
-		},
-
-		data: () => ({
-			content: null,
-			loading: false
-		}),
-
-		watch: {
-			task(new_val) {
-				this.loading = true
-				request.get(`api/task/${this.task.id}`)
-					.then(response => this.content = response.data)
-					.finally(() => this.loading = false)
-			}
-		}
-	}
-</script>
-
-<style lang="scss" scoped>
-	@import "~@/sass/variables";
-
-	.task-tab-preview-card {
-		.actions {
-			display: grid;
-			justify-content: end;
-			align-items: center;
-		}
-
-		.content {
-			border: 1px solid grey;
-			display: grid;
-			grid-template-rows: 50px 50px 700px 200px;
-			padding: 0;
-		}
-
-		@include styledScrollFor('text.content');
-
-		.text-content {
-			overflow: auto;
-		}
-	}
-</style>
+<script src="./TaskTabPreviewCard.js"></script>
+<style lang="scss" scoped src="./TaskTabPreviewCard.scss"></style>

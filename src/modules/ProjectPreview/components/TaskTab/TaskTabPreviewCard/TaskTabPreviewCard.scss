@@ -1,0 +1,153 @@
+@import "~@/sass/variables";
+
+.task__tab_preview_card {
+    .task__preview_content{
+        padding: 17px 25px 25px 25px;
+        border: 1px solid $tableBorderBlue;
+        border-radius: 10px;
+        background-color:$white;
+        margin: 12px;
+
+        .card__content {
+            margin-bottom: 24px;
+
+            .task__header {
+                align-items: center;
+                margin-bottom: 30px;
+
+                .assignee {
+                    display: flex;
+                    align-items: center;
+                    .assignee__name{
+                        color: $tableDarkText;
+                        font-size: 14px;
+                    }
+                }
+
+                .date {
+                    display: flex;
+                    align-items: center;              
+                    .date__icon{
+                        color: $tableBlueText;
+                        border: 1px solid $tableBlueText;
+                        border-radius: 30px;
+                        padding: 5px;
+                        font-size: 27px;
+                    }
+                    .date__text{
+                        font-size: 14px;
+                        color: $red;
+                    }
+                }
+
+                .more__button{
+                    .action{
+                        background-color: $white;
+                        border: 1px solid $tableBorderBlue;
+                        color: $tableBlueText;
+                        .v-icon{
+                            font-size:20px;
+                        }
+                    }
+                }
+            }
+
+            .task__sub_header {
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                margin-bottom: 10px;
+
+                .boxes{
+                    height: auto;
+                    width: 125px;
+                    border: 1px solid $tableBorderBlue;
+                    border-radius: 5px;
+                    text-align: center;
+                    padding: 8px 0;
+                    span.box__content{
+                        font-size: 16px;
+                        color: $tableBlueText;
+                        opacity: 0.7;
+                        text-transform: capitalize;
+                    }
+                }
+
+                .box {
+                    padding: 0 10px;
+                }
+
+                .hours__box {
+                    display: flex;
+                    align-items: center;
+                    border: 1px solid $tableBorderBlue;
+                    border-radius: 5px;
+
+                    .box1 {
+                        background: $red;
+                        padding: 13px 10px;
+                        cursor: pointer;
+                        border-top-left-radius: 5px;
+                        border-bottom-left-radius: 5px;
+                    }
+                    .box {
+                        display: grid;
+                        position: relative;
+                        z-index : 1;
+                    }
+                    .box:not(:last-child):not(:first-child):before {
+                        content : "";
+                        position: absolute;
+                        right: 0;
+                        top: 10px;
+                        height  : 25px;
+                        border-right:1px solid $tableBorderBlue;
+                    }
+                }
+            }
+
+            @include styledScrollFor('.task__content'); //style the scroll
+
+            .task__content {
+                padding: 15px;
+                margin-bottom: 30px;
+                max-height: 1200px;
+                overflow: auto;
+
+                .task__title{
+                    font-size: 17px;
+                    font-weight: 500;
+                    color: $tableDarkText;
+                    margin-bottom: 20px;
+                }
+            
+                .task__comment_section{
+                    margin-top: 30px;
+                }
+            }
+
+            .task__comments {
+                padding: 15px;
+                background-color: $bgLightBlue;
+                display:flex;
+                        border: 1px solid $tableBorderBlue;
+            }
+        }
+        //
+        @include styledScrollFor('text.content');
+
+        .text-content {
+            overflow: auto;
+        }
+
+        .card__content{
+            margin-bottom: 24px;
+        }
+
+        .card__footer{
+            .view__more_btn{
+                color: $tableDarkText;
+            }
+        }
+    }
+}
