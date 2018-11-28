@@ -1,6 +1,14 @@
 <template>
 	<div class="members-tab">
 
+		<v-layout row>
+			<v-flex xs12 class="text-xs-right">
+				<v-btn fab small class="add__btn" @click="add_dialog = true">
+				<v-icon>add</v-icon>
+				</v-btn>
+			</v-flex>
+		</v-layout>
+
 		<add-dialog
 				:dialog.sync="add_dialog"
 				ref="add_dialog"
@@ -34,10 +42,6 @@
 					<v-spacer></v-spacer>
 
 					<v-toolbar-items class="member__option">
-
-						<v-btn fab flat small class="list__view" @click="add_dialog = true">
-							<v-icon>add</v-icon>
-						</v-btn>
 						<v-btn fab flat small class="list__view">
 							<v-icon>list</v-icon>
 						</v-btn>

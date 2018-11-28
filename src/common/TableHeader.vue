@@ -39,20 +39,11 @@
 		align-items: center;
 
 		button.add__btn.v-btn.v-btn--floating.v-btn--small{
-        background-color: $blue;
-        .v-icon{
-            color: $white;
-            font-size: 24px;
+            background-color: $blue;
+            .v-icon{
+                color: $white;
+                font-size: 24px;
+            }
         }
-    }
-
-    button.more__btn.v-btn.v-btn--floating.v-btn--small{
-      background-color: $white;
-      border: 1px solid $white;
-      .v-icon{
-        color: $tableDarkText;
-        font-size: 24px;
-      }
-    }
 	}
 </style>
