@@ -59,6 +59,13 @@
 								</v-flex>
 
 								<v-flex xs12>
+									<members-dropdown :members.sync="members.selected"
+									                  :member-items="members.items"
+									                  @items-updated="items_updated"
+									/>
+								</v-flex>
+
+								<v-flex xs12>
 									<rich-editor
 											placeholder="Description"
 											v-model="description"
