@@ -23,7 +23,7 @@
 									<v-select
 											label="Select Status"
 											v-model.trim="status"
-											:items="['Active', 'Inactive']"
+											:items="['Complete', 'Pending', 'Behind', 'Open']"
 									></v-select>
 								</v-flex>
 
