@@ -40,7 +40,7 @@
 				<td>{{ item.item.total_time }}</td>
 				<td>{{ item.item.status }}</td>
 
-				<td class="text-xs-center">
+				<td class="text-xs-center table__actions">
 
 					<v-btn fab small flat depressed
 						@click="open_edit_dialog(item.item)"
