@@ -18,9 +18,9 @@
 
 				<v-card-text scrollable>
 					<members-dropdown :members.sync="members.selected"
-					                  :member-items="members.items"
-					                  @items-updated="items_updated"
-					/>
+					                    :member-items="members.items"
+					                    @items-updated="items_updated"
+				/>
 				</v-card-text>
 
 				<v-card-actions class="service__actions">

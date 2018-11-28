@@ -1,12 +1,14 @@
 import moment from "moment/moment";
+//Components
 import DatePicker from '@/common/DatePicker.vue'
 import RichEditor from '@/common/RichEditor.vue'
+import MembersDropdown from '@/modules/Projects/components/MembersDropdown/MembersDropdown.vue'
 
 export default {
 	name: 'AddTaskDialog',
 
 	components: {
-		DatePicker, RichEditor
+		DatePicker, RichEditor, MembersDropdown
 	},
 
 	props: {
@@ -21,6 +23,10 @@ export default {
 		status: null,
 		start_date: null,
 		end_date: null,
+		members: {
+			selected: [],
+			items: []
+		},
 		days_init_value: 1,
 	}),
 
@@ -61,7 +67,8 @@ export default {
 				status: this.status,
 				days: this.days,
 				started_at: this.start_date,
-				end_at: this.end_date
+				end_at: this.end_date,
+				assinged_id: this.members.selected
 			}
 			this.$emit('save', fields_to_save)
 		},
@@ -84,6 +91,10 @@ export default {
 				this.end_date = moment(val).add(this.days, 'days').format('YYYY-MM-DD')
 			}
 		},
+
+		items_updated(new_members) {
+			this.members.items = new_members
+		}
 
 	}
 
