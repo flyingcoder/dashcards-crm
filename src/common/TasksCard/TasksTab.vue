@@ -72,6 +72,8 @@
 					}
 					if (val === 'MyTasks')
 						api_url += '/mine'
+
+					api_url += '?all=true'
 					this.get_tasks(api_url)
 				},
 				immediate: true
