@@ -1,12 +1,13 @@
 import DashCard from '@/common/DashCard.vue'
 import RichEditor from '@/common/RichEditor.vue'
+import EmojiPicker from 'vue-emoji-picker'
 import request from '@/services/axios_instance'
 import moment from 'moment'
 
 export default {
 	name: 'TaskTabPreviewCard',
 	components: {
-		DashCard, RichEditor
+		DashCard, RichEditor, EmojiPicker
 	},
 	props: {
 		id: [Number, String],
@@ -16,7 +17,9 @@ export default {
 	data: () => ({
 		content: null,
 		loading: false,
-    comment: ''
+		all_comments: [],
+    comment: '',
+		search: '',
 	}),
 
   computed: {
@@ -26,11 +29,22 @@ export default {
     },
   },
 
+	directives: {
+		focus: {
+			inserted(el) {
+				el.focus()
+			},
+		},
+	},
+
 	watch: {
 		task(new_val) {
 			this.loading = true
 			request.get(`api/task/${this.task.id}`)
-				.then(response => this.content = response.data)
+				.then(response => {
+					this.content = response.data
+					this.all_comments = response.data.comments
+				})
 				.finally(() => this.loading = false)
 		}
 	},
@@ -49,6 +63,20 @@ export default {
 	  get_mins(time) { return time.split(':')[1] },
 	  get_secs(time) { return time.split(':')[2] },
 
+	  append(emoji) {
+		  this.$refs.editor.$refs.richEditor.quill.focus()
+		  const selection = this.$refs.editor.$refs.richEditor.quill.getSelection()
+		  this.$refs.editor.$refs.richEditor.quill.insertText(selection.index, emoji)
+	  },
+
+	  add_new_comment() {
+	  	if (!this.comment) return
+		  request.post(`api/task/${this.task.id}/comments`, { body: this.comment })
+			  .then(response => {
+			  	this.comment = ''
+				  this.all_comments.push(response.data)
+			  })
+	  }
 
   }
 }

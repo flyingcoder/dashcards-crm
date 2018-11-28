@@ -5,6 +5,7 @@
 				@input="$emit('input', $event)"
 				:editor-toolbar="custom_toolbar"
 				:editor-options="custom_options"
+				ref="richEditor"
 				v-bind="$attrs"
 		/>
 	</div>
