@@ -12,26 +12,37 @@
 						<v-container grid-list-md>
 							<v-layout wrap>
 
-								<v-flex xs12 sm4>
+								<v-flex xs12>
 									<v-text-field
 											label="Add task title"
 											v-model.trim="title"
 									></v-text-field>
 								</v-flex>
 
-								<v-flex xs12 sm4>
+								<v-flex xs5>
 									<v-select
-											label="Select Status"
-											v-model.trim="status"
-											:items="['Active', 'Inactive']"
+											label="Select Group"
+											v-model.trim="selected_group"
+											:items="group_items"
+											item-text="name"
+											item-value="id"
 									></v-select>
 								</v-flex>
 
-								<v-flex xs12 sm4>
+								<v-flex xs5>
+									<v-select
+											label="Select Status"
+											v-model.trim="status"
+											:items="['Complete', 'Pending', 'Behind', 'Open']"
+									></v-select>
+								</v-flex>
+
+								<v-flex xs2>
 									<v-text-field
 											label="Add days"
 											v-model.number="days"
 											type="number"
+											min="0"
 									></v-text-field>
 								</v-flex>
 
