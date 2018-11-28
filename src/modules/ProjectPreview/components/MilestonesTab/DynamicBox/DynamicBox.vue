@@ -87,18 +87,25 @@
 			overflow: auto;
 
 			.task {
-				padding: 15px;
-				background: gainsboro;
+				padding: 20px;
+				font-size: 17px;
+				background-color: $bgLightBlue;
+				color: $textDarkBlue;
 				width: 100%;
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				border-bottom: 1px solid brown;
+				border: 1px solid $borderLightGray;
+				cursor: pointer;
+				&:hover{
+					background-color: $white;
+				}
 
 				.remove-icon {
 					cursor: pointer;
-					font-size: 1.3em;
-					color: #a06060;
+					font-size: 1.5em;
+					color: $red;
+					margin-left: 10px;
 				}
 
 			}
@@ -120,8 +127,10 @@
 				}
 			}
 			.content {
-				height: 400px;
-				border: 1px solid $tableBorderBlue;
+				.task {
+					padding: 13px;
+					font-size: 14px;
+				}
 			}
 			.add__new_btn{
 				font-size: 12px;
