@@ -1,3 +1,5 @@
+import request from '@/services/axios_instance'
+
 export default {
 	name: 'TasksDialog',
 
@@ -13,6 +15,8 @@ export default {
 		title: null,
 		description: null,
 		status: null,
+		selected_group: null,
+		group_items: [],
 		days_init_value: 1,
 	}),
 
@@ -32,7 +36,13 @@ export default {
 	},
 
 	watch: {
-		dialog(new_val) { this.open = new_val },
+		dialog(new_val) {
+			if (new_val) { //when dialog opens
+				request.get(`api/groups?all=true`)
+					.then(({data}) => this.group_items = data)
+			}
+			this.open = new_val
+		},
 		open(new_val) { this.$emit('update:dialog', new_val) },
 		fieldsToEdit: {
 			handler(new_val) {
@@ -45,12 +55,14 @@ export default {
 	methods: {
 
 		cancel() { this.open = false },
+
 		save() {
 			const fields_to_save = {
 				title: this.title,
 				description: this.description,
 				status: this.status,
 				days: this.days,
+				role_id: this.selected_group
 			}
 			this.$emit('save', fields_to_save)
 		},
@@ -61,9 +73,13 @@ export default {
 			this.description = new_fields.description
 			this.status = new_fields.status
 			this.days = new_fields.days
-		}
+			this.selected_group = new_fields.role_id
+		},
 
-	}
+		clear_and_close() {
+			Object.assign(this.$data, this.$options.data.apply(this))
+			this.cancel() //close the modal
+		},
 
-
+	},
 }
