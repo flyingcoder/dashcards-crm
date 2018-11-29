@@ -70,7 +70,7 @@
 					if (this.id) {
 						api_url = `api/projects/${this.id}/tasks`
 					}
-					if (val === 'MyTasks')
+					if (val === 'My Tasks')
 						api_url += '/mine'
 
 					api_url += '?all=true'
@@ -84,7 +84,7 @@
 			get_tasks(api_url) {
 				this.loading = true
 				request.get(api_url)
-					.then(({data}) => this.tasks = data.data)
+					.then(({data}) => this.tasks = data)
 					.finally(() => this.loading = false)
 			},
 		}
