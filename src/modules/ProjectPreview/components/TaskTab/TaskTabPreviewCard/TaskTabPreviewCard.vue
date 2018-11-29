@@ -22,12 +22,7 @@
 					<div class="task__sub_header">
 						<div class="boxes job__title"> <span class="box__content">{{ job_title() }}</span></div>
 						<div class="boxes status"> <span class="box__content">{{ content.status }}</span></div>
-						<div class="hours__box">
-							<div class="box1 box"><v-icon small color="white">pause</v-icon></div>
-							<div class="box2 box">{{ get_hours(content.total_time) }} <span>HR</span></div>
-							<div class="box3 box">{{ get_mins(content.total_time) }} <span>M</span></div>
-							<div class="box4 box">{{ get_secs(content.total_time) }} <span>S</span></div>
-						</div>
+						<hours-box :content="content" />
 					</div>
 					<div class="task__content">
 

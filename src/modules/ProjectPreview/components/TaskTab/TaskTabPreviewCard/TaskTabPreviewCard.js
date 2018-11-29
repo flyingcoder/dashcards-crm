@@ -1,13 +1,15 @@
+import request from '@/services/axios_instance'
+import moment from 'moment'
+//Components
 import DashCard from '@/common/DashCard.vue'
 import RichEditor from '@/common/RichEditor.vue'
 import EmojiPicker from 'vue-emoji-picker'
-import request from '@/services/axios_instance'
-import moment from 'moment'
+import HoursBox from '@/common/HoursBox/HoursBox.vue'
 
 export default {
 	name: 'TaskTabPreviewCard',
 	components: {
-		DashCard, RichEditor, EmojiPicker
+		DashCard, RichEditor, EmojiPicker, HoursBox
 	},
 	props: {
 		id: [Number, String],
@@ -58,10 +60,6 @@ export default {
     job_title() {
 	      return this.content.assigned[0].job_title
     },
-
-	  get_hours(time) { return time.split(':')[0] },
-	  get_mins(time) { return time.split(':')[1] },
-	  get_secs(time) { return time.split(':')[2] },
 
 	  append(emoji) {
 		  this.$refs.editor.$refs.richEditor.quill.focus()
