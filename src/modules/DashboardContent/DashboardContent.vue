@@ -46,14 +46,8 @@
         <div class="row d__cards">
             <tasks-card />
 
-            <div class="d__box">
-                <div class="d__box__header">
-                    <label>Timeline</label>
-                </div>
-                <div class="d__box__content">
-                    test
-                </div>
-            </div>
+            <timeline-card />
+
             <div class="d__box">
                 <div class="d__box__header">
                     <label>Client</label>

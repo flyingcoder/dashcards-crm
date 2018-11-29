@@ -1,0 +1,25 @@
+@import '~@/sass/_variables';
+
+.timeline-card {
+
+  @include styledScrollFor('.content');
+
+  .content {
+    max-height: 500px;
+    overflow: auto;
+  }
+
+  .timeline-item  {
+    .t__time {
+      position: absolute;
+      top: 5px;
+      left: -30px;
+      width: 80px;
+      height: 65px;
+      color: darkgrey;
+    }
+    .t__title, .t__content {
+      padding-left: 60px;
+    }
+  }
+}
