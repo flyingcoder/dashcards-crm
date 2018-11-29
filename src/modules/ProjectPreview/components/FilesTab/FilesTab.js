@@ -34,6 +34,7 @@ export default {
 			return {
 				thumbnailWidth: 150,
 				timeout: 500000,
+				addRemoveLinks: true,
 				url: `https://api.bizzooka.ca/api/projects/${this.id}/file`,
 				headers: { "Authorization": "Bearer " + localStorage.getItem('token') },
 			}
