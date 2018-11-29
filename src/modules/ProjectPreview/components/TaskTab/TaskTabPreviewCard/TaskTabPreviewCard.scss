@@ -72,38 +72,6 @@
                         text-transform: capitalize;
                     }
                 }
-
-                .box {
-                    padding: 0 10px;
-                }
-
-                .hours__box {
-                    display: flex;
-                    align-items: center;
-                    border: 1px solid $tableBorderBlue;
-                    border-radius: 5px;
-
-                    .box1 {
-                        background: $red;
-                        padding: 13px 10px;
-                        cursor: pointer;
-                        border-top-left-radius: 5px;
-                        border-bottom-left-radius: 5px;
-                    }
-                    .box {
-                        display: grid;
-                        position: relative;
-                        z-index : 1;
-                    }
-                    .box:not(:last-child):not(:first-child):before {
-                        content : "";
-                        position: absolute;
-                        right: 0;
-                        top: 10px;
-                        height  : 25px;
-                        border-right:1px solid $tableBorderBlue;
-                    }
-                }
             }
 
             @include styledScrollFor('.task__content'); //style the scroll
