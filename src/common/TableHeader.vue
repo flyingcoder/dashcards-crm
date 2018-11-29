@@ -45,5 +45,17 @@
                 font-size: 24px;
             }
         }
-	}
+    }
+    
+    @media only screen and (max-width: 480px){
+        .table-header {
+
+            button.add__btn.v-btn.v-btn--floating.v-btn--small{
+                height: 30px;
+                width: 30px;
+            }
+            
+        }
+    
+    }
 </style>

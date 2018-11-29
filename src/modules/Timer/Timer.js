@@ -16,6 +16,13 @@ export default {
 			{ text: 'Dashboard', disabled: false, router_name: 'default-content' },
 			{ text: 'Timer', disabled: true, router_name: null }
 		],
+		sortList: [
+			{ title: 'Sort by Client', },
+			{ title: 'Sort by Task', },
+			{ title: 'Sort by Services', },
+			{ title: 'Sort by Time', },
+			{ title: 'Sort by Date', }
+		],
 		headers: [
 			{text: 'Client', value: 'client', sortable: true, align: 'left'},
 			{text: 'Task', value: 'task', sortable: true, align: 'left'},
