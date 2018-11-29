@@ -1,6 +1,6 @@
-import ProjectOverviewCard from './ProjectOverviewCard/ProjectOverviewCard.vue'
-import TimelineCard from './TimelineCard/TimelineCard.vue'
 import TasksCard from '@/common/TasksCard/TasksCard.vue'
+import TimelineCard from '@/common/TimelineCard/TimelineCard.vue'
+import ProjectOverviewCard from './ProjectOverviewCard/ProjectOverviewCard.vue'
 
 export default {
 	name: 'HQTab',
