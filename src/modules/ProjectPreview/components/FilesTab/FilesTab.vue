@@ -3,13 +3,13 @@
         <div class="drop__files">
 
             <vue-dropzone
-                ref="myVueDropzone"
+                ref="dropzone"
                 :duplicateCheck="true"
                 id="dropzone"
                 :options="dropzoneOptions"
                 dictFileTooBig="File too big"
                 dictInvalidFileType="Invalid file type"
-                @vdropzone-files-added="files_added"
+                @vdropzone-success="file_added"
             ></vue-dropzone>
 
 
@@ -28,12 +28,13 @@
         
         <custom-table
                 :headers="headers"
+                :items="items"
                 :has-checkbox="true"
-                :has-header-icon="true"
                 hide-actions
                 @items-selected="selected_ids = $event"
                 class="custom__table"
             >
+
             <template slot="toolbar">
                 <v-layout row class="file__list_header">
                     <v-flex md10 sm8 xs7 class="file__tab">
@@ -69,6 +70,19 @@
                     </v-flex>
                 </v-layout>
             </template>
+
+		        <template slot="custom-item" slot-scope="item">
+			        <td>{{ item.item.name }}</td>
+			        <td>{{ item.item.custom_properties.ext }}</td>
+			        <td>{{ item.item.custom_properties.user.first_name}}</td>
+			        <td>Project</td>
+			        <td class="text-xs-center table__actions">
+				        <v-btn fab small flat depressed>
+					        <img src="@/assets/icons/groups/delete.svg" alt="">
+				        </v-btn>
+
+			        </td>
+		        </template>
         </custom-table>
     </div>
 </template>
