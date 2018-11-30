@@ -53,7 +53,12 @@ export default {
 			}
 
 			if (!this.isEditDialog) {
+				if (this.password !== this.repeat_password) {
+					this.$event.$emit('open_snackbar', `Passwords don't match`, 'red')
+					return
+				}
 				fields_to_save.password = this.password
+				fields_to_save.password_confirmation = this.repeat_password
 			}
 			this.$emit('save', fields_to_save)
 		},
