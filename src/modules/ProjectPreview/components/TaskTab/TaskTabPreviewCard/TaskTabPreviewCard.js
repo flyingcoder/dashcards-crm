@@ -3,13 +3,13 @@ import moment from 'moment'
 //Components
 import DashCard from '@/common/DashCard.vue'
 import RichEditor from '@/common/RichEditor.vue'
-import EmojiPicker from 'vue-emoji-picker'
+import EmojiPicker from '@/common/EmojiPicker/EmojiPicker.vue'
 import HoursBox from '@/common/HoursBox/HoursBox.vue'
 
 export default {
 	name: 'TaskTabPreviewCard',
 	components: {
-		DashCard, RichEditor, EmojiPicker, HoursBox
+		DashCard, RichEditor, HoursBox, EmojiPicker
 	},
 	props: {
 		id: [Number, String],
@@ -21,7 +21,6 @@ export default {
 		loading: false,
 		all_comments: [],
     comment: '',
-		search: '',
 	}),
 
   computed: {
@@ -30,14 +29,6 @@ export default {
 	      return this.content.assigned[0].first_name + '' + this.content.assigned[0].last_name
     },
   },
-
-	directives: {
-		focus: {
-			inserted(el) {
-				el.focus()
-			},
-		},
-	},
 
 	watch: {
 		task(new_val) {
@@ -61,12 +52,6 @@ export default {
 	      return this.content.assigned[0].job_title
     },
 
-	  append(emoji) {
-		  this.$refs.editor.$refs.richEditor.quill.focus()
-		  const selection = this.$refs.editor.$refs.richEditor.quill.getSelection()
-		  this.$refs.editor.$refs.richEditor.quill.insertText(selection.index, emoji)
-	  },
-
 	  add_new_comment() {
 	  	if (!this.comment) return
 		  request.post(`api/task/${this.task.id}/comments`, { body: this.comment })
@@ -74,6 +59,12 @@ export default {
 			  	this.comment = ''
 				  this.all_comments.push(response.data)
 			  })
+	  },
+
+	  emoji_added(emoji) {
+		  this.$refs.editor.$refs.richEditor.quill.focus()
+		  const selection = this.$refs.editor.$refs.richEditor.quill.getSelection()
+		  this.$refs.editor.$refs.richEditor.quill.insertText(selection.index, emoji)
 	  }
 
   }
