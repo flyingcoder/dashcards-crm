@@ -22,6 +22,10 @@ export const auth = {
       return store.getters.is_user_logged
     },
 
+		logged_user() {
+    	return store.getters.user
+		},
+
     async logout() {
 			localStorage.removeItem('token')
 			localStorage.removeItem('user')
