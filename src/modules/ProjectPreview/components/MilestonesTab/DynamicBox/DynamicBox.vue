@@ -96,7 +96,6 @@
 				justify-content: space-between;
 				align-items: center;
 				border: 1px solid $borderLightGray;
-				cursor: pointer;
 				&:hover{
 					background-color: $white;
 				}
