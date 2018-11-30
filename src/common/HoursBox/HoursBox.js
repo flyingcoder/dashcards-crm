@@ -11,7 +11,8 @@ export default {
 		timer_started: false,
 		time_running: null,
 		interval: null,
-		timer_status: null
+		timer_status: null,
+		is_timer_disabled: false
 	}),
 
 	computed: {
@@ -38,6 +39,7 @@ export default {
 		get_secs() { return this.time_running.split(':')[2] },
 
 		handle_timer() {
+			if (this.is_timer_disabled) return
 			if (this.timer_started) //the user clicked pause
 				this.pause_timer()
 			else {
@@ -45,8 +47,12 @@ export default {
 				let api = 'api/timer/start'
 				if (this.timer_status === 'pause')
 					api = 'api/timer/back'
+				this.is_timer_disabled = true
 				request.post(api, {type: 'task', id: this.content.id})
-				this.timer_status = 'ongoing'
+					.then(response => {
+						this.is_timer_disabled = false
+						this.timer_status = 'ongoing'
+					} )
 			}
 		},
 
@@ -71,10 +77,14 @@ export default {
 		},
 
 		pause_timer() {
-			clearInterval(this.interval)
+			this.is_timer_disabled = true
 			request.post('api/timer/pause', { type: 'task', id: this.content.id })
-			this.timer_status = 'pause'
-			this.timer_started = false
+				.then(response => {
+					clearInterval(this.interval)
+					this.is_timer_disabled = false
+					this.timer_status = 'pause'
+					this.timer_started = false
+				})
 		},
 
 		set_time_running(hours, mins, secs) {
