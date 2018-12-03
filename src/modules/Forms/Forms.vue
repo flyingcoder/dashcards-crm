@@ -21,18 +21,18 @@
 						<div class="form-actions-wrapper">
 							<div class="actions">
 
-								<v-tooltip right content-class="action">
+								<v-tooltip left content-class="action">
 									<v-btn slot="activator" icon @click="add_new_question">
 										<v-icon>add_circle</v-icon>
 									</v-btn>
 									<span>Add question</span>
 								</v-tooltip>
 
-								<v-tooltip right content-class="action" @click="add_title_and_descriptions">
-									<v-btn slot="activator" icon>
+								<v-tooltip left content-class="action">
+									<v-btn slot="activator" icon @click="add_title_and_descriptions">
 										<v-icon>text_fields</v-icon>
 									</v-btn>
-									<span>Add question</span>
+									<span>Add title and descriptions</span>
 								</v-tooltip>
 							</div>
 						</div>
@@ -65,6 +65,9 @@
 		.actions {
 			display: grid;
 			background: #ded2d2;
+			position: fixed;
+			right: 10px;
+			bottom: 10px;
 		}
 	}
 </style>

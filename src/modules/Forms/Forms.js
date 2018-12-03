@@ -19,16 +19,16 @@ export default {
 				type: 'Q', //question
 				question_field: { placeholder: 'Question', text: '' },
 				items: [
-					{ id: 1, text: 'Short Answer', value: 'short_answer', icon: 'short_text' },
-					{ id: 2, text: 'Paragraph', value: 'paragraph', icon: 'format_align_center' },
-					{ id: 3, text: 'Multiple Choice', value: 'multiple_choice', icon: 'radio_button_unchecked' },
-					{ id: 4, text: 'Checkboxes', value: 'multiple_choice', icon: 'check_box' },
-					{ id: 5, text: 'Dropdown', value: 'dropdown', icon: 'arrow_drop_down_circle' },
+					{ id: 1, text: 'Short Answer', value: 'short_answer', icon: 'short_text', show_icon: false },
+					{ id: 2, text: 'Paragraph', value: 'paragraph', icon: 'format_align_center', show_icon: false },
+					{ id: 3, text: 'Multiple Choice', value: 'multiple_choice', icon: 'radio_button_unchecked', show_icon: true },
+					{ id: 4, text: 'Checkboxes', value: 'checkboxes', icon: 'check_box', show_icon: true },
+					{ id: 5, text: 'Dropdown', value: 'dropdown', icon: 'arrow_drop_down_circle', show_icon: true },
 				],
 				selected: { id: 3, text: 'Multiple Choice', value: 'multiple_choice', icon: 'radio_button_unchecked' },
 				fields: [],
-				short_answer: null,
-				long_answer: null,
+				short_answer: { show: false, text: null },
+				long_answer: { show: false, text: null },
 				new_field_text: null
 			})
 		},
@@ -36,7 +36,7 @@ export default {
 		add_title_and_descriptions() {
 			this.dynamic_sections.push({
 				type: 'TD', //title & description
-				title: { placeholder: 'Untitled Title', text: '' },
+				title: { placeholder: 'Enter Title', text: '' },
 				description: { placeholder: 'Descriptions', text: '' }
 			})
 		},
