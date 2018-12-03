@@ -7,6 +7,8 @@ export default {
 
 	data: () => ({
 		dynamic_sections: [],
+		form_title: '',
+		form_descriptions: ''
 	}),
 
 	watch: {

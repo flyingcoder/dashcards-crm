@@ -4,11 +4,12 @@
 			<v-layout row>
 
 				<v-flex xs12>
-					<v-text-field label="Title of form"></v-text-field>
+					<v-text-field label="Title of form" v-model.trim="form_title"></v-text-field>
 					<v-textarea
 							label="Descriptions"
 							auto-grow
 							rows="1"
+							v-model.trim="form_descriptions"
 					></v-textarea>
 				</v-flex>
 
