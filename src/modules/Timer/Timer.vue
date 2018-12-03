@@ -1,7 +1,7 @@
 <template>
 	<div class="timer">
 
-		<table-header :paths="paths" @click="add_dialog = true"/>
+		<breadcrumb :paths="paths"/>
 
 		<custom-table
 				:headers="headers"
