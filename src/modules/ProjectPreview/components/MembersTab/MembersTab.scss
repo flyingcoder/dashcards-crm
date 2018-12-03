@@ -1,4 +1,7 @@
 @import "~@/sass/_variables";
+    
+@include sortOptionStyle;
+
 .members-tab {
     padding: 25px;
     button.add__btn.v-btn.v-btn--floating.v-btn--small{
@@ -9,8 +12,6 @@
             font-size: 24px;
         }
     }
-    
-    @include sortOptionStyle;
 
     .table__toolbar-title{
         color: $tableTitleBlue;
