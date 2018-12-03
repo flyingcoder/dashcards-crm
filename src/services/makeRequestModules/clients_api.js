@@ -14,6 +14,6 @@ export const clients_api = {
 	},
 
 	delete_client(id) {
-		return request.put(`api/clients/${id}`)
+		return request.delete(`api/clients/${id}`)
 	}
 }
