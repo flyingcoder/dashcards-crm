@@ -58,7 +58,7 @@
 		inject: {
 			bodyMaxHeight: {
 				from: 'bodyMaxHeight',
-				default: '200px'
+				default: '400px'
 			}
 		},
 
