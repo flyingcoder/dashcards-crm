@@ -3,24 +3,27 @@
 .timeline-card {
 
   @include styledScrollFor('.content');
-
-  .content {
-    max-height: 500px;
-    width: 450px;
-    overflow: auto;
-  }
-
-  .timeline-item  {
-    .t__time {
-      position: absolute;
-      top: 5px;
-      left: -30px;
-      width: 80px;
-      height: 65px;
-      color: darkgrey;
+  .timeline__content{
+    margin: 12px;
+    
+    .content {
+      max-height: 500px;
+      width: 450px;
+      overflow: auto;
     }
-    .t__title, .t__content {
-      padding-left: 60px;
+  
+    .timeline-item  {
+      .t__time {
+        position: absolute;
+        top: 5px;
+        left: -30px;
+        width: 80px;
+        height: 65px;
+        color: darkgrey;
+      }
+      .t__title, .t__content {
+        padding-left: 60px;
+      }
     }
   }
 }
