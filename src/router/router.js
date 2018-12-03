@@ -22,6 +22,7 @@ import { settings } from './routes/settings';
 import { project_preview } from "./routes/projectPreview";
 import { timer } from "./routes/timer";
 import {invoice} from "./routes/invoice";
+import { forms } from "./routes/forms";
 
 Vue.use(Router)
 
@@ -41,9 +42,10 @@ export default new Router({
 				services, // path: /dashboard/services
 				teams,// path: /dashboard/team
 			  settings, // path: /dashboard/settings,
-			  project_preview, //path: /dashboard/project-preview
+			  project_preview, //path: /dashboard1/project-preview
 			  timer, //path: /dashboard/timer
 			  invoice, //path: /dashboard/invoice
+			  forms, //path: /dashboard/forms
 		  ]
 	  },
 
