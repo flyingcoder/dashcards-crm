@@ -33,6 +33,7 @@
                         border-radius: 30px;
                         padding: 5px;
                         font-size: 27px;
+                        margin-right: 5px;
                     }
                     .date__text{
                         font-size: 14px;
@@ -73,11 +74,17 @@
                     }
                 }
             }
+            .mobile__hours-box{
+                display: none;
+                width: 150px;
+                margin-left:auto;
+                padding: 8px 0;
+            }
 
             @include styledScrollFor('.task__content'); //style the scroll
 
             .task__content {
-                padding: 15px;
+                padding: 15px 0;
                 margin-bottom: 30px;
                 max-height: 1200px;
                 overflow: auto;
@@ -87,14 +94,18 @@
                     font-weight: 500;
                     color: $tableDarkText;
                     margin-bottom: 20px;
+                    padding: 0 15px;
+                }
+
+                .task__description{
+                    padding: 0 15px;
                 }
             
                 .task__comment_section{
                     margin-top: 30px;
                     .comment {
+                        display: flex;
                         padding: 10px;
-                        border: 1px solid gainsboro;
-                        border-radius: 15px;
                         & + .comment {
                             margin-top: 10px;
                         }
@@ -106,12 +117,17 @@
                 padding: 15px;
                 background-color: $bgLightBlue;
                 display:flex;
-                border: 1px solid $tableBorderBlue;
 
-                .comments-actions {
+                .rich__editor{
+                    background-color: $white;
+                }
+
+                .comments__actions {
                     display: flex;
                     justify-content: flex-start;
                     align-items: center;
+                    background-color: $white;
+                    border: 1px solid $tableBorderBlue;
                 }
 
                 .emoji-wrapper {
@@ -135,6 +151,107 @@
         .card__footer{
             .view__more_btn{
                 color: $tableDarkText;
+            }
+        }
+    }
+}
+
+//Laptop Or iPad Pro View
+@media only screen and (max-width: 1170px) and (min-width: 960px){
+    .task__tab_preview_card {
+        .task__preview_content{
+            padding: 17px;
+            margin: 12px;
+    
+            .card__content {
+    
+                .task__header {
+                    margin-bottom: 24px;
+
+                    .assignee{
+                        flex-direction: column;
+                    }
+    
+                    .date {
+                        flex-direction: column;
+                        align-items: center;
+                        .date__icon{
+                            margin: 0;
+                        }
+                    }
+                }
+
+                .task__sub_header {
+                    justify-content: center;
+
+                    .boxes:first-child{
+                        margin-right: 20px;
+                    }
+
+                    .boxes{
+                        width: 150px;
+                    }
+
+                    .hours__box{
+                        display: none;
+                    }
+                }
+                .mobile__hours-box{
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+//Tablet View
+@media only screen and (max-width: 768px) and (min-width: 481px){
+
+}
+
+//Mobile View
+@media only screen and (max-width: 480px){
+    .task__tab_preview_card {
+        .task__preview_content{
+            padding: 17px;
+            margin: 12px;
+    
+            .card__content {
+    
+                .task__header {
+                    margin-bottom: 24px;
+
+                    .assignee{
+                        flex-direction: column;
+                    }
+    
+                    .date {
+                        flex-direction: column;
+                        align-items: center;
+                        .date__icon{
+                            margin: 0;
+                        }
+                    }
+                }
+
+                .task__sub_header {
+                    justify-content: center;
+
+                    .boxes:first-child{
+                        margin-right: 20px;
+                    }
+
+                    .boxes{
+                        width: 150px;
+                    }
+
+                    .hours__box{
+                        display: none;
+                    }
+                }
+                .mobile__hours-box{
+                    display: block;
+                }
             }
         }
     }
