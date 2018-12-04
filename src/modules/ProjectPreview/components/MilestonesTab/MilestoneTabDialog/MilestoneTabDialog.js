@@ -26,7 +26,9 @@ export default {
 	computed: {
 		days: {
 			get: function () {
-				return this.days_init_value
+				if (!this.start_date || !this.end_date)
+					return this.days_init_value
+				return moment(this.end_date).diff(moment(this.start_date), 'days')
 			},
 			set: function (newValue) {
 				if (!this.start_date && !this.end_date) {
