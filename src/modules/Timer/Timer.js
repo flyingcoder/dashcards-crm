@@ -2,13 +2,12 @@ import { table_functionality } from "@/services/table-functionality";
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import Breadcrumb from '@/common/Breadcrumb.vue'
-import TableHeader from '@/common/TableHeader.vue'
 
 export default {
 	name: 'Timer',
 	mixins: [table_functionality],
 	components: {
-		CustomTable, Breadcrumb, TableHeader
+		CustomTable, Breadcrumb
 	},
 
 	data: () => ({
