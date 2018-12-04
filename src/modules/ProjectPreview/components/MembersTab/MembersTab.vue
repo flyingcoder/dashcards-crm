@@ -51,7 +51,7 @@
 
 						<v-menu class="sort__dropdown"
 						        transition="slide-y-transition"
-						        :nudge-left="135"
+						        :nudge-left="116"
 						        :nudge-bottom="2"
 						        flat
 						        offset-y
