@@ -18,6 +18,13 @@
 				@save="update_item('update_project', $event)"
 		/>
 
+		<delete-dialog
+				:open-dialog.sync="delete_dialog"
+				title="Delete Project"
+				text-content="Are you sure you want to delete this project?"
+				@delete="delete_item('delete_project')"
+		/>
+
 		<custom-table
 				:headers="headers"
 				:items="items"
