@@ -10,7 +10,8 @@ export default {
 		Milestones: () => import('./components/MilestonesTab/MilestonesTab.vue'),
 		Invoice: () => import('./components/InvoiceTab/InvoiceTab.vue'),
 		Task: () => import('./components/TaskTab/TaskTab.vue'),
-		Files: () => import('./components/FilesTab/FilesTab.vue')
+		Files: () => import('./components/FilesTab/FilesTab.vue'),
+		Reports: () => import('./components/ReportsTab/ReportsTab.vue')
 	},
 
 	props: {
