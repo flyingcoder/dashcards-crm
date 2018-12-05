@@ -10,6 +10,7 @@ export default {
 		Milestones: () => import('./components/MilestonesTab/MilestonesTab.vue'),
 		Invoice: () => import('./components/InvoiceTab/InvoiceTab.vue'),
 		Task: () => import('./components/TaskTab/TaskTab.vue'),
+		Timer: () => import('./components/TimerTab/TimerTab.vue'),
 		Files: () => import('./components/FilesTab/FilesTab.vue'),
 		Reports: () => import('./components/ReportsTab/ReportsTab.vue')
 	},
