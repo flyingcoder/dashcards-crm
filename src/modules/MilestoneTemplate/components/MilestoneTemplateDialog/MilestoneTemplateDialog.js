@@ -40,7 +40,12 @@ export default {
 			const new_fields = Object.assign({}, fields)
 			this.name = new_fields.name
 			this.status = new_fields.status
-		}
+		},
+
+		clear_and_close() {
+			Object.assign(this.$data, this.$options.data.apply(this))
+			this.cancel() //close the modal
+		},
 
 	}
 
