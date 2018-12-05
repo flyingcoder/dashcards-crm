@@ -121,13 +121,16 @@
                 .rich__editor{
                     background-color: $white;
                 }
+                
+                
 
                 .comments__actions {
                     display: flex;
                     justify-content: flex-start;
                     align-items: center;
                     background-color: $white;
-                    border: 1px solid $tableBorderBlue;
+                    border: 1px solid $gray;
+                    border-top: none;
                 }
 
                 .emoji-wrapper {

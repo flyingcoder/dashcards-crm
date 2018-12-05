@@ -63,7 +63,7 @@
 							/>
 
 							<div class="comments__actions">
-								<v-btn :disabled="!comment" @click="add_new_comment">Send</v-btn>
+								<v-btn class="comment__btn" color="#3b589e" :disabled="!comment" @click="add_new_comment">Send</v-btn>
 								<div class="emoji-wrapper">
 									<emoji-picker @emoji-added="emoji_added" />
 								</div>
@@ -86,3 +86,9 @@
 
 <script src="./TaskTabPreviewCard.js"></script>
 <style lang="scss" scoped src="./TaskTabPreviewCard.scss"></style>
+
+<style scoped>
+>>> .comment__btn .v-btn__content{
+	color: #fff;
+}
+</style>
