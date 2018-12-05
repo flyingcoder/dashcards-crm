@@ -1,0 +1,89 @@
+@import '~@/sass/_variables';
+.invoice__tab {
+    padding: 17px 25px;
+    
+    button.add__btn.v-btn.v-btn--floating.v-btn--small{
+        background-color: $blue;
+        margin-bottom: 20px;
+        .v-icon{
+            color: $white;
+            font-size: 24px;
+        }
+    }
+
+    .invoice__container {
+        background-color: $white;
+        border: 1px solid $tableBorderBlue;
+        border-radius: 10px;
+        padding: 25px;
+
+        .invoice__content{
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: $tableBlueBg;
+            border: 1px solid $tableBorderBlue;
+
+            .invoice__icon{
+                svg{
+                    fill: $btnGray;
+                    width: 150px;
+                    margin-bottom: 30px;
+                }
+            }
+
+        }
+        
+    }
+
+}
+
+// Tablet View
+@media only screen and (max-width: 768px) and (min-width: 481px){
+    .invoice__tab {
+    
+        .invoice__container {
+    
+            .invoice__content{
+                height: 400px;
+    
+                .invoice__icon{
+                    svg{
+                        width: 100px;
+                        margin-bottom: 20px;
+                    }
+                }
+    
+            }
+            
+        }
+    
+    }
+}
+
+// Mobile View
+@media only screen and (max-width: 480px){
+    .invoice__tab {
+        padding: 17px;
+    
+        .invoice__container {
+            padding: 10px;
+    
+            .invoice__content{
+                height: 300px;
+    
+                .invoice__icon{
+                    svg{
+                        width: 70px;
+                        margin-bottom: 20px;
+                    }
+                }
+    
+            }
+            
+        }
+    
+    }
+}
