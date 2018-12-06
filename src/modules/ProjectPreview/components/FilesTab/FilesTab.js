@@ -35,7 +35,7 @@ export default {
 				thumbnailWidth: 150,
 				timeout: 500000,
 				addRemoveLinks: true,
-				url: `https://api.bizzooka.ca/api/projects/${this.id}/file`,
+				url: `https://api.bizzooka.com/api/projects/${this.id}/file`,
 				headers: { "Authorization": "Bearer " + localStorage.getItem('token') },
 			}
 		}
@@ -47,6 +47,7 @@ export default {
 
 	methods: {
 		file_added(file, response) {
+			this.$event.$emit('open_snackbar', 'File(s) uploaded successfully', 'red', 'success', 3000)
 			this.items.unshift(JSON.parse(response))
 			this.$refs.dropzone.removeFile(file)
 		}
