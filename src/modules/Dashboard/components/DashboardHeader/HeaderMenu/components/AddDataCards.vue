@@ -1,7 +1,7 @@
 <template>
     <v-menu class="datacards__dropdown"
 	        transition="slide-y-transition"
-	        :nudge-bottom="10"
+	        :nudge-bottom="5"
 	        bottom
 	        offset-y
             :close-on-content-click="false"
