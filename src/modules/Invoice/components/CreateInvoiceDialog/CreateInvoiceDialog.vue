@@ -106,16 +106,16 @@
 							<h3>Subtotal {{ subtotal }} </h3>
 							<div class="discount field" v-show="show_discount">
 								Discounts
-								<v-text-field>
+								<v-text-field v-model="discount">
 									<v-tooltip slot="prepend" bottom>
-										<v-btn slot="activator" icon @click="toggle_field('discount')">
+										<v-btn slot="activator" icon @click="toggle_field('discount_symbol')">
 											<v-icon>compare_arrows</v-icon>
 										</v-btn>
 
 										Toggle discount
 									</v-tooltip>
 									<template slot="append">
-										<span slot="activator">{{ discount }}</span>
+										<span slot="activator">{{ discount_symbol }}</span>
 									</template>
 								</v-text-field>
 								<v-btn icon @click="show_discount = !show_discount">
@@ -124,16 +124,16 @@
 							</div>
 							<div class="tax field" v-show="show_tax">
 								Tax
-								<v-text-field>
+								<v-text-field v-model="tax">
 									<v-tooltip slot="prepend" bottom>
-										<v-btn slot="activator" icon @click="toggle_field('tax')">
+										<v-btn slot="activator" icon @click="toggle_field('tax_symbol')">
 											<v-icon>compare_arrows</v-icon>
 										</v-btn>
 
 										Toggle tax
 									</v-tooltip>
 									<template slot="append">
-										<span slot="activator">{{ tax }}</span>
+										<span slot="activator">{{ tax_symbol }}</span>
 									</template>
 								</v-text-field>
 								<v-btn icon @click="show_tax = !show_tax">
@@ -142,7 +142,7 @@
 							</div>
 							<div class="shipping field" v-show="show_shipping">
 								Shipping
-								<v-text-field label="Shipping"></v-text-field>
+								<v-text-field label="Shipping" v-model="shipping"></v-text-field>
 								<v-btn icon @click="show_shipping = !show_shipping">
 									<v-icon>delete</v-icon>
 								</v-btn>
@@ -164,7 +164,7 @@
 									+ Shipping
 								</v-btn>
 							</div>
-							Total $0.00
+							Total {{ total }}
 						</div>
 					</div>
 
