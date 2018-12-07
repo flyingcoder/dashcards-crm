@@ -1,10 +1,7 @@
 <template>
     <div class="header-menu">
 
-        <header-icon
-            :image-src="require('@/assets/icons/header/add__default.png')"
-            :hovered-image-src="require('@/assets/icons/header/add.png')"
-        />
+        <add-cards />
 
         <header-icon
             :image-src="require('@/assets/icons/header/email__default.png')"
