@@ -112,10 +112,28 @@ export default {
 
 @import '~@/sass/_variables';
 
+.v-menu__content.theme--light.menuable__content__active{
+    box-shadow: 0 15px 5px -3px rgba(0,0,0,.2), 
+                0 18px 10px -3px rgba(0,0,0,.14), 
+                0 13px 14px -3px rgba(0,0,0,.12);
+}
+
 .add__cards_list{
     background-color: $lightViolete;
     width: 420px;
     padding: 15px 25px;
+    margin-top: 15px;
+    &:after{
+        content: "";
+        position:absolute;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-bottom: 15px solid $lightViolete;
+        border-top: 15px solid transparent;
+        right: 50%;
+        top: 0;
+        margin-top: -15px;
+    }
     
     .add__cards__title{
         font-size: 23px;
