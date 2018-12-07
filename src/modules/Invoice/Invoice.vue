@@ -1,6 +1,6 @@
 <template>
 	<div class="invoice">
-		<create-invoice-dialog :open="create_dialog" />
+		<create-invoice-dialog :open.sync="create_dialog" />
 		<table-header :paths="paths" />
 
 		<div class="invoice__container">
