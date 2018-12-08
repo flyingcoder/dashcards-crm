@@ -113,22 +113,5 @@
 
 <script src="./MessagesTab.js"></script>
 <style lang="scss" scoped src="./MessagesTab.scss"></style>
-
-<style scoped>
->>>.content__wrapper .buzz__tables{
-    padding: 0;
-    border-radius: none;
-    border: none;
-}
->>>.content__wrapper .buzz__tables .buzz__tablesTwo{
-    padding: 0;
-    border: none;
-}
-
->>>.option .v-btn__content{
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 16px;
-}
-</style>
+<style scoped src="./MessagesTab.css"></style>
 
