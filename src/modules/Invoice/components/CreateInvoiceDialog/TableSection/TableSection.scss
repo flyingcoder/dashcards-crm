@@ -1,0 +1,26 @@
+.second-row.table-section {
+
+  .table-headers {
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr 1fr 10px;
+    grid-gap: 10px;
+
+    .column {
+      padding: 10px;
+      background: #bdbdbd;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+  }
+
+  .table-body {
+    margin-top: 10px;
+    .row {
+      display: grid;
+      grid-template-columns: 4fr 1fr 1fr 1fr 10px;
+      grid-gap: 10px;
+    }
+  }
+
+}

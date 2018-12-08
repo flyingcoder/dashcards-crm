@@ -1,10 +1,12 @@
-import _cloneDeep from 'lodash/cloneDeep'
+import { mapGetters } from 'vuex'
 //Components
-import DatePicker from '@/common/DatePicker.vue'
+import DialogToolbar from './DialogToolbar.vue'
+import InfoSection from './InfoSection/InfoSection.vue'
+import TableSection from './TableSection/TableSection.vue'
 
 export default {
 	components: {
-		DatePicker
+		DialogToolbar, InfoSection, TableSection
 	},
 
 	props: {
@@ -20,19 +22,12 @@ export default {
 		tax_symbol: '%',
 		tax: '',
 		shipping: '',
-		rows: [],
-		active_row: {
-			descriptions: '',
-			rate: '',
-			hours: ''
-		}
 	}),
 
 	computed: {
-		should_disable() {
-			const { descriptions, rate, hours } = this.active_row
-			return !descriptions || !rate || !hours
-		},
+		...mapGetters('invoice', [
+			'rows'
+		]),
 		subtotal() {
 			if (!this.rows.length) return '0'
 			return this.rows.reduce((acc, cur) => {
@@ -69,30 +64,6 @@ export default {
 			else
 				this[field_name] = '%'
 		},
-		calculate_amount(row) {
-			return row.rate * row.hours
-		},
-		add_new_row() {
-			const { descriptions, rate, hours } = this.active_row
-			const amount = this.calculate_amount(this.active_row)
-			this.rows.push({ descriptions, rate, hours, amount })
-			this.active_row = {
-				descriptions: '',
-				rate: '',
-				hours: ''
-			}
-		},
-		delete_row(index) {
-			let rows = _cloneDeep(this.rows)
-			rows.splice(index, 1)
-			this.rows = rows
-		},
-		row_updated(row, index) {
-			let rows = _cloneDeep(this.rows)
-			const new_amount = row.hours * row.rate
-			rows[index].amount = new_amount
-			this.rows = rows
-		}
 	},
 
 }

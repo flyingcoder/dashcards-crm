@@ -3,91 +3,14 @@
 		<v-layout row justify-center>
 			<v-dialog :value="open" fullscreen persist hide-overlay transition="dialog-bottom-transition">
 
-				<div class="dialog">
-					<v-toolbar dark color="indigo" height="60">
-						<v-btn icon dark @click="$emit('update:open', false)">
-							<v-icon>close</v-icon>
-						</v-btn>
-						<v-toolbar-title>Create new Invoice</v-toolbar-title>
-						<v-spacer></v-spacer>
-						<v-toolbar-items>
-							<v-btn dark flat>Send Invoice</v-btn>
-						</v-toolbar-items>
-					</v-toolbar>
-				</div>
-
+				<dialog-toolbar @close="$emit('update:open', false)"
+				                @send=""
+				/>
 				<div class="content">
-					<div class="first-row info-section">
-						<div class="left-side">
 
-							<div class="add-logo-box">
-								+ Add Your Logo
-							</div>
+					<info-section />
 
-							<div class="bill-from">
-								<v-textarea label="Who is this invoice from"></v-textarea>
-							</div>
-
-							<div class="bill-to">
-								<v-text-field label="Who is this invoice to"></v-text-field>
-							</div>
-
-
-						</div>
-						<div class="right-side">
-							<div class="invoice-title">INVOICE</div>
-							<div class="invoice-number">
-								Invoice Number
-								<input type="text" value="3">
-							</div>
-							<div class="invoice-dates">
-								<div class="created-date">
-									Date:
-									<date-picker label="Select Date" />
-								</div>
-
-								<div class="due-date">
-									Due Date:
-									<date-picker label="Select Date" />
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="second-row table-section">
-
-						<div class="table-headers">
-							<div class="column">Description</div>
-							<div class="column">Rate</div>
-							<div class="column">Hours</div>
-							<div class="column">Amount</div>
-						</div>
-
-						<div class="table-body">
-
-							<div class="active row">
-								<v-text-field label="Descriptions" v-model.trim="active_row.descriptions" />
-								<v-text-field min="0" type="number" label="Rate" v-model.trim.number="active_row.rate" />
-								<v-text-field min="0" type="number" label="Hours" v-model.trim.number="active_row.hours" />
-								<v-text-field label="Amount" :value="calculate_amount(active_row)" readonly />
-								<v-btn outline icon :disabled="should_disable" @click="add_new_row">
-									<v-icon>add</v-icon>
-								</v-btn>
-							</div>
-
-							<div class="row" v-for="(row, index) of rows" :key="index">
-								<v-text-field label="Descriptions" v-model.trim="row.descriptions" />
-								<v-text-field min="0" type="number" label="Rate" @change="row_updated(row, index)" v-model.trim.number="row.rate" />
-								<v-text-field min="0" type="number" label="Hours" @change="row_updated(row, index)" v-model.trim.number="row.hours" />
-								<v-text-field label="Amount" v-model="row.amount" readonly />
-								<v-btn icon @click="delete_row(index)">
-									<v-icon>delete</v-icon>
-								</v-btn>
-							</div>
-
-						</div>
-
-					</div>
+					<table-section />
 
 					<div class="third-row additional-info-section">
 
