@@ -5,36 +5,4 @@
   grid-template-rows: 1fr 1fr 1fr;
   padding: 35px;
   overflow: auto;
-
-  .third-row.additional-info-section {
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
-
-    .right-side {
-      text-align: right;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-
-      .field {
-        display: grid;
-        grid-auto-flow: column;
-        grid-gap: 15px;
-        align-items: center;
-      }
-
-      .fields-to-add {
-        display: flex;
-        padding: 10px;
-
-        ~ .btn {
-          margin: 10px;
-        }
-      }
-    }
-
-  }
-
 }

@@ -1,5 +1,3 @@
-import _cloneDeep from "lodash/cloneDeep";
-
 const state = {
 	rows: []
 }
