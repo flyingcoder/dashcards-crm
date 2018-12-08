@@ -12,6 +12,7 @@ export default {
 		Task: () => import('./components/TaskTab/TaskTab.vue'),
 		Timer: () => import('./components/TimerTab/TimerTab.vue'),
 		Files: () => import('./components/FilesTab/FilesTab.vue'),
+		Messages: () => import('./components/MessagesTab/MessagesTab.vue'),
 		Reports: () => import('./components/ReportsTab/ReportsTab.vue')
 	},
 

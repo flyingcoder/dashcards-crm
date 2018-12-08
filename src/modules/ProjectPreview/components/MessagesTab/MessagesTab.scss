@@ -1,0 +1,208 @@
+@import '~@/sass/_variables';
+
+@include sortOptionStyle;
+
+
+.message__tab {
+    padding: 25px;
+    margin: 25px;
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+    @include customTableRow;
+
+    .message__content{
+        background-color: $tableBlueBg;
+        border: 1px solid $tableBorderBlue;
+        border-radius: 10px;
+        padding: 15px;
+        
+        .message__sidebar{
+            .sidebar__options{
+                margin: 10px;
+                padding: 20px;
+                background-color: $white;
+                border: 1px solid $tableBorderBlue;
+                border-radius: 10px;
+                text-align: center;
+
+                .option{
+                    height: 60px;
+                    width: 190px;
+                    margin: 0;
+                    font-size: 15px;
+                    border: 1px solid $tableBorderBlue;
+                    text-transform: capitalize;
+                    color: $textDark;
+                    background-color: $lightGray;
+
+                    &:hover{
+                        background-color: $white;
+                    }
+
+                    .v-btn--active:before, .v-btn:focus:before, .v-btn:hover:before {
+                        background-color: inherit;
+                    }
+                    
+                    span{
+                        font-size: 12px;
+                        line-height: 35px;
+                        background-color: $red;
+                        height: 35px;
+                        width: 35px;
+                        color: $white;
+                        border-radius: 50%;
+                    }
+                    
+                }
+
+                .v-btn--active:before, .v-btn:focus:before, .v-btn:hover:before {
+                    background-color: inherit;
+                }
+
+                .write__btn{
+                    height: 60px;
+                    width: 190px;
+                    margin: 0;
+                    font-size: 15px;
+                    margin-bottom: 20px;
+                }
+
+                .inbox__btn, .sent__btn, .draft__btn{
+                    border-bottom: none;
+                }
+            }
+
+            .sidebar__chatlist{
+                margin: 10px;
+                background-color: $white;
+                border: 1px solid $tableBorderBlue;
+                border-radius: 10px;
+
+                .user{
+                    padding: 10px;
+                    text-align: center;
+                    display: flex;
+                    .user__img{
+                        height: 50px;
+                        width: 50px;
+                        max-width: 50px;
+                        border-radius: 50%;
+                        border: 1px solid $borderLightGray;
+                        position: relative;
+                        
+                        .status{
+                            position: absolute;
+                            bottom: 0;
+                            right: 0;
+                            width: 15px;
+                            height: 15px;
+                            border: 2px solid $lightViolete;
+                            border-radius: 50%;
+                        }
+                        
+                        .online{
+                            background-color: $green;
+                        }
+
+                        .offline{
+                            background-color: $gray;
+                        }
+
+                        .dnd{
+                            background-color: $red;
+                        }
+                    }
+                    .user__name{
+                        margin-left: 10px;
+                        font-size: 14px;
+                        font-size: 12px;
+                        margin: auto 10px;
+                        text-align: left;
+                        font-weight: 500;
+                        color: $textDark;
+                    }
+                    .add__chat{
+                        height: 33px;
+                        min-width: 33px;
+                        border-radius: 5px;
+                        border: 1px solid $borderLightGray;
+                        background-color: $lightGray;
+                        color: $darkGray;
+                        margin: auto 0;
+                        text-align: right;
+                        padding: 0;
+                    }
+                }
+
+                @include styledScrollFor('.friend__list')
+
+                .friend__list{
+                    overflow: auto;
+                    max-height: 500px;
+                    .friend{
+                        border-top: 1px solid $borderLightGray;
+                    }
+                }
+
+                .view__more{
+                    text-align: center;
+                    padding: 10px;
+                    border-top: 1px solid $borderLightGray;
+                    .view__more_btn{
+                        color: $tableDarkText;
+                    }
+                }
+            }
+        }
+        .message__table{
+            .custom__table{
+                margin: 10px;
+
+                .table__toolbar {
+                    border: 1px solid $tableBorderBlue;
+                    border-bottom: none;
+                    background-color: $lightGray;
+                }
+
+                .table__toolbar-title{
+                    color: $tableTitleBlue;
+                    text-align: left;
+                    font-size: 30px;
+                }
+
+                .message__option{
+                    .v-icon{
+                        font-size: 24px;
+                        color: $sortOptionGray;
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+@media only screen and (max-width: 480px){
+    .message__tab {
+        padding: 15px;
+
+        .table__toolbar-title{
+            font-size: 18px;
+        }
+    
+        .message__option{
+
+            .v-btn--floating.v-btn--small{
+                height: 30px;
+                width: 30px;
+            }
+
+            .v-icon{
+                font-size: 24px;
+                color: $sortOptionGray;
+            }
+        }
+        
+    }
+}
