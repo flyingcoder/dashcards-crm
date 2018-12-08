@@ -1,0 +1,15 @@
+.right-side {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  .fields-to-add {
+    display: flex;
+    padding: 10px;
+
+    ~ .btn {
+      margin: 10px;
+    }
+  }
+}
