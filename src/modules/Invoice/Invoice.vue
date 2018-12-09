@@ -1,9 +1,26 @@
 <template>
 	<div class="invoice">
 		<create-invoice-dialog :open.sync="create_dialog" />
-		<table-header :paths="paths" />
 
-		<div class="invoice__container">
+		<table-header :paths="paths"
+		              :no-button="!items.length"
+		              @click="create_dialog = true"
+		/>
+
+		<custom-table
+				v-if="items.length"
+				:headers="headers"
+				:items="items"
+				:loading="loading"
+				:sort="sort"
+				:has-checkbox="true"
+				hide-actions
+				@items-selected="selected_ids = $event"
+		>
+
+		</custom-table>
+
+		<div class="invoice__container" v-else>
 			<div class="invoice__content">
 				<div class="invoice__icon">
 					<svg viewBox="0 0 250 250">
@@ -16,6 +33,7 @@
 				       @click="create_dialog = true"
 				>Add New Invoice</v-btn>
 			</div>
+
 		</div>
 
 	</div>

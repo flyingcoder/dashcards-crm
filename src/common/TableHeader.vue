@@ -1,13 +1,12 @@
 <template>
     <v-layout row wrap class="table-header">
-        <v-flex>
-            <breadcrumb :paths="paths"/>
-        </v-flex>
-        <v-flex>
-            <v-btn fab small class="add__btn" @click="$emit('click')">
+        <breadcrumb :paths="paths"/>
+        <v-btn v-if="!noButton"
+               fab small class="add__btn"
+               @click="$emit('click')"
+        >
             <v-icon>add</v-icon>
-            </v-btn>
-        </v-flex>
+        </v-btn>
     </v-layout>
 </template>
 
@@ -18,6 +17,7 @@
         name: 'TableHeader',
         props: {
             paths: Array,
+            noButton: Boolean
         },
         data (){
             return{
