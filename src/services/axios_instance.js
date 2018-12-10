@@ -26,12 +26,10 @@ request.interceptors.response.use(response => {
 		auth.logout()
     return
   }
-  //TODO: refactor this to have best practise. -roland review
-  var res = error.response;
-  if(error.response.status == 422) {
-    for(error in res.data.errors) {
-      store.commit('open_snackbar', { status: true, message: res.data.errors[error][0] })
-    }
+  const res = error.response
+
+  if(Array.isArray(res)) {
+	  store.commit('open_snackbar', { status: true, message: res.data.errors[error][0] })
   } else {
     store.commit('open_snackbar', { status: true, message: res.data.message })
   }  
