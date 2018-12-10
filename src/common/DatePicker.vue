@@ -26,46 +26,44 @@
 </template>
 
 <script>
-	export default {
-		name: 'DatePicker',
-		inheritAttrs: false,
-		props: {
-			value: { type: String, default: null },
-			min: { type: String, default: null },
-			max: { type: String, default: null }
-		},
+export default {
+  name: 'DatePicker',
+  inheritAttrs: false,
+  props: {
+    value: { type: String, default: null },
+    min: { type: String, default: null },
+    max: { type: String, default: null }
+  },
 
-		data: () => ({
-			menu: false,
-			picker_date: null
-		}),
+  data: () => ({
+    menu: false,
+    picker_date: null
+  }),
 
-		watch: {
-			value(val) { this.picker_date = val }
-		},
+  watch: {
+    value(val) {
+      this.picker_date = val
+    }
+  },
 
-		methods: {
+  methods: {
+    save() {
+      this.$emit('input', this.picker_date)
+      this.cancel()
+    },
 
-			save() {
-				this.$emit('input', this.picker_date)
-				this.cancel()
-			},
+    cancel() {
+      this.menu = false
+    },
 
-			cancel() {
-				this.menu = false
-			},
-
-			clear() {
-				this.picker_date = null
-			}
-
-		},
-
-	}
+    clear() {
+      this.picker_date = null
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-	.date-picker {
-
-	}
+.date-picker {
+}
 </style>

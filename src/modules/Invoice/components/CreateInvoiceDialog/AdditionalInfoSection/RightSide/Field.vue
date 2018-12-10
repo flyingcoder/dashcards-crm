@@ -26,24 +26,24 @@
 </template>
 
 <script>
-	export default {
-		props: {
-			title: String,
-			show: Boolean,
-			classes: Array,
-			value: [String, Number],
-			symbol: String,
-			symbolType: String,
-			noSymbol: Boolean
-		}
-	}
+export default {
+  props: {
+    title: String,
+    show: Boolean,
+    classes: Array,
+    value: [String, Number],
+    symbol: String,
+    symbolType: String,
+    noSymbol: Boolean
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-	.field {
-		display: grid;
-		grid-auto-flow: column;
-		grid-gap: 15px;
-		align-items: center;
-	}
+.field {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 15px;
+  align-items: center;
+}
 </style>

@@ -1,23 +1,17 @@
 <template>
 	<div class="right-side">
 		<div class="invoice-title">INVOICE</div>
-		<div class="invoice-number field">
+		<div class="invoice-number">
 			Invoice Number
 			<input type="text" value="3">
 		</div>
-
-		<div class="invoice-type field">
-			Select type
-			<v-select :items="['hourly', 'monthly']" value="hourly"></v-select>
-		</div>
-
 		<div class="invoice-dates">
-			<div class="created-date field">
+			<div class="created-date">
 				Date:
 				<date-picker label="Select Date" />
 			</div>
 
-			<div class="due-date" field>
+			<div class="due-date">
 				Due Date:
 				<date-picker label="Select Date" />
 			</div>
@@ -26,43 +20,47 @@
 </template>
 
 <script>
-	import DatePicker from '@/common/DatePicker.vue'
+import DatePicker from '@/common/DatePicker.vue'
 
-	export default {
-		components: {
-			DatePicker
-		},
-	}
+export default {
+  components: {
+    DatePicker
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-	.right-side {
-		display: grid;
+.right-side {
+  display: grid;
 
-		.invoice-title {
-			width: 200px;
-			font-size: 35px;
-			color: gray;
-			text-align: right;
-			width: 100%;
-		}
+  .invoice-title {
+    width: 200px;
+    font-size: 35px;
+    color: gray;
+    text-align: right;
+    width: 100%;
+  }
 
-		.field {
-			display: grid;
-			grid-auto-flow: column;
-			justify-content: end;
-			align-items: center;
-			grid-gap: 15px;
-		}
+  .invoice-number {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: end;
+    align-items: center;
+    grid-gap: 15px;
 
-		.invoice-number {
-			> input{
-				padding: 10px;
-				border: 1px solid grey;
-				border-radius: 10px;
+    > input {
+      padding: 10px;
+      border: 1px solid grey;
+      border-radius: 10px;
+    }
+  }
 
-			}
-		}
-
-	}
+  .invoice-dates > div {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: end;
+    align-items: center;
+    grid-gap: 15px;
+  }
+}
 </style>

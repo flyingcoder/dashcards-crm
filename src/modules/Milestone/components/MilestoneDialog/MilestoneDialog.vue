@@ -52,10 +52,10 @@
 	</div>
 </template>
 
-<script src="./MilestoneDialog.js"></script>
+<script src="./MilestoneDialog.js">
+</script>
 
 <style lang="scss" scoped>
-	.milestone-dialog {
-
-	}
+.milestone-dialog {
+}
 </style>

@@ -88,11 +88,12 @@
 	</div>
 </template>
 
-<script src="./MilestoneTask.js"></script>
+<script src="./MilestoneTask.js">
+</script>
 <style lang="scss" scoped>
-	@import "~@/sass/variables";
+@import '~@/sass/variables';
 
-	.milestone-task {
-		@include customTableRow; //css used for styling the last row of the table
-	}
+.milestone-task {
+  @include customTableRow; //css used for styling the last row of the table
+}
 </style>

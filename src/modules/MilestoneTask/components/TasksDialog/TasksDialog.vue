@@ -70,10 +70,10 @@
 	</div>
 </template>
 
-<script src="./TasksDialog.js"></script>
+<script src="./TasksDialog.js">
+</script>
 
 <style lang="scss" scoped>
-	.tasks-dialog {
-
-	}
+.tasks-dialog {
+}
 </style>

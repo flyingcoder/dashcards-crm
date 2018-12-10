@@ -1,24 +1,25 @@
 import EmojiPicker from 'vue-emoji-picker'
 
 export default {
-	components: {
-		EmojiPicker
-	},
+  components: {
+    EmojiPicker
+  },
 
-	data: () => ({
-		search: ''
-	}),
+  data: () => ({
+    search: ''
+  }),
 
-	directives: {
-		focus: {
-			inserted(el) {
-				el.focus()
-			},
-		},
-	},
+  directives: {
+    focus: {
+      inserted(el) {
+        el.focus()
+      }
+    }
+  },
 
-	methods: {
-		append(emoji) { this.$emit('emoji-added', emoji) },
-	}
-
+  methods: {
+    append(emoji) {
+      this.$emit('emoji-added', emoji)
+    }
+  }
 }

@@ -24,5 +24,7 @@
 	</v-flex>
 </template>
 
-<script src="./TimelineCard.js"></script>
-<style lang="scss" scoped src="./TimelineCard.scss"></style>
+<script src="./TimelineCard.js">
+</script>
+<style lang="scss" scoped src="./TimelineCard.scss">
+</style>

@@ -3,7 +3,7 @@ import CustomField from '@/common/CustomField/CustomField.vue'
 
 export default {
   name: 'ForgotPassword',
-  components: {LoginComponent, CustomField},
+  components: { LoginComponent, CustomField },
 
   data: () => ({
     email: ''

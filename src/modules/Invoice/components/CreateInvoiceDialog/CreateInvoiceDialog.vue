@@ -3,9 +3,7 @@
 		<v-layout row justify-center>
 			<v-dialog :value="open" fullscreen persist hide-overlay transition="dialog-bottom-transition">
 
-				<dialog-toolbar @close="$emit('update:open', false)"
-				                @send=""
-				/>
+				<dialog-toolbar @close="$emit('update:open', false)" />
 
 				<div class="content">
 
@@ -20,5 +18,7 @@
 	</div>
 </template>
 
-<script src="./CreateInvoiceDialog.js"></script>
-<style lang="scss" scoped src="./CreateInvoiceDialog.scss"></style>
+<script src="./CreateInvoiceDialog.js">
+</script>
+<style lang="scss" scoped src="./CreateInvoiceDialog.scss">
+</style>

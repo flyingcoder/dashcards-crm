@@ -45,36 +45,37 @@
 	</div>
 </template>
 
-<script src="./Forms.js"></script>
+<script src="./Forms.js">
+</script>
 
 <style lang="scss" scoped>
-	.forms {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		padding: 20px;
+.forms {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 
-		.form-container {
-			width: 600px;
-		}
-		.form-wrapper {
-			display: grid;
-			grid-template-columns: 10fr 1fr;
-		}
+  .form-container {
+    width: 600px;
+  }
+  .form-wrapper {
+    display: grid;
+    grid-template-columns: 10fr 1fr;
+  }
 
-		.actions {
-			display: grid;
-			background: #ded2d2;
-			position: fixed;
-			right: 10px;
-			bottom: 10px;
-		}
-	}
+  .actions {
+    display: grid;
+    background: #ded2d2;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+  }
+}
 </style>
 
 <style scoped>
-	>>> .tabs a.v-tabs__item.v-tabs__item--active {
-		background: #3B589E;
-		color: white;
-	}
+>>> .tabs a.v-tabs__item.v-tabs__item--active {
+  background: #3b589e;
+  color: white;
+}
 </style>

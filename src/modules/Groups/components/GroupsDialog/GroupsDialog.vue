@@ -40,7 +40,8 @@
 		</v-dialog>
 	</v-layout>
 </template>
-<script src="./GroupsDialog.js"></script>
+<script src="./GroupsDialog.js">
+</script>
 
 
 

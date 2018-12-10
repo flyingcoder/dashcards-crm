@@ -17,19 +17,20 @@
 </template>
 
 <style lang="scss" scoped>
-	.left-side {
-		.add-logo-box {
-			width: 200px;
-			height: 150px;
-			background: gainsboro;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			font-size: 18px;
-		}
+.left-side {
+  .add-logo-box {
+    width: 200px;
+    height: 150px;
+    background: gainsboro;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+  }
 
-		.bill-from, .bill-to {
-			width: 300px;
-		}
-	}
+  .bill-from,
+  .bill-to {
+    width: 300px;
+  }
+}
 </style>

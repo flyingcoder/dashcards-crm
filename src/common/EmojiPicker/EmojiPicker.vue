@@ -8,7 +8,7 @@
 			</svg>
 		</div>
 
-		<div slot="emoji-picker" slot-scope="{ emojis, insert, display }">
+		<div slot="emoji-picker" slot-scope="{ emojis, insert }">
 			<div class="emoji-picker">
 
 				<div class="emoji-picker__search">
@@ -32,5 +32,7 @@
 	</emoji-picker>
 </template>
 
-<script src="./EmojiPicker.js"></script>
-<style lang="scss" scoped src="./EmojiPicker.scss"></style>
+<script src="./EmojiPicker.js">
+</script>
+<style lang="scss" scoped src="./EmojiPicker.scss">
+</style>

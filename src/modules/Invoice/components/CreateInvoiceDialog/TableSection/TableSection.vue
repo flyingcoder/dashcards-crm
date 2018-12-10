@@ -35,5 +35,7 @@
 	</div>
 </template>
 
-<script src="./TableSection.js"></script>
-<style lang="scss" scoped src="./TableSection.scss"></style>
+<script src="./TableSection.js">
+</script>
+<style lang="scss" scoped src="./TableSection.scss">
+</style>

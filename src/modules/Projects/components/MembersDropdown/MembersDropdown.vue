@@ -41,54 +41,55 @@
 </template>
 
 <script>
-	import debounce from 'lodash/debounce'
-	import makeRequestTo from '@/services/makeRequestTo'
+import debounce from 'lodash/debounce'
+import makeRequestTo from '@/services/makeRequestTo'
 
-	export default {
-		name: 'MembersDropdown',
-		inheritAttrs: false,
+export default {
+  name: 'MembersDropdown',
+  inheritAttrs: false,
 
-		props: {
-			members: Array,
-			memberItems: Array,
-		},
+  props: {
+    members: Array,
+    memberItems: Array
+  },
 
-		data: () => ({
-			items: [],
-			is_loading: false,
-			search: null,
-		}),
+  data: () => ({
+    items: [],
+    is_loading: false,
+    search: null
+  }),
 
-		watch: {
-			search (val) { val && this.debounce(val) },
-			memberItems (val) { this.items = [...val] },
-		},
+  watch: {
+    search(val) {
+      val && this.debounce(val)
+    },
+    memberItems(val) {
+      this.items = [...val]
+    }
+  },
 
-		methods: {
-			
-			members_selected(val) {
-				this.$emit('update:members', val)
-			},
+  methods: {
+    members_selected(val) {
+      this.$emit('update:members', val)
+    },
 
-			debounce: debounce(function(val){
-				this.is_loading = true
-				makeRequestTo.fill_dropdown('member', val)
-					.then(response => {
-						this.items = response.data
-						this.$emit('items-updated', response.data)
-					})
-					.finally(() => this.is_loading = false)
-			}, 500),
+    debounce: debounce(function(val) {
+      this.is_loading = true
+      makeRequestTo
+        .fill_dropdown('member', val)
+        .then(response => {
+          this.items = response.data
+          this.$emit('items-updated', response.data)
+        })
+        .finally(() => (this.is_loading = false))
+    }, 500),
 
-			is_item_active(id) {
-				return this.members.includes(id)
-			}
-
-		}
-
-	}
+    is_item_active(id) {
+      return this.members.includes(id)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-
 </style>

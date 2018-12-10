@@ -89,4 +89,5 @@
 	</div>
 </template>
 
-<script src="./AddTaskDialog.js"></script>
+<script src="./AddTaskDialog.js">
+</script>

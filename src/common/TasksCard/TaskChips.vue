@@ -43,51 +43,51 @@
 </template>
 
 <script>
-	export default {
-		name: 'TaskChips',
-		props: {
-			countAll: Number,
-			countCompleted: Number,
-			countPending: Number,
-			countBehind: Number,
-			countOpen: Number,
-			activeChip: String,
-		}
-	}
+export default {
+  name: 'TaskChips',
+  props: {
+    countAll: Number,
+    countCompleted: Number,
+    countPending: Number,
+    countBehind: Number,
+    countOpen: Number,
+    activeChip: String
+  }
+}
 </script>
 
 <style lang="scss" scoped>
 @import '~@/sass/_variables';
-	.task__chips {
-		padding: 20px 0;
-		border-bottom: 1px solid $borderGray;
-		.theme--light.v-chip{
-			background-color: $white;
-			border-color: $borderGray;
-			font-size: 12px;
-			font-weight: 500;
-			color: $chipGray;
-		}
-		.task__avatar{
-			background-color: $chipGray;
-			border-color: $chipGray;
-			color: $white;
-			font-size: 12px;
-			font-weight: 500;
-		}
-		.task__chip.active{
-			background-color: $chipDark;
-			border-color:$chipDark;
-			color: $white;
-			.task__avatar{
-				background-color: $chipBlue;
-				border-color: $chipBlue;
-			}
-		}
-	}
+.task__chips {
+  padding: 20px 0;
+  border-bottom: 1px solid $borderGray;
+  .theme--light.v-chip {
+    background-color: $white;
+    border-color: $borderGray;
+    font-size: 12px;
+    font-weight: 500;
+    color: $chipGray;
+  }
+  .task__avatar {
+    background-color: $chipGray;
+    border-color: $chipGray;
+    color: $white;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .task__chip.active {
+    background-color: $chipDark;
+    border-color: $chipDark;
+    color: $white;
+    .task__avatar {
+      background-color: $chipBlue;
+      border-color: $chipBlue;
+    }
+  }
+}
 </style>
 <style scoped>
->>> .task__chip .v-chip__content{
-	cursor: pointer;
+>>> .task__chip .v-chip__content {
+  cursor: pointer;
 }
 </style>

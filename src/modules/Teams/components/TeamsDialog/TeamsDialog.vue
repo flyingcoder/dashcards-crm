@@ -110,5 +110,5 @@
 	</v-layout>
 </template>
 
-<script src="./TeamsDialog.js"></script>
-
+<script src="./TeamsDialog.js">
+</script>

@@ -22,5 +22,7 @@
 
     </div>
 </template>
-<script src="./HeaderMenu.js"></script>
-<style lang="scss" scoped src="./HeaderMenu.scss"></style>
+<script src="./HeaderMenu.js">
+</script>
+<style lang="scss" scoped src="./HeaderMenu.scss">
+</style>

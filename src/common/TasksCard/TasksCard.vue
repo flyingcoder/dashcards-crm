@@ -13,24 +13,24 @@
 </template>
 
 <script>
-	import DashCard from '@/common/DashCard.vue'
-	import TasksContent from './TasksContent.vue'
+import DashCard from '@/common/DashCard.vue'
+import TasksContent from './TasksContent.vue'
 
-	export default {
-		name: 'TasksCard',
-		components: {
-			DashCard, TasksContent
-		},
+export default {
+  name: 'TasksCard',
+  components: {
+    DashCard,
+    TasksContent
+  },
 
-		props: { id: [Number, String], viewMoreLink: Object },
-
-	}
+  props: { id: [Number, String], viewMoreLink: Object }
+}
 </script>
 
 <style lang="scss" scoped>
-	.tasks-card {
-		.tasks__content{
-			margin: 12px;
-		}
-	}
+.tasks-card {
+  .tasks__content {
+    margin: 12px;
+  }
+}
 </style>

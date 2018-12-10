@@ -41,9 +41,10 @@
 	</div>
 </template>
 
-<script src="./InvoiceTable.js"></script>
+<script src="./InvoiceTable.js">
+</script>
 <style lang="scss" scoped>
-	.invoice-table {
-		width: 100%;
-	}
+.invoice-table {
+  width: 100%;
+}
 </style>

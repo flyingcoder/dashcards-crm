@@ -1,7 +1,7 @@
 export default {
-    props: {
-        methods: {
-            type: Object,
-        },
-    },
+  props: {
+    methods: {
+      type: Object
+    }
+  }
 }

@@ -8,19 +8,20 @@
 </template>
 
 <script>
-	import LeftSide from './LeftSide.vue'
-	import RightSide from './RightSide.vue'
+import LeftSide from './LeftSide.vue'
+import RightSide from './RightSide.vue'
 
-	export default {
-		components: {
-			LeftSide, RightSide
-		},
-	}
+export default {
+  components: {
+    LeftSide,
+    RightSide
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-	.first-row.info-section {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-	}
+.first-row.info-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 </style>

@@ -15,5 +15,7 @@
 
     </div>
 </template>
-<script src="./CustomFields.js"></script>
-<style lang="scss" scoped src="./CustomField.scss"></style>
+<script src="./CustomFields.js">
+</script>
+<style lang="scss" scoped src="./CustomField.scss">
+</style>

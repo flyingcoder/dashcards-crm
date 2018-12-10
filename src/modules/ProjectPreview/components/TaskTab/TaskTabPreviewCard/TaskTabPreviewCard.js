@@ -7,65 +7,75 @@ import EmojiPicker from '@/common/EmojiPicker/EmojiPicker.vue'
 import HoursBox from '@/common/HoursBox/HoursBox.vue'
 
 export default {
-	name: 'TaskTabPreviewCard',
-	components: {
-		DashCard, RichEditor, HoursBox, EmojiPicker
-	},
-	props: {
-		id: [Number, String],
-		task: Object,
-	},
-
-	data: () => ({
-		content: null,
-		loading: false,
-		all_comments: [],
-    comment: '',
-	}),
-
-  computed: {
-	  full_name() {
-	      if(!this.content) return null
-	      return this.content.assigned[0].first_name + '' + this.content.assigned[0].last_name
-    },
+  name: 'TaskTabPreviewCard',
+  components: {
+    DashCard,
+    RichEditor,
+    HoursBox,
+    EmojiPicker
+  },
+  props: {
+    id: [Number, String],
+    task: Object
   },
 
-	watch: {
-		task(new_val) {
-			this.loading = true
-			request.get(`api/task/${this.task.id}`)
-				.then(response => {
-					this.content = response.data
-					this.all_comments = response.data.comments
-				})
-				.finally(() => this.loading = false)
-		}
-	},
+  data: () => ({
+    content: null,
+    loading: false,
+    all_comments: [],
+    comment: ''
+  }),
+
+  computed: {
+    full_name() {
+      if (!this.content) return null
+      return (
+        this.content.assigned[0].first_name +
+        '' +
+        this.content.assigned[0].last_name
+      )
+    }
+  },
+
+  watch: {
+    task() {
+      this.loading = true
+      request
+        .get(`api/task/${this.task.id}`)
+        .then(response => {
+          this.content = response.data
+          this.all_comments = response.data.comments
+        })
+        .finally(() => (this.loading = false))
+    }
+  },
 
   methods: {
-
-	  date_created(date) {
-		  return moment(date).format('MMMM DD, YYYY')
-	  },
-
-    job_title() {
-	      return this.content.assigned[0].job_title
+    date_created(date) {
+      return moment(date).format('MMMM DD, YYYY')
     },
 
-	  add_new_comment() {
-	  	if (!this.comment) return
-		  request.post(`api/task/${this.task.id}/comments`, { body: this.comment })
-			  .then(response => {
-			  	this.comment = ''
-				  this.all_comments.push(response.data)
-			  })
-	  },
+    job_title() {
+      return this.content.assigned[0].job_title
+    },
 
-	  emoji_added(emoji) {
-		  this.$refs.editor.$refs.richEditor.quill.focus()
-		  const selection = this.$refs.editor.$refs.richEditor.quill.getSelection()
-		  this.$refs.editor.$refs.richEditor.quill.insertText(selection.index, emoji)
-	  }
+    add_new_comment() {
+      if (!this.comment) return
+      request
+        .post(`api/task/${this.task.id}/comments`, { body: this.comment })
+        .then(response => {
+          this.comment = ''
+          this.all_comments.push(response.data)
+        })
+    },
 
+    emoji_added(emoji) {
+      this.$refs.editor.$refs.richEditor.quill.focus()
+      const selection = this.$refs.editor.$refs.richEditor.quill.getSelection()
+      this.$refs.editor.$refs.richEditor.quill.insertText(
+        selection.index,
+        emoji
+      )
+    }
   }
 }

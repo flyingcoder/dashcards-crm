@@ -20,23 +20,24 @@
 	</div>
 </template>
 
-<script src="./Settings.js"></script>
+<script src="./Settings.js">
+</script>
 
 <style lang="scss" scoped>
-	.settings {
-		.tabs {
-			box-shadow: 0px -2px 1px #e4d0d0;
-			.v-tabs__item--active {
-				background: #3B589E;
-				color: white;
-			}
-		}
-	}
+.settings {
+  .tabs {
+    box-shadow: 0px -2px 1px #e4d0d0;
+    .v-tabs__item--active {
+      background: #3b589e;
+      color: white;
+    }
+  }
+}
 </style>
 
 <style scoped>
-	>>> .tabs .v-tabs__item--active {
-		background: #3B589E;
-		color: white;
-	}
+>>> .tabs .v-tabs__item--active {
+  background: #3b589e;
+  color: white;
+}
 </style>

@@ -32,7 +32,7 @@
 
 				<v-btn large dark
 				       class="invoice__btn"
-				       large dark color="#3b589e"
+				       color="#3b589e"
 				       @click="create_dialog = true"
 				>
 					Add New Invoice
@@ -45,5 +45,7 @@
 	</div>
 </template>
 
-<script src="./Invoice.js"></script>
-<style lang="scss" scoped src="./Invoice.scss"></style>
+<script src="./Invoice.js">
+</script>
+<style lang="scss" scoped src="./Invoice.scss">
+</style>

@@ -28,18 +28,19 @@
 </template>
 
 <script>
-	export default {
-		name: 'DashCard',
-		props: {
-			title: String,
-			viewMoreLink: Object
-		},
-		methods: {
-			reroute() {
-				this.$router.push(this.viewMoreLink)
-			}
-		}
-	}
+export default {
+  name: 'DashCard',
+  props: {
+    title: String,
+    viewMoreLink: Object
+  },
+  methods: {
+    reroute() {
+      this.$router.push(this.viewMoreLink)
+    }
+  }
+}
 </script>
 
-<style lang="scss" scoped src="./DashCard.scss"></style>
+<style lang="scss" scoped src="./DashCard.scss">
+</style>

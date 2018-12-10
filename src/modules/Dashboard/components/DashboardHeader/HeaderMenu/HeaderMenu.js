@@ -3,9 +3,11 @@ import Dropdown from './components/Dropdown.vue'
 import AddCards from './components/AddDataCards.vue'
 
 export default {
-    name: 'HeaderMenu',
+  name: 'HeaderMenu',
 
-    components: {
-      HeaderIcon, Dropdown, AddCards
-    },
+  components: {
+    HeaderIcon,
+    Dropdown,
+    AddCards
+  }
 }

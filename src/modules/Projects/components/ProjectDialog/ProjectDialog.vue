@@ -56,9 +56,7 @@
 					<div class="quill-editor-example">
 						<quill-editor v-model="quill_editor.content"
 						              :options="quill_editor.editorOption"
-						              @blur=""
-						              @focus=""
-						              @ready="">
+						>
 						</quill-editor>
 					</div>
 				</div>
@@ -80,5 +78,7 @@
 	</v-layout>
 </template>
 
-<script src="./ProjectDialog.js"></script>
-<style lang="scss" scoped src="./ProjectDialog.scss"></style>
+<script src="./ProjectDialog.js">
+</script>
+<style lang="scss" scoped src="./ProjectDialog.scss">
+</style>

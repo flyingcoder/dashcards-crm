@@ -60,7 +60,7 @@
 								<td class="text-xs-center">{{item.item.description}}</td>
 								<td class="actions">
 									<template v-for="action of get_actions(item.item.slug)">
-										<v-tooltip bottom>
+										<v-tooltip bottom :key="action.value">
 											<v-btn
 													slot="activator"
 													color="blue"
@@ -107,5 +107,7 @@
 	</div>
 </template>
 
-<script src="./Groups.js"></script>
-<style lang="scss" scoped src="./Groups.scss"></style>
+<script src="./Groups.js">
+</script>
+<style lang="scss" scoped src="./Groups.scss">
+</style>

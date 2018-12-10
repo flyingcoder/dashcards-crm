@@ -4,37 +4,39 @@ import moment from 'moment'
 import DashCard from '@/common/DashCard.vue'
 
 export default {
-	name: 'TimelineCard',
+  name: 'TimelineCard',
 
-	components: {
-		DashCard
-	},
+  components: {
+    DashCard
+  },
 
-	props: {
-		id: [Number, String]
-	},
+  props: {
+    id: [Number, String]
+  },
 
-	data: () => ({
-		timeline_items: [],
-		loading: false
-	}),
+  data: () => ({
+    timeline_items: [],
+    loading: false
+  }),
 
-	created() {
-		const api = this.id ? `api/projects/${this.id}/timeline` : 'api/activities'
-		this.fill_timeline_card(api)
-	},
+  created() {
+    const api = this.id ? `api/projects/${this.id}/timeline` : 'api/activities'
+    this.fill_timeline_card(api)
+  },
 
-	methods: {
-		get_calendar_time(time) {
-			let string = moment(time).calendar().split('at')
-			return string.join('')
-		},
-		fill_timeline_card(api) {
-			this.loading = true
-			request.get(api)
-				.then(response => this.timeline_items = response.data)
-				.finally(() => this.loading = false)
-		}
-	}
-
+  methods: {
+    get_calendar_time(time) {
+      let string = moment(time)
+        .calendar()
+        .split('at')
+      return string.join('')
+    },
+    fill_timeline_card(api) {
+      this.loading = true
+      request
+        .get(api)
+        .then(response => (this.timeline_items = response.data))
+        .finally(() => (this.loading = false))
+    }
+  }
 }

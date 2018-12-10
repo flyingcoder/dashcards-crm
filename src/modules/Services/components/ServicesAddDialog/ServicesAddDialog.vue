@@ -36,7 +36,7 @@
 							</v-flex>
 
 							<v-flex xs12>
-								<v-layout row v-for="(service, index) of services">
+								<v-layout row v-for="(service, index) of services" :key="index">
 
 									<v-flex xs10>
 										<v-text-field
@@ -69,5 +69,7 @@
 	</v-layout>
 </template>
 
-<script src="./ServicesAddDialog.js"></script>
-<style lang="scss" src="./ServicesAddDialog.scss"></style>
+<script src="./ServicesAddDialog.js">
+</script>
+<style lang="scss" src="./ServicesAddDialog.scss">
+</style>

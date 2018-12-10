@@ -90,7 +90,7 @@
 
 	</div>
 </template>
-<script src="./Services.js"></script>
-<style lang="scss" scoped src="./Services.scss"></style>
-
-
+<script src="./Services.js">
+</script>
+<style lang="scss" scoped src="./Services.scss">
+</style>

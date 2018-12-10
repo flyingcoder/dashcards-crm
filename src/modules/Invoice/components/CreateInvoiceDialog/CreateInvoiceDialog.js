@@ -5,11 +5,14 @@ import TableSection from './TableSection/TableSection.vue'
 import AdditionalInfoSection from './AdditionalInfoSection/AdditionalInfoSection.vue'
 
 export default {
-	components: {
-		DialogToolbar, InfoSection, TableSection, AdditionalInfoSection
-	},
+  components: {
+    DialogToolbar,
+    InfoSection,
+    TableSection,
+    AdditionalInfoSection
+  },
 
-	props: {
-		open: Boolean,
-	},
+  props: {
+    open: Boolean
+  }
 }

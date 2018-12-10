@@ -93,12 +93,13 @@
 	</div>
 </template>
 
-<script src="./Milestone.js"></script>
+<script src="./Milestone.js">
+</script>
 
 <style lang="scss" scoped>
-	@import "~@/sass/variables";
+@import '~@/sass/variables';
 
- .milestone {
-	 @include customTableRow; //css used for styling the last row of the table
- }
+.milestone {
+  @include customTableRow; //css used for styling the last row of the table
+}
 </style>

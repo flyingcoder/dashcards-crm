@@ -50,5 +50,7 @@
 	</div>
 </template>
 
-<script src="./RightSide.js"></script>
-<style lang="scss" scoped src="./RightSide.scss"></style>
+<script src="./RightSide.js">
+</script>
+<style lang="scss" scoped src="./RightSide.scss">
+</style>

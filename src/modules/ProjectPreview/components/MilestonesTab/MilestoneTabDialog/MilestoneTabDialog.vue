@@ -75,4 +75,5 @@
 	</div>
 </template>
 
-<script src="./MilestoneTabDialog.js"></script>
+<script src="./MilestoneTabDialog.js">
+</script>

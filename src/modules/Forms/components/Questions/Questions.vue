@@ -112,12 +112,13 @@
 	</div>
 </template>
 
-<script src="./Questions.js"></script>
+<script src="./Questions.js">
+</script>
 <style lang="scss" scoped>
-	.questions {
-		.form-section {
-			border: 1px solid black;
-			padding: 10px;
-		}
-	}
+.questions {
+  .form-section {
+    border: 1px solid black;
+    padding: 10px;
+  }
+}
 </style>

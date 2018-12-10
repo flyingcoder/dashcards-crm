@@ -42,4 +42,5 @@
 	</v-layout>
 </template>
 
-<script src="./MilestoneTemplateDialog.js"></script>
+<script src="./MilestoneTemplateDialog.js">
+</script>

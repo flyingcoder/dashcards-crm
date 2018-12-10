@@ -11,7 +11,7 @@
 			<v-layout row align-center
 			          :class="['task__tableBody', { active: task.id === active_task_id }]"
 			          v-for="task in tasks"
-			          :key="tasks.id"
+			          :key="task.id"
 			          @click="row_clicked(task)"
 			>
 
@@ -50,154 +50,156 @@
 </template>
 
 <script>
-	export default {
-		name: 'TaskCustomTable',
-		props: {
-			tasks: Array
-		},
-		inject: {
-			bodyMaxHeight: {
-				from: 'bodyMaxHeight',
-				default: '400px'
-			}
-		},
+export default {
+  name: 'TaskCustomTable',
+  props: {
+    tasks: Array
+  },
+  inject: {
+    bodyMaxHeight: {
+      from: 'bodyMaxHeight',
+      default: '400px'
+    }
+  },
 
-		data: () => ({
-			active_task_id: null
-		}),
+  data: () => ({
+    active_task_id: null
+  }),
 
-		created() {
-			this.active_task_id = this.tasks[0].id
-			this.$event.$emit('task-row-clicked', this.tasks[0])
-		},
+  created() {
+    this.active_task_id = this.tasks[0].id
+    this.$event.$emit('task-row-clicked', this.tasks[0])
+  },
 
-		methods: {
-			row_clicked(row) {
-				this.active_task_id = row.id
-				this.$event.$emit('task-row-clicked', row)
-			}
-		}
-	}
+  methods: {
+    row_clicked(row) {
+      this.active_task_id = row.id
+      this.$event.$emit('task-row-clicked', row)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-@import "~@/sass/variables";
+@import '~@/sass/variables';
 
 .task-custom-table {
-	.header {
-		border-bottom: 1px solid $borderGray;
-		background-color: $tableBlueBg;
-		.task__tableHead {
-			padding: 10px;
-			color: $tableTitleBlue;
-			font-size: 15px;
-			font-weight: 500;
-		}
-	}
+  .header {
+    border-bottom: 1px solid $borderGray;
+    background-color: $tableBlueBg;
+    .task__tableHead {
+      padding: 10px;
+      color: $tableTitleBlue;
+      font-size: 15px;
+      font-weight: 500;
+    }
+  }
 
-	@include styledScrollFor('.body'); //style the scroll
+  @include styledScrollFor('.body'); //style the scroll
 
-	.body {
-		overflow: auto;
-		background-color: $tableBlueBg;
+  .body {
+    overflow: auto;
+    background-color: $tableBlueBg;
 
-		.task__tableBody {
-			border-bottom: 1px solid $borderGray;
-			cursor: pointer;
+    .task__tableBody {
+      border-bottom: 1px solid $borderGray;
+      cursor: pointer;
 
-			&.active {
-				background-color: $white;
-			}
+      &.active {
+        background-color: $white;
+      }
 
-			&:hover{
-				background-color: $white;
-			}
+      &:hover {
+        background-color: $white;
+      }
 
-			.assignee__col, .project__col {
-				padding: 10px;
-				font-size: 17px;
-				font-weight: 400;
-			}
+      .assignee__col,
+      .project__col {
+        padding: 10px;
+        font-size: 17px;
+        font-weight: 400;
+      }
 
-			.status__col {
-				font-size: 12px;
-				font-weight: 400;
-				opacity: 0.8;
-				color: $textGray;
+      .status__col {
+        font-size: 12px;
+        font-weight: 400;
+        opacity: 0.8;
+        color: $textGray;
 
-				.status__completed{
-					height: 4px;
-					width: 60px;
-					border-radius: 10px;
-					background-color: $green;
-				}
+        .status__completed {
+          height: 4px;
+          width: 60px;
+          border-radius: 10px;
+          background-color: $green;
+        }
 
-				.status__pending {
-					height: 4px;
-					width: 60px;
-					border-radius: 10px;
-					background-color: $orange;
-				}
+        .status__pending {
+          height: 4px;
+          width: 60px;
+          border-radius: 10px;
+          background-color: $orange;
+        }
 
-				.status__behind {
-					height: 4px;
-					width: 60px;
-					border-radius: 10px;
-					background-color: $red;
-				}
+        .status__behind {
+          height: 4px;
+          width: 60px;
+          border-radius: 10px;
+          background-color: $red;
+        }
 
-				.status__open {
-					height: 4px;
-					width: 60px;
-					border-radius: 10px;
-					background-color: $textGray;
-				}
-
-			}
-		}
-	}
+        .status__open {
+          height: 4px;
+          width: 60px;
+          border-radius: 10px;
+          background-color: $textGray;
+        }
+      }
+    }
+  }
 }
 //Laptop - Tablet View
-@media only screen and (max-width: 1200px) and (min-width: 960px){
-	.task-custom-table {
-		.header {
-			.task__tableHead {
-				font-size: 12px;
-			}
-		}
+@media only screen and (max-width: 1200px) and (min-width: 960px) {
+  .task-custom-table {
+    .header {
+      .task__tableHead {
+        font-size: 12px;
+      }
+    }
 
-		.body {
-			.task__tableBody {
-				&.active {
-					background-color: $white;
-				}
-				.assignee__col, .project__col{
-					font-size: 14px;
-				}
-			}
-		}
-	}
+    .body {
+      .task__tableBody {
+        &.active {
+          background-color: $white;
+        }
+        .assignee__col,
+        .project__col {
+          font-size: 14px;
+        }
+      }
+    }
+  }
 }
 
 //Mobile View
-@media only screen and (max-width: 480px){
-	.task-custom-table {
-		.header {
-			.task__tableHead {
-				font-size: 12px;
-			}
-		}
+@media only screen and (max-width: 480px) {
+  .task-custom-table {
+    .header {
+      .task__tableHead {
+        font-size: 12px;
+      }
+    }
 
-		.body {
-			.task__tableBody {
-				&.active {
-					background-color: $white;
-				}
-				.assignee__col, .project__col{
-					font-size: 12px;
-				}
-			}
-		}
-	}
+    .body {
+      .task__tableBody {
+        &.active {
+          background-color: $white;
+        }
+        .assignee__col,
+        .project__col {
+          font-size: 12px;
+        }
+      }
+    }
+  }
 }
 </style>

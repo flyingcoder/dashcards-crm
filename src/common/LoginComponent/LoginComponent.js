@@ -2,7 +2,7 @@ import CustomField from '@/common/CustomField/CustomField.vue'
 
 export default {
   name: 'LoginComponent',
-  components: {CustomField},
+  components: { CustomField },
   props: {
     'title-text': String,
     'button-text': String,
@@ -21,12 +21,12 @@ export default {
   },
 
   data: () => ({
-    checkbox: false,
+    checkbox: false
   }),
 
   watch: {
-    checkbox(new_value) {
+    checkbox() {
       this.$emit('checkbox-changed', this.checkbox)
     }
-  },
+  }
 }

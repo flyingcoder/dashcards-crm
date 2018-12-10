@@ -93,16 +93,15 @@
     </div>
 </template>
 
-<script src="./FilesTab.js"></script>
-<style lang="scss" scoped src="./FilesTab.scss"></style>
-
-<style scoped>
-
->>>.content__wrapper .buzz__tables .buzz__tablesTwo{
-    padding: 0;
-    border: none;
-    background-color: #fff;
-}
+<script src="./FilesTab.js">
+</script>
+<style lang="scss" scoped src="./FilesTab.scss">
 </style>
 
-
+<style scoped>
+>>> .content__wrapper .buzz__tables .buzz__tablesTwo {
+  padding: 0;
+  border: none;
+  background-color: #fff;
+}
+</style>

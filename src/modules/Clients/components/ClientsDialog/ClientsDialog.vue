@@ -91,4 +91,5 @@
 	</v-layout>
 </template>
 
-<script src="./ClientsDialog.js"></script>
+<script src="./ClientsDialog.js">
+</script>

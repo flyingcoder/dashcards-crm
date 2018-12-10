@@ -32,7 +32,7 @@
 							<v-icon>more_horiz</v-icon>
 						</v-btn>
 						<v-list class="sort__list" flat>
-							<v-list-tile class="sort__list_tile" v-for="(sortLists, index) in sortList" :key="index" @click=" ">
+							<v-list-tile class="sort__list_tile" v-for="(sortLists, index) in sortList" :key="index">
 								<v-list-tile-title class="sort__list_item">{{ sortLists.title }}</v-list-tile-title>
 							</v-list-tile>
 						</v-list>
@@ -47,5 +47,7 @@
 	</div>
 </template>
 
-<script src="./Timer.js"></script>
-<style lang="scss" scoped src="./Timer.scss"></style>
+<script src="./Timer.js">
+</script>
+<style lang="scss" scoped src="./Timer.scss">
+</style>

@@ -93,28 +93,28 @@
 	</div>
 </template>
 
-<script src="./MilestoneTemplate.js"></script>
+<script src="./MilestoneTemplate.js">
+</script>
 
 <style lang="scss" scoped>
-	@import '~@/sass/_variables';
+@import '~@/sass/_variables';
 
-	.milestone-template {
-		.cell-with-icon {
-			display: flex;
-			justify-content: center;
-			align-items: center;
+.milestone-template {
+  .cell-with-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-			.milestone-icon {
-				display: flex;
+    .milestone-icon {
+      display: flex;
 
-				img {
-					width: auto;
-					height: 40px;
-				}
-			}
-		}
+      img {
+        width: auto;
+        height: 40px;
+      }
+    }
+  }
 
-		@include customTableRow; //css used for styling the last row of the table
-
-	}
+  @include customTableRow; //css used for styling the last row of the table
+}
 </style>
