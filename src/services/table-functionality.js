@@ -40,6 +40,11 @@ export const table_functionality = {
 			if (rows_per_page.length === 1) {
 				this.rows_per_page = rows_per_page[0]
 			}
+
+			if (rows_per_page.length === 0) {
+				rows_per_page.push(total_rows)
+				this.rows_per_page = rows_per_page[0]
+			}
 			return rows_per_page
 		},
 
