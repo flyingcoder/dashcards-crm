@@ -27,7 +27,7 @@ export default {
 
   watch: {
   	user_moved_mouse(val) {
-  		if (val >= 180) { //if user is idle for 30 mins
+  		if (val >= 1800000) { //if user is idle for 30 mins
 			  let notification = new Notification("You were idle for 30 mins")
 			  setTimeout(() => {
 				  notification.close();
@@ -39,7 +39,7 @@ export default {
   mounted() {
   	document.addEventListener('mousemove', this.reset_timer)
     setInterval(() => {
-    	this.user_moved_mouse += 10
+    	this.user_moved_mouse += 1000
     }, 10000)
   },
 
