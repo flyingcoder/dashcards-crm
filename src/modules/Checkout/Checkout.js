@@ -2,8 +2,7 @@ import makeRequestTo from '@/services/makeRequestTo'
 
 // Create a Stripe client.
 // eslint-disable-next-line
-const stripe = Stripe("pk_test_IaFgoMQAWbVsxO7GjyW5OhJY");
-
+const stripe = Stripe(process.env.VUE_APP_STRIPE_API)
 // Create an instance of Elements.
 let elements = stripe.elements()
 
