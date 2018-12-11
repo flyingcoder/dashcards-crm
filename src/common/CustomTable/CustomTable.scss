@@ -1,0 +1,91 @@
+@import '~@/sass/_variables';
+
+.content__wrapper{
+  .buzz__tables{
+    background: $white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid $tableBorderBlue;
+    .buzz__tablesTwo{
+      padding: 20px;
+      border: 1px solid $tableBorderBlue;
+      background-color: $tableBlueBg;
+      .table__toolbar{
+        background-color: $tableBlueBg;
+        .table__toolbar-title{
+            color: $tableTitleBlue;
+            text-align: left;
+            font-size: 30px;
+        }
+        .sort__option{
+          border: 1px solid $borderGray;
+          background-color: $white;
+          .v-icon{
+            font-size: 24px;
+            color: $borderGray;
+          }
+        }
+      }
+      .buzzooka__table{
+        border: 1px solid $tableBorderBlue;
+          tr.table__head{
+            background-color: $tableBlueBg;
+            th{
+              text-align: left;
+              color: $tableBlueText;
+              font-size: 13px;
+              font-weight: 500;
+              padding: 8px;
+              &:last-child{
+                text-align: center;
+              }
+            }
+          }
+        tr.table__body-row{
+          &:nth-child(odd){
+            background-color: $white;
+          }
+          &:nth-child(even){
+            background-color: $tableBlueBg;
+          }
+        }
+      }
+    }
+  }
+}
+    
+
+//For Mobile Version
+@media only screen and (max-width: 480px){
+  .content__wrapper{
+    .buzz__tables{
+      padding: 8px;
+      .buzz__tablesTwo{
+        padding: 0;
+        .table__toolbar{
+          height: auto;
+          .table__toolbar-title{
+              color: $tableTitleBlue;
+              text-align: left;
+              font-size: 16px;
+          }
+        }
+        .buzzooka__table{
+          table.v-table thead tr{
+            height: auto;  
+          }
+          tr.table__head{
+            th{
+              font-size: 12px;
+              font-weight: 500;
+              padding:8px;
+              &:last-child{
+                text-align: center;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

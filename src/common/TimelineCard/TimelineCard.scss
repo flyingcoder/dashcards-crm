@@ -1,0 +1,70 @@
+@import '~@/sass/_variables';
+
+.timeline-card {
+
+  @include styledScrollFor('.timeline__inner_content');
+  
+  .timeline__content{
+    margin: 12px;
+    
+    .timeline__inner_content {
+      max-height: 450px;
+      overflow: auto;
+      max-width: 400px;
+      margin: 15px auto 0;
+      
+      .timeline__item  {
+        .t__time {
+          position: absolute;
+          top: 5px;
+          left: -30px;
+          color: $darkGray;
+        }
+
+        .t__content {
+          padding: 0 10px 0 48px;
+          
+          .t__title{
+            text-transform: capitalize;
+            color:  $textDark;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 959px){
+  .timeline-card{
+    .timeline__content{
+      .timeline__inner_content {
+        max-width: 600px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 480px){
+  .timeline-card{
+    .timeline__content{
+      .timeline__inner_content {
+        .timeline__item  {
+          .t__time {
+            font-size: 10px;
+          }
+      
+          .t__content {
+            padding-left: 30px;
+      
+            .t__title{
+              font-size: 16px;
+            }
+            .t__desc{
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

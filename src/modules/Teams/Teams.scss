@@ -1,0 +1,58 @@
+@import "./../../sass/_variables";
+
+.teams-page {
+    padding: 25px;
+    @include customTableRow;
+}
+
+@include sortOptionStyle;
+
+.custom__table{
+    
+    .table__toolbar-title{
+        color: $tableTitleBlue;
+        text-align: left;
+        font-size: 30px;
+    }
+    .member__option{
+        .v-icon{
+            font-size: 24px;
+            color: $sortOptionGray;
+        }
+    }
+    tbody{
+        tr{
+            height: 95px;
+            td{
+                padding: 0 13px;
+                &:nth-child(2){
+                    display: flex;
+                    align-items: center;
+                    height: inherit;
+                }
+                &:last-child{
+                    text-align: center;
+                }
+            }
+            .member__name{
+                color: $tableBlueText;
+                font-weight: 500;
+                flex: 3;
+            }
+            .member__image{
+                display: flex;
+                align-items: center;
+                flex: 1;
+                img{
+                    height: 52px;
+                    border-radius: 50%;
+                    margin-right: 30px;
+                }
+            }
+            .team__position, .team__tasks, .team__projects{
+                font-size: 14px;
+                color: $tableDarkText;
+            }
+        }
+    }
+}

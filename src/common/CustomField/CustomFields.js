@@ -13,7 +13,7 @@ export default {
   },
 
   computed: {
-    imagePath () {
+    imagePath() {
       return this.icon ? require('@/assets/' + this.icon) : null
     },
     listeners() {
@@ -22,6 +22,5 @@ export default {
         input: event => this.$emit('input', event.target.value)
       }
     }
-  },
-
+  }
 }

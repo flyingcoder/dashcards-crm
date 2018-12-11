@@ -1,43 +1,47 @@
 export default {
-	name: 'CustomTable',
-	props: [
-		'headers',
-		'items',
-		'loading',
-		'total-items',
-		'rows-per-page-items',
-		'has-checkbox',
-		'table-action-disabled',
-		'has-header-icon',
-		'pagination'
-	],
+  name: 'CustomTable',
+  inheritAttrs: false,
+  props: [
+    'headers',
+    'items',
+    'loading',
+    'has-checkbox',
+    'has-header-icon',
+    'sort',
+    'toolbar-title'
+  ],
 
-	data: () => ({
-		table_pagination: {},
-		selected: [],
-	}),
+  data: () => ({
+    selected: []
+  }),
 
-	watch: {
+  watch: {
+    selected(newVal) {
+      const selected_ids = newVal.map(item => item.id)
+      this.$emit('items-selected', selected_ids)
+    }
+  },
 
-		table_pagination(new_val) { this.$emit('update:pagination', new_val) }
+  methods: {
+    toggleAll() {
+      if (this.selected.length) this.selected = []
+      else this.selected = this.items.slice()
+    },
 
-	},
+    changeSort(column) {
+      this.$emit('sorted', column)
+    },
 
-	methods: {
+    headerClasses(header) {
+      let classes = ['column']
 
-		toggleAll () {
-			if (this.selected.length) this.selected = []
-			else this.selected = this.items.slice()
-		},
+      if ('sortable' in header) {
+        classes.push('sortable')
+        this.sort.descending ? classes.push('desc') : classes.push('asc')
+        if (header.value === this.sort.sortBy) classes.push('active')
+      }
 
-		changeSort (column) {
-			if (this.pagination.sortBy === column) {
-				this.pagination.descending = !this.pagination.descending
-			} else {
-				this.pagination.sortBy = column
-				this.pagination.descending = false
-			}
-		}
-
-	},
+      return classes
+    }
+  }
 }

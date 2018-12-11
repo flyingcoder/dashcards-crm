@@ -1,0 +1,80 @@
+@import "~@/sass/_variables";
+
+.buzzooka{
+  .pricing{
+    .d__logo {
+      background: $white;
+      flex-basis: 20%;
+      .s__title{
+        .s__logo{
+          justify-content: flex-end;
+          .logo__img{
+              width: 75%;
+          }
+          .b__icon{
+              display: block;
+          }
+          .w__icon{
+              display: none;
+          }
+        } 
+      }
+      .s__hamburger{
+        display: none;
+      } 
+    }
+    .d__header{
+      flex-basis: 80%;
+    }
+    .d__content{
+      flex-basis: 100%;
+      background: $white;
+      .content{
+        padding: 0;
+        .pricing__cover{
+          display: flex;
+          height: 320px;
+          background: #f3f3f2;;
+          justify-content: center;
+          align-items: center;
+          .cover__text{
+            padding-left: 5%;
+            flex-basis: 40%;
+            h1{
+                font-family: Lato;
+                font-size: 32px;
+                font-weight: bold;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                text-align: left;
+                color: $blue;
+            }
+            span{
+                font-family: Lato;
+                font-size: 18px;
+                font-weight: 300;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                text-align: left;
+                color: $blue;
+            }
+          }
+          .cover__photo{
+            display: flex;
+            flex-basis: 60%;
+            justify-content: flex-end;
+            width: 100%;
+            height: 100%;
+            img{
+              width: 90%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -24,29 +24,36 @@
 </template>
 
 <script>
-	export default {
-		name: 'DeleteModal',
-		props: {
-			title: { type: String, default: 'Default Modal Title' },
-			textContent: { type: String, default: 'Default Modal Text Content' },
-			cancelButtonText: { type: String, default: 'Cancel' },
-			deleteButtonText: { type: String, default: 'Delete' },
-			openDialog: Boolean
-		},
+export default {
+  name: 'DeleteModal',
+  props: {
+    title: { type: String, default: 'Default Modal Title' },
+    textContent: { type: String, default: 'Default Modal Text Content' },
+    cancelButtonText: { type: String, default: 'Cancel' },
+    deleteButtonText: { type: String, default: 'Delete' },
+    openDialog: Boolean
+  },
 
-		data: () => ({
-			dialog: false
-		}),
+  data: () => ({
+    dialog: false
+  }),
 
-		watch: {
-			openDialog(new_val) { this.dialog = new_val },
-			dialog(new_val) { this.$emit('update:openDialog', new_val) }
-		},
+  watch: {
+    openDialog(new_val) {
+      this.dialog = new_val
+    },
+    dialog(new_val) {
+      this.$emit('update:openDialog', new_val)
+    }
+  },
 
-		methods: {
-			cancel_clicked() { this.dialog = false },
-			delete_clicked() { this.$emit('delete') },
-		}
-
-	}
+  methods: {
+    cancel_clicked() {
+      this.dialog = false
+    },
+    delete_clicked() {
+      this.$emit('delete')
+    }
+  }
+}
 </script>
