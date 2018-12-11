@@ -9,7 +9,7 @@
 
 <script>
 import LeftSide from './LeftSide.vue'
-import RightSide from './RightSide.vue'
+import RightSide from './RightSide/RightSide.vue'
 
 export default {
   components: {
