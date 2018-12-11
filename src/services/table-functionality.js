@@ -1,5 +1,5 @@
 import makeRequestTo from '@/services/makeRequestTo'
-import debounce from 'lodash/debounce'
+import _debounce from 'lodash/debounce'
 
 export const table_functionality = {
   data: () => ({
@@ -23,7 +23,6 @@ export const table_functionality = {
       descending: false
     },
     search: '',
-    init: false
   }),
 
   computed: {
@@ -71,10 +70,6 @@ export const table_functionality = {
         : (this.show_delete_selected = false)
     },
     api_query(query) {
-      if (!this.init) {
-        this.init = true
-        return
-      }
       this.$router.replace({
         name: this.table_config.route_name,
         query: {
@@ -213,7 +208,7 @@ export const table_functionality = {
       else this.selected = this.items.slice()
     },
 
-    debounce: debounce(function(value) {
+    debounce: _debounce(function(value) {
       this.search = value
     }, 500)
   }
