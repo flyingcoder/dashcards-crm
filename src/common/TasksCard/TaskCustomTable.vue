@@ -58,7 +58,7 @@ export default {
   inject: {
     bodyMaxHeight: {
       from: 'bodyMaxHeight',
-      default: '400px'
+      default: '300px'
     }
   },
 
