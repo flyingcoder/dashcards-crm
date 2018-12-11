@@ -1,17 +1,23 @@
 <template>
 	<div class="right-side">
 		<div class="invoice-title">INVOICE</div>
-		<div class="invoice-number">
+		<div class="invoice-number field">
 			Invoice Number
-			<input type="text" value="3">
+			<input type="text" value="3" />
 		</div>
+
+		<div class="invoice-type field">
+			Select type
+			<v-select :items="['hourly', 'monthly']" value="hourly"></v-select>
+		</div>
+
 		<div class="invoice-dates">
-			<div class="created-date">
+			<div class="created-date field">
 				Date:
 				<date-picker label="Select Date" />
 			</div>
 
-			<div class="due-date">
+			<div class="due-date" field>
 				Due Date:
 				<date-picker label="Select Date" />
 			</div>
@@ -41,26 +47,20 @@ export default {
     width: 100%;
   }
 
-  .invoice-number {
+  .field {
     display: grid;
     grid-auto-flow: column;
     justify-content: end;
     align-items: center;
     grid-gap: 15px;
+  }
 
+  .invoice-number {
     > input {
       padding: 10px;
       border: 1px solid grey;
       border-radius: 10px;
     }
-  }
-
-  .invoice-dates > div {
-    display: grid;
-    grid-auto-flow: column;
-    justify-content: end;
-    align-items: center;
-    grid-gap: 15px;
   }
 }
 </style>

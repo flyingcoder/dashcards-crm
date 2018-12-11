@@ -22,7 +22,7 @@ export const table_functionality = {
       sortBy: null,
       descending: false
     },
-    search: '',
+    search: ''
   }),
 
   computed: {
