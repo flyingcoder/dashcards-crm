@@ -11,6 +11,18 @@
 			<v-select :items="['hourly', 'monthly']" value="hourly"></v-select>
 		</div>
 
+		<div class="invoice-project field">
+			Select Project
+			<v-select
+					:items="projects"
+					:value="selected_project"
+					@change="project_changed"
+					item-text="title"
+					item-value="id"
+					placeholder="Select Project"
+			></v-select>
+		</div>
+
 		<div class="invoice-dates">
 			<div class="created-date field">
 				Date:
@@ -25,14 +37,7 @@
 	</div>
 </template>
 
-<script>
-import DatePicker from '@/common/DatePicker.vue'
-
-export default {
-  components: {
-    DatePicker
-  }
-}
+<script src="./RightSide.js">
 </script>
 
 <style lang="scss" scoped>

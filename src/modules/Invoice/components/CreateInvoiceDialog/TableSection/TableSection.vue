@@ -21,7 +21,7 @@
 			</div>
 
 			<div class="row" v-for="(row, index) of rows" :key="index">
-				<v-text-field label="Descriptions" @input="row_updated('descriptions', $event, index)" />
+				<v-text-field label="Descriptions" @input="row_updated('descriptions', $event, index)" :value="row.descriptions" />
 				<v-text-field min="0" type="number" label="Rate" @input="row_updated('rate', $event, index)" :value="row.rate" />
 				<v-text-field min="0" type="number" label="Hours" @input="row_updated('hours', $event, index)" :value="row.hours" />
 				<v-text-field label="Amount" :value="row.amount" readonly />
