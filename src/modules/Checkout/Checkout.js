@@ -72,7 +72,7 @@ export default {
         } else {
           // Send the token to your server.
           console.log(result.token)
-          makeRequestTo.checkout(result.token).then(response => {
+          makeRequestTo.checkout(result.token.id).then(response => {
             console.log(response)
           })
         }
