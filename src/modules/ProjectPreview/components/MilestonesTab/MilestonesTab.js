@@ -49,8 +49,8 @@ export default {
     get_dynamic_boxes() {
       this.loading = true
       request
-        .get(`api/project/${this.id}/milestone`)
-        .then(({ data }) => (this.boxes = data.data))
+        .get(`api/project/${this.id}/milestone?all=true`)
+        .then(({ data }) => (this.boxes = data))
         .finally(() => (this.loading = false))
     },
 
