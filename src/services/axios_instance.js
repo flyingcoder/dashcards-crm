@@ -3,7 +3,7 @@ import store from '@/store/store'
 import { auth } from '@/plugins/auth'
 
 const request = axios.create({
-  baseURL: process.env.VUE_APP_API_URL,
+  baseURL: 'https://api.bizzooka.com',
   timeout: 5000
 })
 
