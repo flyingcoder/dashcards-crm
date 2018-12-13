@@ -43,7 +43,13 @@
 				<td>{{ item.item.client_name }}</td>
 				<td>{{ item.item.manager_name }}</td>
 				<td>{{ item.item.started_at }}</td>
-				<td>{{ item.item.progress }}</td>
+				<td>
+					<v-progress-linear
+							color="#1fb868"
+							height="5"
+							:value="item.item.progress"
+					></v-progress-linear>
+				</td>
 				<td>{{ item.item.total_time }}</td>
 				<td>{{ item.item.status }}</td>
 
