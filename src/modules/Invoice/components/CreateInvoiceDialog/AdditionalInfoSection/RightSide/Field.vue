@@ -18,7 +18,7 @@
 
 		</v-text-field>
 
-		<v-btn icon @click="$emit('update:show', !show)">
+		<v-btn icon @click="$emit('toggle_visibility', !show)">
 			<v-icon>delete</v-icon>
 		</v-btn>
 

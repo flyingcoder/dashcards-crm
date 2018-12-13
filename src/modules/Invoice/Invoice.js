@@ -30,6 +30,12 @@ export default {
   }),
 
   created() {
-    this.fill_table('get_invoices', true)
+    // this.fill_table('get_invoices', true)
+  },
+
+  methods: {
+    create_invoice() {
+      console.log('create invoice clicked')
+    }
   }
 }
