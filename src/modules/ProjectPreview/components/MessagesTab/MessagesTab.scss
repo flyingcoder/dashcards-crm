@@ -72,110 +72,98 @@
                     border-bottom: none;
                 }
             }
-
-            .sidebar__chatlist{
-                margin: 10px;
-                background-color: $white;
-                border: 1px solid $tableBorderBlue;
-                border-radius: 10px;
-
-                .user{
-                    padding: 10px;
-                    text-align: center;
-                    display: flex;
-                    .user__img{
-                        height: 50px;
-                        width: 50px;
-                        max-width: 50px;
-                        border-radius: 50%;
-                        border: 1px solid $borderLightGray;
-                        position: relative;
-                        
-                        .status{
-                            position: absolute;
-                            bottom: 0;
-                            right: 0;
-                            width: 15px;
-                            height: 15px;
-                            border: 2px solid $lightViolete;
-                            border-radius: 50%;
-                        }
-                        
-                        .online{
-                            background-color: $green;
-                        }
-
-                        .offline{
-                            background-color: $gray;
-                        }
-
-                        .dnd{
-                            background-color: $red;
-                        }
-                    }
-                    .user__name{
-                        margin-left: 10px;
-                        font-size: 14px;
-                        font-size: 12px;
-                        margin: auto 10px;
-                        text-align: left;
-                        font-weight: 500;
-                        color: $textDark;
-                    }
-                    .add__chat{
-                        height: 33px;
-                        min-width: 33px;
-                        border-radius: 5px;
-                        border: 1px solid $borderLightGray;
-                        background-color: $lightGray;
-                        color: $darkGray;
-                        margin: auto 0;
-                        text-align: right;
-                        padding: 0;
-                    }
-                }
-
-                @include styledScrollFor('.friend__list')
-
-                .friend__list{
-                    overflow: auto;
-                    max-height: 500px;
-                    .friend{
-                        border-top: 1px solid $borderLightGray;
-                    }
-                }
-
-                .view__more{
-                    text-align: center;
-                    padding: 10px;
-                    border-top: 1px solid $borderLightGray;
-                    .view__more_btn{
-                        color: $tableDarkText;
-                    }
-                }
-            }
         }
         .message__table{
             .custom__table{
                 margin: 10px;
-
                 .table__toolbar {
                     border: 1px solid $tableBorderBlue;
-                    border-bottom: none;
-                    background-color: $lightGray;
                 }
-
                 .table__toolbar-title{
                     color: $tableTitleBlue;
                     text-align: left;
                     font-size: 30px;
                 }
+            }
+        }
 
-                .message__option{
-                    .v-icon{
-                        font-size: 24px;
-                        color: $sortOptionGray;
+        .sidebar__chatlist{
+            margin: 10px;
+            background-color: $white;
+            border: 1px solid $tableBorderBlue;
+            border-radius: 10px;
+
+            .user{
+                padding: 10px;
+                text-align: center;
+                display: flex;
+                .user__img{
+                    height: 50px;
+                    width: 50px;
+                    max-width: 50px;
+                    border-radius: 50%;
+                    border: 1px solid $borderLightGray;
+                    position: relative;
+                    
+                    .status{
+                        position: absolute;
+                        bottom: 0;
+                        right: 0;
+                        width: 15px;
+                        height: 15px;
+                        border: 2px solid $lightViolete;
+                        border-radius: 50%;
                     }
+                    
+                    .online{
+                        background-color: $green;
+                    }
+
+                    .offline{
+                        background-color: $gray;
+                    }
+
+                    .dnd{
+                        background-color: $red;
+                    }
+                }
+                .user__name{
+                    margin-left: 10px;
+                    font-size: 12px;
+                    margin: auto 10px;
+                    text-align: left;
+                    font-weight: 500;
+                    color: $textDark;
+                }
+                .add__chat{
+                    height: 33px;
+                    min-width: 33px;
+                    border-radius: 5px;
+                    border: 1px solid $borderLightGray;
+                    background-color: $lightGray;
+                    color: $darkGray;
+                    margin: auto 0;
+                    text-align: right;
+                    padding: 0;
+                }
+            }
+
+            @include styledScrollFor('.friend__list')
+
+            .friend__list{
+                overflow: auto;
+                max-height: 500px;
+                .friend{
+                    border-top: 1px solid $borderLightGray;
+                }
+            }
+
+            .view__more{
+                text-align: center;
+                padding: 10px;
+                border-top: 1px solid $borderLightGray;
+                .view__more_btn{
+                    color: $tableDarkText;
                 }
             }
         }
@@ -183,26 +171,132 @@
     
 }
 
-@media only screen and (max-width: 480px){
+@media only screen and (max-width: 768px){
     .message__tab {
-        padding: 15px;
-
-        .table__toolbar-title{
-            font-size: 18px;
-        }
+        padding: 12px;
+        margin: 12px;
     
-        .message__option{
+        .message__content{
+            padding: 10px;
+            
+            .message__sidebar{
+                .sidebar__options{
+                    margin: 10px 2px;
+                    padding: 8px;
+    
+                    .option{
+                        height: 40px;
+                        width: 120px;
+                        font-size: 12px;
 
-            .v-btn--floating.v-btn--small{
-                height: 30px;
-                width: 30px;
+                        span{
+                            font-size: 8px;
+                            line-height: 20px;
+                            height: 20px;
+                            width: 20px;
+                        }
+                        
+                    }
+    
+                    .write__btn{
+                        height: 40px;
+                        width: 120px;
+                        font-size: 12px;
+                        margin-bottom: 10px;
+                    }
+                }
             }
 
-            .v-icon{
-                font-size: 24px;
-                color: $sortOptionGray;
+            .sidebar__chatlist{
+                margin: 10px 2px;
+                .user{
+                    padding: 5px;
+                    .user__img{
+                        height: 30px;
+                        width: 30px;
+                        max-width: 30px;
+                        
+                        .status{
+                            width: 10px;
+                            height: 10px;
+                        }
+                    }
+                    .user__name{
+                        margin-left: 5px;
+                        font-size: 12px;
+                        margin: auto 5px;
+                    }
+                    .add__chat{
+                        height: 23px;
+                        min-width: 23px;
+                        font-size: 100px;
+                        border-radius: 5px;
+                        padding: 0;
+                        .v-icon{
+                            font-size: 15px;
+                        }
+                    }
+                }
+                .friend__list{
+                    max-height: 400px;
+                }
+
+                .view__more{
+                    padding: 5px;
+                    .view__more_btn{
+                        font-size: 12px;
+                    }
+                }
             }
         }
-        
+        .message__table{
+            .custom__table{
+                margin: 2px;
+                .v-toolbar__title.table__toolbar-title{
+                    font-size: 25px;
+                }
+            
+                .message__option{
+                        .v-btn--floating.v-btn--small{
+                            height: 30px;
+                            width: 30px;
+                        }
+                        .v-icon{
+                            font-size: 20px;
+                        }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 599px){
+    .message__tab {
+    
+        .message__content{
+            
+            .message__sidebar{
+                .sidebar__options{
+                    margin: 10px;
+    
+                    .option{
+                        margin: 5px 2px;
+                        border: 1px solid $borderLightGray;
+                    }
+    
+                    .write__btn{
+                        margin: 5px 2px;
+                    }
+                }
+            }
+
+            .sidebar__chatlist{
+                margin: 10px;
+
+                .friend__list{
+                    max-height: 300px;
+                }
+            }
+        }
     }
 }
