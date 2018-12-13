@@ -30,12 +30,21 @@ export default {
   }),
 
   created() {
+    //TODO fill the table from API
     // this.fill_table('get_invoices', true)
   },
 
   methods: {
     create_invoice() {
-      console.log('create invoice clicked')
+      this.loading = true
+      this.create_dialog = false
+      this.$store
+        .dispatch('invoice/create_invoice')
+        .then(({ data }) => this.items.push(data.data))
+        .finally(() => {
+          this.loading = false
+          this.$store.commit('invoice/reset_state')
+        })
     }
   }
 }

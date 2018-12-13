@@ -6,6 +6,7 @@
 				<dialog-toolbar
 						@close="$emit('update:open', false)"
 						@send="$emit('send')"
+						:disabled="!can_create_invoice"
 				/>
 
 				<div class="content">

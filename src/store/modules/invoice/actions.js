@@ -21,5 +21,34 @@ export const actions = {
       const mins = time.split(':')[1]
       return Number(Number(hours) + Number(mins / 60)).toPrecision(3)
     }
+  },
+  create_invoice({ state }) {
+    const obj = {
+      title: state.title,
+      date: state.date,
+      due_date: state.due_date,
+      total_amount: state.total_amount,
+      items: state.rows,
+      terms: state.terms,
+      notes: state.notes,
+      tax: calculate_field(state, 'tax'),
+      discount: calculate_field(state, 'discount'),
+      shipping: calculate_field(state, 'shipping', false)
+    }
+
+    request.post(`api/projects/${state.selected_project}/invoice`, obj)
   }
+}
+
+const calculate_field = (state, field, has_symbol = true) => {
+  if (state[field].show && has_symbol)
+    return {
+      value: state[field].value,
+      symbol: state[field].symbol
+    }
+  if (state[field].show && !has_symbol)
+    return {
+      value: state[field].value
+    }
+  return null
 }

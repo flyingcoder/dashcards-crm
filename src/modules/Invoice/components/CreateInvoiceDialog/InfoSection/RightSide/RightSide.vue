@@ -1,6 +1,8 @@
 <template>
 	<div class="right-side">
-		<div class="invoice-title">INVOICE</div>
+		<div class="invoice-title" >
+			<input type="text" class="input" placeholder="Add Name" v-model.trim="title" />
+		</div>
 		<div class="invoice-number field">
 			Invoice Number
 			<input type="text" value="3" />
@@ -58,6 +60,11 @@
     color: gray;
     text-align: right;
     width: 100%;
+
+    > .input {
+      text-align: right;
+      outline: none;
+    }
   }
 
   .field {

@@ -1,3 +1,4 @@
+import { mapGetters } from 'vuex'
 //Components
 import DialogToolbar from './DialogToolbar.vue'
 import InfoSection from './InfoSection/InfoSection.vue'
@@ -14,5 +15,9 @@ export default {
 
   props: {
     open: Boolean
+  },
+
+  computed: {
+    ...mapGetters('invoice', ['can_create_invoice'])
   }
 }

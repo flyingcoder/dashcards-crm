@@ -12,7 +12,15 @@ export default {
       'selected_project',
       'due_date',
       'date'
-    ])
+    ]),
+    title: {
+      get() {
+        return this.$store.getters['invoice/title']
+      },
+      set(new_title) {
+        this.$store.commit('invoice/set_title', new_title)
+      }
+    }
   },
 
   created() {
