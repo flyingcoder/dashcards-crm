@@ -92,17 +92,8 @@
     }
     .service__actions{
         justify-content: center;
-        .service__actions_btn.v-btn{
-            font-size: 16px;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #dce1e5;
-            color: $modalTitle;
-            background-color: $white;
-            height: auto;
-            width: 130px;
-            margin: 0 9px;
-        }
+        
+        @include styledModalButton('.service__actions_btn')
     }
 }
 
@@ -151,13 +142,6 @@
                     width: 45px;
                     min-width: 0;
                 }
-            }
-        }
-        .service__actions{
-            .service__actions_btn.v-btn{
-                font-size: 14px;
-                padding: 8px;
-                width: 80px;
             }
         }
     }

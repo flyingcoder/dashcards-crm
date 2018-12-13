@@ -1,49 +1,160 @@
-.projects-dialog {
-  padding: 20px;
+@import '~@/sass/_variables';
 
-  .dialog-header {
-    width: 100%;
-    display: grid;
-    grid-auto-flow: column;
+.projects__dialog.v-card.theme--light{
+  border-radius: 15px;
+  background-color: $modalBgGray;
+  padding: 24px;
+
+  .dialog__header {
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 28px;
+    
+    .dialog__title{
+      font-size:24px;
+      font-weight: 500;
+      color: $modalTitle;
+    }
+
+    .close__btn{
+      margin: 0;
+      color: $textDark;
+      border: 1px solid $borderLightGray;
+    }
+
+    .v-btn--floating.v-btn--small .v-icon {
+      font-size: 25px;
+    }
   }
 
-  .dialog-buttons {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-gap: 10px;
-  }
+  @include styledScrollFor('.dialog__body')
 
-  .dialog-actions {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  .dialog__body{
+    max-height: 400px;
+    overflow: auto;
+    padding: 0 15px;
+    margin: 0 20px;
+    
+    .dialog__buttons {
+      margin-bottom: 20px;
 
-  .quill-editor {
-    .quill-code {
-      height: auto;
-      border: none;
-      > .title {
-        border: 1px solid #ccc;
-        border-left: none;
-        height: 3em;
-        line-height: 3em;
-        text-indent: 1rem;
-        font-weight: bold;
+      .d__btn{
+        width: 170px;
+        height: 47px;
+        padding: 5px 10px;
+        font-size: 18px;
+        background-color: $white;
+        color: $textDark;
+        border: 1px solid $borderLightGray;
+        border-radius: 5px;
+
+        .d__icon{
+          width: 27px;
+          fill: $textDark;
+          margin-right: 10px;
+          margin-top: 3px;
+        }
+
+        .d__title{
+          text-transform: capitalize;
+        }
       }
-      > code {
-        width: 100%;
-        margin: 0;
-        padding: 1rem;
-        border: 1px solid #ccc;
-        border-top: none;
-        border-left: none;
-        border-radius: 0;
-        height: 30rem;
-        overflow-y: auto;
+    }
+
+    .project__title{
+      margin-bottom: 20px;
+    }
+  
+    .project__description{
+      border-radius: 8px;
+      border: none;
+      
+      .quill-editor {
+        height: auto;
+        background-color: $white;
+        border-radius: 8px;
+        border: 1px solid $borderLightGray;
+        box-shadow: $darkBoxShadow;
+        margin-bottom: 20px;
+        color: $textDark;
+        
+        label{
+          color: $textDark;
+          caret-color: $textDark;
+        }
+
+        > .title {
+          border-left: none;
+          height: 3em;
+          line-height: 3em;
+          text-indent: 1rem;
+          font-weight: bold;
+        }
+        > code {
+          width: 100%;
+          margin: 0;
+          padding: 1rem;
+          border-top: none;
+          border-left: none;
+          border-radius: 0;
+          height: 30rem;
+          overflow-y: auto;
+        }
+      }
+    }
+  }
+  
+  .dialog__actions{
+    justify-content: center;
+
+    @include styledModalButton('.dialog__actions_btn')
+  }
+}
+
+@media only screen and (max-width: 480px){
+  .projects__dialog.v-card.theme--light{
+    padding: 18px;
+  
+    .dialog__header {
+      margin-bottom: 10px;
+      
+      .dialog__title{
+        font-size:20px;
+      }
+  
+      .v-btn--floating.v-btn--small .v-icon {
+        font-size: 20px;
+      }
+      .v-btn--floating.v-btn--small {
+        height: 30px;
+        width: 30px;
+      }
+
+    }
+  
+    .dialog__body{
+      
+      .dialog__buttons {
+        margin-bottom: 10px;
+  
+        .d__btn{
+          height: auto;
+          padding: 0;
+          font-size: 12px;
+          width: 80px;
+  
+          .d__icon{
+            width: 18px;
+            margin-right: 5px;
+          }
+        }
+
+        .attachment{
+          padding: 3px 10px;
+          .v-icon{
+            font-size: 18px;
+          }
+        }
       }
     }
   }

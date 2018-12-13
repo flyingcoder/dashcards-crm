@@ -11,6 +11,10 @@
 				cache-items
 				v-bind="$attrs"
 				@change="changed"
+        hide-details
+        prepend-icon="search"
+        color="#657186"
+        clearable
 		></v-autocomplete>
 	</div>
 </template>
@@ -51,3 +55,7 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.autocomplete-wrapper {
+}
+</style>

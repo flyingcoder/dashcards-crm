@@ -1,3 +1,10 @@
+@import '~@/sass/_variables';
+
+.due__date_menu{
+  width: 220px;
+  padding: 5px;
+}
+
 .pickers-container {
   background: white;
   font-size: 12px;
@@ -18,7 +25,14 @@
   .actions {
     display: grid;
     grid-auto-flow: column;
-    justify-content: end;
+    justify-content: center;
+    .v-btn{
+        font-size: 14px;
+        border-radius: 5px;
+        border: 1px solid $borderLightGray;
+        color: $modalTitle;
+        background-color: $white;
+    }
   }
 
 }

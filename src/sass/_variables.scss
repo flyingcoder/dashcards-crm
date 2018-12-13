@@ -47,6 +47,7 @@
     $bgLightBlue: #f8f8ff;
     $borderLightGray: #dce1e5;
     $textDarkBlue: #667187;
+    $darkBoxShadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 
 // Mixin for styled scroll
 
@@ -135,3 +136,23 @@
     }
 }
 
+@mixin styledModalButton ($selector) {
+    #{$selector}.v-btn{
+        font-size: 16px;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid $borderLightGray;
+        color: $modalTitle;
+        background-color: $white;
+        height: auto;
+        width: 130px;
+        margin: 0 9px;
+    }
+    @media only screen and (max-width: 480px){
+        #{$selector}.v-btn{
+            font-size: 14px;
+            padding: 8px;
+            width: 80px;
+        }
+    }
+}
