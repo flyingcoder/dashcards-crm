@@ -1,7 +1,10 @@
 <template>
 	<div class="invoice">
 
-		<create-invoice-dialog :open.sync="create_dialog" />
+		<create-invoice-dialog
+				:open.sync="create_dialog"
+				@send="create_invoice"
+		/>
 
 		<table-header :paths="paths"
 		              :no-button="!items.length"

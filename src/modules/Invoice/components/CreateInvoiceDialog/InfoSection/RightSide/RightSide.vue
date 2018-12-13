@@ -1,6 +1,8 @@
 <template>
 	<div class="right-side">
-		<div class="invoice-title">INVOICE</div>
+		<div class="invoice-title" >
+			<input type="text" class="input" placeholder="Add Name" v-model.trim="title" />
+		</div>
 		<div class="invoice-number field">
 			Invoice Number
 			<input type="text" value="3" />
@@ -26,12 +28,20 @@
 		<div class="invoice-dates">
 			<div class="created-date field">
 				Date:
-				<date-picker label="Select Date" />
+				<date-picker placeholder="Select Date"
+				             :value="date"
+				             :max="due_date"
+				             @input="update_date($event, 'date')"
+				/>
 			</div>
 
-			<div class="due-date" field>
+			<div class="due-date field">
 				Due Date:
-				<date-picker label="Select Date" />
+				<date-picker placeholder="Select Date"
+				             :value="due_date"
+				             :min="date"
+				             @input="update_date($event, 'due_date')"
+				/>
 			</div>
 		</div>
 	</div>
@@ -50,6 +60,11 @@
     color: gray;
     text-align: right;
     width: 100%;
+
+    > .input {
+      text-align: right;
+      outline: none;
+    }
   }
 
   .field {
