@@ -1,5 +1,55 @@
+@import "~@/sass/_variables";
+
 .header-menu {
     display: flex;
     justify-content: space-around;
     align-items: center;
+
+    .try__premium{
+        position: relative;
+        z-index : 1;
+        &:before {
+            content : "";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            height: 35px;
+            border-right: 2px solid $tableBorderBlue;
+          }
+        .premium__btn{
+            font-weight: 500;   
+            width: 170px;
+            border: 1px solid $blue;
+            color: $blue;
+            text-align: center;
+            cursor: pointer;
+            padding: 5px;
+            margin: 0 10px 0 15px;
+            border-radius: 5px;
+
+            &:hover{
+                color: $white;
+                background-color: $blue;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 480px){
+    .header-menu {
+    
+        .try__premium{
+            &:before {
+                top: 6px;
+                height: 25px;
+              }
+            .premium__btn{
+                font-weight: 500;   
+                width: 100px;
+                margin: 0 5px 0 10px;
+                padding: 2px;
+                font-size: 10px;
+            }
+        }
+    }
 }

@@ -20,6 +20,10 @@
 
         <dropdown /> <!--custom component-->
 
+        <div class="try__premium">
+            <div class="premium__btn">Try Premium Free for 1 Month</div>
+        </div>
+
     </div>
 </template>
 <script src="./HeaderMenu.js">
