@@ -22,6 +22,23 @@
 				@items-selected="selected_ids = $event"
 		>
 
+			<template slot="custom-item" slot-scope=" { item }">
+				<td>{{ item.due_date }}</td>
+				<td>{{ item.title }}</td>
+				<td>{{ item.first_name + ' ' + item.last_name }}</td>
+				<td>{{ item.total_amount }}</td>
+
+
+				<td class="text-xs-center">
+
+					<v-btn fab small flat depressed @click="open_delete_dialog(item.item)">
+						<img src="@/assets/icons/groups/delete.svg" alt="">
+					</v-btn>
+
+				</td>
+
+			</template>
+
 		</custom-table>
 
 		<div class="invoice__container" v-else>
