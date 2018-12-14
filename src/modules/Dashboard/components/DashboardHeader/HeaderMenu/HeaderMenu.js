@@ -9,5 +9,11 @@ export default {
     HeaderIcon,
     Dropdown,
     AddCards
+  },
+
+  methods: {
+    go_to_pricing_page() {
+      this.$router.push({ name: 'pricing' })
+    }
   }
 }

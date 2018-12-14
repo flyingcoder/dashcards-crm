@@ -20,7 +20,7 @@
 
         <dropdown /> <!--custom component-->
 
-        <div class="try__premium">
+        <div class="try__premium" @click="go_to_pricing_page">
             <div class="premium__btn">Try Premium Free for 1 Month</div>
         </div>
 
