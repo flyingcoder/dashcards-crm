@@ -3,17 +3,11 @@
 		<v-dialog v-model="open" persistent scrollable max-width="600px">
 			<v-card class="addService__dialog">
 
-				<v-card-title>
-						<v-layout row align-center>
-							<v-flex xs10>
-								<span class="dialog__title">{{ title }}</span>
-							</v-flex>
-							<v-flex xs2 class="text-xs-right">
-								<v-btn small fab @click="cancel">
-									<v-icon dark>close</v-icon>
-								</v-btn>
-							</v-flex>
-						</v-layout>
+				<v-card-title class="dialog__header">
+					<span class="dialog__title">{{ title }}</span>
+					<v-btn small fab @click="cancel" class="close__dialog">
+						<v-icon dark>close</v-icon>
+					</v-btn>
 				</v-card-title>
 
 				<v-card-text scrollable>

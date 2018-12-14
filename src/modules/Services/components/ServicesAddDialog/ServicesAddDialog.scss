@@ -77,24 +77,23 @@
     }
 }
 
+@include styledDialog('.addService__dialog.v-card.theme--light');
+
 .addService__dialog.v-card.theme--light{
-    border-radius: 15px;
-    background-color: $modalBgGray;
-    padding: 24px;
-    .v-card__title{
+
+    .dialog__header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
         padding: 0;
-        margin-bottom: 28px;
-        .dialog__title{
-            font-size:24px;
-            font-weight: 500;
-            color: $modalTitle;
-        }
+
+        @include styledCloseDialog('.close__dialog');
+
+        @include styledTitleDialog('.dialog__title');
     }
-    .service__actions{
-        justify-content: center;
-        
-        @include styledModalButton('.service__actions_btn')
-    }
+    
+    @include actionButtonsDialog('.service__actions')
 }
 
 //Tablet View
@@ -104,13 +103,9 @@
 
 //Mobile View
 @media only screen and (max-width: 480px){
-    .addService__dialog.v-card.theme--light{
-        padding: 18px;
+    .addService__dialog{
         .v-card__title{
-            margin-bottom: 22px;
-            .dialog__title{
-                font-size:22px;
-            }
+            margin-bottom: 10px;
         }
         .v-card__text{
             max-height:300px;

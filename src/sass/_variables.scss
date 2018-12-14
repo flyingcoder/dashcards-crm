@@ -91,6 +91,93 @@
 
     }
 }
+/********************************************************************
+ * Dialog Mixins
+ * (Start)
+ ********************************************************************/
+
+// Dialog style
+@mixin styledDialog($selector){
+    #{$selector}{
+        border-radius: 15px;
+        background-color: $modalBgGray;
+        padding: 24px;
+    }
+    @media only screen and (max-width: 480px){
+        #{$selector}{
+            padding: 15px;
+        }
+    }
+}
+// Close button in Dialog
+@mixin styledCloseDialog($selector) {
+    #{$selector}{
+        border: 1px solid $sortOptionGray;
+        background-color: $white;
+        .v-icon{
+         font-size: 24px;
+         color: $sortOptionGray;
+       }
+    }
+    
+    @media only screen and (max-width: 480px){
+        #{$selector}{
+            height: 30px;
+            width: 30px;
+            .v-icon{
+             font-size: 20px;
+           }
+        }
+    }
+}
+
+// Title style in Dialog
+@mixin styledTitleDialog($selector) {
+    #{$selector}{
+        font-size:24px;
+        font-weight: 500;
+        color: $modalTitle;
+    }
+
+    @media only screen and (max-width: 480px){
+        #{$selector}{
+            font-size:20px;
+        }
+    }
+}
+
+// Action buttons in Dialog
+@mixin actionButtonsDialog($selector) {
+    #{$selector}{
+        justify-content: center;
+        .v-btn{
+            font-size: 14px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid $borderLightGray;
+            color: $modalTitle;
+            background-color: $white;
+            height: auto;
+            width: 110px;
+            margin: 0 9px;
+        }
+    }
+    @media only screen and (max-width: 480px){
+        #{$selector}{
+            .v-btn{
+                font-size: 14px;
+                padding: 8px;
+                width: 80px;
+            }
+        }
+    }
+}
+
+/********************************************************************
+ * Dialog Mixins
+ * (End)
+ ********************************************************************/
+
 @mixin sortOptionStyle {
     
     .sort__option{
@@ -132,27 +219,6 @@
                 font-weight: 500;
                 margin: 0 10px;
             }
-        }
-    }
-}
-
-@mixin styledModalButton ($selector) {
-    #{$selector}.v-btn{
-        font-size: 16px;
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid $borderLightGray;
-        color: $modalTitle;
-        background-color: $white;
-        height: auto;
-        width: 130px;
-        margin: 0 9px;
-    }
-    @media only screen and (max-width: 480px){
-        #{$selector}.v-btn{
-            font-size: 14px;
-            padding: 8px;
-            width: 80px;
         }
     }
 }

@@ -1,30 +1,17 @@
 @import '~@/sass/_variables';
 
-.projects__dialog.v-card.theme--light{
-  border-radius: 15px;
-  background-color: $modalBgGray;
-  padding: 24px;
+@include styledDialog('.projects__dialog');
+
+.projects__dialog{
 
   .dialog__header {
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 28px;
+    margin-bottom: 10px;
     
-    .dialog__title{
-      font-size:24px;
-      font-weight: 500;
-      color: $modalTitle;
-    }
+    @include styledTitleDialog('.dialog__title');
 
-    .close__btn{
-      margin: 0;
-      color: $textDark;
-      border: 1px solid $borderLightGray;
-    }
-
-    .v-btn--floating.v-btn--small .v-icon {
-      font-size: 25px;
-    }
+    @include styledCloseDialog('.close__btn');
   }
 
   @include styledScrollFor('.dialog__body')
@@ -102,34 +89,19 @@
         }
       }
     }
+    .project__comment{
+      margin-bottom: 10px;
+    }
   }
-  
-  .dialog__actions{
-    justify-content: center;
 
-    @include styledModalButton('.dialog__actions_btn')
-  }
+    @include actionButtonsDialog('.dialog__actions')
 }
 
 @media only screen and (max-width: 480px){
-  .projects__dialog.v-card.theme--light{
-    padding: 18px;
+  .projects__dialog{
   
     .dialog__header {
       margin-bottom: 10px;
-      
-      .dialog__title{
-        font-size:20px;
-      }
-  
-      .v-btn--floating.v-btn--small .v-icon {
-        font-size: 20px;
-      }
-      .v-btn--floating.v-btn--small {
-        height: 30px;
-        width: 30px;
-      }
-
     }
   
     .dialog__body{
