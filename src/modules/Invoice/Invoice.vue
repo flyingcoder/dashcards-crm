@@ -12,7 +12,7 @@
 		/>
 
 		<custom-table
-				v-if="items.length"
+				v-if="items.length || loading"
 				:headers="headers"
 				:items="items"
 				:loading="loading"

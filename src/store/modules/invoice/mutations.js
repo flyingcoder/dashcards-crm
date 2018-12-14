@@ -2,6 +2,7 @@ import moment from 'moment/moment'
 import { initial_state } from './initial_state'
 
 export const mutations = {
+  set_create_dialog: (state, payload) => (state.create_dialog = payload),
   add_new_row: (state, payload) => state.rows.push(payload),
   add_rows: (state, payload) => state.rows.push(...payload),
   delete_row: (state, index) => state.rows.splice(index, 1),

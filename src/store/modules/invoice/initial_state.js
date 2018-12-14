@@ -1,4 +1,5 @@
 export const initial_state = () => ({
+  create_dialog: false,
   title: 'Unnamed',
   rows: [],
   projects: [],

@@ -19,7 +19,6 @@ export default {
       { text: 'Dashboard', disabled: false, router_name: 'default-content' },
       { text: 'Invoice', disabled: true, router_name: null }
     ],
-    create_dialog: false,
     headers: [
       { id: 1, text: 'Due Date', value: 'due_date' },
       { id: 2, text: 'Invoice', value: 'invoice' },
@@ -28,6 +27,17 @@ export default {
       { id: 5, is_action: true }
     ]
   }),
+
+  computed: {
+    create_dialog: {
+      get() {
+        return this.$store.getters['invoice/create_dialog']
+      },
+      set(val) {
+        this.$store.commit('invoice/set_create_dialog', val)
+      }
+    }
+  },
 
   created() {
     this.fill_table('get_invoices', true)

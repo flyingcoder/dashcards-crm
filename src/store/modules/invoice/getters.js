@@ -1,4 +1,5 @@
 export const getters = {
+  create_dialog: state => state.create_dialog,
   title: state => state.title,
   rows: state => state.rows,
   projects: state => state.projects,
