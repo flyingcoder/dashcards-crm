@@ -36,7 +36,7 @@ export const actions = {
       shipping: calculate_field(state, 'shipping', false)
     }
 
-    request.post(`api/projects/${state.selected_project}/invoice`, obj)
+    return request.post(`api/projects/${state.selected_project}/invoice`, obj)
   }
 }
 

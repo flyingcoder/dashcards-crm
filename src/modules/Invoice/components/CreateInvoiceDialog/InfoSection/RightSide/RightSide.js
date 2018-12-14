@@ -11,7 +11,8 @@ export default {
       'projects',
       'selected_project',
       'due_date',
-      'date'
+      'date',
+      'create_dialog'
     ]),
     title: {
       get() {
@@ -23,9 +24,13 @@ export default {
     }
   },
 
-  created() {
-    this.$store.dispatch('invoice/fetch_projects')
-    this.$store.commit('invoice/init_date')
+  watch: {
+    create_dialog(val) {
+      if (val) {
+        this.$store.dispatch('invoice/fetch_projects')
+        this.$store.commit('invoice/init_date')
+      }
+    }
   },
 
   methods: {

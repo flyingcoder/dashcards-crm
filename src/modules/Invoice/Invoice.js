@@ -19,7 +19,6 @@ export default {
       { text: 'Dashboard', disabled: false, router_name: 'default-content' },
       { text: 'Invoice', disabled: true, router_name: null }
     ],
-    create_dialog: false,
     headers: [
       { id: 1, text: 'Due Date', value: 'due_date' },
       { id: 2, text: 'Invoice', value: 'invoice' },
@@ -29,9 +28,19 @@ export default {
     ]
   }),
 
+  computed: {
+    create_dialog: {
+      get() {
+        return this.$store.getters['invoice/create_dialog']
+      },
+      set(val) {
+        this.$store.commit('invoice/set_create_dialog', val)
+      }
+    }
+  },
+
   created() {
-    //TODO fill the table from API
-    // this.fill_table('get_invoices', true)
+    this.fill_table('get_invoices', true)
   },
 
   methods: {
@@ -40,7 +49,7 @@ export default {
       this.create_dialog = false
       this.$store
         .dispatch('invoice/create_invoice')
-        .then(({ data }) => this.items.push(data.data))
+        .then(({ data }) => this.items.unshift(data))
         .finally(() => {
           this.loading = false
           this.$store.commit('invoice/reset_state')
