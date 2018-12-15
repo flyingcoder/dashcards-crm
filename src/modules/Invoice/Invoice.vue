@@ -1,6 +1,11 @@
 <template>
 	<div class="invoice">
 
+		<email-dialog
+				:dialog.sync="email_dialog"
+				ref="email_dialog"
+		/>
+
 		<create-invoice-dialog
 				:open.sync="create_dialog"
 				@send="create_invoice"
@@ -31,8 +36,14 @@
 
 				<td class="text-xs-center">
 
+					<v-btn fab small flat depressed>
+						<img src="@/assets/icons/groups/edit.svg" alt="">
+					</v-btn>
 					<v-btn fab small flat depressed @click="open_delete_dialog(item.item)">
 						<img src="@/assets/icons/groups/delete.svg" alt="">
+					</v-btn>
+					<v-btn fab small flat depressed @click="email_dialog = true">
+						<v-icon>email</v-icon>
 					</v-btn>
 
 				</td>
@@ -68,4 +79,9 @@
 <script src="./Invoice.js">
 </script>
 <style lang="scss" scoped src="./Invoice.scss">
+</style>
+<style scoped>
+>>> .table__toolbar .v-toolbar__content {
+  all: unset;
+}
 </style>

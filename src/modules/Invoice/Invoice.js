@@ -3,6 +3,7 @@ import { table_functionality } from '@/services/table-functionality'
 import TableHeader from '@/common/TableHeader.vue'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import CreateInvoiceDialog from './components/CreateInvoiceDialog/CreateInvoiceDialog.vue'
+import EmailDialog from './components/EmailDialog/EmailDialog.vue'
 
 export default {
   name: 'Invoice',
@@ -11,7 +12,8 @@ export default {
   components: {
     TableHeader,
     CreateInvoiceDialog,
-    CustomTable
+    CustomTable,
+    EmailDialog
   },
 
   data: () => ({
@@ -25,7 +27,8 @@ export default {
       { id: 3, text: 'Client', value: 'client' },
       { id: 4, text: 'Amount', value: 'amount' },
       { id: 5, is_action: true }
-    ]
+    ],
+    email_dialog: false
   }),
 
   computed: {
