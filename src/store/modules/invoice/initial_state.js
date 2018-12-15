@@ -1,5 +1,7 @@
 export const initial_state = () => ({
   create_dialog: false,
+  edit_dialog: false,
+  invoice_id: null,
   title: 'Unnamed',
   billed_to: null,
   billed_from: null,

@@ -7,13 +7,15 @@
 		/>
 
 		<create-invoice-dialog
-				:open.sync="create_dialog"
-				@send="create_invoice"
+				:open="create_invoice_dialog || edit_invoice_dialog"
+				@close="close_dialog"
+				@create="create_invoice"
+				@edit="edit_invoice"
 		/>
 
 		<table-header :paths="paths"
 		              :no-button="!items.length"
-		              @click="create_dialog = true"
+		              @click="create_invoice_dialog = true"
 		/>
 
 		<custom-table
@@ -36,12 +38,14 @@
 
 				<td class="text-xs-center">
 
-					<v-btn fab small flat depressed>
+					<v-btn fab small flat depressed @click="open_edit_dialog(item)">
 						<img src="@/assets/icons/groups/edit.svg" alt="">
 					</v-btn>
+
 					<v-btn fab small flat depressed @click="open_delete_dialog(item.item)">
 						<img src="@/assets/icons/groups/delete.svg" alt="">
 					</v-btn>
+
 					<v-btn fab small flat depressed @click="email_dialog = true">
 						<v-icon>email</v-icon>
 					</v-btn>
@@ -64,7 +68,7 @@
 				<v-btn large dark
 				       class="invoice__btn"
 				       color="#3b589e"
-				       @click="create_dialog = true"
+				       @click="create_invoice_dialog = true"
 				>
 					Add New Invoice
 				</v-btn>

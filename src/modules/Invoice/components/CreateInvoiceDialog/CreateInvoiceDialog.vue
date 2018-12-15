@@ -4,8 +4,9 @@
 			<v-dialog :value="open" fullscreen persist hide-overlay transition="dialog-bottom-transition">
 
 				<dialog-toolbar
-						@close="$emit('update:open', false)"
-						@send="$emit('send')"
+						@close="$emit('close', false)"
+						@send="$emit('create')"
+						@edit="$emit('edit')"
 						:disabled="!can_create_invoice"
 				/>
 

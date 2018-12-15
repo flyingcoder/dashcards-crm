@@ -1,4 +1,5 @@
 import { table_functionality } from '@/services/table-functionality'
+import { mapGetters } from 'vuex'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
@@ -32,12 +33,21 @@ export default {
   }),
 
   computed: {
-    create_dialog: {
+    ...mapGetters('invoice', ['selected_project', 'invoice_id']),
+    create_invoice_dialog: {
       get() {
         return this.$store.getters['invoice/create_dialog']
       },
       set(val) {
         this.$store.commit('invoice/set_create_dialog', val)
+      }
+    },
+    edit_invoice_dialog: {
+      get() {
+        return this.$store.getters['invoice/edit_dialog']
+      },
+      set(val) {
+        this.$store.commit('invoice/set_edit_dialog', val)
       }
     }
   },
@@ -49,14 +59,46 @@ export default {
   methods: {
     create_invoice() {
       this.loading = true
-      this.create_dialog = false
+      this.create_invoice_dialog = false
       this.$store
-        .dispatch('invoice/create_invoice')
+        .dispatch('invoice/save_invoice', {
+          method: 'post',
+          api: `api/projects/${this.selected_project}/invoice`
+        })
         .then(({ data }) => this.items.unshift(data))
         .finally(() => {
           this.loading = false
           this.$store.commit('invoice/reset_state')
         })
+    },
+
+    edit_invoice() {
+      this.loading = true
+      this.edit_invoice_dialog = true
+      this.$store
+        .dispatch('invoice/save_invoice', {
+          method: 'put',
+          api: `api/invoice/${this.invoice_id}`
+        })
+        .then(({ data }) => {
+          const index = this.items.findIndex(item => item.id === data.id)
+          if (~index) this.items.splice(index, 1, data)
+          this.$store.commit('invoice/set_invoice_id', null)
+        })
+        .finally(() => {
+          this.loading = false
+          this.$store.commit('invoice/reset_state')
+        })
+    },
+
+    open_edit_dialog(data) {
+      this.$store.commit('invoice/open_invoice_for_editing', data)
+    },
+
+    close_dialog(val) {
+      if (this.create_invoice_dialog)
+        this.$store.commit('invoice/set_create_dialog', val)
+      else this.$store.commit('invoice/set_edit_dialog', val)
     }
   }
 }
