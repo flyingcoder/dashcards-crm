@@ -26,26 +26,16 @@ request.interceptors.response.use(
     return response
   },
   error => {
-    if (error.response.status === 401) {
+    if (error.response.status === 401 && localStorage.getItem('token')) {
       // Unauthenticated
       auth.logout()
       return
     }
-    //TODO: refactor this to have best practise. -roland review
-    var res = error.response
-    if (error.response.status == 422) {
-      for (error in res.data.errors) {
-        store.commit('open_snackbar', {
-          status: true,
-          message: res.data.errors[error][0]
-        })
-      }
-    } else {
-      store.commit('open_snackbar', {
-        status: true,
-        message: res.data.message
-      })
-    }
+    const res = error.response
+    store.commit('open_snackbar', {
+      status: true,
+      message: res.data.message
+    })
   }
 )
 
