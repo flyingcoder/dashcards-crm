@@ -8,7 +8,9 @@ export const actions = {
   },
   fetch_tasks({ commit }, api) {
     request.get(api).then(({ data }) => {
-      const rows = data.map(task => ({
+      commit('set_billed_to', data.billed_to)
+      commit('set_billed_from', data.billed_from)
+      const rows = data.tasks.map(task => ({
         descriptions: task.title,
         hours: get_hours(task.total_time),
         rate: null,
@@ -25,6 +27,8 @@ export const actions = {
   create_invoice({ state }) {
     const obj = {
       title: state.title,
+      billed_to: state.billed_to,
+      billed_from: state.billed_from,
       date: state.date,
       due_date: state.due_date,
       total_amount: state.total_amount,

@@ -14,6 +14,8 @@ export const mutations = {
   set_total_amount: (state, payload) => (state.total_amount = payload),
   set_textarea: (state, { new_val, field }) => (state[field] = new_val),
   set_title: (state, newtitle) => (state.title = newtitle),
+  set_billed_to: (state, payload) => (state.billed_to = payload),
+  set_billed_from: (state, payload) => (state.billed_from = payload),
   toggle_visibility: (state, { new_val, field }) =>
     (state[field].show = new_val),
   set_field: (state, { new_val, field }) =>

@@ -6,15 +6,42 @@
 		</div>
 
 		<div class="bill-from">
-			<v-textarea label="Who is this invoice from"></v-textarea>
+			<v-textarea label="Who is this invoice from"
+			            v-model="billed_from"
+			></v-textarea>
 		</div>
 
 		<div class="bill-to">
-			<v-text-field label="Who is this invoice to"></v-text-field>
+			<v-text-field label="Who is this invoice to"
+			              v-model="billed_to"
+			></v-text-field>
 		</div>
 
 	</div>
 </template>
+
+<script>
+export default {
+  computed: {
+    billed_to: {
+      get() {
+        return this.$store.getters['invoice/billed_to']
+      },
+      set(newVal) {
+        this.$store.commit('invoice/set_billed_to', newVal)
+      }
+    },
+    billed_from: {
+      get() {
+        return this.$store.getters['invoice/billed_from']
+      },
+      set(newVal) {
+        this.$store.commit('invoice/set_billed_from', newVal)
+      }
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .left-side {

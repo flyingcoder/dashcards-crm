@@ -1,6 +1,8 @@
 export const initial_state = () => ({
   create_dialog: false,
   title: 'Unnamed',
+  billed_to: null,
+  billed_from: null,
   rows: [],
   projects: [],
   selected_project: null,

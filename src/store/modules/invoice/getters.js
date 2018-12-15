@@ -1,6 +1,8 @@
 export const getters = {
   create_dialog: state => state.create_dialog,
   title: state => state.title,
+  billed_to: state => state.billed_to,
+  billed_from: state => state.billed_from,
   rows: state => state.rows,
   projects: state => state.projects,
   selected_project: state => state.selected_project,

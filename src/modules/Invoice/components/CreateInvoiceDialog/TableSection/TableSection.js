@@ -56,10 +56,7 @@ export default {
     },
 
     fill_table(pro_id) {
-      this.$store.dispatch(
-        'invoice/fetch_tasks',
-        `api/projects/${pro_id}/tasks?all=true`
-      )
+      this.$store.dispatch('invoice/fetch_tasks', `api/projects/${pro_id}`)
     }
   }
 }
