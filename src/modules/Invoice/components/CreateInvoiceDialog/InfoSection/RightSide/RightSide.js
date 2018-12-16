@@ -12,7 +12,8 @@ export default {
       'selected_project',
       'due_date',
       'date',
-      'create_dialog'
+      'create_dialog',
+      'edit_dialog'
     ]),
     title: {
       get() {
@@ -20,6 +21,14 @@ export default {
       },
       set(new_title) {
         this.$store.commit('invoice/set_title', new_title)
+      }
+    },
+    type: {
+      get() {
+        return this.$store.getters['invoice/type']
+      },
+      set(newVal) {
+        this.$store.commit('invoice/set_type', newVal)
       }
     }
   },
@@ -29,6 +38,11 @@ export default {
       if (val) {
         this.$store.dispatch('invoice/fetch_projects')
         this.$store.commit('invoice/init_date')
+      }
+    },
+    edit_dialog(val) {
+      if (val) {
+        this.$store.dispatch('invoice/fetch_projects')
       }
     }
   },

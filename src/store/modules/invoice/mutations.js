@@ -3,12 +3,15 @@ import { initial_state } from './initial_state'
 
 export const mutations = {
   set_create_dialog: (state, payload) => (state.create_dialog = payload),
+  set_edit_dialog: (state, payload) => (state.edit_dialog = payload),
+  set_invoice_id: (state, payload) => (state.invoice_id = payload),
   add_new_row: (state, payload) => state.rows.push(payload),
   add_rows: (state, payload) => state.rows.push(...payload),
   delete_row: (state, index) => state.rows.splice(index, 1),
   update_row: (state, { row, index }) => state.rows.splice(index, 1, row),
   set_projects: (state, payload) => (state.projects = payload),
   set_selected_project: (state, payload) => (state.selected_project = payload),
+  set_type: (state, payload) => (state.type = payload),
   update_date: (state, { date, field }) => (state[field] = date),
   init_date: state => (state.date = moment().format('YYYY-MM-DD')),
   set_total_amount: (state, payload) => (state.total_amount = payload),
@@ -29,5 +32,16 @@ export const mutations = {
     Object.keys(initial).forEach(key => {
       state[key] = initial[key]
     })
+  },
+  open_invoice_for_editing(state, payload) {
+    state.invoice_id = payload.id
+    state.date = payload.date
+    state.due_date = payload.due_date
+    state.selected_project = payload.project_id
+    state.terms = payload.terms
+    state.title = payload.title
+    if (payload.tax) state.tax = payload.tax
+    if (payload.discount) state.discount = payload.discount
+    state.edit_dialog = true
   }
 }

@@ -24,8 +24,10 @@ export const actions = {
       return Number(Number(hours) + Number(mins / 60)).toPrecision(3)
     }
   },
-  create_invoice({ state }) {
+  save_invoice({ state }, { method, api }) {
     const obj = {
+      project_id: state.selected_project,
+      type: state.type,
       title: state.title,
       billed_to: state.billed_to,
       billed_from: state.billed_from,
@@ -40,7 +42,7 @@ export const actions = {
       shipping: calculate_field(state, 'shipping', false)
     }
 
-    return request.post(`api/projects/${state.selected_project}/invoice`, obj)
+    return request[method](api, obj)
   }
 }
 

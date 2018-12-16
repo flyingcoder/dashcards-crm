@@ -10,7 +10,7 @@
 
 		<div class="invoice-type field">
 			Select type
-			<v-select :items="['hourly', 'monthly']" value="hourly"></v-select>
+			<v-select :items="['hourly', 'monthly']" v-model="type"></v-select>
 		</div>
 
 		<div class="invoice-project field">

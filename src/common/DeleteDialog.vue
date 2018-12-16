@@ -65,15 +65,14 @@ export default {
 
 @include styledDialog('.delete__dialog');
 
-.delete__dialog{
-
-  .dialog__header{
+.delete__dialog {
+  .dialog__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
     padding: 0;
-    
+
     @include styledCloseDialog('.close__dialog');
 
     @include styledTitleDialog('.dialog__title');
@@ -81,17 +80,14 @@ export default {
 
   @include styledScrollFor('.dialog__body');
 
-  .dialog__body{
+  .dialog__body {
     color: $tableDarkText;
     font-size: 16px;
   }
-  
+
   @include actionButtonsDialog('.dialog__actions');
-
 }
 
-@media only screen and (max-width: 480px){
-  
+@media only screen and (max-width: 480px) {
 }
-
 </style>
