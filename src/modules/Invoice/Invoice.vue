@@ -18,6 +18,13 @@
 		              @click="create_invoice_dialog = true"
 		/>
 
+		<delete-dialog
+				:open-dialog.sync="delete_dialog"
+				title="Delete Invoice"
+				text-content="Are you sure you want to delete this invoice?"
+				@delete="delete_invoice"
+		/>
+
 		<custom-table
 				v-if="items.length || loading"
 				:headers="headers"
@@ -42,7 +49,7 @@
 						<img src="@/assets/icons/groups/edit.svg" alt="">
 					</v-btn>
 
-					<v-btn fab small flat depressed @click="open_delete_dialog(item.item)">
+					<v-btn fab small flat depressed @click="open_delete_dialog(item)">
 						<img src="@/assets/icons/groups/delete.svg" alt="">
 					</v-btn>
 
