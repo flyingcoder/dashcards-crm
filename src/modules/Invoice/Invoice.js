@@ -3,6 +3,7 @@ import { mapGetters } from 'vuex'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
+import DeleteDialog from '@/common/DeleteDialog.vue'
 import CreateInvoiceDialog from './components/CreateInvoiceDialog/CreateInvoiceDialog.vue'
 import EmailDialog from './components/EmailDialog/EmailDialog.vue'
 
@@ -14,7 +15,8 @@ export default {
     TableHeader,
     CreateInvoiceDialog,
     CustomTable,
-    EmailDialog
+    EmailDialog,
+    DeleteDialog
   },
 
   data: () => ({
@@ -89,6 +91,19 @@ export default {
           this.loading = false
           this.$store.commit('invoice/reset_state')
         })
+    },
+
+    async delete_invoice() {
+      this.loading = true
+      this.delete_dialog = false
+      await this.$store.dispatch('invoice/delete_invoice', {
+        id: this.delete_item_id
+      })
+      this.loading = false
+      const index = this.items.findIndex(
+        item => item.id === this.delete_item_id
+      )
+      if (~index) this.items.splice(index, this.delete_item_id)
     },
 
     open_edit_dialog(data) {

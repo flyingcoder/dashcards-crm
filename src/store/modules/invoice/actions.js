@@ -43,6 +43,9 @@ export const actions = {
     }
 
     return request[method](api, obj)
+  },
+  delete_invoice({ state, commit }, { id }) {
+    return request.delete(`api/invoice/${id}`)
   }
 }
 
