@@ -8,6 +8,7 @@ export const getters = {
   rows: state => state.rows,
   projects: state => state.projects,
   selected_project: state => state.selected_project,
+  type: state => state.type,
   due_date: state => state.due_date,
   date: state => state.date,
   notes: state => state.notes,

@@ -26,6 +26,8 @@ export const actions = {
   },
   save_invoice({ state }, { method, api }) {
     const obj = {
+      project_id: state.selected_project,
+      type: state.type,
       title: state.title,
       billed_to: state.billed_to,
       billed_from: state.billed_from,

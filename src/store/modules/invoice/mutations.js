@@ -11,6 +11,7 @@ export const mutations = {
   update_row: (state, { row, index }) => state.rows.splice(index, 1, row),
   set_projects: (state, payload) => (state.projects = payload),
   set_selected_project: (state, payload) => (state.selected_project = payload),
+  set_type: (state, payload) => (state.type = payload),
   update_date: (state, { date, field }) => (state[field] = date),
   init_date: state => (state.date = moment().format('YYYY-MM-DD')),
   set_total_amount: (state, payload) => (state.total_amount = payload),

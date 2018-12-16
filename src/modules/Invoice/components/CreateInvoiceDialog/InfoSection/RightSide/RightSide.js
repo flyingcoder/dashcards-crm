@@ -22,6 +22,14 @@ export default {
       set(new_title) {
         this.$store.commit('invoice/set_title', new_title)
       }
+    },
+    type: {
+      get() {
+        return this.$store.getters['invoice/type']
+      },
+      set(newVal) {
+        this.$store.commit('invoice/set_type', newVal)
+      }
     }
   },
 
