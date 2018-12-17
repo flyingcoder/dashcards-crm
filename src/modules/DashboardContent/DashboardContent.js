@@ -1,4 +1,3 @@
-import request from '@/services/axios_instance'
 import { mapGetters, mapActions } from 'vuex'
 //Components
 import Breadcrumb from '@/common/Breadcrumb.vue'
@@ -48,7 +47,7 @@ export default {
         counter: '847',
         icon: require('@/assets/icons/sidebar/templates.svg')
       }
-    ],
+    ]
   }),
 
   computed: {

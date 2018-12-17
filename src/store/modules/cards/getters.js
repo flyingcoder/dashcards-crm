@@ -5,5 +5,6 @@ export const getters = {
       return acc
     }, [])
     return cards.includes(card)
-  }
+  },
+  cards: state => state.cards
 }
