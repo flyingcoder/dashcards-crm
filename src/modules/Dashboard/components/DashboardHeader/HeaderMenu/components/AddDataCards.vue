@@ -2,11 +2,11 @@
     <v-menu class="datacards__dropdown"
 	        transition="slide-y-transition"
 	        :nudge-bottom="5"
-	        bottom
+          :nudge-left="180"
 	        offset-y
-            :close-on-content-click="false"
+          :close-on-content-click="false"
 	>
-		<div class="dropdown" slot="activator">
+		<div class="d__dropdown" slot="activator">
 			<header-icon
                 :image-src="require('@/assets/icons/header/add__default.png')"
                 :hovered-image-src="require('@/assets/icons/header/add.png')"
