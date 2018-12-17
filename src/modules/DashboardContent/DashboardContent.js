@@ -1,4 +1,4 @@
-import request from '@/services/axios_instance'
+import { mapGetters, mapActions } from 'vuex'
 //Components
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import TasksCard from '@/common/TasksCard/TasksCard.vue'
@@ -47,23 +47,18 @@ export default {
         counter: '847',
         icon: require('@/assets/icons/sidebar/templates.svg')
       }
-    ],
-    cards: []
+    ]
   }),
 
+  computed: {
+    ...mapGetters('cards', ['cards', 'should_show'])
+  },
+
   created() {
-    request
-      .get('api/dashboard/default/dashitems')
-      .then(({ data }) => (this.cards = data))
+    this.fill_cards()
   },
 
   methods: {
-    should_show(card) {
-      const cards = this.cards.reduce((acc, cur) => {
-        acc.push(cur.name)
-        return acc
-      }, [])
-      return !!cards.includes(card)
-    }
+    ...mapActions('cards', ['fill_cards'])
   }
 }

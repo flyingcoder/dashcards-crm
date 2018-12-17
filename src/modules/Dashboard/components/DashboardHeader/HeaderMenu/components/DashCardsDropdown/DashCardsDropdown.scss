@@ -1,118 +1,8 @@
-<template>
-    <v-menu class="datacards__dropdown"
-	        transition="slide-y-transition"
-	        :nudge-bottom="5"
-          :nudge-left="180"
-	        offset-y
-          :close-on-content-click="false"
-	>
-		<div class="d__dropdown" slot="activator">
-			<header-icon
-                :image-src="require('@/assets/icons/header/add__default.png')"
-                :hovered-image-src="require('@/assets/icons/header/add.png')"
-            />
-		</div>
-
-		<v-list class="add__cards_list">
-
-            <v-list-tile-title class="add__cards__title">Data Boxes</v-list-tile-title>
-
-            <label class="select__all"> <span>Add All Data Box</span>
-                <input type="checkbox" checked="checked">
-                <span class="checkmark"></span>
-            </label>
-
-			<v-layout row wrap align-center justify-center class="card__layout">
-
-                <v-flex sm6 xs12 class="data__box" 
-                    v-for="(item, index) in items"
-                    :key="index"
-                >
-                
-                <input type="checkbox" name="boxes" :value="item.title" :id="index" />
-                <label class="card__option" :for="index">
-
-                    <div class="card__option_content">
-                        <v-img max-width="35px" :src="item.icon" class="card__icons"/>
-
-                        <div class="card__title">
-                            {{ item.title }}
-                        </div>
-                    </div>
-                    
-                </label>
-
-                </v-flex>
-
-            </v-layout>
-
-            <div class="card__btn">
-                <v-btn dark color="#8b94bf" class="reset">Reset Default</v-btn>
-                <v-btn dark color="#8b94bf" class="save">Save</v-btn>
-            </div>
-
-		</v-list>
-
-	</v-menu>
-</template>
-
-
-<script>
-import HeaderIcon from './HeaderIcon.vue'
-
-export default {
-  name: 'AddDataCards',
-
-  components: {
-    HeaderIcon
-  },
-
-  data: () => ({
-    avatarSize: 'auto',
-    items: [
-      {
-        title: 'Task',
-        icon: require('@/assets/icons/sidebar/templates.svg')
-      },
-      {
-        title: 'Timeline',
-        icon: require('@/assets/icons/sidebar/timers.svg')
-      },
-      {
-        title: 'Client',
-        icon: require('@/assets/icons/sidebar/clients.svg')
-      },
-      {
-        title: 'Timer',
-        icon: require('@/assets/icons/sidebar/timers.svg')
-      },
-      {
-        title: 'Payment',
-        icon: require('@/assets/icons/sidebar/payment.svg')
-      },
-      {
-        title: 'Invoice',
-        icon: require('@/assets/icons/sidebar/invoice.svg')
-      },
-      {
-        title: 'Calendar',
-        icon: require('@/assets/icons/sidebar/calendar.svg')
-      },
-      {
-        title: 'Passbox',
-        icon: require('@/assets/icons/header/user/lock.svg')
-      }
-    ]
-  })
-}
-</script>
-
-<style lang="scss" scoped>
 @import '~@/sass/_variables';
 
 .v-menu__content.theme--light.menuable__content__active {
   box-shadow: 0 15px 5px -3px rgba(0, 0, 0, 0.2),
-    0 18px 10px -3px rgba(0, 0, 0, 0.14), 0 13px 14px -3px rgba(0, 0, 0, 0.12);
+  0 18px 10px -3px rgba(0, 0, 0, 0.14), 0 13px 14px -3px rgba(0, 0, 0, 0.12);
 }
 
 .add__cards_list {
@@ -266,4 +156,3 @@ export default {
     }
   }
 }
-</style>

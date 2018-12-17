@@ -1,6 +1,6 @@
 import HeaderIcon from './components/HeaderIcon.vue'
 import Dropdown from './components/Dropdown.vue'
-import AddCards from './components/AddDataCards.vue'
+import AddCards from './components/DashCardsDropdown/DashCardsDropdown.vue'
 
 export default {
   name: 'HeaderMenu',
