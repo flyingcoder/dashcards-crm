@@ -1,4 +1,5 @@
 import { validations } from './validations'
+import makeRequestTo from '@/services/makeRequestTo'
 
 export default {
   name: 'TeamsDialog',
@@ -20,14 +21,16 @@ export default {
     contact_number: '',
     password: '',
     repeat_password: '',
-    group_items: ['Admin', 'Developer', 'Staff', 'Manager'],
+    group_items: [],
     show_password: false,
-    show_repeat_password: false
+    show_repeat_password: false,
+    loading: false
   }),
 
   watch: {
     dialog(new_val) {
       this.open = new_val
+      new_val && this.fill_group_items()
     },
     open(new_val) {
       this.$emit('update:dialog', new_val)
@@ -41,6 +44,14 @@ export default {
   },
 
   methods: {
+    fill_group_items() {
+      this.loading = false
+      makeRequestTo
+        .get_all_groups()
+        .then(({ data }) => (this.group_items = data.data))
+        .finally(() => (this.loading = false))
+    },
+
     cancel() {
       this.open = false
     },

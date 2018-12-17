@@ -7,7 +7,9 @@
 					<span class="headline">{{ title }}</span>
 				</v-card-title>
 
-				<v-card-text>
+				<v-progress-linear v-if="loading" slot="progress" color="blue" indeterminate></v-progress-linear>
+
+				<v-card-text v-show="!loading">
 					<v-container grid-list-md>
 						<v-layout wrap>
 
@@ -36,6 +38,8 @@
 										label="Group Name"
 										v-model.trim="group_name"
 										:items="group_items"
+										item-text="name"
+										item-value="name"
 								></v-select>
 							</v-flex>
 
@@ -99,7 +103,7 @@
 
 				</v-card-text>
 
-				<v-card-actions>
+				<v-card-actions v-show="!loading">
 					<v-spacer></v-spacer>
 					<v-btn color="blue darken-1" flat @click="cancel">Cancel</v-btn>
 					<v-btn color="blue darken-1" flat :disabled="$v.$invalid" @click="save">Save</v-btn>
