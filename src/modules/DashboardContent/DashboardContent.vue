@@ -44,9 +44,9 @@
         </div>
 
         <div class="row d__cards">
-            <tasks-card />
+            <tasks-card v-if="should_show('Tasks')" />
 
-            <timeline-card />
+            <timeline-card v-if="should_show('Timeline')" />
 
             <div class="d__box">
                 <div class="d__box__header">
