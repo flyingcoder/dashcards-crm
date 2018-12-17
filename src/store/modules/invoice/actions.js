@@ -44,7 +44,8 @@ export const actions = {
 
     return request[method](api, obj)
   },
-  delete_invoice({ state, commit }, { id }) {
+  delete_invoice({ state }, { id }) {
+    //TODO move this action in api file (Under makeRequestTo service)
     return request.delete(`api/invoice/${id}`)
   }
 }
