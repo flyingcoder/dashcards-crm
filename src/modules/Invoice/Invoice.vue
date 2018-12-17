@@ -53,7 +53,7 @@
 						<img src="@/assets/icons/groups/delete.svg" alt="">
 					</v-btn>
 
-					<v-btn fab small flat depressed @click="email_dialog = true">
+					<v-btn fab small flat depressed @click="open_email_dialog(item.id)">
 						<v-icon>email</v-icon>
 					</v-btn>
 

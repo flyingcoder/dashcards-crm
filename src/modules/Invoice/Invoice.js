@@ -110,6 +110,11 @@ export default {
       this.$store.commit('invoice/open_invoice_for_editing', data)
     },
 
+    open_email_dialog(id) {
+      this.$store.commit('invoice/set_invoice_id', id)
+      this.email_dialog = true
+    },
+
     close_dialog(val) {
       if (this.create_invoice_dialog)
         this.$store.commit('invoice/set_create_dialog', val)

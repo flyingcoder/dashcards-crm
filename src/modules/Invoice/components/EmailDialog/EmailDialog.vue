@@ -5,7 +5,7 @@
 
 				<v-card-title class="dialog__header">
 					<span class="dialog__title">Send Invoice Options</span>
-					<v-btn fab small class="close__dialog" @click="cancel">
+					<v-btn fab small class="close__dialog" @click="clear_and_close">
 						<v-icon>close</v-icon>
 					</v-btn>
 				</v-card-title>
@@ -18,6 +18,7 @@
 										class="dialog__selectfield"
 										label="Status"
 										:items="status_items"
+										v-model="selected_status"
 										solo
 										hide-details
 										color="#657186"
@@ -29,8 +30,8 @@
 				</v-card-text>
 
 				<v-card-actions class="dialog__actions">
-					<v-btn @click="cancel">Cancel</v-btn>
-					<v-btn>Save</v-btn>
+					<v-btn @click="clear_and_close">Cancel</v-btn>
+					<v-btn :disabled="status_disabled" @click="save">Save</v-btn>
 				</v-card-actions>
 
 			</v-card>
