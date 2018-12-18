@@ -1,9 +1,11 @@
 import { mapGetters, mapActions } from 'vuex'
+import _cloneDeep from 'lodash/cloneDeep'
 //Components
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import TasksCard from '@/common/TasksCard/TasksCard.vue'
 import TimelineCard from '@/common/TimelineCard/TimelineCard.vue'
 import LogonLabel from './components/LonOnLabel.vue'
+import draggable from 'vuedraggable'
 
 export default {
   name: 'DashboardContent',
@@ -11,7 +13,8 @@ export default {
     Breadcrumb,
     LogonLabel,
     TasksCard,
-    TimelineCard
+    TimelineCard,
+    draggable
   },
 
   data: () => ({
@@ -47,11 +50,16 @@ export default {
         counter: '847',
         icon: require('@/assets/icons/sidebar/templates.svg')
       }
-    ]
+    ],
   }),
 
   computed: {
-    ...mapGetters('cards', ['cards', 'should_show'])
+    ...mapGetters('cards', ['cards', 'should_show']),
+    card_components() {
+      let cards = _cloneDeep(this.cards)
+      cards.forEach(card => card.component = card.slug + '-card')
+      return cards
+    }
   },
 
   created() {
