@@ -20,43 +20,47 @@
 				Data Boxes
 			</v-list-tile-title>
 
-			<label class="select__all"> <span>Add All Data Box</span> <input
-					type="checkbox" checked="checked"> <span class="checkmark"></span>
-			</label>
+			<v-progress-linear v-if="loading" color="blue" :indeterminate="true"></v-progress-linear>
 
-			<v-layout row wrap align-center justify-center class="card__layout">
+			<template v-else>
+				<label class="select__all"> <span>Add All Data Box</span> <input
+						type="checkbox" checked="checked"> <span class="checkmark"></span>
+				</label>
 
-				<v-flex sm6 xs12 class="data__box"
-				        v-for="(item, index) in items"
-				        :key="index"
-				>
+				<v-layout row wrap align-center justify-center class="card__layout">
 
-					<input type="checkbox"
-					       name="boxes"
-					       :id="index"
-					       :value="item.value"
-					       v-model="selected_items"
-					/>
-					<label class="card__option" :for="index">
+					<v-flex sm6 xs12 class="data__box"
+					        v-for="item in items"
+					        :key="item.id"
+					>
 
-						<div class="card__option_content">
-							<v-img max-width="35px" :src="item.icon" class="card__icons"/>
+						<input type="checkbox"
+						       name="boxes"
+						       :id="item.id"
+						       :value="item.id"
+						       v-model="selected_items"
+						/>
+						<label class="card__option" :for="item.id">
 
-							<div class="card__title">
-								{{ item.title }}
+							<div class="card__option_content">
+								<v-img max-width="35px" :src="item.icon" class="card__icons"/>
+
+								<div class="card__title">
+									{{ item.title }}
+								</div>
 							</div>
-						</div>
 
-					</label>
+						</label>
 
-				</v-flex>
+					</v-flex>
 
-			</v-layout>
+				</v-layout>
 
-			<div class="card__btn">
-				<v-btn dark color="#8b94bf" class="reset">Reset Default</v-btn>
-				<v-btn dark color="#8b94bf" class="save" :disabled="disabled" @click="save">Save</v-btn>
-			</div>
+				<div class="card__btn">
+					<v-btn dark color="#8b94bf" class="reset">Reset Default</v-btn>
+					<v-btn dark color="#8b94bf" class="save" :disabled="disabled" @click="save">Save</v-btn>
+				</div>
+			</template>
 
 		</v-list>
 
