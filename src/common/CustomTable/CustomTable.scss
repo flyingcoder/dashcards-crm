@@ -56,13 +56,14 @@
     
 
 //For Mobile Version
-@media only screen and (max-width: 480px){
+@media only screen and (max-width: 600px){
   .content__wrapper{
     .buzz__tables{
       padding: 8px;
       .buzz__tablesTwo{
         padding: 0;
         .table__toolbar{
+          padding: 0 8px;
           height: auto;
           .table__toolbar-title{
               color: $tableTitleBlue;

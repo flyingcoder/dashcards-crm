@@ -43,13 +43,13 @@
                     class="custom__table"
                 >
                 <template slot="toolbar">
-                    <v-toolbar flat class="table__toolbar">
+                    <v-layout row wrap justify-space-between align-center flat class="table__toolbar">
                         
-                        <v-toolbar-title class="table__toolbar-title">Members</v-toolbar-title>
+                        <div class="table__toolbar-title">Members</div>
 
-                        <v-spacer></v-spacer>
+                        <div class="member__option">
 
-                        <v-toolbar-items class="member__option">
+                            <v-btn class="groups" dark small color="#3b589e" @click="go_to_groups_page">Groups</v-btn>
                 
                             <v-btn fab flat small class="list__view">
                                 <v-icon>list</v-icon>
@@ -74,8 +74,8 @@
                                 </v-list>
                             </v-menu>
                         
-                        </v-toolbar-items>
-                    </v-toolbar>
+                        </div>
+                    </v-layout>
                 </template>
 
                     <template slot="custom-item" slot-scope="item" class="template-table">

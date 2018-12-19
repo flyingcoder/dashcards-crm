@@ -65,6 +65,10 @@ export default {
       return !member.projects.length
         ? 'no projects assigned'
         : member.projects.length
+    },
+
+    go_to_groups_page() {
+      this.$router.push({ path: './team/groups' })
     }
   }
 }
