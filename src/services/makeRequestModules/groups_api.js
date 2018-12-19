@@ -5,6 +5,10 @@ export const groups_api = {
     return request.get(`/api/groups`)
   },
 
+  get_group_permissions(id) {
+    return request.get(`api/groups/${id}/permission`)
+  },
+
   get_groups(query) {
     return request.get(`/api/groups?${query}`)
   },

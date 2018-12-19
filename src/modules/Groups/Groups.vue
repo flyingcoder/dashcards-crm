@@ -1,6 +1,11 @@
 <template>
 	<div class="groups">
-		<component :is="permissions_dialog" @close-dialog="permissions_dialog = ''" something="bla"></component>
+
+		<component :is="permissions_dialog"
+		           @close-dialog="permissions_dialog = ''"
+		           :group-id="group_id"
+		></component>
+
 		<groups-dialog
 				:dialog.sync="add_dialog"
 				ref="add_dialog"
