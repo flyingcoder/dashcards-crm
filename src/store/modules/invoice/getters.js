@@ -1,4 +1,5 @@
 export const getters = {
+  company_logo: state => state.company_logo,
   create_dialog: state => state.create_dialog,
   edit_dialog: state => state.edit_dialog,
   invoice_id: state => state.invoice_id,
