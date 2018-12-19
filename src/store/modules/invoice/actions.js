@@ -26,6 +26,7 @@ export const actions = {
   },
   save_invoice({ state }, { method, api }) {
     const obj = {
+      company_logo: get_form_data(state.company_logo),
       project_id: state.selected_project,
       type: state.type,
       title: state.title,
@@ -61,4 +62,11 @@ const calculate_field = (state, field, has_symbol = true) => {
       value: state[field].value
     }
   return null
+}
+
+const get_form_data = file => {
+  if (!file) return null
+  let formData = new FormData()
+  formData.append('file', file)
+  return formData
 }

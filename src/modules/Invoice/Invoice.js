@@ -75,6 +75,7 @@ export default {
     },
 
     edit_invoice() {
+      this.$store.commit('invoice/set_company_logo', null)
       this.loading = true
       this.edit_invoice_dialog = true
       this.$store

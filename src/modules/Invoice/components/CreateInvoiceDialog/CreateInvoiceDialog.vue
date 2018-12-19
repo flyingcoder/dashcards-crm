@@ -5,7 +5,7 @@
 
 				<dialog-toolbar
 						@close="$emit('close', false)"
-						@send="$emit('create')"
+						@create="$emit('create')"
 						@edit="$emit('edit')"
 						:disabled="!can_create_invoice"
 				/>
