@@ -51,6 +51,14 @@ export const actions = {
   delete_invoice({ state }, { id }) {
     //TODO move this action in api file (Under makeRequestTo service)
     return request.delete(`api/invoice/${id}`)
+  },
+  type_changed_to_monthly({ commit, state }) {
+    commit('clear_rows')
+    commit('set_selected_project', null)
+    commit('set_projects', [])
+    commit('set_total_amount', 0)
+    commit('set_billed_to', null)
+    commit('set_billed_from', null)
   }
 }
 

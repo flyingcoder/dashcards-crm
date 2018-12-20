@@ -1,5 +1,6 @@
+import { mapGetters, mapMutations, mapActions } from 'vuex'
+//Components
 import DatePicker from '@/common/DatePicker.vue'
-import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -14,7 +15,8 @@ export default {
       'date',
       'create_dialog',
       'edit_dialog',
-      'invoice_id'
+      'invoice_id',
+      'type'
     ]),
     title: {
       get() {
@@ -29,7 +31,7 @@ export default {
         return this.$store.getters['invoice/type']
       },
       set(newVal) {
-        this.$store.commit('invoice/set_type', newVal)
+        this.set_type(newVal)
       }
     }
   },
@@ -37,24 +39,33 @@ export default {
   watch: {
     create_dialog(val) {
       if (val) {
-        this.$store.dispatch('invoice/fetch_projects')
-        this.$store.commit('invoice/init_date')
+        if (this.type === 'hourly') this.fetch_projects()
+        this.init_date()
       }
     },
     edit_dialog(val) {
-      if (val) {
-        this.$store.dispatch('invoice/fetch_projects')
+      if (val && this.type === 'hourly') {
+        this.fetch_projects()
+      }
+    },
+    type(val) {
+      if (val === 'monthly') {
+        this.type_changed_to_monthly()
+      } else {
+        // val = 'hourly'
+        this.fetch_projects()
       }
     }
   },
 
   methods: {
-    project_changed(new_proj_id) {
-      this.$store.commit('invoice/set_selected_project', new_proj_id)
-    },
+    ...mapActions('invoice', ['fetch_projects', 'type_changed_to_monthly']),
 
-    update_date(date, field) {
-      this.$store.commit('invoice/update_date', { date, field })
-    }
+    ...mapMutations('invoice', [
+      'init_date',
+      'set_type',
+      'set_selected_project',
+      'update_date'
+    ])
   }
 }
