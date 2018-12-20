@@ -64,5 +64,5 @@ const calculate_field = (state, field, has_symbol = true) => {
     return {
       value: state[field].value
     }
-  return null
+  return 0
 }
