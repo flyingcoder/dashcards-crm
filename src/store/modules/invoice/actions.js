@@ -25,25 +25,28 @@ export const actions = {
     }
   },
   save_invoice({ state }, { method, api }) {
-    const obj = {
-      company_logo: get_form_data(state.company_logo),
-      project_id: state.selected_project,
-      type: state.type,
-      title: state.title,
-      billed_to: state.billed_to,
-      billed_from: state.billed_from,
-      date: state.date,
-      due_date: state.due_date,
-      total_amount: state.total_amount,
-      items: state.rows,
-      terms: state.terms,
-      notes: state.notes,
-      tax: calculate_field(state, 'tax'),
-      discount: calculate_field(state, 'discount'),
-      shipping: calculate_field(state, 'shipping', false)
-    }
+    let formData = new FormData()
+    formData.append('company_logo', state.company_logo)
+    formData.append('project_id', state.selected_project)
+    formData.append('type', state.type)
+    formData.append('title', state.title)
+    formData.append('billed_to', state.billed_to)
+    formData.append('billed_from', state.billed_from)
+    formData.append('date', state.date)
+    formData.append('due_date', state.due_date)
+    formData.append('total_amount', state.total_amount)
+    formData.append('items', state.rows)
+    formData.append('terms', state.terms)
+    formData.append('notes', state.notes)
+    formData.append('tax', calculate_field(state, 'tax'))
+    formData.append('discount', calculate_field(state, 'discount'))
+    formData.append('shipping', calculate_field(state, 'shipping', false))
 
-    return request[method](api, obj)
+    return request[method](api, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
   },
   delete_invoice({ state }, { id }) {
     //TODO move this action in api file (Under makeRequestTo service)
@@ -62,11 +65,4 @@ const calculate_field = (state, field, has_symbol = true) => {
       value: state[field].value
     }
   return null
-}
-
-const get_form_data = file => {
-  if (!file) return null
-  let formData = new FormData()
-  formData.append('file', file)
-  return formData
 }

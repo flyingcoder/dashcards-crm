@@ -65,7 +65,7 @@ export default {
       this.$store
         .dispatch('invoice/save_invoice', {
           method: 'post',
-          api: `api/projects/${this.selected_project}/invoice`
+          api: `api/invoice`
         })
         .then(({ data }) => this.items.unshift(data))
         .finally(() => {
