@@ -49,65 +49,6 @@
                            v-if="should_show(card.slug)"
                 ></component>
             </template>
-
-
-
-            <!--<tasks-card v-if="should_show('tasks')"/>-->
-            <!--<timeline-card v-if="should_show('timeline')"/>-->
-
-            <!--<div class="d__box">-->
-            <!--<div class="d__box__header">-->
-            <!--<label>Client</label>-->
-            <!--</div>-->
-            <!--<div class="d__box__content">-->
-            <!--test-->
-            <!--</div>-->
-            <!--</div>-->
-            <!---->
-            <!--<div class="d__box">-->
-            <!--<div class="d__box__header">-->
-            <!--<label>Timer</label>-->
-            <!--</div>-->
-            <!--<div class="d__box__content">-->
-            <!--test-->
-            <!--</div>-->
-            <!--</div>-->
-            <!---->
-            <!--<div class="d__box">-->
-            <!--<div class="d__box__header">-->
-            <!--<label>Payment</label>-->
-            <!--</div>-->
-            <!--<div class="d__box__content">-->
-            <!--test-->
-            <!--</div>-->
-            <!--</div>-->
-            <!---->
-            <!--<div class="d__box">-->
-            <!--<div class="d__box__header">-->
-            <!--<label>Invoice</label>-->
-            <!--</div>-->
-            <!--<div class="d__box__content">-->
-            <!--test-->
-            <!--</div>-->
-            <!--</div>-->
-            <!---->
-            <!--<div class="d__box">-->
-            <!--<div class="d__box__header">-->
-            <!--<label>Calendar</label>-->
-            <!--</div>-->
-            <!--<div class="d__box__content">-->
-            <!--test-->
-            <!--</div>-->
-            <!--</div>-->
-            <!---->
-            <!--<div class="d__box">-->
-            <!--<div class="d__box__header">-->
-            <!--<label>Pass Box</label>-->
-            <!--</div>-->
-            <!--<div class="d__box__content">-->
-            <!--test-->
-            <!--</div>-->
-            <!--</div>-->
         </draggable>
 
     </div>
