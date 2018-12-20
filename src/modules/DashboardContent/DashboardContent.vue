@@ -43,60 +43,13 @@
             </div>
         </div>
 
-        <div class="row d__cards">
-            <tasks-card v-if="should_show('Tasks')" />
-
-            <timeline-card v-if="should_show('Timeline')" />
-
-            <div class="d__box">
-                <div class="d__box__header">
-                    <label>Client</label>
-                </div>
-                <div class="d__box__content">
-                    test
-                </div>
-            </div>
-            <div class="d__box">
-                <div class="d__box__header">
-                    <label>Timer</label>
-                </div>
-                <div class="d__box__content">
-                    test
-                </div>
-            </div>
-            <div class="d__box">
-                <div class="d__box__header">
-                    <label>Payment</label>
-                </div>
-                <div class="d__box__content">
-                    test
-                </div>
-            </div>
-            <div class="d__box">
-                <div class="d__box__header">
-                    <label>Invoice</label>
-                </div>
-                <div class="d__box__content">
-                    test
-                </div>
-            </div>
-            <div class="d__box">
-                <div class="d__box__header">
-                    <label>Calendar</label>
-                </div>
-                <div class="d__box__content">
-                    test
-                </div>
-            </div>
-            <div class="d__box">
-                <div class="d__box__header">
-                    <label>Pass Box</label>
-                </div>
-                <div class="d__box__content">
-                    test
-                </div>
-            </div>
-        </div>
+        <draggable class="row d__cards" v-model="cards">
+            <template v-for="card in card_components">
+                <component :is="card.component"
+                           v-if="should_show(card.slug)"
+                ></component>
+            </template>
+        </draggable>
 
     </div>
 </template>
