@@ -25,6 +25,8 @@
     $btnGray: #b3b7c3;
     $textGray: #9095AB;
     $textDark: #657186;
+    $textLightBlue: #7a94a9;
+    $textDarkBlue: #667187;
     $chipGray: #9196ac;
     $chipDark: #2b3244;
     $chipBlue: #3e5aa3;
@@ -46,7 +48,6 @@
     $modalTitle: #657186;
     $bgLightBlue: #f8f8ff;
     $borderLightGray: #dce1e5;
-    $textDarkBlue: #667187;
     $darkBoxShadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 
 // Mixin for styled scroll
@@ -219,6 +220,39 @@
                 font-weight: 500;
                 margin: 0 10px;
             }
+        }
+    }
+}
+
+@mixin userImgWithStatus ($selector){
+    #{$selector}{
+        height: 30px;
+        width: 30px;
+        max-width: 30px;
+        border-radius: 50%;
+        border: 1px solid $borderLightGray;
+        position: relative;
+
+        .status{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 13px;
+            height: 13px;
+            border: 2px solid $lightViolete;
+            border-radius: 50%;
+        }
+        
+        .online{
+            background-color: $green;
+        }
+
+        .offline{
+            background-color: $gray;
+        }
+
+        .dnd{
+            background-color: $red;
         }
     }
 }
