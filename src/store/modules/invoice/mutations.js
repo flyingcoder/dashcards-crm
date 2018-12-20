@@ -10,6 +10,7 @@ export const mutations = {
   add_rows: (state, payload) => state.rows.push(...payload),
   delete_row: (state, index) => state.rows.splice(index, 1),
   update_row: (state, { row, index }) => state.rows.splice(index, 1, row),
+  clear_rows: state => (state.rows = []),
   set_projects: (state, payload) => (state.projects = payload),
   set_selected_project: (state, payload) => (state.selected_project = payload),
   set_type: (state, payload) => (state.type = payload),

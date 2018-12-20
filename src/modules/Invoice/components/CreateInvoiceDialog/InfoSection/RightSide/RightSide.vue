@@ -14,12 +14,12 @@
 			<v-select :items="['hourly', 'monthly']" v-model="type"></v-select>
 		</div>
 
-		<div class="invoice-project field">
+		<div class="invoice-project field" v-if="type === 'hourly'">
 			Select Project
 			<v-select
 					:items="projects"
 					:value="selected_project"
-					@change="project_changed"
+					@change="set_selected_project"
 					item-text="title"
 					item-value="id"
 					placeholder="Select Project"
@@ -32,7 +32,7 @@
 				<date-picker placeholder="Select Date"
 				             :value="date"
 				             :max="due_date"
-				             @input="update_date($event, 'date')"
+				             @input="update_date({ date: $event, field: 'date' })"
 				/>
 			</div>
 
@@ -41,7 +41,7 @@
 				<date-picker placeholder="Select Date"
 				             :value="due_date"
 				             :min="date"
-				             @input="update_date($event, 'due_date')"
+				             @input="update_date({ date: $event, field: 'due_date' })"
 				/>
 			</div>
 		</div>
