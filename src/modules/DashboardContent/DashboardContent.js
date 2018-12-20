@@ -1,5 +1,6 @@
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import _cloneDeep from 'lodash/cloneDeep'
+import request from '@/services/axios_instance'
 //Components
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import TasksCard from '@/common/TasksCard/TasksCard.vue'
@@ -18,6 +19,7 @@ export default {
   },
 
   data: () => ({
+    init: true,
     paths: [{ text: 'Dashboard', disabled: true, router_name: null }],
     tiles: [
       {
@@ -50,15 +52,37 @@ export default {
         counter: '847',
         icon: require('@/assets/icons/sidebar/templates.svg')
       }
-    ],
+    ]
   }),
 
   computed: {
-    ...mapGetters('cards', ['cards', 'should_show']),
+    ...mapGetters('cards', ['should_show']),
+
+    cards: {
+      get() {
+        return this.$store.getters['cards/cards']
+      },
+      set(val) {
+        this.set_cards(val)
+      }
+    },
+
     card_components() {
       let cards = _cloneDeep(this.cards)
-      cards.forEach(card => card.component = card.slug + '-card')
+      cards.forEach(card => (card.component = card.slug + '-card'))
       return cards
+    }
+  },
+
+  watch: {
+    cards(val) {
+      if (this.init) {
+        this.init = false
+      } else {
+        request.post('api/dashboard/default/dashitems', {
+          dashitem_id: this.cards.map(card => card.id)
+        })
+      }
     }
   },
 
@@ -67,6 +91,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('cards', ['fill_cards'])
+    ...mapActions('cards', ['fill_cards']),
+    ...mapMutations('cards', ['set_cards'])
   }
 }
