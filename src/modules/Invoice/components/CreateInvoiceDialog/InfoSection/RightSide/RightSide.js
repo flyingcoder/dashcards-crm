@@ -13,7 +13,8 @@ export default {
       'due_date',
       'date',
       'create_dialog',
-      'edit_dialog'
+      'edit_dialog',
+      'invoice_id'
     ]),
     title: {
       get() {
