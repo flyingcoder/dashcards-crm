@@ -3,9 +3,10 @@
 		<div class="invoice-title" >
 			<input type="text" class="input" placeholder="Add Name" v-model.trim="title" />
 		</div>
-		<div class="invoice-number field">
+
+		<div class="invoice-number field" v-if="edit_dialog">
 			Invoice Number
-			<input type="text" value="3" />
+			<input type="text" readonly :value="invoice_id" />
 		</div>
 
 		<div class="invoice-type field">
