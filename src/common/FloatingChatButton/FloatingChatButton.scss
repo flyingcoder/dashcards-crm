@@ -39,15 +39,6 @@
                 white-space: nowrap;
                 font-size: 14px;
             }
-            .user__msg{
-                width : 130px;
-                overflow:hidden;
-                display:inline-block;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                color: $darkGray;
-                font-size: 12px;
-            }
         }
         
     }
@@ -74,13 +65,13 @@
         top:0px;
         right:0px;
         font-size:.7em;
-        background:$red;
+        background:$green;
         color:$white;
-        width:18px;height:18px;
+        width:18px;
+        height:18px;
         text-align:center;
         line-height:18px;
         border-radius:50%;
-        box-shadow:0 0 1px #333;
         font-size:12px;
     }
 

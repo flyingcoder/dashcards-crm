@@ -2,35 +2,27 @@ export default {
   data: () => ({
     fabs: false,
     showMessage: false,
-    dataNotify: '4',
+    dataNotify: '2',
     friends: [
       {
         id: 0,
         name: 'Mohammad Alongan',
-        status: 'online',
-        message:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,'
+        status: 'online'
       },
       {
         id: 1,
         name: 'Klent Gary',
-        status: 'offline',
-        message:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,'
+        status: 'offline'
       },
       {
         id: 2,
         name: 'Alvin Pacot',
-        status: 'dnd',
-        message:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,'
+        status: 'dnd'
       },
       {
         id: 3,
         name: 'Roland Doda',
-        status: 'online',
-        message:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,'
+        status: 'online'
       }
     ]
   })

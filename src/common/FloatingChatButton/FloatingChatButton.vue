@@ -21,7 +21,7 @@
         </v-btn>
 
         <v-card class="chat__inbox">
-            <div class="inbox__title">Inbox ({{dataNotify}})</div>
+            <div class="inbox__title">Online Friends ({{dataNotify}})</div>
             <div class="user new__message" 
                 v-for="friend in friends"
                 :key="friend.id"
@@ -33,7 +33,6 @@
 
                 <div class="user__detail">
                     <span class="user__name">{{friend.name}}</span>
-                    <span class="user__msg">{{friend.message}}</span>
                 </div>
             </div>
         </v-card>
