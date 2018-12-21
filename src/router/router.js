@@ -46,7 +46,7 @@ export default new Router({
         timer, //path: /dashboard/timer
         invoice, //path: /dashboard/invoice
         forms, //path: /dashboard/forms
-        chat, //path: /dashboard/chat
+        chat //path: /dashboard/chat
       ]
     },
 

@@ -1,6 +1,7 @@
 import HeaderIcon from './components/HeaderIcon.vue'
 import Dropdown from './components/Dropdown.vue'
 import AddCards from './components/DashCardsDropdown/DashCardsDropdown.vue'
+import ChatList from './components/ChatNotificationList/ChatNotificationList.vue'
 
 export default {
   name: 'HeaderMenu',
@@ -8,7 +9,8 @@ export default {
   components: {
     HeaderIcon,
     Dropdown,
-    AddCards
+    AddCards,
+    ChatList
   },
 
   methods: {

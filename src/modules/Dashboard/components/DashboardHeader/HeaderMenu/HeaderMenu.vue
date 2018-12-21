@@ -13,10 +13,7 @@
             :hovered-image-src="require('@/assets/icons/header/notification.png')"
         />
 
-        <header-icon
-            :image-src="require('@/assets/icons/header/chat__default.png')"
-            :hovered-image-src="require('@/assets/icons/header/chat.png')"
-        />
+        <chat-list />
 
         <dropdown /> <!--custom component-->
 
