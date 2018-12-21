@@ -1,12 +1,14 @@
 <template>
 	<div class="rich-editor">
 		<vue-editor
+				ref="richEditor"
+				use-custom-image-handler
 				:value="value"
-				@input="$emit('input', $event)"
 				:editor-toolbar="custom_toolbar"
 				:editor-options="custom_options"
-				ref="richEditor"
 				v-bind="$attrs"
+				@input="$emit('input', $event)"
+				@imageAdded="handleImageAdded"
 		/>
 	</div>
 </template>
@@ -54,6 +56,22 @@ export default {
         options.bounds = '.rich-editor'
         return options
       }
+    }
+  },
+
+  methods: {
+    handleImageAdded(file, Editor, cursorLocation, resetUploader) {
+      if (file.size / 1024 > 1024) {
+        this.$event.$emit('open_snackbar', 'Large images do not allowed', 'red')
+        return
+      }
+      const reader = new FileReader()
+      reader.onload = e => {
+        const image = e.target.result
+        Editor.insertEmbed(cursorLocation, 'image', image)
+        resetUploader()
+      }
+      reader.readAsDataURL(file)
     }
   }
 }
