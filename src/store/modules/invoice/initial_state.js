@@ -9,7 +9,7 @@ export const initial_state = () => ({
   rows: [],
   projects: [],
   selected_project: null,
-  type: 'hourly',
+  type: 'monthly',
   due_date: null,
   date: null,
   total_amount: 0,
