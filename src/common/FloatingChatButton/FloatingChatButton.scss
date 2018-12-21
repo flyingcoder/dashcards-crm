@@ -181,9 +181,10 @@
                     text-align: justify;
                     margin: 0;
                     color: $textDarkBlue;
+                    margin: 0 15px 0 0;
                 }
                 
-                .me{
+                .message.me{
                     background-color: $tableBlueBg;
                     
                     .sender{
@@ -192,6 +193,14 @@
                         .sender__name{
                             text-align: right;
                         }
+                    }
+
+                    .sender__message{
+                        margin: 0 0 0 15px;
+                        text-align: justify;
+                        display: flex;
+                        flex-flow: column;
+                        align-items: flex-end;
                     }
                 }
             }
