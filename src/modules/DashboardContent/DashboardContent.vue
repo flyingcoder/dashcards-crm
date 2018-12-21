@@ -7,9 +7,7 @@
             </div>
             <div class="page__options">
                 <div class="option save">
-                    <div class="icon">
-                        <img src="@/assets/icons/dashboard/save.svg" class="responsive-img" alt="save" />
-                    </div>
+                    <div class="icon"></div>
                     <div class="title">
                         <span> Save  </span>
                     </div>

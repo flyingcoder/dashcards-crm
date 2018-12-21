@@ -6,11 +6,12 @@
         .page__options{
             display: flex;
             flex: 1;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
             margin-left: 2%;
             height: auto;
             .option{
+                margin-left: 20px;
                 display: flex;
                 flex-basis: 31%;
                 height: 40px;
@@ -44,6 +45,11 @@
                     }
                 }
             }
+            
+            .option.themes{
+                display: none;
+            }
+
             .themes{
                 display: flex;
                 background: $blue;
