@@ -73,59 +73,6 @@
             }
         }
     }
-    .d__tiles{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
-        .tiles__content{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 14px;
-            height: auto;
-            border-radius: 9px;
-            .tiles__icon{
-                display: flex;
-                flex: 1;
-                height: 100%;
-                justify-content: center;
-                align-items: center;
-                border-radius: 8px 0 0 8px;
-            }
-            .tiles__info{
-                height: 100%;
-                flex: 2;
-                text-align: center;
-                background: $white;
-                border-radius: 0 8px 8px  0;
-                .counter{
-                    font-size: 20px;
-                }
-                .tile__title{
-                    font-size: 13px;
-                }
-            }
-            &:first-child{
-                background: #ed8564;
-            }
-            &:nth-child(2){
-                background: #50b4aa;
-            }
-            &:nth-child(3){
-                background: #a085d5;
-            }
-            &:nth-child(4){
-                background: #1fb868;
-            }
-            &:nth-child(5){
-                background: #00a7e5;
-            }
-            &:last-child{
-                background: #ff7f7e;
-            }
-        }
-    }
     .d__cards{
         display: flex;
         align-items: flex-start;
@@ -154,40 +101,6 @@
 }
 
 
-// Small Laptop - Large Desktop
-@media only screen and (min-width: 768px){
-    .content{
-        .tiles__content{
-            flex-basis: 15%;
-            .tiles__icon{
-                .tiles__image{
-                    padding: 5px;
-                }
-                .icon{
-                    width: 34px;
-                    min-width: 26px;
-                }
-            }
-            .tiles__info{
-                padding: 5px;
-                .content{
-                    font-size: 15px;
-                }
-                .tile__title{
-                    font-size: 12px;
-                }
-            }
-        }
-    }
-}
-@media only screen and (max-width: 940px) and (min-width: 768px){
-    .content{
-        .tiles__content{
-            flex-basis: 30%;
-        }
-    }
-}
-
 // Tablet
 @media only screen and (max-width: 767px){
     .content{
@@ -214,33 +127,6 @@
                 }
             }
         }
-        .d__tiles{
-            .tiles__content{
-                flex-basis: 30%;
-                height: 40px;
-                .tiles__icon{
-                    .icon{
-                        width: 50%;
-                    }
-                }
-                .tiles__info{
-                    display: flex;
-                    align-items: center;
-                    .counter{
-                        display: flex;
-                        flex: 1;
-                        justify-content: center;
-                        font-size: 18px;
-                        text-indent: 12px;
-                    }
-                    .tile__title{
-                        flex: 2;
-                        font-size: 12px;
-                        text-indent: 6px;
-                    }
-                }
-            }
-        }
         .d__cards{
             .d__box{
                 width: 100%;
@@ -260,28 +146,6 @@
                         span{
                             font-size: 12px;
                         }
-                    }
-                }
-            }
-        }
-        .d__tiles{
-            flex-wrap: wrap;
-            .tiles__content{
-                .tiles__icon{
-                    .icon{
-                        min-width: 20px;
-                    }
-                }
-                .tiles__info{
-                    flex-direction:column;
-                    .counter{
-                        font-size: 14px;
-                        text-indent: 0;
-                        margin-bottom: 6px;
-                    }
-                    .tile__title{
-                        font-size: 11px;
-                        text-indent: 0;
                     }
                 }
             }
