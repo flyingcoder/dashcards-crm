@@ -23,6 +23,7 @@ import { timer } from './routes/timer'
 import { invoice } from './routes/invoice'
 import { forms } from './routes/forms'
 import { chat } from './routes/chat'
+import { calendar } from './routes/calendar'
 
 Vue.use(Router)
 
@@ -47,6 +48,7 @@ export default new Router({
         invoice, //path: /dashboard/invoice
         forms, //path: /dashboard/forms
         chat, //path: /dashboard/chat
+        calendar //path: /dashboard/calendar
       ]
     },
 
