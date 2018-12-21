@@ -3,10 +3,7 @@
 
         <add-cards />
 
-        <header-icon
-            :image-src="require('@/assets/icons/header/email__default.png')"
-            :hovered-image-src="require('@/assets/icons/header/email.png')"
-        />
+        <notification-list />
 
         <header-icon
             :image-src="require('@/assets/icons/header/notification__default.png')"
