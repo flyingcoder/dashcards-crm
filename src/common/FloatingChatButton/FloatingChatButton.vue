@@ -92,7 +92,7 @@
                 </div>
                 
                 <div class="write">
-                    <v-text-field solo flat hide-details color="#333" label="Type a message..."></v-text-field>
+                    <v-text-field solo flat hide-details color="#667187" label="Type a message..."></v-text-field>
                     <v-icon color="#3b589e" class="send">send</v-icon>
                 </div>
 

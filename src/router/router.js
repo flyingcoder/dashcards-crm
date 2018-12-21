@@ -22,6 +22,7 @@ import { project_preview } from './routes/projectPreview'
 import { timer } from './routes/timer'
 import { invoice } from './routes/invoice'
 import { forms } from './routes/forms'
+import { chat } from './routes/chat'
 
 Vue.use(Router)
 
@@ -44,7 +45,8 @@ export default new Router({
         project_preview, //path: /dashboard1/project-preview
         timer, //path: /dashboard/timer
         invoice, //path: /dashboard/invoice
-        forms //path: /dashboard/forms
+        forms, //path: /dashboard/forms
+        chat, //path: /dashboard/chat
       ]
     },
 

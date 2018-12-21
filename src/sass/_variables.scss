@@ -22,6 +22,7 @@
     $gray: #ccc;
     $darkGray: #b3b6c3;
     $lightGray: #f8f8ff;
+    $lightGray-2: #BCC2CF;
     $btnGray: #b3b7c3;
     $textGray: #9095AB;
     $textDark: #657186;
@@ -232,6 +233,10 @@
         border-radius: 50%;
         border: 1px solid $borderLightGray;
         position: relative;
+        
+        .v-responsive{
+            border-radius: 50%;
+        }
 
         .status{
             position: absolute;
