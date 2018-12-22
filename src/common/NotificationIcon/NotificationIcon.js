@@ -1,12 +1,15 @@
-//Components
-import HeaderIcon from '../HeaderIcon.vue'
+import HeaderIcon from '@/common/HeaderIcon.vue'
 
 export default {
   components: {
     HeaderIcon
   },
+  props: {
+    imageSrc: String,
+    hoveredImageSrc: String,
+    count: [Number, String]
+  },
   data: () => ({
-    dataNotify: '4',
     friends: [
       {
         id: 0,

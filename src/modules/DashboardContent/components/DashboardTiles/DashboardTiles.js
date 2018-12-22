@@ -1,4 +1,5 @@
 import request from '@/services/axios_instance'
+import { mapMutations } from 'vuex'
 //Components
 import Tile from '@/common/Tile.vue'
 
@@ -43,8 +44,14 @@ export default {
   }),
 
   created() {
-    request
-      .get('api/dashboard/counts')
-      .then(({ data }) => (this.counters = data))
+    request.get('api/dashboard/counts').then(({ data }) => {
+      this.counters = data
+      this.set_chat(data.chats)
+      this.set_notification(data.notification)
+    })
+  },
+
+  methods: {
+    ...mapMutations('headerIcons', ['set_chat', 'set_notification'])
   }
 }
