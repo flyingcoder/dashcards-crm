@@ -10,38 +10,41 @@ export default {
     tiles: [
       {
         title: 'Projects',
-        counter: '33',
+        value: 'projects',
         icon: require('@/assets/icons/sidebar/projects.svg')
       },
       {
         title: 'Open Tasks',
-        counter: '12',
+        value: 'tasks',
         icon: require('@/assets/icons/sidebar/templates.svg')
       },
       {
         title: 'Calendar',
-        counter: '09',
+        value: 'calendars',
         icon: require('@/assets/icons/sidebar/calendar.svg')
       },
       {
         title: 'Timer',
-        counter: '54',
+        value: 'timer',
         icon: require('@/assets/icons/sidebar/timers.svg')
       },
       {
         title: 'Inbound',
-        counter: '799',
+        value: 'inbound',
         icon: require('@/assets/icons/sidebar/templates.svg')
       },
       {
         title: 'Outbound',
-        counter: '847',
+        value: 'outbound',
         icon: require('@/assets/icons/sidebar/templates.svg')
       }
-    ]
+    ],
+    counters: null
   }),
 
   created() {
-    request.get('api/dashboard/counts').then(console.log)
+    request
+      .get('api/dashboard/counts')
+      .then(({ data }) => (this.counters = data))
   }
 }

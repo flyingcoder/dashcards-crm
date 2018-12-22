@@ -1,10 +1,10 @@
 <template>
-	<div class="d__tiles">
+	<div class="d__tiles" v-if="counters">
 		<tile v-for="tile in tiles"
 		      :key="tile.title"
 		      :img-src="tile.icon"
 		      img-background="#ed8564"
-		      :counter="tile.counter"
+		      :counter="counters[tile.value]"
 		      :title="tile.title"
 		/>
 	</div>
