@@ -7,6 +7,7 @@ export const actions = {
       .then(({ data }) => commit('set_projects', data))
   },
   fetch_tasks({ commit }, api) {
+    commit('set_custom_loader', true, { root: true })
     request.get(api).then(({ data }) => {
       commit('set_billed_to', data.billed_to)
       commit('set_billed_from', data.billed_from)
@@ -17,6 +18,7 @@ export const actions = {
         amount: null
       }))
       rows.length && commit('add_rows', rows)
+      commit('set_custom_loader', false, { root: true })
     })
     function get_hours(time) {
       const hours = time.split(':')[0]

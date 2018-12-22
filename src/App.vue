@@ -1,5 +1,6 @@
 <template>
   <v-app class="buzzooka" id="buzzooka">
+    <custom-loader />
     <snackbar></snackbar>
     <router-view></router-view>
   </v-app>
@@ -7,10 +8,11 @@
 
 <script>
 import snackbar from './common/snackbar/snackbar.vue'
+import CustomLoader from './common/CustomLoader.vue'
 
 export default {
   name: 'App',
-  components: { snackbar },
+  components: { snackbar, CustomLoader },
   data: () => ({
     user_moved_mouse: 0
   }),

@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    custom_loader: false,
     user: null,
     snackbar: {
       status: false,
@@ -13,6 +14,7 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    custom_loader: state => state.custom_loader,
     is_user_logged: state => !!state.user,
     user: state => state.user,
     snackbar: state => state.snackbar
@@ -20,7 +22,8 @@ export default new Vuex.Store({
   mutations: {
     set_user: (state, payload) => (state.user = payload),
     remove_user: state => (state.user = null),
-    open_snackbar: (state, payload) => (state.snackbar = payload)
+    open_snackbar: (state, payload) => (state.snackbar = payload),
+    set_custom_loader: (state, payload) => (state.custom_loader = payload)
   },
   actions: {
     login({ commit }, payload) {
