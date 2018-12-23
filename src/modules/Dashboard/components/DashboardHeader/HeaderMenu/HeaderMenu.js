@@ -1,18 +1,39 @@
-import HeaderIcon from './components/HeaderIcon.vue'
+import { mapGetters } from 'vuex'
+//Components
 import Dropdown from './components/Dropdown.vue'
 import AddCards from './components/DashCardsDropdown/DashCardsDropdown.vue'
-import ChatList from './components/ChatNotificationList/ChatNotificationList.vue'
-import NotificationList from './components/NotificationList/NotificationList.vue'
+import NotificationIcon from '@/common/NotificationIcon/NotificationIcon.vue'
 
 export default {
-  name: 'HeaderMenu',
-
   components: {
-    HeaderIcon,
     Dropdown,
     AddCards,
-    ChatList,
-    NotificationList
+    NotificationIcon
+  },
+
+  computed: {
+    ...mapGetters('headerIcons', ['chat', 'notification']),
+
+    mail_icon() {
+      return require('@/assets/icons/header/email__default.png')
+    },
+    hovered_mail_icon() {
+      return require('@/assets/icons/header/email.png')
+    },
+
+    notification_icon() {
+      return require('@/assets/icons/header/notification__default.png')
+    },
+    hovered_notification_icon() {
+      return require('@/assets/icons/header/notification.png')
+    },
+
+    chat_icon() {
+      return require('@/assets/icons/header/chat__default.png')
+    },
+    hovered_chat_icon() {
+      return require('@/assets/icons/header/chat.png')
+    }
   },
 
   methods: {

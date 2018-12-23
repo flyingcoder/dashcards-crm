@@ -2,7 +2,7 @@ import { mapGetters, mapActions } from 'vuex'
 import _isEqual from 'lodash/isEqual'
 import request from '@/services/axios_instance'
 //Components
-import HeaderIcon from '../HeaderIcon.vue'
+import HeaderIcon from '../../../../../../../common/HeaderIcon.vue'
 
 export default {
   components: {
