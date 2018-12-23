@@ -13,10 +13,11 @@
         background-color: $tableBlueBg;
         border: 1px solid $tableBorderBlue;
         padding: 25px;
+        display: grid;
 
-        .reports__content{
+        .reports__buttons{
             background-color: $white;
-            height: 500px;
+            height: auto;
             padding: 25px;
 
             .reports__option{
@@ -44,8 +45,8 @@
         .reports__body{
             padding: 18px;
     
-            .reports__content{
-                height: 400px;
+            .reports__buttons{
+                height: auto;
                 padding: 18px;
     
                 .reports__option{
@@ -73,7 +74,7 @@
         .reports__body{
             padding: 10px;
     
-            .reports__content{
+            .reports__buttons{
                 height: 300px;
                 padding: 10px;
     
