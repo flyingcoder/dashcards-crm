@@ -1,0 +1,26 @@
+@import '~@/sass/_variables';
+
+@include styledDialog('.custom__dialog');
+
+.custom__dialog {
+  .dialog__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 0;
+
+    @include styledCloseDialog('.close__dialog');
+
+    @include styledTitleDialog('.dialog__title');
+  }
+
+  @include styledScrollFor('.dialog__body');
+
+  .dialog__body {
+    color: $tableDarkText;
+    font-size: 16px;
+  }
+
+  @include actionButtonsDialog('.dialog__actions');
+}

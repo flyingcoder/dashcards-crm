@@ -1,12 +1,34 @@
 <template>
     <div class="reports__tab">
+        <custom-dialog
+            ref="dialog"
+            title="Add Link"
+            button2-text="Save"
+            @button2="on_dialog_save"
+        >
+            <template slot="content">
+                <v-text-field
+                    pattern="https://.*"
+                    required
+                    type="url"
+                    v-model="link"
+                    prepend-icon="link"
+                    label="Link"
+                    outline
+                    clearable
+                />
+            </template>c
+
+        </custom-dialog>
+
+
         <div class="reports__body">
             <div class="reports__buttons">
                 <div class="reports__option">
 
                     <v-btn large color="#3b589e" 
                            class="add__link"
-                           @click="add_content"
+                           @click="open_dialog"
                     >
                         Add Link
                     </v-btn>

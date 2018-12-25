@@ -87,7 +87,4 @@ export default {
 
   @include actionButtonsDialog('.dialog__actions');
 }
-
-@media only screen and (max-width: 480px) {
-}
 </style>
