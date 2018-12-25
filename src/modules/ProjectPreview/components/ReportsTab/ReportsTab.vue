@@ -3,21 +3,23 @@
         <custom-dialog
             ref="dialog"
             title="Add Link"
-            button2-text="Save"
-            @button2="on_dialog_save"
         >
             <template slot="content">
                 <v-text-field
                     pattern="https://.*"
-                    required
                     type="url"
-                    v-model="link"
+                    v-model.trim="link"
                     prepend-icon="link"
                     label="Link"
                     outline
                     clearable
+                    @keydown="validate_url"
                 />
-            </template>c
+            </template>
+
+            <template slot="button2">
+                <v-btn @click="on_dialog_save" :disabled="!link.length || !this.valid_url">Save</v-btn>
+            </template>
 
         </custom-dialog>
 
@@ -44,7 +46,7 @@
                 </div>
             </div>
             <div class="reports__content" v-if="iframe_src">
-                <iframe src="https://www.your-report.com/clients/au/5cornerdental.com/aakspr6973"
+                <iframe :src="iframe_src"
                         frameborder="0"
                         width="100%"
                         height="500px"
