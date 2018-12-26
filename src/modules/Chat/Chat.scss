@@ -1,13 +1,126 @@
 @import '~@/sass/_variables';
 .v-menu__content.theme--light.menuable__content__active{
-    //box-shadow: 0 15px 5px -3px rgba(0,0,0,.2), 0 18px 10px -3px rgba(0,0,0,.14), 0 13px 14px -3px rgba(0,0,0,.12);
-    box-shadow: none;
+    // box-shadow: 0 15px 5px -3px rgba(0,0,0,.2), 0 18px 10px -3px rgba(0,0,0,.14), 0 13px 14px -3px rgba(0,0,0,.12);
+     box-shadow: none;
+     transition: box-shadow none;
 }
+
+.hover__info{
+    background-color: $white;
+    border-radius: 8px;
+    border: 1px solid $tableBorderBlue;
+    margin: 10px 10px 10px 30px;
+    box-shadow: $darkBoxShadow;
+
+    &::after{
+        content: '';
+        position: absolute;
+        border-left: 15px solid transparent;
+        border-right: 15px solid $white;
+        border-bottom: 15px solid transparent;
+        border-top: 15px solid transparent;
+        left: 1px;
+        top: 40%;
+        z-index: 50;
+    }
+
+    &::before{
+        content: '';
+        position: absolute;
+        transform: rotate(45deg);
+        width: 30px;
+        height: 30px;
+        left: 23px;
+        top: 40%;
+        z-index: -1;
+        box-shadow: $darkBoxShadow;
+    }
+
+    .info__one{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        .h__img {
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            margin: 10px;
+            .v-responsive{
+                border-radius: 50%;
+            }
+        }
+        .h__details{
+            margin: 10px;
+            .h__name{
+                color: $textDark-2;
+            }
+            .h__job{
+                color: $textGray;
+                margin-bottom: 10px;
+            }
+        }
+    }
+    .info__two{
+        margin: 10px;
+        .info__cta{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+    }
+
+    .info__three{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background-color: $tableBlueBg; 
+        border-top: 1px solid $borderLightGray;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        text-align: center;
+        padding: 15px 0;
+
+        .total{
+            color: $textDark-2;
+            p{
+                margin-bottom: 0;
+            }
+        }
+    }
+    
+    .info__anchor{
+        color: $textGray;
+        margin: 0 5px;
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        
+        a{
+            color: $textGray;
+            text-decoration: none;
+
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+
+        .v-icon{
+            color: $textGray;
+            margin-right: 5px;
+            font-size: 20px;
+        }
+    }
+}
+
 .add__chatlist{
     background-color: $white;
     border: 1px solid $tableBorderBlue;
     border-radius: 10px;
     padding: 10px 0;
+    margin: 60px 10px 10px 10px;
+    box-shadow: $darkBoxShadow;
 
     .add__group{
         padding: 10px;
@@ -38,7 +151,7 @@
     }
 
     .search{
-        padding: 10px;
+        padding: 5px;
         border-top: 1px solid $borderLightGray;
     }
 
@@ -125,11 +238,15 @@
             border: 1px solid $tableBorderBlue;
             border-radius: 10px;
 
+            .you{
+                border-bottom: 1px solid $tableBorderBlue;
+                align-items: center;
+            }
+
             .user{
                 padding: 10px;
                 text-align: center;
                 display: flex;
-                border-bottom: 1px solid $tableBorderBlue;
 
                 @include userImgWithStatus ('.user__img');
 
@@ -172,11 +289,13 @@
                 overflow: auto;
                 max-height: 500px;
                 .friend__info{
-
-                }
-                .friend{
-                    border-top: 1px solid $borderLightGray;
+                    border-bottom: 1px solid $borderLightGray;
+                    width: 100%;
                     cursor: pointer;
+
+                    &:last-child{
+                        border: none;
+                    }
 
                     &:hover{
                         background-color: $tableBlueBg;
@@ -364,6 +483,14 @@
 }
 
 @media only screen and (max-width: 768px){
+    .hover__info{
+        margin: 20px 10px 10px 30px;
+    }
+    
+    .add__chatlist{
+        margin: 10px;
+    }
+
     .chat{
         padding: 12px;
         margin: 12px;
@@ -509,6 +636,17 @@
                     }
                 }
             }
+        }
+    }
+}
+@media only screen and (max-width: 600px){
+    .hover__info{
+        margin: 10px;
+        &::after{
+            all: unset;
+        }
+        &::before{
+            all: unset;
         }
     }
 }
