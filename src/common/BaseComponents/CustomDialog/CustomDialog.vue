@@ -18,7 +18,7 @@
 						</slot>
 
 						<slot name="cancel-icon">
-							<v-btn fab small class="close__dialog" @click="dialog = false">
+							<v-btn fab small class="close__dialog" @click="close_dialog">
 								<v-icon>close</v-icon>
 							</v-btn>
 						</slot>
