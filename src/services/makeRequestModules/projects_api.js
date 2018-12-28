@@ -13,6 +13,10 @@ export const projects_api = {
     return request.post('api/projects', new_project)
   },
 
+  add_new_report(id, report) {
+    return request.post(`api/projects/${id}/reports`, report)
+  },
+
   update_project(id, project) {
     return request.put(`api/projects/${id}`, project)
   },
