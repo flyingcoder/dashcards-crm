@@ -52,7 +52,11 @@
                         Add Link
                     </v-btn>
 
-                    <v-btn large color="#3b589e" class="save">
+                    <v-btn large color="#3b589e"
+                           :disabled="!activate_save"
+                           class="save"
+                           @click="save_report"
+                    >
                         Save
                     </v-btn>
 
