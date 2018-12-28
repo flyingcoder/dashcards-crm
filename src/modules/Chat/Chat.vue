@@ -12,10 +12,10 @@
                         </div>
                         <span class="user__name">Ross Mosqueda</span>
                         <v-spacer></v-spacer>
-                        <v-menu class="hover__div"
+                        <v-menu class="hover__add"
                                 right 
                                 offset-y
-                                :nudge-right="50"
+                                :nudge-right="33"
                                 :nudge-top="25"
                                 :close-on-content-click="false"
                         >
@@ -67,11 +67,17 @@
                     </div>
 
                     <div class="friend__list">
-                        <div class="friend__info"
-                            v-for="friend in friends"
-                            :key="friend.id"
+                        <v-menu class="friend__info"
+                                v-for="friend in friends"
+                                :key="friend.id"
+                                right 
+                                offset-y
+                                :nudge-right="190"
+                                :nudge-top="150"
+                                :close-on-content-click="false"
+                                open-on-hover
                         >
-                            <div class="friend user">
+                            <div class="friend user" slot="activator">
                                 <div class="user__img" >
                                     <v-img :src="require('@/assets/temp/user.png')" />
                                     <span class="status" :class="friend.status"></span>
@@ -80,7 +86,52 @@
                                 <span class="user__name">{{friend.name}}</span>
                             </div>
 
-                        </div>
+                            <div class="hover__info">
+                                <div class="info__one">
+                                    <div class="h__img">
+                                        <v-img :src="require('@/assets/temp/user.png')" />
+                                    </div>
+                                    <div class="h__details">
+                                        <h2 class="h__name">{{friend.name}}</h2>
+                                        <p class="h__job">Front-end Web Developer</p>
+                                        <div class="info__anchor">
+                                            <v-icon>email</v-icon> <a href="mailto:sample.buzzooka@gmail.com">sample.buzzooka@gmail.com</a>
+                                        </div>
+                                        <div class="info__anchor">
+                                            <v-icon>location_on</v-icon> <span>Sweden</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="info__two">
+                                    <div class="info__cta">
+                                        <div class="info__anchor">
+                                            <v-icon>person</v-icon> <a href="#">View Profile</a>
+                                        </div>
+                                        <div class="info__anchor">
+                                            <v-icon>email</v-icon> <a href="mailto:sample.buzzooka@gmail.com">Email</a>
+                                        </div>
+                                        <div class="info__anchor">
+                                            <v-icon>message</v-icon> <a href="#">Chat</a>
+                                        </div>
+                                        <div class="info__anchor">
+                                            <v-icon>phone</v-icon> <a href="tel:16045555555">Call</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="info__three">
+                                    <div class="total">
+                                        <p>Total Hours</p>
+                                        <h2>10</h2>
+                                    </div>
+                                    <div class="total">
+                                        <p>Total Amount</p>
+                                        <h2>$2,758.93</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </v-menu>
                     </div>
 
                     <div class="view__more">
