@@ -29,6 +29,7 @@
 		<draggable class="row d__cards" v-model="cards">
 			<template v-for="card in card_components">
 				<component :is="card.component"
+				           :key="card.component"
 				           v-if="should_show(card.slug)"
 				></component>
 			</template>

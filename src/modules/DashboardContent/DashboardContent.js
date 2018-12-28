@@ -50,7 +50,7 @@ export default {
         this.init = false
       } else {
         request.post('api/dashboard/default/dashitems', {
-          dashitem_id: this.cards.map(card => card.id)
+          dashitem_id: val.map(card => card.id)
         })
       }
     }

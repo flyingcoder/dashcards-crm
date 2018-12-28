@@ -1,12 +1,15 @@
 module.exports = {
   root: true,
+
   env: {
     node: true
   },
-  extends: ['plugin:vue/essential', '@vue/prettier'],
+
+  extends: ['plugin:vue/strongly-recommended', '@vue/prettier'],
+
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-console': 'off',
+    'no-debugger': 'off',
     semi: 'off',
     'prettier/prettier': [
       'warn',
@@ -15,8 +18,13 @@ module.exports = {
         semi: false,
         trailingComma: 'none'
       }
-    ]
+    ],
+    'vue/attribute-hyphenation': 'warning',
+    'vue/component-name-in-template-casing': 'warning',
+    'vue/html-indent': 'warning',
+    'vue/require-default-prop': 'off'
   },
+
   parserOptions: {
     parser: 'babel-eslint'
   }
