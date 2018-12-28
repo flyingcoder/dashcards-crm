@@ -2,6 +2,18 @@
 
 @include sortOptionStyle;
 
+.custom-dialog {
+    .textfield{
+        margin: 10px 5px;
+    }
+}
+
+@include actionButtonsDialog('.disable-btn');
+
+.theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat){
+    background-color: $white;
+}
+
 .reports__tab{
     margin: 24px;
     background-color: $white;
