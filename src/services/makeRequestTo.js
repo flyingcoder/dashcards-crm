@@ -17,14 +17,8 @@ export default {
     return request.post('/api/login', { email, password })
   },
 
-  register({ company_name, company_email, first_name, email, password }) {
-    return request.post('/api/register', {
-      company_name,
-      company_email,
-      first_name,
-      email,
-      password
-    })
+  register(fields) {
+    return request.post('/api/register', fields)
   },
 
   checkout(token) {
