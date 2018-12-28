@@ -5,20 +5,37 @@
             title="Add Link"
         >
             <template slot="content">
-                <v-text-field
-                    pattern="https://.*"
-                    type="url"
-                    v-model.trim="link"
-                    prepend-icon="link"
-                    label="Link"
-                    outline
-                    clearable
-                    @keydown="validate_url"
-                />
+                <div class="custom-dialog">
+                    <v-text-field
+                        class="textfield"
+                        pattern="https://.*"
+                        type="url"
+                        v-model.trim="link"
+                        prepend-icon="link"
+                        label="https://"
+                        clearable
+                        @keydown="validate_url"
+                        solo
+                        hide-details
+                        color="#657186"
+                    />
+                    <v-text-field
+                        class="textfield"
+                        label="Title"
+                        solo
+                        clearable
+                        @keydown="validate_url"
+                        hide-details
+                        prepend-icon="text_fields"
+                        color="#657186"
+                    />
+                </div>
             </template>
 
             <template slot="button2">
-                <v-btn @click="on_dialog_save" :disabled="!link.length || !this.valid_url">Save</v-btn>
+                <div class="disable-btn">
+                    <v-btn @click="on_dialog_save" :disabled="!link.length || !this.valid_url">Save</v-btn>
+                </div>
             </template>
 
         </custom-dialog>
