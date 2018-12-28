@@ -20,11 +20,11 @@
                         color="#657186"
                     />
                     <v-text-field
+                        v-model.trim="title"
                         class="textfield"
                         label="Title"
                         solo
                         clearable
-                        @keydown="validate_url"
                         hide-details
                         prepend-icon="text_fields"
                         color="#657186"
@@ -34,7 +34,7 @@
 
             <template slot="button2">
                 <div class="disable-btn">
-                    <v-btn @click="on_dialog_save" :disabled="!link.length || !this.valid_url">Save</v-btn>
+                    <v-btn @click="on_dialog_save" :disabled="is_disabled">Save</v-btn>
                 </div>
             </template>
 

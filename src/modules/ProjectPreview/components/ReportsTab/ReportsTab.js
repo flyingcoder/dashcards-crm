@@ -9,8 +9,15 @@ export default {
     iframe_src: null,
     iframe_loading: false,
     link: '',
+    title: '',
     valid_url: false
   }),
+
+  computed: {
+    is_disabled() {
+      return !this.link || !this.valid_url || !this.title
+    }
+  },
 
   created() {
     this.$router.replace({
@@ -29,7 +36,9 @@ export default {
     },
 
     validate_url(event) {
-      this.valid_url = event.target.validity.valid
+      this.$nextTick(() => {
+        this.valid_url = event.target.validity.valid
+      })
     },
 
     on_dialog_save() {
