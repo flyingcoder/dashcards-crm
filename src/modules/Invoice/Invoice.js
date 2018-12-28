@@ -1,5 +1,6 @@
 import { table_functionality } from '@/services/table-functionality'
 import { mapGetters } from 'vuex'
+import makeRequestTo from '@/services/makeRequestTo'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
@@ -97,9 +98,7 @@ export default {
     async delete_invoice() {
       this.loading = true
       this.delete_dialog = false
-      await this.$store.dispatch('invoice/delete_invoice', {
-        id: this.delete_item_id
-      })
+      await makeRequestTo.delete_invoice(this.delete_item_id)
       this.loading = false
       const index = this.items.findIndex(
         item => item.id === this.delete_item_id

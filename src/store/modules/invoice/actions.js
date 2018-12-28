@@ -1,9 +1,10 @@
 import request from '@/services/axios_instance'
+import makeRequestTo from '@/services/makeRequestTo'
 
 export const actions = {
   fetch_projects({ commit }) {
-    request
-      .get('api/projects?all=true')
+    makeRequestTo
+      .get_all_projects()
       .then(({ data }) => commit('set_projects', data))
   },
   fetch_tasks({ commit }, api) {
@@ -50,11 +51,7 @@ export const actions = {
       }
     })
   },
-  delete_invoice({ state }, { id }) {
-    //TODO move this action in api file (Under makeRequestTo service)
-    return request.delete(`api/invoice/${id}`)
-  },
-  type_changed_to_monthly({ commit, state }) {
+  type_changed_to_monthly({ commit }) {
     commit('clear_rows')
     commit('set_selected_project', null)
     commit('set_projects', [])
