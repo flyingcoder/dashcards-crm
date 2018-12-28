@@ -2,7 +2,7 @@
     <div :class="[className, 'field']">
 
         <div class="v-icon">
-            <img v-bind:src="imagePath" alt="">
+            <img :src="imagePath" alt="">
         </div>
 
         <input
