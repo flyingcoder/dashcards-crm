@@ -1,6 +1,6 @@
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
-import { table_functionality } from '@/services/table-functionality'
+import { table_functionality } from '@/services/table-functionality/table-functionality'
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import TableHeader from '@/common/TableHeader.vue'

@@ -1,7 +1,7 @@
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import AddDialog from './AddDialog/AddDialog.vue'
-import { table_functionality } from '@/services/table-functionality'
+import { table_functionality } from '@/services/table-functionality/table-functionality'
 
 export default {
   name: 'MembersTab',

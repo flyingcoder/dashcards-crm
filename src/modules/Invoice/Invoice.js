@@ -1,4 +1,4 @@
-import { table_functionality } from '@/services/table-functionality'
+import { table_functionality } from '@/services/table-functionality/table-functionality'
 import { mapGetters } from 'vuex'
 import makeRequestTo from '@/services/makeRequestTo'
 //Components
