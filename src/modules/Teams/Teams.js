@@ -1,4 +1,4 @@
-import { table_functionality } from '@/services/table-functionality'
+import { table_functionality } from '@/services/table-functionality/table-functionality'
 import isEmpty from 'lodash/isEmpty'
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
