@@ -5,13 +5,11 @@ export const computed = {
       const total_rows = this.items_response.total
       const items = [5, 10, 15, 20, 25]
       let rows_per_page = items.filter(item => item <= total_rows)
-      if (rows_per_page[rows_per_page.length - 1] < total_rows) {
+      if (!rows_per_page.includes(total_rows)) {
         rows_per_page.push(total_rows)
-        this.rows_per_page = total_rows
       }
-      if (rows_per_page.length === 1) {
-        this.rows_per_page = rows_per_page[0]
-      }
+
+      this.rows_per_page = total_rows
       return rows_per_page
     },
 

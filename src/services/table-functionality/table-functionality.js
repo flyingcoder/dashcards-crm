@@ -17,7 +17,7 @@ export const table_functionality = {
     delete_item_id: null,
     show_delete_selected: false,
     selected_ids: [],
-    rows_per_page: 10,
+    rows_per_page: null,
     page: 1,
     sort: {
       sortBy: null,
@@ -33,6 +33,12 @@ export const table_functionality = {
         : (this.show_delete_selected = false)
     },
     api_query(query) {
+      if (
+        this.items_response &&
+        this.rows_per_page === this.items_response.total
+      )
+        return
+
       this.$router.replace({
         name: this.table_config.route_name,
         query: {
