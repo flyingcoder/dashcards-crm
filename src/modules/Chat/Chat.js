@@ -1,5 +1,11 @@
+import Pusher from 'pusher-js'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
+
+const pusher = new Pusher('180f64fc668151a6279d', {
+  cluster: 'eu',
+  encrypted: true
+})
 
 export default {
   name: 'Chat',
@@ -70,5 +76,23 @@ export default {
         activeHistory: 'Active 3 weeks ago'
       }
     ]
-  })
+  }),
+
+  created() {
+    this.subscribe()
+  },
+
+  beforeDestroy() {
+    pusher.unsubscribe('chat') //TODO add channel name
+  },
+
+  methods: {
+    subscribe() {
+      pusher.subscribe('chat') //TODO add subsciption
+      pusher.bind('chat_new_message', data => {
+        //TODO listen to channel
+        console.log(data)
+      })
+    }
+  }
 }
