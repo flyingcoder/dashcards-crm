@@ -37,9 +37,11 @@ export default {
     card: null
   }),
 
-  created() {
-    //TODO move functionality to beforeRouteEnter hook
-    if (!this.price) this.$router.replace({ name: 'not_found' })
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      if (!vm.price) next({ name: 'not_found' })
+      else next()
+    })
   },
 
   mounted() {
