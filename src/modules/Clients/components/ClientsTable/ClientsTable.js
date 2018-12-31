@@ -16,10 +16,11 @@ export default {
 
   data: () => ({
     headers: [
-      { text: 'Client', align: 'left', value: 'name' },
-      { text: 'Contact No.', value: 'contact' },
-      { text: 'Email', value: 'email' },
-      { text: 'Status', value: 'status' }
+      { id: 1, text: 'Client', align: 'left', value: 'name' },
+      { id: 2, text: 'Contact No.', value: 'contact' },
+      { id: 3, text: 'Email', value: 'email' },
+      { id: 4, text: 'Status', value: 'status' },
+      { id: 5, is_action: true }
     ],
     table_config: {
       route_name: 'clients',

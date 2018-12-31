@@ -31,7 +31,6 @@
 				:loading="loading"
 				:sort="sort"
 				:has-checkbox="true"
-				:has-header-icon="true"
 				hide-actions
 				@items-selected="selected_ids = $event"
 				toolbar-title="Projects"
