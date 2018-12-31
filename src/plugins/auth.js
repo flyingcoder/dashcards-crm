@@ -34,15 +34,19 @@ export const auth = {
   },
 
   login({ email, password }) {
+    store.commit('set_custom_loader', true)
     make_request_to
       .login({ email, password })
       .then(response => set_to_localStorage(response))
+      .finally(() => store.commit('set_custom_loader', false))
   },
 
   register(fields) {
+    store.commit('set_custom_loader', true)
     make_request_to
       .register(fields)
       .then(response => set_to_localStorage(response))
+      .finally(() => store.commit('set_custom_loader', false))
   }
 }
 
