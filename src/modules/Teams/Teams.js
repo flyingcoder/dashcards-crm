@@ -30,10 +30,11 @@ export default {
     ],
 
     headers: [
-      { text: 'Member', align: 'left', value: 'name' },
-      { text: 'Position', value: 'position' },
-      { text: 'Tasks', value: 'tasks' },
-      { text: 'Projects', value: 'projects' }
+      { id: 1, text: 'Member', align: 'left', value: 'name' },
+      { id: 2, text: 'Position', value: 'position' },
+      { id: 3, text: 'Tasks', value: 'tasks' },
+      { id: 4, text: 'Projects', value: 'projects' },
+      { id: 5, is_action: true }
     ],
     table_config: {
       route_name: 'team',

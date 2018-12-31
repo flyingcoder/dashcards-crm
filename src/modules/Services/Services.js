@@ -35,7 +35,8 @@ export default {
           text: 'Date Created',
           value: 'service_created_at',
           sortable: true
-        }
+        },
+        { id: 4, is_action: true }
       ],
       table_config: {
         route_name: 'services',
