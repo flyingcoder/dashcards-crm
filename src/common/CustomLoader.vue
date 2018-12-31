@@ -34,10 +34,10 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: transform 0.2s;
+  transition: opacity 0.5s;
 }
 .fade-enter,
 .fade-leave-to {
-  transform: scale(0);
+  opacity: 1;
 }
 </style>
