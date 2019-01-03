@@ -58,7 +58,7 @@ export default {
     save_report() {
       makeRequestTo
         .add_new_report(this.id, {
-          link: this.link,
+          url: this.link,
           title: this.title
         })
         .then(() => {
