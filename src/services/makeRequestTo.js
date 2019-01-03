@@ -11,6 +11,7 @@ import { autocomplete_api } from './makeRequestModules/autocomplete_api'
 import { projects_api } from './makeRequestModules/projects_api'
 import { project_overview_tab_members } from './makeRequestModules/project-overview-tab-members'
 import { invoices_api } from './makeRequestModules/invoices_api'
+import { reports_api } from "./makeRequestModules/reports_api";
 
 export default {
   login({ email, password }) {
@@ -40,5 +41,6 @@ export default {
   ...autocomplete_api,
   ...projects_api,
   ...project_overview_tab_members,
-  ...invoices_api
+  ...invoices_api,
+  ...reports_api
 }
