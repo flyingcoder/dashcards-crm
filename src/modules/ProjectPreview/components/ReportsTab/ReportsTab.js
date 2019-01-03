@@ -51,13 +51,13 @@ export default {
 
     on_dialog_save() {
       this.$refs.dialog.close_dialog()
-      this.$store.commit('set_custom_loader', false)
+      this.$store.commit('set_custom_loader', true)
       this.iframe_src = this.link
     },
 
     save_report() {
       makeRequestTo
-        .add_new_report(this.id, {
+        .add_project_report(this.id, {
           url: this.link,
           title: this.title
         })
