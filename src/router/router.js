@@ -26,6 +26,7 @@ import { chat } from './routes/chat'
 import { calendar } from './routes/calendar'
 import { reports } from './routes/reports'
 import { payment } from './routes/payment'
+import { cloud } from './routes/cloud'
 
 Vue.use(Router)
 
@@ -52,7 +53,8 @@ export default new Router({
         chat, //path: /dashboard/chat
         calendar, //path: /dashboard/calendar
         reports, //path: /dashboard/reports
-        payment //path: /dashboard/payment
+        payment, //path: /dashboard/payment
+        cloud //path: /dashboard/cloud
       ]
     },
 
