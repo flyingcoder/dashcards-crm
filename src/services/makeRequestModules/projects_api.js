@@ -14,7 +14,7 @@ export const projects_api = {
   },
 
   add_new_report(id, report) {
-    return request.post(`api/projects/${id}/reports`, report)
+    return request.post(`api/projects/${id}/report`, report)
   },
 
   update_project(id, project) {
