@@ -24,6 +24,7 @@ import { invoice } from './routes/invoice'
 import { forms } from './routes/forms'
 import { chat } from './routes/chat'
 import { calendar } from './routes/calendar'
+import { reports } from './routes/reports'
 
 Vue.use(Router)
 
@@ -48,7 +49,8 @@ export default new Router({
         invoice, //path: /dashboard/invoice
         forms, //path: /dashboard/forms
         chat, //path: /dashboard/chat
-        calendar //path: /dashboard/calendar
+        calendar, //path: /dashboard/calendar
+        reports //path: /dashboard/reports
       ]
     },
 
