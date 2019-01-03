@@ -11,12 +11,20 @@ import store from './store/store'
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
-  if (['login', 'not_found', 'signup'].includes(to.name)) {
+  const authenticated = store.getters.is_user_logged
+
+  if (['login', 'signup'].includes(to.name) && !authenticated) {
     next()
-  } else if (store.getters.is_user_logged) {
-    next()
-  } else {
+  } else if (['login', 'signup'].includes(to.name) && authenticated) {
     next({ name: 'not_found' })
+  } else if (to.name === 'home' && !authenticated) {
+    next({ name: 'login' })
+  } else if (to.name === 'not_found') {
+    next()
+  } else if (!authenticated) {
+    next({ name: 'not_found' })
+  } else {
+    next()
   }
 })
 
