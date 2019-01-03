@@ -37,9 +37,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/sass/_variables';
 .tile {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1.5fr 2.5fr;
   height: 55px;
   border-radius: 9px;
   overflow: hidden;
@@ -52,7 +53,7 @@ export default {
   }
 
   .tile-content {
-    background: white;
+    background-color: $white;
     padding: 0;
     text-align: center;
     display: grid;

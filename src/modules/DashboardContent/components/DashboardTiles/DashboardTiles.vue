@@ -3,7 +3,7 @@
 		<tile v-for="tile in tiles"
 		      :key="tile.title"
 		      :img-src="tile.icon"
-		      img-background="#ed8564"
+		      :img-background="tile.color"
 		      :counter="counters[tile.value]"
 		      :title="tile.title"
 		/>
