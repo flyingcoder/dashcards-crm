@@ -27,6 +27,7 @@ import { calendar } from './routes/calendar'
 import { reports } from './routes/reports'
 import { payment } from './routes/payment'
 import { cloud } from './routes/cloud'
+import { support } from './routes/support'
 
 Vue.use(Router)
 
@@ -54,7 +55,8 @@ export default new Router({
         calendar, //path: /dashboard/calendar
         reports, //path: /dashboard/reports
         payment, //path: /dashboard/payment
-        cloud //path: /dashboard/cloud
+        cloud, //path: /dashboard/cloud
+        support //path: /dashboard/support
       ]
     },
 
