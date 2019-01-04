@@ -2,18 +2,24 @@
 	<div class="milestone-dialog">
 		<v-layout row justify-center>
 			<v-dialog v-model="open" persistent max-width="600px">
-				<v-card>
+				<v-card class="milestone__dialog">
 
-					<v-card-title>
-						<span class="headline">{{ dialogTitle }}</span>
+					<v-card-title class="dialog__header">
+						<span class="dialog__title">{{ dialogTitle }}</span>
+						<v-btn fab small class="close__dialog" @click="cancel">
+							<v-icon>close</v-icon>
+						</v-btn>
 					</v-card-title>
 
-					<v-card-text>
-						<v-container grid-list-md>
-							<v-layout wrap justify-center>
+					<v-card-text class="dialog__body">
+							<v-layout wrap>
 
 								<v-flex xs12 sm6>
 									<v-text-field
+											class="dialog__textfield"
+											solo
+											hide-details
+											color="#657186"
 											label="Add milestone title"
 											v-model.trim="title"
 									></v-text-field>
@@ -21,6 +27,10 @@
 
 								<v-flex xs12 sm6>
 									<v-select
+											class="dialog__selectfield"
+											solo
+											hide-details
+											color="#657186"
 											label="Select Status"
 											v-model.trim="status"
 											:items="['Active', 'Inactive']"
@@ -29,6 +39,10 @@
 
 								<v-flex xs12 sm6>
 									<date-picker
+											class="dialog__datepicker"
+											solo
+											hide-details
+											color="#657186"
 											label="Start Date"
 											prepend-icon="event"
 											readonly
@@ -40,6 +54,10 @@
 
 								<v-flex xs12 sm6>
 									<date-picker
+											class="dialog__datepicker"
+											solo
+											hide-details
+											color="#657186"
 											label="End Date"
 											prepend-icon="event"
 											readonly
@@ -51,6 +69,10 @@
 
 								<v-flex xs12 sm6>
 									<v-text-field
+											class="dialog__textfield"
+											solo
+											hide-details
+											color="#657186"
 											label="Add days"
 											v-model.number="days"
 											min="0"
@@ -59,14 +81,12 @@
 								</v-flex>
 
 							</v-layout>
-						</v-container>
 
 					</v-card-text>
 
-					<v-card-actions>
-						<v-spacer></v-spacer>
-						<v-btn color="blue darken-1" flat @click="cancel">Cancel</v-btn>
-						<v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+					<v-card-actions class="dialog__actions">
+						<v-btn @click="cancel">Cancel</v-btn>
+						<v-btn @click="save">Save</v-btn>
 					</v-card-actions>
 
 				</v-card>
@@ -77,3 +97,7 @@
 
 <script src="./MilestoneTabDialog.js">
 </script>
+<style lang="scss" scoped src="./MilestoneTabDialog.scss">
+</style>
+<style scoped src="./MilestoneTabDialog.css">
+</style>

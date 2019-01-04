@@ -16,11 +16,11 @@
 				v-bind="$attrs"
 		></v-text-field>
 
-		<v-date-picker clearable v-model="picker_date" :max="max" :min="min" no-title scrollable>
+		<v-date-picker clearable color="#657186" v-model="picker_date" :max="max" :min="min" no-title scrollable>
 			<v-spacer></v-spacer>
-			<v-btn flat color="primary" @click="cancel">Cancel</v-btn>
-			<v-btn flat color="primary" @click="save">OK</v-btn>
-			<v-btn flat color="primary" @click="clear">Clear</v-btn>
+			<v-btn flat color="#657186" @click="cancel">Cancel</v-btn>
+			<v-btn flat color="#657186" @click="save">OK</v-btn>
+			<v-btn flat color="#657186" @click="clear">Clear</v-btn>
 		</v-date-picker>
 	</v-menu>
 </template>
