@@ -7,3 +7,11 @@
   grid-gap: 10px;
   justify-content: space-between;
 }
+
+@media only screen and (max-width: 500px){
+  .d__tiles {
+    grid-template-columns: repeat(auto-fit, 120px);
+    grid-template-rows: 45px;
+    justify-content: space-around;
+  }
+}

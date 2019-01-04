@@ -58,6 +58,30 @@ export default {
     text-align: center;
     display: grid;
     align-items: center;
+
+    .text-counter,
+    .text-title {
+      color: $titleDarkBlue;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .tile {
+    height: 45px;
+
+    .tile-icon {
+      padding: 5px;
+    }
+
+    .tile-content {
+      .text-counter {
+        font-size: 16px;
+      }
+      .text-title {
+        font-size: 12px;
+      }
+    }
   }
 }
 </style>
