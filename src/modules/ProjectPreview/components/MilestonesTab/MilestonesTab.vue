@@ -38,6 +38,41 @@
 
 		<v-progress-linear v-show="loading" :indeterminate="true"></v-progress-linear>
 
+		<v-layout row justify-end>
+			<v-speed-dial
+					v-model="is_open_speed_dial"
+					direction="bottom"
+					right
+					transition="slide-y-transition"
+			>
+				<v-btn
+					slot="activator"
+					v-model="is_open_speed_dial"
+					color="#3b589e"
+					dark
+					fab
+					small
+				>
+					<v-icon>add</v-icon>
+					<v-icon>close</v-icon>
+				</v-btn>
+
+				<div class="speed__dial_item" @click="add_dialog = true">
+					Add Milestone
+					<v-btn slot="activator" color="indigo" dark small fab>
+						<v-icon>add</v-icon>
+					</v-btn>
+				</div>
+
+				<div class="speed__dial_item" @click="open_select_template_dialog">
+					Select Template
+					<v-btn slot="activator" :disabled="boxes.length > 0" color="indigo" small fab>
+						<v-icon color="white">touch_app</v-icon>
+					</v-btn>
+				</div>
+			</v-speed-dial>
+		</v-layout>
+
 		<v-layout row wrap class="boxes__wrapper">
 			<v-flex md6 xs12 class="milestone__box" v-for="(box, index) of boxes" :key="box.id">
 				<div class="milestone__dynamic_box">
@@ -52,39 +87,6 @@
 				</div>
 			</v-flex>
 		</v-layout>
-
-		<v-speed-dial
-				v-model="is_open_speed_dial"
-				fixed
-				bottom
-				right
-				transition="slide-y-reverse-transition"
-		>
-			<v-btn
-					slot="activator"
-					v-model="is_open_speed_dial"
-					color="blue darken-2"
-					dark
-					fab
-			>
-				<v-icon>add</v-icon>
-				<v-icon>close</v-icon>
-			</v-btn>
-
-			<div class="speed__dial_item" @click="add_dialog = true">
-				Add Milestone
-				<v-btn slot="activator" color="indigo" dark small fab>
-					<v-icon>add</v-icon>
-				</v-btn>
-			</div>
-
-			<div class="speed__dial_item" @click="open_select_template_dialog">
-				Select Template
-				<v-btn slot="activator" :disabled="boxes.length > 0" color="indigo" small fab>
-					<v-icon color="white">touch_app</v-icon>
-				</v-btn>
-			</div>
-		</v-speed-dial>
 
 	</div>
 </template>
