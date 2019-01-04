@@ -52,5 +52,3 @@
 </script>
 <style lang="scss" scoped src="./CustomDialog.scss">
 </style>
-<style scoped src="./CustomDialog.css">
-</style>

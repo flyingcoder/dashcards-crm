@@ -1,7 +1,7 @@
 <template>
 	<div class="right-side">
 
-		<h3>Subtotal {{ subtotal }} </h3>
+		<h3 class="subtotal">Subtotal: {{ subtotal }} $</h3>
 
 		<field title="Tax"
 		       symbol-type="tax_symbol"
@@ -36,23 +36,32 @@
 
 		<div class="fields-to-add">
 			<v-btn class="btn"
+				color="#3b589e"
+				dark
 			       v-show="!discount.show"
 			       @click="toggle_visibility({ new_val: !discount.show, field: 'discount' })">
-				+ Discount
+				<v-icon>add</v-icon>
+				Discount
 			</v-btn>
 			<v-btn class="btn"
+				color="#3b589e"
+				dark
 			       v-show="!tax.show"
 			       @click="toggle_visibility({ new_val: !tax.show, field: 'tax' })">
-				+ Tax
+				<v-icon>add</v-icon>
+				Tax
 			</v-btn>
 			<v-btn class="btn"
+				color="#3b589e"
+				dark
 			       v-show="!shipping.show"
 			       @click="toggle_visibility({ new_val: !shipping.show, field: 'shipping' })">
-				+ Shipping
+				<v-icon>add</v-icon>
+				Shipping
 			</v-btn>
 		</div>
 
-		Total {{ total }}
+		<h2 class="total">Total: {{ total }} $</h2>
 	</div>
 </template>
 

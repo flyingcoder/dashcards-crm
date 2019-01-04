@@ -11,21 +11,21 @@
 		<div class="table-body">
 
 			<div class="active row">
-				<v-text-field label="Descriptions" v-model.trim="active_row.descriptions" />
-				<v-text-field min="0" type="number" label="Rate" v-model.trim.number="active_row.rate" />
-				<v-text-field min="0" type="number" label="Hours" v-model.trim.number="active_row.hours" />
-				<v-text-field label="Amount" :value="calculate_amount(active_row)" readonly />
-				<v-btn outline icon :disabled="should_disable" @click="add_new_row">
+				<v-text-field class="textfield" label="Descriptions" solo flat color="#657186" hide-details v-model.trim="active_row.descriptions" />
+				<v-text-field class="textfield" min="0" type="number" label="Rate"  solo flat color="#657186" hide-details v-model.trim.number="active_row.rate" />
+				<v-text-field class="textfield" min="0" type="number" label="Hours" solo flat color="#657186" hide-details v-model.trim.number="active_row.hours" />
+				<v-text-field class="textfield" label="Amount" solo flat color="#657186" hide-details :value="calculate_amount(active_row)" readonly />
+				<v-btn class="action" color="#1fb868" outline icon :disabled="should_disable" @click="add_new_row">
 					<v-icon>add</v-icon>
 				</v-btn>
 			</div>
 
 			<div class="row" v-for="(row, index) of rows" :key="index">
-				<v-text-field label="Descriptions" @input="row_updated('descriptions', $event, index)" :value="row.descriptions" />
-				<v-text-field min="0" type="number" label="Rate" @input="row_updated('rate', $event, index)" :value="row.rate" />
-				<v-text-field min="0" type="number" label="Hours" @input="row_updated('hours', $event, index)" :value="row.hours" />
-				<v-text-field label="Amount" :value="row.amount" readonly />
-				<v-btn icon @click="delete_row(index)">
+				<v-text-field class="textfield" label="Descriptions" solo flat color="#657186" hide-details @input="row_updated('descriptions', $event, index)" :value="row.descriptions" />
+				<v-text-field class="textfield" min="0" type="number" label="Rate" solo flat color="#657186" hide-details @input="row_updated('rate', $event, index)" :value="row.rate" />
+				<v-text-field class="textfield" min="0" type="number" label="Hours" solo flat color="#657186" hide-details @input="row_updated('hours', $event, index)" :value="row.hours" />
+				<v-text-field class="textfield" label="Amount" solo flat color="#657186" hide-details :value="row.amount" readonly />
+				<v-btn class="action" color="#ff7f7c" outline icon @click="delete_row(index)">
 					<v-icon>delete</v-icon>
 				</v-btn>
 			</div>
@@ -38,4 +38,6 @@
 <script src="./TableSection.js">
 </script>
 <style lang="scss" scoped src="./TableSection.scss">
+</style>
+<style scoped src="./TableSection.css">
 </style>

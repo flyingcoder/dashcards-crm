@@ -4,9 +4,9 @@
 			<v-btn icon dark @click="$emit('close')">
 				<v-icon>close</v-icon>
 			</v-btn>
-			<v-toolbar-title>Create new Invoice</v-toolbar-title>
+			<v-toolbar-title class="dialog-title">Create new Invoice</v-toolbar-title>
 			<v-spacer></v-spacer>
-			<v-toolbar-items>
+			<v-toolbar-items class="dialog-send">
 				<v-btn :disabled="disabled" dark flat @click="handle_click">Send Invoice</v-btn>
 			</v-toolbar-items>
 		</v-toolbar>
@@ -33,3 +33,17 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@media only screen and (max-width: 599px) {
+  .dialog-title {
+    font-size: 16px;
+  }
+
+  .dialog-send {
+    .v-btn {
+      font-size: 12px;
+    }
+  }
+}
+</style>

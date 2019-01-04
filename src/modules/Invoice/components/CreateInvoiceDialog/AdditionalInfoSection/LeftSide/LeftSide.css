@@ -1,0 +1,24 @@
+>>> .theme--light.v-input:not(.v-input--is-disabled) input, >>> .theme--light.v-input:not(.v-input--is-disabled) textarea{
+    color: #657186;
+}
+
+>>> .textarea__field .v-input__slot{
+    background-color: #fbfcff;
+    border: 1px solid #e8f1fa;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+>>> .textarea__field .v-input__slot:hover{
+    border: 1px solid #cce0f4;
+}
+
+@media only screen and (max-width: 599px){
+    >>> .textarea__field .v-input__slot{
+        font-size: 12px;
+        padding: 4px 6px;
+    }
+    >>> .textarea__field .v-label{
+        font-size: 12px;
+    }
+}

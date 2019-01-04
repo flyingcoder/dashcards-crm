@@ -1,26 +1,69 @@
+@import '~@/sass/_variables';
+
 .second-row.table-section {
 
   .table-headers {
     display: grid;
-    grid-template-columns: 4fr 1fr 1fr 1fr 10px;
+    grid-template-columns: 4fr 1fr 1fr 1fr 50px;
     grid-gap: 10px;
 
     .column {
       padding: 10px;
-      background: #bdbdbd;
+      background-color: $fieldLabel;
       font-weight: bold;
       font-size: 15px;
+      color: $textDark;
     }
 
   }
 
   .table-body {
     margin-top: 10px;
+
     .row {
       display: grid;
-      grid-template-columns: 4fr 1fr 1fr 1fr 10px;
+      grid-template-columns: 4fr 1fr 1fr 1fr 50px;
       grid-gap: 10px;
+
+      .textfield{
+        margin-bottom: 5px;
+      }
     }
   }
 
+}
+
+@media only screen and (max-width: 599px){
+  .second-row.table-section {
+
+    .table-headers {
+      grid-template-columns: 4fr 1fr 1fr 1fr 40px;
+      grid-gap: 5px;
+  
+      .column {
+        padding: 6px 8px;
+        font-size: 12px;
+      }
+  
+    }
+  
+    .table-body {
+
+      .row {
+        grid-template-columns: 4fr 1fr 1fr 1fr 40px;
+        grid-gap: 5px;
+
+        .textfield{
+          margin-bottom: 5px;
+        }
+
+        .action{
+          margin: 0 auto;
+          height: 30px;
+          width: 30px;
+        }
+      }
+    }
+  
+  }
 }
