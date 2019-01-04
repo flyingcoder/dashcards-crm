@@ -1,15 +1,32 @@
 <template>
 	<div class="invoice">
 
-		<create-invoice-dialog :open.sync="create_dialog" />
+		<email-dialog
+				:dialog.sync="email_dialog"
+				ref="email_dialog"
+		/>
+
+		<create-invoice-dialog
+				:open="create_invoice_dialog || edit_invoice_dialog"
+				@close="close_dialog"
+				@create="create_invoice"
+				@edit="edit_invoice"
+		/>
 
 		<table-header :paths="paths"
 		              :no-button="!items.length"
-		              @click="create_dialog = true"
+		              @click="create_invoice_dialog = true"
+		/>
+
+		<delete-dialog
+				:open-dialog.sync="delete_dialog"
+				title="Delete Invoice"
+				text-content="Are you sure you want to delete this invoice?"
+				@delete="delete_invoice"
 		/>
 
 		<custom-table
-				v-if="items.length"
+				v-if="items.length || loading"
 				:headers="headers"
 				:items="items"
 				:loading="loading"
@@ -18,6 +35,31 @@
 				hide-actions
 				@items-selected="selected_ids = $event"
 		>
+
+			<template slot="custom-item" slot-scope=" { item }">
+				<td>{{ item.due_date }}</td>
+				<td>{{ item.title }}</td>
+				<td>{{ item.first_name + ' ' + item.last_name }}</td>
+				<td>{{ item.total_amount }}</td>
+
+
+				<td class="text-xs-center">
+
+					<v-btn fab small flat depressed @click="open_edit_dialog(item)">
+						<img src="@/assets/icons/groups/edit.svg" alt="">
+					</v-btn>
+
+					<v-btn fab small flat depressed @click="open_delete_dialog(item)">
+						<img src="@/assets/icons/groups/delete.svg" alt="">
+					</v-btn>
+
+					<v-btn fab small flat depressed @click="open_email_dialog(item.id)">
+						<v-icon>email</v-icon>
+					</v-btn>
+
+				</td>
+
+			</template>
 
 		</custom-table>
 
@@ -33,7 +75,7 @@
 				<v-btn large dark
 				       class="invoice__btn"
 				       color="#3b589e"
-				       @click="create_dialog = true"
+				       @click="create_invoice_dialog = true"
 				>
 					Add New Invoice
 				</v-btn>
@@ -48,4 +90,9 @@
 <script src="./Invoice.js">
 </script>
 <style lang="scss" scoped src="./Invoice.scss">
+</style>
+<style scoped>
+>>> .table__toolbar .v-toolbar__content {
+  all: unset;
+}
 </style>

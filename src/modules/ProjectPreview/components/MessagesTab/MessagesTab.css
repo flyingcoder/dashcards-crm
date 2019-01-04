@@ -13,3 +13,9 @@
     align-items: center;
     padding: 0 16px;
 }
+
+@media only screen and (max-width: 768px){
+    >>>.option .v-btn__content{
+        padding: 0 8px;
+    }
+}

@@ -3,7 +3,7 @@
 
         <v-layout row wrap class="message__content">
 
-            <v-flex xs3 class="message__sidebar">
+            <v-flex sm3 xs12 class="message__sidebar">
 
                 <div class="sidebar__options">
                     <v-btn dark color="#3e5aa3" class="write__btn">
@@ -23,43 +23,9 @@
                         Bin <span class="counter">250</span>
                     </v-btn>
                 </div>
-
-                <div class="sidebar__chatlist">
-
-                    <div class="you user">
-                        <div class="user__img" >
-                            <v-img :src="require('@/assets/temp/user.png')" />
-                            <span class="status online"></span>
-                        </div>
-                        <span class="user__name">Mohammad</span>
-                        <v-spacer></v-spacer>
-                        <v-btn flat class="add__chat"><v-icon>add</v-icon></v-btn>
-                    </div>
-
-                    <div class="friend__list">
-                        <div class="friend user" 
-                            v-for="friend in friends"
-                            :key="friend.id"
-                        >
-
-                            <div class="user__img" >
-                                <v-img :src="require('@/assets/temp/user.png')" />
-                                <span class="status" :class="friend.status"></span>
-                            </div>
-
-                            <span class="user__name">{{friend.name}}</span>
-
-                        </div>
-                    </div>
-
-                    <div class="view__more">
-                        <v-btn flat normal class="view__more_btn">VIEW MORE</v-btn>
-                    </div>
-
-                </div>
             </v-flex>
 
-            <v-flex xs9 class="message__table">
+            <v-flex sm9 xs12 class="message__table">
                 <custom-table
                         :headers="headers"
                         :items="items"
@@ -102,6 +68,42 @@
                     </template>
 
                 </custom-table>
+            </v-flex>
+
+            <v-flex sm3 xs12>
+
+                <div class="sidebar__chatlist">
+                    <div class="you user">
+                        <div class="user__img" >
+                            <v-img :src="require('@/assets/temp/user.png')" />
+                            <span class="status online"></span>
+                        </div>
+                        <span class="user__name">Mohammad</span>
+                        <v-spacer></v-spacer>
+                        <v-btn flat class="add__chat"><v-icon>add</v-icon></v-btn>
+                    </div>
+
+                    <div class="friend__list">
+                        <div class="friend user" 
+                            v-for="friend in friends"
+                            :key="friend.id"
+                        >
+
+                            <div class="user__img" >
+                                <v-img :src="require('@/assets/temp/user.png')" />
+                                <span class="status" :class="friend.status"></span>
+                            </div>
+
+                            <span class="user__name">{{friend.name}}</span>
+
+                        </div>
+                    </div>
+
+                    <div class="view__more">
+                        <v-btn flat normal class="view__more_btn">VIEW MORE</v-btn>
+                    </div>
+                </div>
+
             </v-flex>
 
         </v-layout>

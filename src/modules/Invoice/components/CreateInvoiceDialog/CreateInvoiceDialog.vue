@@ -3,7 +3,12 @@
 		<v-layout row justify-center>
 			<v-dialog :value="open" fullscreen persist hide-overlay transition="dialog-bottom-transition">
 
-				<dialog-toolbar @close="$emit('update:open', false)" />
+				<dialog-toolbar
+						@close="$emit('close', false)"
+						@create="$emit('create')"
+						@edit="$emit('edit')"
+						:disabled="!can_create_invoice"
+				/>
 
 				<div class="content">
 

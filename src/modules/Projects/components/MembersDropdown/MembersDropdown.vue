@@ -1,7 +1,6 @@
 <template>
 	<div class="members-dropdown">
 		<v-autocomplete
-				label="Search Members"
 				:value="members"
 				@input="members_selected"
 				:items="items"
@@ -10,14 +9,19 @@
 				hide-no-data
 				no-filter
 				item-value="id"
+        prepend-icon="search"
 				chips
 				multiple
+        clearable
+        hide-details
+        color="#657186"
 		>
 			<template slot="selection" slot-scope="data">
 				<v-chip
 						:selected="data.selected"
 						outline
 						class="chip--select-multi"
+            close
 				>
 					<img :src="require('@/assets/temp/user.png')" width="30" height="30">
 					&nbsp;{{data.item.first_name}}
@@ -90,6 +94,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

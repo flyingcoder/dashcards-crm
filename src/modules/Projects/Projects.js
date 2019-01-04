@@ -1,4 +1,4 @@
-import { table_functionality } from '@/services/table-functionality'
+import { table_functionality } from '@/services/table-functionality/table-functionality'
 
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
@@ -25,28 +25,44 @@ export default {
       { text: 'Projects', disabled: true, router_name: null }
     ],
     headers: [
-      { text: 'Service', value: 'project', sortable: true, align: 'left' },
-      { text: 'Client', value: 'client', sortable: true, align: 'left' },
       {
+        id: 1,
+        text: 'Service',
+        value: 'project',
+        sortable: true,
+        align: 'left'
+      },
+      { id: 2, text: 'Client', value: 'client', sortable: true, align: 'left' },
+      {
+        id: 3,
         text: 'Project Manager',
         value: 'project',
         sortable: true,
         align: 'left'
       },
       {
+        id: 4,
         text: 'Start Date',
         value: 'start-date',
         sortable: true,
         align: 'left'
       },
-      { text: 'Progress', value: 'progress', sortable: true, align: 'left' },
       {
+        id: 5,
+        text: 'Progress',
+        value: 'progress',
+        sortable: true,
+        align: 'left'
+      },
+      {
+        id: 6,
         text: 'Time Spent',
         value: 'time-spent',
         sortable: true,
         align: 'left'
       },
-      { text: 'Status', value: 'status', sortable: true, align: 'left' }
+      { id: 7, text: 'Status', value: 'status', sortable: true, align: 'left' },
+      { id: 8, is_action: true }
     ],
     table_config: {
       route_name: 'projects',

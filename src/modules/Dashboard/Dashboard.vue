@@ -6,6 +6,7 @@
 
         <div class="d__content">
             <router-view></router-view>
+            <floating-chat-button></floating-chat-button>
         </div>
     </div>
 </template>

@@ -1,0 +1,211 @@
+@import '~@/sass/_variables';
+
+.chat__inbox{
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 5px;
+    width: 200px;
+
+    .inbox__title{
+        padding: 5px;
+        background-color: $tableBlueBg;
+        color: $titleDarkBlue;
+        border-bottom: 1px solid $tableBorderBlue;
+    }
+
+    .user{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border-bottom: 1px solid $tableBorderBlue;
+        padding: 5px;
+
+        &:hover{
+            background-color: $white;
+        }
+
+        @include userImgWithStatus ('.user__img');
+
+        .user__detail{
+            margin-left: 10px;
+            width : 130px;
+            cursor:pointer;
+
+            .user__name{
+                width : 130px;
+                overflow:hidden;
+                display:inline-block;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                font-size: 14px;
+            }
+        }
+        
+    }
+    .new__message{
+        background-color: $tableBlueBg;
+    }
+}
+
+#chat{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+
+    .chat__button{
+        position: relative;
+        margin: 10px;
+    }
+    .chat__button[data-notify]:after {
+        content:attr(data-notify);
+        position:absolute;
+        top:0px;
+        right:0px;
+        font-size:.7em;
+        background:$green;
+        color:$white;
+        width:18px;
+        height:18px;
+        text-align:center;
+        line-height:18px;
+        border-radius:50%;
+        font-size:12px;
+    }
+
+    .chatbox{
+        margin: 10px;
+        .chat__header{
+            background-color: $blue;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 5px;
+            cursor: pointer;
+            width: 206px;
+
+            @include userImgWithStatus ('.user__img');
+            
+            .user__detail{
+                margin-left: 10px;
+                width : 130px;
+                height: 24px;
+                cursor:pointer;
+    
+                .user__name{
+                    width : 130px;
+                    overflow:hidden;
+                    display:inline-block;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    font-size: 12px;
+                    line-height: 24px;
+                    color: $white
+                }
+                
+            }
+                
+            .close__btn{
+                text-align: right;
+                font-size: 20px;
+                padding: 2px;
+                color: $white;
+                &:hover{
+                    color: $red;
+                }
+            }
+        }
+
+        .fadeHeight-enter-active, .fadeHeight-leave-active {
+            transition: all 0.4s;
+            max-height: 500px;
+        }
+        .fadeHeight-enter, .fadeHeight-leave-to {
+            opacity: 0;
+            max-height: 0px;
+        }
+
+        .chat__body{
+
+            @include styledScrollFor('.messages'); //style the scroll
+
+            .messages{
+                background-color: $white;
+                overflow: auto;
+                max-height: 300px;
+                max-width: 206px;
+                border-bottom: 1px solid $borderLightGray;
+                
+                .message{
+                    border-bottom: 1px solid $borderLightGray;
+                }
+
+                .sender{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    padding: 3px;
+
+                    @include userImgWithStatus ('.sender__img');
+
+                    .sender__name{
+                        font-size: 12px;
+                        margin: 0 5px;
+                        width: 105px;
+                        color: $titleDarkBlue;
+                    }
+
+                    .date{
+                        width: 55px;
+                        font-size: 10px;
+                        opacity: 0.7;
+                        margin: 0 5px;
+                        color: $textDarkBlue;
+                    }
+                }
+
+                .sender__message{
+                    padding: 7px;
+                    font-size: 12px;
+                    text-align: justify;
+                    margin: 0;
+                    color: $textDarkBlue;
+                    margin: 0 15px 0 0;
+                }
+                
+                .message.me{
+                    background-color: $tableBlueBg;
+                    
+                    .sender{
+                        flex-direction: row-reverse;
+
+                        .sender__name{
+                            text-align: right;
+                        }
+                    }
+
+                    .sender__message{
+                        margin: 0 0 0 15px;
+                        text-align: justify;
+                        display: flex;
+                        flex-flow: column;
+                        align-items: flex-end;
+                    }
+                }
+            }
+
+            .write{
+                max-width: 206px;
+                display: flex;
+                align-items: center;
+                border: 1px solid $borderLightGray;
+
+                .send{
+                    padding: 5px;
+                }
+            }
+        }
+    }
+}

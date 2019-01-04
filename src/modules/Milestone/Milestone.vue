@@ -4,14 +4,14 @@
 		<milestone-dialog
 				:dialog.sync="add_dialog"
 				ref="add_dialog"
-				dialog-title="Add Milestone"
+				dialogTitle="Add Milestone"
 				@save="add_item('add_new_milestone', $event, dynamic_api)"
 		/>
 
 		<milestone-dialog
 				:dialog.sync="edit_dialog"
 				ref="edit_dialog"
-				dialog-title="Edit Milestone"
+				dialogTitle="Edit Milestone"
 				:is-edit-dialog="edit_dialog"
 				:fields-to-edit="edit_item"
 				@save="update_item('edit_milestone', $event, dynamic_api)"

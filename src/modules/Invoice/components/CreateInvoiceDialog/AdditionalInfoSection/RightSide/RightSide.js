@@ -1,24 +1,13 @@
 import Field from './Field'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   components: {
     Field
   },
 
-  data: () => ({
-    show_discount: false,
-    show_tax: false,
-    show_shipping: false,
-    discount_symbol: '%',
-    discount: '',
-    tax_symbol: '%',
-    tax: '',
-    shipping: ''
-  }),
-
   computed: {
-    ...mapGetters('invoice', ['rows']),
+    ...mapGetters('invoice', ['rows', 'tax', 'discount', 'shipping']),
     subtotal() {
       if (!this.rows.length) return '0'
       return this.rows.reduce((acc, cur) => {
@@ -27,31 +16,38 @@ export default {
     },
     total() {
       let total = Number(this.subtotal)
-      if (this.show_discount) {
-        if (this.discount_symbol === '%') {
-          total -= Number((this.subtotal * this.discount) / 100)
+      if (this.discount.show) {
+        if (this.discount.symbol === '%') {
+          total -= Number((this.subtotal * this.discount.value) / 100)
         } else {
-          total -= Number(this.discount)
+          total -= Number(this.discount.value)
         }
       }
-      if (this.show_tax) {
-        if (this.tax_symbol === '%') {
-          total += Number((this.subtotal * this.tax) / 100)
+      if (this.tax.show) {
+        if (this.tax.symbol === '%') {
+          total += Number((this.subtotal * this.tax.value) / 100)
         } else {
-          total += Number(this.tax)
+          total += Number(this.tax.value)
         }
       }
-      if (this.show_shipping) {
-        total += Number(this.shipping)
+      if (this.shipping.show) {
+        total += Number(this.shipping.value)
       }
       return total
     }
   },
 
-  methods: {
-    toggle_field(field_name) {
-      if (this[field_name] === '%') this[field_name] = '$'
-      else this[field_name] = '%'
+  watch: {
+    total(val) {
+      this.$store.commit('invoice/set_total_amount', val)
     }
+  },
+
+  methods: {
+    ...mapMutations('invoice', [
+      'toggle_visibility',
+      'set_field',
+      'toggle_symbol'
+    ])
   }
 }

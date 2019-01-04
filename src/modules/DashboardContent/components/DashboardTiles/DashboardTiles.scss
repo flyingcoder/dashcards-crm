@@ -1,0 +1,17 @@
+@import '~@/sass/_variables';
+
+.d__tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 140px);
+  grid-template-rows: 55px;
+  grid-gap: 10px;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 500px){
+  .d__tiles {
+    grid-template-columns: repeat(auto-fit, 120px);
+    grid-template-rows: 45px;
+    justify-content: space-around;
+  }
+}

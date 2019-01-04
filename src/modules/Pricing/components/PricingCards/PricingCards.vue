@@ -26,7 +26,9 @@
 <script>
 export default {
   name: 'PricingCards',
-  props: ['pricing-cards']
+  props: {
+    pricingCards: [Array, Object]
+  }
 }
 </script>
 

@@ -1,4 +1,4 @@
-import { table_functionality } from '@/services/table-functionality'
+import { table_functionality } from '@/services/table-functionality/table-functionality'
 import isEmpty from 'lodash/isEmpty'
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
@@ -24,19 +24,22 @@ export default {
       { text: 'Permissions', disabled: true, router_name: null }
     ],
     headers: [
-      { text: 'Name', value: 'name', sortable: true, align: 'left' },
+      { id: 1, text: 'Name', value: 'name', sortable: true, align: 'left' },
       {
+        id: 2,
         text: 'Description',
         value: 'description',
         sortable: true,
         align: 'left'
       },
       {
+        id: 3,
         text: 'Capability',
         value: 'capability',
         sortable: false,
         align: 'left'
-      }
+      },
+      { id: 4, is_action: true }
     ],
     table_config: {
       route_name: 'settings',

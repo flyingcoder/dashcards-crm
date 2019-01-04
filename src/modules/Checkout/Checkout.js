@@ -2,8 +2,7 @@ import makeRequestTo from '@/services/makeRequestTo'
 
 // Create a Stripe client.
 // eslint-disable-next-line
-const stripe = Stripe("pk_test_IaFgoMQAWbVsxO7GjyW5OhJY");
-
+const stripe = Stripe('pk_test_IaFgoMQAWbVsxO7GjyW5OhJY')
 // Create an instance of Elements.
 let elements = stripe.elements()
 
@@ -38,9 +37,11 @@ export default {
     card: null
   }),
 
-  created() {
-    //TODO move functionality to beforeRouteEnter hook
-    if (!this.price) this.$router.replace({ name: 'not_found' })
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      if (!vm.price) next({ name: 'not_found' })
+      else next()
+    })
   },
 
   mounted() {

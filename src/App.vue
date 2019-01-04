@@ -1,16 +1,19 @@
 <template>
   <v-app class="buzzooka" id="buzzooka">
+    <custom-loader />
     <snackbar></snackbar>
     <router-view></router-view>
   </v-app>
 </template>
 
 <script>
+import makeRequestTo from '@/services/makeRequestTo'
 import snackbar from './common/snackbar/snackbar.vue'
+import CustomLoader from './common/CustomLoader.vue'
 
 export default {
   name: 'App',
-  components: { snackbar },
+  components: { snackbar, CustomLoader },
   data: () => ({
     user_moved_mouse: 0
   }),
@@ -22,6 +25,7 @@ export default {
     } else if (Notification.permission !== 'denied') {
       this.request_notification_permission()
     }
+    this.fetch_online_users()
   },
 
   watch: {
@@ -53,6 +57,11 @@ export default {
           this.request_notification_permission()
         }
       })
+    },
+    fetch_online_users() {
+      makeRequestTo
+        .get_online_users()
+        .then(({ data }) => this.$store.commit('set_online_users', data))
     }
   }
 }

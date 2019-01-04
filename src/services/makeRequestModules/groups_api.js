@@ -1,6 +1,14 @@
 import request from '@/services/axios_instance'
 
 export const groups_api = {
+  get_all_groups() {
+    return request.get(`/api/groups`)
+  },
+
+  get_group_permissions(id) {
+    return request.get(`api/groups/${id}/permission`)
+  },
+
   get_groups(query) {
     return request.get(`/api/groups?${query}`)
   },

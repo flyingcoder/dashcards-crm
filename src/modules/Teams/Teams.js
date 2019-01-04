@@ -1,4 +1,4 @@
-import { table_functionality } from '@/services/table-functionality'
+import { table_functionality } from '@/services/table-functionality/table-functionality'
 import isEmpty from 'lodash/isEmpty'
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
@@ -30,10 +30,11 @@ export default {
     ],
 
     headers: [
-      { text: 'Member', align: 'left', value: 'name' },
-      { text: 'Position', value: 'position' },
-      { text: 'Tasks', value: 'tasks' },
-      { text: 'Projects', value: 'projects' }
+      { id: 1, text: 'Member', align: 'left', value: 'name' },
+      { id: 2, text: 'Position', value: 'position' },
+      { id: 3, text: 'Tasks', value: 'tasks' },
+      { id: 4, text: 'Projects', value: 'projects' },
+      { id: 5, is_action: true }
     ],
     table_config: {
       route_name: 'team',
@@ -58,11 +59,17 @@ export default {
     },
 
     tasks_text(member) {
-      return !member.tasks ? 'no tasks assigned' : member.tasks.length
+      return !member.tasks.length ? 'no tasks assigned' : member.tasks.length
     },
 
     projects_text(member) {
-      return !member.projects ? 'no projects assigned' : member.projects.length
+      return !member.projects.length
+        ? 'no projects assigned'
+        : member.projects.length
+    },
+
+    go_to_groups_page() {
+      this.$router.push({ path: './team/groups' })
     }
   }
 }

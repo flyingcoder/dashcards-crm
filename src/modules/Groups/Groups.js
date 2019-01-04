@@ -1,4 +1,4 @@
-import { table_functionality } from '@/services/table-functionality'
+import { table_functionality } from '@/services/table-functionality/table-functionality'
 
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
@@ -21,6 +21,7 @@ export default {
 
   data: () => ({
     permissions_dialog: '',
+    group_id: null,
     paths: [
       { text: 'Dashboard', disabled: false, router_name: 'default-content' },
       { text: 'Groups', disabled: true, router_name: null }
@@ -53,8 +54,10 @@ export default {
         this.open_edit_dialog({ id, name, description })
       else if (action === 'delete_group')
         this.open_delete_dialog({ id, name, description })
-      else if (action === 'permissions')
+      else if (action === 'permissions') {
+        this.group_id = id
         this.permissions_dialog = 'PermissionsDialog'
+      }
     },
 
     get_actions(group_slug) {

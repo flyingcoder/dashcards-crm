@@ -1,31 +1,24 @@
 <template>
-	<v-layout row justify-center>
-		<v-dialog v-model="dialog" persistent max-width="500px">
-
-			<v-card>
-
-				<v-card-title>
-					<span class="headline">{{ title }}</span>
-				</v-card-title>
-
-				<v-card-text>
-					{{ textContent }}
-				</v-card-text>
-
-				<v-card-actions>
-					<v-spacer></v-spacer>
-					<v-btn color="blue darken-1" flat @click="cancel_clicked">{{cancelButtonText}}</v-btn>
-					<v-btn color="blue darken-1" flat @click="delete_clicked">{{deleteButtonText}}</v-btn>
-				</v-card-actions>
-
-			</v-card>
-		</v-dialog>
-	</v-layout>
+	<div>
+		<custom-dialog
+				:title="title"
+				:content="textContent"
+				:button1-text="cancelButtonText"
+				:button2-text="deleteButtonText"
+				:open.sync="open"
+				@button1="cancel_clicked"
+				@button2="delete_clicked"
+		></custom-dialog>
+	</div>
 </template>
 
 <script>
+import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 export default {
-  name: 'DeleteModal',
+  components: {
+    CustomDialog
+  },
+
   props: {
     title: { type: String, default: 'Default Modal Title' },
     textContent: { type: String, default: 'Default Modal Text Content' },
@@ -35,21 +28,21 @@ export default {
   },
 
   data: () => ({
-    dialog: false
+    open: false
   }),
 
   watch: {
-    openDialog(new_val) {
-      this.dialog = new_val
+    openDialog(val) {
+      this.open = val
     },
-    dialog(new_val) {
-      this.$emit('update:openDialog', new_val)
+    open(val) {
+      this.$emit('update:openDialog', val)
     }
   },
 
   methods: {
     cancel_clicked() {
-      this.dialog = false
+      this.open = false
     },
     delete_clicked() {
       this.$emit('delete')

@@ -1,0 +1,104 @@
+@import '~@/sass/variables';
+
+.permission-dialog-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  .dialog {
+    width: 80%;
+    height: auto;
+    background: #eeeff3;
+    padding: 15px;
+    border-radius: 15px;
+    margin-top: 15px;
+    z-index: 100;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #798496;
+
+      .close-icon {
+        background: white;
+        border-radius: 15px;
+        padding: 0 8px;
+        font-size: 20px;
+        box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .table-wrapper {
+      width: 100%;
+      border-radius: 15px;
+      margin-top: 20px;
+      overflow: hidden;
+
+      .fixed-headers {
+        width: 100%;
+        padding: 15px 0;
+        background: #f8f9fb;
+        border: 1px solid #dae1e7;
+        border-radius: 8px 8px 0 0;
+        color: #858e9d;
+
+        tr {
+          display: grid;
+          grid-template-columns: repeat(24, 1fr);
+
+          th:nth-child(1) {
+            text-align: left;
+            margin-left: 5px;
+            grid-column: span 4;
+          }
+
+          th:nth-child(2) {
+            grid-column: span 4;
+          }
+
+          th:nth-child(3) {
+            grid-column: span 3;
+          }
+
+          th:nth-child(4) {
+            grid-column: span 4;
+          }
+
+          th:nth-child(5) {
+            grid-column: span 4;
+          }
+
+          th:nth-child(6) {
+            text-align: right;
+            margin-right: 5px;
+            grid-column: span 5;
+          }
+        }
+      }
+
+      .custom-table {
+        max-height: 370px;
+        overflow: auto;
+      }
+
+      @include styledScrollFor('.custom-table');
+    }
+  }
+
+  .backdrop {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(78, 19, 17, 0.3);
+    z-index: 99;
+  }
+}

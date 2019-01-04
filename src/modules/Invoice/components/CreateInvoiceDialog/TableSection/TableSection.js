@@ -10,10 +10,16 @@ export default {
   }),
 
   computed: {
-    ...mapGetters('invoice', ['rows']),
+    ...mapGetters('invoice', ['rows', 'selected_project']),
     should_disable() {
       const { descriptions, rate, hours } = this.active_row
       return !descriptions || !rate || !hours
+    }
+  },
+
+  watch: {
+    selected_project(val) {
+      val && this.fill_table(val)
     }
   },
 
@@ -47,6 +53,13 @@ export default {
       row[key] = Number(value)
       row.amount = row.hours * row.rate
       this.$store.commit('invoice/update_row', { row, index })
+    },
+
+    fill_table(pro_id) {
+      this.$store.dispatch(
+        'invoice/fetch_tasks',
+        `api/projects/${pro_id}/tasks-for-invoice`
+      )
     }
   }
 }
