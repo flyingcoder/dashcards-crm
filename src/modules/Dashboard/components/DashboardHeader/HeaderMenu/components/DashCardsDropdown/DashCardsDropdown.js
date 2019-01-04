@@ -30,6 +30,13 @@ export default {
     }
   },
 
+  filters: {
+    imgpath(value) {
+      var url = '@/assets/sidebar/' + value + '.svg'
+      return require(url)
+    }
+  },
+
   watch: {
     dropdown_visible(val) {
       val && this.fill_selected_items()
