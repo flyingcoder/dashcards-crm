@@ -43,7 +43,7 @@
 						<label class="card__option" :for="item.id">
 
 							<div class="card__option_content">
-								<v-img max-width="35px" :src="item.icon" class="card__icons"/>
+								<v-img max-width="35px" :src="item.slug | imgpath" class="card__icons"/>
 
 								<div class="card__title">
 									{{ item.title }}
