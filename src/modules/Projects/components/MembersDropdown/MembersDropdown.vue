@@ -15,6 +15,7 @@
         clearable
         hide-details
         color="#657186"
+        label="Assign member(s)"
 		>
 			<template slot="selection" slot-scope="data">
 				<v-chip
