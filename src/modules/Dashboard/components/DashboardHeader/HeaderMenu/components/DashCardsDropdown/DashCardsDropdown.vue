@@ -43,10 +43,17 @@
 						<label class="card__option" :for="item.id">
 
 							<div class="card__option_content">
-								<v-img max-width="35px" :src="item.slug | imgpath" class="card__icons"/>
+								<img v-if="item.slug == 'tasks'" width="40px" src="@/assets/icons/sidebar/tasks.svg" class="card__icons"/>
+								<img v-if="item.slug == 'timeline'" width="40px" src="@/assets/icons/sidebar/timers.svg" class="card__icons"/>
+								<img v-if="item.slug == 'client'" width="40px" src="@/assets/icons/sidebar/clients.svg" class="card__icons"/>
+								<img v-if="item.slug == 'timer'" width="40px" src="@/assets/icons/sidebar/timers.svg" class="card__icons"/>
+								<img v-if="item.slug == 'payment'" width="40px" src="@/assets/icons/sidebar/payment.svg" class="card__icons"/>
+								<img v-if="item.slug == 'invoice'" width="40px" src="@/assets/icons/sidebar/invoice.svg" class="card__icons"/>
+								<img v-if="item.slug == 'calendar'" width="40px" src="@/assets/icons/sidebar/calendar.svg" class="card__icons"/>
+								<img v-if="item.slug == 'passbox'" width="30px" src="@/assets/icons/header/user/lock.svg" class="card__icons"/>
 
 								<div class="card__title">
-									{{ item.title }}
+									{{ item.name }}
 								</div>
 							</div>
 
