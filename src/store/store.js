@@ -11,19 +11,23 @@ export default new Vuex.Store({
     snackbar: {
       status: false,
       message: ''
-    }
+    },
+    show_floating_button: true
   },
   getters: {
     custom_loader: state => state.custom_loader,
     is_user_logged: state => !!state.user,
     user: state => state.user,
-    snackbar: state => state.snackbar
+    snackbar: state => state.snackbar,
+    show_floating_button: state => state.show_floating_button
   },
   mutations: {
     set_user: (state, payload) => (state.user = payload),
     remove_user: state => (state.user = null),
     open_snackbar: (state, payload) => (state.snackbar = payload),
-    set_custom_loader: (state, payload) => (state.custom_loader = payload)
+    set_custom_loader: (state, payload) => (state.custom_loader = payload),
+    set_floating_button: (state, payload) =>
+      (state.show_floating_button = payload)
   },
   actions: {
     login({ commit }, payload) {

@@ -80,10 +80,12 @@ export default {
 
   created() {
     this.subscribe()
+    this.$store.commit('set_floating_button', false)
   },
 
   beforeDestroy() {
     pusher.unsubscribe('chat') //TODO add channel name
+    this.$store.commit('set_floating_button', true)
   },
 
   methods: {
