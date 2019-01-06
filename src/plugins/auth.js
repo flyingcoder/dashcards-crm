@@ -26,11 +26,13 @@ export const auth = {
     return store.getters.user
   },
 
-  async logout() {
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
-    await store.dispatch('logout')
-    router.push({ name: 'login' })
+  logout() {
+    make_request_to.logout().then(() => {
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
+      store.dispatch('logout')
+      router.push({ name: 'login' })
+    })
   },
 
   login({ email, password }) {
