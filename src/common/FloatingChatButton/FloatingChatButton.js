@@ -25,5 +25,10 @@ export default {
         status: 'online'
       }
     ]
-  })
+  }),
+  computed: {
+    should_show() {
+      return this.$store.getters.show_floating_button
+    }
+  }
 }
