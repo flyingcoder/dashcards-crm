@@ -33,10 +33,7 @@ export const table_functionality = {
         : (this.show_delete_selected = false)
     },
     api_query(query) {
-      if (
-        this.items_response &&
-        this.rows_per_page === this.items_response.total
-      )
+      if (this.items_response && this.rows_per_page === this.items.length)
         return
 
       this.$router.replace({
