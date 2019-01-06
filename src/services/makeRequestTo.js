@@ -19,10 +19,6 @@ export default {
     return request.post('/api/login', { email, password })
   },
 
-  logout() {
-    return request.post('/api/logout')
-  },
-
   register(fields) {
     return request.post('/api/register', fields)
   },
