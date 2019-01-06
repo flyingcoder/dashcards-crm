@@ -9,7 +9,7 @@ export const computed = {
         rows_per_page.push(total_rows)
       }
 
-      this.rows_per_page = total_rows
+      this.rows_per_page = this.items.length
       return rows_per_page
     },
 
