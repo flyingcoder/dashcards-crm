@@ -32,6 +32,12 @@ export default {
     }
   }),
 
+  filters: {
+    phoneDisplayForm: function(value) {
+      return value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2 $3')
+    }
+  },
+
   watch: {
     dialog(new_val) {
       this.add_dialog = new_val
