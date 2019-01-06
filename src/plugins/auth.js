@@ -45,7 +45,13 @@ export const auth = {
     store.commit('set_custom_loader', true)
     make_request_to
       .register(fields)
-      .then(response => set_to_localStorage(response))
+      .then(response => {
+        store.commit('open_snackbar', {
+          status: true,
+          message: 'You have successfully registered'
+        })
+        set_to_localStorage(response)
+      })
       .finally(() => store.commit('set_custom_loader', false))
   }
 }

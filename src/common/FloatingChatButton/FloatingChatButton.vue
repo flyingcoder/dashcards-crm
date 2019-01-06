@@ -1,5 +1,5 @@
 <template>
-    <div id="chat">
+    <div id="chat" v-show="should_show">
 
     <v-menu top 
             slide-y-reverse-transition 

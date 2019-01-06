@@ -16,7 +16,7 @@ router.beforeEach((to, from, next) => {
   if (['login', 'signup'].includes(to.name) && !authenticated) {
     next()
   } else if (['login', 'signup'].includes(to.name) && authenticated) {
-    next({ name: 'not_found' })
+    next({ path: '/dashboard' })
   } else if (to.name === 'home' && !authenticated) {
     next({ name: 'login' })
   } else if (to.name === 'not_found') {
