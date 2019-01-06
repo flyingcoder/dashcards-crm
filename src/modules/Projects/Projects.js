@@ -7,6 +7,7 @@ import TableHeader from '@/common/TableHeader.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import ProjectDialog from './components/ProjectDialog/ProjectDialog.vue'
 import isEmpty from 'lodash/isEmpty'
+import moment from 'moment'
 
 export default {
   name: 'Projects',
@@ -73,6 +74,12 @@ export default {
       refresh_table_api_name: 'paginate_projects_table'
     }
   }),
+
+  filters: {
+    fromNowFormat: function(value) {
+      return moment(value).fromNow()
+    }
+  },
 
   created() {
     const query = { ...this.$route.query }

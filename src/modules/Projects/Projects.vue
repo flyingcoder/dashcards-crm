@@ -41,7 +41,7 @@
 				<td>{{ item.item.service_name }}</td>
 				<td>{{ item.item.client_name }}</td>
 				<td>{{ item.item.manager_name }}</td>
-				<td>{{ item.item.started_at }}</td>
+				<td>{{ item.item.started_at | fromNowFormat }}</td>
 				<td>
 					<v-progress-linear
 							color="#1fb868"
