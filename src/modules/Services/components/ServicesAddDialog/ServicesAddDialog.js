@@ -12,6 +12,12 @@ export default {
     services: []
   }),
 
+  computed: {
+    is_disabled() {
+      return !this.services.length
+    }
+  },
+
   watch: {
     dialog(new_val) {
       this.open = new_val
