@@ -27,11 +27,11 @@ export const auth = {
   },
 
   logout() {
-     make_request_to.logout().then(() => {
-       localStorage.removeItem('token')
-       localStorage.removeItem('user')
-       store.dispatch('logout')
-       router.push({ name: 'login' })
+    make_request_to.logout().then(() => {
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
+      store.dispatch('logout')
+      router.push({ name: 'login' })
     })
   },
 

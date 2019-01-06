@@ -1,6 +1,6 @@
 <template>
 	<div class="d__tiles" v-if="counters">
-		<tile v-for="tile in tiles"
+		<tile v-for="tile in filteredTiles"
 		      :key="tile.title"
 		      :img-src="tile.icon"
 		      :img-background="tile.color"

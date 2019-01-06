@@ -6,12 +6,6 @@
                 <breadcrumb :paths="paths" />
             </div>
             <div class="page__options">
-                <div class="option save">
-                    <div class="icon"></div>
-                    <div class="title">
-                        <span> Save  </span>
-                    </div>
-                </div>
 
 				<logon-label/> <!--custom component-->
 
