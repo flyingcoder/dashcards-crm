@@ -1,0 +1,36 @@
+@import '~@/sass/_variables';
+
+@include styledDialog('.groups-dialog');
+
+.select-item{
+  color: $textDark;
+  font-size: 14px;
+}
+
+.groups-dialog{
+
+  .dialog__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 0;
+    
+    @include styledCloseDialog('.close__dialog');
+
+    @include styledTitleDialog('.dialog__title');
+  }
+
+  @include styledScrollFor('.dialog__body');
+
+  .dialog__body{
+      max-height: 300px;
+      overflow: auto;
+      .dialog__textfield, .dialog__selectfield, .dialog__textarea{
+        margin: 5px;
+      }
+  }
+  
+  @include actionButtonsDialog('.dialog__actions');
+
+}
