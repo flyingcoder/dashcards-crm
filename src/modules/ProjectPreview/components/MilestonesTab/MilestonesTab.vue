@@ -40,6 +40,7 @@
 
 		<v-layout row justify-end>
 			<v-speed-dial
+					class="add-btn"
 					v-model="is_open_speed_dial"
 					direction="bottom"
 					right
@@ -59,14 +60,14 @@
 
 				<div class="speed__dial_item" @click="add_dialog = true">
 					Add Milestone
-					<v-btn slot="activator" color="indigo" dark small fab>
+					<v-btn slot="activator" color="#3b589e" dark small fab>
 						<v-icon>add</v-icon>
 					</v-btn>
 				</div>
 
 				<div class="speed__dial_item" @click="open_select_template_dialog">
 					Select Template
-					<v-btn slot="activator" :disabled="boxes.length > 0" color="indigo" small fab>
+					<v-btn slot="activator" :disabled="boxes.length > 0" color="#3b589e" small fab>
 						<v-icon color="white">touch_app</v-icon>
 					</v-btn>
 				</div>
