@@ -27,6 +27,7 @@
 		<select-template-dialog
 				:open.sync="select_template_dialog"
 				@save="add_template"
+				dialog-title="Add Milestone Template"
 		/>
 
 		<add-task-dialog
