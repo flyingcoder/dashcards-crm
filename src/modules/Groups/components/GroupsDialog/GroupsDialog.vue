@@ -45,19 +45,9 @@
 									label="Select Permission"
 								>
 
-								</v-select>
-
-								<v-select
-									class="dialog__selectfield"
-									solo
-									hide-details
-									:items="permission_items"
-									color="#657186"
-									label="Select">
-
-									<template slot="item" slot-scope="{item}">
-										<div class="select-item">{{item.text}}</div>
-									</template>
+								<template slot="item" slot-scope="{item}">
+									<div class="select-item">{{item.text}}</div>
+								</template>
 
 								</v-select>
 							</v-flex>

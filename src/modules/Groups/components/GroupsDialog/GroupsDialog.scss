@@ -2,6 +2,11 @@
 
 @include styledDialog('.groups-dialog');
 
+.select-item{
+  color: $textDark;
+  font-size: 14px;
+}
+
 .groups-dialog{
 
   .dialog__header{
@@ -24,9 +29,6 @@
       .dialog__textfield, .dialog__selectfield, .dialog__textarea{
         margin: 5px;
       }
-      .dialog__selectfield .v-select .dropdown-toggle {
-        border: 1px solid red;
-     }
   }
   
   @include actionButtonsDialog('.dialog__actions');
