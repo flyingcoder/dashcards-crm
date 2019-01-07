@@ -1,4 +1,3 @@
-import Pusher from 'pusher-js'
 import makeRequestTo from '@/services/makeRequestTo'
 //Components
 import DashboardLogo from './components/DashboardLogo/DashboardLogo.vue'
@@ -17,6 +16,9 @@ export default {
   computed: {
     user() {
       return this.$store.getters.user
+    },
+    online_users() {
+      return this.$store.getters['onlineUsers/online_users']
     }
   },
 
@@ -26,24 +28,27 @@ export default {
 
   methods: {
     subscribe() {
-      let pusher = new Pusher('6857db1d25c87cb2e20d', {
-        cluster: 'ap1',
-        encrypted: true,
-        authEndpoint: 'https://api.bizzooka.com/api/broadcasting/auth',
-        auth: {
-          headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('token')
-          }
-        }
-      })
-      let channel = pusher.subscribe(
+      this.$pusher.authenticate()
+      let login_channel = this.$pusher.subscribe(
         'private-user.login.' + this.user.company_id
       )
-      channel.bind('App\\Events\\UserLogin', ({ user }) => {
-        this.$store.commit('onlineUsers/add_new_user', {
+      login_channel.bind('App\\Events\\UserLogin', ({ user }) => {
+        this.$store.commit('onlineUsers/add_user', {
           id: user.id,
           name: `${user.first_name}, ${user.last_name}`
         })
+      })
+
+      let logout_channel = this.$pusher.subscribe(
+        'private-user.logout.' + this.user.company_id
+      )
+      logout_channel.bind('App\\Events\\UserLogout', ({ user }) => {
+        const index = this.online_users.findIndex(
+          on_user => on_user.id === user.id
+        )
+        if (~index) {
+          this.$store.commit('onlineUsers/delete_user', index)
+        }
       })
     },
     fetch_online_users() {

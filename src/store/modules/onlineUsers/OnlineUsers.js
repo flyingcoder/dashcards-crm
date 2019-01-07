@@ -7,8 +7,8 @@ const getters = {
 }
 
 const mutations = {
-  add_new_user: (state, payload) => state.online_users.push(payload),
-  delete_new_user: (state, index) => state.online_users.splice(index, 1),
+  add_user: (state, payload) => state.online_users.push(payload),
+  delete_user: (state, index) => state.online_users.splice(index, 1),
   set_online_users: (state, payload) => (state.online_users = payload)
 }
 
