@@ -13,7 +13,11 @@ export default {
   data: () => ({
     open: false,
     name: '',
-    description: ''
+    description: '',
+    permission_items: [
+      { id: 1, text: 'Permission One', value: 'permissionone' },
+      { id: 2, text: 'Permission Two', value: 'permissiontwo' }
+    ]
   }),
 
   computed: {
