@@ -2,10 +2,12 @@
 import makeRequestTo from '@/services/makeRequestTo'
 //Components
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
+import ReportsList from './components/ReportsList/ReportsList.vue'
 
 export default {
   components: {
-    CustomDialog
+    CustomDialog,
+    ReportsList
   },
 
   data: () => ({
@@ -55,6 +57,7 @@ export default {
           this.link = ''
           this.title = ''
           this.activate_save = false
+          this.iframe_src = null
         })
     }
   }

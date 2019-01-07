@@ -1,0 +1,22 @@
+.reports-list {
+  border: 1px solid darkgray;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+
+  .no-data {
+    padding: 10px;
+    text-align: center;
+  }
+
+  .report-item {
+    border-bottom: 1px solid darkgray;
+    padding: 10px;
+
+    &:hover {
+      background: white;
+      cursor: pointer;
+    }
+  }
+
+}

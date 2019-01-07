@@ -11,5 +11,9 @@ export const reports_api = {
 
   get_project_reports(id) {
     return request.get(`api/projects/${id}/report`)
+  },
+
+  get_reports() {
+    return request.get('api/report')
   }
 }
