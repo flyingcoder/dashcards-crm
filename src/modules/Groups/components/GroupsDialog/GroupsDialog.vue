@@ -55,8 +55,8 @@
 									color="#657186"
 									label="Select">
 
-									<template slot="item" slot-scope="item">
-										<div class="select-item">{{ item }}</div>
+									<template slot="item" slot-scope="{item}">
+										<div class="select-item">{{item.text}}</div>
 									</template>
 
 								</v-select>
