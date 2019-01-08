@@ -43,11 +43,14 @@
 									:items="permission_items"
 									color="#657186"
 									label="Select Permission"
+									item-text="name"
+									item-value="id"
+									v-model="selected_permission"
 								>
 
-								<template slot="item" slot-scope="{item}">
-									<div class="select-item">{{item.text}}</div>
-								</template>
+								<!-- <template slot="item" slot-scope="{item}">
+									<div class="select-item">{{item.name}}</div>
+								</template> -->
 
 								</v-select>
 							</v-flex>
