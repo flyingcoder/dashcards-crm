@@ -15,6 +15,10 @@ export default {
   },
 
   methods: {
-    ...mapMutations('onlineUsers', ['set_all_users'])
+    ...mapMutations('onlineUsers', ['set_all_users']),
+    open_chat_box(user) {
+      this.$emit('open-chatbox', user)
+      this.fabs = false
+    }
   }
 }

@@ -13,6 +13,7 @@ import { project_overview_tab_members } from './makeRequestModules/project-overv
 import { invoices_api } from './makeRequestModules/invoices_api'
 import { reports_api } from './makeRequestModules/reports_api'
 import { users_api } from './makeRequestModules/users_api'
+import { chat_api } from './makeRequestModules/chat_api'
 
 export default {
   login({ email, password }) {
@@ -48,5 +49,6 @@ export default {
   ...project_overview_tab_members,
   ...invoices_api,
   ...reports_api,
-  ...users_api
+  ...users_api,
+  ...chat_api
 }
