@@ -5,7 +5,7 @@ const state = {
 
 const getters = {
   online_users: state => state.online_users,
-  all_users: state => state.all_users.filter(user => user.is_online)
+  all_users: state => state.all_users
 }
 
 const mutations = {
