@@ -5,6 +5,6 @@ export default {
     conv: Object
   },
   methods: {
-    ...mapMutations('chat', ['toggle_active_conv'])
+    ...mapMutations('chat', ['toggle_open_conv', 'close_active_conv'])
   }
 }
