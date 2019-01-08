@@ -5,14 +5,7 @@ const state = {
 
 const getters = {
   online_users: state => state.online_users,
-  all_users: state => {
-    return state.all_users.map(user => {
-      user.is_online = state.online_users.includes(
-        on_user => on_user.id === user.id
-      )
-      return user
-    })
-  }
+  all_users: state => state.all_users.filter(user => user.is_online)
 }
 
 const mutations = {

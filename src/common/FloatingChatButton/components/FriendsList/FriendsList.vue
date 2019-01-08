@@ -19,11 +19,11 @@
 		</v-btn>
 
 		<v-card class="chat__inbox">
-			<template>
 				<div class="inbox__title">Online Friends ({{all_users.length}})</div>
 				<div class="user new__message"
 				     v-for="user of all_users"
 				     :key="user.id"
+				     @click="open_chat_box(user)"
 				>
 					<div class="user__img" >
 						<v-img :src="require('@/assets/temp/user.png')"/>
@@ -34,7 +34,6 @@
 						<span class="user__name">{{user.name}}</span>
 					</div>
 				</div>
-			</template>
 		</v-card>
 	</v-menu>
 </template>
