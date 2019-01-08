@@ -9,7 +9,7 @@
             class="chat__position"
     >
         <v-btn class="chat__button" 
-               :data-notify="dataNotify" 
+               :data-notify="all_users.length"
                slot="activator" 
                v-model="fabs" 
                color="#3b589e" 
@@ -21,20 +21,22 @@
         </v-btn>
 
         <v-card class="chat__inbox">
-            <div class="inbox__title">Online Friends ({{dataNotify}})</div>
-            <div class="user new__message" 
-                v-for="friend in friends"
-                :key="friend.id"
-            >
-                <div class="user__img" >
-                    <v-img :src="require('@/assets/temp/user.png')"/>
-                    <span class="status" :class="friend.status"></span>
-                </div>
+            <template>
+                <div class="inbox__title">Online Friends ({{all_users.length}})</div>
+                <div class="user new__message"
+                     v-for="user of all_users"
+                     :key="user.id"
+                >
+                    <div class="user__img" >
+                        <v-img :src="require('@/assets/temp/user.png')"/>
+                        <span class="status" :class="[user.is_online ? 'online' : 'offline']"></span>
+                    </div>
 
-                <div class="user__detail">
-                    <span class="user__name">{{friend.name}}</span>
+                    <div class="user__detail">
+                        <span class="user__name">{{user.name}}</span>
+                    </div>
                 </div>
-            </div>
+            </template>
         </v-card>
     </v-menu>
       
