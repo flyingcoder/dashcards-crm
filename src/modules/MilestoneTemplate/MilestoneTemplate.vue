@@ -98,8 +98,8 @@
 @import '~@/sass/_variables';
 
 .milestone-template {
-	padding: 20px;
-	  
+  padding: 20px;
+
   .cell-with-icon {
     display: flex;
     justify-content: center;
