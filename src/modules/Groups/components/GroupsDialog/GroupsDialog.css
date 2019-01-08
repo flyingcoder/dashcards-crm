@@ -11,7 +11,9 @@
 >>> .dialog__body label.v-label.theme--light{
     font-size: 16px;
 }
-
+>>> .theme--light.v-select .v-select__selections{
+    color: #657186;
+}
 
 @media only screen and (max-width: 480px){
     >>> .dialog__body .v-input__slot{

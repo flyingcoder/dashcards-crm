@@ -66,12 +66,7 @@ export default {
       }
     },
     validation_passed() {
-      if (
-        this.name &&
-        this.description &&
-        this.selected_permission &&
-        this.does_something_changed
-      ) {
+      if (this.name && this.description && this.does_something_changed) {
         return true
       }
       this.$event.$emit('open_snackbar', 'Nothing Changed!')

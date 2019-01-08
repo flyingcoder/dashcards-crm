@@ -48,9 +48,9 @@
 									v-model="selected_permission"
 								>
 
-								<!-- <template slot="item" slot-scope="{item}">
+								<template slot="item" slot-scope="{item}">
 									<div class="select-item">{{item.name}}</div>
-								</template> -->
+								</template>
 
 								</v-select>
 							</v-flex>
