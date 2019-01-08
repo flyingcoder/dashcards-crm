@@ -1,7 +1,7 @@
 <template>
 	<div class="chatbox">
 
-		<v-card class="chat__header" @click="toggle_active_conv(conv.id)">
+		<v-card class="chat__header" @click="toggle_open_conv(conv.id)">
 			<div class="user__img">
 				<v-img :src="require('@/assets/temp/user.png')"/>
 				<span :class="['status', conv.user.is_online ? 'online': 'offline']"></span>
@@ -11,7 +11,7 @@
 				<div class="user__name">{{ conv.user.name }}</div>
 			</div>
 
-			<v-icon class="close__btn">
+			<v-icon class="close__btn" @click="close_active_conv(conv.id)">
 				close
 			</v-icon>
 		</v-card>

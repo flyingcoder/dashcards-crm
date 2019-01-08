@@ -14,11 +14,20 @@ const mutations = {
   add_conversation: (state, payload) => state.conversations.push(payload),
   activate_conversation: (state, index) =>
     (state.conversations[index].active = true),
-  toggle_active_conv: (state, id) => {
+  toggle_open_conv: (state, id) => {
     let conv = _cloneDeep(state.conversations)
     const index = conv.findIndex(conv => conv.id === id)
     if (~index) {
       conv[index].open = !conv[index].open
+      state.conversations = conv
+    }
+  },
+  close_active_conv: (state, id) => {
+    let conv = _cloneDeep(state.conversations)
+    const index = conv.findIndex(conv => conv.id === id)
+    if (~index) {
+      conv[index].active = false
+      conv[index].open = false
       state.conversations = conv
     }
   }
