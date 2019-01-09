@@ -77,5 +77,11 @@ export default {
         emoji
       )
     }
+  },
+
+  filters: {
+    fromNowFormat: function(value) {
+      return moment(value).fromNow()
+    }
   }
 }
