@@ -1,0 +1,47 @@
+@import "./../../sass/_variables";
+
+@include sortOptionStyle;
+
+
+.timer {
+    padding: 25px;
+    @include customTableRow;
+
+    .table__toolbar-title{
+        color: $tableTitleBlue;
+        text-align: left;
+        font-size: 30px;
+    }
+
+    .timer__option{
+        .v-icon{
+            font-size: 24px;
+            color: $sortOptionGray;
+        }
+    }
+    
+}
+
+@media only screen and (max-width: 480px){
+    .timer {
+        padding: 15px;
+
+        .table__toolbar-title{
+            font-size: 18px;
+        }
+    
+        .timer__option{
+
+            .v-btn--floating.v-btn--small{
+                height: 30px;
+                width: 30px;
+            }
+
+            .v-icon{
+                font-size: 24px;
+                color: $sortOptionGray;
+            }
+        }
+        
+    }
+}

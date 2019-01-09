@@ -1,5 +1,5 @@
 <template>
-	<v-flex md6 xs12 class="project-overview-card">
+	<v-flex xs12 class="project-overview-card">
 		<div class="project__overview_content">
 			<dash-card title="Project Overview">
 				<div class="content__wrapper" slot="content">
@@ -46,52 +46,50 @@
 </template>
 
 <script>
-	import DashCard from '@/common/DashCard.vue'
-	import ProjectRow from './ProjectRow.vue'
-	import request from '@/services/axios_instance'
-	import { format } from 'date-fns'
+import DashCard from '@/common/DashCard.vue'
+import ProjectRow from './ProjectRow.vue'
+import request from '@/services/axios_instance'
+import { format } from 'date-fns'
 
-	export default {
-		name: 'ProjectOverviewCard',
-		components: {
-			DashCard, ProjectRow
-		},
+export default {
+  name: 'ProjectOverviewCard',
+  components: {
+    DashCard,
+    ProjectRow
+  },
 
-		props: { id: [Number, String] },
+  props: { id: [Number, String] },
 
-		data: () => ({
-			projects: [],
-			loading: false
-		}),
+  data: () => ({
+    projects: [],
+    loading: false
+  }),
 
-		created() {
-			this.loading = true
-			request.get('api/projects/' + this.id)
-				.then(({data}) => this.projects.push(data))
-				.finally(() => this.loading = false)
-		},
+  created() {
+    this.loading = true
+    request
+      .get('api/projects/' + this.id)
+      .then(({ data }) => this.projects.push(data))
+      .finally(() => (this.loading = false))
+  },
 
-		methods: {
-			format_date(date) {
-				return format(date, 'MMMM D, YYYY')
-			},
-			format_time(time) {
-				let [hours, mins, secs] = time.split(':')
-				return `${hours} HRS | ${mins} MINS | ${secs} SECS`
-			}
-		}
-
-	}
+  methods: {
+    format_date(date) {
+      return format(date, 'MMMM D, YYYY')
+    },
+    format_time(time) {
+      let [hours, mins, secs] = time.split(':')
+      return `${hours} HRS | ${mins} MINS | ${secs} SECS`
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
 @import '~@/sass/_variables';
-	.project-overview-card {
-		.project__overview_content{
-			margin: 12px;
-		}
-		.content__wrapper{
-			border: 1px solid $tableBorderBlue;
-		}
-	}
+.project-overview-card {
+  .content__wrapper {
+    border: 1px solid $tableBorderBlue;
+  }
+}
 </style>

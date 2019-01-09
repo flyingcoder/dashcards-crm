@@ -1,0 +1,652 @@
+@import '~@/sass/_variables';
+.v-menu__content.theme--light.menuable__content__active{
+    // box-shadow: 0 15px 5px -3px rgba(0,0,0,.2), 0 18px 10px -3px rgba(0,0,0,.14), 0 13px 14px -3px rgba(0,0,0,.12);
+     box-shadow: none;
+     transition: box-shadow none;
+}
+
+.hover__info{
+    background-color: $white;
+    border-radius: 8px;
+    border: 1px solid $tableBorderBlue;
+    margin: 10px 10px 10px 30px;
+    box-shadow: $darkBoxShadow;
+
+    &::after{
+        content: '';
+        position: absolute;
+        border-left: 15px solid transparent;
+        border-right: 15px solid $white;
+        border-bottom: 15px solid transparent;
+        border-top: 15px solid transparent;
+        left: 1px;
+        top: 40%;
+        z-index: 50;
+    }
+
+    &::before{
+        content: '';
+        position: absolute;
+        transform: rotate(45deg);
+        width: 30px;
+        height: 30px;
+        left: 23px;
+        top: 40%;
+        z-index: -1;
+        box-shadow: $darkBoxShadow;
+    }
+
+    .info__one{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        .h__img {
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            margin: 10px;
+            .v-responsive{
+                border-radius: 50%;
+            }
+        }
+        .h__details{
+            margin: 10px;
+            .h__name{
+                color: $textDark-2;
+            }
+            .h__job{
+                color: $textGray;
+                margin-bottom: 10px;
+            }
+        }
+    }
+    .info__two{
+        margin: 10px;
+        .info__cta{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+    }
+
+    .info__three{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background-color: $tableBlueBg; 
+        border-top: 1px solid $borderLightGray;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        text-align: center;
+        padding: 15px 0;
+
+        .total{
+            color: $textDark-2;
+            p{
+                margin-bottom: 0;
+            }
+        }
+    }
+    
+    .info__anchor{
+        color: $textGray;
+        margin: 0 5px;
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        
+        a{
+            color: $textGray;
+            text-decoration: none;
+
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+
+        .v-icon{
+            color: $textGray;
+            margin-right: 5px;
+            font-size: 20px;
+        }
+    }
+}
+
+.add__chatlist{
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+    padding: 10px 0;
+    margin: 60px 10px 10px 10px;
+    box-shadow: $darkBoxShadow;
+
+    .add__group{
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        cursor: pointer;
+
+        &:hover{
+            background-color: $tableBlueBg;
+        }
+        
+        .group__icon{
+            background-color: $darkGray;
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+            padding: 5px;
+            svg{
+                fill: $white;
+            }
+        }
+        span{
+            font-size: 14px;
+            color: $textDark;
+            margin-left: 10px;
+        }
+    }
+
+    .search{
+        padding: 5px;
+        border-top: 1px solid $borderLightGray;
+    }
+
+    .user{
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid $tableBorderBlue;
+
+        @include userImgWithStatus ('.user__img');
+
+        .user__img{
+            height: 40px;
+            width: 40px;
+            max-width: 40px;
+            min-width: 40px;
+            
+            .status{
+                width: 15px;
+                height: 15px;
+                border: 2px solid $lightViolete;
+            }
+        }
+        .user__info{
+            margin-left: 10px;
+            text-align: left;
+            .user__name{
+                font-size: 12px;
+                font-weight: 500;
+                color: $textDark;
+            }
+            .active__history{
+                font-size: 11px;
+                color: $textDark;
+                opacity: 0.7;
+            }
+        }
+        
+        .add__chat{
+            height: 33px;
+            min-width: 33px;
+            border-radius: 5px;
+            border: 1px solid $borderLightGray;
+            background-color: $lightGray;
+            color: $darkGray;
+            margin: auto 0;
+            text-align: right;
+            padding: 0;
+        }
+    }
+
+    @include styledScrollFor('.friend__list');
+
+    .friend__list{
+        overflow: auto;
+        max-height: 500px;
+        .friend{
+            border-top: 1px solid $borderLightGray;
+            cursor: pointer;
+
+            &:hover{
+                background-color: $tableBlueBg;
+            }
+        }
+    }
+}
+
+.chat{
+    padding: 25px;
+    margin: 25px;
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+
+    .chat__content{
+        background-color: $tableBlueBg;
+        border: 1px solid $tableBorderBlue;
+        border-radius: 10px;
+        padding: 15px;
+
+        .chatlist{
+            margin: 10px;
+            background-color: $white;
+            border: 1px solid $tableBorderBlue;
+            border-radius: 10px;
+
+            .you{
+                border-bottom: 1px solid $tableBorderBlue;
+                align-items: center;
+            }
+
+            .user{
+                padding: 10px;
+                text-align: center;
+                display: flex;
+
+                @include userImgWithStatus ('.user__img');
+
+                .user__img{
+                    height: 40px;
+                    width: 40px;
+                    max-width: 40px;
+                    min-width: 40px;
+                    
+                    .status{
+                        width: 15px;
+                        height: 15px;
+                        border: 2px solid $lightViolete;
+                    }
+                }
+                .user__name{
+                    margin-left: 10px;
+                    font-size: 12px;
+                    margin: auto 10px;
+                    text-align: left;
+                    font-weight: 500;
+                    color: $textDark;
+                }
+                .add__chat{
+                    height: 33px;
+                    min-width: 33px;
+                    border-radius: 5px;
+                    border: 1px solid $borderLightGray;
+                    background-color: $lightGray;
+                    color: $darkGray;
+                    margin: auto 0;
+                    text-align: right;
+                    padding: 0;
+                }
+            }
+
+            @include styledScrollFor('.friend__list');
+
+            .friend__list{
+                overflow: auto;
+                max-height: 500px;
+                .friend__info{
+                    border-bottom: 1px solid $borderLightGray;
+                    width: 100%;
+                    cursor: pointer;
+
+                    &:last-child{
+                        border: none;
+                    }
+
+                    &:hover{
+                        background-color: $tableBlueBg;
+                    }
+                }
+            }
+
+            .view__more{
+                text-align: center;
+                padding: 10px;
+                border-top: 1px solid $borderLightGray;
+                .view__more_btn{
+                    color: $tableDarkText;
+                }
+            }
+        }
+
+        .chat__message{
+            .message__content{
+                margin: 10px;
+                .message__header{
+                    background-color: $blue;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 5px 25px;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                    
+                    @include userImgWithStatus ('.sender__img');
+
+                    .sender__img{
+                        text-align: center;
+                        height: 50px;
+                        width: 50px;
+                        max-width: 50px;
+                        min-width: 50px;
+                        
+                        .status{
+                            width: 15px;
+                            height: 15px;
+                            border: 2px solid $lightViolete;
+                        }
+                    }
+
+                    .name{
+                        text-align: left;
+                        color: $white;
+                        h5{
+                            font-size: 18px;
+                        }
+                        .active__status{
+                            font-size: 12px;
+                            opacity: 0.7;
+                        }
+                    }
+
+                    .actions{
+                        text-align: right;
+                        .v-btn--floating.v-btn--small .v-icon{
+                            font-size: 20px;
+                        }
+                    }
+                }
+
+                .message__body{
+                    border: 1px solid $borderLightGray;
+                    border-bottom-left-radius: 10px;
+                    border-bottom-right-radius: 10px;
+                    @include styledScrollFor('.messages'); //style the scroll
+                    
+                    .messages{
+                        background-color: $white;
+                        overflow: auto;
+                        max-height: 450px;
+                        border-bottom: 1px solid $borderLightGray;
+                        
+                        .message{
+                            border-bottom: 1px solid $borderLightGray;
+                            padding: 5px 25px;
+                        }
+        
+                        .sender{
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            justify-content: space-between;
+        
+                            @include userImgWithStatus ('.sender__img');
+
+                            .sender__img{
+                                text-align: center;
+                                height: 50px;
+                                width: 50px;
+                                max-width: 50px;
+                                
+                                .status{
+                                    width: 15px;
+                                    height: 15px;
+                                    border: 2px solid $lightViolete;
+                                }
+                            }
+        
+                            .sender__name h5{
+                                font-size: 18px;
+                                margin: 0 5px;
+                                color: $titleDarkBlue;
+                            }
+        
+                            .date{
+                                font-size: 12px;
+                                opacity: 0.7;
+                                margin: 0 5px;
+                                color: $textDarkBlue;
+                                text-align: right;
+                            }
+                        }
+        
+                        .sender__message{
+                            padding: 10px;
+                            font-size: 16px;
+                            text-align: justify;
+                            margin: 0;
+                            color: $textDarkBlue;
+                            margin-right: 30px;
+                        }
+                        
+                        .me{
+                            background-color: $tableBlueBg;
+                            
+                            .sender{
+                                flex-direction: row-reverse;
+        
+                                .sender__name{
+                                    text-align: right;
+                                }
+                                .date{
+                                    text-align: left;
+                                }
+                            }
+
+                            .sender__message{
+                                margin-left: 30px;
+                                margin-right: 0;
+                                text-align: justify;
+                                display: flex;
+                                flex-flow: column;
+                                align-items: flex-end;
+                            }
+                        }
+                    }
+                    .write{
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: nowrap;
+                        align-items: center;
+                        background-color: $white;
+                        .write__actions{
+                            .action{
+                                margin: 5px 7px;
+                                color: $lightGray-2;
+                                cursor: pointer;
+                                
+                                &:hover{
+                                    color: $blue;
+                                }
+                            }
+                        }
+                    }
+                    
+                    .view__more{
+                        text-align: center;
+                        padding: 10px;
+                        border-top: 1px solid $borderLightGray;
+                        background-color: $white;
+                        border-bottom-left-radius: 10px;
+                        border-bottom-right-radius: 10px;
+                        .view__more_btn{
+                            color: $tableDarkText;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .hover__info{
+        margin: 20px 10px 10px 30px;
+    }
+    
+    .add__chatlist{
+        margin: 10px;
+    }
+
+    .chat{
+        padding: 12px;
+        margin: 12px;
+    
+        .chat__content{
+            padding: 10px;
+    
+            .chatlist{
+                margin: 10px 2px;
+    
+                .user{
+                    padding: 5px;
+    
+                    .user__img{
+                        height: 30px;
+                        width: 30px;
+                        min-width: 30px;
+                        
+                        .status{
+                            width: 10px;
+                            height: 10px;
+                        }
+                    }
+                    .user__name{
+                        margin-left: 5px;
+                        font-size: 12px;
+                        margin: auto 5px;
+                    }
+                    .add__chat{
+                        height: 23px;
+                        min-width: 23px;
+                        font-size: 100px;
+                        border-radius: 5px;
+                        padding: 0;
+                        .v-icon{
+                            font-size: 15px;
+                        }
+                    }
+                }
+    
+                .friend__list{
+                    max-height: 400px;
+                }
+    
+                .view__more{
+                    padding: 5px;
+                }
+            }
+    
+            .chat__message{
+                .message__content{
+                    margin: 10px 5px;
+                    .message__header{
+                        padding: 5px 10px;
+    
+                        .sender__img{
+                            height: 30px;
+                            min-width: 30px;
+                            max-width: 30px;
+                            
+                            .status{
+                                width: 10px;
+                                height: 10px;
+                            }
+                        }
+    
+                        .name{
+                            h5{
+                                font-size: 14px;
+                            }
+                            .active__status{
+                                font-size: 10px;
+                            }
+                        }
+    
+                        .actions{
+                            .v-btn--floating.v-btn--small {
+                                height: 30px;
+                                width: 30px;
+                                margin: 0 2px;
+                                .v-icon{
+                                    font-size: 15px;
+                                }
+                            }
+                        }
+                    }
+    
+                    .message__body{
+                        
+                        .messages{
+                            max-height: 360px;
+                            
+                            .message{
+                                padding: 5px 10px;
+                            }
+            
+                            .sender{
+    
+                                .sender__img{
+                                    height: 30px;
+                                    width: 30px;
+                                    max-width: 30px;
+                                    
+                                    .status{
+                                        width: 10px;
+                                        height: 10px;
+                                    }
+                                }
+            
+                                .sender__name h5{
+                                    font-size: 14px;
+                                }
+                            }
+            
+                            .sender__message{
+                                padding: 7px;
+                                font-size: 14px;
+                                margin-right: 20px;
+                            }
+                            
+                            .me{
+    
+                                .sender__message{
+                                    margin-left: 20px;
+                                }
+                            }
+                        }
+                        .write{
+                            .v-input__control{
+                                height: auto;
+                            }
+                            .write__actions{
+                                .action{
+                                    margin: 3px 5px;
+                                    font-size: 20px;
+                                }
+                            }
+                        }
+                        
+                        .view__more{
+                            padding: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 600px){
+    .hover__info{
+        margin: 10px;
+        &::after{
+            all: unset;
+        }
+        &::before{
+            all: unset;
+        }
+    }
+}

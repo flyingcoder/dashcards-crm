@@ -36,20 +36,19 @@
                     :loading="loading"
                     :sort="sort"
                     :has-checkbox="true"
-                    :has-header-icon="true"
                     hide-actions
                     @items-selected="selected_ids = $event"
                     @sorted="changeSort"
                     class="custom__table"
                 >
                 <template slot="toolbar">
-                    <v-toolbar flat class="table__toolbar">
+                    <v-layout row wrap justify-space-between align-center flat class="table__toolbar">
                         
-                        <v-toolbar-title class="table__toolbar-title">Members</v-toolbar-title>
+                        <div class="table__toolbar-title">Members</div>
 
-                        <v-spacer></v-spacer>
+                        <div class="member__option">
 
-                        <v-toolbar-items class="member__option">
+                            <v-btn class="groups" dark small color="#3b589e" @click="go_to_groups_page">Groups</v-btn>
                 
                             <v-btn fab flat small class="list__view">
                                 <v-icon>list</v-icon>
@@ -68,14 +67,14 @@
                                     <v-icon>more_horiz</v-icon>
                                 </v-btn>
                                 <v-list class="sort__list" flat>
-                                    <v-list-tile class="sort__list_tile" v-for="(sortLists, index) in sortList" :key="index" @click=" ">
+                                    <v-list-tile class="sort__list_tile" v-for="(sortLists, index) in sortList" :key="index">
                                         <v-list-tile-title class="sort__list_item">{{ sortLists.title }}</v-list-tile-title>
                                     </v-list-tile>
                                 </v-list>
                             </v-menu>
                         
-                        </v-toolbar-items>
-                    </v-toolbar>
+                        </div>
+                    </v-layout>
                 </template>
 
                     <template slot="custom-item" slot-scope="item" class="template-table">
@@ -117,7 +116,7 @@
                                 Rows per page: <v-select :items="rows_per_page_items" menu-props="auto" v-model="rows_per_page"></v-select>
                             </div>
 
-                            <div class="pagination">
+                            <div class="pagination" v-show="should_show_pagination">
                                 <div class="text-xs-center pt-2">
                                     <v-pagination :length="total_items" :total-visible="5" v-model="page"></v-pagination>
                                 </div>
@@ -130,5 +129,7 @@
         
     </div>
 </template>
-<style lang="scss" src="./Teams.scss"></style>
-<script src="./Teams.js"></script>
+<style lang="scss" src="./Teams.scss">
+</style>
+<script src="./Teams.js">
+</script>

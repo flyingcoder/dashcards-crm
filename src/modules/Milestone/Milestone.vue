@@ -4,14 +4,14 @@
 		<milestone-dialog
 				:dialog.sync="add_dialog"
 				ref="add_dialog"
-				dialog-title="Add Milestone"
+				dialogTitle="Add Milestone"
 				@save="add_item('add_new_milestone', $event, dynamic_api)"
 		/>
 
 		<milestone-dialog
 				:dialog.sync="edit_dialog"
 				ref="edit_dialog"
-				dialog-title="Edit Milestone"
+				dialogTitle="Edit Milestone"
 				:is-edit-dialog="edit_dialog"
 				:fields-to-edit="edit_item"
 				@save="update_item('edit_milestone', $event, dynamic_api)"
@@ -42,10 +42,9 @@
 							@sorted="changeSort"
 					>
 						<template slot="custom-item" slot-scope="item"> <!-- Table Items -->
-							<td class="text-xs-center">{{ item.item.title }}</td>
-							<td class="text-xs-center">{{ item.item.status }}</td>
-							<td class="text-xs-center">{{ item.item.days }}</td>
-
+							<td class="text-xs-left">{{ item.item.title }}</td>
+							<td class="text-xs-left">{{ item.item.status }}</td>
+							<td class="text-xs-left">{{ item.item.days }}</td>
 							<td class="text-xs-center">
 								<v-icon class="mr-2" @click="open_edit_dialog(item.item)">
 									edit
@@ -94,12 +93,13 @@
 	</div>
 </template>
 
-<script src="./Milestone.js"></script>
+<script src="./Milestone.js">
+</script>
 
 <style lang="scss" scoped>
-	@import "~@/sass/variables";
+@import '~@/sass/variables';
 
- .milestone {
-	 @include customTableRow; //css used for styling the last row of the table
- }
+.milestone {
+  @include customTableRow; //css used for styling the last row of the table
+}
 </style>

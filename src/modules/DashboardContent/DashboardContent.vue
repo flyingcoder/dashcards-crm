@@ -1,110 +1,51 @@
 <template>
-    <div class="content">
+	<div class="content">
 
-        <div class="row d__breadcrumbs">
-            <div class="breadcrumbs">
-                <breadcrumb :paths="paths" />
-            </div>
-            <div class="page__options">
-                <div class="option save">
-                    <div class="icon">
-                        <img src="@/assets/icons/dashboard/save.svg" class="responsive-img" alt="save" />
-                    </div>
-                    <div class="title">
-                        <span> Save  </span>
-                    </div>
-                </div>
+		<div class="row d__breadcrumbs">
+			<div class="breadcrumbs">
+				<breadcrumb :paths="paths"/>
+			</div>
+			<div class="page__options">
 
-               <logon-label /> <!--custom component-->
+				<logon-label/> <!--custom component-->
 
-                <div class="option themes">
-                    <div class="color"></div>
-                    <div class="title">
-                        <span>Themes</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+				<div class="option themes">
+					<div class="color"></div>
+					<div class="title">
+						<span>Themes</span>
+					</div>
+				</div>
+			</div>
+		</div>
 
-        <div class="row d__tiles">
-            <div class="tiles__content"
-                v-for="tile in tiles"
-                :key="tile.title">
+		<dashboard-tiles/> <!-- custom component -->
 
-                <div class="tiles__icon">
-                    <img class="responsive-img icon tiles__image" :src="tile.icon" />
-                </div>
+		<v-container fluid>
+			<v-layout>
+				<draggable class="d__cards" v-model="cards">
+					<template v-for="card in card_components">
 
-                <div class="tiles__info">
-                    <div class="counter"> {{ tile.counter }} </div>
-                    <div class="tile__title">{{ tile.title }}</div>
-                </div>
+						<component :is="card.component"
+						           :key="card.component"
+						           v-if="should_show(card.slug) && card.hasOwnProperty('component')"
+						></component>
 
-            </div>
-        </div>
+						<template v-else-if="should_show(card.slug)">
+							<v-flex xs12 :key="card.id">
+								<div>
+									<dash-card :title="card.name"></dash-card>
+								</div>
+							</v-flex>
+						</template>
 
-        <div class="row d__cards">
-            <tasks-card />
+					</template>
+				</draggable>
+			</v-layout>
+		</v-container>
 
-            <div class="d__box">
-                <div class="d__box__header">
-                    <label>Timeline</label>
-                </div>
-                <div class="d__box__content">
-                    test
-                </div>
-            </div>
-            <div class="d__box">
-                <div class="d__box__header">
-                    <label>Client</label>
-                </div>
-                <div class="d__box__content">
-                    test
-                </div>
-            </div>
-            <div class="d__box">
-                <div class="d__box__header">
-                    <label>Timer</label>
-                </div>
-                <div class="d__box__content">
-                    test
-                </div>
-            </div>
-            <div class="d__box">
-                <div class="d__box__header">
-                    <label>Payment</label>
-                </div>
-                <div class="d__box__content">
-                    test
-                </div>
-            </div>
-            <div class="d__box">
-                <div class="d__box__header">
-                    <label>Invoice</label>
-                </div>
-                <div class="d__box__content">
-                    test
-                </div>
-            </div>
-            <div class="d__box">
-                <div class="d__box__header">
-                    <label>Calendar</label>
-                </div>
-                <div class="d__box__content">
-                    test
-                </div>
-            </div>
-            <div class="d__box">
-                <div class="d__box__header">
-                    <label>Pass Box</label>
-                </div>
-                <div class="d__box__content">
-                    test
-                </div>
-            </div>
-        </div>
-
-    </div>
+	</div>
 </template>
-<script src="./DashboardContent.js"></script>
-<style lang="scss" scoped src="./DashboardContent.scss"></style>
+<script src="./DashboardContent.js">
+</script>
+<style lang="scss" scoped src="./DashboardContent.scss">
+</style>

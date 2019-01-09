@@ -1,0 +1,12 @@
+@import '~@/sass/_variables';
+
+#chat{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    z-index: 999;
+
+}

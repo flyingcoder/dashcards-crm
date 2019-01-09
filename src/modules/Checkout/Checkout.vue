@@ -1,5 +1,5 @@
 <template>
-  <div class="checkout">
+  <div class="checkout" v-if="price">
     <div class="payment__container">
       <h1>You are going to pay {{ price }}</h1>
       <form id="payment-form">
@@ -20,5 +20,7 @@
     </div>
   </div>
 </template>
-<script src="./Checkout.js"></script>
-<style lang="scss" scoped src="./Checkout.scss"></style>
+<script src="./Checkout.js">
+</script>
+<style lang="scss" scoped src="./Checkout.scss">
+</style>

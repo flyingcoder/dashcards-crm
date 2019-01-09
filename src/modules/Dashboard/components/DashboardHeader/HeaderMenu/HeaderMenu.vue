@@ -1,29 +1,35 @@
 <template>
     <div class="header-menu">
 
-        <header-icon
-            :image-src="require('@/assets/icons/header/add__default.png')"
-            :hovered-image-src="require('@/assets/icons/header/add.png')"
+        <add-cards />
+
+        <notification-icon
+            :image-src="mail_icon"
+            :hovered-image-src="hovered_mail_icon"
+            :count="null"
         />
 
-        <header-icon
-            :image-src="require('@/assets/icons/header/email__default.png')"
-            :hovered-image-src="require('@/assets/icons/header/email.png')"
+        <notification-icon
+            :image-src="notification_icon"
+            :hovered-image-src="hovered_notification_icon"
+            :count="notification"
         />
 
-        <header-icon
-            :image-src="require('@/assets/icons/header/notification__default.png')"
-            :hovered-image-src="require('@/assets/icons/header/notification.png')"
-        />
-
-        <header-icon
-            :image-src="require('@/assets/icons/header/chat__default.png')"
-            :hovered-image-src="require('@/assets/icons/header/chat.png')"
+        <notification-icon
+            :image-src="chat_icon"
+            :hovered-image-src="hovered_chat_icon"
+            :count="chat"
         />
 
         <dropdown /> <!--custom component-->
 
+        <div class="try__premium">
+            <div class="premium__btn" @click="go_to_pricing_page">Try Premium Free for 1 Month</div>
+        </div>
+
     </div>
 </template>
-<script src="./HeaderMenu.js"></script>
-<style lang="scss" scoped src="./HeaderMenu.scss"></style>
+<script src="./HeaderMenu.js">
+</script>
+<style lang="scss" scoped src="./HeaderMenu.scss">
+</style>

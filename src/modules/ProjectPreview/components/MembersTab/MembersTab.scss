@@ -1,7 +1,17 @@
 @import "~@/sass/_variables";
-.members-tab {
     
-    @include sortOptionStyle;
+@include sortOptionStyle;
+
+.members-tab {
+    padding: 25px;
+    button.add__btn.v-btn.v-btn--floating.v-btn--small{
+        background-color: $blue;
+        margin-bottom: 20px;
+        .v-icon{
+            color: $white;
+            font-size: 24px;
+        }
+    }
 
     .table__toolbar-title{
         color: $tableTitleBlue;
@@ -13,6 +23,29 @@
         .v-icon{
             font-size: 24px;
             color: $sortOptionGray;
+        }
+    }
+}
+
+@media only screen and (max-width: 480px){
+    .members-tab {
+        padding: 15px;
+        button.add__btn.v-btn.v-btn--floating.v-btn--small{
+            margin-bottom: 15px;
+        }
+    
+        .table__toolbar-title{
+            font-size: 16px;
+        }
+    
+        .member__option{
+            .v-btn--floating.v-btn--small{
+                height: 30px;
+                width: 30px;
+            }
+            .v-icon{
+                font-size: 20px;
+            }
         }
     }
 }

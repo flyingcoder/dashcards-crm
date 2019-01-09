@@ -3,30 +3,9 @@
 @include styledScrollFor('.v-card__text')
 
 .v-card__text{
-    max-height:600px;
-    padding: 0;
     .theme--light.v-input:not(.v-input--is-disabled) input{
         color: $modalTitle;
         caret-color: $modalTitle;
-    }
-    label.v-label.theme--light{
-        font-size: 20px;
-        opacity: 0.8;
-    }
-    .service__input{
-        font-size: 20px;
-        font-weight: 500;
-        color: $modalTitle;
-        .v-text-field.v-text-field--solo .v-input__control{
-            min-height: 65px;
-        }
-        .v-input__slot{
-            min-height: 0;
-            border-radius:8px;
-            border: 1px solid #dce1e5;
-            max-height: 65px;
-            padding: 24px 26px;
-        }
     }
 
     button.addService__btn.v-btn.v-btn--depressed.theme--light, button.addService__btn.v-btn.theme--light, button.deleteService__btn.v-btn.theme--light{
@@ -77,66 +56,71 @@
     }
 }
 
+@include styledDialog('.addService__dialog.v-card.theme--light');
+
 .addService__dialog.v-card.theme--light{
-    border-radius: 15px;
-    background-color: $modalBgGray;
-    padding: 24px;
-    .v-card__title{
+
+    .v-card__text{
+        max-height:600px;
         padding: 0;
-        margin-bottom: 28px;
-        .dialog__title{
-            font-size:24px;
+        .theme--light.v-input:not(.v-input--is-disabled) input{
+            color: $modalTitle;
+            caret-color: $modalTitle;
+        }
+        label.v-label.theme--light{
+            font-size: 20px;
+            opacity: 0.8;
+        }
+        .service__input{
+            font-size: 20px;
             font-weight: 500;
             color: $modalTitle;
+            .v-input__slot{
+                border-radius:8px;
+                min-height: 65px;
+            }
         }
     }
-    .service__actions{
-        justify-content: center;
-        .service__actions_btn.v-btn{
-            font-size: 16px;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #dce1e5;
-            color: $modalTitle;
-            background-color: $white;
-            height: auto;
-            width: 130px;
-            margin: 0 9px;
-        }
-    }
-}
 
-//Tablet View
-@media only screen and (max-width: 768px) and (min-width: 481px){
+    .dialog__header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 0;
+
+        @include styledCloseDialog('.close__dialog');
+
+        @include styledTitleDialog('.dialog__title');
+    }
     
+    .service__field{
+        margin-bottom: 10px;
+    }
+    
+    @include actionButtonsDialog('.service__actions')
 }
 
 //Mobile View
-@media only screen and (max-width: 480px){
+@media only screen and (max-width: 599px){
     .addService__dialog.v-card.theme--light{
-        padding: 18px;
         .v-card__title{
-            margin-bottom: 22px;
-            .dialog__title{
-                font-size:22px;
-            }
+            margin-bottom: 10px;
         }
         .v-card__text{
             max-height:300px;
+
+            label.v-label.theme--light{
+                font-size: 16px;
+            }
+
             .service__input{
-                font-size: 18px;
-                margin-right: 15px;
-                .v-text-field.v-text-field--solo .v-input__control{
-                    min-height: 0;
-                }
+                font-size: 16px;
                 .v-input__slot{
-                    min-height: 0;
-                    min-width: 0;
-                    border-radius:8px;
-                    max-height: 46px;
-                    padding: 10px 14px;
+                    min-height: 46px;
                 }
             }
+
             button.addService__btn.v-btn.v-btn--depressed.theme--light, button.addService__btn.v-btn.theme--light, button.deleteService__btn.v-btn.theme--light{
                 max-height: 45px;
                 width: auto;
@@ -151,13 +135,6 @@
                     width: 45px;
                     min-width: 0;
                 }
-            }
-        }
-        .service__actions{
-            .service__actions_btn.v-btn{
-                font-size: 14px;
-                padding: 8px;
-                width: 80px;
             }
         }
     }

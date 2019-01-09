@@ -20,19 +20,27 @@
 
 		<v-flex xs12 class="card__footer text-xs-center">
 			<slot name="footer">
-				<v-btn flat class="view__more_btn">VIEW MORE</v-btn>
+				<v-btn v-if="viewMoreLink" flat class="view__more_btn" @click="reroute">VIEW MORE</v-btn>
 			</slot>
 		</v-flex>
+
 	</v-container>
 </template>
 
 <script>
-	export default {
-		name: 'DashCard',
-		props: {
-			title: String
-		}
-	}
+export default {
+  name: 'DashCard',
+  props: {
+    title: String,
+    viewMoreLink: Object
+  },
+  methods: {
+    reroute() {
+      this.$router.push(this.viewMoreLink)
+    }
+  }
+}
 </script>
 
-<style lang="scss" scoped src="./DashCard.scss"></style>
+<style lang="scss" scoped src="./DashCard.scss">
+</style>

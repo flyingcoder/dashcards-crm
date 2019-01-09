@@ -17,6 +17,11 @@
       height: 70%;
     }
   }
+  .table__actions{
+    display: flex;
+    align-items: center;
+    margin-top: 3px;
+  }
 
   @include customTableRow;
 }

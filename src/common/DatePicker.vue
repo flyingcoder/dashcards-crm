@@ -16,56 +16,54 @@
 				v-bind="$attrs"
 		></v-text-field>
 
-		<v-date-picker clearable v-model="picker_date" :max="max" :min="min" no-title scrollable>
+		<v-date-picker clearable color="#657186" v-model="picker_date" :max="max" :min="min" no-title scrollable>
 			<v-spacer></v-spacer>
-			<v-btn flat color="primary" @click="cancel">Cancel</v-btn>
-			<v-btn flat color="primary" @click="save">OK</v-btn>
-			<v-btn flat color="primary" @click="clear">Clear</v-btn>
+			<v-btn flat color="#657186" @click="cancel">Cancel</v-btn>
+			<v-btn flat color="#657186" @click="save">OK</v-btn>
+			<v-btn flat color="#657186" @click="clear">Clear</v-btn>
 		</v-date-picker>
 	</v-menu>
 </template>
 
 <script>
-	export default {
-		name: 'DatePicker',
-		inheritAttrs: false,
-		props: {
-			value: { type: String, default: null },
-			min: { type: String, default: null },
-			max: { type: String, default: null }
-		},
+export default {
+  name: 'DatePicker',
+  inheritAttrs: false,
+  props: {
+    value: { type: String, default: null },
+    min: { type: String, default: null },
+    max: { type: String, default: null }
+  },
 
-		data: () => ({
-			menu: false,
-			picker_date: null
-		}),
+  data: () => ({
+    menu: false,
+    picker_date: null
+  }),
 
-		watch: {
-			value(val) { this.picker_date = val }
-		},
+  watch: {
+    value(val) {
+      this.picker_date = val
+    }
+  },
 
-		methods: {
+  methods: {
+    save() {
+      this.$emit('input', this.picker_date)
+      this.cancel()
+    },
 
-			save() {
-				this.$emit('input', this.picker_date)
-				this.cancel()
-			},
+    cancel() {
+      this.menu = false
+    },
 
-			cancel() {
-				this.menu = false
-			},
-
-			clear() {
-				this.picker_date = null
-			}
-
-		},
-
-	}
+    clear() {
+      this.picker_date = null
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-	.date-picker {
-
-	}
+.date-picker {
+}
 </style>

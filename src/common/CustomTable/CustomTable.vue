@@ -16,6 +16,7 @@
                 :headers="headers"
                 :items="items"
                 :loading="loading"
+                no-data-text=""
                 select-all
                 disable-initial-sort
                 v-bind="$attrs"
@@ -81,7 +82,7 @@
           </template>
 
           <template slot="no-data"> <!-- DISPLAYED WHEN NO ITEMS -->
-            <v-alert :value="true" color="error" icon="warning">
+            <v-alert :value="true" color="error" icon="warning" v-if="!loading">
               Sorry, nothing to display here :(
             </v-alert>
           </template>
@@ -97,7 +98,10 @@
     </div>
   </div>
 </template>
-<script src="./CustomTable.js"></script>
-<style lang="scss" scoped src="./CustomTable.scss"></style>
+<script src="./CustomTable.js">
+</script>
+<style lang="scss" scoped src="./CustomTable.scss">
+</style>
 
-<style scoped src="./CustomTable.css"></style>
+<style scoped src="./CustomTable.css">
+</style>

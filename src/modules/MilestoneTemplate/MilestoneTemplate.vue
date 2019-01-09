@@ -25,96 +25,96 @@
 				@delete="delete_item('delete_milestone_template')"
 		/>
 
-		<v-container>
-			<v-layout row>
-				<v-flex xs12>
+		<v-layout row>
+			<v-flex xs12>
 
-					<table-header :paths="paths" @click="add_dialog = true" />
+				<table-header :paths="paths" @click="add_dialog = true" />
 
-					<custom-table
-							:headers="headers"
-							:items="items"
-							:loading="loading"
-							:sort="sort"
-							:has-checkbox="true"
-							hide-actions
-							@items-selected="selected_ids = $event"
-							toolbar-title="Milestone Templates"
-							@sorted="changeSort"
-					>
-						<template slot="custom-item" slot-scope="item"> <!-- Table Items -->
-							<td>{{ item.item.name }}</td>
-							<td>{{ item.item.status }}</td>
+				<custom-table
+						:headers="headers"
+						:items="items"
+						:loading="loading"
+						:sort="sort"
+						:has-checkbox="true"
+						hide-actions
+						@items-selected="selected_ids = $event"
+						toolbar-title="Milestone Templates"
+						@sorted="changeSort"
+				>
+					<template slot="custom-item" slot-scope="item"> <!-- Table Items -->
+						<td>{{ item.item.name }}</td>
+						<td>{{ item.item.status }}</td>
 
-							<td class="text-xs-center">
-								<v-icon class="mr-2" @click="open_edit_dialog(item.item)">
-									edit
-								</v-icon>
+						<td class="text-xs-center">
+							<v-icon class="mr-2" @click="open_edit_dialog(item.item)">
+								edit
+							</v-icon>
 
-								<v-icon class="mr-2" @click="open_delete_dialog(item.item)">
-									delete
-								</v-icon>
+							<v-icon class="mr-2" @click="open_delete_dialog(item.item)">
+								delete
+							</v-icon>
 
-								<v-icon @click="navigate_to_milestone_page(item.item)" title="Open milestone table">
-									pageview
-								</v-icon>
+							<v-icon @click="navigate_to_milestone_page(item.item)" title="Open milestone table">
+								pageview
+							</v-icon>
 
-							</td>
-						</template>
+						</td>
+					</template>
 
-						<template slot="table-actions">
+					<template slot="table-actions">
 
-							<div class="actions-wrapper">
+						<div class="actions-wrapper">
 
-								<div class="bulk-delete">
-									<v-btn color="indigo" dark outline :disabled="!show_delete_selected">
-										Delete Selected
-									</v-btn>
-								</div>
-
-								<div class="rows-per-page-dropdown">
-									Rows per page: <v-select :items="rows_per_page_items" menu-props="auto" v-model="rows_per_page"></v-select>
-								</div>
-
-								<div class="pagination">
-									<div class="text-xs-center pt-2">
-										<v-pagination :length="total_items" :total-visible="5" v-model="page"></v-pagination>
-									</div>
-								</div>
-
+							<div class="bulk-delete">
+								<v-btn color="indigo" dark outline :disabled="!show_delete_selected">
+									Delete Selected
+								</v-btn>
 							</div>
-						</template>
 
-					</custom-table>
-				</v-flex>
-			</v-layout>
-		</v-container>
+							<div class="rows-per-page-dropdown">
+								Rows per page: <v-select :items="rows_per_page_items" menu-props="auto" v-model="rows_per_page"></v-select>
+							</div>
+
+							<div class="pagination" v-if="should_show_pagination">
+								<div class="text-xs-center pt-2">
+									<v-pagination :length="total_items" :total-visible="5" v-model="page"></v-pagination>
+								</div>
+							</div>
+
+						</div>
+					</template>
+
+				</custom-table>
+			</v-flex>
+		</v-layout>
 
 	</div>
 </template>
 
-<script src="./MilestoneTemplate.js"></script>
+<script src="./MilestoneTemplate.js">
+</script>
 
 <style lang="scss" scoped>
-	@import '~@/sass/_variables';
+@import '~@/sass/_variables';
 
-	.milestone-template {
-		.cell-with-icon {
-			display: flex;
-			justify-content: center;
-			align-items: center;
+.milestone-template {
+  padding: 20px;
 
-			.milestone-icon {
-				display: flex;
+  .cell-with-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-				img {
-					width: auto;
-					height: 40px;
-				}
-			}
-		}
+    .milestone-icon {
+      display: flex;
 
-		@include customTableRow; //css used for styling the last row of the table
+      img {
+        width: auto;
+        height: 40px;
+      }
+    }
+  }
 
-	}
+  @include customTableRow; //css used for styling the last row of the table
+}
 </style>

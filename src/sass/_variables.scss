@@ -9,13 +9,32 @@
 // Colors
     $white: #ffffff;
     $blue: #3b589e;
-    $green: #4caf50;
-    $red: #ff5252;
-    $orange: #ff7f27;
+    $lightBlue: #00a7e5;
+    $green: #1fb868;
+    $red: #f56c6c;
+    $lightRed: #ff7f7e;
+    $violet: #a085d5;
+    $darkViolete: #8b94bf;
+    $darkViolete-2: #515d93;
+    $lightViolete: #e8eaf6;
+    $lightViolete-2: #ced3eb;
+    $lightGreen: #50b4aa;
+    $orange: #ed8564;
+    $gray: #ccc;
+    $gray-2: #d5d4d2;
+    $darkGray: #b3b6c3;
+    $lightGray: #f8f8ff;
+    $lightGray-2: #BCC2CF;
+    $btnGray: #b3b7c3;
     $textGray: #9095AB;
+    $textDark: #657186;
+    $textDark-2: #4c5561;
+    $textLightBlue: #7a94a9;
+    $textDarkBlue: #667187;
     $chipGray: #9196ac;
     $chipDark: #2b3244;
     $chipBlue: #3e5aa3;
+    $titleDarkBlue: #667381;
     $borderGray: #b2b6c0;
     $toggle-border: #e3e6eb;
     $tile-border: #dce1e5;
@@ -30,7 +49,12 @@
     $tableTitleBlue: #667280;
     $tableIconGray:#d3d5e1;
     $modalBgGray:#eeeef3;
-    $modalTitle: #667187;
+    $modalTitle: #657186;
+    $bgLightBlue: #f8f8ff; 
+    $bgLightBlue-2: #f5f7fa;
+    $borderLightGray: #dce1e5;
+    $fieldLabel: #e8f1fa;
+    $darkBoxShadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 
 // Mixin for styled scroll
 
@@ -74,6 +98,93 @@
 
     }
 }
+/********************************************************************
+ * Dialog Mixins
+ * (Start)
+ ********************************************************************/
+
+// Dialog style
+@mixin styledDialog($selector){
+    #{$selector}{
+        border-radius: 15px;
+        background-color: $modalBgGray;
+        padding: 24px;
+    }
+    @media only screen and (max-width: 480px){
+        #{$selector}{
+            padding: 15px;
+        }
+    }
+}
+// Close button in Dialog
+@mixin styledCloseDialog($selector) {
+    #{$selector}{
+        border: 1px solid $sortOptionGray;
+        background-color: $white;
+        .v-icon{
+         font-size: 24px;
+         color: $sortOptionGray;
+       }
+    }
+    
+    @media only screen and (max-width: 480px){
+        #{$selector}{
+            height: 30px;
+            width: 30px;
+            .v-icon{
+             font-size: 20px;
+           }
+        }
+    }
+}
+
+// Title style in Dialog
+@mixin styledTitleDialog($selector) {
+    #{$selector}{
+        font-size:24px;
+        font-weight: 500;
+        color: $modalTitle;
+    }
+
+    @media only screen and (max-width: 480px){
+        #{$selector}{
+            font-size:20px;
+        }
+    }
+}
+
+// Action buttons in Dialog
+@mixin actionButtonsDialog($selector) {
+    #{$selector}{
+        justify-content: center;
+        .v-btn{
+            font-size: 14px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid $borderLightGray;
+            color: $modalTitle;
+            background-color: $white;
+            height: auto;
+            width: 110px;
+            margin: 0 9px;
+        }
+    }
+    @media only screen and (max-width: 480px){
+        #{$selector}{
+            .v-btn{
+                font-size: 14px;
+                padding: 8px;
+                width: 80px;
+            }
+        }
+    }
+}
+
+/********************************************************************
+ * Dialog Mixins
+ * (End)
+ ********************************************************************/
+
 @mixin sortOptionStyle {
     
     .sort__option{
@@ -119,3 +230,53 @@
     }
 }
 
+@mixin userImgWithStatus ($selector){
+    #{$selector}{
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        border: 1px solid $borderLightGray;
+        position: relative;
+        
+        .v-responsive{
+            border-radius: 50%;
+        }
+
+        .status{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 13px;
+            height: 13px;
+            border: 2px solid $lightViolete;
+            border-radius: 50%;
+        }
+        
+        .online{
+            background-color: $green;
+        }
+
+        .offline{
+            background-color: $gray;
+        }
+
+        .dnd{
+            background-color: $red;
+        }
+    }
+}
+
+@mixin cardTitle($selector){
+    #{$selector}{
+        color: $tableTitleBlue;
+        font-size: 24px;
+        font-weight: 500;
+        letter-spacing: .02em!important;
+        font-family: Roboto,sans-serif!important;
+    }
+    @media only screen and (max-width: 599px){
+        #{$selector}{
+            font-size: 16px;
+        }
+    }
+}

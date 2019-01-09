@@ -1,7 +1,7 @@
 <template>
-	<v-flex md6 xs12 class="tasks-card">
+	<v-flex xs12 class="tasks-card">
 		<div class="tasks__content">
-			<dash-card title="Tasks" class="task__content">
+			<dash-card title="Tasks" :view-more-link="viewMoreLink" class="task__content">
 				<div class="content-wrapper" slot="content">
 						<div class="tasks-items">
 							<tasks-content :id="id" />
@@ -13,24 +13,21 @@
 </template>
 
 <script>
-	import DashCard from '@/common/DashCard.vue'
-	import TasksContent from './TasksContent.vue'
+import DashCard from '@/common/DashCard.vue'
+import TasksContent from './TasksContent.vue'
 
-	export default {
-		name: 'TasksCard',
-		components: {
-			DashCard, TasksContent
-		},
+export default {
+  name: 'TasksCard',
+  components: {
+    DashCard,
+    TasksContent
+  },
 
-		props: { id: [Number, String], },
-
-	}
+  props: { id: [Number, String], viewMoreLink: Object }
+}
 </script>
 
 <style lang="scss" scoped>
-	.tasks-card {
-		.tasks__content{
-			margin: 12px;
-		}
-	}
+.tasks-card {
+}
 </style>

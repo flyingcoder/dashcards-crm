@@ -1,0 +1,32 @@
+@import '~@/sass/_variables';
+
+@include styledDialog('.teams-dialog');
+
+.teams-dialog{
+
+    .dialog__header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        padding: 0;
+    
+        @include styledCloseDialog('.close__dialog');
+
+        @include styledTitleDialog('.dialog__title');
+    }
+
+    .dialog__body{
+
+        .dialog__textfield, .dialog__selectfield{
+          margin: 5px;
+        }
+
+        .dialog-description{
+            margin: 5px;
+        }
+    }
+    
+    @include actionButtonsDialog('.dialog__actions');
+
+}

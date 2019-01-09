@@ -1,71 +1,73 @@
 export default {
-	name: 'MilestoneDialog',
+  name: 'MilestoneDialog',
 
-	props: {
-		dialog: Boolean,
-		dialogTitle: String,
-		isEditDialog: Boolean,
-		fieldsToEdit: { type: Object, default: () => {} }
-	},
+  props: {
+    dialog: Boolean,
+    dialogTitle: String,
+    isEditDialog: Boolean,
+    fieldsToEdit: { type: Object, default: () => {} }
+  },
 
-	data: () => ({
-		open: false,
-		title: null,
-		status: null,
-		days_init_value: 1,
-	}),
+  data: () => ({
+    open: false,
+    title: null,
+    status: null,
+    days_init_value: 1
+  }),
 
-	computed: {
-		days: {
-			get: function () {
-				return this.days_init_value
-			},
-			set: function (newValue) {
-				if (parseInt(newValue) < 1) {
-					this.days_init_value = 1
-					return
-				}
-				this.days_init_value = newValue
-			}
-		}
-	},
+  computed: {
+    days: {
+      get: function() {
+        return this.days_init_value
+      },
+      set: function(newValue) {
+        if (parseInt(newValue) < 1) {
+          this.days_init_value = 1
+          return
+        }
+        this.days_init_value = newValue
+      }
+    }
+  },
 
-	watch: {
-		dialog(new_val) { this.open = new_val },
-		open(new_val) { this.$emit('update:dialog', new_val) },
-		fieldsToEdit: {
-			handler(new_val) {
-				this.isEditDialog && this.update_fields(new_val)
-			},
-			deep: true
-		}
-	},
+  watch: {
+    dialog(new_val) {
+      this.open = new_val
+    },
+    open(new_val) {
+      this.$emit('update:dialog', new_val)
+    },
+    fieldsToEdit: {
+      handler(new_val) {
+        this.isEditDialog && this.update_fields(new_val)
+      },
+      deep: true
+    }
+  },
 
-	methods: {
+  methods: {
+    cancel() {
+      this.open = false
+    },
+    save() {
+      const fields_to_save = {
+        title: this.title,
+        status: this.status,
+        days: this.days
+      }
+      this.$emit('save', fields_to_save)
+    },
 
-		cancel() { this.open = false },
-		save() {
-			const fields_to_save = {
-				title: this.title,
-				status: this.status,
-				days: this.days,
-			}
-			this.$emit('save', fields_to_save)
-		},
+    update_fields({ fields }) {
+      const new_fields = Object.assign({}, fields)
+      this.title = new_fields.title
+      this.status = new_fields.status
+      this.days = new_fields.days
+    },
 
-		update_fields({fields}) {
-			const new_fields = Object.assign({}, fields)
-			this.title = new_fields.title
-			this.status = new_fields.status
-			this.days = new_fields.days
-		},
-
-		clear_and_close() {
-			Object.assign(this.$data, this.$options.data.apply(this))
-			this.cancel() //close the modal
-		},
-
-	}
-
-
+    clear_and_close() {
+      Object.assign(this.$data, this.$options.data.apply(this))
+      this.cancel() //close the modal
+    }
+  }
 }

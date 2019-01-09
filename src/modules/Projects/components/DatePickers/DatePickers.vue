@@ -3,13 +3,16 @@
 		<v-menu
 				v-model="date_picker.menu"
 				:close-on-content-click="false"
-				full-width
+				class="due__date_menu"
 		>
 			<v-text-field
 					slot="activator"
 					label="Select Start & End Date"
 					readonly
 					:value="text_field_label"
+					color="#657186"
+					prepend-icon="calendar_today"
+					hide-details
 			></v-text-field>
 			<div class="pickers-container">
 
@@ -21,11 +24,13 @@
 				<div class="due-date-pickers">
 					<v-date-picker
 							v-model="date_picker.start_date"
+        					color="#657186"
 					></v-date-picker>
 					<v-date-picker
 							:readonly="!date_picker.start_date"
 							v-model="date_picker.end_date"
 							:min="date_picker.start_date"
+        					color="#657186"
 					></v-date-picker>
 				</div>
 
@@ -39,5 +44,7 @@
 	</div>
 </template>
 
-<script src="./DatePickers.js"></script>
-<style lang="scss" scoped src="./DatePickers.scss"></style>
+<script src="./DatePickers.js">
+</script>
+<style lang="scss" scoped src="./DatePickers.scss">
+</style>

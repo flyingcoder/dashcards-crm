@@ -3,13 +3,17 @@
   .milestone__dynamic_box{
     margin: 12px;
   }
-  .speed__dial_item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    margin-right: 105px;
-    width: 160px;
+  .add-btn{
+    z-index: 1;
+    
+    .speed__dial_item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      margin-right: 105px;
+      width: 160px;
+    }
   }
 }
 @media only screen and (max-width: 480px){

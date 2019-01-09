@@ -13,15 +13,16 @@
 </template>
 
 <script>
-	export default {
-		name: 'ProjectRow',
-		functional: true,
-		props: {
-			labelIcon: String,
-			col1: String,
-			col2: [String, Number]
-		}
-	}
+export default {
+  name: 'ProjectRow',
+  functional: true,
+  props: {
+    labelIcon: String,
+    col1: String,
+    col2: [String, Number]
+  }
+}
 </script>
 
-<style lang="scss" scoped src="./ProjectRow.scss"></style>
+<style lang="scss" scoped src="./ProjectRow.scss">
+</style>

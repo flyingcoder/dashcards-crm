@@ -7,5 +7,7 @@
       ></v-text-field>
     </div>
 </template>
-<script src="./HeaderSearch.js"></script>
-<style lang="scss" scoped src="./HeaderSearch.scss"></style>
+<script src="./HeaderSearch.js">
+</script>
+<style lang="scss" scoped src="./HeaderSearch.scss">
+</style>

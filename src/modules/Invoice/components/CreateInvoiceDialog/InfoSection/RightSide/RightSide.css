@@ -1,0 +1,64 @@
+>>> .theme--light.v-input:not(.v-input--is-disabled) input, >>> .theme--light.v-input:not(.v-input--is-disabled) textarea{
+    color: #657186;
+}
+
+>>> .titlefield .v-input__slot{
+    border: 1px solid transparent;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+>>> .titlefield input{
+    max-height: 100px;
+    text-align: right;
+}
+>>> .titlefield .v-input__slot:hover{
+    border: 1px solid #e8f1fa;
+}
+
+>>> .textfield .v-input__slot{
+    background-color: #fbfcff;
+    border: 1px solid #e8f1fa;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+>>> .textfield .v-input__slot .v-select__selections{
+    line-height: 1.1em;
+}
+
+>>> .textfield .v-input__slot:hover{
+    border: 1px solid #cce0f4;
+}
+
+>>> .invoice__dates .textfield .v-input__slot{
+    font-size: 16px;
+    font-weight: 400;
+}
+@media only screen and (max-width: 1000px){
+    >>> .titlefield .v-input__slot{
+        font-size: 25px;
+    }
+}
+
+@media only screen and (max-width: 690px){
+    >>> .titlefield input{
+        text-align: left;
+    }
+}
+
+@media only screen and (max-width: 599px){
+    >>> .textfield .v-input__control{
+        min-height: auto;
+    }
+    >>> .titlefield .v-input__slot{
+        font-size: 20px;
+    }
+    >>> .textfield .v-input__slot{
+        font-size: 12px;
+        padding: 4px 6px;
+    }
+    >>> .invoice__dates .textfield .v-input__slot{
+        font-size: 12px;
+    }
+}

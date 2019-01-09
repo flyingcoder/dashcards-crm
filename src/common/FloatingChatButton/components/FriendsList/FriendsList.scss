@@ -1,0 +1,69 @@
+@import '~@/sass/_variables';
+
+.chat__button{
+  position: relative;
+  margin: 10px;
+}
+.chat__button[data-notify]:after {
+  content:attr(data-notify);
+  position:absolute;
+  top:0px;
+  right:0px;
+  font-size:.7em;
+  background:$green;
+  color:$white;
+  width:18px;
+  height:18px;
+  text-align:center;
+  line-height:18px;
+  border-radius:50%;
+  font-size:12px;
+}
+
+.chat__inbox{
+  background-color: $white;
+  border: 1px solid $tableBorderBlue;
+  border-radius: 5px;
+  width: 200px;
+
+  .inbox__title{
+    padding: 5px;
+    background-color: $tableBlueBg;
+    color: $titleDarkBlue;
+    border-bottom: 1px solid $tableBorderBlue;
+  }
+
+  .user{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid $tableBorderBlue;
+    padding: 5px;
+
+    &:hover{
+      background-color: $white;
+    }
+
+    @include userImgWithStatus ('.user__img');
+
+    .user__detail{
+      margin-left: 10px;
+      width : 130px;
+      cursor:pointer;
+
+      .user__name{
+        width : 130px;
+        overflow:hidden;
+        display:inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 14px;
+      }
+    }
+
+  }
+  .new__message{
+    background-color: $tableBlueBg;
+  }
+
+}

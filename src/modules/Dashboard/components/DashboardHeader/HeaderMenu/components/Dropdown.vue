@@ -44,79 +44,76 @@
 </template>
 
 <script>
-	export default {
-		name: 'Dropdown',
+export default {
+  name: 'Dropdown',
 
-		data: () => ({
-			avatarSize: 'auto',
-			items: [
-				{
-					title: 'Profile',
-					icon: require('@/assets/icons/header/user/profile.svg')
-				},
-				{
-					title: 'Settings',
-					icon: require('@/assets/icons/header/user/settings.svg'),
-					action: 'navigate_to_settings'
-				},
-				{
-					title: 'Help',
-					icon: require('@/assets/icons/header/user/help.svg')
-				},
-				{
-					title: 'Lock',
-					icon: require('@/assets/icons/header/user/lock.svg')
-				},
-				{
-					title: 'Logout',
-					icon: require('@/assets/icons/header/user/logout.svg'),
-					action: 'logout'
-				}
-			]
-		}),
+  data: () => ({
+    avatarSize: 'auto',
+    items: [
+      {
+        title: 'Profile',
+        icon: require('@/assets/icons/header/user/profile.svg')
+      },
+      {
+        title: 'Settings',
+        icon: require('@/assets/icons/header/user/settings.svg'),
+        action: 'navigate_to_settings'
+      },
+      {
+        title: 'Help',
+        icon: require('@/assets/icons/header/user/help.svg')
+      },
+      {
+        title: 'Lock',
+        icon: require('@/assets/icons/header/user/lock.svg')
+      },
+      {
+        title: 'Logout',
+        icon: require('@/assets/icons/header/user/logout.svg'),
+        action: 'logout'
+      }
+    ]
+  }),
 
-		methods: {
+  methods: {
+    handle_action(action) {
+      this[action]() //i.e the action is logout will call this.logout()
+    },
 
-			handle_action (action) {
-				this[action]() //i.e the action is logout will call this.logout()
-			},
+    logout() {
+      this.$auth.logout()
+    },
 
-			logout() {
-				this.$auth.logout()
-			},
-
-			navigate_to_settings() {
-				this.$router.push({name: 'settings'})
-			}
-
-		}
-
-	}
+    navigate_to_settings() {
+      this.$router.push({ name: 'settings' })
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-	.user-dropdown {
-		.dropdown {
-			width: 75px;
-			.atomic-icon {
-				width: 30px;
-			}
-			.user-chevron img{
-				width: 25px;
-			}
-		}
-	}
-	@media only screen and (max-width: 480px){
-		.user-dropdown {
-			.dropdown {
-				width: 50px;
-				.atomic-icon {
-					width: 22px;
-				}
-				.user-chevron img{
-					width: 20px;
-				}
-			}
-		}
-	}
+.user-dropdown {
+  .dropdown {
+    width: 75px;
+    .atomic-icon {
+      width: 30px;
+    }
+    .user-chevron img {
+      width: 25px;
+    }
+  }
+}
+@media only screen and (max-width: 480px) {
+  .user-dropdown {
+    .dropdown {
+      width: 50px;
+      .atomic-icon {
+        width: 22px;
+      }
+      .user-chevron img {
+        width: 20px;
+      }
+    }
+  }
+}
 </style>

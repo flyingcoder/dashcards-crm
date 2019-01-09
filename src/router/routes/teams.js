@@ -1,5 +1,5 @@
 export const teams = {
-	path: 'team',
-	name: 'team',
-	component: () => import('@/modules/Teams/Teams.vue')
+  path: 'team',
+  name: 'team',
+  component: () => import('@/modules/Teams/Teams.vue')
 }
