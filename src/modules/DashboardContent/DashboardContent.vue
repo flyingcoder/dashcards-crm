@@ -1,11 +1,11 @@
 <template>
 	<div class="content">
 
-        <div class="row d__breadcrumbs">
-            <div class="breadcrumbs">
-                <breadcrumb :paths="paths" />
-            </div>
-            <div class="page__options">
+		<div class="row d__breadcrumbs">
+			<div class="breadcrumbs">
+				<breadcrumb :paths="paths"/>
+			</div>
+			<div class="page__options">
 
 				<logon-label/> <!--custom component-->
 
@@ -20,14 +20,28 @@
 
 		<dashboard-tiles/> <!-- custom component -->
 
-		<draggable class="row d__cards" v-model="cards">
-			<template v-for="card in card_components">
-				<component :is="card.component"
-				           :key="card.component"
-				           v-if="should_show(card.slug)"
-				></component>
-			</template>
-		</draggable>
+		<v-container fluid>
+			<v-layout>
+				<draggable class="d__cards" v-model="cards">
+					<template v-for="card in card_components">
+
+						<component :is="card.component"
+						           :key="card.component"
+						           v-if="should_show(card.slug) && card.hasOwnProperty('component')"
+						></component>
+
+						<template v-else-if="should_show(card.slug)">
+							<v-flex xs12 :key="card.id">
+								<div>
+									<dash-card :title="card.name"></dash-card>
+								</div>
+							</v-flex>
+						</template>
+
+					</template>
+				</draggable>
+			</v-layout>
+		</v-container>
 
 	</div>
 </template>

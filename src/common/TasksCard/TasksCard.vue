@@ -1,5 +1,5 @@
 <template>
-	<v-flex md6 xs12 class="tasks-card">
+	<v-flex xs12 class="tasks-card">
 		<div class="tasks__content">
 			<dash-card title="Tasks" :view-more-link="viewMoreLink" class="task__content">
 				<div class="content-wrapper" slot="content">
@@ -29,8 +29,5 @@ export default {
 
 <style lang="scss" scoped>
 .tasks-card {
-  .tasks__content {
-    margin: 12px;
-  }
 }
 </style>

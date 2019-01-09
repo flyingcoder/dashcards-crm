@@ -5,8 +5,7 @@
   @include styledScrollFor('.timeline__inner_content');
   
   .timeline__content{
-    margin: 12px;
-    
+
     .timeline__inner_content {
       max-height: 450px;
       overflow: auto;

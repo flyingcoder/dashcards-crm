@@ -5,6 +5,7 @@ import request from '@/services/axios_instance'
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import TasksCard from '@/common/TasksCard/TasksCard.vue'
 import TimelineCard from '@/common/TimelineCard/TimelineCard.vue'
+import DashCard from '@/common/DashCard.vue'
 import LogonLabel from './components/LonOnLabel.vue'
 import DashboardTiles from './components/DashboardTiles/DashboardTiles.vue'
 import draggable from 'vuedraggable'
@@ -16,6 +17,7 @@ export default {
     LogonLabel,
     TasksCard,
     TimelineCard,
+    DashCard,
     DashboardTiles,
     draggable
   },
@@ -39,8 +41,12 @@ export default {
 
     card_components() {
       let cards = _cloneDeep(this.cards)
-      cards.forEach(card => (card.component = card.slug + '-card'))
-      return cards
+      return cards.map(card => {
+        if (['timeline', 'tasks'].includes(card.slug)) {
+          card.component = card.slug + '-card'
+        }
+        return card
+      })
     }
   },
 

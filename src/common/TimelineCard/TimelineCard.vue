@@ -1,5 +1,5 @@
 <template>
-	<v-flex md6 xs12 class="timeline-card">
+	<v-flex xs12 class="timeline-card">
 		<div class="timeline__content">
 			<dash-card title="Timeline">
 				<div class="timeline__inner_content" slot="content">
