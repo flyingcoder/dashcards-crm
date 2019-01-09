@@ -30,7 +30,11 @@ export default {
 <style lang="scss" scoped>
 .tasks-card {
   .tasks__content {
-    margin: 12px;
+		margin: 12px;
+		
+		.tasks-items{
+			margin: 1px;
+		}
   }
 }
 </style>

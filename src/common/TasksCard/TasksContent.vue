@@ -44,6 +44,7 @@ export default {
 @import '~@/sass/_variables';
 .tasks-content {
   border: 1px solid #b2b6c0;
+  margin: 1px;
   .task__tabs {
     border-bottom: 1px solid #b2b6c0;
     .v-tabs__div:nth-child(1) {
