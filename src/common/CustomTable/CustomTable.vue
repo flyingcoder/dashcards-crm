@@ -16,6 +16,7 @@
                 :headers="headers"
                 :items="items"
                 :loading="loading"
+                no-data-text=""
                 select-all
                 disable-initial-sort
                 v-bind="$attrs"
@@ -81,7 +82,7 @@
           </template>
 
           <template slot="no-data"> <!-- DISPLAYED WHEN NO ITEMS -->
-            <v-alert :value="true" color="error" icon="warning">
+            <v-alert :value="true" color="error" icon="warning" v-if="!loading">
               Sorry, nothing to display here :(
             </v-alert>
           </template>
