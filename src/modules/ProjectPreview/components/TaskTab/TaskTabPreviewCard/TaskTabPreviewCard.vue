@@ -1,5 +1,5 @@
 <template>
-	<v-flex md6 xs12 class="task__tab_preview_card" v-if="task">
+	<v-flex xs12 class="task__tab_preview_card" v-if="task">
 		<v-flex class="task__preview_content">
 
 			<v-flex class="card__content" slot="content">
