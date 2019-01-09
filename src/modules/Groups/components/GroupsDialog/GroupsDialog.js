@@ -53,7 +53,7 @@ export default {
         let name = this.name
         let description = this.description
         this.$emit('save', { name, description })
-      }
+     }
     },
     validation_passed() {
       if (this.name && this.description && this.does_something_changed) {

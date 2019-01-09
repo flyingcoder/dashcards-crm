@@ -44,7 +44,7 @@ export default {
       this.user_moved_mouse += 1000
     }, 10000)
   },
-
+  
   methods: {
     reset_timer() {
       this.user_moved_mouse = 0

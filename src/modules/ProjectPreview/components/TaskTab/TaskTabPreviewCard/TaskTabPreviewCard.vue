@@ -45,7 +45,10 @@
 							
 							<div class="comment" v-for="comment of all_comments" :key="comment.id">
 								<v-flex sm2 xs3><v-img :src="require('@/assets/temp/user.png')" height="45" width="45" /></v-flex>
-								<v-flex sm10 xs9> <p v-html="comment.body"></p> </v-flex>
+								<v-flex sm10 xs9> 
+									<p v-html="comment.body"></p>
+									<small>{{ comment.created_at }}</small>
+								</v-flex>
 							</div>
 						</div>
 
