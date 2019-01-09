@@ -31,10 +31,6 @@ export default {
 .tasks-card {
   .tasks__content {
 		margin: 12px;
-		
-		.tasks-items{
-			margin: 1px;
-		}
   }
 }
 </style>
