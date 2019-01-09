@@ -15,18 +15,15 @@
 }
 
 .reports {
-  margin: 14px;
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  grid-gap: 10px;
+  padding: 14px;
 }
 
 .body-wrapper{
-  margin: 24px;
+  margin: 10px;
   background-color: $white;
   border: 1px solid $tableBorderBlue;
   border-radius: 10px;
-  padding: 25px;
+  padding: 20px;
 
   .reports__body{
     background-color: $tableBlueBg;
@@ -43,11 +40,11 @@
         text-align: right;
         .add__link{
           color: $white;
-          width: 130px;
+          width: 100px;
         }
         .save{
           color: $white;
-          width: 130px;
+          width: 100px;
         }
       }
 
@@ -56,10 +53,12 @@
   }
 }
 
-@media only screen and (max-width: 768px) and (min-width: 481px){
+@media only screen and (max-width: 768px){
+  .reports {
+    padding: 7px;
+  }
   .body-wrapper{
-    margin: 18px;
-    padding: 18px;
+    padding: 15px;
 
     .reports__body{
       padding: 18px;
@@ -70,11 +69,11 @@
 
         .reports__option{
           .add__link{
-            width: 100px;
+            width: 80px;
             font-size: 14px;
           }
           .save{
-            width: 100px;
+            width: 80px;
             font-size: 14px;
           }
         }
@@ -85,9 +84,8 @@
   }
 }
 
-@media only screen and (max-width: 480px){
+@media only screen and (max-width: 599px){
   .body-wrapper{
-    margin: 14px;
     padding: 10px;
 
     .reports__body{
