@@ -21,6 +21,22 @@ export const methods = {
       })
     },
 
+    extract_per_page(string) {
+      const starts = string.search('per_page')
+      return string.substring(starts + 9, starts + 10)
+    },
+
+    calc_per_page_items(page_rows, total_rows) {
+      const items = [5, 10, 15, 20, 25]
+
+      if (!items.includes(page_rows)) items.push(page_rows)
+
+      if (!items.includes(total_rows) && total_rows <= 25)
+        items.push(total_rows)
+
+      return items
+    },
+
     update_item(api_name, item, dynamic_api = null) {
       makeRequestTo[api_name](this.edit_item.id, item, dynamic_api).then(
         response => {

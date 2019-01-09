@@ -1,16 +1,14 @@
 export const computed = {
   computed: {
     rows_per_page_items() {
-      if (!this.items_response) return []
-      const total_rows = this.items_response.total
-      const items = [5, 10, 15, 20, 25]
-      let rows_per_page = items.filter(item => item <= total_rows)
-      if (!rows_per_page.includes(total_rows)) {
-        rows_per_page.push(total_rows)
-      }
+      const res = this.items_response
+      if (!res) return []
+      const total_rows = this.items.length
+      const remaining_rows = res.total - res.from + 1
+      const items = this.calc_per_page_items(total_rows, res.total)
 
-      this.rows_per_page = this.items.length
-      return rows_per_page
+      this.rows_per_page = total_rows
+      return items.filter(item => item <= remaining_rows)
     },
 
     should_show_pagination() {
@@ -19,9 +17,8 @@ export const computed = {
     },
 
     total_items() {
-      return this.items_response
-        ? Math.ceil(this.items_response.total / this.rows_per_page)
-        : 0
+      if (!this.items_response) return null
+      return this.items_response.last_page
     },
     query_for_sorting() {
       if (!this.sort.sortBy) return ''
