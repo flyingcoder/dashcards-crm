@@ -41,7 +41,7 @@
 
 					<template slot="button2">
 						<div class="disable-btn">
-							<v-btn @click="on_dialog_save" :disabled="is_disabled">Save</v-btn>
+							<v-btn @click="on_dialog_save" :disabled="is_disabled">Display</v-btn>
 						</div>
 					</template>
 
