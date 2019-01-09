@@ -48,7 +48,7 @@ export default {
       this.loading = false
       makeRequestTo
         .get_all_groups()
-        .then(({ data }) => (this.group_items = data.data))
+        .then(({ data }) => (this.group_items = data))
         .finally(() => (this.loading = false))
     },
 
