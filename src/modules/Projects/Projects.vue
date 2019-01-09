@@ -18,13 +18,19 @@
 				@save="update_item('update_project', $event)"
 		/>
 
+		<delete-dialog
+				:open-dialog.sync="delete_dialog"
+				title="Delete Project"
+				text-content="Are you sure you want to delete this project?"
+				@delete="delete_item('delete_project')"
+		/>
+
 		<custom-table
 				:headers="headers"
 				:items="items"
 				:loading="loading"
 				:sort="sort"
 				:has-checkbox="true"
-				:has-header-icon="true"
 				hide-actions
 				@items-selected="selected_ids = $event"
 				toolbar-title="Projects"
@@ -35,12 +41,18 @@
 				<td>{{ item.item.service_name }}</td>
 				<td>{{ item.item.client_name }}</td>
 				<td>{{ item.item.manager_name }}</td>
-				<td>{{ item.item.started_at }}</td>
-				<td>{{ item.item.progress }}</td>
+				<td>{{ item.item.started_at | fromNowFormat }}</td>
+				<td>
+					<v-progress-linear
+							color="#1fb868"
+							height="5"
+							:value="item.item.progress"
+					></v-progress-linear>
+				</td>
 				<td>{{ item.item.total_time }}</td>
 				<td>{{ item.item.status }}</td>
 
-				<td class="text-xs-center">
+				<td class="text-xs-center table__actions">
 
 					<v-btn fab small flat depressed
 						@click="open_edit_dialog(item.item)"
@@ -77,7 +89,7 @@
 						Rows per page: <v-select :items="rows_per_page_items" menu-props="auto" v-model="rows_per_page"></v-select>
 					</div>
 
-					<div class="pagination">
+					<div class="pagination" v-show="should_show_pagination">
 						<div class="text-xs-center pt-2">
 							<v-pagination :length="total_items" :total-visible="5" v-model="page"></v-pagination>
 						</div>
@@ -90,5 +102,7 @@
 
 	</div>
 </template>
-<script src="./Projects.js"></script>
-<style lang="scss" scoped src="./Projects.scss"></style>
+<script src="./Projects.js">
+</script>
+<style lang="scss" scoped src="./Projects.scss">
+</style>

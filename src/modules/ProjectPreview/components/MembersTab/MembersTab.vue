@@ -1,6 +1,14 @@
 <template>
 	<div class="members-tab">
 
+		<v-layout row>
+			<v-flex xs12 class="text-xs-right">
+				<v-btn fab small class="add__btn" @click="add_dialog = true">
+				<v-icon>add</v-icon>
+				</v-btn>
+			</v-flex>
+		</v-layout>
+
 		<add-dialog
 				:dialog.sync="add_dialog"
 				ref="add_dialog"
@@ -34,10 +42,6 @@
 					<v-spacer></v-spacer>
 
 					<v-toolbar-items class="member__option">
-
-						<v-btn fab flat small class="list__view" @click="add_dialog = true">
-							<v-icon>add</v-icon>
-						</v-btn>
 						<v-btn fab flat small class="list__view">
 							<v-icon>list</v-icon>
 						</v-btn>
@@ -47,7 +51,7 @@
 
 						<v-menu class="sort__dropdown"
 						        transition="slide-y-transition"
-						        :nudge-left="135"
+						        :nudge-left="116"
 						        :nudge-bottom="2"
 						        flat
 						        offset-y
@@ -56,7 +60,7 @@
 								<v-icon>more_horiz</v-icon>
 							</v-btn>
 							<v-list class="sort__list" flat>
-								<v-list-tile class="sort__list_tile" v-for="(sortLists, index) in sortList" :key="index" @click=" ">
+								<v-list-tile class="sort__list_tile" v-for="(sortLists, index) in sortList" :key="index">
 									<v-list-tile-title class="sort__list_item">{{ sortLists.title }}</v-list-tile-title>
 								</v-list-tile>
 							</v-list>
@@ -84,5 +88,7 @@
 	</div>
 </template>
 
-<script src="./MembersTab.js"></script>
-<style lang="scss" scoped src="./MembersTab.scss"></style>
+<script src="./MembersTab.js">
+</script>
+<style lang="scss" scoped src="./MembersTab.scss">
+</style>

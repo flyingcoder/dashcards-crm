@@ -39,5 +39,7 @@
 
     </div>
 </template>
-<script src="./ForgotPassword.js"></script>
-<style lang="scss" scoped src="./ForgotPassword.scss"></style>
+<script src="./ForgotPassword.js">
+</script>
+<style lang="scss" scoped src="./ForgotPassword.scss">
+</style>

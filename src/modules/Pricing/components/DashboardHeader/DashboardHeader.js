@@ -4,5 +4,5 @@ import HeaderMenu from './HeaderMenu/HeaderMenu.vue'
 
 export default {
   name: 'DashboardHeader',
-  components: {HeaderHamburger, HeaderSearch, HeaderMenu}
+  components: { HeaderHamburger, HeaderSearch, HeaderMenu }
 }

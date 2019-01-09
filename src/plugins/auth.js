@@ -2,47 +2,64 @@ import Vue from 'vue'
 import store from '@/store/store'
 import make_request_to from '@/services/makeRequestTo'
 import router from '@/router/router'
-
-(function() { //for setting the user when the page refreshes
+;(function() {
+  //for setting the user when the page refreshes
   const user = localStorage.getItem('user')
   if (user) {
     store.commit('set_user', JSON.parse(user))
   }
 })()
 
-async function set_to_localStorage({data}) {
-	localStorage.setItem('token', data.token)
-	localStorage.setItem('user', JSON.stringify(data.user))
-	await store.dispatch('login', data)
-	router.push({ name: 'default-content' })
+async function set_to_localStorage({ data }) {
+  localStorage.setItem('token', data.token)
+  localStorage.setItem('user', JSON.stringify(data.user))
+  await store.dispatch('login', data)
+  router.push({ name: 'default-content' })
 }
 
 export const auth = {
-    isAuthenticated () {
-      return store.getters.is_user_logged
-    },
+  isAuthenticated() {
+    return store.getters.is_user_logged
+  },
 
-    async logout() {
-			localStorage.removeItem('token')
-			localStorage.removeItem('user')
-			await store.dispatch('logout')
-			router.push({ name: 'login' })
-    },
+  logged_user() {
+    return store.getters.user
+  },
 
-    login({ email, password }) {
-      make_request_to.login({ email, password })
-        .then(response => set_to_localStorage(response))
-    },
+  logout() {
+    make_request_to.logout().then(() => {
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
+      store.dispatch('logout')
+      router.push({ name: 'login' })
+    })
+  },
 
-    register(fields) {
-      make_request_to.register(fields)
-        .then(response => set_to_localStorage(response))
-    },
+  login({ email, password }) {
+    store.commit('set_custom_loader', true)
+    make_request_to
+      .login({ email, password })
+      .then(response => set_to_localStorage(response))
+      .finally(() => store.commit('set_custom_loader', false))
+  },
+
+  register(fields) {
+    store.commit('set_custom_loader', true)
+    make_request_to
+      .register(fields)
+      .then(response => {
+        store.commit('open_snackbar', {
+          status: true,
+          message: 'You have successfully registered'
+        })
+        set_to_localStorage(response)
+      })
+      .finally(() => store.commit('set_custom_loader', false))
+  }
 }
 
-
 const Authentication = {
-  install: (Vue, options) => {
+  install: Vue => {
     Vue.prototype.$auth = auth
   }
 }

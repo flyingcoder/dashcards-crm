@@ -30,7 +30,6 @@
 				:loading="loading"
 				:sort="sort"
 				:has-checkbox="true"
-				:has-header-icon="true"
 				hide-actions
 				@items-selected="selected_ids = $event"
 				toolbar-title="Clients"
@@ -47,7 +46,7 @@
 					</div>
 				</td>
 
-				<td>{{ item.item.telephone }}</td>
+				<td>{{ item.item.telephone | phoneDisplayForm }}</td>
 				<td>{{ item.item.email }}</td>
 				<td>{{ item.item.status }}</td>
 
@@ -88,5 +87,7 @@
 	</div>
 </template>
 
-<script src="./ClientsTable.js"></script>
-<style lang="scss" scoped src="./ClientsTable.scss"></style>
+<script src="./ClientsTable.js">
+</script>
+<style lang="scss" scoped src="./ClientsTable.scss">
+</style>

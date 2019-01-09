@@ -1,0 +1,21 @@
+>>>.content__wrapper .buzz__tables{
+    padding: 0;
+    border-radius: none;
+    border: none;
+}
+>>>.content__wrapper .buzz__tables .buzz__tablesTwo{
+    padding: 0;
+    border: none;
+}
+
+>>>.option .v-btn__content{
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+}
+
+@media only screen and (max-width: 768px){
+    >>>.option .v-btn__content{
+        padding: 0 8px;
+    }
+}

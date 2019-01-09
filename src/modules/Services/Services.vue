@@ -32,7 +32,6 @@
 			:loading="loading"
 			:sort="sort"
 			:has-checkbox="true"
-			:has-header-icon="true"
 			hide-actions
 			@items-selected="selected_ids = $event"
 			@sorted="changeSort"
@@ -90,7 +89,7 @@
 
 	</div>
 </template>
-<script src="./Services.js"></script>
-<style lang="scss" scoped src="./Services.scss"></style>
-
-
+<script src="./Services.js">
+</script>
+<style lang="scss" scoped src="./Services.scss">
+</style>

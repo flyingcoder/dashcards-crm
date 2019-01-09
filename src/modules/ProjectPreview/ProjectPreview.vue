@@ -20,12 +20,14 @@
 	</div>
 </template>
 
-<script src="./ProjectPreview.js"></script>
-<style lang="scss" scoped src="./ProjectPreview.scss"></style>
+<script src="./ProjectPreview.js">
+</script>
+<style lang="scss" scoped src="./ProjectPreview.scss">
+</style>
 
 <style scoped>
 >>> .tabs a.v-tabs__item.v-tabs__item--active {
-	background: #3B589E;
-	color: white;
+  background: #3b589e;
+  color: white;
 }
 </style>

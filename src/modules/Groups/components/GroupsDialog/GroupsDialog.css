@@ -1,0 +1,25 @@
+>>> .theme--light.v-input:not(.v-input--is-disabled) input, >>> .theme--light.v-input:not(.v-input--is-disabled) textarea{
+    color: #657186;
+}
+>>> .dialog__body .theme--light.v-text-field--solo>.v-input__control>.v-input__slot{
+    border: 1px solid #dce1e5;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #657186;
+}
+
+>>> .dialog__body label.v-label.theme--light{
+    font-size: 16px;
+}
+>>> .theme--light.v-select .v-select__selections{
+    color: #657186;
+}
+
+@media only screen and (max-width: 480px){
+    >>> .dialog__body .v-input__slot{
+        font-size: 12px;
+    }
+    >>> .dialog__body label.v-label.theme--light{
+        font-size: 12px;
+    }
+}

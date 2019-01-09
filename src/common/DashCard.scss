@@ -4,6 +4,7 @@
     border: 1px solid $tableBorderBlue;
     border-radius: 10px;
     background-color:$white;
+    min-height: 650px;
     .card__header {
         margin-bottom: 5px;
         .card__title{
@@ -17,6 +18,7 @@
             .action{
                 background-color: $tableBlueBg;
                 border: 1px solid $tableBorderBlue;
+                margin: 0 0 0 10px;
                 .v-btn__content .v-icon{
                     color: $tableTitleBlue;
                 }
@@ -35,13 +37,27 @@
     }
 
 }
+
+//Tablet View
+@media only screen and (max-width: 959px){
+    .dash__card {
+        min-height: auto;
+    }
+}
+
 //Mobile View
 @media only screen and (max-width: 480px){
     .dash__card {
         padding: 10px 15px 15px 15px;
         .card__header {
             .card__title{
-                font-size: 18px;
+                font-size: 16px;
+            }
+            .actions {
+                .v-btn--floating.v-btn--small{
+                    height: 30px;
+                    width: 30px;
+                }
             }
         }
         

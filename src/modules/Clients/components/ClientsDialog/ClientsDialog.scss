@@ -1,0 +1,40 @@
+@import '~@/sass/_variables';
+
+@include sortOptionStyle;
+
+@include styledDialog('.clients__dialog');
+
+.clients__dialog{
+
+  .dialog__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 0;
+    
+    @include styledCloseDialog('.close__dialog');
+
+    @include styledTitleDialog('.dialog__title');
+  }
+
+  @include styledScrollFor('.dialog__body');
+
+  .dialog__body{
+      max-height: 300px;
+      overflow: auto;
+      .dialog__textfield{
+        margin: 5px;
+      }
+      .dialog__selectfield{
+          margin: 5px;
+      }
+  }
+  
+  @include actionButtonsDialog('.dialog__actions');
+
+}
+
+@media only screen and (max-width: 480px){
+  
+}

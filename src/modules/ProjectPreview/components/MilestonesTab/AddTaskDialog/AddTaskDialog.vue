@@ -23,7 +23,7 @@
 									<v-select
 											label="Select Status"
 											v-model.trim="status"
-											:items="['Active', 'Inactive']"
+											:items="['Complete', 'Pending', 'Behind', 'Open']"
 									></v-select>
 								</v-flex>
 
@@ -59,6 +59,13 @@
 								</v-flex>
 
 								<v-flex xs12>
+									<members-dropdown :members.sync="members.selected"
+									                  :member-items="members.items"
+									                  @items-updated="items_updated"
+									/>
+								</v-flex>
+
+								<v-flex xs12>
 									<rich-editor
 											placeholder="Description"
 											v-model="description"
@@ -82,4 +89,5 @@
 	</div>
 </template>
 
-<script src="./AddTaskDialog.js"></script>
+<script src="./AddTaskDialog.js">
+</script>

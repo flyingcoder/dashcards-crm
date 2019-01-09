@@ -1,0 +1,31 @@
+@import '~@/sass/_variables';
+
+@include styledDialog('.task__dialog');
+
+.task__dialog{
+
+    .dialog__header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        padding: 0;
+    
+        @include styledCloseDialog('.close__dialog');
+
+        @include styledTitleDialog('.dialog__title');
+    }
+
+    .dialog__body{
+        .dialog__textfield, .dialog__selectfield, .dialog__textarea{
+          margin: 5px;
+        }
+    }
+    
+    @include actionButtonsDialog('.dialog__actions');
+
+}
+
+@media only screen and (max-width: 480px){
+    
+}

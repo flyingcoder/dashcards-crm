@@ -1,5 +1,5 @@
 >>> .table__toolbar .v-toolbar__content{
-    padding:0;
+    padding: 0 8px;
 }
 >>> .buzzooka__table .v-datatable__actions{
     justify-content: space-between;

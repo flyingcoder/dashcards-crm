@@ -1,0 +1,33 @@
+@import "~@/sass/variables";
+
+.hours__box {
+  display: flex;
+  align-items: center;
+  border: 1px solid $tableBorderBlue;
+  border-radius: 5px;
+
+  .box {
+    padding: 0 10px;
+  }
+
+  .box1 {
+    background-color: $red;
+    padding: 13px 10px;
+    cursor: pointer;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  .box {
+    display: grid;
+    position: relative;
+    z-index : 1;
+  }
+  .box:not(:last-child):not(:first-child):before {
+    content : "";
+    position: absolute;
+    right: 0;
+    top: 10px;
+    height  : 25px;
+    border-right:1px solid $tableBorderBlue;
+  }
+}

@@ -1,23 +1,31 @@
 import request from '@/services/axios_instance'
 
 export const groups_api = {
-	get_groups(query) {
-		return request.get(`/api/groups?${query}`)
-	},
+  get_all_groups() {
+    return request.get(`api/groups?all=true`)
+  },
 
-	add_new_group(group) {
-		return request.post('api/groups', group)
-	},
+  get_group_permissions(id) {
+    return request.get(`api/groups/${id}/permission`)
+  },
 
-	update_group(id, group) {
-		return request.put(`api/groups/${id}`, group)
-	},
+  get_groups(query) {
+    return request.get(`/api/groups?${query}`)
+  },
 
-	delete_group(id) {
-		return request.delete(`api/groups/${id}`)
-	},
+  add_new_group(group) {
+    return request.post('api/groups', group)
+  },
 
-	paginate_groups_table(query) {
-		return request.get(`api/groups?${query}`)
-	}
+  update_group(id, group) {
+    return request.put(`api/groups/${id}`, group)
+  },
+
+  delete_group(id) {
+    return request.delete(`api/groups/${id}`)
+  },
+
+  paginate_groups_table(query) {
+    return request.get(`api/groups?${query}`)
+  }
 }

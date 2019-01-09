@@ -27,5 +27,7 @@
 
     </div>
 </template>
-<style lang="scss" src="./Pricing.scss"></style>
-<script src="./Pricing.js"></script>
+<style lang="scss" src="./Pricing.scss">
+</style>
+<script src="./Pricing.js">
+</script>

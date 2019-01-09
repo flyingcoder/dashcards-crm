@@ -18,10 +18,7 @@
                 <template slot="fields">
                         <div class="l__labels">
                                 
-                        <!-- KINDLY VERIFY ROLAND -->
-                        <!-- This 2 fields will be updated in the CRM Settings when the user first login-->
-
-                        <!-- <custom-field
+                         <custom-field
                                 className="signup__field"
                                 v-model.trim="company_name.text"
                                 :valid="company_name.is_valid"
@@ -29,9 +26,9 @@
                                 placeholder="Company Name"
                                 @blur="validate_field('company_name')"
                                 @focus="company_name.is_valid = true"
-                        ></custom-field> -->
+                        ></custom-field>
 
-                        <!-- <custom-field
+                         <custom-field
                                 className="signup__field"
                                 v-model.trim="company_email.text"
                                 :valid="company_email.is_valid"
@@ -39,7 +36,7 @@
                                 placeholder="Company Email"
                                 @blur="validate_field('company_email')"
                                 @focus="company_email.is_valid = true"
-                        ></custom-field> -->
+                        ></custom-field>
 
                         <custom-field
                                 className="signup__field"
@@ -119,5 +116,7 @@
 
   </div>
 </template>
-<script src="./Signup.js"></script>
-<style lang="scss" scoped src="./Signup.scss"></style>
+<script src="./Signup.js">
+</script>
+<style lang="scss" scoped src="./Signup.scss">
+</style>

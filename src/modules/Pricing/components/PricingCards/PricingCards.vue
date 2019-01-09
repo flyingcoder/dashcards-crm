@@ -1,6 +1,6 @@
 <template>
 	<div class="price__list">
-		<div class="price__card" v-for="price_card in pricingCards">
+		<div class="price__card" v-for="price_card in pricingCards" :key="price_card.id">
 
 			<div class="plan__type"> {{price_card.type}}</div>
 
@@ -24,10 +24,13 @@
 </template>
 
 <script>
-	export default {
-		name: 'PricingCards',
-		props: ['pricing-cards']
-	}
+export default {
+  name: 'PricingCards',
+  props: {
+    pricingCards: [Array, Object]
+  }
+}
 </script>
 
-<style lang="scss" scoped src="./PricingCards.scss"></style>
+<style lang="scss" scoped src="./PricingCards.scss">
+</style>
