@@ -29,5 +29,8 @@ export default {
 
 <style lang="scss" scoped>
 .tasks-card {
+  .tasks__content {
+		margin: 12px;
+  }
 }
 </style>
