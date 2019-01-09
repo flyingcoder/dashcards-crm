@@ -3,7 +3,7 @@ import store from '@/store/store'
 import { auth } from '@/plugins/auth'
 
 const request = axios.create({
-  baseURL: 'https://api.dashcard.com',
+  baseURL: 'https://api.dashcards.com',
   timeout: 5000
 })
 
