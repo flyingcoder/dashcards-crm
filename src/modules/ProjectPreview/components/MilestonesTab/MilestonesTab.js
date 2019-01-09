@@ -2,7 +2,7 @@ import request from '@/services/axios_instance'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import DynamicBox from './DynamicBox/DynamicBox.vue'
 import MilestoneTabDialog from './MilestoneTabDialog/MilestoneTabDialog.vue'
-import SelectTemplateDialog from './SelectTemplateDialog.vue'
+import SelectTemplateDialog from './SelectTemplateDialog/SelectTemplateDialog.vue'
 import AddTaskDialog from './AddTaskDialog/AddTaskDialog.vue'
 
 export default {

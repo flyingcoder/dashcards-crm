@@ -7,5 +7,13 @@ export const reports_api = {
 
   add_new_report(report) {
     return request.post('api/report', report)
+  },
+
+  get_project_reports(id) {
+    return request.get(`api/projects/${id}/report`)
+  },
+
+  get_reports() {
+    return request.get('api/report')
   }
 }

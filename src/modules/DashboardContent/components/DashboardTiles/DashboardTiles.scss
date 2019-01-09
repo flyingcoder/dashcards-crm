@@ -3,9 +3,7 @@
 .d__tiles {
   display: grid;
   grid-template-columns: repeat(auto-fit, 140px);
-  grid-template-rows: 55px;
-  grid-gap: 10px;
-  justify-content: space-between;
+  grid-gap: 20px 50px;
 }
 
 @media only screen and (max-width: 500px){

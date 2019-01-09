@@ -32,8 +32,15 @@ export const table_functionality = {
         ? (this.show_delete_selected = true)
         : (this.show_delete_selected = false)
     },
-    api_query(query) {
-      if (this.items_response && this.rows_per_page === this.items.length)
+    api_query(query, old_query) {
+      const new_per_page = Number(this.extract_per_page(query))
+      const old_per_page = Number(this.extract_per_page(old_query)) || null
+
+      if (
+        this.items_response &&
+        this.rows_per_page === this.items.length &&
+        new_per_page !== old_per_page
+      )
         return
 
       this.$router.replace({

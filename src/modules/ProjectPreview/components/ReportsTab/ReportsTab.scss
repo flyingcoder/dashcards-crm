@@ -14,8 +14,14 @@
     background-color: $white;
 }
 
-.reports__tab{
-    margin: 24px;
+.reports__tab {
+    margin: 14px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-gap: 10px;
+}
+
+.body-wrapper{
     background-color: $white;
     border: 1px solid $tableBorderBlue;
     border-radius: 10px;
@@ -50,8 +56,7 @@
 }
 
 @media only screen and (max-width: 768px) and (min-width: 481px){
-    .reports__tab{
-        margin: 18px;
+    .body-wrapper{
         padding: 18px;
     
         .reports__body{
@@ -79,8 +84,7 @@
 }
 
 @media only screen and (max-width: 480px){
-    .reports__tab{
-        margin: 14px;
+    .body-wrapper{
         padding: 10px;
     
         .reports__body{
