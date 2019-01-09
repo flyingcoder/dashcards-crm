@@ -7,7 +7,7 @@
 	        class="chat__position"
 	>
 		<v-btn class="chat__button"
-		       :data-notify="all_users.length"
+		       :data-notify="online_users.length"
 		       slot="activator"
 		       v-model="fabs"
 		       color="#3b589e"
@@ -19,7 +19,7 @@
 		</v-btn>
 
 		<v-card class="chat__inbox">
-				<div class="inbox__title">Online Friends ({{all_users.length}})</div>
+				<div class="inbox__title">Online Friends ({{online_users.length}})</div>
 				<div class="user new__message"
 				     v-for="user of all_users"
 				     :key="user.id"

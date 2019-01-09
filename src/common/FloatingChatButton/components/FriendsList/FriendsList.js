@@ -7,7 +7,10 @@ export default {
   }),
 
   computed: {
-    ...mapGetters('onlineUsers', ['all_users'])
+    ...mapGetters('onlineUsers', ['all_users']),
+    online_users() {
+      return this.all_users.filter(user => user.is_online)
+    }
   },
 
   created() {
