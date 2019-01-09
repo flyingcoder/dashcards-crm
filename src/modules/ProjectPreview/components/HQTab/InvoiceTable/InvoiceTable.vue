@@ -1,5 +1,5 @@
 <template>
-	<v-flex md6 xs12 class="invoice-card">
+	<v-flex xs12 class="invoice-card">
 		<div class="invoice__content">
 			<dash-card>
 				<div slot="actions"></div>

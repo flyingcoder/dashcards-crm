@@ -1,5 +1,5 @@
 <template>
-	<v-flex md6 xs12 class="project-overview-card">
+	<v-flex xs12 class="project-overview-card">
 		<div class="project__overview_content">
 			<dash-card title="Project Overview">
 				<div class="content__wrapper" slot="content">
@@ -88,9 +88,6 @@ export default {
 <style lang="scss" scoped>
 @import '~@/sass/_variables';
 .project-overview-card {
-  .project__overview_content {
-    margin: 12px;
-  }
   .content__wrapper {
     border: 1px solid $tableBorderBlue;
   }
