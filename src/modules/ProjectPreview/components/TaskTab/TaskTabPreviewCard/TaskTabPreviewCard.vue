@@ -47,7 +47,7 @@
 								<v-flex sm2 xs3><v-img :src="require('@/assets/temp/user.png')" height="45" width="45" /></v-flex>
 								<v-flex sm10 xs9> 
 									<p v-html="comment.body"></p>
-									<small> {{ comment.created_at | fromNowFormat }}</small>
+									<small> {{ comment.created_at | from_now }}</small>
 								</v-flex>
 							</div>
 						</div>

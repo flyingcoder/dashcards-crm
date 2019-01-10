@@ -1,5 +1,4 @@
-import makeRequestTo from '@/services/makeRequestTo'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   data: () => ({
@@ -13,12 +12,7 @@ export default {
     }
   },
 
-  created() {
-    makeRequestTo.get_all_users().then(({ data }) => this.set_all_users(data))
-  },
-
   methods: {
-    ...mapMutations('onlineUsers', ['set_all_users']),
     open_chat_box(user) {
       this.$emit('open-chatbox', user)
       this.fabs = false

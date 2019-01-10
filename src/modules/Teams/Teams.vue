@@ -92,13 +92,15 @@
                         <td class="team__projects">{{ projects_text(item.item) }}</td>
 
                         <td class="team__option">
-                            <v-icon class="mr-2" @click="open_edit_dialog(item.item)">
-                                edit
-                            </v-icon>
-
-                            <v-icon @click="open_delete_dialog(item.item)">
-                                delete
-                            </v-icon>
+                            <v-btn fab small flat depressed @click="open_edit_dialog(item.item)">
+                                <img src="@/assets/icons/groups/edit.svg" alt="">
+                            </v-btn>
+                            <v-btn fab small flat depressed @click="open_delete_dialog(item.item)">
+                                <img src="@/assets/icons/groups/delete.svg" alt="">
+                            </v-btn>
+                            <v-btn fab small flat depressed>
+                                <v-icon>pageview</v-icon>
+                            </v-btn>
                         </td>
                     </template>
 
