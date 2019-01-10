@@ -47,7 +47,7 @@
 				</td>
 
 				<td>{{ item.item.telephone | phoneDisplayForm }}</td>
-				<td>{{ item.item.email }}</td>
+				<td class="email">{{ item.item.email }}</td>
 				<td>{{ item.item.status }}</td>
 
 				<td class="text-xs-center">

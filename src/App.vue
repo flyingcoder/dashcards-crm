@@ -59,3 +59,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+td::first-letter:not(.email) {
+  text-transform: uppercase;
+}
+</style>
