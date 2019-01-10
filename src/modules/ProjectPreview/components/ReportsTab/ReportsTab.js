@@ -70,7 +70,7 @@ export default {
           url: this.link,
           title: this.title
         })
-        .then(({data}) => {
+        .then(({ data }) => {
           this.link = ''
           this.title = ''
           this.activate_save = false
