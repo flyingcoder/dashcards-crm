@@ -11,6 +11,8 @@ export default {
   },
 
   data: () => ({
+    reports: [],
+    loading: false,
     iframe_src: null,
     iframe_loading: false,
     link: '',
@@ -23,6 +25,14 @@ export default {
     is_disabled() {
       return !this.link || !this.valid_url || !this.title
     }
+  },
+
+  created() {
+    this.loading = true
+    makeRequestTo
+      .get_reports()
+      .then(({ data }) => (this.reports = data.data))
+      .finally(() => (this.loading = false))
   },
 
   methods: {
@@ -53,11 +63,12 @@ export default {
           url: this.link,
           title: this.title
         })
-        .then(() => {
+        .then(({ data }) => {
           this.link = ''
           this.title = ''
           this.activate_save = false
           this.iframe_src = null
+          this.reports.push(data)
         })
     }
   }

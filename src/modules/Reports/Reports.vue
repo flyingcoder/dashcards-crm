@@ -2,7 +2,7 @@
 	<v-layout row wrap class="reports">
 		
 		<v-flex md3 sm4 xs5>
-			<reports-list />
+			<reports-list :reports="reports" :loading="loading" />
 		</v-flex>
 
 		<v-flex md9 sm8 xs7>

@@ -2,7 +2,7 @@
     <v-layout row wrap class="reports__tab">
 		
 		<v-flex md3 sm4 xs5>
-			<reports-list :id="id" />
+			<reports-list :reports="reports" :loading="loading" />
 		</v-flex>
 
 		<v-flex md9 sm8 xs7>
@@ -41,7 +41,7 @@
 
 					<template slot="button2">
 						<div class="disable-btn">
-							<v-btn @click="on_dialog_save" :disabled="is_disabled">Save</v-btn>
+							<v-btn @click="on_dialog_save" :disabled="is_disabled">Display</v-btn>
 						</div>
 					</template>
 
