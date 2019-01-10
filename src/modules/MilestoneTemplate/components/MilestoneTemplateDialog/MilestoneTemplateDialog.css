@@ -1,6 +1,11 @@
 >>> .theme--light.v-input:not(.v-input--is-disabled) input, >>> .theme--light.v-input:not(.v-input--is-disabled) textarea{
     color: #657186;
 }
+
+>>> .dialog__textfield input{
+    text-transform: capitalize;
+}
+
 >>> .dialog__body .v-input__slot, >>> .dialog__body .v-input__slot{
     border: 1px solid #dce1e5;
     border-radius: 8px;

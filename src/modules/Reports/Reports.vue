@@ -14,7 +14,7 @@
 					<template slot="content">
 						<div class="custom-dialog">
 							<v-text-field
-									class="textfield"
+									class="dialog__link"
 									pattern="https://.*"
 									type="url"
 									v-model.trim="link"
@@ -28,7 +28,7 @@
 							/>
 							<v-text-field
 									v-model.trim="title"
-									class="textfield"
+									class="dialog__textfield "
 									label="Title"
 									solo
 									clearable
@@ -88,4 +88,6 @@
 <script src="./Reports.js">
 </script>
 <style scoped lang="scss" src="./Reports.scss">
+</style>
+<style scoped src="./Reports.css">
 </style>

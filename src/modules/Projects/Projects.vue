@@ -38,9 +38,9 @@
 		>
 
 			<template slot="custom-item" slot-scope="item">
-				<td>{{ item.item.service_name }}</td>
-				<td>{{ item.item.client_name }}</td>
-				<td>{{ item.item.manager_name }}</td>
+				<td class="text-cap">{{ item.item.service_name }}</td>
+				<td class="text-cap">{{ item.item.client_name }}</td>
+				<td class="text-cap">{{ item.item.manager_name }}</td>
 				<td>{{ item.item.started_at | from_now }}</td>
 				<td>
 					<v-progress-linear
@@ -50,7 +50,7 @@
 					></v-progress-linear>
 				</td>
 				<td>{{ item.item.total_time }}</td>
-				<td>{{ item.item.status }}</td>
+				<td class="text-cap">{{ item.item.status }}</td>
 
 				<td class="text-xs-center table__actions">
 
@@ -67,7 +67,7 @@
 					</v-btn>
 
 					<v-btn fab flat small depressed
-			       @click="navigate_to_view_project(item.item.id)"
+			       		@click="navigate_to_view_project(item.item.id)"
 					>
 						<v-icon>pageview</v-icon>
 					</v-btn>

@@ -60,7 +60,7 @@
 
 							<v-flex xs12 sm6>
 								<v-text-field
-										class="dialog__textfield"
+										class="dialog__email"
 										label="Email"
 										v-model.trim="email"
 										solo
@@ -83,7 +83,7 @@
 
 							<v-flex xs12 sm6 v-if="!isEditDialog">
 								<v-text-field
-										class="dialog__textfield"
+										class="dialog__password"
 										:append-icon="show_password ? 'visibility_off' : 'visibility'"
 										:type="show_password ? 'text' : 'password'"
 										label="Password"
@@ -97,7 +97,7 @@
 
 							<v-flex xs12 sm6 v-if="!isEditDialog">
 								<v-text-field
-										class="dialog__textfield"
+										class="dialog__password"
 										:append-icon="show_repeat_password ? 'visibility_off' : 'visibility'"
 										:type="show_repeat_password ? 'text' : 'password'"
 										label="Repeat Password"

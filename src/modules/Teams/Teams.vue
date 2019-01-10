@@ -82,12 +82,12 @@
                             <div class="member__image">
                                 <img :src="require('@/assets/temp/user.png')" /> &nbsp;
                             </div>
-                            <div class="member__name">
+                            <div class="member__name text-cap">
                                 {{ item.item.first_name }}
                             </div>
                         </td>
 
-                        <td class="team__position">{{ item.item.job_title }}</td>
+                        <td class="team__position text-cap">{{ item.item.job_title }}</td>
                         <td class="team__tasks">{{ tasks_text(item.item) }}</td>
                         <td class="team__projects">{{ projects_text(item.item) }}</td>
 
