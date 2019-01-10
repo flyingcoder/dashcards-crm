@@ -11,7 +11,7 @@
 
 						<v-flex xs5 class="assignee">
 							<v-flex xs4><v-img :src="require('@/assets/temp/user.png')" height="45" width="45" /></v-flex>
-							<div class="assignee__name">{{ full_name }}</div>
+							<div class="assignee__name text-cap">{{ full_name }}</div>
 						</v-flex>
 
 						<v-flex xs5 class="date">
@@ -28,7 +28,7 @@
 					</v-layout>
 
 					<div class="task__sub_header">
-						<div class="boxes job__title"> <span class="box__content">{{ job_title() }}</span></div>
+						<div class="boxes job__title text-cap"> <span class="box__content">{{ job_title() }}</span></div>
 						<div class="boxes status"> <span class="box__content">{{ content.status }}</span></div>
 						<hours-box :content="content" />
 					</div>
@@ -37,8 +37,8 @@
 
 					<div class="task__content">
 
-						<div class="task__title">{{ content.title }}</div>
-						<div class="task__description">{{ content.description }}</div>
+						<div class="task__title text-cap">{{ content.title }}</div>
+						<div class="task__description textarea-cap">{{ content.description }}</div>
 
 						<div class="task__comment_section">
 							<v-divider></v-divider><br>

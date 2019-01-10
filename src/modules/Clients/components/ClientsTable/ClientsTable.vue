@@ -39,7 +39,7 @@
 			<template slot="custom-item" slot-scope="item">
 
 				<td class="text-xs-right"> <!--TODO fill image with dynamic data from backend-->
-					<div class="user__name">
+					<div class="user__name text-cap">
 						<v-img max-height="60px" width="50px" :src="require('@/assets/temp/user.png')" /> &nbsp;
 						{{ item.item.first_name }}
 						{{ item.item.last_name }}
@@ -48,7 +48,7 @@
 
 				<td>{{ item.item.telephone | phoneDisplayForm }}</td>
 				<td class="email">{{ item.item.email }}</td>
-				<td>{{ item.item.status }}</td>
+				<td class="text-cap">{{ item.item.status }}</td>
 
 				<td class="text-xs-center">
 					<v-btn fab small flat depressed @click="open_edit_dialog(item.item)">

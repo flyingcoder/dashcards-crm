@@ -42,9 +42,9 @@
 							@sorted="changeSort"
 					>
 						<template slot="custom-item" slot-scope="item"> <!-- Table Items -->
-							<td class="text-xs-left">{{ item.item.title }}</td>
-							<td class="text-xs-left">{{ short_description_text(item.item.description) }}</td>
-							<td class="text-xs-left">{{ item.item.status }}</td>
+							<td class="text-xs-left text-cap">{{ item.item.title }}</td>
+							<td class="text-xs-left textarea-cap">{{ short_description_text(item.item.description) }}</td>
+							<td class="text-xs-left text-cap">{{ item.item.status }}</td>
 							<td class="text-xs-left">{{ item.item.days }}</td>
 
 							<td class="text-xs-center">

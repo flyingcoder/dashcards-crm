@@ -61,7 +61,11 @@ export default {
 </script>
 
 <style lang="scss">
-td::first-letter:not(.email) {
+.text-cap{
+  text-transform: capitalize;
+}
+
+.textarea-cap::first-letter{
   text-transform: uppercase;
 }
 </style>

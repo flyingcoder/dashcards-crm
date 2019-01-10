@@ -71,10 +71,10 @@
 			</template>
 
 			<template slot="custom-item" slot-scope="{item}">
-				<td>{{ item.first_name + ' ' + item.last_name }}</td>
+				<td class="text-cap">{{ item.first_name + ' ' + item.last_name }}</td>
 				<td class="email">{{ item.email }}</td>
 				<td>{{ item.telephone }}</td>
-				<td>{{ item.job_title }}</td>
+				<td class="text-cap">{{ item.job_title }}</td>
 				<td>{{ item.tasks.length }}</td>
 
 				<td>

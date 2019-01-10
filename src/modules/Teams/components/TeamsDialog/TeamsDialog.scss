@@ -18,12 +18,8 @@
 
     .dialog__body{
 
-        .dialog__textfield, .dialog__selectfield{
+        .dialog__textfield, .dialog__selectfield, .dialog-description, .dialog__email, .dialog__password{
           margin: 5px;
-        }
-
-        .dialog-description{
-            margin: 5px;
         }
     }
     

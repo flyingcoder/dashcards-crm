@@ -77,10 +77,10 @@
             </template>
 
 		        <template slot="custom-item" slot-scope="item">
-			        <td>{{ item.item.name }}</td>
-			        <td>{{ item.item.custom_properties.ext }}</td>
-			        <td>{{ item.item.custom_properties.user.first_name}}</td>
-			        <td>Project</td>
+			        <td class="text-cap">{{ item.item.custom_properties.ext }}</td>
+			        <td class="text-cap">{{ item.item.name }}</td>
+			        <td class="text-cap">{{ item.item.custom_properties.user.first_name}}</td>
+			        <td class="text-cap">Project</td>
 			        <td class="text-xs-center table__actions">
 				        <v-btn fab small flat depressed>
 					        <img src="@/assets/icons/groups/delete.svg" alt="">
