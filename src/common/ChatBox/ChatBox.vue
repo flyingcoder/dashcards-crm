@@ -37,7 +37,7 @@
 									<span class="status online"></span>
 								</div>
 								<h5 class="sender__name"> Me </h5>
-								<span class="date"> {{ message.created_at | fromNowFormat }} </span>
+								<span class="date"> {{ message.created_at | chat_format }} </span>
 							</div>
 							<p class="sender__message">{{ message.body }}</p>
 						</div>
@@ -49,7 +49,7 @@
 									<span :class="['status', conv.user.is_online ? 'online' : 'offline' ]"></span>
 								</div>
 								<h5 class="sender__name"> {{ conv.user.name }} </h5>
-								<span class="date"> {{ message.created_at | fromNowFormat }} </span>
+								<span class="date"> {{ message.created_at | chat_format }} </span>
 							</div>
 							<p class="sender__message">{{ message.body }}</p>
 						</div>
