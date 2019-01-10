@@ -1,4 +1,3 @@
-import makeRequestTo from '@/services/makeRequestTo'
 //Components
 import DashboardLogo from './components/DashboardLogo/DashboardLogo.vue'
 import DashboardHeader from './components/DashboardHeader/DashboardHeader.vue'
@@ -16,14 +15,7 @@ export default {
   computed: {
     user() {
       return this.$store.getters.user
-    },
-    online_users() {
-      return this.$store.getters['onlineUsers/online_users']
     }
-  },
-
-  created() {
-    this.fetch_online_users()
   },
 
   methods: {
@@ -49,12 +41,6 @@ export default {
         if (~index) {
           this.$store.commit('onlineUsers/delete_user', index)
         }
-      })
-    },
-    fetch_online_users() {
-      makeRequestTo.get_online_users().then(({ data }) => {
-        this.$store.commit('onlineUsers/set_online_users', data)
-        this.subscribe()
       })
     }
   }
