@@ -1,7 +1,10 @@
 import { mapMutations } from 'vuex'
 import makeRequestTo from '@/services/makeRequestTo'
+import { global_utils } from '@/global_utils/global_utils'
 
 export default {
+  mixins: [global_utils],
+
   props: {
     conv: Object
   },
@@ -35,6 +38,9 @@ export default {
           message: data
         })
         this.message = null
+        this.$nextTick(() => {
+          this.scrollToBottom(this.$refs.chat_box)
+        })
       })
     }
   }

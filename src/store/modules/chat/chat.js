@@ -2,12 +2,14 @@ import _cloneDeep from 'lodash/cloneDeep'
 import makeRequestTo from '@/services/makeRequestTo'
 
 const state = {
-  conversations: [] //objects of => { id, user, active, messages, open }
+  conversations: [], //objects of => { id, user, active, messages, open }
+  latest_active_id: null
 }
 
 const getters = {
   all_conversations: state => state.conversations,
-  active_conv: state => state.conversations.filter(conv => conv.active)
+  active_conv: state => state.conversations.filter(conv => conv.active),
+  latest_active_id: state => state.latest_active_id
 }
 
 const mutations = {
@@ -34,7 +36,8 @@ const mutations = {
       conv[index].open = false
       state.conversations = conv
     }
-  }
+  },
+  set_latest_active_id: (state, payload) => (state.latest_active_id = payload)
 }
 
 const actions = {
@@ -50,6 +53,7 @@ const actions = {
           open: true,
           active: true
         })
+        commit('set_latest_active_id', user.id)
       })
     }
   }
