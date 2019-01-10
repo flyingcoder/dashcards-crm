@@ -16,7 +16,14 @@
 
 						<div class="toolbar" slot="toolbar">
 							<v-flex xs4>
-								<v-select :items="['Remind', 'Cancel', 'Archive']" label="Batch Actions"></v-select>
+								<v-select 
+										class="dialog__selectfield"
+										solo
+										hide-details
+										color="#657186" 
+										:items="['Remind', 'Cancel', 'Archive']" 
+										label="Batch Actions"
+								></v-select>
 							</v-flex>
 						</div>
 
@@ -47,7 +54,7 @@
 </style>
 
 <style scoped>
->>> .content__wrapper .buzz__tables {
-  all: unset;
+>>> .content-wrapper .buzz__tables {
+  all: unset !important;
 }
 </style>
