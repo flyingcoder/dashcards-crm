@@ -54,7 +54,7 @@
 </style>
 
 <style scoped>
->>> .content__wrapper .buzz__tables {
-  all: unset;
+>>> .content-wrapper .buzz__tables {
+  all: unset !important;
 }
 </style>
