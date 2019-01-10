@@ -12,6 +12,10 @@ const getters = {
 
 const mutations = {
   add_conversation: (state, payload) => state.conversations.push(payload),
+  add_message_to_conv(state, { id, message }) {
+    const index = state.conversations.findIndex(conv => conv.id === id)
+    state.conversations[index].messages.push(message)
+  },
   activate_conversation: (state, index) =>
     (state.conversations[index].active = true),
   toggle_open_conv: (state, id) => {
