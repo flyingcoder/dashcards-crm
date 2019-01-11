@@ -77,7 +77,7 @@
             </template>
 
 		        <template slot="custom-item" slot-scope="item">
-			        <td class="text-cap">{{ item.item.custom_properties.ext }}</td>
+			        <td class="text-upper">{{ item.item.custom_properties.ext }}</td>
 			        <td class="text-cap">{{ item.item.name }}</td>
 			        <td class="text-cap">{{ item.item.custom_properties.user.first_name}}</td>
 			        <td class="text-cap">Project</td>
