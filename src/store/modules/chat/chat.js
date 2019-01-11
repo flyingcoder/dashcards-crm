@@ -12,7 +12,8 @@ const getters = {
   active_conv: state => state.conversations.filter(conv => conv.active),
   latest_active_id: state => state.latest_active_id,
   unread_messages: state => state.unread_messages,
-  unread_message: state => id => state.unread_messages.find(mess => mess.id)
+  unread_message: state => id =>
+    state.unread_messages.find(mess => mess.id === id)
 }
 
 const mutations = {
@@ -21,8 +22,10 @@ const mutations = {
     const index = state.conversations.findIndex(conv => conv.id === id)
     state.conversations[index].messages.push(message)
   },
-  activate_conversation: (state, index) =>
-    (state.conversations[index].active = true),
+  activate_conversation: (state, index) => {
+    state.conversations[index].active = true
+    state.latest_active_id = state.conversations[index].id
+  },
   toggle_open_conv: (state, id) => {
     let conv = _cloneDeep(state.conversations)
     const index = conv.findIndex(conv => conv.id === id)
@@ -42,6 +45,7 @@ const mutations = {
       conv[index].active = false
       conv[index].open = false
       state.conversations = conv
+      state.latest_active_id = null
     }
   },
   set_latest_active_id: (state, payload) => (state.latest_active_id = payload),

@@ -43,6 +43,10 @@ export default {
         from_id: this.user.id,
         to_id: this.conv.id
       }
+      this.send_message_request(payload)
+    },
+
+    send_message_request(payload) {
       makeRequestTo.send_message(payload).then(({ data }) => {
         this.add_message_to_conv({
           id: this.conv.id,

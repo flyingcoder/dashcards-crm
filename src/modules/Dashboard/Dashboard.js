@@ -74,16 +74,18 @@ export default {
         `App\\Events\\PrivateChatSent`,
         ({ message, sender, receiver }) => {
           if (receiver.id === this.user.id) {
-            const conv = this.all_conversations.find(
-              conv => conv.id === sender.id
-            )
-            if (!conv.open && conv.active) {
-              this.add_unread_messages(sender.id)
-            }
+            this.handle_unread_message(sender)
             this.add_message_to_conv({ id: sender.id, message })
           }
         }
       )
+    },
+
+    handle_unread_message(sender) {
+      const conv = this.all_conversations.find(conv => conv.id === sender.id)
+      if (!conv.open && conv.active) {
+        this.add_unread_messages(sender.id)
+      }
     },
 
     fetch_all_users() {
