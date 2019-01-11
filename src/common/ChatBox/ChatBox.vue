@@ -1,7 +1,7 @@
 <template>
 	<div class="chatbox">
 
-		<v-card class="chat__header" @click="toggle_open_conv(conv.id)">
+		<v-card class="chat__header" @click="toggle_chat_box(conv.id)">
 
 			<div class="user-info">
 				<div class="user__img">

@@ -24,6 +24,12 @@ export default {
     }
   },
 
+  watch: {
+    'conv.messages'() {
+      this.scrollToBottom(this.$refs.chat_box)
+    }
+  },
+
   methods: {
     ...mapMutations('chat', [
       'toggle_open_conv',
@@ -43,10 +49,15 @@ export default {
           message: data
         })
         this.message = null
-        this.$nextTick(() => {
-          this.scrollToBottom(this.$refs.chat_box)
-        })
+        this.scrollToBottom(this.$refs.chat_box)
       })
+    },
+
+    toggle_chat_box(id) {
+      this.toggle_open_conv(id)
+      if (!this.conv.open) {
+        this.scrollToBottom(this.$refs.chat_box)
+      }
     }
   }
 }
