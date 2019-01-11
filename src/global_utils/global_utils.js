@@ -18,7 +18,9 @@ export const global_utils = {
   },
   methods: {
     scrollToBottom(e) {
-      e.scrollTop = e.scrollHeight - e.getBoundingClientRect().height
+      this.$nextTick(() => {
+        e.scrollTop = e.scrollHeight - e.getBoundingClientRect().height
+      })
     }
   }
 }

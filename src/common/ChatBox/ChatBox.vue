@@ -1,7 +1,7 @@
 <template>
 	<div class="chatbox">
 
-		<v-card class="chat__header" @click="toggle_open_conv(conv.id)">
+		<v-card class="chat__header" @click="toggle_chat_box(conv.id)">
 
 			<div class="user-info">
 				<div class="user__img">
@@ -13,6 +13,10 @@
 					<div class="user__name">{{ conv.user.name }}</div>
 				</div>
 			</div>
+
+			<v-badge right v-show="unread_message">
+				<span slot="badge">{{ unread_message }}</span>
+			</v-badge>
 
 			<v-icon class="close__btn" @click="close_active_conv(conv.id)">
 				close
