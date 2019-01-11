@@ -16,6 +16,11 @@ export default {
   computed: {
     user() {
       return this.$store.getters.user
+    },
+    unread_message() {
+      const unread = this.$store.getters['chat/unread_message'](this.conv.id)
+      if (unread) return unread.count
+      return 0
     }
   },
 

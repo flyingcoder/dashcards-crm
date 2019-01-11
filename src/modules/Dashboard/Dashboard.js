@@ -16,6 +16,7 @@ export default {
 
   computed: {
     ...mapGetters('onlineUsers', ['all_users']),
+    ...mapGetters('chat', ['unread_messages', 'all_conversations']),
     user() {
       return this.$store.getters.user
     }
@@ -27,6 +28,7 @@ export default {
 
   methods: {
     ...mapMutations('onlineUsers', ['set_all_users']),
+    ...mapMutations('chat', ['add_unread_messages', 'add_message_to_conv']),
 
     subscribe() {
       this.$pusher.authenticate()
@@ -37,8 +39,13 @@ export default {
         'private-user.logout.' + this.user.company_id
       )
 
+      const chat_channel = this.$pusher.subscribe(
+        `private-chat.new-message.${this.user.id}`
+      )
+
       this.login_channel(login_channel)
       this.logout_channel(logout_channel)
+      this.chat_channel(chat_channel)
     },
 
     login_channel(channel) {
@@ -60,6 +67,23 @@ export default {
           this.$store.commit('onlineUsers/user_logged_out', index)
         }
       })
+    },
+
+    chat_channel(channel) {
+      channel.bind(
+        `App\\Events\\PrivateChatSent`,
+        ({ message, sender, receiver }) => {
+          if (receiver.id === this.user.id) {
+            const conv = this.all_conversations.find(
+              conv => conv.id === sender.id
+            )
+            if (!conv.open && conv.active) {
+              this.add_unread_messages(sender.id)
+            }
+            this.add_message_to_conv({ id: sender.id, message })
+          }
+        }
+      )
     },
 
     fetch_all_users() {

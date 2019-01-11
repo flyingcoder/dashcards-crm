@@ -14,6 +14,10 @@
 				</div>
 			</div>
 
+			<v-badge right v-show="unread_message">
+				<span slot="badge">{{ unread_message }}</span>
+			</v-badge>
+
 			<v-icon class="close__btn" @click="close_active_conv(conv.id)">
 				close
 			</v-icon>
