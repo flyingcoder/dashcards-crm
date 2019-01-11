@@ -157,12 +157,21 @@
         }
     }
 
-    .comment-msg{
+    .commenter{
+        margin-bottom: 16px;
+    }
+
+    .comment-name{
         color: $textDark;
     }
+    
     .comment-time{
         color: $textDark;
         opacity: 0.7;
+    }
+
+    .comment-msg{
+        color: $textDark-2;
     }
 }
 
