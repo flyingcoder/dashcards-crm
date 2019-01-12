@@ -25,6 +25,7 @@ export default {
 
   watch: {
     latest_active_id(id) {
+      if (!id) return
       this.$nextTick(() => {
         let element = document.querySelector(`#chat_box${id}`)
         this.scrollToBottom(element)
