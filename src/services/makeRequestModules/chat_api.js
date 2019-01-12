@@ -7,5 +7,9 @@ export const chat_api = {
 
   send_message(payload) {
     return request.post('api/chat/private', payload)
+  },
+
+  get_old_messages(api) {
+    return request.get(api)
   }
 }

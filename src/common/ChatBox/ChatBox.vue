@@ -24,13 +24,26 @@
 		</v-card>
 
 		<transition name="fadeHeight" mode="out-in">
-			<v-card class="chat__body" v-show="conv.open">
-				<div class="messages" ref="chat_box" :id="`chat_box${conv.id}`">
+			<v-card class="chat__body"
+			        v-show="conv.open"
+			>
+				<div class="messages"
+				     ref="chat_box"
+				     :id="`chat_box${conv.id}`"
+				     @scroll="on_scroll"
+				>
+
+					<div class="message-loader">
+						<v-progress-circular
+								indeterminate
+								color="primary"
+								v-if="scroll_load"
+						></v-progress-circular>
+					</div>
 
 					<div class="no-messages" v-if="!conv.messages.length">
 						No messages yet
 					</div>
-
 
 					<template v-else v-for="message of conv.messages">
 
