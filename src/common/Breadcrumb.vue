@@ -6,7 +6,7 @@
 
 			<template slot="item" slot-scope="{item}">
 				<v-breadcrumbs-item class="page__title" :disabled="item.disabled">
-	        <span @click="navigate_from_breadcrumb(item.router_name)">
+	        <span @click="navigate_from_breadcrumb(item)">
 	          {{ item.text }}
 	        </span>
 				</v-breadcrumbs-item>
@@ -24,8 +24,13 @@ export default {
   },
 
   methods: {
-    navigate_from_breadcrumb(router_name) {
-      router_name && this.$router.push({ name: router_name })
+    navigate_from_breadcrumb(item) {
+      if (item.hasOwnProperty('path')) {
+        item.path && this.$router.push({ path: item.path })
+      } else {
+        const { router_name } = item
+        router_name && this.$router.push({ name: router_name })
+      }
     }
   }
 }
