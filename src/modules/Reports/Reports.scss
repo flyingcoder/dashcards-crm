@@ -3,7 +3,7 @@
 @include sortOptionStyle;
 
 .custom-dialog {
-  .textfield{
+  .dialog__link, .dialog__textfield{
     margin: 10px 5px;
   }
 }
@@ -32,7 +32,6 @@
     display: grid;
 
     .reports__buttons{
-      background-color: $white;
       height: auto;
       padding: 25px;
 
@@ -50,6 +49,13 @@
 
     }
 
+  }
+  .reports-content{
+    background-color: $white;
+  }
+  .site-preview{
+    border: 1px solid $tableBorderBlue;
+    margin: 5px 10px;
   }
 }
 
