@@ -2,7 +2,7 @@ import _cloneDeep from 'lodash/cloneDeep'
 import makeRequestTo from '@/services/makeRequestTo'
 
 const state = {
-  conversations: [], //objects of => { id, user, active, messages, open }
+  conversations: [], //objects of => { id, user, active, messages, open, next_url }
   latest_active_id: null,
   unread_messages: [] //object of => { id, count }
 }
@@ -57,6 +57,13 @@ const mutations = {
     } else {
       state.unread_messages.push({ id, count: 1 })
     }
+  },
+  add_older_messages(state, { id, data }) {
+    const index = state.conversations.findIndex(conv => conv.id === id)
+    if (~index) {
+      state.conversations[index].messages.unshift(...data.data)
+      state.conversations[index].next_url = data.next_page_url
+    }
   }
 }
 
@@ -71,7 +78,8 @@ const actions = {
           user,
           messages: data.data,
           open: true,
-          active: true
+          active: true,
+          next_url: data.next_page_url
         })
         commit('set_latest_active_id', user.id)
       })
