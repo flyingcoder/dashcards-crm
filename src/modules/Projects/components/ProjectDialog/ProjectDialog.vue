@@ -20,7 +20,7 @@
 								bottom
 								offset-y
 								:close-on-content-click="false"
-								max-width="400"
+								max-width="350"
 							>
 								<v-btn slot="activator" class="d__btn">
 									<div class="d__icon">
@@ -50,7 +50,7 @@
 								bottom
 								offset-y
 								:close-on-content-click="false"
-								max-width="400"
+								max-width="350"
 							>
 								<v-btn slot="activator" class="d__btn">
 									<div class="d__icon">
@@ -109,7 +109,7 @@
 								bottom
 								offset-y
 								:close-on-content-click="false"
-								max-width="400"
+								max-width="350"
 							>
 								<v-btn slot="activator" class="d__btn">
 									<div class="d__icon">
