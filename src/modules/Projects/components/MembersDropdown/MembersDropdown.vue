@@ -60,4 +60,3 @@
 </script>
 <style lang="scss" scoped src="./MembersDropdown.scss">
 </style>
-
