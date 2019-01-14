@@ -83,8 +83,8 @@
 }
 
 
-// Tablet
-@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+// Mobile
+@media only screen and (max-width: 64em) {
     .content{
         .d__breadcrumbs{
             flex-wrap: wrap;
