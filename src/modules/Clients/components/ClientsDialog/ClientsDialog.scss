@@ -23,11 +23,8 @@
   .dialog__body{
       max-height: 300px;
       overflow: auto;
-      .dialog__textfield{
+      .dialog__textfield, .dialog__email, .dialog__selectfield, .dialog__password{
         margin: 5px;
-      }
-      .dialog__selectfield{
-          margin: 5px;
       }
   }
   

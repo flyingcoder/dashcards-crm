@@ -8,6 +8,10 @@
     color: #657186;
 }
 
+>>> .dialog__textfield input{
+    text-transform: capitalize;
+}
+
 >>> .dialog__body label.v-label.theme--light{
     font-size: 16px;
 }

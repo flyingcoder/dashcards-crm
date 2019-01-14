@@ -17,10 +17,6 @@ export default {
   },
 
   data: () => ({
-    paths: [
-      { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-      { text: 'Milestone Task', disabled: true, router_name: null }
-    ],
     headers: [
       { text: 'Title', value: 'title' },
       { text: 'Description', value: 'description' },
@@ -39,6 +35,19 @@ export default {
   computed: {
     dynamic_api() {
       return `api/milestone/${this.milestone_id}/task`
+    },
+    paths() {
+      return [
+        { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+        { text: 'Templates', disabled: false, router_name: 'templates' },
+        {
+          text: 'Milestones',
+          disabled: false,
+          router_name: null,
+          path: `/dashboard/templates/${this.template_id}/milestone`
+        },
+        { text: 'Tasks', disabled: true, router_name: null }
+      ]
     }
   },
 

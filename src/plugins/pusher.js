@@ -5,10 +5,10 @@ let pusher = null
 
 export const broadcast = {
   authenticate() {
-    pusher = new Pusher('6857db1d25c87cb2e20d', {
+    pusher = new Pusher('0594afc8c3bfe95e8a06', {
       cluster: 'ap1',
       encrypted: true,
-      authEndpoint: 'https://api.bizzooka.com/api/broadcasting/auth',
+      authEndpoint: 'https://api.dashcards.com/api/broadcasting/auth',
       auth: {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token')

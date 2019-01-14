@@ -59,12 +59,12 @@ export default {
     },
 
     tasks_text(member) {
-      return !member.tasks.length ? 'no tasks assigned' : member.tasks.length
+      return !member.tasks.length ? 'No tasks assigned' : member.tasks.length
     },
 
     projects_text(member) {
       return !member.projects.length
-        ? 'no projects assigned'
+        ? 'No projects assigned'
         : member.projects.length
     },
 
