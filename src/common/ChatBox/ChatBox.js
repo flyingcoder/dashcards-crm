@@ -3,6 +3,7 @@ import makeRequestTo from '@/services/makeRequestTo'
 import { global_utils } from '@/global_utils/global_utils'
 import _isEqual from 'lodash/isEqual'
 import _throttle from 'lodash/throttle'
+import _cloneDeep from 'lodash/cloneDeep'
 
 export default {
   mixins: [global_utils],
@@ -17,7 +18,8 @@ export default {
     scroll_top: null,
     channel: null,
     typing: false,
-    timeout: null
+    timeout: null,
+    old_conv: null
   }),
 
   computed: {
@@ -32,26 +34,22 @@ export default {
   },
 
   watch: {
-    conv({ new_messages, new_page_url }, { old_messages, old_page_url }) {
-      if (
-        !_isEqual(new_messages, old_messages) &&
-        new_page_url !== old_page_url
-      )
-        this.scrollToBottom(this.$refs.chat_box)
+    conv: {
+      handler(new_conv) {
+        if (
+          !_isEqual(new_conv.messages, this.old_conv.messages) &&
+          new_conv.next_url === this.old_conv.next_url
+        )
+          this.scrollToBottom(this.$refs.chat_box)
+        this.old_conv = _cloneDeep(new_conv)
+      },
+      deep: true
     }
   },
 
-  mounted() {
-    this.channel = this.$pusher.subscribe(
-      `private-chat.typing-${this.user.company_id}`
-    )
-
-    this.channel.bind('client-typing', ({ user_id }) => {
-      if (user_id === this.conv.id) {
-        this.set_timeout()
-        this.typing = true
-      }
-    })
+  created() {
+    this.old_conv = _cloneDeep(this.conv)
+    this.subscribe()
   },
 
   methods: {
@@ -61,6 +59,7 @@ export default {
       'add_message_to_conv',
       'add_older_messages'
     ]),
+
     send_message() {
       if (!this.message) return
       let payload = {
@@ -126,6 +125,19 @@ export default {
       this.interval = setTimeout(() => {
         this.typing = false
       }, 700)
+    },
+
+    subscribe() {
+      this.channel = this.$pusher.subscribe(
+        `private-chat.typing-${this.user.company_id}`
+      )
+
+      this.channel.bind('client-typing', ({ user_id }) => {
+        if (user_id === this.conv.id) {
+          this.set_timeout()
+          this.typing = true
+        }
+      })
     }
   }
 }
