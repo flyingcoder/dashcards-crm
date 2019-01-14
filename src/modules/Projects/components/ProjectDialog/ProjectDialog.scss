@@ -14,11 +14,11 @@
     @include styledCloseDialog('.close__btn');
   }
 
-  @include styledScrollFor('.dialog__body')
+  @include styledScrollFor('.dialog__body');
 
   .dialog__body{
     max-height: 400px;
-    overflow: auto;
+    overflow: hidden auto;
     padding: 0 15px;
     margin: 0 20px;
     
@@ -26,7 +26,7 @@
       margin-bottom: 20px;
 
       .d__btn{
-        width: 170px;
+        width: 100%;
         height: 47px;
         padding: 5px 10px;
         font-size: 18px;
@@ -44,6 +44,8 @@
 
         .d__title{
           text-transform: capitalize;
+          white-space: normal;
+          font-size: 15px;
         }
       }
     }

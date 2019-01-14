@@ -85,7 +85,6 @@ export default {
       makeRequestTo
         .fill_dropdown('member', val)
         .then(response => {
-          this.items = response.data
           this.$emit('items-updated', response.data)
         })
         .finally(() => (this.is_loading = false))
