@@ -42,6 +42,21 @@
 
     @include styledScrollFor('.messages'); //style the scroll
 
+    .typing-indicator {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      background: white;
+      padding: 5px;
+      text-align: center;
+      border-bottom: 1px solid;
+      opacity: 0;
+      transition: opacity .2;
+
+      &.active {
+        opacity: 1;
+      }
+    }
 
     .messages{
       background-color: $white;

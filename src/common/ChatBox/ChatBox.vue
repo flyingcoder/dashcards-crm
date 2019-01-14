@@ -75,15 +75,24 @@
 
 				</div>
 
+				<div :class="['typing-indicator', { active: typing }]" v-show="typing">
+					... {{ conv.user.name.split(',')[1] }} is typing
+				</div>
+
 				<div class="write">
 					<v-text-field solo flat hide-details
 					              color="#667187"
 					              label="Type a message..."
 					              v-model.trim="message"
+					              @keydown.exact="user_typing"
 					              @keydown.enter="send_message"
 					></v-text-field>
 
-					<v-icon :disabled="!message" color="#3b589e" class="send" @click="send_message">send</v-icon>
+					<v-icon :disabled="!message"
+					        color="#3b589e"
+					        class="send"
+					        @click="send_message"
+					>send</v-icon>
 				</div>
 
 			</v-card>

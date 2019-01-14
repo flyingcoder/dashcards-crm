@@ -2,6 +2,7 @@ import { mapMutations } from 'vuex'
 import makeRequestTo from '@/services/makeRequestTo'
 import { global_utils } from '@/global_utils/global_utils'
 import _isEqual from 'lodash/isEqual'
+import _throttle from 'lodash/throttle'
 
 export default {
   mixins: [global_utils],
@@ -13,7 +14,10 @@ export default {
   data: () => ({
     message: null,
     scroll_load: false,
-    scroll_top: null
+    scroll_top: null,
+    channel: null,
+    typing: false,
+    timeout: null
   }),
 
   computed: {
@@ -35,6 +39,19 @@ export default {
       )
         this.scrollToBottom(this.$refs.chat_box)
     }
+  },
+
+  mounted() {
+    this.channel = this.$pusher.subscribe(
+      `private-chat.typing-${this.user.company_id}`
+    )
+
+    this.channel.bind('client-typing', ({ user_id }) => {
+      if (user_id === this.conv.id) {
+        this.set_timeout()
+        this.typing = true
+      }
+    })
   },
 
   methods: {
@@ -98,6 +115,17 @@ export default {
           })
         })
         .finally(() => (this.scroll_load = false))
+    },
+
+    user_typing: _throttle(function() {
+      this.channel.trigger('client-typing', { user_id: this.user.id })
+    }, 300),
+
+    set_timeout() {
+      clearTimeout(this.interval)
+      this.interval = setTimeout(() => {
+        this.typing = false
+      }, 700)
     }
   }
 }
