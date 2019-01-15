@@ -42,8 +42,8 @@
 						@sorted="changeSort"
 				>
 					<template slot="custom-item" slot-scope="item"> <!-- Table Items -->
-						<td>{{ item.item.name }}</td>
-						<td>{{ item.item.status }}</td>
+						<td class="text-cap">{{ item.item.name }}</td>
+						<td class="text-cap">{{ item.item.status }}</td>
 
 						<td class="text-xs-center">
 							<v-icon class="mr-2" @click="open_edit_dialog(item.item)">

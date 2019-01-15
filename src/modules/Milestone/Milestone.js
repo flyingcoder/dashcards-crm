@@ -18,7 +18,8 @@ export default {
   data: () => ({
     paths: [
       { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-      { text: 'Milestone', disabled: true, router_name: null }
+      { text: 'Templates', disabled: false, router_name: 'templates' },
+      { text: 'Milestones', disabled: true, router_name: null }
     ],
     headers: [
       { text: 'Title', value: 'title' },

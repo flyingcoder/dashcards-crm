@@ -24,7 +24,10 @@ export default {
     dialog: Boolean,
     title: String,
     isEditDialog: Boolean,
-    fieldsToEdit: { type: Object, default: () => {} }
+    fieldsToEdit: {
+      type: Object,
+      default: () => {}
+    }
   },
 
   data: () => ({
@@ -67,8 +70,12 @@ export default {
 
   computed: {
     disabled() {
-      if (isEmpty(this.client.selected) || isEmpty(this.members.selected))
-        return false
+      if (
+        isEmpty(this.client.selected) ||
+        isEmpty(this.members.selected) ||
+        !this.project_title
+      )
+        return true
 
       if (this.members.selected.includes(this.client.selected.value)) {
         this.$event.$emit(
@@ -99,6 +106,17 @@ export default {
   },
 
   methods: {
+    get_by_id(ids) {
+      const members = this.members.items.filter(memb => ids.includes(memb.id))
+      let string = members.reduce((acc, cur, index) => {
+        if (index >= 4) return acc
+        return (acc += cur.first_name + ',')
+      }, '')
+      string = string.slice(0, -1)
+      if (string.length > 25) string += ' ...'
+      return string
+    },
+
     cancel() {
       this.open = false
     },
@@ -182,6 +200,10 @@ export default {
         items.push({ text: `${service_name}`, value: id })
       })
       this[action].items = items
+    },
+
+    update_member_items(new_items) {
+      this.$set(this.members, 'items', new_items)
     }
   }
 }

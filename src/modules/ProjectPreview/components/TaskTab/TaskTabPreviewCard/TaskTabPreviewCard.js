@@ -1,4 +1,5 @@
 import request from '@/services/axios_instance'
+import { global_utils } from '@/global_utils/global_utils'
 import moment from 'moment'
 //Components
 import DashCard from '@/common/DashCard.vue'
@@ -7,7 +8,7 @@ import EmojiPicker from '@/common/EmojiPicker/EmojiPicker.vue'
 import HoursBox from '@/common/HoursBox/HoursBox.vue'
 
 export default {
-  name: 'TaskTabPreviewCard',
+  mixins: [global_utils],
   components: {
     DashCard,
     RichEditor,
@@ -76,12 +77,6 @@ export default {
         selection.index,
         emoji
       )
-    }
-  },
-
-  filters: {
-    fromNowFormat: function(value) {
-      return moment(value).fromNow()
     }
   }
 }

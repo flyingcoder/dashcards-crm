@@ -1,11 +1,11 @@
 <template>
 	<v-layout row wrap class="reports">
 		
-		<v-flex md3 sm4 xs5>
-			<reports-list />
+		<v-flex xs12>
+			<reports-list :reports="reports" :loading="loading" />
 		</v-flex>
 
-		<v-flex md9 sm8 xs7>
+		<v-flex xs12>
 			<div class="body-wrapper">
 				<custom-dialog
 						ref="dialog"
@@ -14,7 +14,7 @@
 					<template slot="content">
 						<div class="custom-dialog">
 							<v-text-field
-									class="textfield"
+									class="dialog__link"
 									pattern="https://.*"
 									type="url"
 									v-model.trim="link"
@@ -28,7 +28,7 @@
 							/>
 							<v-text-field
 									v-model.trim="title"
-									class="textfield"
+									class="dialog__textfield "
 									label="Title"
 									solo
 									clearable
@@ -47,37 +47,39 @@
 
 				</custom-dialog>
 				<div class="reports__body">
-					<div class="reports__buttons">
-						<div class="reports__option">
+					<div class="reports-content">
+						<div class="reports__buttons">
+							<div class="reports__option">
 
-							<v-btn color="#3b589e"
-								class="add__link"
-								@click="open_dialog"
-							>
-								Add Link
-							</v-btn>
+								<v-btn color="#3b589e"
+									class="add__link"
+									@click="open_dialog"
+								>
+									Add Link
+								</v-btn>
 
-							<v-btn color="#3b589e"
-								:disabled="!activate_save"
-								class="save"
-								@click="save_report"
-							>
-								Save
-							</v-btn>
+								<v-btn color="#3b589e"
+									:disabled="!activate_save"
+									class="save"
+									@click="save_report"
+								>
+									Save
+								</v-btn>
 
-							<v-btn fab flat small class="sort__option">
-								<v-icon>more_horiz</v-icon>
-							</v-btn>
+								<v-btn fab flat small class="sort__option">
+									<v-icon>more_horiz</v-icon>
+								</v-btn>
 
+							</div>
 						</div>
-					</div>
-					<div class="reports__content" v-if="iframe_src">
-						<iframe :src="iframe_src"
-								frameborder="0"
-								width="100%"
-								height="500px"
-								@load="iframe_loaded"
-						></iframe>
+						<div class="site-preview" v-if="iframe_src">
+							<iframe :src="iframe_src"
+									frameborder="0"
+									width="100%"
+									height="500px"
+									@load="iframe_loaded"
+							></iframe>
+						</div>
 					</div>
 				</div>
 			</div>		
@@ -88,4 +90,6 @@
 <script src="./Reports.js">
 </script>
 <style scoped lang="scss" src="./Reports.scss">
+</style>
+<style scoped src="./Reports.css">
 </style>

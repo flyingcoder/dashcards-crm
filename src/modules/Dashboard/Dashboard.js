@@ -1,3 +1,4 @@
+import { mapGetters, mapMutations } from 'vuex'
 import makeRequestTo from '@/services/makeRequestTo'
 //Components
 import DashboardLogo from './components/DashboardLogo/DashboardLogo.vue'
@@ -14,46 +15,82 @@ export default {
   },
 
   computed: {
+    ...mapGetters('onlineUsers', ['all_users']),
+    ...mapGetters('chat', ['unread_messages', 'all_conversations']),
     user() {
       return this.$store.getters.user
-    },
-    online_users() {
-      return this.$store.getters['onlineUsers/online_users']
     }
   },
 
   created() {
-    this.fetch_online_users()
+    this.fetch_all_users()
   },
 
   methods: {
+    ...mapMutations('onlineUsers', ['set_all_users']),
+    ...mapMutations('chat', ['add_unread_messages', 'add_message_to_conv']),
+
     subscribe() {
       this.$pusher.authenticate()
-      let login_channel = this.$pusher.subscribe(
+      const login_channel = this.$pusher.subscribe(
         'private-user.login.' + this.user.company_id
       )
-      login_channel.bind('App\\Events\\UserLogin', ({ user }) => {
-        this.$store.commit('onlineUsers/add_user', {
-          id: user.id,
-          name: `${user.first_name}, ${user.last_name}`
-        })
-      })
-
-      let logout_channel = this.$pusher.subscribe(
+      const logout_channel = this.$pusher.subscribe(
         'private-user.logout.' + this.user.company_id
       )
-      logout_channel.bind('App\\Events\\UserLogout', ({ user }) => {
-        const index = this.online_users.findIndex(
+
+      const chat_channel = this.$pusher.subscribe(
+        `private-chat.new-message.${this.user.id}`
+      )
+
+      this.login_channel(login_channel)
+      this.logout_channel(logout_channel)
+      this.chat_channel(chat_channel)
+    },
+
+    login_channel(channel) {
+      channel.bind('App\\Events\\UserLogin', ({ user }) => {
+        this.$store.commit('onlineUsers/user_logged_in', {
+          id: user.id,
+          name: `${user.first_name}, ${user.last_name}`,
+          is_online: user.is_online
+        })
+      })
+    },
+
+    logout_channel(channel) {
+      channel.bind('App\\Events\\UserLogout', ({ user }) => {
+        const index = this.all_users.findIndex(
           on_user => on_user.id === user.id
         )
         if (~index) {
-          this.$store.commit('onlineUsers/delete_user', index)
+          this.$store.commit('onlineUsers/user_logged_out', index)
         }
       })
     },
-    fetch_online_users() {
-      makeRequestTo.get_online_users().then(({ data }) => {
-        this.$store.commit('onlineUsers/set_online_users', data)
+
+    chat_channel(channel) {
+      channel.bind(
+        `App\\Events\\PrivateChatSent`,
+        ({ message, sender, receiver }) => {
+          if (receiver.id === this.user.id) {
+            this.handle_unread_message(sender)
+            this.add_message_to_conv({ id: sender.id, message })
+          }
+        }
+      )
+    },
+
+    handle_unread_message(sender) {
+      const conv = this.all_conversations.find(conv => conv.id === sender.id)
+      if (!conv.open && conv.active) {
+        this.add_unread_messages(sender.id)
+      }
+    },
+
+    fetch_all_users() {
+      makeRequestTo.get_all_users().then(({ data }) => {
+        this.set_all_users(data)
         this.subscribe()
       })
     }

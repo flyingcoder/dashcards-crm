@@ -23,6 +23,7 @@
 						outline
 						class="chip--select-multi"
             close
+						@input="remove_chip(data.index)"
 				>
 					<img :src="require('@/assets/temp/user.png')" width="30" height="30">
 					&nbsp;{{data.item.first_name}}
@@ -47,6 +48,7 @@
 
 <script>
 import debounce from 'lodash/debounce'
+import _cloneDeep from 'lodash/cloneDeep'
 import makeRequestTo from '@/services/makeRequestTo'
 
 export default {
@@ -83,7 +85,6 @@ export default {
       makeRequestTo
         .fill_dropdown('member', val)
         .then(response => {
-          this.items = response.data
           this.$emit('items-updated', response.data)
         })
         .finally(() => (this.is_loading = false))
@@ -91,6 +92,12 @@ export default {
 
     is_item_active(id) {
       return this.members.includes(id)
+    },
+
+    remove_chip(index) {
+      let members = _cloneDeep(this.members)
+      members.splice(index, 1)
+      this.$emit('update:members', members)
     }
   }
 }

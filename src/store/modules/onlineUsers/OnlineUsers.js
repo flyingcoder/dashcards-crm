@@ -1,17 +1,25 @@
+import _cloneDeep from 'lodash/cloneDeep'
+
 const state = {
-  online_users: [],
   all_users: []
 }
 
 const getters = {
-  online_users: state => state.online_users,
   all_users: state => state.all_users
 }
 
 const mutations = {
-  add_user: (state, payload) => state.online_users.push(payload),
-  delete_user: (state, index) => state.online_users.splice(index, 1),
-  set_online_users: (state, payload) => (state.online_users = payload),
+  user_logged_in: (state, payload) => {
+    let users = _cloneDeep(state.all_users)
+    const index = users.findIndex(user => user.id === payload.id)
+    if (~index) {
+      users.splice(index, 1, payload)
+    } else {
+      users.push(payload)
+    }
+    state.all_users = users
+  },
+  user_logged_out: (state, index) => (state.all_users[index].is_online = false),
   set_all_users: (state, payload) => (state.all_users = payload)
 }
 

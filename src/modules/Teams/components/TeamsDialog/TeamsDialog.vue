@@ -72,7 +72,7 @@
 
 							<v-flex xs12 sm6>
 								<v-text-field
-                  						class="dialog__textfield"
+                  						class="dialog__email"
 										color="#667187"
 										solo
 										hide-details
@@ -99,7 +99,7 @@
 
 							<v-flex xs12 sm6 v-if="!isEditDialog">
 								<v-text-field
-                  						class="dialog__textfield"
+                  						class="dialog__password"
 										color="#667187"
 										solo
 										hide-details
@@ -115,7 +115,7 @@
 
 							<v-flex xs12 sm6 v-if="!isEditDialog">
 								<v-text-field
-                  						class="dialog__textfield"
+                  						class="dialog__password"
 										color="#667187"
 										solo
 										hide-details

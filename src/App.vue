@@ -59,3 +59,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.text-cap {
+  text-transform: capitalize;
+}
+
+.textarea-cap::first-letter {
+  text-transform: uppercase;
+}
+</style>
