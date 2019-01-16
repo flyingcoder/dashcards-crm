@@ -15,7 +15,9 @@ export default {
 
   props: {
     dialog: Boolean,
-    dialogTitle: String
+    dialogTitle: String,
+    isEditDialog: Boolean,
+    fieldsToEdit: { type: Object, default: () => {} }
   },
 
   data: () => ({
@@ -63,6 +65,12 @@ export default {
     },
     open(new_val) {
       this.$emit('update:dialog', new_val)
+    },
+    fieldsToEdit: {
+      handler(new_val) {
+        this.isEditDialog && this.update_fields(new_val)
+      },
+      deep: true
     }
   },
 
@@ -82,6 +90,18 @@ export default {
         assinged_id: this.members.selected
       }
       this.$emit('save', fields_to_save)
+    },
+
+    update_fields({ fields }) {
+      const new_fields = Object.assign({}, fields)
+      this.title = new_fields.title
+      this.description = new_fields.description
+      this.status = new_fields.status
+      this.days = new_fields.days
+      this.start_date = new_fields.started_at
+      this.end_date = new_fields.end_at
+      this.$set(this.members, 'items', new_fields.members)
+      this.$set(this.members, 'selected', new_fields.members.map(m => m.id))
     },
 
     clear_and_close() {
