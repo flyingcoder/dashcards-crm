@@ -5,7 +5,6 @@ import DynamicBox from './DynamicBox/DynamicBox.vue'
 import MilestoneTabDialog from './MilestoneTabDialog/MilestoneTabDialog.vue'
 import SelectTemplateDialog from './SelectTemplateDialog/SelectTemplateDialog.vue'
 import AddTaskDialog from './AddTaskDialog/AddTaskDialog.vue'
-import EditTaskDialog from '@/modules/MilestoneTask/components/TasksDialog/TasksDialog.vue'
 import _cloneDeep from 'lodash/cloneDeep'
 
 export default {
@@ -15,8 +14,7 @@ export default {
     MilestoneTabDialog,
     DeleteDialog,
     SelectTemplateDialog,
-    AddTaskDialog,
-    EditTaskDialog
+    AddTaskDialog
   },
 
   props: {

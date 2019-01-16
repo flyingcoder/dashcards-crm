@@ -37,7 +37,7 @@
 				@save="add_new_task"
 		/>
 
-		<edit-task-dialog
+		<add-task-dialog
 				:dialog.sync="edit_task_dialog"
 				ref="edit_task_dialog"
 				dialog-title="Edit Task"
