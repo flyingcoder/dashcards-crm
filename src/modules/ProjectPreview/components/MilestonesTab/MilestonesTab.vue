@@ -37,6 +37,15 @@
 				@save="add_new_task"
 		/>
 
+		<edit-task-dialog
+				:dialog.sync="edit_task_dialog"
+				ref="edit_task_dialog"
+				dialog-title="Edit Task"
+				:is-edit-dialog="edit_task_dialog"
+				:fields-to-edit="edit_task_item"
+				@save="update_task"
+		/>
+
 		<v-progress-linear v-show="loading" :indeterminate="true"></v-progress-linear>
 
 		<v-layout row justify-end>
@@ -83,6 +92,7 @@
 							:box="box"
 							@edit="open_edit_dialog"
 							@delete="open_delete_confirmation"
+							@edit-task="edit_task"
 							@remove-task="remove_task(index, $event)"
 							@add-task="open_add_task_dialog"
 					/>

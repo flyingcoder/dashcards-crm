@@ -1,9 +1,12 @@
 import request from '@/services/axios_instance'
+import makeRequestTo from '@/services/makeRequestTo'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import DynamicBox from './DynamicBox/DynamicBox.vue'
 import MilestoneTabDialog from './MilestoneTabDialog/MilestoneTabDialog.vue'
 import SelectTemplateDialog from './SelectTemplateDialog/SelectTemplateDialog.vue'
 import AddTaskDialog from './AddTaskDialog/AddTaskDialog.vue'
+import EditTaskDialog from '@/modules/MilestoneTask/components/TasksDialog/TasksDialog.vue'
+import _cloneDeep from 'lodash/cloneDeep'
 
 export default {
   name: 'MilestonesTab',
@@ -12,7 +15,8 @@ export default {
     MilestoneTabDialog,
     DeleteDialog,
     SelectTemplateDialog,
-    AddTaskDialog
+    AddTaskDialog,
+    EditTaskDialog
   },
 
   props: {
@@ -22,6 +26,7 @@ export default {
   data: () => ({
     add_dialog: false,
     edit_dialog: false,
+    edit_task_dialog: false,
     delete_dialog: false,
     select_template_dialog: false,
     add_task_dialog: false,
@@ -33,6 +38,12 @@ export default {
     edit_item: {
       id: null,
       fields: null
+    },
+    edit_task_item: {
+      id: null,
+      index: null,
+      fields: null,
+      box_id: null
     },
     box_id_to_add_task: null
   }),
@@ -144,6 +155,16 @@ export default {
       this.get_dynamic_boxes()
     },
 
+    edit_task({ task, index, box_id }) {
+      this.edit_task_dialog = true
+      this.edit_task_item = {
+        id: task.id,
+        index,
+        fields: task,
+        box_id
+      }
+    },
+
     remove_task(box_index, { task_index, task_id }) {
       this.loading = true
       request
@@ -161,6 +182,38 @@ export default {
           )
         })
         .finally(() => (this.loading = false))
+    },
+
+    update_task(task) {
+      makeRequestTo
+        .edit_milestone_task(
+          this.edit_task_item.id,
+          task,
+          `api/milestone/${this.id}/task`
+        )
+        .then(res => {
+          const { index, box_id } = this.edit_task_item
+          let boxes = _cloneDeep(this.boxes)
+          const box_index = boxes.findIndex(box => box.id === box_id)
+          if (~box_index) {
+            this.edit_task_dialog = false
+            boxes[box_index].tasks[index] = res.data
+            this.boxes = boxes
+            this.edit_task_item = {
+              id: null,
+              index: null,
+              task: null,
+              box_id: null
+            }
+            this.$event.$emit(
+              'open_snackbar',
+              'Task updated successfully',
+              'red',
+              'success',
+              2000
+            )
+          }
+        })
     },
 
     open_add_task_dialog(box_id) {
