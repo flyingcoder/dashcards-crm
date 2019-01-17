@@ -16,11 +16,11 @@
 
 						<v-flex md4 sm6 xs12 class="text-xs-center">
 							<v-menu class="d__dropdown"
-							        transition="slide-y-transition"
-							        bottom
-							        offset-y
-							        :close-on-content-click="false"
-							        max-width="400"
+								transition="slide-y-transition"
+								bottom
+								offset-y
+								:close-on-content-click="false"
+								max-width="350"
 							>
 								<v-btn slot="activator" class="d__btn">
 									<div class="d__icon">
@@ -51,11 +51,11 @@
 						<v-flex md4 sm6 xs12 class="text-xs-center">
 
 							<v-menu class="d__dropdown"
-							        transition="slide-y-transition"
-							        bottom
-							        offset-y
-							        :close-on-content-click="false"
-							        max-width="400"
+								transition="slide-y-transition"
+								bottom
+								offset-y
+								:close-on-content-click="false"
+								max-width="350"
 							>
 								<v-btn slot="activator" class="d__btn">
 									<div class="d__icon">
@@ -128,11 +128,11 @@
 						<v-flex md4 sm6 xs12 class="text-xs-center">
 
 							<v-menu class="d__dropdown"
-							        transition="slide-y-transition"
-							        bottom
-							        offset-y
-							        :close-on-content-click="false"
-							        max-width="400"
+								transition="slide-y-transition"
+								bottom
+								offset-y
+								:close-on-content-click="false"
+								max-width="350"
 							>
 								<v-btn slot="activator" class="d__btn">
 									<div class="d__icon">
