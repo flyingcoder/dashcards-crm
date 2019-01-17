@@ -18,7 +18,7 @@
 
   .dialog__body{
     max-height: 400px;
-    overflow: hidden auto;
+    overflow: auto;
     padding: 0 15px;
     margin: 0 20px;
     
@@ -26,7 +26,7 @@
       margin-bottom: 20px;
 
       .d__btn{
-        width: 100%;
+        width: 170px;
         height: 47px;
         padding: 5px 10px;
         font-size: 18px;
@@ -48,6 +48,18 @@
           font-size: 15px;
         }
       }
+    }
+    
+    .choosen{
+      padding: 5px;
+      color: $textDark;
+      font-size: 14px;
+      width: 170px;
+      margin: 0 auto;
+      text-align: left;
+      background-color: $white;
+      border: 1px solid $borderLightGray;
+      border-radius: 5px;
     }
 
     .project__title{
@@ -113,9 +125,9 @@
   
         .d__btn{
           height: auto;
-          padding: 0;
+          padding: 5px;
           font-size: 12px;
-          width: 80px;
+          width: 150px;
   
           .d__icon{
             width: 18px;
@@ -129,6 +141,12 @@
             font-size: 18px;
           }
         }
+      }
+      
+      .choosen{
+        padding: 5px;
+        font-size: 12px;
+        width: 150px;
       }
     }
   }
