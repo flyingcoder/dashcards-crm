@@ -111,6 +111,7 @@ export default {
       let string = members.reduce((acc, cur) => {
         return (acc += cur.first_name + ' ' + cur.last_name + ', ')
       }, '')
+      string = string.slice(0, -2)
       return string
     },
 
