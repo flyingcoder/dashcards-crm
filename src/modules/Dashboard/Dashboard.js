@@ -23,7 +23,7 @@ export default {
   },
 
   created() {
-    this.fetch_all_users()
+    this.subscribe()
   },
 
   methods: {
@@ -32,41 +32,17 @@ export default {
 
     subscribe() {
       this.$pusher.authenticate()
-      const login_channel = this.$pusher.subscribe(
-        'private-user.login.' + this.user.company_id
-      )
-      const logout_channel = this.$pusher.subscribe(
-        'private-user.logout.' + this.user.company_id
-      )
 
       const chat_channel = this.$pusher.subscribe(
         `private-chat.new-message.${this.user.id}`
       )
 
-      this.login_channel(login_channel)
-      this.logout_channel(logout_channel)
+      const friends_channel = this.$pusher.subscribe(
+        `presence-friend-list-${this.user.company_id}`
+      )
+
       this.chat_channel(chat_channel)
-    },
-
-    login_channel(channel) {
-      channel.bind('App\\Events\\UserLogin', ({ user }) => {
-        this.$store.commit('onlineUsers/user_logged_in', {
-          id: user.id,
-          name: `${user.first_name}, ${user.last_name}`,
-          is_online: user.is_online
-        })
-      })
-    },
-
-    logout_channel(channel) {
-      channel.bind('App\\Events\\UserLogout', ({ user }) => {
-        const index = this.all_users.findIndex(
-          on_user => on_user.id === user.id
-        )
-        if (~index) {
-          this.$store.commit('onlineUsers/user_logged_out', index)
-        }
-      })
+      this.friends_channel(friends_channel)
     },
 
     chat_channel(channel) {
@@ -81,18 +57,43 @@ export default {
       )
     },
 
+    friends_channel(channel) {
+      channel.bind('pusher:subscription_succeeded', ({ members }) => {
+        let all_users = []
+        Object.entries(members).forEach(([key, value]) => {
+          all_users.push({
+            id: Number(key),
+            name: `${value.first_name}, ${value.last_name}`,
+            is_online: !!value.is_online
+          })
+        })
+        this.set_all_users(all_users)
+      })
+
+      channel.bind('pusher:member_added', ({ info: member }) => {
+        this.$store.commit('onlineUsers/user_logged_in', {
+          id: member.id,
+          name: `${member.first_name}, ${member.last_name}`,
+          is_online: !!member.is_online
+        })
+      })
+
+      channel.bind('pusher:member_removed', ({ info: member }) => {
+        const index = this.all_users.findIndex(
+          on_user => on_user.id === member.id
+        )
+        if (~index) {
+          makeRequestTo.logout_user(member.id)
+          this.$store.commit('onlineUsers/user_logged_out', index)
+        }
+      })
+    },
+
     handle_unread_message(sender) {
       const conv = this.all_conversations.find(conv => conv.id === sender.id)
       if (!conv.open && conv.active) {
         this.add_unread_messages(sender.id)
       }
-    },
-
-    fetch_all_users() {
-      makeRequestTo.get_all_users().then(({ data }) => {
-        this.set_all_users(data)
-        this.subscribe()
-      })
     }
   }
 }
