@@ -2,10 +2,6 @@
   <div class="login">
     <v-layout row wrap justify-center align-center class="login__content">
       <v-flex md6 xs12 fill-height class="l__form">
-      <span style="position: absolute; top: 0;">
-        For email use: ross.buzzooka@gmail.com <br />
-        For password use: gDQsa7nUyadmin
-      </span>
       
       <login-component
             title-text="Log in"
