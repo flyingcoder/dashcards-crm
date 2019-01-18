@@ -15,5 +15,9 @@ export const templates_milestone_api = {
 
   delete_milestone(id, api_url) {
     return request.delete(`${api_url}/${id}`)
+  },
+
+  edit_milestone_task(id, payload, api_url) {
+    return request.put(`${api_url}/${id}`, payload)
   }
 }

@@ -14,13 +14,13 @@
 				<div class="dialog__body">
 					<v-layout row wrap class="dialog__buttons">
 
-						<v-flex xs4 class="text-xs-center">
+						<v-flex md4 sm6 xs12 class="text-xs-center">
 							<v-menu class="d__dropdown"
-							        transition="slide-y-transition"
-							        bottom
-							        offset-y
-							        :close-on-content-click="false"
-							        max-width="400"
+								transition="slide-y-transition"
+								bottom
+								offset-y
+								:close-on-content-click="false"
+								max-width="350"
 							>
 								<v-btn slot="activator" class="d__btn">
 									<div class="d__icon">
@@ -30,9 +30,7 @@
 										</svg>
 									</div>
 									<div class="d__title">
-										<span
-												v-if="client.selected">{{ client.selected.text }}</span>
-										<span v-else>Select Client</span>
+										<span>Select Client</span>
 									</div>
 								</v-btn>
 
@@ -46,16 +44,18 @@
 								</v-list>
 
 							</v-menu>
+							
+							<div class="choosen" v-if="client.selected">{{ client.selected.text }}</div>
 						</v-flex>
 
-						<v-flex xs4 class="text-xs-center">
+						<v-flex md4 sm6 xs12 class="text-xs-center">
 
 							<v-menu class="d__dropdown"
-							        transition="slide-y-transition"
-							        bottom
-							        offset-y
-							        :close-on-content-click="false"
-							        max-width="400"
+								transition="slide-y-transition"
+								bottom
+								offset-y
+								:close-on-content-click="false"
+								max-width="350"
 							>
 								<v-btn slot="activator" class="d__btn">
 									<div class="d__icon">
@@ -65,9 +65,7 @@
 										</svg>
 									</div>
 									<div class="d__title">
-										<span
-												v-if="service.selected">{{ service.selected.text }}</span>
-										<span v-else>Select Service</span>
+										<span>Select Service</span>
 									</div>
 								</v-btn>
 
@@ -82,16 +80,18 @@
 
 							</v-menu>
 
+							<div class="choosen" v-if="service.selected">{{ service.selected.text }}</div>
+
 						</v-flex>
 
-						<v-flex xs4 class="text-xs-center">
+						<v-flex md4 sm6 xs12 class="text-xs-center">
 							<v-btn class="attachment d__btn">
 								<v-icon> attach_file</v-icon>
 								<div class="d__title">Attach</div>
 							</v-btn>
 						</v-flex>
 
-						<v-flex xs6 class="text-xs-center">
+						<v-flex md4 sm6 xs12 class="text-xs-center">
 
 							<v-menu class="d__dropdown"
 							        transition="slide-y-transition"
@@ -107,8 +107,7 @@
 										</svg>
 									</div>
 									<div class="d__title">
-										<span v-if="date_pickers.start_date">{{ $refs.date_pickers.text_field_label }}</span>
-										<span v-else>Select Date</span>
+										<span>Select Date</span>
 									</div>
 								</v-btn>
 
@@ -122,16 +121,18 @@
 
 							</v-menu>
 
+							<div class="choosen" v-if="date_pickers.start_date">{{ $refs.date_pickers.text_field_label }}</div>
+
 						</v-flex>
 
-						<v-flex xs6 class="text-xs-center">
+						<v-flex md4 sm6 xs12 class="text-xs-center">
 
 							<v-menu class="d__dropdown"
-							        transition="slide-y-transition"
-							        bottom
-							        offset-y
-							        :close-on-content-click="false"
-							        max-width="400"
+								transition="slide-y-transition"
+								bottom
+								offset-y
+								:close-on-content-click="false"
+								max-width="350"
 							>
 								<v-btn slot="activator" class="d__btn">
 									<div class="d__icon">
@@ -141,8 +142,7 @@
 										</svg>
 									</div>
 									<div class="d__title">
-										<span v-if="members.selected.length">{{ get_by_id(members.selected) }}</span>
-										<span v-else>Select Date</span>
+										<span>Assign Members</span>
 									</div>
 								</v-btn>
 
@@ -155,6 +155,8 @@
 								</v-list>
 
 							</v-menu>
+
+							<div class="choosen" v-if="members.selected.length">{{ get_by_id(members.selected) }}</div>
 
 						</v-flex>
 

@@ -280,3 +280,14 @@
         }
     }
 }
+
+@mixin firstColumnHover {
+  .table__body-row{
+    td:nth-child(2){
+      cursor: pointer;
+    }
+    td:nth-child(2):hover{
+      background-color: #eee;
+    }
+  }
+}

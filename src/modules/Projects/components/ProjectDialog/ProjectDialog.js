@@ -108,12 +108,10 @@ export default {
   methods: {
     get_by_id(ids) {
       const members = this.members.items.filter(memb => ids.includes(memb.id))
-      let string = members.reduce((acc, cur, index) => {
-        if (index >= 4) return acc
-        return (acc += cur.first_name + ',')
+      let string = members.reduce((acc, cur) => {
+        return (acc += cur.first_name + ' ' + cur.last_name + ', ')
       }, '')
-      string = string.slice(0, -1)
-      if (string.length > 25) string += ' ...'
+      string = string.slice(0, -2)
       return string
     },
 
