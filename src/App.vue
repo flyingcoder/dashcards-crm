@@ -17,15 +17,6 @@ export default {
     user_moved_mouse: 0
   }),
 
-  created() {
-    // Let's check if the browser supports notifications
-    if (!('Notification' in window)) {
-      alert('This browser does not support desktop notification')
-    } else if (Notification.permission !== 'denied') {
-      this.request_notification_permission()
-    }
-  },
-
   watch: {
     user_moved_mouse(val) {
       if (val >= 1800000) {
@@ -35,6 +26,23 @@ export default {
           notification.close()
         }, 4500)
       }
+    }
+  },
+
+  created() {
+    if (!sessionStorage.getItem('logged')) {
+      this.$store.dispatch('logout')
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
+      navigator.sendBeacon('https://api.bizzooka.com/api/logout')
+      this.$router.push({ name: 'login' })
+    }
+
+    // Let's check if the browser supports notifications
+    if (!('Notification' in window)) {
+      alert('This browser does not support desktop notification')
+    } else if (Notification.permission !== 'denied') {
+      this.request_notification_permission()
     }
   },
 
