@@ -1,5 +1,4 @@
 import { mapGetters, mapMutations } from 'vuex'
-import makeRequestTo from '@/services/makeRequestTo'
 //Components
 import DashboardLogo from './components/DashboardLogo/DashboardLogo.vue'
 import DashboardHeader from './components/DashboardHeader/DashboardHeader.vue'
@@ -83,7 +82,6 @@ export default {
           on_user => on_user.id === member.id
         )
         if (~index) {
-          makeRequestTo.logout_user(member.id)
           this.$store.commit('onlineUsers/user_logged_out', index)
         }
       })

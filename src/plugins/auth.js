@@ -36,6 +36,7 @@ export const auth = {
   },
 
   login({ email, password }) {
+	  sessionStorage.setItem('logged', true)
     store.commit('set_custom_loader', true)
     make_request_to
       .login({ email, password })
