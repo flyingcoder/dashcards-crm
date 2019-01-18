@@ -10,13 +10,10 @@
 
 					<v-timeline align-top dense v-else>
 						<v-timeline-item v-for="item of timeline_items" :key="item.id" color="#1fb868" small>
-							<v-layout class="timeline__item">
-								<v-flex xs2 class="t__time">{{ get_calendar_time(item.created_at) }}</v-flex>
-								<v-flex class="t__content">
+							<div class="timeline__item">
+								<div class="t__time">{{ get_calendar_time(item.created_at) }}</div>
 									<h2 class="t__title">{{ item.description }}</h2>
-									<p class="t__desc">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-								</v-flex>
-							</v-layout>
+							</div>
 						</v-timeline-item>
 					</v-timeline>
 

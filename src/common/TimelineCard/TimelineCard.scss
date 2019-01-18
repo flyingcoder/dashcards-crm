@@ -1,53 +1,53 @@
-@import '~@/sass/_variables';
+@import "~@/sass/_variables";
 
 .timeline-card {
+  @include styledScrollFor(".timeline__inner_content");
 
-  @include styledScrollFor('.timeline__inner_content');
-  
-  .timeline__content{
-
+  .timeline__content {
     .timeline__inner_content {
       max-height: 450px;
       overflow: auto;
       margin: 15px auto 0;
-      
-      .timeline__item  {
+
+      .timeline__item {
+        display: grid;
+        grid-template-columns: 80px 1fr;
+        align-items: center;
+        grid-gap: 10px;
+        margin-left: -15px;
+        white-space: normal;
+        word-break: break-word;
+
         .t__time {
-          position: absolute;
-          top: 5px;
-          left: -30px;
           color: $darkGray;
         }
 
-        .t__content {
-          padding: 0 10px 0 48px;
-          
-          .t__title{
-            text-transform: capitalize;
-            color:  $textDark;
-          }
+        .t__title {
+          text-transform: capitalize;
+          color: $textDark;
+          padding: 0 10px;
         }
       }
     }
   }
 }
 
-@media only screen and (max-width: 480px){
-  .timeline-card{
-    .timeline__content{
+@media only screen and (max-width: 480px) {
+  .timeline-card {
+    .timeline__content {
       .timeline__inner_content {
-        .timeline__item  {
+        .timeline__item {
           .t__time {
             font-size: 10px;
           }
-      
+
           .t__content {
             padding-left: 30px;
-      
-            .t__title{
+
+            .t__title {
               font-size: 16px;
             }
-            .t__desc{
+            .t__desc {
               font-size: 12px;
             }
           }
