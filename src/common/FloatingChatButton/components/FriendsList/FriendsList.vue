@@ -21,7 +21,7 @@
 		<v-card class="chat__inbox">
 				<div class="inbox__title">Online Friends ({{online_users.length}})</div>
 				<div class="user new__message"
-				     v-for="user of all_users"
+				     v-for="user of online_users"
 				     :key="user.id"
 				     @click="open_chat_box(user)"
 				>
