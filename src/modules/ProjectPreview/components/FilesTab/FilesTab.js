@@ -48,13 +48,7 @@ export default {
 
   methods: {
     file_added(file, response) {
-      this.$event.$emit(
-        'open_snackbar',
-        'File(s) uploaded successfully',
-        'red',
-        'success',
-        3000
-      )
+      this.$event.$emit('open_snackbar', 'File(s) uploaded successfully')
       this.items.unshift(JSON.parse(response))
       this.$refs.dropzone.removeFile(file)
     }

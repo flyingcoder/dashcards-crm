@@ -24,14 +24,13 @@ export default {
   created() {
     this.$event.$on(
       'open_snackbar',
-      (text, color = '', icon = 'notification', timeout = 6000, mode = '') => {
+      (text, type = 'success', timeout = 2500) => {
         if (!text) return
         this.snackbar = true
         this.text = text
-        this.color = color || ''
-        this.mode = mode
+        this.color = this.get_color(type)
         this.timeout = timeout
-        this.icon = this.$vuetify.icons[icon]
+        this.icon = this.get_icon(type)
       }
     )
   },
@@ -45,7 +44,22 @@ export default {
   watch: {
     snackbar_store(snackbar) {
       snackbar.status &&
-        this.$event.$emit('open_snackbar', snackbar.message, 'red')
+        this.$event.$emit('open_snackbar', snackbar.message, 'error')
+    }
+  },
+
+  methods: {
+    get_color(type) {
+      const colors = {
+        error: 'red',
+        notification: 'orange',
+        success: 'green'
+      }
+      return colors[type]
+    },
+
+    get_icon(type) {
+	    return this.$vuetify.icons[type]
     }
   }
 }

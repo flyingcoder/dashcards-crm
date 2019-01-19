@@ -31,9 +31,7 @@ export default {
         this.$event.$emit(
           'open_snackbar',
           `Timer ${timer_message}`,
-          'red',
-          'success',
-          1500
+          'notification'
         )
       })
     }

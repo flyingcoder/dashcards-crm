@@ -12,12 +12,7 @@ export const methods = {
           this.items.unshift(new_items)
         }
         this.$refs.add_dialog.clear_and_close()
-        this.$event.$emit(
-          'open_snackbar',
-          this.table_config.add_message,
-          'red',
-          'success'
-        )
+        this.$event.$emit('open_snackbar', this.table_config.add_message)
       })
     },
 
@@ -49,12 +44,7 @@ export const methods = {
             fields: null
           }
           this.edit_dialog = false
-          this.$event.$emit(
-            'open_snackbar',
-            this.table_config.update_message,
-            'red',
-            'success'
-          )
+          this.$event.$emit('open_snackbar', this.table_config.update_message)
         }
       )
     },
@@ -67,12 +57,7 @@ export const methods = {
         if (~index) this.items.splice(index, 1)
         this.delete_item_id = null
         this.delete_dialog = false
-        this.$event.$emit(
-          'open_snackbar',
-          this.table_config.delete_message,
-          'red',
-          'success'
-        )
+        this.$event.$emit('open_snackbar', this.table_config.delete_message)
       })
     },
 
@@ -114,9 +99,7 @@ export const methods = {
         response => {
           this.$event.$emit(
             'open_snackbar',
-            this.table_config.refresh_table_message,
-            'red',
-            'success'
+            this.table_config.refresh_table_message
           )
           this.loading = false
           this.items_response = response.data

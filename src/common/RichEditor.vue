@@ -62,7 +62,11 @@ export default {
   methods: {
     handleImageAdded(file, Editor, cursorLocation, resetUploader) {
       if (file.size / 1024 > 1024) {
-        this.$event.$emit('open_snackbar', 'Large images do not allowed', 'red')
+        this.$event.$emit(
+          'open_snackbar',
+          'Large images do not allowed',
+          'error'
+        )
         return
       }
       const reader = new FileReader()
