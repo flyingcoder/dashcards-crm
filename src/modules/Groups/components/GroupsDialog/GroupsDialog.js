@@ -69,7 +69,7 @@ export default {
       if (this.name && this.description && this.does_something_changed) {
         return true
       }
-      this.$event.$emit('open_snackbar', 'Nothing Changed!')
+      this.$event.$emit('open_snackbar', 'Nothing Changed!', 'notification')
       return false
     },
     update_fields({ fields }) {

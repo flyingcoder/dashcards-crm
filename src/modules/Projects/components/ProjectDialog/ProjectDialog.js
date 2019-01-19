@@ -78,12 +78,7 @@ export default {
         return true
 
       if (this.members.selected.includes(this.client.selected.value)) {
-        this.$event.$emit(
-          'open_snackbar',
-          `Client can't be a member`,
-          'error',
-          'notification'
-        )
+        this.$event.$emit('open_snackbar', `Client can't be a member`, 'error')
         return true
       }
       return false

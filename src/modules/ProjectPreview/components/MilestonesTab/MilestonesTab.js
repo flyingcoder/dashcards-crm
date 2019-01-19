@@ -70,13 +70,7 @@ export default {
         .post(`api/project/${this.id}/milestone`, milestone)
         .then(({ data }) => this.boxes.push(data))
         .finally(() => (this.loading = false))
-      this.$event.$emit(
-        'open_snackbar',
-        'New Milestone added successfully',
-        'red',
-        'success',
-        2000
-      )
+      this.$event.$emit('open_snackbar', 'New Milestone added successfully')
     },
 
     open_delete_confirmation(id) {
@@ -96,13 +90,7 @@ export default {
             ))
         )
         .finally(() => (this.loading = false))
-      this.$event.$emit(
-        'open_snackbar',
-        'Milestone deleted successfully',
-        'red',
-        'success',
-        2000
-      )
+      this.$event.$emit('open_snackbar', 'Milestone deleted successfully')
       this.id_to_delete = null
     },
 
@@ -126,13 +114,7 @@ export default {
           if (~index) this.boxes.splice(index, 1, data)
         })
         .finally(() => (this.loading = false))
-      this.$event.$emit(
-        'open_snackbar',
-        'Milestone updated successfully',
-        'red',
-        'success',
-        2000
-      )
+      this.$event.$emit('open_snackbar', 'Milestone updated successfully')
       this.edit_item = {
         id: null,
         fields: null
@@ -171,13 +153,7 @@ export default {
           let boxes = [...this.boxes]
           boxes[box_index].tasks.splice(task_index, 1)
           this.boxes = boxes
-          this.$event.$emit(
-            'open_snackbar',
-            'Task deleted successfully',
-            'red',
-            'success',
-            2000
-          )
+          this.$event.$emit('open_snackbar', 'Task deleted successfully')
         })
         .finally(() => (this.loading = false))
     },
@@ -203,13 +179,7 @@ export default {
               task: null,
               box_id: null
             }
-            this.$event.$emit(
-              'open_snackbar',
-              'Task updated successfully',
-              'red',
-              'success',
-              2000
-            )
+            this.$event.$emit('open_snackbar', 'Task updated successfully')
           }
         })
     },
@@ -229,13 +199,7 @@ export default {
             box => box.id === this.box_id_to_add_task
           )
           this.boxes[box_index].tasks.push(data)
-          this.$event.$emit(
-            'open_snackbar',
-            'Task added successfully',
-            'red',
-            'success',
-            2000
-          )
+          this.$event.$emit('open_snackbar', 'Task added successfully')
         })
         .finally(() => {
           this.loading = false

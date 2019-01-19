@@ -101,7 +101,7 @@
 
 .milestone {
   @include customTableRow; //css used for styling the last row of the table
-  
+
   @include firstColumnHover;
 }
 </style>

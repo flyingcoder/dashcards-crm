@@ -38,7 +38,6 @@ export const validations = {
             'open_snackbar',
             this[field].error_messages[index],
             'error',
-            'notification',
             3000
           )
           return false //returning, so the input field has error
