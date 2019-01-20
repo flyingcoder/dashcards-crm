@@ -59,7 +59,7 @@ export default {
     },
 
     get_icon(type) {
-	    return this.$vuetify.icons[type]
+      return this.$vuetify.icons[type]
     }
   }
 }
