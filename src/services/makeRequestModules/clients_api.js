@@ -1,6 +1,10 @@
 import request from '@/services/axios_instance'
 
 export const clients_api = {
+  get_all_clients() {
+    return request.get('api/clients?true=all')
+  },
+
   get_clients() {
     return request.get('api/clients')
   },

@@ -1,6 +1,4 @@
-import debounce from 'lodash/debounce'
 import _cloneDeep from 'lodash/cloneDeep'
-import makeRequestTo from '@/services/makeRequestTo'
 
 export default {
   name: 'MembersDropdown',
@@ -8,19 +6,20 @@ export default {
 
   props: {
     members: Array,
-    memberItems: Array
+    memberItems: Array,
+    isLoading: Boolean
   },
 
   data: () => ({
     items: [],
-    is_loading: false,
     search: null
   }),
 
   watch: {
     search(val) {
-      val && this.debounce(val)
+      this.$emit('search', val)
     },
+
     memberItems(val) {
       this.items = [...val]
     }
@@ -30,16 +29,6 @@ export default {
     members_selected(val) {
       this.$emit('update:members', val)
     },
-
-    debounce: debounce(function(val) {
-      this.is_loading = true
-      makeRequestTo
-        .fill_dropdown('member', val)
-        .then(response => {
-          this.$emit('items-updated', response.data)
-        })
-        .finally(() => (this.is_loading = false))
-    }, 500),
 
     is_item_active(id) {
       return this.members.includes(id)

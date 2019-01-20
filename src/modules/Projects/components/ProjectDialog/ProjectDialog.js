@@ -3,8 +3,9 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 import { quillEditor } from 'vue-quill-editor'
-import cloneDeep from 'lodash/cloneDeep'
+import _cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
+import axios from 'axios'
 //Components
 import makeRequestTo from '@/services/makeRequestTo'
 import AutoComplete from '../AutoComplete'
@@ -32,17 +33,21 @@ export default {
 
   data: () => ({
     open: false,
+    dropdown_loading: false,
     client: {
       selected: null,
       items: [],
-      loading: false
+      all_items: [],
+      show: false
     },
     service: {
       selected: null,
       items: [],
-      loading: false
+      all_items: [],
+      show: false
     },
     members: {
+      all_items: [],
       items: [],
       selected: []
     },
@@ -88,6 +93,7 @@ export default {
   watch: {
     dialog(new_val) {
       this.open = new_val
+      if (new_val && !this.isEditDialog) this.init_dropdowns()
     },
     open(new_val) {
       this.$emit('update:dialog', new_val)
@@ -101,8 +107,31 @@ export default {
   },
 
   methods: {
+    init_dropdowns() {
+      this.dropdown_loading = true
+      axios
+        .all([
+          makeRequestTo.get_all_clients(),
+          makeRequestTo.get_all_services(),
+          makeRequestTo.get_all_teams()
+        ])
+        .then(
+          axios.spread((res1, res2, res3) => {
+            this.client.all_items = res1.data.data || []
+            this.service.all_items = res2.data.data || []
+            this.members.all_items = res3.data.data || []
+            this.client.items = _cloneDeep(this.client.all_items)
+            this.service.items = _cloneDeep(this.service.all_items)
+            this.members.items = _cloneDeep(this.members.all_items)
+          })
+        )
+        .finally(() => (this.dropdown_loading = false))
+    },
+
     get_by_id(ids) {
-      const members = this.members.items.filter(memb => ids.includes(memb.id))
+      const members = this.members.all_items.filter(memb =>
+        ids.includes(memb.id)
+      )
       let string = members.reduce((acc, cur) => {
         return (acc += cur.first_name + ' ' + cur.last_name + ', ')
       }, '')
@@ -131,7 +160,7 @@ export default {
     },
 
     update_fields({ fields }) {
-      const new_fields = cloneDeep(fields)
+      const new_fields = _cloneDeep(fields)
       this.$set(this.service, 'items', [
         { text: new_fields.service_name, value: new_fields.service_id }
       ])
@@ -167,36 +196,19 @@ export default {
       this.cancel() //close the modal
     },
 
-    get_searched_items(action, keyword, is_service = false) {
-      this[action].loading = true
-      makeRequestTo
-        .fill_dropdown(action, keyword)
-        .then(response => this.update_items(response.data, action, is_service))
-        .finally(() => (this[action].loading = false))
-    },
-
-    update_items(new_items, action, is_service) {
-      if (is_service) {
-        this.update_service_items(new_items, action)
-        return
+    filter_dropdown_items(data_prop, search) {
+      let items = _cloneDeep(this[data_prop].all_items)
+      if (!search) {
+        this[data_prop].items = items
+      } else {
+        const filtered = items.filter(item => {
+          return (
+            item.first_name.toLowerCase().includes(search.toLowerCase()) ||
+            item.last_name.toLowerCase().includes(search.toLowerCase())
+          )
+        })
+        this.$set(this[data_prop], 'items', filtered)
       }
-      let items = []
-      new_items.forEach(({ id, first_name, last_name }) => {
-        items.push({ text: `${first_name} ${last_name}`, value: id })
-      })
-      this[action].items = items
-    },
-
-    update_service_items(new_items, action) {
-      let items = []
-      new_items.forEach(({ id, service_name }) => {
-        items.push({ text: `${service_name}`, value: id })
-      })
-      this[action].items = items
-    },
-
-    update_member_items(new_items) {
-      this.$set(this.members, 'items', new_items)
     }
   }
 }

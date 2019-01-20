@@ -4,18 +4,18 @@
 				:value="members"
 				@input="members_selected"
 				:items="items"
-				:loading="is_loading"
 				:search-input.sync="search"
-				hide-no-data
-				no-filter
+				:loading="isLoading"
 				item-value="id"
         prepend-icon="search"
+				no-filter
 				chips
 				multiple
         clearable
         hide-details
         color="#657186"
         label="Assign member(s)"
+				v-bind="$attrs"
 		>
 			<template slot="selection" slot-scope="data">
 				<v-chip
