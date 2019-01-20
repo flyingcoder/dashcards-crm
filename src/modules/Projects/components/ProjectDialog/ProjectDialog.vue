@@ -16,11 +16,12 @@
 
 						<v-flex md4 sm6 xs12 class="text-xs-center">
 							<v-menu class="d__dropdown"
-								transition="slide-y-transition"
-								bottom
-								offset-y
-								:close-on-content-click="false"
-								max-width="350"
+											transition="slide-y-transition"
+											bottom
+											offset-y
+											:close-on-content-click="false"
+											max-width="350"
+							        v-model="client.show"
 							>
 								<v-btn slot="activator" class="d__btn">
 									<div class="d__icon">
@@ -38,24 +39,30 @@
 									<auto-complete
 											v-model="client.selected"
 											:items="client.items"
-											:is-loading="client.loading"
-											@searched="get_searched_items('client', $event)"
-									/>
+											:is-loading="dropdown_loading"
+											item-text="full_name"
+											@close-dropdown="client.show = false"
+									>
+										<template slot="item" slot-scope="{ item }">
+											{{ item.first_name }} {{ item.last_name }}
+										</template>
+									</auto-complete>
 								</v-list>
 
 							</v-menu>
 							
-							<div class="choosen" v-if="client.selected">{{ client.selected.text }}</div>
+							<div class="choosen" v-if="client.selected">{{ client.selected.first_name }}</div>
 						</v-flex>
 
 						<v-flex md4 sm6 xs12 class="text-xs-center">
 
 							<v-menu class="d__dropdown"
-								transition="slide-y-transition"
-								bottom
-								offset-y
-								:close-on-content-click="false"
-								max-width="350"
+											transition="slide-y-transition"
+											bottom
+											offset-y
+											:close-on-content-click="false"
+											max-width="350"
+							        v-model="service.show"
 							>
 								<v-btn slot="activator" class="d__btn">
 									<div class="d__icon">
@@ -73,14 +80,15 @@
 									<auto-complete
 											v-model="service.selected"
 											:items="service.items"
-											:is-loading="service.loading"
-											@searched="get_searched_items('service', $event, true)"
+											:is-loading="dropdown_loading"
+											item-text="service_name"
+											@close-dropdown="service.show = false"
 									/>
 								</v-list>
 
 							</v-menu>
 
-							<div class="choosen" v-if="service.selected">{{ service.selected.text }}</div>
+							<div class="choosen" v-if="service.selected">{{ service.selected.service_name }}</div>
 
 						</v-flex>
 
@@ -150,7 +158,8 @@
 									<members-dropdown
 											:members.sync="members.selected"
 											:member-items="members.items"
-											@items-updated="update_member_items"
+											:is-loading="dropdown_loading"
+											@search="filter_dropdown_items('members', $event)"
 									/>
 								</v-list>
 
