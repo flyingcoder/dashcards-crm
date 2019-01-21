@@ -20,9 +20,7 @@
 				Data Boxes
 			</v-list-tile-title>
 
-			<v-progress-linear v-if="loading" color="blue" :indeterminate="true"></v-progress-linear>
-
-			<template v-else>
+			<template>
 				<label class="select__all"> <span>Add All Data Box</span> <input
 						type="checkbox" checked="checked"> <span class="checkmark"></span>
 				</label>
@@ -30,7 +28,7 @@
 				<v-layout row wrap align-center justify-center class="card__layout">
 
 					<v-flex sm6 xs12 class="data__box"
-					        v-for="item in items"
+					        v-for="item in dash_items"
 					        :key="item.id"
 					>
 
@@ -38,7 +36,7 @@
 						       name="boxes"
 						       :id="item.id"
 						       :value="item.id"
-						       v-model="selected_items"
+						       v-model="selected_cards"
 						/>
 						<label class="card__option" :for="item.id">
 

@@ -8,7 +8,7 @@
 			<slot name="actions">
 				<v-flex xs4 class="actions text-xs-right">
 					<v-btn fab small flat class="action">
-						<v-icon>close</v-icon>
+						<v-icon @click="$emit('close')">close</v-icon>
 					</v-btn>
 				</v-flex>
 			</slot>
