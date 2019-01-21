@@ -28,12 +28,13 @@
 						<component :is="card.component"
 						           :key="card.component"
 						           v-if="should_show(card.slug) && card.hasOwnProperty('component')"
+						           @close="close(card.id)"
 						></component>
 
 						<template v-else-if="should_show(card.slug)">
 							<v-flex xs12 :key="card.id">
 								<div>
-									<dash-card :title="card.name"></dash-card>
+									<dash-card @close="close(card.id)" :title="card.name"></dash-card>
 								</div>
 							</v-flex>
 						</template>

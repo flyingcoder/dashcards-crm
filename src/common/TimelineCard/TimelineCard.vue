@@ -1,7 +1,7 @@
 <template>
 	<v-flex xs12 class="timeline-card">
 		<div class="timeline__content">
-			<dash-card title="Timeline">
+			<dash-card title="Timeline" @close="$emit('close')">
 				<div class="timeline__inner_content" slot="content">
 
 					<v-progress-linear v-if="loading" :indeterminate="true"></v-progress-linear>
