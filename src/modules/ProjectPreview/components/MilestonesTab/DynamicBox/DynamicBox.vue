@@ -22,8 +22,10 @@
 			<div class="content" slot="content">
 				<div class="task" v-for="(task, index) of box.tasks" :key="task.id">
 					{{ task.title }}
-					<v-icon color="indigo" class="task-icon" @click="edit_task_clicked(task, index)">edit</v-icon>
-					󠁿󠁿󠁿<span @click="open_delete_dialog({ task_index: index, task_id: task.id })" class="task-icon">🗙</span>
+					<div class="task-actions">
+						<v-icon color="indigo" class="task-icon" @click="edit_task_clicked(task, index)">edit</v-icon>
+						󠁿󠁿󠁿<span @click="open_delete_dialog({ task_index: index, task_id: task.id })" class="task-icon">🗙</span>
+					</div>
 				</div>
 			</div>
 			<v-btn large slot="footer" round class="add__new_btn" color="#3b589e" dark @click="$emit('add-task', box.id)">
