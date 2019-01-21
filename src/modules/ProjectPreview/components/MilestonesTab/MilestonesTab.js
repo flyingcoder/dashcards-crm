@@ -43,7 +43,8 @@ export default {
       fields: null,
       box_id: null
     },
-    box_id_to_add_task: null
+    box_id_to_add_task: null,
+    add_task_start_date: null
   }),
 
   created() {
@@ -186,6 +187,9 @@ export default {
 
     open_add_task_dialog(box_id) {
       this.box_id_to_add_task = box_id
+      this.add_task_start_date = this.boxes.find(
+        box => box.id === box_id
+      ).started_at
       this.add_task_dialog = true
     },
 

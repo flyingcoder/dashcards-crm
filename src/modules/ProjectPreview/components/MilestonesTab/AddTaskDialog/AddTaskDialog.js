@@ -17,7 +17,8 @@ export default {
     dialog: Boolean,
     dialogTitle: String,
     isEditDialog: Boolean,
-    fieldsToEdit: { type: Object, default: () => {} }
+    fieldsToEdit: { type: Object, default: () => {} },
+    milestoneStartDate: String
   },
 
   data: () => ({
@@ -62,6 +63,12 @@ export default {
   watch: {
     dialog(new_val) {
       this.open = new_val
+      if (new_val && !this.isEditDialog) {
+        this.start_date = this.milestoneStartDate
+        this.end_date = moment(this.milestoneStartDate)
+          .add(1, 'days')
+          .format('YYYY-MM-DD')
+      }
     },
     open(new_val) {
       this.$emit('update:dialog', new_val)
