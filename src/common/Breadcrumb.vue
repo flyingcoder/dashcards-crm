@@ -37,22 +37,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/sass/_variables';
 .breadcrumb-wrapper {
   ul.v-breadcrumbs.theme--light {
     li.page__title {
       font-size: 26px;
       font-weight: 500;
-      &:first-child a.v-breadcrumbs__item span {
-        color: #bcc2ce;
+      a.v-breadcrumbs__item span {
+        color: $tableBlueText;
+      }
+      a.v-breadcrumbs__item span:hover {
+        color: $textDark;
       }
       &:last-child a.v-breadcrumbs__item span {
-        color: #667280;
+        color: $lightGray-2;
       }
     }
     li.v-breadcrumbs__divider {
       i {
         font-size: 50px;
-        color: #bcc2ce;
+        color: $lightGray-2;
       }
     }
   }

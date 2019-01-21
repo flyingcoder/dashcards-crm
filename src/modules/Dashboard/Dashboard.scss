@@ -40,24 +40,6 @@
             .row{
                 display: flex;
             }
-            .breadcrumbs{
-                flex: 1;
-                .v-breadcrumbs{
-                    padding: 0;
-                }
-                .page__title{
-                    font-size: 27px;
-                    a{
-                        color: #bcc2cf;
-                        &:hover{
-                            color: #667381;
-                        }
-                    }
-                    .v-breadcrumbs__item--disabled{
-                        color: #667381;
-                    }
-                }
-            }
             .page__options{
                 .add__btn{
                     background: $blue;
