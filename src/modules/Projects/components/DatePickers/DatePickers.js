@@ -42,6 +42,7 @@ export default {
 
   methods: {
     save() {
+      this.$emit('close-dropdown')
       this.cancel()
     },
     reset() {

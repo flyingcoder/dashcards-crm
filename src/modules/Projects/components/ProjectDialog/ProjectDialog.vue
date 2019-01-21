@@ -106,6 +106,7 @@
 							        bottom
 							        offset-y
 							        :close-on-content-click="false"
+							        v-model="date_pickers.show"
 							>
 								<v-btn slot="activator" class="d__btn">
 									<div class="d__icon">
@@ -124,6 +125,7 @@
 											ref="date_pickers"
 											:start-date.sync="date_pickers.start_date"
 											:end-date.sync="date_pickers.end_date"
+											@close-dropdown="date_pickers.show = false"
 									/> <!--Due Date field-->
 								</v-list>
 
