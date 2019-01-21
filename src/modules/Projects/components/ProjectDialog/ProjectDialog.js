@@ -54,7 +54,8 @@ export default {
     comment: '',
     date_pickers: {
       start_date: '',
-      end_date: ''
+      end_date: '',
+      show: false
     },
     project_title: '',
     is_autocomplete_loading: false,
@@ -78,11 +79,12 @@ export default {
       if (
         isEmpty(this.client.selected) ||
         isEmpty(this.members.selected) ||
-        !this.project_title
+        !this.project_title ||
+        !this.quill_editor.content
       )
         return true
 
-      if (this.members.selected.includes(this.client.selected.value)) {
+      if (this.members.selected.includes(this.client.selected.id)) {
         this.$event.$emit('open_snackbar', `Client can't be a member`, 'error')
         return true
       }
@@ -147,8 +149,8 @@ export default {
       if (this.disabled) return
       const fields_to_save = {
         title: this.project_title,
-        client_id: this.client.selected.value || null,
-        service_id: this.service.selected.value || null,
+        client_id: this.client.selected.id || null,
+        service_id: this.service.selected.id || null,
         start_at: this.date_pickers.start_date,
         end_at: this.date_pickers.end_date,
         description: this.quill_editor.content,
