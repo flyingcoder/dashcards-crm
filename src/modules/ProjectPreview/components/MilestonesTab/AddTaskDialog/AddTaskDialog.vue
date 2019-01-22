@@ -44,7 +44,8 @@
 								<v-flex xs12>
 									<members-dropdown :members.sync="members.selected"
 									                  :member-items="members.items"
-									                  @items-updated="items_updated"
+									                  :is-loading="members.loading"
+									                  @search="filter_dropdown_items('members', $event)"
 									/>
 								</v-flex>
 
