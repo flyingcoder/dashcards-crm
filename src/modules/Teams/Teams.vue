@@ -82,23 +82,25 @@
                             <div class="member__image">
                                 <img :src="require('@/assets/temp/user.png')" /> &nbsp;
                             </div>
-                            <div class="member__name">
+                            <div class="member__name text-cap">
                                 {{ item.item.first_name }}
                             </div>
                         </td>
 
-                        <td class="team__position">{{ item.item.job_title }}</td>
+                        <td class="team__position text-cap">{{ item.item.job_title }}</td>
                         <td class="team__tasks">{{ tasks_text(item.item) }}</td>
                         <td class="team__projects">{{ projects_text(item.item) }}</td>
 
                         <td class="team__option">
-                            <v-icon class="mr-2" @click="open_edit_dialog(item.item)">
-                                edit
-                            </v-icon>
-
-                            <v-icon @click="open_delete_dialog(item.item)">
-                                delete
-                            </v-icon>
+                            <v-btn fab small flat depressed @click="open_edit_dialog(item.item)">
+                                <img src="@/assets/icons/groups/edit.svg" alt="">
+                            </v-btn>
+                            <v-btn fab small flat depressed @click="open_delete_dialog(item.item)">
+                                <img src="@/assets/icons/groups/delete.svg" alt="">
+                            </v-btn>
+                            <v-btn fab small flat depressed>
+                                <v-icon>pageview</v-icon>
+                            </v-btn>
                         </td>
                     </template>
 

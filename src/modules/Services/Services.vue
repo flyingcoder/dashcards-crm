@@ -39,9 +39,9 @@
 		>
 
 			<template slot="custom-item" slot-scope="item">
-				<td class="service__name">{{ item.item.service_name }}</td>
+				<td class="service__name text-cap">{{ item.item.service_name }}</td>
 
-				<td>{{ item.item.name }}</td>
+				<td class="text-cap">{{ item.item.name }}</td>
 
 				<td>{{ item.item.service_created_at }}</td>
 

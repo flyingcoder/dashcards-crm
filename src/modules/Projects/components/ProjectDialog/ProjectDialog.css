@@ -2,6 +2,11 @@
     color: #657186;
     caret-color: #657186;
 }
+
+>>> .theme--light.v-input:not(.v-input--is-disabled) input{
+    text-transform: capitalize;
+}
+
 >>> .project__title .v-input__slot, >>> .project__comment .v-input__slot{
     border: 1px solid #dce1e5;
     border-radius: 8px;

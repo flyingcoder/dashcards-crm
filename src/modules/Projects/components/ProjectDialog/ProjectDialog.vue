@@ -121,8 +121,9 @@
 								</v-btn>
 
 								<v-list>
-									<members-dropdown :members.sync="members.selected"
-										:member-items="members.items"
+									<members-dropdown
+											:members.sync="members.selected"
+											:member-items="members.items"
 									/>
 								</v-list>
 

@@ -1,5 +1,5 @@
 import { table_functionality } from '@/services/table-functionality/table-functionality'
-
+import { global_utils } from '@/global_utils/global_utils'
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import Breadcrumb from '@/common/Breadcrumb.vue'
@@ -7,11 +7,10 @@ import TableHeader from '@/common/TableHeader.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import ProjectDialog from './components/ProjectDialog/ProjectDialog.vue'
 import isEmpty from 'lodash/isEmpty'
-import moment from 'moment'
 
 export default {
   name: 'Projects',
-  mixins: [table_functionality],
+  mixins: [table_functionality, global_utils],
   components: {
     CustomTable,
     Breadcrumb,
@@ -74,12 +73,6 @@ export default {
       refresh_table_api_name: 'paginate_projects_table'
     }
   }),
-
-  filters: {
-    fromNowFormat: function(value) {
-      return moment(value).fromNow()
-    }
-  },
 
   created() {
     const query = { ...this.$route.query }

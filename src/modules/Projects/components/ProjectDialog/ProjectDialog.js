@@ -67,8 +67,12 @@ export default {
 
   computed: {
     disabled() {
-      if (isEmpty(this.client.selected) || isEmpty(this.members.selected))
-        return false
+      if (
+        isEmpty(this.client.selected) ||
+        isEmpty(this.members.selected) ||
+        !this.project_title
+      )
+        return true
 
       if (this.members.selected.includes(this.client.selected.value)) {
         this.$event.$emit(
