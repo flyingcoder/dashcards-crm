@@ -16,6 +16,7 @@ export default {
   },
 
   props: {
+    id: Number,
     dialog: Boolean,
     dialogTitle: String,
     isEditDialog: Boolean,
@@ -145,10 +146,10 @@ export default {
     fill_members_dropdown() {
       this.loading = true
       makeRequestTo
-        .get_all_teams()
+        .get_project_members(this.id)
         .then(({ data }) => {
-          this.members.all_items = data
-          this.members.items = data
+          this.members.all_items = data.data
+          this.members.items = data.data
         })
         .finally(() => (this.loading = false))
     },

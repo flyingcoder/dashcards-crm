@@ -35,6 +35,7 @@
 				ref="add_task_dialog"
 				dialog-title="Add Task"
 				:milestone-start-date="add_task_start_date"
+				:id="id"
 				@save="add_new_task"
 		/>
 
