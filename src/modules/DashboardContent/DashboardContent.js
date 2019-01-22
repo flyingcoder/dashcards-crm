@@ -67,7 +67,13 @@ export default {
   },
 
   methods: {
-    ...mapActions('cards', ['fill_cards']),
-    ...mapMutations('cards', ['set_cards'])
+    ...mapActions('cards', ['fill_cards', 'update_cards']),
+    ...mapMutations('cards', ['set_cards']),
+    close(id) {
+      const card_ids = this.cards
+        .filter(card => card.id !== id)
+        .map(card => card.id)
+      this.update_cards({ dashitem_id: card_ids })
+    }
   }
 }

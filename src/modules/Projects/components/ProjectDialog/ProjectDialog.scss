@@ -14,11 +14,11 @@
     @include styledCloseDialog('.close__btn');
   }
 
-  @include styledScrollFor('.dialog__body')
+  @include styledScrollFor('.dialog__body');
 
   .dialog__body{
     max-height: 400px;
-    overflow: auto;
+    overflow: hidden auto;
     padding: 0 15px;
     margin: 0 20px;
     
@@ -44,8 +44,22 @@
 
         .d__title{
           text-transform: capitalize;
+          white-space: normal;
+          font-size: 15px;
         }
       }
+    }
+    
+    .choosen{
+      padding: 5px;
+      color: $textDark;
+      font-size: 14px;
+      width: 170px;
+      margin: 0 auto;
+      text-align: left;
+      background-color: $white;
+      border: 1px solid $borderLightGray;
+      border-radius: 5px;
     }
 
     .project__title{
@@ -111,9 +125,9 @@
   
         .d__btn{
           height: auto;
-          padding: 0;
+          padding: 5px;
           font-size: 12px;
-          width: 80px;
+          width: 150px;
   
           .d__icon{
             width: 18px;
@@ -127,6 +141,12 @@
             font-size: 18px;
           }
         }
+      }
+      
+      .choosen{
+        padding: 5px;
+        font-size: 12px;
+        width: 150px;
       }
     }
   }

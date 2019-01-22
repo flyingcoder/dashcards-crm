@@ -1,9 +1,11 @@
 import request from '@/services/axios_instance'
+import makeRequestTo from '@/services/makeRequestTo'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import DynamicBox from './DynamicBox/DynamicBox.vue'
 import MilestoneTabDialog from './MilestoneTabDialog/MilestoneTabDialog.vue'
 import SelectTemplateDialog from './SelectTemplateDialog/SelectTemplateDialog.vue'
 import AddTaskDialog from './AddTaskDialog/AddTaskDialog.vue'
+import _cloneDeep from 'lodash/cloneDeep'
 
 export default {
   name: 'MilestonesTab',
@@ -22,6 +24,7 @@ export default {
   data: () => ({
     add_dialog: false,
     edit_dialog: false,
+    edit_task_dialog: false,
     delete_dialog: false,
     select_template_dialog: false,
     add_task_dialog: false,
@@ -34,7 +37,14 @@ export default {
       id: null,
       fields: null
     },
-    box_id_to_add_task: null
+    edit_task_item: {
+      id: null,
+      index: null,
+      fields: null,
+      box_id: null
+    },
+    box_id_to_add_task: null,
+    add_task_start_date: null
   }),
 
   created() {
@@ -61,13 +71,7 @@ export default {
         .post(`api/project/${this.id}/milestone`, milestone)
         .then(({ data }) => this.boxes.push(data))
         .finally(() => (this.loading = false))
-      this.$event.$emit(
-        'open_snackbar',
-        'New Milestone added successfully',
-        'red',
-        'success',
-        2000
-      )
+      this.$event.$emit('open_snackbar', 'New Milestone added successfully')
     },
 
     open_delete_confirmation(id) {
@@ -87,13 +91,7 @@ export default {
             ))
         )
         .finally(() => (this.loading = false))
-      this.$event.$emit(
-        'open_snackbar',
-        'Milestone deleted successfully',
-        'red',
-        'success',
-        2000
-      )
+      this.$event.$emit('open_snackbar', 'Milestone deleted successfully')
       this.id_to_delete = null
     },
 
@@ -117,13 +115,7 @@ export default {
           if (~index) this.boxes.splice(index, 1, data)
         })
         .finally(() => (this.loading = false))
-      this.$event.$emit(
-        'open_snackbar',
-        'Milestone updated successfully',
-        'red',
-        'success',
-        2000
-      )
+      this.$event.$emit('open_snackbar', 'Milestone updated successfully')
       this.edit_item = {
         id: null,
         fields: null
@@ -144,6 +136,16 @@ export default {
       this.get_dynamic_boxes()
     },
 
+    edit_task({ task, index, box_id }) {
+      this.edit_task_dialog = true
+      this.edit_task_item = {
+        id: task.id,
+        index,
+        fields: task,
+        box_id
+      }
+    },
+
     remove_task(box_index, { task_index, task_id }) {
       this.loading = true
       request
@@ -152,19 +154,42 @@ export default {
           let boxes = [...this.boxes]
           boxes[box_index].tasks.splice(task_index, 1)
           this.boxes = boxes
-          this.$event.$emit(
-            'open_snackbar',
-            'Task deleted successfully',
-            'red',
-            'success',
-            2000
-          )
+          this.$event.$emit('open_snackbar', 'Task deleted successfully')
         })
         .finally(() => (this.loading = false))
     },
 
+    update_task(task) {
+      makeRequestTo
+        .edit_milestone_task(
+          this.edit_task_item.id,
+          task,
+          `api/milestone/${this.id}/task`
+        )
+        .then(res => {
+          const { index, box_id } = this.edit_task_item
+          let boxes = _cloneDeep(this.boxes)
+          const box_index = boxes.findIndex(box => box.id === box_id)
+          if (~box_index) {
+            this.edit_task_dialog = false
+            boxes[box_index].tasks[index] = res.data
+            this.boxes = boxes
+            this.edit_task_item = {
+              id: null,
+              index: null,
+              task: null,
+              box_id: null
+            }
+            this.$event.$emit('open_snackbar', 'Task updated successfully')
+          }
+        })
+    },
+
     open_add_task_dialog(box_id) {
       this.box_id_to_add_task = box_id
+      this.add_task_start_date = this.boxes.find(
+        box => box.id === box_id
+      ).started_at
       this.add_task_dialog = true
     },
 
@@ -178,13 +203,7 @@ export default {
             box => box.id === this.box_id_to_add_task
           )
           this.boxes[box_index].tasks.push(data)
-          this.$event.$emit(
-            'open_snackbar',
-            'Task added successfully',
-            'red',
-            'success',
-            2000
-          )
+          this.$event.$emit('open_snackbar', 'Task added successfully')
         })
         .finally(() => {
           this.loading = false

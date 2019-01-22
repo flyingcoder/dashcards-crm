@@ -6,8 +6,6 @@
 				:loading="isLoading"
 				:search-input.sync="search"
 				return-object
-				hide-no-data
-				no-filter
 				cache-items
 				v-bind="$attrs"
 				@change="changed"
@@ -20,8 +18,6 @@
 </template>
 
 <script>
-import debounce from 'lodash/debounce'
-
 export default {
   name: 'AutoComplete',
   inheritAttrs: false,
@@ -37,7 +33,7 @@ export default {
 
   watch: {
     search(val) {
-      val && this.is_val_diff_from_selected(val) && this.debounce(val)
+      val && this.is_val_diff_from_selected(val) && this.$emit('search', val)
     }
   },
 
@@ -47,11 +43,9 @@ export default {
       return val !== this.value.text
     },
     changed(val) {
+      this.$emit('close-dropdown')
       this.$emit('input', val)
-    },
-    debounce: debounce(function(val) {
-      this.$emit('searched', val)
-    }, 500)
+    }
   }
 }
 </script>

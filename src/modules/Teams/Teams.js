@@ -70,6 +70,13 @@ export default {
 
     go_to_groups_page() {
       this.$router.push({ path: './team/groups' })
+    },
+
+    navigate_to_view_project(id) {
+      this.$router.push({
+        name: 'team/profile',
+        params: { user_id: id }
+      })
     }
   }
 }

@@ -34,7 +34,18 @@
 				:dialog.sync="add_task_dialog"
 				ref="add_task_dialog"
 				dialog-title="Add Task"
+				:milestone-start-date="add_task_start_date"
+				:id="id"
 				@save="add_new_task"
+		/>
+
+		<add-task-dialog
+				:dialog.sync="edit_task_dialog"
+				ref="edit_task_dialog"
+				dialog-title="Edit Task"
+				:is-edit-dialog="edit_task_dialog"
+				:fields-to-edit="edit_task_item"
+				@save="update_task"
 		/>
 
 		<v-progress-linear v-show="loading" :indeterminate="true"></v-progress-linear>
@@ -83,6 +94,7 @@
 							:box="box"
 							@edit="open_edit_dialog"
 							@delete="open_delete_confirmation"
+							@edit-task="edit_task"
 							@remove-task="remove_task(index, $event)"
 							@add-task="open_add_task_dialog"
 					/>

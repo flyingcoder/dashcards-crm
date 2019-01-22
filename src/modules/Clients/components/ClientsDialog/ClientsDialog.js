@@ -57,7 +57,7 @@ export default {
 
       if (!this.isEditDialog) {
         if (this.password !== this.repeat_password) {
-          this.$event.$emit('open_snackbar', `Passwords don't match`, 'red')
+          this.$event.$emit('open_snackbar', `Passwords don't match`, 'error')
           return
         }
         fields_to_save.password = this.password

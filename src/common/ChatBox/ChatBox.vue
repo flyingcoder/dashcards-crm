@@ -14,7 +14,11 @@
 				</div>
 			</div>
 
+<<<<<<< HEAD
 			<v-badge right v-show="unread_message">
+=======
+			<v-badge right color="#f56c6c" v-show="unread_message">
+>>>>>>> develop
 				<span slot="badge">{{ unread_message }}</span>
 			</v-badge>
 
@@ -75,15 +79,31 @@
 
 				</div>
 
+				<div :class="['typing-indicator', { active: typing }]" v-show="typing">
+					... {{ conv.user.name.split(',')[1] }} is typing
+				</div>
+
 				<div class="write">
 					<v-text-field solo flat hide-details
 					              color="#667187"
 					              label="Type a message..."
 					              v-model.trim="message"
+<<<<<<< HEAD
 					              @keydown.enter="send_message"
 					></v-text-field>
 
 					<v-icon :disabled="!message" color="#3b589e" class="send" @click="send_message">send</v-icon>
+=======
+					              @keydown.exact="user_typing"
+					              @keydown.enter="send_message"
+					></v-text-field>
+
+					<v-icon :disabled="!message"
+					        color="#3b589e"
+					        class="send"
+					        @click="send_message"
+					>send</v-icon>
+>>>>>>> develop
 				</div>
 
 			</v-card>

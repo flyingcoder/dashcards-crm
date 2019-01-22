@@ -14,7 +14,7 @@
 					<v-card-text class="dialog__body">
 							<v-layout wrap>
 
-								<v-flex xs12 sm6>
+								<v-flex xs12 sm12>
 									<v-text-field
 											class="dialog__textfield"
 											solo
@@ -23,18 +23,6 @@
 											label="Add milestone title"
 											v-model.trim="title"
 									></v-text-field>
-								</v-flex>
-
-								<v-flex xs12 sm6>
-									<v-select
-											class="dialog__selectfield"
-											solo
-											hide-details
-											color="#657186"
-											label="Select Status"
-											v-model.trim="status"
-											:items="['Active', 'Inactive']"
-									></v-select>
 								</v-flex>
 
 								<v-flex xs12 sm6>

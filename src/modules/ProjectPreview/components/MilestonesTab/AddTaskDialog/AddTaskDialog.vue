@@ -12,27 +12,10 @@
 						<v-container grid-list-md>
 							<v-layout wrap>
 
-								<v-flex xs12 md6>
+								<v-flex xs12 md12>
 									<v-text-field
 											label="Add task title"
 											v-model.trim="title"
-									></v-text-field>
-								</v-flex>
-
-								<v-flex xs10 md4>
-									<v-select
-											label="Select Status"
-											v-model.trim="status"
-											:items="['Complete', 'Pending', 'Behind', 'Open']"
-									></v-select>
-								</v-flex>
-
-								<v-flex xs2 md2>
-									<v-text-field
-											label="Days"
-											v-model.number="days"
-											type="number"
-											min="0"
 									></v-text-field>
 								</v-flex>
 
@@ -61,7 +44,8 @@
 								<v-flex xs12>
 									<members-dropdown :members.sync="members.selected"
 									                  :member-items="members.items"
-									                  @items-updated="items_updated"
+									                  :is-loading="members.loading"
+									                  @search="filter_dropdown_items('members', $event)"
 									/>
 								</v-flex>
 

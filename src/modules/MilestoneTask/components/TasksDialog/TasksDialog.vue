@@ -39,18 +39,6 @@
 								></v-select>
 							</v-flex>
 
-							<v-flex xs5>
-								<v-select
-										class="dialog__selectfield"
-										label="Select Status"
-										v-model.trim="status"
-										:items="['Complete', 'Pending', 'Behind', 'Open']"
-										color="#667187"
-										solo
-										hide-details
-								></v-select>
-							</v-flex>
-
 							<v-flex xs2>
 								<v-text-field
 										class="dialog__textfield"

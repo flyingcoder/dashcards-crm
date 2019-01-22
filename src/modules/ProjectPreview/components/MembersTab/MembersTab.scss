@@ -2,6 +2,8 @@
     
 @include sortOptionStyle;
 
+@include firstColumnHover;
+
 .members-tab {
     padding: 25px;
     button.add__btn.v-btn.v-btn--floating.v-btn--small{

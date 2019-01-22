@@ -4,18 +4,18 @@
 				:value="members"
 				@input="members_selected"
 				:items="items"
-				:loading="is_loading"
 				:search-input.sync="search"
-				hide-no-data
-				no-filter
+				:loading="isLoading"
 				item-value="id"
         prepend-icon="search"
+				no-filter
 				chips
 				multiple
         clearable
         hide-details
         color="#657186"
         label="Assign member(s)"
+				v-bind="$attrs"
 		>
 			<template slot="selection" slot-scope="data">
 				<v-chip
@@ -26,26 +26,37 @@
 						@input="remove_chip(data.index)"
 				>
 					<img :src="require('@/assets/temp/user.png')" width="30" height="30">
-					&nbsp;{{data.item.first_name}}
+					&nbsp;<span class="chip-member-name">{{data.item.first_name}}</span>
 				</v-chip>
 			</template>
 
 			<template slot="item" slot-scope="{item}">
-					<div class="member-avatar">
-						<img :src="require('@/assets/temp/user.png')" width="30" height="30">
-					</div>
-					<div class="member-full-name">
-						{{item.first_name}} {{item.last_name}}
-					</div>
-					<div class="checked-icon" v-if="is_item_active(item.id)">
-						<v-icon color="green">check_circle</v-icon>
-					</div>
+					<div class="member">
+            <div class="member-avatar">
+              <img :src="require('@/assets/temp/user.png')">
+            </div>
+            <div class="member-info">
+              <div class="full-name">
+                {{item.first_name}} {{item.last_name}}
+              </div>
+              <div class="job-title">
+              {{item.job_title}}
+              </div>
+            </div>
+            <div class="checked-icon" v-if="!is_item_active(item.id)">
+              <v-icon color="gray">check_circle_outline</v-icon>
+            </div>
+            <div class="checked-icon" v-if="is_item_active(item.id)">
+              <v-icon color="green">check_circle</v-icon>
+            </div>
+          </div>
 			</template>
 
 		</v-autocomplete>
 	</div>
 </template>
 
+<<<<<<< HEAD
 <script>
 import debounce from 'lodash/debounce'
 import _cloneDeep from 'lodash/cloneDeep'
@@ -102,4 +113,9 @@ export default {
     }
   }
 }
+=======
+<script src="./MembersDropdown.js">
+>>>>>>> develop
 </script>
+<style lang="scss" scoped src="./MembersDropdown.scss">
+</style>

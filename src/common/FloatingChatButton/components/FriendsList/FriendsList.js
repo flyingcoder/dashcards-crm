@@ -7,8 +7,11 @@ export default {
 
   computed: {
     ...mapGetters('onlineUsers', ['all_users']),
+    ...mapGetters(['user']),
     online_users() {
-      return this.all_users.filter(user => user.is_online)
+      return this.all_users.filter(
+        user => user.is_online && user.id !== this.user.id
+      )
     }
   },
 

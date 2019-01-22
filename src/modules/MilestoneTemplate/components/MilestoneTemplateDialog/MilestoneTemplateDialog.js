@@ -11,7 +11,7 @@ export default {
   data: () => ({
     open: false,
     name: null,
-    status: null
+    status: 'active'
   }),
 
   watch: {

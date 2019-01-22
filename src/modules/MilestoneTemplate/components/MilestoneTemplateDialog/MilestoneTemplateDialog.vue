@@ -24,18 +24,6 @@
 								></v-text-field>
 							</v-flex>
 
-							<v-flex xs12 sm6>
-								<v-select
-										class="dialog__selectfield"
-										label="Select Status"
-										v-model.trim="status"
-										:items="['Active', 'Inactive']"
-										color="#667187"
-										solo
-										hide-details
-								></v-select>
-							</v-flex>
-
 						</v-layout>
 
 				</v-card-text>

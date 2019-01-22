@@ -2,6 +2,11 @@ import { mapMutations } from 'vuex'
 import makeRequestTo from '@/services/makeRequestTo'
 import { global_utils } from '@/global_utils/global_utils'
 import _isEqual from 'lodash/isEqual'
+<<<<<<< HEAD
+=======
+import _throttle from 'lodash/throttle'
+import _cloneDeep from 'lodash/cloneDeep'
+>>>>>>> develop
 
 export default {
   mixins: [global_utils],
@@ -13,7 +18,15 @@ export default {
   data: () => ({
     message: null,
     scroll_load: false,
+<<<<<<< HEAD
     scroll_top: null
+=======
+    scroll_top: null,
+    channel: null,
+    typing: false,
+    timeout: null,
+    old_conv: null
+>>>>>>> develop
   }),
 
   computed: {
@@ -28,6 +41,7 @@ export default {
   },
 
   watch: {
+<<<<<<< HEAD
     conv({ new_messages, new_page_url }, { old_messages, old_page_url }) {
       if (
         !_isEqual(new_messages, old_messages) &&
@@ -37,6 +51,26 @@ export default {
     }
   },
 
+=======
+    conv: {
+      handler(new_conv) {
+        if (
+          !_isEqual(new_conv.messages, this.old_conv.messages) &&
+          new_conv.next_url === this.old_conv.next_url
+        )
+          this.scrollToBottom(this.$refs.chat_box)
+        this.old_conv = _cloneDeep(new_conv)
+      },
+      deep: true
+    }
+  },
+
+  created() {
+    this.old_conv = _cloneDeep(this.conv)
+    this.subscribe()
+  },
+
+>>>>>>> develop
   methods: {
     ...mapMutations('chat', [
       'toggle_open_conv',
@@ -44,6 +78,10 @@ export default {
       'add_message_to_conv',
       'add_older_messages'
     ]),
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
     send_message() {
       if (!this.message) return
       let payload = {
@@ -98,6 +136,33 @@ export default {
           })
         })
         .finally(() => (this.scroll_load = false))
+<<<<<<< HEAD
+=======
+    },
+
+    user_typing: _throttle(function() {
+      this.channel.trigger('client-typing', { user_id: this.user.id })
+    }, 300),
+
+    set_timeout() {
+      clearTimeout(this.interval)
+      this.interval = setTimeout(() => {
+        this.typing = false
+      }, 700)
+    },
+
+    subscribe() {
+      this.channel = this.$pusher.subscribe(
+        `private-chat.typing-${this.user.company_id}`
+      )
+
+      this.channel.bind('client-typing', ({ user_id }) => {
+        if (user_id === this.conv.id) {
+          this.set_timeout()
+          this.typing = true
+        }
+      })
+>>>>>>> develop
     }
   }
 }

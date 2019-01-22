@@ -53,7 +53,7 @@
 										v-model.trim="group_name"
 										:items="group_items"
 										item-text="name"
-										item-value="name"
+										item-value="id"
 								></v-select>
 							</v-flex>
 

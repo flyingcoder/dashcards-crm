@@ -1,6 +1,14 @@
 import request from '@/services/axios_instance'
 
 export const teams_api = {
+  get_all_teams() {
+    return request.get('api/company/teams?all=true')
+  },
+
+  get_project_members(id) {
+    return request.get(`api/projects/${id}/member?all=true`)
+  },
+
   get_teams() {
     return request.get('api/company/teams')
   },
