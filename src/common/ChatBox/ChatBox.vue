@@ -14,7 +14,7 @@
 				</div>
 			</div>
 
-			<v-badge right v-show="unread_message">
+			<v-badge right color="#f56c6c" v-show="unread_message">
 				<span slot="badge">{{ unread_message }}</span>
 			</v-badge>
 
