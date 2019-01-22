@@ -1,0 +1,180 @@
+@import '~@/sass/_variables';
+
+.profile-upper{
+    margin-bottom: 20px;
+    border-bottom: 1px solid $borderLightGray;
+    box-shadow: $darkBoxShadow;
+
+    .background{
+        height: 350px;
+        background-color: $blue;
+        position: relative;
+    }
+    .camera{
+        color: $white;
+        font-size: 40px;
+        opacity: 0.5;
+        position: absolute;
+        cursor: pointer;
+        top: 25px;
+        right: 25px;
+
+        &:hover{
+            opacity: 1.0;
+        }
+    }
+    .settings{
+        color: $white;
+        font-size: 40px;
+        opacity: 0.5;
+        position: absolute;
+        cursor: pointer;
+        bottom: 25px;
+        right: 25px;
+
+        &:hover{
+            opacity: 1.0;
+        }
+    }
+
+    .icons{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 2fr 1fr 1fr 1fr;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 15px;
+        border-bottom: 1px solid $borderLightGray;
+    }
+    .icon{
+        justify-self: center;
+        margin: 15px;
+        cursor: pointer;
+        background-color: $darkGray;
+
+        &:hover{
+            background-color: $blue;
+        }
+    }
+    .user-img{
+        justify-self: center;
+        margin-top: -78px;
+        cursor: pointer;
+        z-index: 1;
+
+        img{
+            border-radius: 50%;
+            height:150px;
+            width:150px;
+        }
+    }
+
+    .user-info{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        background-color: $white;
+        padding: 20px;
+        align-items: center;
+    }
+
+    .info-div{
+        text-align: center;
+    }
+
+    .hour{
+        font-size: 14px;
+        color: $textGray;
+    }
+    .value{
+        font-size: 30px;
+        color: $black;
+    }
+    .name{
+        font-size: 22px;
+        color: $black;
+        position: relative;
+
+        .v-icon{
+            color: $textGray;
+            opacity: 0.7;
+            position: absolute;
+            top: 5px;
+            margin-left: 5px;
+            cursor: pointer;
+
+            &:hover{
+                color: $blue;
+            }
+        }
+    }
+    .job-title{
+        font-size: 18px;
+        color: $black;
+        margin-bottom: 10px;
+    }
+    .address{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        color: $textGray;
+        opacity: 0.7;
+
+        .v-icon{
+            color: $textGray;
+            opacity: 0.7;
+        }
+    }
+}
+
+@media only screen and (max-width: 910px){
+    .profile-upper{
+        .icon{
+            margin: 10px;
+            height: 40px !important;
+            width: 40px !important;
+            .v-icon{
+                font-size: 18px;
+            }
+        }
+        .user-img{
+            margin-top: -56px;
+
+            img{
+                height: 120px;
+                width: 120px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .profile-upper{
+        margin-bottom: 15px;
+    
+        .background{
+            height: 300px;
+        }
+        .camera{
+            font-size: 35px;
+            top: 20px;
+            right: 20px;
+        }
+        .settings{
+            font-size: 35px;
+            bottom: 20px;
+            right: 20px;
+        }
+    
+        .icons{
+            padding: 0 12px;
+        }
+    
+        .user-info{
+            padding: 15px;
+        }
+    }
+}
+
+@media only screen and (max-width: 480px){
+
+}

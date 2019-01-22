@@ -1,6 +1,6 @@
 export const user_profile = {
   path: 'team/profile/:user_id',
-  name: 'user_profile',
+  name: 'team/profile',
   props: true,
   component: () => import('@/modules/UserProfile/UserProfile.vue')
 }

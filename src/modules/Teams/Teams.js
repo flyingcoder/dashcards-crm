@@ -74,7 +74,7 @@ export default {
 
     navigate_to_view_project(id) {
       this.$router.push({
-        name: 'user_profile',
+        name: 'team/profile',
         params: { user_id: id }
       })
     }
