@@ -119,9 +119,9 @@ export default {
         ])
         .then(
           axios.spread((res1, res2, res3) => {
-            this.client.all_items = res1.data.data || []
-            this.service.all_items = res2.data.data || []
-            this.members.all_items = res3.data.data || []
+            this.client.all_items = res1.data || []
+            this.service.all_items = res2.data || []
+            this.members.all_items = res3.data || []
             this.client.items = _cloneDeep(this.client.all_items)
             this.service.items = _cloneDeep(this.service.all_items)
             this.members.items = _cloneDeep(this.members.all_items)

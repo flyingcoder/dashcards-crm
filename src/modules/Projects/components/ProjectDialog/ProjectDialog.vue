@@ -81,14 +81,14 @@
 											v-model="service.selected"
 											:items="service.items"
 											:is-loading="dropdown_loading"
-											item-text="service_name"
+											item-text="name"
 											@close-dropdown="service.show = false"
 									/>
 								</v-list>
 
 							</v-menu>
 
-							<div class="choosen" v-if="service.selected">{{ service.selected.service_name }}</div>
+							<div class="choosen" v-if="service.selected">{{ service.selected.name }}</div>
 
 						</v-flex>
 
