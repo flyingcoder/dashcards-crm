@@ -14,13 +14,17 @@ export default {
     open: false,
     title: null,
     description: null,
-    status: null,
+    status: 'open',
     selected_group: null,
     group_items: [],
     days_init_value: 1
   }),
 
   computed: {
+    dynamic_api() {
+      return `api/projects/${this.id}/member`
+    },
+
     days: {
       get: function() {
         return this.days_init_value

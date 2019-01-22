@@ -25,7 +25,7 @@ export default {
     open: false,
     title: null,
     description: null,
-    status: null,
+    status: 'open',
     start_date: null,
     end_date: null,
     members: {
