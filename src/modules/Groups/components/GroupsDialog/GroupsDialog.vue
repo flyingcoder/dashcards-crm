@@ -38,21 +38,16 @@
 							<v-flex xs12>
 								<v-select
 									class="dialog__selectfield"
+									multiple
 									solo
-									hide-details
+									chips
 									:items="permission_items"
 									color="#657186"
 									label="Select Permission"
 									item-text="name"
 									item-value="id"
 									v-model="selected_permission"
-								>
-
-								<template slot="item" slot-scope="{item}">
-									<div class="select-item">{{item.name}}</div>
-								</template>
-
-								</v-select>
+								></v-select>
 							</v-flex>
 
 						</v-layout>
