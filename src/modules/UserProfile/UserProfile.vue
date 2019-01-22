@@ -1,15 +1,20 @@
 <template>
-    <div class="user-preview content">
-        <h1>This is your Profile Page.</h1>
+    <div class="content">
+
+        <table-header :paths="paths" :no-button="true" />
+        
+        <div class="profile">
+            <div class="profile-content">
+
+                <upper></upper>
+
+            </div>
+        </div>
+
     </div>
 </template>
 
-<script>
-export default {
-  name: 'UserProfile'
-}
+<script src="./UserProfile.js">
 </script>
-
-<style lang="scss" scoped>
-@import '~@/sass/_variables';
+<style lang="scss" scoped src="./UserProfile.scss">
 </style>
