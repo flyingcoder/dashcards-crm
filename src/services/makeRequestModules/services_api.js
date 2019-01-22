@@ -2,7 +2,7 @@ import request from '@/services/axios_instance'
 
 export const services_api = {
   get_all_services() {
-    return request.get('api/services?true=all')
+    return request.get('api/services?all=true')
   },
 
   get_services() {
