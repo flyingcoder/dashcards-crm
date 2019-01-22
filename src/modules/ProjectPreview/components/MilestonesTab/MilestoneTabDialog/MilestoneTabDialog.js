@@ -19,7 +19,7 @@ export default {
     title: null,
     start_date: null,
     end_date: null,
-    status: null,
+    status: 'active',
     days_init_value: 0
   }),
 
