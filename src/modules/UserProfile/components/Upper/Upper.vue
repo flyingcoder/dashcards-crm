@@ -7,8 +7,9 @@
 		</div>
 
 		<Icons @icon-clicked="handle_icon" />
-
+		<AddPicture />
 		<UserInfo />
+
 	</div>
 </template>
 
