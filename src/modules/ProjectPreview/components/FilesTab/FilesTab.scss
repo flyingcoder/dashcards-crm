@@ -17,10 +17,9 @@
             }
             .drop__files_content{
                 flex-direction: column;
-                height: 500px;
                 .file__icon{
                     .v-icon{
-                        font-size: 120px;
+                        font-size: 100px;
                         color: $btnGray;
                     }
                 }
@@ -84,12 +83,6 @@
             padding: 20px;
             .drop__files_body{
                 .drop__files_content{
-                    height: 400px;
-                    .file__icon{
-                        .v-icon{
-                            font-size: 100px;
-                        }
-                    }
                     .drop__title{
                         font-size: 17px;
                     }
@@ -131,7 +124,6 @@
             padding: 15px;
             .drop__files_body{
                 .drop__files_content{
-                    height: 300px;
                     .file__icon{
                         .v-icon{
                             font-size: 70px;
