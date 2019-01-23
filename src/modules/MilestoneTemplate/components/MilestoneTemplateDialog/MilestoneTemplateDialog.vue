@@ -12,8 +12,7 @@
 
 				<v-card-text class="dialog__body">
 						<v-layout wrap>
-
-							<v-flex xs12 sm6>
+							<v-flex xs12>
 								<v-text-field
 										class="dialog__textfield"
 										label="Add template name"

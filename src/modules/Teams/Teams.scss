@@ -9,6 +9,8 @@
 
 @include firstColumnHover;
 
+@include emptyTable('.empty-member');
+
 .custom__table{
     
     .table__toolbar{

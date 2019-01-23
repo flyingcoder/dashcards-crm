@@ -45,6 +45,7 @@
 				dialog-title="Edit Task"
 				:is-edit-dialog="edit_task_dialog"
 				:fields-to-edit="edit_task_item"
+				:id="id"
 				@save="update_task"
 		/>
 
