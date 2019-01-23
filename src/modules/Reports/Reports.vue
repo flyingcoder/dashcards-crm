@@ -2,7 +2,7 @@
 	<v-layout row wrap class="reports">
 		
 		<v-flex xs12>
-			<reports-list :reports="reports" :loading="loading" />
+			<reports-list v-if="reports.length" :reports="reports" :loading="loading" />
 		</v-flex>
 
 		<v-flex xs12>

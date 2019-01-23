@@ -25,7 +25,7 @@
 								></v-text-field>
 							</v-flex>
 
-							<v-flex xs5>
+							<v-flex xs6>
 								<v-select
 										class="dialog__selectfield"
 										label="Select Group"
@@ -39,7 +39,7 @@
 								></v-select>
 							</v-flex>
 
-							<v-flex xs2>
+							<v-flex xs6>
 								<v-text-field
 										class="dialog__textfield"
 										label="Add days"

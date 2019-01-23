@@ -1,4 +1,4 @@
-@import "./../../sass/_variables";
+@import '~@/sass/_variables';
 
 .projects {
   width: 100%;
@@ -26,4 +26,5 @@
 
   @include customTableRow;
   @include firstColumnHover;
+  @include emptyTable('.empty-project');
 }
