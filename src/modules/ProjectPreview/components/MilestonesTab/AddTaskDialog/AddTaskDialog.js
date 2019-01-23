@@ -103,7 +103,7 @@ export default {
         days: this.days,
         started_at: this.start_date,
         end_at: this.end_date,
-        assinged_id: this.members.selected
+        assigned_id: this.members.selected
       }
       this.$emit('save', fields_to_save)
     },
