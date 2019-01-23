@@ -1,3 +1,5 @@
+import { mapMutations, mapActions } from 'vuex'
+//Components
 import TableHeader from '@/common/TableHeader.vue'
 import Upper from './components/Upper/Upper.vue'
 
@@ -22,6 +24,12 @@ export default {
   }),
 
   created() {
-    this.$store.commit('memberProfile/set_user_id', this.user_id)
+    this.set_user_id(this.user_id)
+    this.get_single_member(this.user_id)
+  },
+
+  methods: {
+    ...mapMutations('memberProfile', ['set_user_id']),
+    ...mapActions('memberProfile', ['get_single_member'])
   }
 }
