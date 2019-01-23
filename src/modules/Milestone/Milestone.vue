@@ -42,11 +42,7 @@
 							@sorted="changeSort"
 					>
 						<template slot="custom-item" slot-scope="item"> <!-- Table Items -->
-<<<<<<< HEAD
-							<td class="text-xs-left text-cap">{{ item.item.title }}</td>
-=======
 							<td class="text-xs-left text-cap" @click="navigate_to_milestone_page(item.item)">{{ item.item.title }}</td>
->>>>>>> develop
 							<td class="text-xs-left text-cap">{{ item.item.status }}</td>
 							<td class="text-xs-left">{{ item.item.days }}</td>
 							<td class="text-xs-center">

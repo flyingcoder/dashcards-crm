@@ -79,12 +79,8 @@ export default {
       if (
         isEmpty(this.client.selected) ||
         isEmpty(this.members.selected) ||
-<<<<<<< HEAD
-        !this.project_title
-=======
         !this.project_title ||
         !this.quill_editor.content
->>>>>>> develop
       )
         return true
 

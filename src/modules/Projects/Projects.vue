@@ -38,11 +38,7 @@
 		>
 
 			<template slot="custom-item" slot-scope="item">
-<<<<<<< HEAD
-				<td class="text-cap">{{ item.item.service_name }}</td>
-=======
 				<td class="text-cap clickable-td" @click="navigate_to_view_project(item.item.id)">{{ item.item.service_name }} </td>
->>>>>>> develop
 				<td class="text-cap">{{ item.item.client_name }}</td>
 				<td class="text-cap">{{ item.item.manager_name }}</td>
 				<td>{{ item.item.started_at | from_now }}</td>

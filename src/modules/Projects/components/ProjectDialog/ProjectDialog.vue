@@ -160,11 +160,8 @@
 									<members-dropdown
 											:members.sync="members.selected"
 											:member-items="members.items"
-<<<<<<< HEAD
-=======
 											:is-loading="dropdown_loading"
 											@search="filter_dropdown_items('members', $event)"
->>>>>>> develop
 									/>
 								</v-list>
 

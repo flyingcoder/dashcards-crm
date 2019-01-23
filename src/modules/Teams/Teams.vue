@@ -98,11 +98,7 @@
                             <v-btn fab small flat depressed @click="open_delete_dialog(item.item)">
                                 <img src="@/assets/icons/groups/delete.svg" alt="">
                             </v-btn>
-<<<<<<< HEAD
-                            <v-btn fab small flat depressed>
-=======
                             <v-btn fab small flat depressed @click="navigate_to_view_project(item.item.id)">
->>>>>>> develop
                                 <v-icon>pageview</v-icon>
                             </v-btn>
                         </td>
