@@ -1,17 +1,15 @@
 <template>
-    <div class="content">
+	<div class="content">
 
-        <table-header :paths="paths" :no-button="true" />
-        
-        <div class="profile">
-            <div class="profile-content">
+		<table-header :paths="paths" :no-button="true"/>
 
-                <upper></upper>
+		<div class="profile">
+			<div class="profile-content">
+				<Upper />
+			</div>
+		</div>
 
-            </div>
-        </div>
-
-    </div>
+	</div>
 </template>
 
 <script src="./UserProfile.js">

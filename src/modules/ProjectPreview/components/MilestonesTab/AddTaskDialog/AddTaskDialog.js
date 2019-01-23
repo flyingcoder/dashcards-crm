@@ -103,7 +103,7 @@ export default {
         days: this.days,
         started_at: this.start_date,
         end_at: this.end_date,
-        assinged_id: this.members.selected
+        assigned_id: this.members.selected
       }
       this.$emit('save', fields_to_save)
     },
@@ -116,8 +116,7 @@ export default {
       this.days = new_fields.days
       this.start_date = new_fields.started_at
       this.end_date = new_fields.end_at
-      this.$set(this.members, 'items', new_fields.members)
-      this.$set(this.members, 'selected', new_fields.members.map(m => m.id))
+      this.$set(this.members, 'selected', new_fields.assigned.map(m => m.id))
     },
 
     clear_and_close() {

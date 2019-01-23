@@ -3,7 +3,7 @@
 
 		<v-layout row class="header">
 			<v-flex xs3 class="task__tableHead">Assignee</v-flex>
-			<v-flex xs6 class="task__tableHead">Project</v-flex>
+			<v-flex xs6 class="task__tableHead">Task</v-flex>
 			<v-flex xs3 class="task__tableHead">Status</v-flex>
 		</v-layout>
 
@@ -20,7 +20,7 @@
 				</v-flex>
 
 				<v-flex xs6 class="project__col">
-					{{ task.description.length > 25 ? task.description.slice(0, 40) : task.description }}
+					{{ task.title }}
 				</v-flex>
 
 				<v-flex xs3 class="status__col">

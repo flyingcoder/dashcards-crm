@@ -32,6 +32,7 @@
         </div>
         
         <custom-table
+			    v-if="items.length || loading"
                 :headers="headers"
                 :items="items"
                 :has-checkbox="true"
