@@ -38,7 +38,8 @@
 					<div class="task__content">
 
 						<div class="task__title text-cap">{{ content.title }}</div>
-						<div class="task__description textarea-cap">{{ content.description }}</div>
+
+						<div class="task__description textarea-cap" v-html="content.description"></div>
 
 						<div class="task__comment_section">
 							<v-divider></v-divider><br>
@@ -82,9 +83,9 @@
 
 			</v-flex>
 			
-			<v-flex xs12 class="card__footer text-xs-center">
+			<!--  v-flex xs12 class="card__footer text-xs-center">
 				<v-btn flat class="view__more_btn">VIEW MORE</v-btn>
-			</v-flex>
+			</v-flex -->
 
 		</v-flex>
 	</v-flex>
