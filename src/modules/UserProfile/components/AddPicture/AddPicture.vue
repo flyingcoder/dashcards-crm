@@ -3,8 +3,39 @@
 		<CustomDialog
 				:open.sync="dialog"
 				title="Upload New Profile Picture"
+				ref="picture_dialog"
 		>
+			<template slot="content">
+				<div class="content">
+					<vue-dropzone
+							ref="dropzone"
+							:duplicateCheck="true"
+							acceptedFiles="image/*"
+							id="dropzone"
+							:options="dropzoneOptions"
+							:useCustomSlot=true
+							dictFileTooBig="File too big"
+							dictInvalidFileType="Invalid file type"
+							@vdropzone-success="file_added"
+					>
+						<v-layout row align-center
+						          justify-center fill-height
+						          class="drop__files_content"
+						>
+							<div class="file__icon">
+								<v-icon>file_copy</v-icon>
+							</div>
 
+							<div class="drop__title">Drop files here</div>
+							<div class="drop__text">or</div>
+							<div class="drop__btn">
+								<v-btn large dark color="#3b589e">Choose your files</v-btn>
+							</div>
+
+						</v-layout>
+					</vue-dropzone>
+				</div>
+			</template>
 
 			<template slot="entire-actions">
 				<span></span> <!-- for removing the actions from the dialog -->
@@ -18,13 +49,16 @@
 import { mapGetters, mapMutations } from 'vuex'
 //Components
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
 export default {
   components: {
-    CustomDialog
+    CustomDialog,
+    vueDropzone: vue2Dropzone
   },
   computed: {
-    ...mapGetters('memberProfile', ['picture_dialog_is_open']),
+    ...mapGetters('memberProfile', ['picture_dialog_is_open', 'user_id']),
 
     dialog: {
       get() {
@@ -33,14 +67,38 @@ export default {
       set(val) {
         this.set_picture_dialog(val)
       }
+    },
+
+    dropzoneOptions() {
+      return {
+        maxFiles: 1,
+        thumbnailWidth: 150,
+        timeout: 500000,
+        addRemoveLinks: true,
+        url: `https://api.bizzooka.com/api/company/teams/${this.user_id}`,
+        headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+        method: 'put'
+      }
     }
   },
 
   methods: {
-    ...mapMutations('memberProfile', ['set_picture_dialog'])
+    ...mapMutations('memberProfile', ['set_picture_dialog']),
+
+    file_added() {
+      this.$event.$emit(
+        'open_snackbar',
+        'Profile picture uploaded successfully!'
+      )
+      this.$refs.picture_dialog.clear_and_close()
+    }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.content {
+  display: flex;
+  justify-content: center;
+}
 </style>
