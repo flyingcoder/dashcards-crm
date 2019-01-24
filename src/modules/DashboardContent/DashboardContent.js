@@ -8,6 +8,7 @@ import TimelineCard from '@/common/TimelineCard/TimelineCard.vue'
 import DashCard from '@/common/DashCard.vue'
 import LogonLabel from './components/LonOnLabel.vue'
 import DashboardTiles from './components/DashboardTiles/DashboardTiles.vue'
+import NoCards from './components/NoCards.vue'
 import draggable from 'vuedraggable'
 
 export default {
@@ -19,6 +20,7 @@ export default {
     TimelineCard,
     DashCard,
     DashboardTiles,
+    NoCards,
     draggable
   },
 

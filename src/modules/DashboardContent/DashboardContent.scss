@@ -1,4 +1,4 @@
-@import "../../sass/variables";
+@import '~@/sass/_variables';
 
 .content{
     .d__breadcrumbs{
@@ -80,17 +80,6 @@
         grid-gap: 15px;
         width: 100%;
     }
-    .empty-cards{
-        display: grid;
-        grid-template-columns: 1fr;
-        justify-items: center;
-        margin-top: 50px;
-
-        .icon .v-icon{
-            font-size: 120px;
-            color: $btnGray;
-        }
-    }
 }
 
 
@@ -128,21 +117,6 @@
             width: 100%;
         }
         
-        .empty-cards{
-            margin-top: 30px;
-
-            .icon .v-icon{
-                font-size: 100px;
-            }
-
-            .dashitem-btn{
-                .v-btn--large{
-                    font-size: 13px;
-                    height: 38px;
-                    padding: 0 22px;
-                }
-            }
-        }
     }
 }
 
@@ -163,19 +137,5 @@
             }
         }
         
-        .empty-cards{
-            margin-top: 20px;
-
-            .icon .v-icon{
-                font-size: 70px;
-            }
-            
-            .dashitem-btn{
-                .v-btn--large{
-                    height: 33px;
-                    padding: 0 20px;
-                }
-            }
-        }
     }
 }

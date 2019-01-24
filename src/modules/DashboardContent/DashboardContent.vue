@@ -21,14 +21,9 @@
 		<dashboard-tiles/> <!-- custom component -->
 
 		<v-container fluid>
-			<div class="empty-cards" v-if="cards.length == 0">
-				<div class="icon">
-					<v-icon>add_box</v-icon>
-				</div>
-				<div class="dashitem-btn">
-					<v-btn large dark color="#3b589e">Add Dashitem</v-btn>
-				</div>
-			</div>
+
+			<NoCards v-if="!cards.length" />
+
 			<v-layout>
 				<draggable class="d__cards" v-model="cards">
 					<template v-for="card in card_components">

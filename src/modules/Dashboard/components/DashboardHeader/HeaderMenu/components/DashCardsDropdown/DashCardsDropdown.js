@@ -1,4 +1,4 @@
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import _isEqual from 'lodash/isEqual'
 import request from '@/services/axios_instance'
 //Components
@@ -12,12 +12,11 @@ export default {
   data: () => ({
     dropdown_visible: false,
     avatarSize: 'auto',
-    selected_cards: [],
-    dash_items: []
+    selected_cards: []
   }),
 
   computed: {
-    ...mapGetters('cards', ['cards']),
+    ...mapGetters('cards', ['cards', 'dash_items']),
 
     cards_id() {
       const ids = this.cards.map(card => card.id)
@@ -40,6 +39,7 @@ export default {
 
   methods: {
     ...mapActions('cards', ['update_cards']),
+    ...mapMutations('cards', ['set_dash_items']),
     save() {
       this.dropdown_visible = false
       this.update_cards({ dashitem_id: this.selected_cards })
@@ -48,7 +48,7 @@ export default {
       this.loading = true
       request
         .get('api/dashitems')
-        .then(({ data }) => (this.dash_items = data))
+        .then(({ data }) => this.set_dash_items(data))
         .finally(() => (this.loading = false))
     }
   }
