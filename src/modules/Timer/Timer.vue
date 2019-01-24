@@ -43,6 +43,33 @@
 			</v-toolbar>
 		</template>
 
+		<template slot="custom-item" slot-scope="item" class="template-table">
+			
+			<td class="text-xs-left team__member"> <!--TODO fill image with dynamic data from backend-->
+				<div class="member__image">
+					<img :src="require('@/assets/temp/user.png')" /> &nbsp;
+				</div>
+				<div class="member__name text-cap">
+					MOOOOOOOOOOOO
+				</div>
+			</td>
+
+			<td class="text-cap">Hello</td>
+			<td class="">Whole</td>
+			<td class="">World</td>
+			<td class="">World</td>
+			<td class="">World</td>
+
+			<td class="">
+				<v-btn fab small flat depressed>
+					<img src="@/assets/icons/groups/edit.svg" alt="">
+				</v-btn>
+				<v-btn fab small flat depressed>
+					<img src="@/assets/icons/groups/delete.svg" alt="">
+				</v-btn>
+			</td>
+		</template>
+
 		</custom-table>
 
 		<div class="empty-timer" v-else>

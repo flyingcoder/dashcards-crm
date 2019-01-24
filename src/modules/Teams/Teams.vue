@@ -79,7 +79,7 @@
                 </template>
 
                     <template slot="custom-item" slot-scope="item" class="template-table">
-                        <td class="text-xs-left team__member" @click="navigate_to_view_project(item.item.id)"> <!--TODO fill image with dynamic data from backend-->
+                        <td class="text-xs-left team__member" @click="navigate_to_view_profile(item.item.id)"> <!--TODO fill image with dynamic data from backend-->
                             <div class="member__image">
                                 <img :src="require('@/assets/temp/user.png')" /> &nbsp;
                             </div>
@@ -99,7 +99,7 @@
                             <v-btn fab small flat depressed @click="open_delete_dialog(item.item)">
                                 <img src="@/assets/icons/groups/delete.svg" alt="">
                             </v-btn>
-                            <v-btn fab small flat depressed @click="navigate_to_view_project(item.item.id)">
+                            <v-btn fab small flat depressed @click="navigate_to_view_profile(item.item.id)">
                                 <v-icon>pageview</v-icon>
                             </v-btn>
                         </td>
