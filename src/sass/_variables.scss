@@ -322,6 +322,11 @@
                 margin-bottom: 20px;
             }
         }
+
+        .empty-text{
+            color: $btnGray;
+            font-size: 20px;
+        }
     }
 
     @media only screen and (max-width: 64em){
@@ -343,6 +348,10 @@
                     height: 38px;
                     padding: 0 22px;
                 }
+            }
+
+            .empty-text{
+                font-size: 18px;
             }
         }
     }
@@ -371,6 +380,10 @@
                 svg{
                     width: 70px;
                 }
+            }
+
+            .empty-text{
+                font-size: 16px;
             }
         }
     }
