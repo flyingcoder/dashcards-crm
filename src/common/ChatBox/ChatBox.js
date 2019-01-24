@@ -57,7 +57,8 @@ export default {
       'toggle_open_conv',
       'close_active_conv',
       'add_message_to_conv',
-      'add_older_messages'
+      'add_older_messages',
+      'replace_message'
     ]),
 
     send_message() {
@@ -71,13 +72,21 @@ export default {
     },
 
     send_message_request(payload) {
+      this.add_message_to_conv({
+        id: this.conv.id,
+        message: {
+          body: payload.message,
+          user_id: payload.from_id,
+          id: 'temporary'
+        }
+      })
+      this.message = null
+      this.scrollToBottom(this.$refs.chat_box)
       makeRequestTo.send_message(payload).then(({ data }) => {
-        this.add_message_to_conv({
+        this.replace_message({
           id: this.conv.id,
           message: data
         })
-        this.message = null
-        this.scrollToBottom(this.$refs.chat_box)
       })
     },
 

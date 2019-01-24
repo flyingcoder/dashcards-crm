@@ -22,6 +22,13 @@ const mutations = {
     const index = state.conversations.findIndex(conv => conv.id === id)
     state.conversations[index].messages.push(message)
   },
+  replace_message(state, { id, message }) {
+    const index = state.conversations.findIndex(conv => conv.id === id)
+    const msg_index = state.conversations[index].messages.findIndex(
+      m => m.id === 'temporary'
+    )
+    state.conversations[index].messages.splice(msg_index, 1, message)
+  },
   activate_conversation: (state, index) => {
     state.conversations[index].active = true
     state.latest_active_id = state.conversations[index].id
