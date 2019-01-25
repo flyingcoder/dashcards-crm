@@ -7,18 +7,21 @@
             :image-src="mail_icon"
             :hovered-image-src="hovered_mail_icon"
             :count="null"
+            type="mail"
         />
 
         <notification-icon
             :image-src="notification_icon"
             :hovered-image-src="hovered_notification_icon"
             :count="notification"
+            type="notification"
         />
 
         <notification-icon
             :image-src="chat_icon"
             :hovered-image-src="hovered_chat_icon"
             :count="chat"
+            type="chat"
         />
 
         <dropdown /> <!--custom component-->
