@@ -1,4 +1,4 @@
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 //Components
 import DashboardLogo from './components/DashboardLogo/DashboardLogo.vue'
 import DashboardHeader from './components/DashboardHeader/DashboardHeader.vue'
@@ -23,11 +23,13 @@ export default {
 
   created() {
     this.subscribe()
+    this.fetch_chat()
   },
 
   methods: {
     ...mapMutations('onlineUsers', ['set_all_users']),
     ...mapMutations('chat', ['add_unread_messages', 'add_message_to_conv']),
+    ...mapActions('notifications', ['fetch_chat']),
 
     subscribe() {
       this.$pusher.authenticate()
