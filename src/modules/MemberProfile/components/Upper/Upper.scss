@@ -1,0 +1,59 @@
+@import '~@/sass/variables';
+
+.profile-upper{
+    margin-bottom: 20px;
+    border-bottom: 1px solid $borderLightGray;
+    box-shadow: $darkBoxShadow;
+
+    .background{
+        height: 350px;
+        background-color: $blue;
+        position: relative;
+    }
+    .camera{
+        color: $white;
+        font-size: 40px;
+        opacity: 0.5;
+        position: absolute;
+        cursor: pointer;
+        top: 25px;
+        right: 25px;
+
+        &:hover{
+            opacity: 1.0;
+        }
+    }
+    .settings{
+        color: $white;
+        font-size: 40px;
+        opacity: 0.5;
+        position: absolute;
+        cursor: pointer;
+        bottom: 25px;
+        right: 25px;
+
+        &:hover{
+            opacity: 1.0;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .profile-upper{
+        margin-bottom: 15px;
+    
+        .background{
+            height: 300px;
+        }
+        .camera{
+            font-size: 35px;
+            top: 20px;
+            right: 20px;
+        }
+        .settings{
+            font-size: 35px;
+            bottom: 20px;
+            right: 20px;
+        }
+    }
+}

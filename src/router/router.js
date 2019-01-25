@@ -28,7 +28,8 @@ import { reports } from './routes/reports'
 import { payment } from './routes/payment'
 import { cloud } from './routes/cloud'
 import { support } from './routes/support'
-import { user_profile } from './routes/userProfile'
+import { member_profile } from './routes/memberProfile'
+import { client_profile } from './routes/clientProfile'
 
 Vue.use(Router)
 
@@ -58,7 +59,8 @@ export default new Router({
         payment, //path: /dashboard/payment
         cloud, //path: /dashboard/cloud
         support, //path: /dashboard/support
-        user_profile //path: /dashboard/team/profile/:id
+        member_profile, //path: /dashboard/team/profile/:id
+        client_profile //path: /dashboard/clients/profile/:id
       ]
     },
 
