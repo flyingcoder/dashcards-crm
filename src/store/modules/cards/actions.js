@@ -7,7 +7,7 @@ export const actions = {
       .then(({ data }) => commit('set_cards', data))
   },
   update_cards({ commit }, payload) {
-    request
+    return request
       .post('api/dashboard/default/dashitems', payload)
       .then(({ data }) => commit('set_cards', data))
   }

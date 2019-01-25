@@ -40,7 +40,7 @@ export default {
 
     clear_and_close() {
       Object.assign(this.$data, this.$options.data.apply(this))
-      this.cancel() //close the modal
+      this.close_dialog() //close the modal
     },
 
     activate_loading() {

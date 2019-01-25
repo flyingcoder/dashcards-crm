@@ -2,7 +2,9 @@
 	<div class="empty-cards">
 
 		<CustomDialog title="Select Dash Cards"
+		              ref="dialog"
 		              :open.sync="dialog"
+		              @button1="dialog = false"
 		>
 			<template slot="content">
 				<div class="dash__cards">
@@ -19,7 +21,7 @@
 			</template>
 
 			<template slot="button2">
-				<v-btn :disabled="nothing_changed">Save</v-btn>
+				<v-btn :disabled="nothing_changed" @click="save">Save</v-btn>
 			</template>
 
 		</CustomDialog>
@@ -38,6 +40,7 @@
 
 <script>
 import _cloneDeep from 'lodash/cloneDeep'
+import { mapActions } from 'vuex'
 //Components
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 import DashCard from '@/common/BaseComponents/DashCard.vue'
@@ -78,6 +81,8 @@ export default {
   },
 
   methods: {
+    ...mapActions('cards', ['update_cards']),
+
     check_selected(id) {
       if (this.selected.includes(id)) {
         const index = this.selected.findIndex(s => s.id === id)
@@ -85,6 +90,12 @@ export default {
       } else {
         this.selected.push(id)
       }
+    },
+
+    save() {
+      if (this.nothing_changed) return
+      this.$refs.dialog.clear_and_close()
+      this.update_cards({ dashitem_id: this.selected })
     }
   }
 }
