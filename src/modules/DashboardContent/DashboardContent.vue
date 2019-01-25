@@ -21,6 +21,9 @@
 		<dashboard-tiles/> <!-- custom component -->
 
 		<v-container fluid>
+
+			<NoCards v-if="!cards.length" />
+
 			<v-layout>
 				<draggable class="d__cards" v-model="cards">
 					<template v-for="card in card_components">

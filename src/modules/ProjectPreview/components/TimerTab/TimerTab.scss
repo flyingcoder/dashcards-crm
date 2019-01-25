@@ -2,9 +2,10 @@
 
 @include sortOptionStyle;
 
+@include emptyTable('.empty-timer');
 
 .timer__tab {
-    padding: 25px;
+    padding: 14px 28px;
     @include customTableRow;
 
     button.add__btn.v-btn.v-btn--floating.v-btn--small{

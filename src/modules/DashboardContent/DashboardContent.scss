@@ -1,4 +1,4 @@
-@import "../../sass/variables";
+@import '~@/sass/_variables';
 
 .content{
     .d__breadcrumbs{
@@ -116,6 +116,7 @@
             grid-gap: 15px;
             width: 100%;
         }
+        
     }
 }
 
@@ -135,5 +136,6 @@
                 }
             }
         }
+        
     }
 }

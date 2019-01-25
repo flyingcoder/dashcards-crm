@@ -38,6 +38,11 @@ export default {
       this.dialog = false
     },
 
+    clear_and_close() {
+      Object.assign(this.$data, this.$options.data.apply(this))
+      this.close_dialog() //close the modal
+    },
+
     activate_loading() {
       this.loading = true
     },
