@@ -1,0 +1,7 @@
+@import '~@/sass/_variables';
+
+.profile-lower{
+    display: grid;
+    grid-template-columns: 60% 37%;
+    grid-gap: 3%;
+}

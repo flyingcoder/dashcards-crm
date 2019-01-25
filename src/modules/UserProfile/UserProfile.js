@@ -1,12 +1,14 @@
 import TableHeader from '@/common/TableHeader.vue'
 import Upper from './components/Upper/Upper.vue'
+import Lower from './components/Lower/Lower.vue'
 
 export default {
   name: 'UserProfile',
 
   components: {
     TableHeader,
-    Upper
+    Upper,
+    Lower
   },
 
   data: () => ({

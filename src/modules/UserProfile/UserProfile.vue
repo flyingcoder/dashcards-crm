@@ -7,6 +7,7 @@
             <div class="profile-content">
 
                 <upper></upper>
+                <lower></lower>
 
             </div>
         </div>
