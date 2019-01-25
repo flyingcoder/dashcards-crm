@@ -1,7 +1,7 @@
 <template>
     <div class="profile-lower">
-        <left></left>
-        <right></right>
+        <Left/>
+        <Right/>
     </div>
 </template>
 
