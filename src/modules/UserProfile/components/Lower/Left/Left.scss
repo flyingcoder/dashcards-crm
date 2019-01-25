@@ -1,0 +1,18 @@
+@import '~@/sass/_variables';
+.profile-left{
+    .tab-item{
+        background-color: $bgLightBlue-2;
+        border: 1px solid $borderLightGray;
+        svg{
+            width: 40px;
+            fill: $textDark-3;
+        }
+        img{
+            height: 40px;
+        }
+        .v-icon{
+            font-size: 40px;
+            color: $textDark-3;
+        }
+    }
+}
