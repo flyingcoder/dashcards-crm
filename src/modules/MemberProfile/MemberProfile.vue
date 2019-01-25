@@ -12,7 +12,7 @@
 	</div>
 </template>
 
-<script src="./UserProfile.js">
+<script src="./MemberProfile.js">
 </script>
-<style lang="scss" scoped src="./UserProfile.scss">
+<style lang="scss" scoped src="./MemberProfile.scss">
 </style>

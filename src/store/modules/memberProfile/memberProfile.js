@@ -32,6 +32,14 @@ const actions = {
       .get_single_member(id)
       .then(({ data }) => commit('set_user', data))
       .finally(() => commit('set_user_loading', false))
+  },
+
+  get_single_client({ commit }, id) {
+    commit('set_user_loading', true)
+    makeRequestTo
+      .get_single_client(id)
+      .then(({ data }) => commit('set_user', data))
+      .finally(() => commit('set_user_loading', false))
   }
 }
 

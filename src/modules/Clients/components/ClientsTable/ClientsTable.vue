@@ -58,6 +58,10 @@
 					<v-btn fab small flat depressed @click="open_delete_dialog(item.item)">
 						<img src="@/assets/icons/groups/delete.svg" alt="">
 					</v-btn>
+
+					<v-btn fab small flat depressed @click="navigate_to_view_profile(item.item.id)">
+						<v-icon>pageview</v-icon>
+					</v-btn>
 				</td>
 			</template>
 
