@@ -9,7 +9,8 @@ const getters = {
 }
 
 const mutations = {
-  set_chat: (state, payload) => (state.chat = payload)
+  set_chat: (state, payload) => (state.chat = payload),
+  add_to_chat: (state, payload) => state.chat.unshift(payload)
 }
 
 const actions = {

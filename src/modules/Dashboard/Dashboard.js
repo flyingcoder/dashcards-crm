@@ -29,6 +29,7 @@ export default {
   methods: {
     ...mapMutations('onlineUsers', ['set_all_users']),
     ...mapMutations('chat', ['add_unread_messages', 'add_message_to_conv']),
+    ...mapMutations('notifications', ['add_to_chat']),
     ...mapActions('notifications', ['fetch_chat']),
 
     subscribe() {
@@ -37,20 +38,26 @@ export default {
       const chat_channel = this.$pusher.subscribe(
         `private-chat.new-message.${this.user.id}`
       )
-
       const friends_channel = this.$pusher.subscribe(
         `presence-friend-list-${this.user.company_id}`
+      )
+      const chat_notification_channel = this.$pusher.subscribe(
+        `private-chat.notification.${this.user.id}`
       )
 
       this.chat_channel(chat_channel)
       this.friends_channel(friends_channel)
+      this.chat_notification_channel(chat_notification_channel)
     },
 
     chat_channel(channel) {
       channel.bind(
         `App\\Events\\PrivateChatSent`,
         ({ message, sender, receiver }) => {
-          if (receiver.id === this.user.id) {
+          const conv = this.all_conversations.find(
+            conv => conv.id === sender.id
+          )
+          if (conv && receiver.id === this.user.id) {
             this.handle_unread_message(sender)
             this.add_message_to_conv({ id: sender.id, message })
           }
@@ -89,9 +96,19 @@ export default {
       })
     },
 
+    chat_notification_channel(channel) {
+      channel.bind('App\\Events\\ChatNotification', ({ notification }) => {
+        const sender_id = notification.sender.id
+        const conv = this.all_conversations.find(conv => conv.id === sender_id)
+        if (!conv || !conv.open) {
+          this.add_to_chat(notification)
+        }
+      })
+    },
+
     handle_unread_message(sender) {
       const conv = this.all_conversations.find(conv => conv.id === sender.id)
-      if (!conv.open && conv.active) {
+      if (conv && !conv.open && conv.active) {
         this.add_unread_messages(sender.id)
       }
     }
