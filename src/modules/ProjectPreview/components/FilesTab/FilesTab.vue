@@ -2,32 +2,15 @@
     <div class="files__tab">
         <div class="drop__files">
 	            <div class="drop__files_body">
-                    <vue-dropzone
-                        ref="dropzone"
-                        :duplicateCheck="true"
-                        id="dropzone"
-                        :options="dropzoneOptions"
-                        :useCustomSlot=true
-                        dictFileTooBig="File too big"
-                        dictInvalidFileType="Invalid file type"
-                        @vdropzone-success="file_added"
-                    >
-                            <v-layout row align-center
-                                    justify-center fill-height
-                                    class="drop__files_content"
-                            >
-                                <div class="file__icon">
-                                    <v-icon>file_copy</v-icon>
-                                </div>
-
-                                <div class="drop__title">Drop files here</div>
-                                <div class="drop__text">or</div>
-                                <div class="drop__btn">
-                                    <v-btn large dark color="#3b589e">Choose your files</v-btn>
-                                </div>
-                                
-                            </v-layout>
-                    </vue-dropzone>
+								<CustomDropzone
+										ref="dropzone"
+										:duplicateCheck="true"
+										:options="dropzoneOptions"
+										:useCustomSlot=true
+										dictFileTooBig="File too big"
+										dictInvalidFileType="Invalid file type"
+										@success="file_added"
+								/>
 	            </div>
         </div>
         

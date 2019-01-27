@@ -7,33 +7,16 @@
 		>
 			<template slot="content">
 				<div class="content">
-					<vue-dropzone
-							ref="dropzone"
+					<CustomDropzone
 							:duplicateCheck="true"
 							acceptedFiles="image/*"
 							id="dropzone"
 							:options="dropzoneOptions"
-							:useCustomSlot=true
+							:useCustomSlot="true"
 							dictFileTooBig="File too big"
 							dictInvalidFileType="Invalid file type"
-							@vdropzone-success="file_added"
-					>
-						<v-layout row align-center
-						          justify-center fill-height
-						          class="drop__files_content"
-						>
-							<div class="file__icon">
-								<v-icon>file_copy</v-icon>
-							</div>
-
-							<div class="drop__title">Drop files here</div>
-							<div class="drop__text">or</div>
-							<div class="drop__btn">
-								<v-btn large dark color="#3b589e">Choose your files</v-btn>
-							</div>
-
-						</v-layout>
-					</vue-dropzone>
+							@success="file_added"
+					/>
 				</div>
 			</template>
 
@@ -49,13 +32,12 @@
 import { mapGetters, mapMutations } from 'vuex'
 //Components
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
-import vue2Dropzone from 'vue2-dropzone'
-import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+import CustomDropzone from '@/common/CustomDropzone.vue'
 
 export default {
   components: {
     CustomDialog,
-    vueDropzone: vue2Dropzone
+    CustomDropzone
   },
   computed: {
     ...mapGetters('memberProfile', ['picture_dialog_is_open', 'user_id']),

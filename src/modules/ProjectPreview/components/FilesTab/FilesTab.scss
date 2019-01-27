@@ -1,4 +1,5 @@
-@import '~@/sass/_variables';
+@import '~@/sass/variables';
+
 .files__tab{
     padding: 24px;
     .drop__files{
@@ -13,23 +14,6 @@
                 border: 1px solid $tableBorderBlue;
                 &:hover{
                     background-color: #dedede;
-                }
-            }
-            .drop__files_content{
-                flex-direction: column;
-                .file__icon{
-                    .v-icon{
-                        font-size: 100px;
-                        color: $btnGray;
-                    }
-                }
-                .drop__title{
-                    font-size: 17px;
-                    color: $tableDarkText;
-                }
-                .drop__text{
-                    font-size: 12px;
-                    color: $tableDarkText;
                 }
             }
         }
@@ -81,20 +65,6 @@
         padding: 20px;
         .drop__files{
             padding: 20px;
-            .drop__files_body{
-                .drop__files_content{
-                    .drop__title{
-                        font-size: 17px;
-                    }
-                    .drop__btn{
-                        .v-btn--large{
-                            font-size: 13px;
-                            height: 38px;
-                            padding: 0 22px;
-                        }
-                    }
-                }
-            }
         }
         .file__list_header{
             margin-bottom: 17px;
@@ -122,25 +92,6 @@
         padding: 15px;
         .drop__files{
             padding: 15px;
-            .drop__files_body{
-                .drop__files_content{
-                    .file__icon{
-                        .v-icon{
-                            font-size: 70px;
-                        }
-                    }
-                    .drop__title{
-                        font-size: 15px;
-                    }
-                    .drop__btn{
-                        .v-btn--large{
-                            font-size: 13px;
-                            height: 33px;
-                            padding: 0 20px;
-                        }
-                    }
-                }
-            }
         }
         .file__list_header{
             margin-bottom: 17px;
