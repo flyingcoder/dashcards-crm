@@ -1,9 +1,8 @@
-import vue2Dropzone from 'vue2-dropzone'
-import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 import { table_functionality } from '@/services/table-functionality/table-functionality'
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import TableHeader from '@/common/TableHeader.vue'
+import CustomDropzone from '@/common/CustomDropzone.vue'
 
 export default {
   name: 'FilesTab',
@@ -13,7 +12,7 @@ export default {
   components: {
     CustomTable,
     TableHeader,
-    vueDropzone: vue2Dropzone
+	  CustomDropzone
   },
 
   props: {
@@ -47,10 +46,10 @@ export default {
   },
 
   methods: {
-    file_added(file, response) {
+    file_added([file, response]) {
       this.$event.$emit('open_snackbar', 'File(s) uploaded successfully')
       this.items.unshift(JSON.parse(response))
-      this.$refs.dropzone.removeFile(file)
+      this.$refs.dropzone.remove_file(file)
     }
   }
 }
