@@ -39,60 +39,6 @@
     }
   }
 
-  .card__layout {
-    margin-bottom: 15px;
-    .data__box {
-      text-align: center;
-      .card__option {
-        display: block;
-        position: relative;
-        background-color: $lightViolete-2;
-        cursor: pointer;
-        text-align: center;
-        width: 120px;
-        height: 90px;
-        border-radius: 10px;
-        border: 2px solid $lightViolete-2;
-        margin: 5px auto;
-
-        &:hover {
-          border: 2px solid $darkViolete;
-        }
-
-        .card__option_content {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          margin-right: -50%;
-          transform: translate(-50%, -50%);
-          max-height: 90px;
-
-          .card__title {
-            font-size: 18px;
-            color: $darkViolete;
-            margin-top: 10px;
-          }
-
-          .card__icons {
-            margin: 0 auto;
-          }
-        }
-      }
-      input[type='checkbox'] {
-        display: none;
-      }
-
-      input[type='checkbox']:checked + .card__option {
-        background-color: $darkViolete;
-        border: 2px solid $darkViolete;
-
-        .card__title {
-          color: $white;
-        }
-      }
-    }
-  }
-
   .select__all {
     display: block;
     position: relative;
@@ -155,5 +101,13 @@
     input:checked ~ .checkmark:after {
       display: block;
     }
+  }
+
+  .dash__cards {
+    display: grid;
+    grid-template-columns: 120px 120px;
+    justify-content: space-around;
+    grid-gap: 10px 0;
+    padding-bottom: 15px;
   }
 }

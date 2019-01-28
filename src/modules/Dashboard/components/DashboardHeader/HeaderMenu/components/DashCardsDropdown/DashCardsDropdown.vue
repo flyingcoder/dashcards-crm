@@ -25,41 +25,17 @@
 						type="checkbox" checked="checked"> <span class="checkmark"></span>
 				</label>
 
-				<v-layout row wrap align-center justify-center class="card__layout">
-
-					<v-flex sm6 xs12 class="data__box"
-					        v-for="item in dash_items"
-					        :key="item.id"
-					>
-
-						<input type="checkbox"
-						       name="boxes"
-						       :id="item.id"
-						       :value="item.id"
-						       v-model="selected_cards"
+				<div class="dash__cards">
+					<template v-for="item of dash_items">
+						<DashCard :title="item.name"
+						          :img-src="item.img_path"
+						          :selected="selected_cards"
+						          :id="item.id"
+						          :key="item.id"
+						          @click="check_selected(item.id)"
 						/>
-						<label class="card__option" :for="item.id">
-
-							<div class="card__option_content">
-								<img v-if="item.slug == 'tasks'" width="40px" src="@/assets/icons/sidebar/tasks.svg" class="card__icons"/>
-								<img v-if="item.slug == 'timeline'" width="40px" src="@/assets/icons/sidebar/timers.svg" class="card__icons"/>
-								<img v-if="item.slug == 'client'" width="40px" src="@/assets/icons/sidebar/clients.svg" class="card__icons"/>
-								<img v-if="item.slug == 'timer'" width="40px" src="@/assets/icons/sidebar/timers.svg" class="card__icons"/>
-								<img v-if="item.slug == 'payment'" width="40px" src="@/assets/icons/sidebar/payment.svg" class="card__icons"/>
-								<img v-if="item.slug == 'invoice'" width="40px" src="@/assets/icons/sidebar/invoice.svg" class="card__icons"/>
-								<img v-if="item.slug == 'calendar'" width="40px" src="@/assets/icons/sidebar/calendar.svg" class="card__icons"/>
-								<img v-if="item.slug == 'passbox'" width="30px" src="@/assets/icons/header/user/lock.svg" class="card__icons"/>
-
-								<div class="card__title">
-									{{ item.name }}
-								</div>
-							</div>
-
-						</label>
-
-					</v-flex>
-
-				</v-layout>
+					</template>
+				</div>
 
 				<div class="card__btn">
 					<v-btn dark color="#8b94bf" class="reset">Reset Default</v-btn>
