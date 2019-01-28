@@ -18,6 +18,8 @@
   @include styledScrollFor('.dialog__body');
 
   .dialog__body {
+    max-height: 350px;
+    overflow: hidden auto;
     color: $tableDarkText;
     font-size: 16px;
   }
