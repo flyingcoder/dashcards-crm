@@ -1,39 +1,13 @@
->>> .theme--light.v-input:not(.v-input--is-disabled) input, >>> .theme--light.v-input:not(.v-input--is-disabled) textarea{
-    color: #657186;
-}
->>> .dialog__body .theme--light.v-text-field--solo>.v-input__control>.v-input__slot{
-    border: 1px solid #dce1e5;
-    border-radius: 8px;
-    font-size: 16px;
-    color: #657186;
-}
-
->>> .dialog__textfield input{
-    text-transform: capitalize;
-}
-
->>> .dialog__body label.v-label.theme--light{
+>>> .task-member .v-input{
     font-size: 16px;
 }
 
->>> .task-description .ql-toolbar.ql-snow{
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    border-bottom-color: #dce1e5;
-}
->>> .task-description .ql-container.ql-snow{
-    border: none;
-}
->>> .task-description .ql-editor{
-    color: #657186;
-}
 
 @media only screen and (max-width: 480px){
-    >>> .dialog__body .v-input__slot{
+    >>> .task-member .v-input{
         font-size: 12px;
     }
-    >>> .dialog__body label.v-label.theme--light{
+    >>> .task-description .ql-editor{
         font-size: 12px;
     }
 }

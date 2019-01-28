@@ -1,54 +1,24 @@
 @import '~@/sass/_variables';
 
-@include styledDialog('.task-dialog');
+.custom-dialog{
 
-.task-dialog{
-
-    .dialog__header{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-        padding: 0;
-    
-        @include styledCloseDialog('.close__dialog');
-
-        @include styledTitleDialog('.dialog__title');
+    .task-description{
+        margin: 5px;
+        background-color: $white;
+        border-radius: 8px;
+        border: 1px solid $borderLightGray;
+        box-shadow: $darkBoxShadow;
+    }
+    .task-member{
+        margin: 5px;
+        background-color: $white;
+        border-radius: 8px;
+        border: 1px solid $borderLightGray;
+        box-shadow: $darkBoxShadow;
+        padding: 5px;
+    }
+    .dialog__date{
+        margin: 5px;
     }
 
-    @include styledScrollFor('.dialog__body');
-
-    .dialog__body{
-        max-height: 400px;
-        overflow: auto;
-        .dialog__textfield{
-          margin: 5px;
-        }
-
-        .task-description{
-            margin: 5px;
-            background-color: $white;
-            border-radius: 8px;
-            border: 1px solid $borderLightGray;
-            box-shadow: $darkBoxShadow;
-        }
-        .task-date{
-            margin: 5px;
-        }
-        .task-member{
-            margin: 5px;
-            background-color: $white;
-            border-radius: 8px;
-            border: 1px solid $borderLightGray;
-            box-shadow: $darkBoxShadow;
-            padding: 5px;
-        }
-    }
-    
-    @include actionButtonsDialog('.dialog__actions');
-
-}
-
-@media only screen and (max-width: 480px){
-    
 }
