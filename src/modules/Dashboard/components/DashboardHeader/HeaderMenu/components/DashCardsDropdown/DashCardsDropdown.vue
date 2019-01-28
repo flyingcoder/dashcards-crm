@@ -21,9 +21,10 @@
 			</v-list-tile-title>
 
 			<template>
-				<label class="select__all"> <span>Add All Data Box</span> <input
-						type="checkbox" checked="checked"> <span class="checkmark"></span>
-				</label>
+				<CustomCheckbox
+						text="Add All Data Box"
+						:checked.sync="checkbox"
+				/>
 
 				<div class="dash__cards">
 					<template v-for="item of dash_items">

@@ -5,17 +5,20 @@ import request from '@/services/axios_instance'
 //Components
 import HeaderIcon from '@/common/HeaderIcon.vue'
 import DashCard from '@/common/BaseComponents/DashCard.vue'
+import CustomCheckbox from '@/common/BaseComponents/CustomCheckbox.vue'
 
 export default {
   components: {
     HeaderIcon,
-    DashCard
+    DashCard,
+    CustomCheckbox
   },
 
   data: () => ({
     dropdown_visible: false,
     avatarSize: 'auto',
     selected_cards: [],
+    checkbox: false,
     icons: {
       tasks: 'sidebar/tasks.svg',
       timeline: 'sidebar/timers.svg',
