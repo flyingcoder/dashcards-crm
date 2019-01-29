@@ -14,6 +14,9 @@
 				slot="activator"
 				:value="value"
 				v-bind="$attrs"
+        solo
+        hide-details
+        color="#657186"
 		></v-text-field>
 
 		<v-date-picker clearable color="#657186" v-model="picker_date" :max="max" :min="min" no-title scrollable>

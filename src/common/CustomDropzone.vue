@@ -66,38 +66,38 @@ export default {
   }
 }
 
-@media only screen and (max-width: 768px) and (min-width: 481px){
-	.drop__files_content{
-		.drop__title{
-			font-size: 17px;
-		}
-		.drop__btn{
-			.v-btn--large{
-				font-size: 13px;
-				height: 38px;
-				padding: 0 22px;
-			}
-		}
-	}
+@media only screen and (max-width: 768px) and (min-width: 481px) {
+  .drop__files_content {
+    .drop__title {
+      font-size: 17px;
+    }
+    .drop__btn {
+      .v-btn--large {
+        font-size: 13px;
+        height: 38px;
+        padding: 0 22px;
+      }
+    }
+  }
 }
 
-@media only screen and (max-width: 480px){
-	.drop__files_content{
-		.file__icon{
-			.v-icon{
-				font-size: 70px;
-			}
-		}
-		.drop__title{
-			font-size: 15px;
-		}
-		.drop__btn{
-			.v-btn--large{
-				font-size: 13px;
-				height: 33px;
-				padding: 0 20px;
-			}
-		}
-	}
+@media only screen and (max-width: 480px) {
+  .drop__files_content {
+    .file__icon {
+      .v-icon {
+        font-size: 70px;
+      }
+    }
+    .drop__title {
+      font-size: 15px;
+    }
+    .drop__btn {
+      .v-btn--large {
+        font-size: 13px;
+        height: 33px;
+        padding: 0 20px;
+      }
+    }
+  }
 }
 </style>

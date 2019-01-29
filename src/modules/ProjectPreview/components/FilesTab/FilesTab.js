@@ -12,7 +12,7 @@ export default {
   components: {
     CustomTable,
     TableHeader,
-	  CustomDropzone
+    CustomDropzone
   },
 
   props: {

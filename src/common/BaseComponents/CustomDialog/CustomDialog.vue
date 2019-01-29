@@ -1,6 +1,6 @@
 <template>
 	<v-layout row justify-center>
-		<v-dialog v-model="dialog" persistent max-width="500px">
+		<v-dialog v-model="dialog" persistent max-width="600px">
 
 			<v-progress-linear v-if="loading"
 			                   slot="progress"
@@ -51,4 +51,6 @@
 <script src="./CustomDialog.js">
 </script>
 <style lang="scss" scoped src="./CustomDialog.scss">
+</style>
+<style scoped src="./CustomDialog.css">
 </style>
