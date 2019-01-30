@@ -32,7 +32,7 @@
 			<v-layout row>
 				<v-flex xs12>
 
-					<table-header :paths="paths" @click="add_dialog = true" />
+					<table-header :paths="paths" @click="add_dialog = true"/>
 
 					<v-card>
 						<v-card-title>
@@ -59,23 +59,26 @@
 								@sorted="changeSort"
 						>
 
-							<template slot="custom-item" slot-scope="item">
-								<td class="text-xs-center">{{item.item.id}}</td>
-								<td class="text-xs-center">{{item.item.name}}</td>
-								<td class="text-xs-center">{{item.item.description}}</td>
+							<template slot="custom-item" slot-scope="{item}">
+								<td class="text-xs-center">{{item.id}}</td>
+								<td class="text-xs-center">{{item.name}}</td>
+								<td class="text-xs-center">{{item.description}}</td>
 								<td class="actions">
-									<template v-for="action of get_actions(item.item.slug)">
-										<v-tooltip bottom :key="action.value">
-											<v-btn
-													slot="activator"
-													color="blue"
-													@click="action_clicked(action.value, item.item)"
-											>
-												<img :src="action.icon"/> &nbsp;
-												{{ action.text }}
-											</v-btn>
-											<span>{{action.tooltip}}</span>
-										</v-tooltip>
+									<template v-for="action of get_actions(item.slug)">
+										<template
+												v-if="is_edit_or_delete_action(item.value) && item.company_id">
+											<v-tooltip bottom :key="action.value">
+												<v-btn
+														slot="activator"
+														color="blue"
+														@click="action_clicked(action.value, item)"
+												>
+													<img :src="action.icon"/> &nbsp;
+													{{ action.text }}
+												</v-btn>
+												<span>{{action.tooltip}}</span>
+											</v-tooltip>
+										</template>
 									</template>
 								</td>
 							</template>
@@ -85,18 +88,22 @@
 								<div class="actions-wrapper">
 
 									<div class="bulk-delete">
-										<v-btn color="indigo" dark outline :disabled="!show_delete_selected">
+										<v-btn color="indigo" dark outline
+										       :disabled="!show_delete_selected">
 											Delete Selected
 										</v-btn>
 									</div>
 
 									<div class="rows-per-page-dropdown">
-										Rows per page: <v-select :items="rows_per_page_items" menu-props="auto" v-model="rows_per_page"></v-select>
+										Rows per page:
+										<v-select :items="rows_per_page_items" menu-props="auto"
+										          v-model="rows_per_page"></v-select>
 									</div>
 
 									<div class="pagination">
 										<div class="text-xs-center pt-2">
-											<v-pagination :length="total_items" :total-visible="5" v-model="page"></v-pagination>
+											<v-pagination :length="total_items" :total-visible="5"
+											              v-model="page"></v-pagination>
 										</div>
 									</div>
 

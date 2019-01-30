@@ -42,10 +42,31 @@ export default {
     }
   }),
 
+  watch: {
+    api_query(query) {
+      this.$router.push({
+        name: this.table_config.route_name,
+        query: {
+          tab: 'groups',
+          page: this.page,
+          per_page: this.rows_per_page,
+          search: this.search,
+          sort: this.query_for_sorting
+        }
+      })
+      this.loading = true
+      this.refresh_table(query)
+    }
+  },
+
   created() {
     const query = { ...this.$route.query }
-    if (isEmpty(query)) this.fill_table('get_groups', true)
-    else this.update_table_actions(query)
+    delete query.tab
+    if (isEmpty(query)) {
+      this.fill_table('get_groups', true)
+    } else {
+      this.update_table_actions(query)
+    }
   },
 
   methods: {
@@ -102,6 +123,10 @@ export default {
             icon: require(`@/${'assets/icons/groups/delete.svg'}`)
           }
         ]
+    },
+
+    is_edit_or_delete_action(action) {
+      return action === 'edit_settings' || action === 'delete_group'
     }
   }
 }

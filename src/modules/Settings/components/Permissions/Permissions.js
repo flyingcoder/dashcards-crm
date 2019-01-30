@@ -51,16 +51,6 @@ export default {
     }
   }),
 
-  created() {
-    const query = { ...this.$route.query }
-    delete query.tab
-    if (isEmpty(query)) {
-      this.fill_table('get_permissions', true)
-    } else {
-      this.update_table_actions(query)
-    }
-  },
-
   watch: {
     api_query(query) {
       this.$router.push({
@@ -75,6 +65,16 @@ export default {
       })
       this.loading = true
       this.refresh_table(query)
+    }
+  },
+
+  created() {
+    const query = { ...this.$route.query }
+    delete query.tab
+    if (isEmpty(query)) {
+      this.fill_table('get_permissions', true)
+    } else {
+      this.update_table_actions(query)
     }
   },
 
