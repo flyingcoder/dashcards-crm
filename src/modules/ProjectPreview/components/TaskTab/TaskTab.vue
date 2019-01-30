@@ -1,7 +1,14 @@
 <template>
 	<div class="tasks-tab">
-		<tasks-card :id="id" />
-		<preview-card :id="id" :task="task" />
+		<div class="actions">
+			<v-btn color="indigo" dark icon title="Add New Task">
+				<v-icon>add</v-icon>
+			</v-btn>
+		</div>
+		<div class="cards">
+			<tasks-card :id="id" />
+			<preview-card :id="id" :task="task" />
+		</div>
 	</div>
 </template>
 
