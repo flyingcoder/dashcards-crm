@@ -72,6 +72,7 @@ export default {
     font-size: 22px;
     color: $black;
     position: relative;
+    text-transform: capitalize;
 
     .v-icon {
       color: $textGray;

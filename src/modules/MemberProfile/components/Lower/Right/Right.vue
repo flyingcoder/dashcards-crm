@@ -1,18 +1,17 @@
 <template>
     <div class="profile-right">
+
         <v-tabs class="tabs" centered grow hide-slider height="60px" :show-arrows="is_screen_medium_and_down">
-			<v-tab class="tab-item" href="#tab-1">
-                <v-icon>image</v-icon>
+			<v-tab v-for="(tab, index) in tabs" class="tab-item" :href="'#tab-' + index" :key="index">
+                <v-icon>{{ tab.icon }}</v-icon>
             </v-tab>
-
-            <v-tab class="tab-item" href="#tab-2">
-                <v-icon>image</v-icon>
-            </v-tab>
-
-            <v-tab class="tab-item" href="#tab-3">
-                <v-icon>image</v-icon>
-            </v-tab>
+            <v-tab-item v-for="(text, index) in texts" :value="'tab-' + index" :key="index">
+                <v-card flat>
+                    <v-card-text>{{ text.content }}</v-card-text>
+                </v-card>
+            </v-tab-item>
 		</v-tabs>
+        
     </div>
 </template>
 
