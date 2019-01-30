@@ -1,21 +1,24 @@
->>>.content__wrapper .buzz__tables{
-    padding: 0;
-    border-radius: none;
-    border: none;
+>>> .theme--light.v-input:not(.v-input--is-disabled) input, >>> .theme--light.v-input:not(.v-input--is-disabled) textarea{
+    color: #657186;
 }
->>>.content__wrapper .buzz__tables .buzz__tablesTwo{
-    padding: 0;
-    border: none;
+>>> .write__msg .v-input__slot {
+    font-size: 16px;
+    color: #657186;
 }
-
->>>.option .v-btn__content{
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 16px;
+>>> .write__msg label.v-label.theme--light{
+    font-size: 16px;
+    color: #657186;
 }
 
 @media only screen and (max-width: 768px){
-    >>>.option .v-btn__content{
-        padding: 0 8px;
+    
+    >>> .write__msg .v-input__slot {
+        font-size: 12px;
+    }
+    >>> .write__msg label.v-label.theme--light{
+        font-size: 12px;
+    }
+    >>> .write__msg .v-input__control {
+        min-height: auto;
     }
 }

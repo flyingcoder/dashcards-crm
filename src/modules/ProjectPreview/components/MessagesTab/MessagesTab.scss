@@ -2,302 +2,353 @@
 
 @include sortOptionStyle;
 
-
-.message__tab {
+.message__tab{
     padding: 25px;
     margin: 25px;
     background-color: $white;
     border: 1px solid $tableBorderBlue;
     border-radius: 10px;
     @include customTableRow;
-
+    
     .message__content{
         background-color: $tableBlueBg;
         border: 1px solid $tableBorderBlue;
         border-radius: 10px;
         padding: 15px;
+    }
+    
+    .sidebar__chatlist{
+        margin: 10px;
+        background-color: $white;
+        border: 1px solid $tableBorderBlue;
+        border-radius: 10px;
+    }
+
+    .user{
+        padding: 10px;
+        text-align: center;
+        display: flex;
+    }
+    
+    .user__img{
+        height: 50px;
+        width: 50px;
+        max-width: 50px;
+        border-radius: 50%;
+        border: 1px solid $borderLightGray;
+        position: relative;
         
-        .message__sidebar{
-            .sidebar__options{
-                margin: 10px;
-                padding: 20px;
-                background-color: $white;
-                border: 1px solid $tableBorderBlue;
-                border-radius: 10px;
-                text-align: center;
-
-                .option{
-                    height: 60px;
-                    width: 190px;
-                    margin: 0;
-                    font-size: 15px;
-                    border: 1px solid $tableBorderBlue;
-                    text-transform: capitalize;
-                    color: $textDark;
-                    background-color: $lightGray;
-
-                    &:hover{
-                        background-color: $white;
-                    }
-
-                    .v-btn--active:before, .v-btn:focus:before, .v-btn:hover:before {
-                        background-color: inherit;
-                    }
-                    
-                    span{
-                        font-size: 12px;
-                        line-height: 35px;
-                        background-color: $red;
-                        height: 35px;
-                        width: 35px;
-                        color: $white;
-                        border-radius: 50%;
-                    }
-                    
-                }
-
-                .v-btn--active:before, .v-btn:focus:before, .v-btn:hover:before {
-                    background-color: inherit;
-                }
-
-                .write__btn{
-                    height: 60px;
-                    width: 190px;
-                    margin: 0;
-                    font-size: 15px;
-                    margin-bottom: 20px;
-                }
-
-                .inbox__btn, .sent__btn, .draft__btn{
-                    border-bottom: none;
-                }
-            }
+        .status{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 15px;
+            height: 15px;
+            border: 2px solid $lightViolete;
+            border-radius: 50%;
         }
-        .message__table{
-            .custom__table{
-                margin: 10px;
-                .table__toolbar {
-                    border: 1px solid $tableBorderBlue;
-                }
-                .table__toolbar-title{
-                    color: $tableTitleBlue;
-                    text-align: left;
-                    font-size: 30px;
-                }
-            }
+        
+        .online{
+            background-color: $green;
         }
 
-        .sidebar__chatlist{
-            margin: 10px;
-            background-color: $white;
-            border: 1px solid $tableBorderBlue;
-            border-radius: 10px;
+        .offline{
+            background-color: $gray;
+        }
 
-            .user{
-                padding: 10px;
-                text-align: center;
-                display: flex;
-                .user__img{
-                    height: 50px;
-                    width: 50px;
-                    max-width: 50px;
-                    border-radius: 50%;
-                    border: 1px solid $borderLightGray;
-                    position: relative;
-                    
-                    .status{
-                        position: absolute;
-                        bottom: 0;
-                        right: 0;
-                        width: 15px;
-                        height: 15px;
-                        border: 2px solid $lightViolete;
-                        border-radius: 50%;
-                    }
-                    
-                    .online{
-                        background-color: $green;
-                    }
+        .dnd{
+            background-color: $red;
+        }
+    }
 
-                    .offline{
-                        background-color: $gray;
-                    }
+    .user__name{
+        margin-left: 10px;
+        font-size: 12px;
+        margin: auto 10px;
+        text-align: left;
+        font-weight: 500;
+        color: $textDark;text-transform: capitalize;
+    }
 
-                    .dnd{
-                        background-color: $red;
-                    }
-                }
-                .user__name{
-                    margin-left: 10px;
-                    font-size: 12px;
-                    margin: auto 10px;
-                    text-align: left;
-                    font-weight: 500;
-                    color: $textDark;text-transform: capitalize;
-                }
-                .add__chat{
-                    height: 33px;
-                    min-width: 33px;
-                    border-radius: 5px;
-                    border: 1px solid $borderLightGray;
-                    background-color: $lightGray;
-                    color: $darkGray;
-                    margin: auto 0;
-                    text-align: right;
-                    padding: 0;
-                }
+    @include styledScrollFor('.friend__list');
+
+    .friend__list{
+        overflow: auto;
+        max-height: 500px;
+        .friend{
+            border-top: 1px solid $borderLightGray;
+        }
+    }
+
+    .view__more{
+        text-align: center;
+        padding: 10px;
+        border-top: 1px solid $borderLightGray;
+        .view__more_btn{
+            color: $tableDarkText;
+        }
+    }
+
+    .tabs{
+        margin: 10px;
+    }
+
+    .option{
+        background-color: $bgLightBlue-2;
+        border: 1px solid $borderLightGray;
+    }
+
+    .tab-title{
+        margin-right: 20px;
+    }
+    
+    .counter{
+        font-size: 12px;
+        line-height: 35px;
+        background-color: $red;
+        height: 35px;
+        width: 35px;
+        color: $white;
+        border-radius: 50%;
+    }
+    
+    .message__body{
+        border: 1px solid $borderLightGray;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    @include styledScrollFor('.messages'); //style the scroll
+
+    .messages{
+        background-color: $white;
+        overflow: auto;
+        max-height: 462px;
+        border-bottom: 1px solid $borderLightGray;
+    }
+
+    .message{
+        border-bottom: 1px solid $borderLightGray;
+        padding: 5px 25px;
+    }
+
+    .sender{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    @include userImgWithStatus ('.sender__img');
+
+    .sender__img{
+        text-align: center;
+        height: 50px;
+        width: 50px;
+        max-width: 50px;
+        
+        .status{
+            width: 15px;
+            height: 15px;
+            border: 2px solid $lightViolete;
+        }        
+    }
+
+    .sender__name h5{
+        font-size: 18px;
+        margin: 0 5px;
+        color: $titleDarkBlue;
+    }
+
+    .date{
+        font-size: 12px;
+        opacity: 0.7;
+        margin: 0 5px;
+        color: $textDarkBlue;
+        text-align: right;
+    }
+
+    .sender__message{
+        padding: 10px;
+        font-size: 16px;
+        text-align: justify;
+        margin: 0;
+        color: $textDarkBlue;
+        margin-right: 30px;
+    }
+
+    .me{
+        background-color: $tableBlueBg;
+        
+        .sender{
+            flex-direction: row-reverse;
+
+            .sender__name{
+                text-align: right;
             }
-
-            @include styledScrollFor('.friend__list')
-
-            .friend__list{
-                overflow: auto;
-                max-height: 500px;
-                .friend{
-                    border-top: 1px solid $borderLightGray;
-                }
+            .date{
+                text-align: left;
             }
+        }
 
-            .view__more{
-                text-align: center;
-                padding: 10px;
-                border-top: 1px solid $borderLightGray;
-                .view__more_btn{
-                    color: $tableDarkText;
+        .sender__message{
+            margin-left: 30px;
+            margin-right: 0;
+            text-align: justify;
+            display: flex;
+            flex-flow: column;
+            align-items: flex-end;
+        }
+    }
+
+    
+    .write{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        background-color: $white;
+        .write__actions{
+            .action{
+                margin: 5px 7px;
+                color: $lightGray-2;
+                cursor: pointer;
+                
+                &:hover{
+                    color: $blue;
                 }
             }
         }
     }
-    
+        
+    .view__more{
+        text-align: center;
+        padding: 10px;
+        border-top: 1px solid $borderLightGray;
+        background-color: $white;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        .view__more_btn{
+            color: $tableDarkText;
+        }
+    }
 }
 
 @media only screen and (max-width: 768px){
     .message__tab {
         padding: 12px;
         margin: 12px;
-    
+
         .message__content{
             padding: 10px;
+        }
+
+        .sidebar__chatlist{
+            margin: 10px 2px;
+        }
+
+        .user{
+            padding: 5px;
+        }
+
+        .user__img{
+            height: 30px;
+            width: 30px;
+            max-width: 30px;
             
-            .message__sidebar{
-                .sidebar__options{
-                    margin: 10px 2px;
-                    padding: 8px;
-    
-                    .option{
-                        height: 40px;
-                        width: 120px;
-                        font-size: 12px;
-
-                        span{
-                            font-size: 8px;
-                            line-height: 20px;
-                            height: 20px;
-                            width: 20px;
-                        }
-                        
-                    }
-    
-                    .write__btn{
-                        height: 40px;
-                        width: 120px;
-                        font-size: 12px;
-                        margin-bottom: 10px;
-                    }
-                }
+            .status{
+                width: 10px;
+                height: 10px;
             }
+        }
+        
+        .user__name{
+            margin-left: 5px;
+            font-size: 12px;
+            margin: auto 5px;
+            text-transform: capitalize;
+        }
+        
+        .friend__list{
+            max-height: 400px;
+        }
+        .view__more{
+            padding: 5px;
+            .view__more_btn{
+                font-size: 12px;
+            }
+        }
+        
+        .tab-title{
+            font-size: 12px;
+            margin-right: 5px;
+        }
+        
+        .counter{
+            font-size: 11px;
+            line-height: 25px;
+            height: 25px;
+            width: 25px;
+        }
+    }
+    
+    .message__body{
+        .messages{
+            max-height: 360px;
+        }
+        .message{
+            padding: 5px 10px;
+        }
+        .sender__img{
+            height: 30px;
+            width: 30px;
+            max-width: 30px;
+            
+            .status{
+                width: 10px;
+                height: 10px;
+            }
+        }
 
-            .sidebar__chatlist{
-                margin: 10px 2px;
-                .user{
-                    padding: 5px;
-                    .user__img{
-                        height: 30px;
-                        width: 30px;
-                        max-width: 30px;
-                        
-                        .status{
-                            width: 10px;
-                            height: 10px;
-                        }
-                    }
-                    .user__name{
-                        margin-left: 5px;
-                        font-size: 12px;
-                        margin: auto 5px;
-                        text-transform: capitalize;
-                    }
-                    .add__chat{
-                        height: 23px;
-                        min-width: 23px;
-                        font-size: 100px;
-                        border-radius: 5px;
-                        padding: 0;
-                        .v-icon{
-                            font-size: 15px;
-                        }
-                    }
-                }
-                .friend__list{
-                    max-height: 400px;
-                }
+        .sender__name h5{
+            font-size: 14px;
+        }
 
-                .view__more{
-                    padding: 5px;
-                    .view__more_btn{
-                        font-size: 12px;
-                    }
+        .sender__message{
+            padding: 7px;
+            font-size: 14px;
+            margin-right: 20px;
+        }
+        .me{
+            .sender__message{
+                margin-left: 20px;
+            }
+        }
+
+        .write{
+            .v-input__control{
+                height: auto;
+            }
+            .write__actions{
+                .action{
+                    margin: 3px 5px;
+                    font-size: 20px;
                 }
             }
         }
-        .message__table{
-            .custom__table{
-                margin: 2px;
-                .v-toolbar__title.table__toolbar-title{
-                    font-size: 25px;
-                }
-            
-                .message__option{
-                        .v-btn--floating.v-btn--small{
-                            height: 30px;
-                            width: 30px;
-                        }
-                        .v-icon{
-                            font-size: 20px;
-                        }
-                }
-            }
+        
+        .view__more{
+            padding: 5px;
         }
     }
 }
 
 @media only screen and (max-width: 599px){
-    .message__tab {
-    
-        .message__content{
-            
-            .message__sidebar{
-                .sidebar__options{
-                    margin: 10px;
-    
-                    .option{
-                        margin: 5px 2px;
-                        border: 1px solid $borderLightGray;
-                    }
-    
-                    .write__btn{
-                        margin: 5px 2px;
-                    }
-                }
-            }
+    .sidebar__chatlist{
+        margin: 10px;
 
-            .sidebar__chatlist{
-                margin: 10px;
-
-                .friend__list{
-                    max-height: 300px;
-                }
-            }
+        .friend__list{
+            max-height: 300px;
         }
     }
 }

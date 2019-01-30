@@ -3,73 +3,6 @@
 
         <v-layout row wrap class="message__content">
 
-            <v-flex sm3 xs12 class="message__sidebar">
-
-                <div class="sidebar__options">
-                    <v-btn dark color="#3e5aa3" class="write__btn">
-                        Write A Message
-                    </v-btn>
-
-                    <v-btn flat class="inbox__btn option">
-                        Inbox <span class="counter">250</span>
-                    </v-btn>
-                    <v-btn flat class="sent__btn option">
-                        Sent Mail <span class="counter">100</span>
-                    </v-btn>
-                    <v-btn flat class="draft__btn option">
-                        Draft <span class="counter">50</span>
-                    </v-btn>
-                    <v-btn flat class="bin__btn option">
-                        Bin <span class="counter">250</span>
-                    </v-btn>
-                </div>
-            </v-flex>
-
-            <v-flex sm9 xs12 class="message__table">
-                <custom-table
-                        :headers="headers"
-                        :items="items"
-                        :loading="loading"
-                        :sort="sort"
-                        :has-checkbox="true"
-                        hide-actions
-                        @items-selected="selected_ids = $event"
-                        @sorted="changeSort"
-                        class="custom__table"
-                >
-                
-                    <template slot="toolbar">
-                        <v-toolbar flat class="table__toolbar">
-                            
-                            <v-toolbar-title class="table__toolbar-title">Inbox</v-toolbar-title>
-
-                            <v-spacer></v-spacer>
-
-                            <v-toolbar-items class="message__option">
-                                
-                                <v-menu class="sort__dropdown"
-                                    transition="slide-y-transition"
-                                    :nudge-left="110"
-                                    :nudge-bottom="2"
-                                    flat
-                                    offset-y>
-                                    <v-btn fab flat small class="sort__option" slot="activator">
-                                        <v-icon>more_horiz</v-icon>
-                                    </v-btn>
-                                    <v-list class="sort__list" flat>
-                                        <v-list-tile class="sort__list_tile" v-for="(sortLists, index) in sortList" :key="index">
-                                            <v-list-tile-title class="sort__list_item">{{ sortLists.title }}</v-list-tile-title>
-                                        </v-list-tile>
-                                    </v-list>
-                                </v-menu>
-                            
-                            </v-toolbar-items>
-                        </v-toolbar>
-                    </template>
-
-                </custom-table>
-            </v-flex>
-
             <v-flex sm3 xs12>
 
                 <div class="sidebar__chatlist">
@@ -79,8 +12,6 @@
                             <span class="status online"></span>
                         </div>
                         <span class="user__name">Mohammad</span>
-                        <v-spacer></v-spacer>
-                        <v-btn flat class="add__chat"><v-icon>add</v-icon></v-btn>
                     </div>
 
                     <div class="friend__list">
@@ -106,10 +37,112 @@
 
             </v-flex>
 
+             <v-flex sm9 xs12 class="message-group">
+                <v-tabs class="tabs" centered grow hide-slider height="60px" :show-arrows="is_screen_medium_and_down">
+                    <v-tab class="option" v-for="(tab, index) in tabs" :href="'#tab-' + index" :key="index">
+                         <div class="tab-title">{{tab.title}}</div>
+                         <div class="counter">{{ tab.counter }}</div>
+                    </v-tab>
+                    <v-tab-item v-for="(text, index) in texts" :value="'tab-' + index" :key="index">
+                        <div class="message__body">
+                            <div class="messages">
+                                <div class="message">
+                                    <v-layout row wrap class="sender">
+                                        <v-flex xs3 class="sender__img" >
+                                            <v-img :src="require('@/assets/temp/user.png')"/>
+                                            <span class="status online"></span>
+                                        </v-flex>
+                                        <v-flex xs5 class="sender__name"><h5> Kate Martz </h5></v-flex>
+                                        <v-flex xs4 class="date"> 1 hour ago </v-flex>
+                                    </v-layout>
+                                    <div class="sender__message">Hello</div>
+                                </div>
+                                <div class="message me">
+                                    <v-layout row wrap class="sender">
+                                        <v-flex xs3 class="sender__img" >
+                                            <v-img :src="require('@/assets/temp/user.png')"/>
+                                            <span class="status online"></span>
+                                        </v-flex>
+                                        <v-flex xs5 class="sender__name"><h5> me </h5></v-flex>
+                                        <v-flex xs4 class="date">59 mins ago</v-flex>
+                                    </v-layout>
+                                    <div class="sender__message">Hi</div>
+                                </div>
+                                <div class="message">
+                                    <v-layout row wrap class="sender">
+                                        <v-flex xs3 class="sender__img" >
+                                            <v-img :src="require('@/assets/temp/user.png')"/>
+                                            <span class="status online"></span>
+                                        </v-flex>
+                                        <v-flex xs5 class="sender__name"><h5> Kate Martz </h5></v-flex>
+                                        <v-flex xs4 class="date"> 23 sec ago</v-flex>
+                                    </v-layout>
+                                    <div class="sender__message">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque atque voluptas ipsam reprehenderit provident? Id, officia. Ut corrupti assumenda architecto molestiae quaerat necessitatibus beatae, nesciunt quo minus facilis iste ab?</div>
+                                </div>
+                                <div class="message">
+                                    <v-layout row wrap class="sender">
+                                        <v-flex xs3 class="sender__img" >
+                                            <v-img :src="require('@/assets/temp/user.png')"/>
+                                            <span class="status online"></span>
+                                        </v-flex>
+                                        <v-flex xs5 class="sender__name"><h5> Kate Martz </h5></v-flex>
+                                        <v-flex xs4 class="date"> 23 sec ago</v-flex>
+                                    </v-layout>
+                                    <div class="sender__message">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque atque voluptas ipsam reprehenderit provident? Id, officia. Ut corrupti assumenda architecto molestiae quaerat necessitatibus beatae, nesciunt quo minus facilis iste ab?</div>
+                                </div>
+                                <div class="message me">
+                                    <v-layout row wrap class="sender">
+                                        <v-flex xs3 class="sender__img" >
+                                            <v-img :src="require('@/assets/temp/user.png')"/>
+                                            <span class="status online"></span>
+                                        </v-flex>
+                                        <v-flex xs5 class="sender__name"><h5> Me </h5></v-flex>
+                                        <v-flex xs4 class="date"> 23 sec ago</v-flex>
+                                    </v-layout>
+                                    <div class="sender__message">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</div>
+                                </div>
+                                <div class="message">
+                                    <v-layout row wrap class="sender">
+                                        <v-flex xs3 class="sender__img" >
+                                            <v-img :src="require('@/assets/temp/user.png')"/>
+                                            <span class="status online"></span>
+                                        </v-flex>
+                                        <v-flex xs5 class="sender__name"><h5> Kate Martz </h5></v-flex>
+                                        <v-flex xs4 class="date"> 23 sec ago</v-flex>
+                                    </v-layout>
+                                    <div class="sender__message">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque atque voluptas ipsam reprehenderit provident? Id, officia. Ut corrupti assumenda architecto molestiae quaerat necessitatibus beatae, nesciunt quo minus facilis iste ab?</div>
+                                </div>
+                                <div class="message me">
+                                    <v-layout row wrap class="sender">
+                                        <v-flex xs3 class="sender__img" >
+                                            <v-img :src="require('@/assets/temp/user.png')"/>
+                                            <span class="status online"></span>
+                                        </v-flex>
+                                        <v-flex xs5 class="sender__name"><h5> Kate Martz </h5></v-flex>
+                                        <v-flex xs4 class="date"> 23 sec ago</v-flex>
+                                    </v-layout>
+                                    <div class="sender__message">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque atque voluptas ipsam reprehenderit provident? Id, officia. Ut corrupti assumenda architecto molestiae quaerat necessitatibus beatae, nesciunt quo minus facilis iste ab?</div>
+                                </div>
+                            </div>
+                            
+                            <div class="write">
+                                <v-text-field class="write__msg" solo flat hide-details color="#667187" label="Type a message..."></v-text-field>
+                                <div class="write__actions">
+                                    <v-icon class="action insert__emoticon">insert_emoticon</v-icon>
+                                    <v-icon class="action attach_file">attach_file</v-icon>
+                                    <v-icon class="action send">send</v-icon>
+                                </div>
+                            </div>
+                            <div class="view__more">
+                                <v-btn flat class="view__more_btn">VIEW MORE</v-btn>
+                            </div>
+                        </div>
+                    </v-tab-item>
+                </v-tabs>
+            </v-flex>
+
         </v-layout>
-
-		
-
+        
 	</div>
 </template>
 
