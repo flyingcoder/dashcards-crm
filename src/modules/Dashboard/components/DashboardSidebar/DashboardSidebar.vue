@@ -1,8 +1,9 @@
 <template>
     <v-list class="sidebar">
+	    <template v-for="item in items">
         <v-list-tile
+		        v-if="item.can_view()"
             class="s__list"
-            v-for="item in items"
             :key="item.title"
             :class="{active: item.action === selected_route_name}"
             @click="sidebar_item_clicked(item.action)"
@@ -17,6 +18,7 @@
                 {{ item.title }}
             </v-list-tile-content>
         </v-list-tile>
+	    </template>
     </v-list>
 </template>
 
