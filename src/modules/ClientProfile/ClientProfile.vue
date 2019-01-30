@@ -6,6 +6,7 @@
 		<div class="profile">
 			<div class="profile-content">
 				<Upper />
+				<Lower />
 			</div>
 		</div>
 
