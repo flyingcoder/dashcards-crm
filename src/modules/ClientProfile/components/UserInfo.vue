@@ -7,7 +7,7 @@
 
 		<template v-else>
 			<div class="info-div">
-				<div class="hour">Total Hours</div>
+				<div class="hour">Invoices</div>
 				<div class="value">68</div>
 			</div>
 
@@ -16,7 +16,7 @@
 					{{ user.first_name }} {{ user.last_name }}
 					<v-icon>edit</v-icon>
 				</h4>
-				<div class="job-title">UI/UX Designer</div>
+				<div class="job-title">CEO, Samsung</div>
 				<div class="address">
 					<v-icon>place</v-icon>
 					Cebu, Philippines
@@ -24,8 +24,8 @@
 			</div>
 
 			<div class="info-div">
-				<div class="hour">Per Hour</div>
-				<div class="value">$10</div>
+				<div class="hour">Amount Paid</div>
+				<div class="value">$10,000</div>
 			</div>
 		</template>
 
