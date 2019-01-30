@@ -6,7 +6,12 @@
 			<v-icon class="settings">settings</v-icon>
 		</div>
 
-		<Icons @icon-clicked="handle_icon" />
+		<div class="icons">
+			<div class="user-img" @click="image_clicked">
+				<img src="@/assets/temp/user.png" alt="User">
+			</div>
+		</div>
+
 		<AddPicture />
 		<UserInfo />
 
