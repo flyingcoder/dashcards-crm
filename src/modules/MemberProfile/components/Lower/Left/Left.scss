@@ -1,5 +1,7 @@
 @import '~@/sass/_variables';
 .profile-left{
+    box-shadow: $darkBoxShadow;
+    
     .tab-item{
         background-color: $bgLightBlue-2;
         border: 1px solid $borderLightGray;
