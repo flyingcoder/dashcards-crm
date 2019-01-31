@@ -31,10 +31,19 @@ export default {
 
   computed: {
     ...mapGetters('cards', ['should_show']),
+    ...mapGetters(['user']),
 
     cards: {
       get() {
-        return this.$store.getters['cards/cards']
+        if (!this.user) return []
+        let cards = _cloneDeep(this.$store.getters['cards/cards'])
+        return cards.map(card => {
+          card.can_view = () => {
+            const method = `can_view_${card.slug}`
+            return this[method](this.user)
+          }
+          return card
+        })
       },
       set(val) {
         this.set_cards(val)
@@ -76,6 +85,42 @@ export default {
         .filter(card => card.id !== id)
         .map(card => card.id)
       this.update_cards({ dashitem_id: card_ids })
+    },
+    can_view_tasks(user) {
+      return (
+        user.can.hasOwnProperty('tasks') ||
+        user.can.hasOwnProperty('tasks_own') ||
+        user.is_admin
+      )
+    },
+    can_view_timeline(user) {
+      return true
+    },
+    can_view_client(user) {
+      return user.is_admin
+    },
+    can_view_timer(user) {
+      return (
+        user.can.hasOwnProperty('timers') ||
+        user.can.hasOwnProperty('timers_own') ||
+        user.is_admin
+      )
+    },
+    can_view_payment(user) {
+      return true
+    },
+    can_view_invoice(user) {
+      return user.can.hasOwnProperty('invoices') || user.is_admin
+    },
+    can_view_calendar(user) {
+      return (
+        user.can.hasOwnProperty('calendars') ||
+        user.can.hasOwnProperty('calendars_own') ||
+        user.is_admin
+      )
+    },
+    can_view_passbox(user) {
+      return true
     }
   }
 }

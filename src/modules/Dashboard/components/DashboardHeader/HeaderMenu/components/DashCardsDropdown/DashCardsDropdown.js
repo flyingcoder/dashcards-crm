@@ -49,7 +49,10 @@ export default {
     },
 
     nothing_changed() {
-      return _isEqual(this.cards_id.sort(), this.selected_cards.sort())
+      return _isEqual(
+        this.cards_id.slice().sort(),
+        this.selected_cards.slice().sort()
+      )
     },
 
     disabled() {
@@ -77,6 +80,7 @@ export default {
     },
 
     check_selected(id) {
+      console.log(id)
       if (this.selected_cards.includes(id)) {
         const index = this.selected_cards.findIndex(s => s.id === id)
         this.selected_cards.splice(index, 1)
