@@ -27,10 +27,10 @@ export default {
       { text: 'Groups', disabled: true, router_name: null }
     ],
     headers: [
-      { id: 1, text: 'ID', value: 'id', width: '5%' },
-      { id: 2, text: 'Group Name', value: 'group_name', width: '5%' },
-      { id: 3, text: 'Description', value: 'description', width: '5%' },
-      { id: 4, is_action: true, width: '85%' }
+      { id: 1, text: 'ID', value: 'id' },
+      { id: 2, text: 'Group Name', value: 'group_name' },
+      { id: 3, text: 'Description', value: 'description' },
+      { id: 4, is_action: true }
     ],
     table_config: {
       route_name: 'team/groups',
@@ -60,48 +60,19 @@ export default {
       }
     },
 
-    get_actions(group_slug) {
-      if (group_slug.includes('default-admin'))
-        return [
-          {
-            text: 'Group',
-            value: 'group_members',
-            tooltip: 'Group Members'
-          }
-        ]
-      else
-        return [
-          {
-            text: 'Permissions',
-            value: 'permissions',
-            tooltip: 'Permissions',
-            icon: require(`@/${'assets/icons/groups/permissions.svg'}`)
-          },
-          {
-            text: 'Migrate',
-            value: 'migrate_members',
-            tooltip: 'Migrate Members',
-            icon: require(`@/${'assets/icons/groups/migrate.svg'}`)
-          },
-          {
-            text: 'Group',
-            value: 'group_members',
-            tooltip: 'Group Members',
-            icon: require(`@/${'assets/icons/groups/members.svg'}`)
-          },
-          {
-            text: 'Edit',
-            value: 'edit_settings',
-            tooltip: 'Edit Settings',
-            icon: require(`@/${'assets/icons/groups/edit.svg'}`)
-          },
-          {
-            text: 'Delete',
-            value: 'delete_group',
-            tooltip: 'Delete Group',
-            icon: require(`@/${'assets/icons/groups/delete.svg'}`)
-          }
-        ]
+    get_actions() {
+      return [
+        {
+          value: 'edit_settings',
+          tooltip: 'Edit Settings',
+          icon: require(`@/${'assets/icons/groups/edit.svg'}`)
+        },
+        {
+          value: 'delete_group',
+          tooltip: 'Delete Group',
+          icon: require(`@/${'assets/icons/groups/delete.svg'}`)
+        }
+      ]
     }
   }
 }
