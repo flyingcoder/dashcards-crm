@@ -25,7 +25,7 @@
 		/>
 
 		<custom-table
-				v-if="false"
+				v-if="items.length"
 				:headers="headers"
 				:items="items"
 				:loading="loading"
