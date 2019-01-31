@@ -1,72 +1,58 @@
 <template>
-		<v-layout row justify-center>
-		<v-dialog v-model="open" persistent max-width="600px">
-			<v-card class="permissions-dialog">
+	<v-layout row justify-center>
+		<custom-dialog  :title="title"
+						ref="dialog"
+						:open.sync="open"
+						button2-text="Save"
+						@button1="open = false"
+						@button2="save"
+		>
+			<template slot="content">
+				<v-layout wrap class="custom-dialog">
 
-				<v-card-title>
-					<span class="headline">{{ title }}</span>
-				</v-card-title>
+					<v-flex xs12 sm6>
+						<v-select
+								class="dialog__selectfield"
+								:items="permissions"
+								v-model.trim="selected_permission"
+								placeholder="Select Permission"
+								multiple
+								solo
+								hide-details
+								color="#657186"
+						></v-select>
+					</v-flex>
 
-				<v-card-text>
-					<v-container grid-list-md>
-						<v-layout wrap>
+					<v-flex xs12 sm6>
+						<v-select
+								class="dialog__selectfield"
+								placeholder="Select Group"
+								:items="group_items"
+								v-model.trim="selected_group"
+								solo
+								hide-details
+								color="#657186"
+								item-text="name"
+								item-value="id"
+						></v-select>
+					</v-flex>
 
-							<v-flex xs12 sm6>
-								<v-text-field
-										label="Name"
-										v-model.trim="name"
-								></v-text-field>
-							</v-flex>
+					<v-flex xs12>
+						<v-textarea
+								class="dialog__textarea"
+								label="Description"
+								v-model.trim="description"
+								solo
+								hide-details
+								color="#657186"
+						></v-textarea>
+					</v-flex>
 
-							<v-flex xs12 sm6>
-								<v-text-field
-										label="Description"
-										v-model.trim="description"
-								></v-text-field>
-							</v-flex>
+				</v-layout>
 
-							<div class="permissions">
+			</template>
 
-								<div class="title">
-									<div class="left-line line"></div>
-									<h4>Permissions</h4>
-									<div class="right-line line"></div>
-								</div>
-
-								<div class="items">
-											<v-switch
-													label="View"
-													v-model="slug.view"
-											></v-switch>
-											<v-switch
-													label="Create"
-													v-model="slug.create"
-											></v-switch>
-											<v-switch
-													label="Update"
-													v-model="slug.update"
-											></v-switch>
-											<v-switch
-													label="Delete"
-													v-model="slug.delete"
-											></v-switch>
-								</div>
-
-							</div>
-
-						</v-layout>
-					</v-container>
-
-				</v-card-text>
-
-				<v-card-actions>
-					<v-spacer></v-spacer>
-					<v-btn color="blue darken-1" flat @click="cancel">Cancel</v-btn>
-					<v-btn color="blue darken-1" flat @click="save">Save</v-btn>
-				</v-card-actions>
-
-			</v-card>
-		</v-dialog>
+		</custom-dialog>
 	</v-layout>
 </template>
 

@@ -1,7 +1,10 @@
 import cloneDeep from 'lodash/cloneDeep'
+import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
+import makeRequestTo from '@/services/makeRequestTo'
 
 export default {
   name: 'PermissionDialog',
+  components: { CustomDialog },
 
   props: {
     dialog: Boolean,
@@ -12,8 +15,11 @@ export default {
 
   data: () => ({
     open: false,
-    name: null,
     description: null,
+    permissions: ['view', 'creat', 'update', 'delete'],
+    selected_permission: '',
+    group_items: [],
+    selected_group: '',
     slug: {
       create: false,
       view: false,
@@ -23,8 +29,12 @@ export default {
   }),
 
   watch: {
-    dialog(new_val) {
-      this.open = new_val
+    dialog: {
+      handler(new_val) {
+        this.open = new_val
+        new_val && this.fill_group_items()
+      },
+      immediate: true
     },
     open(new_val) {
       this.$emit('update:dialog', new_val)
@@ -67,12 +77,19 @@ export default {
   },
 
   methods: {
+    fill_group_items() {
+      this.loading = false
+      makeRequestTo
+        .get_all_groups()
+        .then(({ data }) => (this.group_items = data))
+        .finally(() => (this.loading = false))
+    },
     cancel() {
       this.open = false
     },
     save() {
       const fields_to_save = {
-        name: this.name,
+        selected_group: this.selected_group,
         description: this.description,
         slug: this.slug
       }
@@ -81,13 +98,13 @@ export default {
 
     update_fields({ fields }) {
       const new_fields = cloneDeep(fields)
-      this.name = new_fields.name
+      this.selected_group = new_fields.selected_group
       this.description = new_fields.description
       this.slug = new_fields.slug
     },
 
     clear_and_close() {
-      this.name = ''
+      this.selected_group = ''
       this.description = ''
       this.slug = {
         create: false,
