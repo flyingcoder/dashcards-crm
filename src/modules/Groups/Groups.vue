@@ -60,19 +60,14 @@
 						>
 
 							<template slot="custom-item" slot-scope="item">
-								<td class="text-xs-center">{{item.item.id}}</td>
-								<td class="text-xs-center">{{item.item.name}}</td>
-								<td class="text-xs-center">{{item.item.description}}</td>
+								<td>{{item.item.id}}</td>
+								<td>{{item.item.name}}</td>
+								<td>{{item.item.description}}</td>
 								<td class="actions">
 									<template v-for="action of get_actions(item.item.slug)">
 										<v-tooltip bottom :key="action.value">
-											<v-btn
-													slot="activator"
-													color="blue"
-													@click="action_clicked(action.value, item.item)"
-											>
-												<img :src="action.icon"/> &nbsp;
-												{{ action.text }}
+											<v-btn fab small flat depressed slot="activator" @click="action_clicked(action.value, item.item)">
+												<img :src="action.icon">
 											</v-btn>
 											<span>{{action.tooltip}}</span>
 										</v-tooltip>
