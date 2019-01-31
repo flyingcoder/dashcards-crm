@@ -5,6 +5,7 @@
 	        :nudge-bottom="5"
 	        offset-y
 	        :close-on-content-click="false"
+	        v-model="dropdown_visible"
 	>
 		<div class="chat__button"
 		     :data-notify="count"
@@ -17,7 +18,7 @@
 		</div>
 
 		<template v-if="type === 'chat'">
-			<ChatDropdown :notifications="notifications" />
+			<ChatDropdown :notifications="notifications" @close="dropdown_visible = false" />
 		</template>
 
 	</v-menu>

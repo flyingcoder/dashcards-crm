@@ -5,6 +5,7 @@
 			<div class="user new__message"
 			     v-for="notification of notifications"
 			     :key="notification.id"
+			     @click="open_chat_box(notification.sender)"
 			>
 				<div class="user__img" >
 					<v-img :src="require('@/assets/temp/user.png')"/>
@@ -21,15 +22,37 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     notifications: Array
+  },
+
+  computed: {
+    ...mapGetters('onlineUsers', ['all_users'])
   },
 
   filters: {
     full_name(notification) {
       const user = notification.sender
       return `${user.first_name} ${user.last_name}`
+    }
+  },
+
+  methods: {
+    open_chat_box(user) {
+      this.$store.dispatch('chat/open_conversation', {
+        id: user.id,
+        is_online: this.is_user_online(user.id),
+        name: `${user.first_name}, ${user.last_name}`
+      })
+      this.$emit('close')
+    },
+    is_user_online(id) {
+      const user = this.all_users.find(user => user.id === id)
+      if (!user) return false
+      return user.is_online
     }
   }
 }
