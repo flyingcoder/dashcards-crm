@@ -45,7 +45,7 @@ export default {
           icon: require('@/assets/icons/sidebar/calendar.svg'),
           admin_only: false,
           can_view: () =>
-            user.can.calendars.view || user.can.calendars.view || user.is_admin
+            user.can.calendars.view || user.can.calendars_own.view || user.is_admin
         },
         {
           title: 'Timer',

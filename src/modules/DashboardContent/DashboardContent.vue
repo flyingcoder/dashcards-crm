@@ -22,7 +22,7 @@
 
 		<v-container fluid>
 
-			<NoCards v-if="!cards.length" />
+			<NoCards v-if="!cards.length"/>
 
 			<v-layout>
 				<draggable class="d__cards" v-model="cards">
@@ -30,14 +30,16 @@
 
 						<component :is="card.component"
 						           :key="card.component"
-						           v-if="should_show(card.slug) && card.hasOwnProperty('component')"
+						           v-if="should_show(card.slug) && card.hasOwnProperty('component') && card.can_view()"
 						           @close="close(card.id)"
 						></component>
 
-						<template v-else-if="should_show(card.slug)">
+						<template v-else-if="should_show(card.slug) && card.can_view()">
 							<v-flex xs12 :key="card.id">
 								<div>
-									<dash-card @close="close(card.id)" :title="card.name"></dash-card>
+									<dash-card @close="close(card.id)"
+									           :title="card.name"
+									></dash-card>
 								</div>
 							</v-flex>
 						</template>
