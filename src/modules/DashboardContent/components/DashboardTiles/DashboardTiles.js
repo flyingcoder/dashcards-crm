@@ -25,8 +25,8 @@ export default {
           color: '#ed8564',
           icon: require('@/assets/icons/sidebar/projects.svg'),
           can_view: () =>
-            user.can.projects_own.view ||
-            user.can.projects.view ||
+            user.can.hasOwnProperty('projects_own') ||
+            user.can.hasOwnProperty('projects') ||
             user.is_admin
         },
         {
@@ -36,7 +36,9 @@ export default {
           icon: require('@/assets/icons/sidebar/templates.svg'),
           admin_only: false,
           can_view: () =>
-            user.can.tasks.view || user.can.tasks_own.view || user.is_admin
+            user.can.hasOwnProperty('tasks') ||
+            user.can.hasOwnProperty('tasks_own') ||
+            user.is_admin
         },
         {
           title: 'Calendar',
@@ -45,7 +47,9 @@ export default {
           icon: require('@/assets/icons/sidebar/calendar.svg'),
           admin_only: false,
           can_view: () =>
-            user.can.calendars.view || user.can.calendars_own.view || user.is_admin
+            user.can.hasOwnProperty('calendars') ||
+            user.can.hasOwnProperty('calendars_own') ||
+            user.is_admin
         },
         {
           title: 'Timer',
@@ -54,7 +58,9 @@ export default {
           icon: require('@/assets/icons/sidebar/timers.svg'),
           admin_only: false,
           can_view: () =>
-            user.can.timers.view || user.can.timers.view || user.is_admin
+            user.can.hasOwnProperty('timers') ||
+            user.can.hasOwnProperty('timers_own') ||
+            user.is_admin
         },
         {
           title: 'Inbound',
