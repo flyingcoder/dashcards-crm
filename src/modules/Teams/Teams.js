@@ -69,7 +69,7 @@ export default {
     },
 
     go_to_groups_page() {
-      this.$router.push({ path: './team/groups' })
+      this.$router.push({ path: 'settings?tab=groups' })
     },
 
     navigate_to_view_profile(id) {
