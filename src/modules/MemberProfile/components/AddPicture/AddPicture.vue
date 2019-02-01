@@ -58,8 +58,7 @@ export default {
         timeout: 500000,
         addRemoveLinks: true,
         url: `https://api.bizzooka.com/api/user/${this.user_id}`,
-        headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
-        method: 'put'
+        headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
       }
     }
   },
