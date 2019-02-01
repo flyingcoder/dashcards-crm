@@ -8,6 +8,11 @@
     justify-content: flex-start;
     grid-gap: 10px;
     text-align: center;
+    cursor: pointer;
+
+    .v-responsive.v-image{
+      border-radius: 50%;
+    }
   }
 
   .actions-wrapper { //TODO replace it with mixin since this code is repeated
@@ -29,4 +34,6 @@
   }
 
   @include emptyTable('.empty-client');
+
+  @include firstColumnHover;
 }
