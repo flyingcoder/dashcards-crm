@@ -14,6 +14,10 @@ export default {
   },
 
   data: () => ({
+    paths: [
+      { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+      { text: 'Chat', disabled: true, router_name: null }
+    ],
     friends: [
       {
         id: 0,

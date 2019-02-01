@@ -1,5 +1,6 @@
 <template>
   <div class="calendar">
+    <table-header :paths="paths" :noButton="true" />
   </div>
 </template>
 <script src="./Calendar.js">
