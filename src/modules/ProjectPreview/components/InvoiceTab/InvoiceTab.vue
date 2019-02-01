@@ -1,5 +1,13 @@
 <template>
 	<div class="invoice__tab">
+
+		<create-invoice-dialog
+				:open="create_invoice_dialog || edit_invoice_dialog"
+				@close="close_dialog"
+				@create="create_invoice"
+				@edit="edit_invoice"
+		/>
+
 		<v-layout row>
 			<v-flex xs12 class="text-xs-right">
 				<v-btn fab small class="add__btn" @click="add_dialog = true">
