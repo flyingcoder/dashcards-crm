@@ -89,8 +89,8 @@
                         </td>
 
                         <td class="team__position text-cap">{{ item.item.job_title }}</td>
-                        <td class="team__tasks">{{ item.tasks }}</td>
-                        <td class="team__projects">{{ item.projects }}</td>
+                        <td class="team__tasks">{{ item.item.tasks }}</td>
+                        <td class="team__projects">{{ item.item.projects }}</td>
 
                         <td class="team__option">
                             <v-btn fab small flat depressed @click="open_edit_dialog(item.item)">
