@@ -56,7 +56,7 @@ export default {
         thumbnailWidth: 150,
         timeout: 500000,
         addRemoveLinks: true,
-        url: `https://api.bizzooka.com/api/company/teams/${this.user_id}`,
+        url: `https://api.bizzooka.com/api/company/clients/${this.user_id}`,
         headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
         method: 'put'
       }
@@ -66,11 +66,12 @@ export default {
   methods: {
     ...mapMutations('memberProfile', ['set_picture_dialog']),
 
-    file_added() {
+    file_added([, response]) {
       this.$event.$emit(
         'open_snackbar',
         'Profile picture uploaded successfully!'
       )
+	    this.$emit('picture-changed', response)
       this.$refs.picture_dialog.clear_and_close()
     }
   }
