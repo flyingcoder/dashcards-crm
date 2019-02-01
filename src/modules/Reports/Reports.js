@@ -3,14 +3,20 @@ import makeRequestTo from '@/services/makeRequestTo'
 //Components
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 import ReportsList from './components/ReportsList/ReportsList.vue'
+import TableHeader from '@/common/TableHeader.vue'
 
 export default {
   components: {
     CustomDialog,
-    ReportsList
+    ReportsList,
+    TableHeader
   },
 
   data: () => ({
+    paths: [
+      { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+      { text: 'Reports', disabled: true, router_name: null }
+    ],
     reports: [],
     loading: false,
     iframe_src: null,

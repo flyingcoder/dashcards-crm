@@ -1,5 +1,9 @@
 <template>
 	<v-layout row wrap class="reports">
+
+		<v-flex xs12>
+			<table-header :paths="paths" :noButton="true" />
+		</v-flex>
 		
 		<v-flex xs12>
 			<reports-list v-if="reports.length" :reports="reports" :loading="loading" />
