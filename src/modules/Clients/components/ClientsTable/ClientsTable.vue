@@ -40,7 +40,7 @@
 			<template slot="custom-item" slot-scope="item">
 
 				<td class="text-xs-right"> <!--TODO fill image with dynamic data from backend-->
-					<div class="user__name text-cap">
+					<div class="user__name text-cap" @click="navigate_to_view_profile(item.item.id)">
 						<v-img max-height="60px" width="50px" :src="require('@/assets/temp/user.png')" /> &nbsp;
 						{{ item.item.first_name }}
 						{{ item.item.last_name }}
