@@ -4,6 +4,7 @@
 	        v-model="fabs"
 	        :close-on-content-click="false"
 	        :nudge-top="60"
+			right
 	        class="chat__position"
 	>
 		<v-btn class="chat__button"
