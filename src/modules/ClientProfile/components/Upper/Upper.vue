@@ -6,13 +6,13 @@
 			<v-icon class="settings">settings</v-icon>
 		</div>
 
-		<div class="icons">
+		<div class="icons" v-if="user">
 			<div class="user-img" @click="image_clicked">
-				<img src="@/assets/temp/user.png" alt="User">
+				<img :src="user.image_url" alt="User">
 			</div>
 		</div>
 
-		<AddPicture />
+		<AddPicture @picture-changed="set_user" />
 		<UserInfo />
 
 	</div>

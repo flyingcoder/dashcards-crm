@@ -66,11 +66,12 @@ export default {
   methods: {
     ...mapMutations('memberProfile', ['set_picture_dialog']),
 
-    file_added() {
+    file_added([, response]) {
       this.$event.$emit(
         'open_snackbar',
         'Profile picture uploaded successfully!'
       )
+      this.$emit('picture-changed', response)
       this.$refs.picture_dialog.clear_and_close()
     }
   }
