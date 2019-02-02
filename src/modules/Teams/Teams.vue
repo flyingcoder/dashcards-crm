@@ -44,20 +44,20 @@
                 >
                 <template slot="toolbar">
                     <v-layout row wrap justify-space-between align-center flat class="table__toolbar">
-                        
+
                         <div class="table__toolbar-title">Members</div>
 
                         <div class="member__option">
 
                             <v-btn class="groups" dark small color="#3b589e" @click="go_to_groups_page">Groups</v-btn>
-                
+
                             <v-btn fab flat small class="list__view">
                                 <v-icon>list</v-icon>
                             </v-btn>
                             <v-btn fab flat small class="grid__view">
                                 <v-icon>grid_on</v-icon>
                             </v-btn>
-                            
+
                             <v-menu class="sort__dropdown"
                                 transition="slide-y-transition"
                                 :nudge-left="135"
@@ -73,7 +73,7 @@
                                     </v-list-tile>
                                 </v-list>
                             </v-menu>
-                        
+
                         </div>
                     </v-layout>
                 </template>
@@ -81,7 +81,7 @@
                     <template slot="custom-item" slot-scope="item" class="template-table">
                         <td class="text-xs-left team__member" @click="navigate_to_view_profile(item.item.id)"> <!--TODO fill image with dynamic data from backend-->
                             <div class="member__image">
-                                <img :src="require('@/assets/temp/user.png')" /> &nbsp;
+                                <img :src="item.item.image_url" /> &nbsp;
                             </div>
                             <div class="member__name text-cap">
                                 {{ item.item.first_name }}
@@ -142,7 +142,7 @@
 				</div>
 			</div>
 		</div>
-        
+
     </div>
 </template>
 <style lang="scss" src="./Teams.scss">
