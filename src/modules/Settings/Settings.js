@@ -13,15 +13,9 @@ export default {
     tabs: [
       { id: 1, name: 'General' },
       { id: 2, name: 'Company' },
-      { id: 3, name: 'Invoices' },
+      { id: 3, name: 'Invoice' },
       { id: 4, name: 'Groups' },
-      { id: 5, name: 'Permissions' },
-      { id: 6, name: 'Email Templates' },
-      { id: 7, name: 'Support' },
-      { id: 8, name: 'Form Fields' },
-      { id: 9, name: 'Cron' },
-      { id: 10, name: 'DB Backup' },
-      { id: 11, name: 'Updates' }
+      { id: 5, name: 'Permissions' }
     ]
   }),
 
