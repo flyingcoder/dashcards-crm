@@ -29,7 +29,7 @@ export default {
         this.active_tab = query.tab.charAt(0).toUpperCase() + query.tab.slice(1)
       }
     }
-    query.tab = this.active_tab
+    query.tab = this.active_tab.toLowerCase()
     this.$router.replace({ name: 'settings', query: query })
   }
 }
