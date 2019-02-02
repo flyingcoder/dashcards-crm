@@ -14,8 +14,15 @@
                 </svg>
             </v-list-tile-action>
 
-            <v-list-tile-content class="s__content">
+            <v-list-tile-content class="s__content" :data-nav="item.title">
                 {{ item.title }}
+
+	            <div class="submenu" v-if="item.title === 'Templates'">
+		            <div class="item">Milestone</div>
+		            <div class="item">Report</div>
+		            <div class="item">Invoice</div>
+	            </div>
+
             </v-list-tile-content>
         </v-list-tile>
 	    </template>
