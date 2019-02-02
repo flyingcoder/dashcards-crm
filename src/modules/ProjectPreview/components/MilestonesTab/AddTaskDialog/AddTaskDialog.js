@@ -18,7 +18,7 @@ export default {
   },
 
   props: {
-    id: Number,
+    id: [Number, String],
     dialog: Boolean,
     dialogTitle: String,
     isEditDialog: Boolean,
