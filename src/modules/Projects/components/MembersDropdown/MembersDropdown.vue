@@ -25,7 +25,7 @@
             close
 						@input="remove_chip(data.index)"
 				>
-					<img :src="require('@/assets/temp/user.png')" width="30" height="30">
+					<img :src="data.item.image_url" width="30" height="30">
 					&nbsp;<span class="chip-member-name">{{data.item.first_name}}</span>
 				</v-chip>
 			</template>
@@ -33,7 +33,7 @@
 			<template slot="item" slot-scope="{item}">
 					<div class="member">
             <div class="member-avatar">
-              <img :src="require('@/assets/temp/user.png')">
+              <img :src="item.image_url">
             </div>
             <div class="member-info">
               <div class="full-name">
