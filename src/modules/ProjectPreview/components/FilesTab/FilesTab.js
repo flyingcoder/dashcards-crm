@@ -26,7 +26,14 @@ export default {
       { text: 'Uploaded by', value: 'member' },
       { text: 'Project', value: 'project' },
       { is_action: true }
-    ]
+    ],
+    table_config: {
+      route_name: 'project_preview',
+      add_message: 'New File(s) added successfully!',
+      delete_message: 'File deleted successfully!',
+      refresh_table_message: 'Table refreshed',
+      refresh_table_api_name: 'paginate_tab_files_table'
+    }
   }),
 
   computed: {
@@ -38,11 +45,15 @@ export default {
         url: `https://api.bizzooka.com/api/projects/${this.id}/file`,
         headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
       }
+    },
+    dynamic_api() {
+      return `api/projects/${this.id}/file`
     }
   },
 
   created() {
     this.$router.replace({ name: 'project_preview', query: { tab: 'Files' } })
+    this.fill_table('get_files', true, this.dynamic_api)
   },
 
   methods: {

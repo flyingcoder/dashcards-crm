@@ -15,6 +15,7 @@ import { reports_api } from './makeRequestModules/reports_api'
 import { users_api } from './makeRequestModules/users_api'
 import { chat_api } from './makeRequestModules/chat_api'
 import { timers_api } from './makeRequestModules/timers_api'
+import { files_api } from './makeRequestModules/files_api'
 
 export default {
   login({ email, password }) {
@@ -52,5 +53,6 @@ export default {
   ...reports_api,
   ...users_api,
   ...chat_api,
-  ...timers_api
+  ...timers_api,
+  ...files_api
 }
