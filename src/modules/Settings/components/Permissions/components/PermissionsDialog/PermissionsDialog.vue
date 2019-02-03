@@ -14,7 +14,7 @@
 						<v-select
 								class="dialog__selectfield"
 								:items="permissions"
-								v-model.trim="selected_permission"
+								v-model.trim="selected_permissions"
 								placeholder="Select Permission"
 								multiple
 								solo
@@ -33,7 +33,7 @@
 								hide-details
 								color="#657186"
 								item-text="name"
-								item-value="id"
+								item-value="slug"
 						></v-select>
 					</v-flex>
 

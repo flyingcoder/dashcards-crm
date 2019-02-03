@@ -16,16 +16,10 @@ export default {
   data: () => ({
     open: false,
     description: null,
-    permissions: ['view', 'creat', 'update', 'delete'],
-    selected_permission: '',
-    group_items: [],
-    selected_group: '',
-    slug: {
-      create: false,
-      view: false,
-      update: false,
-      delete: false
-    }
+    selected_permissions: [],
+    selected_group: null,
+    permissions: ['view', 'create', 'update', 'delete'],
+    group_items: []
   }),
 
   watch: {
@@ -44,35 +38,6 @@ export default {
         this.isEditDialog && this.update_fields(new_val)
       },
       deep: true
-    },
-    'slug.create'(val) {
-      if (val) {
-        this.slug.view = true
-      } else {
-        this.slug.update = false
-      }
-    },
-    'slug.update'(val) {
-      if (val) {
-        this.slug.create = true
-      } else {
-        this.slug.delete = false
-      }
-    },
-    'slug.delete'(val) {
-      if (val) {
-        this.slug.update = true
-      }
-    },
-    'slug.view'(val) {
-      if (!val) {
-        this.slug = {
-          create: false,
-          view: false,
-          update: false,
-          delete: false
-        }
-      }
     }
   },
 
@@ -89,9 +54,11 @@ export default {
     },
     save() {
       const fields_to_save = {
-        selected_group: this.selected_group,
+        group: this.selected_group,
         description: this.description,
-        slug: this.slug
+        slug: this.permissions.filter(
+          p => !this.selected_permissions.includes(p)
+        )
       }
       this.$emit('save', fields_to_save)
     },
@@ -100,18 +67,10 @@ export default {
       const new_fields = cloneDeep(fields)
       this.selected_group = new_fields.selected_group
       this.description = new_fields.description
-      this.slug = new_fields.slug
     },
 
     clear_and_close() {
-      this.selected_group = ''
-      this.description = ''
-      this.slug = {
-        create: false,
-        view: false,
-        update: false,
-        delete: false
-      }
+      Object.assign(this.$data, this.$options.data.apply(this))
       this.cancel() //close the modal
     }
   }
