@@ -49,7 +49,7 @@
 
 						<custom-table
 								:headers="headers"
-								:items="items"
+								:items="indexes_items"
 								:loading="loading"
 								:sort="sort"
 								:has-checkbox="true"
@@ -60,7 +60,7 @@
 						>
 
 							<template slot="custom-item" slot-scope="{item}">
-								<td class="text-xs-center">{{item.id}}</td>
+								<td class="text-xs-center">{{item.index}}</td>
 								<td class="text-xs-center">{{item.name}}</td>
 								<td class="text-xs-center">{{item.description}}</td>
 								<td class="actions">
