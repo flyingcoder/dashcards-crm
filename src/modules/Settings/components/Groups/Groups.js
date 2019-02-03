@@ -1,5 +1,5 @@
 import { table_functionality } from '@/services/table-functionality/table-functionality'
-
+import _cloneDeep from 'lodash/cloneDeep'
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import TableHeader from '@/common/TableHeader.vue'
@@ -27,7 +27,7 @@ export default {
       { text: 'Groups', disabled: true, router_name: null }
     ],
     headers: [
-      { id: 1, text: 'ID', value: 'id', width: '5%' },
+      { id: 1, text: 'Index', value: 'index', width: '5%' },
       { id: 2, text: 'Group Name', value: 'group_name', width: '5%' },
       { id: 3, text: 'Description', value: 'description', width: '5%' },
       { id: 4, is_action: true, width: '85%' }
@@ -41,6 +41,16 @@ export default {
       refresh_table_api_name: 'paginate_groups_table'
     }
   }),
+
+  computed: {
+    indexes_items() {
+      let items = _cloneDeep(this.items)
+      return items.map((item, index) => {
+        item.index = index + 1
+        return item
+      })
+    }
+  },
 
   watch: {
     api_query(query, old_query) {
