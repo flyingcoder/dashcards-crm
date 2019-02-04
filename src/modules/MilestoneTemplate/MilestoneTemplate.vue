@@ -37,28 +37,16 @@
 						:sort="sort"
 						:has-checkbox="true"
 						hide-actions
-						@items-selected="selected_ids = $event"
 						toolbar-title="Milestone Templates"
+						@items-selected="selected_ids = $event"
 						@sorted="changeSort"
+						@edit="open_edit_dialog"
+						@delete="open_delete_dialog"
+						@view="navigate_to_milestone_page"
 				>
 					<template slot="custom-item" slot-scope="item"> <!-- Table Items -->
 						<td class="text-cap" @click="navigate_to_milestone_page(item.item)">{{ item.item.name }}</td>
 						<td class="text-cap">{{ item.item.status }}</td>
-
-						<td class="text-xs-center">
-							<v-icon class="mr-2" @click="open_edit_dialog(item.item)">
-								edit
-							</v-icon>
-
-							<v-icon class="mr-2" @click="open_delete_dialog(item.item)">
-								delete
-							</v-icon>
-
-							<v-icon @click="navigate_to_milestone_page(item.item)" title="Open milestone table">
-								pageview
-							</v-icon>
-
-						</td>
 					</template>
 
 					<template slot="table-actions">
