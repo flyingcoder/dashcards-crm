@@ -1,15 +1,19 @@
 export default {
   name: 'CustomTable',
   inheritAttrs: false,
-  props: [
-    'headers',
-    'items',
-    'loading',
-    'has-checkbox',
-    'has-header-icon',
-    'sort',
-    'toolbar-title'
-  ],
+
+  props: {
+    headers: Array,
+    items: Array,
+    loading: Boolean,
+    hasCheckbox: Boolean,
+    hasHeaderIcon: Boolean,
+    sort: Object,
+    toolbarTitle: String,
+    noRowEdit: Boolean,
+    noRowDelete: Boolean,
+    noRowView: Boolean
+  },
 
   data: () => ({
     selected: []
