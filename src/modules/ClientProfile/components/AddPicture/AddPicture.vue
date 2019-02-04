@@ -71,7 +71,7 @@ export default {
         'open_snackbar',
         'Profile picture uploaded successfully!'
       )
-	    this.$emit('picture-changed', response)
+      this.$emit('picture-changed', response)
       this.$refs.picture_dialog.clear_and_close()
     }
   }
