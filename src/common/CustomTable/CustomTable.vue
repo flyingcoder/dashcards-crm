@@ -81,7 +81,7 @@
 	            <slot name="row-actions" :item="props.item">
 		            <td class="text-xs-center table__actions">
 
-			            <slot name="row-edit">
+			            <slot name="row-edit" :item="props.item">
 				            <v-btn fab small flat depressed
 				                   @click="$emit('edit', props.item)"
 				            >
@@ -89,7 +89,7 @@
 				            </v-btn>
 			            </slot>
 
-			            <slot name="row-delete">
+			            <slot name="row-delete" :item="props.item">
 				            <v-btn fab small flat depressed
 				                   @click="$emit('delete', props.item)"
 				            >
@@ -97,7 +97,7 @@
 				            </v-btn>
 			            </slot>
 
-			            <slot name="row-view">
+			            <slot name="row-view" :item="props.item">
 				            <v-btn fab flat small depressed
 				                   @click="$emit('view', props.item)"
 				            >
