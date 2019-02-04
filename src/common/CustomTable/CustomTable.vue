@@ -10,7 +10,7 @@
             </v-toolbar-title>
           </v-toolbar>
         </slot>
-          
+
         <v-data-table
                 v-model="selected"
                 :headers="headers"
@@ -77,6 +77,36 @@
               </td>
 
               <slot name="custom-item" :item="props.item"></slot>
+
+	            <slot name="row-actions" :item="props.item" v-if="showRowActions">
+		            <td class="text-xs-center table__actions">
+
+			            <slot name="row-edit" :item="props.item" v-if="!noRowEdit">
+				            <v-btn fab small flat depressed
+				                   @click="$emit('edit', props.item)"
+				            >
+					            <img src="@/assets/icons/groups/edit.svg" alt="">
+				            </v-btn>
+			            </slot>
+
+			            <slot name="row-delete" :item="props.item" v-if="!noRowDelete">
+				            <v-btn fab small flat depressed
+				                   @click="$emit('delete', props.item)"
+				            >
+					            <img src="@/assets/icons/groups/delete.svg" alt="">
+				            </v-btn>
+			            </slot>
+
+			            <slot name="row-view" :item="props.item" v-if="!noRowView">
+				            <v-btn fab flat small depressed
+				                   @click="$emit('view', props.item)"
+				            >
+					            <v-icon>pageview</v-icon>
+				            </v-btn>
+			            </slot>
+
+		            </td>
+	            </slot>
 
             </tr>
           </template>

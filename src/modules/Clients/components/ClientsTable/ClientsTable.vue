@@ -32,9 +32,12 @@
 				:sort="sort"
 				:has-checkbox="true"
 				hide-actions
-				@items-selected="selected_ids = $event"
 				toolbar-title="Clients"
+				@items-selected="selected_ids = $event"
 				@sorted="changeSort"
+				@edit="open_edit_dialog"
+				@delete="open_delete_dialog"
+				@view="navigate_to_view_profile($event.id)"
 		>
 
 			<template slot="custom-item" slot-scope="item">
@@ -50,19 +53,6 @@
 				<td>{{ item.item.telephone | phoneDisplayForm }}</td>
 				<td class="email">{{ item.item.email }}</td>
 				<td class="text-cap">{{ item.item.status }}</td>
-
-				<td class="text-xs-center">
-					<v-btn fab small flat depressed @click="open_edit_dialog(item.item)">
-						<img src="@/assets/icons/groups/edit.svg" alt="">
-					</v-btn>
-					<v-btn fab small flat depressed @click="open_delete_dialog(item.item)">
-						<img src="@/assets/icons/groups/delete.svg" alt="">
-					</v-btn>
-
-					<v-btn fab small flat depressed @click="navigate_to_view_profile(item.item.id)">
-						<v-icon>pageview</v-icon>
-					</v-btn>
-				</td>
 			</template>
 
 			<template slot="table-actions">

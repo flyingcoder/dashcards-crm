@@ -34,33 +34,18 @@
 			:sort="sort"
 			:has-checkbox="true"
 			hide-actions
+			toolbar-title="Services"
+			no-row-view
 			@items-selected="selected_ids = $event"
 			@sorted="changeSort"
-			toolbar-title="Services"
+			@edit="open_edit_dialog"
+			@delete="open_delete_dialog"
 		>
 
 			<template slot="custom-item" slot-scope="item">
 				<td class="service__name text-cap">{{ item.item.service_name }}</td>
-
 				<td class="text-cap">{{ item.item.name }}</td>
-
 				<td>{{ item.item.service_created_at }}</td>
-
-				<td class="text-xs-center">
-
-					<v-btn fab small flat depressed
-						@click="open_edit_dialog(item.item)"
-					>
-						<img src="@/assets/icons/groups/edit.svg" alt="">
-					</v-btn>
-
-					<v-btn fab small flat depressed
-						@click="open_delete_dialog(item.item)"
-					>
-						<img src="@/assets/icons/groups/delete.svg" alt="">
-					</v-btn>
-
-				</td>
 			</template>
 
 			<template slot="table-actions">

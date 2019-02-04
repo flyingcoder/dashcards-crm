@@ -34,6 +34,8 @@
 				:has-checkbox="true"
 				hide-actions
 				@items-selected="selected_ids = $event"
+				@edit="open_edit_dialog"
+				@delete="open_delete_dialog"
 		>
 
 			<template slot="custom-item" slot-scope=" { item }">
@@ -41,24 +43,12 @@
 				<td>{{ item.title }}</td>
 				<td>{{ item.first_name + ' ' + item.last_name }}</td>
 				<td>{{ item.total_amount }}</td>
+			</template>
 
-
-				<td class="text-xs-center">
-
-					<v-btn fab small flat depressed @click="open_edit_dialog(item)">
-						<img src="@/assets/icons/groups/edit.svg" alt="">
-					</v-btn>
-
-					<v-btn fab small flat depressed @click="open_delete_dialog(item)">
-						<img src="@/assets/icons/groups/delete.svg" alt="">
-					</v-btn>
-
-					<v-btn fab small flat depressed @click="open_email_dialog(item.id)">
-						<v-icon>email</v-icon>
-					</v-btn>
-
-				</td>
-
+			<template slot="row-view" slot-scope="{ item }">
+				<v-btn fab small flat depressed @click="open_email_dialog(item.id)">
+					<v-icon>email</v-icon>
+				</v-btn>
 			</template>
 
 		</custom-table>

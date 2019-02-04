@@ -63,6 +63,9 @@
 								<td class="text-xs-center">{{item.index}}</td>
 								<td class="text-xs-center">{{item.name}}</td>
 								<td class="text-xs-center">{{item.description}}</td>
+							</template>
+
+							<template slot="row-actions" slot-scope="{ item }">
 								<td class="actions">
 									<template v-for="action of get_actions(item.slug)">
 										<template
