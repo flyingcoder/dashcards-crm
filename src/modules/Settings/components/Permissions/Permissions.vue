@@ -33,35 +33,22 @@
 				:sort="sort"
 				:has-checkbox="true"
 				hide-actions
-				@items-selected="selected_ids = $event"
 				toolbar-title="Permissions"
+				no-row-view
+				@items-selected="selected_ids = $event"
 				@sorted="changeSort"
+				@edit="open_edit_dialog"
+				@delete="open_delete_dialog"
 		>
 
 			<template slot="custom-item" slot-scope="{item}">
 				<td>{{ item.name }}</td>
-
 				<td>{{ item.description }}</td>
-
 				<td>{{ capability_column(item.slug) }}</td>
+			</template>
 
-				<td class="text-xs-center">
-					<template v-if="item.company_id">
-
-						<v-btn fab small flat depressed
-						       @click="open_edit_dialog(item)"
-						>
-							<img src="@/assets/icons/groups/edit.svg" alt="">
-						</v-btn>
-
-						<v-btn fab small flat depressed
-						       @click="open_delete_dialog(item)"
-						>
-							<img src="@/assets/icons/groups/delete.svg" alt="">
-						</v-btn>
-					</template>
-
-				</td>
+			<template slot="row-actions" slot-scope="{ item }">
+				<span v-if="!item.company_id"></span>
 			</template>
 
 			<template slot="table-actions">

@@ -12,7 +12,11 @@ export default {
     toolbarTitle: String,
     noRowEdit: Boolean,
     noRowDelete: Boolean,
-    noRowView: Boolean
+    noRowView: Boolean,
+    showRowActions: {
+      type: Boolean,
+      default: true
+    }
   },
 
   data: () => ({

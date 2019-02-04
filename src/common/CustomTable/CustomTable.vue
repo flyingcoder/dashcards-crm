@@ -78,7 +78,7 @@
 
               <slot name="custom-item" :item="props.item"></slot>
 
-	            <slot name="row-actions" :item="props.item">
+	            <slot name="row-actions" :item="props.item" v-if="showRowActions">
 		            <td class="text-xs-center table__actions">
 
 			            <slot name="row-edit" :item="props.item" v-if="!noRowEdit">
