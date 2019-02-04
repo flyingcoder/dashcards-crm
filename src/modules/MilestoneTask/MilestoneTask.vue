@@ -37,25 +37,18 @@
 						:sort="sort"
 						:has-checkbox="true"
 						hide-actions
-						@items-selected="selected_ids = $event"
 						toolbar-title="Tasks"
+						no-row-view
+						@items-selected="selected_ids = $event"
 						@sorted="changeSort"
+						@edit="open_edit_dialog"
+						@delete="open_delete_dialog"
 				>
 					<template slot="custom-item" slot-scope="item"> <!-- Table Items -->
 						<td class="text-xs-left text-cap">{{ item.item.title }}</td>
 						<td class="text-xs-left textarea-cap">{{ short_description_text(item.item.description) }}</td>
 						<td class="text-xs-left text-cap">{{ item.item.status }}</td>
 						<td class="text-xs-left">{{ item.item.days }}</td>
-
-						<td class="text-xs-center">
-							<v-icon class="mr-2" @click="open_edit_dialog(item.item)">
-								edit
-							</v-icon>
-
-							<v-icon @click="open_delete_dialog(item.item)">
-								delete
-							</v-icon>
-						</td>
 					</template>
 
 					<template slot="table-actions">
