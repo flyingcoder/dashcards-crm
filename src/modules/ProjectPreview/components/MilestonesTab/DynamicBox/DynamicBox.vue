@@ -92,7 +92,8 @@ export default {
   @include styledScrollFor('.content');
 
   .content {
-    height: 400px;
+    height: 470px;
+    max-height: 470px;
     border: 1px solid $tableBorderBlue;
     padding: 0;
     overflow: auto;
@@ -134,15 +135,15 @@ export default {
         margin: 6px;
       }
     }
-    .content {
-      .task {
-        padding: 13px;
-        font-size: 14px;
-      }
+  }
+  .content {
+    .task {
+      padding: 13px;
+      font-size: 14px;
     }
-    .add__new_btn {
-      font-size: 12px;
-    }
+  }
+  .add__new_btn {
+    font-size: 12px;
   }
 }
 </style>
