@@ -1,15 +1,15 @@
 <template functional>
-	<v-layout row wrap class="project__overview_row">
-		<v-flex xs5 class="project__label">
-			<v-flex class="project__label_icon">
-				<svg viewBox="0 0 250 250">
-					<path class="icon" :d="props.labelIcon"/>
-				</svg>
-			</v-flex>
-			<v-flex class="project__label_title">{{ props.col1 }}</v-flex>
-		</v-flex>
-		<v-flex xs7 class="project__value">{{ props.col2 }}</v-flex>
-	</v-layout>
+  <v-layout row wrap class="project__overview_row">
+    <v-flex xs5 class="project__label">
+      <v-flex class="project__label_icon">
+        <svg viewBox="0 0 250 250">
+          <path class="icon" :d="props.labelIcon" />
+        </svg>
+      </v-flex>
+      <v-flex class="project__label_title">{{ props.col1 }}</v-flex>
+    </v-flex>
+    <v-flex xs7 class="project__value">{{ props.col2 }}</v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -24,5 +24,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped src="./ProjectRow.scss">
-</style>
+<style lang="scss" scoped src="./ProjectRow.scss"></style>

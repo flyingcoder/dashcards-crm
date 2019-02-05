@@ -1,18 +1,22 @@
 <template functional>
-	<div class="tile">
-		<div class="tile-icon" :style="{ background: props.imgBackground }">
-			<slot name="tile-icon">
-				<v-img :src="props.imgSrc" :height="props.imgHeight" :width="props.imgWidth" />
-			</slot>
-		</div>
+  <div class="tile">
+    <div class="tile-icon" :style="{ background: props.imgBackground }">
+      <slot name="tile-icon">
+        <v-img
+          :src="props.imgSrc"
+          :height="props.imgHeight"
+          :width="props.imgWidth"
+        />
+      </slot>
+    </div>
 
-		<div class="tile-content">
-			<slot name="tile-content">
-				<h2 class="text-counter"> {{ props.counter }} </h2>
-				<div class="text-title">{{ props.title }}</div>
-			</slot>
-		</div>
-	</div>
+    <div class="tile-content">
+      <slot name="tile-content">
+        <h2 class="text-counter">{{ props.counter }}</h2>
+        <div class="text-title">{{ props.title }}</div>
+      </slot>
+    </div>
+  </div>
 </template>
 
 <script>

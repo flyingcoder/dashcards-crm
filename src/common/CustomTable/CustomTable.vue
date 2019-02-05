@@ -2,50 +2,54 @@
   <div class="content__wrapper">
     <div class="row buzz__tables">
       <div class="buzz__tablesTwo">
-
         <slot name="toolbar">
           <v-toolbar flat class="table__toolbar">
             <v-toolbar-title class="table__toolbar-title">
-              {{toolbarTitle}}
+              {{ toolbarTitle }}
             </v-toolbar-title>
           </v-toolbar>
         </slot>
 
         <v-data-table
-                v-model="selected"
-                :headers="headers"
-                :items="items"
-                :loading="loading"
-                no-data-text=""
-                select-all
-                disable-initial-sort
-                v-bind="$attrs"
-                class="buzzooka__table"
+          v-model="selected"
+          :headers="headers"
+          :items="items"
+          :loading="loading"
+          no-data-text=""
+          select-all
+          disable-initial-sort
+          v-bind="$attrs"
+          class="buzzooka__table"
         >
-          <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear> <!-- LOADING -->
+          <v-progress-linear
+            slot="progress"
+            color="blue"
+            indeterminate
+          ></v-progress-linear>
+          <!-- LOADING -->
 
-          <template slot="headers" slot-scope="props"> <!-- HEADERS -->
+          <template slot="headers" slot-scope="props">
+            <!-- HEADERS -->
             <tr class="table__head">
               <th v-if="$props.hasCheckbox">
                 <v-checkbox
-                        :input-value="props.all"
-                        :indeterminate="props.indeterminate"
-                        primary
-                        hide-details
-                        @click.self="toggleAll"
+                  :input-value="props.all"
+                  :indeterminate="props.indeterminate"
+                  primary
+                  hide-details
+                  @click.self="toggleAll"
                 ></v-checkbox>
               </th>
               <th
-                      v-for="header in props.headers"
-                      :key="header.id"
-                      :class="headerClasses(header)"
-                      :width="header.width"
-                      @click="header.sortable && changeSort(header.value)"
+                v-for="header in props.headers"
+                :key="header.id"
+                :class="headerClasses(header)"
+                :width="header.width"
+                @click="header.sortable && changeSort(header.value)"
               >
                 <template v-if="header.text === 'Icon'">
-                  <v-btn fab small depressed
-                        :disabled="tableActionDisabled">
-                    <img src="@/assets/icons/groups/delete.svg" alt="">
+                  <v-btn fab small depressed :disabled="tableActionDisabled">
+                    <img src="@/assets/icons/groups/delete.svg" alt="" />
                   </v-btn>
                 </template>
 
@@ -54,7 +58,7 @@
                 </template>
 
                 <template v-else>
-                  {{header.text}}
+                  {{ header.text }}
                   <v-icon small v-if="header.sortable">arrow_upward</v-icon>
                 </template>
               </th>
@@ -62,56 +66,81 @@
               <th v-if="hasHeaderIcon">
                 <img src="@/assets/icons/table/menu.svg" />
               </th>
-
             </tr>
           </template>
 
-          <template slot="items" slot-scope="props"> <!-- ITEMS -->
+          <template slot="items" slot-scope="props">
+            <!-- ITEMS -->
             <tr :active="props.selected" class="table__body-row">
-              <td v-if="$props.hasCheckbox" @click="props.selected = !props.selected">
+              <td
+                v-if="$props.hasCheckbox"
+                @click="props.selected = !props.selected"
+              >
                 <v-checkbox
-                        :input-value="props.selected"
-                        primary
-                        hide-details
+                  :input-value="props.selected"
+                  primary
+                  hide-details
                 ></v-checkbox>
               </td>
 
               <slot name="custom-item" :item="props.item"></slot>
 
-	            <slot name="row-actions" :item="props.item" v-if="showRowActions">
-		            <td class="text-xs-center table__actions">
+              <slot name="row-actions" :item="props.item" v-if="showRowActions">
+                <td class="text-xs-center table__actions">
+                  <slot
+                    name="row-edit"
+                    :item="props.item"
+                    v-if="!noRowEdit && can_edit"
+                  >
+                    <v-btn
+                      fab
+                      small
+                      flat
+                      depressed
+                      @click="$emit('edit', props.item)"
+                    >
+                      <img src="@/assets/icons/groups/edit.svg" alt="" />
+                    </v-btn>
+                  </slot>
 
-			            <slot name="row-edit" :item="props.item" v-if="!noRowEdit && can_edit">
-				            <v-btn fab small flat depressed
-				                   @click="$emit('edit', props.item)"
-				            >
-					            <img src="@/assets/icons/groups/edit.svg" alt="">
-				            </v-btn>
-			            </slot>
+                  <slot
+                    name="row-delete"
+                    :item="props.item"
+                    v-if="!noRowDelete && can_delete"
+                  >
+                    <v-btn
+                      fab
+                      small
+                      flat
+                      depressed
+                      @click="$emit('delete', props.item)"
+                    >
+                      <img src="@/assets/icons/groups/delete.svg" alt="" />
+                    </v-btn>
+                  </slot>
 
-			            <slot name="row-delete" :item="props.item" v-if="!noRowDelete && can_delete">
-				            <v-btn fab small flat depressed
-				                   @click="$emit('delete', props.item)"
-				            >
-					            <img src="@/assets/icons/groups/delete.svg" alt="">
-				            </v-btn>
-			            </slot>
-
-			            <slot name="row-view" :item="props.item" v-if="!noRowView && can_view">
-				            <v-btn fab flat small depressed
-				                   @click="$emit('view', props.item)"
-				            >
-					            <v-icon>pageview</v-icon>
-				            </v-btn>
-			            </slot>
-
-		            </td>
-	            </slot>
-
+                  <slot
+                    name="row-view"
+                    :item="props.item"
+                    v-if="!noRowView && can_view"
+                  >
+                    <v-btn
+                      fab
+                      flat
+                      small
+                      depressed
+                      @click="$emit('view', props.item)"
+                    >
+                      <v-icon>pageview</v-icon>
+                    </v-btn>
+                  </slot>
+                </td>
+              </slot>
             </tr>
           </template>
 
-          <template slot="no-data"> <!-- DISPLAYED WHEN NO ITEMS -->
+          <template slot="no-data">
+            <!-- DISPLAYED WHEN NO ITEMS -->
             <v-alert :value="true" color="error" icon="warning" v-if="!loading">
               Sorry, nothing to display here :(
             </v-alert>
@@ -122,16 +151,12 @@
               <slot name="table-actions"></slot>
             </td>
           </template>
-
         </v-data-table>
       </div>
     </div>
   </div>
 </template>
-<script src="./CustomTable.js">
-</script>
-<style lang="scss" scoped src="./CustomTable.scss">
-</style>
+<script src="./CustomTable.js"></script>
+<style lang="scss" scoped src="./CustomTable.scss"></style>
 
-<style scoped src="./CustomTable.css">
-</style>
+<style scoped src="./CustomTable.css"></style>

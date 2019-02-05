@@ -1,27 +1,29 @@
 <template>
-	<vue-dropzone
-			ref="dropzone"
-			id="dropzone"
-			:options="options"
-			v-bind="$attrs"
-			@vdropzone-success="$emit('success', arguments)"
-	>
-		<v-layout row align-center
-		          justify-center fill-height
-		          class="drop__files_content"
-		>
-			<div class="file__icon">
-				<v-icon>file_copy</v-icon>
-			</div>
+  <vue-dropzone
+    ref="dropzone"
+    id="dropzone"
+    :options="options"
+    v-bind="$attrs"
+    @vdropzone-success="$emit('success', arguments)"
+  >
+    <v-layout
+      row
+      align-center
+      justify-center
+      fill-height
+      class="drop__files_content"
+    >
+      <div class="file__icon">
+        <v-icon>file_copy</v-icon>
+      </div>
 
-			<div class="drop__title">Drop files here</div>
-			<div class="drop__text">or</div>
-			<div class="drop__btn">
-				<v-btn large dark color="#3b589e">Choose your files</v-btn>
-			</div>
-
-		</v-layout>
-	</vue-dropzone>
+      <div class="drop__title">Drop files here</div>
+      <div class="drop__text">or</div>
+      <div class="drop__btn">
+        <v-btn large dark color="#3b589e">Choose your files</v-btn>
+      </div>
+    </v-layout>
+  </vue-dropzone>
 </template>
 
 <script>

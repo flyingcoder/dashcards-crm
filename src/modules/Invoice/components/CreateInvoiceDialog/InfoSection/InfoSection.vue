@@ -1,10 +1,8 @@
 <template>
-	<v-layout row wrap justify-space-between class="first-row info-section">
-
-		<left-side />
-		<right-side />
-
-	</v-layout>
+  <v-layout row wrap justify-space-between class="first-row info-section">
+    <left-side />
+    <right-side />
+  </v-layout>
 </template>
 
 <script>

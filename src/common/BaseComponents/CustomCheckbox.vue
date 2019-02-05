@@ -1,12 +1,13 @@
 <template functional>
-	<label class="select__all">
-		<span>{{ props.text }}</span>
-		<input type="checkbox"
-		       :checked="props.checked"
-		       @change="listeners['update:checked'](!props.checked)"
-		>
-		<span class="checkmark"></span>
-	</label>
+  <label class="select__all">
+    <span>{{ props.text }}</span>
+    <input
+      type="checkbox"
+      :checked="props.checked"
+      @change="listeners['update:checked'](!props.checked)"
+    />
+    <span class="checkmark"></span>
+  </label>
 </template>
 
 <script>

@@ -13,7 +13,7 @@ const permissions = {
 }
 
 Plugin.install = Vue => {
-	Vue.prototype.$_permissions = permissions
+  Vue.prototype.$_permissions = permissions
 }
 
 Vue.use(Plugin)

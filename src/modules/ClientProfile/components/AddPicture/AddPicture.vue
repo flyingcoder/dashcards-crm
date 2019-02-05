@@ -1,30 +1,30 @@
 <template>
-	<div class="add-picture">
-		<CustomDialog
-				:open.sync="dialog"
-				title="Upload New Profile Picture"
-				ref="picture_dialog"
-		>
-			<template slot="content">
-				<div class="content">
-					<CustomDropzone
-					:duplicateCheck="true"
-					acceptedFiles="image/*"
-					:options="dropzoneOptions"
-					:useCustomSlot="true"
-					dictFileTooBig="File too big"
-					dictInvalidFileType="Invalid file type"
-					@success="file_added"
-					/>
-				</div>
-			</template>
+  <div class="add-picture">
+    <CustomDialog
+      :open.sync="dialog"
+      title="Upload New Profile Picture"
+      ref="picture_dialog"
+    >
+      <template slot="content">
+        <div class="content">
+          <CustomDropzone
+            :duplicateCheck="true"
+            acceptedFiles="image/*"
+            :options="dropzoneOptions"
+            :useCustomSlot="true"
+            dictFileTooBig="File too big"
+            dictInvalidFileType="Invalid file type"
+            @success="file_added"
+          />
+        </div>
+      </template>
 
-			<template slot="entire-actions">
-				<span></span> <!-- for removing the actions from the dialog -->
-			</template>
-
-		</CustomDialog>
-	</div>
+      <template slot="entire-actions">
+        <span></span>
+        <!-- for removing the actions from the dialog -->
+      </template>
+    </CustomDialog>
+  </div>
 </template>
 
 <script>

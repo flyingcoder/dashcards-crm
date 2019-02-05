@@ -1,12 +1,13 @@
 <template>
-	<div :class="['dash__card', { selected: is_selected }]"
-	     @click="$emit('click')"
-	>
-		<div class="image">
-			<v-img width="40px" :src="computed_src"></v-img>
-		</div>
-		<div class="title">{{ title }}</div>
-	</div>
+  <div
+    :class="['dash__card', { selected: is_selected }]"
+    @click="$emit('click')"
+  >
+    <div class="image">
+      <v-img width="40px" :src="computed_src"></v-img>
+    </div>
+    <div class="title">{{ title }}</div>
+  </div>
 </template>
 
 <script>

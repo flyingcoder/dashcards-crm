@@ -1,24 +1,27 @@
 <template>
-	<div class="chat__inbox">
-		<div class="inbox__title">Message Notifications ({{ notifications.length }})</div>
-		<div class="msg__notif">
-			<div class="user new__message"
-			     v-for="notification of notifications"
-			     :key="notification.id"
-			     @click="open_chat_box(notification.sender)"
-			>
-				<div class="user__img" >
-					<v-img :src="require('@/assets/temp/user.png')"/>
-					<span class="status offline"></span>
-				</div>
+  <div class="chat__inbox">
+    <div class="inbox__title">
+      Message Notifications ({{ notifications.length }})
+    </div>
+    <div class="msg__notif">
+      <div
+        class="user new__message"
+        v-for="notification of notifications"
+        :key="notification.id"
+        @click="open_chat_box(notification.sender)"
+      >
+        <div class="user__img">
+          <v-img :src="require('@/assets/temp/user.png')" />
+          <span class="status offline"></span>
+        </div>
 
-				<div class="user__detail">
-					<span class="user__name">{{ notification | full_name }}</span>
-					<span class="user__msg">{{ notification.body }}</span>
-				</div>
-			</div>
-		</div>
-	</div>
+        <div class="user__detail">
+          <span class="user__name">{{ notification | full_name }}</span>
+          <span class="user__msg">{{ notification.body }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
