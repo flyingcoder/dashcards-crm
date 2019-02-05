@@ -1,10 +1,13 @@
 <template>
-	<v-layout row wrap justify-space-between class="third-row additional-info-section">
-
-		<v-flex sm6 xs12 class="left-content"><left-side /></v-flex>
-		<v-flex sm6 xs12 class="right-content"><right-side /></v-flex>
-
-	</v-layout>
+  <v-layout
+    row
+    wrap
+    justify-space-between
+    class="third-row additional-info-section"
+  >
+    <v-flex sm6 xs12 class="left-content"><left-side /></v-flex>
+    <v-flex sm6 xs12 class="right-content"><right-side /></v-flex>
+  </v-layout>
 </template>
 
 <script>

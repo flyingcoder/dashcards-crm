@@ -1,35 +1,33 @@
 <template>
-	<div class="user-info">
+  <div class="user-info">
+    <div class="loading" v-if="user_loading">
+      <v-progress-linear :indeterminate="true" />
+    </div>
 
-		<div class="loading" v-if="user_loading">
-			<v-progress-linear :indeterminate="true" />
-		</div>
+    <template v-else>
+      <div class="info-div">
+        <div class="hour">Invoices</div>
+        <div class="value">68</div>
+      </div>
 
-		<template v-else>
-			<div class="info-div">
-				<div class="hour">Invoices</div>
-				<div class="value">68</div>
-			</div>
+      <div class="info-div">
+        <h4 class="name">
+          {{ user.first_name }} {{ user.last_name }}
+          <v-icon>edit</v-icon>
+        </h4>
+        <div class="job-title">CEO, Samsung</div>
+        <div class="address">
+          <v-icon>place</v-icon>
+          Cebu, Philippines
+        </div>
+      </div>
 
-			<div class="info-div">
-				<h4 class="name">
-					{{ user.first_name }} {{ user.last_name }}
-					<v-icon>edit</v-icon>
-				</h4>
-				<div class="job-title">CEO, Samsung</div>
-				<div class="address">
-					<v-icon>place</v-icon>
-					Cebu, Philippines
-				</div>
-			</div>
-
-			<div class="info-div">
-				<div class="hour">Amount Paid</div>
-				<div class="value">$10,000</div>
-			</div>
-		</template>
-
-	</div>
+      <div class="info-div">
+        <div class="hour">Amount Paid</div>
+        <div class="value">$10,000</div>
+      </div>
+    </template>
+  </div>
 </template>
 
 <script>

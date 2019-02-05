@@ -1,16 +1,16 @@
 <template>
-	<div class="rich-editor">
-		<vue-editor
-				ref="richEditor"
-				use-custom-image-handler
-				:value="value"
-				:editor-toolbar="custom_toolbar"
-				:editor-options="custom_options"
-				v-bind="$attrs"
-				@input="$emit('input', $event)"
-				@imageAdded="handleImageAdded"
-		/>
-	</div>
+  <div class="rich-editor">
+    <vue-editor
+      ref="richEditor"
+      use-custom-image-handler
+      :value="value"
+      :editor-toolbar="custom_toolbar"
+      :editor-options="custom_options"
+      v-bind="$attrs"
+      @input="$emit('input', $event)"
+      @imageAdded="handleImageAdded"
+    />
+  </div>
 </template>
 
 <script>

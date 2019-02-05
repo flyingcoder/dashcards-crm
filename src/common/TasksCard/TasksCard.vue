@@ -1,19 +1,20 @@
 <template>
-	<v-flex xs12 class="tasks-card">
-		<div class="tasks__content">
-			<dash-card title="Tasks"
-			           :view-more-link="viewMoreLink"
-			           class="task__content"
-			           @close="$emit('close')"
-			>
-				<div class="content-wrapper" slot="content">
-						<div class="tasks-items">
-							<tasks-content :id="id" />
-						</div>
-				</div>
-			</dash-card>
-		</div>
-	</v-flex>
+  <v-flex xs12 class="tasks-card">
+    <div class="tasks__content">
+      <dash-card
+        title="Tasks"
+        :view-more-link="viewMoreLink"
+        class="task__content"
+        @close="$emit('close')"
+      >
+        <div class="content-wrapper" slot="content">
+          <div class="tasks-items">
+            <tasks-content :id="id" />
+          </div>
+        </div>
+      </dash-card>
+    </div>
+  </v-flex>
 </template>
 
 <script>

@@ -1,19 +1,17 @@
 <template>
-	<div class="breadcrumb-wrapper">
-		<v-breadcrumbs :items="paths">
+  <div class="breadcrumb-wrapper">
+    <v-breadcrumbs :items="paths">
+      <v-icon slot="divider">chevron_right</v-icon>
 
-			<v-icon slot="divider">chevron_right</v-icon>
-
-			<template slot="item" slot-scope="{item}">
-				<v-breadcrumbs-item class="page__title" :disabled="item.disabled">
-	        <span @click="navigate_from_breadcrumb(item)">
-	          {{ item.text }}
-	        </span>
-				</v-breadcrumbs-item>
-			</template>
-
-		</v-breadcrumbs>
-	</div>
+      <template slot="item" slot-scope="{ item }">
+        <v-breadcrumbs-item class="page__title" :disabled="item.disabled">
+          <span @click="navigate_from_breadcrumb(item)">
+            {{ item.text }}
+          </span>
+        </v-breadcrumbs-item>
+      </template>
+    </v-breadcrumbs>
+  </div>
 </template>
 
 <script>

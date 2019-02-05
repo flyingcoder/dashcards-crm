@@ -1,13 +1,13 @@
 <template>
-	<transition name="fade">
-		<div class="custom-loader" v-show="should_show">
-			<v-progress-circular
-					indeterminate
-					color="primary"
-					:size="72"
-			></v-progress-circular>
-		</div>
-	</transition>
+  <transition name="fade">
+    <div class="custom-loader" v-show="should_show">
+      <v-progress-circular
+        indeterminate
+        color="primary"
+        :size="72"
+      ></v-progress-circular>
+    </div>
+  </transition>
 </template>
 
 <script>

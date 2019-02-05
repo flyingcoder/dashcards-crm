@@ -1,32 +1,40 @@
 <template>
-	<v-menu
-			ref="menu"
-			:close-on-content-click="false"
-			v-model="menu"
-			:nudge-right="40"
-			lazy
-			transition="scale-transition"
-			offset-y
-			full-width
-			min-width="290px"
-	>
-		<v-text-field
-				slot="activator"
-				:value="value"
-				v-bind="$attrs"
-        solo
-        hide-details
-        color="#657186"
-				readonly
-		></v-text-field>
+  <v-menu
+    ref="menu"
+    :close-on-content-click="false"
+    v-model="menu"
+    :nudge-right="40"
+    lazy
+    transition="scale-transition"
+    offset-y
+    full-width
+    min-width="290px"
+  >
+    <v-text-field
+      slot="activator"
+      :value="value"
+      v-bind="$attrs"
+      solo
+      hide-details
+      color="#657186"
+      readonly
+    ></v-text-field>
 
-		<v-date-picker clearable color="#657186" v-model="picker_date" :max="max" :min="min" no-title scrollable>
-			<v-spacer></v-spacer>
-			<v-btn flat color="#657186" @click="cancel">Cancel</v-btn>
-			<v-btn flat color="#657186" @click="save">OK</v-btn>
-			<v-btn flat color="#657186" @click="clear">Clear</v-btn>
-		</v-date-picker>
-	</v-menu>
+    <v-date-picker
+      clearable
+      color="#657186"
+      v-model="picker_date"
+      :max="max"
+      :min="min"
+      no-title
+      scrollable
+    >
+      <v-spacer></v-spacer>
+      <v-btn flat color="#657186" @click="cancel">Cancel</v-btn>
+      <v-btn flat color="#657186" @click="save">OK</v-btn>
+      <v-btn flat color="#657186" @click="clear">Clear</v-btn>
+    </v-date-picker>
+  </v-menu>
 </template>
 
 <script>

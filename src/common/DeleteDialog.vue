@@ -1,15 +1,15 @@
 <template>
-	<div>
-		<custom-dialog
-				:title="title"
-				:content="textContent"
-				:button1-text="cancelButtonText"
-				:button2-text="deleteButtonText"
-				:open.sync="open"
-				@button1="cancel_clicked"
-				@button2="delete_clicked"
-		></custom-dialog>
-	</div>
+  <div>
+    <custom-dialog
+      :title="title"
+      :content="textContent"
+      :button1-text="cancelButtonText"
+      :button2-text="deleteButtonText"
+      :open.sync="open"
+      @button1="cancel_clicked"
+      @button2="delete_clicked"
+    ></custom-dialog>
+  </div>
 </template>
 
 <script>

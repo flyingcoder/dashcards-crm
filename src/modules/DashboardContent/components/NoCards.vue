@@ -1,41 +1,41 @@
 <template>
-	<div class="empty-cards">
+  <div class="empty-cards">
+    <CustomDialog
+      title="Select Dash Cards"
+      ref="dialog"
+      :open.sync="dialog"
+      @button1="dialog = false"
+    >
+      <template slot="content">
+        <div class="dash__cards">
+          <template v-for="item of dash_items">
+            <DashCard
+              :title="item.name"
+              :img-src="item.img_path"
+              :selected="selected"
+              :id="item.id"
+              :key="item.id"
+              @click="check_selected(item.id)"
+            />
+          </template>
+        </div>
+      </template>
 
-		<CustomDialog title="Select Dash Cards"
-		              ref="dialog"
-		              :open.sync="dialog"
-		              @button1="dialog = false"
-		>
-			<template slot="content">
-				<div class="dash__cards">
-					<template v-for="item of dash_items">
-						<DashCard :title="item.name"
-						          :img-src="item.img_path"
-						          :selected="selected"
-						          :id="item.id"
-						          :key="item.id"
-						          @click="check_selected(item.id)"
-						/>
-					</template>
-				</div>
-			</template>
+      <template slot="button2">
+        <v-btn :disabled="nothing_changed" @click="save">Save</v-btn>
+      </template>
+    </CustomDialog>
 
-			<template slot="button2">
-				<v-btn :disabled="nothing_changed" @click="save">Save</v-btn>
-			</template>
+    <div class="icon">
+      <v-icon>add_box</v-icon>
+    </div>
 
-		</CustomDialog>
-
-		<div class="icon">
-			<v-icon>add_box</v-icon>
-		</div>
-
-		<div class="dashitem-btn">
-			<v-btn large dark color="#3b589e" @click="dialog = true">Add Dashitem
-			</v-btn>
-		</div>
-
-	</div>
+    <div class="dashitem-btn">
+      <v-btn large dark color="#3b589e" @click="dialog = true"
+        >Add Dashitem
+      </v-btn>
+    </div>
+  </div>
 </template>
 
 <script>
