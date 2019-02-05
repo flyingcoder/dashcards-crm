@@ -1,12 +1,19 @@
+import TableHeader from '@/common/TableHeader.vue'
+
 export default {
   components: {
+    TableHeader,
     Questions: () => import('./components/Questions/Questions.vue')
   },
 
   data: () => ({
     active_tab: 'Questions',
     tabs: [{ id: 1, name: 'Questions' }, { id: 2, name: 'Answers' }],
-    dynamic_sections: []
+    dynamic_sections: [],
+    paths: [
+      { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+      { text: 'Forms', disabled: true, router_name: null }
+    ]
   }),
 
   methods: {

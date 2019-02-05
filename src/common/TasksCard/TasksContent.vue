@@ -1,23 +1,23 @@
 <template>
-	<div class="tasks-content">
-		<v-tabs class="task__tabs" centered grow hide-slider v-model="active_tab">
-			<v-tab
-					v-for="tab in tabs"
-					:key="tab.name"
-					:href="`#${tab.name}`"
-			>
-				{{ tab.name }}
-			</v-tab>
-		</v-tabs>
+  <div class="tasks-content">
+    <v-tabs class="task__tabs" centered grow hide-slider v-model="active_tab">
+      <v-tab v-for="tab in tabs" :key="tab.name" :href="`#${tab.name}`">
+        {{ tab.name }}
+      </v-tab>
+    </v-tabs>
 
-		<v-tabs-items v-model="active_tab">
-			<v-tab-item v-for="tab of tabs" :key="tab.id" :value="tab.name">
-				<v-card flat>
-					<tasks-tab :tab="active_tab" v-if="active_tab === tab.name" :id="id" />
-				</v-card>
-			</v-tab-item>
-		</v-tabs-items>
-	</div>
+    <v-tabs-items v-model="active_tab">
+      <v-tab-item v-for="tab of tabs" :key="tab.id" :value="tab.name">
+        <v-card flat>
+          <tasks-tab
+            :tab="active_tab"
+            v-if="active_tab === tab.name"
+            :id="id"
+          />
+        </v-card>
+      </v-tab-item>
+    </v-tabs-items>
+  </div>
 </template>
 
 <script>

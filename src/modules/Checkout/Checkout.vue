@@ -20,7 +20,5 @@
     </div>
   </div>
 </template>
-<script src="./Checkout.js">
-</script>
-<style lang="scss" scoped src="./Checkout.scss">
-</style>
+<script src="./Checkout.js"></script>
+<style lang="scss" scoped src="./Checkout.scss"></style>

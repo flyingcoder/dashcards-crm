@@ -20,7 +20,7 @@ export default {
 
   data: () => ({
     paths: [
-      { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+      { text: 'Settings', disabled: false, router_name: 'settings' },
       { text: 'Permissions', disabled: true, router_name: null }
     ],
     headers: [
@@ -51,19 +51,19 @@ export default {
     }
   }),
 
-  created() {
-    const query = { ...this.$route.query }
-    delete query.tab
-    if (isEmpty(query)) {
-      this.fill_table('get_permissions', true)
-    } else {
-      this.update_table_actions(query)
-    }
-  },
-
   watch: {
-    api_query(query) {
-      this.$router.push({
+    api_query(query, old_query) {
+      const new_per_page = Number(this.extract_per_page(query))
+      const old_per_page = Number(this.extract_per_page(old_query)) || null
+
+      if (
+        this.items_response &&
+        this.rows_per_page === this.items.length &&
+        new_per_page !== old_per_page
+      )
+        return
+
+      this.$router.replace({
         name: this.table_config.route_name,
         query: {
           tab: 'permissions',
@@ -75,6 +75,26 @@ export default {
       })
       this.loading = true
       this.refresh_table(query)
+    }
+  },
+
+  created() {
+    const query = { ...this.$route.query }
+    if (query.tab === 'permissions') {
+      delete query.tab
+      if (isEmpty(query)) {
+        this.fill_table('get_permissions', true)
+      } else {
+        this.update_table_actions(query)
+      }
+    } else {
+      this.$router.replace({
+        name: this.table_config.route_name,
+        query: {
+          tab: 'groups'
+        }
+      })
+      this.fill_table('get_permissions', true)
     }
   },
 

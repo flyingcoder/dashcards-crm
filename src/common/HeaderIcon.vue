@@ -1,8 +1,8 @@
 <template>
-	<div class="header-icon">
-		<img :src="imageSrc" class="responsive-img icon default" />
-		<img :src="hoveredImageSrc" class="responsive-img icon hovered" />
-	</div>
+  <div class="header-icon">
+    <img :src="imageSrc" class="responsive-img icon default" />
+    <img :src="hoveredImageSrc" class="responsive-img icon hovered" />
+  </div>
 </template>
 
 <script>

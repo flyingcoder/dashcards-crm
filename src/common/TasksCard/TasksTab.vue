@@ -1,24 +1,22 @@
 <template>
-	<div class="loading" v-if="loading">
-		<v-progress-linear :indeterminate="true"></v-progress-linear>
-	</div>
-	<div class="no-data" v-else-if="tasks_are_empty">
-		Nothing to display
-	</div>
-	<div class="tasks-tab" v-else>
+  <div class="loading" v-if="loading">
+    <v-progress-linear :indeterminate="true"></v-progress-linear>
+  </div>
+  <div class="no-data" v-else-if="tasks_are_empty">
+    Nothing to display
+  </div>
+  <div class="tasks-tab" v-else>
+    <task-chips
+      :count-all="tasks.length"
+      :count-completed="count_completed_tasks"
+      :count-pending="count_pending_tasks"
+      :count-behind="count_behind_tasks"
+      :count-open="count_open_tasks"
+      :active-chip.sync="active_chip"
+    />
 
-	<task-chips
-			:count-all="tasks.length"
-			:count-completed="count_completed_tasks"
-			:count-pending="count_pending_tasks"
-			:count-behind="count_behind_tasks"
-			:count-open="count_open_tasks"
-			:active-chip.sync="active_chip"
-	/>
-
-	<task-custom-table :tasks="filtered_tasks"	/>
-
-	</div>
+    <task-custom-table :tasks="filtered_tasks" />
+  </div>
 </template>
 
 <script>

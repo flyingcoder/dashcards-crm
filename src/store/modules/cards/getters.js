@@ -6,5 +6,6 @@ export const getters = {
     }, [])
     return cards.includes(card.toLowerCase())
   },
-  cards: state => state.cards
+  cards: state => state.cards,
+  dash_items: state => state.dash_items
 }

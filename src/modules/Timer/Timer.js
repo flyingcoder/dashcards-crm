@@ -1,4 +1,5 @@
 import { table_functionality } from '@/services/table-functionality/table-functionality'
+import isEmpty from 'lodash/isEmpty'
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import Breadcrumb from '@/common/Breadcrumb.vue'
@@ -44,5 +45,19 @@ export default {
     ]
   }),
 
-  methods: {}
+  created() {
+    const query = this.$route.query
+    if (isEmpty(query)) {
+      this.fill_table('get_timers', true)
+    } else {
+      this.update_table_actions(query)
+    }
+  },
+
+  methods: {
+    toggleAll() {
+      if (this.selected.length) this.selected = []
+      else this.selected = this.items.slice()
+    }
+  }
 }

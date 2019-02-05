@@ -1,38 +1,56 @@
 <template>
-	<div class="dynamic-card">
+  <div class="dynamic-card">
+    <delete-dialog
+      :open-dialog.sync="delete_dialog"
+      title="Delete Task"
+      text-content="Are you sure you want to delete this task?"
+      @delete="delete_task(item_to_delete)"
+    />
 
-		<delete-dialog
-				:open-dialog.sync="delete_dialog"
-				title="Delete Task"
-				text-content="Are you sure you want to delete this task?"
-				@delete="delete_task(item_to_delete)"
-		/>
-
-		<dash-card :title="validate_title(box.title)">
-			<template slot="actions">
-				<v-flex xs4 class="actions text-xs-right">
-					<v-btn fab flat small class="action">
-						<v-icon  @click="$emit('edit', box)">edit</v-icon>
-					</v-btn>
-					<v-btn fab flat small class="action">
-						<v-icon @click="$emit('delete', box.id)">close</v-icon>
-					</v-btn>
-				</v-flex>
-			</template>
-			<div class="content" slot="content">
-				<div class="task" v-for="(task, index) of box.tasks" :key="task.id">
-					{{ task.title }}
-					<div class="task-actions">
-						<v-icon color="indigo" class="task-icon" @click="edit_task_clicked(task, index)">edit</v-icon>
-						󠁿󠁿󠁿<span @click="open_delete_dialog({ task_index: index, task_id: task.id })" class="task-icon">🗙</span>
-					</div>
-				</div>
-			</div>
-			<v-btn large slot="footer" round class="add__new_btn" color="#3b589e" dark @click="$emit('add-task', box.id)">
-				ADD NEW
-			</v-btn>
-		</dash-card>
-	</div>
+    <dash-card :title="validate_title(box.title)">
+      <template slot="actions">
+        <v-flex xs4 class="actions text-xs-right">
+          <v-btn fab flat small class="action">
+            <v-icon @click="$emit('edit', box)">edit</v-icon>
+          </v-btn>
+          <v-btn fab flat small class="action">
+            <v-icon @click="$emit('delete', box.id)">close</v-icon>
+          </v-btn>
+        </v-flex>
+      </template>
+      <div class="content" slot="content">
+        <div class="task" v-for="(task, index) of box.tasks" :key="task.id">
+          {{ task.title }}
+          <div class="task-actions">
+            <v-icon
+              color="indigo"
+              class="task-icon"
+              @click="edit_task_clicked(task, index)"
+              >edit</v-icon
+            >
+            󠁿󠁿󠁿<span
+              @click="
+                open_delete_dialog({ task_index: index, task_id: task.id })
+              "
+              class="task-icon"
+              >🗙</span
+            >
+          </div>
+        </div>
+      </div>
+      <v-btn
+        large
+        slot="footer"
+        round
+        class="add__new_btn"
+        color="#3b589e"
+        dark
+        @click="$emit('add-task', box.id)"
+      >
+        ADD NEW
+      </v-btn>
+    </dash-card>
+  </div>
 </template>
 
 <script>
@@ -92,7 +110,8 @@ export default {
   @include styledScrollFor('.content');
 
   .content {
-    height: 400px;
+    height: 470px;
+    max-height: 470px;
     border: 1px solid $tableBorderBlue;
     padding: 0;
     overflow: auto;
@@ -134,15 +153,15 @@ export default {
         margin: 6px;
       }
     }
-    .content {
-      .task {
-        padding: 13px;
-        font-size: 14px;
-      }
+  }
+  .content {
+    .task {
+      padding: 13px;
+      font-size: 14px;
     }
-    .add__new_btn {
-      font-size: 12px;
-    }
+  }
+  .add__new_btn {
+    font-size: 12px;
   }
 }
 </style>

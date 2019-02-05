@@ -59,6 +59,10 @@ export default {
     this.fill_table('get_invoices', true)
   },
 
+  beforeDestroy() {
+    this.$store.commit('invoice/reset_state')
+  },
+
   methods: {
     create_invoice() {
       this.loading = true

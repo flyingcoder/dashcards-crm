@@ -1,13 +1,13 @@
 <template>
-	<div class="option logon-label">
-		<div class="icon">
-			<v-switch :value="switch1" :disabled="disabled" @change="switch1_changed">
-			</v-switch>
-		</div>
-		<div class="title">
-			<span class="label">Log on</span>
-		</div>
-	</div>
+  <div class="option logon-label">
+    <div class="icon">
+      <v-switch :value="switch1" :disabled="disabled" @change="switch1_changed">
+      </v-switch>
+    </div>
+    <div class="title">
+      <span class="label">Log on</span>
+    </div>
+  </div>
 </template>
 
 <script>

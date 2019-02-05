@@ -1,13 +1,10 @@
 <template>
-    <v-layout row wrap class="table-header">
-        <breadcrumb :paths="paths"/>
-        <v-btn v-if="!noButton"
-               fab small class="add__btn"
-               @click="$emit('click')"
-        >
-            <v-icon>add</v-icon>
-        </v-btn>
-    </v-layout>
+  <v-layout row wrap class="table-header">
+    <breadcrumb :paths="paths" />
+    <v-btn v-if="!noButton" fab small class="add__btn" @click="$emit('click')">
+      <v-icon>add</v-icon>
+    </v-btn>
+  </v-layout>
 </template>
 
 <script>

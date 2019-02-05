@@ -1,52 +1,54 @@
 <template>
-	<div class="task-custom-table">
+  <div class="task-custom-table">
+    <v-layout row class="header">
+      <v-flex xs3 class="task__tableHead">Assignee</v-flex>
+      <v-flex xs6 class="task__tableHead">Task</v-flex>
+      <v-flex xs3 class="task__tableHead">Status</v-flex>
+    </v-layout>
 
-		<v-layout row class="header">
-			<v-flex xs3 class="task__tableHead">Assignee</v-flex>
-			<v-flex xs6 class="task__tableHead">Task</v-flex>
-			<v-flex xs3 class="task__tableHead">Status</v-flex>
-		</v-layout>
+    <div class="body" :style="{ maxHeight: bodyMaxHeight }">
+      <v-layout
+        row
+        align-center
+        :class="['task__tableBody', { active: task.id === active_task_id }]"
+        v-for="task in tasks"
+        :key="task.id"
+        @click="row_clicked(task)"
+      >
+        <v-flex xs3 class="assignee__col">
+          <v-img
+            :src="require('@/assets/temp/user.png')"
+            height="40"
+            width="40"
+          />
+        </v-flex>
 
-		<div class="body" :style="{ maxHeight: bodyMaxHeight }">
-			<v-layout row align-center
-			          :class="['task__tableBody', { active: task.id === active_task_id }]"
-			          v-for="task in tasks"
-			          :key="task.id"
-			          @click="row_clicked(task)"
-			>
+        <v-flex xs6 class="project__col">
+          {{ task.title }}
+        </v-flex>
 
-				<v-flex xs3 class="assignee__col">
-					<v-img :src="require('@/assets/temp/user.png')" height="40" width="40" />
-				</v-flex>
+        <v-flex xs3 class="status__col">
+          {{ task.status }}
 
-				<v-flex xs6 class="project__col">
-					{{ task.title }}
-				</v-flex>
+          <div v-if="task.status === 'completed'">
+            <div class="status__completed"></div>
+          </div>
 
-				<v-flex xs3 class="status__col">
-					{{task.status}}
+          <div v-if="task.status === 'pending'">
+            <div class="status__pending"></div>
+          </div>
 
-					<div v-if="task.status === 'completed'">
-						<div class="status__completed"></div>
-					</div>
+          <div v-if="task.status === 'behind'">
+            <div class="status__behind"></div>
+          </div>
 
-					<div v-if="task.status === 'pending'">
-						<div class="status__pending"></div>
-					</div>
-
-					<div v-if="task.status === 'behind'">
-						<div class="status__behind"></div>
-					</div>
-
-					<div v-if="task.status === 'open'">
-						<div class="status__open"></div>
-					</div>
-				</v-flex>
-
-			</v-layout>
-		</div>
-
-	</div>
+          <div v-if="task.status === 'open'">
+            <div class="status__open"></div>
+          </div>
+        </v-flex>
+      </v-layout>
+    </div>
+  </div>
 </template>
 
 <script>

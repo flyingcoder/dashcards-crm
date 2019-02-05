@@ -5,6 +5,7 @@ import _cloneDeep from 'lodash/cloneDeep'
 import DatePicker from '@/common/DatePicker.vue'
 import RichEditor from '@/common/RichEditor.vue'
 import MembersDropdown from '@/modules/Projects/components/MembersDropdown/MembersDropdown.vue'
+import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 
 export default {
   name: 'AddTaskDialog',
@@ -12,11 +13,12 @@ export default {
   components: {
     DatePicker,
     RichEditor,
-    MembersDropdown
+    MembersDropdown,
+    CustomDialog
   },
 
   props: {
-    id: Number,
+    id: [Number, String],
     dialog: Boolean,
     dialogTitle: String,
     isEditDialog: Boolean,
@@ -94,6 +96,9 @@ export default {
     cancel() {
       this.open = false
     },
+    open_dialog() {
+      this.$refs.dialog.open_dialog()
+    },
 
     save() {
       const fields_to_save = {
@@ -116,7 +121,7 @@ export default {
       this.days = new_fields.days
       this.start_date = new_fields.started_at
       this.end_date = new_fields.end_at
-      this.$set(this.members, 'selected', new_fields.assigned.map(m => m.id))
+      this.$set(this.members, 'selected', new_fields.assigned_id)
     },
 
     clear_and_close() {

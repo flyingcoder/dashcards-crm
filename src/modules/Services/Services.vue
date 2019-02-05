@@ -1,109 +1,104 @@
 <template>
-	<div class="services">
+  <div class="services">
+    <table-header :paths="paths" @click="add_dialog = true" />
 
-		<table-header :paths="paths" @click="add_dialog = true" />
+    <services-add-dialog
+      :dialog.sync="add_dialog"
+      ref="add_dialog"
+      title="Add New Service(s)"
+      @save="add_item('add_new_services', $event)"
+    />
 
-		<services-add-dialog
-				:dialog.sync="add_dialog"
-				ref="add_dialog"
-				title="Add New Service(s)"
-				@save="add_item('add_new_services', $event)"
-		/>
+    <services-edit-dialog
+      :dialog.sync="edit_dialog"
+      ref="edit_dialog"
+      title="Edit Service"
+      :is-edit-dialog="edit_dialog"
+      :fields-to-edit="edit_item"
+      @save="update_item('update_service', $event)"
+    />
 
-		<services-edit-dialog
-				:dialog.sync="edit_dialog"
-				ref="edit_dialog"
-				title="Edit Service"
-				:is-edit-dialog="edit_dialog"
-				:fields-to-edit="edit_item"
-				@save="update_item('update_service', $event)"
-		/>
+    <delete-dialog
+      :open-dialog.sync="delete_dialog"
+      title="Delete Service"
+      text-content="Are you sure you want to delete this service?"
+      @delete="delete_item('delete_service')"
+    />
 
-		<delete-dialog
-				:open-dialog.sync="delete_dialog"
-				title="Delete Service"
-				text-content="Are you sure you want to delete this service?"
-				@delete="delete_item('delete_service')"
-		/>
+    <custom-table
+      v-if="items.length || loading"
+      :headers="headers"
+      :items="items"
+      :loading="loading"
+      :sort="sort"
+      :has-checkbox="true"
+      hide-actions
+      toolbar-title="Services"
+      no-row-view
+      :permission="$_permissions.get('services')"
+      @items-selected="selected_ids = $event"
+      @sorted="changeSort"
+      @edit="open_edit_dialog"
+      @delete="open_delete_dialog"
+    >
+      <template slot="custom-item" slot-scope="item">
+        <td class="service__name text-cap">{{ item.item.service_name }}</td>
+        <td class="text-cap">{{ item.item.name }}</td>
+        <td>{{ item.item.service_created_at }}</td>
+      </template>
 
-		<custom-table
-			v-if="items.length || loading"
-			:headers="headers"
-			:items="items"
-			:loading="loading"
-			:sort="sort"
-			:has-checkbox="true"
-			hide-actions
-			@items-selected="selected_ids = $event"
-			@sorted="changeSort"
-			toolbar-title="Services"
-		>
+      <template slot="table-actions">
+        <div class="actions-wrapper">
+          <div class="bulk-delete">
+            <v-btn
+              color="indigo"
+              dark
+              outline
+              :disabled="!show_delete_selected"
+            >
+              Delete Selected
+            </v-btn>
+          </div>
 
-			<template slot="custom-item" slot-scope="item">
-				<td class="service__name text-cap">{{ item.item.service_name }}</td>
+          <div class="rows-per-page-dropdown">
+            Rows per page:
+            <v-select
+              :items="rows_per_page_items"
+              menu-props="auto"
+              v-model="rows_per_page"
+            ></v-select>
+          </div>
 
-				<td class="text-cap">{{ item.item.name }}</td>
+          <div class="pagination">
+            <div class="text-xs-center pt-2">
+              <v-pagination
+                :length="total_items"
+                :total-visible="5"
+                v-model="page"
+              ></v-pagination>
+            </div>
+          </div>
+        </div>
+      </template>
+    </custom-table>
 
-				<td>{{ item.item.service_created_at }}</td>
-
-				<td class="text-xs-center">
-
-					<v-btn fab small flat depressed
-						@click="open_edit_dialog(item.item)"
-					>
-						<img src="@/assets/icons/groups/edit.svg" alt="">
-					</v-btn>
-
-					<v-btn fab small flat depressed
-						@click="open_delete_dialog(item.item)"
-					>
-						<img src="@/assets/icons/groups/delete.svg" alt="">
-					</v-btn>
-
-				</td>
-			</template>
-
-			<template slot="table-actions">
-
-				<div class="actions-wrapper">
-
-					<div class="bulk-delete">
-						<v-btn color="indigo" dark outline :disabled="!show_delete_selected">
-							Delete Selected
-						</v-btn>
-					</div>
-
-					<div class="rows-per-page-dropdown">
-						Rows per page: <v-select :items="rows_per_page_items" menu-props="auto" v-model="rows_per_page"></v-select>
-					</div>
-
-					<div class="pagination">
-						<div class="text-xs-center pt-2">
-							<v-pagination :length="total_items" :total-visible="5" v-model="page"></v-pagination>
-						</div>
-					</div>
-
-				</div>
-			</template>
-
-		</custom-table>
-
-		<div class="empty-service" v-else>
-			<div class="empty-content">
-				<div class="empty-svg">
-					<svg viewBox="0 0 250 250">
-						<path d="M57 58l151 0 0 -7c0,-4 -2,-7 -4,-10 -3,-3 -7,-4 -11,-4l-165 0c-4,0 -8,1 -10,4 -3,3 -5,6 -5,10l0 113c0,4 2,8 5,10 2,3 6,4 10,4l1 0 0 -92c0,-8 3,-15 8,-20 5,-5 12,-8 20,-8zm164 0l1 0c8,0 15,3 20,8 5,5 8,12 8,20l0 113c0,7 -3,14 -8,20 -5,5 -12,8 -20,8l-165 0c-8,0 -15,-3 -20,-8 -5,-6 -8,-13 -8,-20l0 -7 -1 0c-8,0 -15,-3 -20,-8 -5,-5 -8,-12 -8,-20l0 -113c0,-7 3,-14 8,-20 5,-5 12,-8 20,-8l165 0c8,0 15,3 20,8 5,6 8,13 8,20l0 7zm1 14l-165 0c-4,0 -8,1 -11,4 -2,2 -4,6 -4,10l0 113c0,4 2,7 4,10 3,3 7,4 11,4l165 0c4,0 8,-1 10,-4 3,-3 5,-6 5,-10l0 -113c0,-4 -2,-8 -5,-10 -2,-3 -6,-4 -10,-4z M125 67c3,0 5,1 7,3l0 0c1,2 2,4 2,7l0 5c6,1 10,3 15,6l4 -4c1,-2 4,-3 6,-3 3,0 5,1 7,3 2,2 3,4 3,7 0,2 -1,5 -3,6l-4 4c3,4 5,9 6,15l5 0c3,0 5,1 7,2l0 0c2,2 3,4 3,7 0,3 -1,5 -3,7 -2,1 -4,2 -7,2l-4 0c-2,6 -4,11 -7,15l4 4c2,1 3,4 3,6 0,3 -1,5 -3,7 -2,2 -4,3 -7,3 -2,0 -5,-1 -6,-3l-4 -3c-4,3 -9,5 -15,6l0 4c0,3 -1,5 -2,7 -2,2 -4,3 -7,3 -3,0 -5,-1 -7,-3l0 0c-1,-2 -2,-4 -2,-7l0 -4c-6,-1 -11,-3 -15,-6l-4 3c-1,2 -4,3 -6,3 -3,0 -5,-1 -7,-3 -2,-2 -3,-4 -3,-7 0,-2 1,-5 3,-6l4 -4c-3,-4 -5,-9 -7,-15l-4 0c-3,0 -5,-1 -7,-2l0 0c-2,-2 -3,-4 -3,-7 0,-3 1,-5 3,-7l0 0c2,-1 4,-2 7,-2l5 0c1,-6 3,-11 6,-15l-4 -4c-2,-1 -3,-4 -3,-6 0,-3 1,-5 3,-7 2,-2 4,-3 7,-3 2,0 5,1 6,3l4 4c5,-3 9,-5 15,-6l0 -5c0,-3 1,-5 2,-7l0 0c2,-2 4,-3 7,-3zm1 14l0 -4c0,-1 0,-1 0,-1l0 0c0,-1 -1,-1 -1,-1 0,0 -1,0 -1,1l0 0c0,0 0,0 0,1l0 4c0,0 1,0 1,0 0,0 1,0 1,0zm29 12c1,0 1,1 1,1 1,0 1,1 1,1l3 -3c1,0 1,-1 1,-1 0,-1 0,-1 -1,-1 0,-1 0,-1 -1,-1 0,0 -1,0 -1,1l-3 3zm14 31c0,0 0,1 0,1 0,1 0,1 0,1l4 0c1,0 1,0 1,0 1,0 1,-1 1,-1 0,0 0,-1 -1,-1l0 0c0,0 0,0 -1,0l-4 0zm-11 32c-1,0 -1,0 -2,1 0,0 0,0 0,1l2 2c0,1 1,1 1,1 1,0 1,0 1,-1 1,0 1,0 1,-1 0,0 0,-1 -1,-1l-2 -2zm-32 14c0,0 -1,0 -1,0 0,0 -1,0 -1,0l0 3c0,1 0,1 0,1l0 0c0,1 1,1 1,1 0,0 1,0 1,-1 0,0 0,0 0,-1l0 -3zm-32 -12c0,-1 0,-1 0,-1 -1,-1 -1,-1 -2,-1l-2 2c-1,0 -1,1 -1,1 0,1 0,1 1,1 0,1 0,1 1,1 0,0 1,0 1,-1l2 -2zm-13 -32c0,0 0,0 0,-1 0,0 0,-1 0,-1l-4 0c-1,0 -1,0 -1,0l0 0c-1,0 -1,1 -1,1 0,0 0,1 1,1l0 0c0,0 0,0 1,0l4 0zm12 -31c0,0 0,-1 1,-1 0,0 0,-1 1,-1l-3 -3c0,-1 -1,-1 -1,-1 -1,0 -1,0 -1,1 -1,0 -1,0 -1,1 0,0 0,1 1,1l3 3zm32 11c5,0 10,2 14,6 3,3 5,8 5,13 0,6 -2,11 -5,14l0 0c-4,4 -9,6 -14,6 -5,0 -10,-2 -14,-6l0 0c-3,-3 -5,-8 -5,-14 0,-5 2,-10 5,-13l0 0c4,-4 9,-6 14,-6zm4 15c-1,-1 -2,-1 -4,-1 -2,0 -3,0 -4,1l0 0c-1,1 -2,3 -2,4 0,2 1,4 2,5 1,1 2,1 4,1 2,0 3,0 4,-1 1,-1 2,-3 2,-5 0,-1 -1,-3 -2,-4zm18 -17c-6,-6 -13,-9 -22,-9 -9,0 -16,3 -22,9 -5,5 -9,13 -9,21 0,9 4,17 9,22 6,6 13,9 22,9 9,0 16,-3 22,-9 5,-5 9,-13 9,-22 0,-8 -4,-16 -9,-21z"/>
-					</svg>
-				</div>
-				<div class="empty-btn">
-					<v-btn large dark color="#3b589e"  @click="add_dialog = true">Add Service</v-btn>
-				</div>
-			</div>
-		</div>
-
-	</div>
+    <div class="empty-service" v-else>
+      <div class="empty-content">
+        <div class="empty-svg">
+          <svg viewBox="0 0 250 250">
+            <path
+              d="M57 58l151 0 0 -7c0,-4 -2,-7 -4,-10 -3,-3 -7,-4 -11,-4l-165 0c-4,0 -8,1 -10,4 -3,3 -5,6 -5,10l0 113c0,4 2,8 5,10 2,3 6,4 10,4l1 0 0 -92c0,-8 3,-15 8,-20 5,-5 12,-8 20,-8zm164 0l1 0c8,0 15,3 20,8 5,5 8,12 8,20l0 113c0,7 -3,14 -8,20 -5,5 -12,8 -20,8l-165 0c-8,0 -15,-3 -20,-8 -5,-6 -8,-13 -8,-20l0 -7 -1 0c-8,0 -15,-3 -20,-8 -5,-5 -8,-12 -8,-20l0 -113c0,-7 3,-14 8,-20 5,-5 12,-8 20,-8l165 0c8,0 15,3 20,8 5,6 8,13 8,20l0 7zm1 14l-165 0c-4,0 -8,1 -11,4 -2,2 -4,6 -4,10l0 113c0,4 2,7 4,10 3,3 7,4 11,4l165 0c4,0 8,-1 10,-4 3,-3 5,-6 5,-10l0 -113c0,-4 -2,-8 -5,-10 -2,-3 -6,-4 -10,-4z M125 67c3,0 5,1 7,3l0 0c1,2 2,4 2,7l0 5c6,1 10,3 15,6l4 -4c1,-2 4,-3 6,-3 3,0 5,1 7,3 2,2 3,4 3,7 0,2 -1,5 -3,6l-4 4c3,4 5,9 6,15l5 0c3,0 5,1 7,2l0 0c2,2 3,4 3,7 0,3 -1,5 -3,7 -2,1 -4,2 -7,2l-4 0c-2,6 -4,11 -7,15l4 4c2,1 3,4 3,6 0,3 -1,5 -3,7 -2,2 -4,3 -7,3 -2,0 -5,-1 -6,-3l-4 -3c-4,3 -9,5 -15,6l0 4c0,3 -1,5 -2,7 -2,2 -4,3 -7,3 -3,0 -5,-1 -7,-3l0 0c-1,-2 -2,-4 -2,-7l0 -4c-6,-1 -11,-3 -15,-6l-4 3c-1,2 -4,3 -6,3 -3,0 -5,-1 -7,-3 -2,-2 -3,-4 -3,-7 0,-2 1,-5 3,-6l4 -4c-3,-4 -5,-9 -7,-15l-4 0c-3,0 -5,-1 -7,-2l0 0c-2,-2 -3,-4 -3,-7 0,-3 1,-5 3,-7l0 0c2,-1 4,-2 7,-2l5 0c1,-6 3,-11 6,-15l-4 -4c-2,-1 -3,-4 -3,-6 0,-3 1,-5 3,-7 2,-2 4,-3 7,-3 2,0 5,1 6,3l4 4c5,-3 9,-5 15,-6l0 -5c0,-3 1,-5 2,-7l0 0c2,-2 4,-3 7,-3zm1 14l0 -4c0,-1 0,-1 0,-1l0 0c0,-1 -1,-1 -1,-1 0,0 -1,0 -1,1l0 0c0,0 0,0 0,1l0 4c0,0 1,0 1,0 0,0 1,0 1,0zm29 12c1,0 1,1 1,1 1,0 1,1 1,1l3 -3c1,0 1,-1 1,-1 0,-1 0,-1 -1,-1 0,-1 0,-1 -1,-1 0,0 -1,0 -1,1l-3 3zm14 31c0,0 0,1 0,1 0,1 0,1 0,1l4 0c1,0 1,0 1,0 1,0 1,-1 1,-1 0,0 0,-1 -1,-1l0 0c0,0 0,0 -1,0l-4 0zm-11 32c-1,0 -1,0 -2,1 0,0 0,0 0,1l2 2c0,1 1,1 1,1 1,0 1,0 1,-1 1,0 1,0 1,-1 0,0 0,-1 -1,-1l-2 -2zm-32 14c0,0 -1,0 -1,0 0,0 -1,0 -1,0l0 3c0,1 0,1 0,1l0 0c0,1 1,1 1,1 0,0 1,0 1,-1 0,0 0,0 0,-1l0 -3zm-32 -12c0,-1 0,-1 0,-1 -1,-1 -1,-1 -2,-1l-2 2c-1,0 -1,1 -1,1 0,1 0,1 1,1 0,1 0,1 1,1 0,0 1,0 1,-1l2 -2zm-13 -32c0,0 0,0 0,-1 0,0 0,-1 0,-1l-4 0c-1,0 -1,0 -1,0l0 0c-1,0 -1,1 -1,1 0,0 0,1 1,1l0 0c0,0 0,0 1,0l4 0zm12 -31c0,0 0,-1 1,-1 0,0 0,-1 1,-1l-3 -3c0,-1 -1,-1 -1,-1 -1,0 -1,0 -1,1 -1,0 -1,0 -1,1 0,0 0,1 1,1l3 3zm32 11c5,0 10,2 14,6 3,3 5,8 5,13 0,6 -2,11 -5,14l0 0c-4,4 -9,6 -14,6 -5,0 -10,-2 -14,-6l0 0c-3,-3 -5,-8 -5,-14 0,-5 2,-10 5,-13l0 0c4,-4 9,-6 14,-6zm4 15c-1,-1 -2,-1 -4,-1 -2,0 -3,0 -4,1l0 0c-1,1 -2,3 -2,4 0,2 1,4 2,5 1,1 2,1 4,1 2,0 3,0 4,-1 1,-1 2,-3 2,-5 0,-1 -1,-3 -2,-4zm18 -17c-6,-6 -13,-9 -22,-9 -9,0 -16,3 -22,9 -5,5 -9,13 -9,21 0,9 4,17 9,22 6,6 13,9 22,9 9,0 16,-3 22,-9 5,-5 9,-13 9,-22 0,-8 -4,-16 -9,-21z"
+            />
+          </svg>
+        </div>
+        <div class="empty-btn">
+          <v-btn large dark color="#3b589e" @click="add_dialog = true"
+            >Add Service</v-btn
+          >
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
-<script src="./Services.js">
-</script>
-<style lang="scss" scoped src="./Services.scss">
-</style>
+<script src="./Services.js"></script>
+<style lang="scss" scoped src="./Services.scss"></style>

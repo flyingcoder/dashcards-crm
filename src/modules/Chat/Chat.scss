@@ -220,8 +220,11 @@
 }
 
 .chat{
+    padding: 14px 28px;
+}
+
+.chat-container{
     padding: 25px;
-    margin: 25px;
     background-color: $white;
     border: 1px solid $tableBorderBlue;
     border-radius: 10px;

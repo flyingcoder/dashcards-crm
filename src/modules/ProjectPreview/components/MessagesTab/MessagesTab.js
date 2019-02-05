@@ -1,15 +1,24 @@
 import { table_functionality } from '@/services/table-functionality/table-functionality'
+import { is_screen_medium_and_down } from '@/global_utils/is_screen_medium_and_down'
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 
 export default {
   name: 'MessagesTab',
-  mixins: [table_functionality],
+  mixins: [table_functionality, is_screen_medium_and_down],
   components: {
     CustomTable
   },
 
   data: () => ({
+    tabs: [
+      { title: 'Client Messages', counter: '250' },
+      { title: 'Team Messages', counter: '120' }
+    ],
+    texts: [
+      { title: 'Client Messages', content: 'Client messages ...' },
+      { title: 'Team Messages', content: 'Team messages ...' }
+    ],
     sortList: [
       { title: 'Sort by Client' },
       { title: 'Sort by Task' },

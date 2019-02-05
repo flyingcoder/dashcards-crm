@@ -10,7 +10,6 @@ import { forgotPassword } from './routes/forgotPassword'
 import { pricing } from './routes/pricing'
 import { dashboard } from './routes/dashboard'
 import { clients } from './routes/clients'
-import { groups } from './routes/groups'
 import { templates } from './routes/templates'
 import { milestones } from './routes/milestones'
 import { milestoneTasks } from './routes/milestoneTasks'
@@ -28,7 +27,8 @@ import { reports } from './routes/reports'
 import { payment } from './routes/payment'
 import { cloud } from './routes/cloud'
 import { support } from './routes/support'
-import { user_profile } from './routes/userProfile'
+import { member_profile } from './routes/memberProfile'
+import { client_profile } from './routes/clientProfile'
 
 Vue.use(Router)
 
@@ -40,7 +40,6 @@ export default new Router({
       children: [
         dashboard, // path: '' => info the path is empty because is the default component for the parent
         clients, // path: /dashboard/clients
-        groups, // path: /dashboard/team/groups
         templates, // path: /dashboard/templates
         milestones, // path: /dashboard/templates/:id/milestone
         milestoneTasks, // path: /dashboard/templates/:id/milestone/:id2/task
@@ -58,7 +57,8 @@ export default new Router({
         payment, //path: /dashboard/payment
         cloud, //path: /dashboard/cloud
         support, //path: /dashboard/support
-        user_profile //path: /dashboard/team/profile/:id
+        member_profile, //path: /dashboard/team/profile/:id
+        client_profile //path: /dashboard/clients/profile/:id
       ]
     },
 

@@ -14,6 +14,22 @@
         font-size: 30px;
     }
 
+    .client-name{
+        color: $tableBlueText;
+        font-weight: 500;
+        flex: 3;
+    }
+    .client-img{
+        display: flex;
+        align-items: center;
+        flex: 1;
+        img{
+            height: 52px;
+            border-radius: 50%;
+            margin-right: 30px;
+        }
+    }
+
     .timer__option{
         .v-icon{
             font-size: 24px;

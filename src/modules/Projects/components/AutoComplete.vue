@@ -1,20 +1,20 @@
 <template>
-	<div class="autocomplete-wrapper">
-		<v-autocomplete
-				:value="value"
-				:items="items"
-				:loading="isLoading"
-				:search-input.sync="search"
-				return-object
-				cache-items
-				v-bind="$attrs"
-				@change="changed"
-        hide-details
-        prepend-icon="search"
-        color="#657186"
-        clearable
-		></v-autocomplete>
-	</div>
+  <div class="autocomplete-wrapper">
+    <v-autocomplete
+      :value="value"
+      :items="items"
+      :loading="isLoading"
+      :search-input.sync="search"
+      return-object
+      cache-items
+      v-bind="$attrs"
+      @change="changed"
+      hide-details
+      prepend-icon="search"
+      color="#657186"
+      clearable
+    ></v-autocomplete>
+  </div>
 </template>
 
 <script>

@@ -49,5 +49,14 @@ export default {
 
   created() {
     this.fill_table('get_clients', true)
+  },
+
+  methods: {
+    navigate_to_view_profile(id) {
+      this.$router.push({
+        name: 'client/profile',
+        params: { user_id: id }
+      })
+    }
   }
 }

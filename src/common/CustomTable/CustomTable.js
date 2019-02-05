@@ -1,19 +1,46 @@
 export default {
   name: 'CustomTable',
   inheritAttrs: false,
-  props: [
-    'headers',
-    'items',
-    'loading',
-    'has-checkbox',
-    'has-header-icon',
-    'sort',
-    'toolbar-title'
-  ],
+
+  props: {
+    headers: Array,
+    items: Array,
+    loading: Boolean,
+    hasCheckbox: Boolean,
+    hasHeaderIcon: Boolean,
+    sort: Object,
+    toolbarTitle: String,
+    noRowEdit: Boolean,
+    noRowDelete: Boolean,
+    noRowView: Boolean,
+    showRowActions: {
+      type: Boolean,
+      default: true
+    },
+    permission: Object
+  },
 
   data: () => ({
     selected: []
   }),
+
+  computed: {
+    user() {
+      return this.$store.getters.user
+    },
+    can_view() {
+      if (this.user.is_admin) return true
+      return this.permission && this.permission.view
+    },
+    can_edit() {
+      if (this.user.is_admin) return true
+      return this.permission && this.permission.update
+    },
+    can_delete() {
+      if (this.user.is_admin) return true
+      return this.permission && this.permission.delete
+    }
+  },
 
   watch: {
     selected(newVal) {

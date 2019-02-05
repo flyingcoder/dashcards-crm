@@ -1,13 +1,11 @@
 <template>
-    <v-snackbar
-        v-model="snackbar"
-        :color="color"
-        :timeout="timeout"
-    >
-        <v-icon color="white" medium>{{icon}}</v-icon>
-        {{ text }}
-        <v-icon color="white" @click="snackbar = false" medium>{{$vuetify.icons.clear}}</v-icon>
-    </v-snackbar>
+  <v-snackbar v-model="snackbar" :color="color" :timeout="timeout">
+    <v-icon color="white" medium>{{ icon }}</v-icon>
+    {{ text }}
+    <v-icon color="white" @click="snackbar = false" medium>{{
+      $vuetify.icons.clear
+    }}</v-icon>
+  </v-snackbar>
 </template>
 <script>
 export default {
