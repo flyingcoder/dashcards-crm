@@ -39,6 +39,7 @@
 				:has-checkbox="true"
 				hide-actions
 				class="custom__table"
+				:permission="$_permissions.get('hq_members')"
 				@items-selected="selected_ids = $event"
 				@sorted="changeSort"
 				@edit="open_edit_dialog"

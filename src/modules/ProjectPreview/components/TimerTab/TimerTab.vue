@@ -9,19 +9,20 @@
 				:sort="sort"
 				:has-checkbox="true"
 				hide-actions
+			    :permission="$_permissions.get('timers')"
 				@items-selected="selected_ids = $event"
 				@sorted="changeSort"
 		>
-        
+
             <template slot="toolbar">
                 <v-toolbar flat class="table__toolbar">
-                    
+
                     <v-toolbar-title class="table__toolbar-title">Timer</v-toolbar-title>
 
                     <v-spacer></v-spacer>
 
                     <v-toolbar-items class="timer__option">
-                        
+
                         <v-menu class="sort__dropdown"
                             transition="slide-y-transition"
                             :nudge-left="110"
@@ -37,7 +38,7 @@
                                 </v-list-tile>
                             </v-list>
                         </v-menu>
-                    
+
                     </v-toolbar-items>
                 </v-toolbar>
             </template>

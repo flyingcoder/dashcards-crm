@@ -38,6 +38,7 @@
 						:has-checkbox="true"
 						hide-actions
 						toolbar-title="Milestone Templates"
+						:permission="$_permissions.get('templates')"
 						@items-selected="selected_ids = $event"
 						@sorted="changeSort"
 						@edit="open_edit_dialog"

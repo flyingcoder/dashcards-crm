@@ -33,6 +33,7 @@
 				:sort="sort"
 				:has-checkbox="true"
 				hide-actions
+				:permission="$_permissions.get('invoice')"
 				@items-selected="selected_ids = $event"
 				@edit="open_edit_dialog"
 				@delete="open_delete_dialog"

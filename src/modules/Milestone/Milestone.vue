@@ -38,6 +38,7 @@
 						:has-checkbox="true"
 						hide-actions
 						toolbar-title="Milestones"
+						:permission="$_permissions.get('hq_milestones')"
 						@items-selected="selected_ids = $event"
 						@sorted="changeSort"
 						@edit="open_edit_dialog"

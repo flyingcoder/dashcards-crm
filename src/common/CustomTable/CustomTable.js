@@ -30,15 +30,15 @@ export default {
     },
     can_view() {
       if (this.user.is_admin) return true
-      return this.permission.view
+      return this.permission && this.permission.view
     },
     can_edit() {
       if (this.user.is_admin) return true
-      return this.permission.update
+      return this.permission && this.permission.update
     },
     can_delete() {
       if (this.user.is_admin) return true
-      return this.permission.delete
+      return this.permission && this.permission.delete
     }
   },
 

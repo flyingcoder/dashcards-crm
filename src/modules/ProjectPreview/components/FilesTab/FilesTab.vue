@@ -20,6 +20,7 @@
 				:items="items"
 				:has-checkbox="true"
 				hide-actions
+				:permission="$_permissions.get('hq_files')"
 				@items-selected="selected_ids = $event"
 				class="custom__table"
 				no-row-edit
