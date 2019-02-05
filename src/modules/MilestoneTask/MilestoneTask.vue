@@ -39,6 +39,7 @@
 						hide-actions
 						toolbar-title="Tasks"
 						no-row-view
+						:permission="$_permissions.get('hq_milestone_tasks')"
 						@items-selected="selected_ids = $event"
 						@sorted="changeSort"
 						@edit="open_edit_dialog"

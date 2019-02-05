@@ -34,6 +34,7 @@
 				hide-actions
 				no-row-edit
 				no-row-view
+				:permission="$_permissions.get('hq_members')"
 				@items-selected="selected_ids = $event"
 				@sorted="changeSort"
 		>

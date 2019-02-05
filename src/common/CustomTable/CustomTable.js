@@ -16,12 +16,31 @@ export default {
     showRowActions: {
       type: Boolean,
       default: true
-    }
+    },
+    permission: Object
   },
 
   data: () => ({
     selected: []
   }),
+
+  computed: {
+    user() {
+      return this.$store.getters.user
+    },
+    can_view() {
+      if (this.user.is_admin) return true
+      return this.permission && this.permission.view
+    },
+    can_edit() {
+      if (this.user.is_admin) return true
+      return this.permission && this.permission.update
+    },
+    can_delete() {
+      if (this.user.is_admin) return true
+      return this.permission && this.permission.delete
+    }
+  },
 
   watch: {
     selected(newVal) {

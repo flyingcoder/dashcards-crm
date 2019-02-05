@@ -54,8 +54,9 @@
 								:sort="sort"
 								:has-checkbox="true"
 								hide-actions
-								@items-selected="selected_ids = $event"
 								toolbar-title="Groups"
+								:permission="$_permissions.get('groups')"
+								@items-selected="selected_ids = $event"
 								@sorted="changeSort"
 						>
 

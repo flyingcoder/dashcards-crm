@@ -35,6 +35,7 @@
 				hide-actions
 				toolbar-title="Permissions"
 				no-row-view
+				:permission="$_permissions.get('permissions')"
 				@items-selected="selected_ids = $event"
 				@sorted="changeSort"
 				@edit="open_edit_dialog"

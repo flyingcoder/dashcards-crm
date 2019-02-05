@@ -33,6 +33,7 @@
 				:sort="sort"
 				:has-checkbox="true"
 				hide-actions
+				:permission="$_permissions.get('projects')"
 				@items-selected="selected_ids = $event"
 				toolbar-title="Projects"
 				@sorted="changeSort"

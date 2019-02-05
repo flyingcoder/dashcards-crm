@@ -11,17 +11,18 @@
 							:loading="loading"
 							:has-checkbox="true"
 							hide-actions
+							:permission="$_permissions.get('invoice')"
 							@items-selected="selected_ids = $event"
 					>
 
 						<div class="toolbar" slot="toolbar">
 							<v-flex xs4>
-								<v-select 
+								<v-select
 										class="dialog__selectfield"
 										solo
 										hide-details
-										color="#657186" 
-										:items="['Remind', 'Cancel', 'Archive']" 
+										color="#657186"
+										:items="['Remind', 'Cancel', 'Archive']"
 										label="Batch Actions"
 								></v-select>
 							</v-flex>

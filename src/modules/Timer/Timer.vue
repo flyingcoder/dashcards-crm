@@ -11,18 +11,19 @@
 				:sort="sort"
 				:has-checkbox="true"
 				hide-actions
+				:permission="$_permissions.get('timers')"
 				@items-selected="selected_ids = $event"
 				@sorted="changeSort"
 		>
 		<template slot="toolbar">
 			<v-toolbar flat class="table__toolbar">
-				
+
 				<v-toolbar-title class="table__toolbar-title">Timer</v-toolbar-title>
 
 				<v-spacer></v-spacer>
 
 				<v-toolbar-items class="timer__option">
-					
+
 					<v-menu class="sort__dropdown"
 						transition="slide-y-transition"
 						:nudge-left="135"
@@ -38,13 +39,13 @@
 							</v-list-tile>
 						</v-list>
 					</v-menu>
-				
+
 				</v-toolbar-items>
 			</v-toolbar>
 		</template>
 
 		<template slot="custom-item" slot-scope="item" class="template-table">
-			
+
 			<td class="text-xs-left team__member"> <!--TODO fill image with dynamic data from backend-->
 				<div class="client-name">
 					<img :src="require('@/assets/temp/user.png')" /> &nbsp;
