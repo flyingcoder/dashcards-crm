@@ -57,7 +57,7 @@ export default {
         thumbnailWidth: 150,
         timeout: 500000,
         addRemoveLinks: true,
-        url: `https://api.bizzooka.com/api/user/${this.user_id}`,
+        url: `https://api.dashcards.com/api/user/${this.user_id}`,
         headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
       }
     }
