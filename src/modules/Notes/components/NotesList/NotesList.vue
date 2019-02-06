@@ -7,7 +7,12 @@
     <v-progress-linear v-if="loading" :indeterminate="true"></v-progress-linear>
 
     <div class="notes-body" v-else>
-      <div class="note" v-for="note of notes" :key="note.id">
+      <div
+        class="note"
+        v-for="note of notes"
+        :key="note.id"
+        @click="$emit('clicked', note)"
+      >
         <div class="note-name">
           <span>{{ note.title }}</span>
           <v-icon class="notify selected">notifications</v-icon>

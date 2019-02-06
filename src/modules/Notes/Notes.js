@@ -16,7 +16,8 @@ export default {
     ],
     dialog: false,
     notes: [],
-    loading: false
+    loading: false,
+    selected_note: null
   }),
 
   created() {
@@ -28,7 +29,10 @@ export default {
       this.loading = true
       api_to
         .get_notes()
-        .then(({ data }) => (this.notes = data.data))
+        .then(({ data }) => {
+          this.notes = data.data
+          this.select_first_note(data.data)
+        })
         .finally(() => (this.loading = false))
     },
 
@@ -37,6 +41,16 @@ export default {
         this.notes.push(data)
         this.$event.$emit('open_snackbar', 'Note Added Successfully')
       })
+    },
+
+    select_first_note(notes) {
+      if (notes.length) {
+        this.selected_note = notes[0]
+      }
+    },
+
+    change_selected(note) {
+      this.selected_note = note
     }
   }
 }

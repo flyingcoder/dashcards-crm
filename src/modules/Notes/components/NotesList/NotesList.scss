@@ -24,23 +24,24 @@
     .note{
         padding: 10px;
         border-bottom: 1px solid $borderLightGray;
+        cursor: pointer;
     }
-    
+
     .note-name{
         display: grid;
-        grid-template-columns: 1fr 30px; 
+        grid-template-columns: 1fr 30px;
         justify-content: space-between;
         grid-gap: 10px;
         align-items: center;
-        
+
         span{
             font-size: 16px;
             color: $textDark;
             font-weight: 500;
-            white-space: nowrap; 
-            width: 180px; 
+            white-space: nowrap;
+            width: 180px;
             overflow: hidden;
-            text-overflow: ellipsis; 
+            text-overflow: ellipsis;
         }
     }
 
@@ -60,10 +61,10 @@
     .note-desc p{
         font-size: 14px;
         color: $textDark;
-        white-space: nowrap; 
-        width: 200px; 
+        white-space: nowrap;
+        width: 200px;
         overflow: hidden;
-        text-overflow: ellipsis; 
+        text-overflow: ellipsis;
         margin: 0;
     }
 

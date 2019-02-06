@@ -1,3 +1,7 @@
 export default {
-  name: 'NoteForm'
+  name: 'NoteForm',
+  props: {
+    note: Object,
+    loading: Boolean
+  }
 }
