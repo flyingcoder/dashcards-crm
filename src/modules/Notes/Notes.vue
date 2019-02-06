@@ -1,7 +1,7 @@
 <template>
     <div class="notes">
 
-        <table-header :paths="paths" :noButton="true" />
+        <table-header :paths="paths" />
 
         <div class="notes-wrapper">
 
