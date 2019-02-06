@@ -1,8 +1,12 @@
 <template>
   <div class="notes">
-    <table-header :paths="paths" @click="dialog = true" />
-
-    <NotesDialog :dialog.sync="dialog" @save="save" />
+    <table-header :paths="paths" @click="notes_dialog = true" />
+    <NotesDialog :dialog.sync="notes_dialog" @save="save" />
+    <CollaboratorDialog
+      :dialog.sync="coll_dialog"
+      :collaborators="collaborators"
+      @save="save"
+    />
 
     <div class="notes-wrapper">
       <div class="notes-content">
@@ -11,7 +15,11 @@
           :loading="loading"
           @clicked="change_selected"
         />
-        <note-form :note="selected_note" :loading="loading" />
+        <note-form
+          :note="selected_note"
+          :loading="loading"
+          @collaborator="open_collaborators_dialog"
+        />
       </div>
     </div>
   </div>
