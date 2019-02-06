@@ -1,3 +1,7 @@
 export default {
-  name: 'NotesList'
+  name: 'NotesList',
+  props: {
+    notes: Array,
+    loading: Boolean
+  }
 }

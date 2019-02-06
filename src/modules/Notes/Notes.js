@@ -15,14 +15,28 @@ export default {
       { text: 'Notes', disabled: true, router_name: null }
     ],
     dialog: false,
-    comment: null,
-    title: null,
-    description: null
+    notes: [],
+    loading: false
   }),
 
-  computed: {
-    api_to() {
-      return api_to
+  created() {
+    this.fetch_notes()
+  },
+
+  methods: {
+    fetch_notes() {
+      this.loading = true
+      api_to
+        .get_notes()
+        .then(({ data }) => (this.notes = data.data))
+        .finally(() => (this.loading = false))
+    },
+
+    save(payload) {
+      api_to.add_new_note(payload).then(({ data }) => {
+        this.notes.push(data)
+        this.$event.$emit('open_snackbar', 'Note Added Successfully')
+      })
     }
   }
 }
