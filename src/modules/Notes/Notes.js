@@ -1,13 +1,13 @@
+import { api_to } from './api'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
-import RichEditor from '@/common/RichEditor.vue'
-import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 import NotesList from './components/NotesList/NotesList.vue'
 import NoteForm from './components/NoteForm/NoteForm.vue'
+import NotesDialog from './components/NotesDialog/NotesDialog'
 
 export default {
   name: 'Notes',
-  components: { TableHeader, NotesList, NoteForm, CustomDialog, RichEditor },
+  components: { TableHeader, NotesList, NoteForm, NotesDialog },
 
   data: () => ({
     paths: [
@@ -18,5 +18,11 @@ export default {
     comment: null,
     title: null,
     description: null
-  })
+  }),
+
+  computed: {
+    api_to() {
+      return api_to
+    }
+  }
 }
