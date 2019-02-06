@@ -55,7 +55,8 @@
   </div>
 </template>
 
-<script src="./Forms.js"></script>
+<script src="./Forms.js">
+</script>
 
 <style lang="scss" scoped>
 .forms {

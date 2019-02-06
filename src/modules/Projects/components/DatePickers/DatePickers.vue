@@ -43,5 +43,7 @@
   </div>
 </template>
 
-<script src="./DatePickers.js"></script>
-<style lang="scss" scoped src="./DatePickers.scss"></style>
+<script src="./DatePickers.js">
+</script>
+<style lang="scss" scoped src="./DatePickers.scss">
+</style>

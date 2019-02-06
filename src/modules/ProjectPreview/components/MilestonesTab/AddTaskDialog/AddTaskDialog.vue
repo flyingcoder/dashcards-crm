@@ -65,6 +65,9 @@
   </div>
 </template>
 
-<script src="./AddTaskDialog.js"></script>
-<style lang="scss" scoped src="./AddTaskDialog.scss"></style>
-<style scoped src="./AddTaskDialog.css"></style>
+<script src="./AddTaskDialog.js">
+</script>
+<style lang="scss" scoped src="./AddTaskDialog.scss">
+</style>
+<style scoped src="./AddTaskDialog.css">
+</style>

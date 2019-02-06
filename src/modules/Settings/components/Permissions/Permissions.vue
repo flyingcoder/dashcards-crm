@@ -86,5 +86,7 @@
     </custom-table>
   </div>
 </template>
-<script src="./Permissions.js"></script>
-<style lang="scss" scoped src="./Permissions.scss"></style>
+<script src="./Permissions.js">
+</script>
+<style lang="scss" scoped src="./Permissions.scss">
+</style>

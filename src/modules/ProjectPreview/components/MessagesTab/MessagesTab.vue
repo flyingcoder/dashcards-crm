@@ -192,6 +192,9 @@
   </div>
 </template>
 
-<script src="./MessagesTab.js"></script>
-<style lang="scss" scoped src="./MessagesTab.scss"></style>
-<style scoped src="./MessagesTab.css"></style>
+<script src="./MessagesTab.js">
+</script>
+<style lang="scss" scoped src="./MessagesTab.scss">
+</style>
+<style scoped src="./MessagesTab.css">
+</style>

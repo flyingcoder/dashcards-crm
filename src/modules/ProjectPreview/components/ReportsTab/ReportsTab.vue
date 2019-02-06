@@ -85,6 +85,9 @@
   </v-layout>
 </template>
 
-<script src="./ReportsTab.js"></script>
-<style lang="scss" scoped src="./ReportsTab.scss"></style>
-<style scoped src="./ReportsTab.css"></style>
+<script src="./ReportsTab.js">
+</script>
+<style lang="scss" scoped src="./ReportsTab.scss">
+</style>
+<style scoped src="./ReportsTab.css">
+</style>

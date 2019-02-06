@@ -25,5 +25,7 @@
     </div>
   </div>
 </template>
-<style lang="scss" src="./DashboardLogo.scss"></style>
-<script src="./DashboardLogo.js"></script>
+<style lang="scss" src="./DashboardLogo.scss">
+</style>
+<script src="./DashboardLogo.js">
+</script>

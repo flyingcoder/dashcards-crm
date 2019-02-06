@@ -121,6 +121,9 @@
   </div>
 </template>
 
-<script src="./TableSection.js"></script>
-<style lang="scss" scoped src="./TableSection.scss"></style>
-<style scoped src="./TableSection.css"></style>
+<script src="./TableSection.js">
+</script>
+<style lang="scss" scoped src="./TableSection.scss">
+</style>
+<style scoped src="./TableSection.css">
+</style>

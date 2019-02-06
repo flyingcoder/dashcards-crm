@@ -61,6 +61,9 @@
   </div>
 </template>
 
-<script src="./MilestoneDialog.js"></script>
-<style lang="scss" scoped src="./MilestoneDialog.scss"></style>
-<style scoped src="./MilestoneDialog.css"></style>
+<script src="./MilestoneDialog.js">
+</script>
+<style lang="scss" scoped src="./MilestoneDialog.scss">
+</style>
+<style scoped src="./MilestoneDialog.css">
+</style>

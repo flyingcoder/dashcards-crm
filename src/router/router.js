@@ -29,6 +29,7 @@ import { cloud } from './routes/cloud'
 import { support } from './routes/support'
 import { member_profile } from './routes/memberProfile'
 import { client_profile } from './routes/clientProfile'
+import { notes } from './routes/notes'
 
 Vue.use(Router)
 
@@ -58,7 +59,8 @@ export default new Router({
         cloud, //path: /dashboard/cloud
         support, //path: /dashboard/support
         member_profile, //path: /dashboard/team/profile/:id
-        client_profile //path: /dashboard/clients/profile/:id
+        client_profile, //path: /dashboard/clients/profile/:id
+        notes //path: /dashboard/notes/
       ]
     },
 

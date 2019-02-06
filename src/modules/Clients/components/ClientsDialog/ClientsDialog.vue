@@ -120,6 +120,9 @@
   </v-layout>
 </template>
 
-<script src="./ClientsDialog.js"></script>
-<style lang="scss" scoped src="./ClientsDialog.scss"></style>
-<style scoped src="./ClientsDialog.css"></style>
+<script src="./ClientsDialog.js">
+</script>
+<style lang="scss" scoped src="./ClientsDialog.scss">
+</style>
+<style scoped src="./ClientsDialog.css">
+</style>

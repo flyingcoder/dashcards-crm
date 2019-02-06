@@ -170,5 +170,7 @@
     </div>
   </div>
 </template>
-<style lang="scss" src="./Teams.scss"></style>
-<script src="./Teams.js"></script>
+<style lang="scss" src="./Teams.scss">
+</style>
+<script src="./Teams.js">
+</script>

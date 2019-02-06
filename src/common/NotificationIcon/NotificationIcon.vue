@@ -21,5 +21,7 @@
   </v-menu>
 </template>
 
-<script src="./NotificationIcon.js"></script>
-<style lang="scss" scoped src="./NotificationIcon.scss"></style>
+<script src="./NotificationIcon.js">
+</script>
+<style lang="scss" scoped src="./NotificationIcon.scss">
+</style>

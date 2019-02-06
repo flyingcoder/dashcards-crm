@@ -111,7 +111,8 @@
   </div>
 </template>
 
-<script src="./Milestone.js"></script>
+<script src="./Milestone.js">
+</script>
 
 <style lang="scss" scoped>
 @import '~@/sass/variables';

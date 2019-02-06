@@ -89,8 +89,11 @@
   </v-layout>
 </template>
 
-<script src="./RightSide.js"></script>
+<script src="./RightSide.js">
+</script>
 
-<style lang="scss" scoped src="./RightSide.scss"></style>
+<style lang="scss" scoped src="./RightSide.scss">
+</style>
 
-<style scoped src="./RightSide.css"></style>
+<style scoped src="./RightSide.css">
+</style>

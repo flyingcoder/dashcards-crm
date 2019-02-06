@@ -72,8 +72,10 @@
   </div>
 </template>
 
-<script src="./Invoice.js"></script>
-<style lang="scss" scoped src="./Invoice.scss"></style>
+<script src="./Invoice.js">
+</script>
+<style lang="scss" scoped src="./Invoice.scss">
+</style>
 <style scoped>
 >>> .table__toolbar .v-toolbar__content {
   all: unset;
