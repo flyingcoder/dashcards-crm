@@ -1,0 +1,78 @@
+@import '~@/sass/_variables';
+
+.notes-list{
+    background-color: #ffffff;
+    border: 1px solid #dce1e5;
+    border-radius: 10px;
+
+    .note-header{
+        padding: 10px;
+        font-size: 24px;
+        color: $textDark;
+        text-align: left;
+        font-weight: 500;
+        border-bottom: 1px solid $borderLightGray;
+    }
+
+    @include styledScrollFor('.notes-body');
+
+    .notes-body{
+        overflow: auto;
+        max-height: 500px;
+    }
+
+    .note{
+        padding: 10px;
+        border-bottom: 1px solid $borderLightGray;
+    }
+    
+    .note-name{
+        display: grid;
+        grid-template-columns: 1fr 30px; 
+        justify-content: space-between;
+        grid-gap: 10px;
+        align-items: center;
+        
+        span{
+            font-size: 16px;
+            color: $textDark;
+            font-weight: 500;
+            white-space: nowrap; 
+            width: 180px; 
+            overflow: hidden;
+            text-overflow: ellipsis; 
+        }
+    }
+
+    .notify{
+        color: $gray;
+        cursor: pointer;
+
+        &.selected{
+            color: $blue;
+        }
+
+        &:hover{
+            color: $blue;
+        }
+    }
+
+    .note-desc p{
+        font-size: 14px;
+        color: $textDark;
+        white-space: nowrap; 
+        width: 200px; 
+        overflow: hidden;
+        text-overflow: ellipsis; 
+        margin: 0;
+    }
+
+    .view__more{
+        text-align: center;
+        padding: 10px;
+        border-top: 1px solid $borderLightGray;
+        .view__more_btn{
+            color: $tableDarkText;
+        }
+    }
+}

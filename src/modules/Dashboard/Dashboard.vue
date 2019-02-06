@@ -10,5 +10,7 @@
     </div>
   </div>
 </template>
-<style lang="scss" src="./Dashboard.scss"></style>
-<script src="./Dashboard.js"></script>
+<style lang="scss" src="./Dashboard.scss">
+</style>
+<script src="./Dashboard.js">
+</script>

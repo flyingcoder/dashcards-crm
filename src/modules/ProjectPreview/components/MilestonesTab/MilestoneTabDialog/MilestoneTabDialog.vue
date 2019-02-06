@@ -78,6 +78,9 @@
   </div>
 </template>
 
-<script src="./MilestoneTabDialog.js"></script>
-<style lang="scss" scoped src="./MilestoneTabDialog.scss"></style>
-<style scoped src="./MilestoneTabDialog.css"></style>
+<script src="./MilestoneTabDialog.js">
+</script>
+<style lang="scss" scoped src="./MilestoneTabDialog.scss">
+</style>
+<style scoped src="./MilestoneTabDialog.css">
+</style>

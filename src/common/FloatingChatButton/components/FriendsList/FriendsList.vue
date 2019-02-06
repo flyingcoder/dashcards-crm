@@ -45,5 +45,7 @@
   </v-menu>
 </template>
 
-<script src="./FriendsList.js"></script>
-<style lang="scss" scoped src="./FriendsList.scss"></style>
+<script src="./FriendsList.js">
+</script>
+<style lang="scss" scoped src="./FriendsList.scss">
+</style>

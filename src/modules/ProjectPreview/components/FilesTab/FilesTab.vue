@@ -79,8 +79,10 @@
   </div>
 </template>
 
-<script src="./FilesTab.js"></script>
-<style lang="scss" scoped src="./FilesTab.scss"></style>
+<script src="./FilesTab.js">
+</script>
+<style lang="scss" scoped src="./FilesTab.scss">
+</style>
 
 <style scoped>
 >>> .content__wrapper .buzz__tables .buzz__tablesTwo {

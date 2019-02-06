@@ -129,5 +129,7 @@
   </div>
 </template>
 
-<script src="./Groups.js"></script>
-<style lang="scss" scoped src="./Groups.scss"></style>
+<script src="./Groups.js">
+</script>
+<style lang="scss" scoped src="./Groups.scss">
+</style>

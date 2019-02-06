@@ -53,6 +53,8 @@
   </v-layout>
 </template>
 
-<script src="./PermissionsDialog.js"></script>
+<script src="./PermissionsDialog.js">
+</script>
 
-<style lang="scss" scoped src="./PermissionsDialog.scss"></style>
+<style lang="scss" scoped src="./PermissionsDialog.scss">
+</style>

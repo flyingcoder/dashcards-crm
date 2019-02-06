@@ -36,6 +36,8 @@
   </v-layout>
 </template>
 
-<script src="./AddDialog.js"></script>
+<script src="./AddDialog.js">
+</script>
 
-<style lang="scss" scoped src="./AddDialog.scss"></style>
+<style lang="scss" scoped src="./AddDialog.scss">
+</style>

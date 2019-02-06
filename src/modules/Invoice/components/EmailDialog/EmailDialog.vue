@@ -34,6 +34,9 @@
   </v-layout>
 </template>
 
-<script src="./EmailDialog.js"></script>
-<style lang="scss" scoped src="./EmailDialog.scss"></style>
-<style scoped src="./EmailDialog.css"></style>
+<script src="./EmailDialog.js">
+</script>
+<style lang="scss" scoped src="./EmailDialog.scss">
+</style>
+<style scoped src="./EmailDialog.css">
+</style>

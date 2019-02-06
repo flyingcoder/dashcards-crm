@@ -28,5 +28,7 @@
   </v-list>
 </template>
 
-<script src="./DashboardSidebar.js"></script>
-<style lang="scss" scoped src="./DashboardSidebar.scss"></style>
+<script src="./DashboardSidebar.js">
+</script>
+<style lang="scss" scoped src="./DashboardSidebar.scss">
+</style>

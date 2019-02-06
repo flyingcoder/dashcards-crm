@@ -320,6 +320,9 @@
   </div>
 </template>
 
-<script src="./Chat.js"></script>
-<style lang="scss" scoped src="./Chat.scss"></style>
-<style scoped src="./Chat.css"></style>
+<script src="./Chat.js">
+</script>
+<style lang="scss" scoped src="./Chat.scss">
+</style>
+<style scoped src="./Chat.css">
+</style>

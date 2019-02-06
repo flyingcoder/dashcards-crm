@@ -29,8 +29,10 @@
   </div>
 </template>
 
-<script src="./Right.js"></script>
-<style lang="scss" scoped src="./Right.scss"></style>
+<script src="./Right.js">
+</script>
+<style lang="scss" scoped src="./Right.scss">
+</style>
 <style scoped>
 >>> .tabs a.v-tabs__item.v-tabs__item--active {
   background-color: #3b589e;

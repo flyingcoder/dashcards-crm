@@ -42,4 +42,5 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped src="./DashCard.scss"></style>
+<style lang="scss" scoped src="./DashCard.scss">
+</style>

@@ -31,8 +31,10 @@
   </div>
 </template>
 
-<style lang="scss" scoped src="./Left.scss"></style>
-<script src="./Left.js"></script>
+<style lang="scss" scoped src="./Left.scss">
+</style>
+<script src="./Left.js">
+</script>
 
 <style scoped>
 >>> .tabs a.v-tabs__item.v-tabs__item--active {

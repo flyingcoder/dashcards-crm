@@ -58,6 +58,9 @@
     </v-dialog>
   </v-layout>
 </template>
-<script src="./GroupsDialog.js"></script>
-<style lang="scss" scoped src="./GroupsDialog.scss"></style>
-<style scoped src="./GroupsDialog.css"></style>
+<script src="./GroupsDialog.js">
+</script>
+<style lang="scss" scoped src="./GroupsDialog.scss">
+</style>
+<style scoped src="./GroupsDialog.css">
+</style>

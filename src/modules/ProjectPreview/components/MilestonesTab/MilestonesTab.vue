@@ -119,5 +119,7 @@
   </div>
 </template>
 
-<script src="./MilestonesTab.js"></script>
-<style lang="scss" scoped src="./MilestonesTab.scss"></style>
+<script src="./MilestonesTab.js">
+</script>
+<style lang="scss" scoped src="./MilestonesTab.scss">
+</style>

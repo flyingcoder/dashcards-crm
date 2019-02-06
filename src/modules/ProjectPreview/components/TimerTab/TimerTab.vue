@@ -64,5 +64,7 @@
   </div>
 </template>
 
-<script src="./TimerTab.js"></script>
-<style lang="scss" scoped src="./TimerTab.scss"></style>
+<script src="./TimerTab.js">
+</script>
+<style lang="scss" scoped src="./TimerTab.scss">
+</style>
