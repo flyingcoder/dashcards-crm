@@ -6,8 +6,12 @@
 
     <div class="notes-wrapper">
       <div class="notes-content">
-        <notes-list :notes="notes" :loading="loading" />
-        <note-form />
+        <notes-list
+          :notes="notes"
+          :loading="loading"
+          @clicked="change_selected"
+        />
+        <note-form :note="selected_note" :loading="loading" />
       </div>
     </div>
   </div>
