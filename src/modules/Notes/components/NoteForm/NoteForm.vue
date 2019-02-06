@@ -12,7 +12,11 @@
         :value="note.title"
       >
       </v-text-field>
-      <v-btn flat class="add-btn">
+      <v-btn
+        flat
+        class="add-btn"
+        @click="$emit('collaborator', note.collaborators)"
+      >
         <v-icon>add</v-icon>
       </v-btn>
     </div>

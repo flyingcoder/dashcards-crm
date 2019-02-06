@@ -4,20 +4,29 @@ import TableHeader from '@/common/TableHeader.vue'
 import NotesList from './components/NotesList/NotesList.vue'
 import NoteForm from './components/NoteForm/NoteForm.vue'
 import NotesDialog from './components/NotesDialog/NotesDialog'
+import CollaboratorDialog from './components/CollaboratorDialog/CollaboratorDialog.vue'
 
 export default {
   name: 'Notes',
-  components: { TableHeader, NotesList, NoteForm, NotesDialog },
+  components: {
+    TableHeader,
+    NotesList,
+    NoteForm,
+    NotesDialog,
+    CollaboratorDialog
+  },
 
   data: () => ({
     paths: [
       { text: 'Dashboard', disabled: false, router_name: 'default-content' },
       { text: 'Notes', disabled: true, router_name: null }
     ],
-    dialog: false,
+    notes_dialog: false,
+    coll_dialog: false,
     notes: [],
     loading: false,
-    selected_note: null
+    selected_note: null,
+    collaborators: []
   }),
 
   created() {
@@ -51,6 +60,11 @@ export default {
 
     change_selected(note) {
       this.selected_note = note
+    },
+
+    open_collaborators_dialog(collaborators) {
+      this.collaborators = collaborators
+      this.coll_dialog = true
     }
   }
 }

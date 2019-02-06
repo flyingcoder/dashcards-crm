@@ -6,5 +6,8 @@ export const api_to = {
   },
   get_notes() {
     return request.get('api/note')
+  },
+  get_users() {
+    return request.get('api/company/members')
   }
 }
