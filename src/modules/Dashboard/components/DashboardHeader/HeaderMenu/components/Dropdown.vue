@@ -13,7 +13,7 @@
           <v-avatar class="user-icon responsive-img" :size="avatarSize">
             <img
               class="atomic-icon"
-              src="@/assets/temp/atomic.png"
+              :src="user.image_url"
               width="45px"
               alt="user"
             />
@@ -79,6 +79,12 @@ export default {
       }
     ]
   }),
+
+  computed: {
+    user() {
+      return this.$store.getters.user
+    }
+  },
 
   methods: {
     handle_action(action) {
