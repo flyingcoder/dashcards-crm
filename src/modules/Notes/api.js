@@ -9,5 +9,8 @@ export const api_to = {
   },
   get_users() {
     return request.get('api/company/members')
+  },
+  save_collaborators(payload, id) {
+    return request.post(`api/note/${id}/collaborators`, payload)
   }
 }
