@@ -14,6 +14,7 @@
           :notes="notes"
           :loading="loading"
           @clicked="change_selected"
+          @toggle-pin="toggle_pin"
         />
         <note-form
           :note="selected_note"

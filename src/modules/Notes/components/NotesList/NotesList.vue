@@ -9,13 +9,18 @@
     <div class="notes-body" v-else>
       <div
         class="note"
-        v-for="note of notes"
+        v-for="(note, index) of notes"
         :key="note.id"
         @click="$emit('clicked', note)"
       >
         <div class="note-name">
           <span>{{ note.title }}</span>
-          <v-icon class="notify selected">notifications</v-icon>
+          <v-icon
+            :class="['notify', { selected: note.pivot.is_pinned }]"
+            @click="$emit('toggle-pin', { note, index })"
+          >
+            notifications
+          </v-icon>
         </div>
         <div class="note-desc">
           <p v-html="note.content"></p>
