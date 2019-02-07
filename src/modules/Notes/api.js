@@ -12,5 +12,9 @@ export const api_to = {
   },
   save_collaborators(payload, id) {
     return request.post(`api/note/${id}/collaborators`, payload)
+  },
+  toggle_pin(note) {
+    if (note.pivot.is_pinned) return request.put(`api/note/${note.id}/unpin`)
+    else return request.put(`api/note/${note.id}/pin`)
   }
 }

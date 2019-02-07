@@ -26,7 +26,8 @@ export default {
     notes: [],
     loading: false,
     selected_note: null,
-    collaborators: []
+    collaborators: [],
+    pin_api: false
   }),
 
   created() {
@@ -84,6 +85,20 @@ export default {
           'Collaborators updated successfully!'
         )
       }
+    },
+    toggle_pin({ note, index }) {
+      if (this.pin_api) return
+      this.pin_api = true
+      const text = note.pivot.is_pinned ? 'Unpinned' : 'Pinned'
+      api_to
+        .toggle_pin(note)
+        .then(({ data }) =>
+          this.$set(this.notes[index].pivot, 'is_pinned', data)
+        )
+        .finally(() => {
+          this.pin_api = false
+          this.$event.$emit('open_snackbar', `${text} successfully!`)
+        })
     }
   }
 }
