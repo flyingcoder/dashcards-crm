@@ -5,6 +5,7 @@
       :open.sync="open"
       button2-text="Save"
       @button1="open = false"
+      @button2="save"
     >
       <template #content>
         <v-layout wrap class="custom-dialog">
@@ -65,8 +66,13 @@ export default {
       this.loading = true
       api_to
         .get_users()
-        .then(({ data }) => this.items = data)
+        .then(({ data }) => (this.items = data))
         .finally(() => (this.loading = false))
+    },
+
+    save() {
+      this.$emit('save', { users_id: this.selected })
+      Object.assign(this.$data, this.$options.data.apply(this))
     }
   }
 }

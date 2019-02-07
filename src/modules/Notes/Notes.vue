@@ -5,7 +5,7 @@
     <CollaboratorDialog
       :dialog.sync="coll_dialog"
       :collaborators="collaborators"
-      @save="save"
+      @save="save_collaborators"
     />
 
     <div class="notes-wrapper">

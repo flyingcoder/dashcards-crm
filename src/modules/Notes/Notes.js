@@ -52,6 +52,12 @@ export default {
       })
     },
 
+    save_collaborators(payload) {
+      api_to
+        .save_collaborators(payload, this.selected_note.id)
+        .then(this.update_collaborators)
+    },
+
     select_first_note(notes) {
       if (notes.length) {
         this.selected_note = notes[0]
@@ -65,6 +71,19 @@ export default {
     open_collaborators_dialog(collaborators) {
       this.collaborators = collaborators
       this.coll_dialog = true
+    },
+
+    update_collaborators({ data }) {
+      const index = this.notes.findIndex(
+        note => note.id === this.selected_note.id
+      )
+      if (~index) {
+        this.notes[index].collaborators = data
+        this.$event.$emit(
+          'open_snackbar',
+          'Collaborators updated successfully!'
+        )
+      }
     }
   }
 }
