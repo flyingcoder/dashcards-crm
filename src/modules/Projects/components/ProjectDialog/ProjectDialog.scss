@@ -2,13 +2,13 @@
 
 @include styledDialog('.projects__dialog');
 
-.projects__dialog{
+.projects__dialog {
 
   .dialog__header {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-    
+
     @include styledTitleDialog('.dialog__title');
 
     @include styledCloseDialog('.close__btn');
@@ -16,16 +16,16 @@
 
   @include styledScrollFor('.dialog__body');
 
-  .dialog__body{
+  .dialog__body {
     max-height: 400px;
     overflow: hidden auto;
     padding: 0 15px;
     margin: 0 20px;
-    
+
     .dialog__buttons {
       margin-bottom: 20px;
 
-      .d__btn{
+      .d__btn {
         width: 170px;
         height: 47px;
         padding: 5px 10px;
@@ -35,22 +35,22 @@
         border: 1px solid $borderLightGray;
         border-radius: 5px;
 
-        .d__icon{
+        .d__icon {
           width: 27px;
           fill: $textDark;
           margin-right: 10px;
           margin-top: 3px;
         }
 
-        .d__title{
+        .d__title {
           text-transform: capitalize;
           white-space: normal;
           font-size: 15px;
         }
       }
     }
-    
-    .choosen{
+
+    .choosen {
       padding: 5px;
       color: $textDark;
       font-size: 14px;
@@ -62,14 +62,16 @@
       border-radius: 5px;
     }
 
-    .project__title{
-      margin-bottom: 20px;
+    .text-fields {
+      display: grid;
+      grid-gap: 10px 0;
+      padding: 10px 0;
     }
-  
-    .project__description{
+
+    .project__description {
       border-radius: 8px;
       border: none;
-      
+
       .quill-editor {
         height: auto;
         background-color: $white;
@@ -78,8 +80,8 @@
         box-shadow: $darkBoxShadow;
         margin-bottom: 20px;
         color: $textDark;
-        
-        label{
+
+        label {
           color: $textDark;
           caret-color: $textDark;
         }
@@ -91,6 +93,7 @@
           text-indent: 1rem;
           font-weight: bold;
         }
+
         > code {
           width: 100%;
           margin: 0;
@@ -103,47 +106,45 @@
         }
       }
     }
-    .project__comment{
-      margin-bottom: 10px;
-    }
   }
 
-    @include actionButtonsDialog('.dialog__actions')
+  @include actionButtonsDialog('.dialog__actions')
 }
 
-@media only screen and (max-width: 480px){
-  .projects__dialog{
-  
+@media only screen and (max-width: 480px) {
+  .projects__dialog {
+
     .dialog__header {
       margin-bottom: 10px;
     }
-  
-    .dialog__body{
-      
+
+    .dialog__body {
+
       .dialog__buttons {
         margin-bottom: 10px;
-  
-        .d__btn{
+
+        .d__btn {
           height: auto;
           padding: 5px;
           font-size: 12px;
           width: 150px;
-  
-          .d__icon{
+
+          .d__icon {
             width: 18px;
             margin-right: 5px;
           }
         }
 
-        .attachment{
+        .attachment {
           padding: 3px 10px;
-          .v-icon{
+
+          .v-icon {
             font-size: 18px;
           }
         }
       }
-      
-      .choosen{
+
+      .choosen {
         padding: 5px;
         font-size: 12px;
         width: 150px;
