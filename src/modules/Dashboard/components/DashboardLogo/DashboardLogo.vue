@@ -2,13 +2,13 @@
   <div class="s__title">
     <div class="s__logo">
       <img
-        v-if="iconClass"
+        v-show="iconClass"
         class="mini__logo"
         src="@/assets/logo/mini-white.png"
         alt="logo"
       />
       <img
-        v-else
+        v-show="!iconClass"
         class="logo"
         src="@/assets/logo/buzzooka-white.png"
       />

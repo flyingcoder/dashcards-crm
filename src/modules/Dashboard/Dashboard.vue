@@ -1,8 +1,12 @@
 <template>
   <div class="dashboard__container">
     <div class="d__header"><dashboard-header></dashboard-header></div>
-    <div class="d__sidebar">
-      <div class="d__logo"><dashboard-logo></dashboard-logo></div>
+    <div :class="['d__sidebar', { collapse: mini_sidebar }]">
+      <div class="d__logo">
+        <dashboard-logo
+          @toggle-sidebar="mini_sidebar = $event"
+        ></dashboard-logo>
+      </div>
       <dashboard-sidebar></dashboard-sidebar>
     </div>
 

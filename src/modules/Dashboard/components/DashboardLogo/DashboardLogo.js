@@ -12,6 +12,7 @@ export default {
     rotateIcon(iconClass) {
       if (iconClass) this.iconClass = ''
       else this.iconClass = 'close'
+      this.$emit('toggle-sidebar', !iconClass)
     }
   }
 }

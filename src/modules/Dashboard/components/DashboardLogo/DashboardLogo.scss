@@ -14,7 +14,7 @@
     }
     .icon {
       position: absolute;
-      top: 13px;
+      top: 18px;
       right: -10px;
       border-radius: 50%;
       background: white;
@@ -34,6 +34,10 @@
     }
   .logo {
     width: 90%;
+    height: auto;
+  }
+  .mini__logo {
+    width: 60%;
     height: auto;
   }
 }

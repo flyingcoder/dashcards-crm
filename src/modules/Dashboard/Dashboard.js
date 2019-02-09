@@ -13,6 +13,10 @@ export default {
     FloatingChatButton
   },
 
+  data: () => ({
+    mini_sidebar: false
+  }),
+
   computed: {
     ...mapGetters('onlineUsers', ['all_users']),
     ...mapGetters('chat', ['unread_messages', 'all_conversations']),
