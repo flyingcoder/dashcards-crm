@@ -3,5 +3,15 @@ export default {
     methods: {
       type: Object
     }
+  },
+  data: () => ({
+    iconClass: ''
+  }),
+
+  methods: {
+    rotateIcon(iconClass) {
+      if (iconClass) this.iconClass = ''
+      else this.iconClass = 'close'
+    }
   }
 }
