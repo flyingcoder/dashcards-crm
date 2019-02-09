@@ -1,3 +1,4 @@
+import moment from 'moment'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
 
@@ -9,6 +10,14 @@ export default {
     paths: [
       { text: 'Dashboard', disabled: false, router_name: 'default-content' },
       { text: 'Calendar', disabled: true, router_name: null }
-    ]
-  })
+    ],
+    start: '2019-02-01',
+    type: 'month'
+  }),
+
+  computed: {
+    date() {
+      return moment(this.start, 'YYYY-MM-DD').format('MMMM YYYY')
+    }
+  }
 }
