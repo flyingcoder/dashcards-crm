@@ -52,7 +52,5 @@
   </v-menu>
 </template>
 
-<script src="./DashCardsDropdown.js">
-</script>
-<style lang="scss" scoped src="./DashCardsDropdown.scss">
-</style>
+<script src="./DashCardsDropdown.js"></script>
+<style lang="scss" scoped src="./DashCardsDropdown.scss"></style>

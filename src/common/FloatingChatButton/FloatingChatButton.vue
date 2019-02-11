@@ -8,8 +8,6 @@
   </div>
 </template>
 
-<script src="./FloatingChatButton.js">
-</script>
+<script src="./FloatingChatButton.js"></script>
 
-<style lang="scss" scoped src="./FloatingChatButton.scss">
-</style>
+<style lang="scss" scoped src="./FloatingChatButton.scss"></style>

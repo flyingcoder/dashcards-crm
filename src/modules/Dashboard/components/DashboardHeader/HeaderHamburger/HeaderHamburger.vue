@@ -10,7 +10,5 @@
     </span>
   </button>
 </template>
-<style lang="scss" src="./HeaderHamburger.scss">
-</style>
-<script src="./HeaderHamburger.js">
-</script>
+<style lang="scss" src="./HeaderHamburger.scss"></style>
+<script src="./HeaderHamburger.js"></script>

@@ -50,7 +50,5 @@
     <br />
   </div>
 </template>
-<script src="./Loader.js">
-</script>
-<style lang="scss" scoped src="./Loader.scss">
-</style>
+<script src="./Loader.js"></script>
+<style lang="scss" scoped src="./Loader.scss"></style>

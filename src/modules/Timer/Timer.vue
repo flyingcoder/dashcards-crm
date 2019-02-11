@@ -60,7 +60,5 @@
   </div>
 </template>
 
-<script src="./Timer.js">
-</script>
-<style lang="scss" scoped src="./Timer.scss">
-</style>
+<script src="./Timer.js"></script>
+<style lang="scss" scoped src="./Timer.scss"></style>

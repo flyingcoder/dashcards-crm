@@ -36,9 +36,6 @@
   </v-layout>
 </template>
 
-<script src="./SelectTemplateDialog.js">
-</script>
-<style scoped src="./SelectTemplateDialog.css">
-</style>
-<style lang="scss" scoped src="./SelectTemplateDialog.scss">
-</style>
+<script src="./SelectTemplateDialog.js"></script>
+<style scoped src="./SelectTemplateDialog.css"></style>
+<style lang="scss" scoped src="./SelectTemplateDialog.scss"></style>

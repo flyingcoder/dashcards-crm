@@ -33,9 +33,6 @@
   </v-layout>
 </template>
 
-<script src="./MilestoneTemplateDialog.js">
-</script>
-<style lang="scss" scoped src="./MilestoneTemplateDialog.scss">
-</style>
-<style scoped src="./MilestoneTemplateDialog.css">
-</style>
+<script src="./MilestoneTemplateDialog.js"></script>
+<style lang="scss" scoped src="./MilestoneTemplateDialog.scss"></style>
+<style scoped src="./MilestoneTemplateDialog.css"></style>

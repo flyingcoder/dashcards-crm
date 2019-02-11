@@ -73,9 +73,6 @@
   </div>
 </template>
 
-<script src="./TasksDialog.js">
-</script>
-<style lang="scss" scoped src="./TasksDialog.scss">
-</style>
-<style scoped src="./TasksDialog.css">
-</style>
+<script src="./TasksDialog.js"></script>
+<style lang="scss" scoped src="./TasksDialog.scss"></style>
+<style scoped src="./TasksDialog.css"></style>

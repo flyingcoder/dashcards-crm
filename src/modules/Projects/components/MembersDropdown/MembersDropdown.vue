@@ -55,7 +55,5 @@
   </div>
 </template>
 
-<script src="./MembersDropdown.js">
-</script>
-<style lang="scss" scoped src="./MembersDropdown.scss">
-</style>
+<script src="./MembersDropdown.js"></script>
+<style lang="scss" scoped src="./MembersDropdown.scss"></style>

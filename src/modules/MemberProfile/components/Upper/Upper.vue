@@ -16,8 +16,6 @@
   </div>
 </template>
 
-<style lang="scss" scoped src="./Upper.scss">
-</style>
+<style lang="scss" scoped src="./Upper.scss"></style>
 
-<script src="./Upper.js">
-</script>
+<script src="./Upper.js"></script>

@@ -30,7 +30,5 @@
   </div>
 </template>
 
-<script src="./ReportsList.js">
-</script>
-<style scoped lang="scss" src="./ReportsList.scss">
-</style>
+<script src="./ReportsList.js"></script>
+<style scoped lang="scss" src="./ReportsList.scss"></style>

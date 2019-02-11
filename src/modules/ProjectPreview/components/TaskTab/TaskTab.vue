@@ -12,7 +12,5 @@
   </div>
 </template>
 
-<script src="./TaskTab.js">
-</script>
-<style lang="scss" scoped src="./TaskTab.scss">
-</style>
+<script src="./TaskTab.js"></script>
+<style lang="scss" scoped src="./TaskTab.scss"></style>

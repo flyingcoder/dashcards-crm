@@ -38,7 +38,5 @@
   </div>
 </template>
 
-<script src="./InvoiceTab.js">
-</script>
-<style lang="scss" scoped src="./InvoiceTab.scss">
-</style>
+<script src="./InvoiceTab.js"></script>
+<style lang="scss" scoped src="./InvoiceTab.scss"></style>

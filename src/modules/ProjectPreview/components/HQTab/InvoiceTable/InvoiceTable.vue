@@ -45,10 +45,8 @@
   </v-flex>
 </template>
 
-<script src="./InvoiceTable.js">
-</script>
-<style lang="scss" scoped src="./InvoiceTable.scss">
-</style>
+<script src="./InvoiceTable.js"></script>
+<style lang="scss" scoped src="./InvoiceTable.scss"></style>
 
 <style scoped>
 >>> .content-wrapper .buzz__tables {

@@ -41,7 +41,5 @@
     </v-flex>
   </v-layout>
 </template>
-<script src="./LoginComponent.js">
-</script>
-<style lang="scss" scoped src="./LoginComponent.scss">
-</style>
+<script src="./LoginComponent.js"></script>
+<style lang="scss" scoped src="./LoginComponent.scss"></style>

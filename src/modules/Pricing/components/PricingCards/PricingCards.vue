@@ -36,5 +36,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped src="./PricingCards.scss">
-</style>
+<style lang="scss" scoped src="./PricingCards.scss"></style>

@@ -14,7 +14,5 @@
   </div>
 </template>
 
-<script src="./HoursBox.js">
-</script>
-<style lang="scss" scoped src="./HoursBox.scss">
-</style>
+<script src="./HoursBox.js"></script>
+<style lang="scss" scoped src="./HoursBox.scss"></style>

@@ -13,7 +13,5 @@
   </div>
 </template>
 
-<script src="./DashboardTiles.js">
-</script>
-<style lang="scss" scoped src="./DashboardTiles.scss">
-</style>
+<script src="./DashboardTiles.js"></script>
+<style lang="scss" scoped src="./DashboardTiles.scss"></style>

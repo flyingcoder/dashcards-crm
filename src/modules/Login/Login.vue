@@ -52,7 +52,5 @@
     </v-layout>
   </div>
 </template>
-<script src="./Login.js">
-</script>
-<style lang="scss" scoped src="./Login.scss">
-</style>
+<script src="./Login.js"></script>
+<style lang="scss" scoped src="./Login.scss"></style>
