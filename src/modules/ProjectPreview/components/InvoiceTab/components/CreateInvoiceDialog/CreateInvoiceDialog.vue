@@ -25,7 +25,5 @@
   </div>
 </template>
 
-<script src="./CreateInvoiceDialog.js">
-</script>
-<style lang="scss" scoped src="./CreateInvoiceDialog.scss">
-</style>
+<script src="./CreateInvoiceDialog.js"></script>
+<style lang="scss" scoped src="./CreateInvoiceDialog.scss"></style>

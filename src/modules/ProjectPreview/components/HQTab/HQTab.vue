@@ -9,7 +9,5 @@
   </v-layout>
 </template>
 
-<script src="./HQTab.js">
-</script>
-<style lang="scss" scoped src="./HQTab.scss">
-</style>
+<script src="./HQTab.js"></script>
+<style lang="scss" scoped src="./HQTab.scss"></style>

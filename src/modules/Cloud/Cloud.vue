@@ -4,8 +4,7 @@
   </div>
 </template>
 
-<script src="./Cloud.js">
-</script>
+<script src="./Cloud.js"></script>
 <style lang="scss" scoped>
 @import '~@/sass/_variables';
 

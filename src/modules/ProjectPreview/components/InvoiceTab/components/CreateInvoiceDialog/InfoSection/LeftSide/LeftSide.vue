@@ -41,11 +41,8 @@
   </div>
 </template>
 
-<script src="./LeftSide.js">
-</script>
+<script src="./LeftSide.js"></script>
 
-<style lang="scss" scoped src="./LeftSide.scss">
-</style>
+<style lang="scss" scoped src="./LeftSide.scss"></style>
 
-<style scoped src="./LeftSide.css">
-</style>
+<style scoped src="./LeftSide.css"></style>

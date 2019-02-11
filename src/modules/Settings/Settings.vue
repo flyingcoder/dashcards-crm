@@ -21,8 +21,7 @@
   </div>
 </template>
 
-<script src="./Settings.js">
-</script>
+<script src="./Settings.js"></script>
 
 <style lang="scss" scoped>
 .settings {

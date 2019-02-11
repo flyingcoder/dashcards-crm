@@ -152,9 +152,6 @@
   </v-layout>
 </template>
 
-<script src="./TeamsDialog.js">
-</script>
-<style scoped src="./TeamsDialog.css">
-</style>
-<style lang="scss" scoped src="./TeamsDialog.scss">
-</style>
+<script src="./TeamsDialog.js"></script>
+<style scoped src="./TeamsDialog.css"></style>
+<style lang="scss" scoped src="./TeamsDialog.scss"></style>

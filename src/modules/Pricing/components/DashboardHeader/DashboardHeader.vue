@@ -5,7 +5,5 @@
     <div class="h__menu"><header-menu></header-menu></div>
   </div>
 </template>
-<script src="./DashboardHeader.js">
-</script>
-<style lang="scss" scoped src="./DashboardHeader.scss">
-</style>
+<script src="./DashboardHeader.js"></script>
+<style lang="scss" scoped src="./DashboardHeader.scss"></style>

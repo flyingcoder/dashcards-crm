@@ -11,7 +11,5 @@
   </div>
 </template>
 
-<script src="./MemberProfile.js">
-</script>
-<style lang="scss" scoped src="./MemberProfile.scss">
-</style>
+<script src="./MemberProfile.js"></script>
+<style lang="scss" scoped src="./MemberProfile.scss"></style>

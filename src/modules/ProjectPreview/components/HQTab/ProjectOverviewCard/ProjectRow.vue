@@ -24,5 +24,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped src="./ProjectRow.scss">
-</style>
+<style lang="scss" scoped src="./ProjectRow.scss"></style>

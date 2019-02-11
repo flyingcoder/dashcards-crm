@@ -81,7 +81,5 @@
   </v-layout>
 </template>
 
-<script src="./ServicesAddDialog.js">
-</script>
-<style lang="scss" src="./ServicesAddDialog.scss">
-</style>
+<script src="./ServicesAddDialog.js"></script>
+<style lang="scss" src="./ServicesAddDialog.scss"></style>

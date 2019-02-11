@@ -80,7 +80,5 @@
   </div>
 </template>
 
-<script src="./MembersTab.js">
-</script>
-<style lang="scss" scoped src="./MembersTab.scss">
-</style>
+<script src="./MembersTab.js"></script>
+<style lang="scss" scoped src="./MembersTab.scss"></style>

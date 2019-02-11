@@ -112,7 +112,5 @@
   </div>
 </template>
 
-<script src="./ChatBox.js">
-</script>
-<style lang="scss" scoped src="./ChatBox.scss">
-</style>
+<script src="./ChatBox.js"></script>
+<style lang="scss" scoped src="./ChatBox.scss"></style>

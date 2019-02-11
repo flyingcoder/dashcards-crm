@@ -142,8 +142,7 @@
   </div>
 </template>
 
-<script src="./Questions.js">
-</script>
+<script src="./Questions.js"></script>
 <style lang="scss" scoped>
 .questions {
   .form-section {

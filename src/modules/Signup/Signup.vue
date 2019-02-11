@@ -119,7 +119,5 @@
     </div>
   </div>
 </template>
-<script src="./Signup.js">
-</script>
-<style lang="scss" scoped src="./Signup.scss">
-</style>
+<script src="./Signup.js"></script>
+<style lang="scss" scoped src="./Signup.scss"></style>

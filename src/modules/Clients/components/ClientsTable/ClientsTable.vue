@@ -115,7 +115,5 @@
   </div>
 </template>
 
-<script src="./ClientsTable.js">
-</script>
-<style lang="scss" scoped src="./ClientsTable.scss">
-</style>
+<script src="./ClientsTable.js"></script>
+<style lang="scss" scoped src="./ClientsTable.scss"></style>

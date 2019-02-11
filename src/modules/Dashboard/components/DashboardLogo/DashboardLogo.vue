@@ -1,31 +1,26 @@
 <template>
   <div class="s__title">
-    <!-- s stands for sidebar-->
-
     <div class="s__logo">
       <img
-        class="logo__img w__icon"
-        src="@/assets/logo/buzzooka-white.png"
-        width="20px"
-        height="20px"
-      />
-      <img
-        class="logo__img hidden"
+        v-show="miniSidebar"
+        class="mini__logo"
         src="@/assets/logo/mini-white.png"
-        width="20px"
-        height="20px"
         alt="logo"
       />
       <img
-        class="logo__img b__icon"
-        src="@/assets/logo/buzzooka-blue.png"
-        width="20px"
-        height="20px"
+        v-show="!miniSidebar"
+        class="logo"
+        src="@/assets/logo/buzzooka-white.png"
       />
     </div>
+    <span :class="['icon', { close: miniSidebar }]" @click="rotateIcon">
+      <img
+        src="@/assets/icons/header/chevron.png"
+        class="chevron"
+        alt="chevron"
+      />
+    </span>
   </div>
 </template>
-<style lang="scss" src="./DashboardLogo.scss">
-</style>
-<script src="./DashboardLogo.js">
-</script>
+<style lang="scss" src="./DashboardLogo.scss"></style>
+<script src="./DashboardLogo.js"></script>

@@ -44,9 +44,6 @@
   </v-layout>
 </template>
 
-<script src="./CustomDialog.js">
-</script>
-<style lang="scss" scoped src="./CustomDialog.scss">
-</style>
-<style scoped src="./CustomDialog.css">
-</style>
+<script src="./CustomDialog.js"></script>
+<style lang="scss" scoped src="./CustomDialog.scss"></style>
+<style scoped src="./CustomDialog.css"></style>

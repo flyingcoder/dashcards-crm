@@ -1,116 +1,88 @@
 @import "~@/sass/_variables";
 
 .sidebar {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
   background: $blue;
   color: $white;
-  padding: 0;
-  list-style-type: none;
-  .s__list{
+
+  .v-list__tile {
+    padding: 0;
+    width: 100%;
+  }
+
+
+  .s__icons {
+    display: flex;
+    justify-content: center;
+
+    svg {
+      fill: $white;
+      width: 27px;
+    }
+  }
+
+  .s__list {
     display: flex;
     height: 50px;
+    width: 200px;
     margin-left: 7px;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    transition: width 300ms ease-in-out;
     z-index: 1;
-    .v-list__tile{
-      padding: 0;
-    }
-    .s__icons{
-      display: flex;
-      justify-content: center;
-      transition: width 300ms ease-in-out;
-      svg{
-        fill: $white;
-        width: 27px;
-        transition: width 300ms ease-in-out;
-      }
-    }
-    .s__content{
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      font-size: 14px;
-      font-family: $lato-semi;
-      opacity: 1;
-      transition: opacity 300ms ease-in-out;
-      margin-left: auto;
-    }
-    &:hover{
+
+    &:hover {
       background: #f2f1f7;
       color: $blue;
       border-radius: 8px 0 0 8px;
-      svg{
+
+      svg {
         fill: $blue;
       }
     }
-  }
-  .active{
-    background: #f2f1f7;
-    color: $blue;
-    border-radius: 8px 0 0 8px;
-    box-shadow: -10px 2px 15px 0px rgba(0,0,0,0.4);
-      .s__icons{
-        svg{
+
+    &.active {
+      background: #f2f1f7;
+      color: $blue;
+      border-radius: 8px 0 0 8px;
+      box-shadow: -10px 2px 15px 0px rgba(0, 0, 0, 0.4);
+
+      .s__icons {
+        svg {
           fill: $blue;
         }
       }
-  }
-  .responsive-img {
-    width: 90%;
-    height: auto;
-  }
-
-  [data-nav="Templates"]:hover > .submenu {
-    display: block;
-  }
-
-  .submenu {
-    position: absolute;
-    right: -150px;
-    top: 0;
-    background: $blue;
-    padding: 5px;
-    width: 150px;
-    color: white;
-    border-radius: 0 20px;
-    display: none;
-
-    .item ~ .item {
-      margin-top: 2px;
-    }
-
-    .item {
-      padding: 10px;
-      border-radius: 10px;
-      text-align: center;
-
-      &:hover {
-        background: white;
-        color: $blue;
-      }
     }
   }
 }
 
-// Small Laptop - Large Desktop
-@media only screen and (min-width: 768px) {
-
+[data-nav="Templates"]:hover > .submenu {
+  display: block;
 }
 
-// Mobile Phone - Tablet
-@media only screen and (min-width: 320px) and (max-width: 767px){
-  .sidebar{
-    padding: 2px 4px;
-    .s__list{
-      margin-left: 0;
-      border-radius: 8px;
-      &:hover{
-        border-radius: 8px;
-      }
+.submenu {
+  position: absolute;
+  right: -150px;
+  top: 0;
+  background: $blue;
+  padding: 5px;
+  width: 150px;
+  color: white;
+  border-radius: 0 20px;
+  display: none;
+  z-index: 1;
+
+  .item ~ .item {
+    margin-top: 2px;
+  }
+
+  .item {
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+
+    &:hover {
+      background: white;
+      color: $blue;
     }
   }
 }
+

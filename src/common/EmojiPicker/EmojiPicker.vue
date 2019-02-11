@@ -45,7 +45,5 @@
   </emoji-picker>
 </template>
 
-<script src="./EmojiPicker.js">
-</script>
-<style lang="scss" scoped src="./EmojiPicker.scss">
-</style>
+<script src="./EmojiPicker.js"></script>
+<style lang="scss" scoped src="./EmojiPicker.scss"></style>

@@ -7,7 +7,5 @@
     </p>
   </div>
 </template>
-<script src="./Home.js">
-</script>
-<style lang="scss" scoped src="./Home.scss">
-</style>
+<script src="./Home.js"></script>
+<style lang="scss" scoped src="./Home.scss"></style>

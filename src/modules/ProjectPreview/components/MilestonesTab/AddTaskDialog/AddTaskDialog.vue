@@ -3,7 +3,6 @@
     <custom-dialog ref="dialog" :open.sync="dialog" title="Add Task">
       <template #content>
         <v-layout wrap class="custom-dialog">
-
           <v-flex xs12 md12>
             <v-text-field
               class="dialog__textfield"
@@ -66,9 +65,6 @@
   </div>
 </template>
 
-<script src="./AddTaskDialog.js">
-</script>
-<style lang="scss" scoped src="./AddTaskDialog.scss">
-</style>
-<style scoped src="./AddTaskDialog.css">
-</style>
+<script src="./AddTaskDialog.js"></script>
+<style lang="scss" scoped src="./AddTaskDialog.scss"></style>
+<style scoped src="./AddTaskDialog.css"></style>

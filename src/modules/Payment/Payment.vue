@@ -4,8 +4,7 @@
   </div>
 </template>
 
-<script src="./Payment.js">
-</script>
+<script src="./Payment.js"></script>
 <style lang="scss" scoped>
 @import '~@/sass/_variables';
 
