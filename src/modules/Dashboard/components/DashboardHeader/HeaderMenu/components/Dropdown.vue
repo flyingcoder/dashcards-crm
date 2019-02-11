@@ -69,10 +69,6 @@ export default {
         icon: require('@/assets/icons/header/user/help.svg')
       },
       {
-        title: 'Lock',
-        icon: require('@/assets/icons/header/user/lock.svg')
-      },
-      {
         title: 'Logout',
         icon: require('@/assets/icons/header/user/logout.svg'),
         action: 'logout'
