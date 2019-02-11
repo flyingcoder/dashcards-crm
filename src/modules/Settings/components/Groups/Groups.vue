@@ -59,9 +59,9 @@
               @sorted="changeSort"
             >
               <template slot="custom-item" slot-scope="{ item }">
-                <td class="text-xs-center">{{ item.index }}</td>
-                <td class="text-xs-center">{{ item.name }}</td>
-                <td class="text-xs-center">{{ item.description }}</td>
+                <td>{{ item.index }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.description }}</td>
               </template>
 
               <template slot="row-actions" slot-scope="{ item }">
