@@ -19,7 +19,7 @@
 
           <div class="submenu" v-if="item.title === 'Templates'">
             <div class="item">Milestone</div>
-            <div class="item">Report</div>
+            <div class="item" @click="sidebar_item_clicked('reports')">Reports</div>
             <div class="item">Invoice</div>
           </div>
         </v-list-tile-content>
