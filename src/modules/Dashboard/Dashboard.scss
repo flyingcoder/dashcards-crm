@@ -8,6 +8,7 @@
   .d__sidebar {
     width: 100%;
     grid-area: sidebar;
+    transition: width .3s linear;
   }
 
   .d__header {
@@ -33,16 +34,26 @@
   .d__sidebar.collapse {
     width: 60px;
 
+    .s__content {
+      width: 0;
+      opacity: 0;
+    }
+
+    .s__list {
+      padding: 0;
+    }
+    //width: 60px;
+    //transition: all 1s;
+    //
     .s__list {
       position: relative;
       margin-left: 0;
-      transition: width 500ms ease-in-out;
       width: 100%;
 
       &:hover {
         width: 204px;
         border-radius: 8px;
-        transition: width 300ms ease-in-out;
+        //transition: width 300ms ease-in-out;
 
         .s__content {
           opacity: 1;
@@ -55,6 +66,7 @@
       }
     }
     .sidebar {
+      //transition: width 1s;
       a {
         padding: 0;
         width: 100%;
