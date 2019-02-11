@@ -29,6 +29,7 @@
       :loading="loading"
       :sort="sort"
       :has-checkbox="true"
+      toolbar-title="Invoice"
       hide-actions
       :permission="$_permissions.get('invoice')"
       @items-selected="selected_ids = $event"
