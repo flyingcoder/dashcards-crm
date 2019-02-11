@@ -42,5 +42,7 @@
     </div>
   </div>
 </template>
-<script src="./Notes.js"></script>
-<style lang="scss" scoped src="./Notes.scss"></style>
+<script src="./Notes.js">
+</script>
+<style lang="scss" scoped src="./Notes.scss">
+</style>

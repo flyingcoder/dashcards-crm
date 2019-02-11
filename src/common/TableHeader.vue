@@ -4,6 +4,9 @@
     <v-btn v-if="!noButton" fab small class="add__btn" @click="$emit('click')">
       <v-icon>add</v-icon>
     </v-btn>
+    <slot name="form-btn">
+        {{ content }}
+    </slot>
   </v-layout>
 </template>
 

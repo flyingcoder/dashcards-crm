@@ -39,6 +39,9 @@
   </div>
   <v-progress-linear v-else :indeterminate="true"></v-progress-linear>
 </template>
-<script src="./NoteForm.js"></script>
-<style lang="scss" scoped src="./NoteForm.scss"></style>
-<style scoped src="./NoteForm.css"></style>
+<script src="./NoteForm.js">
+</script>
+<style lang="scss" scoped src="./NoteForm.scss">
+</style>
+<style scoped src="./NoteForm.css">
+</style>
