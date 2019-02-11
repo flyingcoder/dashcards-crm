@@ -55,14 +55,6 @@
           <div class="table__toolbar-title">Members</div>
 
           <div class="member__option">
-            <v-btn
-              class="groups"
-              dark
-              small
-              color="#3b589e"
-              @click="go_to_groups_page"
-              >Groups
-            </v-btn>
 
             <v-btn fab flat small class="list__view">
               <v-icon>list</v-icon>
