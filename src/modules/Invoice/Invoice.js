@@ -123,6 +123,10 @@ export default {
       if (this.create_invoice_dialog)
         this.$store.commit('invoice/set_create_dialog', val)
       else this.$store.commit('invoice/set_edit_dialog', val)
+    },
+
+    open_invoice_dialog(data) {
+      console.log(data)
     }
   }
 }

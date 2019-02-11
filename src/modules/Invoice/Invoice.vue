@@ -34,6 +34,7 @@
       @items-selected="selected_ids = $event"
       @edit="open_edit_dialog"
       @delete="open_delete_dialog"
+      @view="open_invoice_dialog"
     >
       <template slot="custom-item" slot-scope="{ item }">
         <td>{{ item.title }}</td>
