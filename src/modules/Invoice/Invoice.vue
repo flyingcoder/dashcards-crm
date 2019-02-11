@@ -36,8 +36,8 @@
       @delete="open_delete_dialog"
     >
       <template slot="custom-item" slot-scope="{ item }">
-        <td>{{ item.due_date }}</td>
         <td>{{ item.title }}</td>
+        <td>{{ item.due_date }}</td>
         <td>{{ item.billed_to }}</td>
         <td>{{ item.total_amount }}</td>
       </template>
@@ -45,6 +45,9 @@
       <template slot="row-view" slot-scope="{ item }">
         <v-btn fab small flat depressed @click="open_email_dialog(item.id)">
           <v-icon>email</v-icon>
+        </v-btn>
+        <v-btn fab small flat depressed @click="open_invoice_dialog(item)">
+          <v-icon>search</v-icon>
         </v-btn>
       </template>
     </custom-table>

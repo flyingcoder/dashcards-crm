@@ -26,8 +26,8 @@ export default {
       { text: 'Invoice', disabled: true, router_name: null }
     ],
     headers: [
-      { id: 1, text: 'Due Date', value: 'due_date' },
-      { id: 2, text: 'Invoice', value: 'invoice' },
+      { id: 1, text: 'Invoice', value: 'invoice' },
+      { id: 2, text: 'Due Date', value: 'due_date' },
       { id: 3, text: 'Client', value: 'client' },
       { id: 4, text: 'Amount', value: 'amount' },
       { id: 5, is_action: true }
