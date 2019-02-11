@@ -57,7 +57,8 @@ export default {
     items: [
       {
         title: 'Profile',
-        icon: require('@/assets/icons/header/user/profile.svg')
+        icon: require('@/assets/icons/header/user/profile.svg'),
+        action: 'navigate_to_profile'
       },
       {
         title: 'Settings',
@@ -93,6 +94,14 @@ export default {
 
     navigate_to_settings() {
       this.$router.push({ name: 'settings' })
+    },
+
+    navigate_to_profile() {
+      if (this.user.role === 'client') {
+        this.$router.push(`clients/profile/${this.user.id}`)
+      } else {
+        this.$router.push(`team/profile/${this.user.id}`)
+      }
     }
   }
 }
