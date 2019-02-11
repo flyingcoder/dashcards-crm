@@ -4,8 +4,8 @@
     slide-y-reverse-transition
     v-model="fabs"
     :close-on-content-click="false"
-    :nudge-top="60"
-    right
+    :nudge-top="10"
+    offset-y
     class="chat__position"
   >
     <v-btn
