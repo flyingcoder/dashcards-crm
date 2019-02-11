@@ -1,6 +1,4 @@
 @import "~@/sass/_variables";
-    
-@include sortOptionStyle;
 
 @include firstColumnHover;
 
@@ -22,13 +20,6 @@
         text-align: left;
         font-size: 30px;
     }
-
-    .member__option{
-        .v-icon{
-            font-size: 24px;
-            color: $sortOptionGray;
-        }
-    }
 }
 
 @media only screen and (max-width: 480px){
@@ -40,16 +31,6 @@
     
         .table__toolbar-title{
             font-size: 16px;
-        }
-    
-        .member__option{
-            .v-btn--floating.v-btn--small{
-                height: 30px;
-                width: 30px;
-            }
-            .v-icon{
-                font-size: 20px;
-            }
         }
     }
 }

@@ -9,45 +9,12 @@
       :loading="loading"
       :sort="sort"
       :has-checkbox="true"
+      toolbar-title="Timer"
       hide-actions
       :permission="$_permissions.get('timers')"
       @items-selected="selected_ids = $event"
       @sorted="changeSort"
     >
-      <template slot="toolbar">
-        <v-toolbar flat class="table__toolbar">
-          <v-toolbar-title class="table__toolbar-title">Timer</v-toolbar-title>
-
-          <v-spacer></v-spacer>
-
-          <v-toolbar-items class="timer__option">
-            <v-menu
-              class="sort__dropdown"
-              transition="slide-y-transition"
-              :nudge-left="135"
-              :nudge-bottom="2"
-              flat
-              offset-y
-            >
-              <v-btn fab flat small class="sort__option" slot="activator">
-                <v-icon>more_horiz</v-icon>
-              </v-btn>
-              <v-list class="sort__list" flat>
-                <v-list-tile
-                  class="sort__list_tile"
-                  v-for="(sortLists, index) in sortList"
-                  :key="index"
-                >
-                  <v-list-tile-title class="sort__list_item">{{
-                    sortLists.title
-                  }}</v-list-tile-title>
-                </v-list-tile>
-              </v-list>
-            </v-menu>
-          </v-toolbar-items>
-        </v-toolbar>
-      </template>
-
       <template slot="custom-item" slot-scope="item" class="template-table">
         <td class="text-xs-left team__member">
           <!--TODO fill image with dynamic data from backend-->

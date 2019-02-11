@@ -1,7 +1,5 @@
 @import '~@/sass/_variables';
 
-@include sortOptionStyle;
-
 @include styledDialog('.clients__dialog');
 
 .clients__dialog{

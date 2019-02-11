@@ -63,10 +63,6 @@
                 >
                   Save
                 </v-btn>
-
-                <v-btn fab flat small class="sort__option">
-                  <v-icon>more_horiz</v-icon>
-                </v-btn>
               </div>
             </div>
             <div class="site-preview" v-if="iframe_src">

@@ -35,6 +35,7 @@
       :sort="sort"
       :has-checkbox="true"
       hide-actions
+      toolbar-title="Members"
       class="custom__table"
       :permission="$_permissions.get('hq_members')"
       @items-selected="selected_ids = $event"
@@ -43,52 +44,6 @@
       @delete="open_delete_dialog"
       @view="navigate_to_view_profile($event.id)"
     >
-      <template slot="toolbar">
-        <v-layout
-          row
-          wrap
-          justify-space-between
-          align-center
-          flat
-          class="table__toolbar"
-        >
-          <div class="table__toolbar-title">Members</div>
-
-          <div class="member__option">
-
-            <v-btn fab flat small class="list__view">
-              <v-icon>list</v-icon>
-            </v-btn>
-            <v-btn fab flat small class="grid__view">
-              <v-icon>grid_on</v-icon>
-            </v-btn>
-
-            <v-menu
-              class="sort__dropdown"
-              transition="slide-y-transition"
-              :nudge-left="135"
-              :nudge-bottom="2"
-              flat
-              offset-y
-            >
-              <v-btn fab flat small class="sort__option" slot="activator">
-                <v-icon>more_horiz</v-icon>
-              </v-btn>
-              <v-list class="sort__list" flat>
-                <v-list-tile
-                  class="sort__list_tile"
-                  v-for="(sortLists, index) in sortList"
-                  :key="index"
-                >
-                  <v-list-tile-title class="sort__list_item"
-                    >{{ sortLists.title }}
-                  </v-list-tile-title>
-                </v-list-tile>
-              </v-list>
-            </v-menu>
-          </div>
-        </v-layout>
-      </template>
 
       <template slot="custom-item" slot-scope="item" class="template-table">
         <td
