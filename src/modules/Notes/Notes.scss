@@ -2,6 +2,8 @@
 
 .notes{
     padding: 14px 28px;
+    
+    @include emptyTable('.empty-notes');
 
     .notes-wrapper{
         margin: 10px;
