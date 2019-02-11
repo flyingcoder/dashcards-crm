@@ -1,18 +1,14 @@
 export default {
   props: {
-    methods: {
-      type: Object
+    miniSidebar: {
+      type: Boolean,
+      default: false
     }
   },
-  data: () => ({
-    iconClass: ''
-  }),
 
   methods: {
-    rotateIcon(iconClass) {
-      if (iconClass) this.iconClass = ''
-      else this.iconClass = 'close'
-      this.$emit('toggle-sidebar', !iconClass)
+    rotateIcon() {
+      this.$emit('update:miniSidebar', !this.miniSidebar)
     }
   }
 }

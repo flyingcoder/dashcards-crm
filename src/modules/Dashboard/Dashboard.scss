@@ -5,6 +5,7 @@
   display: grid;
   grid-template-areas: 'sidebar header' 'sidebar content';
   grid-template-columns: auto 1fr;
+  grid-template-rows: 60px 1fr;
 
   .d__sidebar {
     width: 100%;
