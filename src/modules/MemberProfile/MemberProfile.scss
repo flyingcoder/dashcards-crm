@@ -1,5 +1,7 @@
 @import '~@/sass/_variables';
 
+@include pagePadding ('.member-profile');
+
 .profile{
     background-color: $white;
     border: 1px solid $borderLightGray;

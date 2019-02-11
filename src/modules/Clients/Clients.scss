@@ -1,5 +1,3 @@
 @import "~@/sass/_variables";
 
-.clients {
-  padding: 20px;
-}
+@include pagePadding ('.clients');

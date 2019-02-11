@@ -1,7 +1,8 @@
 @import "~@/sass/_variables";
 
+@include pagePadding ('.calendar');
+
 .calendar {
-  padding: 20px;
 
   .calendar-actions {
     display: flex;

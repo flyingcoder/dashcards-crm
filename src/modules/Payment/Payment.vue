@@ -7,7 +7,7 @@
 <script src="./Payment.js">
 </script>
 <style lang="scss" scoped>
-.payment {
-  padding: 14px 28px;
-}
+@import '~@/sass/_variables';
+
+@include pagePadding ('.payment');
 </style>

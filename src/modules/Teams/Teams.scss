@@ -1,7 +1,8 @@
-@import "./../../sass/_variables";
+@import '~@/sass/_variables';
+
+@include pagePadding ('.teams-page');
 
 .teams-page {
-    padding: 25px;
     @include customTableRow;
 }
 

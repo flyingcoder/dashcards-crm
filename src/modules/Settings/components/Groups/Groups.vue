@@ -28,7 +28,6 @@
       @delete="delete_item('delete_group')"
     />
 
-    <v-container fluid>
       <v-layout row>
         <v-flex xs12>
           <table-header :paths="paths" @click="add_dialog = true" />
@@ -125,7 +124,6 @@
           </v-card>
         </v-flex>
       </v-layout>
-    </v-container>
   </div>
 </template>
 

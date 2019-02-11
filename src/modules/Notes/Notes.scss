@@ -1,7 +1,8 @@
 @import '~@/sass/_variables';
 
+@include pagePadding ('.notes');
+
 .notes{
-    padding: 14px 28px;
     
     @include emptyTable('.empty-notes');
 

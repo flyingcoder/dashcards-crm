@@ -290,7 +290,7 @@
         }
     }
 
-    @media only screen and (max-width: 64em){
+    @media only screen and (max-width: 768px){
         
         #{$selector}{
             padding: 20px;
@@ -346,6 +346,23 @@
             .empty-text{
                 font-size: 16px;
             }
+        }
+    }
+}
+@mixin pagePadding($selector) {
+    #{$selector}{
+        padding: 0 20px;
+    }
+
+    @media only screen and (max-width: 768px){
+        #{$selector}{
+            padding: 0 10px;
+        }
+    }
+
+    @media only screen and (max-width: 480px){
+        #{$selector}{
+            padding: 0 5px;
         }
     }
 }

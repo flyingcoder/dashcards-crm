@@ -1,8 +1,6 @@
 @import '~@/sass/_variables';
 
-.forms {
-    padding: 14px 28px;
-}
+@include pagePadding ('.forms');
 
 .form-content {
     display: flex;

@@ -1,4 +1,6 @@
-@import "~@/sass/_variables";
+@import '~@/sass/_variables';
+
+@include pagePadding ('.content');
 
 .buzzooka{
     .dashboard__container{
@@ -36,7 +38,6 @@
         }
 
         .content{
-            padding: 14px 28px;
             .row{
                 display: flex;
             }

@@ -19,11 +19,9 @@
 
     <dashboard-tiles />
     <!-- custom component -->
-
-    <v-container fluid>
       <NoCards v-if="!cards.length" />
 
-      <v-layout>
+      <v-layout class="dashcard-content">
         <draggable class="d__cards" v-model="cards">
           <template v-for="card in card_components">
             <component
@@ -50,7 +48,6 @@
           </template>
         </draggable>
       </v-layout>
-    </v-container>
   </div>
 </template>
 <script src="./DashboardContent.js">
