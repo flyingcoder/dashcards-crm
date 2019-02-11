@@ -9,6 +9,7 @@
 // Colors
     $white: #ffffff;
     $blue: #3b589e;
+    $darkBlue: #1b2847;
     $lightBlue: #00a7e5;
     $green: #1fb868;
     $red: #f56c6c;
@@ -287,8 +288,13 @@
   .table__body-row{
     td:nth-child(2){
       cursor: pointer;
+      color: $blue;
+      text-transform: capitalize;
+      font-weight: bold;
     }
-    td:nth-child(2):hover{
+    td:nth-child(2):hover, 
+    td:nth-child(2):visited, 
+    td:nth-child(2):active{
       background-color: #eee;
     }
   }
