@@ -38,7 +38,7 @@
       <template slot="custom-item" slot-scope="{ item }">
         <td>{{ item.due_date }}</td>
         <td>{{ item.title }}</td>
-        <td>{{ item.first_name + ' ' + item.last_name }}</td>
+        <td>{{ item.billed_to }}</td>
         <td>{{ item.total_amount }}</td>
       </template>
 
