@@ -1,7 +1,5 @@
 @import '~@/sass/_variables';
 
-@include sortOptionStyle;
-
 .custom-dialog {
   .dialog__link, .dialog__textfield{
     margin: 10px 5px;
