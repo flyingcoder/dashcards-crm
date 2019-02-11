@@ -1,10 +1,5 @@
 @import "~@/sass/_variables";
 
-.v-list__tile {
-  padding: 0;
-  width: 100%;
-}
-
 
 .dashboard__container {
   display: grid;
@@ -25,6 +20,11 @@
 
   .d__content {
     grid-area: content;
+  }
+
+  .v-list__tile {
+    padding: 0;
+    width: 100%;
   }
 
   .d__logo {

@@ -1,13 +1,14 @@
 @import "~@/sass/_variables";
 
-.v-list__tile {
-  padding: 0;
-  width: 100%;
-}
-
 .sidebar {
   background: $blue;
   color: $white;
+
+  .v-list__tile {
+    padding: 0;
+    width: 100%;
+  }
+
 
   .s__icons {
     display: flex;
