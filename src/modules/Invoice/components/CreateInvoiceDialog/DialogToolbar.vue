@@ -1,15 +1,15 @@
 <template>
   <div class="dialog">
-    <v-toolbar dark color="indigo" height="60">
-      <v-btn icon dark @click="$emit('close')">
-        <v-icon>close</v-icon>
-      </v-btn>
+    <v-toolbar dark color="#3b589e" height="60">
       <v-toolbar-title class="dialog-title">Create new Invoice</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="dialog-send">
         <v-btn :disabled="disabled" dark flat @click="handle_click"
-          >Send Invoice</v-btn
+          >Submit</v-btn
         >
+        <v-btn icon dark @click="$emit('close')">
+          <v-icon>close</v-icon>
+        </v-btn>
       </v-toolbar-items>
     </v-toolbar>
   </div>
