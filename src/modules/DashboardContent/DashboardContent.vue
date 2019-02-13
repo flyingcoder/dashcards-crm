@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="dashboard-content">
     <div class="row d__breadcrumbs">
       <div class="breadcrumbs">
         <breadcrumb :paths="paths" />
