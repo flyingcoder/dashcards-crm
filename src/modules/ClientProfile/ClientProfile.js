@@ -18,7 +18,7 @@ export default {
   data: () => ({
     paths: [
       { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-      { text: 'Team', disabled: false, router_name: 'client' },
+      { text: 'Client', disabled: false, router_name: 'client' },
       { text: 'Profile', disabled: true, router_name: null }
     ]
   }),
