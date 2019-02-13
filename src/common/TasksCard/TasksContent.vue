@@ -43,12 +43,12 @@ export default {
 <style lang="scss" scoped>
 @import '~@/sass/_variables';
 .tasks-content {
-  border: 1px solid #b2b6c0;
+  border: 1px solid $borderGray;
   margin: 5px;
   .task__tabs {
-    border-bottom: 1px solid #b2b6c0;
+    border-bottom: 1px solid $borderGray;
     .v-tabs__div:nth-child(1) {
-      border-right: 1px solid #b2b6c0;
+      border-right: 1px solid $borderGray;
     }
   }
 }
@@ -56,12 +56,11 @@ export default {
 
 <style scoped>
 >>> .task__tabs a.v-tabs__item.v-tabs__item--active {
-  background-color: white;
-  color: #4c5561;
+  background-color: #3b589e;
+  color: white;
 }
 >>> .task__tabs .v-tabs__item:not(.v-tabs__item--active) {
-  background-color: #f5f7fa;
+  background-color: white;
   color: #4c5561;
-  opacity: 1;
 }
 </style>
