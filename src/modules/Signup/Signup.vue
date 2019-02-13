@@ -27,16 +27,6 @@
 
             <custom-field
               className="signup__field"
-              v-model.trim="company_email.text"
-              :valid="company_email.is_valid"
-              input-type="email"
-              placeholder="Company Email"
-              @blur="validate_field('company_email')"
-              @focus="company_email.is_valid = true"
-            ></custom-field>
-
-            <custom-field
-              className="signup__field"
               v-model.trim="first_name.text"
               :valid="first_name.is_valid"
               input-type="text"

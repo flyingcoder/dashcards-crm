@@ -14,15 +14,6 @@ export default {
       error_messages: ['Company Name is required'],
       validations: ['required']
     },
-    company_email: {
-      text: '',
-      is_valid: true,
-      error_messages: [
-        'Company email is required',
-        'Please type a valid company email'
-      ],
-      validations: ['required', 'email']
-    },
     first_name: {
       text: '',
       is_valid: true,
@@ -69,7 +60,6 @@ export default {
       if (this.all_validations_passed()) {
         const fields = {
           company_name: this.company_name.text,
-          company_email: this.company_email.text,
           first_name: this.first_name.text,
           last_name: this.last_name.text,
           email: this.email.text,
