@@ -1,13 +1,23 @@
 <template>
   <div class="add-picture">
     <CustomDialog
-      :open.sync="dialog"
-      title="Upload New Profile Picture"
       ref="picture_dialog"
+      title="Upload New Profile Picture"
+      button2-text="Save"
+      :open.sync="dialog"
     >
-      <template slot="content">
+      <template #content>
         <div class="content">
+          <Loader :loading="loading" />
+          <CropImage
+            v-if="file_uploaded"
+            ref="croppie"
+            :image="image64"
+            :options="croppie.options"
+            :result="croppie.result"
+          />
           <CustomDropzone
+            v-else
             ref="dropzone"
             :duplicateCheck="true"
             acceptedFiles="image/*"
@@ -16,23 +26,16 @@
             dictFileTooBig="File too big"
             dictInvalidFileType="Invalid file type"
             @file-added="file_added"
-            @success="file_added"
           />
         </div>
       </template>
 
-      <template slot="entire-actions">
-        <span></span>
-        <!-- for removing the actions from the dialog -->
+      <template #button2>
+        <v-btn @click="get_cropped_image" :disabled="!file_uploaded"
+          >Save</v-btn
+        >
       </template>
     </CustomDialog>
-    <CropImage
-      v-if="file_uploaded"
-      :image="image64"
-      :upload="upload"
-      @cancel="crop_cancelled"
-      @uploaded="uploaded"
-    />
   </div>
 </template>
 
@@ -40,12 +43,14 @@
 import { mapGetters, mapMutations } from 'vuex'
 import { api_to } from '../../api'
 //Components
+import Loader from '@/common/BaseComponents/Loader.vue'
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 import CustomDropzone from '@/common/CustomDropzone.vue'
 import CropImage from '@/common/CropImage.vue'
 
 export default {
   components: {
+    Loader,
     CustomDialog,
     CustomDropzone,
     CropImage
@@ -53,7 +58,17 @@ export default {
 
   data: () => ({
     file_uploaded: false,
-    image64: null
+    image64: null,
+    loading: false,
+    croppie: {
+      options: {
+        viewport: { width: 200, height: 200, type: 'circle' },
+        showZoomer: false,
+        boundary: { width: 300, height: 300 },
+        enableOrientation: true
+      },
+      result: 'blob'
+    }
   }),
 
   computed: {
@@ -94,26 +109,29 @@ export default {
       reader.readAsDataURL(file)
     },
 
-    crop_cancelled() {
-      this.$refs.dropzone.remove_all_files()
-      this.image64 = null
-      this.file_uploaded = false
+    get_cropped_image() {
+      this.$refs.croppie.get_result().then(this.upload_image)
     },
 
-    upload(image) {
-      //passed as prop to the CropImage Component
+    upload_image(image) {
       let formData = new FormData()
       formData.append('file', image)
-      return api_to.upload_image(this.user.id, formData)
+      this.loading = true
+      api_to
+        .upload_image(this.user.id, formData)
+        .then(this.image_uploaded)
+        .finally(() => (this.loading = false))
     },
 
-    uploaded(response) {
+    image_uploaded(response) {
+      this.$refs.croppie.clear_component()
       this.$event.$emit(
         'open_snackbar',
         'Profile picture uploaded successfully!'
       )
-      this.$emit('picture-changed', response)
+      this.$emit('picture-changed', response.data)
       this.$refs.picture_dialog.clear_and_close()
+      Object.assign(this.$data, this.$options.data.apply(this))
     }
   }
 }

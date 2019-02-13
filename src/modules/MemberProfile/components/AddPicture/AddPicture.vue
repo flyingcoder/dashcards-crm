@@ -2,9 +2,9 @@
   <div class="add-picture">
     <CustomDialog
       ref="picture_dialog"
-      :open.sync="dialog"
       title="Upload New Profile Picture"
       button2-text="Save"
+      :open.sync="dialog"
     >
       <template #content>
         <div class="content">
@@ -26,7 +26,6 @@
             dictFileTooBig="File too big"
             dictInvalidFileType="Invalid file type"
             @file-added="file_added"
-            @success="file_added"
           />
         </div>
       </template>
