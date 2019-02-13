@@ -116,10 +116,9 @@
 <style lang="scss" scoped>
 @import '~@/sass/variables';
 
-@include pagePadding ('.milestone');
+@include pagePadding('.milestone');
 
 .milestone {
-
   @include customTableRow; //css used for styling the last row of the table
 
   @include firstColumnHover;

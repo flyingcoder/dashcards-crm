@@ -19,35 +19,35 @@
 
     <dashboard-tiles />
     <!-- custom component -->
-      <NoCards v-if="!cards.length" />
+    <NoCards v-if="!cards.length" />
 
-      <v-layout class="dashcard-content">
-        <draggable class="d__cards" v-model="cards">
-          <template v-for="card in card_components">
-            <component
-              :is="card.component"
-              :key="card.component"
-              v-if="
-                should_show(card.slug) &&
-                  card.hasOwnProperty('component') &&
-                  card.can_view()
-              "
-              @close="close(card.id)"
-            ></component>
+    <v-layout class="dashcard-content">
+      <draggable class="d__cards" v-model="cards">
+        <template v-for="card in card_components">
+          <component
+            :is="card.component"
+            :key="card.component"
+            v-if="
+              should_show(card.slug) &&
+                card.hasOwnProperty('component') &&
+                card.can_view()
+            "
+            @close="close(card.id)"
+          ></component>
 
-            <template v-else-if="should_show(card.slug) && card.can_view()">
-              <v-flex xs12 :key="card.id">
-                <div>
-                  <dash-card
-                    @close="close(card.id)"
-                    :title="card.name"
-                  ></dash-card>
-                </div>
-              </v-flex>
-            </template>
+          <template v-else-if="should_show(card.slug) && card.can_view()">
+            <v-flex xs12 :key="card.id">
+              <div>
+                <dash-card
+                  @close="close(card.id)"
+                  :title="card.name"
+                ></dash-card>
+              </div>
+            </v-flex>
           </template>
-        </draggable>
-      </v-layout>
+        </template>
+      </draggable>
+    </v-layout>
   </div>
 </template>
 <script src="./DashboardContent.js"></script>

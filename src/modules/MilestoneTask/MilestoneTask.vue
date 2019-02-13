@@ -113,10 +113,9 @@
 <style lang="scss" scoped>
 @import '~@/sass/variables';
 
-@include pagePadding ('.milestone-task');
+@include pagePadding('.milestone-task');
 
 .milestone-task {
-
   @include customTableRow; //css used for styling the last row of the table
 
   @include emptyTable('.empty-task');
