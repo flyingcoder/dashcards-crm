@@ -8,5 +8,5 @@
 <style lang="scss" scoped>
 @import '~@/sass/_variables';
 
-@include pagePadding ('.cloud');
+@include pagePadding('.cloud');
 </style>

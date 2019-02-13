@@ -44,7 +44,6 @@
       @delete="open_delete_dialog"
       @view="navigate_to_view_profile($event.id)"
     >
-
       <template slot="custom-item" slot-scope="item" class="template-table">
         <td
           class="text-xs-left team__member"

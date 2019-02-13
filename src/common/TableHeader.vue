@@ -5,7 +5,7 @@
       <v-icon>add</v-icon>
     </v-btn>
     <slot name="form-btn">
-        {{ content }}
+      {{ content }}
     </slot>
   </v-layout>
 </template>

@@ -119,10 +119,8 @@
   </v-flex>
 </template>
 
-<script src="./TaskTabPreviewCard.js">
-</script>
-<style lang="scss" scoped src="./TaskTabPreviewCard.scss">
-</style>
+<script src="./TaskTabPreviewCard.js"></script>
+<style lang="scss" scoped src="./TaskTabPreviewCard.scss"></style>
 
 <style scoped>
 >>> .comment__btn .v-btn__content {

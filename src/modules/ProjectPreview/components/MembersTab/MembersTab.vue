@@ -38,7 +38,6 @@
       @items-selected="selected_ids = $event"
       @sorted="changeSort"
     >
-
       <template slot="custom-item" slot-scope="{ item }">
         <td class="text-cap">{{ item.first_name + ' ' + item.last_name }}</td>
         <td class="email">{{ item.email }}</td>

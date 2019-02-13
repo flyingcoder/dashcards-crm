@@ -3,21 +3,31 @@
     <table-header :paths="paths" :noButton="true">
       <template slot="form-btn">
         <div class="form-btn">
-
           <v-tooltip bottom content-class="action">
-            <v-btn class="add__btn" fab small slot="activator" @click="add_new_question">
+            <v-btn
+              class="add__btn"
+              fab
+              small
+              slot="activator"
+              @click="add_new_question"
+            >
               <v-icon>add</v-icon>
             </v-btn>
             <span>Add question</span>
           </v-tooltip>
 
           <v-tooltip bottom content-class="action">
-            <v-btn class="add__btn" fab small slot="activator" @click="add_title_and_descriptions">
+            <v-btn
+              class="add__btn"
+              fab
+              small
+              slot="activator"
+              @click="add_title_and_descriptions"
+            >
               <v-icon>text_fields</v-icon>
             </v-btn>
             <span>Add title and descriptions</span>
           </v-tooltip>
-
         </div>
       </template>
     </table-header>
@@ -55,8 +65,7 @@
 
 <script src="./Forms.js"></script>
 
-<style lang="scss" scoped src="./Forms.scss">
-</style>
+<style lang="scss" scoped src="./Forms.scss"></style>
 
 <style scoped>
 >>> .tabs a.v-tabs__item.v-tabs__item--active {
