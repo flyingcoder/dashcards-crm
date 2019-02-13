@@ -113,13 +113,6 @@ export default {
       this.$refs.croppie.get_result().then(this.upload_image)
     },
 
-    crop_cancelled() {
-      //TODO this is not used
-      this.$refs.dropzone.remove_all_files()
-      this.image64 = null
-      this.file_uploaded = false
-    },
-
     upload_image(image) {
       let formData = new FormData()
       formData.append('file', image)
@@ -136,8 +129,9 @@ export default {
         'open_snackbar',
         'Profile picture uploaded successfully!'
       )
-      this.$emit('picture-changed', response)
+      this.$emit('picture-changed', response.data)
       this.$refs.picture_dialog.clear_and_close()
+      Object.assign(this.$data, this.$options.data.apply(this))
     }
   }
 }
