@@ -4,6 +4,10 @@
   position: relative;
   margin: 10px;
 }
+.chat__position{
+  bottom: 0;
+  right: 0;
+}
 .chat__button[data-notify]:after {
   content:attr(data-notify);
   position:absolute;
@@ -25,7 +29,7 @@
   border: 1px solid $tableBorderBlue;
   border-radius: 5px;
   width: 200px;
-  right: 0;
+  margin-right: 150px;
 
   .inbox__title{
     padding: 5px;
