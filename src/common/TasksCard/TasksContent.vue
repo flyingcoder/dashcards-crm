@@ -34,9 +34,20 @@ export default {
   },
 
   data: () => ({
-    active_tab: 'My Tasks',
-    tabs: [{ id: 1, name: 'My Tasks' }, { id: 2, name: 'All Tasks' }]
-  })
+    active_tab: 'My Tasks'
+  }),
+
+  computed: {
+    user() {
+      return this.$store.getters.user
+    },
+    tabs() {
+      let tabs = [{ id: 1, name: 'My Tasks' }, { id: 2, name: 'All Tasks' }]
+      if (this.user.is_admin) return tabs
+      else if (!this.$_permissions.get('tasks_own')) tabs.splice(1)
+      return tabs
+    }
+  }
 }
 </script>
 
