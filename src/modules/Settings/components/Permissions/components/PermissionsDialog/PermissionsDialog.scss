@@ -4,4 +4,28 @@
   .dialog__selectfield, .dialog__textarea{
     margin: 5px;
   }
+  .permissions {
+    width: 100%;
+    padding: 10px;
+
+    .title {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      grid-gap: 10px;
+      color: #7d5050;
+    }
+
+    .line {
+      height: 2px;
+      background: #e8e8e8;
+    }
+
+    .items {
+      display: flex;
+    }
+
+  }
 }

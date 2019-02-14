@@ -17,11 +17,17 @@ export default {
   data: () => ({
     open: false,
     description: null,
-    selected_permissions: [],
+    selected_permission: null,
     selected_group: null,
     permissions: [],
     group_items: [],
-    loading_permissions: false
+    loading_permissions: false,
+    slug: {
+      create: false,
+      view: false,
+      update: false,
+      delete: false
+    }
   }),
 
   watch: {
@@ -40,6 +46,35 @@ export default {
         this.isEditDialog && this.update_fields(new_val)
       },
       deep: true
+    },
+    'slug.create'(val) {
+      if (val) {
+        this.slug.view = true
+      } else {
+        this.slug.update = false
+      }
+    },
+    'slug.update'(val) {
+      if (val) {
+        this.slug.create = true
+      } else {
+        this.slug.delete = false
+      }
+    },
+    'slug.delete'(val) {
+      if (val) {
+        this.slug.update = true
+      }
+    },
+    'slug.view'(val) {
+      if (!val) {
+        this.slug = {
+          create: false,
+          view: false,
+          update: false,
+          delete: false
+        }
+      }
     }
   },
 
@@ -64,11 +99,10 @@ export default {
     },
     save() {
       const fields_to_save = {
+        permission_id: this.selected_permission,
         group: this.selected_group,
         description: this.description,
-        slug: this.permissions.filter(
-          p => !this.selected_permissions.includes(p)
-        )
+        slug: this.slug
       }
       this.$emit('save', fields_to_save)
     },
