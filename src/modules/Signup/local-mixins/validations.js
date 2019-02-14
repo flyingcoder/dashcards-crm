@@ -3,7 +3,6 @@ import { required, minLength, email } from 'vuelidate/lib/validators'
 export const validations = {
   validations: {
     company_name: { text: { required } },
-    company_email: { text: { required, email } },
     first_name: { text: { required } },
     last_name: { text: { required } },
     email: { text: { required, email } },
@@ -12,7 +11,7 @@ export const validations = {
         required,
         minLength: minLength(6),
         containsNumber(password) {
-          if (!password || password.length < 6) return
+          if (!password || password.length < 6) return true
           return /\d/.test(password)
         }
       }
@@ -50,7 +49,6 @@ export const validations = {
     all_validations_passed() {
       const FIELDS = [
         'company_name',
-        'company_email',
         'first_name',
         'last_name',
         'email',
