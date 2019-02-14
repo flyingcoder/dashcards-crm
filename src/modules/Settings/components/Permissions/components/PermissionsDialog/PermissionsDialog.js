@@ -1,6 +1,7 @@
 import cloneDeep from 'lodash/cloneDeep'
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 import makeRequestTo from '@/services/makeRequestTo'
+import { api_to } from '../../api'
 
 export default {
   name: 'PermissionDialog',
@@ -18,8 +19,9 @@ export default {
     description: null,
     selected_permissions: [],
     selected_group: null,
-    permissions: ['view', 'create', 'update', 'delete'],
-    group_items: []
+    permissions: [],
+    group_items: [],
+    loading_permissions: false
   }),
 
   watch: {
@@ -39,6 +41,14 @@ export default {
       },
       deep: true
     }
+  },
+
+  created() {
+    this.loading_permissions = true
+    api_to
+      .get_permissions()
+      .then(({ data }) => (this.permissions = data))
+      .finally(() => (this.loading_permissions = false))
   },
 
   methods: {

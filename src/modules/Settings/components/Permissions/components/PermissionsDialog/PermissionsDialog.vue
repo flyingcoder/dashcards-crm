@@ -11,16 +11,18 @@
       <template slot="content">
         <v-layout wrap class="custom-dialog">
           <v-flex xs12 sm6>
-            <v-select
+            <v-autocomplete
               class="dialog__selectfield"
               :items="permissions"
+              :loading="loading_permissions"
               v-model.trim="selected_permissions"
               placeholder="Select Permission"
-              multiple
+              item-text="name"
+              item-value="id"
               solo
               hide-details
               color="#657186"
-            ></v-select>
+            ></v-autocomplete>
           </v-flex>
 
           <v-flex xs12 sm6>
