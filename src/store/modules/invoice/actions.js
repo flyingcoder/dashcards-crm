@@ -38,7 +38,7 @@ export const actions = {
     formData.append('date', state.date)
     formData.append('due_date', state.due_date)
     formData.append('total_amount', state.total_amount)
-    formData.append('items', state.rows)
+    formData.append('items', JSON.stringify(state.rows))
     formData.append('terms', state.terms)
     formData.append('notes', state.notes)
     formData.append('tax', calculate_field(state, 'tax'))

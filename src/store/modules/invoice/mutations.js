@@ -42,6 +42,7 @@ export const mutations = {
     state.selected_project = payload.project_id
     state.terms = payload.terms
     state.title = payload.title
+	  state.type = payload.type
     if (payload.tax) state.tax = payload.tax
     if (payload.discount) state.discount = payload.discount
     state.edit_dialog = true
