@@ -23,6 +23,7 @@
               placeholder="Company Name"
               @blur="validate_field('company_name')"
               @focus="company_name.is_valid = true"
+              @keydown.enter="register"
             ></custom-field>
 
             <custom-field
@@ -33,6 +34,7 @@
               placeholder="First Name"
               @blur="validate_field('first_name')"
               @focus="first_name.is_valid = true"
+              @keydown.enter="register"
             ></custom-field>
 
             <custom-field
@@ -43,6 +45,7 @@
               placeholder="Last Name"
               @blur="validate_field('last_name')"
               @focus="last_name.is_valid = true"
+              @keydown.enter="register"
             ></custom-field>
 
             <custom-field
@@ -53,6 +56,7 @@
               placeholder="Email"
               @blur="validate_field('email')"
               @focus="email.is_valid = true"
+              @keydown.enter="register"
             ></custom-field>
 
             <custom-field
@@ -63,6 +67,7 @@
               placeholder="Password"
               @blur="validate_field('password')"
               @focus="password.is_valid = true"
+              @keydown.enter="register"
             ></custom-field>
 
             <custom-field
@@ -73,6 +78,7 @@
               placeholder="Repeat Password"
               @blur="validate_field('repeat_password')"
               @focus="repeat_password.is_valid = true"
+              @keydown.enter="register"
             ></custom-field>
           </div>
         </template>
