@@ -3,12 +3,14 @@ import { mapGetters, mapMutations } from 'vuex'
 import DialogToolbar from '../DialogToolbar.vue'
 import TopLeft from './TopLeft/TopLeft.vue'
 import TopRight from './TopRight/TopRight.vue'
+import TableSection from './TableSection/TableSection.vue'
 
 export default {
   components: {
     DialogToolbar,
     TopLeft,
-    TopRight
+    TopRight,
+	  TableSection
   },
   props: {
     type: String
