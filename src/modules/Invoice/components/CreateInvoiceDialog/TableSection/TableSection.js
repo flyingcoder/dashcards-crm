@@ -10,7 +10,13 @@ export default {
   }),
 
   computed: {
-    ...mapGetters('invoice', ['rows', 'selected_project']),
+    ...mapGetters('invoice', [
+      'create_dialog',
+      'edit_dialog',
+      'view_dialog',
+      'rows',
+      'selected_project'
+    ]),
     should_disable() {
       const { descriptions, rate, hours } = this.active_row
       return !descriptions || !rate || !hours

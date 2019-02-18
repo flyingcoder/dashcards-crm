@@ -2,6 +2,7 @@ export const initial_state = () => ({
   company_logo: null,
   create_dialog: false,
   edit_dialog: false,
+  view_dialog: false,
   invoice_id: null,
   title: 'Unnamed',
   billed_to: null,

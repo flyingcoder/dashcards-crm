@@ -1,25 +1,14 @@
 <template>
   <div class="invoice">
-    <email-dialog :dialog.sync="email_dialog" ref="email_dialog" />
-
-    <create-invoice-dialog
-      :open="create_invoice_dialog || edit_invoice_dialog"
-      @close="close_dialog"
-      @create="create_invoice"
-      @edit="edit_invoice"
-    />
-
     <table-header
       :paths="paths"
       :no-button="!items.length"
-      @click="create_invoice_dialog = true"
     />
-
+    <invoice-dialog />
     <delete-dialog
       :open-dialog.sync="delete_dialog"
       title="Delete Invoice"
       text-content="Are you sure you want to delete this invoice?"
-      @delete="delete_invoice"
     />
 
     <custom-table
@@ -33,9 +22,6 @@
       hide-actions
       :permission="$_permissions.get('invoice')"
       @items-selected="selected_ids = $event"
-      @edit="open_edit_dialog"
-      @delete="open_delete_dialog"
-      @view="open_invoice_dialog"
     >
       <template slot="custom-item" slot-scope="{ item }">
         <td>{{ item.title }}</td>
@@ -45,12 +31,12 @@
       </template>
 
       <template slot="row-view" slot-scope="{ item }">
-        <v-btn fab small flat depressed @click="open_email_dialog(item.id)">
-          <v-icon>email</v-icon>
-        </v-btn>
-        <v-btn fab small flat depressed @click="open_invoice_dialog(item)">
-          <v-icon>search</v-icon>
-        </v-btn>
+        <!--<v-btn fab small flat depressed @click="open_email_dialog(item.id)">-->
+          <!--<v-icon>email</v-icon>-->
+        <!--</v-btn>-->
+        <!--<v-btn fab small flat depressed @click="view_invoice_dialog = true">-->
+          <!--<v-icon>search</v-icon>-->
+        <!--</v-btn>-->
       </template>
     </custom-table>
 

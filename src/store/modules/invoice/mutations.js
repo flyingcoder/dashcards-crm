@@ -5,6 +5,7 @@ export const mutations = {
   set_company_logo: (state, payload) => (state.company_logo = payload),
   set_create_dialog: (state, payload) => (state.create_dialog = payload),
   set_edit_dialog: (state, payload) => (state.edit_dialog = payload),
+  set_view_dialog: (state, payload) => (state.view_dialog = payload),
   set_invoice_id: (state, payload) => (state.invoice_id = payload),
   add_new_row: (state, payload) => state.rows.push(payload),
   add_rows: (state, payload) => state.rows.push(...payload),
@@ -37,12 +38,15 @@ export const mutations = {
   },
   open_invoice_for_editing(state, payload) {
     state.invoice_id = payload.id
+    state.billed_to = payload.billed_to
+    state.billed_from = payload.billed_from
     state.date = payload.date
     state.due_date = payload.due_date
     state.selected_project = payload.project_id
+    state.rows = payload.items
     state.terms = payload.terms
     state.title = payload.title
-	  state.type = payload.type
+    state.type = payload.type
     if (payload.tax) state.tax = payload.tax
     if (payload.discount) state.discount = payload.discount
     state.edit_dialog = true
