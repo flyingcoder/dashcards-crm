@@ -14,7 +14,10 @@
       />
 
       <div class="content">
-        <TopLeft />
+        <v-layout row wrap justify-space-between class="first-row info-section">
+          <TopLeft />
+          <TopRight />
+        </v-layout>
       </div>
     </v-dialog>
   </div>
