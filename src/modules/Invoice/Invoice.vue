@@ -6,7 +6,7 @@
       @click="open_create_dialog"
     />
 
-    <component :is="invoice_dialog" />
+    <InvoiceDialog type="create" />
 
     <delete-dialog
       :open-dialog.sync="delete_dialog"

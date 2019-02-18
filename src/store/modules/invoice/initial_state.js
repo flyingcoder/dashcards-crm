@@ -1,6 +1,9 @@
 export const initial_state = () => ({
   company_logo: null,
-  dialog: null,
+  dialog: {
+    type: null,
+    open: false
+  },
   invoice_id: null,
   toolbar: {
     title: null,

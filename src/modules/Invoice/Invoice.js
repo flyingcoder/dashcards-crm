@@ -6,6 +6,7 @@ import TableHeader from '@/common/TableHeader.vue'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import EmailDialog from './components/EmailDialog/EmailDialog.vue'
+import InvoiceDialog from './components/InvoiceDialog/InvoiceDialog.vue'
 
 export default {
   name: 'Invoice',
@@ -13,7 +14,7 @@ export default {
 
   components: {
     TableHeader,
-    InvoiceDialog: () => import('./components/InvoiceDialog/InvoiceDialog.vue'),
+    InvoiceDialog,
     CustomTable,
     EmailDialog,
     DeleteDialog
@@ -33,13 +34,6 @@ export default {
     ]
   }),
 
-  computed: {
-    invoice_dialog() {
-      const is_open = this.$store.getters['invoice/dialog']
-      return is_open ? 'InvoiceDialog' : null
-    }
-  },
-
   created() {
     this.loading = true
     api_to
@@ -55,7 +49,7 @@ export default {
         title: 'Create Invoice',
         submit_disable: false
       })
-      this.set_dialog('create')
+      this.set_dialog({ type: 'create', open: true })
     }
   }
 }

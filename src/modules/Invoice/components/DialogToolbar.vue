@@ -7,7 +7,7 @@
       <v-spacer></v-spacer>
       <v-toolbar-items class="dialog-send">
         <v-btn :disabled="toolbar.submit_disable" dark flat>Submit</v-btn>
-        <v-btn icon dark @click="set_dialog(null)">
+        <v-btn icon dark @click="set_dialog({ type: null, open: false })">
           <v-icon>close</v-icon>
         </v-btn>
       </v-toolbar-items>
