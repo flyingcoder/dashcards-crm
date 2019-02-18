@@ -2,6 +2,7 @@ export const getters = {
   company_logo: state => state.company_logo,
   dialog: state => state.dialog,
   invoice_id: state => state.invoice_id,
+	toolbar: state => state.toolbar,
   title: state => state.title,
   billed_to: state => state.billed_to,
   billed_from: state => state.billed_from,

@@ -5,6 +5,7 @@ export const mutations = {
   set_company_logo: (state, payload) => (state.company_logo = payload),
   set_dialog: (state, payload) => (state.dialog = payload),
   set_invoice_id: (state, payload) => (state.invoice_id = payload),
+	set_toolbar: (state, payload) => (state.toolbar = payload),
   add_new_row: (state, payload) => state.rows.push(payload),
   add_rows: (state, payload) => state.rows.push(...payload),
   delete_row: (state, index) => state.rows.splice(index, 1),

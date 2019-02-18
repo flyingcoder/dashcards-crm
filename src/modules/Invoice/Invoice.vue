@@ -3,8 +3,11 @@
     <table-header
       :paths="paths"
       :no-button="!items.length"
+      @click="open_create_dialog"
     />
-    <invoice-dialog />
+
+    <component :is="invoice_dialog" />
+
     <delete-dialog
       :open-dialog.sync="delete_dialog"
       title="Delete Invoice"
@@ -32,10 +35,10 @@
 
       <template slot="row-view" slot-scope="{ item }">
         <!--<v-btn fab small flat depressed @click="open_email_dialog(item.id)">-->
-          <!--<v-icon>email</v-icon>-->
+        <!--<v-icon>email</v-icon>-->
         <!--</v-btn>-->
         <!--<v-btn fab small flat depressed @click="view_invoice_dialog = true">-->
-          <!--<v-icon>search</v-icon>-->
+        <!--<v-icon>search</v-icon>-->
         <!--</v-btn>-->
       </template>
     </custom-table>

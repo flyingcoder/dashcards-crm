@@ -1,11 +1,10 @@
 import { api_to } from './api'
 import { table_functionality } from '@/services/table-functionality/table-functionality'
-import { mapGetters } from 'vuex'
+import { mapMutations } from 'vuex'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
-import InvoiceDialog from './components/InvoiceDialog/InvoiceDialog.vue'
 import EmailDialog from './components/EmailDialog/EmailDialog.vue'
 
 export default {
@@ -14,7 +13,7 @@ export default {
 
   components: {
     TableHeader,
-    InvoiceDialog,
+    InvoiceDialog: () => import('./components/InvoiceDialog/InvoiceDialog.vue'),
     CustomTable,
     EmailDialog,
     DeleteDialog
@@ -34,6 +33,13 @@ export default {
     ]
   }),
 
+  computed: {
+    invoice_dialog() {
+      const is_open = this.$store.getters['invoice/dialog']
+      return is_open ? 'InvoiceDialog' : null
+    }
+  },
+
   created() {
     this.loading = true
     api_to
@@ -42,9 +48,14 @@ export default {
       .finally(() => (this.loading = false))
   },
 
-  beforeDestroy() {
-    this.$store.commit('invoice/reset_state')
-  },
-
-  methods: {}
+  methods: {
+    ...mapMutations('invoice', ['set_dialog', 'set_toolbar']),
+    open_create_dialog() {
+      this.set_toolbar({
+        title: 'Create Invoice',
+        submit_disable: false
+      })
+      this.set_dialog('create')
+    }
+  }
 }
