@@ -25,6 +25,19 @@
             <TopRight />
           </v-layout>
           <TableSection />
+          <v-layout
+            row
+            wrap
+            justify-space-between
+            class="third-row additional-info-section"
+          >
+            <v-flex sm6 xs12 class="left-content">
+              <BottomLeft />
+            </v-flex>
+            <v-flex sm6 xs12 class="right-content">
+              <BottomRight />
+            </v-flex>
+          </v-layout>
         </div>
       </v-dialog>
     </v-layout>

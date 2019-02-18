@@ -4,13 +4,17 @@ import DialogToolbar from '../DialogToolbar.vue'
 import TopLeft from './TopLeft/TopLeft.vue'
 import TopRight from './TopRight/TopRight.vue'
 import TableSection from './TableSection/TableSection.vue'
+import BottomLeft from './BottomLeft/BottomLeft.vue'
+import BottomRight from './BottomRight/BottomRight.vue'
 
 export default {
   components: {
     DialogToolbar,
     TopLeft,
     TopRight,
-	  TableSection
+    TableSection,
+    BottomLeft,
+    BottomRight
   },
   props: {
     type: String
