@@ -11,7 +11,8 @@
         v-model.trim="title"
       ></v-text-field>
     </div>
-    <div class="field">
+
+    <div class="field" v-if="!(dialog.type === 'create')">
       <div class="field__label">Invoice ID</div>
       <v-text-field
         class="textfield"
