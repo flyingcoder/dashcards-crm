@@ -1,3 +1,4 @@
+import { api_to } from './api'
 import { table_functionality } from '@/services/table-functionality/table-functionality'
 import { mapGetters } from 'vuex'
 //Components
@@ -30,19 +31,20 @@ export default {
       { id: 3, text: 'Client', value: 'client' },
       { id: 4, text: 'Amount', value: 'amount' },
       { id: 5, is_action: true }
-    ],
-    email_dialog: false
+    ]
   }),
 
-  computed: {
-    ...mapGetters('invoice', ['selected_project', 'invoice_id']),
-  },
-
   created() {
-    this.fill_table('get_invoices', true)
+    this.loading = true
+    api_to
+      .get_invoices()
+      .then(({ data }) => this.add_table_rows(data.data, data))
+      .finally(() => (this.loading = false))
   },
 
   beforeDestroy() {
     this.$store.commit('invoice/reset_state')
   },
+
+  methods: {}
 }
