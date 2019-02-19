@@ -23,7 +23,7 @@ import { api_to } from '../api'
 
 export default {
   computed: {
-    ...mapGetters('invoice', ['toolbar', 'can_create_invoice'])
+    ...mapGetters('invoice', ['toolbar', 'can_create_invoice', 'invoice'])
   },
   methods: {
     ...mapMutations('invoice', ['set_dialog']),
@@ -38,29 +38,29 @@ export default {
     },
     get_invoice() {
       let formData = new FormData()
-      formData.append('company_logo', this.$store.state.invoice.invoice.company_logo)
-      formData.append('project_id', this.$store.state.invoice.invoice.selected_project || 0)
-      formData.append('type', this.$store.state.invoice.invoice.type)
-      formData.append('title', this.$store.state.invoice.invoice.title)
-      formData.append('billed_to', this.$store.state.invoice.invoice.billed_to)
-      formData.append('billed_from', this.$store.state.invoice.invoice.billed_from)
-      formData.append('date', this.$store.state.invoice.invoice.date)
-      formData.append('due_date', this.$store.state.invoice.invoice.due_date)
-      formData.append('total_amount', this.$store.state.invoice.invoice.total_amount)
-      formData.append('items', JSON.stringify(this.$store.state.invoice.invoice.rows))
-      formData.append('terms', this.$store.state.invoice.invoice.terms)
-      formData.append('notes', this.$store.state.invoice.invoice.notes)
+      formData.append('company_logo', this.invoice.company_logo)
+      formData.append('project_id', this.invoice.selected_project || 0)
+      formData.append('type', this.invoice.type)
+      formData.append('title', this.invoice.title)
+      formData.append('billed_to', this.invoice.billed_to)
+      formData.append('billed_from', this.invoice.billed_from)
+      formData.append('date', this.invoice.date)
+      formData.append('due_date', this.invoice.due_date)
+      formData.append('total_amount', this.invoice.total_amount)
+      formData.append('items', JSON.stringify(this.invoice.rows))
+      formData.append('terms', this.invoice.terms)
+      formData.append('notes', this.invoice.notes)
       formData.append(
         'tax',
-        this.calculate_field(this.$store.state.invoice.invoice, 'tax')
+        this.calculate_field(this.invoice, 'tax')
       )
       formData.append(
         'discount',
-        this.calculate_field(this.$store.state.invoice.invoice, 'discount')
+        this.calculate_field(this.invoice, 'discount')
       )
       formData.append(
         'shipping',
-        this.calculate_field(this.$store.state.invoice.invoice, 'shipping', false)
+        this.calculate_field(this.invoice, 'shipping', false)
       )
       return formData
     },

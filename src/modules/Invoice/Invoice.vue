@@ -59,7 +59,7 @@
             large
             dark
             color="#3b589e"
-            @click="create_invoice_dialog = true"
+            @click="open_create_dialog"
             >Add New Invoice</v-btn
           >
         </div>

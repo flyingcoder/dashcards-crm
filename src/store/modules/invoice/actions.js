@@ -1,31 +1,4 @@
-import request from '@/services/axios_instance'
-import makeRequestTo from '@/services/makeRequestTo'
-
 export const actions = {
-  // save_invoice({ state }, { method, api }) {
-  //   let formData = new FormData()
-  //   formData.append('company_logo', state.company_logo)
-  //   formData.append('project_id', state.selected_project)
-  //   formData.append('type', state.type)
-  //   formData.append('title', state.title)
-  //   formData.append('billed_to', state.billed_to)
-  //   formData.append('billed_from', state.billed_from)
-  //   formData.append('date', state.date)
-  //   formData.append('due_date', state.due_date)
-  //   formData.append('total_amount', state.total_amount)
-  //   formData.append('items', JSON.stringify(state.rows))
-  //   formData.append('terms', state.terms)
-  //   formData.append('notes', state.notes)
-  //   formData.append('tax', calculate_field(state, 'tax'))
-  //   formData.append('discount', calculate_field(state, 'discount'))
-  //   formData.append('shipping', calculate_field(state, 'shipping', false))
-  //
-  //   return request[method](api, formData, {
-  //     headers: {
-  //       'Content-Type': 'multipart/form-data'
-  //     }
-  //   })
-  // },
   type_changed_to_monthly({ commit }) {
     commit('clear_rows')
     commit('set_selected_project', null)
@@ -51,16 +24,3 @@ export const actions = {
     }
   }
 }
-
-// const calculate_field = (state, field, has_symbol = true) => {
-//   if (state[field].show && has_symbol)
-//     return {
-//       value: state[field].value,
-//       symbol: state[field].symbol
-//     }
-//   if (state[field].show && !has_symbol)
-//     return {
-//       value: state[field].value
-//     }
-//   return 0
-// }

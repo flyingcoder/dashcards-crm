@@ -133,7 +133,7 @@ export default {
       if (val === 'monthly') {
         this.type_changed_to_monthly()
       }
-    },
+    }
   },
 
   methods: {
