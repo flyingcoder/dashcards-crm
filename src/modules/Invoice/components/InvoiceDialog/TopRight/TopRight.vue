@@ -38,7 +38,7 @@
       ></v-select>
     </div>
 
-    <div class="field">
+    <div class="field" v-if="type === 'hourly'">
       <div class="field__label">Select Project</div>
       <v-select
         class="textfield"
@@ -143,15 +143,12 @@ export default {
     type(val) {
       if (val === 'monthly') {
         this.type_changed_to_monthly()
-      } else {
-        // val = 'hourly'
-        this.fetch_projects()
       }
-    }
+    },
   },
 
   methods: {
-    ...mapActions('invoice', ['fetch_projects', 'type_changed_to_monthly']),
+    ...mapActions('invoice', ['type_changed_to_monthly']),
 
     ...mapMutations('invoice', [
       'init_date',

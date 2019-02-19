@@ -1,4 +1,5 @@
 import { mapGetters } from 'vuex'
+import { api_to } from '../../../api'
 
 export default {
   data: () => ({
@@ -25,7 +26,7 @@ export default {
 
   watch: {
     selected_project(val) {
-      val && this.fill_table(val)
+      val && this.fetch_projects_tasks(val)
     }
   },
 
@@ -61,11 +62,12 @@ export default {
       this.$store.commit('invoice/update_row', { row, index })
     },
 
-    fill_table(pro_id) {
-      this.$store.dispatch(
-        'invoice/fetch_tasks',
-        `api/projects/${pro_id}/tasks-for-invoice`
-      )
-    }
+    fetch_projects_tasks(pro_id) {
+      this.$store.commit('set_custom_loader', true)
+      api_to
+        .get_projects_tasks(pro_id)
+        .then(({data}) => this.$store.dispatch('invoice/set_table_rows', data))
+        .finally(() => this.$store.commit('set_custom_loader', false))
+    },
   }
 }

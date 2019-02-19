@@ -1,6 +1,7 @@
 import { api_to } from './api'
 import { table_functionality } from '@/services/table-functionality/table-functionality'
 import { mapMutations } from 'vuex'
+import axios from 'axios'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
@@ -36,6 +37,7 @@ export default {
 
   created() {
     this.loading = true
+    this.fetch_data()
     api_to
       .get_invoices()
       .then(({ data }) => this.add_table_rows(data.data, data))
@@ -43,13 +45,24 @@ export default {
   },
 
   methods: {
-    ...mapMutations('invoice', ['set_dialog', 'set_toolbar']),
+    ...mapMutations('invoice', ['set_dialog', 'set_toolbar', 'set_projects']),
     open_create_dialog() {
       this.set_toolbar({
         title: 'Create Invoice',
         submit_disable: false
       })
       this.set_dialog({ type: 'create', open: true })
+    },
+    fetch_data() {
+      axios
+        .all([api_to.get_invoices(), api_to.get_all_projects()])
+        .then(
+          axios.spread((res1, res2) => {
+            this.add_table_rows(res1.data.data, res1.data)
+            this.set_projects(res2.data)
+          })
+        )
+        .finally(() => (this.loading = false))
     }
   }
 }

@@ -7,5 +7,13 @@ export const api_to = {
 
   delete_invoice(id) {
     return request.delete(`api/invoice/${id}`)
+  },
+
+  get_all_projects() {
+    return request.get('api/projects?all=true')
+  },
+
+  get_projects_tasks(id) {
+    return request.get(`api/projects/${id}/tasks-for-invoice`)
   }
 }
