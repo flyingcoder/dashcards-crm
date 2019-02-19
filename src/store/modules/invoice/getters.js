@@ -19,7 +19,6 @@ export const getters = {
   shipping: state => state.shipping,
   can_create_invoice(state) {
     return !!(
-      state.selected_project &&
       state.date &&
       state.due_date &&
       state.title &&

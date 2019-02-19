@@ -6,8 +6,7 @@ export const initial_state = () => ({
   },
   invoice_id: null,
   toolbar: {
-    title: null,
-    submit_disable: false
+    title: null
   },
   title: 'Unnamed',
   billed_to: null,

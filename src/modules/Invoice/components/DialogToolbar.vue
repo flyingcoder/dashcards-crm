@@ -6,7 +6,7 @@
       }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="dialog-send">
-        <v-btn :disabled="toolbar.submit_disable" dark flat>Submit</v-btn>
+        <v-btn :disabled="!can_create_invoice" dark flat>Submit</v-btn>
         <v-btn icon dark @click="set_dialog({ type: null, open: false })">
           <v-icon>close</v-icon>
         </v-btn>
@@ -20,7 +20,7 @@ import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters('invoice', ['toolbar'])
+    ...mapGetters('invoice', ['toolbar', 'can_create_invoice'])
   },
   methods: {
     ...mapMutations('invoice', ['set_dialog'])

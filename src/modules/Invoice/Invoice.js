@@ -48,8 +48,7 @@ export default {
     ...mapMutations('invoice', ['set_dialog', 'set_toolbar', 'set_projects']),
     open_create_dialog() {
       this.set_toolbar({
-        title: 'Create Invoice',
-        submit_disable: false
+        title: 'Create Invoice'
       })
       this.set_dialog({ type: 'create', open: true })
     },
