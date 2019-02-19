@@ -129,17 +129,6 @@ export default {
   },
 
   watch: {
-    // create_dialog(val) {
-    //   if (val) {
-    //     if (this.type === 'hourly') this.fetch_projects()
-    //     this.init_date()
-    //   }
-    // },
-    // edit_dialog(val) {
-    //   if (val && this.type === 'hourly') {
-    //     this.fetch_projects()
-    //   }
-    // },
     type(val) {
       if (val === 'monthly') {
         this.type_changed_to_monthly()

@@ -12,6 +12,7 @@
       :open-dialog.sync="delete_dialog"
       title="Delete Invoice"
       text-content="Are you sure you want to delete this invoice?"
+      @delete="delete_invoice"
     />
 
     <custom-table
@@ -25,6 +26,7 @@
       hide-actions
       :permission="$_permissions.get('invoice')"
       @items-selected="selected_ids = $event"
+      @delete="open_delete_dialog"
     >
       <template slot="custom-item" slot-scope="{ item }">
         <td>{{ item.title }}</td>

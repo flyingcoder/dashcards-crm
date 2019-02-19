@@ -52,6 +52,18 @@ export default {
       })
       this.set_dialog({ type: 'create', open: true })
     },
+
+    async delete_invoice() {
+      this.loading = true
+      this.delete_dialog = false
+      await api_to.delete_invoice(this.delete_item_id)
+      this.loading = false
+      const index = this.items.findIndex(
+        item => item.id === this.delete_item_id
+      )
+      if (~index) this.items.splice(index, 1)
+    },
+
     fetch_data() {
       axios
         .all([api_to.get_invoices(), api_to.get_all_projects()])
