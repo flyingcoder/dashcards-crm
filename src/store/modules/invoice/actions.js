@@ -52,15 +52,15 @@ export const actions = {
   }
 }
 
-const calculate_field = (state, field, has_symbol = true) => {
-  if (state[field].show && has_symbol)
-    return {
-      value: state[field].value,
-      symbol: state[field].symbol
-    }
-  if (state[field].show && !has_symbol)
-    return {
-      value: state[field].value
-    }
-  return 0
-}
+// const calculate_field = (state, field, has_symbol = true) => {
+//   if (state[field].show && has_symbol)
+//     return {
+//       value: state[field].value,
+//       symbol: state[field].symbol
+//     }
+//   if (state[field].show && !has_symbol)
+//     return {
+//       value: state[field].value
+//     }
+//   return 0
+// }

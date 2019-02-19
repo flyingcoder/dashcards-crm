@@ -6,7 +6,7 @@
       @click="open_create_dialog"
     />
 
-    <InvoiceDialog type="create" />
+    <InvoiceDialog type="create" @created="items.unshift($event)" />
 
     <delete-dialog
       :open-dialog.sync="delete_dialog"

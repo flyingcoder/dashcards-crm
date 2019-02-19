@@ -2,7 +2,7 @@ export const getters = {
   company_logo: state => state.company_logo,
   dialog: state => state.dialog,
   invoice_id: state => state.invoice_id,
-	toolbar: state => state.toolbar,
+  toolbar: state => state.toolbar,
   title: state => state.title,
   billed_to: state => state.billed_to,
   billed_from: state => state.billed_from,
@@ -22,7 +22,9 @@ export const getters = {
       state.date &&
       state.due_date &&
       state.title &&
-      state.rows.length
+      state.rows.length &&
+      state.billed_from &&
+      state.billed_to
     )
   }
 }

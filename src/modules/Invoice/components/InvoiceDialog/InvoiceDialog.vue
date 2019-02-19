@@ -9,9 +9,7 @@
         transition="dialog-bottom-transition"
       >
         <DialogToolbar
-          @close="$emit('close', false)"
-          @create="$emit('create')"
-          @edit="$emit('edit')"
+          @created="$emit('created', $event)"
         />
 
         <div class="content">
