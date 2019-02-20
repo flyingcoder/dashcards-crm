@@ -6,7 +6,7 @@
       }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="dialog-send">
-        <v-btn :disabled="!can_create_invoice" dark flat @click="save_invoice"
+        <v-btn :disabled="!can_submit" dark flat @click="save_invoice"
           >Submit</v-btn
         >
         <v-btn icon dark @click="close_dialog">
@@ -26,16 +26,23 @@ export default {
     ...mapGetters('invoice', [
       'toolbar',
       'can_create_invoice',
+      'can_edit_invoice',
       'dialog',
-      'invoice'
-    ])
+      'invoice',
+    ]),
+    can_submit() {
+      if (this.dialog.type === 'create') return this.can_create_invoice
+      if (this.dialog.type === 'edit') return this.can_edit_invoice
+      return false
+    }
   },
   methods: {
     ...mapMutations('invoice', ['set_dialog', 'revert_invoice']),
     save_invoice() {
-      if (!this.can_create_invoice) return
-      api_to
-        .save_invoice(this.get_invoice())
+      if (!this.can_submit) return
+      const api =
+        this.dialog.type === 'create' ? 'create_invoice' : 'update_invoice'
+      api_to[api](this.get_invoice())
         .then(({ data }) => this.$emit('created', data))
         .finally(() => {
           this.$store.commit('invoice/reset_state')

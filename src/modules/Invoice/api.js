@@ -9,8 +9,12 @@ export const api_to = {
     return request.delete(`api/invoice/${id}`)
   },
 
-  save_invoice(payload) {
+  create_invoice(payload) {
     return request.post('api/invoice', payload)
+  },
+
+  update_invoice(payload) {
+    return request.out(`api/invoice/${payload.invoice_id}`, payload)
   },
 
   get_all_projects() {

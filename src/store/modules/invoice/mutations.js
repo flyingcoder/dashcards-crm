@@ -54,5 +54,6 @@ export const mutations = {
     state.invoice.project_id = payload.project_id || null
     state.invoice.title = payload.title
     state.invoice.type = payload.type
+    state.invoice_to_edit = _cloneDeep(state.invoice)
   }
 }

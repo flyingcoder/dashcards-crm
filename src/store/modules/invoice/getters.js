@@ -1,3 +1,5 @@
+import _isEqual from 'lodash/isEqual'
+
 export const getters = {
   invoice: state => state.invoice,
   invoice_id: state => {
@@ -58,5 +60,8 @@ export const getters = {
       state.invoice.billed_from &&
       state.invoice.billed_to
     )
+  },
+  can_edit_invoice(state) {
+    return _isEqual(state.invoice, state.invoice_to_edit)
   }
 }

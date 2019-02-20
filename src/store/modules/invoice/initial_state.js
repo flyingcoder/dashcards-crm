@@ -29,6 +29,7 @@ export const initial_state = () => ({
     }
   },
   copy_invoice: null,
+  invoice_to_edit: null,
   dialog: {
     type: null,
     open: false
