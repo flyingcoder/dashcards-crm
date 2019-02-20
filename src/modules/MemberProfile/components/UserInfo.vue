@@ -13,7 +13,6 @@
       <div class="info-div">
         <h4 class="name">
           {{ user.first_name }} {{ user.last_name }}
-          <v-icon>edit</v-icon>
         </h4>
         <div class="job-title">UI/UX Designer</div>
         <div class="address">
@@ -69,21 +68,7 @@ export default {
   .name {
     font-size: 22px;
     color: $black;
-    position: relative;
     text-transform: capitalize;
-
-    .v-icon {
-      color: $textGray;
-      opacity: 0.7;
-      position: absolute;
-      top: 5px;
-      margin-left: 5px;
-      cursor: pointer;
-
-      &:hover {
-        color: $blue;
-      }
-    }
   }
   .job-title {
     font-size: 18px;
