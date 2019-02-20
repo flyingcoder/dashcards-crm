@@ -28,6 +28,7 @@ export const initial_state = () => ({
       show: false
     }
   },
+  copy_invoice: null,
   dialog: {
     type: null,
     open: false

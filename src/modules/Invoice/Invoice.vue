@@ -7,6 +7,7 @@
     />
 
     <InvoiceDialog type="create" @created="items.unshift($event)" />
+    <InvoiceDialog type="edit" />
 
     <delete-dialog
       :open-dialog.sync="delete_dialog"
@@ -26,6 +27,7 @@
       hide-actions
       :permission="$_permissions.get('invoice')"
       @items-selected="selected_ids = $event"
+      @edit="open_edit_dialog"
       @delete="open_delete_dialog"
     >
       <template slot="custom-item" slot-scope="{ item }">

@@ -1,4 +1,5 @@
 import moment from 'moment/moment'
+import _cloneDeep from 'lodash/cloneDeep'
 import { initial_state } from './initial_state'
 
 export const mutations = {
@@ -9,10 +10,12 @@ export const mutations = {
   add_new_row: (state, payload) => state.invoice.rows.push(payload),
   add_rows: (state, payload) => state.invoice.rows.push(...payload),
   delete_row: (state, index) => state.invoice.rows.splice(index, 1),
-  update_row: (state, { row, index }) => state.invoice.rows.splice(index, 1, row),
+  update_row: (state, { row, index }) =>
+    state.invoice.rows.splice(index, 1, row),
   clear_rows: state => (state.invoice.rows = []),
   set_projects: (state, payload) => (state.projects = payload),
-  set_selected_project: (state, payload) => (state.invoice.selected_project = payload),
+  set_selected_project: (state, payload) =>
+    (state.invoice.selected_project = payload),
   set_type: (state, payload) => (state.invoice.type = payload),
   update_date: (state, { date, field }) => (state.invoice[field] = date),
   init_date: state => (state.invoice.date = moment().format('YYYY-MM-DD')),
@@ -35,19 +38,21 @@ export const mutations = {
       state[key] = initial[key]
     })
   },
+  revert_invoice(state) {
+    //used when we close the edit invoice, so we revert the invoice changes
+    state.invoice = _cloneDeep(state.copy_invoice)
+  },
   open_invoice_for_editing(state, payload) {
-    state.invoice_id = payload.id
-    state.billed_to = payload.billed_to
-    state.billed_from = payload.billed_from
-    state.date = payload.date
-    state.due_date = payload.due_date
-    state.selected_project = payload.project_id
-    state.rows = payload.items
-    state.terms = payload.terms
-    state.title = payload.title
-    state.type = payload.type
-    if (payload.tax) state.tax = payload.tax
-    if (payload.discount) state.discount = payload.discount
-    state.edit_dialog = true
+    state.copy_invoice = _cloneDeep(state.invoice)
+    state.invoice.invoice_id = payload.id
+    state.invoice.billed_from = payload.billed_from
+    state.invoice.billed_to = payload.billed_to
+    state.invoice.compayny_logo = payload.compayny_logo
+    state.invoice.date = payload.date
+    state.invoice.due_date = payload.due_date
+    state.invoice.rows = payload.items
+    state.invoice.project_id = payload.project_id || null
+    state.invoice.title = payload.title
+    state.invoice.type = payload.type
   }
 }

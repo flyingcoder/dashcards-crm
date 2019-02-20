@@ -22,5 +22,5 @@ export const actions = {
       const mins = time.split(':')[1]
       return Number(Number(hours) + Number(mins / 60)).toPrecision(3)
     }
-  }
+  },
 }

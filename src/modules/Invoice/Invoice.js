@@ -45,12 +45,24 @@ export default {
   },
 
   methods: {
-    ...mapMutations('invoice', ['set_dialog', 'set_toolbar', 'set_projects']),
+    ...mapMutations('invoice', [
+      'set_dialog',
+      'set_toolbar',
+      'set_projects',
+      'open_invoice_for_editing'
+    ]),
+
     open_create_dialog() {
       this.set_toolbar({
         title: 'Create Invoice'
       })
       this.set_dialog({ type: 'create', open: true })
+    },
+
+    open_edit_dialog(data) {
+      this.set_toolbar({ title: 'Edit Dialog' })
+      this.open_invoice_for_editing(data)
+      this.set_dialog({ type: 'edit', open: true })
     },
 
     async delete_invoice() {

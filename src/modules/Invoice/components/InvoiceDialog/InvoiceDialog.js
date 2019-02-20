@@ -1,5 +1,4 @@
 import { mapGetters, mapMutations } from 'vuex'
-import _cloneDeep from 'lodash/cloneDeep'
 //Components
 import DialogToolbar from '../DialogToolbar.vue'
 import TopLeft from './TopLeft/TopLeft.vue'
@@ -34,15 +33,12 @@ export default {
   watch: {
     'dialog.open'(val) {
       if (!val && this.type === 'edit') {
-        //when dialog opens
-        this.update_state(this.copied_invoice)
-      } else {
-        //when closes
-        this.copied_invoice = _cloneDeep(this.$store.state.invoice.invoice)
+        //when edit dialog gets closed
+        this.revert_invoice()
       }
     }
   },
   methods: {
-    ...mapMutations('invoice', ['set_dialog', 'update_state'])
+    ...mapMutations('invoice', ['set_dialog', 'revert_invoice'])
   }
 }

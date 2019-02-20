@@ -21,6 +21,8 @@
         hide-details
         flat
         placeholder="#"
+        readonly
+        :value="invoice_id"
       ></v-text-field>
     </div>
 
