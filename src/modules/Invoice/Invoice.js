@@ -2,6 +2,7 @@ import { api_to } from './api'
 import { table_functionality } from '@/services/table-functionality/table-functionality'
 import { mapMutations } from 'vuex'
 import axios from 'axios'
+import _cloneDeep from 'lodash/cloneDeep'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
@@ -61,7 +62,7 @@ export default {
 
     open_edit_dialog(data) {
       this.set_toolbar({ title: 'Edit Dialog' })
-      this.open_invoice_for_editing(data)
+      this.open_invoice_for_editing(_cloneDeep(data))
       this.set_dialog({ type: 'edit', open: true })
     },
 
