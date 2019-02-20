@@ -9,7 +9,7 @@
         <v-btn :disabled="!can_create_invoice" dark flat @click="save_invoice"
           >Submit</v-btn
         >
-        <v-btn icon dark @click="set_dialog({ type: null, open: false })">
+        <v-btn icon dark @click="close_dialog">
           <v-icon>close</v-icon>
         </v-btn>
       </v-toolbar-items>
@@ -23,10 +23,15 @@ import { api_to } from '../api'
 
 export default {
   computed: {
-    ...mapGetters('invoice', ['toolbar', 'can_create_invoice', 'invoice'])
+    ...mapGetters('invoice', [
+      'toolbar',
+      'can_create_invoice',
+      'dialog',
+      'invoice'
+    ])
   },
   methods: {
-    ...mapMutations('invoice', ['set_dialog']),
+    ...mapMutations('invoice', ['set_dialog', 'revert_invoice']),
     save_invoice() {
       if (!this.can_create_invoice) return
       api_to
@@ -36,6 +41,7 @@ export default {
           this.$store.commit('invoice/reset_state')
         })
     },
+
     get_invoice() {
       let formData = new FormData()
       formData.append('company_logo', this.invoice.company_logo)
@@ -50,10 +56,7 @@ export default {
       formData.append('items', JSON.stringify(this.invoice.rows))
       formData.append('terms', this.invoice.terms)
       formData.append('notes', this.invoice.notes)
-      formData.append(
-        'tax',
-        this.calculate_field(this.invoice, 'tax')
-      )
+      formData.append('tax', this.calculate_field(this.invoice, 'tax'))
       formData.append(
         'discount',
         this.calculate_field(this.invoice, 'discount')
@@ -76,6 +79,11 @@ export default {
           value: state[field].value
         }
       return 0
+    },
+
+    close_dialog() {
+      if (this.dialog.type === 'edit') this.revert_invoice()
+      this.set_dialog({ type: null, open: false })
     }
   }
 }

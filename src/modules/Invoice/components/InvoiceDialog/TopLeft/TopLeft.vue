@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   data: () => ({
     image_preview: null
@@ -75,11 +75,15 @@ export default {
         this.image_preview = null
         return
       }
-      const reader = new FileReader()
-      reader.onload = e => {
-        this.image_preview = e.target.result
+      if (typeof val === 'object') {
+        const reader = new FileReader()
+        reader.onload = e => {
+          this.image_preview = e.target.result
+        }
+        reader.readAsDataURL(val)
+      } else {
+        this.image_preview = val
       }
-      reader.readAsDataURL(val)
     }
   },
 

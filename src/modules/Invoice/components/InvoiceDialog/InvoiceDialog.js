@@ -30,15 +30,7 @@ export default {
       return this.dialog.open && this.dialog.type === this.type
     }
   },
-  watch: {
-    'dialog.open'(val) {
-      if (!val && this.type === 'edit') {
-        //when edit dialog gets closed
-        this.revert_invoice()
-      }
-    }
-  },
   methods: {
-    ...mapMutations('invoice', ['set_dialog', 'revert_invoice'])
+    ...mapMutations('invoice', ['set_dialog'])
   }
 }
