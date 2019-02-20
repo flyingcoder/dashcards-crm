@@ -68,6 +68,7 @@ export default {
   .name {
     font-size: 22px;
     color: $black;
+    text-transform: capitalize;
   }
   .job-title {
     font-size: 18px;
