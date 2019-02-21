@@ -29,8 +29,48 @@
   </div>
 </template>
 
-<script src="./LeftSide.js"></script>
+<script>
+import { mapGetters } from 'vuex'
 
-<style lang="scss" scoped src="./LeftSide.scss"></style>
+export default {
+  data: () => ({}),
 
-<style scoped src="./LeftSide.css"></style>
+  computed: {
+    ...mapGetters('invoice', ['notes', 'terms'])
+  },
+
+  methods: {
+    update_textarea(new_val, field) {
+      this.$store.commit('invoice/set_textarea', { new_val, field })
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import '~@/sass/_variables';
+
+.left-side {
+  .field__label {
+    background-color: $fieldLabel;
+    border: 1px solid $fieldLabel;
+    color: $textDark;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 6px 8px;
+    margin-bottom: 5px;
+  }
+  .textarea__field {
+    margin-bottom: 5px;
+  }
+}
+
+@media only screen and (max-width: 599px) {
+  .left-side {
+    .field__label {
+      font-size: 12px;
+      padding: 4px 6px;
+    }
+  }
+}
+</style>

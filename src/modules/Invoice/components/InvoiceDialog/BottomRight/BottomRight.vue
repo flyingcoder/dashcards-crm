@@ -81,5 +81,102 @@
   </div>
 </template>
 
-<script src="./RightSide.js"></script>
-<style lang="scss" scoped src="./RightSide.scss"></style>
+<script>
+import Field from './Field'
+import { mapGetters, mapMutations } from 'vuex'
+
+export default {
+  components: {
+    Field
+  },
+
+  computed: {
+    ...mapGetters('invoice', ['rows', 'tax', 'discount', 'shipping']),
+    subtotal() {
+      if (!this.rows.length) return '0'
+      return this.rows.reduce((acc, cur) => {
+        return (acc += cur.amount)
+      }, 0)
+    },
+    total() {
+      let total = Number(this.subtotal)
+      if (this.discount.show) {
+        if (this.discount.symbol === '%') {
+          total -= Number((this.subtotal * this.discount.value) / 100)
+        } else {
+          total -= Number(this.discount.value)
+        }
+      }
+      if (this.tax.show) {
+        if (this.tax.symbol === '%') {
+          total += Number((this.subtotal * this.tax.value) / 100)
+        } else {
+          total += Number(this.tax.value)
+        }
+      }
+      if (this.shipping.show) {
+        total += Number(this.shipping.value)
+      }
+      return total
+    }
+  },
+
+  watch: {
+    total(val) {
+      this.$store.commit('invoice/set_total_amount', val)
+    }
+  },
+
+  methods: {
+    ...mapMutations('invoice', [
+      'toggle_visibility',
+      'set_field',
+      'toggle_symbol'
+    ])
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import '~@/sass/_variables';
+
+.right-side {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  .subtotal {
+    color: $textDark;
+    margin-bottom: 10px;
+  }
+
+  .fields-to-add {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .total {
+    color: $textDark;
+  }
+}
+
+@media only screen and (max-width: 599px) {
+  .right-side {
+    .fields-to-add {
+      padding: 5px;
+
+      .v-btn {
+        font-size: 12px;
+        padding: 0 10px;
+      }
+
+      .v-icon {
+        font-size: 18px;
+      }
+    }
+  }
+}
+</style>
