@@ -54,7 +54,7 @@ export default {
   methods: {
     navigate_to_view_profile(id) {
       this.$router.push({
-        name: 'client/profile',
+        name: 'client_profile',
         params: { user_id: id }
       })
     }
