@@ -7,7 +7,7 @@
     />
 
     <InvoiceDialog type="create" @created="items.unshift($event)" />
-    <InvoiceDialog type="edit" />
+    <InvoiceDialog type="edit" @updated="invoice_updated" />
 
     <delete-dialog
       :open-dialog.sync="delete_dialog"
@@ -57,11 +57,7 @@
           </svg>
         </div>
         <div class="empty-btn">
-          <v-btn
-            large
-            dark
-            color="#3b589e"
-            @click="open_create_dialog"
+          <v-btn large dark color="#3b589e" @click="open_create_dialog"
             >Add New Invoice</v-btn
           >
         </div>

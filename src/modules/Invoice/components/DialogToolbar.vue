@@ -28,7 +28,7 @@ export default {
       'can_create_invoice',
       'can_edit_invoice',
       'dialog',
-      'invoice',
+      'invoice'
     ]),
     can_submit() {
       if (this.dialog.type === 'create') return this.can_create_invoice
@@ -40,10 +40,23 @@ export default {
     ...mapMutations('invoice', ['set_dialog', 'revert_invoice']),
     save_invoice() {
       if (!this.can_submit) return
-      const api =
-        this.dialog.type === 'create' ? 'create_invoice' : 'update_invoice'
-      api_to[api](this.get_invoice())
+      this.dialog.type === 'create' && this.create_invoice()
+      this.dialog.type === 'edit' && this.update_invoice()
+    },
+
+    create_invoice() {
+      api_to
+        .create_invoice(this.get_invoice())
         .then(({ data }) => this.$emit('created', data))
+        .finally(() => {
+          this.$store.commit('invoice/reset_state')
+        })
+    },
+
+    update_invoice() {
+      api_to
+        .update_invoice(this.get_invoice(), this.invoice.invoice_id)
+        .then(({ data }) => this.$emit('updated', data))
         .finally(() => {
           this.$store.commit('invoice/reset_state')
         })

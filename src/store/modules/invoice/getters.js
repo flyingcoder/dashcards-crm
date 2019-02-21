@@ -61,7 +61,10 @@ export const getters = {
       state.invoice.billed_to
     )
   },
-  can_edit_invoice(state) {
-    return _isEqual(state.invoice, state.invoice_to_edit)
+  can_edit_invoice(state, getters) {
+    return (
+      !_isEqual(state.invoice, state.invoice_to_edit) &&
+      getters.can_create_invoice
+    )
   }
 }

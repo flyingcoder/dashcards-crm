@@ -87,6 +87,13 @@ export default {
           })
         )
         .finally(() => (this.loading = false))
+    },
+
+    invoice_updated(invoice) {
+      const index = this.items.findIndex(item => item.id === invoice.id)
+      if (~index) {
+        this.items.splice(index, 1, invoice)
+      }
     }
   }
 }

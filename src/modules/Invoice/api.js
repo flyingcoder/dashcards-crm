@@ -13,8 +13,12 @@ export const api_to = {
     return request.post('api/invoice', payload)
   },
 
-  update_invoice(payload) {
-    return request.out(`api/invoice/${payload.invoice_id}`, payload)
+  update_invoice(payload, id) {
+    return request.post(`api/invoice/${id}`, payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
   },
 
   get_all_projects() {

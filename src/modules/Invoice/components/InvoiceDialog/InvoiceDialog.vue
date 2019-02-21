@@ -10,6 +10,7 @@
       >
         <DialogToolbar
           @created="$emit('created', $event)"
+          @updated="$emit('updated', $event)"
         />
 
         <div class="content">
