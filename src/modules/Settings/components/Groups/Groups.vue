@@ -91,7 +91,7 @@
               <div class="actions-wrapper">
                 <div class="bulk-delete">
                   <v-btn
-                    color="indigo"
+                    color="#3b589e"
                     dark
                     outline
                     :disabled="!show_delete_selected"
@@ -106,6 +106,7 @@
                     :items="rows_per_page_items"
                     menu-props="auto"
                     v-model="rows_per_page"
+                    color="#3b589e"
                   ></v-select>
                 </div>
 
@@ -115,6 +116,7 @@
                       :length="total_items"
                       :total-visible="5"
                       v-model="page"
+                      color="#3b589e"
                     ></v-pagination>
                   </div>
                 </div>
