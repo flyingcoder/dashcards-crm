@@ -1,5 +1,9 @@
 <template>
-  <div class="note-form" v-if="!loading">
+  <div class="no-data" v-if="!loading && !note">
+    No notes yet
+  </div>
+	<v-progress-linear v-else-if="loading" :indeterminate="true"></v-progress-linear>
+  <div class="note-form" v-else>
     <div class="note-title">
       <v-text-field
         solo
@@ -34,10 +38,6 @@
       </v-textarea>
     </div>
   </div>
-  <div class="no-data" v-else-if="!loading && !note">
-    No notes yet
-  </div>
-  <v-progress-linear v-else :indeterminate="true"></v-progress-linear>
 </template>
 <script src="./NoteForm.js"></script>
 <style lang="scss" scoped src="./NoteForm.scss"></style>
