@@ -71,8 +71,11 @@ export default {
   }),
 
   computed: {
-    ...mapGetters('memberProfile', ['picture_dialog_is_open', 'user_id']),
-    ...mapGetters(['user']),
+    ...mapGetters('memberProfile', [
+      'picture_dialog_is_open',
+      'user_id',
+      'user'
+    ]),
 
     dialog: {
       get() {
@@ -97,7 +100,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations('memberProfile', ['set_picture_dialog']),
+    ...mapMutations('memberProfile', ['set_picture_dialog', 'set_user']),
 
     file_added([file]) {
       const reader = new FileReader()
@@ -117,7 +120,7 @@ export default {
       formData.append('file', image)
       this.loading = true
       api_to
-        .upload_image(this.user.id, formData)
+        .upload_image(this.user_id, formData)
         .then(this.image_uploaded)
         .finally(() => (this.loading = false))
     },
@@ -128,7 +131,7 @@ export default {
         'open_snackbar',
         'Profile picture uploaded successfully!'
       )
-      this.$emit('picture-changed', response.data)
+      this.set_user(response.data)
       this.$refs.picture_dialog.clear_and_close()
       Object.assign(this.$data, this.$options.data.apply(this))
     }
