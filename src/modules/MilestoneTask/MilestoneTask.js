@@ -7,7 +7,6 @@ import TableHeader from '@/common/TableHeader.vue'
 import TaskDialog from './components/TasksDialog/TasksDialog.vue'
 
 export default {
-  name: 'Milestone',
   mixins: [table_functionality],
   components: { CustomTable, DeleteDialog, TaskDialog, TableHeader },
 
