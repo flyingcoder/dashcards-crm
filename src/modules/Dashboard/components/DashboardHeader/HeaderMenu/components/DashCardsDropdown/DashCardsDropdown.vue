@@ -24,16 +24,15 @@
         <CustomCheckbox text="Add All Data Box" :checked.sync="checkbox" />
 
         <div class="dash__cards">
-          <template v-for="item of dash_items">
-            <DashCard
-              :title="item.name"
-              :img-src="item.img_path"
-              :selected="selected_cards"
-              :id="item.id"
-              :key="item.id"
-              @click="check_selected(item.id)"
-            />
-          </template>
+          <DashCard
+            v-for="item of dash_items"
+            :title="item.name"
+            :img-src="item.img_path"
+            :selected="selected_cards"
+            :id="item.id"
+            :key="item.id"
+            @click="check_selected(item.id)"
+          />
         </div>
 
         <div class="card__btn">

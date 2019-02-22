@@ -80,10 +80,9 @@ export default {
     },
 
     check_selected(id) {
-      console.log(id)
       if (this.selected_cards.includes(id)) {
-        const index = this.selected_cards.findIndex(s => s.id === id)
-        this.selected_cards.splice(index, 1)
+        const index = this.selected_cards.findIndex(card_id => card_id === id)
+        if (~index) this.selected_cards.splice(index, 1)
       } else {
         this.selected_cards.push(id)
       }
