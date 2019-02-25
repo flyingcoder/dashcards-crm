@@ -8,6 +8,7 @@
 
     <InvoiceDialog type="create" @created="items.unshift($event)" />
     <InvoiceDialog type="edit" @updated="invoice_updated" />
+    <InvoiceDialog type="view" @updated="invoice_updated" />
 
     <delete-dialog
       :open-dialog.sync="delete_dialog"
@@ -38,12 +39,12 @@
       </template>
 
       <template slot="row-view" slot-scope="{ item }">
-        <!--<v-btn fab small flat depressed @click="open_email_dialog(item.id)">-->
-        <!--<v-icon>email</v-icon>-->
-        <!--</v-btn>-->
-        <!--<v-btn fab small flat depressed @click="view_invoice_dialog = true">-->
-        <!--<v-icon>search</v-icon>-->
-        <!--</v-btn>-->
+        <v-btn fab small flat depressed>
+          <v-icon>email</v-icon>
+        </v-btn>
+        <v-btn fab small flat depressed @click="open_view_dialog(item)">
+          <v-icon>search</v-icon>
+        </v-btn>
       </template>
     </custom-table>
 

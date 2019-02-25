@@ -2,6 +2,7 @@
   <v-layout column align-end wrap class="right__side">
     <div class="invoice__title">
       <v-text-field
+        :readonly="dialog.type === 'view'"
         class="titlefield"
         color="#657186"
         solo
@@ -15,6 +16,7 @@
     <div class="field" v-if="!(dialog.type === 'create')">
       <div class="field__label">Invoice ID</div>
       <v-text-field
+        :readonly="dialog.type === 'view'"
         class="textfield"
         color="#657186"
         solo
@@ -29,6 +31,7 @@
     <div class="invoice__type field">
       <div class="field__label">Select Type</div>
       <v-select
+        :readonly="dialog.type === 'view'"
         class="textfield"
         solo
         hide-details
@@ -43,6 +46,7 @@
     <div class="field" v-if="type === 'hourly'">
       <div class="field__label">Select Project</div>
       <v-select
+        :readonly="dialog.type === 'view'"
         class="textfield"
         solo
         hide-details
@@ -61,7 +65,19 @@
       <div class="created__date">
         <div class="field__label">Invoice Date:</div>
 
+        <v-text-field
+          v-if="dialog.type === 'view'"
+          :value="date"
+          class="textfield"
+          flat
+          solo
+          hide-details
+          color="#657186"
+          readonly
+        ></v-text-field>
+
         <date-picker
+          v-else
           class="textfield"
           solo
           hide-details
@@ -76,7 +92,20 @@
 
       <div class="due__date">
         <div class="field__label">Due Date:</div>
+
+        <v-text-field
+          v-if="dialog.type === 'view'"
+          :value="due_date"
+          class="textfield"
+          flat
+          solo
+          hide-details
+          color="#657186"
+          readonly
+        ></v-text-field>
+
         <date-picker
+          v-else
           class="textfield"
           solo
           hide-details
@@ -180,8 +209,7 @@ export default {
     margin: 30px 0;
     .created__date,
     .due__date {
-      display: flex;
-      flex-direction: row;
+      display: grid;
 
       .field__label {
         display: flex;
@@ -191,44 +219,6 @@ export default {
       .datefield {
         margin: 2px;
       }
-    }
-  }
-}
-
-@media only screen and (max-width: 1000px) {
-  .right__side {
-    .invoice__dates {
-      .created__date,
-      .due__date {
-        flex-direction: column;
-
-        .field__label {
-          margin: 0 0 2px 0;
-        }
-        .datefield {
-          margin: 0 0 2px 0;
-        }
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 690px) {
-  .right__side {
-    align-items: flex-start;
-
-    .invoice__title {
-      .titlefield {
-        margin: 20px 0;
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 599px) {
-  .right__side {
-    .field__label {
-      font-size: 12px;
     }
   }
 }

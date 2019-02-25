@@ -66,6 +66,12 @@ export default {
       this.set_dialog({ type: 'edit', open: true })
     },
 
+    open_view_dialog(data) {
+      this.set_toolbar({ title: '' })
+      this.open_invoice_for_editing(_cloneDeep(data))
+      this.set_dialog({ type: 'view', open: true })
+    },
+
     async delete_invoice() {
       this.loading = true
       this.delete_dialog = false

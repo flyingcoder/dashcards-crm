@@ -9,6 +9,7 @@
       :value="tax.value"
       :classes="['tax', 'field']"
       :show="tax.show"
+      :readonly="dialog.type === 'view'"
       @input="set_field({ new_val: $event, field: 'tax' })"
       @toggle-symbol="toggle_symbol('tax')"
       @toggle_visibility="toggle_visibility({ new_val: $event, field: 'tax' })"
@@ -21,6 +22,7 @@
       :value="discount.value"
       :classes="['discount', 'field']"
       :show="discount.show"
+      :readonly="dialog.type === 'view'"
       @input="set_field({ new_val: $event, field: 'discount' })"
       @toggle-symbol="toggle_symbol('discount')"
       @toggle_visibility="
@@ -34,13 +36,14 @@
       :value="shipping.value"
       :classes="['shipping', 'field']"
       :show="shipping.show"
+      :readolny="dialog.type === 'view'"
       @input="set_field({ new_val: $event, field: 'shipping' })"
       @toggle_visibility="
         toggle_visibility({ new_val: $event, field: 'shipping' })
       "
     />
 
-    <div class="fields-to-add">
+    <div class="fields-to-add" v-if="dialog.type !== 'view'">
       <v-btn
         class="btn"
         color="#3b589e"
@@ -91,7 +94,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('invoice', ['rows', 'tax', 'discount', 'shipping']),
+    ...mapGetters('invoice', ['rows', 'tax', 'discount', 'shipping', 'dialog']),
     subtotal() {
       if (!this.rows.length) return '0'
       return this.rows.reduce((acc, cur) => {

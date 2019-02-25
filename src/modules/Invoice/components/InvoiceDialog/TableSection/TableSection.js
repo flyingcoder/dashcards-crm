@@ -11,13 +11,7 @@ export default {
   }),
 
   computed: {
-    ...mapGetters('invoice', [
-      'create_dialog',
-      'edit_dialog',
-      'view_dialog',
-      'rows',
-      'selected_project'
-    ]),
+    ...mapGetters('invoice', ['dialog', 'rows', 'selected_project']),
     should_disable() {
       const { descriptions, rate, hours } = this.active_row
       return !descriptions || !rate || !hours
@@ -66,8 +60,10 @@ export default {
       this.$store.commit('set_custom_loader', true)
       api_to
         .get_projects_tasks(pro_id)
-        .then(({data}) => this.$store.dispatch('invoice/set_table_rows', data))
+        .then(({ data }) =>
+          this.$store.dispatch('invoice/set_table_rows', data)
+        )
         .finally(() => this.$store.commit('set_custom_loader', false))
-    },
+    }
   }
 }

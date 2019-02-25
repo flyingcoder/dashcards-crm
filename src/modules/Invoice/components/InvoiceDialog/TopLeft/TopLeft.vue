@@ -1,9 +1,17 @@
 <template>
   <div class="left__side">
-    <div class="add__logo_box" @click="$refs.hidden_input.click()">
+    <div
+      class="add__logo_box"
+      @click="dialog.type !== 'view' && $refs.hidden_input.click()"
+    >
       <img :src="image_preview" v-if="image_preview" class="image-preview" />
       <span class="text" v-else>+ Add Your Logo</span>
-      <v-btn outline class="button" v-show="image_preview">Remove</v-btn>
+      <v-btn
+        outline
+        class="button"
+        v-show="image_preview && dialog.type !== 'view'"
+        >Remove</v-btn
+      >
       <input
         type="file"
         accept="image/*"
@@ -16,6 +24,7 @@
     <div class="bill__from">
       <div class="form__label">Bill From:</div>
       <v-textarea
+        :readonly="dialog.type === 'view'"
         class="textfield"
         label="Who is this invoice from"
         v-model="billed_from"
@@ -29,6 +38,7 @@
     <div class="bill__to">
       <div class="form__label">Bill To:</div>
       <v-text-field
+        :readonly="dialog.type === 'view'"
         class="textfield"
         label="Who is this invoice to"
         v-model="billed_to"
@@ -49,7 +59,7 @@ export default {
   }),
 
   computed: {
-    ...mapGetters('invoice', ['company_logo']),
+    ...mapGetters('invoice', ['company_logo', 'dialog']),
     billed_to: {
       get() {
         return this.$store.getters['invoice/billed_to']

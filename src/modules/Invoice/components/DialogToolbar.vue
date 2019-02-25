@@ -1,14 +1,31 @@
 <template>
   <div class="dialog">
     <v-toolbar dark color="#3b589e" height="60">
-      <v-toolbar-title class="dialog-title">{{
-        toolbar.title
-      }}</v-toolbar-title>
+      <v-toolbar-title class="dialog-title">
+        <template v-if="dialog.type === 'view'">
+          <v-btn icon title="download">
+            <v-icon>cloud_download</v-icon>
+          </v-btn>
+          <template v-if="user.role === 'client'">
+            <v-btn>Pay</v-btn>
+          </template>
+          <template v-else>
+            <v-btn>Remind</v-btn>
+          </template>
+        </template>
+        <span v-else>{{ toolbar.title }}</span>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="dialog-send">
-        <v-btn :disabled="!can_submit" dark flat @click="save_invoice"
-          >Submit</v-btn
+        <v-btn
+          v-if="dialog.type !== 'view'"
+          :disabled="!can_submit"
+          dark
+          flat
+          @click="save_invoice"
         >
+          Submit
+        </v-btn>
         <v-btn icon dark @click="close_dialog">
           <v-icon>close</v-icon>
         </v-btn>
@@ -30,6 +47,7 @@ export default {
       'dialog',
       'invoice'
     ]),
+    ...mapGetters(['user']),
     can_submit() {
       if (this.dialog.type === 'create') return this.can_create_invoice
       if (this.dialog.type === 'edit') return this.can_edit_invoice
@@ -102,7 +120,7 @@ export default {
     },
 
     close_dialog() {
-      if (this.dialog.type === 'edit') this.revert_invoice()
+      if (['view', 'edit'].includes(this.dialog.type)) this.revert_invoice()
       this.set_dialog({ type: null, open: false })
     }
   }

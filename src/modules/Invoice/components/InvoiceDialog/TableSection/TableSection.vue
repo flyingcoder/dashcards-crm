@@ -8,7 +8,7 @@
     </div>
 
     <div class="table-body">
-      <div class="active row">
+      <div class="active row" v-if="dialog.type !== 'view'">
         <v-text-field
           class="textfield"
           label="Descriptions"
@@ -70,8 +70,9 @@
           flat
           color="#657186"
           hide-details
-          @input="row_updated('descriptions', $event, index)"
+          :readonly="dialog.type === 'view'"
           :value="row.descriptions"
+          @input="row_updated('descriptions', $event, index)"
         />
         <v-text-field
           class="textfield"
@@ -82,8 +83,9 @@
           flat
           color="#657186"
           hide-details
-          @input="row_updated('rate', $event, index)"
+          :readonly="dialog.type === 'view'"
           :value="row.rate"
+          @input="row_updated('rate', $event, index)"
         />
         <v-text-field
           class="textfield"
@@ -94,8 +96,9 @@
           flat
           color="#657186"
           hide-details
-          @input="row_updated('hours', $event, index)"
+          :readonly="dialog.type === 'view'"
           :value="row.hours"
+          @input="row_updated('hours', $event, index)"
         />
         <v-text-field
           class="textfield"
@@ -108,6 +111,7 @@
           readonly
         />
         <v-btn
+         v-if="dialog.type !== 'view'"
           class="action"
           color="#ff7f7c"
           outline

@@ -5,6 +5,7 @@
       <v-textarea
         label="Notes - any revelant information not already covered"
         :value="notes"
+        :readonly="dialog.type === 'view'"
         class="textarea__field"
         flat
         solo
@@ -18,6 +19,7 @@
       <v-textarea
         label="Terms and conditions - late fees, payment methods, delivery schedule"
         :value="terms"
+        :readonly="dialog.type === 'view'"
         class="textarea__field"
         flat
         solo
@@ -36,7 +38,7 @@ export default {
   data: () => ({}),
 
   computed: {
-    ...mapGetters('invoice', ['notes', 'terms'])
+    ...mapGetters('invoice', ['notes', 'terms', 'dialog'])
   },
 
   methods: {
