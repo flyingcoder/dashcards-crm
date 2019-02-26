@@ -18,7 +18,6 @@ export default {
   methods: {
     open_chat_box(user) {
       this.$emit('open-chatbox', user)
-      this.fabs = false
     }
   }
 }

@@ -38,6 +38,7 @@ export default {
 @import '~@/sass/_variables';
 .breadcrumb-wrapper {
   ul.v-breadcrumbs.theme--light {
+    padding: 18px 0;
     li.page__title {
       font-size: 26px;
       font-weight: 500;
@@ -61,7 +62,7 @@ export default {
 }
 
 // Tablet View
-@media only screen and (max-width: 768px) and (min-width: 481px) {
+@media only screen and (max-width: 768px) {
   .breadcrumb-wrapper {
     //TODO add styling for breadcrumb
     ul.v-breadcrumbs.theme--light {

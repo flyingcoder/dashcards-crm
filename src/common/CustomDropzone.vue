@@ -4,6 +4,8 @@
     id="dropzone"
     :options="options"
     v-bind="$attrs"
+    @vdropzone-thumbnail="$emit('thumbnail', arguments)"
+    @vdropzone-file-added="$emit('file-added', arguments)"
     @vdropzone-success="$emit('success', arguments)"
   >
     <v-layout
@@ -43,6 +45,9 @@ export default {
   methods: {
     remove_file(file) {
       this.$refs.dropzone.removeFile(file)
+    },
+    remove_all_files() {
+      this.$refs.dropzone.removeAllFiles()
     }
   }
 }

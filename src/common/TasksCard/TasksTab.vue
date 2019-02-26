@@ -2,9 +2,14 @@
   <div class="loading" v-if="loading">
     <v-progress-linear :indeterminate="true"></v-progress-linear>
   </div>
+
   <div class="no-data" v-else-if="tasks_are_empty">
-    Nothing to display
+    <div class="empty-content">
+      <v-icon class="empty-icon">stars</v-icon>
+      <p class="empty-text">List Empty</p>
+    </div>
   </div>
+
   <div class="tasks-tab" v-else>
     <task-chips
       :count-all="tasks.length"
@@ -91,6 +96,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tasks-tab {
+@import '~@/sass/_variables';
+
+.no-data {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: center;
+  height: 200px;
+
+  .empty-content {
+    text-align: center;
+  }
+
+  .empty-icon {
+    font-size: 50px;
+    color: $btnGray;
+  }
+
+  .empty-text {
+    color: $btnGray;
+    font-size: 20px;
+  }
 }
 </style>

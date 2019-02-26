@@ -180,30 +180,22 @@
             </v-flex>
           </v-layout>
 
-          <v-text-field
-            v-model.trim="project_title"
-            label="Untitled Project"
-            class="project__title"
-            solo
-            hide-details
-          >
-          </v-text-field>
+          <div class="text-fields">
+            <TextField :value.sync="project_title" label="Project Title" />
 
-          <div class="project__description">
-            <quill-editor
-              v-model="quill_editor.content"
-              :options="quill_editor.editorOption"
-            >
-            </quill-editor>
-          </div>
+            <div class="project__description">
+              <quill-editor
+                v-model="quill_editor.content"
+                :options="quill_editor.editorOption"
+              >
+              </quill-editor>
+            </div>
 
-          <div class="project__comment" v-if="!isEditDialog">
-            <v-textarea
-              v-model.trim="comment"
-              solo
-              label="Add Comment"
-              hide-details
-            ></v-textarea>
+            <TextArea
+              :value.sync="comment"
+              v-if="!isEditDialog"
+              label="Comment"
+            />
           </div>
         </div>
 

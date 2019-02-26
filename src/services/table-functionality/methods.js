@@ -85,6 +85,11 @@ export const methods = {
       })
     },
 
+    add_table_rows(rows, response) {
+      this.items = rows
+      this.items_response = response
+    },
+
     changeSort(column) {
       if (this.sort.sortBy === column) {
         this.sort.descending = !this.sort.descending

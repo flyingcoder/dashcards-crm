@@ -4,7 +4,7 @@ import { auth } from '@/plugins/auth'
 
 const request = axios.create({
   baseURL: 'https://api.dashcards.com',
-  timeout: 5000
+  timeout: 500000
 })
 
 request.interceptors.request.use(

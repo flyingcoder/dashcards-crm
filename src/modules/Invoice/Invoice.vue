@@ -1,19 +1,14 @@
 <template>
   <div class="invoice">
-    <email-dialog :dialog.sync="email_dialog" ref="email_dialog" />
-
-    <create-invoice-dialog
-      :open="create_invoice_dialog || edit_invoice_dialog"
-      @close="close_dialog"
-      @create="create_invoice"
-      @edit="edit_invoice"
-    />
-
     <table-header
       :paths="paths"
       :no-button="!items.length"
-      @click="create_invoice_dialog = true"
+      @click="open_create_dialog"
     />
+
+    <InvoiceDialog type="create" @created="items.unshift($event)" />
+    <InvoiceDialog type="edit" @updated="invoice_updated" />
+    <InvoiceDialog type="view" @updated="invoice_updated" />
 
     <delete-dialog
       :open-dialog.sync="delete_dialog"
@@ -29,6 +24,7 @@
       :loading="loading"
       :sort="sort"
       :has-checkbox="true"
+      toolbar-title="Invoice"
       hide-actions
       :permission="$_permissions.get('invoice')"
       @items-selected="selected_ids = $event"
@@ -36,15 +32,18 @@
       @delete="open_delete_dialog"
     >
       <template slot="custom-item" slot-scope="{ item }">
-        <td>{{ item.due_date }}</td>
         <td>{{ item.title }}</td>
-        <td>{{ item.first_name + ' ' + item.last_name }}</td>
+        <td>{{ item.due_date }}</td>
+        <td>{{ item.billed_to }}</td>
         <td>{{ item.total_amount }}</td>
       </template>
 
       <template slot="row-view" slot-scope="{ item }">
-        <v-btn fab small flat depressed @click="open_email_dialog(item.id)">
+        <v-btn fab small flat depressed>
           <v-icon>email</v-icon>
+        </v-btn>
+        <v-btn fab small flat depressed @click="open_view_dialog(item)">
+          <v-icon>search</v-icon>
         </v-btn>
       </template>
     </custom-table>
@@ -59,11 +58,7 @@
           </svg>
         </div>
         <div class="empty-btn">
-          <v-btn
-            large
-            dark
-            color="#3b589e"
-            @click="create_invoice_dialog = true"
+          <v-btn large dark color="#3b589e" @click="open_create_dialog"
             >Add New Invoice</v-btn
           >
         </div>

@@ -8,6 +8,8 @@ import isEmpty from 'lodash/isEmpty'
 import axios from 'axios'
 //Components
 import makeRequestTo from '@/services/makeRequestTo'
+import TextField from '@/common/BaseComponents/TextField.vue'
+import TextArea from '@/common/BaseComponents/TextArea.vue'
 import AutoComplete from '../AutoComplete'
 import DatePickers from '../DatePickers/DatePickers.vue' //used for Due Date field
 import MembersDropdown from '../MembersDropdown/MembersDropdown.vue'
@@ -18,7 +20,9 @@ export default {
     quillEditor,
     AutoComplete,
     DatePickers,
-    MembersDropdown
+    MembersDropdown,
+    TextField,
+    TextArea
   },
 
   props: {
@@ -135,7 +139,7 @@ export default {
         ids.includes(memb.id)
       )
       let string = members.reduce((acc, cur) => {
-        return (acc += cur.first_name + ' ' + cur.last_name + ', ')
+        return (acc += cur.name.replace(',', '') + ', ')
       }, '')
       string = string.slice(0, -2)
       return string

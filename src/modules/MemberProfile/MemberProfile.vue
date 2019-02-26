@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="member-profile">
     <table-header :paths="paths" :no-button="true" />
 
     <div class="profile">

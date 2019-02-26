@@ -30,7 +30,7 @@ export default {
   },
 
   created() {
-    if (!sessionStorage.getItem('logged')) {
+    if (!sessionStorage.getItem('logged') && localStorage.getItem('token')) {
       this.$store.dispatch('logout')
       localStorage.removeItem('token')
       localStorage.removeItem('user')

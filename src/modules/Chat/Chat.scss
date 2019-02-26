@@ -219,9 +219,7 @@
     }
 }
 
-.chat{
-    padding: 14px 28px;
-}
+@include pagePadding ('.chat');
 
 .chat-container{
     padding: 25px;
@@ -495,8 +493,6 @@
     }
 
     .chat{
-        padding: 12px;
-        margin: 12px;
     
         .chat__content{
             padding: 10px;

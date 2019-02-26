@@ -28,7 +28,7 @@
     >
       <template slot="toolbar">
         <v-layout row class="file__list_header">
-          <v-flex md10 sm12 xs12 class="file__tab">
+          <v-flex class="file__tab">
             <v-btn color="#b3b7c3" flat medium>
               <v-icon dark left class="all">select_all</v-icon>
               All
@@ -51,17 +51,6 @@
             </v-btn>
             <v-btn color="#3b589e" dark>
               Add Link
-            </v-btn>
-          </v-flex>
-          <v-flex md2 sm12 xs12 class="file__option text-xs-right">
-            <v-btn fab flat small class="list__view">
-              <v-icon>list</v-icon>
-            </v-btn>
-            <v-btn fab flat small class="grid__view">
-              <v-icon>grid_on</v-icon>
-            </v-btn>
-            <v-btn fab flat small class="sort__option">
-              <v-icon>more_horiz</v-icon>
             </v-btn>
           </v-flex>
         </v-layout>

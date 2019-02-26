@@ -1,6 +1,36 @@
 <template>
   <div class="forms">
-    <table-header :paths="paths" :noButton="true" />
+    <table-header :paths="paths" :noButton="true">
+      <template slot="form-btn">
+        <div class="form-btn">
+          <v-tooltip bottom content-class="action">
+            <v-btn
+              class="add__btn"
+              fab
+              small
+              slot="activator"
+              @click="add_new_question"
+            >
+              <v-icon>add</v-icon>
+            </v-btn>
+            <span>Add question</span>
+          </v-tooltip>
+
+          <v-tooltip bottom content-class="action">
+            <v-btn
+              class="add__btn"
+              fab
+              small
+              slot="activator"
+              @click="add_title_and_descriptions"
+            >
+              <v-icon>text_fields</v-icon>
+            </v-btn>
+            <span>Add title and descriptions</span>
+          </v-tooltip>
+        </div>
+      </template>
+    </table-header>
 
     <div class="form-content">
       <div class="form-container">
@@ -25,28 +55,6 @@
                 :sections="dynamic_sections"
                 v-if="active_tab === tab.name"
               ></component>
-
-              <div class="form-actions-wrapper">
-                <div class="actions">
-                  <v-tooltip left content-class="action">
-                    <v-btn slot="activator" icon @click="add_new_question">
-                      <v-icon>add_circle</v-icon>
-                    </v-btn>
-                    <span>Add question</span>
-                  </v-tooltip>
-
-                  <v-tooltip left content-class="action">
-                    <v-btn
-                      slot="activator"
-                      icon
-                      @click="add_title_and_descriptions"
-                    >
-                      <v-icon>text_fields</v-icon>
-                    </v-btn>
-                    <span>Add title and descriptions</span>
-                  </v-tooltip>
-                </div>
-              </div>
             </div>
           </v-tab-item>
         </v-tabs-items>
@@ -57,33 +65,7 @@
 
 <script src="./Forms.js"></script>
 
-<style lang="scss" scoped>
-.forms {
-  padding: 14px 28px;
-}
-.form-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-
-  .form-container {
-    width: 600px;
-  }
-  .form-wrapper {
-    display: grid;
-    grid-template-columns: 10fr 1fr;
-  }
-
-  .actions {
-    display: grid;
-    background: #ded2d2;
-    position: fixed;
-    right: 10px;
-    bottom: 10px;
-  }
-}
-</style>
+<style lang="scss" scoped src="./Forms.scss"></style>
 
 <style scoped>
 >>> .tabs a.v-tabs__item.v-tabs__item--active {

@@ -14,7 +14,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations('memberProfile', ['set_picture_dialog', 'set_user']),
+    ...mapMutations('memberProfile', ['set_picture_dialog']),
 
     image_clicked() {
       this.set_picture_dialog(true) //open picture dialog

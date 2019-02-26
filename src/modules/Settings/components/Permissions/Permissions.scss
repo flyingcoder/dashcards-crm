@@ -1,8 +1,8 @@
 @import "~@/sass/_variables";
 
-.permissions-table {
-    padding: 25px;
+@include pagePadding ('.permissions-table');
 
+.permissions-table {
     @include customTableRow; //css used for styling the last row of the table
 }
 

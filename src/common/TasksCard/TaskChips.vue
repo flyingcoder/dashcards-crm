@@ -72,6 +72,7 @@ export default {
     font-size: 12px;
     font-weight: 500;
     color: $chipGray;
+    z-index: 0;
   }
   .task__avatar {
     background-color: $chipGray;

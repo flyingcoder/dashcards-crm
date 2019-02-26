@@ -26,7 +26,7 @@
           @input="remove_chip(data.index)"
         >
           <img :src="data.item.image_url" width="30" height="30" />
-          &nbsp;<span class="chip-member-name">{{ data.item.first_name }}</span>
+          &nbsp;<span class="chip-member-name">{{ data.item.name }}</span>
         </v-chip>
       </template>
 
@@ -37,7 +37,7 @@
           </div>
           <div class="member-info">
             <div class="full-name">
-              {{ item.first_name }} {{ item.last_name }}
+              {{ item.name }}
             </div>
             <div class="job-title">
               {{ item.job_title }}

@@ -1,5 +1,7 @@
 @import "~@/sass/variables";
 
+@include pagePadding ('.groups');
+
 .groups {
     position: relative;
 

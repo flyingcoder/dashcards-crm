@@ -13,11 +13,27 @@ export default {
     FloatingChatButton
   },
 
+  data: () => ({
+    mini_sidebar: false
+  }),
+
   computed: {
     ...mapGetters('onlineUsers', ['all_users']),
     ...mapGetters('chat', ['unread_messages', 'all_conversations']),
     user() {
       return this.$store.getters.user
+    },
+    is_sm_and_down() {
+      return this.$vuetify.breakpoint.smAndDown
+    }
+  },
+
+  watch: {
+    is_sm_and_down: {
+      handler(val) {
+        this.mini_sidebar = val
+      },
+      immediate: true
     }
   },
 

@@ -1,0 +1,26 @@
+@import '~@/sass/_variables';
+
+@include pagePadding ('.notes');
+
+.notes{
+    
+    @include emptyTable('.empty-notes');
+
+    .notes-wrapper{
+        margin: 10px;
+        background-color: $white;
+        border: 1px solid $tableBorderBlue;
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    .notes-content{
+        background-color: $tableBlueBg;
+        border: 1px solid $tableBorderBlue;
+        padding: 15px;
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        grid-gap: 20px;
+    }
+
+}

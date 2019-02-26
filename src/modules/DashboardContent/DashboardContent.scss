@@ -1,6 +1,12 @@
 @import '~@/sass/_variables';
 
-.content{
+@include pagePadding('.dashboard-content');
+
+.dashcard-content{
+    padding: 20px 0;
+}
+
+.dashboard-content{
     .d__breadcrumbs{
         margin-bottom: 14px;
         .page__options{
@@ -85,7 +91,7 @@
 
 // Mobile
 @media only screen and (max-width: 64em) {
-    .content{
+    .dashboard-content{
         .d__breadcrumbs{
             flex-wrap: wrap;
             flex-direction: column;
@@ -123,7 +129,7 @@
 // Mobile Phone
 @media only screen and (max-width: 480px) {
     // TODO -> Moe review, not recommended using this kind of nested styles, try to keep it clean
-    .content{
+    .dashboard-content{
         .d__breadcrumbs{
             .page__options{
                 .option{

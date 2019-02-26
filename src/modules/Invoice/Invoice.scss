@@ -1,7 +1,7 @@
 @import '~@/sass/_variables';
 
-.invoice{
-	padding: 14px 28px;
-}
+@include pagePadding ('.invoice');
 
 @include emptyTable('.empty-invoice');
+
+@include firstColumnHover;

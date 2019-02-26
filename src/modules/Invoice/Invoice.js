@@ -1,12 +1,14 @@
+import { api_to } from './api'
 import { table_functionality } from '@/services/table-functionality/table-functionality'
-import { mapGetters } from 'vuex'
-import makeRequestTo from '@/services/makeRequestTo'
+import { mapMutations } from 'vuex'
+import axios from 'axios'
+import _cloneDeep from 'lodash/cloneDeep'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
-import CreateInvoiceDialog from './components/CreateInvoiceDialog/CreateInvoiceDialog.vue'
 import EmailDialog from './components/EmailDialog/EmailDialog.vue'
+import InvoiceDialog from './components/InvoiceDialog/InvoiceDialog.vue'
 
 export default {
   name: 'Invoice',
@@ -14,7 +16,7 @@ export default {
 
   components: {
     TableHeader,
-    CreateInvoiceDialog,
+    InvoiceDialog,
     CustomTable,
     EmailDialog,
     DeleteDialog
@@ -26,103 +28,78 @@ export default {
       { text: 'Invoice', disabled: true, router_name: null }
     ],
     headers: [
-      { id: 1, text: 'Due Date', value: 'due_date' },
-      { id: 2, text: 'Invoice', value: 'invoice' },
+      { id: 1, text: 'Invoice', value: 'invoice' },
+      { id: 2, text: 'Due Date', value: 'due_date' },
       { id: 3, text: 'Client', value: 'client' },
       { id: 4, text: 'Amount', value: 'amount' },
       { id: 5, is_action: true }
-    ],
-    email_dialog: false
+    ]
   }),
 
-  computed: {
-    ...mapGetters('invoice', ['selected_project', 'invoice_id']),
-    create_invoice_dialog: {
-      get() {
-        return this.$store.getters['invoice/create_dialog']
-      },
-      set(val) {
-        this.$store.commit('invoice/set_create_dialog', val)
-      }
-    },
-    edit_invoice_dialog: {
-      get() {
-        return this.$store.getters['invoice/edit_dialog']
-      },
-      set(val) {
-        this.$store.commit('invoice/set_edit_dialog', val)
-      }
-    }
-  },
-
   created() {
-    this.fill_table('get_invoices', true)
-  },
-
-  beforeDestroy() {
-    this.$store.commit('invoice/reset_state')
+    this.loading = true
+    this.fetch_data()
+    api_to
+      .get_invoices()
+      .then(({ data }) => this.add_table_rows(data.data, data))
+      .finally(() => (this.loading = false))
   },
 
   methods: {
-    create_invoice() {
-      this.loading = true
-      this.create_invoice_dialog = false
-      this.$store
-        .dispatch('invoice/save_invoice', {
-          method: 'post',
-          api: `api/invoice`
-        })
-        .then(({ data }) => this.items.unshift(data))
-        .finally(() => {
-          this.loading = false
-          this.$store.commit('invoice/reset_state')
-        })
+    ...mapMutations('invoice', [
+      'set_dialog',
+      'set_toolbar',
+      'set_projects',
+      'open_invoice_for_editing'
+    ]),
+
+    open_create_dialog() {
+      this.set_toolbar({
+        title: 'Create Invoice'
+      })
+      this.set_dialog({ type: 'create', open: true })
     },
 
-    edit_invoice() {
-      this.$store.commit('invoice/set_company_logo', null)
-      this.loading = true
-      this.edit_invoice_dialog = true
-      this.$store
-        .dispatch('invoice/save_invoice', {
-          method: 'put',
-          api: `api/invoice/${this.invoice_id}`
-        })
-        .then(({ data }) => {
-          const index = this.items.findIndex(item => item.id === data.id)
-          if (~index) this.items.splice(index, 1, data)
-          this.$store.commit('invoice/set_invoice_id', null)
-        })
-        .finally(() => {
-          this.loading = false
-          this.$store.commit('invoice/reset_state')
-        })
+    open_edit_dialog(data) {
+      this.set_toolbar({ title: 'Edit Dialog' })
+      this.open_invoice_for_editing(_cloneDeep(data))
+      this.set_dialog({ type: 'edit', open: true })
+    },
+
+    open_view_dialog(data) {
+      this.set_toolbar({ title: '' })
+      this.open_invoice_for_editing(_cloneDeep(data))
+      this.set_dialog({ type: 'view', open: true })
     },
 
     async delete_invoice() {
       this.loading = true
       this.delete_dialog = false
-      await makeRequestTo.delete_invoice(this.delete_item_id)
+      await api_to.delete_invoice(this.delete_item_id)
       this.loading = false
       const index = this.items.findIndex(
         item => item.id === this.delete_item_id
       )
-      if (~index) this.items.splice(index, this.delete_item_id)
+      if (~index) this.items.splice(index, 1)
     },
 
-    open_edit_dialog(data) {
-      this.$store.commit('invoice/open_invoice_for_editing', data)
+    fetch_data() {
+      axios
+        .all([api_to.get_invoices(), api_to.get_all_projects()])
+        .then(
+          axios.spread((res1, res2) => {
+            this.add_table_rows(res1.data.data, res1.data)
+            this.set_projects(res2.data)
+          })
+        )
+        .finally(() => (this.loading = false))
     },
 
-    open_email_dialog(id) {
-      this.$store.commit('invoice/set_invoice_id', id)
-      this.email_dialog = true
-    },
-
-    close_dialog(val) {
-      if (this.create_invoice_dialog)
-        this.$store.commit('invoice/set_create_dialog', val)
-      else this.$store.commit('invoice/set_edit_dialog', val)
+    invoice_updated(invoice) {
+      const index = this.items.findIndex(item => item.id === invoice.id)
+      if (~index) {
+        this.items.splice(index, 1, invoice)
+      }
     }
   }
 }

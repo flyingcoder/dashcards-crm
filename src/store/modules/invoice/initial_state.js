@@ -1,32 +1,41 @@
 export const initial_state = () => ({
-  company_logo: null,
-  create_dialog: false,
-  edit_dialog: false,
-  invoice_id: null,
-  title: 'Unnamed',
-  billed_to: null,
-  billed_from: null,
-  rows: [],
-  projects: [],
-  selected_project: null,
-  type: 'monthly',
-  due_date: null,
-  date: null,
-  total_amount: 0,
-  notes: '',
-  terms: '',
-  tax: {
-    symbol: '%',
-    value: null,
-    show: false
+  invoice: {
+    company_logo: null,
+    invoice_id: null,
+    title: 'Unnamed',
+    billed_to: null,
+    billed_from: null,
+    rows: [],
+    selected_project: null,
+    type: 'monthly',
+    due_date: null,
+    date: null,
+    total_amount: 0,
+    notes: '',
+    terms: '',
+    tax: {
+      symbol: '%',
+      value: null,
+      show: false
+    },
+    discount: {
+      symbol: '%',
+      value: null,
+      show: false
+    },
+    shipping: {
+      value: null,
+      show: false
+    }
   },
-  discount: {
-    symbol: '%',
-    value: null,
-    show: false
+  copy_invoice: null,
+  invoice_to_edit: null,
+  dialog: {
+    type: null,
+    open: false
   },
-  shipping: {
-    value: null,
-    show: false
-  }
+  toolbar: {
+    title: null
+  },
+  projects: []
 })

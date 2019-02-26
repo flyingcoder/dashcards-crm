@@ -1,11 +1,11 @@
 <template>
-  <v-menu
-    top
+  <v-speed-dial
+    bottom
+    right
     slide-y-reverse-transition
     v-model="fabs"
-    :close-on-content-click="false"
-    :nudge-top="60"
-    right
+    direction="top"
+    offset-y
     class="chat__position"
   >
     <v-btn
@@ -42,7 +42,7 @@
         </div>
       </div>
     </v-card>
-  </v-menu>
+  </v-speed-dial>
 </template>
 
 <script src="./FriendsList.js"></script>

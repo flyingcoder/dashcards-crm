@@ -1,7 +1,5 @@
 @import '~@/sass/_variables';
 
-@include sortOptionStyle;
-
 @include emptyTable('.empty-timer');
 
 .timer__tab {

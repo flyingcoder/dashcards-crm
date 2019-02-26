@@ -6,7 +6,7 @@
 
 <script src="./Support.js"></script>
 <style lang="scss" scoped>
-.support {
-  padding: 14px 28px;
-}
+@import '~@/sass/_variables';
+
+@include pagePadding('.support');
 </style>

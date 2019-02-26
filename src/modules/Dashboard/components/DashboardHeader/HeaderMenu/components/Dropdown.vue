@@ -13,7 +13,7 @@
           <v-avatar class="user-icon responsive-img" :size="avatarSize">
             <img
               class="atomic-icon"
-              src="@/assets/temp/atomic.png"
+              :src="user.image_url"
               width="45px"
               alt="user"
             />
@@ -57,7 +57,8 @@ export default {
     items: [
       {
         title: 'Profile',
-        icon: require('@/assets/icons/header/user/profile.svg')
+        icon: require('@/assets/icons/header/user/profile.svg'),
+        action: 'navigate_to_profile'
       },
       {
         title: 'Settings',
@@ -69,16 +70,18 @@ export default {
         icon: require('@/assets/icons/header/user/help.svg')
       },
       {
-        title: 'Lock',
-        icon: require('@/assets/icons/header/user/lock.svg')
-      },
-      {
         title: 'Logout',
         icon: require('@/assets/icons/header/user/logout.svg'),
         action: 'logout'
       }
     ]
   }),
+
+  computed: {
+    user() {
+      return this.$store.getters.user
+    }
+  },
 
   methods: {
     handle_action(action) {
@@ -91,6 +94,14 @@ export default {
 
     navigate_to_settings() {
       this.$router.push({ name: 'settings' })
+    },
+
+    navigate_to_profile() {
+      if (this.user.role === 'client') {
+        this.$router.push(`clients/profile/${this.user.id}`)
+      } else {
+        this.$router.push(`team/profile/${this.user.id}`)
+      }
     }
   }
 }

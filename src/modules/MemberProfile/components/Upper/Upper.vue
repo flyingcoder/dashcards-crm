@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <AddPicture @picture-changed="set_user" />
+    <AddPicture />
     <UserInfo />
   </div>
 </template>

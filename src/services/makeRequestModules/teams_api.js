@@ -6,7 +6,7 @@ export const teams_api = {
   },
 
   get_all_teams() {
-    return request.get('api/company/teams?all=true')
+    return request.get('api/company/members')
   },
 
   get_project_members(id) {

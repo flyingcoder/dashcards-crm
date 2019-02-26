@@ -9,6 +9,7 @@
 // Colors
     $white: #ffffff;
     $blue: #3b589e;
+    $darkBlue: #1b2847;
     $lightBlue: #00a7e5;
     $green: #1fb868;
     $red: #f56c6c;
@@ -187,51 +188,6 @@
  * (End)
  ********************************************************************/
 
-@mixin sortOptionStyle {
-    
-    .sort__option{
-        border: 1px solid $sortOptionGray;
-        background-color: $white;
-        .v-icon{
-         font-size: 24px;
-         color: $sortOptionGray;
-       }
-    }
-    .v-menu__content.theme--light.menuable__content__active{
-        box-shadow: 0 15px 5px -3px rgba(0,0,0,.2), 0 18px 10px -3px rgba(0,0,0,.14), 0 13px 14px -3px rgba(0,0,0,.12);
-        
-    }
-
-    // List
-    .sort__list{
-        padding: 0;
-        margin-top:20px;
-        &:after{
-            content: "";
-            position:absolute;
-            margin-top:-45px;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-bottom: 15px solid $sortListBgBlue;
-            border-top: 15px solid transparent;
-            right: 10px;
-            bottom: 239px;
-        }
-        .sort__list_tile{
-            background-color: $sortListBgBlue;
-            .v-list__tile--link:hover{
-                background-color: $sortListBgWhite;
-            }
-            .sort__list_item{
-                color: $sortListDarkTxt;
-                font-size: 14px;
-                font-weight: 500;
-                margin: 0 10px;
-            }
-        }
-    }
-}
-
 @mixin userImgWithStatus ($selector){
     #{$selector}{
         height: 30px;
@@ -287,9 +243,14 @@
   .table__body-row{
     td:nth-child(2){
       cursor: pointer;
+      color: $blue;
+      text-transform: capitalize;
+      font-weight: bold;
     }
-    td:nth-child(2):hover{
-      background-color: #eee;
+    td:nth-child(2):hover, 
+    td:nth-child(2):visited, 
+    td:nth-child(2):active{
+      color: $darkGray;
     }
   }
 }
@@ -329,7 +290,7 @@
         }
     }
 
-    @media only screen and (max-width: 64em){
+    @media only screen and (max-width: 768px){
         
         #{$selector}{
             padding: 20px;
@@ -385,6 +346,23 @@
             .empty-text{
                 font-size: 16px;
             }
+        }
+    }
+}
+@mixin pagePadding($selector) {
+    #{$selector}{
+        padding: 0 20px;
+    }
+
+    @media only screen and (max-width: 768px){
+        #{$selector}{
+            padding: 0 10px;
+        }
+    }
+
+    @media only screen and (max-width: 480px){
+        #{$selector}{
+            padding: 0 5px;
         }
     }
 }

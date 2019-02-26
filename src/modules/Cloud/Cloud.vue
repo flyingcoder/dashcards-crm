@@ -6,7 +6,7 @@
 
 <script src="./Cloud.js"></script>
 <style lang="scss" scoped>
-.cloud {
-  padding: 14px 28px;
-}
+@import '~@/sass/_variables';
+
+@include pagePadding('.cloud');
 </style>

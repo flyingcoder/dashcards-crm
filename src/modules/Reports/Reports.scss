@@ -1,6 +1,6 @@
 @import '~@/sass/_variables';
 
-@include sortOptionStyle;
+@include pagePadding ('.reports');
 
 .custom-dialog {
   .dialog__link, .dialog__textfield{
@@ -12,10 +12,6 @@
 
 .theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat){
   background-color: $white;
-}
-
-.reports {
-  padding: 14px 28px;
 }
 
 .body-wrapper{

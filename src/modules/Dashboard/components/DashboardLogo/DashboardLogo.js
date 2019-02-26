@@ -1,7 +1,14 @@
 export default {
   props: {
-    methods: {
-      type: Object
+    miniSidebar: {
+      type: Boolean,
+      default: false
+    }
+  },
+
+  methods: {
+    rotateIcon() {
+      this.$emit('update:miniSidebar', !this.miniSidebar)
     }
   }
 }

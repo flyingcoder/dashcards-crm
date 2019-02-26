@@ -1,11 +1,11 @@
 <template>
-  <div class="content">
+  <div class="client-profile">
     <table-header :paths="paths" :no-button="true" />
 
     <div class="profile">
       <div class="profile-content">
         <Upper />
-        <Lower />
+        <Lower :user_id="user_id"/>
       </div>
     </div>
   </div>

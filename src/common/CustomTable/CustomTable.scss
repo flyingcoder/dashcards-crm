@@ -7,7 +7,7 @@
     border-radius: 10px;
     border: 1px solid $tableBorderBlue;
     .buzz__tablesTwo{
-      padding: 20px;
+      padding: 10px 20px 20px 20px;
       border: 1px solid $tableBorderBlue;
       background-color: $tableBlueBg;
       .table__toolbar{
@@ -16,14 +16,6 @@
             color: $tableTitleBlue;
             text-align: left;
             font-size: 30px;
-        }
-        .sort__option{
-          border: 1px solid $borderGray;
-          background-color: $white;
-          .v-icon{
-            font-size: 24px;
-            color: $borderGray;
-          }
         }
       }
       .buzzooka__table{
