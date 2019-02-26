@@ -60,6 +60,12 @@ export default {
     }
   },
 
+  watch: {
+    checkbox(val) {
+      val && this.select_all_cards()
+    }
+  },
+
   created() {
     this.get_dashitems()
   },
@@ -89,6 +95,10 @@ export default {
     },
     reset() {
       this.selected_cards = [...this.cards_id]
+    },
+    select_all_cards() {
+      const ids = this.dash_items.map(item => item.id)
+      this.selected_cards = [...ids]
     }
   }
 }
