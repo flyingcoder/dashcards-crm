@@ -77,6 +77,10 @@ export default {
       'user'
     ]),
 
+    ...mapGetters({
+      logged_user: 'user'
+    }),
+
     dialog: {
       get() {
         return this.picture_dialog_is_open
@@ -132,6 +136,10 @@ export default {
         'Profile picture uploaded successfully!'
       )
       this.set_user(response.data)
+      if (Number(this.user_id) === Number(this.logged_user.id)) {
+        /* if we modify the logged user */
+        this.$store.commit('set_user_image', response.data.image_url)
+      }
       this.$refs.picture_dialog.clear_and_close()
       Object.assign(this.$data, this.$options.data.apply(this))
     }
