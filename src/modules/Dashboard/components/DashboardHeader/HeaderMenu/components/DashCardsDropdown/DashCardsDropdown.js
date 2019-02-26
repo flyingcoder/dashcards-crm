@@ -86,6 +86,9 @@ export default {
       } else {
         this.selected_cards.push(id)
       }
+    },
+    reset() {
+      this.selected_cards = [...this.cards_id]
     }
   }
 }
