@@ -98,9 +98,9 @@ export default {
 
     navigate_to_profile() {
       if (this.user.role === 'client') {
-        this.$router.push(`clients/profile/${this.user.id}`)
+        this.$router.push(`/dashboard/clients/profile/${this.user.id}`)
       } else {
-        this.$router.push(`team/profile/${this.user.id}`)
+        this.$router.push(`/dashboard/team/profile/${this.user.id}`)
       }
     }
   }
