@@ -1,0 +1,6 @@
+@import '~@/sass/_variables';
+
+.dialog__selectfield, .dialog__email, .dialog__password{
+    margin: 5px;
+}
+@include actionButtonsDialog('.dialog__actions');

@@ -9,10 +9,11 @@
       :show-arrows="is_screen_medium_and_down"
       v-model="active_tab"
     >
-      <v-tab v-for="tab in tabs" 
-            :key="tab.name" 
-            :href="`#${tab.name}`"
-            class="tab-item"
+      <v-tab
+        v-for="tab in tabs"
+        :key="tab.name"
+        :href="`#${tab.name}`"
+        class="tab-item"
       >
         <svg viewBox="0 0 250 250">
           <path class="icon" :d="tab.icon" />

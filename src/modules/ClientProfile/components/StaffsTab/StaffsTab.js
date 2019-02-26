@@ -1,6 +1,6 @@
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
-import AddDialog from './AddDialog/AddDialog.vue'
+import StaffDialog from './StaffDialog/StaffDialog.vue'
 import { table_functionality } from '@/services/table-functionality/table-functionality'
 
 export default {
@@ -8,7 +8,7 @@ export default {
   mixins: [table_functionality],
   components: {
     CustomTable,
-    AddDialog,
+    StaffDialog,
     DeleteDialog
   },
   inheritAttrs: false,
@@ -19,6 +19,7 @@ export default {
 
   data: () => ({
     add_dialog: false,
+    staff_id: '',
     headers: [
       { text: 'Member', value: 'member' },
       { text: 'Email', value: 'email' },
@@ -37,24 +38,31 @@ export default {
   }),
 
   computed: {
-    // dynamic_api() {
-    //   return `api/projects/${this.id}/member`
-    // }
+    dynamic_api() {
+      return `api/clients/${this.id}/staffs`
+    }
   },
 
   created() {
     this.$router.replace({
       name: 'client_profile',
-      query: { tab: 'Members' }
+      query: { tab: 'Staffs' }
     })
-    // this.fill_table('get_members', true, this.dynamic_api)
+    this.fill_table('get_members', true, this.dynamic_api)
   },
 
   methods: {
-    // can_be_deleted(item) {
-    //   return !(
-    //     item.job_title === 'Administrator' || item.job_title === 'Client'
-    //   )
-    // }
+    can_be_deleted(item) {
+      return !(
+        item.job_title === 'Administrator' || item.job_title === 'Client'
+      )
+    },
+
+    navigate_to_view_profile(id) {
+      this.$router.push({
+        name: 'client_profile',
+        params: { user_id: id }
+      })
+    }
   }
 }
