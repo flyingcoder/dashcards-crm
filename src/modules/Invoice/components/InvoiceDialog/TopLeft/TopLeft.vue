@@ -1,6 +1,7 @@
 <template>
   <div class="left__side">
     <div
+      v-if="!(dialog.type === 'view' && !image_preview)"
       class="add__logo_box"
       @click="dialog.type !== 'view' && $refs.hidden_input.click()"
     >
