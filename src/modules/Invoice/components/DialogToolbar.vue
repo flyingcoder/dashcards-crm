@@ -7,10 +7,10 @@
             <v-icon>cloud_download</v-icon>
           </v-btn>
           <template v-if="user.role === 'client'">
-            <v-btn>Pay</v-btn>
+            <v-btn flat dark outline>Pay</v-btn>
           </template>
           <template v-else>
-            <v-btn>Remind</v-btn>
+            <v-btn flat dark outline>Remind</v-btn>
           </template>
         </template>
         <span v-else>{{ toolbar.title }}</span>
