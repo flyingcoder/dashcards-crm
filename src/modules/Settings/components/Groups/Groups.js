@@ -11,8 +11,6 @@ export default {
   name: 'Groups',
   mixins: [table_functionality],
   components: {
-    PermissionsDialog: () =>
-      import('./components/PermissionsDialog/PermissionsDialog.vue'),
     CustomTable,
     GroupsDialog,
     TableHeader,
@@ -20,7 +18,6 @@ export default {
   },
 
   data: () => ({
-    permissions_dialog: '',
     group_id: null,
     paths: [
       { text: 'Settings', disabled: false, router_name: null },
@@ -31,6 +28,20 @@ export default {
       { id: 2, text: 'Group Name', value: 'group_name', width: '5%' },
       { id: 3, text: 'Description', value: 'description', width: '5%' },
       { id: 4, is_action: true, width: '85%' }
+    ],
+    actions: [
+      {
+        text: 'Edit',
+        value: 'edit_settings',
+        tooltip: 'Edit Settings',
+        icon: require(`@/${'assets/icons/groups/edit.svg'}`)
+      },
+      {
+        text: 'Delete',
+        value: 'delete_group',
+        tooltip: 'Delete Group',
+        icon: require(`@/${'assets/icons/groups/delete.svg'}`)
+      }
     ],
     table_config: {
       route_name: 'settings',
@@ -105,58 +116,6 @@ export default {
         this.open_edit_dialog({ id, name, description })
       else if (action === 'delete_group')
         this.open_delete_dialog({ id, name, description })
-      else if (action === 'permissions') {
-        this.group_id = id
-        this.permissions_dialog = 'PermissionsDialog'
-      }
-    },
-
-    get_actions(group_slug) {
-      if (group_slug.includes('default-admin'))
-        return [
-          {
-            text: 'Group',
-            value: 'group_members',
-            tooltip: 'Group Members'
-          }
-        ]
-      else
-        return [
-          {
-            text: 'Permissions',
-            value: 'permissions',
-            tooltip: 'Permissions',
-            icon: require(`@/${'assets/icons/groups/permissions.svg'}`)
-          },
-          {
-            text: 'Migrate',
-            value: 'migrate_members',
-            tooltip: 'Migrate Members',
-            icon: require(`@/${'assets/icons/groups/migrate.svg'}`)
-          },
-          {
-            text: 'Group',
-            value: 'group_members',
-            tooltip: 'Group Members',
-            icon: require(`@/${'assets/icons/groups/members.svg'}`)
-          },
-          {
-            text: 'Edit',
-            value: 'edit_settings',
-            tooltip: 'Edit Settings',
-            icon: require(`@/${'assets/icons/groups/edit.svg'}`)
-          },
-          {
-            text: 'Delete',
-            value: 'delete_group',
-            tooltip: 'Delete Group',
-            icon: require(`@/${'assets/icons/groups/delete.svg'}`)
-          }
-        ]
-    },
-
-    is_edit_or_delete_action(action) {
-      return action === 'edit_settings' || action === 'delete_group'
     }
   }
 }

@@ -36,7 +36,9 @@
         </div>
 
         <div class="card__btn">
-          <v-btn dark color="#8b94bf" class="reset">Reset Default</v-btn>
+          <v-btn dark color="#8b94bf" class="reset" @click="reset">
+            Reset Default
+          </v-btn>
           <v-btn
             dark
             color="#8b94bf"

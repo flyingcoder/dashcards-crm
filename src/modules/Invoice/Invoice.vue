@@ -32,7 +32,7 @@
       @delete="open_delete_dialog"
     >
       <template slot="custom-item" slot-scope="{ item }">
-        <td>{{ item.title }}</td>
+        <td @click="open_view_dialog(item)">{{ item.title }}</td>
         <td>{{ item.due_date }}</td>
         <td>{{ item.billed_to }}</td>
         <td>{{ item.total_amount }}</td>

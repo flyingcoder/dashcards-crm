@@ -23,6 +23,10 @@ export default new Vuex.Store({
   },
   mutations: {
     set_user: (state, payload) => (state.user = payload),
+    set_user_image: (state, payload) => {
+      state.user.image_url = payload
+      localStorage.setItem('user', JSON.stringify(state.user))
+    },
     remove_user: state => (state.user = null),
     open_snackbar: (state, payload) => (state.snackbar = payload),
     set_custom_loader: (state, payload) => (state.custom_loader = payload),

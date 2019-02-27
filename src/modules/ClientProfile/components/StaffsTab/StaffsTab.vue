@@ -7,23 +7,31 @@
         </v-btn>
       </v-flex>
     </v-layout>
-
-    <!-- <add-dialog
-      :dialog.sync="add_dialog"
+    
+    <staff-dialog
       ref="add_dialog"
-      title="Add Member(s)"
-      @save="add_item('add_members', $event, dynamic_api)"
-      :all-members="items"
+      title="Add New Staff"
+      :dialog.sync="add_dialog"
+      @save="add_item('add_new_team', $event, dynamic_api)"
+    />
+
+    <staff-dialog
+      ref="edit_dialog"
+      title="Edit Staff"
+      :dialog.sync="edit_dialog"
+      :fields-to-edit="edit_item"
+      :is-edit-dialog="edit_dialog"
+      @save="update_item('update_team', $event)"
     />
 
     <delete-dialog
       :open-dialog.sync="delete_dialog"
-      title="Delete Member"
-      text-content="Are you sure you want to delete this member?"
-      @delete="delete_item('delete_member', dynamic_api)"
-    /> -->
+      title="Delete Staffssss"
+      text-content="Are you sure you want to delete this staff?"
+      @delete="delete_item('delete_team', $event)"
+    />
 
-    <!-- <custom-table
+    <custom-table
       v-if="items.length"
       :headers="headers"
       :items="items"
@@ -31,36 +39,24 @@
       :sort="sort"
       :has-checkbox="true"
       hide-actions
-      no-row-edit
-      toolbar-title="Members"
-      no-row-view
+      toolbar-title="Staffs"
       :permission="$_permissions.get('hq_members')"
       @items-selected="selected_ids = $event"
       @sorted="changeSort"
+      @edit="open_edit_dialog"
+      @delete="open_delete_dialog"
+      @view="navigate_to_view_profile($event.id)"
     >
       <template slot="custom-item" slot-scope="{ item }">
-        <td class="text-cap">{{ item.first_name + ' ' + item.last_name }}</td>
+        <td class="text-cap" @click="navigate_to_view_profile(item.id)">{{ item.first_name + ' ' + item.last_name }}</td>
         <td class="email">{{ item.email }}</td>
         <td>{{ item.telephone }}</td>
         <td class="text-cap">{{ item.job_title }}</td>
-        <td>{{ item.tasks.length }}</td>
+        <td>{{ item.tasks }}</td>
       </template>
+    </custom-table>
 
-      <template slot="row-delete" slot-scope="{ item }">
-        <v-btn
-          v-if="can_be_deleted(item)"
-          fab
-          small
-          flat
-          depressed
-          @click="open_delete_dialog(item)"
-        >
-          <img src="@/assets/icons/groups/delete.svg" alt="" />
-        </v-btn>
-      </template>
-    </custom-table> -->
-
-    <div class="empty-member">
+    <div class="empty-member" v-else>
       <div class="empty-content">
         <div class="empty-svg">
           <svg viewBox="0 0 250 250">
@@ -79,5 +75,5 @@
   </div>
 </template>
 
-<script src="./MembersTab.js"></script>
-<style lang="scss" scoped src="./MembersTab.scss"></style>
+<script src="./StaffsTab.js"></script>
+<style lang="scss" scoped src="./StaffsTab.scss"></style>

@@ -73,25 +73,19 @@
           <v-icon>close</v-icon>
         </v-btn>
 
-        <div class="speed__dial_item" @click="add_dialog = true">
-          Add Milestone
-          <v-btn slot="activator" color="#3b589e" dark small fab>
-            <v-icon>add</v-icon>
-          </v-btn>
-        </div>
+        <v-btn color="#3b589e" dark small fab @click="add_dialog = true">
+          <v-icon title="Add Milestone">add</v-icon>
+        </v-btn>
 
-        <div class="speed__dial_item" @click="open_select_template_dialog">
-          Select Template
-          <v-btn
-            slot="activator"
-            :disabled="boxes.length > 0"
-            color="#3b589e"
-            small
-            fab
-          >
-            <v-icon color="white">touch_app</v-icon>
-          </v-btn>
-        </div>
+        <v-btn
+          :disabled="boxes.length > 0"
+          color="#3b589e"
+          small
+          fab
+          @click="open_select_template_dialog"
+        >
+          <v-icon color="white" title="Select Template">touch_app</v-icon>
+        </v-btn>
       </v-speed-dial>
     </v-layout>
 

@@ -53,18 +53,21 @@
                   <div class="friend__list">
                     <div
                       class="friend user"
-                      v-for="friend in friends"
-                      :key="friend.id"
+                      v-for="user of all_users"
+                      :key="user.id"
                     >
                       <div class="user__img">
-                        <v-img :src="require('@/assets/temp/user.png')" />
-                        <span class="status" :class="friend.status"></span>
+                        <v-img :src="user.image_url" />
+                        <span
+                          class="status"
+                          :class="[user.is_online ? 'online' : 'offline']"
+                        ></span>
                       </div>
 
                       <div class="user__info">
-                        <div class="user__name">{{ friend.name }}</div>
+                        <div class="user__name">{{ user.name }}</div>
                         <div class="active__history">
-                          {{ friend.activeHistory }}
+                          active history
                         </div>
                       </div>
                     </div>
@@ -76,8 +79,8 @@
             <div class="friend__list">
               <v-menu
                 class="friend__info"
-                v-for="friend in friends"
-                :key="friend.id"
+                v-for="user of all_users"
+                :key="user.id"
                 right
                 offset-y
                 :nudge-right="190"
@@ -87,25 +90,28 @@
               >
                 <div class="friend user" slot="activator">
                   <div class="user__img">
-                    <v-img :src="require('@/assets/temp/user.png')" />
-                    <span class="status" :class="friend.status"></span>
+                    <v-img :src="user.image_url" />
+                    <span
+                      class="status"
+                      :class="[user.is_online ? 'online' : 'offline']"
+                    ></span>
                   </div>
 
-                  <span class="user__name">{{ friend.name }}</span>
+                  <span class="user__name">{{ user.name }}</span>
                 </div>
 
                 <div class="hover__info">
                   <div class="info__one">
                     <div class="h__img">
-                      <v-img :src="require('@/assets/temp/user.png')" />
+                      <v-img :src="user.image_url" />
                     </div>
                     <div class="h__details">
-                      <h2 class="h__name">{{ friend.name }}</h2>
-                      <p class="h__job">Front-end Web Developer</p>
+                      <h2 class="h__name">{{ user.name }}</h2>
+                      <p class="h__job">{{user.job_title}}</p>
                       <div class="info__anchor">
                         <v-icon>email</v-icon>
-                        <a href="mailto:sample.buzzooka@gmail.com"
-                          >sample.buzzooka@gmail.com</a
+                        <a :href="'mailto:' + user.email"
+                          >{{ user.email }}</a
                         >
                       </div>
                       <div class="info__anchor">

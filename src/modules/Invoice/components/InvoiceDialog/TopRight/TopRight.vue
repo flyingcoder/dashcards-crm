@@ -185,8 +185,14 @@ export default {
 
 .right__side {
   .invoice__title {
-    .titlefield {
-      margin-bottom: 40px;
+    color: $textDark;
+    font-weight: 500;
+    padding: 6px 8px;
+    margin-bottom: 20px;
+
+    .titlefield{
+      font-size: 26px;
+      width: 300px;
     }
   }
 
