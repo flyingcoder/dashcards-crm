@@ -1,10 +1,5 @@
 <template>
   <div class="groups">
-    <component
-      :is="permissions_dialog"
-      @close-dialog="permissions_dialog = ''"
-      :group-id="group_id"
-    ></component>
 
     <groups-dialog
       :dialog.sync="add_dialog"
@@ -12,6 +7,7 @@
       title="Add Group"
       @save="add_item('add_new_group', $event)"
     />
+
     <groups-dialog
       :dialog.sync="edit_dialog"
       ref="edit_dialog"
@@ -65,12 +61,8 @@
 
             <template slot="row-actions" slot-scope="{ item }">
               <td class="actions">
-                <template v-for="action of get_actions(item.slug)">
-                  <template
-                    v-if="
-                      is_edit_or_delete_action(item.value) && item.company_id
-                    "
-                  >
+                <template v-for="action of actions">
+                  <template v-if="item.company_id">
                     <v-tooltip bottom :key="action.value">
                       <v-btn
                         slot="activator"
