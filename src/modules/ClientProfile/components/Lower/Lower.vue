@@ -10,24 +10,19 @@
       v-model="active_tab"
     >
       <v-tab
-        v-for="tab in tabs"
-        :key="tab.name"
-        :href="`#${tab.name}`"
+        v-for="tab of tabs"
+        :key="tab.route"
+        :to="tab.route"
         class="tab-item"
       >
         <svg viewBox="0 0 250 250">
           <path class="icon" :d="tab.icon" />
         </svg>
       </v-tab>
-      <v-tabs-items v-model="active_tab">
-        <v-tab-item v-for="tab of tabs" :key="tab.id" :value="tab.name">
-          <component
-            :id="user_id"
-            :is="active_tab"
-            v-if="active_tab === tab.name"
-          ></component>
-        </v-tab-item>
-      </v-tabs-items>
+
+      <v-tab-item v-for="tab of tabs" :key="tab.route" :value="tab.route">
+        <router-view></router-view>
+      </v-tab-item>
     </v-tabs>
   </div>
 </template>
