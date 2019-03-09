@@ -99,7 +99,7 @@ export default {
   watch: {
     dialog(new_val) {
       this.open = new_val
-      if (new_val && !this.isEditDialog) this.init_dropdowns()
+      if (new_val) this.init_dropdowns()
     },
     open(new_val) {
       this.$emit('update:dialog', new_val)
@@ -167,20 +167,14 @@ export default {
 
     update_fields({ fields }) {
       const new_fields = _cloneDeep(fields)
-      this.$set(this.service, 'items', [
-        { text: new_fields.service_name, value: new_fields.service_id }
-      ])
       this.$set(this.service, 'selected', {
         text: new_fields.service_name,
-        value: new_fields.service_id
+        id: new_fields.service_id
       })
       this.$set(this.client, 'selected', {
         text: new_fields.client_name,
-        value: new_fields.client_id
+        id: new_fields.client_id
       })
-      this.$set(this.client, 'items', [
-        { text: new_fields.client_name, value: new_fields.client_id }
-      ])
       this.$set(
         this.date_pickers,
         'start_date',

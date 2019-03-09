@@ -51,7 +51,10 @@
               </v-menu>
 
               <div class="choosen" v-if="client.selected">
-                {{ client.selected.first_name }}
+                <span v-if="isEditDialog">
+                  {{ client.selected.text }}
+                </span>
+                <span v-else>{{ client.selected.first_name }}</span>
               </div>
             </v-flex>
 
@@ -91,7 +94,10 @@
               </v-menu>
 
               <div class="choosen" v-if="service.selected">
-                {{ service.selected.name }}
+                <span v-if="isEditDialog">
+                  {{ service.selected.text }}
+                </span>
+                <span v-else>{{ service.selected.name }}</span>
               </div>
             </v-flex>
 

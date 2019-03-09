@@ -53,10 +53,7 @@ export default {
 
   methods: {
     navigate_to_view_profile(id) {
-      this.$router.push({
-        name: 'client_profile',
-        params: { user_id: id }
-      })
+      this.$router.push(`/dashboard/clients/profile/${id}`)
     }
   }
 }

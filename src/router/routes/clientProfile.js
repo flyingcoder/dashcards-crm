@@ -1,6 +1,13 @@
 export const client_profile = {
   path: 'clients/profile/:user_id',
-  name: 'client_profile',
   props: true,
-  component: () => import('@/modules/ClientProfile/ClientProfile.vue')
+  component: () => import('@/modules/ClientProfile/ClientProfile.vue'),
+  children: [
+    {
+      path: '',
+      name: 'clients-tasks',
+      props: true,
+      component: () => import('@/modules/ClientProfile-Tasks/Tasks.vue')
+    }
+  ]
 }
