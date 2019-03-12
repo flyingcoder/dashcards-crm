@@ -19,12 +19,10 @@
       :headers="headers"
       :items="items"
       :has-checkbox="true"
-      hide-actions
       :permission="$_permissions.get('hq_files')"
-      @items-selected="selected_ids = $event"
+      hide-actions
       class="custom__table"
-      no-row-edit
-      no-row-view
+      @items-selected="selected_ids = $event"
     >
       <template slot="toolbar">
         <v-layout row class="file__list_header">
@@ -57,12 +55,33 @@
       </template>
 
       <template slot="custom-item" slot-scope="item">
+        <td>
+          <v-img :src="item.item.thumb_url"></v-img>
+        </td>
         <td class="text-upper">{{ item.item.custom_properties.ext }}</td>
         <td class="text-cap">{{ item.item.name }}</td>
         <td class="text-cap">
           {{ item.item.custom_properties.user.first_name }}
         </td>
         <td class="text-cap">Project</td>
+      </template>
+
+      <template #row-actions="{ item }">
+        <td class="text-xs-center">
+          <v-btn
+            fab
+            flat
+            small
+            depressed
+            title="Download"
+            @click="download_image(item.thumb_url)"
+          >
+            <v-icon>cloud_download</v-icon>
+          </v-btn>
+          <v-btn v-if="can_delete" fab small flat depressed title="Delete">
+            <img src="@/assets/icons/groups/delete.svg" alt="" />
+          </v-btn>
+        </td>
       </template>
     </custom-table>
   </div>

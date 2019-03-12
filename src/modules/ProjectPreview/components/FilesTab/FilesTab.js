@@ -21,6 +21,7 @@ export default {
 
   data: () => ({
     headers: [
+      { text: 'Thumbnail', value: 'thumbnail' },
       { text: 'Filetype', value: 'filetype' },
       { text: 'Filename', value: 'filename' },
       { text: 'Uploaded by', value: 'member' },
@@ -37,6 +38,9 @@ export default {
   }),
 
   computed: {
+    user() {
+      return this.$store.getters.user
+    },
     dropzoneOptions() {
       return {
         thumbnailWidth: 150,
@@ -48,6 +52,13 @@ export default {
     },
     dynamic_api() {
       return `api/projects/${this.id}/file`
+    },
+    can_delete() {
+      if (this.user.is_admin) return true
+      return (
+        this.$_permissions.get('hq_files') &&
+        this.$_permissions.get('hq_files').delete
+      )
     }
   },
 
@@ -61,6 +72,19 @@ export default {
       this.$event.$emit('open_snackbar', 'File(s) uploaded successfully')
       this.items.unshift(JSON.parse(response))
       this.$refs.dropzone.remove_file(file)
+    },
+    download_image(image_url) {
+      let link = document.createElement('a')
+      link.setAttribute(
+        'href',
+        'data:application/octet-stream,' + encodeURIComponent(image_url)
+      )
+      let ext = image_url.split('.').pop()
+      link.setAttribute('download', `image.${ext}`)
+      link.style.display = 'none'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
     }
   }
 }
