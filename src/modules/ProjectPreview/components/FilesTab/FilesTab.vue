@@ -1,5 +1,7 @@
 <template>
   <div class="files__tab">
+    <LinkDialog ref="link_dialog" />
+
     <div class="drop__files">
       <div class="drop__files_body">
         <CustomDropzone
@@ -47,7 +49,7 @@
               <v-icon dark left class="other">settings_applications</v-icon>
               Other
             </v-btn>
-            <v-btn color="#3b589e" dark>
+            <v-btn color="#3b589e" dark @click="open_link_dialog">
               Add Link
             </v-btn>
           </v-flex>

@@ -3,6 +3,7 @@ import { table_functionality } from '@/services/table-functionality/table-functi
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import CustomDropzone from '@/common/CustomDropzone.vue'
+import LinkDialog from './components/LinkDialog.vue'
 
 export default {
   name: 'FilesTab',
@@ -12,7 +13,8 @@ export default {
   components: {
     CustomTable,
     TableHeader,
-    CustomDropzone
+    CustomDropzone,
+    LinkDialog
   },
 
   props: {
@@ -85,6 +87,9 @@ export default {
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
+    },
+    open_link_dialog() {
+      this.$refs.link_dialog.openDialog()
     }
   }
 }
