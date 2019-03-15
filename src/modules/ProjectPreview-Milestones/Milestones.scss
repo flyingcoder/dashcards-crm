@@ -1,0 +1,23 @@
+.milestones__tab {
+  padding: 12px 24px;
+  .milestone__dynamic_box{
+    margin: 12px;
+  }
+  .add-btn{
+    z-index: 1;
+
+    .speed__dial_item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      margin-right: 105px;
+      width: 160px;
+    }
+  }
+}
+@media only screen and (max-width: 480px){
+  .milestones__tab{
+    padding: 12px;
+  }
+}

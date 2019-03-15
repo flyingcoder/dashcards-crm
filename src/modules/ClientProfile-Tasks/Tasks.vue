@@ -35,7 +35,7 @@ import apiTo from './api'
 //Components
 import TasksChips from '@/common/TasksCard/TaskChips'
 import TasksTable from '@/common/TasksCard/TaskCustomTable'
-import PreviewCard from '@/modules/ProjectPreview/components/TaskTab/TaskTabPreviewCard/TaskTabPreviewCard.vue'
+import PreviewCard from '@/modules/ProjectPreview-Tasks/components/TaskTabPreviewCard/TaskTabPreviewCard.vue'
 
 export default {
   components: {
