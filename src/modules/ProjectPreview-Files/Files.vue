@@ -58,7 +58,7 @@
 
       <template slot="custom-item" slot-scope="item">
         <td>
-          <v-img :src="item.item.thumb_url"></v-img>
+          <v-img :src="item.item.thumb_url" width="50px" height="50px"></v-img>
         </td>
         <td class="text-upper">{{ item.item.custom_properties.ext }}</td>
         <td class="text-cap">{{ item.item.name }}</td>
