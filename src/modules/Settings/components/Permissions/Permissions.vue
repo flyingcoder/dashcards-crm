@@ -46,10 +46,6 @@
         <td>{{ capability_column(item.slug) }}</td>
       </template>
 
-      <template slot="row-actions" slot-scope="{ item }">
-        <span v-if="!item.company_id"></span>
-      </template>
-
       <template slot="table-actions">
         <div class="actions-wrapper">
           <div class="bulk-delete">
