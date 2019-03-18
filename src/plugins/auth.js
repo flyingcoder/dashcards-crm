@@ -51,7 +51,7 @@ export const auth = {
       .then(response => {
         store.commit('open_snackbar', {
           status: true,
-          message: res.data.message
+          message: response.data.message
         })
         set_to_localStorage(response)
       })

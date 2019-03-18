@@ -36,7 +36,9 @@ export default {
       delete_message: 'File deleted successfully!',
       refresh_table_message: 'Table refreshed',
       refresh_table_api_name: 'paginate_tab_files_table'
-    }
+    },
+    url: '',
+    dialog: false
   }),
 
   computed: {
@@ -69,6 +71,10 @@ export default {
   },
 
   methods: {
+    pop(url){
+      this.dialog = true
+      this.url = url
+    },
     file_added([file, response]) {
       this.$event.$emit('open_snackbar', 'File(s) uploaded successfully')
       this.items.unshift(JSON.parse(response))

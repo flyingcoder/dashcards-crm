@@ -15,6 +15,10 @@
         />
       </div>
     </div>
+    
+    <v-dialog v-model="dialog" width="500" >
+        <img :src="url" width="500">
+    </v-dialog>
 
     <custom-table
       v-if="items.length || loading"
@@ -57,7 +61,7 @@
       </template>
 
       <template slot="custom-item" slot-scope="item">
-        <td>
+        <td @click="pop(item.item.public_url)">
           <v-img :src="item.item.thumb_url" width="50px" height="50px"></v-img>
         </td>
         <td class="text-upper">{{ item.item.custom_properties.ext }}</td>

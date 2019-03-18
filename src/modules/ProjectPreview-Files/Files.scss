@@ -1,4 +1,5 @@
 @import '~@/sass/variables';
+@include firstColumnHover;
 
 .files__tab{
   padding: 24px;
