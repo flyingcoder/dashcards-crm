@@ -15,7 +15,7 @@
       @click="listeners['update:activeChip']('completed')"
     >
       <v-avatar class="task__avatar">{{ props.countCompleted }}</v-avatar>
-      Completed
+      Done
     </v-chip>
 
     <v-chip
@@ -64,7 +64,7 @@ export default {
 <style lang="scss" scoped>
 @import '~@/sass/_variables';
 .task__chips {
-  padding: 20px 0;
+  padding: 10px 0;
   border-bottom: 1px solid $borderGray;
   .theme--light.v-chip {
     background-color: $white;

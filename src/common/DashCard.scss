@@ -1,6 +1,6 @@
 @import '~@/sass/_variables';
 .dash__card {
-    padding: 17px 25px 25px 25px;
+    padding: 15px;
     border: 1px solid $tableBorderBlue;
     border-radius: 10px;
     background-color:$white;
@@ -27,7 +27,7 @@
     }
     
     .card__content{
-        margin-bottom: 24px;
+        margin-bottom: 0px;
     }
 
     .card__footer{
@@ -43,6 +43,7 @@
     .dash__card {
         min-height: auto;
     }
+
 }
 
 //Mobile View
