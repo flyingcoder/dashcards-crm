@@ -1,5 +1,5 @@
 import TasksCard from '@/common/TasksCard/TasksCard.vue'
-import PreviewCard from './TaskTabPreviewCard/TaskTabPreviewCard.vue'
+import PreviewCard from './components/TaskTabPreviewCard/TaskTabPreviewCard.vue'
 
 export default {
   name: 'TasksTab',
@@ -20,7 +20,6 @@ export default {
   }),
 
   created() {
-    this.$router.replace({ name: 'project_preview')
     this.$event.$on(
       'task-row-clicked',
       data_from_child => (this.task = data_from_child)

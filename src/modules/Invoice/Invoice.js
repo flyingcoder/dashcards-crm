@@ -45,6 +45,10 @@ export default {
       .finally(() => (this.loading = false))
   },
 
+  beforeDestroy() {
+    this.$store.commit('invoice/reset_state')
+  },
+
   methods: {
     ...mapMutations('invoice', [
       'set_dialog',
