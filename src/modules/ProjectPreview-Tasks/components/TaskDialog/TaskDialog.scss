@@ -1,0 +1,24 @@
+@import '~@/sass/_variables';
+
+.custom-dialog{
+
+  .task-description{
+    margin: 5px;
+    background-color: $white;
+    border-radius: 8px;
+    border: 1px solid $borderLightGray;
+    box-shadow: $darkBoxShadow;
+  }
+  .task-member{
+    margin: 5px;
+    background-color: $white;
+    border-radius: 8px;
+    border: 1px solid $borderLightGray;
+    box-shadow: $darkBoxShadow;
+    padding: 5px;
+  }
+  .dialog__date{
+    margin: 5px;
+  }
+
+}

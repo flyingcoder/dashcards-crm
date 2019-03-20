@@ -29,7 +29,7 @@ export default {
 
   computed: {
     full_name() {
-      if (!this.content) return null
+      if (!this.content || !this.content.assigned.length) return null
       return (
         this.content.assigned[0].first_name +
         '' +
@@ -57,6 +57,7 @@ export default {
     },
 
     job_title() {
+      if (!this.content.assigned.length) return null
       return this.content.assigned[0].job_title
     },
 
