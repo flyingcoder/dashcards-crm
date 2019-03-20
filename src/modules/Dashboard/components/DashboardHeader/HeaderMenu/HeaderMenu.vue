@@ -1,6 +1,6 @@
 <template>
   <div class="header-menu">
-    <add-cards />
+    <add-cards v-if="$route.name === 'default-content'" />
 
     <notification-icon
       :image-src="mail_icon"
