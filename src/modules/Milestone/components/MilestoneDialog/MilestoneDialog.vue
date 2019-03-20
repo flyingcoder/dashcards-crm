@@ -16,35 +16,35 @@
                 <v-flex xs12 sm6>
                   <v-text-field
                     class="dialog__textfield"
-                    label="Add milestone title"
+                    label="Milestone Title"
                     v-model.trim="title"
-                    solo
+                    box
                     hide-details
-                    color="#657186"
+                    color="blue"
                   ></v-text-field>
                 </v-flex>
 
                 <v-flex xs12 sm6>
                   <v-select
                     class="dialog__selectfield"
-                    label="Select Status"
+                    label="Status"
                     v-model.trim="status"
                     :items="['Active', 'Inactive']"
-                    solo
+                    box
                     hide-details
-                    color="#657186"
+                    color="blue"
                   ></v-select>
                 </v-flex>
 
                 <v-flex xs12 sm6>
                   <v-text-field
                     class="dialog__textfield"
-                    label="Add days"
+                    label="Days"
                     v-model.number="days"
                     type="number"
-                    solo
+                    box
                     hide-details
-                    color="#657186"
+                    color="blue"
                   ></v-text-field>
                 </v-flex>
               </v-layout>
