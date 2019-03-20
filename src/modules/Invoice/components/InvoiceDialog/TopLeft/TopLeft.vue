@@ -144,9 +144,11 @@ export default {
     }
 
     .image-preview {
-      width: 100%;
-      height: auto;
       position: absolute;
+      height: auto;
+      width: auto;
+      max-height: 150px;
+      max-width: 200px;
     }
 
     .hidden-input {
