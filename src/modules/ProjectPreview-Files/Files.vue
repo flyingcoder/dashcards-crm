@@ -80,7 +80,7 @@
             small
             depressed
             title="Download"
-            @click="download_image(item.thumb_url)"
+            @click="download_image(item.public_url)"
           >
             <v-icon>cloud_download</v-icon>
           </v-btn>
