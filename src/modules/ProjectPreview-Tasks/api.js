@@ -8,10 +8,10 @@ export default {
     return request.get(`api/project/${id}/milestone?all=true`)
   },
   get_own_tasks (id) {
-    return request.get(`api/projects/${id}/tasks/mine`)
+    return request.get(`api/projects/${id}/tasks/mine?all=true`)
   },
   get_all_tasks (id) {
-    return request.get(`api/projects/${id}/tasks`)
+    return request.get(`api/projects/${id}/tasks?all=true`)
   },
   create_new_task (payload) {
     return request.post('api/task', payload)
