@@ -5,7 +5,7 @@
 
   <div class="no-data" v-else-if="tasks_are_empty">
     <div class="empty-content">
-      <v-icon class="empty-icon">stars</v-icon>
+      <v-icon class="empty-icon">list</v-icon>
       <p class="empty-text">List Empty</p>
     </div>
   </div>

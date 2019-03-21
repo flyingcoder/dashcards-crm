@@ -15,7 +15,7 @@
       @click="listeners['update:activeChip']('completed')"
     >
       <v-avatar class="task__avatar">{{ props.countCompleted }}</v-avatar>
-      Completed
+      Done
     </v-chip>
 
     <v-chip
