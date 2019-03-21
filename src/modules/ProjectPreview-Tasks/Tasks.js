@@ -66,7 +66,7 @@ export default {
       this.loading = true
       apiTo
         .get_own_tasks(this.id)
-        .then(({ data }) => (this.tasks_own = data.data))
+        .then(({ data }) => (this.tasks_own = data))
         .finally(() => (this.loading = false))
     },
 
