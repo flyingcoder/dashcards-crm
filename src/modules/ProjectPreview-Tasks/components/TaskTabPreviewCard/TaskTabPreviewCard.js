@@ -35,6 +35,9 @@ export default {
         '' +
         this.content.assigned[0].last_name
       )
+    },
+    assignee_url() {
+      return this.content.assigned[0].image_url
     }
   },
 

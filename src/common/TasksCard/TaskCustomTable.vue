@@ -17,10 +17,12 @@
       >
         <v-flex xs3 class="assignee__col">
           <v-img
-            :src="require('@/assets/temp/user.png')"
+            v-if="task.assignee_url"
+            :src="task.assignee_url"
             height="40"
             width="40"
           />
+          <span v-if="!task.assignee_url"></span>
         </v-flex>
 
         <v-flex xs6 class="project__col">
@@ -60,7 +62,7 @@ export default {
   inject: {
     bodyMaxHeight: {
       from: 'bodyMaxHeight',
-      default: '300px'
+      default: '415px'
     }
   },
 

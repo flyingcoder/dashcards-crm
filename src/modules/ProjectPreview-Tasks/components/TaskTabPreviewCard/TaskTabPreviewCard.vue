@@ -12,7 +12,8 @@
             <v-flex xs5 class="assignee">
               <v-flex xs4
                 ><v-img
-                  :src="require('@/assets/temp/user.png')"
+                  v-if="assignee_url"
+                  :src="assignee_url"
                   height="45"
                   width="45"
               /></v-flex>
