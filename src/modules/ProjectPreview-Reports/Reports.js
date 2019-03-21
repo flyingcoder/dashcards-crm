@@ -1,12 +1,14 @@
 import makeRequestTo from '@/services/makeRequestTo'
 //Components
-import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 import ReportsList from './components/ReportsList/ReportsList.vue'
+import ReportsDialog from './components/ReportsDialog.vue'
+import ReportsSection from './components/ReportsSection.vue'
 
 export default {
   components: {
-    CustomDialog,
-    ReportsList
+    ReportsList,
+    ReportsDialog,
+    ReportsSection
   },
 
   props: {
@@ -17,18 +19,10 @@ export default {
     reports: [],
     loading: false,
     iframe_src: null,
-    iframe_loading: false,
-    link: '',
-    title: '',
-    valid_url: false,
-    activate_save: false
+    activate_save: false,
+    iframe_src_table: null,
+    active_report: null
   }),
-
-  computed: {
-    is_disabled() {
-      return !this.link || !this.valid_url || !this.title
-    }
-  },
 
   created() {
     this.loading = true
@@ -44,35 +38,28 @@ export default {
     },
 
     iframe_loaded() {
-      this.$store.commit('set_custom_loader', false)
+      this.stop_loader()
       this.activate_save = true
     },
 
-    validate_url(event) {
-      this.$nextTick(() => {
-        this.valid_url = event.target.validity.valid
-      })
-    },
-
-    on_dialog_save() {
-      this.$refs.dialog.close_dialog()
-      this.$store.commit('set_custom_loader', true)
-      this.iframe_src = this.link
+    stop_loader() {
+      this.$store.commit('set_custom_loader', false)
     },
 
     save_report() {
       makeRequestTo
-        .add_project_report(this.id, {
-          url: this.link,
-          title: this.title
-        })
+        .add_project_report(this.id, this.$refs.dialog.get_payload())
         .then(({ data }) => {
-          this.link = ''
-          this.title = ''
+          this.$refs.dialog.refresh_payload()
           this.activate_save = false
           this.iframe_src = null
           this.reports.push(data)
         })
+    },
+    preview_row_url(report) {
+      this.$store.commit('set_custom_loader', true)
+      this.iframe_src_table = report.url
+      this.active_report = report
     }
   }
 }

@@ -22,42 +22,6 @@
   border: 1px solid $tableBorderBlue;
   border-radius: 10px;
   padding: 20px;
-
-  .reports__body{
-    background-color: $tableBlueBg;
-    border: 1px solid $tableBorderBlue;
-    padding: 25px;
-    display: grid;
-
-    .reports__buttons{
-      background-color: $white;
-      height: auto;
-      padding: 25px;
-
-      .reports__option{
-        text-align: right;
-        .add__link{
-          color: $white;
-          width: 100px;
-        }
-        .save{
-          color: $white;
-          width: 100px;
-        }
-      }
-
-    }
-
-  }
-
-  .reports-content{
-    background-color: $white;
-  }
-  .site-preview{
-    border: 1px solid $tableBorderBlue;
-    margin: 5px 10px;
-  }
-
 }
 
 @media only screen and (max-width: 768px){
