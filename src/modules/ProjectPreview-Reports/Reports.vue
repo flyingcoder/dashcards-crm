@@ -1,6 +1,6 @@
 <template>
   <v-layout row wrap class="reports__tab">
-    <v-flex xs12 class="text-xs-right">
+    <v-flex xs12 class="text-xs-right" v-if="has_permission">
       <v-btn
         color="indigo"
         dark
@@ -13,7 +13,7 @@
       </v-btn>
     </v-flex>
 
-    <v-flex xs12 md3>
+    <v-flex xs12 :md3="has_permission || !reports.length">
       <reports-list
         v-if="reports.length"
         :reports="reports"
@@ -23,7 +23,7 @@
       />
     </v-flex>
 
-    <v-flex xs12 md9>
+    <v-flex xs12 md9 v-if="has_permission">
       <div class="body-wrapper">
         <ReportsDialog
           ref="dialog"

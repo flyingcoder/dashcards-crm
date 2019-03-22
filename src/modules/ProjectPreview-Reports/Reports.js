@@ -23,6 +23,13 @@ export default {
     active_report: null
   }),
 
+  computed: {
+    has_permission() {
+      if (this.$store.getters.user.is_admin) return true
+      return this.$_permissions.get('hq_reports')
+    }
+  },
+
   created() {
     this.loading = true
     makeRequestTo
