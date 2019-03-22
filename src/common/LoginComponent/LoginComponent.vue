@@ -2,7 +2,9 @@
   <v-layout row wrap justify-center align-center class="login__card">
     <v-flex xs8 class="login__cardIn">
       <div class="l__logo">
-        <img src="@/assets/logo/logo-white.png" />
+        <a href="https://dashcards.com/">
+          <img src="@/assets/logo/logo-white.png" />
+        </a>
       </div>
 
       <div class="l__title">{{ titleText }}</div>
