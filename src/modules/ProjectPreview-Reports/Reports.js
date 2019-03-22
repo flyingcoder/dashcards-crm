@@ -20,7 +20,6 @@ export default {
     loading: false,
     iframe_src: null,
     activate_save: false,
-    iframe_src_table: null,
     active_report: null
   }),
 
@@ -37,28 +36,11 @@ export default {
       this.$refs.dialog.open_dialog()
     },
 
-    iframe_loaded() {
-      this.stop_loader()
-      this.activate_save = true
-    },
-
-    stop_loader() {
-      this.$store.commit('set_custom_loader', false)
-    },
-
-    save_report() {
-      makeRequestTo
-        .add_project_report(this.id, this.$refs.dialog.get_payload())
-        .then(({ data }) => {
-          this.$refs.dialog.refresh_payload()
-          this.activate_save = false
-          this.iframe_src = null
-          this.reports.push(data)
-        })
+    add_new_report(report) {
+      this.reports.push(report)
     },
     preview_row_url(report) {
-      this.$store.commit('set_custom_loader', true)
-      this.iframe_src_table = report.url
+      this.iframe_src = report.url
       this.active_report = report
     }
   }

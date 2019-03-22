@@ -1,5 +1,18 @@
 <template>
   <v-layout row wrap class="reports__tab">
+    <v-flex xs12 class="text-xs-right">
+      <v-btn
+        color="indigo"
+        dark
+        right
+        icon
+        title="Add New Report"
+        @click="open_dialog"
+      >
+        <v-icon>add</v-icon>
+      </v-btn>
+    </v-flex>
+
     <v-flex xs12 md3>
       <reports-list
         v-if="reports.length"
@@ -12,24 +25,14 @@
 
     <v-flex xs12 md9>
       <div class="body-wrapper">
-        <ReportsDialog ref="dialog" @update-iframe="iframe_src = $event" />
-
-        <ReportsSection
-          no_actions
-          :iframe_src="iframe_src_table"
-          @iframe-loaded="stop_loader"
+        <ReportsDialog
+          ref="dialog"
+          :id="id"
+          @report-added="add_new_report"
         />
-      </div>
-    </v-flex>
 
-    <v-flex xs12>
-      <div class="body-wrapper">
         <ReportsSection
           :iframe_src="iframe_src"
-          :activate_save="activate_save"
-          @open-dialog="open_dialog"
-          @save-report="save_report"
-          @iframe-loaded="iframe_loaded"
         />
       </div>
     </v-flex>

@@ -1,26 +1,6 @@
 <template>
   <div class="reports__body">
     <div class="reports-content">
-      <div v-if="!no_actions" class="reports__buttons">
-        <div class="reports__option">
-          <v-btn
-            color="#3b589e"
-            class="add__link"
-            @click="$emit('open-dialog')"
-          >
-            Add Link
-          </v-btn>
-
-          <v-btn
-            color="#3b589e"
-            :disabled="!activate_save"
-            class="save"
-            @click="$emit('save-report')"
-          >
-            Save
-          </v-btn>
-        </div>
-      </div>
       <div class="site-preview" v-if="iframe_src">
         <iframe
           :src="iframe_src"
@@ -37,9 +17,7 @@
 <script>
 export default {
   props: {
-    iframe_src: String,
-    activate_save: Boolean,
-    no_actions: Boolean
+    iframe_src: String
   }
 }
 </script>

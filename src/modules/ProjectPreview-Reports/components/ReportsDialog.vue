@@ -30,7 +30,7 @@
 
     <template slot="button2">
       <div class="disable-btn">
-        <v-btn @click="on_dialog_save" :disabled="is_disabled">Display</v-btn>
+        <v-btn @click="on_dialog_save" :disabled="is_disabled">Save</v-btn>
       </div>
     </template>
   </custom-dialog>
@@ -38,10 +38,14 @@
 
 <script>
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
+import apiTo from '../api'
 
 export default {
   components: {
     CustomDialog
+  },
+  props: {
+    id: [Number, String]
   },
   data: () => ({
     link: '',
@@ -52,12 +56,19 @@ export default {
   computed: {
     is_disabled() {
       return !this.link || !this.valid_url || !this.title
-    },
+    }
   },
 
   methods: {
     open_dialog() {
       this.$refs.dialog.open_dialog()
+    },
+    close_dialog() {
+      this.$refs.dialog.close_dialog()
+    },
+    clear_and_close() {
+      this.close_dialog()
+      Object.assign(this.$data, this.$options.data.apply(this))
     },
     validate_url(event) {
       this.$nextTick(() => {
@@ -65,19 +76,17 @@ export default {
       })
     },
     on_dialog_save() {
-      this.$refs.dialog.close_dialog()
       this.$store.commit('set_custom_loader', true)
-      this.$emit('update-iframe', this.link)
-    },
-    get_payload() {
-      return {
-        url: this.link,
-        title: this.title
-      }
-    },
-    refresh_payload() {
-      this.link = ''
-      this.title = ''
+      apiTo
+        .add_project_report(this.id, {
+          url: this.link,
+          title: this.title
+        })
+        .then(({ data }) => {
+          this.$emit('report-added', data)
+          this.clear_and_close()
+        })
+        .finally(() => this.$store.commit('set_custom_loader', false))
     }
   }
 }
