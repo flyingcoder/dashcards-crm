@@ -1,10 +1,8 @@
 <template>
   <div class="dashboard-content">
     <div class="row d__breadcrumbs">
-      <div class="breadcrumbs">
-        <breadcrumb :paths="paths" />
-      </div>
       <div class="page__options">
+        <breadcrumb :paths="paths" />
         <logon-label />
         <!--custom component-->
 
