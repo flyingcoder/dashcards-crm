@@ -4,7 +4,6 @@ import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import CustomDropzone from '@/common/CustomDropzone.vue'
 import LinkDialog from './components/LinkDialog.vue'
-import axios from 'axios'
 
 export default {
   name: 'FilesTab',
@@ -81,32 +80,18 @@ export default {
       this.items.unshift(JSON.parse(response))
       this.$refs.dropzone.remove_file(file)
     },
-    download_image(image_url) {
-      axios({
-        url: image_url,
-        method: 'GET',
-        responseType: 'blob', // important
-      }).then((response) => {
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
-        link.href = url;
-        let ext = image_url.split('.').pop();
-        link.setAttribute('download', `file.${ext}`);
-        document.body.appendChild(link);
-        link.click();
-      });
-      /*
+    download_image(image_url, ext) {
       let link = document.createElement('a')
       link.setAttribute(
         'href',
-        'data:application/octet-stream,' + encodeURIComponent(image_url)
+        'data:application/octet-stream,' + image_url
       )
-      let ext = image_url.split('.').pop()
+      //let ext = image_url.split('.').pop()
       link.setAttribute('download', `image.${ext}`)
       link.style.display = 'none'
       document.body.appendChild(link)
       link.click()
-      document.body.removeChild(link)*/
+      document.body.removeChild(link)
     },
     open_link_dialog() {
       this.$refs.link_dialog.openDialog()
