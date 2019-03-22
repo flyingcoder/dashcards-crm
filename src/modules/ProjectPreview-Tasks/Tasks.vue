@@ -7,14 +7,33 @@
       :id="id"
       @save="create_new_task"
     />
+
+    <TaskDialog
+      :id="id"
+      :task="task"
+      ref="edit_task_dialog"
+      dialog-title="Edit Task"
+      @save="edit_task"
+    />
+
     <div class="actions">
-      <v-btn color="indigo" dark icon title="Add New Task" @click="add_task_dialog = true">
+      <v-btn
+        color="indigo"
+        dark
+        icon
+        title="Add New Task"
+        @click="add_task_dialog = true"
+      >
         <v-icon>add</v-icon>
       </v-btn>
     </div>
     <div class="cards">
       <tasks-card :tasks="tab_tasks" />
-      <preview-card :id="id" :task="task" />
+      <preview-card
+        :id="id"
+        :task="task"
+        @dropdown-action="handle_dropdown_action"
+      />
     </div>
   </div>
 </template>

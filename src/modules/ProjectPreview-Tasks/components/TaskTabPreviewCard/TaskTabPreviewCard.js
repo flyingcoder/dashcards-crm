@@ -24,7 +24,11 @@ export default {
     content: null,
     loading: false,
     all_comments: [],
-    comment: ''
+    comment: '',
+    dropdown_actions: [
+      { id: 1, text: 'Edit', value: 'edit' },
+      { id: 2, text: 'Delete', value: 'delete' }
+    ]
   }),
 
   computed: {

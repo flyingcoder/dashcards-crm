@@ -1,6 +1,10 @@
 <template>
   <div class="task-dialog">
-    <custom-dialog ref="dialog" :open.sync="computedDialog" title="Add Task">
+    <custom-dialog
+      ref="dialog"
+      :open.sync="computedDialog"
+      :title="dialogTitle"
+    >
       <template #content>
         <v-layout wrap class="custom-dialog">
           <v-flex xs12 md12>

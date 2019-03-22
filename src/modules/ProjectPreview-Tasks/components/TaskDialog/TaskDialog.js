@@ -18,8 +18,7 @@ export default {
     id: [Number, String],
     dialog: Boolean,
     dialogTitle: String,
-    isEditDialog: Boolean,
-    fieldsToEdit: { type: Object, default: () => {} },
+    task: Object,
     milestoneStartDate: String
   },
 
@@ -67,12 +66,6 @@ export default {
     },
     open(new_val) {
       this.$emit('update:dialog', new_val)
-    },
-    fieldsToEdit: {
-      handler(new_val) {
-        this.isEditDialog && this.update_fields(new_val)
-      },
-      deep: true
     }
   },
 
@@ -82,7 +75,9 @@ export default {
     },
 
     open_dialog() {
+      this.fill_dropdowns()
       this.$refs.dialog.open_dialog()
+      this.update_fields(this.task)
     },
 
     save() {
@@ -98,15 +93,14 @@ export default {
       this.$emit('save', fields_to_save)
     },
 
-    update_fields({ fields }) {
-      const new_fields = Object.assign({}, fields)
-      this.title = new_fields.title
-      this.description = new_fields.description
-      this.status = new_fields.status
-      this.days = new_fields.days
-      this.start_date = new_fields.started_at
-      this.end_date = new_fields.end_at
-      this.$set(this.members, 'selected', new_fields.assigned_id)
+    update_fields(fields) {
+      const task = _cloneDeep(fields)
+      this.title = task.title
+      this.description = task.description
+      this.start_date = task.started_at
+      this.end_date = task.end_at
+      this.milestones.selected = task.milestone_id
+      this.members.selected = task.assigned_ids
     },
 
     clear_and_close() {

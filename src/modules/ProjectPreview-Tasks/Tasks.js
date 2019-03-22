@@ -87,6 +87,33 @@ export default {
         this.$refs.add_task_dialog.clear_and_close()
         this.$event.$emit('open_snackbar', 'New Task added successfully')
       })
+    },
+
+    edit_task(payload) {
+      apiTo.edit_task(this.task.id, payload).then(({ data }) => {
+        this.update_task(data, this.task.id, 'all_tasks')
+        this.update_task(data, this.task.id, 'tasks_own')
+        this.$refs.edit_task_dialog.clear_and_close()
+        this.$event.$emit('open_snackbar', 'Task updated successfully')
+      })
+    },
+
+    update_task(new_task, id, target) {
+      const indexFound = this[target].findIndex(task => task.id === id)
+      if (indexFound) this[target].splice(indexFound, 1, new_task)
+    },
+
+    handle_dropdown_action(action) {
+      const method = `open_${action}_task_dialog`
+      this[method]()
+    },
+
+    open_edit_task_dialog() {
+      this.$refs.edit_task_dialog.open_dialog()
+    },
+
+    open_delete_task_dialog() {
+      console.log('called delete')
     }
   }
 }

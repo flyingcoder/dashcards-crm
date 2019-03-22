@@ -27,11 +27,22 @@
               </div>
             </v-flex>
 
-            <v-flex xs2 class="more__button text-xs-right">
-              <v-btn fab flat small class="action">
-                <v-icon>more_horiz</v-icon>
-              </v-btn>
-            </v-flex>
+            <v-menu offset-y>
+              <template v-slot:activator="{ on }">
+                <v-btn icon fab small outline v-on="on">
+                  <v-icon>more_horiz</v-icon>
+                </v-btn>
+              </template>
+              <v-list>
+                <v-list-tile
+                  v-for="item of dropdown_actions"
+                  :key="item.id"
+                  @click="$emit('dropdown-action', item.value)"
+                >
+                  <v-list-tile-action>{{ item.text }}</v-list-tile-action>
+                </v-list-tile>
+              </v-list>
+            </v-menu>
           </v-layout>
 
           <div class="task__sub_header">
@@ -112,10 +123,6 @@
           </div>
         </template>
       </v-flex>
-
-      <!--  v-flex xs12 class="card__footer text-xs-center">
-				<v-btn flat class="view__more_btn">VIEW MORE</v-btn>
-			</v-flex -->
     </v-flex>
   </v-flex>
 </template>
