@@ -16,6 +16,13 @@
       @save="edit_task"
     />
 
+    <DeleteDialog
+      :open-dialog.sync="delete_dialog"
+      title="Delete Task"
+      text-content="Are you sure you want to delete this task?"
+      @delete="delete_task"
+    />
+
     <div class="actions">
       <v-btn
         color="indigo"
@@ -30,6 +37,7 @@
     <div class="cards">
       <tasks-card :tasks="tab_tasks" />
       <preview-card
+        v-if="task"
         :id="id"
         :task="task"
         @dropdown-action="handle_dropdown_action"

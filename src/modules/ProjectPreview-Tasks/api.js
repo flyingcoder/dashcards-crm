@@ -18,5 +18,9 @@ export default {
   },
   edit_task(id, payload) {
     return request.put(`api/task/${id}`, payload)
+  },
+
+  delete_task(id) {
+    return request.delete(`api/task/${id}`)
   }
 }
