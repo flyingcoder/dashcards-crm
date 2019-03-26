@@ -80,7 +80,7 @@
             small
             depressed
             title="Download"
-            @click="download_image(item.public_url, item.custom_properties.ext)"
+            :href="item.download_url"
           >
             <v-icon>cloud_download</v-icon>
           </v-btn>
