@@ -4,55 +4,53 @@
   @include styledScrollFor(".timeline__inner_content");
 
   .timeline__content {
+
     .timeline__inner_content {
       max-height: 450px;
       overflow: auto;
       margin: 15px auto 0;
-
-      .timeline__item {
-        display: grid;
-        grid-template-columns: 80px 1fr;
-        align-items: center;
-        grid-gap: 10px;
-        margin-left: -15px;
-        white-space: normal;
-        word-break: break-word;
-
-        .t__time {
-          color: $darkGray;
-        }
-
-        .t__title {
-          text-transform: capitalize;
-          color: $textDark;
-          padding: 0 10px;
-        }
-      }
     }
+
+    .timeline__item {
+      display: grid;
+      grid-template-columns: 0.2fr 1fr;
+      align-items: center;
+      grid-gap: 10px;
+      margin-left: -15px;
+      white-space: normal;
+      word-break: break-word;
+    }
+
+    .t__time {
+      color: $darkGray;
+    }
+
+    .t__title {
+      text-transform: capitalize;
+      color: $textDark;
+      padding: 0 10px;
+    }
+
   }
 }
 
 @media only screen and (max-width: 480px) {
   .timeline-card {
+  
     .timeline__content {
-      .timeline__inner_content {
-        .timeline__item {
-          .t__time {
-            font-size: 10px;
-          }
-
-          .t__content {
-            padding-left: 30px;
-
-            .t__title {
-              font-size: 16px;
-            }
-            .t__desc {
-              font-size: 12px;
-            }
-          }
-        }
+  
+      .t__time {
+        font-size: 10px;
       }
+
+      .t__content {
+        padding-left: 30px;
+      }
+  
+      .t__title {
+        font-size: 16px;
+      }
+  
     }
   }
 }
