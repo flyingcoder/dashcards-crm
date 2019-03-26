@@ -1,13 +1,17 @@
 <template>
-  <div class="option logon-label">
-    <div class="icon">
-      <v-switch :value="switch1" :disabled="disabled" @change="switch1_changed">
-      </v-switch>
-    </div>
-    <div class="title">
-      <span class="label">Log on</span>
-    </div>
+  <div class="icon">
+    <v-switch :value="switch1" :disabled="disabled" @change="switch1_changed">
+    </v-switch>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-btn @click="switch1_changed">
+          <v-icon>{{timer_icon}}</v-icon>
+        </v-btn>
+      </template>
+      <span>Tooltip</span>
+    </v-tooltip>
   </div>
+  
 </template>
 
 <script>
@@ -18,7 +22,8 @@ export default {
 
   data: () => ({
     switch1: true,
-    disabled: false
+    disabled: false,
+    timer_icon: 'timer_off'
   }),
 
   methods: {
