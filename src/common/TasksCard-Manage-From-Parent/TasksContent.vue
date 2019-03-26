@@ -9,10 +9,7 @@
     <v-tabs-items v-model="active_tab">
       <v-tab-item v-for="tab of tabs" :key="tab.id" :value="tab.name">
         <v-card flat>
-          <tasks-tab
-            v-if="active_tab === tab.name"
-            :tasks="tasks"
-          />
+          <tasks-tab v-if="active_tab === tab.name" :tasks="tasks" />
         </v-card>
       </v-tab-item>
     </v-tabs-items>
@@ -49,7 +46,7 @@ export default {
   },
 
   watch: {
-    active_tab (val) {
+    active_tab(val) {
       this.$event.$emit('task-card-tab', val)
     }
   }

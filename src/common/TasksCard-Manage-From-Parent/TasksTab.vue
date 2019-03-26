@@ -64,7 +64,6 @@ export default {
       return this.tasks.filter(task => task.status === 'open').length
     }
   }
-
 }
 </script>
 

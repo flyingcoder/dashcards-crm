@@ -39,20 +39,20 @@
             ></v-select>
           </v-flex>
 
-	        <div class="permissions">
-		        <div class="title">
-			        <div class="left-line line"></div>
-			        <h4>Permissions</h4>
-			        <div class="right-line line"></div>
-		        </div>
+          <div class="permissions">
+            <div class="title">
+              <div class="left-line line"></div>
+              <h4>Permissions</h4>
+              <div class="right-line line"></div>
+            </div>
 
-		        <div class="items">
-			        <v-switch label="View" v-model="slug.view"></v-switch>
-			        <v-switch label="Create" v-model="slug.create"></v-switch>
-			        <v-switch label="Update" v-model="slug.update"></v-switch>
-			        <v-switch label="Delete" v-model="slug.delete"></v-switch>
-		        </div>
-	        </div>
+            <div class="items">
+              <v-switch label="View" v-model="slug.view"></v-switch>
+              <v-switch label="Create" v-model="slug.create"></v-switch>
+              <v-switch label="Update" v-model="slug.update"></v-switch>
+              <v-switch label="Delete" v-model="slug.delete"></v-switch>
+            </div>
+          </div>
 
           <v-flex xs12>
             <v-textarea
@@ -64,7 +64,6 @@
               color="#657186"
             ></v-textarea>
           </v-flex>
-
         </v-layout>
       </template>
     </custom-dialog>

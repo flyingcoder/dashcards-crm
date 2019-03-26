@@ -15,9 +15,9 @@
         />
       </div>
     </div>
-    
-    <v-dialog v-model="dialog" width="500" >
-        <img :src="url" width="500">
+
+    <v-dialog v-model="dialog" width="500">
+      <img :src="url" width="500" />
     </v-dialog>
 
     <custom-table
@@ -97,9 +97,9 @@
 <style lang="scss" scoped src="./Files.scss"></style>
 
 <style scoped>
-  >>> .content__wrapper .buzz__tables .buzz__tablesTwo {
-    padding: 0;
-    border: none;
-    background-color: #fff;
-  }
+>>> .content__wrapper .buzz__tables .buzz__tablesTwo {
+  padding: 0;
+  border: none;
+  background-color: #fff;
+}
 </style>

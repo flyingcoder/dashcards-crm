@@ -17,5 +17,5 @@ export default {
 
   data: () => ({
     taskPath: { name: 'project_preview', query: { tab: 'Task' } }
-  }),
+  })
 }

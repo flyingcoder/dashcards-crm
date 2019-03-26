@@ -6,9 +6,7 @@
         <span class="status online"></span>
       </v-flex>
       <v-flex xs5 class="sender__name">
-        <h5>
-          {{ message.sender.first_name }} {{ message.sender.last_name }}
-        </h5>
+        <h5>{{ message.sender.first_name }} {{ message.sender.last_name }}</h5>
       </v-flex>
       <v-flex xs4 class="date"> {{ message.created_at | from_now }} </v-flex>
     </v-layout>
@@ -19,7 +17,7 @@
 </template>
 
 <script>
-import { global_utils } from "@/global_utils/global_utils";
+import { global_utils } from '@/global_utils/global_utils'
 
 export default {
   mixins: [global_utils],

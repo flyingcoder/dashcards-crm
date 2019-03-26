@@ -25,15 +25,9 @@
 
     <v-flex xs12 md9 v-if="has_permission">
       <div class="body-wrapper">
-        <ReportsDialog
-          ref="dialog"
-          :id="id"
-          @report-added="add_new_report"
-        />
+        <ReportsDialog ref="dialog" :id="id" @report-added="add_new_report" />
 
-        <ReportsSection
-          :iframe_src="iframe_src"
-        />
+        <ReportsSection :iframe_src="iframe_src" />
       </div>
     </v-flex>
   </v-layout>

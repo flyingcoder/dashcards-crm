@@ -56,7 +56,7 @@ export default {
           id: 9,
           name: 'Invoice',
           route: `/dashboard/project-preview/${this.id}/invoice`
-        },
+        }
       ]
     }
   }

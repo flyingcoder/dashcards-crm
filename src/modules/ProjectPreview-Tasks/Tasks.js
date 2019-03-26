@@ -101,9 +101,9 @@ export default {
       })
     },
 
-    delete_task () { // delete request to the server
-      apiTo.delete_task(this.task.id)
-        .then(() => (this.remove_task()))
+    delete_task() {
+      // delete request to the server
+      apiTo.delete_task(this.task.id).then(() => this.remove_task())
     },
 
     update_task(new_task, id, target) {
@@ -111,9 +111,14 @@ export default {
       if (indexFound) this[target].splice(indexFound, 1, new_task)
     },
 
-    remove_task () { //after delete request (API)
-      const own_task_index = this.tasks_own.findIndex(task => task.id === this.task.id)
-      const all_task_index = this.all_tasks.findIndex(task => task.id === this.task.id)
+    remove_task() {
+      //after delete request (API)
+      const own_task_index = this.tasks_own.findIndex(
+        task => task.id === this.task.id
+      )
+      const all_task_index = this.all_tasks.findIndex(
+        task => task.id === this.task.id
+      )
       if (!own_task_index) this.tasks_own.splice(own_task_index, 1)
       if (!all_task_index) this.tasks_own.splice(all_task_index, 1)
       this.delete_dialog = false
@@ -121,7 +126,7 @@ export default {
       this.set_active_task_after_delete()
     },
 
-    set_active_task_after_delete () {
+    set_active_task_after_delete() {
       if (this.selected_tab === 'My Tasks') {
         if (this.tasks_own.length) this.task = this.tasks_own[0]
         else this.task = null

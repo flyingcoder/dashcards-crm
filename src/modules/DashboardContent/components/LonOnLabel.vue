@@ -5,13 +5,12 @@
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
         <v-btn @click="switch1_changed">
-          <v-icon>{{timer_icon}}</v-icon>
+          <v-icon>{{ timer_icon }}</v-icon>
         </v-btn>
       </template>
       <span>Tooltip</span>
     </v-tooltip>
   </div>
-  
 </template>
 
 <script>

@@ -5,7 +5,7 @@
     <div class="profile">
       <div class="profile-content">
         <Upper />
-        <Lower :user_id="user_id"/>
+        <Lower :user_id="user_id" />
       </div>
     </div>
   </div>

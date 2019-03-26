@@ -2,7 +2,10 @@
   <div class="no-data" v-if="!loading && !note">
     No notes yet
   </div>
-	<v-progress-linear v-else-if="loading" :indeterminate="true"></v-progress-linear>
+  <v-progress-linear
+    v-else-if="loading"
+    :indeterminate="true"
+  ></v-progress-linear>
   <div class="note-form" v-else>
     <div class="note-title">
       <v-text-field

@@ -27,5 +27,4 @@
   </div>
 </template>
 
-<script src="./ServicesEditDialog.js">
-</script>
+<script src="./ServicesEditDialog.js"></script>

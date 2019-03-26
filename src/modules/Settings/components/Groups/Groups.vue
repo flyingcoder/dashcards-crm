@@ -1,6 +1,5 @@
 <template>
   <div class="groups">
-
     <groups-dialog
       :dialog.sync="add_dialog"
       ref="add_dialog"
