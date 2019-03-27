@@ -76,20 +76,15 @@ export default {
       this.dialog = true
       this.url = url
     },
+    sortFile(type) {
+      alert('This feature is under-construction.')
+    },
     file_added([file, response]) {
       this.$event.$emit('open_snackbar', 'File(s) uploaded successfully')
       this.items.unshift(JSON.parse(response))
       this.$refs.dropzone.remove_file(file)
     },
 
-    download_image(image_url) {
-      let link = document.createElement('a')
-      link.href = image_url
-      link.target = '_blank'
-      link.download = 'image.jpg'
-      document.body.appendChild(link)
-      link.click()
-    },
     open_link_dialog() {
       this.$refs.link_dialog.openDialog()
     }

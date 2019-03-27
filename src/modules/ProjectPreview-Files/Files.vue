@@ -37,19 +37,19 @@
               <v-icon dark left class="all">select_all</v-icon>
               All
             </v-btn>
-            <v-btn color="#b3b7c3" flat medium>
+            <v-btn color="#b3b7c3" flat medium @click="sortFile('image')">
               <v-icon dark left class="image">image</v-icon>
               Image
             </v-btn>
-            <v-btn color="#b3b7c3" flat medium>
+            <v-btn color="#b3b7c3" flat medium @click="sortFile('video')">
               <v-icon dark left class="video">video_library</v-icon>
               Video
             </v-btn>
-            <v-btn color="#b3b7c3" flat medium>
+            <v-btn color="#b3b7c3" flat medium @click="sortFile('docs')">
               <v-icon dark left class="docs">file_copy</v-icon>
-              Document
+              Docs
             </v-btn>
-            <v-btn color="#b3b7c3" flat medium>
+            <v-btn color="#b3b7c3" flat medium @click="sortFile('other')">
               <v-icon dark left class="other">settings_applications</v-icon>
               Other
             </v-btn>
