@@ -41,6 +41,9 @@
             background-color: $tableBlueBg;
           }
         }
+        .table__actions{
+          min-width: 240px;
+        }
       }
     }
   }
