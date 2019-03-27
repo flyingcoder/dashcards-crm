@@ -92,7 +92,7 @@ export default {
     },
 
     delete_item() {
-      apiTo.deleteFile(this.id, this.delete_item_id).then(() => {
+      apiTo.deleteFile(this.delete_item_id).then(() => {
         const indexFound = this.items.findIndex(
           item => item.id === this.delete_item_id
         )

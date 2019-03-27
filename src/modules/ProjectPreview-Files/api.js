@@ -1,5 +1,5 @@
 import request from '@/services/axios_instance'
 
-export const deleteFile = (projectId, fileId) => {
-  return request.delete(`api/projects/${projectId}/file/${fileId}`)
+export const deleteFile = fileId => {
+  return request.delete(`api/file/${fileId}`)
 }
