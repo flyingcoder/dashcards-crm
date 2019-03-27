@@ -25,6 +25,9 @@ export default {
     },
     open(new_val) {
       this.$emit('update:dialog', new_val)
+    },
+    allMembers(newVal) {
+      this.members.items = [...newVal]
     }
   },
 
