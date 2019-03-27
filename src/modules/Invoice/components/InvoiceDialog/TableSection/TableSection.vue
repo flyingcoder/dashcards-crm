@@ -111,7 +111,7 @@
           readonly
         />
         <v-btn
-         v-if="dialog.type !== 'view'"
+          v-if="dialog.type !== 'view'"
           class="action"
           color="#ff7f7c"
           outline

@@ -1,81 +1,33 @@
 <template>
   <v-layout row wrap class="reports__tab">
-    <v-flex xs12>
+    <v-flex xs12 class="text-xs-right" v-if="has_permission">
+      <v-btn
+        color="indigo"
+        dark
+        right
+        icon
+        title="Add New Report"
+        @click="open_dialog"
+      >
+        <v-icon>add</v-icon>
+      </v-btn>
+    </v-flex>
+
+    <v-flex xs12 :md3="has_permission || !reports.length">
       <reports-list
         v-if="reports.length"
         :reports="reports"
+        :active-report="active_report"
         :loading="loading"
+        @row-clicked="preview_row_url"
       />
     </v-flex>
 
-    <v-flex xs12>
+    <v-flex xs12 md9 v-if="has_permission">
       <div class="body-wrapper">
-        <custom-dialog ref="dialog" title="Add Link">
-          <template slot="content">
-            <div class="custom-dialog">
-              <v-text-field
-                class="dialog__link"
-                pattern="https://.*"
-                type="url"
-                v-model.trim="link"
-                prepend-icon="link"
-                label="https://"
-                clearable
-                @keydown="validate_url"
-                solo
-                hide-details
-                color="#657186"
-              />
-              <v-text-field
-                v-model.trim="title"
-                class="dialog__textfield"
-                label="Title"
-                solo
-                clearable
-                hide-details
-                prepend-icon="text_fields"
-                color="#657186"
-              />
-            </div>
-          </template>
+        <ReportsDialog ref="dialog" :id="id" @report-added="add_new_report" />
 
-          <template slot="button2">
-            <div class="disable-btn">
-              <v-btn @click="on_dialog_save" :disabled="is_disabled"
-              >Display</v-btn
-              >
-            </div>
-          </template>
-        </custom-dialog>
-        <div class="reports__body">
-          <div class="reports-content">
-            <div class="reports__buttons">
-              <div class="reports__option">
-                <v-btn color="#3b589e" class="add__link" @click="open_dialog">
-                  Add Link
-                </v-btn>
-
-                <v-btn
-                  color="#3b589e"
-                  :disabled="!activate_save"
-                  class="save"
-                  @click="save_report"
-                >
-                  Save
-                </v-btn>
-              </div>
-            </div>
-            <div class="site-preview" v-if="iframe_src">
-              <iframe
-                :src="iframe_src"
-                frameborder="0"
-                width="100%"
-                height="500px"
-                @load="iframe_loaded"
-              ></iframe>
-            </div>
-          </div>
-        </div>
+        <ReportsSection :iframe_src="iframe_src" />
       </div>
     </v-flex>
   </v-layout>

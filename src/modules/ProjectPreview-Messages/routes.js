@@ -1,6 +1,9 @@
+import clientMessagesTab from './subpages/ClientMessages/route'
+import teamMessagesTab from './subpages/TeamMessages/route'
+
 export default {
   path: 'messages',
-  name: 'project-preview-messages',
   component: () => import('./Messages.vue'),
-  props: true
+  props: true,
+  children: [clientMessagesTab, teamMessagesTab]
 }

@@ -1,4 +1,3 @@
-
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 
 export default {
@@ -11,7 +10,7 @@ export default {
     fieldsToEdit: { type: Object, default: () => {} }
   },
 
-  components:{
+  components: {
     CustomDialog
   },
 

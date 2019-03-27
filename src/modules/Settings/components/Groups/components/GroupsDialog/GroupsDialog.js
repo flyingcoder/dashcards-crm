@@ -20,7 +20,7 @@ export default {
 
   computed: {
     are_fields_valid() {
-      return (!!(this.name && this.description) && this.does_something_changed)
+      return !!(this.name && this.description) && this.does_something_changed
     },
     does_something_changed() {
       if (!this.isEditDialog) return true //if it is not Edit Dialog

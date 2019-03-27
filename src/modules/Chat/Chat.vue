@@ -107,12 +107,10 @@
                     </div>
                     <div class="h__details">
                       <h2 class="h__name">{{ user.name }}</h2>
-                      <p class="h__job">{{user.job_title}}</p>
+                      <p class="h__job">{{ user.job_title }}</p>
                       <div class="info__anchor">
                         <v-icon>email</v-icon>
-                        <a :href="'mailto:' + user.email"
-                          >{{ user.email }}</a
-                        >
+                        <a :href="'mailto:' + user.email">{{ user.email }}</a>
                       </div>
                       <div class="info__anchor">
                         <v-icon>location_on</v-icon> <span>Sweden</span>

@@ -15,9 +15,9 @@
         />
       </div>
     </div>
-    
-    <v-dialog v-model="dialog" width="500" >
-        <img :src="url" width="500">
+
+    <v-dialog v-model="dialog" width="500">
+      <img :src="url" width="500" />
     </v-dialog>
 
     <custom-table
@@ -37,19 +37,19 @@
               <v-icon dark left class="all">select_all</v-icon>
               All
             </v-btn>
-            <v-btn color="#b3b7c3" flat medium>
+            <v-btn color="#b3b7c3" flat medium @click="sortFile('image')">
               <v-icon dark left class="image">image</v-icon>
               Image
             </v-btn>
-            <v-btn color="#b3b7c3" flat medium>
+            <v-btn color="#b3b7c3" flat medium @click="sortFile('video')">
               <v-icon dark left class="video">video_library</v-icon>
               Video
             </v-btn>
-            <v-btn color="#b3b7c3" flat medium>
+            <v-btn color="#b3b7c3" flat medium @click="sortFile('docs')">
               <v-icon dark left class="docs">file_copy</v-icon>
-              Document
+              Docs
             </v-btn>
-            <v-btn color="#b3b7c3" flat medium>
+            <v-btn color="#b3b7c3" flat medium @click="sortFile('other')">
               <v-icon dark left class="other">settings_applications</v-icon>
               Other
             </v-btn>
@@ -80,7 +80,7 @@
             small
             depressed
             title="Download"
-            @click="download_image(item.thumb_url)"
+            :href="item.download_url"
           >
             <v-icon>cloud_download</v-icon>
           </v-btn>
@@ -97,9 +97,9 @@
 <style lang="scss" scoped src="./Files.scss"></style>
 
 <style scoped>
-  >>> .content__wrapper .buzz__tables .buzz__tablesTwo {
-    padding: 0;
-    border: none;
-    background-color: #fff;
-  }
+>>> .content__wrapper .buzz__tables .buzz__tablesTwo {
+  padding: 0;
+  border: none;
+  background-color: #fff;
+}
 </style>

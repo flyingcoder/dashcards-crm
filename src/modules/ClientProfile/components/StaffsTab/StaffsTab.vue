@@ -7,7 +7,7 @@
         </v-btn>
       </v-flex>
     </v-layout>
-    
+
     <staff-dialog
       ref="add_dialog"
       title="Add New Staff"
@@ -48,7 +48,9 @@
       @view="navigate_to_view_profile($event.id)"
     >
       <template slot="custom-item" slot-scope="{ item }">
-        <td class="text-cap" @click="navigate_to_view_profile(item.id)">{{ item.first_name + ' ' + item.last_name }}</td>
+        <td class="text-cap" @click="navigate_to_view_profile(item.id)">
+          {{ item.first_name + ' ' + item.last_name }}
+        </td>
         <td class="email">{{ item.email }}</td>
         <td>{{ item.telephone }}</td>
         <td class="text-cap">{{ item.job_title }}</td>

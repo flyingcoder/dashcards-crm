@@ -37,7 +37,7 @@
           </div>
           <div class="member-info">
             <div class="full-name">
-              {{ item.name }}
+              {{ item.first_name }}
             </div>
             <div class="job-title">
               {{ item.job_title }}

@@ -24,17 +24,24 @@ export default {
     content: null,
     loading: false,
     all_comments: [],
-    comment: ''
+    comment: '',
+    dropdown_actions: [
+      { id: 1, text: 'Edit', value: 'edit' },
+      { id: 2, text: 'Delete', value: 'delete' }
+    ]
   }),
 
   computed: {
     full_name() {
-      if (!this.content) return null
+      if (!this.content || !this.content.assigned.length) return null
       return (
         this.content.assigned[0].first_name +
         '' +
         this.content.assigned[0].last_name
       )
+    },
+    assignee_url() {
+      return this.content.assigned[0].image_url
     }
   },
 
@@ -57,6 +64,7 @@ export default {
     },
 
     job_title() {
+      if (!this.content.assigned.length) return null
       return this.content.assigned[0].job_title
     },
 

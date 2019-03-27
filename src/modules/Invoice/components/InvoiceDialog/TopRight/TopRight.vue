@@ -190,7 +190,7 @@ export default {
     padding: 6px 8px;
     margin-bottom: 20px;
 
-    .titlefield{
+    .titlefield {
       font-size: 26px;
       width: 300px;
     }

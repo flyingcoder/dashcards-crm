@@ -17,6 +17,7 @@ export default {
 
   computed: {
     task_belongs_to_logged_user() {
+      if (!this.content.assigned.length) return
       return this.content.assigned[0].id === this.$auth.logged_user().id
     }
   },

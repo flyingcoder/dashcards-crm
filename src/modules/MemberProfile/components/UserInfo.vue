@@ -11,9 +11,7 @@
       </div>
 
       <div class="info-div">
-        <h4 class="name">
-          {{ user.first_name }} {{ user.last_name }}
-        </h4>
+        <h4 class="name">{{ user.first_name }} {{ user.last_name }}</h4>
         <div class="job-title">UI/UX Designer</div>
         <div class="address">
           <v-icon>place</v-icon>
