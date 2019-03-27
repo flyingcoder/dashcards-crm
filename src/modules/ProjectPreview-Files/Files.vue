@@ -2,6 +2,13 @@
   <div class="files__tab">
     <LinkDialog ref="link_dialog" />
 
+    <delete-dialog
+      :open-dialog.sync="delete_dialog"
+      title="Delete File"
+      text-content="Are you sure you want to delete this file?"
+      @delete="delete_item"
+    />
+
     <div class="drop__files">
       <div class="drop__files_body">
         <CustomDropzone
@@ -84,7 +91,15 @@
           >
             <v-icon>cloud_download</v-icon>
           </v-btn>
-          <v-btn v-if="can_delete" fab small flat depressed title="Delete">
+          <v-btn
+            v-if="can_delete"
+            @click="open_delete_dialog(item)"
+            fab
+            small
+            flat
+            depressed
+            title="Delete"
+          >
             <img src="@/assets/icons/groups/delete.svg" alt="" />
           </v-btn>
         </td>

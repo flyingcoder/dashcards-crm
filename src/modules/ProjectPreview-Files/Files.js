@@ -1,10 +1,11 @@
 import { table_functionality } from '@/services/table-functionality/table-functionality'
+import * as apiTo from './api'
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import CustomDropzone from '@/common/CustomDropzone.vue'
 import LinkDialog from './components/LinkDialog.vue'
-import request from '@/services/axios_instance'
+import DeleteDialog from '@/common/DeleteDialog.vue'
 
 export default {
   name: 'FilesTab',
@@ -15,7 +16,8 @@ export default {
     CustomTable,
     TableHeader,
     CustomDropzone,
-    LinkDialog
+    LinkDialog,
+    DeleteDialog
   },
 
   props: {
@@ -87,6 +89,20 @@ export default {
 
     open_link_dialog() {
       this.$refs.link_dialog.openDialog()
+    },
+
+    delete_item() {
+      apiTo.deleteFile(this.id, this.delete_item_id).then(() => {
+        const indexFound = this.items.findIndex(
+          item => item.id === this.delete_item_id
+        )
+        if (~indexFound) {
+          this.items.splice(indexFound, 1)
+          this.delete_item_id = null
+          this.delete_dialog = false
+          this.$event.$emit('open_snackbar', this.table_config.delete_message)
+        }
+      })
     }
   }
 }
