@@ -10,10 +10,10 @@
 
     <add-dialog
       :dialog.sync="add_dialog"
+      :id="id"
       ref="add_dialog"
       title="Add Member(s)"
       @save="add_item('add_members', $event, dynamic_api)"
-      :all-members="items"
     />
 
     <delete-dialog

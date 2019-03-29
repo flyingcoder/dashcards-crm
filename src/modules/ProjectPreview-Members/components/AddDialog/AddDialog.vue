@@ -21,7 +21,8 @@
               <members-dropdown
                 :members.sync="members.selected"
                 :member-items="members.items"
-                @items-updated="items_updated"
+                :is-loading="members.loading"
+                @search="filter_members"
               />
             </v-flex>
           </v-layout>
@@ -29,7 +30,7 @@
 
         <v-card-actions class="dialog__actions">
           <v-btn @click="cancel">Cancel</v-btn>
-          <v-btn @click="save">Save</v-btn>
+          <v-btn :disable="disableSave" @click="save">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
