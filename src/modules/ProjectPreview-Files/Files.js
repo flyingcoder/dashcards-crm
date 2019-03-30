@@ -91,6 +91,13 @@ export default {
       this.$refs.link_dialog.openDialog()
     },
 
+    addLink(payload) {
+      apiTo.addProjectLink(this.id, payload).then(({ data }) => {
+        this.items.push(data)
+        this.$refs.link_dialog.closeAndClearDialog()
+      })
+    },
+
     delete_item() {
       apiTo.deleteFile(this.delete_item_id).then(() => {
         const indexFound = this.items.findIndex(

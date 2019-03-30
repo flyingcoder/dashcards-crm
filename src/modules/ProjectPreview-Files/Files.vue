@@ -1,6 +1,6 @@
 <template>
   <div class="files__tab">
-    <LinkDialog ref="link_dialog" />
+    <LinkDialog ref="link_dialog" @save="addLink" />
 
     <delete-dialog
       :open-dialog.sync="delete_dialog"

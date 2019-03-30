@@ -1,11 +1,16 @@
 <template>
   <div class="link-dialog">
-    <CustomDialog ref="dialog" :open.sync="dialog" title="File URL">
+    <CustomDialog
+      ref="dialog"
+      :open.sync="dialog"
+      title="File URL"
+      button2-text="Save"
+      @button2="saveClicked"
+    >
       <template #content>
         <v-layout wrap class="custom-dialog">
           <v-flex xs12 md12>
             <v-text-field
-              class="dialog__textfield"
               label="File URL"
               v-model.trim="url"
               type="url"
@@ -21,6 +26,7 @@
 </template>
 
 <script>
+// Components
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 export default {
   components: {
@@ -33,6 +39,13 @@ export default {
   methods: {
     openDialog() {
       this.dialog = true
+    },
+    closeAndClearDialog() {
+      Object.assign(this.$data, this.$options.data.apply(this))
+    },
+    saveClicked() {
+      if (!this.url) return
+      this.$emit('save', { url: this.url })
     }
   }
 }
