@@ -51,10 +51,7 @@
               </v-menu>
 
               <div class="choosen" v-if="client.selected">
-                <span v-if="isEditDialog">
-                  {{ client.selected.text }}
-                </span>
-                <span v-else>{{ client.selected.first_name }}</span>
+                <span>{{ client.selected.full_name }}</span>
               </div>
             </v-flex>
 
