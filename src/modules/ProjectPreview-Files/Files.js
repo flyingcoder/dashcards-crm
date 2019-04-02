@@ -6,6 +6,7 @@ import TableHeader from '@/common/TableHeader.vue'
 import CustomDropzone from '@/common/CustomDropzone.vue'
 import LinkDialog from './components/LinkDialog.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
+import ToolbarItem from './components/ToolbarItem.vue'
 
 export default {
   name: 'FilesTab',
@@ -17,7 +18,8 @@ export default {
     TableHeader,
     CustomDropzone,
     LinkDialog,
-    DeleteDialog
+    DeleteDialog,
+    ToolbarItem
   },
 
   props: {
@@ -41,10 +43,53 @@ export default {
       refresh_table_api_name: 'paginate_tab_files_table'
     },
     url: '',
-    dialog: false
+    dialog: false,
+    filter: 'all',
+    toolbarItems: [
+      {
+        id: 1,
+        className: 'all',
+        type: 'all',
+        icon: 'select_all',
+        iconText: 'All'
+      },
+      {
+        id: 2,
+        className: 'image',
+        type: 'image',
+        icon: 'image',
+        iconText: 'Image'
+      },
+      {
+        id: 3,
+        className: 'video',
+        type: 'video',
+        icon: 'video_library',
+        iconText: 'Video'
+      },
+      {
+        id: 4,
+        className: 'docs',
+        type: 'document',
+        icon: 'file_copy',
+        iconText: 'Docs'
+      },
+      {
+        id: 5,
+        className: 'other',
+        type: 'other',
+        icon: 'settings_applications',
+        iconText: 'Other'
+      }
+    ]
   }),
 
   computed: {
+    filteredItems() {
+      if (this.filter === 'all') return this.items
+      return this.items.filter(item => item.type === this.filter)
+    },
+
     user() {
       return this.$store.getters.user
     },
