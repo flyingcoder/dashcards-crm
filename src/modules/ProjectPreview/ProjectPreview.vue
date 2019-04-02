@@ -12,9 +12,7 @@
         {{ tab.name }}
       </v-tab>
     </v-tabs>
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
+    <router-view></router-view>
   </div>
 </template>
 

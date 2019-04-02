@@ -3,20 +3,23 @@
     <div class="sidebar__chatlist">
       <div class="you user">
         <div class="user__img">
-          <v-img :src="require('@/assets/temp/user.png')" />
+          <v-img :src="loggedUser.image_url" />
           <span class="status online"></span>
         </div>
-        <span class="user__name">Mohammad</span>
+        <span class="user__name">{{ loggedUser.first_name }}</span>
       </div>
 
       <div class="friend__list">
-        <div class="friend user" v-for="friend of users" :key="friend.id">
+        <div class="friend user" v-for="user of users" :key="user.id">
           <div class="user__img">
-            <v-img :src="require('@/assets/temp/user.png')" />
-            <span class="status" :class="friend.status"></span>
+            <v-img :src="user.image_url" />
+            <span
+              class="status"
+              :class="user.is_online ? 'online' : 'offline'"
+            ></span>
           </div>
 
-          <span class="user__name">{{ friend.name }}</span>
+          <span class="user__name">{{ user.first_name }}</span>
         </div>
       </div>
 
@@ -28,10 +31,26 @@
 </template>
 
 <script>
+import { getMembers } from '../api'
+
 export default {
+  props: {
+    id: [Number, String]
+  },
+
   data: () => ({
     users: []
-  })
+  }),
+
+  computed: {
+    loggedUser() {
+      return this.$store.getters.user
+    }
+  },
+
+  created() {
+    getMembers(this.id).then(({ data }) => (this.users = data.data))
+  }
 }
 </script>
 

@@ -1,117 +1,92 @@
 @import '~@/sass/variables';
+
 @include firstColumnHover;
 
-.files__tab{
+.files__tab {
   padding: 24px;
-  .drop__files{
+
+  .drop__files {
     background-color: $white;
     border: 1px solid $tableBorderBlue;
     border-radius: 10px;
     padding: 25px;
     margin-bottom: 22px;
-    .drop__files_body{
-      .vue-dropzone{
+
+    .drop__files_body {
+      .vue-dropzone {
         background-color: $tableBlueBg;
         border: 1px solid $tableBorderBlue;
-        &:hover{
+
+        &:hover {
           background-color: #dedede;
         }
       }
     }
   }
-  .file__list_header{
-    margin-bottom: 17px;
-    .file__tab{
-      .v-btn{
-        border: 1px solid $btnGray;
-        border-radius: 5px;
-        height: 50px;
-        width: 125px;
-        &:hover{
-          .all.v-icon{
-            color: $violet;
-          }
-          .image.v-icon{
-            color: $green;
-          }
-          .video.v-icon{
-            color: $red;
-          }
-          .docs.v-icon{
-            color: $lightBlue;
-          }
-          .other.v-icon{
-            color: $lightGreen;
-          }
-        }
-      }
-    }
 
-    .file__option{
-      .v-icon{
+  .file__list_header {
+    margin-bottom: 17px;
+
+    .file__option {
+      .v-icon {
         font-size: 24px;
         color: $sortOptionGray;
       }
     }
   }
-  .text-upper{
+
+  .text-upper {
     text-transform: uppercase;
   }
 }
 
-@media only screen and (max-width: 768px) and (min-width: 481px){
-  .files__tab{
+@media only screen and (max-width: 768px) and (min-width: 481px) {
+  .files__tab {
     padding: 20px;
-    .drop__files{
+
+    .drop__files {
       padding: 20px;
     }
-    .file__list_header{
+
+    .file__list_header {
       margin-bottom: 17px;
       flex-direction: column;
 
-      .file__tab{
+      .file__tab {
         order: 2;
         text-align: center;
       }
-      .file__option{
+
+      .file__option {
         order: 1;
-      }
-      .file__tab{
-        .v-btn{
-          font-size: 12px;
-          height: 35px;
-        }
       }
     }
   }
 }
 
-@media only screen and (max-width: 480px){
-  .files__tab{
+@media only screen and (max-width: 480px) {
+  .files__tab {
     padding: 15px;
-    .drop__files{
+
+    .drop__files {
       padding: 15px;
     }
-    .file__list_header{
+
+    .file__list_header {
       margin-bottom: 17px;
       flex-direction: column;
 
-      .file__tab{
+      .file__tab {
         order: 2;
         text-align: center;
       }
-      .file__option{
+
+      .file__option {
         order: 1;
-        .v-btn--floating.v-btn--small{
+
+        .v-btn--floating.v-btn--small {
           height: 30px;
           width: 30px;
-        }
-      }
-      .file__tab{
-        .v-btn{
-          font-size: 12px;
-          height: 30px;
-          width: 125px;
         }
       }
     }
