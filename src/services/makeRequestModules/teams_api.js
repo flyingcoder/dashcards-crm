@@ -9,6 +9,10 @@ export const teams_api = {
     return request.get('api/company/members')
   },
 
+  get_all_members() {
+    return request.get('api/company/members?for=project')
+  },
+
   get_project_members(id) {
     return request.get(`api/projects/${id}/member?all=true`)
   },
