@@ -115,7 +115,7 @@ export default {
         .all([
           makeRequestTo.get_all_clients(),
           makeRequestTo.get_all_services(),
-          makeRequestTo.get_all_teams()
+          makeRequestTo.getAllMembers()
         ])
         .then(
           axios.spread((res1, res2, res3) => {
