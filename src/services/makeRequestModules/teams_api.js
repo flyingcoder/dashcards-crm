@@ -9,7 +9,7 @@ export const teams_api = {
     return request.get('api/company/members')
   },
 
-  get_all_members() {
+  getAllMembers() {
     return request.get('api/company/members?for=project')
   },
 
