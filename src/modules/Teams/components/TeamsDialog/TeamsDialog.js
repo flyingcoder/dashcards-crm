@@ -1,5 +1,6 @@
 import { validations } from './validations'
 import makeRequestTo from '@/services/makeRequestTo'
+import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 
 export default {
   name: 'TeamsDialog',
@@ -9,6 +10,9 @@ export default {
     title: String,
     isEditDialog: Boolean,
     fieldsToEdit: { type: Object, default: () => {} }
+  },
+  components:{
+    CustomDialog
   },
 
   data: () => ({

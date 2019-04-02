@@ -26,6 +26,18 @@
     background-color: #fff;
 }
 
+>>> .custom__dialog .dialog__actions .v-btn{
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #dce1e5;
+    color: #657186;
+    background-color: #ffffff;
+    height: auto;
+    width: 110px;
+    margin: 0 9px;
+}
+
 @media only screen and (max-width: 480px){
     >>> .dialog__body .v-input__slot{
         font-size: 12px;
