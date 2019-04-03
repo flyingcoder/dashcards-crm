@@ -203,10 +203,10 @@
         </div>
 
         <v-card-actions class="dialog__actions">
+          <v-btn class="dialog__actions_btn" @click="cancel">Cancel</v-btn>
           <v-btn class="dialog__actions_btn" :disabled="disabled" @click="save">
             Save
           </v-btn>
-          <v-btn class="dialog__actions_btn" @click="cancel">Cancel</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
