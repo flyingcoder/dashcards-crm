@@ -2,7 +2,7 @@
 <custom-dialog
       :title="title"
       ref="dialog"
-      :open.sync="dialog"
+      :open.sync="open"
       button2-text="Save"
       @button1="cancel"
   >

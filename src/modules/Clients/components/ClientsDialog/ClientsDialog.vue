@@ -2,13 +2,13 @@
     <custom-dialog
       title="Add New Client"
       ref="dialog"
-      :open.sync="dialog"
+      :open.sync="open"
       button2-text="Save"
       @button1="cancel"
       @button2="save"
     >
       <template slot="content">
-        <v-layout row wrap>
+        <v-layout row wrap class="clients__dialog">
           <v-flex xs12 sm6>
             <v-text-field
               class="dialog__textfield d-field"
@@ -109,27 +109,6 @@
         </v-layout>
       </template>
     </custom-dialog>
-    <!-- <v-dialog v-model="open" persistent max-width="600px">
-      <v-card class="clients__dialog">
-        <v-card-title class="dialog__header">
-          <span class="dialog__title">{{ title }}Add Client</span>
-          <v-btn fab small class="close__dialog" @click="cancel">
-            <v-icon>close</v-icon>
-          </v-btn>
-        </v-card-title>
-
-        <v-card-text class="dialog__body">
-          <v-layout wrap>
-            
-          </v-layout>
-        </v-card-text>
-
-        <v-card-actions class="dialog__actions">
-          <v-btn @click="cancel">Cancel</v-btn>
-          <v-btn @click="save">Save</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog> -->
 </template>
 
 <script src="./ClientsDialog.js"></script>

@@ -1,5 +1,10 @@
+import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
+
 export default {
   name: 'MilestoneTemplateDialog',
+  components:{
+    CustomDialog
+  },
 
   props: {
     dialog: Boolean,
