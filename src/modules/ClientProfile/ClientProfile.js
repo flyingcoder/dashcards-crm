@@ -23,14 +23,9 @@ export default {
     ]
   }),
 
-  watch: {
-    $route: {
-      handler(val) {
-        this.set_user_id(val.params.user_id)
-        this.get_single_client(val.params.user_id)
-      },
-      immediate: true
-    }
+  created() {
+    this.set_user_id(this.user_id)
+    this.get_single_client(this.user_id)
   },
 
   methods: {
