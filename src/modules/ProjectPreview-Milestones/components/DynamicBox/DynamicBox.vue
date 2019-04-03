@@ -119,6 +119,7 @@ export default {
     .task {
       padding: 20px;
       font-size: 17px;
+      text-transform: capitalize;
       background-color: $bgLightBlue;
       color: $textDarkBlue;
       width: 100%;
