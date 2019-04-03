@@ -15,15 +15,19 @@
               item-value="id"
               label="Milestone"
               placeholder="Select Milestone"
+              box
+              color="#657186"
+              hide-details
+              class="d-field"
             ></v-select>
           </v-flex>
 
           <v-flex xs12 md12>
             <v-text-field
-              class="dialog__textfield"
+              class="dialog__textfield d-field"
               label="Add task title"
               v-model.trim="title"
-              solo
+              box
               hide-details
               color="#657186"
             ></v-text-field>
@@ -31,7 +35,7 @@
 
           <v-flex xs12 md6>
             <date-picker
-              class="dialog__date"
+              class="dialog__date d-field"
               label="Start Date"
               prepend-icon="event"
               readonly
@@ -42,7 +46,7 @@
 
           <v-flex xs12 md6>
             <date-picker
-              class="dialog__date"
+              class="dialog__date d-field"
               label="End Date"
               prepend-icon="event"
               readonly
