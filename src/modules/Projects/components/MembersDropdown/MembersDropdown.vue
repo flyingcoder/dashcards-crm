@@ -60,8 +60,7 @@
 <style lang="scss" scoped src="./MembersDropdown.scss"></style>
 
 <style scoped>
->>> .theme--light.v-text-field--box>.v-input__control>.v-input__slot{
-    background-color: #fff;
+>>> .theme--light.v-text-field--box > .v-input__control > .v-input__slot {
+  background-color: #fff;
 }
 </style>
-

@@ -2,7 +2,7 @@ import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 
 export default {
   name: 'MilestoneTemplateDialog',
-  components:{
+  components: {
     CustomDialog
   },
 

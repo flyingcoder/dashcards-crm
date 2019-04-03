@@ -11,7 +11,7 @@ export default {
     isEditDialog: Boolean,
     fieldsToEdit: { type: Object, default: () => {} }
   },
-  components:{
+  components: {
     CustomDialog
   },
 

@@ -3,7 +3,7 @@ import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 
 export default {
   name: 'TasksDialog',
-  components:{
+  components: {
     CustomDialog
   },
 

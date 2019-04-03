@@ -1,11 +1,11 @@
 <template>
   <custom-dialog
-      :title="dialogTitle"
-      ref="dialog"
-      :open.sync="open"
-      button2-text="Save"
-      @button1="cancel"
-      @button2="save"
+    :title="dialogTitle"
+    ref="dialog"
+    :open.sync="open"
+    button2-text="Save"
+    @button1="cancel"
+    @button2="save"
   >
     <template #content>
       <v-layout row wrap>
