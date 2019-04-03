@@ -1,31 +1,35 @@
 <template>
   <custom-dialog ref="dialog" title="Add Link">
-    <template slot="content">
-      <div class="custom-dialog">
-        <v-text-field
-          class="dialog__link"
-          pattern="https://.*"
-          type="url"
-          v-model.trim="link"
-          prepend-icon="link"
-          label="https://"
-          clearable
-          @keydown="validate_url"
-          solo
-          hide-details
-          color="#657186"
-        />
-        <v-text-field
-          v-model.trim="title"
-          class="dialog__textfield"
-          label="Title"
-          solo
-          clearable
-          hide-details
-          prepend-icon="text_fields"
-          color="#657186"
-        />
-      </div>
+    <template #content>
+      <v-layout row wrap class="custom-dialog">
+        <v-flex xs12>
+          <v-text-field
+            class="dialog__link d-field"
+            pattern="https://.*"
+            type="url"
+            v-model.trim="link"
+            prepend-icon="link"
+            label="https://"
+            clearable
+            @keydown="validate_url"
+            box
+            hide-details
+            color="#657186"
+          />
+        </v-flex>
+        <v-flex xs12>
+          <v-text-field
+            v-model.trim="title"
+            class="dialog__textfield d-field"
+            label="Title"
+            box
+            clearable
+            hide-details
+            prepend-icon="text_fields"
+            color="#657186"
+          />
+        </v-flex>
+      </v-layout>
     </template>
 
     <template slot="button2">
