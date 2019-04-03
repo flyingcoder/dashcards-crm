@@ -1,10 +1,12 @@
 import DatePicker from '@/common/DatePicker.vue'
 import moment from 'moment'
+import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 
 export default {
   name: 'MilestoneTabDialog',
   components: {
-    DatePicker
+    DatePicker,
+    CustomDialog
   },
 
   props: {

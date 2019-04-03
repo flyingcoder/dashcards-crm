@@ -1,5 +1,11 @@
+import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
+
 export default {
   name: 'ClientsDialog',
+
+  components: {
+    CustomDialog
+  },
 
   props: {
     dialog: Boolean,

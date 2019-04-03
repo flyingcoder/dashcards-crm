@@ -1,7 +1,11 @@
 import request from '@/services/axios_instance'
+import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 
 export default {
   name: 'SelectTemplateDialog',
+  components: {
+    CustomDialog
+  },
   props: {
     open: Boolean,
     title: String,

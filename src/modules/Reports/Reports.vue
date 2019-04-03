@@ -26,7 +26,7 @@
                 label="https://"
                 clearable
                 @keydown="validate_url"
-                solo
+                box
                 hide-details
                 color="#657186"
               />
@@ -34,7 +34,7 @@
                 v-model.trim="title"
                 class="dialog__textfield "
                 label="Title"
-                solo
+                box
                 clearable
                 hide-details
                 prepend-icon="text_fields"
@@ -87,4 +87,3 @@
 
 <script src="./Reports.js"></script>
 <style scoped lang="scss" src="./Reports.scss"></style>
-<style scoped src="./Reports.css"></style>

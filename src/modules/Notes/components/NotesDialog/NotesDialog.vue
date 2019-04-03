@@ -13,8 +13,9 @@
             <v-text-field
               v-model.trim="payload.title"
               label="Add Title"
-              class="project__title mb-2"
-              solo
+              class="dialog__textfield d-field"
+              color="#667187"
+              box
               hide-details
             >
             </v-text-field>
@@ -24,7 +25,7 @@
             <rich-editor
               placeholder="Description"
               v-model.trim="payload.content"
-              class="task-description"
+              class="note-description"
             />
           </v-flex>
         </v-layout>
@@ -71,3 +72,12 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+@import '~@/sass/_variables';
+.note-description {
+  border-radius: 8px;
+  border: none;
+  background-color: $white;
+  margin: 0 5px;
+}
+</style>
