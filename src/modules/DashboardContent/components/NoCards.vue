@@ -22,7 +22,7 @@
       </template>
 
       <template slot="button2">
-        <v-btn :disabled="nothing_changed" @click="save">Save</v-btn>
+        <v-btn :disabled="nothing_changed" class="save-card" @click="save">Save</v-btn>
       </template>
     </CustomDialog>
 
