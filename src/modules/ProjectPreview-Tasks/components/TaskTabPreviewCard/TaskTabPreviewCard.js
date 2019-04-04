@@ -46,15 +46,18 @@ export default {
   },
 
   watch: {
-    task() {
-      this.loading = true
-      request
-        .get(`api/task/${this.task.id}`)
-        .then(response => {
-          this.content = response.data
-          this.all_comments = response.data.comments
-        })
-        .finally(() => (this.loading = false))
+    task: {
+      handler(newTask) {
+        this.loading = true
+        request
+          .get(`api/task/${newTask.id}`)
+          .then(response => {
+            this.content = response.data
+            this.all_comments = response.data.comments
+          })
+          .finally(() => (this.loading = false))
+      },
+      immediate: true
     }
   },
 
