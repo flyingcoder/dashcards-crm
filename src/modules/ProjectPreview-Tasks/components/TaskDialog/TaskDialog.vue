@@ -4,6 +4,7 @@
       ref="dialog"
       :open.sync="computedDialog"
       :title="dialogTitle"
+      @button1="computedDialog = false"
     >
       <template #content>
         <v-layout wrap class="custom-dialog">
