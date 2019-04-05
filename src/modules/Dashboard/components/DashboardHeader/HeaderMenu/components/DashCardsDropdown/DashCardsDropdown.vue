@@ -56,9 +56,8 @@
 <script src="./DashCardsDropdown.js"></script>
 <style lang="scss" scoped src="./DashCardsDropdown.scss"></style>
 <style scoped>
->>> .save.theme--dark.v-btn.v-btn--disabled:not(.v-btn--icon):not(.v-btn--flat):not(.v-btn--outline){
+>>> .save.theme--dark.v-btn.v-btn--disabled:not(.v-btn--icon):not(.v-btn--flat):not(.v-btn--outline) {
   background-color: rgba(139, 148, 191, 0.5) !important;
   border-color: rgb(139, 148, 191) !important;
 }
 </style>
-
