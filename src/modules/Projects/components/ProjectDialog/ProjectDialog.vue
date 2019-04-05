@@ -91,10 +91,7 @@
               </v-menu>
 
               <div class="choosen" v-if="service.selected">
-                <span v-if="isEditDialog">
-                  {{ service.selected.text }}
-                </span>
-                <span v-else>{{ service.selected.name }}</span>
+                <span>{{ service.selected.name }}</span>
               </div>
             </v-flex>
 

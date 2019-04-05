@@ -164,7 +164,7 @@ export default {
     update_fields({ fields }) {
       const new_fields = _cloneDeep(fields)
       this.$set(this.service, 'selected', {
-        text: new_fields.service_name,
+        name: new_fields.service_name,
         id: new_fields.service_id
       })
       this.$set(this.client, 'selected', {
