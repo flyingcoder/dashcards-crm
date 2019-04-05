@@ -57,7 +57,7 @@
         <v-flex xs12 sm6>
           <v-text-field
             class="dialog__email d-field"
-            label="Email"
+            label="Contact Email"
             v-model.trim="email"
             box
             hide-details
@@ -75,6 +75,17 @@
             hide-details
             color="#657186"
           ></v-select>
+        </v-flex>
+
+        <v-flex xs12>
+          <v-text-field
+            class="dialog__textfield d-field"
+            label="Location"
+            v-model.trim="location"
+            box
+            hide-details
+            color="#657186"
+          ></v-text-field>
         </v-flex>
 
         <v-flex xs12 sm6 v-if="!isEditDialog">

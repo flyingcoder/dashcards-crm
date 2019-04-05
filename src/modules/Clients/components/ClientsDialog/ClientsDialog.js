@@ -24,6 +24,7 @@ export default {
     telephone: null,
     email: null,
     status: null,
+    location: null,
     password: null,
     repeat_password: null,
     status_items: [
@@ -58,7 +59,8 @@ export default {
         company_name: this.company_name,
         telephone: this.telephone,
         email: this.email,
-        status: this.status
+        status: this.status,
+        location: this.location
       }
 
       if (!this.isEditDialog) {
@@ -80,10 +82,11 @@ export default {
       this.telephone = new_fields.telephone
       this.email = new_fields.email
       this.status = new_fields.status
+      this.location = new_fields.location
     },
 
     clear_and_close() {
-      this.first_name = this.last_name = this.company_name = ''
+      this.first_name = this.last_name = this.company_name = this.location = ''
       this.telephone = this.email = this.status = ''
       this.password = this.repeat_password = ''
       this.cancel() //close the modal
