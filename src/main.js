@@ -13,7 +13,7 @@ import store from './store/store'
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
-  const authenticated = store.getters.is_user_logged
+  const authenticated = !!localStorage.getItem('token')
 
   if (['login', 'signup'].includes(to.name) && !authenticated) {
     next()
