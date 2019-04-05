@@ -31,7 +31,9 @@
             />
           </svg>
         </div>
-        <h2>No Invoice yet</h2>
+        <div class="empty-text">
+          No Invoice yet
+        </div>
       </div>
     </div>
   </div>
