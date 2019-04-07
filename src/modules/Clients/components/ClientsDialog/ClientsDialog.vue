@@ -9,6 +9,17 @@
   >
     <template slot="content">
       <v-layout row wrap class="clients__dialog">
+        <v-flex xs12>
+          <v-text-field
+            class="dialog__textfield d-field"
+            label="Company Name"
+            v-model.trim="business_name"
+            box
+            hide-details
+            color="#657186"
+          ></v-text-field>
+        </v-flex>
+
         <v-flex xs12 sm6>
           <v-text-field
             class="dialog__textfield d-field"
@@ -34,8 +45,8 @@
         <v-flex xs12 sm6>
           <v-text-field
             class="dialog__textfield d-field"
-            label="Company Name"
-            v-model.trim="company_name"
+            label="Location"
+            v-model.trim="location"
             box
             hide-details
             color="#657186"
@@ -75,17 +86,6 @@
             hide-details
             color="#657186"
           ></v-select>
-        </v-flex>
-
-        <v-flex xs12>
-          <v-text-field
-            class="dialog__textfield d-field"
-            label="Location"
-            v-model.trim="location"
-            box
-            hide-details
-            color="#657186"
-          ></v-text-field>
         </v-flex>
 
         <v-flex xs12 sm6 v-if="!isEditDialog">
