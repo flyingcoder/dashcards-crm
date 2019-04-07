@@ -152,8 +152,8 @@ export default {
       makeRequestTo
         .get_project_members(this.id)
         .then(({ data }) => {
-          this.members.all_items = data.data
-          this.members.items = data.data
+          this.members.all_items = data
+          this.members.items = data
         })
         .finally(() => (this.loading = false))
     },

@@ -115,8 +115,8 @@ export default {
         apiTo.get_project_milestones(this.id)
       ])
       this.loading = false
-      this.members.all_items = members.data.data
-      this.members.items = members.data.data
+      this.members.all_items = members.data
+      this.members.items = members.data
       this.milestones.items = milestones.data
     },
 
