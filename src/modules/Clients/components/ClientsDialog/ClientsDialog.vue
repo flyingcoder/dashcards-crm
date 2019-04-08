@@ -12,8 +12,8 @@
         <v-flex xs12>
           <v-text-field
             class="dialog__textfield d-field"
-            label="Company Name"
-            v-model.trim="business_name"
+            label="Business Name"
+            v-model.trim="company_name"
             box
             hide-details
             color="#657186"
