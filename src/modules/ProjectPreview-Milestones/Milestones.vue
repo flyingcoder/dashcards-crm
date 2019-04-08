@@ -101,6 +101,7 @@
           <dynamic-box
             :id="id"
             :box="box"
+            :loading="box.id === boxIdInProgress"
             @edit="open_edit_dialog"
             @delete="open_delete_confirmation"
             @edit-task="edit_task"
@@ -110,6 +111,8 @@
         </div>
       </v-flex>
     </v-layout>
+
+    <CustomTable toolbar-title="Tasks" :headers="headers" hide-actions />
   </div>
 </template>
 

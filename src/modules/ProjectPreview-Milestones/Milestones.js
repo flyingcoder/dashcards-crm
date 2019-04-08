@@ -6,6 +6,7 @@ import MilestoneTabDialog from './components/MilestoneTabDialog/MilestoneTabDial
 import SelectTemplateDialog from './components/SelectTemplateDialog/SelectTemplateDialog.vue'
 import AddTaskDialog from './components/AddTaskDialog/AddTaskDialog.vue'
 import _cloneDeep from 'lodash/cloneDeep'
+import CustomTable from '@/common/CustomTable/CustomTable.vue'
 
 export default {
   name: 'MilestonesTab',
@@ -14,7 +15,8 @@ export default {
     MilestoneTabDialog,
     DeleteDialog,
     SelectTemplateDialog,
-    AddTaskDialog
+    AddTaskDialog,
+    CustomTable
   },
 
   props: {
@@ -44,7 +46,22 @@ export default {
       box_id: null
     },
     box_id_to_add_task: null,
-    add_task_start_date: null
+    add_task_start_date: null,
+    boxIdInProgress: null,
+    headers: [
+      {
+        id: 1,
+        text: 'Task',
+        value: 'task',
+        align: 'left'
+      },
+      {
+        id: 2,
+        text: 'Status',
+        value: 'status',
+        align: 'left'
+      }
+    ]
   }),
 
   created() {
@@ -99,7 +116,7 @@ export default {
     },
 
     async update_milestone(updated_fields) {
-      this.loading = true
+      this.boxIdInProgress = this.edit_item.id
       this.edit_dialog = false
       await request
         .put(
@@ -110,7 +127,7 @@ export default {
           const index = this.boxes.findIndex(item => item.id === data.id)
           if (~index) this.boxes.splice(index, 1, data)
         })
-        .finally(() => (this.loading = false))
+        .finally(() => (this.boxIdInProgress = null))
       this.$event.$emit('open_snackbar', 'Milestone updated successfully')
       this.edit_item = {
         id: null,
@@ -143,7 +160,7 @@ export default {
     },
 
     remove_task(box_index, { task_index, task_id }) {
-      this.loading = true
+      this.boxIdInProgress = this.boxes[box_index].id
       request
         .delete(`api/task/${task_id}`)
         .then(() => {
@@ -152,10 +169,11 @@ export default {
           this.boxes = boxes
           this.$event.$emit('open_snackbar', 'Task deleted successfully')
         })
-        .finally(() => (this.loading = false))
+        .finally(() => (this.boxIdInProgress = null))
     },
 
     update_task(task) {
+      this.boxIdInProgress = this.edit_item.box_id
       makeRequestTo
         .edit_milestone_task(
           this.edit_task_item.id,
@@ -179,6 +197,7 @@ export default {
             this.$event.$emit('open_snackbar', 'Task updated successfully')
           }
         })
+        .finally(() => (this.boxIdInProgress = null))
     },
 
     open_add_task_dialog(box_id) {
@@ -190,7 +209,7 @@ export default {
     },
 
     add_new_task(payload) {
-      this.loading = true
+      this.boxIdInProgress = this.box_id_to_add_task
       this.$refs.add_task_dialog.clear_and_close()
       request
         .post(`api/milestone/${this.box_id_to_add_task}/task`, payload)
@@ -202,7 +221,7 @@ export default {
           this.$event.$emit('open_snackbar', 'Task added successfully')
         })
         .finally(() => {
-          this.loading = false
+          this.boxIdInProgress = null
           this.box_id_to_add_task = null
         })
     }

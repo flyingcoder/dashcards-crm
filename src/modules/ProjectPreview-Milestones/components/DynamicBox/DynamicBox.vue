@@ -10,6 +10,11 @@
     <dash-card :title="validate_title(box.title)">
       <template slot="actions">
         <v-flex xs4 class="actions text-xs-right">
+          {{
+            box.tasks.filter(i => i.status === 'completed').length +
+              '/' +
+              box.tasks.length
+          }}
           <v-btn fab flat small class="action">
             <v-icon @click="$emit('edit', box)">edit</v-icon>
           </v-btn>
@@ -19,6 +24,10 @@
         </v-flex>
       </template>
       <div class="content" slot="content">
+        <v-progress-linear
+          v-if="loading"
+          :indeterminate="true"
+        ></v-progress-linear>
         <div class="task" v-for="(task, index) of box.tasks" :key="task.id">
           {{ task.title }}
           <div class="task-actions">
@@ -65,7 +74,8 @@ export default {
   },
   props: {
     id: [Number, String],
-    box: Object
+    box: Object,
+    loading: Boolean
   },
 
   data: () => ({
