@@ -30,14 +30,6 @@ export default {
   },
 
   created() {
-    if (!sessionStorage.getItem('logged') && localStorage.getItem('token')) {
-      this.$store.dispatch('logout')
-      localStorage.removeItem('token')
-      localStorage.removeItem('user')
-      navigator.sendBeacon('https://api.bizzooka.com/api/logout')
-      this.$router.push({ name: 'login' })
-    }
-
     // Let's check if the browser supports notifications
     if (!('Notification' in window)) {
       alert('This browser does not support desktop notification')
