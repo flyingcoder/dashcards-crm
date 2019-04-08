@@ -4,6 +4,6 @@ export const getProjectMembers = projectId => {
   return request.get(`api/projects/${projectId}/new-members`)
 }
 
-export const getMembers = projectId => {
-  return request.get(`api/projects/${projectId}/member`)
+export const addProjectMember = (projectId, payload) => {
+  return request.post(`api/projects/${projectId}/member`, payload)
 }

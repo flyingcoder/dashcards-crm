@@ -1,4 +1,8 @@
+import * as apiTo from '../../api'
+// Components
 import MembersDropdown from '@/modules/Projects/components/MembersDropdown/MembersDropdown.vue'
+import _cloneDeep from 'lodash/cloneDeep'
+
 export default {
   name: 'AddDialog',
   components: {
@@ -7,7 +11,7 @@ export default {
   props: {
     dialog: Boolean,
     title: String,
-    allMembers: Array
+    id: [Number, String]
   },
 
   data: () => ({
@@ -15,12 +19,21 @@ export default {
     name: '',
     members: {
       selected: [],
-      items: []
+      items: [],
+      allItems: [],
+      loading: false
     }
   }),
 
+  computed: {
+    disableSave() {
+      return !this.members.selected.length
+    }
+  },
+
   watch: {
     dialog(new_val) {
+      new_val && this.getProjectMembers()
       this.open = new_val
     },
     open(new_val) {
@@ -29,21 +42,41 @@ export default {
   },
 
   methods: {
+    getProjectMembers() {
+      this.members.loading = true
+      apiTo
+        .getProjectMembers(this.id)
+        .then(({ data }) => {
+          this.members.allItems = data
+          this.members.items = data
+        })
+        .finally(() => (this.members.loading = false))
+    },
+
     cancel() {
       this.open = false
     },
     save() {
+      if (this.disableSave) return
       this.$emit('save', this.members.selected)
     },
     clear_and_close() {
       Object.assign(this.$data, this.$options.data.apply(this))
       this.cancel() //close the modal
     },
-    items_updated(new_members) {
-      this.members.items = new_members.filter(
-        new_member =>
-          !this.allMembers.find(member => member.id === new_member.id)
-      )
+    filter_members(search) {
+      let items = _cloneDeep(this.members.allItems)
+      if (!search) {
+        this.members.items = items
+      } else {
+        const filtered = items.filter(item => {
+          return (
+            item.first_name.toLowerCase().includes(search.toLowerCase()) ||
+            item.last_name.toLowerCase().includes(search.toLowerCase())
+          )
+        })
+        this.$set(this.members, 'items', filtered)
+      }
     }
   }
 }

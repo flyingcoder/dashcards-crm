@@ -16,6 +16,7 @@
       color="#657186"
       label="Assign member(s)"
       v-bind="$attrs"
+      box
     >
       <template slot="selection" slot-scope="data">
         <v-chip
@@ -57,3 +58,9 @@
 
 <script src="./MembersDropdown.js"></script>
 <style lang="scss" scoped src="./MembersDropdown.scss"></style>
+
+<style scoped>
+>>> .theme--light.v-text-field--box > .v-input__control > .v-input__slot {
+  background-color: #fff;
+}
+</style>

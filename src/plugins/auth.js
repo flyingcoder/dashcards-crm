@@ -30,7 +30,6 @@ export const auth = {
     make_request_to.logout().then(() => {
       localStorage.removeItem('token')
       localStorage.removeItem('user')
-      store.dispatch('logout')
       router.push({ name: 'login' })
     })
   },

@@ -1,6 +1,13 @@
 <template>
   <div class="files__tab">
-    <LinkDialog ref="link_dialog" />
+    <LinkDialog ref="link_dialog" @save="addLink" />
+
+    <delete-dialog
+      :open-dialog.sync="delete_dialog"
+      title="Delete File"
+      text-content="Are you sure you want to delete this file?"
+      @delete="delete_item"
+    />
 
     <div class="drop__files">
       <div class="drop__files_body">
@@ -23,7 +30,7 @@
     <custom-table
       v-if="items.length || loading"
       :headers="headers"
-      :items="items"
+      :items="filteredItems"
       :has-checkbox="true"
       :permission="$_permissions.get('hq_files')"
       hide-actions
@@ -33,26 +40,15 @@
       <template slot="toolbar">
         <v-layout row class="file__list_header">
           <v-flex class="file__tab">
-            <v-btn color="#b3b7c3" flat medium>
-              <v-icon dark left class="all">select_all</v-icon>
-              All
-            </v-btn>
-            <v-btn color="#b3b7c3" flat medium @click="sortFile('image')">
-              <v-icon dark left class="image">image</v-icon>
-              Image
-            </v-btn>
-            <v-btn color="#b3b7c3" flat medium @click="sortFile('video')">
-              <v-icon dark left class="video">video_library</v-icon>
-              Video
-            </v-btn>
-            <v-btn color="#b3b7c3" flat medium @click="sortFile('docs')">
-              <v-icon dark left class="docs">file_copy</v-icon>
-              Docs
-            </v-btn>
-            <v-btn color="#b3b7c3" flat medium @click="sortFile('other')">
-              <v-icon dark left class="other">settings_applications</v-icon>
-              Other
-            </v-btn>
+            <ToolbarItem
+              v-for="item of toolbarItems"
+              :key="item.id"
+              :icon="item.icon"
+              :icon-text="item.iconText"
+              :icon-class="item.className"
+              :is-active="item.type === filter"
+              @click="filter = item.type"
+            />
             <v-btn color="#3b589e" dark @click="open_link_dialog">
               Add Link
             </v-btn>
@@ -84,7 +80,15 @@
           >
             <v-icon>cloud_download</v-icon>
           </v-btn>
-          <v-btn v-if="can_delete" fab small flat depressed title="Delete">
+          <v-btn
+            v-if="can_delete"
+            @click="open_delete_dialog(item)"
+            fab
+            small
+            flat
+            depressed
+            title="Delete"
+          >
             <img src="@/assets/icons/groups/delete.svg" alt="" />
           </v-btn>
         </td>

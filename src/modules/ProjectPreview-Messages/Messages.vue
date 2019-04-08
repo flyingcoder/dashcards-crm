@@ -1,7 +1,7 @@
 <template>
   <div class="message__tab">
     <v-layout row wrap class="message__content">
-      <UsersList />
+      <UsersList :id="id" />
 
       <v-flex sm9 xs12 class="message-group">
         <v-tabs

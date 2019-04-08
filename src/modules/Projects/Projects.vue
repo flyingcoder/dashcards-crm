@@ -47,18 +47,24 @@
         >
           {{ item.item.service_name }}
         </td>
-        <td class="text-cap">{{ item.item.client_name }}</td>
+        <td class="text-cap">{{ item.item.business_name }}</td>
         <td class="text-cap">{{ item.item.manager_name }}</td>
-        <td>{{ item.item.started_at | from_now }}</td>
+        <td class="text-cap">Canada</td>
+        <td>{{ item.item.started_at | bzFromNow }}</td>
         <td>
           <v-progress-linear
+            v-if="item.item.progress < 100"
+            color="#9095AB"
+            height="5"
+            value="100"
+          ></v-progress-linear>
+          <v-progress-linear
+            v-else
             color="#1fb868"
             height="5"
-            :value="item.item.progress"
+            value="100"
           ></v-progress-linear>
         </td>
-        <td>{{ item.item.total_time }}</td>
-        <td class="text-cap">{{ item.item.status }}</td>
       </template>
 
       <template slot="table-actions">

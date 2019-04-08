@@ -28,41 +28,46 @@ export default {
       {
         id: 1,
         text: 'Service',
-        value: 'project',
+        value: 'service',
         sortable: true,
         align: 'left'
       },
-      { id: 2, text: 'Client', value: 'client', sortable: true, align: 'left' },
+      {
+        id: 2,
+        text: 'Company Name',
+        value: 'business_name',
+        sortable: true,
+        align: 'left'
+      },
       {
         id: 3,
-        text: 'Project Manager',
-        value: 'project',
+        text: 'Created By',
+        value: 'created_by',
         sortable: true,
         align: 'left'
       },
       {
         id: 4,
+        text: 'Location',
+        value: 'location',
+        sortable: true,
+        align: 'left'
+      },
+      {
+        id: 5,
         text: 'Start Date',
         value: 'start-date',
         sortable: true,
         align: 'left'
       },
       {
-        id: 5,
+        id: 6,
         text: 'Progress',
         value: 'progress',
         sortable: true,
         align: 'left'
       },
-      {
-        id: 6,
-        text: 'Time Spent',
-        value: 'time-spent',
-        sortable: true,
-        align: 'left'
-      },
-      { id: 7, text: 'Status', value: 'status', sortable: true, align: 'left' },
-      { id: 8, is_action: true }
+      { id: 7, is_action: true }
     ],
     table_config: {
       route_name: 'projects',

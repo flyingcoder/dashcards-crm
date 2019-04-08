@@ -14,16 +14,16 @@
         :key="tab.route"
         :to="tab.route"
         class="tab-item"
+        exact
       >
         <svg viewBox="0 0 250 250">
           <path class="icon" :d="tab.icon" />
         </svg>
       </v-tab>
-
-      <v-tab-item v-for="tab of tabs" :key="tab.route" :value="tab.route">
-        <router-view></router-view>
-      </v-tab-item>
     </v-tabs>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 

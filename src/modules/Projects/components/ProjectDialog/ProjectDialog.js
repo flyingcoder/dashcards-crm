@@ -115,7 +115,7 @@ export default {
         .all([
           makeRequestTo.get_all_clients(),
           makeRequestTo.get_all_services(),
-          makeRequestTo.get_all_teams()
+          makeRequestTo.getAllMembers()
         ])
         .then(
           axios.spread((res1, res2, res3) => {
@@ -164,11 +164,11 @@ export default {
     update_fields({ fields }) {
       const new_fields = _cloneDeep(fields)
       this.$set(this.service, 'selected', {
-        text: new_fields.service_name,
+        name: new_fields.service_name,
         id: new_fields.service_id
       })
       this.$set(this.client, 'selected', {
-        text: new_fields.client_name,
+        full_name: new_fields.client_name,
         id: new_fields.client_id
       })
       this.$set(

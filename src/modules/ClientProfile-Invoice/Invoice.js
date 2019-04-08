@@ -12,7 +12,7 @@ export default {
   },
 
   props: {
-    id: [Number, String]
+    user_id: [Number, String]
   },
 
   data: () => ({
@@ -28,8 +28,8 @@ export default {
   created() {
     this.loading = true
     apiTo
-      .getInvoices(this.id)
-      .then(({ data }) => this.add_table_rows(data.data, data))
+      .getInvoices(this.user_id)
+      .then(({ data }) => this.add_table_rows(data, null))
       .finally(() => (this.loading = false))
   }
 }
