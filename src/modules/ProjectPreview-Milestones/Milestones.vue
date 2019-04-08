@@ -111,9 +111,7 @@
         </div>
       </v-flex>
     </v-layout>
-
-    <CustomTable toolbar-title="Tasks" :headers="headers" hide-actions />
-  </div>
+t  </div>
 </template>
 
 <script src="./Milestones.js"></script>

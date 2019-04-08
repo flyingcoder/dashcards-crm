@@ -6,7 +6,6 @@ import MilestoneTabDialog from './components/MilestoneTabDialog/MilestoneTabDial
 import SelectTemplateDialog from './components/SelectTemplateDialog/SelectTemplateDialog.vue'
 import AddTaskDialog from './components/AddTaskDialog/AddTaskDialog.vue'
 import _cloneDeep from 'lodash/cloneDeep'
-import CustomTable from '@/common/CustomTable/CustomTable.vue'
 
 export default {
   name: 'MilestonesTab',
@@ -15,8 +14,7 @@ export default {
     MilestoneTabDialog,
     DeleteDialog,
     SelectTemplateDialog,
-    AddTaskDialog,
-    CustomTable
+    AddTaskDialog
   },
 
   props: {
@@ -47,21 +45,7 @@ export default {
     },
     box_id_to_add_task: null,
     add_task_start_date: null,
-    boxIdInProgress: null,
-    headers: [
-      {
-        id: 1,
-        text: 'Task',
-        value: 'task',
-        align: 'left'
-      },
-      {
-        id: 2,
-        text: 'Status',
-        value: 'status',
-        align: 'left'
-      }
-    ]
+    boxIdInProgress: null
   }),
 
   created() {
