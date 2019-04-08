@@ -16,7 +16,7 @@
         <template slot="fields">
           <div class="l__labels">
             <custom-field
-              className="signup__field"
+              className="signup__field text-capitalize"
               v-model.trim="company_name.text"
               :valid="company_name.is_valid"
               input-type="text"
@@ -27,7 +27,7 @@
             ></custom-field>
 
             <custom-field
-              className="signup__field"
+              className="signup__field text-capitalize"
               v-model.trim="first_name.text"
               :valid="first_name.is_valid"
               input-type="text"
@@ -38,7 +38,7 @@
             ></custom-field>
 
             <custom-field
-              className="signup__field"
+              className="signup__field text-capitalize"
               v-model.trim="last_name.text"
               :valid="last_name.is_valid"
               input-type="text"
