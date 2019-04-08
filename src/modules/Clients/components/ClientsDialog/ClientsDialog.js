@@ -20,7 +20,7 @@ export default {
     show_repeat_password: false,
     first_name: null,
     last_name: null,
-    business_name: null,
+    company_name: null,
     telephone: null,
     email: null,
     status: null,
@@ -56,7 +56,7 @@ export default {
       const fields_to_save = {
         first_name: this.first_name,
         last_name: this.last_name,
-        business_name: this.business_name,
+        company_name: this.company_name,
         telephone: this.telephone,
         email: this.email,
         status: this.status,
@@ -78,7 +78,7 @@ export default {
       const new_fields = Object.assign({}, fields)
       this.first_name = new_fields.first_name
       this.last_name = new_fields.last_name
-      this.business_name = new_fields.business_name
+      this.company_name = new_fields.company_name
       this.telephone = new_fields.telephone
       this.email = new_fields.email
       this.status = new_fields.status
@@ -86,7 +86,7 @@ export default {
     },
 
     clear_and_close() {
-      this.first_name = this.last_name = this.business_name = this.location = ''
+      this.first_name = this.last_name = this.company_name = this.location = ''
       this.telephone = this.email = this.status = ''
       this.password = this.repeat_password = ''
       this.cancel() //close the modal
