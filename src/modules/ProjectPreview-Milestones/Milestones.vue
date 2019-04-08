@@ -111,7 +111,7 @@
         </div>
       </v-flex>
     </v-layout>
-t  </div>
+  </div>
 </template>
 
 <script src="./Milestones.js"></script>
