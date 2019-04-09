@@ -10,6 +10,9 @@ export default {
   methods: {
     preview_row_url(index) {
       this.$emit('row-clicked', this.reports[index])
+    },
+    actionClicked(report, index, event) {
+      this.$emit(event, { report, index })
     }
   }
 }

@@ -18,7 +18,7 @@
       <div class="list-content" v-else>
         <v-layout
           row
-          class="report-item"
+          class="report-item align-center"
           :class="{ active: activeReport && activeReport.id === report.id }"
           v-for="(report, index) of reports"
           :key="report.id"
@@ -26,6 +26,13 @@
         >
           <v-flex xs3 class="reports-id">{{ index + 1 }}</v-flex>
           <v-flex xs9 class="reports-title">{{ report.title }}</v-flex>
+          <v-btn icon @click.stop="actionClicked(report, index, 'edit')">
+            <v-icon color="indigo">edit</v-icon>
+          </v-btn>
+
+          <v-btn icon @click.stop="actionClicked(report, index, 'delete')">
+            󠁿󠁿󠁿<span style="font-size: 20px">🗙</span>
+          </v-btn>
         </v-layout>
       </div>
     </div>
