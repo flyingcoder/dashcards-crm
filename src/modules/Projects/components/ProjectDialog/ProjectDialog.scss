@@ -17,7 +17,7 @@
   @include styledScrollFor('.dialog__body');
 
   .dialog__body {
-    max-height: 400px;
+    max-height: 450px;
     overflow: hidden auto;
     padding: 0 15px;
     margin: 0 20px;
@@ -79,7 +79,6 @@
         border-radius: 8px;
         border: 1px solid $borderLightGray;
         box-shadow: $darkBoxShadow;
-        margin-bottom: 20px;
         color: $textDark;
 
         label {
