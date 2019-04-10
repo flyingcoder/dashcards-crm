@@ -31,15 +31,18 @@ export default {
     ],
     actions: [
       {
-        text: 'Edit',
         value: 'edit_settings',
         tooltip: 'Edit Settings',
         icon: require(`@/${'assets/icons/groups/edit.svg'}`)
       },
       {
-        text: 'Delete',
         value: 'delete_group',
         tooltip: 'Delete Group',
+        icon: require(`@/${'assets/icons/groups/delete.svg'}`)
+      },
+      {
+        value: '',
+        tooltip: 'Key',
         icon: require(`@/${'assets/icons/groups/delete.svg'}`)
       }
     ],
@@ -111,11 +114,5 @@ export default {
   },
 
   methods: {
-    action_clicked(action, { id, name, description }) {
-      if (action === 'edit_settings')
-        this.open_edit_dialog({ id, name, description })
-      else if (action === 'delete_group')
-        this.open_delete_dialog({ id, name, description })
-    }
   }
 }

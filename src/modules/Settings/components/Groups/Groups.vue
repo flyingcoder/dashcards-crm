@@ -54,26 +54,44 @@
           >
             <template slot="custom-item" slot-scope="{ item }">
               <td>{{ item.index }}</td>
-              <td>{{ item.name }}</td>
+              <td class="text-cap">{{ item.name }}</td>
               <td>{{ item.description }}</td>
             </template>
 
             <template slot="row-actions" slot-scope="{ item }">
-              <td class="actions">
-                <template v-for="action of actions">
-                  <template v-if="item.company_id">
-                    <v-tooltip bottom :key="action.value">
-                      <v-btn
-                        slot="activator"
-                        color="blue"
-                        @click="action_clicked(action.value, item)"
+              <td class="text-xs-center">
+                <template v-if="item.company_id">
+                    <v-btn
+                      @click="open_edit_dialog(item)"
+                      fab
+                      small
+                      flat
+                      depressed
+                      slot="activator"
+                      title="Edit"
+                    >
+                      <img src="@/assets/icons/groups/edit.svg" />
+                    </v-btn>
+                    <v-btn
+                      @click="open_delete_dialog(item)"
+                      fab
+                      small
+                      flat
+                      depressed
+                      slot="activator"
+                      title="Delete"
+                    >
+                      <img src="@/assets/icons/groups/delete.svg" />
+                    </v-btn>
+                    <v-btn
+                        fab
+                        flat
+                        small
+                        depressed
+                        title="Security"
                       >
-                        <img :src="action.icon" /> &nbsp;
-                        {{ action.text }}
+                        <v-icon>vpn_key</v-icon>
                       </v-btn>
-                      <span>{{ action.tooltip }}</span>
-                    </v-tooltip>
-                  </template>
                 </template>
               </td>
             </template>
