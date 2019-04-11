@@ -4,6 +4,10 @@
   background: $blue;
   color: $white;
 
+  .sidebar-inner{
+    position: relative;
+  }
+
   .v-list__tile {
     padding: 0;
     width: 100%;
@@ -58,6 +62,10 @@
   display: block;
 }
 
+[data-nav="Forms"]:hover > .submenu {
+  display: block;
+}
+
 .submenu {
   position: absolute;
   right: -150px;
@@ -82,6 +90,7 @@
     &:hover {
       background: white;
       color: $blue;
+      cursor: pointer;
     }
   }
 }
