@@ -118,7 +118,7 @@ export default {
       formData.append('file', image)
       this.loading = true
       api_to
-        .upload_image(this.user.id, formData)
+        .upload_image(this.user_id, formData)
         .then(this.image_uploaded)
         .finally(() => (this.loading = false))
     },
