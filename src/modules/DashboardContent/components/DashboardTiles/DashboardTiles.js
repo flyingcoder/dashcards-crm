@@ -83,12 +83,12 @@ export default {
   created() {
     request.get('api/dashboard/counts').then(({ data }) => {
       this.counters = data
-      this.set_chat(data.chats)
-      this.set_notification(data.notification)
+      this.setChat(data.chats)
+      this.setNotification(data.notification)
     })
   },
 
   methods: {
-    ...mapMutations('headerIcons', ['set_chat', 'set_notification'])
+    ...mapMutations('headerIcons', ['setChat', 'setNotification'])
   }
 }

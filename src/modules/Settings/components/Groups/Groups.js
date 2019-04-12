@@ -113,6 +113,5 @@ export default {
     }
   },
 
-  methods: {
-  }
+  methods: {}
 }

@@ -1,8 +1,6 @@
 <template>
   <div class="chat__inbox">
-    <div class="inbox__title">
-      Message Notifications ({{ notifications.length }})
-    </div>
+    <div class="inbox__title">Message Notifications ({{ chat }})</div>
     <div class="msg__notif">
       <div
         class="user new__message"
@@ -28,12 +26,12 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  props: {
-    notifications: Array
-  },
-
   computed: {
-    ...mapGetters('onlineUsers', ['all_users'])
+    ...mapGetters('onlineUsers', ['all_users']),
+    ...mapGetters('headerIcons', ['chat']),
+    notifications() {
+      return this.$store.getters['notifications/chat']
+    }
   },
 
   filters: {

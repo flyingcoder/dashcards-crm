@@ -72,7 +72,7 @@ export default {
         )
         activityLog.bind('App\\Events\\ActivityEvent', payload => {
           this.$store.commit('headerIcons/addNotification')
-          this.$store.commit('headerIcons/addNotificationList', payload)
+          this.$store.commit('notifications/addNotification', payload)
         })
       }
     },

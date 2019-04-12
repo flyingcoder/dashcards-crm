@@ -19,11 +19,12 @@ export default {
   }),
 
   computed: {
-    tasksProgress () {
+    tasksProgress() {
       const { box } = this
-      const completedTasks = box.tasks.filter(t => t.status === 'completed').length
+      const completedTasks = box.tasks.filter(t => t.status === 'completed')
+        .length
       const allTasks = box.tasks.length
-      return (completedTasks * allTasks / 100) * 100
+      return ((completedTasks * allTasks) / 100) * 100
     }
   },
 

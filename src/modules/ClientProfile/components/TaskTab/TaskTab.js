@@ -20,7 +20,7 @@ export default {
   }),
 
   created() {
-    this.$router.replace({ name: 'project_preview')
+    this.$router.replace({ name: 'project_preview' })
     this.$event.$on(
       'task-row-clicked',
       data_from_child => (this.task = data_from_child)

@@ -61,37 +61,31 @@
             <template slot="row-actions" slot-scope="{ item }">
               <td class="text-xs-center">
                 <template v-if="item.company_id">
-                    <v-btn
-                      @click="open_edit_dialog(item)"
-                      fab
-                      small
-                      flat
-                      depressed
-                      slot="activator"
-                      title="Edit"
-                    >
-                      <img src="@/assets/icons/groups/edit.svg" />
-                    </v-btn>
-                    <v-btn
-                      @click="open_delete_dialog(item)"
-                      fab
-                      small
-                      flat
-                      depressed
-                      slot="activator"
-                      title="Delete"
-                    >
-                      <img src="@/assets/icons/groups/delete.svg" />
-                    </v-btn>
-                    <v-btn
-                        fab
-                        flat
-                        small
-                        depressed
-                        title="Security"
-                      >
-                        <v-icon>vpn_key</v-icon>
-                      </v-btn>
+                  <v-btn
+                    @click="open_edit_dialog(item)"
+                    fab
+                    small
+                    flat
+                    depressed
+                    slot="activator"
+                    title="Edit"
+                  >
+                    <img src="@/assets/icons/groups/edit.svg" />
+                  </v-btn>
+                  <v-btn
+                    @click="open_delete_dialog(item)"
+                    fab
+                    small
+                    flat
+                    depressed
+                    slot="activator"
+                    title="Delete"
+                  >
+                    <img src="@/assets/icons/groups/delete.svg" />
+                  </v-btn>
+                  <v-btn fab flat small depressed title="Security">
+                    <v-icon>vpn_key</v-icon>
+                  </v-btn>
                 </template>
               </td>
             </template>

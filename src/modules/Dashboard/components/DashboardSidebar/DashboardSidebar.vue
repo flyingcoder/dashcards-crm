@@ -1,6 +1,6 @@
 <template>
   <v-list class="sidebar">
-    <div class="sidebar-inner" v-for="item in items" :data-nav="item.title">
+    <div class="sidebar-inner" v-for="item in items" :data-nav="item.title" :key="item.action">
       <v-list-tile
         v-if="item.can_view()"
         class="s__list"
@@ -18,7 +18,7 @@
           {{ item.title }}
         </v-list-tile-content>
       </v-list-tile>
-      
+
       <div class="submenu" v-if="item.title === 'Templates'">
         <div class="item">Milestone</div>
         <div class="item" @click="sidebar_item_clicked('reports')">

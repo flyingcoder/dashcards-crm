@@ -96,7 +96,7 @@ export default {
     }
   }
 
-  .chatlist-header{
+  .chatlist-header {
     font-size: 20px;
     text-align: left;
     font-weight: 500;
