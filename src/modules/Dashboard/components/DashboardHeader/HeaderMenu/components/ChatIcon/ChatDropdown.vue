@@ -1,6 +1,6 @@
 <template>
   <div class="chat__inbox">
-    <div class="inbox__title">Message Notifications ({{ chat }})</div>
+    <div class="inbox__title">Message Notifications ({{ chat || 0 }})</div>
     <div class="msg__notif">
       <div
         class="user new__message"

@@ -76,6 +76,8 @@ const mutations = {
 
 const actions = {
   open_conversation({ commit, state }, user) {
+    commit('notifications/removeChat', user, { root: true })
+    commit('headerIcons/removeChatNotification', null, { root: true })
     const index = state.conversations.findIndex(conv => conv.id === user.id)
     if (~index) commit('activate_conversation', index)
     else {

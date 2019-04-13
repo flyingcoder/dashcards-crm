@@ -14,7 +14,11 @@ const mutations = {
   setChat: (state, payload) => (state.chat = payload),
   add_to_chat: (state, payload) => state.chat.unshift(payload),
   setNotification: (state, payload) => (state.notification = payload),
-  addNotification: (state, payload) => state.notification.unshift(payload)
+  addNotification: (state, payload) => state.notification.unshift(payload),
+  removeChat: (state, user) => {
+    const index = state.chat.findIndex(n => n.sender.id === user.id)
+    if (~index) state.chat.splice(index, 1)
+  }
 }
 
 const actions = {
