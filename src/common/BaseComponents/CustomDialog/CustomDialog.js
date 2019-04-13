@@ -4,7 +4,8 @@ export default {
     content: { type: String, default: 'Default Modal Text Content' },
     button1Text: { type: String, default: 'Cancel' },
     button2Text: { type: String, default: 'Delete' },
-    open: Boolean
+    open: Boolean,
+    value: Boolean
   },
 
   data: () => ({
@@ -13,11 +14,18 @@ export default {
   }),
 
   watch: {
+    value: {
+      handler(val) {
+        this.dialog = val
+      },
+      immediate: true
+    },
     open(new_val) {
       this.dialog = new_val
     },
-    dialog(new_val) {
+    dialog(val) {
       this.$emit('update:open', new_val)
+      this.$emit('input', val)
     }
   },
 
