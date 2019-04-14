@@ -27,7 +27,8 @@ export default {
           can_view: () =>
             user.can.hasOwnProperty('projects_own') ||
             user.can.hasOwnProperty('projects') ||
-            user.is_admin
+            user.is_admin,
+          route: '/dashboard/projects'
         },
         {
           title: 'Open Tasks',
@@ -38,7 +39,8 @@ export default {
           can_view: () =>
             user.can.hasOwnProperty('tasks') ||
             user.can.hasOwnProperty('tasks_own') ||
-            user.is_admin
+            user.is_admin,
+          route: null
         },
         {
           title: 'Calendar',
@@ -49,7 +51,8 @@ export default {
           can_view: () =>
             user.can.hasOwnProperty('calendars') ||
             user.can.hasOwnProperty('calendars_own') ||
-            user.is_admin
+            user.is_admin,
+          route: '/dashboard/calendar'
         },
         {
           title: 'Timer',
@@ -60,21 +63,24 @@ export default {
           can_view: () =>
             user.can.hasOwnProperty('timers') ||
             user.can.hasOwnProperty('timers_own') ||
-            user.is_admin
+            user.is_admin,
+          route: '/dashboard/timer'
         },
         {
           title: 'Inbound',
           value: 'inbound',
           color: '#00a7e5',
           icon: require('@/assets/icons/sidebar/templates.svg'),
-          can_view: () => user.is_admin
+          can_view: () => user.is_admin,
+          route: null
         },
         {
           title: 'Outbound',
           value: 'outbound',
           color: '#ff7f7e',
           icon: require('@/assets/icons/sidebar/templates.svg'),
-          can_view: () => user.is_admin
+          can_view: () => user.is_admin,
+          route: null
         }
       ]
     }
@@ -89,6 +95,9 @@ export default {
   },
 
   methods: {
-    ...mapMutations('headerIcons', ['setChat', 'setNotification'])
+    ...mapMutations('headerIcons', ['setChat', 'setNotification']),
+    navigateTo (route) {
+      route && this.$router.push(route)
+    }
   }
 }
