@@ -24,7 +24,7 @@ export default {
       this.dialog = new_val
     },
     dialog(val) {
-      this.$emit('update:open', new_val)
+      this.$emit('update:open', val)
       this.$emit('input', val)
     }
   },
