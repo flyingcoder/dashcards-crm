@@ -5,6 +5,7 @@ import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import GroupsDialog from './components/GroupsDialog/GroupsDialog.vue'
+import PermissionsDialog from './components/PermissionsDialog/PermissionsDialog.vue'
 import isEmpty from 'lodash/isEmpty'
 
 export default {
@@ -13,6 +14,7 @@ export default {
   components: {
     CustomTable,
     GroupsDialog,
+    PermissionsDialog,
     TableHeader,
     DeleteDialog
   },

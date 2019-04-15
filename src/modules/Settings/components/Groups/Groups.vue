@@ -23,6 +23,12 @@
       @delete="delete_item('delete_group')"
     />
 
+    <PermissionsDialog
+      :dialog.sync="permissionDialog"
+      ref="permissionDialog"
+      title="Permission Table Dialog"
+    />
+
     <v-layout row>
       <v-flex xs12>
         <table-header :paths="paths" @click="add_dialog = true" />
@@ -83,7 +89,14 @@
                   >
                     <img src="@/assets/icons/groups/delete.svg" />
                   </v-btn>
-                  <v-btn fab flat small depressed title="Security">
+                  <v-btn
+                    fab
+                    flat
+                    small
+                    depressed
+                    title="Security"
+                    @click="permissionDialog = true"
+                  >
                     <v-icon>vpn_key</v-icon>
                   </v-btn>
                 </template>
