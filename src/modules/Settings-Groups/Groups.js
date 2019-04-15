@@ -97,23 +97,10 @@ export default {
 
   created() {
     const query = { ...this.$route.query }
-    if (query.tab === 'groups') {
-      delete query.tab
-      if (isEmpty(query)) {
-        this.fill_table('get_groups', true)
-      } else {
-        this.update_table_actions(query)
-      }
-    } else {
-      this.$router.replace({
-        name: this.table_config.route_name,
-        query: {
-          tab: 'groups'
-        }
-      })
+    if (isEmpty(query)) {
       this.fill_table('get_groups', true)
+    } else {
+      this.update_table_actions(query)
     }
   },
-
-  methods: {}
 }

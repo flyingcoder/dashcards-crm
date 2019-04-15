@@ -71,5 +71,4 @@
 </template>
 
 <script src="./PermissionsDialog.js"></script>
-
 <style lang="scss" scoped src="./PermissionsDialog.scss"></style>
