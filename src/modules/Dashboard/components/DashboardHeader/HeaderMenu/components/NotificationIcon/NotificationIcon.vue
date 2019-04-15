@@ -21,7 +21,7 @@
 
 <script>
 import HeaderIcon from '@/common/HeaderIcon.vue'
-import NotificationDropdown from './NotificationDropdown.vue'
+import NotificationDropdown from './NotificationDropdown/NotificationDropdown.vue'
 
 export default {
   components: { HeaderIcon, NotificationDropdown },
