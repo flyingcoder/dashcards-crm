@@ -1,5 +1,5 @@
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
-import { apiTo } from '../../api'
+import { getPermissions } from '../../api'
 
 export default {
   name: 'GroupsDialog',
@@ -26,7 +26,7 @@ export default {
   }),
 
   created() {
-    apiTo.getPermissions().then(({ data }) => (this.permissions = data))
+    getPermissions().then(({ data }) => (this.permissions = data))
   },
 
   watch: {
