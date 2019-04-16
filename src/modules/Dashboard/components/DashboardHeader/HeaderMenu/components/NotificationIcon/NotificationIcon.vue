@@ -15,7 +15,7 @@
       />
     </div>
 
-    <NotificationDropdown />
+    <NotificationDropdown :visible="dropdownVisible" />
   </v-menu>
 </template>
 

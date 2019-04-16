@@ -1,5 +1,7 @@
 @import '~@/sass/variables';
 
+@include styledScrollFor('.notification-dropdown')
+
 .notification-dropdown {
   background-color: $lightViolete;
   padding: 10px 0;
@@ -8,6 +10,8 @@
   border-bottom: 1px solid $borderLightGray;
   border-right: 1px solid $borderLightGray;
   border-left: 1px solid $borderLightGray;
+  max-height: 300px;
+  overflow: auto;
 
   &:after {
     content: '';
@@ -31,53 +35,5 @@
     border-bottom: 1px solid $borderLightGray;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-  }
-
-  @include styledScrollFor('.notif');
-
-  .notif {
-    max-height: 300px;
-    overflow: auto;
-  }
-
-  .user {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid $borderLightGray;
-    padding: 5px;
-
-    &:hover {
-      background-color: $white;
-    }
-    
-    @include userImgWithStatus('.user__img');
-
-    .user__img {
-      height: 40px;
-      width: 40px;
-      min-width: 40px;
-    }
-
-    .user__detail {
-      margin-right: 10px;
-      cursor: pointer;
-      width: 220px;
-      font-size: 14px;
-      color: $titleDarkBlue;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis-word;
-
-      .user__name {
-          font-weight: bold;
-      }
-    }
-  }
-  .new__message {
-    background-color: $red;
   }
 }
