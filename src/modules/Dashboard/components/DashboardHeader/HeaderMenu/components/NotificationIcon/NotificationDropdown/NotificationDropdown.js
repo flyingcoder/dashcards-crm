@@ -1,5 +1,6 @@
 import * as apiTo from '../api'
 import { mapGetters } from 'vuex'
+import { cloneDeep } from 'lodash'
 // Components
 import SingleNotification from './SingleNotification.vue'
 
@@ -33,6 +34,14 @@ export default {
         .then(({ data }) =>
           this.$store.commit('notifications/setNotification', data)
         )
+    },
+    notificationClicked(notification, index) {
+      this.$emit('notification-clicked')
+      apiTo.markReadNotification(notification.id).then(() => {
+        let notifications = cloneDeep(this.notifications)
+        notifications[index].read = true
+        this.$store.commit('notifications/setNotification', notifications)
+      })
     }
   }
 }

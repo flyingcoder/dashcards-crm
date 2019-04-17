@@ -1,5 +1,5 @@
 <template functional>
-  <div class="notif" :class="{ read: props.read }">
+  <div class="notif" :class="{ read: props.read }" v-on="listeners">
     <div class="user">
       <div class="user__detail">
         <span class="user__name">
