@@ -1,8 +1,9 @@
-import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 import { getPermissions } from '../../api'
+import { cloneDeep } from 'lodash'
+// Components
+import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 
 export default {
-  name: 'GroupsDialog',
   components: {
     CustomDialog
   },
@@ -17,16 +18,14 @@ export default {
   data: () => ({
     open: false,
     permissions: [],
-    slug: {
-      create: false,
-      view: false,
-      update: false,
-      delete: false
-    }
+    originalPermissions: []
   }),
 
   created() {
-    getPermissions().then(({ data }) => (this.permissions = data))
+    getPermissions().then(({ data }) => {
+      this.permissions = data
+      this.originalPermissions = cloneDeep(data)
+    })
   },
 
   watch: {
@@ -35,35 +34,6 @@ export default {
     },
     open(newVal) {
       this.$emit('update:dialog', newVal)
-    },
-    'permission.slug.create'(val) {
-      if (val) {
-        this.permission.slug.view = true
-      } else {
-        this.permission.slug.update = false
-      }
-    },
-    'permission.slug.update'(val) {
-      if (val) {
-        this.permission.slug.create = true
-      } else {
-        this.permission.slug.delete = false
-      }
-    },
-    'permission.slug.delete'(val) {
-      if (val) {
-        this.permission.slug.update = true
-      }
-    },
-    'permission.slug.view'(val) {
-      if (!val) {
-        this.permission.slug = {
-          create: false,
-          view: false,
-          update: false,
-          delete: false
-        }
-      }
     }
   },
 
@@ -80,6 +50,41 @@ export default {
     },
     snakeCaseToNormal(text) {
       return text.split('_').join(' ')
+    },
+    viewSlug(index, value) {
+      if (!value) {
+        this.$set(this.permissions[index], 'slug', {
+          view: false,
+          create: false,
+          update: false,
+          delete: false
+        })
+      }
+    },
+    createSlug(index, value) {
+      if (value) this.$set(this.permissions[index].slug, 'view', true)
+      else {
+        this.$set(this.permissions[index].slug, 'update', false)
+        this.$set(this.permissions[index].slug, 'delete', false)
+      }
+    },
+    updateSlug(index, value) {
+      if (value) {
+        this.$set(this.permissions[index].slug, 'create', true)
+        this.$set(this.permissions[index].slug, 'view', true)
+      } else this.$set(this.permissions[index].slug, 'delete', false)
+    },
+    deleteSlug(index, value) {
+      let permissions = cloneDeep(this.permissions)
+      if (value) {
+        permissions[index].slug = {
+          view: true,
+          create: true,
+          update: true,
+          delete: true
+        }
+        this.permissions = permissions
+      }
     }
   }
 }
