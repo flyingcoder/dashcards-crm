@@ -1,17 +1,20 @@
 //TODO DRY, uses the same code as ReportsTab
 import makeRequestTo from '@/services/makeRequestTo'
+import apiTo from './api'
 //Components
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 import ReportsList from './components/ReportsList/ReportsList.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import ReportsSection from './components/ReportsSection.vue'
+import DeleteDialog from '@/common/DeleteDialog.vue'
 
 export default {
   components: {
     CustomDialog,
     ReportsList,
     TableHeader,
-    ReportsSection
+    ReportsSection,
+    DeleteDialog
   },
 
   data: () => ({
@@ -26,7 +29,9 @@ export default {
     title: '',
     valid_url: false,
     activateSave: false,
-    activeReport: null
+    activeReport: null,
+    deleteDialog: false,
+    deleteReportId: null
   }),
 
   computed: {
@@ -46,6 +51,11 @@ export default {
   methods: {
     open_dialog() {
       this.$refs.dialog.open_dialog()
+    },
+
+    openDeleteDialog({ report }) {
+      this.deleteReportId = report.id
+      this.deleteDialog = true
     },
 
     iframe_loaded() {
@@ -85,6 +95,23 @@ export default {
           this.reports.push(data)
         })
         .finally(() => this.$store.commit('set_custom_loader', false))
+    },
+
+    deleteReport() {
+      this.$store.commit('set_custom_loader', true)
+      apiTo
+        .deleteReport(this.deleteReportId)
+        .then(() => {
+          const index = this.deleteReportId
+          if (~index) {
+            this.reports.splice(index, 1)
+            this.$event.$emit('open_snackbar', 'Report deleted successfully')
+          }
+        })
+        .finally(() => {
+          this.deleteDialog = false
+          this.$store.commit('set_custom_loader', false)
+        })
     }
   }
 }

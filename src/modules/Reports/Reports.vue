@@ -1,5 +1,13 @@
 <template>
   <v-layout row wrap class="reports">
+
+    <DeleteDialog
+      :open-dialog.sync="deleteDialog"
+      title="Delete Report"
+      text-content="Are you sure you want to delete this template?"
+      @delete="deleteReport"
+    />
+
     <v-flex xs12>
       <table-header :paths="paths" :noButton="true" />
     </v-flex>
@@ -11,6 +19,7 @@
         :loading="loading"
         :active-report="activeReport"
         @row-clicked="previewRowUrl"
+        @delete="openDeleteDialog"
       />
     </v-flex>
 
