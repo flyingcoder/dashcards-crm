@@ -96,7 +96,7 @@ export default {
 
   methods: {
     ...mapMutations('headerIcons', ['setChat', 'setNotification']),
-    navigateTo (route) {
+    navigateTo(route) {
       route && this.$router.push(route)
     }
   }

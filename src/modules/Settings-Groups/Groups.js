@@ -102,5 +102,5 @@ export default {
     } else {
       this.update_table_actions(query)
     }
-  },
+  }
 }

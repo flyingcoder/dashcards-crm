@@ -21,6 +21,8 @@
           class="report-item"
           v-for="(report, index) of reports"
           :key="report.id"
+          :class="{ active: activeReport && activeReport.id === report.id }"
+          @click="previewRowUrl(index)"
         >
           <v-flex xs3 class="reports-id">{{ index + 1 }}</v-flex>
           <v-flex xs9 class="reports-title text-cap">{{ report.title }}</v-flex>

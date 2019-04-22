@@ -181,7 +181,11 @@
           </v-layout>
 
           <div class="text-fields">
-            <TextField :value.sync="project_title" label="Project Title" color="#657186" />
+            <TextField
+              :value.sync="project_title"
+              label="Project Title"
+              color="#657186"
+            />
 
             <div class="project__description">
               <quill-editor

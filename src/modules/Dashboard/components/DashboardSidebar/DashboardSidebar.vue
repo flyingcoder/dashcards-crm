@@ -1,6 +1,11 @@
 <template>
   <v-list class="sidebar">
-    <div class="sidebar-inner" v-for="item in items" :data-nav="item.title" :key="item.action">
+    <div
+      class="sidebar-inner"
+      v-for="item in items"
+      :data-nav="item.title"
+      :key="item.action"
+    >
       <v-list-tile
         v-if="item.can_view()"
         class="s__list"

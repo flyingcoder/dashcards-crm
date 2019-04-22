@@ -11,7 +11,7 @@ export default {
       { id: 2, name: 'Groups', route: '/dashboard/settings/groups' },
       { id: 3, name: 'General' },
       { id: 4, name: 'Company' },
-      { id: 5, name: 'Invoice' },
+      { id: 5, name: 'Invoice' }
     ]
-  }),
+  })
 }
