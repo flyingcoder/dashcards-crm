@@ -31,10 +31,10 @@ export default {
 .notif {
   max-height: 300px;
   overflow: auto;
-  background: #b3e0ff;
+  background: $blue-2;
 
   &.read {
-    background: #e6f5ff;
+    background: $lightBlue-2;
   }
 
   .user {
@@ -42,7 +42,7 @@ export default {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid $borderLightGray;
+    border-bottom: 1px solid $borderGray;
     padding: 5px;
 
     &:hover {

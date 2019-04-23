@@ -63,20 +63,17 @@ export default {
 @import '~@/sass/variables';
 
 .chat__inbox {
-  background-color: $lightViolete;
+  background-color: $lightBlue-2;
   padding: 10px 0;
   width: 300px;
   margin-top: 15px;
-  border-bottom: 1px solid $borderLightGray;
-  border-right: 1px solid $borderLightGray;
-  border-left: 1px solid $borderLightGray;
 
   &:after {
     content: '';
     position: absolute;
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
-    border-bottom: 15px solid $lightViolete;
+    border-bottom: 15px solid $lightBlue-2;
     border-top: 15px solid transparent;
     right: 50%;
     top: 0;
@@ -87,10 +84,8 @@ export default {
   .inbox__title {
     padding: 5px;
     color: $titleDarkBlue;
-    padding: 10px 15px;
     font-weight: 500;
-    background-color: $lightViolete;
-    border-bottom: 1px solid $borderLightGray;
+    border-bottom: 1px solid $borderGray;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
   }
@@ -105,11 +100,11 @@ export default {
       display: flex;
       flex-direction: row;
       align-items: center;
-      border-bottom: 1px solid $borderLightGray;
+      border-bottom: 1px solid $borderGray;
       padding: 5px;
 
       &:hover {
-        background-color: $white;
+        background-color: $lightBlue-2;
       }
 
       @include userImgWithStatus('.user__img');
@@ -139,13 +134,13 @@ export default {
           display: inline-block;
           text-overflow: ellipsis;
           white-space: nowrap;
-          color: $darkGray;
+          color: $titleDarkBlue;
           font-size: 12px;
         }
       }
     }
     .new__message {
-      background-color: $lightViolete;
+      background-color: $blue-2;
     }
   }
 }
