@@ -1,11 +1,10 @@
 <template>
   <div class="project-details">
-    <TableHeader :paths="paths" :noButton="true" />
-    <CustomDialog
-      title="Select service"
-      v-model="serviceDialog"
-      @button1="serviceDialog = false"
-    >
+    <TableHeader :paths="paths" @click="addNewQuestion" />
+    <CustomDialog title="Select service" v-model="serviceDialog">
+      <template #cancel-icon>
+        <span></span>
+      </template>
       <template #content>
         <v-select
           v-model="service.selected"
@@ -16,10 +15,18 @@
           label="Select Service"
         ></v-select>
       </template>
-      <template #button2>
+      <template #entire-actions>
         <v-btn :disabled="!service.selected" @click="save">Save</v-btn>
       </template>
     </CustomDialog>
+
+    <div class="question-fields">
+      <QuestionsFields
+        :service-id="service.selected"
+        v-if="!serviceDialog"
+        :sections="dynamicSections"
+      />
+    </div>
   </div>
 </template>
 

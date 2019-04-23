@@ -1,5 +1,5 @@
 export const projectDetails = {
   path: 'project-details',
   name: 'projectDetails',
-  component: () => import('@/modules/ProjectDetails/ProjectDetails.vue')
+  component: () => import('@/modules/Forms-ProjectDetails/ProjectDetails.vue')
 }

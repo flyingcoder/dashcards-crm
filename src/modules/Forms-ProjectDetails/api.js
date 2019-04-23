@@ -7,3 +7,7 @@ export const getServices = () => {
 export const postService = serviceId => {
   return request.get(`api/forms/project-details/${serviceId}`)
 }
+
+export const postFields = payload => {
+  return request.post(`api/forms/project-details`, payload)
+}
