@@ -3,8 +3,8 @@
     <v-layout row v-for="(section, index) of dynamicSections" :key="index">
       <v-flex xs12>
         <div class="field">
-          <v-layout row>
-            <v-flex xs8 class="pr-5">
+          <v-layout row align-center>
+            <v-flex xs7 class="pr-5">
               <v-text-field
                 :label="section.questionField.placeholder"
                 v-model="section.questionField.text"
@@ -18,6 +18,12 @@
                 :items="section.items"
                 return-object
               ></v-select>
+            </v-flex>
+
+            <v-flex xs1>
+              <v-btn round icon @click="removeQuestion(index)">
+                <v-icon>delete</v-icon>
+              </v-btn>
             </v-flex>
           </v-layout>
 
@@ -220,6 +226,10 @@ export default {
         service_id: this.serviceId,
         fields: this.dynamicSections
       })
+    },
+    removeQuestion(index) {
+      this.dynamicSections.splice(index, 1)
+      this.$emit('update:sections', this.dynamicSections)
     }
   }
 }

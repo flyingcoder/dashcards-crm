@@ -24,7 +24,7 @@
       <QuestionsFields
         :service-id="service.selected"
         v-if="!serviceDialog"
-        :sections="dynamicSections"
+        :sections.sync="dynamicSections"
       />
     </div>
   </div>
