@@ -26,7 +26,8 @@ export default {
 
   data: () => ({
     init: true,
-    paths: [{ text: 'Dashboard', disabled: true, router_name: null }]
+    paths: [{ text: 'Dashboard', disabled: true, router_name: null }],
+    isRequestInProgress: false
   }),
 
   computed: {
@@ -81,10 +82,14 @@ export default {
     ...mapActions('cards', ['fill_cards', 'update_cards']),
     ...mapMutations('cards', ['set_cards']),
     close(id) {
+      if (this.isRequestInProgress) return
+      this.isRequestInProgress = true
       const card_ids = this.cards
         .filter(card => card.id !== id)
         .map(card => card.id)
-      this.update_cards({ dashitem_id: card_ids })
+      this.update_cards({ dashitem_id: card_ids }).finally(
+        () => (this.isRequestInProgress = false)
+      )
     },
     can_view_tasks(user) {
       return (
