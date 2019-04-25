@@ -102,7 +102,9 @@ export default {
       apiTo
         .deleteReport(this.deleteReportId)
         .then(() => {
-          const index = this.deleteReportId
+          const index = this.reports.findIndex(
+            r => r.id === this.deleteReportId
+          )
           if (~index) {
             this.reports.splice(index, 1)
             this.$event.$emit('open_snackbar', 'Report deleted successfully')
