@@ -21,6 +21,7 @@ export default {
   },
 
   data: () => ({
+    isRequestInProgress: false,
     content: null,
     loading: false,
     all_comments: [],
@@ -72,13 +73,15 @@ export default {
     },
 
     add_new_comment() {
-      if (!this.comment) return
+      if (!this.comment || this.isRequestInProgress) return
+      this.isRequestInProgress = true
       request
         .post(`api/task/${this.task.id}/comments`, { body: this.comment })
         .then(response => {
           this.comment = ''
           this.all_comments.push(response.data)
         })
+        .finally(() => (this.isRequestInProgress = false))
     },
 
     emoji_added(emoji) {
