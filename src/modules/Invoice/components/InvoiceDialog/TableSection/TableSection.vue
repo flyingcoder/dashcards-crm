@@ -48,7 +48,7 @@
           color="#657186"
           hide-details
           :value="calculate_amount(active_row)"
-          readonly
+          disabled
         />
         <v-btn
           class="action"
@@ -70,7 +70,7 @@
           flat
           color="#657186"
           hide-details
-          :readonly="dialog.type === 'view'"
+          :disabled="dialog.type === 'view'"
           :value="row.descriptions"
           @input="row_updated('descriptions', $event, index)"
         />
@@ -83,7 +83,7 @@
           flat
           color="#657186"
           hide-details
-          :readonly="dialog.type === 'view'"
+          :disabled="dialog.type === 'view'"
           :value="row.rate"
           @input="row_updated('rate', $event, index)"
         />
@@ -96,7 +96,7 @@
           flat
           color="#657186"
           hide-details
-          :readonly="dialog.type === 'view'"
+          :disabled="dialog.type === 'view'"
           :value="row.hours"
           @input="row_updated('hours', $event, index)"
         />
@@ -108,7 +108,7 @@
           color="#657186"
           hide-details
           :value="row.amount"
-          readonly
+          disabled
         />
         <v-btn
           v-if="dialog.type !== 'view'"
