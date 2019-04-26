@@ -1,11 +1,12 @@
 <template>
   <div class="left-side">
-    <div class="notes">
+    <div class="notes"
+        v-show="!isEmptyField(dialog.type === 'view', notes)">
       <div class="field__label">Notes</div>
       <v-textarea
         label="Notes - any revelant information not already covered"
         :value="notes"
-        :readonly="dialog.type === 'view'"
+        :disabled="dialog.type === 'view'"
         class="textarea__field"
         flat
         solo
@@ -14,12 +15,13 @@
         @input="update_textarea($event, 'notes')"
       />
     </div>
-    <div class="Terms">
+    <div class="Terms"
+        v-show="!isEmptyField(dialog.type === 'view', terms)">
       <div class="field__label">Terms</div>
       <v-textarea
         label="Terms and conditions - late fees, payment methods, delivery schedule"
         :value="terms"
-        :readonly="dialog.type === 'view'"
+        :disabled="dialog.type === 'view'"
         class="textarea__field"
         flat
         solo
@@ -44,10 +46,29 @@ export default {
   methods: {
     update_textarea(new_val, field) {
       this.$store.commit('invoice/set_textarea', { new_val, field })
+    },
+    isEmptyField(view, value){
+      if(view){
+        if (!value){
+          return true
+        }
+      }
     }
   }
 }
 </script>
+
+<style scoped>
+>>> .theme--light.v-input--is-disabled .v-label, >>> .theme--light.v-input--is-disabled input, >>> .theme--light.v-input--is-disabled textarea{
+    color: #657186;
+}
+>>> .theme--light.v-select .v-chip--disabled, >>> .theme--light.v-select.v-input--is-disabled .v-select__selections, >>> .theme--light.v-select .v-select__selection--disabled{
+    color: #657186;
+}
+>>> .theme--light.v-input:not(.v-input--is-disabled) input, >>> .theme--light.v-input:not(.v-input--is-disabled) textarea{
+  color: #657186;
+}
+</style>
 
 <style lang="scss" scoped>
 @import '~@/sass/_variables';

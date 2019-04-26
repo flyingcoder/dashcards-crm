@@ -9,7 +9,7 @@
       :value="tax.value"
       :classes="['tax', 'field']"
       :show="tax.show"
-      :readonly="dialog.type === 'view'"
+      :disabled="dialog.type === 'view'"
       @input="set_field({ new_val: $event, field: 'tax' })"
       @toggle-symbol="toggle_symbol('tax')"
       @toggle_visibility="toggle_visibility({ new_val: $event, field: 'tax' })"
@@ -139,6 +139,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+>>> .theme--light.v-input--is-disabled .v-label, >>> .theme--light.v-input--is-disabled input, >>> .theme--light.v-input--is-disabled textarea{
+    color: #657186;
+}
+>>> .theme--light.v-select .v-chip--disabled, >>> .theme--light.v-select.v-input--is-disabled .v-select__selections, >>> .theme--light.v-select .v-select__selection--disabled{
+    color: #657186;
+}
+</style>
 
 <style lang="scss" scoped>
 @import '~@/sass/_variables';

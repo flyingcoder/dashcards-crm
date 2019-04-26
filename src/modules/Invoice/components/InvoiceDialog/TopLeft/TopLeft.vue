@@ -25,7 +25,7 @@
     <div class="bill__from">
       <div class="form__label">Bill From:</div>
       <v-textarea
-        :readonly="dialog.type === 'view'"
+        :disabled="dialog.type === 'view'"
         class="textfield"
         label="Who is this invoice from"
         v-model="billed_from"
@@ -39,7 +39,7 @@
     <div class="bill__to">
       <div class="form__label">Bill To:</div>
       <v-text-field
-        :readonly="dialog.type === 'view'"
+        :disabled="dialog.type === 'view'"
         class="textfield"
         label="Who is this invoice to"
         v-model="billed_to"
@@ -107,6 +107,18 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+>>> .theme--light.v-input--is-disabled .v-label, >>> .theme--light.v-input--is-disabled input, >>> .theme--light.v-input--is-disabled textarea{
+    color: #657186;
+}
+>>> .theme--light.v-select .v-chip--disabled, >>> .theme--light.v-select.v-input--is-disabled .v-select__selections, >>> .theme--light.v-select .v-select__selection--disabled{
+    color: #657186;
+}
+>>> .theme--light.v-input:not(.v-input--is-disabled) input, >>> .theme--light.v-input:not(.v-input--is-disabled) textarea{
+  color: #657186;
+}
+</style>
 
 <style lang="scss" scoped>
 @import '~@/sass/variables';

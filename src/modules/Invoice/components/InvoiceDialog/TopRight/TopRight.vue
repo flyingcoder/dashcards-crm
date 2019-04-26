@@ -2,7 +2,7 @@
   <v-layout column align-end wrap class="right__side">
     <div class="invoice__title">
       <v-text-field
-        :readonly="dialog.type === 'view'"
+        :disabled="dialog.type === 'view'"
         class="titlefield"
         color="#657186"
         solo
@@ -14,24 +14,23 @@
     </div>
 
     <div class="field" v-if="!(dialog.type === 'create')">
-      <div class="field__label">Invoice ID</div>
+      <div class="field__label">Invoice ID:</div>
       <v-text-field
-        :readonly="dialog.type === 'view'"
+        :disabled="dialog.type === 'view'"
         class="textfield"
         color="#657186"
         solo
         hide-details
         flat
         placeholder="#"
-        readonly
         :value="invoice_id"
       ></v-text-field>
     </div>
 
     <div class="invoice__type field">
-      <div class="field__label">Select Type</div>
+      <div class="field__label">{{dialog.type === 'view' ? 'Type:' : 'Select Type:'}}</div>
       <v-select
-        :readonly="dialog.type === 'view'"
+        :disabled="dialog.type === 'view'"
         class="textfield"
         solo
         hide-details
@@ -44,9 +43,9 @@
     </div>
 
     <div class="field" v-if="type === 'hourly'">
-      <div class="field__label">Select Project</div>
+      <div class="field__label">{{dialog.type === 'view' ? 'Project:' : 'Select Project:'}}</div>
       <v-select
-        :readonly="dialog.type === 'view'"
+        :disabled="dialog.type === 'view'"
         class="textfield"
         solo
         hide-details
@@ -73,7 +72,7 @@
           solo
           hide-details
           color="#657186"
-          readonly
+          disabled
         ></v-text-field>
 
         <date-picker
@@ -101,7 +100,7 @@
           solo
           hide-details
           color="#657186"
-          readonly
+          disabled
         ></v-text-field>
 
         <date-picker
@@ -180,9 +179,23 @@ export default {
 }
 </script>
 
+<style scoped>
+>>> .theme--light.v-input--is-disabled .v-label, >>> .theme--light.v-input--is-disabled input, >>> .theme--light.v-input--is-disabled textarea{
+    color: #657186;
+}
+>>> .theme--light.v-select .v-chip--disabled, >>> .theme--light.v-select.v-input--is-disabled .v-select__selections, >>> .theme--light.v-select .v-select__selection--disabled{
+    color: #657186;
+}
+>>> .theme--light.v-select .v-select__selections{
+  color: #657186;
+}
+>>> .theme--light.v-input:not(.v-input--is-disabled) input, >>> .theme--light.v-input:not(.v-input--is-disabled) textarea{
+  color: #657186;
+}
+</style>
+
 <style lang="scss" scoped>
 @import '~@/sass/_variables';
-
 .right__side {
   .invoice__title {
     color: $textDark;
