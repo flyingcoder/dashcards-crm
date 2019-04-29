@@ -2,6 +2,7 @@ export default {
   name: 'NotesList',
   props: {
     notes: Array,
-    loading: Boolean
+    loading: Boolean,
+    activeNote: Object
   }
 }

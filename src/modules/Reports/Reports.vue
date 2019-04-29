@@ -1,6 +1,5 @@
 <template>
   <v-layout row wrap class="reports">
-
     <DeleteDialog
       :open-dialog.sync="deleteDialog"
       title="Delete Report"

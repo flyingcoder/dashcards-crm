@@ -13,6 +13,7 @@
         <notes-list
           :notes="notes"
           :loading="loading"
+          :active-note="selected_note"
           @clicked="change_selected"
           @toggle-pin="toggle_pin"
         />
