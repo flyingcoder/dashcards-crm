@@ -6,7 +6,9 @@
       <div class="table-header">
         <div class="reports-id">#</div>
         <div class="reports-title">Title</div>
-        <div class="text-xs-center"><img src="@/assets/icons/table/menu.svg" /></div>
+        <div class="text-xs-center">
+          <img src="@/assets/icons/table/menu.svg" />
+        </div>
       </div>
 
       <v-progress-linear
@@ -28,7 +30,11 @@
           <div class="reports-id">{{ index + 1 }}</div>
           <div class="reports-title text-cap">{{ report.title }}</div>
 
-          <v-btn class="reports-action" icon @click.stop="actionClicked(report, index, 'delete')">
+          <v-btn
+            class="reports-action"
+            icon
+            @click.stop="actionClicked(report, index, 'delete')"
+          >
             󠁿󠁿󠁿<span>🗙</span>
           </v-btn>
         </div>

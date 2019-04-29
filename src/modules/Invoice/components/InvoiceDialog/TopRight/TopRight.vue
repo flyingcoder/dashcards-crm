@@ -28,7 +28,9 @@
     </div>
 
     <div class="invoice__type field">
-      <div class="field__label">{{dialog.type === 'view' ? 'Type:' : 'Select Type:'}}</div>
+      <div class="field__label">
+        {{ dialog.type === 'view' ? 'Type:' : 'Select Type:' }}
+      </div>
       <v-select
         :disabled="dialog.type === 'view'"
         class="textfield"
@@ -43,7 +45,9 @@
     </div>
 
     <div class="field" v-if="type === 'hourly'">
-      <div class="field__label">{{dialog.type === 'view' ? 'Project:' : 'Select Project:'}}</div>
+      <div class="field__label">
+        {{ dialog.type === 'view' ? 'Project:' : 'Select Project:' }}
+      </div>
       <v-select
         :disabled="dialog.type === 'view'"
         class="textfield"
@@ -180,16 +184,21 @@ export default {
 </script>
 
 <style scoped>
->>> .theme--light.v-input--is-disabled .v-label, >>> .theme--light.v-input--is-disabled input, >>> .theme--light.v-input--is-disabled textarea{
-    color: #657186;
-}
->>> .theme--light.v-select .v-chip--disabled, >>> .theme--light.v-select.v-input--is-disabled .v-select__selections, >>> .theme--light.v-select .v-select__selection--disabled{
-    color: #657186;
-}
->>> .theme--light.v-select .v-select__selections{
+>>> .theme--light.v-input--is-disabled .v-label,
+>>> .theme--light.v-input--is-disabled input,
+>>> .theme--light.v-input--is-disabled textarea {
   color: #657186;
 }
->>> .theme--light.v-input:not(.v-input--is-disabled) input, >>> .theme--light.v-input:not(.v-input--is-disabled) textarea{
+>>> .theme--light.v-select .v-chip--disabled,
+>>> .theme--light.v-select.v-input--is-disabled .v-select__selections,
+>>> .theme--light.v-select .v-select__selection--disabled {
+  color: #657186;
+}
+>>> .theme--light.v-select .v-select__selections {
+  color: #657186;
+}
+>>> .theme--light.v-input:not(.v-input--is-disabled) input,
+>>> .theme--light.v-input:not(.v-input--is-disabled) textarea {
   color: #657186;
 }
 </style>
