@@ -120,6 +120,7 @@ export default {
     },
 
     upload_image(image) {
+      console.log('this');
       let formData = new FormData()
       formData.append('file', image)
       this.loading = true

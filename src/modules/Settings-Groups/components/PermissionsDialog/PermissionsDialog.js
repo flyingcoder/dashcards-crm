@@ -43,6 +43,7 @@ export default {
     },
     save() {
       this.open = false
+      console.log(this.permissions);
     },
     clearAndClose() {
       Object.assign(this.$data, this.$options.data.apply(this))
