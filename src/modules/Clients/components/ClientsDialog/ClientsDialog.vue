@@ -20,6 +20,8 @@
           ></v-text-field>
         </v-flex>
 
+        <v-flex xs12><p class="owner">Owner's Fullname</p> </v-flex>
+
         <v-flex xs12 sm6>
           <v-text-field
             class="dialog__textfield d-field"
@@ -42,11 +44,22 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex xs12 sm6>
+        <v-flex xs12>
           <v-text-field
             class="dialog__textfield d-field"
             label="Location"
             v-model.trim="location"
+            box
+            hide-details
+            color="#657186"
+          ></v-text-field>
+        </v-flex>
+
+        <v-flex xs12 sm6>
+          <v-text-field
+            class="dialog__textfield d-field"
+            label="Contact Name"
+            v-model.trim="contact_name"
             box
             hide-details
             color="#657186"

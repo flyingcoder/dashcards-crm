@@ -22,6 +22,7 @@ export default {
     last_name: null,
     company_name: null,
     telephone: null,
+    contact_name: null,
     email: null,
     status: null,
     location: null,
@@ -58,6 +59,7 @@ export default {
         last_name: this.last_name,
         company_name: this.company_name,
         telephone: this.telephone,
+        contact_name: this.contact_name,
         email: this.email,
         status: this.status,
         location: this.location
@@ -79,14 +81,15 @@ export default {
       this.first_name = new_fields.first_name
       this.last_name = new_fields.last_name
       this.company_name = new_fields.company_name
-      this.telephone = new_fields.telephone
+      this.telephone = new_fields.telephone,
+      this.contact_name = new_fields.contact_name,
       this.email = new_fields.email
       this.status = new_fields.status
       this.location = new_fields.location
     },
 
     clear_and_close() {
-      this.first_name = this.last_name = this.company_name = this.location = ''
+      this.first_name = this.last_name = this.company_name = this.location = this.contact_name = ''
       this.telephone = this.email = this.status = ''
       this.password = this.repeat_password = ''
       this.cancel() //close the modal

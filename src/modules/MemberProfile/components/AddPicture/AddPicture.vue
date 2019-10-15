@@ -4,6 +4,7 @@
       ref="picture_dialog"
       title="Upload New Profile Picture"
       button2-text="Save"
+      @button1="cancel"
       :open.sync="dialog"
     >
       <template #content>
@@ -143,6 +144,9 @@ export default {
       }
       this.$refs.picture_dialog.clear_and_close()
       Object.assign(this.$data, this.$options.data.apply(this))
+    },
+    cancel(){
+      this.dialog = false
     }
   }
 }

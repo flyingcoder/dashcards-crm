@@ -145,6 +145,10 @@ export default {
       this.$refs.edit_task_dialog.open_dialog()
     },
 
+    closeEditDialog() {
+      this.$refs.edit_task_dialog.cancel()
+    },
+
     open_delete_task_dialog() {
       this.delete_dialog = true
     }

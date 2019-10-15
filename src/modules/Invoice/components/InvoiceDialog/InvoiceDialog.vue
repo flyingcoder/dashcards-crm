@@ -4,7 +4,8 @@
       <v-dialog
         v-model="invoice_dialog"
         fullscreen
-        persist
+        persistent
+        no-click-animation
         hide-overlay
         transition="dialog-bottom-transition"
       >

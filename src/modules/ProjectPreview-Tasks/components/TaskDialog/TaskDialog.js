@@ -47,6 +47,7 @@ export default {
         return this.dialog
       },
       set(val) {
+        !val && this.$emit('close')
         this.$emit('update:dialog', val)
       }
     }
@@ -71,7 +72,7 @@ export default {
 
   methods: {
     cancel() {
-      this.open = false
+      this.dialog = false
     },
 
     open_dialog() {
