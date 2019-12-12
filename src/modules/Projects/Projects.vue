@@ -41,15 +41,14 @@
       @view="navigate_to_view_project($event.id)"
     >
       <template slot="custom-item" slot-scope="item">
-        <td
-          class="text-cap clickable-td"
-          @click="navigate_to_view_project(item.item.id)"
-        >
-          {{ item.item.service_name }}
+        <td class="text-cap clickable-td"  
+        @click="navigate_to_view_project(item.item.id)">
+          {{ item.item.title }}
         </td>
         <td class="text-cap">{{ item.item.business_name }}</td>
+        <td class="text-cap">{{ item.item.service_name }}
+        </td>
         <td class="text-cap">{{ item.item.manager_name }}</td>
-        <td class="text-cap">Canada</td>
         <td>{{ item.item.started_at | bzFromNow }}</td>
         <td>
           <v-progress-linear

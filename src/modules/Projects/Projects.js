@@ -27,8 +27,8 @@ export default {
     headers: [
       {
         id: 1,
-        text: 'Service',
-        value: 'service',
+        text: 'Project Title',
+        value: 'title',
         sortable: true,
         align: 'left'
       },
@@ -41,15 +41,15 @@ export default {
       },
       {
         id: 3,
-        text: 'Created By',
-        value: 'created_by',
+        text: 'Service',
+        value: 'service',
         sortable: true,
         align: 'left'
       },
       {
         id: 4,
-        text: 'Location',
-        value: 'location',
+        text: 'Created By',
+        value: 'created_by',
         sortable: true,
         align: 'left'
       },

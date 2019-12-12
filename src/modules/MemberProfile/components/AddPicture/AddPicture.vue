@@ -21,7 +21,7 @@
             v-else
             ref="dropzone"
             :duplicateCheck="true"
-            acceptedFiles="image/*"
+            acceptedFiles="validFileType"
             :options="dropzoneOptions"
             :useCustomSlot="true"
             dictFileTooBig="File too big"
@@ -60,6 +60,7 @@ export default {
     file_uploaded: false,
     image64: null,
     loading: false,
+    validFileType:".jpg,.png,.jpeg",
     croppie: {
       options: {
         viewport: { width: 200, height: 200, type: 'circle' },
@@ -109,11 +110,20 @@ export default {
 
     file_added([file]) {
       const reader = new FileReader()
-      reader.onload = () => {
-        this.image64 = reader.result
-        this.file_uploaded = true
+      if(this.validFileType.indexOf(file.type) > -1) {
+        reader.onload = () => {
+          this.image64 = reader.result
+          this.file_uploaded = true
+        }
+        reader.readAsDataURL(file)
       }
-      reader.readAsDataURL(file)
+      this.$event.$emit(
+        'open_snackbar',
+        'Not a valid image!',
+        'error'
+      )
+      this.dialog = false
+      this.file_uploaded = false
     },
 
     get_cropped_image() {
@@ -121,7 +131,7 @@ export default {
     },
 
     upload_image(image) {
-      console.log('this');
+      
       let formData = new FormData()
       formData.append('file', image)
       this.loading = true
@@ -147,6 +157,7 @@ export default {
     },
     cancel(){
       this.dialog = false
+      this.file_uploaded = false
     }
   }
 }
