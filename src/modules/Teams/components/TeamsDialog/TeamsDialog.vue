@@ -97,7 +97,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex xs12 sm6 v-if="!isEditDialog">
+        <!-- <v-flex xs12 sm6 v-if="!isEditDialog">
           <v-text-field
             class="dialog__password d-field"
             color="#667187"
@@ -128,13 +128,13 @@
             :type="show_repeat_password ? 'text' : 'password'"
             v-model.trim="repeat_password"
             @click:append="show_repeat_password = !show_repeat_password"
-          ></v-text-field>
-        </v-flex>
+          ></v-text-field> 
+        </v-flex>-->
       </v-layout>
 
       <div class="dialog-description">
-        <small>Password is at least 6 character with numbers and letters</small
-        ><br />
+        <!-- <small>Password is at least 6 character with numbers and letters</small
+        ><br /> -->
         <small>All fields are required</small>
       </div>
     </template>

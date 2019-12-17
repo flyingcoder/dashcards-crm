@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Pusher from 'pusher-js'
+import { settings } from '@/variables'
 
 let pusher = null
 
@@ -8,7 +9,7 @@ export const broadcast = {
     pusher = new Pusher('6857db1d25c87cb2e20d', {
       cluster: 'ap1',
       encrypted: true,
-      authEndpoint: 'https://api.bizzooka.com/api/broadcasting/auth',
+      authEndpoint: settings.apiHostBaseURL + '/api/broadcasting/auth',
       auth: {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token')
