@@ -47,6 +47,7 @@ import Loader from '@/common/BaseComponents/Loader.vue'
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 import CustomDropzone from '@/common/CustomDropzone.vue'
 import CropImage from '@/common/CropImage.vue'
+import { settings } from '@/variables'
 
 export default {
   components: {
@@ -96,7 +97,7 @@ export default {
         maxFiles: 1,
         thumbnailWidth: 150,
         addRemoveLinks: true,
-        url: `https://api.bizzooka.com/api/company/clients/${this.user_id}`,
+        url: settings.apiHostBaseURL + `/api/company/clients/${this.user_id}`,
         headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
         method: 'put',
         autoProcessQueue: false

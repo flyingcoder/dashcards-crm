@@ -7,6 +7,7 @@ import { notFound } from './routes/notFound'
 import { login } from './routes/login'
 import { signup } from './routes/signup'
 import { forgotPassword } from './routes/forgotPassword'
+import { setPassword } from './routes/setPassword'
 import { pricing } from './routes/pricing'
 import { dashboard } from './routes/dashboard'
 import { clients } from './routes/clients'
@@ -68,6 +69,7 @@ export default new Router({
       ]
     },
 
+    setPassword, // path: /set-password
     home, // path: /
     checkout, // path: /checkout
     notFound, // path: /404

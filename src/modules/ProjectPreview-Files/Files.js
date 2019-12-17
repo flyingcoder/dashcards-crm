@@ -7,6 +7,7 @@ import CustomDropzone from '@/common/CustomDropzone.vue'
 import LinkDialog from './components/LinkDialog.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import ToolbarItem from './components/ToolbarItem.vue'
+import { settings } from '@/variables'
 
 export default {
   name: 'FilesTab',
@@ -98,7 +99,7 @@ export default {
         thumbnailWidth: 150,
         timeout: 500000,
         addRemoveLinks: true,
-        url: `https://api.bizzooka.com/api/projects/${this.id}/file`,
+        url: settings.apiHostBaseURL + `/api/projects/${this.id}/file`,
         headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
       }
     },
