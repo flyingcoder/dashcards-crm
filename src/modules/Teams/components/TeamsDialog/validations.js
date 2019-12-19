@@ -8,6 +8,7 @@ export const validations = {
     group_name: { required },
     job_title: { required },
     email: { required, email },
+    rate: { numeric },
     contact_number: { required, numeric }
 
     // ,password: {

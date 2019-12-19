@@ -135,8 +135,33 @@
       <div class="dialog-description">
         <!-- <small>Password is at least 6 character with numbers and letters</small
         ><br /> -->
-        <small>All fields are required</small>
+        <small>Above fields are required</small>
       </div>
+
+      <v-layout wrap v-show="!loading">
+        <v-flex xs12 sm6>
+            <v-text-field
+              class="dialog__textfield d-field"
+              color="#667187"
+              box
+              hide-details
+              label="Address"
+              v-model.trim="address"
+            ></v-text-field>
+        </v-flex>
+
+        <v-flex xs12 sm6>
+            <v-text-field
+              class="dialog__textfield d-field"
+              color="#667187"
+              box
+              hide-details
+              label="$ / Hour"
+              v-model.trim="rate"
+            ></v-text-field>
+        </v-flex>
+      </v-layout>
+
     </template>
 
     <template slot="button2">
