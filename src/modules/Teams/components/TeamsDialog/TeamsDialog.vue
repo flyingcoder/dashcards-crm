@@ -156,7 +156,10 @@
               color="#667187"
               box
               hide-details
-              label="$ / Hour"
+              label="Rate / Hour"
+              prefix="$"
+              @blur="on_blur_field('rate')"
+              :error="$v.rate.$error"
               v-model.trim="rate"
             ></v-text-field>
         </v-flex>

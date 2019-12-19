@@ -15,13 +15,13 @@
         <div class="job-title">{{ user.job_title }}</div>
         <div class="address">
           <v-icon>place</v-icon>
-          {{ user.address }}
+          {{ user.meta.address.value }}
         </div>
       </div>
 
       <div class="info-div">
         <div class="hour">Per Hour</div>
-        <div class="value">{{ user.hourly_rate }}</div>
+        <div class="value">{{ user.meta.rate.value }}</div>
       </div>
     </template>
   </div>
