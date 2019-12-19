@@ -6,7 +6,7 @@
 
     <template v-else>
       <div class="info-div">
-        <div class="hour">Total Hours This Week</div>
+        <div class="hour">Time Worked This Week</div>
         <div class="value">{{ user.week_hours }}</div>
       </div>
 
