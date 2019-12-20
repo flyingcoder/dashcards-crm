@@ -13,7 +13,7 @@
       <div class="info-div">
         <h4 class="name">{{ user.first_name }} {{ user.last_name }}</h4>
         <div class="job-title">{{ user.job_title }}</div>
-        <div class="address">
+        <div class="address"  v-if="user.meta.address">
           <v-icon>place</v-icon>
           {{ user.meta.address.value }}
         </div>
@@ -21,7 +21,8 @@
 
       <div class="info-div">
         <div class="hour">Per Hour</div>
-        <div class="value">{{ user.meta.rate.value }}</div>
+        <div class="value" v-if="user.meta.rate">{{ user.meta.rate.value }}</div>
+        <div class="value" v-if="!user.meta.rate">0</div>
       </div>
     </template>
   </div>
