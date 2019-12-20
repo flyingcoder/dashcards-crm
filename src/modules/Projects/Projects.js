@@ -34,7 +34,7 @@ export default {
       },
       {
         id: 2,
-        text: 'Company Name',
+        text: 'Business Name',
         value: 'company_name',
         sortable: true,
         align: 'left'
