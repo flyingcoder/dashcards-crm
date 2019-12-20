@@ -45,7 +45,7 @@
         @click="navigate_to_view_project(item.item.id)">
           {{ item.item.title }}
         </td>
-        <td class="text-cap">{{ item.item.business_name }}</td>
+        <td class="text-cap">{{ item.item.company_name }}</td>
         <td class="text-cap">{{ item.item.service_name }}
         </td>
         <td class="text-cap">{{ item.item.manager_name }}</td>

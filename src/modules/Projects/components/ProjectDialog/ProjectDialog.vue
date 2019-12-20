@@ -40,18 +40,18 @@
                     v-model="client.selected"
                     :items="client.items"
                     :is-loading="dropdown_loading"
-                    item-text="business_name"
+                    item-text="company_name"
                     @close-dropdown="client.show = false"
                   >
                     <template slot="item" slot-scope="{ item }">
-                      {{ item.business_name }}
+                      {{ item.company_name }}
                     </template>
                   </auto-complete>
                 </v-list>
               </v-menu>
 
               <div class="choosen" v-if="client.selected">
-                <span>{{ client.selected.business_name }}</span>
+                <span>{{ client.selected.company_name }}</span>
               </div>
             </v-flex>
 
