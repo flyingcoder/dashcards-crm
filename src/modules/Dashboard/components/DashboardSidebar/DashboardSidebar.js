@@ -49,6 +49,7 @@ export default {
           action: 'services',
           can_view: () => {
             if (this.user.is_admin) return true
+            //this needs api data
             return this.user.can.hasOwnProperty('services')
           }
         },

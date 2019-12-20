@@ -168,7 +168,7 @@ export default {
         id: new_fields.service_id
       })
       this.$set(this.client, 'selected', {
-        full_name: new_fields.client_name,
+        company_name: new_fields.company_name,
         id: new_fields.client_id
       })
       this.$set(
