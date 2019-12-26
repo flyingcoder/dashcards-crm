@@ -1,3 +1,46 @@
 @import '~@/sass/_variables';
 
 @include pagePadding('.project-details');
+
+.project-details {
+	.question-fields {
+		max-width : 600px;
+		margin-left : auto;
+		margin-right: auto;
+
+		.form-content {
+		    display: -webkit-box;
+		    display: flex;
+		    -webkit-box-pack: center;
+		            justify-content: center;
+		    -webkit-box-align: center;
+		            align-items: center;
+		    padding: 20px;
+		  
+		    .form-container {
+		      width: 600px;
+		    }
+		    .form-wrapper {
+		      display: -ms-grid;
+		      display: grid;
+		      -ms-grid-columns: 10fr 1fr;
+		      grid-template-columns: 10fr 1fr;
+		    }
+		}
+		.service-name-label {
+			padding: 20px 10px;
+			font-size: 16px;
+			border: 1px solid #dce1e5;
+			margin-bottom: 5px;
+		}
+	}
+}
+
+.add__btn.v-btn.v-btn--floating.v-btn--small {
+    background-color: $blue;
+
+    .v-icon {
+      color: $white;
+      font-size: 22px;
+    }
+}

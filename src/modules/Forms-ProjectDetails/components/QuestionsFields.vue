@@ -1,6 +1,6 @@
 <template>
   <div class="question-fields">
-    <v-layout row v-for="(section, index) of dynamicSections" :key="index">
+    <v-layout row group v-for="(section, index) of dynamicSections" :key="index">
       <v-flex xs12>
         <div class="field">
           <v-layout row align-center>
@@ -103,9 +103,22 @@
         </div>
       </v-flex>
     </v-layout>
-    <v-btn v-if="dynamicSections.length" @click="save">Save</v-btn>
+    <v-btn class="btn-save" v-if="dynamicSections.length" @click="save">Save</v-btn>
   </div>
 </template>
+<style lang="scss" scoped>
+.question-fields {
+  .layout.row.group {
+    border: 1px solid #dce1e5;
+    padding: 10px;
+    margin-bottom : 5px;
+  }
+  .btn-save {
+    float : right;
+    margin-bottom : 10px;
+  }
+}
+</style>
 
 <script>
 import cloneDeep from 'lodash/cloneDeep'
@@ -222,10 +235,16 @@ export default {
       }
     },
     save() {
+      let __this = this;
       apiTo.postFields({
         service_id: this.serviceId,
         fields: this.dynamicSections
+      }).then(function(data){
+         __this.$event.$emit('open_snackbar', "Project details fields updated", 'success', 10000)
       })
+      .catch(function(error) {
+          __this.$event.$emit('open_snackbar', "${error}", 'error', 10000)
+        })
     },
     removeQuestion(index) {
       this.dynamicSections.splice(index, 1)

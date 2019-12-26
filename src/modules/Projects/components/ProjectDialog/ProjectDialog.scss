@@ -5,8 +5,10 @@
 .projects__dialog {
 
   .dialog__header {
-    justify-content: space-between;
-    align-items: center;
+    -webkit-box-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+            align-items: center;
     margin-bottom: 10px;
 
     @include styledTitleDialog('.dialog__title');
@@ -63,6 +65,7 @@
     }
 
     .text-fields {
+      display: -ms-grid;
       display: grid;
       grid-gap: 10px 0;
       padding: 10px 0;

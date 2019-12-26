@@ -16,11 +16,13 @@
         ></v-select>
       </template>
       <template #entire-actions>
-        <v-btn :disabled="!service.selected" @click="save">Save</v-btn>
+        <v-btn :disabled="!service.selected" @click="save">Select</v-btn>
       </template>
     </CustomDialog>
 
     <div class="question-fields">
+      <div class="service-name-label" v-if="serviceName">{{ serviceName }} Extra Inputs</div>
+      
       <QuestionsFields
         :service-id="service.selected"
         v-if="!serviceDialog"

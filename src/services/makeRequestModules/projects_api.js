@@ -23,5 +23,10 @@ export const projects_api = {
 
   paginate_projects_table(query) {
     return request.get(`api/projects?${query}`)
+  },
+
+  get_projects_extra_inputs(serviceId) {
+    return request.get(`api/forms/project-details/${serviceId}`)
   }
+
 }
