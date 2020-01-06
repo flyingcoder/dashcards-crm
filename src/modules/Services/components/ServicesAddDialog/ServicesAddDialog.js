@@ -1,3 +1,5 @@
+import recommended_services from '@/assets/services/services.txt'
+
 export default {
   name: 'ServicesAddDialog',
 
@@ -9,8 +11,13 @@ export default {
   data: () => ({
     open: false,
     name: '',
-    services: []
+    services: [],
+    recommendedServices : []
   }),
+  
+  mounted() {
+    this.recommendedServices = this.get_recommended_services()
+  },
 
   computed: {
     is_disabled() {
@@ -28,8 +35,16 @@ export default {
   },
 
   methods: {
+    get_recommended_services() {
+      var services = recommended_services.split("\n")
+      return services.filter( function(v){ return v.trim().length != 0 })
+    },
+
     add_service() {
-      if (!this.name) return
+      if (!this.name) {
+        this.$event.$emit('open_snackbar', 'Service name required!', 'error' )
+        return
+      }
 
       this.services.unshift({ name: this.name })
       this.name = ''
