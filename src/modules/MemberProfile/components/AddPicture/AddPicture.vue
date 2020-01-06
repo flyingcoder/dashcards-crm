@@ -61,7 +61,7 @@ export default {
     file_uploaded: false,
     image64: null,
     loading: false,
-    validFileType:".jpg,.png,.jpeg",
+    validFileType: settings.allowedImageType,
     croppie: {
       options: {
         viewport: { width: 200, height: 200, type: 'circle' },
@@ -111,20 +111,21 @@ export default {
 
     file_added([file]) {
       const reader = new FileReader()
-      if(this.validFileType.indexOf(file.type) > -1) {
+      if(this.validFileType.includes(file.type)) {
         reader.onload = () => {
           this.image64 = reader.result
           this.file_uploaded = true
         }
         reader.readAsDataURL(file)
+      } else {
+        this.$event.$emit(
+          'open_snackbar',
+          'Not a valid image!',
+          'error'
+        )
+        this.file_uploaded = false
+        this.dialog = false
       }
-      this.$event.$emit(
-        'open_snackbar',
-        'Not a valid image!',
-        'error'
-      )
-      this.dialog = false
-      this.file_uploaded = false
     },
 
     get_cropped_image() {
