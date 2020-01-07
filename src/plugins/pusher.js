@@ -6,7 +6,7 @@ let pusher = null
 
 export const broadcast = {
   authenticate() {
-    pusher = new Pusher('6857db1d25c87cb2e20d', {
+    pusher = new Pusher('0594afc8c3bfe95e8a06', {
       cluster: 'ap1',
       encrypted: true,
       authEndpoint: settings.apiHostBaseURL + '/api/broadcasting/auth',
