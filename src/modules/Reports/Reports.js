@@ -1,15 +1,20 @@
 //TODO DRY, uses the same code as ReportsTab
 import makeRequestTo from '@/services/makeRequestTo'
+import apiTo from './api'
 //Components
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 import ReportsList from './components/ReportsList/ReportsList.vue'
 import TableHeader from '@/common/TableHeader.vue'
+import ReportsSection from './components/ReportsSection.vue'
+import DeleteDialog from '@/common/DeleteDialog.vue'
 
 export default {
   components: {
     CustomDialog,
     ReportsList,
-    TableHeader
+    TableHeader,
+    ReportsSection,
+    DeleteDialog
   },
 
   data: () => ({
@@ -19,12 +24,14 @@ export default {
     ],
     reports: [],
     loading: false,
-    iframe_src: null,
-    iframe_loading: false,
+    iframeSrc: null,
     link: '',
     title: '',
     valid_url: false,
-    activate_save: false
+    activateSave: false,
+    activeReport: null,
+    deleteDialog: false,
+    deleteReportId: null
   }),
 
   computed: {
@@ -46,9 +53,14 @@ export default {
       this.$refs.dialog.open_dialog()
     },
 
+    openDeleteDialog({ report }) {
+      this.deleteReportId = report.id
+      this.deleteDialog = true
+    },
+
     iframe_loaded() {
+      this.activateSave = true
       this.$store.commit('set_custom_loader', false)
-      this.activate_save = true
     },
 
     validate_url(event) {
@@ -60,10 +72,16 @@ export default {
     on_dialog_save() {
       this.$refs.dialog.close_dialog()
       this.$store.commit('set_custom_loader', true)
-      this.iframe_src = this.link
+      this.iframeSrc = this.link
+    },
+
+    previewRowUrl(report) {
+      this.iframeSrc = report.url
+      this.activeReport = report
     },
 
     save_report() {
+      this.$store.commit('set_custom_loader', true)
       makeRequestTo
         .add_new_report({
           url: this.link,
@@ -72,9 +90,29 @@ export default {
         .then(({ data }) => {
           this.link = ''
           this.title = ''
-          this.activate_save = false
-          this.iframe_src = null
+          this.activateSave = false
+          this.iframeSrc = null
           this.reports.push(data)
+        })
+        .finally(() => this.$store.commit('set_custom_loader', false))
+    },
+
+    deleteReport() {
+      this.$store.commit('set_custom_loader', true)
+      apiTo
+        .deleteReport(this.deleteReportId)
+        .then(() => {
+          const index = this.reports.findIndex(
+            r => r.id === this.deleteReportId
+          )
+          if (~index) {
+            this.reports.splice(index, 1)
+            this.$event.$emit('open_snackbar', 'Report deleted successfully')
+          }
+        })
+        .finally(() => {
+          this.deleteDialog = false
+          this.$store.commit('set_custom_loader', false)
         })
     }
   }

@@ -11,7 +11,7 @@
       <template slot="content">
         <v-layout row wrap>
           <v-flex xs12>
-            <v-text-field
+            <v-combobox
               class="service__input"
               label="Service name"
               v-model.trim="name"
@@ -19,7 +19,8 @@
               solo
               hide-details
               color="#657186"
-            ></v-text-field>
+              :items="recommendedServices"
+            ></v-combobox>
           </v-flex>
         </v-layout>
       </template>

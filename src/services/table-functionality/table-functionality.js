@@ -7,6 +7,7 @@ export const table_functionality = {
     edit_dialog: false,
     add_dialog: false,
     delete_dialog: false,
+    permissionDialog: false,
     loading: false,
     items: [],
     items_response: null,

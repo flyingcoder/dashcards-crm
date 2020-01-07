@@ -19,7 +19,7 @@
   input {
     flex-basis: 80%;
     height: 100%;
-    color: #b3b3b3;
+    color: $textDark;
     background: $white;
     font-family: HelveticaLTStd;
     font-size: 14px;
@@ -28,7 +28,7 @@
     font-style: normal;
     letter-spacing: normal;
     outline: none;
-    border: solid 1px #e6e6e6;
+    border: solid 1px $borderLightGray;
     border-radius: 0 5px 5px 0;
     transition : border 500ms ease-out; 
     &::placeholder{
@@ -40,10 +40,14 @@
   }
 
   input.invalid {
-    border: 3px solid #ff9a9a;
+    border: 2px solid $red;
     transition : border 500ms ease-out; 
   }
   
+}
+
+.text-capitalize input{
+    text-transform: capitalize;
 }
 
 .signup__field {

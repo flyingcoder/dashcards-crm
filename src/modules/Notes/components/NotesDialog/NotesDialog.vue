@@ -2,9 +2,9 @@
   <div class="notes-dialog">
     <CustomDialog
       title="Add Notes"
-      :open.sync="open"
+      v-model="showDialog"
       button2-text="Save"
-      @button1="open = false"
+      @button1="showDialog = false"
       @button2="save"
     >
       <template #content>
@@ -44,23 +44,24 @@ export default {
   },
 
   props: {
-    dialog: Boolean
+    value: Boolean
   },
 
   data: () => ({
-    open: false,
     payload: {
       title: null,
       content: null
     }
   }),
 
-  watch: {
-    open(new_val) {
-      this.dialog !== new_val && this.$emit('update:dialog', new_val)
-    },
-    dialog(new_val) {
-      this.open = new_val
+  computed: {
+    showDialog: {
+      get() {
+        return this.value
+      },
+      set(val) {
+        this.$emit('input', val)
+      }
     }
   },
 

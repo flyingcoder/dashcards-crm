@@ -1,5 +1,5 @@
 export const initial_state = () => ({
-  chat: null,
-  notification: null,
-  messages: null
+  chat: 0,
+  notification: 0,
+  messages: 0
 })

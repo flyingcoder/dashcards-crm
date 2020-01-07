@@ -1,13 +1,7 @@
 <template>
   <v-flex sm3 xs12 class="users-list">
     <div class="sidebar__chatlist">
-      <div class="you user">
-        <div class="user__img">
-          <v-img :src="loggedUser.image_url" />
-          <span class="status online"></span>
-        </div>
-        <span class="user__name">{{ loggedUser.first_name }}</span>
-      </div>
+      <div class="chatlist-header user">User List</div>
 
       <div class="friend__list">
         <div class="friend user" v-for="user of users" :key="user.id">
@@ -100,6 +94,14 @@ export default {
     .dnd {
       background-color: $red;
     }
+  }
+
+  .chatlist-header {
+    font-size: 20px;
+    text-align: left;
+    font-weight: 500;
+    color: $textDark;
+    text-transform: capitalize;
   }
 
   .user__name {

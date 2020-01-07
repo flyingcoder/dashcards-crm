@@ -10,6 +10,7 @@ import LogonLabel from './components/LonOnLabel.vue'
 import DashboardTiles from './components/DashboardTiles/DashboardTiles.vue'
 import NoCards from './components/NoCards.vue'
 import draggable from 'vuedraggable'
+import CalendarCard from '@/common/CalendarCard/CalendarCard.vue'
 
 export default {
   name: 'DashboardContent',
@@ -21,12 +22,14 @@ export default {
     DashCard,
     DashboardTiles,
     NoCards,
-    draggable
+    draggable,
+    CalendarCard
   },
 
   data: () => ({
     init: true,
-    paths: [{ text: 'Dashboard', disabled: true, router_name: null }]
+    paths: [{ text: 'Dashboard', disabled: true, router_name: null }],
+    isRequestInProgress: false
   }),
 
   computed: {
@@ -53,7 +56,7 @@ export default {
     card_components() {
       let cards = _cloneDeep(this.cards)
       return cards.map(card => {
-        if (['timeline', 'tasks'].includes(card.slug)) {
+        if (['timeline', 'tasks', 'calendar'].includes(card.slug)) {
           card.component = card.slug + '-card'
         }
         return card
@@ -81,10 +84,14 @@ export default {
     ...mapActions('cards', ['fill_cards', 'update_cards']),
     ...mapMutations('cards', ['set_cards']),
     close(id) {
+      if (this.isRequestInProgress) return
+      this.isRequestInProgress = true
       const card_ids = this.cards
         .filter(card => card.id !== id)
         .map(card => card.id)
-      this.update_cards({ dashitem_id: card_ids })
+      this.update_cards({ dashitem_id: card_ids }).finally(
+        () => (this.isRequestInProgress = false)
+      )
     },
     can_view_tasks(user) {
       return (
@@ -94,7 +101,7 @@ export default {
       )
     },
     can_view_timeline(user) {
-      return true
+      return user ? true : false
     },
     can_view_client(user) {
       return user.is_admin
@@ -107,7 +114,7 @@ export default {
       )
     },
     can_view_payment(user) {
-      return true
+      return user ? true : false
     },
     can_view_invoice(user) {
       return user.can.hasOwnProperty('invoices') || user.is_admin
@@ -120,7 +127,7 @@ export default {
       )
     },
     can_view_passbox(user) {
-      return true
+      return user ? true : false
     }
   }
 }

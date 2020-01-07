@@ -8,6 +8,7 @@
         :img-background="tile.color"
         :counter="counters[tile.value]"
         :title="tile.title"
+        @click="navigateTo(tile.route)"
       />
     </template>
   </div>

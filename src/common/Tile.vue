@@ -1,5 +1,5 @@
 <template functional>
-  <div class="tile">
+  <div class="tile" v-on="listeners">
     <div class="tile-icon" :style="{ background: props.imgBackground }">
       <slot name="tile-icon">
         <v-img

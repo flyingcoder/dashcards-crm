@@ -40,18 +40,18 @@
                     v-model="client.selected"
                     :items="client.items"
                     :is-loading="dropdown_loading"
-                    item-text="full_name"
+                    item-text="company_name"
                     @close-dropdown="client.show = false"
                   >
                     <template slot="item" slot-scope="{ item }">
-                      {{ item.first_name }} {{ item.last_name }}
+                      {{ item.company_name }}
                     </template>
                   </auto-complete>
                 </v-list>
               </v-menu>
 
               <div class="choosen" v-if="client.selected">
-                <span>{{ client.selected.full_name }}</span>
+                <span>{{ client.selected.company_name }}</span>
               </div>
             </v-flex>
 
@@ -181,7 +181,11 @@
           </v-layout>
 
           <div class="text-fields">
-            <TextField :value.sync="project_title" label="Project Title" />
+            <TextField
+              :value.sync="project_title"
+              label="Project Title"
+              color="#657186"
+            />
 
             <div class="project__description">
               <quill-editor
@@ -195,7 +199,64 @@
               :value.sync="comment"
               v-if="!isEditDialog"
               label="Comment"
+              color="#657186"
             />
+          </div>
+          
+          <div class="extra-inputs" v-if="hasExtraInputs">
+            <v-layout row group>
+              <v-flex xs12>
+                <div class="field" v-for="(section, index) in extraFields">
+                      <v-checkbox
+                        v-if="section.selected.value === 'checkboxes'"
+                        v-model="extraFields[index].selected.answer"
+                        :label="section.questionField.text"
+                        :items="section.fields"
+                        :key="index"
+                      ></v-checkbox>
+
+                      <v-text-field
+                        solo
+                        v-else-if="section.selected.value === 'short_answer'"
+                        :label="section.questionField.text"
+                        required
+                        v-model="extraFields[index].selected.answer"
+                        :key="index"
+                        filled
+                      ></v-text-field>
+    
+                      <v-select 
+                        solo
+                        v-else-if="section.selected.value === 'dropdown'"
+                        :items="section.fields"
+                        :label="section.questionField.text"
+                        v-model="extraFields[index].selected.answer"
+                        :key="index"
+                      ></v-select>
+                      
+                      <v-radio-group v-else-if="section.selected.value === 'multiple_choice'">
+                        <v-radio
+                          v-for="radio in section.fields"
+                          :label="`${radio.text}`"
+                          :value="radio"
+                          v-model="extraFields[index].selected.answer"
+                          :key="index"
+                        ></v-radio>
+                      </v-radio-group>
+
+                      <v-textarea
+                        solo
+                        v-else-if="section.selected.value === 'paragraph'"
+                        :label="section.questionField.text"
+                        required
+                        v-model="extraFields[index].selected.answer"
+                        :key="index"
+                      ></v-textarea>
+
+                </div>
+
+              </v-flex>
+            </v-layout>
           </div>
         </div>
 

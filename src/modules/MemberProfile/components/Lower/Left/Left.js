@@ -17,7 +17,7 @@ export default {
     ],
     texts: [
       {
-        content: 'This is a TaskTab.'
+        content: <tasks />
       },
       {
         content: 'This is a TimerTab.'

@@ -23,6 +23,8 @@ export default {
     job_title: '',
     email: '',
     contact_number: '',
+    rate: '',
+    address: '',
     password: '',
     repeat_password: '',
     group_items: [],
@@ -74,6 +76,8 @@ export default {
       this.first_name = new_fields.first_name
       this.last_name = new_fields.last_name
       this.email = new_fields.email
+      this.rate = new_fields.rate
+      this.address = new_fields.address
       this.contact_number = new_fields.telephone
       this.group_name = new_fields.group_name
       this.job_title = new_fields.job_title
@@ -84,6 +88,8 @@ export default {
         first_name: this.first_name,
         last_name: this.last_name,
         email: this.email,
+        rate: this.rate,
+        address: this.address,
         telephone: this.contact_number,
         group_name: this.group_name,
         job_title: this.job_title
@@ -99,6 +105,7 @@ export default {
       this.first_name = this.last_name = this.group_name = ''
       this.job_title = this.email = this.contact_number = ''
       this.password = this.repeat_password = ''
+      this.rate = this.address = ''
       this.cancel() //close the modal
     }
   }

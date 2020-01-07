@@ -24,7 +24,12 @@
     .note{
         padding: 10px;
         border-bottom: 1px solid $borderLightGray;
+        border-left: 1px solid transparent;
         cursor: pointer;
+
+        &:hover, &.active{
+            background: $lightGray;
+        }
     }
 
     .note-name{

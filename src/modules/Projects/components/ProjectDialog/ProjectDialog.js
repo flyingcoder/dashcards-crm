@@ -36,6 +36,8 @@ export default {
   },
 
   data: () => ({
+    extraFields : [],
+    hasExtraInputs : false,
     open: false,
     dropdown_loading: false,
     client: {
@@ -97,14 +99,35 @@ export default {
       this.open = new_val
       if (new_val) this.init_dropdowns()
     },
+    
     open(new_val) {
       this.$emit('update:dialog', new_val)
     },
+    
     fieldsToEdit: {
       handler(new_val) {
         this.isEditDialog && this.update_fields(new_val)
       },
       deep: true
+    },
+    
+    'service.selected'(new_val, old_val) {
+      if (new_val) {
+        if (this.isEditDialog) {
+          if (new_val.id === this.fieldsToEdit.fields.service_id) {
+            if (this.fieldsToEdit.fields.extra_fields) {
+              this.extraFields = this.fieldsToEdit.fields.extra_fields
+              this.hasExtraInputs = true
+            } else {
+              this.get_extra_inputs(new_val.id)
+            }
+          } else {
+            this.get_extra_inputs(new_val.id)
+          }
+        } else {
+          this.get_extra_inputs(new_val.id)
+        }
+      }
     }
   },
 
@@ -154,8 +177,10 @@ export default {
         start_at: this.date_pickers.start_date,
         end_at: this.date_pickers.end_date,
         description: this.quill_editor.content,
-        members: this.members.selected
+        members: this.members.selected,
+        extra_fields : this.extraFields
       }
+
       if (!this.isEditDialog) fields_to_save.comment = this.comment
 
       this.$emit('save', fields_to_save)
@@ -168,7 +193,7 @@ export default {
         id: new_fields.service_id
       })
       this.$set(this.client, 'selected', {
-        full_name: new_fields.client_name,
+        company_name: new_fields.company_name,
         id: new_fields.client_id
       })
       this.$set(
@@ -204,6 +229,19 @@ export default {
           )
         })
         this.$set(this[data_prop], 'items', filtered)
+      }
+    },
+
+    get_extra_inputs(serviceId) {
+      if (serviceId) {
+        makeRequestTo.get_projects_extra_inputs(serviceId)
+          .then(({ data }) => {
+            this.extraFields = JSON.parse(data.questions) 
+            this.hasExtraInputs = true;
+          })
+          .catch(() => (this.hasExtraInputs = false))
+      } else {
+        this.hasExtraInputs = false
       }
     }
   }

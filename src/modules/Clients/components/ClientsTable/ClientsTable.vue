@@ -48,7 +48,7 @@
             <v-img
               max-height="60px"
               width="50px"
-              :src="require('@/assets/temp/user.png')"
+              :src="item.item.image_url"
             />
             &nbsp;
             {{ item.item.first_name }}

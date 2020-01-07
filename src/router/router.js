@@ -7,6 +7,7 @@ import { notFound } from './routes/notFound'
 import { login } from './routes/login'
 import { signup } from './routes/signup'
 import { forgotPassword } from './routes/forgotPassword'
+import { setPassword } from './routes/setPassword'
 import { pricing } from './routes/pricing'
 import { dashboard } from './routes/dashboard'
 import { clients } from './routes/clients'
@@ -30,6 +31,8 @@ import { support } from './routes/support'
 import { member_profile } from './routes/memberProfile'
 import { client_profile } from './routes/clientProfile'
 import { notes } from './routes/notes'
+import { questionnaire } from './routes/questionnaire'
+import { projectDetails } from './routes/projectDetails'
 
 Vue.use(Router)
 
@@ -60,10 +63,13 @@ export default new Router({
         support, //path: /dashboard/support
         member_profile, //path: /dashboard/team/profile/:id
         client_profile, //path: /dashboard/clients/profile/:id
-        notes //path: /dashboard/notes/
+        notes, //path: /dashboard/notes/
+        questionnaire, //path: /dashboard/forms/questionnaire
+        projectDetails //path: /dashboard/forms/project-details
       ]
     },
 
+    setPassword, // path: /set-password
     home, // path: /
     checkout, // path: /checkout
     notFound, // path: /404

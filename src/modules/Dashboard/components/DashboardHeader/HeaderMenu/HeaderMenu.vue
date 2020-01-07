@@ -2,29 +2,11 @@
   <div class="header-menu">
     <add-cards v-if="$route.name === 'default-content'" />
 
-    <notification-icon
-      :image-src="mail_icon"
-      :hovered-image-src="hovered_mail_icon"
-      :count="null"
-      type="mail"
-    />
-
-    <notification-icon
-      :image-src="notification_icon"
-      :hovered-image-src="hovered_notification_icon"
-      :count="notification"
-      type="notification"
-    />
-
-    <notification-icon
-      :image-src="chat_icon"
-      :hovered-image-src="hovered_chat_icon"
-      :count="chat"
-      type="chat"
-    />
+    <MailIcon />
+    <NotificationIcon />
+    <ChatIcon />
 
     <dropdown />
-    <!--custom component-->
 
     <div class="try__premium">
       <div class="premium__btn" @click="go_to_pricing_page">

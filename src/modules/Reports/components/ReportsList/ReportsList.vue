@@ -3,10 +3,13 @@
     <div class="reports-list-title">Reports List</div>
 
     <div class="reports-content">
-      <v-layout row class="table-header">
-        <v-flex xs3 class="reports-id">#</v-flex>
-        <v-flex xs9 class="reports-title">Title</v-flex>
-      </v-layout>
+      <div class="table-header">
+        <div class="reports-id">#</div>
+        <div class="reports-title">Title</div>
+        <div class="text-xs-center">
+          <img src="@/assets/icons/table/menu.svg" />
+        </div>
+      </div>
 
       <v-progress-linear
         v-if="loading"
@@ -16,15 +19,25 @@
       <h3 class="no-data" v-else-if="!loading && !reports.length">No Data</h3>
 
       <div class="list-content" v-else>
-        <v-layout
+        <div
           row
           class="report-item"
           v-for="(report, index) of reports"
           :key="report.id"
+          :class="{ active: activeReport && activeReport.id === report.id }"
+          @click="previewRowUrl(index)"
         >
-          <v-flex xs3 class="reports-id">{{ index + 1 }}</v-flex>
-          <v-flex xs9 class="reports-title text-cap">{{ report.title }}</v-flex>
-        </v-layout>
+          <div class="reports-id">{{ index + 1 }}</div>
+          <div class="reports-title text-cap">{{ report.title }}</div>
+
+          <v-btn
+            class="reports-action"
+            icon
+            @click.stop="actionClicked(report, index, 'delete')"
+          >
+            󠁿󠁿󠁿<span>🗙</span>
+          </v-btn>
+        </div>
       </div>
     </div>
   </div>

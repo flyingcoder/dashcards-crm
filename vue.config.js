@@ -1,3 +1,11 @@
 module.exports = {
-  lintOnSave: true
+  lintOnSave: true,
+  chainWebpack: config => {
+    config.module
+      .rule('raw')
+      .test(/\.txt$/)
+      .use('raw-loader')
+      .loader('raw-loader')
+      .end()
+  }
 }

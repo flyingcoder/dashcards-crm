@@ -14,12 +14,12 @@ Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
   const authenticated = !!localStorage.getItem('token')
-
-  if (['login', 'signup'].includes(to.name) && !authenticated) {
+  
+  if (['login', 'signup', 'set_password'].includes(to.name) && !authenticated) {
     next()
-  } else if (['login', 'signup'].includes(to.name) && authenticated) {
+  } else if (['login', 'signup', 'set_password'].includes(to.name) && authenticated) {
     next({ path: '/dashboard' })
-  } else if (to.name === 'home' && !authenticated) {
+  }  else if (to.name === 'home' && !authenticated) {
     next({ name: 'login' })
   } else if (to.name === 'not_found') {
     next()

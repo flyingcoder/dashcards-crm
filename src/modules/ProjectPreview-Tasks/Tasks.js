@@ -119,8 +119,8 @@ export default {
       const all_task_index = this.all_tasks.findIndex(
         task => task.id === this.task.id
       )
-      if (!own_task_index) this.tasks_own.splice(own_task_index, 1)
-      if (!all_task_index) this.tasks_own.splice(all_task_index, 1)
+      if (~own_task_index) this.tasks_own.splice(own_task_index, 1)
+      if (~all_task_index) this.tasks_own.splice(all_task_index, 1)
       this.delete_dialog = false
       this.$event.$emit('open_snackbar', 'Task deleted successfully')
       this.set_active_task_after_delete()
@@ -143,6 +143,10 @@ export default {
 
     open_edit_task_dialog() {
       this.$refs.edit_task_dialog.open_dialog()
+    },
+
+    closeEditDialog() {
+      this.$refs.edit_task_dialog.cancel()
     },
 
     open_delete_task_dialog() {

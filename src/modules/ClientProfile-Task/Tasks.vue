@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <PreviewCard :id="user_id" :task="selected_task" />
+    <PreviewCard v-if="selected_task" :id="user_id" :task="selected_task" />
   </div>
 </template>
 

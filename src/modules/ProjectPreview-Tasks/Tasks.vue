@@ -14,6 +14,7 @@
       ref="edit_task_dialog"
       dialog-title="Edit Task"
       @save="edit_task"
+      @close="closeEditDialog"
     />
 
     <DeleteDialog

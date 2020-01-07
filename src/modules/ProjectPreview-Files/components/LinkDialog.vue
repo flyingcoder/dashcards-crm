@@ -4,6 +4,8 @@
       ref="dialog"
       :open.sync="dialog"
       title="File URL"
+      button1-text="Cancel"
+      @button1="close_dialog"
       button2-text="Save"
       @button2="saveClicked"
     >
@@ -39,6 +41,9 @@ export default {
   methods: {
     openDialog() {
       this.dialog = true
+    },
+    close_dialog() {
+      this.dialog = false
     },
     closeAndClearDialog() {
       Object.assign(this.$data, this.$options.data.apply(this))

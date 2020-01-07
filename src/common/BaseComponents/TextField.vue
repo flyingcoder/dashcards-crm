@@ -2,7 +2,7 @@
   <v-text-field
     :value="props.value"
     @input="listeners['update:value']($event)"
-    solo
+    box
     hide-details
     v-bind="data.attrs"
   >

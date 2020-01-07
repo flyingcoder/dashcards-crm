@@ -13,7 +13,7 @@
           <v-layout row wrap>
             <v-layout row align-center class="service__field">
               <v-flex xs10>
-                <v-text-field
+                <v-combobox
                   label="Untitled Service"
                   class="service__input"
                   v-model.trim="name"
@@ -21,7 +21,8 @@
                   solo
                   hide-details
                   color="#657186"
-                ></v-text-field>
+                  :items="recommendedServices"
+                ></v-combobox>
               </v-flex>
 
               <v-flex xs2 class="text-xs-right">

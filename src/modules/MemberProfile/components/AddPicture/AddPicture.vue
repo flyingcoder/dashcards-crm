@@ -4,6 +4,7 @@
       ref="picture_dialog"
       title="Upload New Profile Picture"
       button2-text="Save"
+      @button1="cancel"
       :open.sync="dialog"
     >
       <template #content>
@@ -20,7 +21,7 @@
             v-else
             ref="dropzone"
             :duplicateCheck="true"
-            acceptedFiles="image/*"
+            acceptedFiles="validFileType"
             :options="dropzoneOptions"
             :useCustomSlot="true"
             dictFileTooBig="File too big"
@@ -46,6 +47,7 @@ import Loader from '@/common/BaseComponents/Loader.vue'
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 import CustomDropzone from '@/common/CustomDropzone.vue'
 import CropImage from '@/common/CropImage.vue'
+import { settings } from '@/variables'
 
 export default {
   components: {
@@ -59,6 +61,7 @@ export default {
     file_uploaded: false,
     image64: null,
     loading: false,
+    validFileType: settings.allowedImageType,
     croppie: {
       options: {
         viewport: { width: 200, height: 200, type: 'circle' },
@@ -95,7 +98,7 @@ export default {
         maxFiles: 1,
         thumbnailWidth: 150,
         addRemoveLinks: true,
-        url: `https://api.dashcards.com/api/company/clients/${this.user_id}`,
+        url: settings.apiHostBaseURL + `/api/company/clients/${this.user_id}`,
         headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
         method: 'put',
         autoProcessQueue: false
@@ -108,11 +111,21 @@ export default {
 
     file_added([file]) {
       const reader = new FileReader()
-      reader.onload = () => {
-        this.image64 = reader.result
-        this.file_uploaded = true
+      if(this.validFileType.includes(file.type)) {
+        reader.onload = () => {
+          this.image64 = reader.result
+          this.file_uploaded = true
+        }
+        reader.readAsDataURL(file)
+      } else {
+        this.$event.$emit(
+          'open_snackbar',
+          'Not a valid image!',
+          'error'
+        )
+        this.file_uploaded = false
+        this.dialog = false
       }
-      reader.readAsDataURL(file)
     },
 
     get_cropped_image() {
@@ -120,6 +133,7 @@ export default {
     },
 
     upload_image(image) {
+      
       let formData = new FormData()
       formData.append('file', image)
       this.loading = true
@@ -142,6 +156,10 @@ export default {
       }
       this.$refs.picture_dialog.clear_and_close()
       Object.assign(this.$data, this.$options.data.apply(this))
+    },
+    cancel(){
+      this.dialog = false
+      this.file_uploaded = false
     }
   }
 }

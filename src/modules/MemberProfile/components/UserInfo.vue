@@ -6,22 +6,23 @@
 
     <template v-else>
       <div class="info-div">
-        <div class="hour">Total Hours</div>
-        <div class="value">68</div>
+        <div class="hour">Time Worked This Week</div>
+        <div class="value">{{ user.week_hours }}</div>
       </div>
 
       <div class="info-div">
         <h4 class="name">{{ user.first_name }} {{ user.last_name }}</h4>
-        <div class="job-title">UI/UX Designer</div>
-        <div class="address">
+        <div class="job-title">{{ user.job_title }}</div>
+        <div class="address"  v-if="user.meta.address">
           <v-icon>place</v-icon>
-          Cebu, Philippines
+          {{ user.meta.address.value }}
         </div>
       </div>
 
       <div class="info-div">
         <div class="hour">Per Hour</div>
-        <div class="value">$10</div>
+        <div class="value" v-if="user.meta.rate">{{ user.meta.rate.value }}</div>
+        <div class="value" v-if="!user.meta.rate">0</div>
       </div>
     </template>
   </div>

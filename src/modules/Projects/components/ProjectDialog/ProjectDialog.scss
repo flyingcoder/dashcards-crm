@@ -5,8 +5,10 @@
 .projects__dialog {
 
   .dialog__header {
-    justify-content: space-between;
-    align-items: center;
+    -webkit-box-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+            align-items: center;
     margin-bottom: 10px;
 
     @include styledTitleDialog('.dialog__title');
@@ -17,7 +19,7 @@
   @include styledScrollFor('.dialog__body');
 
   .dialog__body {
-    max-height: 400px;
+    max-height: 450px;
     overflow: hidden auto;
     padding: 0 15px;
     margin: 0 20px;
@@ -32,8 +34,7 @@
         font-size: 18px;
         background-color: $white;
         color: $textDark;
-        border: 1px solid $borderLightGray;
-        border-radius: 5px;
+        border-radius: 4px 4px 0 0;
 
         .d__icon {
           width: 27px;
@@ -58,28 +59,27 @@
       margin: 0 auto;
       text-align: left;
       background-color: $white;
-      border: 1px solid $borderLightGray;
-      border-radius: 5px;
+      border: 2px solid $green;
+      border-radius: 4px;
       text-transform: capitalize;
     }
 
     .text-fields {
+      display: -ms-grid;
       display: grid;
       grid-gap: 10px 0;
       padding: 10px 0;
     }
 
     .project__description {
-      border-radius: 8px;
+      border-radius: 4px 4px 0 0;
       border: none;
 
       .quill-editor {
         height: auto;
         background-color: $white;
-        border-radius: 8px;
+        border-radius: 4px 4px 0 0;
         border: 1px solid $borderLightGray;
-        box-shadow: $darkBoxShadow;
-        margin-bottom: 20px;
         color: $textDark;
 
         label {

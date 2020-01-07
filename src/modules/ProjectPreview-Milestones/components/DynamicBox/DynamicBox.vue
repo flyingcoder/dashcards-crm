@@ -10,6 +10,11 @@
     <dash-card :title="validate_title(box.title)">
       <template slot="actions">
         <v-flex xs4 class="actions text-xs-right">
+          {{
+            box.tasks.filter(i => i.status === 'completed').length +
+              '/' +
+              box.tasks.length
+          }}
           <v-btn fab flat small class="action">
             <v-icon @click="$emit('edit', box)">edit</v-icon>
           </v-btn>
@@ -19,22 +24,66 @@
         </v-flex>
       </template>
       <div class="content" slot="content">
-        <div class="task" v-for="(task, index) of box.tasks" :key="task.id">
-          {{ task.title }}
-          <div class="task-actions">
-            <v-icon
-              color="indigo"
-              class="task-icon"
-              @click="edit_task_clicked(task, index)"
-              >edit</v-icon
+        <v-progress-linear
+          v-if="loading"
+          :indeterminate="true"
+        ></v-progress-linear>
+        <div class="tasks-progress">
+          <div class="fill" :style="{ width: tasksProgress + '%' }"></div>
+        </div>
+        <div class="task-custom-table">
+          <v-layout row class="header">
+            <v-flex xs6 class="task__tableHead">Task</v-flex>
+            <v-flex xs3 class="task__tableHead">Status</v-flex>
+          </v-layout>
+
+          <div class="body">
+            <v-layout
+              row
+              align-center
+              class="task__tableBody"
+              v-for="(task, index) in box.tasks"
+              :key="task.id"
             >
-            󠁿󠁿󠁿<span
-              @click="
-                open_delete_dialog({ task_index: index, task_id: task.id })
-              "
-              class="task-icon"
-              >🗙</span
-            >
+              <v-flex xs6 class="project__col">
+                {{ task.title }}
+              </v-flex>
+
+              <v-flex xs3 class="status__col">
+                {{ task.status }}
+
+                <div v-if="task.status === 'completed'">
+                  <div class="status__completed"></div>
+                </div>
+
+                <div v-if="task.status === 'pending'">
+                  <div class="status__pending"></div>
+                </div>
+
+                <div v-if="task.status === 'behind'">
+                  <div class="status__behind"></div>
+                </div>
+
+                <div v-if="task.status === 'open'">
+                  <div class="status__open"></div>
+                </div>
+              </v-flex>
+
+              <v-icon
+                color="indigo"
+                class="task-icon"
+                @click="edit_task_clicked(task, index)"
+                >edit</v-icon
+              >
+              󠁿󠁿󠁿<span
+                @click="
+                  openDeleteDialog({ task_index: index, task_id: task.id })
+                "
+                class="task-icon"
+              >
+                🗙
+              </span>
+            </v-layout>
           </div>
         </div>
       </div>
@@ -53,116 +102,5 @@
   </div>
 </template>
 
-<script>
-import DashCard from '@/common/DashCard.vue'
-import DeleteDialog from '@/common/DeleteDialog.vue'
-
-export default {
-  name: 'DynamicBox',
-  components: {
-    DashCard,
-    DeleteDialog
-  },
-  props: {
-    id: [Number, String],
-    box: Object
-  },
-
-  data: () => ({
-    delete_dialog: false,
-    item_to_delete: null
-  }),
-
-  methods: {
-    validate_title(title) {
-      return title.length > 18 ? title.slice(0, 18) + '...' : title
-    },
-
-    open_delete_dialog(task) {
-      this.delete_dialog = true
-      this.item_to_delete = task
-    },
-
-    delete_task({ task_index, task_id }) {
-      this.$emit('remove-task', { task_index, task_id })
-      this.delete_dialog = false
-      this.item_to_delete = null
-    },
-
-    edit_task_clicked(task, index) {
-      this.$emit('edit-task', { task, index, box_id: this.box.id })
-    }
-  }
-}
-</script>
-<style lang="scss" scoped>
-@import '~@/sass/_variables';
-
-.dynamic-card {
-  .action {
-    background-color: $tableBlueBg;
-    border: 1px solid $tableBorderBlue;
-    .v-btn__content .v-icon {
-      color: $tableTitleBlue;
-    }
-  }
-
-  @include styledScrollFor('.content');
-
-  .content {
-    height: 470px;
-    max-height: 470px;
-    border: 1px solid $tableBorderBlue;
-    padding: 0;
-    overflow: auto;
-
-    .task {
-      padding: 20px;
-      font-size: 17px;
-      text-transform: capitalize;
-      background-color: $bgLightBlue;
-      color: $textDarkBlue;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border: 1px solid $borderLightGray;
-      &:hover {
-        background-color: $white;
-      }
-
-      .task-icon {
-        cursor: pointer;
-        font-size: 1.5em;
-        color: $red;
-        margin-left: 10px;
-      }
-    }
-  }
-  .add__new_btn {
-    font-size: 12px;
-  }
-}
-@media only screen and (max-width: 480px) {
-  .dynamic-card {
-    .actions {
-      .v-btn--floating.v-btn--small {
-        height: 30px;
-        width: 30px;
-      }
-      .v-btn {
-        margin: 6px;
-      }
-    }
-  }
-  .content {
-    .task {
-      padding: 13px;
-      font-size: 14px;
-    }
-  }
-  .add__new_btn {
-    font-size: 12px;
-  }
-}
-</style>
+<script src="./DynamicBox.js"></script>
+<style lang="scss" scoped src="./DynamicBox.scss"></style>

@@ -1,7 +1,7 @@
 <template>
   <div class="notes">
     <table-header :paths="paths" @click="notes_dialog = true" />
-    <NotesDialog :dialog.sync="notes_dialog" @save="save" />
+    <NotesDialog v-model="notes_dialog" @save="save" />
     <CollaboratorDialog
       :dialog.sync="coll_dialog"
       :collaborators="collaborators"
@@ -13,6 +13,7 @@
         <notes-list
           :notes="notes"
           :loading="loading"
+          :active-note="selected_note"
           @clicked="change_selected"
           @toggle-pin="toggle_pin"
         />

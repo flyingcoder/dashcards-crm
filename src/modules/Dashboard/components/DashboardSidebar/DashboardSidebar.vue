@@ -1,6 +1,11 @@
 <template>
   <v-list class="sidebar">
-    <template v-for="item in items">
+    <div
+      class="sidebar-inner"
+      v-for="item in items"
+      :data-nav="item.title"
+      :key="item.action"
+    >
       <v-list-tile
         v-if="item.can_view()"
         class="s__list"
@@ -14,19 +19,28 @@
           </svg>
         </v-list-tile-action>
 
-        <v-list-tile-content class="s__content" :data-nav="item.title">
+        <v-list-tile-content class="s__content">
           {{ item.title }}
-
-          <div class="submenu" v-if="item.title === 'Templates'">
-            <div class="item">Milestone</div>
-            <div class="item" @click="sidebar_item_clicked('reports')">
-              Reports
-            </div>
-            <div class="item">Invoice</div>
-          </div>
         </v-list-tile-content>
       </v-list-tile>
-    </template>
+
+      <div class="submenu" v-if="item.title === 'Templates'">
+        <div class="item">Milestone</div>
+        <div class="item" @click="sidebar_item_clicked('reports')">
+          Reports
+        </div>
+        <div class="item">Invoice</div>
+      </div>
+
+      <div class="submenu" v-if="item.title === 'Forms'">
+        <div class="item" @click="sidebar_item_clicked('questionnaire')">
+          Questionnaire
+        </div>
+        <div class="item" @click="sidebar_item_clicked('projectDetails')">
+          Project Details
+        </div>
+      </div>
+    </div>
   </v-list>
 </template>
 

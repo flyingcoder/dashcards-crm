@@ -7,10 +7,8 @@
     text-transform: capitalize;
 }
 
->>> .theme--light.v-text-field--solo>.v-input__control>.v-input__slot{
-    border: 1px solid #dce1e5;
-    border-radius: 8px;
-    font-size: 16px;
+>>> .theme--light.v-text-field--box>.v-input__control>.v-input__slot{
+    background-color: #fff;
 }
 
 >>> .project__title label.v-label.theme--light, >>> .project__comment label.v-label.theme--light{

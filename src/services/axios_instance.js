@@ -1,9 +1,10 @@
 import axios from 'axios'
 import store from '@/store/store'
 import { auth } from '@/plugins/auth'
+import { settings } from '@/variables'
 
 const request = axios.create({
-  baseURL: 'https://api.dashcards.com',
+  baseURL: settings.apiHostBaseURL,
   timeout: 500000
 })
 

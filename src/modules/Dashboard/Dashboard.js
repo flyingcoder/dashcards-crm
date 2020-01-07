@@ -64,6 +64,17 @@ export default {
       this.chat_channel(chat_channel)
       this.friends_channel(friends_channel)
       this.chat_notification_channel(chat_notification_channel)
+
+      if (this.user.is_admin) {
+        this.$pusher.authenticate()
+        const activityLog = this.$pusher.subscribe(
+          `private-activity.log.${this.user.id}`
+        )
+        activityLog.bind('App\\Events\\ActivityEvent', payload => {
+          this.$store.commit('headerIcons/addNotification')
+          this.$store.commit('notifications/addNotification', payload)
+        })
+      }
     },
 
     chat_channel(channel) {

@@ -1,4 +1,5 @@
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
+import recommended_services from '@/assets/services/services.txt'
 
 export default {
   name: 'ServicesEditDialog',
@@ -14,9 +15,14 @@ export default {
     CustomDialog
   },
 
+  mounted() {
+    this.recommendedServices = this.get_recommended_services()
+  },
+
   data: () => ({
     open: false,
-    name: null
+    name: null,
+    recommendedServices: []
   }),
 
   watch: {
@@ -38,6 +44,7 @@ export default {
     cancel() {
       this.open = false
     },
+
     save() {
       const fields_to_save = {
         name: this.name
@@ -48,6 +55,11 @@ export default {
     update_fields({ fields }) {
       const new_fields = Object.assign({}, fields)
       this.name = new_fields.service_name
+    },
+
+    get_recommended_services() {
+      var services = recommended_services.split("\n")
+      return services.filter( function(v){ return v.trim().length != 0 })
     }
   }
 }

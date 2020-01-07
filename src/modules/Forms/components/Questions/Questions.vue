@@ -146,8 +146,9 @@
 <style lang="scss" scoped>
 .questions {
   .form-section {
-    border: 1px solid black;
+    border: 1px solid #dce1e5;
     padding: 10px;
+    margin-bottom : 5px;
   }
 }
 </style>

@@ -4,6 +4,7 @@
       ref="picture_dialog"
       title="Upload New Profile Picture"
       button2-text="Save"
+      @button1="cancel"
       :open.sync="dialog"
     >
       <template #content>
@@ -47,6 +48,7 @@ import Loader from '@/common/BaseComponents/Loader.vue'
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 import CustomDropzone from '@/common/CustomDropzone.vue'
 import CropImage from '@/common/CropImage.vue'
+import { settings } from '@/variables'
 
 export default {
   components: {
@@ -89,7 +91,7 @@ export default {
         maxFiles: 1,
         thumbnailWidth: 150,
         addRemoveLinks: true,
-        url: `https://api.bizzooka.com/api/company/clients/${this.user_id}`,
+        url: settings.apiHostBaseURL + `/api/company/clients/${this.user_id}`,
         headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
         method: 'put',
         autoProcessQueue: false
@@ -118,7 +120,7 @@ export default {
       formData.append('file', image)
       this.loading = true
       api_to
-        .upload_image(this.user.id, formData)
+        .upload_image(this.user_id, formData)
         .then(this.image_uploaded)
         .finally(() => (this.loading = false))
     },
@@ -132,6 +134,9 @@ export default {
       this.$emit('picture-changed', response.data)
       this.$refs.picture_dialog.clear_and_close()
       Object.assign(this.$data, this.$options.data.apply(this))
+    },
+    cancel(){
+      this.dialog = false
     }
   }
 }

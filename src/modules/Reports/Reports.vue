@@ -1,5 +1,12 @@
 <template>
   <v-layout row wrap class="reports">
+    <DeleteDialog
+      :open-dialog.sync="deleteDialog"
+      title="Delete Report"
+      text-content="Are you sure you want to delete this template?"
+      @delete="deleteReport"
+    />
+
     <v-flex xs12>
       <table-header :paths="paths" :noButton="true" />
     </v-flex>
@@ -9,6 +16,9 @@
         v-if="reports.length"
         :reports="reports"
         :loading="loading"
+        :active-report="activeReport"
+        @row-clicked="previewRowUrl"
+        @delete="openDeleteDialog"
       />
     </v-flex>
 
@@ -61,7 +71,7 @@
 
                 <v-btn
                   color="#3b589e"
-                  :disabled="!activate_save"
+                  :disabled="!activateSave"
                   class="save"
                   @click="save_report"
                 >
@@ -69,14 +79,11 @@
                 </v-btn>
               </div>
             </div>
-            <div class="site-preview" v-if="iframe_src">
-              <iframe
-                :src="iframe_src"
-                frameborder="0"
-                width="100%"
-                height="500px"
-                @load="iframe_loaded"
-              ></iframe>
+            <div class="site-preview" v-if="reports.length">
+              <ReportsSection
+                :iframeSrc="iframeSrc"
+                @iframe-loaded="iframe_loaded"
+              />
             </div>
           </div>
         </div>

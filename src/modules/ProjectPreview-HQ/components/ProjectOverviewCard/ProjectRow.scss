@@ -2,7 +2,7 @@
 .project__overview_row {
     .project__label, .project__value {
         border: 1px solid $tableBorderBlue;
-        padding: 19px 16px;
+        padding: 13px;
         font-size: 14px;
     }
     .project__label {
@@ -37,7 +37,6 @@
 @media only screen and (max-width: 480px){
     .project__overview_row {
         .project__label, .project__value {
-            padding: 9px 6px;
             font-size: 12px;
         }
         .project__label {
