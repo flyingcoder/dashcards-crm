@@ -22,6 +22,9 @@ export const global_utils = {
         .clone()
         .tz(tz)
         .format('YY/MM/DD, h:mm A')
+    },
+    truncate(text, stop, clamp) {
+      return text.slice(0, stop) + (stop < text.length ? clamp || '...' : '')
     }
   },
   methods: {

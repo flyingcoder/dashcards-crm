@@ -7,6 +7,8 @@ import ReportsList from './components/ReportsList/ReportsList.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import ReportsSection from './components/ReportsSection.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
+import ReportsEditDialog from './components/ReportEditDialog.vue'
+import ReportsAddDialog from './components/ReportAddDialog.vue'
 
 export default {
   components: {
@@ -14,7 +16,13 @@ export default {
     ReportsList,
     TableHeader,
     ReportsSection,
-    DeleteDialog
+    DeleteDialog,
+    ReportsEditDialog,
+    ReportsAddDialog
+  },
+  
+  props: {
+    id: [Number, String]
   },
 
   data: () => ({
@@ -31,7 +39,8 @@ export default {
     activateSave: false,
     activeReport: null,
     deleteDialog: false,
-    deleteReportId: null
+    deleteReportId: null,
+    reportIdToEdit: null
   }),
 
   computed: {
@@ -58,6 +67,10 @@ export default {
       this.deleteDialog = true
     },
 
+    openEditDialog({ report, index }) {
+      this.$refs.editDialog.open_dialog(report, index)
+    },
+
     iframe_loaded() {
       this.activateSave = true
       this.$store.commit('set_custom_loader', false)
@@ -68,19 +81,23 @@ export default {
         this.valid_url = event.target.validity.valid
       })
     },
-
-    on_dialog_save() {
+    /*
+    on_dialog_save() { //kirby:removed, transfer to ReportAddDialog component
       this.$refs.dialog.close_dialog()
       this.$store.commit('set_custom_loader', true)
       this.iframeSrc = this.link
-    },
+    },*/
 
     previewRowUrl(report) {
       this.iframeSrc = report.url
       this.activeReport = report
     },
+    
+    add_new_report(report) {
+      this.reports.push(report)
+    },
 
-    save_report() {
+  /*  save_report() { //kirby:removed, transfer to ReportAddDialog component
       this.$store.commit('set_custom_loader', true)
       makeRequestTo
         .add_new_report({
@@ -95,7 +112,7 @@ export default {
           this.reports.push(data)
         })
         .finally(() => this.$store.commit('set_custom_loader', false))
-    },
+    },*/
 
     deleteReport() {
       this.$store.commit('set_custom_loader', true)
@@ -114,6 +131,10 @@ export default {
           this.deleteDialog = false
           this.$store.commit('set_custom_loader', false)
         })
-    }
+    },
+
+    reportUpdated({ data, index }) {
+      this.$set(this.reports, index, data)
+    },
   }
 }

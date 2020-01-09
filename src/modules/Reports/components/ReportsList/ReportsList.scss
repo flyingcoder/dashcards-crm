@@ -19,10 +19,14 @@
     background-color: $bgLightBlue-2;
 
     .table-header{
+      display: -ms-grid;
       display: grid;
+      -ms-grid-columns: 1fr 4fr 50px;
       grid-template-columns: 1fr 4fr 50px;
-      justify-content: space-between;
-      align-items: center;
+      -webkit-box-pack: justify;
+              justify-content: space-between;
+      -webkit-box-align: center;
+              align-items: center;
       color: $textDarkBlue;
       border-bottom: 1px solid $tile-border;
       font-size: 15px;
@@ -45,10 +49,14 @@
   }
 
   .report-item {
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 1fr 4fr 50px;
     grid-template-columns: 1fr 4fr 50px;
-    justify-content: space-between;
-    align-items: center;
+    -webkit-box-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+            align-items: center;
     border-bottom: 1px solid $tile-border;
     padding: 10px;
     color: $textDark-2;
@@ -67,9 +75,15 @@
       border-bottom: none;
     }
   }
-  .reports-action span{
-    font-size: 20px;
-    color: $red;
+  .reports-action {
+    display:-webkit-box;
+    display:flex;
+    -webkit-box-pack: end;
+            justify-content: end;
+    span{
+      font-size: 20px;
+      color: $red;
+    }
   }
 
 }
