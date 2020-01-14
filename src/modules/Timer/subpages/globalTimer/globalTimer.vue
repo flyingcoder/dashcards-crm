@@ -1,25 +1,42 @@
 <template>
-  <div class="timer__tab">
+  <div class="timer">
     <custom-table
-      v-if="items.length || loading"  
+      v-if="items.length || loading"
       :headers="headers"
       :items="items"
       :loading="loading"
       :sort="sort"
       :has-checkbox="true"
       hide-actions
-      :show-row-actions="false"
-      toolbar-title="Timers"
       :permission="$_permissions.get('timers')"
       @items-selected="selected_ids = $event"
       @sorted="changeSort"
     >
-      <template slot="custom-item" slot-scope="{ item }">
-        <td class="text-cap">{{ item.client }}</td>
-        <td class="email">{{ item.title }}</td>
-        <td>{{ item.assignee }}</td>
-        <td>{{ item.total_time }}</td>
-        <td class="text-cap">{{ item.status }}</td>
+      <template slot="custom-item" slot-scope="item" class="template-table">
+        <td class="text-xs-left team__member">
+          <!--TODO fill image with dynamic data from backend-->
+          <div class="client-name">
+            <img :src="require('@/assets/temp/user.png')" /> &nbsp;
+          </div>
+          <div class="client-img text-cap">
+            Test Test
+          </div>
+        </td>
+
+        <td class="text-cap">Test</td>
+        <td class="">Test</td>
+        <td class="">Test</td>
+        <td class="">Test</td>
+        <td class="">Test</td>
+
+        <td class="">
+          <v-btn fab small flat depressed>
+            <img src="@/assets/icons/groups/edit.svg" alt="" />
+          </v-btn>
+          <v-btn fab small flat depressed>
+            <img src="@/assets/icons/groups/delete.svg" alt="" />
+          </v-btn>
+        </td>
       </template>
     </custom-table>
 
@@ -40,5 +57,5 @@
   </div>
 </template>
 
-<script src="./Timer.js"></script>
-<style lang="scss" scoped src="./Timer.scss"></style>
+<script src="./globalTimer.js"></script>
+<style lang="scss" scoped src="./globalTimer.scss"></style>

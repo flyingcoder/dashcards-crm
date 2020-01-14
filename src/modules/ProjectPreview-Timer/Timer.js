@@ -8,7 +8,9 @@ export default {
   components: {
     CustomTable
   },
-
+  props: {
+    id: [Number, String]
+  },
   data: () => ({
     sortList: [
       { title: 'Sort by Client' },
@@ -18,23 +20,25 @@ export default {
       { title: 'Sort by Date' }
     ],
     headers: [
-      { text: 'Client', value: 'client', sortable: true, align: 'left' },
-      { text: 'Task', value: 'task', sortable: true, align: 'left' },
-      { text: 'Service', value: 'service', sortable: true, align: 'left' },
-      {
-        text: 'Time Start',
-        value: 'time_start',
-        sortable: true,
-        align: 'left'
-      },
-      { text: 'Time End', value: 'time_end', sortable: true, align: 'left' },
-      {
-        text: 'Total Time',
-        value: 'total_time',
-        sortable: true,
-        align: 'left'
-      },
-      { is_action: true }
+      { text: 'Client', value: 'id'},
+      { text: 'Task', value: 'title' },
+      { text: 'Assignee', value: 'assignee' },
+      { text: 'Total Time', value: 'total_time'},
+      { text: 'Status', value: 'status'},
+      { is_action: false }
     ]
-  })
+  }),
+
+  computed: {
+    dynamic_api() {
+      return `api/projects/${this.id}/timers`
+    },
+    client() {
+      return this.id
+    }
+  },
+  created() {
+    this.fill_table('get_project_timers', false, this.dynamic_api)
+    console.log(this)
+  }
 }
