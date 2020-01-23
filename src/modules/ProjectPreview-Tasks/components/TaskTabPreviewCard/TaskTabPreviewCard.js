@@ -37,7 +37,7 @@ export default {
       if (!this.content || !this.content.assigned.length) return null
       return (
         this.content.assigned[0].first_name +
-        '' +
+        ' ' +
         this.content.assigned[0].last_name
       )
     },

@@ -118,6 +118,8 @@ export default {
       this.loading = false
       this.members.all_items = members.data
       this.members.items = members.data
+      console.log(members);
+      console.log(this.members.items);
       this.milestones.items = milestones.data
     },
 

@@ -75,13 +75,14 @@
               >
                 <v-flex sm2 xs3
                   ><v-img
-                    :src="require('@/assets/temp/user.png')"
+                    v-if="assignee_url"
+                    :src="assignee_url"
                     height="45"
                     width="45"
                 /></v-flex>
                 <v-flex sm10 xs9>
                   <div class="commenter">
-                    <div class="comment-name">Ross Mosqueda</div>
+                    <div class="comment-name">{{ full_name }}</div>
                     <small class="comment-time">
                       {{ comment.created_at | from_now }}</small
                     >
@@ -95,7 +96,8 @@
           <div class="task__comments">
             <v-flex sm2 xs3
               ><v-img
-                :src="require('@/assets/temp/user.png')"
+                v-if="assignee_url"
+                :src="assignee_url"
                 height="45"
                 width="45"
             /></v-flex>
