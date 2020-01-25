@@ -52,7 +52,7 @@
             <div class="boxes status">
               <span class="box__content">{{ content.status }}</span>
             </div>
-            <hours-box :content="content" />
+            <hours-box :content="content" v-if="content.status != 'completed'"/>
           </div>
 
           <div class="mobile__hours-box"><hours-box :content="content" /></div>

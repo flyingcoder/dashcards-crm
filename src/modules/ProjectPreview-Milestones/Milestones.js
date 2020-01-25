@@ -162,7 +162,7 @@ export default {
         .edit_milestone_task(
           this.edit_task_item.id,
           task,
-          `api/milestone/${this.id}/task`
+          `api/task`
         )
         .then(res => {
           const { index, box_id } = this.edit_task_item

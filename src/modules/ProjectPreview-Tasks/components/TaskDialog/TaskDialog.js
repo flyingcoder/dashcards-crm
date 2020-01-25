@@ -89,7 +89,7 @@ export default {
         status: this.status,
         started_at: this.start_date,
         end_at: this.end_date,
-        assigned_ids: this.members.selected
+        assigned: this.members.selected
       }
       this.$emit('save', fields_to_save)
     },
@@ -101,7 +101,8 @@ export default {
       this.start_date = task.started_at
       this.end_date = task.end_at
       this.milestones.selected = task.milestone_id
-      this.members.selected = task.assigned_ids
+      //this.members.selected = task.assigned_ids
+      this.$set(this.members, 'selected', task.assigned)
     },
 
     clear_and_close() {
@@ -118,8 +119,6 @@ export default {
       this.loading = false
       this.members.all_items = members.data
       this.members.items = members.data
-      console.log(members);
-      console.log(this.members.items);
       this.milestones.items = milestones.data
     },
 
