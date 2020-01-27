@@ -19,5 +19,9 @@ export const permissions_api = {
 
   paginate_permissions_table(query) {
     return request.get(`api/permission?${query}`)
+  },
+
+  get_role_permissions(role_id) {
+    return request.get(`api/roles/${role_id}/permissions`)
   }
 }

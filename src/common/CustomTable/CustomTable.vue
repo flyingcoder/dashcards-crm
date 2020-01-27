@@ -9,6 +9,8 @@
             </v-toolbar-title>
           </v-toolbar>
         </slot>
+        
+        <slot name="right_toolbar"></slot>
 
         <v-data-table
           v-model="selected"

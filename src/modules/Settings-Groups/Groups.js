@@ -7,6 +7,7 @@ import DeleteDialog from '@/common/DeleteDialog.vue'
 import GroupsDialog from './components/GroupsDialog/GroupsDialog.vue'
 import PermissionsDialog from './components/PermissionsDialog/PermissionsDialog.vue'
 import isEmpty from 'lodash/isEmpty'
+import request from '@/services/axios_instance'
 
 export default {
   name: 'Groups',
@@ -26,10 +27,10 @@ export default {
       { text: 'Groups', disabled: true, router_name: null }
     ],
     headers: [
-      { id: 1, text: 'Index', value: 'index', width: '5%' },
-      { id: 2, text: 'Group Name', value: 'group_name', width: '5%' },
-      { id: 3, text: 'Description', value: 'description', width: '5%' },
-      { id: 4, is_action: true, width: '85%' }
+      { id: 1, text: 'Index', value: 'index', width: '10%' },
+      { id: 2, text: 'Group Name', value: 'group_name', width: '20%' },
+      { id: 3, text: 'Description', value: 'description', width: '40%' },
+      { id: 4, is_action: true, width: '30%' }
     ],
     actions: [
       {
@@ -101,6 +102,21 @@ export default {
       this.fill_table('get_groups', true)
     } else {
       this.update_table_actions(query)
+    }
+  },
+
+  methods : {
+    open_permission_dialog( item ) {
+      this.permissionDialog = true
+      this.$set(this.edit_item, 'id', item.id)
+      this.$set(this.edit_item, 'fields', item)
+    },
+
+    update_permissions(payload) {
+      request.put('api/roles/'+payload.role_id+'/permissions', payload)
+      .then((data) => {
+        this.$emit('open_snackbar', data.message, data.type)
+      })
     }
   }
 }

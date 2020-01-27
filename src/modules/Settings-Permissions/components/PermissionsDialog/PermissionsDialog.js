@@ -17,6 +17,7 @@ export default {
   data: () => ({
     open: false,
     description: null,
+    permission_name : null,
     selected_permission: null,
     selected_group: null,
     permissions: [],
@@ -81,7 +82,7 @@ export default {
   created() {
     this.loading_permissions = true
     api_to
-      .get_permissions()
+      .get_default_permissions()
       .then(({ data }) => (this.permissions = data))
       .finally(() => (this.loading_permissions = false))
   },
@@ -111,6 +112,8 @@ export default {
       const new_fields = cloneDeep(fields)
       this.selected_group = new_fields.selected_group
       this.description = new_fields.description
+      this.slug = new_fields.slug
+      this.permission_name = new_fields.name
     },
 
     clear_and_close() {

@@ -1,5 +1,17 @@
 @import '~@/sass/_variables';
 .switches{
+    display: -webkit-box;
     display: flex;
-    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+            flex-direction: row;
+}
+.bz-table {
+	width : 100%;
+	
+	.table-header {
+		th {
+			width : 50%;
+		}
+	}
 }

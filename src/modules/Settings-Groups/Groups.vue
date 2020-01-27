@@ -27,6 +27,8 @@
       :dialog.sync="permissionDialog"
       ref="permissionDialog"
       title="Permission Table Dialog"
+      :fields-to-edit="edit_item"
+      @save="update_permissions($event)"
     />
 
     <v-layout row>
@@ -94,8 +96,8 @@
                     flat
                     small
                     depressed
-                    title="Security"
-                    @click="permissionDialog = true"
+                    title="Permissions"
+                    @click="open_permission_dialog(item)"
                   >
                     <v-icon>vpn_key</v-icon>
                   </v-btn>

@@ -23,30 +23,37 @@
       @delete="delete_item('delete_permission')"
     />
 
-    <table-header :paths="paths" @click="add_dialog = true" />
-
+    <!--kirby:notes removed, new permissions will be handle by backend observer  -->
+    <!-- <table-header :paths="paths" @click="add_dialog = true" /> -->
+    
     <custom-table
       :headers="headers"
       :items="items"
       :loading="loading"
       :sort="sort"
-      :has-checkbox="true"
+      :has-checkbox="false"
       hide-actions
       toolbar-title="Permissions"
       no-row-view
+      :noRowDelete="true"
       :permission="$_permissions.get('permissions')"
       @items-selected="selected_ids = $event"
       @sorted="changeSort"
       @edit="open_edit_dialog"
-      @delete="open_delete_dialog"
     >
+      <template slot="right_toolbar">
+        <v-flex xs12 sm3 >
+          <v-select label="Select Group" :items="groups" v-model="selected_group"></v-select>
+        </v-flex>
+      </template>
+
       <template slot="custom-item" slot-scope="{ item }">
-        <td>{{ item.name }}</td>
+        <td>{{ item.name | removeSlug }}</td>
         <td>{{ item.description }}</td>
         <td>{{ capability_column(item.slug) }}</td>
       </template>
 
-      <template slot="table-actions">
+      <!-- <template slot="table-actions">
         <div class="actions-wrapper">
           <div class="bulk-delete">
             <v-btn
@@ -80,7 +87,7 @@
             </div>
           </div>
         </div>
-      </template>
+      </template> -->
     </custom-table>
   </div>
 </template>

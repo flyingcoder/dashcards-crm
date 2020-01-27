@@ -85,6 +85,10 @@ export const methods = {
       })
     },
 
+    fill_table_with_data (data) {
+      this.items = data
+    },
+
     add_table_rows(rows, response) {
       this.items = rows
       this.items_response = response

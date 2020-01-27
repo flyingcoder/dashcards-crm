@@ -18,7 +18,7 @@
           :key="permission.id"
           class="table-data"
         >
-          <td>{{ snakeCaseToNormal(permission.name) }}</td>
+          <td>{{ snakeCaseToNormal(permission.name) | removeSlug }}</td>
           <td class="switches">
             <v-switch
               v-model="permission.slug.view"

@@ -10,7 +10,21 @@
     >
       <template slot="content">
         <v-layout wrap class="custom-dialog">
-          <v-flex xs12 sm6>
+          <v-flex xs12 sm6 v-if="!fieldsToEdit">
+            <v-select
+              class="dialog__selectfield"
+              placeholder="Select Group"
+              :items="group_items"
+              v-model.trim="selected_group"
+              solo
+              hide-details
+              color="#657186"
+              item-text="name"
+              item-value="slug"
+            ></v-select>
+          </v-flex>
+          
+          <v-flex xs12 sm6 v-if="!fieldsToEdit">
             <v-autocomplete
               class="dialog__selectfield"
               :items="permissions"
@@ -25,20 +39,9 @@
             ></v-autocomplete>
           </v-flex>
 
-          <v-flex xs12 sm6>
-            <v-select
-              class="dialog__selectfield"
-              placeholder="Select Group"
-              :items="group_items"
-              v-model.trim="selected_group"
-              solo
-              hide-details
-              color="#657186"
-              item-text="name"
-              item-value="slug"
-            ></v-select>
+          <v-flex xs12 sm12 v-if="fieldsToEdit">
+            <label>Edit permission for <strong>{{permission_name}}</strong></label>
           </v-flex>
-
           <div class="permissions">
             <div class="title">
               <div class="left-line line"></div>

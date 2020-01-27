@@ -5,8 +5,12 @@ export const groups_api = {
     return request.get(`api/groups?all=true`)
   },
 
+  get_all_default_groups() {
+    return request.get(`api/groups?default=true`)
+  },
+
   get_group_permissions(id) {
-    return request.get(`api/groups/${id}/permission`)
+    return request.get(`api/groups/${id}/permission`) 
   },
 
   get_groups(query) {
@@ -27,5 +31,9 @@ export const groups_api = {
 
   paginate_groups_table(query) {
     return request.get(`api/groups?${query}`)
-  }
+  },
+
+  get_company_groups(query) {
+    return request.get(`/api/roles/company`)
+  },
 }
