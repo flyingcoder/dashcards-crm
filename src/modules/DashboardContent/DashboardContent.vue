@@ -25,6 +25,7 @@
           <component
             :is="card.component"
             :key="card.component"
+            v-bind="args"
             v-if="
               should_show(card.slug) &&
                 card.hasOwnProperty('component') &&
@@ -39,6 +40,7 @@
                 <dash-card
                   @close="close(card.id)"
                   :title="card.name"
+                  :dashboard="args.dashboard"
                 ></dash-card>
               </div>
             </v-flex>

@@ -11,7 +11,8 @@ export default {
   },
 
   props: {
-    id: [Number, String]
+    id: [Number, String],
+    dashboard: Boolean
   },
 
   data: () => ({

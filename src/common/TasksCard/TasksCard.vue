@@ -5,6 +5,7 @@
         title="Tasks"
         :view-more-link="viewMoreLink"
         class="task__content"
+        :dashboard="dashboard"
         @close="$emit('close')"
       >
         <div class="content-wrapper" slot="content">
@@ -28,7 +29,7 @@ export default {
     TasksContent
   },
 
-  props: { id: [Number, String], viewMoreLink: Object }
+  props: { id: [Number, String], viewMoreLink: Object, dashboard: Boolean }
 }
 </script>
 

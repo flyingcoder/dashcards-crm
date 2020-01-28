@@ -102,7 +102,6 @@ export default {
     },
 
     delete_task() {
-      // delete request to the server
       apiTo.delete_task(this.task.id).then(() => this.remove_task())
     },
 
@@ -120,7 +119,8 @@ export default {
         task => task.id === this.task.id
       )
       if (~own_task_index) this.tasks_own.splice(own_task_index, 1)
-      if (~all_task_index) this.tasks_own.splice(all_task_index, 1)
+      if (~all_task_index) this.all_tasks.splice(all_task_index, 1)
+
       this.delete_dialog = false
       this.$event.$emit('open_snackbar', 'Task deleted successfully')
       this.set_active_task_after_delete()

@@ -29,7 +29,10 @@ export default {
   data: () => ({
     init: true,
     paths: [{ text: 'Dashboard', disabled: true, router_name: null }],
-    isRequestInProgress: false
+    isRequestInProgress: false,
+    args: {
+      dashboard: true
+    }
   }),
 
   computed: {
@@ -78,6 +81,7 @@ export default {
 
   created() {
     this.fill_cards()
+    console.log(this.card_components)
   },
 
   methods: {

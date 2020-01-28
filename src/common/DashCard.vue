@@ -4,7 +4,7 @@
       <v-flex xs8 class="card__title">
         {{ title }}
       </v-flex>
-      <slot name="actions">
+      <slot name="actions" v-if="dashboard">
         <v-flex xs4 class="actions text-xs-right">
           <v-btn fab small flat class="action">
             <v-icon @click="$emit('close')">close</v-icon>
@@ -32,7 +32,8 @@ export default {
   name: 'DashCard',
   props: {
     title: String,
-    viewMoreLink: Object
+    viewMoreLink: Object,
+    dashboard: Boolean
   },
   methods: {
     reroute() {

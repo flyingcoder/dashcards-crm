@@ -1,8 +1,9 @@
 <template>
   <div class="task-custom-table">
     <v-layout row class="header">
-      <v-flex xs3 class="task__tableHead">Assignee</v-flex>
-      <v-flex xs6 class="task__tableHead">Task</v-flex>
+      <v-flex xs3 class="task__tableHead" v-if="tab=='All Tasks'">Assignee</v-flex>
+      <v-flex xs6 class="task__tableHead" v-if="tab=='All Tasks'">Task</v-flex>
+      <v-flex xs9 class="task__tableHead" v-if="tab!='All Tasks'">Task</v-flex>
       <v-flex xs3 class="task__tableHead">Status</v-flex>
     </v-layout>
 
@@ -15,7 +16,7 @@
         :key="task.id"
         @click="row_clicked(task)"
       >
-        <v-flex xs3 class="assignee__col">
+        <v-flex xs3 class="assignee__col" v-if="tab=='All Tasks'">
           <v-img
             v-if="task.assignee_url"
             :src="task.assignee_url"
@@ -25,7 +26,11 @@
           <span v-if="!task.assignee_url"></span>
         </v-flex>
 
-        <v-flex xs6 class="project__col">
+        <v-flex xs6 class="project__col" v-if="tab=='All Tasks'">
+          {{ task.title }}
+        </v-flex>
+
+        <v-flex xs9 class="project__col" v-if="tab!='All Tasks'">
           {{ task.title }}
         </v-flex>
 
@@ -57,7 +62,8 @@
 export default {
   name: 'TaskCustomTable',
   props: {
-    tasks: Array
+    tasks: Array,
+    tab: String
   },
   inject: {
     bodyMaxHeight: {

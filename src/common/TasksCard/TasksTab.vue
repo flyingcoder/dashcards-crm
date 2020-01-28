@@ -20,7 +20,7 @@
       :active-chip.sync="active_chip"
     />
 
-    <task-custom-table :tasks="filtered_tasks" />
+    <task-custom-table :tasks="filtered_tasks" :tab="tab"/>
   </div>
 </template>
 
