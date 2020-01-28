@@ -1,6 +1,11 @@
 @import "~@/sass/_variables";
 
+@include emptyTable('.empty-task');
+
 .tasks-tab {
+  .empty-task {
+    margin: 0 30px;
+  }
   display: grid;
   .cards {
     display: grid;

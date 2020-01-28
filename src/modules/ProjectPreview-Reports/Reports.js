@@ -23,6 +23,7 @@ export default {
   data: () => ({
     reports: [],
     loading: false,
+    iframe_loading: true,
     iframe_src: null,
     activate_save: false,
     active_report: null,
@@ -47,6 +48,10 @@ export default {
   },
 
   methods: {
+    iframeLoaded() {
+      console.log("this")
+      this.iframe_loading = false
+    },
     open_dialog() {
       this.$refs.dialog.open_dialog()
     },

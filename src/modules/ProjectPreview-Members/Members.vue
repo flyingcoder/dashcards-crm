@@ -1,5 +1,10 @@
 <template>
   <div class="members-tab">
+    <v-progress-linear
+      v-show="loading"
+      :indeterminate="true"
+    ></v-progress-linear>
+
     <v-layout row>
       <v-flex xs12 class="text-xs-right">
         <v-btn fab small class="add__btn" @click="add_dialog = true">
@@ -60,7 +65,7 @@
       </template>
     </custom-table>
 
-    <div class="empty-member" v-else>
+    <div class="empty-member" v-show="!loading && !items.length">
       <div class="empty-content">
         <div class="empty-svg">
           <svg viewBox="0 0 250 250">

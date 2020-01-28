@@ -1,13 +1,15 @@
 <template>
   <div class="reports__body">
-    <div class="reports-content">
+    <v-progress-linear v-if="!loaded" :indeterminate="true"
+    ></v-progress-linear>
+    <div class="reports-content" v-show="loaded">
       <div class="site-preview" v-if="iframe_src">
         <iframe
           :src="iframe_src"
           frameborder="0"
           width="100%"
-          height="500px"
-          @load="$emit('iframe-loaded')"
+          height="800"
+          @load="load"
         ></iframe>
       </div>
     </div>
@@ -18,6 +20,14 @@
 export default {
   props: {
     iframe_src: String
+  },
+  data: () => ({
+    loaded: false
+  }),
+  methods: {
+    load() {
+      this.loaded = true
+    }
   }
 }
 </script>
@@ -55,6 +65,5 @@ export default {
 }
 .site-preview {
   border: 1px solid $tableBorderBlue;
-  margin: 5px 10px;
 }
 </style>
