@@ -16,6 +16,7 @@ export default {
   },
 
   data: () => ({
+    user: '',
     paths: [
       { text: 'Dashboard', disabled: false, router_name: 'default-content' },
       { text: 'Teams', disabled: false, router_name: 'team' },

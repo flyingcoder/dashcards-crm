@@ -2,7 +2,7 @@
   <div class="profile-upper">
     <div class="background">
       <v-icon class="camera">camera_alt</v-icon>
-      <v-icon class="settings">settings</v-icon>
+      <v-icon class="settings" @click="open_edit_dialog(user)">settings</v-icon>
     </div>
 
     <div class="icons" v-if="user">
@@ -10,6 +10,15 @@
         <img :src="user.image_url" alt="User" width="100%" height="auto" />
       </div>
     </div>
+
+    <teams-dialog
+        ref="edit_dialog"
+        title="Edit Member"
+        :dialog.sync="edit_dialog"
+        :fields-to-edit="edit_item"
+        :is-edit-dialog="edit_dialog"
+        @save="update_item('update_team', $event)"
+      />
 
     <AddPicture />
     <UserInfo />

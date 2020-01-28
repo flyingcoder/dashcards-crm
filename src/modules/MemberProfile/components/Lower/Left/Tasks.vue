@@ -1,5 +1,5 @@
 <template>
-  <div class="loading" v-if="loading">
+  <div class="loading" v-if="user_loading">
     <v-progress-linear :indeterminate="true"></v-progress-linear>
   </div>
 
@@ -25,25 +25,20 @@
 </template>
 
 <script>
-import request from '@/services/axios_instance'
+import { mapGetters } from 'vuex'
 import TaskChips from '@/common/TasksCard/TaskChips.vue'
 import TaskCustomTable from '@/common/TasksCard/TaskCustomTable.vue'
 
 export default {
-  name: 'ProfileTasks',
   components: { TaskChips, TaskCustomTable },
-  props: {
-    id: [Number, String],
-    tab: String
-  },
 
   data: () => ({
     tasks: [],
-    loading: false,
     active_chip: 'all'
   }),
 
   computed: {
+    ...mapGetters('memberProfile', ['user', 'user_loading']),
     filtered_tasks() {
       if (this.active_chip === 'all') return this.tasks
       return this.tasks.filter(
@@ -51,7 +46,7 @@ export default {
       )
     },
     tasks_are_empty() {
-      return !this.loading && this.tasks.length === 0
+      return this.tasks.length === 0
     },
     count_completed_tasks() {
       return this.tasks.filter(task => task.status === 'completed').length
@@ -68,28 +63,10 @@ export default {
   },
 
   watch: {
-    tab: {
+    user: {
       handler(val) {
-        let api_url = 'api/task'
-        if (this.id) {
-          api_url = `api/projects/${this.id}/tasks`
-        }
-        if (val === 'My Tasks') api_url += '/mine'
-
-        api_url += '?all=true'
-        this.get_tasks(api_url)
-      },
-      immediate: true
-    }
-  },
-
-  methods: {
-    get_tasks(api_url) {
-      this.loading = true
-      request
-        .get(api_url)
-        .then(({ data }) => (this.tasks = data))
-        .finally(() => (this.loading = false))
+        this.tasks = val.tasks
+      }
     }
   }
 }
