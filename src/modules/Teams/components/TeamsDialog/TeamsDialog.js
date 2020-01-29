@@ -70,6 +70,9 @@ export default {
     },
 
     update_fields({ fields }) {
+      fields['rate'] = ("rate" in fields.meta) ? fields.meta.rate.value : ''
+      fields['address'] = ("address" in fields.meta) ? fields.meta.address.value : ''
+      console.log(fields)
       this.password = 'dummypassword1'
       this.repeat_password = 'dummypassword1'
       const new_fields = Object.assign({}, fields)
@@ -92,7 +95,7 @@ export default {
         address: this.address,
         telephone: this.contact_number,
         group_name: this.group_name,
-        job_title: this.job_title
+        job_title: this.job_title,
       }
       if (!this.isEditDialog) {
         fields.password = this.password

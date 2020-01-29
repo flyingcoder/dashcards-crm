@@ -33,12 +33,11 @@ export default {
   components: { TaskChips, TaskCustomTable },
 
   data: () => ({
-    tasks: [],
     active_chip: 'all'
   }),
 
   computed: {
-    ...mapGetters('memberProfile', ['user', 'user_loading']),
+    ...mapGetters('memberProfile', ['tasks', 'user_loading']),
     filtered_tasks() {
       if (this.active_chip === 'all') return this.tasks
       return this.tasks.filter(
@@ -59,14 +58,6 @@ export default {
     },
     count_open_tasks() {
       return this.tasks.filter(task => task.status === 'open').length
-    }
-  },
-
-  watch: {
-    user: {
-      handler(val) {
-        this.tasks = val.tasks
-      }
     }
   }
 }

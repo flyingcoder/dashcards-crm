@@ -17,7 +17,7 @@
         :dialog.sync="edit_dialog"
         :fields-to-edit="edit_item"
         :is-edit-dialog="edit_dialog"
-        @save="update_item('update_team', $event)"
+        @save="update_user_profile($event)"
       />
 
     <AddPicture />
