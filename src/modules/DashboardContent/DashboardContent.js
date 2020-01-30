@@ -11,6 +11,7 @@ import DashboardTiles from './components/DashboardTiles/DashboardTiles.vue'
 import NoCards from './components/NoCards.vue'
 import draggable from 'vuedraggable'
 import CalendarCard from '@/common/CalendarCard/CalendarCard.vue'
+import InvoiceCard from '@/common/InvoiceCard/InvoiceCard.vue'
 
 export default {
   name: 'DashboardContent',
@@ -23,7 +24,8 @@ export default {
     DashboardTiles,
     NoCards,
     draggable,
-    CalendarCard
+    CalendarCard,
+    InvoiceCard
   },
 
   data: () => ({
@@ -59,7 +61,7 @@ export default {
     card_components() {
       let cards = _cloneDeep(this.cards)
       return cards.map(card => {
-        if (['timeline', 'tasks', 'calendar'].includes(card.slug)) {
+        if (['timeline', 'tasks', 'calendar', 'invoice'].includes(card.slug)) {
           card.component = card.slug + '-card'
         }
         return card
