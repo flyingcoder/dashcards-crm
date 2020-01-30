@@ -1,10 +1,10 @@
 <template>
-  <v-flex xs12 class="invoice-card">
-    <div class="invoice__content">
+  <v-flex xs12 class="client-card">
+    <div class="client__content">
       <dash-card
-        title="Invoice"
+        title="Clients"
         :view-more-link="viewMoreLink"
-        class="invoice__content"
+        class="client__content"
         :dashboard="dashboard"
         @close="$emit('close')"
       >
@@ -13,7 +13,7 @@
             v-if="items.length || loading"
             :headers="headers"
             :items="items"
-            :permission="$_permissions.get('invoice')"
+            :permission="$_permissions.get('client')"
             hide-default-footer
             hide-actions
             :loading="loading" 
@@ -22,10 +22,10 @@
             @page-count="pageCount = $event"
           >
             <template v-slot:items="props">
-              <td>{{ props.item.title }}</td>
-              <td>{{ props.item.due_date }}</td>
-              <td>{{ props.item.billed_to }}</td>
-              <td>{{ props.item.total_amount }}</td>
+              <td>{{ props.item.company_name }}</td>
+              <td>{{ props.item.full_name }}</td>
+              <td>{{ props.item.status }}</td>
+              <td>{{ props.item.email }}</td>
             </template>
           </v-data-table>
           <div class="flex justify-content-center" v-if="items.length || loading">
@@ -35,7 +35,7 @@
               @input="onPageChange"
             ></v-pagination>
           </div>
-          <div class="empty-invoice" v-else>
+          <div class="empty-client" v-else>
             <div class="empty-content">
               <div class="empty-svg">
                 <svg viewBox="0 0 250 250">
@@ -45,7 +45,7 @@
                 </svg>
               </div>
               <div class="empty-text">
-                No Invoice yet
+                No Client yet
               </div>
             </div>
           </div>
@@ -55,14 +55,14 @@
   </v-flex>
 </template>
 
-<script src="./InvoiceCard.js"></script>
-
+<script src="./ClientCard.js"></script>
 <style lang="scss" scoped>
   @import '~@/sass/_variables';
-  @include emptyTable('.empty-invoice');
-  
+  @include emptyTable('.empty-client');
+
   .justify-content-center {
     display: flex;
     justify-content: center;
   }
 </style>
+

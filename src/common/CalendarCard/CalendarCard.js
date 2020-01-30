@@ -11,7 +11,9 @@ export default {
   },
 
   props: {
-    id: [Number, String]
+    id: [Number, String],
+    viewMoreLink: Object, 
+    dashboard: Boolean 
   },
 
   data: () => ({

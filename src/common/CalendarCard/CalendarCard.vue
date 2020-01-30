@@ -1,7 +1,13 @@
 <template>
   <v-flex xs12 class="calendar-card">
     <div class="calendar__content">
-      <dash-card title="Calendar" @close="$emit('close')">
+      <dash-card 
+        title="Calendar" 
+        @close="$emit('close')"
+        class="calendar__content"
+        :view-more-link="viewMoreLink"
+        :dashboard="dashboard"
+      >
         <div class="calendar__inner_content" slot="content">
           <v-progress-linear
             v-if="loading"

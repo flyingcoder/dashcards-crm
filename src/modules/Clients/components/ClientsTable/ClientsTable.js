@@ -15,6 +15,7 @@ export default {
   },
 
   data: () => ({
+    items: [],
     headers: [
       { id: 1, text: 'Client', align: 'left', value: 'name' },
       { id: 2, text: 'Contact No.', value: 'contact' },
