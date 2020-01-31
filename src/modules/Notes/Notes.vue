@@ -2,6 +2,13 @@
   <div class="notes">
     <table-header :paths="paths" @click="notes_dialog = true" />
     <NotesDialog v-model="notes_dialog" @save="save" />
+    
+    <EditNotesDialog 
+      v-model="edit_note_dialog" 
+      :fieldsToEdit="note_to_edit"
+      @update="updateNote" 
+    />
+
     <CollaboratorDialog
       :dialog.sync="coll_dialog"
       :collaborators="collaborators"
@@ -21,6 +28,7 @@
           :note="selected_note"
           :loading="loading"
           @collaborator="open_collaborators_dialog"
+          @editNotes="open_edit_note_dialog"
         />
       </div>
     </div>

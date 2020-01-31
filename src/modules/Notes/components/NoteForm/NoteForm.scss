@@ -3,25 +3,30 @@
 .note-form{
 
     .note-title{
-        display: grid;
-        grid-template-columns: 1fr 50px;
-        grid-gap: 20px;
+        display: -webkit-box;
+        display: flex;
         border: 1px solid #dce1e5;
         background-color: $white;
         padding: 10px;
     }
-        
-    .add-btn{
-        height: 33px;
-        min-width: 33px;
-        border-radius: 5px;
-        border: 1px solid $borderLightGray;
-        background-color: $lightGray;
-        color: $darkGray;
-        margin: auto 0;
-        text-align: right;
-        padding: 0;
-    }
+
+    .action-wrapper {
+        display : -webkit-box;
+        display : flex;
+        align-contents: center;
+
+        .action-btn{
+            height: 33px;
+            min-width: 33px;
+            border-radius: 5px;
+            border: 1px solid $borderLightGray;
+            background-color: $lightGray;
+            color: $darkGray;
+            margin: auto 2px;
+            text-align: right;
+            padding: 0;
+        }
+    }   
 
     .note-content{
         padding: 10px;

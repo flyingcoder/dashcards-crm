@@ -16,5 +16,8 @@ export const api_to = {
   toggle_pin(note) {
     if (note.pivot.is_pinned) return request.put(`api/note/${note.id}/unpin`)
     else return request.put(`api/note/${note.id}/pin`)
+  },
+  updateNote(payload) {
+    return request.put(`api/note/${payload.id}`, payload)
   }
 }

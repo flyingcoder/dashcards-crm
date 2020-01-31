@@ -4,7 +4,9 @@ import TableHeader from '@/common/TableHeader.vue'
 import NotesList from './components/NotesList/NotesList.vue'
 import NoteForm from './components/NoteForm/NoteForm.vue'
 import NotesDialog from './components/NotesDialog/NotesDialog'
+import EditNotesDialog from './components/NotesDialog/EditNotesDialog'
 import CollaboratorDialog from './components/CollaboratorDialog/CollaboratorDialog.vue'
+import { cloneDeep } from 'lodash'
 
 export default {
   name: 'Notes',
@@ -13,6 +15,7 @@ export default {
     NotesList,
     NoteForm,
     NotesDialog,
+    EditNotesDialog,
     CollaboratorDialog
   },
 
@@ -22,12 +25,14 @@ export default {
       { text: 'Notes', disabled: true, router_name: null }
     ],
     notes_dialog: false,
+    edit_note_dialog: false,
     coll_dialog: false,
     notes: [],
     loading: false,
     selected_note: null,
     collaborators: [],
-    pin_api: false
+    pin_api: false,
+    note_to_edit : null
   }),
 
   created() {
@@ -50,7 +55,29 @@ export default {
       api_to.add_new_note(payload).then(({ data }) => {
         this.notes.push(data)
         this.$event.$emit('open_snackbar', 'Note Added Successfully')
+        this.notes_dialog = false
       })
+    },
+    
+    updateNote(payload) {
+      if (payload) {
+        api_to.updateNote(payload)
+        .then(this.update_notes)
+      }
+    },
+    update_notes({ data }) {
+      const index = this.notes.findIndex(
+        note => note.id === this.selected_note.id
+      )
+      if (~index) {
+        this.notes[index].title = data.title
+        this.notes[index].content = data.content
+        this.$event.$emit(
+          'open_snackbar',
+          'Note updated successfully!'
+        )
+      }
+      this.edit_note_dialog = false
     },
 
     save_collaborators(payload) {
@@ -72,6 +99,11 @@ export default {
     open_collaborators_dialog(collaborators) {
       this.collaborators = collaborators
       this.coll_dialog = true
+    },
+
+    open_edit_note_dialog(note) {
+      this.note_to_edit = cloneDeep(note)
+      this.edit_note_dialog = true
     },
 
     update_collaborators({ data }) {

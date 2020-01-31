@@ -8,24 +8,37 @@
   ></v-progress-linear>
   <div class="note-form" v-else>
     <div class="note-title">
-      <v-text-field
-        solo
-        hide-details
-        color="#657186"
-        flat
-        placeholder="Note title 1"
-        class="title"
-        readonly
-        :value="note.title"
-      >
-      </v-text-field>
-      <v-btn
-        flat
-        class="add-btn"
-        @click="$emit('collaborator', note.collaborators)"
-      >
-        <v-icon>add</v-icon>
-      </v-btn>
+      <v-layout row >
+        <v-flex grow>
+          <v-text-field
+            solo
+            hide-details
+            color="#657186"
+            flat
+            placeholder="Note title 1"
+            class="title"
+            readonly
+            :value="note.title"
+          >
+          </v-text-field>
+        </v-flex>
+        <v-flex shrink align-center class="action-wrapper">
+            <v-btn
+              flat
+              class="action-btn"
+              @click="$emit('editNotes', note)"
+            >
+              <v-icon>edit</v-icon>
+            </v-btn>
+            <v-btn
+              flat
+              class="action-btn"
+              @click="$emit('collaborator', note.collaborators)"
+            >
+              <v-icon>add</v-icon>
+            </v-btn>
+        </v-flex>
+      </v-layout>
     </div>
     <div class="note-content">
       <v-textarea
