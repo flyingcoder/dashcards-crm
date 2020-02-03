@@ -19,5 +19,8 @@ export const api_to = {
   },
   updateNote(payload) {
     return request.put(`api/note/${payload.id}`, payload)
+  },
+  deleteNote(note) {
+    return request.delete(`api/note/${note.id}`)
   }
 }

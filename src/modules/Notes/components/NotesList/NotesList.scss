@@ -33,11 +33,15 @@
     }
 
     .note-name{
+        display: -ms-grid;
         display: grid;
+        -ms-grid-columns: 1fr 30px;
         grid-template-columns: 1fr 30px;
-        justify-content: space-between;
+        -webkit-box-pack: justify;
+                justify-content: space-between;
         grid-gap: 10px;
-        align-items: center;
+        -webkit-box-align: center;
+                align-items: center;
 
         span{
             font-size: 16px;
@@ -59,6 +63,10 @@
         }
 
         &:hover{
+            color: $blue;
+        }
+
+        &.active{
             color: $blue;
         }
     }

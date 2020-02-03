@@ -5,6 +5,7 @@ import NotesList from './components/NotesList/NotesList.vue'
 import NoteForm from './components/NoteForm/NoteForm.vue'
 import NotesDialog from './components/NotesDialog/NotesDialog'
 import EditNotesDialog from './components/NotesDialog/EditNotesDialog'
+import DeleteDialog from '@/common/DeleteDialog.vue'
 import CollaboratorDialog from './components/CollaboratorDialog/CollaboratorDialog.vue'
 import { cloneDeep } from 'lodash'
 
@@ -16,7 +17,8 @@ export default {
     NoteForm,
     NotesDialog,
     EditNotesDialog,
-    CollaboratorDialog
+    CollaboratorDialog,
+    DeleteDialog
   },
 
   data: () => ({
@@ -26,13 +28,15 @@ export default {
     ],
     notes_dialog: false,
     edit_note_dialog: false,
+    delete_note_dialog : false,
     coll_dialog: false,
     notes: [],
     loading: false,
     selected_note: null,
     collaborators: [],
     pin_api: false,
-    note_to_edit : null
+    note_to_edit : null,
+    note_to_delete : null
   }),
 
   created() {
@@ -130,6 +134,30 @@ export default {
         .finally(() => {
           this.pin_api = false
           this.$event.$emit('open_snackbar', `${text} successfully!`)
+        })
+    },
+
+    open_delete_note_dialog( note ) {
+      this.note_to_delete = cloneDeep(note)
+      this.delete_note_dialog = true
+    },
+
+    delete_note () {
+      api_to
+        .deleteNote(this.note_to_delete)
+        .then(({ data }) => {
+            const index = this.notes.findIndex(
+              note => note.id === this.note_to_delete.id
+            )
+            if (~index) {
+              this.notes.splice(index, 1)
+              this.$event.$emit('open_snackbar', data.message ? data.message : data.error , data.message ? 'success' : 'error')
+            }
+          }
+        )
+        .finally(() => {
+          this.delete_note_dialog = false
+          this.note_to_delete = null
         })
     }
   }

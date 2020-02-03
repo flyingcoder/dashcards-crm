@@ -26,32 +26,60 @@
             <v-btn
               flat
               class="action-btn"
-              @click="$emit('editNotes', note)"
+              @click="$emit('collaborator', note.collaborators)"
             >
-              <v-icon>edit</v-icon>
+              <v-icon>add</v-icon>
             </v-btn>
             <v-btn
               flat
               class="action-btn"
-              @click="$emit('collaborator', note.collaborators)"
+              @click="$emit('editNotes', note)"
             >
-              <v-icon>add</v-icon>
+              <v-icon color="indigo">edit</v-icon>
+            </v-btn>
+            <v-btn
+              flat
+              class="action-btn"
+              @click="$emit('deleteNotes', note)"
+            >
+              <v-icon color="red">delete</v-icon>
             </v-btn>
         </v-flex>
       </v-layout>
     </div>
     <div class="note-content">
-      <v-textarea
-        solo
-        hide-details
-        color="#657186"
-        flat
-        placeholder="Note description ..."
-        class="note-text"
-        readonly
-        v-html="note.content"
-      >
-      </v-textarea>
+      <v-layout row >
+        <v-col xs12>
+          <v-textarea
+            solo
+            hide-details
+            color="#657186"
+            flat
+            placeholder="Note description ..."
+            class="note-text"
+            readonly
+            v-html="note.content"
+          >
+          </v-textarea>
+        </v-col>
+      </v-layout>
+
+      <v-layout row>Collaborators:</v-layout>
+
+      <v-layout row >
+        <v-chip
+          class="ma-2"
+          outlined
+          light
+          disabled
+          v-for="collaborator in note.collaborators"
+        >
+        <v-avatar left>
+          <v-img :src="collaborator.image_url"></v-img>
+        </v-avatar>
+        {{collaborator.name}}
+      </v-chip>
+      </v-layout>
     </div>
   </div>
 </template>

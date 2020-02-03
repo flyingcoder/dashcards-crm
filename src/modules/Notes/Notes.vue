@@ -15,6 +15,14 @@
       @save="save_collaborators"
     />
 
+    <DeleteDialog
+      :open-dialog.sync="delete_note_dialog"
+      title="Delete Note"
+      :noteToDelete="note_to_delete"
+      text-content="Are you sure you want to delete this note?"
+      @delete="delete_note"
+    />
+
     <div v-if="notes" class="notes-wrapper">
       <div class="notes-content">
         <notes-list
@@ -29,6 +37,7 @@
           :loading="loading"
           @collaborator="open_collaborators_dialog"
           @editNotes="open_edit_note_dialog"
+          @deleteNotes="open_delete_note_dialog"
         />
       </div>
     </div>
