@@ -7,6 +7,7 @@
     @vdropzone-thumbnail="$emit('thumbnail', arguments)"
     @vdropzone-file-added="$emit('file-added', arguments)"
     @vdropzone-success="$emit('success', arguments)"
+    @vdropzone-error="$emit('failed', arguments)"
   >
     <v-layout
       row

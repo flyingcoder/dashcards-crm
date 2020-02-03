@@ -88,7 +88,7 @@ export default {
   computed: {
     filteredItems() {
       if (this.filter === 'all') return this.items
-      return this.items.filter(item => item.type === this.filter)
+      return this.items.filter(item => item.collection_name.includes(this.filter))
     },
 
     user() {
@@ -129,7 +129,7 @@ export default {
     },
     file_added([file, response]) {
       this.$event.$emit('open_snackbar', 'File(s) uploaded successfully')
-      this.items.unshift(JSON.parse(response))
+      this.items.unshift(typeof response === 'string' ? JSON.parse(response) : response )
       this.$refs.dropzone.remove_file(file)
     },
 
@@ -156,6 +156,15 @@ export default {
           this.$event.$emit('open_snackbar', this.table_config.delete_message)
         }
       })
+    },
+
+    useDefaultThumbnail(item) {
+      item.thumb_url = require("@/assets/temp/no-image.jpg")
+      item.public_url = require("@/assets/temp/no-image.jpg")
+    },
+
+    file_failed([file, response]) {
+      this.$event.$emit('open_snackbar', typeof response === 'object' ? response[0] : response, 'error')
     }
   }
 }
