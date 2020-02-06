@@ -12,7 +12,6 @@
           <tasks-tab
             :tab="active_tab"
             v-if="active_tab === tab.name"
-            :id="id"
           />
         </v-card>
       </v-tab-item>
@@ -27,10 +26,6 @@ export default {
   name: 'TasksContent',
   components: {
     TasksTab
-  },
-
-  props: {
-    id: [Number, String]
   },
 
   data: () => ({

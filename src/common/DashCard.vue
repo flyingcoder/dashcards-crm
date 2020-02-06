@@ -19,9 +19,13 @@
 
     <v-flex xs12 class="card__footer text-xs-center">
       <slot name="footer">
-        <v-btn v-if="viewMoreLink" flat class="view__more_btn" @click="reroute"
-          >VIEW MORE</v-btn
+        <v-btn 
+          v-if="viewMoreBtn" 
+          flat class="view__more_btn" 
+          @click="$emit('view-more')"
         >
+          VIEW MORE
+        </v-btn>
       </slot>
     </v-flex>
   </v-container>
@@ -32,13 +36,8 @@ export default {
   name: 'DashCard',
   props: {
     title: String,
-    viewMoreLink: Object,
-    dashboard: Boolean
-  },
-  methods: {
-    reroute() {
-      this.$router.push(this.viewMoreLink)
-    }
+    viewMoreBtn: Boolean,
+    dashboard: Boolean,
   }
 }
 </script>

@@ -18,8 +18,8 @@
       >
         <v-flex xs3 class="assignee__col" v-if="tab=='All Tasks'">
           <v-img
-            v-if="task.assignee_url"
-            :src="task.assignee_url"
+            v-if="task.assignee[0].image_url"
+            :src="task.assignee[0].image_url"
             height="40"
             width="40"
           />

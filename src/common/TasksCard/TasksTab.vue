@@ -12,11 +12,11 @@
 
   <div class="tasks-tab" v-else>
     <task-chips
-      :count-all="tasks.length"
-      :count-completed="count_completed_tasks"
-      :count-pending="count_pending_tasks"
-      :count-behind="count_behind_tasks"
-      :count-open="count_open_tasks"
+      :count-all="total"
+      :count-completed="counter.completed"
+      :count-pending="counter.pending"
+      :count-behind="counter.behind"
+      :count-open="counter.open"
       :active-chip.sync="active_chip"
     />
 
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import request from '@/services/axios_instance'
+import { mapMutations, mapActions, mapGetters } from 'vuex'
 import TaskChips from './TaskChips.vue'
 import TaskCustomTable from './TaskCustomTable.vue'
 
@@ -38,12 +38,11 @@ export default {
   },
 
   data: () => ({
-    tasks: [],
-    loading: false,
     active_chip: 'all'
   }),
 
   computed: {
+    ...mapGetters('taskCards', ['total', 'tasks', 'counter', 'loading']),
     filtered_tasks() {
       if (this.active_chip === 'all') return this.tasks
       return this.tasks.filter(
@@ -52,31 +51,24 @@ export default {
     },
     tasks_are_empty() {
       return !this.loading && this.tasks.length === 0
-    },
-    count_completed_tasks() {
-      return this.tasks.filter(task => task.status === 'completed').length
-    },
-    count_pending_tasks() {
-      return this.tasks.filter(task => task.status === 'pending').length
-    },
-    count_behind_tasks() {
-      return this.tasks.filter(task => task.status === 'behind').length
-    },
-    count_open_tasks() {
-      return this.tasks.filter(task => task.status === 'open').length
     }
   },
 
   watch: {
+    active_chip: {
+      handler(val) {
+        console.log(val)
+      }
+    },
     tab: {
       handler(val) {
+        this.$event.$emit('tab-toggle', val)
+
         let api_url = 'api/task'
-        if (this.id) {
-          api_url = `api/projects/${this.id}/tasks`
-        }
+        if (this.id) { api_url = `api/projects/${this.id}/tasks` }
         if (val === 'My Tasks') api_url += '/mine'
 
-        api_url += '?all=true'
+        //api_url += '?all=true'
         this.get_tasks(api_url)
       },
       immediate: true
@@ -84,13 +76,8 @@ export default {
   },
 
   methods: {
-    get_tasks(api_url) {
-      this.loading = true
-      request
-        .get(api_url)
-        .then(({ data }) => (this.tasks = data))
-        .finally(() => (this.loading = false))
-    }
+    ...mapMutations('taskCards', ['set_user_id']),
+    ...mapActions('taskCards', ['get_tasks'])
   }
 }
 </script>

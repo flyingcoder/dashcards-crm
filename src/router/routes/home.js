@@ -1,5 +1,6 @@
 export const home = {
   path: '/',
   name: 'home',
-  component: () => import('@/modules/Home/Home.vue')
+  redirect: '/dashboard'
+  //component: () => import('@/modules/Home/Home.vue')
 }

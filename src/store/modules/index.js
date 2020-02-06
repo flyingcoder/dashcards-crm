@@ -15,7 +15,7 @@ const root = { modules: {} }
     // Search for files in subdirectories.
     true,
     // Include any .js files that are not this file or a unit test.
-    /^((?!index|\.unit\.).)*\.js$/
+    /^((?!index|actions|mutations|getters|initial_state|\.unit\.).)*\.js$/
   )
 
   // For every Vuex module...

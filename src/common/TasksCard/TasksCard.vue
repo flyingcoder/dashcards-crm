@@ -3,7 +3,7 @@
     <div class="tasks__content">
       <dash-card
         title="Tasks"
-        :view-more-link="viewMoreLink"
+        :view-more-btn="true"
         class="task__content"
         :dashboard="dashboard"
         @close="$emit('close')"
@@ -13,12 +13,21 @@
             <tasks-content :id="id" />
           </div>
         </div>
+        <div slot="footer">
+          <v-btn
+            flat class="view__more_btn" 
+            @click="loadMore"
+          >
+            VIEW MORE
+          </v-btn>
+        </div>
       </dash-card>
     </div>
   </v-flex>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import DashCard from '@/common/DashCard.vue'
 import TasksContent from './TasksContent.vue'
 
@@ -29,7 +38,14 @@ export default {
     TasksContent
   },
 
-  props: { id: [Number, String], viewMoreLink: Object, dashboard: Boolean }
+  methods: {
+    ...mapActions('taskCards', ['see_more']),
+    loadMore() {
+      this.see_more()
+    }
+  },
+
+  props: { id: [Number, String], viewMoreLink: String, dashboard: Boolean }
 }
 </script>
 
