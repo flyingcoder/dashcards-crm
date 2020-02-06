@@ -31,8 +31,8 @@ export default {
     headers: [
       { text: 'Thumbnail', value: 'thumbnail' },
       { text: 'Filetype', value: 'filetype' },
-      { text: 'Filename', value: 'filename' },
-      { text: 'Uploaded by', value: 'member' },
+      { text: 'Filename', value: 'filename' , width: '35%'},
+      { text: 'Added by', value: 'member' },
       { text: 'Project', value: 'project' },
       { is_action: true }
     ],
@@ -77,6 +77,13 @@ export default {
       },
       {
         id: 5,
+        className: 'links',
+        type: 'link',
+        icon: 'link',
+        iconText: 'Links'
+      },
+      {
+        id: 6,
         className: 'other',
         type: 'other',
         icon: 'settings_applications',
@@ -165,6 +172,10 @@ export default {
 
     file_failed([file, response]) {
       this.$event.$emit('open_snackbar', typeof response === 'object' ? response[0] : response, 'error')
+    },
+
+    goto_link(url) {
+      window.open(url);
     }
   }
 }

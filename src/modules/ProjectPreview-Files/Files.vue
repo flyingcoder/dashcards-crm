@@ -77,8 +77,20 @@
             depressed
             title="Download"
             :href="item.download_url"
+            v-if="item.mime_type !== 'link'"
           >
             <v-icon>cloud_download</v-icon>
+          </v-btn>
+          <v-btn
+            fab
+            flat
+            small
+            depressed
+            title="Go to link"
+            @click="goto_link(item.download_url)"
+            v-else
+          >
+            <v-icon>link</v-icon>
           </v-btn>
           <v-btn
             v-if="can_delete"
