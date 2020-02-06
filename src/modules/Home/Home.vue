@@ -1,11 +1,15 @@
 <template>
-  <div>
-    <p>This is the Home Page, coming soon with more content</p>
-    <p>
-      For now please navigate to
-      <router-link :to="{ name: 'default-content' }">Dashboard</router-link>
-    </p>
-  </div>
+  <v-layout row justify-center>
+      <v-dialog v-model="loading" persistent fullscreen content-class="loading-dialog">
+        <v-container fill-height>
+          <v-layout row justify-center align-center>
+            <v-progress-circular indeterminate :size="70" :width="7" color="blue"></v-progress-circular>
+          </v-layout>
+        </v-container>
+      </v-dialog>
+    </v-layout>
 </template>
+
 <script src="./Home.js"></script>
+
 <style lang="scss" scoped src="./Home.scss"></style>
