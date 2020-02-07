@@ -27,16 +27,19 @@ request.interceptors.response.use(
     return response
   },
   error => {
-    if (error.response.status === 401 && localStorage.getItem('token')) {
+    if (error.response && error.response.status === 401 && localStorage.getItem('token')) {
       // Unauthenticated
       auth.logout()
       return
     }
     const res = error.response
-    store.commit('open_snackbar', {
-      status: true,
-      message: res.data.message
-    })
+    if(res) {
+      store.commit('open_snackbar', {
+        status: true,
+        message: res.data.message
+      })
+    }
+    
   }
 )
 

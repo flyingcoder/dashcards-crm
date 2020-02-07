@@ -1,6 +1,7 @@
 <template>
   <div class="forgot__password">
-    <div class="f__form">
+    <Loader :loading="loading" />
+    <div class="f__form" v-if="!loading && !sent">
       <login-component
         title-text="Reset your password"
         button-text="SEND"
@@ -26,8 +27,18 @@
         </template>
       </login-component>
     </div>
-
-    <div class="f__gallery">
+    <div class="f__form"  style="flex-basis: 100%;" v-if="sent">
+      <div class="l__logo">
+        <a href="https://dashcards.com/">
+          <img src="@/assets/logo/logo-white.png" />
+        </a>
+      </div>
+      <h1>
+        A reset instruction is sent to your email!
+      </h1>
+    </div>
+    
+    <div v-else class="f__gallery">
       <div class="gallery__text">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium
