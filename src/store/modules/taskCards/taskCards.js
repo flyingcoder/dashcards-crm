@@ -3,33 +3,46 @@ import request from '@/services/axios_instance'
 
 const state = {
   tasks_res: null,
+  tasks: [],
+  total: 0,
   loading: null,
+  id: null,
   see_more_url: null
 }
 
 const getters = {
   tasks_res: state => state.tasks_res,
-  tasks: state => state.tasks_res.data,
+  tasks: state => state.tasks,
   counter: state => state.tasks_res.counter,
-  total: state => state.tasks_res.total,
+  total: state => state.total,
   loading: state => state.loading,
   see_more_url: state => state.see_more_url
 }
 
 const mutations = {
-  set_tasks: (state, payload) => (state.tasks_res.data = payload),
+  set_id: (state, payload) => (state.id = payload),
+  set_tasks: (state, payload) => (state.tasks = payload),
+  set_total: (state, payload) => (state.total = payload),
   set_tasks_res: (state, payload) => (state.tasks_res = payload),
   set_loading: (state, payload) => (state.loading = payload),
+  add_task: (state, payload) => (state.tasks.push(payload)),
   set_see_more_url: (state, payload) => (state.see_more_url = payload)
 }
 
 const actions = {
-  get_tasks({ commit }, payload) {
+  get_tasks({ commit, state }, payload) {
     commit('set_loading', true)
+
+    let api_url = 'api/task'
+    if (state.id) { api_url = `api/projects/${state.id}/tasks` }
+    if (payload === 'My Tasks') api_url += '/mine'
+
     request
-        .get(payload)
+        .get(api_url)
         .then( ( { data } )  => {
           commit('set_tasks_res', data)
+          commit('set_tasks', data.data)
+          commit('set_total', data.total)
           commit('set_see_more_url', data.next_page_url)
         })
         .finally(() => (commit('set_loading', false)))

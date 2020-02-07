@@ -102,7 +102,7 @@ export default {
       this.end_date = task.end_at
       this.milestones.selected = task.milestone_id
       //this.members.selected = task.assigned_ids
-      this.$set(this.members, 'selected', task.assigned)
+      this.$set(this.members, 'selected', task.assignee)
     },
 
     clear_and_close() {

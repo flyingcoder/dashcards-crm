@@ -10,9 +10,8 @@
         <template v-else>
           <v-layout row class="task__header text-xs-left">
             <v-flex xs5 class="assignee">
-              <v-flex xs4
+              <v-flex xs4 v-if="assignee_url"
                 ><v-img
-                  v-if="assignee_url"
                   :src="assignee_url"
                   height="45"
                   width="45"
@@ -46,8 +45,8 @@
           </v-layout>
 
           <div class="task__sub_header">
-            <div class="boxes job__title text-cap">
-              <span class="box__content">{{ job_title() }}</span>
+            <div class="boxes job__title text-cap" v-if="job_title">
+              <span class="box__content">{{ job_title }}</span>
             </div>
             <div class="boxes status">
               <span class="box__content">{{ content.status }}</span>

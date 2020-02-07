@@ -28,6 +28,10 @@ export default {
     TasksTab
   },
 
+  props: {
+    id: [Number, String]
+  },
+
   data: () => ({
     active_tab: 'My Tasks'
   }),

@@ -33,7 +33,6 @@ export default {
   name: 'TasksTab',
   components: { TaskChips, TaskCustomTable },
   props: {
-    id: [Number, String],
     tab: String
   },
 
@@ -57,26 +56,20 @@ export default {
   watch: {
     active_chip: {
       handler(val) {
-        console.log(val)
+        //console.log(this.tasks)
       }
     },
     tab: {
       handler(val) {
-        this.$event.$emit('tab-toggle', val)
-
-        let api_url = 'api/task'
-        if (this.id) { api_url = `api/projects/${this.id}/tasks` }
-        if (val === 'My Tasks') api_url += '/mine'
-
         //api_url += '?all=true'
-        this.get_tasks(api_url)
+        this.get_tasks(val)
+        //console.log(this.tasks)
       },
       immediate: true
     }
   },
 
   methods: {
-    ...mapMutations('taskCards', ['set_user_id']),
     ...mapActions('taskCards', ['get_tasks'])
   }
 }

@@ -15,15 +15,16 @@
         v-for="task in tasks"
         :key="task.id"
         @click="row_clicked(task)"
-      >
+      > 
         <v-flex xs3 class="assignee__col" v-if="tab=='All Tasks'">
-          <v-img
-            v-if="task.assignee[0].image_url"
-            :src="task.assignee[0].image_url"
-            height="40"
-            width="40"
-          />
-          <span v-if="!task.assignee_url"></span>
+          <span v-if="task.assignee.length">
+             <v-img
+              :src="task.assignee[0].image_url"
+              height="40"
+              width="40"
+            />
+          </span>
+          <span v-if="!task.assignee.length"></span>
         </v-flex>
 
         <v-flex xs6 class="project__col" v-if="tab=='All Tasks'">

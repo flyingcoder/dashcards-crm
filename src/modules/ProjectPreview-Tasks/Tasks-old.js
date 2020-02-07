@@ -1,5 +1,4 @@
 import apiTo from './api'
-import { mapMutations, mapActions, mapGetters } from 'vuex'
 //Components
 import TasksCard from '@/common/TasksCard/TasksCard.vue'
 import PreviewCard from './components/TaskTabPreviewCard/TaskTabPreviewCard.vue'
@@ -32,11 +31,11 @@ export default {
     selected_tab: 'My Tasks',
     task: null,
     add_task_dialog: false,
+    loading: false,
     delete_dialog: false
   }),
 
   computed: {
-    ...mapGetters('taskCards', ['total', 'loading']),
     tab_tasks() {
       if (this.selected_tab === 'My Tasks') return this.tasks_own
       return this.all_tasks
@@ -49,8 +48,8 @@ export default {
   watch: {
     selected_tab: {
       handler(val) {
-        //if (val === 'My Tasks') this.get_own_tasks()
-        //else this.get_all_tasks()
+        if (val === 'My Tasks') this.get_own_tasks()
+        else this.get_all_tasks()
       },
       immediate: true
     }
@@ -65,7 +64,6 @@ export default {
   },
 
   methods: {
-    ...mapMutations('taskCards', ['add_task']),
     get_own_tasks() {
       if (this.tasks_own.length) return //tasks are already fetched
       this.loading = true
@@ -85,10 +83,10 @@ export default {
     },
 
     create_new_task(payload) {
-      //const is_myTask = payload.assigned_ids.includes(this.logged_user.id)
+      const is_myTask = payload.assigned_ids.includes(this.logged_user.id)
       apiTo.create_new_task(payload).then(({ data }) => {
-        this.add_task(data)
-        //is_myTask && this.tasks_own.push(data)
+        this.all_tasks.push(data)
+        is_myTask && this.tasks_own.push(data)
         this.$refs.add_task_dialog.clear_and_close()
         this.$event.$emit('open_snackbar', 'New Task added successfully')
       })

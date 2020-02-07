@@ -40,8 +40,8 @@
         <v-icon>add</v-icon>
       </v-btn>
     </div>
-    <div class="cards" v-if="tab_tasks.length">
-      <tasks-card :tasks="tab_tasks" />
+    <div class="cards" v-show="total">
+      <tasks-card :id="id" />
       <preview-card
         v-if="task"
         :id="id"
@@ -49,7 +49,7 @@
         @dropdown-action="handle_dropdown_action"
       />
     </div>
-    <div class="empty-task" v-show="!loading && !tab_tasks.length" >
+    <div class="empty-task" v-show="!total" >
       <div class="empty-content">
         <div class="empty-svg">
             <svg enable-background="new 0 0 431.998 431.998" version="1.1" viewBox="0 0 432 432" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">

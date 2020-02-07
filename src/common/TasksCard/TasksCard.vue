@@ -10,7 +10,7 @@
       >
         <div class="content-wrapper" slot="content">
           <div class="tasks-items">
-            <tasks-content :id="id" />
+            <tasks-content />
           </div>
         </div>
         <div slot="footer">
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 import DashCard from '@/common/DashCard.vue'
 import TasksContent from './TasksContent.vue'
 
@@ -38,14 +38,20 @@ export default {
     TasksContent
   },
 
+  props: { id: [Number, String], dashboard: Boolean },
+
   methods: {
-    ...mapActions('taskCards', ['see_more']),
+    ...mapActions('taskCards', ['see_more', 'get_tasks']),
+    ...mapMutations('taskCards', ['set_id']),
     loadMore() {
       this.see_more()
     }
   },
 
-  props: { id: [Number, String], viewMoreLink: String, dashboard: Boolean }
+  created() {
+    if(this.id)
+      this.set_id(this.id)
+  }
 }
 </script>
 
