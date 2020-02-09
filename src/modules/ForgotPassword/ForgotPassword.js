@@ -1,4 +1,6 @@
 import * as apiTo from './api'
+import axios from 'axios'
+import { settings } from '@/variables'
 //components
 import Loader from '@/common/BaseComponents/Loader.vue'
 import LoginComponent from '@/common/LoginComponent/LoginComponent.vue'
@@ -21,12 +23,18 @@ export default {
   methods: {
     send_email() {
       this.loading = true
-      apiTo
-        .sendEmail({ email: this.email })
-        .then( (response) => {
-          this.$event.$emit('open_snackbar', 'Reset instruction is sent to your email!')
+      axios
+        .post(settings.apiHostBaseURL+`/api/password/email/`, { email: this.email })
+        .then( response => {
+          this.$event.$emit('open_snackbar', response.data.message)
           this.loading = false
           this.sent = true
+        })
+        .catch(error => {
+          console.log(error.response.data.message)
+            this.loading = false
+            this.sent = false
+            this.$event.$emit('open_snackbar', error.response.data.message, 'error')
         })
     }
   }
