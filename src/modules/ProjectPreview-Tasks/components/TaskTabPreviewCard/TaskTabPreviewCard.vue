@@ -63,6 +63,26 @@
               class="task__description textarea-cap"
               v-html="content.description"
             ></div>
+            
+            <div class="task__assigned_to" v-if="content.assignee">
+              <v-flex>
+                <div>Assigned to:</div>
+              </v-flex>
+              <v-flex>
+                <v-chip
+                  class="ma-2"
+                  outlined
+                  light
+                  disabled
+                  v-for="collaborator in content.assignee"
+                >
+                  <v-avatar left>
+                    <v-img :src="collaborator.image_url"></v-img>
+                  </v-avatar>
+                    {{collaborator.first_name}}, {{collaborator.last_name}}
+                </v-chip>
+              </v-flex>
+            </div>
 
             <div class="task__comment_section">
               <v-divider></v-divider><br />

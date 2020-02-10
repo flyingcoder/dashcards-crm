@@ -108,8 +108,11 @@ export default {
     },
 
     update_task(new_task, id, target) {
+      this.task = new_task
       const indexFound = this[target].findIndex(task => task.id === id)
-      if (indexFound) this[target].splice(indexFound, 1, new_task)
+      if (indexFound) { 
+        this[target].splice(indexFound, 1, new_task) 
+      }
     },
 
     remove_task() {

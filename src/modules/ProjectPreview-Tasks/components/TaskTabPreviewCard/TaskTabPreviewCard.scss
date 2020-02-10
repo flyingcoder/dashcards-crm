@@ -11,12 +11,15 @@
             margin-bottom: 24px;
 
             .task__header {
-                align-items: center;
+                -webkit-box-align: center;
+                        align-items: center;
                 margin-bottom: 30px;
 
                 .assignee {
+                    display: -webkit-box;
                     display: flex;
-                    align-items: center;
+                    -webkit-box-align: center;
+                            align-items: center;
                     .assignee__name{
                         color: $tableDarkText;
                         font-size: 14px;
@@ -24,8 +27,10 @@
                 }
 
                 .date {
+                    display: -webkit-box;
                     display: flex;
-                    align-items: center;              
+                    -webkit-box-align: center;
+                            align-items: center;              
                     .date__icon{
                         color: $tableBlueText;
                         border: 1px solid $tableBlueText;
@@ -53,9 +58,12 @@
             }
 
             .task__sub_header {
+                display: -webkit-box;
                 display: flex;
-                justify-content: space-evenly;
-                align-items: center;
+                -webkit-box-pack: space-evenly;
+                        justify-content: space-evenly;
+                -webkit-box-align: center;
+                        align-items: center;
                 margin-bottom: 10px;
 
                 .boxes{
@@ -80,7 +88,7 @@
                 padding: 8px 0;
             }
 
-            @include styledScrollFor('.task__content'); //style the scroll
+            @include styledScrollFor('.task__content'); /*style the scroll*/
 
             .task__content {
                 padding: 15px 0;
@@ -99,10 +107,15 @@
                 .task__description{
                     padding: 0 15px;
                 }
-            
+                
+                .task__assigned_to{
+                    padding: 0 15px;
+                }
+
                 .task__comment_section{
                     margin-top: 30px;
                     .comment {
+                        display: -webkit-box;
                         display: flex;
                         padding: 10px;
                         & + .comment {
@@ -115,18 +128,20 @@
             .task__comments {
                 padding: 15px;
                 background-color: $bgLightBlue;
+                display:-webkit-box;
                 display:flex;
 
                 .rich__editor{
                     background-color: $white;
                 }
                 
-                
-
                 .comments__actions {
+                    display: -webkit-box;
                     display: flex;
-                    justify-content: flex-start;
-                    align-items: center;
+                    -webkit-box-pack: start;
+                            justify-content: flex-start;
+                    -webkit-box-align: center;
+                            align-items: center;
                     background-color: $white;
                     border: 1px solid $gray;
                     border-top: none;
@@ -139,7 +154,7 @@
 
             }
         }
-        //
+        /**/
         @include styledScrollFor('text.content');
 
         .text-content {
@@ -175,7 +190,7 @@
     }
 }
 
-//Laptop Or iPad Pro View
+/*Laptop Or iPad Pro View*/
 @media only screen and (max-width: 1170px) and (min-width: 960px){
     .task__tab_preview_card {
         .task__preview_content{
@@ -188,12 +203,17 @@
                     margin-bottom: 24px;
 
                     .assignee{
-                        flex-direction: column;
+                        -webkit-box-orient: vertical;
+                        -webkit-box-direction: normal;
+                                flex-direction: column;
                     }
     
                     .date {
-                        flex-direction: column;
-                        align-items: center;
+                        -webkit-box-orient: vertical;
+                        -webkit-box-direction: normal;
+                                flex-direction: column;
+                        -webkit-box-align: center;
+                                align-items: center;
                         .date__icon{
                             margin: 0;
                         }
@@ -201,7 +221,8 @@
                 }
 
                 .task__sub_header {
-                    justify-content: center;
+                    -webkit-box-pack: center;
+                            justify-content: center;
 
                     .boxes:first-child{
                         margin-right: 20px;
@@ -223,12 +244,12 @@
     }
 }
 
-//Tablet View
+/*Tablet View*/
 @media only screen and (max-width: 768px) and (min-width: 481px){
 
 }
 
-//Mobile View
+/*Mobile View*/
 @media only screen and (max-width: 480px){
     .task__tab_preview_card {
         .task__preview_content{
@@ -241,12 +262,17 @@
                     margin-bottom: 24px;
 
                     .assignee{
-                        flex-direction: column;
+                        -webkit-box-orient: vertical;
+                        -webkit-box-direction: normal;
+                                flex-direction: column;
                     }
     
                     .date {
-                        flex-direction: column;
-                        align-items: center;
+                        -webkit-box-orient: vertical;
+                        -webkit-box-direction: normal;
+                                flex-direction: column;
+                        -webkit-box-align: center;
+                                align-items: center;
                         .date__icon{
                             margin: 0;
                         }
@@ -254,7 +280,8 @@
                 }
 
                 .task__sub_header {
-                    justify-content: center;
+                    -webkit-box-pack: center;
+                            justify-content: center;
 
                     .boxes:first-child{
                         margin-right: 20px;

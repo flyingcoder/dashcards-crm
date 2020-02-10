@@ -17,6 +17,7 @@ export default {
   },
 
   data: () => ({
-    loading: false
+    loading: false,
+    start : null
   })
 }
