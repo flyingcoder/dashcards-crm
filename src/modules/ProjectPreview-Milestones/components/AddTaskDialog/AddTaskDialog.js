@@ -64,6 +64,15 @@ export default {
 
         this.days_init_value = newValue
       }
+    },
+    computedDialog: {
+      get() {
+        return this.dialog
+      },
+      set(val) {
+        !val && this.$emit('close')
+        this.$emit('update:dialog', val)
+      }
     }
   },
 
@@ -87,6 +96,7 @@ export default {
     fieldsToEdit: {
       handler(new_val) {
         this.isEditDialog && this.update_fields(new_val)
+        this.fill_members_dropdown()
       },
       deep: true
     }
@@ -121,7 +131,7 @@ export default {
       this.days = new_fields.days
       this.start_date = new_fields.started_at
       this.end_date = new_fields.end_at
-      this.$set(this.members, 'selected', new_fields.assigned)
+      this.$set(this.members, 'selected', new_fields.assignee)
     },
 
     clear_and_close() {
@@ -147,7 +157,7 @@ export default {
       }
     },
 
-    fill_members_dropdown() {
+    async fill_members_dropdown() {
       this.loading = true
       makeRequestTo
         .get_project_members(this.id)
