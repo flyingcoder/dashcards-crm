@@ -1,3 +1,4 @@
+//test commit
 import Vue from 'vue'
 import './plugins/axios'
 import './plugins/vuetify'
