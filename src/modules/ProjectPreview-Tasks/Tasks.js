@@ -65,7 +65,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations('taskCards', ['add_task']),
+    ...mapMutations('taskCards', ['add_task', 'del_task']),
     get_own_tasks() {
       if (this.tasks_own.length) return //tasks are already fetched
       this.loading = true
@@ -117,15 +117,15 @@ export default {
 
     remove_task() {
       //after delete request (API)
-      const own_task_index = this.tasks_own.findIndex(
+      /*const own_task_index = this.tasks_own.findIndex(
         task => task.id === this.task.id
       )
       const all_task_index = this.all_tasks.findIndex(
         task => task.id === this.task.id
       )
       if (~own_task_index) this.tasks_own.splice(own_task_index, 1)
-      if (~all_task_index) this.all_tasks.splice(all_task_index, 1)
-
+      if (~all_task_index) this.all_tasks.splice(all_task_index, 1)*/
+      this.del_task(this.task)
       this.delete_dialog = false
       this.$event.$emit('open_snackbar', 'Task deleted successfully')
       this.set_active_task_after_delete()
@@ -151,7 +151,7 @@ export default {
     },
 
     closeEditDialog() {
-      this.$refs.edit_task_dialog.cancel()
+      this.$refs.edit_task_dialog.$refs.dialog.clear_and_close()
     },
 
     open_delete_task_dialog() {

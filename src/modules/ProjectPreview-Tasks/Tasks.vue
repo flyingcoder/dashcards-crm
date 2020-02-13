@@ -11,6 +11,7 @@
       dialog-title="Add Task"
       :id="id"
       @save="create_new_task"
+      @close="add_task_dialog = false"
     />
 
     <TaskDialog
