@@ -54,6 +54,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import axios from '@/services/axios_instance'
+
 export default {
   data: () => ({
     image_preview: null
@@ -101,7 +103,12 @@ export default {
   methods: {
     file_selected(event) {
       if (event.target.files && event.target.files[0]) {
-        this.$store.commit('invoice/set_company_logo', event.target.files[0])
+        let formData = new FormData()
+        formData.append('file', event.target.files[0])
+        axios.post(`api/file/image-upload`, formData, { headers : {'Content-Type': 'multipart/form-data'} })
+        .then(( {data} ) => {
+          this.$store.commit('invoice/set_company_logo', data.url)
+        })
       }
     }
   }
