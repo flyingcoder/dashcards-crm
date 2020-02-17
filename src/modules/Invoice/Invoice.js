@@ -1,7 +1,6 @@
 import { api_to } from './api'
 import { table_functionality } from '@/services/table-functionality/table-functionality'
 import { mapMutations } from 'vuex'
-import axios from 'axios'
 import _cloneDeep from 'lodash/cloneDeep'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
@@ -33,16 +32,20 @@ export default {
       { id: 3, text: 'Client', value: 'client' },
       { id: 4, text: 'Amount', value: 'amount' },
       { id: 5, is_action: true }
-    ]
+    ],
+    items: [],
+    page : 1,
+    rows_per_page : 10,
+    pagination: {
+      current: 1,
+      total: 0
+    }
   }),
 
   created() {
     this.loading = true
     this.fetch_data()
-    api_to
-      .get_invoices()
-      .then(({ data }) => this.add_table_rows(data.data, data))
-      .finally(() => (this.loading = false))
+    this.getInvoices()
   },
 
   beforeDestroy() {
@@ -88,14 +91,10 @@ export default {
     },
 
     fetch_data() {
-      axios
-        .all([api_to.get_invoices(), api_to.get_all_projects()])
-        .then(
-          axios.spread((res1, res2) => {
-            this.add_table_rows(res1.data.data, res1.data)
+      api_to.get_all_projects()
+        .then((res2) => {
             this.set_projects(res2.data)
-          })
-        )
+        })
         .finally(() => (this.loading = false))
     },
 
@@ -104,6 +103,21 @@ export default {
       if (~index) {
         this.items.splice(index, 1, invoice)
       }
+    },
+
+    getInvoices() {
+      this.loading = true
+      api_to.get_invoices(this.pagination.current, this.rows_per_page )
+        .then(response => {
+            this.items = response.data.data
+            this.pagination.current = response.data.current_page
+            this.pagination.total = response.data.last_page
+            this.rows_per_page = response.data.per_page
+        })
+        .finally(() => (this.loading = false))
+    },
+    onPageChange() {
+        this.getInvoices();
     }
   }
 }

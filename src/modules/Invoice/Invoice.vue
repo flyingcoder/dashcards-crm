@@ -46,6 +46,30 @@
           <v-icon>search</v-icon>
         </v-btn>
       </template>
+      <template slot="table-actions">
+        <div class="actions-wrapper">
+          <div class="bulk-delete">
+            <v-btn
+              color="#3b589e"
+              dark
+              outline
+              :disabled="!show_delete_selected"
+            >
+              Delete Selected
+            </v-btn>
+          </div>
+
+          <div class="pagination" v-if="pagination.total > 1">
+              <v-pagination
+                color="#3b589e"
+                v-model="pagination.current"
+                :length="pagination.total"
+                :total-visible="pagination.total < 6 ? pagination.total : 6"
+                @input="onPageChange"
+            ></v-pagination>
+          </div>
+        </div>
+      </template>
     </custom-table>
 
     <div class="empty-invoice" v-else>
