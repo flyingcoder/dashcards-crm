@@ -86,7 +86,6 @@ export default {
 
   created() {
     this.fill_cards()
-    console.log(this.card_components)
   },
 
   methods: {

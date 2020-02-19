@@ -13,31 +13,24 @@
           @created="$emit('created', $event)"
           @updated="$emit('updated', $event)"
         />
-
         <div class="content">
-          <v-layout
-            row
-            wrap
-            justify-space-between
-            class="first-row info-section"
-          >
-            <TopLeft />
-            <TopRight />
-          </v-layout>
-          <TableSection />
-          <v-layout
-            row
-            wrap
-            justify-space-between
-            class="third-row additional-info-section"
-          >
-            <v-flex sm6 xs12 class="left-content">
-              <BottomLeft />
-            </v-flex>
-            <v-flex sm6 xs12 class="right-content">
-              <BottomRight />
-            </v-flex>
-          </v-layout>
+          <v-container fluid  style="max-width:900px;">
+            <v-layout row wrap class="first-row info-section" >
+              <v-flex xs12 sm6><TopLeft /></v-flex>
+              <v-flex xs12 sm6><TopRight /></v-flex>
+            </v-layout>
+            <v-layout row wrap class="second-row">
+              <TableSection />
+            </v-layout>
+            <v-layout row wrap  justify-space-between class="third-row additional-info-section" >
+              <v-flex sm6 xs12 class="left-content">
+                <BottomLeft />
+              </v-flex>
+              <v-flex sm6 xs12 class="right-content">
+                <BottomRight />
+              </v-flex>
+            </v-layout>
+          </v-container>
         </div>
       </v-dialog>
     </v-layout>

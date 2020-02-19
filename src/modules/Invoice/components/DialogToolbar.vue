@@ -94,15 +94,15 @@ export default {
       formData.append('items', JSON.stringify(this.invoice.rows))
       formData.append('terms', this.invoice.terms)
       formData.append('notes', this.invoice.notes)
-      formData.append('tax', this.calculate_field(this.invoice, 'tax'))
-      formData.append(
-        'discount',
-        this.calculate_field(this.invoice, 'discount')
-      )
-      formData.append(
-        'shipping',
-        this.calculate_field(this.invoice, 'shipping', false)
-      )
+
+      var tax = this.calculate_field(this.invoice, 'tax');
+      var discount = this.calculate_field(this.invoice, 'discount');
+      var shipping = this.calculate_field(this.invoice, 'shipping');
+      formData.append('tax', tax.value )
+      formData.append('discount',discount.value)
+      formData.append('shipping',shipping.value)
+      formData.append('symbol', tax.symbol)
+      
       return formData
     },
 

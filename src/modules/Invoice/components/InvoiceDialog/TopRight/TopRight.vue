@@ -8,7 +8,7 @@
         solo
         hide-details
         flat
-        placeholder="Add Invoice Title"
+        placeholder="Add Invoice Title *"
         v-model.trim="title"
       ></v-text-field>
     </div>

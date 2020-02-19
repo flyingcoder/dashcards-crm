@@ -23,8 +23,8 @@
     </div>
 
     <div class="bill__from">
-      <div class="form__label">Bill From:</div>
-      <v-textarea
+      <div class="form__label">Bill From: <span class="required">*</span></div>
+      <v-text-field
         :disabled="dialog.type === 'view'"
         class="textfield"
         label="Who is this invoice from"
@@ -33,11 +33,11 @@
         hide-details
         color="#657186"
         flat
-      ></v-textarea>
+      ></v-text-field>
     </div>
 
     <div class="bill__to">
-      <div class="form__label">Bill To:</div>
+      <div class="form__label">Bill To: <span class="required">*</span></div>
       <v-text-field
         :disabled="dialog.type === 'view'"
         class="textfield"
@@ -196,6 +196,9 @@ export default {
       width: 300px;
       margin-bottom: 2px;
     }
+  }
+  .required {
+    color : red;
   }
 }
 

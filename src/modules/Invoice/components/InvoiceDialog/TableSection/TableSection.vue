@@ -1,10 +1,10 @@
 <template>
   <div class="second-row table-section">
     <div class="table-headers">
-      <div class="column">Description</div>
-      <div class="column">Rate</div>
-      <div class="column">Hours</div>
-      <div class="column">Amount</div>
+      <div class="column">Description<span class="required">*</span></div>
+      <div class="column">Rate<span class="required">*</span></div>
+      <div class="column">Hours<span class="required">*</span></div>
+      <div class="column">Amount<span class="required">*</span></div>
     </div>
 
     <div class="table-body">

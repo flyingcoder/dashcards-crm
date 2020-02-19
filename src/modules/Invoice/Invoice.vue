@@ -8,7 +8,13 @@
 
     <InvoiceDialog type="create" @created="items.unshift($event)" />
     <InvoiceDialog type="edit" @updated="invoice_updated" />
-    <InvoiceDialog type="view" @updated="invoice_updated" />
+
+    <ViewInvoice 
+      ref="view_invoice_dialog"
+      :item="view_item"
+      :open="view_invoice_dialog"
+      @close="view_invoice_dialog = false"
+    ></ViewInvoice>
 
     <delete-dialog
       :open-dialog.sync="delete_dialog"

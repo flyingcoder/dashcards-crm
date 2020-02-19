@@ -8,6 +8,7 @@ import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import EmailDialog from './components/EmailDialog/EmailDialog.vue'
 import InvoiceDialog from './components/InvoiceDialog/InvoiceDialog.vue'
+import ViewInvoice from './components/ViewInvoice/ViewInvoice.vue'
 
 export default {
   name: 'Invoice',
@@ -18,10 +19,12 @@ export default {
     InvoiceDialog,
     CustomTable,
     EmailDialog,
-    DeleteDialog
+    DeleteDialog,
+    ViewInvoice
   },
 
   data: () => ({
+    view_invoice_dialog : false,
     paths: [
       { text: 'Dashboard', disabled: false, router_name: 'default-content' },
       { text: 'Invoice', disabled: true, router_name: null }
@@ -33,6 +36,7 @@ export default {
       { id: 4, text: 'Amount', value: 'amount' },
       { id: 5, is_action: true }
     ],
+    view_item : null,
     items: [],
     page : 1,
     rows_per_page : 10,
@@ -74,9 +78,12 @@ export default {
     },
 
     open_view_dialog(data) {
-      this.set_toolbar({ title: '' })
-      this.open_invoice_for_editing(_cloneDeep(data))
-      this.set_dialog({ type: 'view', open: true })
+      // console.log(data)
+      this.view_item = data
+      this.view_invoice_dialog = true
+      // this.set_toolbar({ title: '' })
+      // this.open_invoice_for_viewing(_cloneDeep(data))
+      // this.set_dialog({ type: 'view', open: true })
     },
 
     async delete_invoice() {

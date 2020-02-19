@@ -1,7 +1,9 @@
 @import '~@/sass/_variables';
 
 .second-row.table-section {
-
+  .required {
+    color : red;
+  }
   .table-headers {
     display: grid;
     grid-template-columns: 4fr 1fr 1fr 1fr 50px;
