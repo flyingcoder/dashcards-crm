@@ -32,6 +32,12 @@
     </div>
 
     <v-list>
+      <div class="dropdown-img">
+        <v-img max-width="50px" :src="user.image_url" />
+        <div class="hero-name">
+          {{ user.first_name + ' ' + user.last_name }}
+        </div>
+      </div>
       <v-list-tile
         class="h__list"
         v-for="(item, index) in items"
@@ -49,6 +55,7 @@
 </template>
 
 <script>
+import { mapMutations, mapActions } from 'vuex'
 export default {
   name: 'Dropdown',
 
@@ -84,6 +91,8 @@ export default {
   },
 
   methods: {
+    ...mapMutations('memberProfile', ['set_user_id']),
+    ...mapActions('memberProfile', ['get_single_member']),
     handle_action(action) {
       this[action]() //i.e the action is logout will call this.logout()
     },
@@ -101,7 +110,10 @@ export default {
         this.$router.push(`/dashboard/clients/profile/${this.user.id}`)
       } else {
         this.$router.push(`/dashboard/team/profile/${this.user.id}`)
+        this.set_user_id(this.user.id)
+        this.get_single_member(this.user.id)
       }
+      //location.reload();
     }
   }
 }
@@ -117,6 +129,18 @@ export default {
     .user-chevron img {
       width: 25px;
     }
+  }
+}
+.dropdown-img {
+  .v-image {
+    margin: 0 auto;
+    display: block;
+  }
+  .hero-name {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    font-size: 16px;
   }
 }
 @media only screen and (max-width: 480px) {
