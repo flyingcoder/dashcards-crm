@@ -15,9 +15,14 @@
       @sorted="changeSort"
     >
       <template slot="custom-item" slot-scope="{ item }">
-        <td class="text-cap">{{ item.client }}</td>
-        <td class="email">{{ item.title }}</td>
-        <td>{{ item.assignee }}</td>
+        <td class="text-cap clickable-td"   
+          @click="view_task(item.id)"
+        >
+          {{ item.title }}
+        </td>
+        <td>
+          <assigned-btn :users="item.assignee" />
+        </td>
         <td>{{ item.total_time }}</td>
         <td class="text-cap">{{ item.status }}</td>
       </template>

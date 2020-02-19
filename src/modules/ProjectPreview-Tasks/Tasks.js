@@ -32,7 +32,8 @@ export default {
     selected_tab: 'My Tasks',
     task: null,
     add_task_dialog: false,
-    delete_dialog: false
+    delete_dialog: false,
+    active_task_id: 0
   }),
 
   computed: {
@@ -59,6 +60,8 @@ export default {
   created() {
     this.$event.$on('task-row-clicked', task => (this.task = task))
     this.$event.$on('task-card-tab', tab => (this.selected_tab = tab))
+    if(this.$route.query.id)
+      this.active_task_id = this.$route.query.id
   },
   beforeDestroy() {
     this.$event.$off('task-row-clicked')

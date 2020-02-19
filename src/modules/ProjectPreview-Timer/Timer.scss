@@ -27,7 +27,6 @@
       color: $sortOptionGray;
     }
   }
-
 }
 
 @media only screen and (max-width: 480px){
@@ -53,3 +52,5 @@
 
   }
 }
+
+@include firstColumnHover;

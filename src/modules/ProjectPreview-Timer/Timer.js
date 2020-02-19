@@ -1,12 +1,14 @@
 import { table_functionality } from '@/services/table-functionality/table-functionality'
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
+import AssignedBtn from '@/common/AssignedBtn.vue'
 
 export default {
   name: 'TimerTab',
   mixins: [table_functionality],
   components: {
-    CustomTable
+    CustomTable,
+    AssignedBtn
   },
   props: {
     id: [Number, String]
@@ -20,7 +22,6 @@ export default {
       { title: 'Sort by Date' }
     ],
     headers: [
-      { text: 'Client', value: 'id'},
       { text: 'Task', value: 'title' },
       { text: 'Assignee', value: 'assignee' },
       { text: 'Total Time', value: 'total_time'},
@@ -28,6 +29,12 @@ export default {
       { is_action: false }
     ]
   }),
+
+  methods: {
+    view_task(id) {
+      this.$router.push('/dashboard/project-preview/9/tasks?id=' + id)
+    }
+  },
 
   computed: {
     dynamic_api() {
@@ -37,8 +44,9 @@ export default {
       return this.id
     }
   },
+
   created() {
+    console.log(this.$route.query.id)
     this.fill_table('get_project_timers', false, this.dynamic_api)
-    console.log(this)
   }
 }
