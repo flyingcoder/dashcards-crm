@@ -1,5 +1,21 @@
 <template>
   <div class="invoice">
+    <ViewInvoice 
+      ref="view_invoice_dialog"
+      :item="view_item"
+      :open="view_invoice_dialog"
+      @close="view_invoice_dialog = false"
+    ></ViewInvoice>
+
+    <InvoiceDialog type="edit" @updated="invoice_updated" />
+
+    <delete-dialog
+      :open-dialog.sync="delete_dialog"
+      title="Delete Invoice"
+      text-content="Are you sure you want to delete this invoice?"
+      @delete="delete_invoice"
+    />
+    
     <custom-table
       v-if="items.length || loading"
       :headers="headers"
@@ -7,22 +23,36 @@
       :loading="loading"
       :sort="sort"
       :permission="$_permissions.get('invoice')"
-      no-row-edit
-      no-row-view
-      no-row-delete
       toolbar-title="Invoice"
       hide-actions
       @items-selected="selected_ids = $event"
+      @delete="open_delete_dialog"
+      @view="open_view_dialog"
+      @edit="open_edit_dialog"
     >
       <template slot="custom-item" slot-scope="{ item }">
         <td>{{ item.title }}</td>
-        <td>{{ item.due_date }}</td>
         <td>{{ item.billed_to }}</td>
+        <td>{{ item.due_date }}</td>
         <td>{{ item.total_amount }}</td>
+      </template>
+
+      <template slot="table-actions">
+        <div class="actions-wrapper">
+          <div class="pagination" v-if="pagination.total > 1">
+              <v-pagination
+                color="#3b589e"
+                v-model="pagination.current"
+                :length="pagination.total"
+                :total-visible="pagination.total < 6 ? pagination.total : 6"
+                @input="onPageChange"
+            ></v-pagination>
+          </div>
+        </div>
       </template>
     </custom-table>
 
-    <div class="empty-invoice" v-else>
+    <div class="empty-invoice" v-if="!items.length && !loading">
       <div class="empty-content">
         <div class="empty-svg">
           <svg viewBox="0 0 250 250">

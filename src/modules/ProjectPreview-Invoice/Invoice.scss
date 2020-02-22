@@ -1,5 +1,28 @@
 @import '~@/sass/_variables';
+@include pagePadding ('.invoice');
 
+.actions-wrapper { /*TODO replace it with mixin since this code is repeated*/
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 1fr 160px 320px;
+	grid-template-columns: 1fr 160px 320px;
+	-webkit-box-pack: justify;
+	    justify-content: space-between;
+	-webkit-box-align: center;
+	    align-items: center;
+
+	.rows-per-page-dropdown {
+	  display: grid;
+	  grid-template-columns: 3fr 1fr;
+	  align-items: center;
+	  justify-content: center;
+	}
+
+	.pagination {
+	  -ms-grid-column-align: end;
+	      justify-self: end;
+	}
+}
 .invoice {
   padding: 20px;
   @include emptyTable('.empty-invoice');

@@ -98,10 +98,10 @@ export default {
       var tax = this.calculate_field(this.invoice, 'tax');
       var discount = this.calculate_field(this.invoice, 'discount');
       var shipping = this.calculate_field(this.invoice, 'shipping');
-      formData.append('tax', tax.value )
-      formData.append('discount',discount.value)
-      formData.append('shipping',shipping.value)
-      formData.append('symbol', tax.symbol)
+      formData.append('tax', tax == 0 ? 0 : tax.value )
+      formData.append('discount',discount  == 0 ? 0 : discount.value)
+      formData.append('shipping',shipping == 0 ? 0 : shipping.value)
+      formData.append('symbol', tax == 0 ? '' : tax.symbol)
       
       return formData
     },

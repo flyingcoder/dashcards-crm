@@ -45,9 +45,9 @@
       </template>
 
       <template slot="row-view" slot-scope="{ item }">
-        <v-btn fab small flat depressed>
+       <!--  <v-btn fab small flat depressed>
           <v-icon>email</v-icon>
-        </v-btn>
+        </v-btn> -->
         <v-btn fab small flat depressed @click="open_view_dialog(item)">
           <v-icon>search</v-icon>
         </v-btn>

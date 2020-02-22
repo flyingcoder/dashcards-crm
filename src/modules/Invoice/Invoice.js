@@ -61,19 +61,19 @@ export default {
       'set_dialog',
       'set_toolbar',
       'set_projects',
-      'open_invoice_for_editing'
+      'open_invoice_for_editing',
+      'set_selected_project'
     ]),
 
     open_create_dialog() {
-      this.set_toolbar({
-        title: 'Create Invoice'
-      })
+      this.set_toolbar({ title: 'Create Invoice' })
       this.set_dialog({ type: 'create', open: true })
     },
 
     open_edit_dialog(data) {
       this.set_toolbar({ title: 'Edit Dialog' })
       this.open_invoice_for_editing(_cloneDeep(data))
+      this.set_selected_project(data.project_id)
       this.set_dialog({ type: 'edit', open: true })
     },
 

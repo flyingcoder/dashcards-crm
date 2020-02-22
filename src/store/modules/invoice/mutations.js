@@ -10,12 +10,10 @@ export const mutations = {
   add_new_row: (state, payload) => state.invoice.rows.push(payload),
   add_rows: (state, payload) => state.invoice.rows.push(...payload),
   delete_row: (state, index) => state.invoice.rows.splice(index, 1),
-  update_row: (state, { row, index }) =>
-    state.invoice.rows.splice(index, 1, row),
+  update_row: (state, { row, index }) => state.invoice.rows.splice(index, 1, row),
   clear_rows: state => (state.invoice.rows = []),
   set_projects: (state, payload) => (state.projects = payload),
-  set_selected_project: (state, payload) =>
-    (state.invoice.selected_project = payload),
+  set_selected_project: (state, payload) => (state.invoice.selected_project = payload),
   set_type: (state, payload) => (state.invoice.type = payload),
   update_date: (state, { date, field }) => (state.invoice[field] = date),
   init_date: state => (state.invoice.date = moment().format('YYYY-MM-DD')),
@@ -24,10 +22,8 @@ export const mutations = {
   set_title: (state, newtitle) => (state.invoice.title = newtitle),
   set_billed_to: (state, payload) => (state.invoice.billed_to = payload),
   set_billed_from: (state, payload) => (state.invoice.billed_from = payload),
-  toggle_visibility: (state, { new_val, field }) =>
-    (state.invoice[field].show = new_val),
-  set_field: (state, { new_val, field }) =>
-    (state.invoice[field].value = Number(new_val)),
+  toggle_visibility: (state, { new_val, field }) => (state.invoice[field].show = new_val),
+  set_field: (state, { new_val, field }) => (state.invoice[field].value = Number(new_val)),
   toggle_symbol(state, field) {
     if (state.invoice[field].symbol === '%') state.invoice[field].symbol = '$'
     else state.invoice[field].symbol = '%'
@@ -54,6 +50,8 @@ export const mutations = {
     state.invoice.project_id = payload.project_id || null
     state.invoice.title = payload.title
     state.invoice.type = payload.type
+    state.invoice.notes = payload.notes
+    state.invoice.terms = payload.terms
     state.invoice_to_edit = _cloneDeep(state.invoice)
   }
 }
