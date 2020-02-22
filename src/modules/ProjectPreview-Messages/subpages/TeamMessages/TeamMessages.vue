@@ -2,15 +2,16 @@
   <div class="message__body team-messages">
     <div class="messages" ref="messages-container">
       <Loader :loading="loading" />
-      <template v-for="message of messages">
+      <template v-if="messages.length">
         <SingleMessage
+          v-for="message of messages"
           :key="message.id"
           :is-my-message="message.sender.id === loggedUser.id"
           :message="message"
         />
       </template>
     </div>
-    <div class="write">
+    <div class="write" v-if="can_message">
       <v-text-field
         v-model="message"
         class="write__msg"
@@ -53,7 +54,8 @@ export default {
   data: () => ({
     loading: false,
     messages: [],
-    message: null
+    message: null,
+    can_message : false
   }),
 
   computed: {
@@ -61,7 +63,12 @@ export default {
       return this.$store.getters.user
     }
   },
-
+  mounted(){
+    this.subscribePusher()
+  },
+  beforeDestroy() {
+    this.$pusher.unsubscribe('private-project.team-message.'+this.id)
+  },
   created() {
     this.loading = true
     apiTo
@@ -74,6 +81,27 @@ export default {
   },
 
   methods: {
+    add_new_message(message){
+      if(!this.messages.some(msg => msg.id === message.id)){
+        this.messages.push(message)
+      }
+      this.scrollToBottom(this.$refs['messages-container'])
+    },
+    user_can_message(can){
+      this.can_message = can
+      if (can) 
+        this.$event.$emit('open_snackbar', 'Team chat connected') 
+      else
+        this.$event.$emit('open_snackbar', 'Team chat disconnected.', 'error')
+    },
+    subscribePusher() {
+      var channel = this.$pusher.subscribe('private-project.team-message.'+this.id)
+          channel.bind('ProjectTeamMessage', (data) =>{ 
+            if(data.type === 'team') this.add_new_message(data.message) 
+          })
+          channel.bind('pusher:subscription_succeeded', () => this.user_can_message(true))
+          channel.bind('pusher:subscription_error',(status) => this.user_can_message(false))
+    },
     sendMessage(message) {
       if (!message) return
       this.message = null
@@ -83,8 +111,7 @@ export default {
         from_id: this.loggedUser.id
       }
       apiTo.send_message(this.id, payload).then(({ data }) => {
-        this.messages.push(data)
-        this.scrollToBottom(this.$refs['messages-container'])
+        this.add_new_message(data)
       })
     }
   }
