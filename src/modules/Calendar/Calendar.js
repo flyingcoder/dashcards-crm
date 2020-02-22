@@ -11,7 +11,7 @@ export default {
       { text: 'Dashboard', disabled: false, router_name: 'default-content' },
       { text: 'Calendar', disabled: true, router_name: null }
     ],
-    start: '2019-02-01',
+    start: moment().format('YYYY-MM-DD'),
     type: 'month'
   }),
 
