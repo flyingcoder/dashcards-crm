@@ -21,8 +21,8 @@
 
       <div class="info-div">
         <div class="hour">Per Hour</div>
-        <div class="value" v-if="user.meta.rate">{{ user.meta.rate.value }}</div>
-        <div class="value" v-if="!user.meta.rate">0</div>
+        <div class="value" v-if="user.meta.rate">{{currency.symbol}} {{ user.meta.rate.value }}</div>
+        <div class="value" v-if="!user.meta.rate">{{currency.symbol}} 0</div>
       </div>
     </template>
   </div>
@@ -30,8 +30,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { settings } from '@/variables'
 
 export default {
+  data: () => ({
+    currency : settings.defaultCurrency //TODO features allow admin to set their default currency
+  }),
   computed: {
     ...mapGetters('memberProfile', ['user', 'user_loading'])
   }

@@ -3,5 +3,6 @@ export const settings = {
   	BaseURL: 'https://bizzooka.com',
   	SiteName: 'Dashcards',
   	// apiHostBaseURL: 'http://localhost:8000', //for local dev,
-  	allowedImageType : [ "image/jpg", "image/png", "image/jpeg", "image/gif" ]
+  	allowedImageType : [ "image/jpg", "image/png", "image/jpeg", "image/gif" ],
+  	defaultCurrency : { name : 'US Dollar', symbol : '$' }
 }
