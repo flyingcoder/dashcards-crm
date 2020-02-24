@@ -6,12 +6,15 @@ let pusher = null
 
 export const broadcast = {
   authenticate() {
-    pusher = new Pusher('0594afc8c3bfe95e8a06', {
-      cluster: 'ap1',
+    Pusher.logToConsole = settings.pusher.logging;
+
+    pusher = new Pusher(settings.pusher.key, {
+      cluster: settings.pusher.cluster,
+      forceTLS: settings.pusher.forceTLS,
       encrypted: true,
       authEndpoint: settings.apiHostBaseURL + '/api/broadcasting/auth',
       auth: {
-        headers: {
+        headers: {  
           Authorization: 'Bearer ' + localStorage.getItem('token')
         }
       }
