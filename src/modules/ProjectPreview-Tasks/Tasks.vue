@@ -44,9 +44,9 @@
     <div class="cards" v-show="total">
       <tasks-card :id="id" />
       <preview-card
-        v-if="task"
+        v-if="active_task_id"
         :id="id"
-        :task="task"
+        :active-id="active_task_id"
         @dropdown-action="handle_dropdown_action"
       />
     </div>

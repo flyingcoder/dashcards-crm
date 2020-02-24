@@ -33,11 +33,20 @@ export default {
     task: null,
     add_task_dialog: false,
     delete_dialog: false,
-    active_task_id: 0
   }),
 
   computed: {
     ...mapGetters('taskCards', ['total', 'loading']),
+    active_task_id: {
+      get: function() {
+        if(this.task)
+          return this.task.id
+      },
+      set: function(val) {
+        console.log(val)
+        return val
+      }
+    },
     tab_tasks() {
       if (this.selected_tab === 'My Tasks') return this.tasks_own
       return this.all_tasks
@@ -62,6 +71,7 @@ export default {
     this.$event.$on('task-card-tab', tab => (this.selected_tab = tab))
     if(this.$route.query.id)
       this.active_task_id = this.$route.query.id
+    
   },
   beforeDestroy() {
     this.$event.$off('task-row-clicked')
@@ -119,15 +129,6 @@ export default {
     },
 
     remove_task() {
-      //after delete request (API)
-      /*const own_task_index = this.tasks_own.findIndex(
-        task => task.id === this.task.id
-      )
-      const all_task_index = this.all_tasks.findIndex(
-        task => task.id === this.task.id
-      )
-      if (~own_task_index) this.tasks_own.splice(own_task_index, 1)
-      if (~all_task_index) this.all_tasks.splice(all_task_index, 1)*/
       this.del_task(this.task)
       this.delete_dialog = false
       this.$event.$emit('open_snackbar', 'Task deleted successfully')

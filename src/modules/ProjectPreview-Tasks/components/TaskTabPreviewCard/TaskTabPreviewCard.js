@@ -16,8 +16,8 @@ export default {
     EmojiPicker
   },
   props: {
-    id: [Number, String],
-    task: Object
+    activeId: [Number, String],
+    id: [Number, String]
   },
 
   data: () => ({
@@ -53,16 +53,19 @@ export default {
   },
 
   watch: {
-    task: {
-      handler(newTask) {
+    activeId: {
+      handler(task_id) {
         this.loading = true
         request
-          .get(`api/task/${newTask.id}`)
+          .get(`api/task/${task_id}`)
           .then(response => {
             this.content = response.data
             this.all_comments = response.data.comments
           })
-          .finally(() => (this.loading = false))
+          .finally(() => ( this.loading = false ))
+
+          //if(this.content.project_id != this.id)
+          //  this.loading = true 
       },
       immediate: true
     }
@@ -77,7 +80,7 @@ export default {
       if (!this.comment || this.isRequestInProgress) return
       this.isRequestInProgress = true
       request
-        .post(`api/task/${this.task.id}/comments`, { body: this.comment })
+        .post(`api/task/${this.active_id}/comments`, { body: this.comment })
         .then(response => {
           this.comment = ''
           this.all_comments.push(response.data)

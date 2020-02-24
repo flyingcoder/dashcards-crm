@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 class="task__tab_preview_card" v-if="task">
+  <v-flex xs12 class="task__tab_preview_card" v-if="activeId">
     <v-flex class="task__preview_content">
       <v-flex class="card__content" slot="content">
         <v-progress-linear
