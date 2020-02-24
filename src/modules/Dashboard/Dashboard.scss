@@ -2,6 +2,7 @@
 
 
 .dashboard__container {
+  min-height : 100%;
   display: grid;
   grid-template-areas: 'sidebar header' 'sidebar content';
   grid-template-columns: auto 1fr;
