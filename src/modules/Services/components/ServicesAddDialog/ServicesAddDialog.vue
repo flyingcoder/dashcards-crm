@@ -22,6 +22,7 @@
                   hide-details
                   color="#657186"
                   :items="recommendedServices"
+                  @input.native="name=$event.srcElement.value"
                 ></v-combobox>
               </v-flex>
 
