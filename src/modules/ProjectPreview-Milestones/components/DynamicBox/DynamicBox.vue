@@ -7,7 +7,7 @@
       @delete="delete_task(item_to_delete)"
     />
 
-    <dash-card :title="validate_title(box.title)">
+    <dash-card :title="validate_title(box.title)" :dashboard="true">
       <template slot="actions">
         <v-flex xs4 class="actions text-xs-right">
           {{
