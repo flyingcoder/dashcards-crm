@@ -80,7 +80,7 @@ export default {
       if (!this.comment || this.isRequestInProgress) return
       this.isRequestInProgress = true
       request
-        .post(`api/task/${this.active_id}/comments`, { body: this.comment })
+        .post(`api/task/${this.activeId}/comments`, { body: this.comment })
         .then(response => {
           this.comment = ''
           this.all_comments.push(response.data)
