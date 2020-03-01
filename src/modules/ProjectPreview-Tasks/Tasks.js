@@ -117,7 +117,7 @@ export default {
     },
 
     delete_task() {
-      apiTo.delete_task(this.task.id).then(() => this.remove_task())
+      apiTo.delete_task(this.task.id).then(() => this.remove_task(this.task))
     },
 
     update_task(new_task, id, target) {
@@ -128,8 +128,8 @@ export default {
       }
     },
 
-    remove_task() {
-      this.del_task(this.task)
+    remove_task(task) {
+      this.del_task(task)
       this.delete_dialog = false
       this.$event.$emit('open_snackbar', 'Task deleted successfully')
       this.set_active_task_after_delete()

@@ -28,7 +28,7 @@ const mutations = {
   add_task: (state, payload) => (state.tasks.push(payload)),
   del_task: (state, payload) => {
     let index =  state.tasks.findIndex(task => task.id == payload.id) 
-    if(index) 
+    if(~index) 
       state.tasks.splice(index, 1)
   },
   set_see_more_url: (state, payload) => (state.see_more_url = payload)
