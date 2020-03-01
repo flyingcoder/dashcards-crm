@@ -4,12 +4,12 @@
       <v-progress-linear :indeterminate="true"></v-progress-linear>
     </div>
 
-    <div class="no-data" v-else-if="tasks_are_empty">
+    <v-flex class="no-data" v-else-if="tasks_are_empty">
       <div class="empty-content">
         <v-icon class="empty-icon">stars</v-icon>
         <p class="empty-text">List Empty</p>
       </div>
-    </div>
+    </v-flex>
 
     <div class="tasks-tab" v-else>
       <div class="task-card">

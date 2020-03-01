@@ -7,21 +7,25 @@
     <template v-else>
       <div class="info-div">
         <div class="hour">Invoices</div>
-        <div class="value">68</div>
+        <div class="value">{{user.no_invoices}}</div>
       </div>
 
       <div class="info-div">
         <h4 class="name">{{ user.first_name }} {{ user.last_name }}</h4>
-        <div class="job-title">CEO, Samsung</div>
+        <div class="job-title" v-if="user.meta.company_name">{{user.meta.company_name.value}}</div>
+        <div class="job-title" v-else>Client</div>
         <div class="address">
           <v-icon>place</v-icon>
-          Cebu, Philippines
+          <span v-if="user.meta.location">{{user.meta.location.value}}</span>
         </div>
       </div>
 
       <div class="info-div">
         <div class="hour">Amount Paid</div>
-        <div class="value">$10,000</div>
+        <div class="value">
+          {{ currency.symbol }}
+          {{ user.total_amount_paid }}
+        </div>
       </div>
     </template>
   </div>
@@ -29,8 +33,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { settings } from '@/variables'
 
 export default {
+  data(){
+    return {
+      currency : settings.defaultCurrency
+    }
+  },
   computed: {
     ...mapGetters('memberProfile', ['user', 'user_loading'])
   }
