@@ -26,7 +26,15 @@
       </div>
     </div>
 
-    <PreviewCard v-if="selected_task" :id="user_id" :task="selected_task" />
+    <v-flex class="task-preview-wrapper">
+      <PreviewCard 
+        v-if="selected_task" 
+        :activeId="selected_task.id" 
+        :id="user_id" 
+        :task="selected_task" 
+        />
+      
+    </v-flex>
   </div>
 </template>
 
@@ -113,6 +121,9 @@ export default {
     border: 1px solid $tableBorderBlue;
     border-radius: 15px;
     overflow: hidden;
+  }
+  .task-preview-wrapper {
+    padding: 15px;
   }
 }
 
