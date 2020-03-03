@@ -12,6 +12,10 @@ export default {
     TeamsDialog
   },
 
+  props: {
+    currentuserid: [Number, String] 
+  },
+  
   data: () => ({
     edit_dialog : false,
     edit_item: {
@@ -21,7 +25,24 @@ export default {
   }),
 
   computed: {
-    ...mapGetters('memberProfile', ['user', 'set_user_loading'])
+    ...mapGetters('memberProfile', ['user', 'set_user_loading']),
+    logged_user() {
+      return this.$store.getters.user
+    },
+    permission() {
+      return this.$_permissions.get('user_profile')
+    },
+    can_edit() {
+      if (this.logged_user.is_admin) return true
+
+      if (this.logged_user.id ===  parseInt(this.currentuserid)) return true //allow edit to self
+      
+      let role = this.logged_user.role.split('-').pop().toLowerCase()
+      if (role === 'manager') {
+        return this.permission && this.permission.update
+      }
+      return false
+    }
   },
 
   methods: {
@@ -31,7 +52,6 @@ export default {
       this.edit_dialog = true
       this.$set(this.edit_item, 'id', item.id)
       this.$set(this.edit_item, 'fields', item)
-      console.log(item)
     },
     update_user_profile(item) {
       item['id'] = this.edit_item.id
@@ -40,7 +60,9 @@ export default {
       this.$set(this.edit_item, 'fields', this.user)
     },
     image_clicked() {
-      this.set_picture_dialog(true) //open picture dialog
+      if (this.can_edit) {
+        this.set_picture_dialog(true) //open picture dialog
+      }
     }
   }
 }

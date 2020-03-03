@@ -66,6 +66,24 @@ export default {
         item.index = index + 1
         return item
       })
+    },
+    user() {
+      return this.$store.getters.user
+    },
+    permission() {
+      return this.$_permissions.get('settings_group')
+    },
+    can_view() {
+      if (this.user.is_admin) return true
+      return this.permission && this.permission.view
+    },
+    can_edit() {
+      if (this.user.is_admin) return true
+      return this.permission && this.permission.update
+    },
+    can_delete() {
+      if (this.user.is_admin) return true
+      return this.permission && this.permission.delete
     }
   },
 

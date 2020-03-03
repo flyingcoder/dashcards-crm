@@ -56,13 +56,13 @@
           </div>
         </v-flex>
         <v-flex xs3  class="action__col">
-              <v-btn icon v-if="task.status !== 'completed'" @click="task_action(task, 'task-mark-as-complete')" title="Mark as complete">
+              <v-btn icon v-if="task.status !== 'completed' && can_edit" @click="task_action(task, 'task-mark-as-complete')" title="Mark as complete">
                 <v-icon color="grey lighten-1">check</v-icon>
               </v-btn>
-              <v-btn icon @click="task_action(task, 'task-delete')" title="Delete Task">
+              <v-btn icon v-if="can_delete" @click="task_action(task, 'task-delete')" title="Delete Task">
                 <v-icon color="grey lighten-1">delete</v-icon>
               </v-btn>
-              <v-btn icon @click="task_action(task, 'task-edit')" title="Edit Task">
+              <v-btn icon v-if="can_edit" @click="task_action(task, 'task-edit')" title="Edit Task">
                 <v-icon color="grey lighten-1">edit</v-icon>
               </v-btn>
         </v-flex>
@@ -92,9 +92,27 @@ export default {
   created() {
     this.active_task_id = this.tasks[0].id
     this.$event.$emit('task-row-clicked', this.tasks[0])
-    this.$event.$on('task-is-updated', task => this.update_task(task))
   },
-
+  computed : {
+    user() {
+      return this.$store.getters.user
+    },
+    permission() {
+      return this.$_permissions.get('tasks_own')
+    },
+    can_view() {
+      if (this.user.is_admin) return true
+      return this.permission && this.permission.view
+    },
+    can_edit() {
+      if (this.user.is_admin) return true
+      return this.permission && this.permission.update
+    },
+    can_delete() {
+      if (this.user.is_admin) return true
+      return this.permission && this.permission.delete
+    }
+  },
   methods: {
     row_clicked(row) {
       this.active_task_id = row.id

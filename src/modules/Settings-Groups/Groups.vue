@@ -56,7 +56,7 @@
             :has-checkbox="true"
             hide-actions
             toolbar-title="Groups"
-            :permission="$_permissions.get('groups')"
+            :permission="$_permissions.get('settings_group')"
             @items-selected="selected_ids = $event"
             @sorted="changeSort"
           >
@@ -70,6 +70,7 @@
               <td class="text-xs-center">
                 <template v-if="item.company_id">
                   <v-btn
+                    v-if="can_edit"
                     @click="open_edit_dialog(item)"
                     fab
                     small
@@ -81,6 +82,7 @@
                     <img src="@/assets/icons/groups/edit.svg" />
                   </v-btn>
                   <v-btn
+                    v-if="can_delete"
                     @click="open_delete_dialog(item)"
                     fab
                     small
@@ -92,6 +94,7 @@
                     <img src="@/assets/icons/groups/delete.svg" />
                   </v-btn>
                   <v-btn
+                    v-if="can_edit"
                     fab
                     flat
                     small

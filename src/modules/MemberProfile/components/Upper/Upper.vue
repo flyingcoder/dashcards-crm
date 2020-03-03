@@ -1,8 +1,8 @@
 <template>
   <div class="profile-upper">
     <div class="background">
-      <v-icon class="camera">camera_alt</v-icon>
-      <v-icon class="settings" @click="open_edit_dialog(user)">settings</v-icon>
+      <v-icon class="camera" v-if="can_edit">camera_alt</v-icon>
+      <v-icon class="settings" v-if="can_edit"  @click="open_edit_dialog(user)">settings</v-icon>
     </div>
 
     <div class="icons" v-if="user">

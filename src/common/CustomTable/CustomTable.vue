@@ -33,7 +33,7 @@
           <template slot="headers" slot-scope="props">
             <!-- HEADERS -->
             <tr class="table__head">
-              <th v-if="$props.hasCheckbox">
+              <th v-if="$props.hasCheckbox && !noRowDelete && can_delete">
                 <v-checkbox
                   :input-value="props.all"
                   :indeterminate="props.indeterminate"
@@ -75,7 +75,7 @@
             <!-- ITEMS -->
             <tr :active="props.selected" class="table__body-row">
               <td
-                v-if="$props.hasCheckbox"
+                v-if="$props.hasCheckbox && !noRowDelete && can_delete"
                 @click="props.selected = !props.selected"
               >
                 <v-checkbox

@@ -4,7 +4,7 @@
 
     <div class="profile">
       <div class="profile-content">
-        <Upper />
+        <Upper :currentuserid="user_id" />
         <Lower />
       </div>
     </div>

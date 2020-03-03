@@ -49,7 +49,6 @@
           class="text-xs-left team__member"
           @click="navigate_to_view_profile(item.item.id)"
         >
-          <!--TODO fill image with dynamic data from backend-->
           <div class="member__image">
             <img :src="item.item.image_url" /> &nbsp;
           </div>
