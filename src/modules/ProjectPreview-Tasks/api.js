@@ -22,5 +22,8 @@ export default {
 
   delete_task(id) {
     return request.delete(`api/task/${id}`)
+  },
+  mark_as_complete_task(id, payload) {
+    return request.put(`api/task/${id}/mark-as-complete`, payload)
   }
 }

@@ -5,6 +5,7 @@ import TasksCard from '@/common/TasksCard/TasksCard.vue'
 import PreviewCard from './components/TaskTabPreviewCard/TaskTabPreviewCard.vue'
 import TaskDialog from './components/TaskDialog/TaskDialog.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
+import ConfirmDialog from '@/common/ConfirmDialog.vue'
 
 export default {
   name: 'TasksTab',
@@ -12,7 +13,8 @@ export default {
     TasksCard,
     PreviewCard,
     TaskDialog,
-    DeleteDialog
+    DeleteDialog,
+    ConfirmDialog
   },
   props: {
     id: [Number, String]
@@ -33,6 +35,7 @@ export default {
     task: null,
     add_task_dialog: false,
     delete_dialog: false,
+    confirm_mark_as_complete_dialog: false,
   }),
 
   computed: {
@@ -72,13 +75,16 @@ export default {
     if(this.$route.query.id)
       this.active_task_id = this.$route.query.id
     
+    this.$event.$on('task-mark-as-complete', task => this.set_and_mark_complete_task(task))
+    this.$event.$on('task-edit', task => this.set_and_edit_task(task))
+    this.$event.$on('task-delete', task => this.set_and_delete_task(task))
   },
   beforeDestroy() {
     this.$event.$off('task-row-clicked')
   },
 
   methods: {
-    ...mapMutations('taskCards', ['add_task', 'del_task']),
+    ...mapMutations('taskCards', ['add_task', 'del_task', 'replace_task']),
     get_own_tasks() {
       if (this.tasks_own.length) return //tasks are already fetched
       this.loading = true
@@ -122,9 +128,16 @@ export default {
 
     update_task(new_task, id, target) {
       this.task = new_task
-      const indexFound = this[target].findIndex(task => task.id === id)
-      if (indexFound) { 
-        this[target].splice(indexFound, 1, new_task) 
+      if (target === 'all_tasks') {
+        let indexFound = this.all_tasks.findIndex(task => task.id === id)
+        if (~indexFound) { 
+          this.all_tasks.splice(indexFound, 1, new_task) 
+        }
+      } else {
+        let indexFound = this.tasks_own.findIndex(task => task.id === id)
+        if (~indexFound) { 
+          this.tasks_own.splice(indexFound, 1, new_task) 
+        }
       }
     },
 
@@ -160,6 +173,36 @@ export default {
 
     open_delete_task_dialog() {
       this.delete_dialog = true
+    },
+
+    open_mark_as_complete_task_dialog(){
+      this.confirm_mark_as_complete_dialog = true
+    },
+
+    confirm_mark_as_complete_task(){
+      var payload = { status : 'completed' }
+      apiTo.mark_as_complete_task(this.task.id, payload)
+        .then(({ data }) => { 
+          this.confirm_mark_as_complete_dialog = false
+          this.$event.$emit('open_snackbar', 'Task is completed')
+          this.update_task(data, this.task.id, 'all_tasks')
+          this.update_task(data, this.task.id, 'tasks_own')
+          this.replace_task(data)
+        })
+    },
+
+    set_and_delete_task(task) {
+      this.task = task
+      this.open_delete_task_dialog()
+    },
+    set_and_edit_task(task) {
+      this.task = task
+      this.open_edit_task_dialog()
+    },
+    set_and_mark_complete_task(task) {
+      this.task = task
+      this.open_mark_as_complete_task_dialog()
     }
+
   }
 }

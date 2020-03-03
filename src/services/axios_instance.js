@@ -34,9 +34,17 @@ request.interceptors.response.use(
     }
     const res = error.response
     if(res) {
+      let message = res.data.message
+      if (typeof res.data.errors != "undefined") {
+        let errors = Object.values(res.data.errors);
+            errors = errors.flat();
+          for (var i = errors.length - 1; i >= 0; i--) {
+            message = message +`\n`+ errors[i]
+          }
+      }
       store.commit('open_snackbar', {
         status: true,
-        message: res.data.message
+        message: message
       })
     }
     

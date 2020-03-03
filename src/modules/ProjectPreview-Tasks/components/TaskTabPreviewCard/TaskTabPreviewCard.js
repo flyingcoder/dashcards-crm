@@ -61,6 +61,7 @@ export default {
           .then(response => {
             this.content = response.data
             this.all_comments = response.data.comments
+            this.set_mark_complete_action(response.data)
           })
           .finally(() => ( this.loading = false ))
 
@@ -68,6 +69,11 @@ export default {
           //  this.loading = true 
       },
       immediate: true
+    },
+    'content.status' : {
+      handler() {
+        this.set_mark_complete_action(this.content)
+      }
     }
   },
 
@@ -95,6 +101,21 @@ export default {
         selection.index,
         emoji
       )
+    },
+    set_mark_complete_action(item) {
+      var xtra_action = { id: 3, text: 'Mark as Complete', value: 'mark_as_complete' };
+      var index = this.dropdown_actions.findIndex(function(item){
+          return item.id === 3
+      })
+      if (~index) {
+        if (item.status.toLowerCase() === 'completed') {
+          this.dropdown_actions.splice(index, 1)
+        }
+      } else {
+        if (item.status.toLowerCase() !== 'completed') {
+          this.dropdown_actions.push(xtra_action)
+        }
+      }
     }
   }
 }

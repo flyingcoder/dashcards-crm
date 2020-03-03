@@ -30,6 +30,14 @@
       @delete="delete_task"
     />
 
+    <ConfirmDialog
+      :open-dialog.sync='confirm_mark_as_complete_dialog'
+      title="Confirmation required!"
+      confirm-button-text="Yes"
+      text-content="Mark task as completed?"
+      @confirm="confirm_mark_as_complete_task"
+    />
+
     <div class="actions">
       <v-btn
         color="indigo"
@@ -41,7 +49,7 @@
         <v-icon>add</v-icon>
       </v-btn>
     </div>
-    <div class="cards" v-show="total">
+    <div class="cards">
       <tasks-card :id="id" />
       <preview-card
         v-if="active_task_id"
@@ -50,7 +58,7 @@
         @dropdown-action="handle_dropdown_action"
       />
     </div>
-    <div class="empty-task" v-show="!total" >
+    <div class="empty-task" v-show="false" >
       <div class="empty-content">
         <div class="empty-svg">
             <svg enable-background="new 0 0 431.998 431.998" version="1.1" viewBox="0 0 432 432" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">

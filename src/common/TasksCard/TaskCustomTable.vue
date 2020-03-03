@@ -1,10 +1,11 @@
 <template>
   <div class="task-custom-table">
     <v-layout row class="header">
-      <v-flex xs3 class="task__tableHead" v-if="tab=='All Tasks'">Assignee</v-flex>
-      <v-flex xs6 class="task__tableHead" v-if="tab=='All Tasks'">Task</v-flex>
-      <v-flex xs9 class="task__tableHead" v-if="tab!='All Tasks'">Task</v-flex>
+      <v-flex xs2 class="task__tableHead" v-if="tab=='All Tasks'">Assignee</v-flex>
+      <v-flex xs4 class="task__tableHead" v-if="tab=='All Tasks'">Task</v-flex>
+      <v-flex xs6 class="task__tableHead" v-if="tab!='All Tasks'">Task</v-flex>
       <v-flex xs3 class="task__tableHead">Status</v-flex>
+      <v-flex xs3 class="task__tableHead">Action</v-flex>
     </v-layout>
 
     <div class="body" :style="{ maxHeight: bodyMaxHeight }">
@@ -16,7 +17,7 @@
         :key="task.id"
         @click="row_clicked(task)"
       > 
-        <v-flex xs3 class="assignee__col" v-if="tab=='All Tasks'">
+        <v-flex xs2 class="assignee__col" v-if="tab=='All Tasks'">
           <span v-if="task.assignee.length">
              <v-img
               :src="task.assignee[0].image_url"
@@ -27,11 +28,11 @@
           <span v-if="!task.assignee.length"></span>
         </v-flex>
 
-        <v-flex xs6 class="project__col" v-if="tab=='All Tasks'">
+        <v-flex xs4 class="project__col" v-if="tab=='All Tasks'">
           {{ task.title }}
         </v-flex>
 
-        <v-flex xs9 class="project__col" v-if="tab!='All Tasks'">
+        <v-flex xs6 class="project__col" v-if="tab!='All Tasks'">
           {{ task.title }}
         </v-flex>
 
@@ -53,6 +54,17 @@
           <div v-if="task.status === 'open'">
             <div class="status__open"></div>
           </div>
+        </v-flex>
+        <v-flex xs3  class="action__col">
+              <v-btn icon v-if="task.status !== 'completed'" @click="task_action(task, 'task-mark-as-complete')" title="Mark as complete">
+                <v-icon color="grey lighten-1">check</v-icon>
+              </v-btn>
+              <v-btn icon @click="task_action(task, 'task-delete')" title="Delete Task">
+                <v-icon color="grey lighten-1">delete</v-icon>
+              </v-btn>
+              <v-btn icon @click="task_action(task, 'task-edit')" title="Edit Task">
+                <v-icon color="grey lighten-1">edit</v-icon>
+              </v-btn>
         </v-flex>
       </v-layout>
     </div>
@@ -80,12 +92,16 @@ export default {
   created() {
     this.active_task_id = this.tasks[0].id
     this.$event.$emit('task-row-clicked', this.tasks[0])
+    this.$event.$on('task-is-updated', task => this.update_task(task))
   },
 
   methods: {
     row_clicked(row) {
       this.active_task_id = row.id
       this.$event.$emit('task-row-clicked', row)
+    },
+    task_action(item, event) {
+      this.$event.$emit(event, item)
     }
   }
 }
@@ -163,6 +179,16 @@ export default {
           width: 60px;
           border-radius: 10px;
           background-color: $textGray;
+        }
+      }
+      .action__col {
+        display: flex;
+        justify-content: end;
+
+        button {
+          display : inline-block;
+          width: 30%;
+          margin : 0 5px;
         }
       }
     }
