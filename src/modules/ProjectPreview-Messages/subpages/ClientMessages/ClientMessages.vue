@@ -14,7 +14,10 @@
         No messages yet
       </div>
     </div>
-    <div class="write" v-if="can_message">
+    <div class="write">
+      <div class="avatar-wrapper">
+        <img :src="loggedUser.image_url" class="sender-avatar">
+      </div>
       <v-text-field
         v-model="message"
         class="write__msg"
@@ -78,10 +81,11 @@ export default {
       .finally(() => (this.loading = false))
   },
   mounted(){
+    this.$pusher.authenticate()
     this.subscribePusher()
   },
   beforeDestroy() {
-    this.$pusher.unsubscribe('private-project.client-message.'+this.id)
+    this.$pusher.unsubscribe(`private-project.client-message.${this.id}`)
   },
   methods: {
     add_new_message(message){
@@ -98,12 +102,12 @@ export default {
         this.$event.$emit('open_snackbar', 'Client chat unavailable for you.', 'error')
     },
     subscribePusher() {
-      var channel = this.$pusher.subscribe('private-project.client-message.'+this.id)
-          channel.bind('ProjectClientMessage', (data) =>{ 
+      const client_message_channel = this.$pusher.subscribe(`private-project.client-message.${this.id}`)
+          client_message_channel.bind('ProjectClientMessage', (data) =>{ 
             if(data.type === 'client') this.add_new_message(data.message) 
           })
-          channel.bind('pusher:subscription_succeeded', () => this.user_can_message(true))
-          channel.bind('pusher:subscription_error',(status) => this.user_can_message(false))
+          client_message_channel.bind('pusher:subscription_succeeded', () => this.user_can_message(true))
+          client_message_channel.bind('pusher:subscription_error',(status) => this.user_can_message(false))
     },
     sendMessage(message) {
       if (!message) return
@@ -153,6 +157,12 @@ export default {
         &:hover {
           color: $blue;
         }
+      }
+    }
+    .avatar-wrapper {
+      padding: 3px;
+      .sender-avatar {
+        width: 40px;
       }
     }
   }

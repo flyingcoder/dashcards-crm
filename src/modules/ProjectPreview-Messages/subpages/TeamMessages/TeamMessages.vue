@@ -11,7 +11,10 @@
         />
       </template>
     </div>
-    <div class="write" v-if="can_message">
+    <div class="write">
+      <div class="avatar-wrapper">
+        <img :src="loggedUser.image_url" class="sender-avatar">
+      </div>
       <v-text-field
         v-model="message"
         class="write__msg"
@@ -64,10 +67,11 @@ export default {
     }
   },
   mounted(){
+    this.$pusher.authenticate()
     this.subscribePusher()
   },
   beforeDestroy() {
-    this.$pusher.unsubscribe('private-project.team-message.'+this.id)
+    this.$pusher.unsubscribe(`private-project.team-message.${this.id}`)
   },
   created() {
     this.loading = true
@@ -95,12 +99,12 @@ export default {
         this.$event.$emit('open_snackbar', 'Team chat disconnected.', 'error')
     },
     subscribePusher() {
-      var channel = this.$pusher.subscribe('private-project.team-message.'+this.id)
-          channel.bind('ProjectTeamMessage', (data) =>{ 
+      const team_message_channel = this.$pusher.subscribe(`private-project.team-message.${this.id}`)
+          team_message_channel.bind('ProjectTeamMessage', (data) =>{ 
             if(data.type === 'team') this.add_new_message(data.message) 
           })
-          channel.bind('pusher:subscription_succeeded', () => this.user_can_message(true))
-          channel.bind('pusher:subscription_error',(status) => this.user_can_message(false))
+          team_message_channel.bind('pusher:subscription_succeeded', () => this.user_can_message(true))
+          team_message_channel.bind('pusher:subscription_error',(status) => this.user_can_message(false))
     },
     sendMessage(message) {
       if (!message) return
@@ -150,6 +154,12 @@ export default {
         &:hover {
           color: $blue;
         }
+      }
+    }
+    .avatar-wrapper {
+      padding: 3px;
+      .sender-avatar {
+        width: 40px;
       }
     }
   }
