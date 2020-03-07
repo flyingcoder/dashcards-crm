@@ -35,7 +35,7 @@
               <v-btn @click="button1clicked">{{ button1Text }}</v-btn>
             </slot>
             <slot name="button2">
-              <v-btn @click="button2clicked">{{ button2Text }}</v-btn>
+              <v-btn :loading="btnloading" @click="button2clicked">{{ button2Text }}</v-btn>
             </slot>
           </slot>
         </v-card-actions>

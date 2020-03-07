@@ -32,7 +32,8 @@ export default {
     fieldsToEdit: {
       type: Object,
       default: () => {}
-    }
+    },
+    btnloading : { type : Boolean, default : false }
   },
 
   data: () => ({
@@ -79,6 +80,10 @@ export default {
       }
     }
   }),
+
+  mounted() {
+    this.$event.$on( 'btnloading_off', (status) => (this.btnloading = status))
+  },
 
   computed: {
     disabled() {
@@ -170,6 +175,7 @@ export default {
 
     save() {
       if (this.disabled) return
+      this.btnloading =  true
       const fields_to_save = {
         title: this.project_title,
         client_id: this.client.selected.id || null,

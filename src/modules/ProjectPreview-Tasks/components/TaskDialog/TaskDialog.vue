@@ -77,7 +77,7 @@
       </template>
 
       <template slot="button2">
-        <v-btn @click="save">Save</v-btn>
+        <v-btn @click="save" :loading="btnloading">Save</v-btn>
       </template>
     </custom-dialog>
   </div>

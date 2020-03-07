@@ -13,6 +13,7 @@ export const methods = {
         }
         this.$refs.add_dialog.clear_and_close()
         this.$event.$emit('open_snackbar', this.table_config.add_message)
+        this.$event.$emit('btnloading_off', false)
       })
     },
 
@@ -45,6 +46,7 @@ export const methods = {
           }
           this.edit_dialog = false
           this.$event.$emit('open_snackbar', this.table_config.update_message)
+          this.$event.$emit('btnloading_off', false)
         }
       )
     },
@@ -58,6 +60,7 @@ export const methods = {
         this.delete_item_id = null
         this.delete_dialog = false
         this.$event.$emit('open_snackbar', this.table_config.delete_message)
+        this.$event.$emit('btnloading_off', false)
       })
     },
 

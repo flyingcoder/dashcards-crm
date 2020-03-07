@@ -19,7 +19,8 @@ export default {
     dialog: Boolean,
     dialogTitle: String,
     task: Object,
-    milestoneStartDate: String
+    milestoneStartDate: String,
+    btnloading : { type : Boolean, default: false }
   },
 
   data: () => ({
@@ -40,6 +41,10 @@ export default {
       items: []
     }
   }),
+
+  mounted() {
+    this.$event.$on( 'btnloading_off', (status) => (this.btnloading = status))
+  },
 
   computed: {
     computedDialog: {
@@ -82,6 +87,7 @@ export default {
     },
 
     save() {
+      this.btnloading = true
       const fields_to_save = {
         milestone_id: this.milestones.selected,
         title: this.title,

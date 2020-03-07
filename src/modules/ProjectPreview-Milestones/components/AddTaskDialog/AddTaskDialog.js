@@ -23,7 +23,8 @@ export default {
     dialogTitle: String,
     isEditDialog: Boolean,
     fieldsToEdit: { type: Object, default: () => {} },
-    milestoneStartDate: String
+    milestoneStartDate: String,
+    btnloading : { type: Boolean, default: false }
   },
 
   data: () => ({
@@ -41,6 +42,10 @@ export default {
     },
     days_init_value: 1
   }),
+
+  mounted() {
+    this.$event.$on( 'btnloading_off', (status) => (this.btnloading = status))
+  },
 
   computed: {
     days: {
@@ -111,6 +116,7 @@ export default {
     },
 
     save() {
+      this.btnloading = true
       const fields_to_save = {
         title: this.title,
         description: this.description,

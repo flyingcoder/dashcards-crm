@@ -168,7 +168,7 @@
     </template>
 
     <template slot="button2">
-      <v-btn :disabled="$v.$invalid" @click="save">Save</v-btn>
+      <v-btn :disabled="$v.$invalid" :loading="btnloading" @click="save">Save</v-btn>
     </template>
   </custom-dialog>
 </template>

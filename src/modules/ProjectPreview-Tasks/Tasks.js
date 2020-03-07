@@ -110,6 +110,7 @@ export default {
         //is_myTask && this.tasks_own.push(data)
         this.$refs.add_task_dialog.clear_and_close()
         this.$event.$emit('open_snackbar', 'New Task added successfully')
+        this.$event.$emit('btnloading_off', false)
       })
     },
 
@@ -119,11 +120,17 @@ export default {
         this.update_task(data, this.task.id, 'tasks_own')
         this.$refs.edit_task_dialog.$refs.dialog.clear_and_close()
         this.$event.$emit('open_snackbar', 'Task updated successfully')
+        this.$event.$emit('btnloading_off', false)
       })
     },
 
     delete_task() {
-      apiTo.delete_task(this.task.id).then(() => this.remove_task(this.task))
+      apiTo
+      .delete_task(this.task.id)
+      .then(() => {
+        this.remove_task(this.task) 
+        this.$event.$emit('btnloading_off', false)
+      })
     },
 
     update_task(new_task, id, target) {
@@ -188,6 +195,7 @@ export default {
           this.update_task(data, this.task.id, 'all_tasks')
           this.update_task(data, this.task.id, 'tasks_own')
           this.replace_task(data)
+          this.$event.$emit('btnloading_off', false)
         })
     },
 

@@ -153,7 +153,10 @@ export default {
           this.boxes = boxes
           this.$event.$emit('open_snackbar', 'Task deleted successfully')
         })
-        .finally(() => (this.boxIdInProgress = null))
+        .finally(() => {
+          this.boxIdInProgress = null
+          this.$event.$emit('btnloading_off', false)
+        })
     },
 
     update_task(task) {
@@ -181,7 +184,10 @@ export default {
             this.$event.$emit('open_snackbar', 'Task updated successfully')
           }
         })
-        .finally(() => (this.boxIdInProgress = null))
+        .finally(() => {
+          this.boxIdInProgress = null
+          this.$event.$emit('btnloading_off', false)
+        })
     },
 
     open_add_task_dialog(box_id) {
@@ -207,6 +213,7 @@ export default {
         .finally(() => {
           this.boxIdInProgress = null
           this.box_id_to_add_task = null
+          this.$event.$emit('btnloading_off', false)
         })
     }
   }

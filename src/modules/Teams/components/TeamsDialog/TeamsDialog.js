@@ -9,10 +9,16 @@ export default {
     dialog: Boolean,
     title: String,
     isEditDialog: Boolean,
-    fieldsToEdit: { type: Object, default: () => {} }
+    fieldsToEdit: { type: Object, default: () => {} },
+    btnloading : { type : Boolean, default : false }
   },
+
   components: {
     CustomDialog
+  },
+
+  mounted() {
+    this.$event.$on( 'btnloading_off', (status) => (this.btnloading = status))
   },
 
   data: () => ({
@@ -60,10 +66,12 @@ export default {
 
     cancel() {
       this.open = false
+      this.btnloading = false
     },
 
     save() {
       if (this.all_validations_passed()) {
+        this.btnloading = true
         const fields_to_save = this.get_fields()
         this.$emit('save', fields_to_save)
       }
