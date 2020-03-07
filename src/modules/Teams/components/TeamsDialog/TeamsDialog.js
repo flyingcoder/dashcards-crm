@@ -80,7 +80,6 @@ export default {
     update_fields({ fields }) {
       fields['rate'] = ("rate" in fields.meta) ? fields.meta.rate.value : ''
       fields['address'] = ("address" in fields.meta) ? fields.meta.address.value : ''
-      console.log(fields)
       this.password = 'dummypassword1'
       this.repeat_password = 'dummypassword1'
       const new_fields = Object.assign({}, fields)

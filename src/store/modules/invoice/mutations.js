@@ -31,7 +31,9 @@ export const mutations = {
   reset_state(state) {
     const initial = initial_state()
     Object.keys(initial).forEach(key => {
-      state[key] = initial[key]
+      if (key !== 'projects') {
+        state[key] = initial[key]
+      }
     })
   },
   revert_invoice(state) {
