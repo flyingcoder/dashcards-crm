@@ -46,6 +46,9 @@
             </v-flex>
           </template>
         </template>
+        <v-flex xs12 class="timeline-card" v-if="cards.length == 1">
+          <NoCards/>
+        </v-flex>
       </draggable>
     </v-layout>
   </div>
