@@ -13,6 +13,7 @@ import draggable from 'vuedraggable'
 import CalendarCard from '@/common/CalendarCard/CalendarCard.vue'
 import ClientCard from '@/common/ClientCard/ClientCard.vue'
 import InvoiceCard from '@/common/InvoiceCard/InvoiceCard.vue'
+import TimerCard from '@/common/TimerCard/TimerCard.vue'
 
 
 export default {
@@ -28,7 +29,8 @@ export default {
     draggable,
     CalendarCard,
     ClientCard,
-    InvoiceCard
+    InvoiceCard,
+    TimerCard
   },
 
   data: () => ({
@@ -64,7 +66,7 @@ export default {
     card_components() {
       let cards = _cloneDeep(this.cards)
       return cards.map(card => {
-        if (['timeline', 'tasks', 'calendar', 'invoice', 'client'].includes(card.slug)) {
+        if (['timeline', 'tasks', 'calendar', 'invoice', 'client', 'timer'].includes(card.slug)) {
           card.component = card.slug + '-card'
         }
         return card

@@ -16,7 +16,7 @@ export default {
   },
   methods: {
   	profile(id) {
-  		this.$router.push('/dashboard/teams/profile/'+id)
+  		this.$router.push('/dashboard/team/profile/'+id)
   	}
   }
 }
