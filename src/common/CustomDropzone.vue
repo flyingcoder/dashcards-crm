@@ -56,6 +56,14 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/sass/variables';
+.dz-error-message {
+  top: 20px;
+}
+
+.dz-remove {
+  opacity: inherit;
+}
+
 .drop__files_content {
   flex-direction: column;
   .file__icon {

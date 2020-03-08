@@ -25,11 +25,15 @@
       </v-list-tile>
 
       <div class="submenu" v-if="item.title === 'Templates'">
-        <div class="item">Milestone</div>
+        <div class="item" @click="sidebar_item_clicked('templates')">
+          Milestone
+        </div>
         <div class="item" @click="sidebar_item_clicked('reports')">
           Reports
         </div>
-        <div class="item">Invoice</div>
+        <!-- div class="item" @click="sidebar_item_clicked('invoices')">
+          Invoice
+        </div -->
       </div>
 
       <div class="submenu" v-if="item.title === 'Forms'">

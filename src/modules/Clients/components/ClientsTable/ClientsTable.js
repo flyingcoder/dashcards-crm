@@ -17,7 +17,7 @@ export default {
   data: () => ({
     items: [],
     headers: [
-      { id: 1, text: 'Business Name', align: 'left', value: 'name' },
+      { id: 1, text: 'Business Name', align: 'left', value: 'company_name' },
       { id: 2, text: 'Contact No.', value: 'contact' },
       { id: 3, text: 'Email', value: 'email' },
       { id: 4, text: 'Status', value: 'status' },

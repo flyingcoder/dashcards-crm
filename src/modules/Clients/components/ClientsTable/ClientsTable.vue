@@ -51,8 +51,7 @@
               :src="item.item.image_url"
             />
             &nbsp;
-            {{ item.item.first_name }}
-            {{ item.item.last_name }}
+            {{ item.item.company_name }}
           </div>
         </td>
 
