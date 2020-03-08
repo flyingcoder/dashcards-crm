@@ -30,6 +30,7 @@
           </v-data-table>
           <div class="flex justify-content-center" v-if="items.length || loading">
             <v-pagination
+              v-if="pagination.total > 1"
               v-model="pagination.current"
               :length="pagination.total"
               @input="onPageChange"
