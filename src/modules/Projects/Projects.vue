@@ -24,6 +24,27 @@
       @delete="delete_item('delete_project')"
     />
 
+    <services-add-dialog
+      :dialog.sync="add_new_service_dialog"
+      ref="add_service_dialog"
+      title="Add New Service(s)"
+      @save="save_new_services($event)"
+    />
+
+    <clients-dialog
+      :dialog.sync="add_new_client_dialog"
+      ref="add_client_dialog"
+      dialog-title="Add Client"
+     @save="save_new_client($event)"
+    />
+
+    <teams-dialog
+      ref="add_member_dialog"
+      title="Add New Member"
+      :dialog.sync="add_new_member_dialog"
+      @save="save_new_member($event)"
+    />
+
     <custom-table
       v-if="items.length || loading"
       :headers="headers"

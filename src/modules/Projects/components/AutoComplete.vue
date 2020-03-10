@@ -9,6 +9,7 @@
       cache-items
       v-bind="$attrs"
       @change="changed"
+      @click:append-outer="clickAppendOuter"
       hide-details
       prepend-icon="search"
       color="#657186"
@@ -43,8 +44,17 @@ export default {
       return val !== this.value.text
     },
     changed(val) {
+      if (val.hasOwnProperty('action')) {
+        this.$emit('click-append-outer')
+        this.$emit('input', '')
+      } else {
+        this.$emit('close-dropdown')
+        this.$emit('input', val)
+      }
+    },
+    clickAppendOuter(val) {
       this.$emit('close-dropdown')
-      this.$emit('input', val)
+      this.$emit('click-append-outer')
     }
   }
 }
