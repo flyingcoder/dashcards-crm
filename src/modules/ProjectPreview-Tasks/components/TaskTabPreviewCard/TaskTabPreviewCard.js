@@ -1,6 +1,7 @@
 import request from '@/services/axios_instance'
 import { global_utils } from '@/global_utils/global_utils'
 import moment from 'moment'
+
 //Components
 import DashCard from '@/common/DashCard.vue'
 import RichEditor from '@/common/RichEditor.vue'

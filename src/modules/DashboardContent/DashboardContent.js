@@ -15,6 +15,9 @@ import ClientCard from '@/common/ClientCard/ClientCard.vue'
 import InvoiceCard from '@/common/InvoiceCard/InvoiceCard.vue'
 import TimerCard from '@/common/TimerCard/TimerCard.vue'
 
+import TaskViewDialog from '@/modules/ProjectPreview-Tasks/components/TaskViewDialog/TaskViewDialog.vue'
+import DeleteDialog from '@/common/DeleteDialog.vue'
+import ConfirmDialog from '@/common/ConfirmDialog.vue'
 
 export default {
   name: 'DashboardContent',
@@ -30,22 +33,32 @@ export default {
     CalendarCard,
     ClientCard,
     InvoiceCard,
-    TimerCard
+    TimerCard,
+    TaskViewDialog,
+    DeleteDialog,
+    ConfirmDialog
   },
-
+  props : {
+    task : { type : Object, default : null },
+    id: [Number, String]
+  },
   data: () => ({
     init: true,
     paths: [{ text: 'Dashboard', disabled: true, router_name: null }],
     isRequestInProgress: false,
     args: {
       dashboard: true
-    }
+    },
+    delete_task_dialog : false,
+    open_view_task_dialog : false,
+    confirm_mark_as_complete_dialog: false,
+    active_task_id : null,
+    active_task : null
   }),
 
   computed: {
     ...mapGetters('cards', ['should_show']),
     ...mapGetters(['user']),
-
     cards: {
       get() {
         if (!this.user) return []
@@ -88,6 +101,26 @@ export default {
 
   created() {
     this.fill_cards()
+    this.$event.$on('task-mark-as-complete', (task) => {
+      this.task = task
+      this.$refs.confirm_mark_as_complete_dialog.open = true
+    })
+    this.$event.$on('close_confirm_dialog', (status)=> {
+      this.task = null
+      this.$refs.confirm_mark_as_complete_dialog.open = false
+    })
+    this.$event.$on('task-delete', (task) => {
+      this.task = task
+      this.delete_task_dialog = true
+    })
+    this.$event.$on('close_delete_dialog', (status)=> {
+      this.task = null
+      this.delete_task_dialog = false
+    })
+    this.$event.$on('task-view', (task) => {
+      this.active_task = task
+      this.open_view_task_dialog = true
+    })
   },
 
   methods: {
@@ -138,6 +171,12 @@ export default {
     },
     can_view_passbox(user) {
       return user ? true : false
+    },
+    confirm_mark_as_complete_task(){
+      this.$event.$emit('task_completed', this.task)
+    },
+    confirm_delete_task(){
+      this.$event.$emit('task_deleted', this.task)
     }
   }
 }

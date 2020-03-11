@@ -46,6 +46,12 @@ export default {
     },
     delete_clicked() {
       this.$emit('delete')
+    },
+    showDialog(){
+      this.open = true
+    },
+    closeDialog(){
+      this.open = false
     }
   }
 }

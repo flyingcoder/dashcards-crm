@@ -19,7 +19,7 @@
     <!-- custom component -->
     <NoCards v-if="!cards.length" />
 
-    <v-layout class="dashcard-content">
+    <v-layout  class="dashcard-content">
       <draggable class="d__cards" v-model="cards">
         <template v-for="card in card_components">
           <component
@@ -51,6 +51,30 @@
         </v-flex>
       </draggable>
     </v-layout>
+
+    <DeleteDialog
+      ref="delete_task_dialog"
+      :open-dialog.sync="delete_task_dialog"
+      title="Delete Task"
+      text-content="Are you sure you want to delete this task?"
+      @delete="confirm_delete_task"
+    />
+
+    <ConfirmDialog
+      ref="confirm_mark_as_complete_dialog"
+      :open-dialog.sync='confirm_mark_as_complete_dialog'
+      title="Confirmation required!"
+      confirm-button-text="Yes"
+      text-content="Mark task as completed?"
+      @confirm="confirm_mark_as_complete_task"
+    />
+
+    <TaskViewDialog
+      ref="view_task_dialog"
+      :dialog.sync="open_view_task_dialog"
+      :task="active_task"
+      @close-task-preview="open_view_task_dialog = false"
+    />
   </div>
 </template>
 <script src="./DashboardContent.js"></script>

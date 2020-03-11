@@ -13,6 +13,9 @@ export default {
   get_all_tasks(id) {
     return request.get(`api/projects/${id}/tasks?all=true`)
   },
+  get_task(task_id) {
+    return request.get(`api/task/${task_id}`)
+  },
   create_new_task(payload) {
     return request.post('api/task', payload)
   },
