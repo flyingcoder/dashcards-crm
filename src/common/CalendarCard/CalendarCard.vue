@@ -14,11 +14,12 @@
             :indeterminate="true"
           ></v-progress-linear>
 
-          <v-calendar align-top dense v-else ref="calendar"
+          <!-- <v-calendar align-top dense v-else ref="calendar"
           v-model="start"
           color="primary">
-            
-          </v-calendar>
+          </v-calendar> -->
+          <!-- <vc-calendar highlight="true" :min-date="now" nav-visibility="visible" is-expanded /> -->
+          <vc-calendar :attributes='attributes' nav-visibility="visible" is-expanded />
         </div>
       </dash-card>
     </div>
