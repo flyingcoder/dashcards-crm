@@ -18,7 +18,6 @@
           v-model="start"
           color="primary">
           </v-calendar> -->
-          <!-- <vc-calendar highlight="true" :min-date="now" nav-visibility="visible" is-expanded /> -->
           <vc-calendar :attributes='attributes' nav-visibility="visible" is-expanded />
         </div>
       </dash-card>
