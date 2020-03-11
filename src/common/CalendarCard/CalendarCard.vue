@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 class="calendar-card">
+  <div class="calendar-card">
     <div class="calendar__content">
       <dash-card 
         title="Calendar" 
@@ -23,7 +23,7 @@
         </div>
       </dash-card>
     </div>
-  </v-flex>
+  </div>
 </template>
 
 <script src="./CalendarCard.js"></script>

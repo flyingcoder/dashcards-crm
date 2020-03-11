@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 class="invoice-card">
+  <div class="invoice-card">
     <div class="invoice__content">
       <dash-card
         title="Invoice"
@@ -53,7 +53,7 @@
         </div>
       </dash-card>
     </div>
-  </v-flex>
+  </div>
 </template>
 
 <script src="./InvoiceCard.js"></script>

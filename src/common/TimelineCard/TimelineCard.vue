@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 class="timeline-card">
+  <div class="timeline-card">
     <div class="timeline__content">
       <dash-card title="Timeline" :dashboard="dashboard" @close="$emit('close')">
         <div class="timeline__inner_content" slot="content">
@@ -28,7 +28,7 @@
         </div>
       </dash-card>
     </div>
-  </v-flex>
+  </div>
 </template>
 
 <script src="./TimelineCard.js"></script>

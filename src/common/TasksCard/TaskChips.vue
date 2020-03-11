@@ -35,15 +35,6 @@
       <v-avatar class="task__avatar">{{ props.countBehind }}</v-avatar>
       Behind
     </v-chip>
-
-    <v-chip
-      small
-      :class="['task__chip', { active: props.activeChip === 'open' }]"
-      @click="listeners['update:activeChip']('open')"
-    >
-      <v-avatar class="task__avatar">{{ props.countOpen }}</v-avatar>
-      Open
-    </v-chip>
   </div>
 </template>
 
@@ -55,7 +46,6 @@ export default {
     countCompleted: Number,
     countPending: Number,
     countBehind: Number,
-    countOpen: Number,
     activeChip: String
   }
 }
@@ -68,7 +58,7 @@ export default {
   border-bottom: 1px solid $borderGray;
   .theme--light.v-chip {
     background-color: $white;
-    border-color: $borderGray;
+    border: 1px solid $borderGray;
     font-size: 12px;
     font-weight: 500;
     color: $chipGray;

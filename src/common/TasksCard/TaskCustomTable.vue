@@ -1,14 +1,14 @@
 <template>
   <div class="task-custom-table">
-    <v-layout row class="header">
+    <v-layout row class="task_header">
       <v-flex xs2 class="task__tableHead" v-if="tab=='All Tasks'">Assignee</v-flex>
-      <v-flex xs4 class="task__tableHead" v-if="tab=='All Tasks'">Task</v-flex>
-      <v-flex xs6 class="task__tableHead" v-if="tab!='All Tasks'">Task</v-flex>
-      <v-flex xs3 class="task__tableHead">Status</v-flex>
+      <v-flex xs5 class="task__tableHead" v-if="tab=='All Tasks'">Task</v-flex>
+      <v-flex xs7 class="task__tableHead" v-if="tab!='All Tasks'">Task</v-flex>
+      <v-flex xs2 class="task__tableHead">Status</v-flex>
       <v-flex xs3 class="task__tableHead">Action</v-flex>
     </v-layout>
 
-    <div class="body" :style="{ maxHeight: bodyMaxHeight }">
+    <div class="task_body" :style="{ height: bodyMaxHeight }">
       <v-layout
         row
         align-center
@@ -28,15 +28,15 @@
           <span v-if="!task.assignee.length"></span>
         </v-flex>
 
-        <v-flex xs4 class="project__col" v-if="tab=='All Tasks'">
+        <v-flex xs5 class="project__col" v-if="tab=='All Tasks'">
           {{ task.title }}
         </v-flex>
 
-        <v-flex xs6 class="project__col" v-if="tab!='All Tasks'">
+        <v-flex xs7 class="project__col" v-if="tab!='All Tasks'">
           {{ task.title }}
         </v-flex>
 
-        <v-flex xs3 class="status__col">
+        <v-flex xs2 class="status__col">
           {{ task.status }}
 
           <div v-if="task.status === 'completed'">
@@ -85,7 +85,7 @@ export default {
   inject: {
     bodyMaxHeight: {
       from: 'bodyMaxHeight',
-      default: '415px'
+      default: '200px'
     }
   },
 
@@ -176,9 +176,10 @@ export default {
 @import '~@/sass/variables';
 
 .task-custom-table {
-  .header {
+  .task_header {
     border-bottom: 1px solid $borderGray;
     background-color: $tableBlueBg;
+    padding: 10px 0;
     .task__tableHead {
       padding: 10px;
       color: $tableTitleBlue;
@@ -187,9 +188,9 @@ export default {
     }
   }
 
-  @include styledScrollFor('.body'); //style the scroll
+  @include styledScrollFor('.task_body'); //style the scroll
 
-  .body {
+  .task_body {
     overflow: auto;
     background-color: $tableBlueBg;
 
@@ -211,12 +212,18 @@ export default {
         font-size: 17px;
         font-weight: 400;
       }
+      .project__col{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
       .status__col {
         font-size: 12px;
         font-weight: 400;
         opacity: 0.8;
         color: $textGray;
+        padding: 10px;
 
         .status__completed {
           height: 4px;
@@ -249,12 +256,6 @@ export default {
       .action__col {
         display: flex;
         justify-content: end;
-
-        button {
-          display : inline-block;
-          width: 30%;
-          margin : 0 5px;
-        }
       }
     }
   }
@@ -262,13 +263,13 @@ export default {
 //Laptop - Tablet View
 @media only screen and (max-width: 1200px) and (min-width: 960px) {
   .task-custom-table {
-    .header {
+    .task_header {
       .task__tableHead {
         font-size: 12px;
       }
     }
 
-    .body {
+    .task_body {
       .task__tableBody {
         &.active {
           background-color: $white;
@@ -285,13 +286,13 @@ export default {
 //Mobile View
 @media only screen and (max-width: 480px) {
   .task-custom-table {
-    .header {
+    .task_header {
       .task__tableHead {
         font-size: 12px;
       }
     }
 
-    .body {
+    .task_body {
       .task__tableBody {
         &.active {
           background-color: $white;

@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 class="timer-card">
+  <div class="timer-card">
     <div class="timer__content">
       <dash-card
         title="Timer"
@@ -53,7 +53,7 @@
         </div>
       </dash-card>
     </div>
-  </v-flex>
+  </div>
 </template>
 
 <script src="./TimerCard.js"></script>

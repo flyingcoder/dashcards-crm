@@ -1,6 +1,6 @@
 <template>
   <div class="task-custom-table">
-    <v-layout row class="header">
+    <v-layout row class="task_header">
       <v-flex xs3 class="task__tableHead">Assignee</v-flex>
       <v-flex xs6 class="task__tableHead">Task</v-flex>
       <v-flex xs3 class="task__tableHead">Status</v-flex>
@@ -88,9 +88,10 @@ export default {
 @import '~@/sass/variables';
 
 .task-custom-table {
-  .header {
+  .task_header {
     border-bottom: 1px solid $borderGray;
     background-color: $tableBlueBg;
+    padding: 10px 0;
     .task__tableHead {
       padding: 10px;
       color: $tableTitleBlue;
@@ -122,6 +123,11 @@ export default {
         padding: 10px;
         font-size: 17px;
         font-weight: 400;
+      }
+      .project__col{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .status__col {
@@ -164,7 +170,7 @@ export default {
 //Laptop - Tablet View
 @media only screen and (max-width: 1200px) and (min-width: 960px) {
   .task-custom-table {
-    .header {
+    .task_header {
       .task__tableHead {
         font-size: 12px;
       }
@@ -187,7 +193,7 @@ export default {
 //Mobile View
 @media only screen and (max-width: 480px) {
   .task-custom-table {
-    .header {
+    .task_header {
       .task__tableHead {
         font-size: 12px;
       }
