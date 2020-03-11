@@ -1,6 +1,21 @@
 <template>
   <div class="calendar">
-    <table-header :paths="paths" :noButton="true" />
+    <v-layout row wrap>
+      <v-flex xs12>
+        <table-header :paths="paths" @click="add_dialog = true" />
+      </v-flex>
+    </v-layout>
+    <v-layout row wrap>
+      <v-flex xs4>
+        <v-calendar
+          ref="calendar"
+          v-model="start"
+          :type="type"
+          color="primary"
+        ></v-calendar>
+      </v-flex>
+    </v-layout>
+    <!-- table-header :paths="paths" :noButton="true" />
     <div class="wrapper">
       <div class="calendar-actions">
         <v-btn @click="$refs.calendar.prev()">
@@ -27,7 +42,7 @@
           color="primary"
         ></v-calendar>
       </v-sheet>
-    </div>
+    </div -->
   </div>
 </template>
 <script src="./Calendar.js"></script>
