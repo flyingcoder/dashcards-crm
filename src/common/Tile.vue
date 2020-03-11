@@ -27,11 +27,11 @@ export default {
     imgSrc: String,
     imgHeight: {
       type: String,
-      default: '25px'
+      default: 'auto'
     },
     imgWidth: {
       type: String,
-      default: '25px'
+      default: '40px'
     },
     imgBackground: String,
     counter: [Number, String],
@@ -45,15 +45,16 @@ export default {
 .tile {
   display: grid;
   grid-template-columns: 1.5fr 2.5fr;
-  height: 55px;
+  height: 80px;
   border-radius: 9px;
   overflow: hidden;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 
   .tile-icon {
     display: grid;
     justify-content: center;
     align-items: center;
-    padding: 0 7px;
+    padding: 0 10px;
   }
 
   .tile-content {
@@ -66,6 +67,10 @@ export default {
     .text-counter,
     .text-title {
       color: $titleDarkBlue;
+    }
+    
+    .text-title {
+      font-size: 18px;
     }
   }
 }
