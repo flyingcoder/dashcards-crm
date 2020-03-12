@@ -15,7 +15,7 @@ export default {
     type: 'month',
     attributes: [
       {
-        highlight: true,
+        dot: true,
         popover: {
           label: 'Meeting with the team',
         },
@@ -26,7 +26,7 @@ export default {
         ]
       },      
       {
-        highlight: 'red',
+        dot: 'red',
         popover: {
           label: 'Task 2 Time Line',
         },
