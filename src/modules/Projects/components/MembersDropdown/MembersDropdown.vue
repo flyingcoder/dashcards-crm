@@ -17,6 +17,8 @@
       label="Assign member(s)"
       v-bind="$attrs"
       box
+      :append-outer-icon="showOuterIcon ? 'add' : ''"
+      @click:append-outer="open_add_new_member"
     >
       <template slot="selection" slot-scope="data">
         <v-chip

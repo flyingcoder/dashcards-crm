@@ -29,10 +29,7 @@ export default {
     dialog: Boolean,
     title: String,
     isEditDialog: Boolean,
-    fieldsToEdit: {
-      type: Object,
-      default: () => {}
-    },
+    fieldsToEdit: { type: Object, default: () => {} },
     btnloading : { type : Boolean, default : false }
   },
 
@@ -83,6 +80,29 @@ export default {
 
   mounted() {
     this.$event.$on( 'btnloading_off', (status) => (this.btnloading = status))
+    this.$event.$on( 'new_services_added', (data) => {
+      for (var i = data.length - 1; i >= 0; i--) {
+        let item = {}
+        item.name = data[i].service_name
+        item.id = data[i].id
+        this.service.items.push(item)
+        this.service.all_items.push(item)
+        this.service.selected = item
+      }
+    })
+    this.$event.$on( 'new_client_added', (data) => {
+        this.client.items.push(data)
+        this.client.all_items.push(data)
+        this.client.selected = data
+    })
+    this.$event.$on( 'new_member_added', (data) => {
+        makeRequestTo.getAllMembers()
+        .then(({data}) => {
+          this.members.all_items = data || []
+          this.members.items = _cloneDeep(this.members.all_items)
+        })
+    })
+    
   },
 
   computed: {
@@ -134,9 +154,16 @@ export default {
         }
       }
     }
+
   },
 
   methods: {
+    add_new_service_opt(){
+      this.service.items.unshift({id: 0, action: true, name: 'Add New Service'})
+    },
+    add_new_client_opt(){
+      this.client.items.unshift({id: 0, action: true, company_name: 'Add New Client'})
+    },
     init_dropdowns() {
       this.dropdown_loading = true
       axios
@@ -153,6 +180,8 @@ export default {
             this.client.items = _cloneDeep(this.client.all_items)
             this.service.items = _cloneDeep(this.service.all_items)
             this.members.items = _cloneDeep(this.members.all_items)
+            this.add_new_client_opt()
+            this.add_new_service_opt()
           })
         )
         .finally(() => (this.dropdown_loading = false))
@@ -249,6 +278,14 @@ export default {
       } else {
         this.hasExtraInputs = false
       }
+    },
+
+    open_add_new_service() {
+      this.$event.$emit('open-new-service-dialog', true)
+    },
+
+    open_add_new_client() {
+      this.$event.$emit('open-new-client-dialog', true)
     }
   }
 }

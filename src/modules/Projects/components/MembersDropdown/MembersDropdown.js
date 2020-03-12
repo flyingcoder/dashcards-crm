@@ -7,7 +7,8 @@ export default {
   props: {
     members: Array,
     memberItems: Array,
-    isLoading: Boolean
+    isLoading: Boolean,
+    showOuterIcon: { type : Boolean, default: false }
   },
 
   data: () => ({
@@ -38,6 +39,10 @@ export default {
       let members = _cloneDeep(this.members)
       members.splice(index, 1)
       this.$emit('update:members', members)
+    },
+
+    open_add_new_member() {
+      this.$event.$emit('open-new-member-dialog', true)
     }
   }
 }

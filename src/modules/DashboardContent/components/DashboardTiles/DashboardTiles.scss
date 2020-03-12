@@ -3,7 +3,7 @@
 .d__tiles {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  grid-gap: 10px;
+  grid-gap: 20px;
   cursor: pointer;
   justify-content: space-between;
 }

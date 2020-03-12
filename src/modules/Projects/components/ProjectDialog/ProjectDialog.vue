@@ -41,7 +41,10 @@
                     :items="client.items"
                     :is-loading="dropdown_loading"
                     item-text="company_name"
+                    :hint="'Click to add new service'"
+                    append-outer-icon="add"
                     @close-dropdown="client.show = false"
+                    @click-append-outer="open_add_new_client"
                   >
                     <template slot="item" slot-scope="{ item }">
                       {{ item.company_name }}
@@ -84,10 +87,15 @@
                     v-model="service.selected"
                     :items="service.items"
                     :is-loading="dropdown_loading"
+                    :hint="'Click to add new service'"
                     item-text="name"
+                    append-outer-icon="add"
+                    @click-append-outer="open_add_new_service"
                     @close-dropdown="service.show = false"
-                  />
+                  >
+                  </auto-complete>
                 </v-list>
+
               </v-menu>
 
               <div class="choosen" v-if="service.selected">
@@ -169,6 +177,7 @@
                     :members.sync="members.selected"
                     :member-items="members.items"
                     :is-loading="dropdown_loading"
+                    :showOuterIcon="true"
                     @search="filter_dropdown_items('members', $event)"
                   />
                 </v-list>

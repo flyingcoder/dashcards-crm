@@ -20,10 +20,10 @@ export default {
     dialogTitle: String,
     task: Object,
     milestoneStartDate: String,
-    btnloading : { type : Boolean, default: false }
   },
 
   data: () => ({
+    btnloading : false,
     open: false,
     title: null,
     description: null,

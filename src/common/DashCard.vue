@@ -1,11 +1,26 @@
 <template>
   <v-container class="dash__card">
     <v-layout row wrap class="card__header" align-center>
-      <v-flex xs8 class="card__title">
+      <v-flex xs4 class="card__title">
         {{ title }}
       </v-flex>
       <slot name="actions" v-if="dashboard">
-        <v-flex xs4 class="actions text-xs-right">
+        <v-flex xs8 class="actions text-xs-right">
+          <v-btn fab small flat class="action">
+            <v-icon>list</v-icon>
+          </v-btn>
+          <v-btn fab small flat class="action">
+            <v-icon>grid_on</v-icon>
+          </v-btn>
+          <v-btn fab small flat class="action">
+            <v-icon>remove</v-icon>
+          </v-btn>
+          <v-btn fab small flat class="action">
+            <v-icon>remove</v-icon>
+          </v-btn>
+          <v-btn fab small flat class="action">
+            <v-icon>zoom_out_map</v-icon>
+          </v-btn>
           <v-btn fab small flat class="action">
             <v-icon @click="$emit('close')">close</v-icon>
           </v-btn>

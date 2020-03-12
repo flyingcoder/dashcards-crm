@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 class="tasks-card">
+  <div class="tasks-card">
     <div class="tasks__content">
       <dash-card
         title="Tasks"
@@ -14,7 +14,7 @@
         </div>
       </dash-card>
     </div>
-  </v-flex>
+  </div>
 </template>
 
 <script>

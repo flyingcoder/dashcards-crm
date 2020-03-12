@@ -27,7 +27,7 @@ request.interceptors.response.use(
     return response
   },
   error => {
-    this.$event.$emit('btnloading_off', false)
+    // $event.$emit('btnloading_off', false)
     
     if (error.response && error.response.status === 401 && localStorage.getItem('token')) {
       // Unauthenticated

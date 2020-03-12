@@ -16,6 +16,7 @@ export default {
   }),
   
   mounted() {
+    this.services = []
     this.recommendedServices = this.get_recommended_services()
   },
 
@@ -28,6 +29,9 @@ export default {
   watch: {
     dialog(new_val) {
       this.open = new_val
+      if (new_val === false) {
+        this.services = []
+      }
     },
     open(new_val) {
       this.$emit('update:dialog', new_val)

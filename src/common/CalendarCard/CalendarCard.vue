@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 class="calendar-card">
+  <div class="calendar-card">
     <div class="calendar__content">
       <dash-card 
         title="Calendar" 
@@ -14,15 +14,15 @@
             :indeterminate="true"
           ></v-progress-linear>
 
-          <v-calendar align-top dense v-else ref="calendar"
+          <!-- <v-calendar align-top dense v-else ref="calendar"
           v-model="start"
           color="primary">
-            
-          </v-calendar>
+          </v-calendar> -->
+          <vc-calendar :attributes='attributes' nav-visibility="visible" is-expanded />
         </div>
       </dash-card>
     </div>
-  </v-flex>
+  </div>
 </template>
 
 <script src="./CalendarCard.js"></script>

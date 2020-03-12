@@ -1,7 +1,14 @@
 <template>
   <div class="icon">
-    <v-switch :value="switch1" :disabled="disabled" @change="switch1_changed">
-    </v-switch>
+    <div class="tile">
+      <div class="tile-icon">
+        <v-switch :value="switch1" :disabled="disabled" @change="switch1_changed"></v-switch>
+      </div>
+      <div class="tile-text">
+        Log Off
+      </div>
+    </div>
+    
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
         <v-btn @click="switch1_changed">
@@ -45,43 +52,32 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../../sass/variables';
-.logon-label {
-  background: white;
-  height: 40px;
+.tile {
+  display: grid;
+  grid-template-columns: 1.5fr 2.5fr;
+  border-radius: 9px;
+  overflow: hidden;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  background: #fff;
   justify-content: center;
   align-items: center;
-  padding: 0 5px;
-  border-radius: 14px;
-  .icon {
-    display: flex;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
+
+  .tile-icon{
+    padding: 0 10px;
+    border-right: 1px solid $tile-border;
+    background: #f5f5f5;
   }
-  .title {
-    display: flex;
-    flex: 2;
-    height: 100%;
-    border-left: 1px solid $tile-border;
-    align-items: center;
-    justify-content: center;
-    .label {
-      font-size: 15px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      line-height: 1;
-      padding-left: 5px;
-      color: black;
-    }
+    
+  .tile-text {
+    font-size: 18px;
+    color: $titleDarkBlue;
+    padding: 0 10px;
+    text-align: center;
   }
 }
-@media only screen and (max-width: 480px) {
-  .logon-label {
-    .title {
-      .label {
-        font-size: 12px;
-      }
-    }
-  }
+.icon {
+  display: grid;
+  grid-gap: 20px;
 }
+@media only screen and (max-width: 480px) {}
 </style>

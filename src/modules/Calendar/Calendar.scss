@@ -2,3 +2,87 @@
 
 @include pagePadding ('.calendar');
 
+.calendar {
+  .calendar-wrapper{
+    margin: 10px;
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .calendar-content{
+      background-color: $tableBlueBg;
+      border: 1px solid $tableBorderBlue;
+      padding: 15px;
+  }
+
+  .calendar_header{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 20px;
+    justify-content: space-between;
+  }
+
+  .calendar_body{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 20px;
+  }
+
+  .date{
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    align-items: center;
+    grid-gap: 20px;
+    .icon{
+      fill: #fff;
+    }
+    .date_icon{
+      width: 50px;
+      background-color: $blue;
+      padding: 4px 5px;
+    }
+  }
+  .calendar_label{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
+  .right{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
+  .event_card{
+    margin: 10px;
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .card_header{
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .card_body{
+    text-align: center;
+  }
+  
+  .card_footer{
+    text-align: center;
+    .view_more{
+      color: $tableDarkText !important;
+    }
+  }
+  
+  .calendar-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+}

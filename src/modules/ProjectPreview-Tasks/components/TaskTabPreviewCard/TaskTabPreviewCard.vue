@@ -66,7 +66,7 @@
             
             <div class="task__assigned_to" v-if="content.assignee">
               <v-flex>
-                <div>Assigned to:</div>
+                <div><v-icon>list</v-icon> Assigned to:</div>
               </v-flex>
               <v-flex>
                 <v-chip
@@ -85,8 +85,7 @@
             </div>
 
             <div class="task__comment_section">
-              <v-divider></v-divider><br />
-
+              <div class="mb-1"><v-icon>chat</v-icon> Comments</div>
               <div
                 class="comment"
                 v-for="comment of all_comments"
@@ -94,17 +93,26 @@
               >
                 <v-flex sm2 xs3
                   ><v-img
-                    v-if="assignee_url"
-                    :src="assignee_url"
+                    v-if="comment.causer"
+                    :src="comment.causer.image_url"
                     height="45"
                     width="45"
                 /></v-flex>
                 <v-flex sm10 xs9>
-                  <div class="commenter">
-                    <div class="comment-name">{{ full_name }}</div>
-                    <small class="comment-time">
-                      {{ comment.created_at | from_now }}</small
-                    >
+                  <div class="commenter"  
+                    @mouseover="hover = true"
+                    @mouseleave="hover = false">
+                    <v-btn 
+                      icon 
+                      v-show="hover && can_delete_comment(comment)" 
+                      @click="confirm_delete_comment(comment)" 
+                      class="btn-comment-delete">
+                        <v-icon>delete</v-icon>
+                    </v-btn>
+                    <div class="comment-name">
+                      <span>{{ comment.causer.first_name }} {{ comment.causer.last_name }}</span>
+                    </div>
+                    <small class="comment-time">{{ comment.created_at | from_now }}</small>
                   </div>
                   <div v-html="comment.body" class="comment-msg"></div>
                 </v-flex>
@@ -115,8 +123,7 @@
           <div class="task__comments">
             <v-flex sm2 xs3
               ><v-img
-                v-if="assignee_url"
-                :src="assignee_url"
+                :src="commenter.image_url"
                 height="45"
                 width="45"
             /></v-flex>
@@ -134,6 +141,7 @@
                   color="#3b589e"
                   :disabled="!comment"
                   @click="add_new_comment"
+                  :loading="btnloading"
                   >Send</v-btn
                 >
                 <div class="emoji-wrapper">
@@ -145,6 +153,14 @@
         </template>
       </v-flex>
     </v-flex>
+
+    <DeleteDialog
+      ref="delete_comment_dialog"
+      title="Delete Comment"
+      text-content="Are you sure you want to delete this comment?"
+      @delete="confirmed_delete_comment"
+    />
+
   </v-flex>
 </template>
 
