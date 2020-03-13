@@ -1,6 +1,15 @@
 @import '~@/sass/variables';
-
+@include emptyTable('.empty-files');
 @include firstColumnHover;
+
+.justify-content-center {
+  display: flex;
+  justify-content: center;
+
+  .empty-content{
+    width: 100%;
+  }
+}
 
 .files__tab {
   padding: 24px;
@@ -37,6 +46,13 @@
 
   .text-upper {
     text-transform: uppercase;
+  }
+  .break-word-container {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    word-wrap: break-word;
+    font-size: 14px;
   }
 }
 

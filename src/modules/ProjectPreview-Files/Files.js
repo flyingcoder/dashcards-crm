@@ -1,4 +1,6 @@
 import { table_functionality } from '@/services/table-functionality/table-functionality'
+import { global_utils } from '@/global_utils/global_utils'
+import { settings } from '@/variables'
 import * as apiTo from './api'
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
@@ -7,12 +9,11 @@ import CustomDropzone from '@/common/CustomDropzone.vue'
 import LinkDialog from './components/LinkDialog.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import ToolbarItem from './components/ToolbarItem.vue'
-import { settings } from '@/variables'
 
 export default {
   name: 'FilesTab',
 
-  mixins: [table_functionality],
+  mixins: [table_functionality, global_utils],
 
   components: {
     CustomTable,
@@ -89,10 +90,15 @@ export default {
         icon: 'settings_applications',
         iconText: 'Other'
       }
-    ]
+    ],
+    layout: 'grid', //list or grid
+    log_id: null
   }),
 
   computed: {
+    permissions(){
+      return this.$_permissions.get('hq_files')
+    }, 
     filteredItems() {
       if (this.filter === 'all') return this.items
       return this.items.filter(item => item.collection_name.includes(this.filter))
@@ -103,9 +109,11 @@ export default {
     },
     dropzoneOptions() {
       return {
+        autoProcessQueue: false,
         thumbnailWidth: 150,
         timeout: 500000,
         addRemoveLinks: true,
+        maxFiles: 10,
         url: settings.apiHostBaseURL + `/api/projects/${this.id}/file`,
         headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
       }
@@ -116,8 +124,8 @@ export default {
     can_delete() {
       if (this.user.is_admin) return true
       return (
-        this.$_permissions.get('hq_files') &&
-        this.$_permissions.get('hq_files').delete
+        this.permissions &&
+        this.permissions.delete
       )
     }
   },
@@ -127,6 +135,9 @@ export default {
   },
 
   methods: {
+    manual_upload(){
+      this.$refs.dropzone.process_queue()
+    },
     pop(url) {
       this.dialog = true
       this.url = url
@@ -136,7 +147,8 @@ export default {
     },
     file_added([file, response]) {
       this.$event.$emit('open_snackbar', 'File(s) uploaded successfully')
-      this.items.unshift(typeof response === 'string' ? JSON.parse(response) : response )
+      var fileUploaded = typeof response === 'string' ? JSON.parse(response) : response
+      this.items.unshift(fileUploaded)
       this.$refs.dropzone.remove_file(file)
     },
 
@@ -149,6 +161,7 @@ export default {
         this.items.push(data)
         this.$refs.link_dialog.closeAndClearDialog()
       })
+      .finally(() => this.$event.$emit('btnloading_off', false))
     },
 
     delete_item() {
@@ -163,11 +176,7 @@ export default {
           this.$event.$emit('open_snackbar', this.table_config.delete_message)
         }
       })
-    },
-
-    useDefaultThumbnail(item) {
-      item.thumb_url = require("@/assets/temp/no-image.jpg")
-      item.public_url = require("@/assets/temp/no-image.jpg")
+      .finally(() => this.$event.$emit('btnloading_off', false))
     },
 
     file_failed([file, response]) {

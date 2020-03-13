@@ -8,7 +8,12 @@
             :indeterminate="true"
           ></v-progress-linear>
 
-          <h2 v-else-if="timeline_items.length === 0">No Data</h2>
+          <Empty 
+            v-else-if="timeline_items.length === 0"
+            slug="empty-timeline"
+            headline="No timeline yet"
+          >
+          </Empty>
 
           <v-timeline align-top dense v-else>
             <v-timeline-item
@@ -21,7 +26,34 @@
                 <div class="t__time">
                   {{ get_calendar_time(item.created_at) }}
                 </div>
-                <h2 class="t__title">{{ item.description }}</h2>
+                <v-flex>
+                  <h2 class="t__title">{{ item.description }}</h2>
+                  <Carousel 
+                    v-if="item.properties.media.length"
+                    :autoplay="true" 
+                    :nav="false"
+                    :items="5"
+                    :showPrev="false"
+                    :showNext="false"
+                    >
+                    <v-img 
+                      v-for="media in item.properties.media"
+                      :src="media.thumb_url"
+                      width="60px"
+                      height="60px"
+                      @error="altImage(media)"
+                    ></v-img>
+                  </Carousel>
+                  <!-- else if single media old uploaded -->
+                  <v-img  
+                    v-else 
+                    :src="addHost(item.properties.thumb_url)"
+                    width="60px"
+                    height="60px"
+                    @error="altImage(item.properties)"
+                  ></v-img>
+                  <!-- {{item.properties}} -->
+                </v-flex>
               </div>
             </v-timeline-item>
           </v-timeline>
