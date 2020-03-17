@@ -1,7 +1,6 @@
 //test commit
 import Vue from 'vue'
 import './plugins/axios'
-import './plugins/vuetify'
 import './plugins/auth'
 import './plugins/pusher'
 import './plugins/eventbus'
@@ -9,6 +8,7 @@ import './plugins/vuelidate'
 import './plugins/permissions'
 import './plugins/v-calendar'
 import App from './App.vue'
+import vuetify from '@/plugins/vuetify'
 import router from './router/router'
 import store from './store/store'
 
@@ -33,6 +33,7 @@ router.beforeEach((to, from, next) => {
 })
 
 new Vue({
+  vuetify,
   router,
   store,
   render: h => h(App)

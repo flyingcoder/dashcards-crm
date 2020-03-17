@@ -1,6 +1,6 @@
 @import '~@/sass/_variables';
 
-@include styledScrollFor('.v-card__text')
+@include styledScrollFor('.v-card__text');
 
 .v-card__text{
     .theme--light.v-input:not(.v-input--is-disabled) input{

@@ -29,7 +29,7 @@
     border-top-right-radius: 8px;
   }
 
-  @include styledScrollFor('.notif-body')
+  @include styledScrollFor('.notif-body');
 
   .notif-body {
     max-height: 300px;

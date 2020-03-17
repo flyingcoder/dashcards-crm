@@ -15,7 +15,7 @@
         </div>
         <div slot="footer">
           <v-btn
-            flat class="view__more_btn" 
+            text class="view__more_btn" 
             @click="loadMore"
           >
             VIEW MORE

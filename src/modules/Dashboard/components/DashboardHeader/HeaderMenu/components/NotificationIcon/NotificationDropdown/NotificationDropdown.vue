@@ -7,6 +7,7 @@
         :key="notification.id"
         :description="notification.description"
         :read="notification.read"
+        v-on="on"
         @click="notificationClicked(notification, index)"
       />
     </div>

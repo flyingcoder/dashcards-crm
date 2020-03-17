@@ -6,6 +6,7 @@
         class="user new__message"
         v-for="notification of notifications"
         :key="notification.id"
+        v-on="on"
         @click="open_chat_box(notification.sender)"
       >
         <div class="user__img">

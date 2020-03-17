@@ -1,16 +1,26 @@
 import moment from 'moment'
+import { table_functionality } from '@/services/table-functionality/table-functionality'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
+import CalendarDialog from './components/CalendarDialog.vue'
+import DeleteDialog from '@/common/DeleteDialog.vue'
 
 export default {
   name: 'Calendar',
-  components: { TableHeader },
+  mixins: [table_functionality],
+  components: { TableHeader, CalendarDialog, DeleteDialog },
 
   data: () => ({
     paths: [
       { text: 'Dashboard', disabled: false, router_name: 'default-content' },
       { text: 'Calendar', disabled: true, router_name: null }
     ],
+    table_config: {
+      route_name: 'templates',
+      add_message: 'New Template added successfully!',
+      update_message: 'Template updated successfully!',
+      delete_message: 'Template deleted successfully!'
+    },
     start: moment().format('YYYY-MM-DD'),
     type: 'month',
     attributes: [

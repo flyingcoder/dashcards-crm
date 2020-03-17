@@ -8,12 +8,14 @@
     :close-on-content-click="false"
     v-model="dropdownVisible"
   >
-    <div class="chat__button" slot="activator">
-      <HeaderIcon
-        :image-src="notificationIcon"
-        :hovered-image-src="hoveredNotificationIcon"
-      />
-    </div>
+    <template v-slot:activator="{ on }">
+      <div class="chat__button">
+        <HeaderIcon
+          :image-src="notificationIcon"
+          :hovered-image-src="hoveredNotificationIcon"
+        />
+      </div>
+    </template>
 
     <NotificationDropdown
       :visible="dropdownVisible"

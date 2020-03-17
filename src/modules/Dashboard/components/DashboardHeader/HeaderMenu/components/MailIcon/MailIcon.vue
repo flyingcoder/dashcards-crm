@@ -8,9 +8,12 @@
     :close-on-content-click="false"
     v-model="dropdownVisible"
   >
-    <div class="chat__button" slot="activator">
-      <HeaderIcon :image-src="mailIcon" :hovered-image-src="hoveredMailIcon" />
-    </div>
+    <template v-slot:activator="{ on }">
+      <div class="chat__button">
+        <HeaderIcon :image-src="mailIcon" :hovered-image-src="hoveredMailIcon" />
+      </div>
+    </template>
+    
 
     <MailDropdown />
   </v-menu>

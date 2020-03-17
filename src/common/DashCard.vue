@@ -6,22 +6,22 @@
       </v-flex>
       <slot name="actions" v-if="dashboard">
         <v-flex xs8 class="actions text-xs-right">
-          <v-btn fab small flat class="action">
+          <v-btn fab small text class="action">
             <v-icon>list</v-icon>
           </v-btn>
-          <v-btn fab small flat class="action">
+          <v-btn fab small text class="action">
             <v-icon>grid_on</v-icon>
           </v-btn>
-          <v-btn fab small flat class="action">
+          <v-btn fab small text class="action">
             <v-icon>remove</v-icon>
           </v-btn>
-          <v-btn fab small flat class="action">
+          <v-btn fab small text class="action">
             <v-icon>remove</v-icon>
           </v-btn>
-          <v-btn fab small flat class="action">
+          <v-btn fab small text class="action">
             <v-icon>zoom_out_map</v-icon>
           </v-btn>
-          <v-btn fab small flat class="action">
+          <v-btn fab small text class="action">
             <v-icon @click="$emit('close')">close</v-icon>
           </v-btn>
         </v-flex>
@@ -36,7 +36,7 @@
       <slot name="footer">
         <v-btn 
           v-if="viewMoreBtn" 
-          flat class="view__more_btn" 
+          text class="view__more_btn" 
           @click="$emit('view-more')"
         >
           VIEW MORE

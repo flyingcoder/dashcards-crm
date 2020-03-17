@@ -1,7 +1,33 @@
 <template>
   <div class="calendar">
-    <table-header :paths="paths" :noButton="true" />
+
+    <calendar-dialog
+      :dialog.sync="add_dialog"
+      ref="add_dialog"
+      dialogTitle="Add New Calendar"
+      @save="add_item('add_new_calendar', $event)"
+    />
+
+    <calendar-dialog
+      :dialog.sync="edit_dialog"
+      ref="edit_dialog"
+      dialogTitle="Edit Calendar"
+      :is-edit-dialog="edit_dialog"
+      :fields-to-edit="edit_item"
+      @save="update_item('edit_calendar', $event)"
+    />
+
+    <delete-dialog
+      :open-dialog.sync="delete_dialog"
+      title="Delete Calendar"
+      text-content="Are you sure you want to delete this calendar?"
+      @delete="delete_item('delete_calendar')"
+    />
+
+    <table-header :paths="paths" @click="add_dialog = true" />
+
     <div class="calendar-wrapper">
+
       <div class="calendar-content">
         <div class="calendar_header">
           <div class="left_option">
@@ -58,13 +84,13 @@
               <div class="card_header">
                 <div class="card_title">Event</div>
                 <div class="card_actions">
-                  <v-btn fab small flat class="action">
+                  <v-btn fab small text class="action">
                     <v-icon>edit</v-icon>
                   </v-btn>
-                  <v-btn fab small flat class="action">
+                  <v-btn fab small text class="action">
                     <v-icon>delete</v-icon>
                   </v-btn>
-                  <v-btn fab small flat class="action">
+                  <v-btn fab small text class="action">
                     <v-icon>add</v-icon>
                   </v-btn>
                 </div>
@@ -82,7 +108,7 @@
                 <v-btn dark color="#3b589e">Add Template</v-btn>
               </div>
               <div class="card_footer">
-                <v-btn class="view_more" flat color="white">View More</v-btn>
+                <v-btn class="view_more" text color="white">View More</v-btn>
               </div>
             </div>
 
@@ -108,7 +134,7 @@
                 <v-btn dark color="#3b589e">Add Template</v-btn>
               </div>
               <div class="card_footer">
-                <v-btn class="view_more" flat color="white">View More</v-btn>
+                <v-btn class="view_more" text color="white">View More</v-btn>
               </div>
             </div>
 
@@ -134,7 +160,7 @@
                 <v-btn dark color="#3b589e">Add Template</v-btn>
               </div>
               <div class="card_footer">
-                <v-btn class="view_more" flat color="white">View More</v-btn>
+                <v-btn class="view_more" text color="white">View More</v-btn>
               </div>
             </div>
 
@@ -160,7 +186,7 @@
                 <v-btn dark color="#3b589e">Add Template</v-btn>
               </div>
               <div class="card_footer">
-                <v-btn class="view_more" flat color="white">View More</v-btn>
+                <v-btn class="view_more" text color="white">View More</v-btn>
               </div>
             </div>
             
