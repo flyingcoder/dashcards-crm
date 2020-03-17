@@ -4,7 +4,11 @@ import makeRequestTo from '@/services/makeRequestTo'
 export const methods = {
   methods: {
     add_item(api_name, item, dynamic_api = null) {
-      makeRequestTo[api_name](item, dynamic_api).then(response => {
+      makeRequestTo[api_name](item, dynamic_api)
+      .catch(() => {
+        this.$event.$emit('btnloading_off', false)
+      })
+      .then(response => {
         const new_items = response.data
         if (Array.isArray(new_items)) {
           new_items.reverse().forEach(new_item => this.items.unshift(new_item))
@@ -34,7 +38,11 @@ export const methods = {
     },
 
     update_item(api_name, item, dynamic_api = null) {
-      makeRequestTo[api_name](this.edit_item.id, item, dynamic_api).then(
+      makeRequestTo[api_name](this.edit_item.id, item, dynamic_api)
+      .catch(() => {
+        this.$event.$emit('btnloading_off', false)
+      })
+      .then(
         response => {
           const index = this.items.findIndex(
             data_item => data_item.id === response.data.id
@@ -52,7 +60,11 @@ export const methods = {
     },
 
     delete_item(api_name, dynamic_api = null) {
-      makeRequestTo[api_name](this.delete_item_id, dynamic_api).then(() => {
+      makeRequestTo[api_name](this.delete_item_id, dynamic_api)
+      .catch(() => {
+        this.$event.$emit('btnloading_off', false)
+      })
+      .then(() => {
         const index = this.items.findIndex(
           data_item => data_item.id === this.delete_item_id
         )
@@ -107,7 +119,11 @@ export const methods = {
     },
 
     refresh_table(query) {
-      makeRequestTo[this.table_config.refresh_table_api_name](query).then(
+      makeRequestTo[this.table_config.refresh_table_api_name](query)
+      .catch(() => {
+        this.$event.$emit('btnloading_off', false)
+      })
+      .then(
         response => {
           this.$event.$emit(
             'open_snackbar',
@@ -116,6 +132,7 @@ export const methods = {
           this.loading = false
           this.items_response = response.data
           this.items = response.data.data
+          this.$event.$emit('btnloading_off', false)
         }
       )
     },

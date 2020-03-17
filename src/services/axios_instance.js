@@ -32,6 +32,10 @@ request.interceptors.response.use(
     if (error.response && error.response.status === 401 && localStorage.getItem('token')) {
       // Unauthenticated
       auth.logout()
+      store.commit('open_snackbar', {
+        status: true,
+        message: "Session expired. Login to continue"
+      })
       return
     }
     const res = error.response
@@ -49,7 +53,7 @@ request.interceptors.response.use(
         message: message
       })
     }
-    
+    return Promise.reject(error)
   }
 )
 
