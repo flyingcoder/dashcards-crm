@@ -15,7 +15,6 @@
             :items="items"
             :permission="$_permissions.get('timer')"
             hide-default-footer
-            hide-actions
             :loading="loading" 
             loading-text="Loading... Please wait"
             class="elevation-1 buzzooka__table"

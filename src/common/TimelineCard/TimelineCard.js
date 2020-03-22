@@ -4,30 +4,39 @@ import moment from 'moment'
 //Components
 import Empty from '@/common/Empty.vue'
 import DashCard from '@/common/DashCard.vue'
-import Carousel from 'vue-owl-carousel'
+// import Carousel from 'vue-owl-carousel'
 
 export default {
   name: 'TimelineCard',
   mixins: [global_utils],
   components: {
     DashCard,
-    Carousel,
+    // Carousel,
     Empty
   },
 
   props: {
     id: [Number, String],
-    dashboard: Boolean
+    dashboard: Boolean,
+    viewMoreLink: Object 
   },
 
   data: () => ({
     timeline_items: [],
-    loading: false
+    loading: false,
+    enableViewMore : true,
+    pagination : {
+      current: 1,
+      total : 0
+    }
   }),
-
+  computed : {
+    api() {
+      return this.id ? `api/projects/${this.id}/timeline` : 'api/activities'
+    }
+  },
   created() {
-    const api = this.id ? `api/projects/${this.id}/timeline` : 'api/activities'
-    this.fill_timeline_card(api)
+    this.fill_timeline_card(this.api)
   },
 
   methods: {
@@ -40,9 +49,33 @@ export default {
     fill_timeline_card(api) {
       this.loading = true
       request
-        .get(api)
-        .then(response => (this.timeline_items = response.data))
+        .get(`${api}?page=${this.pagination.current}`)
+        .then(response => {
+          this.timeline_items = response.data.data
+          this.pagination.current = response.data.current_page
+          this.pagination.total = response.data.total
+          this.enableViewMore = response.data.to !== null && response.data.to < response.data.total
+        })
         .finally(() => (this.loading = false))
+    },
+    load_more_timeline(){
+      this.loading = true
+      request
+        .get(`${this.api}?page=${this.pagination.current + 1}`)
+        .then(response => {
+          response.data.data.forEach(item => {
+            this.timeline_items.push(item)
+          })
+          this.pagination.current = response.data.current_page
+          this.pagination.total = response.data.total
+          this.enableViewMore = response.data.to !== null && response.data.to < response.data.total
+        })
+        .finally(() => (this.loading = false))
+    },
+    set_icon(item) {
+      let icon = 'mdi-buffer'
+      //todo set icon by types
+      return icon
     }
   }
 }

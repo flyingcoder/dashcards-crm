@@ -14,7 +14,7 @@
             class="mx-auto"
             slot="content"
           >
-            <v-layout row class="justify-center">
+            <v-layout>
               <v-flex class="mx-auto">
                 <small>Clients</small>
                 <h2>{{ total_clients }}</h2>
@@ -43,27 +43,25 @@
               auto-draw
             ></v-sparkline>
 
-            <v-data-table
-              :items="items"
-              class="elevation-1"
-              hide-actions
-              hide-headers
-              :key="uniquekey"
-            >
-              <template v-slot:items="props">
-                <td class="text-xs-left">
-                  <div class="user__name text-cap" >
-                    <v-img
-                      max-height="40px"
-                      width="40px"
-                      :src="props.item.user.image_url"
-                    />
-                    <span>{{ props.item.user.fullname }}</span>
-                  </div>
-                </td>
-                <td class="text-xs-left">{{ props.item.amount }}</td>
-              </template>
-            </v-data-table>
+            <v-list disabled tile two-line>
+              <v-list-item
+                v-for="item in items"
+                :key="item.user.id"
+                dense
+              >
+                <v-list-item-avatar>
+                  <v-img :src="item.user.image_url"></v-img>
+                </v-list-item-avatar>
+
+                <v-list-item-content>
+                  <v-list-item-title v-text="item.user.fullname"></v-list-item-title>
+                  <v-list-item-subtitle v-text="item.user.job_title"></v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-icon>
+                  {{ item.amount }}
+                </v-list-item-icon>
+              </v-list-item>
+            </v-list>
           </v-card>
       </dash-card>
     </div>

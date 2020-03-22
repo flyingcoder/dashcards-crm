@@ -36,7 +36,7 @@
       <slot name="footer">
         <v-btn 
           v-if="viewMoreBtn" 
-          text class="view__more_btn" 
+          text class="view__more_btn mx-auto" 
           @click="$emit('view-more')"
         >
           VIEW MORE

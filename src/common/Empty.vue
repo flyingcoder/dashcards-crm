@@ -19,13 +19,9 @@
 export default {
   name: 'Empty',
   props: {
-    slug: String,
-    headline: String
-  },
-  data: () => ({
-    slug: 'sample',
-    headline : 'No data yet'
-  })
+    slug: { type: String, default : 'sample' },
+    headline: { type: String, default : 'No data yet' },
+  }
 }
 </script>
 
