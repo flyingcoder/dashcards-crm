@@ -18,10 +18,11 @@
           :items="items"
           :loading="loading"
           no-data-text=""
-          select-all
-          disable-initial-sort
+          show-select
+          disable-sort
           v-bind="$attrs"
           class="buzzooka__table"
+          hide-default-footer
         >
           <v-progress-linear
             slot="progress"

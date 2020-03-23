@@ -10,8 +10,8 @@
         </v-card-title>
 
         <v-card-text scrollable>
-          <v-layout row wrap>
-            <v-layout row align-center class="service__field">
+          <v-layout wrap>
+            <v-layout align-center justify-space-between class="service__field">
               <v-flex xs10>
                 <v-combobox
                   label="Untitled Service"

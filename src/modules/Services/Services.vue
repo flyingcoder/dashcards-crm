@@ -32,7 +32,7 @@
       :loading="loading"
       :sort="sort"
       :has-checkbox="true"
-      hide-actions
+      hide-default-footer
       toolbar-title="Services"
       no-row-view
       :permission="$_permissions.get('services')"
@@ -53,7 +53,7 @@
             <v-btn
               color="#3b589e"
               dark
-              outline
+              outlined
               :disabled="!show_delete_selected"
             >
               Delete Selected
