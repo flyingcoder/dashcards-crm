@@ -53,7 +53,7 @@
             <img :src="item.item.image_url" /> &nbsp;
           </div>
           <div class="member__name text-cap">
-            {{ item.item.first_name }}
+            {{ item.item.fullname }}
           </div>
         </td>
 
@@ -75,15 +75,15 @@
             </v-btn>
           </div>
 
-          <div class="rows-per-page-dropdown">
+          <!-- <div class="rows-per-page-dropdown">
             Rows per page:
             <v-select
-              :items="rows_per_page_items"
+              :items="10"
               menu-props="auto"
               v-model="rows_per_page"
               color="#3b589e"
             ></v-select>
-          </div>
+          </div> -->
 
           <div class="pagination" v-show="should_show_pagination">
             <div class="text-xs-center pt-2">

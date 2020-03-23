@@ -1,5 +1,5 @@
 <template>
-  <div class="empty-div" :id="slug">
+  <div class="empty" :id="slug">
     <div class="empty-content">
       <div class="empty-svg">
         <svg viewBox="0 0 250 250">
@@ -19,15 +19,15 @@
 export default {
   name: 'Empty',
   props: {
-    slug: { type: String, default : 'sample' },
-    headline: { type: String, default : 'No data yet' },
+    slug: { type: String, default : 'empty-sample' },
+    headline: { type: String, default : 'No data yet' }
   }
 }
 </script>
 
 <style lang="scss" scoped>
   @import '~@/sass/_variables';
-  @include emptyTable('.empty-div');
+  @include emptyTable('.empty');
 
   .justify-content-center {
     display: flex;
