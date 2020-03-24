@@ -23,14 +23,51 @@
       @delete="delete_item('delete_client')"
     />
 
-    <custom-table
+    <VueTable
+      :items="items" 
+      :headers="headers"
+      :showRowActions="true"
+      icon="people_outline"
+      :loading="loading"
+      title="Clients"
+      :key="componentKey"
+      :noMoreData="noMoreData"
+      @load-more="load_more"
+    >
+
+      <template v-slot:row-slot="{ item }">
+        <tr>
+          <td @click="navigate_to_view_profile(item.id)">
+            <v-avatar color="teal" size="36">
+              <v-img :src="item.image_url"></v-img>
+            </v-avatar>
+            {{ item.company_name }}
+          </td>
+          <td>{{ item.telephone | phoneDisplayForm }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.status }}</td>
+          <Actions
+            :item="item"
+            :permissions="$_permissions.get('clients')"
+            @delete="open_delete_dialog(item)"
+            @edit="open_edit_dialog(item)"
+            @view="navigate_to_view_profile(item.id)"
+          ></Actions>
+        </tr>
+      </template>
+      <template v-slot:empty-slot>
+        <v-btn tile text outlined @click="add_dialog = true"><v-icon left>add</v-icon> Add Client</v-btn>
+      </template>
+    </VueTable>
+
+  <!--   <custom-table
       v-if="items.length || loading"
       :headers="headers"
       :items="items"
       :loading="loading"
       :sort="sort"
       :has-checkbox="true"
-      hide-actions
+      hide-default-footer
       toolbar-title="Clients"
       @items-selected="selected_ids = $event"
       @sorted="changeSort"
@@ -40,16 +77,12 @@
     >
       <template slot="custom-item" slot-scope="item">
         <td class="text-xs-right">
-          <!--TODO fill image with dynamic data from backend-->
+      
           <div
             class="user__name text-cap"
             @click="navigate_to_view_profile(item.item.id)"
           >
-            <v-img
-              max-height="60px"
-              width="50px"
-              :src="item.item.image_url"
-            />
+            <v-img max-height="60px" width="50px" :src="item.item.image_url" />
             &nbsp;
             {{ item.item.company_name }}
           </div>
@@ -61,12 +94,12 @@
       </template>
 
       <template slot="table-actions">
-        <div class="actions-wrapper">
+        <v-layout class="actions-wrapper">
           <div class="bulk-delete">
             <v-btn
               color="#3b589e"
               dark
-              outline
+              outlined
               :disabled="!show_delete_selected"
             >
               Delete Selected
@@ -93,11 +126,11 @@
               ></v-pagination>
             </div>
           </div>
-        </div>
+        </v-layout>
       </template>
-    </custom-table>
+    </custom-table> -->
 
-    <div class="empty-client" v-else>
+   <!--  <div class="empty-client" v-else>
       <div class="empty-content">
         <div class="empty-svg">
           <svg viewBox="0 0 250 250">
@@ -112,7 +145,7 @@
           >
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

@@ -8,7 +8,7 @@
     @button2="save"
   >
     <template #content>
-      <v-layout row wrap>
+      <v-layout wrap>
         <v-flex xs12>
           <v-select
             class="dialog__selectfield"

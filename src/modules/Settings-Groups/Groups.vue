@@ -31,7 +31,7 @@
       @save="update_permissions($event)"
     />
 
-    <v-layout row>
+    <v-layout>
       <v-flex xs12>
         <table-header :paths="paths" @click="add_dialog = true" />
 
@@ -54,7 +54,7 @@
             :loading="loading"
             :sort="sort"
             :has-checkbox="true"
-            hide-actions
+            hide-default-footer
             toolbar-title="Groups"
             :permission="$_permissions.get('settings_group')"
             @items-selected="selected_ids = $event"
@@ -114,7 +114,7 @@
                   <v-btn
                     color="#3b589e"
                     dark
-                    outline
+                    outlined
                     :disabled="!show_delete_selected"
                   >
                     Delete Selected

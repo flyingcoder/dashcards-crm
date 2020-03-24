@@ -1,6 +1,6 @@
 <template>
   <div class="clients">
-    <v-layout row wrap>
+    <v-layout wrap>
       <v-flex xs12>
         <table-header :paths="paths" @click="add_dialog = true" />
       </v-flex>

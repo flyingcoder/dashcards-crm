@@ -15,8 +15,7 @@
             :items="items"
             :permission="$_permissions.get('client')"
             hide-default-footer
-            hide-actions
-            :loading="loading" 
+            :loading="loading"
             loading-text="Loading... Please wait"
             class="elevation-1 buzzooka__table"
             @page-count="pageCount = $event"
@@ -28,7 +27,10 @@
               <td>{{ props.item.email }}</td>
             </template>
           </v-data-table>
-          <div class="flex justify-content-center" v-if="items.length || loading">
+          <div
+            class="flex justify-content-center"
+            v-if="items.length || loading"
+          >
             <v-pagination
               v-if="pagination.total > 1"
               v-model="pagination.current"
@@ -58,12 +60,11 @@
 
 <script src="./ClientCard.js"></script>
 <style lang="scss" scoped>
-  @import '~@/sass/_variables';
-  @include emptyTable('.empty-client');
+@import '~@/sass/_variables';
+@include emptyTable('.empty-client');
 
-  .justify-content-center {
-    display: flex;
-    justify-content: center;
-  }
+.justify-content-center {
+  display: flex;
+  justify-content: center;
+}
 </style>
-

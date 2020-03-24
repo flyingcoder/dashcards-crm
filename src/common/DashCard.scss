@@ -6,7 +6,9 @@
     background-color:$white;
     min-height: 500px;
     .card__header {
-        margin-bottom: 5px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
         .card__title{
             color: $tableTitleBlue;
             font-size: 24px;
@@ -34,6 +36,9 @@
     }
 
     .card__footer{
+        display: flex;
+        justify-content: center;
+
         .view__more_btn{
             color: $tableDarkText;
         }

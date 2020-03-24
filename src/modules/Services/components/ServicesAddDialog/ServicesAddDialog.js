@@ -12,9 +12,9 @@ export default {
     open: false,
     name: '',
     services: [],
-    recommendedServices : []
+    recommendedServices: []
   }),
-  
+
   mounted() {
     this.services = []
     this.recommendedServices = this.get_recommended_services()
@@ -40,13 +40,15 @@ export default {
 
   methods: {
     get_recommended_services() {
-      var services = recommended_services.split("\n")
-      return services.filter( function(v){ return v.trim().length != 0 })
+      var services = recommended_services.split('\n')
+      return services.filter(function(v) {
+        return v.trim().length != 0
+      })
     },
 
     add_service() {
       if (!this.name) {
-        this.$event.$emit('open_snackbar', 'Service name required!', 'error' )
+        this.$event.$emit('open_snackbar', 'Service name required!', 'error')
         return
       }
 

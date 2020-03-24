@@ -8,7 +8,7 @@
   ></v-progress-linear>
   <div class="note-form" v-else>
     <div class="note-title">
-      <v-layout row >
+      <v-layout>
         <v-flex grow>
           <v-text-field
             solo
@@ -23,32 +23,24 @@
           </v-text-field>
         </v-flex>
         <v-flex shrink align-center class="action-wrapper">
-            <v-btn
-              flat
-              class="action-btn"
-              @click="$emit('collaborator', note.collaborators)"
-            >
-              <v-icon>add</v-icon>
-            </v-btn>
-            <v-btn
-              flat
-              class="action-btn"
-              @click="$emit('editNotes', note)"
-            >
-              <v-icon color="indigo">edit</v-icon>
-            </v-btn>
-            <v-btn
-              flat
-              class="action-btn"
-              @click="$emit('deleteNotes', note)"
-            >
-              <v-icon color="red">delete</v-icon>
-            </v-btn>
+          <v-btn
+            flat
+            class="action-btn"
+            @click="$emit('collaborator', note.collaborators)"
+          >
+            <v-icon>add</v-icon>
+          </v-btn>
+          <v-btn text class="action-btn" @click="$emit('editNotes', note)">
+            <v-icon color="indigo">edit</v-icon>
+          </v-btn>
+          <v-btn text class="action-btn" @click="$emit('deleteNotes', note)">
+            <v-icon color="red">delete</v-icon>
+          </v-btn>
         </v-flex>
       </v-layout>
     </div>
     <div class="note-content">
-      <v-layout row >
+      <v-layout>
         <v-col xs12>
           <v-textarea
             solo
@@ -64,9 +56,9 @@
         </v-col>
       </v-layout>
 
-      <v-layout row>Collaborators:</v-layout>
+      <v-layout>Collaborators:</v-layout>
 
-      <v-layout row >
+      <v-layout>
         <v-chip
           class="ma-2"
           outlined
@@ -74,11 +66,11 @@
           disabled
           v-for="collaborator in note.collaborators"
         >
-        <v-avatar left>
-          <v-img :src="collaborator.image_url"></v-img>
-        </v-avatar>
-        {{collaborator.name}}
-      </v-chip>
+          <v-avatar left>
+            <v-img :src="collaborator.image_url"></v-img>
+          </v-avatar>
+          {{ collaborator.name }}
+        </v-chip>
       </v-layout>
     </div>
   </div>

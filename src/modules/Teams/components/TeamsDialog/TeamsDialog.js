@@ -10,7 +10,7 @@ export default {
     title: String,
     isEditDialog: Boolean,
     fieldsToEdit: { type: Object, default: () => {} },
-    btnloading : { type : Boolean, default : false }
+    btnloading: { type: Boolean, default: false }
   },
 
   components: {
@@ -18,7 +18,7 @@ export default {
   },
 
   mounted() {
-    this.$event.$on( 'btnloading_off', (status) => (this.btnloading = status))
+    this.$event.$on('btnloading_off', status => (this.btnloading = status))
   },
 
   data: () => ({
@@ -78,8 +78,9 @@ export default {
     },
 
     update_fields({ fields }) {
-      fields['rate'] = ("rate" in fields.meta) ? fields.meta.rate.value : ''
-      fields['address'] = ("address" in fields.meta) ? fields.meta.address.value : ''
+      fields['rate'] = 'rate' in fields.meta ? fields.meta.rate.value : ''
+      fields['address'] =
+        'address' in fields.meta ? fields.meta.address.value : ''
       this.password = 'dummypassword1'
       this.repeat_password = 'dummypassword1'
       const new_fields = Object.assign({}, fields)
@@ -102,7 +103,7 @@ export default {
         address: this.address,
         telephone: this.contact_number,
         group_name: this.group_name,
-        job_title: this.job_title,
+        job_title: this.job_title
       }
       if (!this.isEditDialog) {
         fields.password = this.password

@@ -1,5 +1,5 @@
 <template>
-  <v-layout row justify-center>
+  <v-layout justify-center>
     <v-dialog v-model="open" persistent scrollable max-width="600px">
       <v-card class="addService__dialog">
         <v-card-title class="dialog__header">
@@ -10,8 +10,8 @@
         </v-card-title>
 
         <v-card-text scrollable>
-          <v-layout row wrap>
-            <v-layout row align-center class="service__field">
+          <v-layout wrap>
+            <v-layout align-center justify-space-between class="service__field">
               <v-flex xs10>
                 <v-combobox
                   label="Untitled Service"
@@ -22,7 +22,7 @@
                   hide-details
                   color="#657186"
                   :items="recommendedServices"
-                  @input.native="name=$event.srcElement.value"
+                  @input.native="name = $event.srcElement.value"
                 ></v-combobox>
               </v-flex>
 
@@ -40,7 +40,6 @@
             <v-flex xs12>
               <v-layout
                 align-center
-                row
                 v-for="(service, index) of services"
                 :key="index"
                 class="service__field"

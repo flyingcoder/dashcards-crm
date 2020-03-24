@@ -1,9 +1,13 @@
 <template>
   <div class="question-fields">
-    <v-layout row group v-for="(section, index) of dynamicSections" :key="index">
+    <v-layout
+      group
+      v-for="(section, index) of dynamicSections"
+      :key="index"
+    >
       <v-flex xs12>
         <div class="field">
-          <v-layout row align-center>
+          <v-layout align-center>
             <v-flex xs7 class="pr-5">
               <v-text-field
                 :label="section.questionField.placeholder"
@@ -28,31 +32,31 @@
           </v-layout>
 
           <template v-if="section.shortAnswer.show">
-            <v-layout row>
+            <v-layout>
               <v-text-field
                 label="Descriptions"
                 v-model="section.shortAnswer.text"
               ></v-text-field>
             </v-layout>
-            <v-layout row>
+            <v-layout>
               <v-text-field disabled label="Short Answer"></v-text-field>
             </v-layout>
           </template>
 
           <template v-else-if="section.longAnswer.show">
-            <v-layout row>
+            <v-layout>
               <v-textarea
                 label="Descriptions"
                 v-model="section.longAnswer.text"
               ></v-textarea>
             </v-layout>
-            <v-layout row>
+            <v-layout>
               <v-textarea disabled label="Long Answer"></v-textarea>
             </v-layout>
           </template>
 
           <template v-else>
-            <v-layout row class="default-field" align-center>
+            <v-layout class="default-field" align-center>
               <v-flex xs1>
                 <v-icon>{{ section.selected.icon }}</v-icon>
               </v-flex>
@@ -66,7 +70,7 @@
               <v-flex xs1>
                 <v-btn
                   icon
-                  outline
+                  outlined
                   color="indigo"
                   @click="addNewField(index)"
                   :disabled="!section.newFieldText"
@@ -76,7 +80,6 @@
               </v-flex>
             </v-layout>
             <v-layout
-              row
               align-center
               v-for="(field, fIndex) of section.fields"
               :key="fIndex"
@@ -91,7 +94,7 @@
               <v-flex xs1>
                 <v-btn
                   icon
-                  outline
+                  outlined
                   color="indigo"
                   @click="deleteField(index, fIndex)"
                 >
@@ -103,7 +106,9 @@
         </div>
       </v-flex>
     </v-layout>
-    <v-btn class="btn-save" v-if="dynamicSections.length" @click="save">Save</v-btn>
+    <v-btn class="btn-save" v-if="dynamicSections.length" @click="save"
+      >Save</v-btn
+    >
   </div>
 </template>
 <style lang="scss" scoped>
@@ -111,11 +116,11 @@
   .layout.row.group {
     border: 1px solid #dce1e5;
     padding: 10px;
-    margin-bottom : 5px;
+    margin-bottom: 5px;
   }
   .btn-save {
-    float : right;
-    margin-bottom : 10px;
+    float: right;
+    margin-bottom: 10px;
   }
 }
 </style>
@@ -235,15 +240,22 @@ export default {
       }
     },
     save() {
-      let __this = this;
-      apiTo.postFields({
-        service_id: this.serviceId,
-        fields: this.dynamicSections
-      }).then(function(data){
-         __this.$event.$emit('open_snackbar', "Project details fields updated", 'success', 10000)
-      })
-      .catch(function(error) {
-          __this.$event.$emit('open_snackbar', "${error}", 'error', 10000)
+      let __this = this
+      apiTo
+        .postFields({
+          service_id: this.serviceId,
+          fields: this.dynamicSections
+        })
+        .then(function(data) {
+          __this.$event.$emit(
+            'open_snackbar',
+            'Project details fields updated',
+            'success',
+            10000
+          )
+        })
+        .catch(function(error) {
+          __this.$event.$emit('open_snackbar', '${error}', 'error', 10000)
         })
     },
     removeQuestion(index) {

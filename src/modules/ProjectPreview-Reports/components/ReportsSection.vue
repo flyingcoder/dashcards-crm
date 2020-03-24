@@ -1,7 +1,6 @@
 <template>
   <div class="reports__body">
-    <v-progress-linear v-if="!loaded" :indeterminate="true"
-    ></v-progress-linear>
+    <v-progress-linear v-if="!loaded" :indeterminate="true"></v-progress-linear>
     <div class="reports-content" v-show="loaded">
       <div class="site-preview" v-if="iframe_src">
         <iframe

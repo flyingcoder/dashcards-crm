@@ -20,7 +20,7 @@
       :active-chip.sync="active_chip"
     />
 
-    <task-custom-table :tasks="filtered_tasks" :tab="tab"/>
+    <task-custom-table :tasks="filtered_tasks" :tab="tab" />
   </div>
 </template>
 
@@ -83,7 +83,7 @@ export default {
   grid-template-columns: 1fr;
   justify-items: center;
   align-items: center;
-  height: 515px;
+  height: 300px;
 
   .empty-content {
     text-align: center;

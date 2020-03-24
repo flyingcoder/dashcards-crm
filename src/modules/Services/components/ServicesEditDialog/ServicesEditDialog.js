@@ -58,8 +58,10 @@ export default {
     },
 
     get_recommended_services() {
-      var services = recommended_services.split("\n")
-      return services.filter( function(v){ return v.trim().length != 0 })
+      var services = recommended_services.split('\n')
+      return services.filter(function(v) {
+        return v.trim().length != 0
+      })
     }
   }
 }

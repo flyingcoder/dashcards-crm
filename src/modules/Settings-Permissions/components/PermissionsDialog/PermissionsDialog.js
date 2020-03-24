@@ -17,7 +17,7 @@ export default {
   data: () => ({
     open: false,
     description: null,
-    permission_name : null,
+    permission_name: null,
     selected_permission: null,
     selected_group: null,
     permissions: [],

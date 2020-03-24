@@ -123,18 +123,19 @@ export default {
     }
   },
 
-  methods : {
-    open_permission_dialog( item ) {
+  methods: {
+    open_permission_dialog(item) {
       this.permissionDialog = true
       this.$set(this.edit_item, 'id', item.id)
       this.$set(this.edit_item, 'fields', item)
     },
 
     update_permissions(payload) {
-      request.put('api/roles/'+payload.role_id+'/permissions', payload)
-      .then((data) => {
-        this.$emit('open_snackbar', data.message, data.type)
-      })
+      request
+        .put('api/roles/' + payload.role_id + '/permissions', payload)
+        .then(data => {
+          this.$emit('open_snackbar', data.message, data.type)
+        })
     }
   }
 }

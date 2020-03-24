@@ -1,13 +1,19 @@
 <template>
   <div class="timeline-card">
     <div class="timeline__content">
-      <dash-card title="Timeline" :dashboard="dashboard" @close="$emit('close')">
+      <dash-card
+        title="Timeline"
+        :dashboard="dashboard"
+        @close="$emit('close')"
+        :view-more-link="viewMoreLink"
+        :viewMoreBtn="enableViewMore"
+        @view-more="load_more_timeline"
+      >
         <div class="timeline__inner_content" slot="content">
           <v-progress-linear
             v-if="loading"
             :indeterminate="true"
           ></v-progress-linear>
-
           <Empty 
             v-else-if="timeline_items.length === 0"
             slug="empty-timeline"
@@ -62,6 +68,4 @@
     </div>
   </div>
 </template>
-
 <script src="./TimelineCard.js"></script>
-<style lang="scss" scoped src="./TimelineCard.scss"></style>

@@ -1,11 +1,14 @@
 @import '~@/sass/_variables';
 
-@include styledScrollFor('.v-card__text')
+@include styledScrollFor('.v-card__text');
 
 .v-card__text{
     .theme--light.v-input:not(.v-input--is-disabled) input{
         color: $modalTitle;
         caret-color: $modalTitle;
+    }
+    .service__input {
+        margin-right: 10px;
     }
 
     button.addService__btn.v-btn.v-btn--depressed.theme--light, button.addService__btn.v-btn.theme--light, button.deleteService__btn.v-btn.theme--light{
@@ -15,6 +18,11 @@
         margin: 0;
         min-width: 0;
         background-color: #fff;
+        box-shadow: $darkBoxShadow;
+    }
+    
+    button.addService__btn{
+        box-shadow: $darkBoxShadow;
     }
 
     button.addService__btn.v-btn.theme--light{

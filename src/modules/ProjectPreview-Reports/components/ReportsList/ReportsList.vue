@@ -3,7 +3,7 @@
     <div class="reports-list-title">Reports List</div>
 
     <div class="reports-content">
-      <v-layout row class="table-header">
+      <v-layout class="table-header">
         <v-flex xs3 class="reports-id">#</v-flex>
         <v-flex xs9 class="reports-title">Title</v-flex>
       </v-layout>
@@ -17,7 +17,6 @@
 
       <div class="list-content" v-else>
         <v-layout
-          row
           class="report-item align-center"
           :class="{ active: activeReport && activeReport.id === report.id }"
           v-for="(report, index) of reports"

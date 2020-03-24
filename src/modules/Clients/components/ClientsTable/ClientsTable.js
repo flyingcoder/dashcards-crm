@@ -1,14 +1,16 @@
-import { table_functionality } from '@/services/table-functionality/table-functionality'
+import { list_functionality } from '@/services/list-functionality/list-functionality'
+import request from '@/services/axios_instance'
 
 //Components
-import CustomTable from '@/common/CustomTable/CustomTable.vue'
+import VueTable from '@/common/VueTable/VueTable.vue'
 import ClientsDialog from '../ClientsDialog/ClientsDialog.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
+import Actions from '@/common/VueTable/Actions.vue'
 
 export default {
-  name: 'ClientsCustomTable',
-  mixins: [table_functionality],
-  components: { CustomTable, ClientsDialog, DeleteDialog },
+  name: 'ClientsVueTable',
+  mixins: [list_functionality],
+  components: { VueTable, ClientsDialog, DeleteDialog, Actions },
 
   props: {
     dialog: Boolean
@@ -17,11 +19,11 @@ export default {
   data: () => ({
     items: [],
     headers: [
-      { id: 1, text: 'Business Name', align: 'left', value: 'company_name' },
-      { id: 2, text: 'Contact No.', value: 'contact' },
-      { id: 3, text: 'Email', value: 'email' },
-      { id: 4, text: 'Status', value: 'status' },
-      { id: 5, is_action: true }
+      { text: 'Business Name', align: 'left', value: 'company_name' },
+      { text: 'Contact No.', value: 'contact' },
+      { text: 'Email', value: 'email' },
+      { text: 'Status', value: 'status' },
+      { text: 'Action',value: 'actions', sortable: false, align: 'center' }
     ],
     table_config: {
       route_name: 'clients',
@@ -49,12 +51,31 @@ export default {
   },
 
   created() {
-    this.fill_table('get_clients', true)
+    this.loadClients()
   },
 
   methods: {
     navigate_to_view_profile(id) {
       this.$router.push(`/dashboard/clients/profile/${id}`)
+    },
+    loadClients(){
+      this.loading = true
+      request.get('api/clients?page=1').then(({data}) => {
+        this.items = data.data
+        this.pagination.current = data.current_page
+        this.pagination.total = data.last_page
+        this.hasMoreData()
+      })
+    },
+    load_more(){
+      request.get(`api/clients?page=${this.pagination.current+1}`).then(({data}) => {
+        data.data.forEach(item => {
+          this.items.push(item)
+        })
+        this.pagination.current = data.current_page
+        this.pagination.total = data.last_page
+        this.hasMoreData()
+      })
     }
   }
 }

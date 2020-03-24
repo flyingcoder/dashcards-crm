@@ -162,11 +162,7 @@ export default {
     update_task(task) {
       this.boxIdInProgress = this.edit_item.box_id
       makeRequestTo
-        .edit_milestone_task(
-          this.edit_task_item.id,
-          task,
-          `api/task`
-        )
+        .edit_milestone_task(this.edit_task_item.id, task, `api/task`)
         .then(res => {
           const { index, box_id } = this.edit_task_item
           let boxes = _cloneDeep(this.boxes)

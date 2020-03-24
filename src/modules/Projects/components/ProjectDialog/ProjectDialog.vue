@@ -1,8 +1,8 @@
 <template>
-  <v-layout row justify-center>
+  <v-layout justify-center>
     <v-dialog v-model="open" persistent max-width="700px">
       <v-card class="projects__dialog">
-        <v-layout row class="dialog__header">
+        <v-layout class="dialog__header">
           <span class="dialog__title">{{ title }}</span>
           <v-btn small fab @click="cancel" class="close__btn">
             <v-icon dark>close</v-icon>
@@ -10,7 +10,7 @@
         </v-layout>
 
         <div class="dialog__body">
-          <v-layout row wrap class="dialog__buttons">
+          <v-layout wrap class="dialog__buttons">
             <v-flex md4 sm6 xs12 class="text-xs-center">
               <v-menu
                 class="d__dropdown"
@@ -95,7 +95,6 @@
                   >
                   </auto-complete>
                 </v-list>
-
               </v-menu>
 
               <div class="choosen" v-if="service.selected">
@@ -145,7 +144,7 @@
               </v-menu>
 
               <div class="choosen" v-if="date_pickers.start_date">
-                {{ $refs.date_pickers.text_field_label }}
+                <!-- {{ $refs.date_pickers.text_field_label }} -->
               </div>
             </v-flex>
 
@@ -211,59 +210,59 @@
               color="#657186"
             />
           </div>
-          
+
           <div class="extra-inputs" v-if="hasExtraInputs">
-            <v-layout row group>
+            <v-layout group>
               <v-flex xs12>
                 <div class="field" v-for="(section, index) in extraFields">
-                      <v-checkbox
-                        v-if="section.selected.value === 'checkboxes'"
-                        v-model="extraFields[index].selected.answer"
-                        :label="section.questionField.text"
-                        :items="section.fields"
-                        :key="index"
-                      ></v-checkbox>
+                  <v-checkbox
+                    v-if="section.selected.value === 'checkboxes'"
+                    v-model="extraFields[index].selected.answer"
+                    :label="section.questionField.text"
+                    :items="section.fields"
+                    :key="index"
+                  ></v-checkbox>
 
-                      <v-text-field
-                        solo
-                        v-else-if="section.selected.value === 'short_answer'"
-                        :label="section.questionField.text"
-                        required
-                        v-model="extraFields[index].selected.answer"
-                        :key="index"
-                        filled
-                      ></v-text-field>
-    
-                      <v-select 
-                        solo
-                        v-else-if="section.selected.value === 'dropdown'"
-                        :items="section.fields"
-                        :label="section.questionField.text"
-                        v-model="extraFields[index].selected.answer"
-                        :key="index"
-                      ></v-select>
-                      
-                      <v-radio-group v-else-if="section.selected.value === 'multiple_choice'">
-                        <v-radio
-                          v-for="radio in section.fields"
-                          :label="`${radio.text}`"
-                          :value="radio"
-                          v-model="extraFields[index].selected.answer"
-                          :key="index"
-                        ></v-radio>
-                      </v-radio-group>
+                  <v-text-field
+                    solo
+                    v-else-if="section.selected.value === 'short_answer'"
+                    :label="section.questionField.text"
+                    required
+                    v-model="extraFields[index].selected.answer"
+                    :key="index"
+                    filled
+                  ></v-text-field>
 
-                      <v-textarea
-                        solo
-                        v-else-if="section.selected.value === 'paragraph'"
-                        :label="section.questionField.text"
-                        required
-                        v-model="extraFields[index].selected.answer"
-                        :key="index"
-                      ></v-textarea>
+                  <v-select
+                    solo
+                    v-else-if="section.selected.value === 'dropdown'"
+                    :items="section.fields"
+                    :label="section.questionField.text"
+                    v-model="extraFields[index].selected.answer"
+                    :key="index"
+                  ></v-select>
 
+                  <v-radio-group
+                    v-else-if="section.selected.value === 'multiple_choice'"
+                  >
+                    <v-radio
+                      v-for="radio in section.fields"
+                      :label="`${radio.text}`"
+                      :value="radio"
+                      v-model="extraFields[index].selected.answer"
+                      :key="index"
+                    ></v-radio>
+                  </v-radio-group>
+
+                  <v-textarea
+                    solo
+                    v-else-if="section.selected.value === 'paragraph'"
+                    :label="section.questionField.text"
+                    required
+                    v-model="extraFields[index].selected.answer"
+                    :key="index"
+                  ></v-textarea>
                 </div>
-
               </v-flex>
             </v-layout>
           </div>
@@ -271,7 +270,12 @@
 
         <v-card-actions class="dialog__actions">
           <v-btn class="dialog__actions_btn" @click="cancel">Cancel</v-btn>
-          <v-btn class="dialog__actions_btn" :loading="btnloading" :disabled="disabled" @click="save">
+          <v-btn
+            class="dialog__actions_btn"
+            :loading="btnloading"
+            :disabled="disabled"
+            @click="save"
+          >
             Save
           </v-btn>
         </v-card-actions>

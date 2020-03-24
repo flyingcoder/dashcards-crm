@@ -27,13 +27,12 @@
     </div>
 
     <v-flex class="task-preview-wrapper">
-      <PreviewCard 
-        v-if="selected_task" 
-        :activeId="selected_task.id" 
-        :id="user_id" 
-        :task="selected_task" 
-        />
-      
+      <PreviewCard
+        v-if="selected_task"
+        :activeId="selected_task.id"
+        :id="user_id"
+        :task="selected_task"
+      />
     </v-flex>
   </div>
 </template>

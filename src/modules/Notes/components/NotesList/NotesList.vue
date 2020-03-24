@@ -29,7 +29,7 @@
     </div>
 
     <div class="view__more">
-      <v-btn flat normal class="view__more_btn">VIEW MORE</v-btn>
+      <v-btn text normal class="view__more_btn">VIEW MORE</v-btn>
     </div>
   </div>
 </template>

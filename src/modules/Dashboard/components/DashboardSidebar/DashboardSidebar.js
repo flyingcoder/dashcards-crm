@@ -140,7 +140,7 @@ export default {
           action: 'chat',
           can_view: () => {
             if (this.user.is_admin) return true
-            return this.user.can.hasOwnProperty('chat')
+            return this.user.can.hasOwnProperty('messages')
           }
         },
         {

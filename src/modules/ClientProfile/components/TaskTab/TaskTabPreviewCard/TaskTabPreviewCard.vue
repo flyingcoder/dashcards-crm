@@ -8,7 +8,7 @@
         ></v-progress-linear>
 
         <template v-else>
-          <v-layout row class="task__header text-xs-left">
+          <v-layout class="task__header text-xs-left">
             <v-flex xs5 class="assignee">
               <v-flex xs4
                 ><v-img
@@ -27,7 +27,7 @@
             </v-flex>
 
             <v-flex xs2 class="more__button text-xs-right">
-              <v-btn fab flat small class="action">
+              <v-btn fab text small class="action">
                 <v-icon>more_horiz</v-icon>
               </v-btn>
             </v-flex>
@@ -113,7 +113,7 @@
       </v-flex>
 
       <!--  v-flex xs12 class="card__footer text-xs-center">
-				<v-btn flat class="view__more_btn">VIEW MORE</v-btn>
+				<v-btn text class="view__more_btn">VIEW MORE</v-btn>
 			</v-flex -->
     </v-flex>
   </v-flex>

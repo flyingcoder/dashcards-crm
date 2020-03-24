@@ -53,7 +53,7 @@
         <v-btn
           class="action"
           color="#1fb868"
-          outline
+          outlined
           icon
           :disabled="should_disable"
           @click="add_new_row"
@@ -114,7 +114,7 @@
           v-if="dialog.type !== 'view'"
           class="action"
           color="#ff7f7c"
-          outline
+          outlined
           icon
           @click="delete_row(index)"
         >

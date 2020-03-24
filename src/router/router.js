@@ -75,7 +75,7 @@ export default new Router({
     signup, // path: /signup
     forgotPassword, // path: /forgot-password
     pricing, // path: /pricing,
-    notFound, // path: /404
+    notFound // path: /404
   ],
   mode: 'history'
 })

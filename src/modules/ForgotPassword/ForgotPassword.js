@@ -8,8 +8,8 @@ import CustomField from '@/common/CustomField/CustomField.vue'
 
 export default {
   name: 'ForgotPassword',
-  components: { 
-    LoginComponent, 
+  components: {
+    LoginComponent,
     CustomField,
     Loader
   },
@@ -24,17 +24,23 @@ export default {
     send_email() {
       this.loading = true
       axios
-        .post(settings.apiHostBaseURL+`/api/password/email/`, { email: this.email })
-        .then( response => {
+        .post(settings.apiHostBaseURL + `/api/password/email/`, {
+          email: this.email
+        })
+        .then(response => {
           this.$event.$emit('open_snackbar', response.data.message)
           this.loading = false
           this.sent = true
         })
         .catch(error => {
           console.log(error.response.data.message)
-            this.loading = false
-            this.sent = false
-            this.$event.$emit('open_snackbar', error.response.data.message, 'error')
+          this.loading = false
+          this.sent = false
+          this.$event.$emit(
+            'open_snackbar',
+            error.response.data.message,
+            'error'
+          )
         })
     }
   }

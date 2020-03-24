@@ -1,8 +1,8 @@
 <template>
   <div class="calendar-card">
     <div class="calendar__content">
-      <dash-card 
-        title="Calendar" 
+      <dash-card
+        title="Calendar"
         @close="$emit('close')"
         class="calendar__content"
         :view-more-link="viewMoreLink"
@@ -18,7 +18,11 @@
           v-model="start"
           color="primary">
           </v-calendar> -->
-          <vc-calendar :attributes='attributes' nav-visibility="visible" is-expanded />
+          <vc-calendar
+            :attributes="attributes"
+            nav-visibility="visible"
+            is-expanded
+          />
         </div>
       </dash-card>
     </div>

@@ -8,17 +8,18 @@
     :close-on-content-click="false"
     v-model="dropdown_visible"
   >
-    <div class="d__dropdown" slot="activator">
-      <header-icon
-        :image-src="require('@/assets/icons/header/add__default.png')"
-        :hovered-image-src="require('@/assets/icons/header/add.png')"
-      />
-    </div>
-
+    <template v-slot:activator="{ on }">
+      <div class="d__dropdown" v-on="on">
+        <header-icon
+          :image-src="require('@/assets/icons/header/add__default.png')"
+          :hovered-image-src="require('@/assets/icons/header/add.png')"
+        />
+      </div>
+    </template>
     <v-list class="add__cards_list">
-      <v-list-tile-title class="add__cards__title">
+      <v-list-item-title class="add__cards__title">
         Data Boxes
-      </v-list-tile-title>
+      </v-list-item-title>
 
       <template>
         <CustomCheckbox text="Add All Data Box" :checked.sync="checkbox" />

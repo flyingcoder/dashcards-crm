@@ -1,7 +1,7 @@
 <template>
   <div class="questions">
     <v-container>
-      <v-layout row>
+      <v-layout>
         <v-flex xs12>
           <v-text-field
             label="Title of form"
@@ -17,20 +17,19 @@
       </v-layout>
 
       <v-layout
-        row
         v-for="(section, index) of dynamic_sections"
         :key="index"
         class="form-section"
       >
         <v-flex xs12>
           <div class="title-description-section" v-if="section.type === 'TD'">
-            <v-layout row>
+            <v-layout>
               <v-text-field
                 :label="section.title.placeholder"
                 v-model="section.title.text"
               ></v-text-field>
             </v-layout>
-            <v-layout row>
+            <v-layout>
               <v-textarea
                 :label="section.description.placeholder"
                 v-model="section.description.text"
@@ -39,7 +38,7 @@
           </div>
 
           <div class="question-section" v-else>
-            <v-layout row>
+            <v-layout>
               <v-flex xs8 class="pr-5">
                 <v-text-field
                   :label="section.question_field.placeholder"
@@ -58,31 +57,31 @@
             </v-layout>
 
             <template v-if="section.short_answer.show">
-              <v-layout row>
+              <v-layout>
                 <v-text-field
                   label="Descriptions"
                   v-model="section.short_answer.text"
                 ></v-text-field>
               </v-layout>
-              <v-layout row>
+              <v-layout>
                 <v-text-field disabled label="Short Answer"></v-text-field>
               </v-layout>
             </template>
 
             <template v-else-if="section.long_answer.show">
-              <v-layout row>
+              <v-layout>
                 <v-textarea
                   label="Descriptions"
                   v-model="section.long_answer.text"
                 ></v-textarea>
               </v-layout>
-              <v-layout row>
+              <v-layout>
                 <v-textarea disabled label="Long Answer"></v-textarea>
               </v-layout>
             </template>
 
             <template v-else>
-              <v-layout row class="default-field" align-center>
+              <v-layout class="default-field" align-center>
                 <v-flex xs1>
                   <v-icon>{{ section.selected.icon }}</v-icon>
                 </v-flex>
@@ -98,7 +97,7 @@
                 <v-flex xs1>
                   <v-btn
                     icon
-                    outline
+                    outlined
                     color="indigo"
                     @click="add_new_field(index)"
                     :disabled="!section.new_field_text"
@@ -108,7 +107,6 @@
                 </v-flex>
               </v-layout>
               <v-layout
-                row
                 align-center
                 v-for="(field, f_index) of section.fields"
                 :key="f_index"
@@ -126,7 +124,7 @@
                 <v-flex xs1>
                   <v-btn
                     icon
-                    outline
+                    outlined
                     color="indigo"
                     @click="delete_field(index, f_index)"
                   >
@@ -148,7 +146,7 @@
   .form-section {
     border: 1px solid #dce1e5;
     padding: 10px;
-    margin-bottom : 5px;
+    margin-bottom: 5px;
   }
 }
 </style>

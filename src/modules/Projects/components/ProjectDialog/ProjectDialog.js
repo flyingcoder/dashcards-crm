@@ -30,12 +30,12 @@ export default {
     title: String,
     isEditDialog: Boolean,
     fieldsToEdit: { type: Object, default: () => {} },
-    btnloading : { type : Boolean, default : false }
+    btnloading: { type: Boolean, default: false }
   },
 
   data: () => ({
-    extraFields : [],
-    hasExtraInputs : false,
+    extraFields: [],
+    hasExtraInputs: false,
     open: false,
     dropdown_loading: false,
     client: {
@@ -79,8 +79,8 @@ export default {
   }),
 
   mounted() {
-    this.$event.$on( 'btnloading_off', (status) => (this.btnloading = status))
-    this.$event.$on( 'new_services_added', (data) => {
+    this.$event.$on('btnloading_off', status => (this.btnloading = status))
+    this.$event.$on('new_services_added', data => {
       for (var i = data.length - 1; i >= 0; i--) {
         let item = {}
         item.name = data[i].service_name
@@ -90,19 +90,17 @@ export default {
         this.service.selected = item
       }
     })
-    this.$event.$on( 'new_client_added', (data) => {
-        this.client.items.push(data)
-        this.client.all_items.push(data)
-        this.client.selected = data
+    this.$event.$on('new_client_added', data => {
+      this.client.items.push(data)
+      this.client.all_items.push(data)
+      this.client.selected = data
     })
-    this.$event.$on( 'new_member_added', (data) => {
-        makeRequestTo.getAllMembers()
-        .then(({data}) => {
-          this.members.all_items = data || []
-          this.members.items = _cloneDeep(this.members.all_items)
-        })
+    this.$event.$on('new_member_added', data => {
+      makeRequestTo.getAllMembers().then(({ data }) => {
+        this.members.all_items = data || []
+        this.members.items = _cloneDeep(this.members.all_items)
+      })
     })
-    
   },
 
   computed: {
@@ -124,18 +122,18 @@ export default {
       this.open = new_val
       if (new_val) this.init_dropdowns()
     },
-    
+
     open(new_val) {
       this.$emit('update:dialog', new_val)
     },
-    
+
     fieldsToEdit: {
       handler(new_val) {
         this.isEditDialog && this.update_fields(new_val)
       },
       deep: true
     },
-    
+
     'service.selected'(new_val, old_val) {
       if (new_val) {
         if (this.isEditDialog) {
@@ -154,15 +152,22 @@ export default {
         }
       }
     }
-
   },
 
   methods: {
-    add_new_service_opt(){
-      this.service.items.unshift({id: 0, action: true, name: 'Add New Service'})
+    add_new_service_opt() {
+      this.service.items.unshift({
+        id: 0,
+        action: true,
+        name: 'Add New Service'
+      })
     },
-    add_new_client_opt(){
-      this.client.items.unshift({id: 0, action: true, company_name: 'Add New Client'})
+    add_new_client_opt() {
+      this.client.items.unshift({
+        id: 0,
+        action: true,
+        company_name: 'Add New Client'
+      })
     },
     init_dropdowns() {
       this.dropdown_loading = true
@@ -204,7 +209,7 @@ export default {
 
     save() {
       if (this.disabled) return
-      this.btnloading =  true
+      this.btnloading = true
       const fields_to_save = {
         title: this.project_title,
         client_id: this.client.selected.id || null,
@@ -213,7 +218,7 @@ export default {
         end_at: this.date_pickers.end_date,
         description: this.quill_editor.content,
         members: this.members.selected,
-        extra_fields : this.extraFields
+        extra_fields: this.extraFields
       }
 
       if (!this.isEditDialog) fields_to_save.comment = this.comment
@@ -269,10 +274,11 @@ export default {
 
     get_extra_inputs(serviceId) {
       if (serviceId) {
-        makeRequestTo.get_projects_extra_inputs(serviceId)
+        makeRequestTo
+          .get_projects_extra_inputs(serviceId)
           .then(({ data }) => {
-            this.extraFields = JSON.parse(data.questions) 
-            this.hasExtraInputs = true;
+            this.extraFields = JSON.parse(data.questions)
+            this.hasExtraInputs = true
           })
           .catch(() => (this.hasExtraInputs = false))
       } else {

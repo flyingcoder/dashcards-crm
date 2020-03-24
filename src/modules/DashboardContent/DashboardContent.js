@@ -38,8 +38,8 @@ export default {
     DeleteDialog,
     ConfirmDialog
   },
-  props : {
-    task : { type : Object, default : null },
+  props: {
+    task: { type: Object, default: null },
     id: [Number, String]
   },
   data: () => ({
@@ -49,11 +49,11 @@ export default {
     args: {
       dashboard: true
     },
-    delete_task_dialog : false,
-    open_view_task_dialog : false,
+    delete_task_dialog: false,
+    open_view_task_dialog: false,
     confirm_mark_as_complete_dialog: false,
-    active_task_id : null,
-    active_task : null
+    active_task_id: null,
+    active_task: null
   }),
 
   computed: {
@@ -79,7 +79,16 @@ export default {
     card_components() {
       let cards = _cloneDeep(this.cards)
       return cards.map(card => {
-        if (['timeline', 'tasks', 'calendar', 'invoice', 'client', 'timer'].includes(card.slug)) {
+        if (
+          [
+            'timeline',
+            'tasks',
+            'calendar',
+            'invoice',
+            'client',
+            'timer'
+          ].includes(card.slug)
+        ) {
           card.component = card.slug + '-card'
         }
         return card
@@ -101,23 +110,23 @@ export default {
 
   created() {
     this.fill_cards()
-    this.$event.$on('task-mark-as-complete', (task) => {
+    this.$event.$on('task-mark-as-complete', task => {
       this.task = task
       this.$refs.confirm_mark_as_complete_dialog.open = true
     })
-    this.$event.$on('close_confirm_dialog', (status)=> {
+    this.$event.$on('close_confirm_dialog', status => {
       this.task = null
       this.$refs.confirm_mark_as_complete_dialog.open = false
     })
-    this.$event.$on('task-delete', (task) => {
+    this.$event.$on('task-delete', task => {
       this.task = task
       this.delete_task_dialog = true
     })
-    this.$event.$on('close_delete_dialog', (status)=> {
+    this.$event.$on('close_delete_dialog', status => {
       this.task = null
       this.delete_task_dialog = false
     })
-    this.$event.$on('task-view', (task) => {
+    this.$event.$on('task-view', task => {
       this.active_task = task
       this.open_view_task_dialog = true
     })
@@ -172,10 +181,10 @@ export default {
     can_view_passbox(user) {
       return user ? true : false
     },
-    confirm_mark_as_complete_task(){
+    confirm_mark_as_complete_task() {
       this.$event.$emit('task_completed', this.task)
     },
-    confirm_delete_task(){
+    confirm_delete_task() {
       this.$event.$emit('task_deleted', this.task)
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <div class="message" :class="{ me: isMyMessage }">
-    <v-layout row wrap class="sender">
+    <v-layout wrap class="sender">
       <v-flex xs3 class="sender__img">
         <v-img :src="message.sender.image_url" />
         <span class="status online"></span>

@@ -25,14 +25,14 @@
 
     <!--kirby:notes removed, new permissions will be handle by backend observer  -->
     <!-- <table-header :paths="paths" @click="add_dialog = true" /> -->
-    
+
     <custom-table
       :headers="headers"
       :items="items"
       :loading="loading"
       :sort="sort"
       :has-checkbox="false"
-      hide-actions
+      hide-default-footer
       toolbar-title="Permissions"
       no-row-view
       :noRowDelete="true"
@@ -42,8 +42,12 @@
       @edit="open_edit_dialog"
     >
       <template slot="right_toolbar">
-        <v-flex xs12 sm3 >
-          <v-select label="Select Group" :items="groups" v-model="selected_group"></v-select>
+        <v-flex xs12 sm3>
+          <v-select
+            label="Select Group"
+            :items="groups"
+            v-model="selected_group"
+          ></v-select>
         </v-flex>
       </template>
 

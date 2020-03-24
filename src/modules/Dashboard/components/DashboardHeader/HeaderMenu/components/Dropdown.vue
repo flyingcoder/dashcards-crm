@@ -1,55 +1,71 @@
 <template>
   <v-menu
+    offset-y
     class="user-dropdown"
     transition="slide-y-transition"
-    :nudge-width="100"
+    :nudge-width="10"
     :nudge-bottom="10"
+    :nudge-left="70"
     bottom
-    offset-y
   >
-    <div class="dropdown" slot="activator">
-      <v-layout row align-center>
-        <v-flex xs6>
-          <v-avatar class="user-icon responsive-img" :size="avatarSize">
-            <img
-              class="atomic-icon"
-              :src="user.image_url"
-              width="45px"
-              alt="user"
-            />
-          </v-avatar>
-        </v-flex>
-        <v-flex xs6>
-          <div class="user-chevron">
-            <img
-              src="@/assets/icons/header/chevron-down.svg"
-              class="chevron responsive-img"
-              alt="chevron"
-            />
-          </div>
-        </v-flex>
-      </v-layout>
-    </div>
-
-    <v-list>
-      <div class="dropdown-img">
-        <v-img max-width="50px" :src="user.image_url" />
-        <div class="hero-name">
-          {{ user.first_name + ' ' + user.last_name }}
-        </div>
+    <template v-slot:activator="{ on }">
+      <div class="dropdown" v-on="on">
+        <v-layout align-center>
+          <v-flex xs6>
+            <v-avatar
+              v-if="!user.image_url"
+              class="user-icon responsive-img"
+              :size="avatarSize"
+            >
+              <img class="atomic-icon" :src="user.image_url" alt="user" />
+            </v-avatar>
+            <v-avatar
+              v-else
+              color="red"
+              :size="avatarSize"
+              class="user-icon responsive-img"
+            >
+              <span class="white--text">
+                {{ user.first_name.charAt(0) + user.last_name.charAt(0) }}
+              </span>
+            </v-avatar>
+          </v-flex>
+          <v-flex xs6>
+            <div class="user-chevron">
+              <img
+                src="@/assets/icons/header/chevron-down.svg"
+                class="chevron responsive-img"
+                alt="chevron"
+              />
+            </div>
+          </v-flex>
+        </v-layout>
       </div>
-      <v-list-tile
+    </template>
+    <v-list>
+      <v-list-item class="dropdown-img">
+        <v-row>
+          <v-col cols="12">
+            <v-img max-width="50px" :src="user.image_url" />
+          </v-col>
+          <v-col cols="12">
+            <div class="hero-name">
+              {{ user.first_name + ' ' + user.last_name }}
+            </div>
+          </v-col>
+        </v-row>
+      </v-list-item>
+      <v-list-item
         class="h__list"
         v-for="(item, index) in items"
         :key="index"
         @click="handle_action(item.action)"
       >
-        <v-list-tile-action class="h__icons">
+        <v-list-item-icon class="h__icons">
           <v-img max-width="25px" :src="item.icon" />
-        </v-list-tile-action>
-
-        <v-list-tile-title class="h__title">{{ item.title }}</v-list-tile-title>
-      </v-list-tile>
+        </v-list-item-icon>
+        <v-list-item-title>{{ item.title }}</v-list-item-title>
+      </v-list-item>
     </v-list>
   </v-menu>
 </template>
@@ -60,7 +76,7 @@ export default {
   name: 'Dropdown',
 
   data: () => ({
-    avatarSize: 'auto',
+    avatarSize: '40px',
     items: [
       {
         title: 'Profile',
@@ -120,17 +136,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.user-dropdown {
-  .dropdown {
-    width: 75px;
-    .atomic-icon {
-      width: 30px;
-    }
-    .user-chevron img {
-      width: 25px;
-    }
+.dropdown {
+  width: 75px;
+  cursor: pointer;
+
+  .atomic-icon {
+    width: 30px;
+  }
+  .user-chevron img {
+    width: 25px !important;
   }
 }
+
 .dropdown-img {
   .v-image {
     margin: 0 auto;
@@ -138,7 +155,6 @@ export default {
   }
   .hero-name {
     text-align: center;
-    padding-top: 5px;
     padding-bottom: 10px;
     font-size: 16px;
   }

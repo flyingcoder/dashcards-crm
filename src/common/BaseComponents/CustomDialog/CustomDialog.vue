@@ -1,5 +1,5 @@
 <template>
-  <v-layout row justify-center>
+  <v-layout justify-center>
     <v-dialog v-model="dialog" persistent max-width="600px">
       <v-progress-linear
         v-if="loading"
@@ -35,7 +35,9 @@
               <v-btn @click="button1clicked">{{ button1Text }}</v-btn>
             </slot>
             <slot name="button2">
-              <v-btn :loading="btnloading" @click="button2clicked">{{ button2Text }}</v-btn>
+              <v-btn :loading="btnloading" @click="button2clicked">{{
+                button2Text
+              }}</v-btn>
             </slot>
           </slot>
         </v-card-actions>

@@ -5,7 +5,7 @@
       :indeterminate="true"
     ></v-progress-linear>
 
-    <v-layout row>
+    <v-layout>
       <v-flex xs12 class="text-xs-right">
         <v-btn fab small class="add__btn" @click="add_dialog = true">
           <v-icon>add</v-icon>
@@ -35,7 +35,7 @@
       :loading="loading"
       :sort="sort"
       :has-checkbox="true"
-      hide-actions
+      hide-default-footer
       no-row-edit
       toolbar-title="Members"
       no-row-view

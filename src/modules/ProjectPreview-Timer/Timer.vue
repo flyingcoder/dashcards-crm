@@ -1,13 +1,13 @@
 <template>
   <div class="timer__tab">
     <custom-table
-      v-if="items.length || loading"  
+      v-if="items.length || loading"
       :headers="headers"
       :items="items"
       :loading="loading"
       :sort="sort"
       :has-checkbox="true"
-      hide-actions
+      hide-default-footer
       :show-row-actions="false"
       toolbar-title="Timers"
       :permission="$_permissions.get('timers')"
@@ -15,9 +15,7 @@
       @sorted="changeSort"
     >
       <template slot="custom-item" slot-scope="{ item }">
-        <td class="text-cap clickable-td"   
-          @click="view_task(item.id)"
-        >
+        <td class="text-cap clickable-td" @click="view_task(item.id)">
           {{ item.title }}
         </td>
         <td>

@@ -45,7 +45,7 @@
 
     <div class="fields-to-add" v-if="dialog.type !== 'view'">
       <v-btn
-        class="btn"
+        class="btn mr-1"
         color="#3b589e"
         dark
         v-show="!discount.show"
@@ -57,7 +57,7 @@
         Discount
       </v-btn>
       <v-btn
-        class="btn"
+        class="btn mr-1"
         color="#3b589e"
         dark
         v-show="!tax.show"
@@ -67,7 +67,7 @@
         Tax
       </v-btn>
       <v-btn
-        class="btn"
+        class="btn mr-1"
         color="#3b589e"
         dark
         v-show="!shipping.show"

@@ -1,6 +1,6 @@
 <template>
   <div class="invoice">
-    <ViewInvoice 
+    <ViewInvoice
       ref="view_invoice_dialog"
       :item="view_item"
       :open="view_invoice_dialog"
@@ -15,7 +15,7 @@
       text-content="Are you sure you want to delete this invoice?"
       @delete="delete_invoice"
     />
-    
+
     <custom-table
       v-if="items.length || loading"
       :headers="headers"
@@ -24,7 +24,7 @@
       :sort="sort"
       :permission="$_permissions.get('invoice')"
       toolbar-title="Invoice"
-      hide-actions
+      hide-default-footer
       @items-selected="selected_ids = $event"
       @delete="open_delete_dialog"
       @view="open_view_dialog"
@@ -40,12 +40,12 @@
       <template slot="table-actions">
         <div class="actions-wrapper">
           <div class="pagination" v-if="pagination.total > 1">
-              <v-pagination
-                color="#3b589e"
-                v-model="pagination.current"
-                :length="pagination.total"
-                :total-visible="pagination.total < 6 ? pagination.total : 6"
-                @input="onPageChange"
+            <v-pagination
+              color="#3b589e"
+              v-model="pagination.current"
+              :length="pagination.total"
+              :total-visible="pagination.total < 6 ? pagination.total : 6"
+              @input="onPageChange"
             ></v-pagination>
           </div>
         </div>

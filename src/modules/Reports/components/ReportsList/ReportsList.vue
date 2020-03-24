@@ -30,10 +30,10 @@
           <div class="reports-id">{{ index + 1 }}</div>
           <div class="reports-title text-cap">{{ report.title }}</div>
           <div class="reports-action">
-            <v-btn icon @click.stop="actionClicked(report, index, 'edit')" >
+            <v-btn icon @click.stop="actionClicked(report, index, 'edit')">
               󠁿󠁿󠁿<v-icon color="indigo">edit</v-icon>
             </v-btn>
-            <v-btn icon @click.stop="actionClicked(report, index, 'delete')" >
+            <v-btn icon @click.stop="actionClicked(report, index, 'delete')">
               󠁿󠁿󠁿<v-icon color="red">delete</v-icon>
             </v-btn>
           </div>

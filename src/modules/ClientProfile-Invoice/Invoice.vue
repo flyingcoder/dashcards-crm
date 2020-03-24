@@ -11,7 +11,7 @@
       no-row-view
       no-row-delete
       toolbar-title="Invoice"
-      hide-actions
+      hide-default-footer
       @items-selected="selected_ids = $event"
     >
       <template slot="custom-item" slot-scope="{ item }">

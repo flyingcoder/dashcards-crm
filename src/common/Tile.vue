@@ -48,7 +48,8 @@ export default {
   height: 80px;
   border-radius: 9px;
   overflow: hidden;
-  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
 
   .tile-icon {
     display: grid;
@@ -68,7 +69,7 @@ export default {
     .text-title {
       color: $titleDarkBlue;
     }
-    
+
     .text-title {
       font-size: 18px;
     }

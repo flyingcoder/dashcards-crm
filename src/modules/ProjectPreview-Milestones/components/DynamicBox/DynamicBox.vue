@@ -15,10 +15,10 @@
               '/' +
               box.tasks.length
           }}
-          <v-btn fab flat small class="action">
+          <v-btn fab text small class="action">
             <v-icon @click="$emit('edit', box)">edit</v-icon>
           </v-btn>
-          <v-btn fab flat small class="action">
+          <v-btn fab text small class="action">
             <v-icon @click="$emit('delete', box.id)">close</v-icon>
           </v-btn>
         </v-flex>
@@ -32,14 +32,13 @@
           <div class="fill" :style="{ width: tasksProgress + '%' }"></div>
         </div>
         <div class="task-custom-table">
-          <v-layout row class="header">
+          <v-layout class="header">
             <v-flex xs6 class="task__tableHead">Task</v-flex>
             <v-flex xs3 class="task__tableHead">Status</v-flex>
           </v-layout>
 
           <div class="body">
             <v-layout
-              row
               align-center
               class="task__tableBody"
               v-for="(task, index) in box.tasks"

@@ -6,51 +6,64 @@
         :view-more-link="viewMoreLink"
         class="invoice__content"
         :dashboard="dashboard"
+        :viewMoreBtn="enableViewMore"
         @close="$emit('close')"
+        @view-more="loadMore"
       >
-        <div class="content-wrapper" slot="content">
-          <v-data-table
-            v-if="items.length || loading"
-            :headers="headers"
-            :items="items"
-            :permission="$_permissions.get('invoice')"
-            hide-default-footer
-            hide-actions
-            :loading="loading" 
-            loading-text="Loading... Please wait"
-            class="elevation-1 buzzooka__table"
-            @page-count="pageCount = $event"
-          >
-            <template v-slot:items="props">
-              <td>{{ props.item.title }}</td>
-              <td>{{ props.item.due_date }}</td>
-              <td>{{ props.item.billed_to }}</td>
-              <td>{{ props.item.total_amount }}</td>
-            </template>
-          </v-data-table>
-          <div class="flex justify-content-center" v-if="items.length || loading">
-            <v-pagination
-              v-if="pagination.total > 1"
-              v-model="pagination.current"
-              :length="pagination.total"
-              @input="onPageChange"
-            ></v-pagination>
-          </div>
-          <div class="empty-invoice" v-else>
-            <div class="empty-content">
-              <div class="empty-svg">
-                <svg viewBox="0 0 250 250">
-                  <path
-                    d="M37 11l176 0c11,0 20,4 26,11 7,6 11,16 11,26l0 154c0,10 -4,19 -11,26 -2,2 -4,3 -6,5 -17,13 -33,1 -48,-11 -10,-7 -19,-14 -26,-11 -5,2 -9,7 -12,13 -12,18 -31,17 -46,4 -5,-5 -11,-10 -16,-11 -6,-1 -12,4 -19,9 -11,8 -23,17 -39,11 -6,-1 -12,-5 -16,-9 -7,-7 -11,-16 -11,-26l0 -154c0,-10 4,-20 11,-26 6,-7 15,-11 26,-11zm22 108c8,0 15,7 15,15 0,8 -7,15 -15,15 -8,0 -15,-7 -15,-15 0,-8 7,-15 15,-15zm0 -56c8,0 15,7 15,15 0,8 -7,15 -15,15 -8,0 -15,-7 -15,-15 0,-8 7,-15 15,-15zm44 24c-4,0 -7,-4 -7,-8 0,-4 3,-7 7,-7l96 0c4,0 7,3 7,7 0,4 -3,8 -7,8l-96 0zm0 56c-4,0 -7,-4 -7,-8 0,-4 3,-7 7,-7l96 0c4,0 7,3 7,7 0,4 -3,8 -7,8l-96 0zm129 70c2,-3 3,-7 3,-11l0 -154c0,-6 -2,-12 -6,-16 -4,-4 -10,-6 -16,-6l-176 0c-6,0 -12,2 -16,6 -4,4 -6,10 -6,16l0 154c0,6 2,11 6,15 1,2 3,3 4,3 13,8 23,1 32,-6 9,-7 18,-13 30,-12 10,2 17,8 24,15 8,7 17,8 24,-1 4,-8 9,-15 19,-19 14,-6 27,3 39,13 13,10 26,20 39,3z"
-                  />
-                </svg>
-              </div>
-              <div class="empty-text">
-                No Invoice yet
-              </div>
-            </div>
-          </div>
-        </div>
+        <v-card class="mx-auto" slot="content">
+          <v-layout>
+            <v-flex class="mx-auto">
+              <small>Clients</small>
+              <h2>{{ total_clients }}</h2>
+            </v-flex>
+            <v-flex class="mx-auto">
+              <small>This Month</small>
+              <h2>{{ current_month_total }}</h2>
+            </v-flex>
+            <v-flex class="mx-auto">
+              <small>Last Month</small>
+              <h2>{{ last_month_total }}</h2>
+            </v-flex>
+          </v-layout>
+
+          <v-sparkline
+            :value="value"
+            :gradient="gradient"
+            :smooth="radius || false"
+            :padding="padding"
+            :line-width="width"
+            :stroke-linecap="lineCap"
+            :gradient-direction="gradientDirection"
+            :fill="fill"
+            :type="type"
+            :auto-line-width="autoLineWidth"
+            auto-draw
+          ></v-sparkline>
+
+            <v-list disabled tile two-line dense>
+              <v-list-item
+                v-for="item in items"
+                :key="item.user.id"
+                dense
+              >
+                <v-list-item-avatar size="40">
+                  <v-img :src="item.user.image_url"></v-img>
+                </v-list-item-avatar>
+
+                <v-list-item-content>
+                  <v-list-item-title
+                    v-text="item.user.fullname"
+                  ></v-list-item-title>
+                  <v-list-item-subtitle
+                    v-text="item.user.job_title"
+                  ></v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-icon>
+                  {{ item.amount }}
+                </v-list-item-icon>
+            </v-list-item>
+          </v-list>
+        </v-card>
       </dash-card>
     </div>
   </div>
@@ -59,11 +72,24 @@
 <script src="./InvoiceCard.js"></script>
 
 <style lang="scss" scoped>
-  @import '~@/sass/_variables';
-  @include emptyTable('.empty-invoice');
-  
-  .justify-content-center {
-    display: flex;
-    justify-content: center;
+@import '~@/sass/_variables';
+@include emptyTable('.empty-invoice');
+
+.justify-content-center {
+  display: flex;
+  justify-content: center;
+}
+.user__name {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: flex-start;
+  grid-gap: 10px;
+  text-align: center;
+  cursor: pointer;
+
+  .v-responsive.v-image {
+    border-radius: 50%;
   }
+}
 </style>

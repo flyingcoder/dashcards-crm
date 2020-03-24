@@ -140,35 +140,36 @@
 
       <v-layout wrap v-show="!loading">
         <v-flex xs12 sm6>
-            <v-text-field
-              class="dialog__textfield d-field"
-              color="#667187"
-              box
-              hide-details
-              label="Address"
-              v-model.trim="address"
-            ></v-text-field>
+          <v-text-field
+            class="dialog__textfield d-field"
+            color="#667187"
+            box
+            hide-details
+            label="Address"
+            v-model.trim="address"
+          ></v-text-field>
         </v-flex>
 
         <v-flex xs12 sm6>
-            <v-text-field
-              class="dialog__textfield d-field"
-              color="#667187"
-              box
-              hide-details
-              label="Rate / Hour"
-              prefix="$"
-              @blur="on_blur_field('rate')"
-              :error="$v.rate.$error"
-              v-model.trim="rate"
-            ></v-text-field>
+          <v-text-field
+            class="dialog__textfield d-field"
+            color="#667187"
+            box
+            hide-details
+            label="Rate / Hour"
+            prefix="$"
+            @blur="on_blur_field('rate')"
+            :error="$v.rate.$error"
+            v-model.trim="rate"
+          ></v-text-field>
         </v-flex>
       </v-layout>
-
     </template>
 
     <template slot="button2">
-      <v-btn :disabled="$v.$invalid" :loading="btnloading" @click="save">Save</v-btn>
+      <v-btn :disabled="$v.$invalid" :loading="btnloading" @click="save"
+        >Save</v-btn
+      >
     </template>
   </custom-dialog>
 </template>

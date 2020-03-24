@@ -1,16 +1,12 @@
 <template>
-  <v-layout row wrap class="reports">
+  <v-layout wrap class="reports">
     <DeleteDialog
       :open-dialog.sync="deleteDialog"
       title="Delete Report"
       text-content="Are you sure you want to delete this template?"
       @delete="deleteReport"
     />
-    <ReportsAddDialog 
-      ref="dialog" 
-      :id="id" 
-      @report-added="add_new_report" 
-    />
+    <ReportsAddDialog ref="dialog" :id="id" @report-added="add_new_report" />
     <ReportsEditDialog
       ref="editDialog"
       :id="id"

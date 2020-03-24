@@ -1,6 +1,6 @@
 <template>
   <div class="invoice-dialog">
-    <v-layout row justify-center>
+    <v-layout justify-center>
       <v-dialog
         v-model="invoice_dialog"
         fullscreen
@@ -14,15 +14,19 @@
           @updated="$emit('updated', $event)"
         />
         <div class="content">
-          <v-container fluid  style="max-width:900px;">
-            <v-layout row wrap class="first-row info-section" >
+          <v-container fluid style="max-width:900px;">
+            <v-layout wrap class="first-row info-section">
               <v-flex xs12 sm6><TopLeft /></v-flex>
               <v-flex xs12 sm6><TopRight /></v-flex>
             </v-layout>
-            <v-layout row wrap class="second-row">
+            <v-layout wrap class="second-row">
               <TableSection />
             </v-layout>
-            <v-layout row wrap  justify-space-between class="third-row additional-info-section" >
+            <v-layout
+              wrap
+              justify-space-between
+              class="third-row additional-info-section"
+            >
               <v-flex sm6 xs12 class="left-content">
                 <BottomLeft />
               </v-flex>

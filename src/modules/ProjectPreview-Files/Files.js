@@ -32,7 +32,7 @@ export default {
     headers: [
       { text: 'Thumbnail', value: 'thumbnail' },
       { text: 'Filetype', value: 'filetype' },
-      { text: 'Filename', value: 'filename' , width: '35%'},
+      { text: 'Filename', value: 'filename', width: '35%' },
       { text: 'Added by', value: 'member' },
       { text: 'Project', value: 'project' },
       { is_action: true }
@@ -96,12 +96,14 @@ export default {
   }),
 
   computed: {
-    permissions(){
+    permissions() {
       return this.$_permissions.get('hq_files')
-    }, 
+    },
     filteredItems() {
       if (this.filter === 'all') return this.items
-      return this.items.filter(item => item.collection_name.includes(this.filter))
+      return this.items.filter(item =>
+        item.collection_name.includes(this.filter)
+      )
     },
 
     user() {
@@ -135,7 +137,7 @@ export default {
   },
 
   methods: {
-    manual_upload(){
+    manual_upload() {
       this.$refs.dropzone.process_queue()
     },
     pop(url) {
@@ -147,7 +149,8 @@ export default {
     },
     file_added([file, response]) {
       this.$event.$emit('open_snackbar', 'File(s) uploaded successfully')
-      var fileUploaded = typeof response === 'string' ? JSON.parse(response) : response
+      var fileUploaded =
+        typeof response === 'string' ? JSON.parse(response) : response
       this.items.unshift(fileUploaded)
       this.$refs.dropzone.remove_file(file)
     },
@@ -180,11 +183,15 @@ export default {
     },
 
     file_failed([file, response]) {
-      this.$event.$emit('open_snackbar', typeof response === 'object' ? response[0] : response, 'error')
+      this.$event.$emit(
+        'open_snackbar',
+        typeof response === 'object' ? response[0] : response,
+        'error'
+      )
     },
 
     goto_link(url) {
-      window.open(url);
+      window.open(url)
     }
   }
 }

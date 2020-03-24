@@ -1,5 +1,5 @@
 <template>
-  <div class="empty-div" :id="slug">
+  <div class="empty my-1" :id="slug">
     <div class="empty-content">
       <div class="empty-svg">
         <svg viewBox="0 0 250 250">
@@ -9,7 +9,8 @@
         </svg>
       </div>
       <div class="empty-text">
-        {{ headline }}
+        <p>{{ headline }}</p>
+        <slot name="extra"></slot>
       </div>
     </div>
   </div>
@@ -19,13 +20,9 @@
 export default {
   name: 'Empty',
   props: {
-    slug: String,
-    headline: String
-  },
-  data: () => ({
-    slug: 'sample',
-    headline : 'No data yet'
-  })
+    slug: { type: String, default: 'empty-sample' },
+    headline: { type: String, default: 'No data yet' }
+  }
 }
 </script>
 

@@ -8,13 +8,10 @@
         ></v-progress-linear>
 
         <template v-else>
-          <v-layout row class="task__header text-xs-left">
+          <v-layout class="task__header text-xs-left">
             <v-flex xs5 class="assignee">
               <v-flex xs4 v-if="assignee_url"
-                ><v-img
-                  :src="assignee_url"
-                  height="45"
-                  width="45"
+                ><v-img :src="assignee_url" height="45" width="45"
               /></v-flex>
               <div class="assignee__name text-cap">{{ full_name }}</div>
             </v-flex>
@@ -28,7 +25,7 @@
 
             <v-menu offset-y>
               <template v-slot:activator="{ on }">
-                <v-btn icon fab small outline v-on="on">
+                <v-btn icon fab small outlined v-on="on">
                   <v-icon>more_horiz</v-icon>
                 </v-btn>
               </template>
@@ -51,7 +48,10 @@
             <div class="boxes status">
               <span class="box__content">{{ content.status }}</span>
             </div>
-            <hours-box :content="content" v-if="content.status != 'completed'"/>
+            <hours-box
+              :content="content"
+              v-if="content.status != 'completed'"
+            />
           </div>
 
           <div class="mobile__hours-box"><hours-box :content="content" /></div>
@@ -63,7 +63,7 @@
               class="task__description textarea-cap"
               v-html="content.description"
             ></div>
-            
+
             <div class="task__assigned_to" v-if="content.assignee">
               <v-flex>
                 <div><v-icon>list</v-icon> Assigned to:</div>
@@ -79,7 +79,7 @@
                   <v-avatar left>
                     <v-img :src="collaborator.image_url"></v-img>
                   </v-avatar>
-                    {{collaborator.first_name}}, {{collaborator.last_name}}
+                  {{ collaborator.first_name }}, {{ collaborator.last_name }}
                 </v-chip>
               </v-flex>
             </div>
@@ -99,20 +99,28 @@
                     width="45"
                 /></v-flex>
                 <v-flex sm10 xs9>
-                  <div class="commenter"  
+                  <div
+                    class="commenter"
                     @mouseover="hover = true"
-                    @mouseleave="hover = false">
-                    <v-btn 
-                      icon 
-                      v-show="hover && can_delete_comment(comment)" 
-                      @click="confirm_delete_comment(comment)" 
-                      class="btn-comment-delete">
-                        <v-icon>delete</v-icon>
+                    @mouseleave="hover = false"
+                  >
+                    <v-btn
+                      icon
+                      v-show="hover && can_delete_comment(comment)"
+                      @click="confirm_delete_comment(comment)"
+                      class="btn-comment-delete"
+                    >
+                      <v-icon>delete</v-icon>
                     </v-btn>
                     <div class="comment-name">
-                      <span>{{ comment.causer.first_name }} {{ comment.causer.last_name }}</span>
+                      <span
+                        >{{ comment.causer.first_name }}
+                        {{ comment.causer.last_name }}</span
+                      >
                     </div>
-                    <small class="comment-time">{{ comment.created_at | from_now }}</small>
+                    <small class="comment-time">{{
+                      comment.created_at | from_now
+                    }}</small>
                   </div>
                   <div v-html="comment.body" class="comment-msg"></div>
                 </v-flex>
@@ -122,10 +130,7 @@
 
           <div class="task__comments">
             <v-flex sm2 xs3
-              ><v-img
-                :src="commenter.image_url"
-                height="45"
-                width="45"
+              ><v-img :src="commenter.image_url" height="45" width="45"
             /></v-flex>
 
             <v-flex sm10 xs9 class="rich__editor">
@@ -160,7 +165,6 @@
       text-content="Are you sure you want to delete this comment?"
       @delete="confirmed_delete_comment"
     />
-
   </v-flex>
 </template>
 

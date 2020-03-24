@@ -16,7 +16,7 @@
     </div>
     <div class="write">
       <div class="avatar-wrapper">
-        <img :src="loggedUser.image_url" class="sender-avatar">
+        <img :src="loggedUser.image_url" class="sender-avatar" />
       </div>
       <v-text-field
         v-model="message"
@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="view__more">
-      <v-btn flat class="view__more_btn">VIEW MORE</v-btn>
+      <v-btn text class="view__more_btn">VIEW MORE</v-btn>
     </div>
   </div>
 </template>
@@ -61,7 +61,7 @@ export default {
     loading: false,
     messages: [],
     message: null,
-    can_message : false
+    can_message: false
   }),
 
   computed: {
@@ -80,7 +80,7 @@ export default {
       })
       .finally(() => (this.loading = false))
   },
-  mounted(){
+  mounted() {
     this.$pusher.authenticate()
     this.subscribePusher()
   },
@@ -88,26 +88,35 @@ export default {
     this.$pusher.unsubscribe(`private-project.client-message.${this.id}`)
   },
   methods: {
-    add_new_message(message){
-      if(!this.messages.some(msg => msg.id === message.id)){
+    add_new_message(message) {
+      if (!this.messages.some(msg => msg.id === message.id)) {
         this.messages.push(message)
       }
       this.scrollToBottom(this.$refs['messages-container'])
     },
-    user_can_message(can){
+    user_can_message(can) {
       this.can_message = can
-      if (can) 
-        this.$event.$emit('open_snackbar', 'Client chat connected') 
+      if (can) this.$event.$emit('open_snackbar', 'Client chat connected')
       else
-        this.$event.$emit('open_snackbar', 'Client chat unavailable for you.', 'error')
+        this.$event.$emit(
+          'open_snackbar',
+          'Client chat unavailable for you.',
+          'error'
+        )
     },
     subscribePusher() {
-      const client_message_channel = this.$pusher.subscribe(`private-project.client-message.${this.id}`)
-          client_message_channel.bind('ProjectClientMessage', (data) =>{ 
-            if(data.type === 'client') this.add_new_message(data.message) 
-          })
-          client_message_channel.bind('pusher:subscription_succeeded', () => this.user_can_message(true))
-          client_message_channel.bind('pusher:subscription_error',(status) => this.user_can_message(false))
+      const client_message_channel = this.$pusher.subscribe(
+        `private-project.client-message.${this.id}`
+      )
+      client_message_channel.bind('ProjectClientMessage', data => {
+        if (data.type === 'client') this.add_new_message(data.message)
+      })
+      client_message_channel.bind('pusher:subscription_succeeded', () =>
+        this.user_can_message(true)
+      )
+      client_message_channel.bind('pusher:subscription_error', status =>
+        this.user_can_message(false)
+      )
     },
     sendMessage(message) {
       if (!message) return

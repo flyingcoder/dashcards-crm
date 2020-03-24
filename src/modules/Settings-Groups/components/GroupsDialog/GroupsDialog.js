@@ -57,7 +57,7 @@ export default {
       deep: true
     }
   },
-  
+
   methods: {
     cancel() {
       this.open = false

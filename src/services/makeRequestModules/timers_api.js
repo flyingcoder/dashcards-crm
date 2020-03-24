@@ -5,7 +5,7 @@ export const timers_api = {
     return request.get('api/timer?all=true')
   },
   get_project_timers(api) {
-  	return request.get(api)
+    return request.get(api)
   },
   get_timers() {
     return request.get('api/timer')

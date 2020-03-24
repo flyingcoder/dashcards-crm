@@ -46,7 +46,7 @@ export default {
   },
 
   props: {
-    value : Boolean,
+    value: Boolean,
     fieldsToEdit: Object
   },
 

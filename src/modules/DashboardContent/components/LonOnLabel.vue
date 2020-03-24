@@ -2,21 +2,25 @@
   <div class="icon">
     <div class="tile">
       <div class="tile-icon">
-        <v-switch :value="switch1" :disabled="disabled" @change="switch1_changed"></v-switch>
+        <v-switch
+          :value="switch1"
+          :disabled="disabled"
+          @change="switch1_changed"
+        ></v-switch>
       </div>
       <div class="tile-text">
         Log Off
       </div>
     </div>
-    
-    <v-tooltip bottom>
+
+    <!-- <v-tooltip bottom>
       <template v-slot:activator="{ on }">
         <v-btn @click="switch1_changed">
           <v-icon>{{ timer_icon }}</v-icon>
         </v-btn>
       </template>
       <span>Tooltip</span>
-    </v-tooltip>
+    </v-tooltip> -->
   </div>
 </template>
 
@@ -57,17 +61,18 @@ export default {
   grid-template-columns: 1.5fr 2.5fr;
   border-radius: 9px;
   overflow: hidden;
-  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
   background: #fff;
   justify-content: center;
   align-items: center;
 
-  .tile-icon{
+  .tile-icon {
     padding: 0 10px;
     border-right: 1px solid $tile-border;
     background: #f5f5f5;
   }
-    
+
   .tile-text {
     font-size: 18px;
     color: $titleDarkBlue;
@@ -79,5 +84,6 @@ export default {
   display: grid;
   grid-gap: 20px;
 }
-@media only screen and (max-width: 480px) {}
+@media only screen and (max-width: 480px) {
+}
 </style>

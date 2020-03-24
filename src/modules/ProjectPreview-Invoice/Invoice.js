@@ -25,17 +25,17 @@ export default {
 
   data: () => ({
     headers: [
-      { id: 1, text: 'Invoice', value: 'invoice', width : '30%' },
-      { id: 2, text: 'Client', value: 'client', width : '30%' },
-      { id: 3, text: 'Due Date', value: 'due_date', width : '10%' },
-      { id: 4, text: 'Amount', value: 'amount', width : '10%' },
-      { id: 5, is_action: true, width : '20%' }
+      { id: 1, text: 'Invoice', value: 'invoice', width: '30%' },
+      { id: 2, text: 'Client', value: 'client', width: '30%' },
+      { id: 3, text: 'Due Date', value: 'due_date', width: '10%' },
+      { id: 4, text: 'Amount', value: 'amount', width: '10%' },
+      { id: 5, is_action: true, width: '20%' }
     ],
-    view_invoice_dialog : false,
-    view_item : null,
+    view_invoice_dialog: false,
+    view_item: null,
     items: [],
-    page : 1,
-    rows_per_page : 10,
+    page: 1,
+    rows_per_page: 10,
     pagination: {
       current: 1,
       total: 0
@@ -47,7 +47,7 @@ export default {
     this.fetch_data()
     this.getInvoices()
   },
-  
+
   methods: {
     ...mapMutations('invoice', [
       'set_dialog',
@@ -77,31 +77,33 @@ export default {
       this.set_dialog({ type: 'edit', open: true })
     },
     fetch_data() {
-      apiTo.get_all_projects()
-        .then((res2) => {
-            this.set_projects(res2.data)
+      apiTo
+        .get_all_projects()
+        .then(res2 => {
+          this.set_projects(res2.data)
         })
         .finally(() => (this.loading = false))
     },
     getInvoices() {
       this.loading = true
-      apiTo.getInvoices(this.id, this.pagination.current, this.rows_per_page )
+      apiTo
+        .getInvoices(this.id, this.pagination.current, this.rows_per_page)
         .then(response => {
-            this.items = response.data.data
-            this.pagination.current = response.data.current_page
-            this.pagination.total = response.data.last_page
-            this.rows_per_page = response.data.per_page
+          this.items = response.data.data
+          this.pagination.current = response.data.current_page
+          this.pagination.total = response.data.last_page
+          this.rows_per_page = response.data.per_page
         })
         .finally(() => (this.loading = false))
     },
     onPageChange() {
-      this.getInvoices();
+      this.getInvoices()
     },
     invoice_updated(invoice) {
       const index = this.items.findIndex(item => item.id === invoice.id)
       if (~index) {
         this.items.splice(index, 1, invoice)
       }
-    },
+    }
   }
 }

@@ -8,7 +8,7 @@ export default {
     members: Array,
     memberItems: Array,
     isLoading: Boolean,
-    showOuterIcon: { type : Boolean, default: false }
+    showOuterIcon: { type: Boolean, default: false }
   },
 
   data: () => ({

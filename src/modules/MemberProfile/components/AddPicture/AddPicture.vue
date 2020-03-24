@@ -111,18 +111,14 @@ export default {
 
     file_added([file]) {
       const reader = new FileReader()
-      if(this.validFileType.includes(file.type)) {
+      if (this.validFileType.includes(file.type)) {
         reader.onload = () => {
           this.image64 = reader.result
           this.file_uploaded = true
         }
         reader.readAsDataURL(file)
       } else {
-        this.$event.$emit(
-          'open_snackbar',
-          'Not a valid image!',
-          'error'
-        )
+        this.$event.$emit('open_snackbar', 'Not a valid image!', 'error')
         this.file_uploaded = false
         this.dialog = false
       }
@@ -133,7 +129,6 @@ export default {
     },
 
     upload_image(image) {
-      
       let formData = new FormData()
       formData.append('file', image)
       this.loading = true
@@ -157,7 +152,7 @@ export default {
       this.$refs.picture_dialog.clear_and_close()
       Object.assign(this.$data, this.$options.data.apply(this))
     },
-    cancel(){
+    cancel() {
       this.dialog = false
       this.file_uploaded = false
     }

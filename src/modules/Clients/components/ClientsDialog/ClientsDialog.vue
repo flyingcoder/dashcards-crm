@@ -8,7 +8,7 @@
     @button2="save"
   >
     <template slot="content">
-      <v-layout row wrap class="clients__dialog">
+      <v-layout wrap class="clients__dialog">
         <v-flex xs12>
           <v-text-field
             class="dialog__textfield d-field"

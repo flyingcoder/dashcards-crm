@@ -8,7 +8,7 @@
       <img :src="image_preview" v-if="image_preview" class="image-preview" />
       <span class="text" v-else>+ Add Your Logo</span>
       <v-btn
-        outline
+        outlined
         class="button"
         v-show="image_preview && dialog.type !== 'view'"
         >Remove</v-btn
@@ -105,10 +105,13 @@ export default {
       if (event.target.files && event.target.files[0]) {
         let formData = new FormData()
         formData.append('file', event.target.files[0])
-        axios.post(`api/file/image-upload`, formData, { headers : {'Content-Type': 'multipart/form-data'} })
-        .then(( {data} ) => {
-          this.$store.commit('invoice/set_company_logo', data.url)
-        })
+        axios
+          .post(`api/file/image-upload`, formData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+          })
+          .then(({ data }) => {
+            this.$store.commit('invoice/set_company_logo', data.url)
+          })
       }
     }
   }
@@ -198,7 +201,7 @@ export default {
     }
   }
   .required {
-    color : red;
+    color: red;
   }
 }
 

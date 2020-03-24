@@ -21,8 +21,10 @@
     </CustomDialog>
 
     <div class="question-fields">
-      <div class="service-name-label" v-if="serviceName">{{ serviceName }} Extra Inputs</div>
-      
+      <div class="service-name-label" v-if="serviceName">
+        {{ serviceName }} Extra Inputs
+      </div>
+
       <QuestionsFields
         :service-id="service.selected"
         v-if="!serviceDialog"

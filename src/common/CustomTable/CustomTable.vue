@@ -3,13 +3,11 @@
     <div class="row buzz__tables">
       <div class="buzz__tablesTwo">
         <slot name="toolbar">
-          <v-toolbar flat class="table__toolbar">
-            <v-toolbar-title class="table__toolbar-title">
+          <div class="table__toolbar">
               {{ toolbarTitle }}
-            </v-toolbar-title>
-          </v-toolbar>
+          </div>
         </slot>
-        
+
         <slot name="right_toolbar"></slot>
 
         <v-data-table
@@ -18,10 +16,11 @@
           :items="items"
           :loading="loading"
           no-data-text=""
-          select-all
-          disable-initial-sort
+          show-select
+          disable-sort
           v-bind="$attrs"
           class="buzzooka__table"
+          hide-default-footer
         >
           <v-progress-linear
             slot="progress"
@@ -70,6 +69,10 @@
               </th>
             </tr>
           </template>
+          
+          <template v-slot:item="{ item }">
+            <slot name="custom-item" v-bind:item="item"></slot>
+          </template>
 
           <template slot="items" slot-scope="props">
             <!-- ITEMS -->
@@ -85,7 +88,7 @@
                 ></v-checkbox>
               </td>
 
-              <slot name="custom-item" :item="props.item"></slot>
+              <!-- <slot name="custom-item" v-bind:item="item"></slot> -->
 
               <slot name="row-actions" :item="props.item" v-if="showRowActions">
                 <td class="text-xs-center table__actions">
@@ -143,9 +146,7 @@
 
           <template slot="no-data">
             <!-- DISPLAYED WHEN NO ITEMS -->
-            <v-alert :value="true" color="error" icon="warning" v-if="!loading">
-              Sorry, nothing to display here :(
-            </v-alert>
+            <Empty></Empty>
           </template>
 
           <template slot="footer">

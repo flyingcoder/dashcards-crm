@@ -1,5 +1,5 @@
 <template>
-  <v-layout row justify-center>
+  <v-layout justify-center>
     <v-dialog v-model="open" persistent max-width="600px">
       <v-card class="email__dialog">
         <v-card-title class="dialog__header">
