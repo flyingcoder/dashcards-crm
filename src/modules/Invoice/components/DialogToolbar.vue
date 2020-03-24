@@ -20,8 +20,7 @@
         <v-btn
           v-if="dialog.type !== 'view'"
           :disabled="!can_submit"
-          dark
-          flat
+          text
           @click="save_invoice"
         >
           Submit

@@ -4,7 +4,7 @@
 
     <v-text-field
       class="textfield"
-      flat
+      text
       hide-details
       color="657186"
       solo
@@ -15,13 +15,13 @@
     >
       <v-tooltip class="toggle-btn" slot="prepend" bottom v-if="!noSymbol">
         <v-btn
-          flat
+          text
           color="#657186"
           slot="activator"
           icon
           @click="$emit('toggle-symbol', symbolType)"
         >
-          <v-icon>compare_arrows</v-icon>
+          <v-icon >compare_arrows</v-icon>
         </v-btn>
 
         Toggle {{ title }}

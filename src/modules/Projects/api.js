@@ -9,5 +9,8 @@ export default {
   },
   add_new_member(payload) {
     return request.post('api/company/teams', payload)
+  },
+  get_projects(page){
+  	return request.get(`api/projects?page=${page}`)
   }
 }

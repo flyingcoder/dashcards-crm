@@ -1,8 +1,8 @@
 import request from '@/services/axios_instance'
 
 export const api_to = {
-  get_invoices(page, per_page) {
-    return request.get(`api/invoice?page=${page}&per_page=${per_page}`)
+  get_invoices(page) {
+    return request.get(`api/invoice?page=${page}`)
   },
 
   delete_invoice(id) {

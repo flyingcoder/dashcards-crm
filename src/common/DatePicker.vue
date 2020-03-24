@@ -4,12 +4,11 @@
     :close-on-content-click="false"
     v-model="menu"
     :nudge-right="40"
-    lazy
     transition="scale-transition"
     offset-y
-    full-width
     min-width="290px"
   >
+  <template v-slot:activator="{ on }">
     <v-text-field
       slot="activator"
       :value="value"
@@ -18,8 +17,9 @@
       hide-details
       color="#657186"
       readonly
+      v-on="on"
     ></v-text-field>
-
+  </template>
     <v-date-picker
       clearable
       color="#657186"
@@ -30,9 +30,9 @@
       scrollable
     >
       <v-spacer></v-spacer>
-      <v-btn text color="#657186" @click="cancel">Cancel</v-btn>
-      <v-btn text color="#657186" @click="save">OK</v-btn>
-      <v-btn text color="#657186" @click="clear">Clear</v-btn>
+      <v-btn text outlined color="#657186" @click="cancel">Cancel</v-btn>
+      <v-btn text outlined color="#657186" @click="save">OK</v-btn>
+      <v-btn text outlined color="#657186" @click="clear">Clear</v-btn>
     </v-date-picker>
   </v-menu>
 </template>

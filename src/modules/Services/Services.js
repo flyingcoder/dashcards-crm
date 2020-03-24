@@ -1,24 +1,27 @@
-import { table_functionality } from '@/services/table-functionality/table-functionality'
+import { list_functionality } from '@/services/list-functionality/list-functionality'
 import isEmpty from 'lodash/isEmpty'
+import request from '@/services/axios_instance'
 
 //Components
-import CustomTable from '@/common/CustomTable/CustomTable.vue'
+import VueTable from '@/common/VueTable/VueTable.vue'
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import ServicesAddDialog from './components/ServicesAddDialog/ServicesAddDialog.vue'
 import ServicesEditDialog from './components/ServicesEditDialog/ServicesEditDialog.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import TableHeader from '@/common/TableHeader.vue'
+import Actions from '@/common/VueTable/Actions.vue'
 
 export default {
   name: 'Services',
-  mixins: [table_functionality],
+  mixins: [list_functionality],
   components: {
-    CustomTable,
+    VueTable,
     Breadcrumb,
     ServicesAddDialog,
     ServicesEditDialog,
     DeleteDialog,
-    TableHeader
+    TableHeader,
+    Actions
   },
 
   data() {
@@ -28,15 +31,15 @@ export default {
         { text: 'Services', disabled: true, router_name: null }
       ],
       headers: [
-        { id: 1, text: 'Service', value: 'service_name', sortable: true },
-        { id: 2, text: 'Created By', value: 'name', sortable: true },
+        { text: 'Service', value: 'service_name', sortable: true },
+        { text: 'Created By', value: 'name', sortable: true },
         {
-          id: 3,
+         
           text: 'Date Created',
           value: 'service_created_at',
           sortable: true
         },
-        { id: 4, is_action: true }
+        { text: 'Action', is_action: true, sortable : false }
       ],
       table_config: {
         route_name: 'services',
@@ -50,18 +53,31 @@ export default {
   },
 
   created() {
-    const query = this.$route.query
-    if (isEmpty(query)) {
-      this.fill_table('get_services', true)
-    } else {
-      this.update_table_actions(query)
-    }
+    this.load_services()
   },
 
   methods: {
     toggleAll() {
       if (this.selected.length) this.selected = []
       else this.selected = this.items.slice()
+    },
+    load_services(){
+      request.get('api/services?page=1').then(({data}) => {
+        this.items = data.data
+        this.pagination.current = data.current_page
+        this.pagination.total = data.last_page
+        this.hasMoreData()
+      })
+    },
+    load_more_services(){
+      request.get(`api/services?page=${this.pagination.current+1}`).then(({data}) => {
+        data.data.forEach(item => {
+          this.items.push(item)
+        })
+        this.pagination.current = data.current_page
+        this.pagination.total = data.last_page
+        this.hasMoreData()
+      })
     }
   }
 }

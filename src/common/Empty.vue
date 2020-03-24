@@ -1,5 +1,5 @@
 <template>
-  <div class="empty" :id="slug">
+  <div class="empty my-1" :id="slug">
     <div class="empty-content">
       <div class="empty-svg">
         <svg viewBox="0 0 250 250">
@@ -9,7 +9,8 @@
         </svg>
       </div>
       <div class="empty-text">
-        {{ headline }}
+        <p>{{ headline }}</p>
+        <slot name="extra"></slot>
       </div>
     </div>
   </div>
@@ -32,5 +33,8 @@ export default {
 .justify-content-center {
   display: flex;
   justify-content: center;
+}
+.empty{
+  margin: 5px;
 }
 </style>

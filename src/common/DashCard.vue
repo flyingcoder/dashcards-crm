@@ -1,9 +1,9 @@
 <template>
   <v-container class="dash__card">
-    <v-layout wrap class="card__header" align-center>
-      <div class="card__title">
+    <v-row wrap no-gutters class="card__header" align-center>
+      <v-flex xs4 class="card__title">
         {{ title }}
-      </div>
+      </v-flex>
       <slot name="actions" v-if="dashboard">
         <div class="actions">
           <v-btn fab small text class="action">
@@ -26,7 +26,7 @@
           </v-btn>
         </div>
       </slot>
-    </v-layout>
+    </v-row>
 
     <v-flex xs12 class="card__content">
       <slot name="content" />

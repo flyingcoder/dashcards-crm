@@ -69,6 +69,10 @@
               </th>
             </tr>
           </template>
+          
+          <template v-slot:item="{ item }">
+            <slot name="custom-item" v-bind:item="item"></slot>
+          </template>
 
           <template slot="items" slot-scope="props">
             <!-- ITEMS -->
@@ -84,7 +88,7 @@
                 ></v-checkbox>
               </td>
 
-              <slot name="custom-item" :item="props.item"></slot>
+              <!-- <slot name="custom-item" v-bind:item="item"></slot> -->
 
               <slot name="row-actions" :item="props.item" v-if="showRowActions">
                 <td class="text-xs-center table__actions">
@@ -142,9 +146,7 @@
 
           <template slot="no-data">
             <!-- DISPLAYED WHEN NO ITEMS -->
-            <v-alert :value="true" color="error" icon="warning" v-if="!loading">
-              Sorry, nothing to display here :(
-            </v-alert>
+            <Empty></Empty>
           </template>
 
           <template slot="footer">

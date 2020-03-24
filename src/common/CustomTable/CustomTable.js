@@ -1,7 +1,11 @@
+import Empty from '@/common/Empty.vue'
+
 export default {
   name: 'CustomTable',
   inheritAttrs: false,
-
+  components: {
+    Empty
+  },
   props: {
     headers: Array,
     items: Array,

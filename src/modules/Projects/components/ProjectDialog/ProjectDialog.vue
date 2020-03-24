@@ -144,7 +144,7 @@
               </v-menu>
 
               <div class="choosen" v-if="date_pickers.start_date">
-                {{ $refs.date_pickers.text_field_label }}
+                <!-- {{ $refs.date_pickers.text_field_label }} -->
               </div>
             </v-flex>
 

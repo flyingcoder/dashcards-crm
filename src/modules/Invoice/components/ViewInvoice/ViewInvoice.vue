@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-center>
+  <v-row no-gutters justify-center>
     <v-dialog
       fullscreen
       persistent
@@ -9,7 +9,10 @@
       v-model="view_invoice_dialog"
     >
       <v-card class="invoice__dialog mx-auto" outlined v-if="item">
-        <v-toolbar color="blue" dark>
+        <v-toolbar
+          color="#3b589e"
+          dark
+        >
           <v-icon>list</v-icon>
           <v-toolbar-title>Invoice : {{ item.title }}</v-toolbar-title>
           <v-spacer></v-spacer>
@@ -20,40 +23,40 @@
         </v-toolbar>
 
         <v-container class="invoice-viewbox">
-          <hr class="mb-4" />
-          <v-layout wrap justify-space-between>
-            <v-flex xs12 md3>
-              <img :src="item.company_logo" alt="No company logo" />
-            </v-flex>
-            <v-flex xs12 md4 offset5>
-              <p class="text-right">
-                Invoice ID:{{ item.id }}<br />
-                Created: {{ item.created_at }}<br />
-                Due : {{ item.due_date }} <br />
-                Type : {{ item.type }}
-              </p>
-            </v-flex>
-          </v-layout>
+          <hr class="mb-4">
+          <v-row no-gutters justify-space-between>
+            <v-col md="7">
+              <v-img :src="item.company_logo">
+                <template v-slot:placeholder>
+                  <span class="blue--text headline">No Image Available</span>
+                </template>
+              </v-img>
+            </v-col>
+            <v-col md="5">
+              <v-row no-gutters>
+                <v-col md="6" sm="6">Invoice ID</v-col><v-col md="6" sm="6">: {{item.id}}</v-col>
+                <v-col md="6" sm="6">Created</v-col><v-col md="6" sm="6">: {{item.created_at}}</v-col>
+                <v-col md="6" sm="6">Due </v-col><v-col md="6" sm="6">: {{item.due_date}}</v-col>
+                <v-col md="6" sm="6">Type </v-col><v-col md="6" sm="6">: {{item.type}}</v-col>
+              </v-row>  
+            </v-col>
+          </v-row>
 
-          <v-layout wrap justify-space-between class="mt-2">
-            <v-flex xs12 md3>
-              <p class="text-left">
-                Billed From:<br />
-                {{ item.billed_from }}
-              </p>
-            </v-flex>
-            <v-flex xs12 md4 offset5>
-              <p class="text-right">
-                Billed To:<br />
-                {{ item.billed_to }}
-              </p>
-            </v-flex>
-          </v-layout>
+          <v-row no-gutters justify-space-between class="mt-2">
+            <v-col md="6">
+                Billed From:<br>
+                {{item.billed_from}}
+            </v-col>
+            <v-col md="6">
+                Billed To:<br>
+                {{item.billed_to}}
+            </v-col>
+          </v-row>
 
-          <v-layout wrap justify-space-center class="py-3">
-            <v-flex>{{ item.title }}</v-flex>
-          </v-layout>
-
+          <v-row no-gutters justify-space-center class="py-3">
+            <v-flex>{{item.title}}</v-flex>
+          </v-row>
+    
           <v-data-table
             :headers="headers"
             :items="item.items"
@@ -70,13 +73,13 @@
             </template>
           </v-data-table>
 
-          <v-layout wrap class="my-2 py-3">
-            <v-flex xs12 md12>Total : {{ item.total_amount }}</v-flex>
-            <v-flex xs12 md12>Tax : {{ item.tax }}</v-flex>
-            <v-flex xs12 md12>Discount : {{ item.discount }}</v-flex>
-          </v-layout>
-          <v-layout v-if="item.terms">
-            <v-flex xs12 md12>Terms : {{ item.terms }}</v-flex>
+          <v-row no-gutters class="my-2 py-3">
+              <v-flex xs12 md12>Total : {{item.total_amount}}</v-flex>
+              <v-flex xs12 md12>Tax : {{item.tax}}</v-flex>
+              <v-flex xs12 md12>Discount : {{item.discount}}</v-flex>
+          </v-row>
+          <v-layout row v-if="item.terms">
+              <v-flex xs12 md12 >Terms : {{item.terms}}</v-flex>
           </v-layout>
         </v-container>
         <!-- <v-container class="invoice-viewbox-action">
@@ -93,7 +96,7 @@
         </v-container> -->
       </v-card>
     </v-dialog>
-  </v-layout>
+  </v-row>
 </template>
 
 <script src="./ViewInvoice.js"></script>

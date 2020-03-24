@@ -1,26 +1,30 @@
 import { api_to } from './api'
-import { table_functionality } from '@/services/table-functionality/table-functionality'
+import { list_functionality } from '@/services/list-functionality/list-functionality'
 import { mapMutations } from 'vuex'
 import _cloneDeep from 'lodash/cloneDeep'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
-import CustomTable from '@/common/CustomTable/CustomTable.vue'
+// import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import EmailDialog from './components/EmailDialog/EmailDialog.vue'
 import InvoiceDialog from './components/InvoiceDialog/InvoiceDialog.vue'
 import ViewInvoice from './components/ViewInvoice/ViewInvoice.vue'
+import Actions from '@/common/VueTable/Actions.vue'
+import VueTable from '@/common/VueTable/VueTable.vue'
 
 export default {
   name: 'Invoice',
-  mixins: [table_functionality],
+  mixins: [list_functionality],
 
   components: {
     TableHeader,
     InvoiceDialog,
-    CustomTable,
+    // CustomTable,
+    VueTable,
     EmailDialog,
     DeleteDialog,
-    ViewInvoice
+    ViewInvoice,
+    Actions
   },
 
   data: () => ({
@@ -30,24 +34,22 @@ export default {
       { text: 'Invoice', disabled: true, router_name: null }
     ],
     headers: [
-      { id: 1, text: 'Invoice', value: 'invoice' },
-      { id: 2, text: 'Due Date', value: 'due_date' },
-      { id: 3, text: 'Client', value: 'client' },
-      { id: 4, text: 'Amount', value: 'amount' },
-      { id: 5, is_action: true }
+      { text: 'Invoice', value: 'invoice', sortable: false },
+      { text: 'Due Date', value: 'due_date', sortable: false },
+      { text: 'Client', value: 'client', sortable: false },
+      { text: 'Amount', value: 'amount', sortable: false },
+      { text: 'Action',value: 'actions', sortable: false, }
     ],
-    view_item: null,
-    items: [],
-    page: 1,
-    rows_per_page: 10,
-    pagination: {
-      current: 1,
-      total: 0
+    view_item : null,
+    table_config: {
+      add_message: 'New invoice added successfully!',
+      update_message: 'Invoice updated successfully!',
+      delete_message: 'Invoice deleted successfully!',
+      refresh_table_message: 'Table refreshed',
     }
   }),
 
   created() {
-    this.loading = true
     this.fetch_data()
     this.getInvoices()
   },
@@ -78,12 +80,8 @@ export default {
     },
 
     open_view_dialog(data) {
-      // console.log(data)
       this.view_item = data
       this.view_invoice_dialog = true
-      // this.set_toolbar({ title: '' })
-      // this.open_invoice_for_viewing(_cloneDeep(data))
-      // this.set_dialog({ type: 'view', open: true })
     },
 
     async delete_invoice() {
@@ -115,18 +113,34 @@ export default {
 
     getInvoices() {
       this.loading = true
-      api_to
-        .get_invoices(this.pagination.current, this.rows_per_page)
-        .then(response => {
-          this.items = response.data.data
-          this.pagination.current = response.data.current_page
-          this.pagination.total = response.data.last_page
-          this.rows_per_page = response.data.per_page
+      api_to.get_invoices(this.pagination.current, this.rows_per_page )
+        .then(({data}) => {
+            this.items = data.data
+            this.pagination.current = data.current_page
+            this.pagination.total = data.last_page
+            this.hasMoreData()
         })
-        .finally(() => (this.loading = false))
+        .finally(() => { 
+          this.loading = false
+          this.$event.$emit('btnloading_off', false)
+        })
     },
-    onPageChange() {
-      this.getInvoices()
+    load_more() {
+      this.loading = true
+      api_to.get_invoices(this.pagination.current+1 )
+        .then(({data}) => {
+          console.log(data.data)
+            data.data.forEach(item => {
+              this.items.push(item)
+            })
+            this.pagination.current = data.current_page
+            this.pagination.total = data.last_page
+            this.hasMoreData()
+        })
+        .finally(() => { 
+          this.loading = false
+          this.$event.$emit('btnloading_off', false)
+        })
     }
   }
 }
