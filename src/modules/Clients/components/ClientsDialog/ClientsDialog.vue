@@ -14,7 +14,7 @@
             class="dialog__textfield d-field"
             label="Business Name"
             v-model.trim="company_name"
-            box
+            filled
             hide-details
             color="#657186"
           ></v-text-field>
@@ -27,7 +27,7 @@
             class="dialog__textfield d-field"
             label="First Name"
             v-model.trim="first_name"
-            box
+            filled
             hide-details
             color="#657186"
           ></v-text-field>
@@ -38,7 +38,7 @@
             class="dialog__textfield d-field"
             label="Last Name"
             v-model.trim="last_name"
-            box
+            filled
             hide-details
             color="#657186"
           ></v-text-field>
@@ -49,7 +49,7 @@
             class="dialog__textfield d-field"
             label="Location"
             v-model.trim="location"
-            box
+            filled
             hide-details
             color="#657186"
           ></v-text-field>
@@ -60,7 +60,7 @@
             class="dialog__textfield d-field"
             label="Contact Name"
             v-model.trim="contact_name"
-            box
+            filled
             hide-details
             color="#657186"
           ></v-text-field>
@@ -72,7 +72,7 @@
             label="Telephone"
             mask="phone"
             v-model.trim="telephone"
-            box
+            filled
             hide-details
             color="#657186"
           ></v-text-field>
@@ -83,7 +83,7 @@
             class="dialog__email d-field"
             label="Contact Email"
             v-model.trim="email"
-            box
+            filled
             hide-details
             color="#657186"
           ></v-text-field>
@@ -95,7 +95,7 @@
             label="Status"
             v-model.trim="status"
             :items="status_items"
-            box
+            filled
             hide-details
             color="#657186"
           ></v-select>
@@ -109,7 +109,7 @@
             label="Password"
             v-model.trim="password"
             @click:append="show_password = !show_password"
-            box
+            filled
             hide-details
             color="#657186"
           ></v-text-field>
@@ -125,7 +125,7 @@
             label="Repeat Password"
             v-model.trim="repeat_password"
             @click:append="show_repeat_password = !show_repeat_password"
-            box
+            filled
             hide-details
             color="#657186"
           ></v-text-field>
@@ -137,3 +137,8 @@
 
 <script src="./ClientsDialog.js"></script>
 <style lang="scss" scoped src="./ClientsDialog.scss"></style>
+<style lang="css" scoped>
+>>> .theme--light.v-text-field--filled>.v-input__control>.v-input__slot{
+    background-color: #fff;
+}
+</style>

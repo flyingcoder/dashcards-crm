@@ -25,7 +25,7 @@
     margin: 0 20px;
 
     .dialog__buttons {
-      margin-bottom: 20px;
+      margin-bottom: 0;
 
       .d__btn {
         width: 170px;
@@ -47,6 +47,7 @@
           text-transform: capitalize;
           white-space: normal;
           font-size: 15px;
+          letter-spacing: 0;
         }
       }
     }
