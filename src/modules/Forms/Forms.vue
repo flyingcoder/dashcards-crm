@@ -8,6 +8,8 @@
               class="add__btn"
               fab
               small
+              dark
+              color="#3b589e"
               slot="activator"
               @click="add_new_question"
             >

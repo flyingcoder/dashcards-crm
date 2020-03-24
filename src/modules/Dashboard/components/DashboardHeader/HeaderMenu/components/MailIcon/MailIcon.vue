@@ -10,10 +10,12 @@
   >
     <template v-slot:activator="{ on }">
       <div class="chat__button">
-        <HeaderIcon :image-src="mailIcon" :hovered-image-src="hoveredMailIcon" />
+        <HeaderIcon
+          :image-src="mailIcon"
+          :hovered-image-src="hoveredMailIcon"
+        />
       </div>
     </template>
-    
 
     <MailDropdown />
   </v-menu>

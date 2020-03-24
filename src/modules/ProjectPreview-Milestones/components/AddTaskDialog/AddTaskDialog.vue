@@ -1,11 +1,11 @@
 <template>
   <div class="tasks-dialog">
-    <custom-dialog 
-      ref="dialog" 
-      :open.sync="computedDialog" 
+    <custom-dialog
+      ref="dialog"
+      :open.sync="computedDialog"
       title="Add Task"
       @button1="computedDialog = false"
-      >
+    >
       <template #content>
         <v-layout wrap class="custom-dialog">
           <v-flex xs12 md12>
@@ -64,7 +64,7 @@
       </template>
 
       <template slot="button2">
-        <v-btn :loading="btnloading" @click="save" >Save</v-btn>
+        <v-btn :loading="btnloading" @click="save">Save</v-btn>
       </template>
     </custom-dialog>
   </div>

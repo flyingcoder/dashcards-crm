@@ -43,7 +43,7 @@ export default {
       const fields_to_save = {
         title: this.title,
         description: this.description,
-        properties: this.properties,
+        properties: this.properties
       }
       this.$emit('save', fields_to_save)
     },

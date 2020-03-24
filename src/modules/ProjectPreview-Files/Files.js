@@ -32,7 +32,7 @@ export default {
     headers: [
       { text: 'Thumbnail', value: 'thumbnail' },
       { text: 'Filetype', value: 'filetype' },
-      { text: 'Filename', value: 'filename' , width: '35%'},
+      { text: 'Filename', value: 'filename', width: '35%' },
       { text: 'Added by', value: 'member' },
       { text: 'Project', value: 'project' },
       { is_action: true }
@@ -96,12 +96,14 @@ export default {
   }),
 
   computed: {
-    permissions(){
+    permissions() {
       return this.$_permissions.get('hq_files')
-    }, 
+    },
     filteredItems() {
       if (this.filter === 'all') return this.items
-      return this.items.filter(item => item.collection_name.includes(this.filter))
+      return this.items.filter(item =>
+        item.collection_name.includes(this.filter)
+      )
     },
 
     user() {
@@ -123,10 +125,7 @@ export default {
     },
     can_delete() {
       if (this.user.is_admin) return true
-      return (
-        this.permissions &&
-        this.permissions.delete
-      )
+      return this.permissions && this.permissions.delete
     }
   },
 
@@ -135,7 +134,7 @@ export default {
   },
 
   methods: {
-    manual_upload(){
+    manual_upload() {
       this.$refs.dropzone.process_queue()
     },
     pop(url) {
@@ -147,7 +146,8 @@ export default {
     },
     file_added([file, response]) {
       this.$event.$emit('open_snackbar', 'File(s) uploaded successfully')
-      var fileUploaded = typeof response === 'string' ? JSON.parse(response) : response
+      var fileUploaded =
+        typeof response === 'string' ? JSON.parse(response) : response
       this.items.unshift(fileUploaded)
       this.$refs.dropzone.remove_file(file)
     },
@@ -157,34 +157,42 @@ export default {
     },
 
     addLink(payload) {
-      apiTo.addProjectLink(this.id, payload).then(({ data }) => {
-        this.items.push(data)
-        this.$refs.link_dialog.closeAndClearDialog()
-      })
-      .finally(() => this.$event.$emit('btnloading_off', false))
+      apiTo
+        .addProjectLink(this.id, payload)
+        .then(({ data }) => {
+          this.items.push(data)
+          this.$refs.link_dialog.closeAndClearDialog()
+        })
+        .finally(() => this.$event.$emit('btnloading_off', false))
     },
 
     delete_item() {
-      apiTo.deleteFile(this.delete_item_id).then(() => {
-        const indexFound = this.items.findIndex(
-          item => item.id === this.delete_item_id
-        )
-        if (~indexFound) {
-          this.items.splice(indexFound, 1)
-          this.delete_item_id = null
-          this.delete_dialog = false
-          this.$event.$emit('open_snackbar', this.table_config.delete_message)
-        }
-      })
-      .finally(() => this.$event.$emit('btnloading_off', false))
+      apiTo
+        .deleteFile(this.delete_item_id)
+        .then(() => {
+          const indexFound = this.items.findIndex(
+            item => item.id === this.delete_item_id
+          )
+          if (~indexFound) {
+            this.items.splice(indexFound, 1)
+            this.delete_item_id = null
+            this.delete_dialog = false
+            this.$event.$emit('open_snackbar', this.table_config.delete_message)
+          }
+        })
+        .finally(() => this.$event.$emit('btnloading_off', false))
     },
 
     file_failed([file, response]) {
-      this.$event.$emit('open_snackbar', typeof response === 'object' ? response[0] : response, 'error')
+      this.$event.$emit(
+        'open_snackbar',
+        typeof response === 'object' ? response[0] : response,
+        'error'
+      )
     },
 
     goto_link(url) {
-      window.open(url);
+      window.open(url)
     }
   }
 }

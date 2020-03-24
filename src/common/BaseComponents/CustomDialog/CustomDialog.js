@@ -5,17 +5,17 @@ export default {
     button1Text: { type: String, default: 'Cancel' },
     button2Text: { type: String, default: 'Delete' },
     open: Boolean,
-    value: Boolean,
+    value: Boolean
   },
 
   data: () => ({
     dialog: false,
     loading: false,
-    btnloading : false
+    btnloading: false
   }),
-  
+
   mounted() {
-    this.$event.$on('btnloading_off', (status) => (this.btnloading = status))
+    this.$event.$on('btnloading_off', status => (this.btnloading = status))
   },
 
   watch: {

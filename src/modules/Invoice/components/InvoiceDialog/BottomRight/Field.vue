@@ -33,7 +33,7 @@
     </v-text-field>
 
     <v-btn
-      outline
+      outlined
       color="#ff7f7c"
       icon
       @click="$emit('toggle_visibility', !show)"

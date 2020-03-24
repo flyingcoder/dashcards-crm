@@ -30,7 +30,7 @@
       :loading="loading"
       :sort="sort"
       :has-checkbox="true"
-      hide-actions
+      hide-default-footer
       toolbar-title="Clients"
       @items-selected="selected_ids = $event"
       @sorted="changeSort"
@@ -45,11 +45,7 @@
             class="user__name text-cap"
             @click="navigate_to_view_profile(item.item.id)"
           >
-            <v-img
-              max-height="60px"
-              width="50px"
-              :src="item.item.image_url"
-            />
+            <v-img max-height="60px" width="50px" :src="item.item.image_url" />
             &nbsp;
             {{ item.item.company_name }}
           </div>
@@ -61,12 +57,12 @@
       </template>
 
       <template slot="table-actions">
-        <div class="actions-wrapper">
+        <v-layout class="actions-wrapper">
           <div class="bulk-delete">
             <v-btn
               color="#3b589e"
               dark
-              outline
+              outlined
               :disabled="!show_delete_selected"
             >
               Delete Selected
@@ -93,7 +89,7 @@
               ></v-pagination>
             </div>
           </div>
-        </div>
+        </v-layout>
       </template>
     </custom-table>
 

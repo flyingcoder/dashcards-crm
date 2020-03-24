@@ -28,5 +28,4 @@ export const projects_api = {
   get_projects_extra_inputs(serviceId) {
     return request.get(`api/forms/project-details/${serviceId}`)
   }
-
 }

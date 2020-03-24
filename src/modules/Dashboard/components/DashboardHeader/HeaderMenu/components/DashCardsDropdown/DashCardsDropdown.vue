@@ -1,11 +1,13 @@
 <template>
-  <v-menu class="datacards__dropdown"
+  <v-menu
+    class="datacards__dropdown"
     transition="slide-y-transition"
     :nudge-bottom="5"
     :nudge-left="180"
     offset-y
     :close-on-content-click="false"
-    v-model="dropdown_visible">
+    v-model="dropdown_visible"
+  >
     <template v-slot:activator="{ on }">
       <div class="d__dropdown" v-on="on">
         <header-icon

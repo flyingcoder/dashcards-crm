@@ -15,7 +15,7 @@
             :items="items"
             :permission="$_permissions.get('timer')"
             hide-default-footer
-            :loading="loading" 
+            :loading="loading"
             loading-text="Loading... Please wait"
             class="elevation-1 buzzooka__table"
             @page-count="pageCount = $event"
@@ -27,7 +27,10 @@
               <td>{{ props.item.status }}</td>
             </template>
           </v-data-table>
-          <div class="flex justify-content-center" v-if="items.length || loading">
+          <div
+            class="flex justify-content-center"
+            v-if="items.length || loading"
+          >
             <v-pagination
               v-if="pagination.total > 1"
               v-model="pagination.current"
@@ -57,12 +60,11 @@
 
 <script src="./TimerCard.js"></script>
 <style lang="scss" scoped>
-  @import '~@/sass/_variables';
-  @include emptyTable('.empty-timer');
+@import '~@/sass/_variables';
+@include emptyTable('.empty-timer');
 
-  .justify-content-center {
-    display: flex;
-    justify-content: center;
-  }
+.justify-content-center {
+  display: flex;
+  justify-content: center;
+}
 </style>
-

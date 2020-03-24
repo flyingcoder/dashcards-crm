@@ -53,7 +53,7 @@
       :indeterminate="true"
     ></v-progress-linear>
 
-    <v-layout row justify-end>
+    <v-layout justify-end>
       <v-speed-dial
         class="add-btn"
         v-model="is_open_speed_dial"
@@ -89,7 +89,7 @@
       </v-speed-dial>
     </v-layout>
 
-    <v-layout row wrap class="boxes__wrapper">
+    <v-layout wrap class="boxes__wrapper">
       <v-flex
         md6
         xs12

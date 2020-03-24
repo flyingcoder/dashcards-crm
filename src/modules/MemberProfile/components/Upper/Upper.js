@@ -13,15 +13,15 @@ export default {
   },
 
   props: {
-    currentuserid: [Number, String] 
+    currentuserid: [Number, String]
   },
-  
+
   data: () => ({
-    edit_dialog : false,
+    edit_dialog: false,
     edit_item: {
       id: null,
       fields: null
-    },
+    }
   }),
 
   computed: {
@@ -35,9 +35,12 @@ export default {
     can_edit() {
       if (this.logged_user.is_admin) return true
 
-      if (this.logged_user.id ===  parseInt(this.currentuserid)) return true //allow edit to self
-      
-      let role = this.logged_user.role.split('-').pop().toLowerCase()
+      if (this.logged_user.id === parseInt(this.currentuserid)) return true //allow edit to self
+
+      let role = this.logged_user.role
+        .split('-')
+        .pop()
+        .toLowerCase()
       if (role === 'manager') {
         return this.permission && this.permission.update
       }

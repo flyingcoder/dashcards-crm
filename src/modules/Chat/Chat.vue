@@ -13,24 +13,29 @@
     <table-header :paths="paths" :noButton="true" />
 
     <div class="chat-container">
-      <v-layout row wrap class="chat__content">
+      <v-layout wrap class="chat__content">
         <v-flex md4 sm5 xs12 class="chat__sidebar">
-          <v-card flat class="chatlist">
-            <v-app-bar >
-              <v-img :src="loggeduser.image_url" class="chat__owner_img"></v-img>
-              <span class="chat__owner_name">{{loggeduser.first_name}} {{loggeduser.last_name}}</span>
+          <v-card text class="chatlist">
+            <v-app-bar>
+              <v-img
+                :src="loggeduser.image_url"
+                class="chat__owner_img"
+              ></v-img>
+              <span class="chat__owner_name"
+                >{{ loggeduser.first_name }} {{ loggeduser.last_name }}</span
+              >
               <v-spacer></v-spacer>
-            
+
               <v-btn icon @click="$refs.creategroupchat.open_dialog()">
                 <v-icon>add</v-icon>
               </v-btn>
             </v-app-bar>
-            
-            <v-card flat class="mx-auto" >
+
+            <v-card text class="mx-auto">
               <div class="friend__list">
                 <v-skeleton-loader
                   v-if="userLoading"
-                  v-for="n in [1,2,3,4,5]"
+                  v-for="n in [1, 2, 3, 4, 5]"
                   ref="skeleton"
                   type="list-item-avatar-two-line"
                   class="mx-auto"
@@ -53,9 +58,15 @@
                         </div>
                       </div>
                     </v-list-item-content>
-                   
+
                     <v-list-item-icon>
-                      <v-icon color="success" class="has_message" title="New message" v-show="conv.message_count > 0">mail</v-icon> 
+                      <v-icon
+                        color="success"
+                        class="has_message"
+                        title="New message"
+                        v-show="conv.message_count > 0"
+                        >mail</v-icon
+                      >
                     </v-list-item-icon>
                   </v-list-item>
                 </v-list>
@@ -70,7 +81,7 @@
                       <div class="friend user" @click="open_conversation(user)">
                         <div class="user-wrap">
                           <div class="user__img">
-                            <v-img :src="user.image_url" ></v-img>
+                            <v-img :src="user.image_url"></v-img>
                             <span
                               class="status"
                               :class="[user.is_online ? 'online' : 'offline']"
@@ -80,36 +91,46 @@
                         </div>
                       </div>
                     </v-list-item-content>
-                   
+
                     <v-list-item-icon>
-                      <v-icon color="success" class="has_message" title="New message" v-show="user.message_count > 0">mail</v-icon> 
+                      <v-icon
+                        color="success"
+                        class="has_message"
+                        title="New message"
+                        v-show="user.message_count > 0"
+                        >mail</v-icon
+                      >
                     </v-list-item-icon>
                   </v-list-item>
-
                 </v-list>
               </div>
-    
+
               <v-card-actions>
-                <v-btn text normal class="mx-auto view__more_btn">VIEW MORE</v-btn>
+                <v-btn text normal class="mx-auto view__more_btn"
+                  >VIEW MORE</v-btn
+                >
               </v-card-actions>
             </v-card>
           </v-card>
         </v-flex>
 
         <v-flex md8 sm7 xs12 class="chat__message">
-          <v-card flat class="mx-auto message__content" v-if="activeChat">
+          <v-card text class="mx-auto message__content" v-if="activeChat">
             <v-toolbar color="#3b589e">
-              <v-layout row wrap class="message__header">
+              <v-layout wrap class="message__header">
                 <v-flex xs2 class="sender__img">
                   <svg viewBox="0 0 250 250" v-if="activeChat.type === 'group'">
-                    <path class="icon" :d="group_icon"  />
+                    <path class="icon" :d="group_icon" />
                   </svg>
                   <v-img :src="activeChat.image_url" v-else></v-img>
-                  <span class="status" :class="[activeChat.is_online ? 'online' : 'offline']"></span>
+                  <span
+                    class="status"
+                    :class="[activeChat.is_online ? 'online' : 'offline']"
+                  ></span>
                 </v-flex>
-                
-                <v-toolbar-title>{{activeChat.fullname}}</v-toolbar-title>
-                
+
+                <v-toolbar-title>{{ activeChat.fullname }}</v-toolbar-title>
+
                 <v-spacer></v-spacer>
 
                 <v-menu
@@ -119,7 +140,7 @@
                   :close-on-content-click="false"
                 >
                   <template v-slot:activator="{ on }">
-                    <v-btn fab icon v-on="on" color="#ffffff" >
+                    <v-btn fab icon v-on="on" color="#ffffff">
                       <v-icon>settings</v-icon>
                     </v-btn>
                   </template>
@@ -127,24 +148,51 @@
                   <v-card class="hover__info">
                     <div class="info__one">
                       <div class="h__img">
-                        <svg viewBox="0 0 250 250" v-if="activeChat.type === 'group'">
-                          <path class="icon" :d="group_icon"  />
+                        <svg
+                          viewBox="0 0 250 250"
+                          v-if="activeChat.type === 'group'"
+                        >
+                          <path class="icon" :d="group_icon" />
                         </svg>
                         <v-img :src="activeChat.image_url" v-else />
                       </div>
                       <div class="h__details">
-                        <h2 class="h__name">{{  activeChat.fullname }}</h2>
-                        <p class="h__job">{{ activeChat.type ==='group' ? current_members.length+' members' :activeChat.job_title }}</p>
-                        <div class="info__anchor" v-show="activeChat.type !== 'group'">
+                        <h2 class="h__name">{{ activeChat.fullname }}</h2>
+                        <p class="h__job">
+                          {{
+                            activeChat.type === 'group'
+                              ? current_members.length + ' members'
+                              : activeChat.job_title
+                          }}
+                        </p>
+                        <div
+                          class="info__anchor"
+                          v-show="activeChat.type !== 'group'"
+                        >
                           <v-icon>email</v-icon>
-                          <a :href="'mailto:' + activeChat.email">{{ activeChat.email }}</a>
+                          <a :href="'mailto:' + activeChat.email">{{
+                            activeChat.email
+                          }}</a>
                         </div>
-                        <div class="info__anchor" v-show="activeChat.type !== 'group'">
-                          <v-icon>location_on</v-icon> <span>{{activeChat.location}}</span>
+                        <div
+                          class="info__anchor"
+                          v-show="activeChat.type !== 'group'"
+                        >
+                          <v-icon>location_on</v-icon>
+                          <span>{{ activeChat.location }}</span>
                         </div>
-                        <div class="info__anchor" v-show="activeChat.type === 'group'">
-                          <v-btn text small outlined 
-                            @click="$refs.manage_group_members_dialog.open_dialog()">
+                        <div
+                          class="info__anchor"
+                          v-show="activeChat.type === 'group'"
+                        >
+                          <v-btn
+                            text
+                            small
+                            outlined
+                            @click="
+                              $refs.manage_group_members_dialog.open_dialog()
+                            "
+                          >
                             <v-icon small>settings</v-icon> Manage Members
                           </v-btn>
                         </div>
@@ -153,20 +201,33 @@
                     <div class="info__two" v-show="activeChat.type !== 'group'">
                       <div class="info__cta">
                         <div class="info__anchor">
-                          <v-icon>person</v-icon> <a href="javascript::void(0)" @click="go_to_profile(activeChat)">View Profile</a>
+                          <v-icon>person</v-icon>
+                          <a
+                            href="javascript::void(0)"
+                            @click="go_to_profile(activeChat)"
+                            >View Profile</a
+                          >
                         </div>
                         <div class="info__anchor">
                           <v-icon>email</v-icon>
                           <a :href="'mailto:' + activeChat.email">Email</a>
                         </div>
                         <div class="info__anchor">
-                          <v-icon>message</v-icon> <a href="javascript::void(0)" @click="open_conversation(activeChat)">Chat</a>
+                          <v-icon>message</v-icon>
+                          <a
+                            href="javascript::void(0)"
+                            @click="open_conversation(activeChat)"
+                            >Chat</a
+                          >
                         </div>
                       </div>
                     </div>
 
-                    <div class="info__three" v-show="activeChat.type !== 'group'">
-                      <div class="total" >
+                    <div
+                      class="info__three"
+                      v-show="activeChat.type !== 'group'"
+                    >
+                      <div class="total">
                         <p>Total Hours</p>
                         <h2>10</h2>
                       </div>
@@ -188,53 +249,57 @@
                 class="mx-auto"
               ></v-skeleton-loader>
 
-              <div class="messages" 
-                v-else-if="all_messages.length > 0 " 
+              <div
+                class="messages"
+                v-else-if="all_messages.length > 0"
                 id="messageContainer"
-                >
+              >
                 <div class="view__more" v-show="has_more_message">
-                  <v-btn class="view__more_btn" @click="get_previous_message">VIEW MORE</v-btn>
+                  <v-btn class="view__more_btn" @click="get_previous_message"
+                    >VIEW MORE</v-btn
+                  >
                 </div>
 
-                <Message 
-                v-for="message in all_messages"
-                :message="message"
-                :key="message.id"
+                <Message
+                  v-for="message in all_messages"
+                  :message="message"
+                  :key="message.id"
                 ></Message>
-
               </div>
 
               <div class="messages-empty" v-else>
-                <Empty 
-                  slug="empty-chat" 
+                <Empty
+                  slug="empty-chat"
                   headline="Start sending messages"
                 ></Empty>
               </div>
 
-
-                <div class="write" v-if="!cardLoading">
-                  <div class="avatar-wrapper">
-                    <img :src="loggeduser.image_url" class="sender-avatar">
-                  </div>
-                  <v-text-field
-                    v-model="message"
-                    class="write__msg"
-                    solo
-                    flat
-                    hide-details
-                    color="#667187"
-                    label="Type a message..."
-                    @keyup.enter="sendMessage($event.target.value)"
-                  ></v-text-field>
-                  <div class="write__actions">
-                    <v-icon class="action insert__emoticon">insert_emoticon</v-icon>
-                    <v-icon class="action attach_file">attach_file</v-icon>
-                    <v-icon class="action send" @click="sendMessage(message)">send</v-icon>
-                  </div>
+              <div class="write" v-if="!cardLoading">
+                <div class="avatar-wrapper">
+                  <img :src="loggeduser.image_url" class="sender-avatar" />
                 </div>
+                <v-text-field
+                  v-model="message"
+                  class="write__msg"
+                  solo
+                  flat
+                  hide-details
+                  color="#667187"
+                  label="Type a message..."
+                  @keyup.enter="sendMessage($event.target.value)"
+                ></v-text-field>
+                <div class="write__actions">
+                  <v-icon class="action insert__emoticon"
+                    >insert_emoticon</v-icon
+                  >
+                  <v-icon class="action attach_file">attach_file</v-icon>
+                  <v-icon class="action send" @click="sendMessage(message)"
+                    >send</v-icon
+                  >
+                </div>
+              </div>
             </v-flex>
-            </v-card>
-
+          </v-card>
         </v-flex>
       </v-layout>
     </div>

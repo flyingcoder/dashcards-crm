@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-content">
-    <div class="row d__breadcrumbs">
+    <div class="d__breadcrumbs">
       <div class="page__options">
         <breadcrumb :paths="paths" />
         <logon-label />
@@ -19,7 +19,7 @@
     <!-- custom component -->
     <NoCards v-if="!cards.length" />
 
-    <v-layout  class="dashcard-content">
+    <v-layout class="dashcard-content">
       <draggable class="d__cards" v-model="cards">
         <template v-for="card in card_components">
           <component
@@ -47,7 +47,7 @@
           </template>
         </template>
         <div class="timeline-card" v-if="cards.length == 1">
-          <NoCards/>
+          <NoCards />
         </div>
       </draggable>
     </v-layout>
@@ -62,7 +62,7 @@
 
     <ConfirmDialog
       ref="confirm_mark_as_complete_dialog"
-      :open-dialog.sync='confirm_mark_as_complete_dialog'
+      :open-dialog.sync="confirm_mark_as_complete_dialog"
       title="Confirmation required!"
       confirm-button-text="Yes"
       text-content="Mark task as completed?"

@@ -1,5 +1,5 @@
 <template>
-  <v-layout row justify-center>
+  <v-layout justify-center>
     <custom-dialog
       :title="title"
       ref="dialog"
@@ -23,7 +23,7 @@
               item-value="slug"
             ></v-select>
           </v-flex>
-          
+
           <v-flex xs12 sm6 v-if="!fieldsToEdit">
             <v-autocomplete
               class="dialog__selectfield"
@@ -40,7 +40,9 @@
           </v-flex>
 
           <v-flex xs12 sm12 v-if="fieldsToEdit">
-            <label>Edit permission for <strong>{{permission_name}}</strong></label>
+            <label
+              >Edit permission for <strong>{{ permission_name }}</strong></label
+            >
           </v-flex>
           <div class="permissions">
             <div class="title">

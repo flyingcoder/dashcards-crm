@@ -19,11 +19,11 @@ export default {
     dialog: Boolean,
     dialogTitle: String,
     task: Object,
-    milestoneStartDate: String,
+    milestoneStartDate: String
   },
 
   data: () => ({
-    btnloading : false,
+    btnloading: false,
     open: false,
     title: null,
     description: null,
@@ -43,7 +43,7 @@ export default {
   }),
 
   mounted() {
-    this.$event.$on( 'btnloading_off', (status) => (this.btnloading = status))
+    this.$event.$on('btnloading_off', status => (this.btnloading = status))
   },
 
   computed: {

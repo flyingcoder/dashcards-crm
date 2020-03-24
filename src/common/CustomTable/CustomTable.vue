@@ -3,13 +3,11 @@
     <div class="row buzz__tables">
       <div class="buzz__tablesTwo">
         <slot name="toolbar">
-          <v-toolbar flat class="table__toolbar">
-            <v-toolbar-title class="table__toolbar-title">
+          <div class="table__toolbar">
               {{ toolbarTitle }}
-            </v-toolbar-title>
-          </v-toolbar>
+          </div>
         </slot>
-        
+
         <slot name="right_toolbar"></slot>
 
         <v-data-table

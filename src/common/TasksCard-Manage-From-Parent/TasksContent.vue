@@ -38,7 +38,10 @@ export default {
       return this.$store.getters.user
     },
     tabs() {
-      let tabs = [{ id: 1, name: 'My Tasks' }, { id: 2, name: 'All Tasks' }]
+      let tabs = [
+        { id: 1, name: 'My Tasks' },
+        { id: 2, name: 'All Tasks' }
+      ]
       if (this.user.is_admin) return tabs
       else if (!this.$_permissions.get('tasks_own')) tabs.splice(1)
       return tabs

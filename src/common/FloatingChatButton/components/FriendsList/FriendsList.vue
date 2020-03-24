@@ -7,6 +7,7 @@
     direction="top"
     offset-y
     class="chat__position"
+    width="200"
   >
     <v-btn
       class="chat__button"
@@ -17,8 +18,8 @@
       dark
       fab
     >
-      <v-icon>message</v-icon>
-      <v-icon>close</v-icon>
+      <v-icon v-if="fabs">mdi-close</v-icon>
+      <v-icon v-else>forum</v-icon>
     </v-btn>
 
     <v-card class="chat__inbox">

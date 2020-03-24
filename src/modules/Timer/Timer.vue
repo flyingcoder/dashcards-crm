@@ -2,8 +2,7 @@
   <div class="timer timer__tab">
     <breadcrumb :paths="paths" />
 
-    <v-layout row wrap class="timer__content">
-
+    <v-layout wrap class="timer__content">
       <v-flex sm12 xs12 class="timer-group">
         <v-tabs
           class="tabs"
@@ -26,4 +25,3 @@
 
 <script src="./Timer.js"></script>
 <style lang="scss" scoped src="./Timer.scss"></style>
-

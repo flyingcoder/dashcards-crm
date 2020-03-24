@@ -1,7 +1,19 @@
 <template>
   <div class="profile-left">
-    <v-tabs class="tabs" centered grow hide-slider v-model="active_tab" height="60px">
-      <v-tab class="tab-item" v-for="tab in tabs" :key="tab.name" :href="`#${tab.name}`">
+    <v-tabs
+      class="tabs"
+      centered
+      grow
+      hide-slider
+      v-model="active_tab"
+      height="60px"
+    >
+      <v-tab
+        class="tab-item"
+        v-for="tab in tabs"
+        :key="tab.name"
+        :href="`#${tab.name}`"
+      >
         <svg viewBox="0 0 250 250">
           <path class="icon" :d="tab.icon" />
         </svg>
@@ -54,24 +66,24 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/sass/_variables';
-.profile-left{
-    box-shadow: $darkBoxShadow;
-    
-    .tab-item{
-        background-color: $bgLightBlue-2;
-        border: 1px solid $borderLightGray;
-        svg{
-            width: 40px;
-            fill: $textDark-3;
-        }
-        img{
-            height: 40px;
-        }
-        .v-icon{
-            font-size: 40px;
-            color: $textDark-3;
-        }
+.profile-left {
+  box-shadow: $darkBoxShadow;
+
+  .tab-item {
+    background-color: $bgLightBlue-2;
+    border: 1px solid $borderLightGray;
+    svg {
+      width: 40px;
+      fill: $textDark-3;
     }
+    img {
+      height: 40px;
+    }
+    .v-icon {
+      font-size: 40px;
+      color: $textDark-3;
+    }
+  }
 }
 
 .tasks-content {

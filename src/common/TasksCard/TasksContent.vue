@@ -9,10 +9,7 @@
     <v-tabs-items v-model="active_tab">
       <v-tab-item v-for="tab of tabs" :key="tab.id" :value="tab.name">
         <v-card flat>
-          <tasks-tab
-            :tab="active_tab"
-            v-if="active_tab === tab.name"
-          />
+          <tasks-tab :tab="active_tab" v-if="active_tab === tab.name" />
         </v-card>
       </v-tab-item>
     </v-tabs-items>
@@ -41,7 +38,10 @@ export default {
       return this.$store.getters.user
     },
     tabs() {
-      let tabs = [{ id: 1, name: 'My Tasks' }, { id: 2, name: 'All Tasks' }]
+      let tabs = [
+        { id: 1, name: 'My Tasks' },
+        { id: 2, name: 'All Tasks' }
+      ]
       if (this.user.is_admin) return tabs
       else if (!this.$_permissions.get('tasks_own')) tabs.splice(1)
       return tabs

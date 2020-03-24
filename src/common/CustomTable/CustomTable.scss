@@ -13,40 +13,40 @@
       width: 100%;
       .table__toolbar{
         background-color: $tableBlueBg;
-        .table__toolbar-title{
-            color: $tableTitleBlue;
-            text-align: left;
-            font-size: 30px;
-        }
+        color: $tableTitleBlue;
+        text-align: left;
+        font-size: 30px;
+        padding: 10px;
       }
-      .buzzooka__table{
-        border: 1px solid $tableBorderBlue;
-          tr.table__head{
-            background-color: $tableBlueBg;
-            th{
-              text-align: left;
-              color: $tableBlueText;
-              font-size: 13px;
-              font-weight: 500;
-              padding: 8px;
-              &:last-child{
-                text-align: center;
-              }
-            }
-          }
-        tr.table__body-row{
-          &:nth-child(odd){
-            background-color: $white;
-          }
-          &:nth-child(even){
-            background-color: $tableBlueBg;
-          }
-        }
-        .table__actions{
-          min-width: 240px;
+    }
+  }
+}
+
+.buzzooka__table{
+  border: 1px solid $tableBorderBlue;
+    thead{
+      background-color: $tableBlueBg;
+      th{
+        text-align: left;
+        color: $tableBlueText;
+        font-size: 13px;
+        font-weight: 500;
+        padding: 8px;
+        &:last-child{
+          text-align: center;
         }
       }
     }
+  tr.table__body-row{
+    &:nth-child(odd){
+      background-color: $white !important;
+    }
+    &:nth-child(even){
+      background-color: $tableBlueBg;
+    }
+  }
+  .table__actions{
+    min-width: 240px;
   }
 }
     

@@ -5,6 +5,6 @@ export const api_to = {
     return request.post(`api/user/${id}`, formData)
   },
   update_profile(id, payload) {
-  	return request.put(`api/company/teams/${id}`, payload)
+    return request.put(`api/company/teams/${id}`, payload)
   }
 }

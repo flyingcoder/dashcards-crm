@@ -30,7 +30,7 @@
     <v-dialog v-model="dialog" width="500">
       <img :src="url" width="500" />
     </v-dialog>
-    <v-layout row class="file__list_header">
+    <v-layout class="file__list_header">
       <v-flex class="file__tab">
         <ToolbarItem
           v-for="item of toolbarItems"
@@ -42,32 +42,36 @@
           @click="filter = item.type"
         />
       </v-flex>
-        <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
       <v-flex>
-        <v-btn icon flat @click="layout = 'list'"><v-icon>list</v-icon></v-btn>
-        <v-btn icon flat @click="layout = 'grid'"><v-icon>grid_on</v-icon></v-btn>
+        <v-btn icon text @click="layout = 'list'"><v-icon>list</v-icon></v-btn>
+        <v-btn icon text @click="layout = 'grid'"
+          ><v-icon>grid_on</v-icon></v-btn
+        >
       </v-flex>
     </v-layout>
 
     <v-card v-if="layout == 'grid'">
-      <v-container fluid grid-list-md >
-        <v-layout row wrap v-if="filteredItems.length">
-          <v-flex
-            v-for="item in filteredItems"
-            :key="item.id"
-            xs12 sm4 md3
-          >
+      <v-container fluid grid-list-md>
+        <v-layout wrap v-if="filteredItems.length">
+          <v-flex v-for="item in filteredItems" :key="item.id" xs12 sm4 md3>
             <v-card class="xs-12 sm-3">
-              <v-img 
-                :src="item.thumb_url" 
-                @click="pop(item.public_url)" 
-                height="200px" 
-                @error="altImage(item)">
+              <v-img
+                :src="item.thumb_url"
+                @click="pop(item.public_url)"
+                height="200px"
+                @error="altImage(item)"
+              >
               </v-img>
               <v-card-title primary-title>
                 <div>
-                  <div class="break-word-container" :title="item.name">{{ item.name | str_limit(25) }}</div>
-                  <span class="grey--text">Added by: {{ item.custom_properties.user.first_name }}</span>
+                  <div class="break-word-container" :title="item.name">
+                    {{ item.name | str_limit(25) }}
+                  </div>
+                  <span class="grey--text"
+                    >Added by:
+                    {{ item.custom_properties.user.first_name }}</span
+                  >
                 </div>
               </v-card-title>
               <v-card-actions>
@@ -133,13 +137,18 @@
       :items="filteredItems"
       :has-checkbox="true"
       :permission="$_permissions.get('hq_files')"
-      hide-actions
+      hide-default-footer
       class="custom__table"
       @items-selected="selected_ids = $event"
     >
-      <template slot="custom-item" slot-scope="item" >
+      <template slot="custom-item" slot-scope="item">
         <td @click="pop(item.item.public_url)">
-          <v-img :src="item.item.thumb_url" width="50px" height="50px" @error="altImage(item.item)"></v-img>
+          <v-img
+            :src="item.item.thumb_url"
+            width="50px"
+            height="50px"
+            @error="altImage(item.item)"
+          ></v-img>
         </td>
         <td class="text-upper">{{ item.item.custom_properties.ext }}</td>
         <td class="text-cap">{{ item.item.name }}</td>

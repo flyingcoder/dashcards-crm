@@ -7,10 +7,10 @@
             <v-icon>cloud_download</v-icon>
           </v-btn>
           <template v-if="user.role === 'client'">
-            <v-btn flat dark outline>Pay</v-btn>
+            <v-btn text dark outlined>Pay</v-btn>
           </template>
           <template v-else>
-            <v-btn flat dark outline>Remind</v-btn>
+            <v-btn text dark outlined>Remind</v-btn>
           </template>
         </template>
         <span v-else>{{ toolbar.title }}</span>
@@ -95,14 +95,14 @@ export default {
       formData.append('terms', this.invoice.terms)
       formData.append('notes', this.invoice.notes)
 
-      var tax = this.calculate_field(this.invoice, 'tax');
-      var discount = this.calculate_field(this.invoice, 'discount');
-      var shipping = this.calculate_field(this.invoice, 'shipping');
-      formData.append('tax', tax == 0 ? 0 : tax.value )
-      formData.append('discount',discount  == 0 ? 0 : discount.value)
-      formData.append('shipping',shipping == 0 ? 0 : shipping.value)
+      var tax = this.calculate_field(this.invoice, 'tax')
+      var discount = this.calculate_field(this.invoice, 'discount')
+      var shipping = this.calculate_field(this.invoice, 'shipping')
+      formData.append('tax', tax == 0 ? 0 : tax.value)
+      formData.append('discount', discount == 0 ? 0 : discount.value)
+      formData.append('shipping', shipping == 0 ? 0 : shipping.value)
       formData.append('symbol', tax == 0 ? '' : tax.symbol)
-      
+
       return formData
     },
 

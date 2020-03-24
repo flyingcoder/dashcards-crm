@@ -33,18 +33,19 @@ export default {
       { id: 1, text: 'Edit', value: 'edit' },
       { id: 2, text: 'Delete', value: 'delete' }
     ],
-    commenter : null,
+    commenter: null,
     hover: false,
     activeComment: null,
-    permissions : null,
+    permissions: null,
     btnloading: false
   }),
-  created(){
+  created() {
     this.commenter = this.$store.getters.user
   },
   computed: {
     full_name() {
-      if (!this.content || !this.content.assignee.length) return "No user assigned!"
+      if (!this.content || !this.content.assignee.length)
+        return 'No user assigned!'
       return (
         this.content.assignee[0].first_name +
         ' ' +
@@ -63,7 +64,7 @@ export default {
     user() {
       return this.$store.getters.user
     },
-    permission(){
+    permission() {
       return this.$_permissions.get('message')
     },
     can_view_comment() {
@@ -86,14 +87,14 @@ export default {
             this.all_comments = response.data.comments
             this.set_mark_complete_action(response.data)
           })
-          .finally(() => ( this.loading = false ))
+          .finally(() => (this.loading = false))
 
-          //if(this.content.project_id != this.id)
-          //  this.loading = true 
+        //if(this.content.project_id != this.id)
+        //  this.loading = true
       },
       immediate: true
     },
-    'content.status' : {
+    'content.status': {
       handler() {
         this.set_mark_complete_action(this.content)
       }
@@ -135,9 +136,13 @@ export default {
       )
     },
     set_mark_complete_action(item) {
-      var xtra_action = { id: 3, text: 'Mark as Complete', value: 'mark_as_complete' };
-      var index = this.dropdown_actions.findIndex(function(item){
-          return item.id === 3
+      var xtra_action = {
+        id: 3,
+        text: 'Mark as Complete',
+        value: 'mark_as_complete'
+      }
+      var index = this.dropdown_actions.findIndex(function(item) {
+        return item.id === 3
       })
       if (~index) {
         if (item.status.toLowerCase() === 'completed') {
@@ -149,15 +154,19 @@ export default {
         }
       }
     },
-    confirm_delete_comment(item){
+    confirm_delete_comment(item) {
       this.activeComment = item
       this.$refs.delete_comment_dialog.showDialog()
     },
-    confirmed_delete_comment(){
+    confirmed_delete_comment() {
       request
-        .delete(`api/comments/${this.activeComment.id}`, { id: this.activeComment.id })
+        .delete(`api/comments/${this.activeComment.id}`, {
+          id: this.activeComment.id
+        })
         .then(response => {
-          let index = this.all_comments.findIndex(item => item.id === this.activeComment.id)
+          let index = this.all_comments.findIndex(
+            item => item.id === this.activeComment.id
+          )
           if (~index) {
             this.all_comments.splice(index, 1)
             this.activeComment = null

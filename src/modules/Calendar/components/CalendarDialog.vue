@@ -26,14 +26,13 @@
         hide-details
       ></v-textarea>
 
-      <v-color-picker 
-      label="Calendar Theme" 
-      class="ma-2 dialog__colorpicker d_field" 
-      dot-size="30" 
-      v-model.trim="properties" 
-      width="470px"
+      <v-color-picker
+        label="Calendar Theme"
+        class="ma-2 dialog__colorpicker d_field"
+        dot-size="30"
+        v-model.trim="properties"
+        width="470px"
       ></v-color-picker>
-
     </template>
   </custom-dialog>
 </template>

@@ -16,7 +16,7 @@
     <div class="field" v-if="!(dialog.type === 'create')">
       <div class="field__label">Invoice ID:</div>
       <v-text-field
-        :disabled="(dialog.type === 'view' || dialog.type === 'edit')"
+        :disabled="dialog.type === 'view' || dialog.type === 'edit'"
         class="textfield"
         color="#657186"
         solo
@@ -66,7 +66,9 @@
 
     <div class="invoice__dates">
       <div class="created__date">
-        <div class="field__label">Invoice Date:<span class="required">*</span></div>
+        <div class="field__label">
+          Invoice Date:<span class="required">*</span>
+        </div>
 
         <v-text-field
           v-if="dialog.type === 'view'"

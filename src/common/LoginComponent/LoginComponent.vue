@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap justify-center align-center class="login__card">
+  <v-layout wrap justify-center align-center class="login__card">
     <v-flex xs8 class="login__cardIn">
       <div class="l__logo">
         <a href="https://dashcards.com/">
@@ -13,7 +13,7 @@
 
       <slot name="fields"></slot>
 
-      <v-layout row wrap justify-space-between class="l__tools" v-if="hasTools">
+      <v-layout wrap justify-space-between class="l__tools" v-if="hasTools">
         <v-flex class="checkbox">
           <input type="checkbox" id="checkbox" v-model="checkbox" />
           <label for="checkbox">{{ checkboxText }}</label>

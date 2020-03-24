@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-layout row>
+    <v-layout>
       <v-flex xs12 md12>
         <vue-dropzone
           ref="dropzone"
@@ -32,29 +32,33 @@
               <v-btn large dark color="#3b589e">Choose your files</v-btn>
             </div>
           </v-layout>
-        </vue-dropzone> 
+        </vue-dropzone>
       </v-flex>
-  </v-layout>
-  <v-layout row v-if="needConfirmation">
-    <v-flex xs12 md12 justify-content-between>
-      <v-btn dark color="#3b589e" @click="$emit('open-add-link-dialog')">
-        Add Link <v-icon right>link</v-icon>
-      </v-btn>
-      <v-btn color="success" :disabled="counts < 1" @click="$emit('upload-this-files')">
-        Upload Selected Files <v-icon right dark>cloud_upload</v-icon>
-      </v-btn>
-      <v-btn v-show="counts > 0" color="error" @click="remove_all_files()">
-        Remove All Files <v-icon right>close</v-icon> 
-      </v-btn>
-    </v-flex>
-  </v-layout>
+    </v-layout>
+    <v-layout v-if="needConfirmation">
+      <v-flex xs12 md12 justify-content-between>
+        <v-btn dark color="#3b589e" @click="$emit('open-add-link-dialog')">
+          Add Link <v-icon right>link</v-icon>
+        </v-btn>
+        <v-btn
+          color="success"
+          :disabled="counts < 1"
+          @click="$emit('upload-this-files')"
+        >
+          Upload Selected Files <v-icon right dark>cloud_upload</v-icon>
+        </v-btn>
+        <v-btn v-show="counts > 0" color="error" @click="remove_all_files()">
+          Remove All Files <v-icon right>close</v-icon>
+        </v-btn>
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 
 <script>
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 
 export default {
   inheritAttrs: false,
@@ -69,35 +73,35 @@ export default {
   data: () => ({
     counts: 0,
     session_id: 0
-  }), 
-  created(){
+  }),
+  created() {
     this.session_id = uuidv4()
   },
   methods: {
-    getCount(){
+    getCount() {
       setTimeout(() => {
         this.counts = this.$refs.dropzone.getAcceptedFiles().length
-      }, 1);
+      }, 1)
     },
     remove_file(file) {
       this.$refs.dropzone.removeFile(file)
-      this.getCount() 
+      this.getCount()
     },
     remove_all_files() {
       this.$refs.dropzone.removeAllFiles()
       this.counts = 0
     },
-    process_queue(){
+    process_queue() {
       this.$refs.dropzone.processQueue()
     },
-    file_is_uploaded(event){
+    file_is_uploaded(event) {
       this.$emit('file-added', event)
       this.getCount()
     },
-    file_is_removed(){
+    file_is_removed() {
       this.getCount()
     },
-    file_is_sending(file, xhr, formData){
+    file_is_sending(file, xhr, formData) {
       formData.append('file_upload_session', this.session_id)
     }
   }

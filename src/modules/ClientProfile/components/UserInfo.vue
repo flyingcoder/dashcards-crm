@@ -7,16 +7,18 @@
     <template v-else>
       <div class="info-div">
         <div class="hour">Invoices</div>
-        <div class="value">{{user.no_invoices}}</div>
+        <div class="value">{{ user.no_invoices }}</div>
       </div>
 
       <div class="info-div">
         <h4 class="name">{{ user.first_name }} {{ user.last_name }}</h4>
-        <div class="job-title" v-if="user.meta.company_name">{{user.meta.company_name.value}}</div>
+        <div class="job-title" v-if="user.meta.company_name">
+          {{ user.meta.company_name.value }}
+        </div>
         <div class="job-title" v-else>Client</div>
         <div class="address">
           <v-icon>place</v-icon>
-          <span v-if="user.meta.location">{{user.meta.location.value}}</span>
+          <span v-if="user.meta.location">{{ user.meta.location.value }}</span>
         </div>
       </div>
 
@@ -36,9 +38,9 @@ import { mapGetters } from 'vuex'
 import { settings } from '@/variables'
 
 export default {
-  data(){
+  data() {
     return {
-      currency : settings.defaultCurrency
+      currency: settings.defaultCurrency
     }
   },
   computed: {

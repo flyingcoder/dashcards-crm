@@ -23,7 +23,7 @@
       @delete="delete_item('delete_task', dynamic_api)"
     />
 
-    <v-layout row>
+    <v-layout>
       <v-flex xs12>
         <table-header :paths="paths" @click="add_dialog = true" />
 
@@ -34,7 +34,7 @@
           :loading="loading"
           :sort="sort"
           :has-checkbox="true"
-          hide-actions
+          hide-default-footer
           toolbar-title="Tasks"
           no-row-view
           :permission="$_permissions.get('hq_milestone_tasks')"
@@ -59,7 +59,7 @@
                 <v-btn
                   color="#3b589e"
                   dark
-                  outline
+                  outlined
                   :disabled="!show_delete_selected"
                 >
                   Delete Selected

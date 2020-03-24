@@ -1,16 +1,20 @@
-
 export default {
-  props : {
-    item : Object,
-    open : Boolean
+  props: {
+    item: Object,
+    open: Boolean
   },
 
   data: () => ({
     loading: false,
-    list_items : [],
+    list_items: [],
     headers: [
       { text: '#', align: 'left', sortable: false, width: '20px' },
-      { text: 'Descriptions', align: 'left', sortable: false, value: 'descriptions', },
+      {
+        text: 'Descriptions',
+        align: 'left',
+        sortable: false,
+        value: 'descriptions'
+      },
       { text: 'Rate', value: 'rate', align: 'left', sortable: false },
       { text: 'Hours', value: 'hours', align: 'left', sortable: false },
       { text: 'Amount', value: 'amount', align: 'left', sortable: false }

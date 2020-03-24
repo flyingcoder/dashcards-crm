@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <v-layout row wrap justify-center align-center class="login__content">
+    <v-layout wrap justify-center align-center class="login__content">
       <v-flex md6 xs12 fill-height class="l__form">
         <login-component
           title-text="Log in"

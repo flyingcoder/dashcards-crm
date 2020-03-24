@@ -30,9 +30,9 @@
       scrollable
     >
       <v-spacer></v-spacer>
-      <v-btn flat color="#657186" @click="cancel">Cancel</v-btn>
-      <v-btn flat color="#657186" @click="save">OK</v-btn>
-      <v-btn flat color="#657186" @click="clear">Clear</v-btn>
+      <v-btn text color="#657186" @click="cancel">Cancel</v-btn>
+      <v-btn text color="#657186" @click="save">OK</v-btn>
+      <v-btn text color="#657186" @click="clear">Clear</v-btn>
     </v-date-picker>
   </v-menu>
 </template>

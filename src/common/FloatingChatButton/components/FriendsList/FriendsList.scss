@@ -7,7 +7,9 @@
 .chat__position{
   bottom: 0;
   right: 0;
+
 }
+
 .chat__button[data-notify]:after {
   content:attr(data-notify);
   position:absolute;
@@ -28,7 +30,7 @@
   background-color: $white;
   border: 1px solid $tableBorderBlue;
   border-radius: 5px;
-  width: 200px;
+  min-width: 200px;
   margin-right: 150px;
 
   .inbox__title{

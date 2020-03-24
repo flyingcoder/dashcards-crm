@@ -5,20 +5,22 @@ export const methods = {
   methods: {
     add_item(api_name, item, dynamic_api = null) {
       makeRequestTo[api_name](item, dynamic_api)
-      .catch(() => {
-        this.$event.$emit('btnloading_off', false)
-      })
-      .then(response => {
-        const new_items = response.data
-        if (Array.isArray(new_items)) {
-          new_items.reverse().forEach(new_item => this.items.unshift(new_item))
-        } else {
-          this.items.unshift(new_items)
-        }
-        this.$refs.add_dialog.clear_and_close()
-        this.$event.$emit('open_snackbar', this.table_config.add_message)
-        this.$event.$emit('btnloading_off', false)
-      })
+        .catch(() => {
+          this.$event.$emit('btnloading_off', false)
+        })
+        .then(response => {
+          const new_items = response.data
+          if (Array.isArray(new_items)) {
+            new_items
+              .reverse()
+              .forEach(new_item => this.items.unshift(new_item))
+          } else {
+            this.items.unshift(new_items)
+          }
+          this.$refs.add_dialog.clear_and_close()
+          this.$event.$emit('open_snackbar', this.table_config.add_message)
+          this.$event.$emit('btnloading_off', false)
+        })
     },
 
     extract_per_page(string) {
@@ -39,11 +41,10 @@ export const methods = {
 
     update_item(api_name, item, dynamic_api = null) {
       makeRequestTo[api_name](this.edit_item.id, item, dynamic_api)
-      .catch(() => {
-        this.$event.$emit('btnloading_off', false)
-      })
-      .then(
-        response => {
+        .catch(() => {
+          this.$event.$emit('btnloading_off', false)
+        })
+        .then(response => {
           const index = this.items.findIndex(
             data_item => data_item.id === response.data.id
           )
@@ -55,25 +56,24 @@ export const methods = {
           this.edit_dialog = false
           this.$event.$emit('open_snackbar', this.table_config.update_message)
           this.$event.$emit('btnloading_off', false)
-        }
-      )
+        })
     },
 
     delete_item(api_name, dynamic_api = null) {
       makeRequestTo[api_name](this.delete_item_id, dynamic_api)
-      .catch(() => {
-        this.$event.$emit('btnloading_off', false)
-      })
-      .then(() => {
-        const index = this.items.findIndex(
-          data_item => data_item.id === this.delete_item_id
-        )
-        if (~index) this.items.splice(index, 1)
-        this.delete_item_id = null
-        this.delete_dialog = false
-        this.$event.$emit('open_snackbar', this.table_config.delete_message)
-        this.$event.$emit('btnloading_off', false)
-      })
+        .catch(() => {
+          this.$event.$emit('btnloading_off', false)
+        })
+        .then(() => {
+          const index = this.items.findIndex(
+            data_item => data_item.id === this.delete_item_id
+          )
+          if (~index) this.items.splice(index, 1)
+          this.delete_item_id = null
+          this.delete_dialog = false
+          this.$event.$emit('open_snackbar', this.table_config.delete_message)
+          this.$event.$emit('btnloading_off', false)
+        })
     },
 
     open_edit_dialog(item) {
@@ -100,7 +100,7 @@ export const methods = {
       })
     },
 
-    fill_table_with_data (data) {
+    fill_table_with_data(data) {
       this.items = data
     },
 
@@ -120,11 +120,10 @@ export const methods = {
 
     refresh_table(query) {
       makeRequestTo[this.table_config.refresh_table_api_name](query)
-      .catch(() => {
-        this.$event.$emit('btnloading_off', false)
-      })
-      .then(
-        response => {
+        .catch(() => {
+          this.$event.$emit('btnloading_off', false)
+        })
+        .then(response => {
           this.$event.$emit(
             'open_snackbar',
             this.table_config.refresh_table_message
@@ -133,8 +132,7 @@ export const methods = {
           this.items_response = response.data
           this.items = response.data.data
           this.$event.$emit('btnloading_off', false)
-        }
-      )
+        })
     },
 
     update_table_actions(query) {

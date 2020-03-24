@@ -1,9 +1,6 @@
 <template>
   <v-navigation-drawer class="sidebar" permanent>
-    <v-list
-      dense
-      nav
-    >
+    <v-list dense nav>
       <v-list-item
         v-for="item in items"
         v-if="item.can_view()"
@@ -59,7 +56,7 @@
         <div class="item" @click="sidebar_item_clicked('reports')">
           Reports
         </div>
-        <!-- div class="item" @click="sidebar_item_clicked('invoices')">
+        <! div class="item" @click="sidebar_item_clicked('invoices')">
           Invoice
         </div>
       </div>

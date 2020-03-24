@@ -20,7 +20,7 @@ export default {
     ReportsEditDialog,
     ReportsAddDialog
   },
-  
+
   props: {
     id: [Number, String]
   },
@@ -92,12 +92,12 @@ export default {
       this.iframeSrc = report.url
       this.activeReport = report
     },
-    
+
     add_new_report(report) {
       this.reports.push(report)
     },
 
-  /*  save_report() { //kirby:removed, transfer to ReportAddDialog component
+    /*  save_report() { //kirby:removed, transfer to ReportAddDialog component
       this.$store.commit('set_custom_loader', true)
       makeRequestTo
         .add_new_report({
@@ -135,6 +135,6 @@ export default {
 
     reportUpdated({ data, index }) {
       this.$set(this.reports, index, data)
-    },
+    }
   }
 }

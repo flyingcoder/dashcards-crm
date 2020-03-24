@@ -1,9 +1,9 @@
 <template>
   <div class="timeline-card">
     <div class="timeline__content">
-      <dash-card 
-        title="Timeline" 
-        :dashboard="dashboard" 
+      <dash-card
+        title="Timeline"
+        :dashboard="dashboard"
         @close="$emit('close')"
         :view-more-link="viewMoreLink"
         :viewMoreBtn="enableViewMore"
@@ -15,15 +15,9 @@
             :indeterminate="true"
           ></v-progress-linear>
 
-          <v-card
-            class="mx-auto"
-            v-if="timeline_items.length"
-          >
+          <v-card class="mx-auto" v-if="timeline_items">
             <v-card-text class="py-0">
-              <v-timeline
-                align-top
-                dense
-              >
+              <v-timeline align-top dense>
                 <v-timeline-item
                   small
                   v-for="item of timeline_items"
@@ -40,11 +34,11 @@
                       <div class="caption mb-2"></div>
 
                       <v-avatar
-                        v-if="item.properties.media.length"
+                        v-if="item.properties.media"
                         v-for="media in item.properties.media.slice(0, 5)"
                         tile
                       >
-                        <v-img  
+                        <v-img
                           v-if="media.collection_name === 'project.files.links'"
                           :src="media.custom_properties.thumb"
                         ></v-img>
@@ -55,28 +49,27 @@
                         ></v-img>
                       </v-avatar>
 
-                      <v-avatar tile v-else >
+                      <v-avatar tile v-else>
                         <v-img
                           :src="addHost(item.properties.thumb_url)"
                           @error="altImage(media)"
                         ></v-img>
                       </v-avatar>
-                      
                     </v-col>
                   </v-row>
                 </v-timeline-item>
-
               </v-timeline>
             </v-card-text>
           </v-card>
 
-          <Empty v-else
+          <Empty
+            v-else
             headline="No timeline yet"
             slug="empty-timeline"
           ></Empty>
-      </div>
-    </dash-card>
+        </div>
+      </dash-card>
+    </div>
   </div>
-</div>
 </template>
 <script src="./TimelineCard.js"></script>

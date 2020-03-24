@@ -1,5 +1,5 @@
 <template functional>
-  <v-layout row wrap class="project__overview_row">
+  <v-layout wrap class="project__overview_row">
     <v-flex xs5 class="project__label">
       <v-flex class="project__label_icon">
         <svg viewBox="0 0 250 250">

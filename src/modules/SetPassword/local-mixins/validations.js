@@ -43,10 +43,7 @@ export const validations = {
     },
 
     all_validations_passed() {
-      const FIELDS = [
-        'password',
-        'repeat_password'
-      ]
+      const FIELDS = ['password', 'repeat_password']
 
       for (let field of FIELDS) {
         //calling validate

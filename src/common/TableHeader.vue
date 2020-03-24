@@ -1,7 +1,7 @@
 <template>
-  <v-layout row wrap class="table-header">
+  <v-layout wrap class="table-header">
     <breadcrumb :paths="paths" />
-    <v-btn v-if="!noButton" fab small class="add__btn" @click="$emit('click')">
+    <v-btn v-if="!noButton" fab small color="#3b589e" class="add__btn" @click="$emit('click')">
       <v-icon>add</v-icon>
     </v-btn>
     <slot name="form-btn" />
@@ -36,8 +36,7 @@ export default {
   justify-content: space-between;
   align-items: center;
 
-  button.add__btn.v-btn.v-btn--floating.v-btn--small {
-    background-color: $blue;
+  button.add__btn {
     .v-icon {
       color: $white;
       font-size: 24px;

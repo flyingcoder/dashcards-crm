@@ -1,6 +1,5 @@
 <template>
   <div class="teams-page">
-    <div class="row">
       <teams-dialog
         ref="add_dialog"
         title="Add New Member"
@@ -23,7 +22,7 @@
         text-content="Are you sure you want to delete this member?"
         @delete="delete_item('delete_team', $event)"
       />
-
+    <div class="row">
       <table-header :paths="paths" @click="add_dialog = true" />
     </div>
 
@@ -34,7 +33,7 @@
       :loading="loading"
       :sort="sort"
       :has-checkbox="true"
-      hide-actions
+      hide-default-footer
       toolbar-title="Members"
       class="custom__table"
       :permission="$_permissions.get('hq_members')"
@@ -68,7 +67,7 @@
             <v-btn
               color="#3b589e"
               dark
-              outline
+              outlined
               :disabled="!show_delete_selected"
             >
               Delete Selected

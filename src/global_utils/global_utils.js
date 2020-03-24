@@ -27,14 +27,14 @@ export const global_utils = {
     truncate(text, stop, clamp) {
       return text.slice(0, stop) + (stop < text.length ? clamp || '...' : '')
     },
-    str_limit(value, size){
-      if (!value) return '';
-      value = value.toString();
+    str_limit(value, size) {
+      if (!value) return ''
+      value = value.toString()
 
       if (value.length <= size) {
-        return value;
+        return value
       }
-      return value.substr(0, size) + '...';
+      return value.substr(0, size) + '...'
     }
   },
   methods: {
@@ -43,15 +43,20 @@ export const global_utils = {
         e.scrollTop = e.scrollHeight - e.getBoundingClientRect().height
       })
     },
-    addHost(urlString){
-      if (!(urlString.indexOf('http://') === 0 || urlString.indexOf('https://') === 0)){
-        return settings.apiHostBaseURL+urlString
+    addHost(urlString) {
+      if (
+        !(
+          urlString.indexOf('http://') === 0 ||
+          urlString.indexOf('https://') === 0
+        )
+      ) {
+        return settings.apiHostBaseURL + urlString
       }
       return urlString
     },
-    altImage(item){
-      item.thumb_url = require("@/assets/temp/no-image.jpg")
-      item.public_url = require("@/assets/temp/no-image.jpg")
+    altImage(item) {
+      item.thumb_url = require('@/assets/temp/no-image.jpg')
+      item.public_url = require('@/assets/temp/no-image.jpg')
     }
   }
 }

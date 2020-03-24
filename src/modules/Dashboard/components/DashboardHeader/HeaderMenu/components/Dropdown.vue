@@ -1,29 +1,32 @@
 <template>
-  <v-menu 
-  offset-y
-  class="user-dropdown"
-  transition="slide-y-transition"
-  :nudge-width="100"
-  :nudge-bottom="10"
-  bottom
+  <v-menu
+    offset-y
+    class="user-dropdown"
+    transition="slide-y-transition"
+    :nudge-width="10"
+    :nudge-bottom="10"
+    :nudge-left="70"
+    bottom
   >
     <template v-slot:activator="{ on }">
-      <div
-        class="dropdown"
-        v-on="on"
-      >
-        <v-layout row align-center>
+      <div class="dropdown" v-on="on">
+        <v-layout align-center>
           <v-flex xs6>
-            <v-avatar v-if="!user.image_url" class="user-icon responsive-img" :size="avatarSize">
-              <img
-                class="atomic-icon"
-                :src="user.image_url"
-                alt="user"
-              />
+            <v-avatar
+              v-if="!user.image_url"
+              class="user-icon responsive-img"
+              :size="avatarSize"
+            >
+              <img class="atomic-icon" :src="user.image_url" alt="user" />
             </v-avatar>
-            <v-avatar v-else color="red" :size="avatarSize">
-               <span class="white--text headline">
-                {{ user.first_name.charAt(0) + user.last_name.charAt(0)}}
+            <v-avatar
+              v-else
+              color="red"
+              :size="avatarSize"
+              class="user-icon responsive-img"
+            >
+              <span class="white--text">
+                {{ user.first_name.charAt(0) + user.last_name.charAt(0) }}
               </span>
             </v-avatar>
           </v-flex>
@@ -46,13 +49,11 @@
             <v-img max-width="50px" :src="user.image_url" />
           </v-col>
           <v-col cols="12">
-              <div class="hero-name">
-                {{ user.first_name + ' ' + user.last_name }}
-              </div>
+            <div class="hero-name">
+              {{ user.first_name + ' ' + user.last_name }}
+            </div>
           </v-col>
         </v-row>
-        
-        
       </v-list-item>
       <v-list-item
         class="h__list"
@@ -135,17 +136,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.user-dropdown {
-  .dropdown {
-    width: 75px;
-    .atomic-icon {
-      width: 30px;
-    }
-    .user-chevron img {
-      width: 25px;
-    }
+.dropdown {
+  width: 75px;
+  cursor: pointer;
+
+  .atomic-icon {
+    width: 30px;
+  }
+  .user-chevron img {
+    width: 25px !important;
   }
 }
+
 .dropdown-img {
   .v-image {
     margin: 0 auto;

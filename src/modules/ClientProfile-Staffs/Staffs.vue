@@ -1,6 +1,6 @@
 <template>
   <div class="members-tab">
-    <v-layout row>
+    <v-layout>
       <v-flex xs12 class="text-xs-right">
         <v-btn fab small class="add__btn" @click="add_dialog = true">
           <v-icon>add</v-icon>
@@ -38,7 +38,7 @@
       :loading="loading"
       :sort="sort"
       :has-checkbox="true"
-      hide-actions
+      hide-default-footer
       toolbar-title="Staffs"
       :permission="$_permissions.get('hq_members')"
       @items-selected="selected_ids = $event"

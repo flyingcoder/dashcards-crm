@@ -1,12 +1,12 @@
 <template>
-  <custom-dialog 
-    ref="dialog" 
+  <custom-dialog
+    ref="dialog"
     title="Add Link"
     button1-text="Cancel"
     @button1="close_dialog"
-    >
+  >
     <template #content>
-      <v-layout row wrap class="custom-dialog">
+      <v-layout wrap class="custom-dialog">
         <v-flex xs12>
           <v-text-field
             class="dialog__link d-field"
@@ -40,7 +40,6 @@
     <template slot="button2">
       <v-btn @click="on_dialog_save" :disabled="is_disabled">Save</v-btn>
     </template>
-    
   </custom-dialog>
 </template>
 

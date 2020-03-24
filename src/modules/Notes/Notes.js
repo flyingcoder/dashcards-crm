@@ -28,15 +28,15 @@ export default {
     ],
     notes_dialog: false,
     edit_note_dialog: false,
-    delete_note_dialog : false,
+    delete_note_dialog: false,
     coll_dialog: false,
     notes: [],
     loading: false,
     selected_note: null,
     collaborators: [],
     pin_api: false,
-    note_to_edit : null,
-    note_to_delete : null
+    note_to_edit: null,
+    note_to_delete: null
   }),
 
   created() {
@@ -62,11 +62,10 @@ export default {
         this.notes_dialog = false
       })
     },
-    
+
     updateNote(payload) {
       if (payload) {
-        api_to.updateNote(payload)
-        .then(this.update_notes)
+        api_to.updateNote(payload).then(this.update_notes)
       }
     },
     update_notes({ data }) {
@@ -76,10 +75,7 @@ export default {
       if (~index) {
         this.notes[index].title = data.title
         this.notes[index].content = data.content
-        this.$event.$emit(
-          'open_snackbar',
-          'Note updated successfully!'
-        )
+        this.$event.$emit('open_snackbar', 'Note updated successfully!')
       }
       this.edit_note_dialog = false
     },
@@ -137,24 +133,27 @@ export default {
         })
     },
 
-    open_delete_note_dialog( note ) {
+    open_delete_note_dialog(note) {
       this.note_to_delete = cloneDeep(note)
       this.delete_note_dialog = true
     },
 
-    delete_note () {
+    delete_note() {
       api_to
         .deleteNote(this.note_to_delete)
         .then(({ data }) => {
-            const index = this.notes.findIndex(
-              note => note.id === this.note_to_delete.id
+          const index = this.notes.findIndex(
+            note => note.id === this.note_to_delete.id
+          )
+          if (~index) {
+            this.notes.splice(index, 1)
+            this.$event.$emit(
+              'open_snackbar',
+              data.message ? data.message : data.error,
+              data.message ? 'success' : 'error'
             )
-            if (~index) {
-              this.notes.splice(index, 1)
-              this.$event.$emit('open_snackbar', data.message ? data.message : data.error , data.message ? 'success' : 'error')
-            }
           }
-        )
+        })
         .finally(() => {
           this.delete_note_dialog = false
           this.note_to_delete = null

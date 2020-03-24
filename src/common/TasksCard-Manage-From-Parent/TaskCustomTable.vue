@@ -1,6 +1,6 @@
 <template>
   <div class="task-custom-table">
-    <v-layout row class="task_header">
+    <v-layout class="task_header">
       <v-flex xs3 class="task__tableHead">Assignee</v-flex>
       <v-flex xs6 class="task__tableHead">Task</v-flex>
       <v-flex xs3 class="task__tableHead">Status</v-flex>
@@ -8,7 +8,6 @@
 
     <div class="body" :style="{ maxHeight: bodyMaxHeight }">
       <v-layout
-        row
         align-center
         :class="['task__tableBody', { active: task.id === active_task_id }]"
         v-for="task in tasks"
@@ -124,7 +123,7 @@ export default {
         font-size: 17px;
         font-weight: 400;
       }
-      .project__col{
+      .project__col {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

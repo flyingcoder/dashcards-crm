@@ -7,7 +7,7 @@
       :loading="loading"
       :sort="sort"
       :has-checkbox="true"
-      hide-actions
+      hide-default-footer
       :permission="$_permissions.get('timers')"
       @items-selected="selected_ids = $event"
       @sorted="changeSort"
@@ -30,10 +30,10 @@
         <td class="">Test</td>
 
         <td class="">
-          <v-btn fab small flat depressed>
+          <v-btn fab small text depressed>
             <img src="@/assets/icons/groups/edit.svg" alt="" />
           </v-btn>
-          <v-btn fab small flat depressed>
+          <v-btn fab small text depressed>
             <img src="@/assets/icons/groups/delete.svg" alt="" />
           </v-btn>
         </td>

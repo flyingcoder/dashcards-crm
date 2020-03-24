@@ -35,7 +35,7 @@
       :dialog.sync="add_new_client_dialog"
       ref="add_client_dialog"
       dialog-title="Add Client"
-     @save="save_new_client($event)"
+      @save="save_new_client($event)"
     />
 
     <teams-dialog
@@ -52,7 +52,7 @@
       :loading="loading"
       :sort="sort"
       :has-checkbox="true"
-      hide-actions
+      hide-default-footer
       :permission="$_permissions.get('projects_own')"
       @items-selected="selected_ids = $event"
       toolbar-title="Projects"
@@ -62,13 +62,14 @@
       @view="navigate_to_view_project($event.id)"
     >
       <template slot="custom-item" slot-scope="item">
-        <td class="text-cap clickable-td"  
-        @click="navigate_to_view_project(item.item.id)">
+        <td
+          class="text-cap clickable-td"
+          @click="navigate_to_view_project(item.item.id)"
+        >
           {{ item.item.title }}
         </td>
         <td class="text-cap">{{ item.item.company_name }}</td>
-        <td class="text-cap">{{ item.item.service_name }}
-        </td>
+        <td class="text-cap">{{ item.item.service_name }}</td>
         <td class="text-cap">{{ item.item.manager_name }}</td>
         <td>{{ item.item.started_at | bzFromNow }}</td>
         <td>
@@ -93,7 +94,7 @@
             <v-btn
               color="#3b589e"
               dark
-              outline
+              outlined
               :disabled="!show_delete_selected"
             >
               Delete Selected

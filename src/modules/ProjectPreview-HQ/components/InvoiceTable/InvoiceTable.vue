@@ -9,7 +9,7 @@
             :items="items"
             :loading="loading"
             :has-checkbox="true"
-            hide-actions
+            hide-default-footer
             :permission="$_permissions.get('invoice')"
             @items-selected="selected_ids = $event"
           >

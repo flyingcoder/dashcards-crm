@@ -39,25 +39,27 @@ export default {
 .breadcrumb-wrapper {
   ul.v-breadcrumbs.theme--light {
     padding: 18px 0;
-    li.page__title {
-      font-size: 26px;
-      font-weight: 500;
-      a.v-breadcrumbs__item span {
-        color: $tableBlueText;
-      }
-      a.v-breadcrumbs__item span:hover {
-        color: $textDark;
-      }
-      &:last-child a.v-breadcrumbs__item span {
-        color: $lightGray-2;
-      }
-    }
     li.v-breadcrumbs__divider {
       i {
         font-size: 50px;
         color: $lightGray-2;
       }
     }
+  }
+}
+
+.page__title {
+  font-size: 26px;
+  font-weight: 500;
+  .v-breadcrumbs__item span {
+    color: $tableBlueText;
+  }
+  .v-breadcrumbs__item span:hover {
+    color: $textDark;
+    cursor: pointer;
+  }
+  .v-breadcrumbs__item--disabled span {
+    color: $lightGray-2;
   }
 }
 

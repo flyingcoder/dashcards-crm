@@ -24,8 +24,8 @@ export default {
     headers: [
       { text: 'Task', value: 'title' },
       { text: 'Assignee', value: 'assignee' },
-      { text: 'Total Time', value: 'total_time'},
-      { text: 'Status', value: 'status'},
+      { text: 'Total Time', value: 'total_time' },
+      { text: 'Status', value: 'status' },
       { is_action: false }
     ]
   }),

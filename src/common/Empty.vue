@@ -19,18 +19,18 @@
 export default {
   name: 'Empty',
   props: {
-    slug: { type: String, default : 'empty-sample' },
-    headline: { type: String, default : 'No data yet' }
+    slug: { type: String, default: 'empty-sample' },
+    headline: { type: String, default: 'No data yet' }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  @import '~@/sass/_variables';
-  @include emptyTable('.empty');
+@import '~@/sass/_variables';
+@include emptyTable('.empty');
 
-  .justify-content-center {
-    display: flex;
-    justify-content: center;
-  }
+.justify-content-center {
+  display: flex;
+  justify-content: center;
+}
 </style>

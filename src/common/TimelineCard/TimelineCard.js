@@ -1,6 +1,6 @@
 import request from '@/services/axios_instance'
 import moment from 'moment'
- import { global_utils } from '@/global_utils/global_utils'
+import { global_utils } from '@/global_utils/global_utils'
 //Components
 import Empty from '@/common/Empty.vue'
 import DashCard from '@/common/DashCard.vue'
@@ -18,19 +18,19 @@ export default {
   props: {
     id: [Number, String],
     dashboard: Boolean,
-    viewMoreLink: Object 
+    viewMoreLink: Object
   },
 
   data: () => ({
     timeline_items: [],
     loading: false,
-    enableViewMore : true,
-    pagination : {
+    enableViewMore: true,
+    pagination: {
       current: 1,
-      total : 0
+      total: 0
     }
   }),
-  computed : {
+  computed: {
     api() {
       return this.id ? `api/projects/${this.id}/timeline` : 'api/activities'
     }
@@ -54,11 +54,12 @@ export default {
           this.timeline_items = response.data.data
           this.pagination.current = response.data.current_page
           this.pagination.total = response.data.total
-          this.enableViewMore = response.data.to !== null && response.data.to < response.data.total
+          this.enableViewMore =
+            response.data.to !== null && response.data.to < response.data.total
         })
         .finally(() => (this.loading = false))
     },
-    load_more_timeline(){
+    load_more_timeline() {
       this.loading = true
       request
         .get(`${this.api}?page=${this.pagination.current + 1}`)
@@ -68,7 +69,8 @@ export default {
           })
           this.pagination.current = response.data.current_page
           this.pagination.total = response.data.total
-          this.enableViewMore = response.data.to !== null && response.data.to < response.data.total
+          this.enableViewMore =
+            response.data.to !== null && response.data.to < response.data.total
         })
         .finally(() => (this.loading = false))
     },

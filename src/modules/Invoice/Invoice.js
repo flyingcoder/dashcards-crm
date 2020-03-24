@@ -24,7 +24,7 @@ export default {
   },
 
   data: () => ({
-    view_invoice_dialog : false,
+    view_invoice_dialog: false,
     paths: [
       { text: 'Dashboard', disabled: false, router_name: 'default-content' },
       { text: 'Invoice', disabled: true, router_name: null }
@@ -36,10 +36,10 @@ export default {
       { id: 4, text: 'Amount', value: 'amount' },
       { id: 5, is_action: true }
     ],
-    view_item : null,
+    view_item: null,
     items: [],
-    page : 1,
-    rows_per_page : 10,
+    page: 1,
+    rows_per_page: 10,
     pagination: {
       current: 1,
       total: 0
@@ -98,9 +98,10 @@ export default {
     },
 
     fetch_data() {
-      api_to.get_all_projects()
-        .then((res2) => {
-            this.set_projects(res2.data)
+      api_to
+        .get_all_projects()
+        .then(res2 => {
+          this.set_projects(res2.data)
         })
         .finally(() => (this.loading = false))
     },
@@ -114,17 +115,18 @@ export default {
 
     getInvoices() {
       this.loading = true
-      api_to.get_invoices(this.pagination.current, this.rows_per_page )
+      api_to
+        .get_invoices(this.pagination.current, this.rows_per_page)
         .then(response => {
-            this.items = response.data.data
-            this.pagination.current = response.data.current_page
-            this.pagination.total = response.data.last_page
-            this.rows_per_page = response.data.per_page
+          this.items = response.data.data
+          this.pagination.current = response.data.current_page
+          this.pagination.total = response.data.last_page
+          this.rows_per_page = response.data.per_page
         })
         .finally(() => (this.loading = false))
     },
     onPageChange() {
-        this.getInvoices();
+      this.getInvoices()
     }
   }
 }

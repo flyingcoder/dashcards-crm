@@ -4,7 +4,7 @@
 
     <MailIcon />
     <NotificationIcon />
-    <ChatIcon/>
+    <ChatIcon />
 
     <dropdown />
 

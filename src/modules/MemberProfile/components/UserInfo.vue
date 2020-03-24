@@ -13,7 +13,7 @@
       <div class="info-div">
         <h4 class="name">{{ user.first_name }} {{ user.last_name }}</h4>
         <div class="job-title">{{ user.job_title }}</div>
-        <div class="address"  v-if="user.meta.address">
+        <div class="address" v-if="user.meta.address">
           <v-icon>place</v-icon>
           {{ user.meta.address.value }}
         </div>
@@ -21,8 +21,10 @@
 
       <div class="info-div">
         <div class="hour">Per Hour</div>
-        <div class="value" v-if="user.meta.rate">{{currency.symbol}} {{ user.meta.rate.value }}</div>
-        <div class="value" v-if="!user.meta.rate">{{currency.symbol}} 0</div>
+        <div class="value" v-if="user.meta.rate">
+          {{ currency.symbol }} {{ user.meta.rate.value }}
+        </div>
+        <div class="value" v-if="!user.meta.rate">{{ currency.symbol }} 0</div>
       </div>
     </template>
   </div>
@@ -34,7 +36,7 @@ import { settings } from '@/variables'
 
 export default {
   data: () => ({
-    currency : settings.defaultCurrency //TODO features allow admin to set their default currency
+    currency: settings.defaultCurrency //TODO features allow admin to set their default currency
   }),
   computed: {
     ...mapGetters('memberProfile', ['user', 'user_loading'])

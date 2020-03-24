@@ -47,10 +47,10 @@ export default {
     confirm_clicked() {
       this.$emit('confirm')
     },
-    showDialog(){
+    showDialog() {
       this.open = true
     },
-    closeDialog(){
+    closeDialog() {
       this.open = false
     }
   }

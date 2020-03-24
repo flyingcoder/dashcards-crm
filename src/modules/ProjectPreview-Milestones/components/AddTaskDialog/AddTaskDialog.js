@@ -24,7 +24,7 @@ export default {
     isEditDialog: Boolean,
     fieldsToEdit: { type: Object, default: () => {} },
     milestoneStartDate: String,
-    btnloading : { type: Boolean, default: false }
+    btnloading: { type: Boolean, default: false }
   },
 
   data: () => ({
@@ -44,7 +44,7 @@ export default {
   }),
 
   mounted() {
-    this.$event.$on( 'btnloading_off', (status) => (this.btnloading = status))
+    this.$event.$on('btnloading_off', status => (this.btnloading = status))
   },
 
   computed: {

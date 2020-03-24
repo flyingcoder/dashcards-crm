@@ -14,10 +14,7 @@
           </div>
         </div>
         <div slot="footer">
-          <v-btn
-            text class="view__more_btn" 
-            @click="loadMore"
-          >
+          <v-btn text class="view__more_btn" @click="loadMore">
             VIEW MORE
           </v-btn>
         </div>
@@ -49,8 +46,7 @@ export default {
   },
 
   created() {
-    if(this.id)
-      this.set_id(this.id)
+    if (this.id) this.set_id(this.id)
   }
 }
 </script>

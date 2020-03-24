@@ -1,3 +1,46 @@
+
+>>> .buzzooka__table thead.v-data-table-header{
+    background-color: #f5f7fa;
+}
+>>> .buzzooka__table thead.v-data-table-header th{
+    text-align: left;
+    color: #8090aa;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px;
+}
+>>> .buzzooka__table thead.v-data-table-header th:last-child{
+    text-align: center;
+}
+>>> .buzzooka__table tr.table__body-row:nth-child(odd){
+  background-color: #fff;
+}
+>>> .buzzooka__table tr.table__body-row:nth-child(even){
+  background-color: #f5f7fa;
+}
+>>> .buzzooka__table tbody td{
+    padding: 8px;
+}
+>>> .buzzooka__table tbody tr:nth-child(odd){
+    background-color: #fff;
+    color: #8090aa;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px;
+}
+>>> .buzzooka__table table {
+    border-bottom: 1px solid #8090aa;
+}
+>>>.buzzooka__table tbody tr:nth-child(even){
+    background-color: #f5f7fa;
+    color: #8090aa;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px;
+
+}
+
+
 >>> .table__toolbar .v-toolbar__content{
     padding: 0 8px;
 }

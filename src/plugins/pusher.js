@@ -6,7 +6,7 @@ let pusher = null
 
 export const broadcast = {
   authenticate() {
-    Pusher.logToConsole = settings.pusher.logging;
+    Pusher.logToConsole = settings.pusher.logging
 
     pusher = new Pusher(settings.pusher.key, {
       cluster: settings.pusher.cluster,
@@ -14,7 +14,7 @@ export const broadcast = {
       encrypted: true,
       authEndpoint: settings.apiHostBaseURL + '/api/broadcasting/auth',
       auth: {
-        headers: {  
+        headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token')
         }
       }

@@ -1,11 +1,11 @@
 <template>
   <v-container class="dash__card">
-    <v-layout row wrap class="card__header" align-center>
-      <v-flex xs4 class="card__title">
+    <v-layout wrap class="card__header" align-center>
+      <div class="card__title">
         {{ title }}
-      </v-flex>
+      </div>
       <slot name="actions" v-if="dashboard">
-        <v-flex xs8 class="actions text-xs-right">
+        <div class="actions">
           <v-btn fab small text class="action">
             <v-icon>list</v-icon>
           </v-btn>
@@ -24,7 +24,7 @@
           <v-btn fab small text class="action">
             <v-icon @click="$emit('close')">close</v-icon>
           </v-btn>
-        </v-flex>
+        </div>
       </slot>
     </v-layout>
 
@@ -32,11 +32,12 @@
       <slot name="content" />
     </v-flex>
 
-    <v-flex xs12 class="card__footer text-xs-center">
+    <v-flex xs12 class="card__footer">
       <slot name="footer">
-        <v-btn 
-          v-if="viewMoreBtn" 
-          text class="view__more_btn mx-auto" 
+        <v-btn
+          v-if="viewMoreBtn"
+          text
+          class="view__more_btn mx-auto"
           @click="$emit('view-more')"
         >
           VIEW MORE
@@ -52,7 +53,7 @@ export default {
   props: {
     title: String,
     viewMoreBtn: Boolean,
-    dashboard: Boolean,
+    dashboard: Boolean
   }
 }
 </script>

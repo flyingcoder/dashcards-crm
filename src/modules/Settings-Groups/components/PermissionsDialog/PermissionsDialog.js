@@ -1,5 +1,5 @@
 import request from '@/services/axios_instance'
-import { cloneDeep  } from 'lodash'
+import { cloneDeep } from 'lodash'
 // Components
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 
@@ -20,26 +20,25 @@ export default {
     permissions: [],
     originalPermissions: []
   }),
-  
+
   watch: {
     dialog(newVal) {
       this.open = newVal
     },
-    
+
     open(newVal) {
       this.$emit('update:dialog', newVal)
     },
 
-    'fieldsToEdit.id' (val, old_val) {
-      request.get('api/roles/'+val+'/permissions')
-      .then(({ data }) => {
+    'fieldsToEdit.id'(val, old_val) {
+      request.get('api/roles/' + val + '/permissions').then(({ data }) => {
         this.permissions = data.data
         this.originalPermissions = cloneDeep(data.data)
       })
     }
   },
-  
-  filters :{
+
+  filters: {
     removeSlug(text) {
       return text.split('.')[0]
     }
@@ -47,7 +46,10 @@ export default {
 
   computed: {
     does_something_changed() {
-      return !(JSON.stringify(this.permissions) === JSON.stringify(this.originalPermissions))
+      return !(
+        JSON.stringify(this.permissions) ===
+        JSON.stringify(this.originalPermissions)
+      )
     }
   },
 
@@ -59,8 +61,8 @@ export default {
     save() {
       if (this.validation_passed()) {
         const fields_to_save = {
-          role_id : this.fieldsToEdit.id,
-          permissions : this.get_updated_permissions()
+          role_id: this.fieldsToEdit.id,
+          permissions: this.get_updated_permissions()
         }
         this.$emit('save', fields_to_save)
         this.cancel()
@@ -127,12 +129,16 @@ export default {
     get_updated_permissions() {
       let toBeCheck = cloneDeep(this.permissions)
       let original = cloneDeep(this.originalPermissions)
-      let updatedSlugs = [];
-      for(let i = 0; i < toBeCheck.length; i++){
-        if ( !(toBeCheck[i].slug.view === original[i].slug.view && 
-          toBeCheck[i].slug.create === original[i].slug.create && 
-          toBeCheck[i].slug.update === original[i].slug.update && 
-          toBeCheck[i].slug.delete === original[i].slug.delete) ) {
+      let updatedSlugs = []
+      for (let i = 0; i < toBeCheck.length; i++) {
+        if (
+          !(
+            toBeCheck[i].slug.view === original[i].slug.view &&
+            toBeCheck[i].slug.create === original[i].slug.create &&
+            toBeCheck[i].slug.update === original[i].slug.update &&
+            toBeCheck[i].slug.delete === original[i].slug.delete
+          )
+        ) {
           updatedSlugs.push(toBeCheck[i])
         }
       }

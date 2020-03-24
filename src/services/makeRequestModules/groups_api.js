@@ -10,7 +10,7 @@ export const groups_api = {
   },
 
   get_group_permissions(id) {
-    return request.get(`api/groups/${id}/permission`) 
+    return request.get(`api/groups/${id}/permission`)
   },
 
   get_groups(query) {
@@ -35,5 +35,5 @@ export const groups_api = {
 
   get_company_groups(query) {
     return request.get(`/api/roles/company`)
-  },
+  }
 }

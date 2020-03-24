@@ -21,7 +21,7 @@ export default {
       selected: null
     },
     dynamicSections: [],
-    serviceName : ''
+    serviceName: ''
   }),
 
   created() {
@@ -37,12 +37,14 @@ export default {
         .finally(() => (this.service.loading = false))
     },
     save() {
-      let selectedService = this.service.items.find(obj => obj.id === this.service.selected);
+      let selectedService = this.service.items.find(
+        obj => obj.id === this.service.selected
+      )
       this.serviceName = selectedService.name || ''
 
       apiTo
         .postService(this.service.selected)
-        .then(({ data }) => (this.dynamicSections = JSON.parse(data.questions) ))
+        .then(({ data }) => (this.dynamicSections = JSON.parse(data.questions)))
         .finally(() => (this.serviceDialog = false))
     },
     addNewQuestion() {

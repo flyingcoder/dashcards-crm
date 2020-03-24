@@ -49,7 +49,7 @@ export default {
 
   methods: {
     iframeLoaded() {
-      console.log("this")
+      console.log('this')
       this.iframe_loading = false
     },
     open_dialog() {

@@ -9,7 +9,7 @@
       @button2="save"
     >
       <template slot="content">
-        <v-layout row wrap>
+        <v-layout wrap>
           <v-flex xs12>
             <v-combobox
               class="service__input"

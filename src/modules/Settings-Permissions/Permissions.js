@@ -50,7 +50,7 @@ export default {
       refresh_table_message: 'Table refreshed',
       refresh_table_api_name: 'paginate_permissions_table'
     },
-    groups : [],
+    groups: [],
     selected_group: null
   }),
 
@@ -80,8 +80,8 @@ export default {
       this.loading = true
       this.refresh_table(query)
     },
-    selected_group (role_id) {
-      this.fill_table('get_role_permissions', true, role_id )
+    selected_group(role_id) {
+      this.fill_table('get_role_permissions', true, role_id)
     }
   },
 
@@ -116,24 +116,24 @@ export default {
     },
 
     fill_groups() {
-      api_to.get_company_roles()
-      .then(({ data }) => {
-        this.groups = data.map(function(item){
-          return { value : item.id, text : item.name }
-        }) 
-      })
-      .finally(() => { 
-        this.selected_group = this.groups[0].value
-      })
+      api_to
+        .get_company_roles()
+        .then(({ data }) => {
+          this.groups = data.map(function(item) {
+            return { value: item.id, text: item.name }
+          })
+        })
+        .finally(() => {
+          this.selected_group = this.groups[0].value
+        })
     }
   },
 
   filters: {
-  removeSlug: function (value) {
-    if (!value) return ''
-    value = value.toString()
-    return value.split('.')[0]
+    removeSlug: function(value) {
+      if (!value) return ''
+      value = value.toString()
+      return value.split('.')[0]
+    }
   }
-}
-
 }

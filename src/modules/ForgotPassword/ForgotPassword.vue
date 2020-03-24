@@ -27,7 +27,7 @@
         </template>
       </login-component>
     </div>
-    <div class="f__form"  style="flex-basis: 100%;" v-if="sent">
+    <div class="f__form" style="flex-basis: 100%;" v-if="sent">
       <div class="l__logo">
         <a href="https://dashcards.com/">
           <img src="@/assets/logo/logo-white.png" />
@@ -37,7 +37,7 @@
         A reset instruction is sent to your email!
       </h1>
     </div>
-    
+
     <div v-else class="f__gallery">
       <div class="gallery__text">
         <p>

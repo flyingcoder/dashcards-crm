@@ -28,25 +28,29 @@ request.interceptors.response.use(
   },
   error => {
     // $event.$emit('btnloading_off', false)
-    
-    if (error.response && error.response.status === 401 && localStorage.getItem('token')) {
+
+    if (
+      error.response &&
+      error.response.status === 401 &&
+      localStorage.getItem('token')
+    ) {
       // Unauthenticated
       auth.logout()
       store.commit('open_snackbar', {
         status: true,
-        message: "Session expired. Login to continue"
+        message: 'Session expired. Login to continue'
       })
       return
     }
     const res = error.response
-    if(res) {
+    if (res) {
       let message = res.data.message
-      if (typeof res.data.errors != "undefined") {
-        let errors = Object.values(res.data.errors);
-            errors = errors.flat();
-          for (var i = errors.length - 1; i >= 0; i--) {
-            message = message +`\n`+ errors[i]
-          }
+      if (typeof res.data.errors != 'undefined') {
+        let errors = Object.values(res.data.errors)
+        errors = errors.flat()
+        for (var i = errors.length - 1; i >= 0; i--) {
+          message = message + `\n` + errors[i]
+        }
       }
       store.commit('open_snackbar', {
         status: true,

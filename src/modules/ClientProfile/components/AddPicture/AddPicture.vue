@@ -135,7 +135,7 @@ export default {
       this.$refs.picture_dialog.clear_and_close()
       Object.assign(this.$data, this.$options.data.apply(this))
     },
-    cancel(){
+    cancel() {
       this.dialog = false
     }
   }

@@ -13,7 +13,7 @@
     </div>
     <div class="write">
       <div class="avatar-wrapper">
-        <img :src="loggedUser.image_url" class="sender-avatar">
+        <img :src="loggedUser.image_url" class="sender-avatar" />
       </div>
       <v-text-field
         v-model="message"
@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="view__more">
-      <v-btn flat class="view__more_btn">VIEW MORE</v-btn>
+      <v-btn text class="view__more_btn">VIEW MORE</v-btn>
     </div>
   </div>
 </template>
@@ -58,7 +58,7 @@ export default {
     loading: false,
     messages: [],
     message: null,
-    can_message : false
+    can_message: false
   }),
 
   computed: {
@@ -66,7 +66,7 @@ export default {
       return this.$store.getters.user
     }
   },
-  mounted(){
+  mounted() {
     this.$pusher.authenticate()
     this.subscribePusher()
   },
@@ -85,26 +85,31 @@ export default {
   },
 
   methods: {
-    add_new_message(message){
-      if(!this.messages.some(msg => msg.id === message.id)){
+    add_new_message(message) {
+      if (!this.messages.some(msg => msg.id === message.id)) {
         this.messages.push(message)
       }
       this.scrollToBottom(this.$refs['messages-container'])
     },
-    user_can_message(can){
+    user_can_message(can) {
       this.can_message = can
-      if (can) 
-        this.$event.$emit('open_snackbar', 'Team chat connected') 
+      if (can) this.$event.$emit('open_snackbar', 'Team chat connected')
       else
         this.$event.$emit('open_snackbar', 'Team chat disconnected.', 'error')
     },
     subscribePusher() {
-      const team_message_channel = this.$pusher.subscribe(`private-project.team-message.${this.id}`)
-          team_message_channel.bind('ProjectTeamMessage', (data) =>{ 
-            if(data.type === 'team') this.add_new_message(data.message) 
-          })
-          team_message_channel.bind('pusher:subscription_succeeded', () => this.user_can_message(true))
-          team_message_channel.bind('pusher:subscription_error',(status) => this.user_can_message(false))
+      const team_message_channel = this.$pusher.subscribe(
+        `private-project.team-message.${this.id}`
+      )
+      team_message_channel.bind('ProjectTeamMessage', data => {
+        if (data.type === 'team') this.add_new_message(data.message)
+      })
+      team_message_channel.bind('pusher:subscription_succeeded', () =>
+        this.user_can_message(true)
+      )
+      team_message_channel.bind('pusher:subscription_error', status =>
+        this.user_can_message(false)
+      )
     },
     sendMessage(message) {
       if (!message) return

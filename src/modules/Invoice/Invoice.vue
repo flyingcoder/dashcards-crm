@@ -9,7 +9,7 @@
     <InvoiceDialog type="create" @created="items.unshift($event)" />
     <InvoiceDialog type="edit" @updated="invoice_updated" />
 
-    <ViewInvoice 
+    <ViewInvoice
       ref="view_invoice_dialog"
       :item="view_item"
       :open="view_invoice_dialog"
@@ -31,7 +31,7 @@
       :sort="sort"
       :has-checkbox="true"
       toolbar-title="Invoice"
-      hide-actions
+      hide-default-footer
       :permission="$_permissions.get('invoice')"
       @items-selected="selected_ids = $event"
       @edit="open_edit_dialog"
@@ -45,10 +45,10 @@
       </template>
 
       <template slot="row-view" slot-scope="{ item }">
-       <!--  <v-btn fab small flat depressed>
+        <!--  <v-btn fab small text depressed>
           <v-icon>email</v-icon>
         </v-btn> -->
-        <v-btn fab small flat depressed @click="open_view_dialog(item)">
+        <v-btn fab small text depressed @click="open_view_dialog(item)">
           <v-icon>search</v-icon>
         </v-btn>
       </template>
@@ -58,7 +58,7 @@
             <v-btn
               color="#3b589e"
               dark
-              outline
+              outlined
               :disabled="!show_delete_selected"
             >
               Delete Selected
@@ -66,12 +66,12 @@
           </div>
 
           <div class="pagination" v-if="pagination.total > 1">
-              <v-pagination
-                color="#3b589e"
-                v-model="pagination.current"
-                :length="pagination.total"
-                :total-visible="pagination.total < 6 ? pagination.total : 6"
-                @input="onPageChange"
+            <v-pagination
+              color="#3b589e"
+              v-model="pagination.current"
+              :length="pagination.total"
+              :total-visible="pagination.total < 6 ? pagination.total : 6"
+              @input="onPageChange"
             ></v-pagination>
           </div>
         </div>

@@ -27,25 +27,25 @@ export default {
       {
         dot: true,
         popover: {
-          label: 'Meeting with the team',
+          label: 'Meeting with the team'
         },
         dates: [
           new Date(2020, 2, 1), // Jan 1st
           new Date(2020, 2, 10), // Jan 10th
-          new Date(2020, 2, 22), // Jan 22nd
+          new Date(2020, 2, 22) // Jan 22nd
         ]
-      },      
+      },
       {
         dot: 'red',
         popover: {
-          label: 'Task 2 Time Line',
+          label: 'Task 2 Time Line'
         },
         dates: [
           { start: new Date(2020, 2, 2), end: new Date(2020, 2, 9) },
           { start: new Date(2020, 2, 15), span: 5 } // # of days
         ]
       }
-    ],
+    ]
   }),
 
   computed: {

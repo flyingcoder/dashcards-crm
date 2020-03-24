@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-    <v-text-field flat label="Search" prepend-icon="search"></v-text-field>
+    <v-text-field text label="Search" prepend-icon="search"></v-text-field>
   </div>
 </template>
 <script src="./HeaderSearch.js"></script>
