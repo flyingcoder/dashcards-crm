@@ -136,14 +136,12 @@ export const methods = {
         else if (sort[1] === 'desc') this.sort.descending = true
       }
     },
-
     hasMoreData(){
       this.componentKey += 1
       if (this.pagination.current >= this.pagination.total) {
         this.noMoreData = true
       }
     },
-
     toggleAll() {
       if (this.selected.length) this.selected = []
       else this.selected = this.items.slice()

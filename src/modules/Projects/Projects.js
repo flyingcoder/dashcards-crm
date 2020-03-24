@@ -86,6 +86,10 @@ export default {
         align: 'center'
       }
     ],
+    pagination: {
+      current: 1,
+      total: 0,
+    },
     table_config: {
       add_message: 'New project added successfully!',
       update_message: 'Project updated successfully!',
@@ -102,7 +106,6 @@ export default {
     this.$event.$on('open-new-member-dialog', () => this.add_new_member_dialog = true)
   },
   methods: {
-    
     load_more(){
       this.loading = true
       apiTo.get_projects(this.pagination.current + 1).then(({data}) =>{

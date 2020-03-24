@@ -1,7 +1,6 @@
 <template>
   <v-layout wrap class="table-header">
     <breadcrumb :paths="paths" />
-    
     <v-flex>
       <v-btn v-if="!noButton" fab small class="add__btn mr-2" @click="$emit('click')">
         <v-icon>add</v-icon>

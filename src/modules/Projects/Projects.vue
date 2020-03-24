@@ -111,7 +111,6 @@
         <v-btn tile text outlined @click="add_dialog = true"><v-icon left>add</v-icon> Add Project</v-btn>
       </template>
     </VueTable>
-    
   </div>
 </template>
 <script src="./Projects.js"></script>

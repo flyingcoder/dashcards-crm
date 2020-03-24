@@ -13,7 +13,6 @@ import TextArea from '@/common/BaseComponents/TextArea.vue'
 import AutoComplete from '../AutoComplete'
 import DatePickers from '../DatePickers/DatePickers.vue' //used for Due Date field
 import MembersDropdown from '../MembersDropdown/MembersDropdown.vue'
-import UserSelector from '@/common/BaseComponents/UserSelector.vue'
 
 export default {
   name: 'ProjectModal',
@@ -24,7 +23,6 @@ export default {
     MembersDropdown,
     TextField,
     TextArea,
-    UserSelector,
   },
 
   props: {
