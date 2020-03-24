@@ -11,7 +11,7 @@
 
         <div class="dialog__body">
           <v-layout wrap class="dialog__buttons">
-            <v-flex md4 sm6 xs12 class="text-xs-center">
+            <v-flex md4 sm6 xs12 class="text-xs-center mb-3">
               <v-menu
                 class="d__dropdown"
                 transition="slide-y-transition"
@@ -21,7 +21,8 @@
                 max-width="350"
                 v-model="client.show"
               >
-                <v-btn slot="activator" class="d__btn">
+              <template v-slot:activator="{ on }">
+                <v-btn v-on="on" class="d__btn">
                   <div class="d__icon">
                     <svg viewBox="0 0 250 250">
                       <path
@@ -34,6 +35,7 @@
                     <span>Select Client</span>
                   </div>
                 </v-btn>
+              </template>
 
                 <v-list>
                   <auto-complete
@@ -58,7 +60,7 @@
               </div>
             </v-flex>
 
-            <v-flex md4 sm6 xs12 class="text-xs-center">
+            <v-flex md4 sm6 xs12 class="text-xs-center mb-3">
               <v-menu
                 class="d__dropdown"
                 transition="slide-y-transition"
@@ -68,7 +70,8 @@
                 max-width="350"
                 v-model="service.show"
               >
-                <v-btn slot="activator" class="d__btn">
+               <template v-slot:activator="{ on }">
+                <v-btn v-on="on" class="d__btn">
                   <div class="d__icon">
                     <svg viewBox="0 0 250 250">
                       <path
@@ -81,6 +84,7 @@
                     <span>Select Service</span>
                   </div>
                 </v-btn>
+               </template>
 
                 <v-list>
                   <auto-complete
@@ -102,14 +106,14 @@
               </div>
             </v-flex>
 
-            <v-flex md4 sm6 xs12 class="text-xs-center">
+            <v-flex md4 sm6 xs12 class="text-xs-center mb-3">
               <v-btn class="attachment d__btn">
                 <v-icon> attach_file</v-icon>
                 <div class="d__title">Attach</div>
               </v-btn>
             </v-flex>
 
-            <v-flex md4 sm6 xs12 class="text-xs-center">
+            <v-flex md4 sm6 xs12 class="text-xs-center mb-3">
               <v-menu
                 class="d__dropdown"
                 transition="slide-y-transition"
@@ -118,7 +122,8 @@
                 :close-on-content-click="false"
                 v-model="date_pickers.show"
               >
-                <v-btn slot="activator" class="d__btn">
+               <template v-slot:activator="{ on }">
+                <v-btn v-on="on" class="d__btn">
                   <div class="d__icon">
                     <svg viewBox="0 0 250 250">
                       <path
@@ -131,6 +136,7 @@
                     <span>Select Date</span>
                   </div>
                 </v-btn>
+               </template>
 
                 <v-list>
                   <date-pickers
@@ -148,7 +154,7 @@
               </div>
             </v-flex>
 
-            <v-flex md4 sm6 xs12 class="text-xs-center">
+            <v-flex md4 sm6 xs12 class="text-xs-center mb-3">
               <v-menu
                 class="d__dropdown"
                 transition="slide-y-transition"
@@ -157,7 +163,8 @@
                 :close-on-content-click="false"
                 max-width="350"
               >
-                <v-btn slot="activator" class="d__btn">
+               <template v-slot:activator="{ on }">
+                <v-btn v-on="on" class="d__btn">
                   <div class="d__icon">
                     <svg viewBox="0 0 250 250">
                       <path
@@ -170,6 +177,7 @@
                     <span>Assign Members</span>
                   </div>
                 </v-btn>
+               </template>
 
                 <v-list>
                   <members-dropdown

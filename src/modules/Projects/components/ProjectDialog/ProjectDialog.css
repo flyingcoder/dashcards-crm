@@ -22,7 +22,9 @@
 >>> .project__description .quill-editor .ql-toolbar.ql-snow{
     border-bottom: 1px solid #dce1e5;
 }
-
+>>> .theme--light.v-text-field--filled>.v-input__control>.v-input__slot{
+    background-color: #fff;
+}
 @media only screen and (max-width: 480px){
     >>> .project__title .v-input__slot, >>> .project__comment .v-input__slot{
         font-size: 12px;

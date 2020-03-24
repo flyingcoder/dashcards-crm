@@ -37,6 +37,9 @@
     width: 110px;
     margin: 0 9px;
 }
+>>> .custom__dialog .dialog__body{
+    padding: 0;
+}
 
 @media only screen and (max-width: 480px){
     >>> .dialog__body .v-input__slot{

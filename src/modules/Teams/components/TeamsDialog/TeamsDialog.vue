@@ -19,7 +19,7 @@
           <v-text-field
             class="dialog__textfield d-field"
             color="#667187"
-            box
+            filled
             hide-details
             @blur="on_blur_field('first_name')"
             :error="$v.first_name.$error"
@@ -32,7 +32,7 @@
           <v-text-field
             class="dialog__textfield d-field"
             color="#667187"
-            box
+            filled
             hide-details
             @blur="on_blur_field('last_name')"
             :error="$v.last_name.$error"
@@ -45,7 +45,7 @@
           <v-select
             class="dialog__selectfield d-field"
             color="#667187"
-            box
+            filled
             hide-details
             @blur="on_blur_field('group_name')"
             :error="$v.group_name.$error"
@@ -61,7 +61,7 @@
           <v-text-field
             class="dialog__textfield d-field"
             color="#667187"
-            box
+            filled
             hide-details
             @blur="on_blur_field('job_title')"
             :error="$v.job_title.$error"
@@ -74,7 +74,7 @@
           <v-text-field
             class="dialog__email d-field"
             color="#667187"
-            box
+            filled
             hide-details
             @blur="on_blur_field('email')"
             :error="$v.email.$error"
@@ -87,7 +87,7 @@
           <v-text-field
             class="dialog__textfield d-field"
             color="#667187"
-            box
+            filled
             hide-details
             @blur="on_blur_field('contact_number')"
             :error="$v.contact_number.$error"
@@ -143,7 +143,7 @@
           <v-text-field
             class="dialog__textfield d-field"
             color="#667187"
-            box
+            filled
             hide-details
             label="Address"
             v-model.trim="address"
@@ -154,10 +154,10 @@
           <v-text-field
             class="dialog__textfield d-field"
             color="#667187"
-            box
+            filled
             hide-details
             label="Rate / Hour"
-            prefix="$"
+            suffix="$"
             @blur="on_blur_field('rate')"
             :error="$v.rate.$error"
             v-model.trim="rate"
@@ -176,3 +176,8 @@
 
 <script src="./TeamsDialog.js"></script>
 <style lang="scss" scoped src="./TeamsDialog.scss"></style>
+<style lang="css" scoped>
+>>> .theme--light.v-text-field--filled>.v-input__control>.v-input__slot{
+    background-color: #fff;
+}
+</style>
