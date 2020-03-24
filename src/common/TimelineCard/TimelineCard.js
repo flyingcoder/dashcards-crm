@@ -1,13 +1,18 @@
 import request from '@/services/axios_instance'
 import moment from 'moment'
+ import { global_utils } from '@/global_utils/global_utils'
 //Components
+import Empty from '@/common/Empty.vue'
 import DashCard from '@/common/DashCard.vue'
+import Carousel from 'vue-owl-carousel'
 
 export default {
   name: 'TimelineCard',
-
+  mixins: [global_utils],
   components: {
-    DashCard
+    DashCard,
+    Carousel,
+    Empty
   },
 
   props: {
