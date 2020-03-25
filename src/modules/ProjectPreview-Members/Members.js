@@ -29,7 +29,7 @@ export default {
       { text: 'Telephone', value: 'telephone' },
       { text: 'Position', value: 'position' },
       { text: 'Tasks', value: 'tasks' },
-      { text: 'Action', value: 'action' },
+      { text: 'Action', value: 'action' }
     ],
     sortList: [
       { title: 'Sort by member' },
@@ -66,7 +66,7 @@ export default {
     },
     navigate_to_view_profile(user) {
       let item = Object.values(user.user_roles)
-      if (item[0].indexOf('client') >= 0 || item[0].indexOf('agent') >= 0 ) {
+      if (item[0].indexOf('client') >= 0 || item[0].indexOf('agent') >= 0) {
         this.$router.push(`/dashboard/clients/profile/${user.id}`)
       } else {
         this.$router.push(`/dashboard/team/profile/${user.id}`)

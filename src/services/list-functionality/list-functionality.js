@@ -1,8 +1,7 @@
-
 import { methods } from './methods'
 
 export const list_functionality = {
-  mixins: [ methods],
+  mixins: [methods],
   data: () => ({
     edit_dialog: false,
     add_dialog: false,
@@ -25,13 +24,13 @@ export const list_functionality = {
       descending: false
     },
     search: '',
-    pagination :{
-      current : 1,
+    pagination: {
+      current: 1,
       total: 0
     },
     noMoreData: false,
     componentKey: 1,
-    view : 'list'
+    view: 'list'
   }),
 
   watch: {

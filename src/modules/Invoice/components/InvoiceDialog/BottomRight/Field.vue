@@ -12,16 +12,23 @@
       min="0"
       :value="value"
       @input="$emit('input', $event)"
-    > 
+    >
       <v-tooltip class="toggle-btn" bottom v-if="!noSymbol">
         <template v-slot:activator="{ on }">
-          <v-btn icon color="#657186" text v-on="on" @click="$emit('toggle-symbol', symbolType)"><v-icon >compare_arrows</v-icon></v-btn>
+          <v-btn
+            icon
+            color="#657186"
+            text
+            v-on="on"
+            @click="$emit('toggle-symbol', symbolType)"
+            ><v-icon>compare_arrows</v-icon></v-btn
+          >
         </template>
         <span>Toggle {{ title }}</span>
       </v-tooltip>
 
       <template v-slot:append v-if="!noSymbol">
-        <span slot="activator" >{{ symbol }}</span>
+        <span slot="activator">{{ symbol }}</span>
       </template>
     </v-text-field>
 

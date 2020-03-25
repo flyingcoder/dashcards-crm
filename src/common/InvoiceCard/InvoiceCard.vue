@@ -40,27 +40,23 @@
             auto-draw
           ></v-sparkline>
 
-            <v-list disabled tile two-line dense>
-              <v-list-item
-                v-for="item in items"
-                :key="item.user.id"
-                dense
-              >
-                <v-list-item-avatar size="40">
-                  <v-img :src="item.user.image_url"></v-img>
-                </v-list-item-avatar>
+          <v-list disabled tile two-line dense>
+            <v-list-item v-for="item in items" :key="item.user.id" dense>
+              <v-list-item-avatar size="40">
+                <v-img :src="item.user.image_url"></v-img>
+              </v-list-item-avatar>
 
-                <v-list-item-content>
-                  <v-list-item-title
-                    v-text="item.user.fullname"
-                  ></v-list-item-title>
-                  <v-list-item-subtitle
-                    v-text="item.user.job_title"
-                  ></v-list-item-subtitle>
-                </v-list-item-content>
-                <v-list-item-icon>
-                  {{ item.amount }}
-                </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title
+                  v-text="item.user.fullname"
+                ></v-list-item-title>
+                <v-list-item-subtitle
+                  v-text="item.user.job_title"
+                ></v-list-item-subtitle>
+              </v-list-item-content>
+              <v-list-item-icon>
+                {{ item.amount }}
+              </v-list-item-icon>
             </v-list-item>
           </v-list>
         </v-card>

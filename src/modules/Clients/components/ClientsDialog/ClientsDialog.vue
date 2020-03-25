@@ -138,7 +138,7 @@
 <script src="./ClientsDialog.js"></script>
 <style lang="scss" scoped src="./ClientsDialog.scss"></style>
 <style lang="css" scoped>
->>> .theme--light.v-text-field--filled>.v-input__control>.v-input__slot{
-    background-color: #fff;
+>>> .theme--light.v-text-field--filled > .v-input__control > .v-input__slot {
+  background-color: #fff;
 }
 </style>

@@ -38,14 +38,14 @@ export default {
       { text: 'Due Date', value: 'due_date', sortable: false },
       { text: 'Client', value: 'client', sortable: false },
       { text: 'Amount', value: 'amount', sortable: false },
-      { text: 'Action',value: 'actions', sortable: false, }
+      { text: 'Action', value: 'actions', sortable: false }
     ],
-    view_item : null,
+    view_item: null,
     table_config: {
       add_message: 'New invoice added successfully!',
       update_message: 'Invoice updated successfully!',
       delete_message: 'Invoice deleted successfully!',
-      refresh_table_message: 'Table refreshed',
+      refresh_table_message: 'Table refreshed'
     }
   }),
 
@@ -113,31 +113,33 @@ export default {
 
     getInvoices() {
       this.loading = true
-      api_to.get_invoices(this.pagination.current, this.rows_per_page )
-        .then(({data}) => {
-            this.items = data.data
-            this.pagination.current = data.current_page
-            this.pagination.total = data.last_page
-            this.hasMoreData()
+      api_to
+        .get_invoices(this.pagination.current, this.rows_per_page)
+        .then(({ data }) => {
+          this.items = data.data
+          this.pagination.current = data.current_page
+          this.pagination.total = data.last_page
+          this.hasMoreData()
         })
-        .finally(() => { 
+        .finally(() => {
           this.loading = false
           this.$event.$emit('btnloading_off', false)
         })
     },
     load_more() {
       this.loading = true
-      api_to.get_invoices(this.pagination.current+1 )
-        .then(({data}) => {
+      api_to
+        .get_invoices(this.pagination.current + 1)
+        .then(({ data }) => {
           console.log(data.data)
-            data.data.forEach(item => {
-              this.items.push(item)
-            })
-            this.pagination.current = data.current_page
-            this.pagination.total = data.last_page
-            this.hasMoreData()
+          data.data.forEach(item => {
+            this.items.push(item)
+          })
+          this.pagination.current = data.current_page
+          this.pagination.total = data.last_page
+          this.hasMoreData()
         })
-        .finally(() => { 
+        .finally(() => {
           this.loading = false
           this.$event.$emit('btnloading_off', false)
         })

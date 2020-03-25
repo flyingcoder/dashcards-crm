@@ -32,10 +32,10 @@ export default {
       { text: 'Client', value: 'client', width: '30%' },
       { text: 'Due Date', value: 'due_date', width: '10%' },
       { text: 'Amount', value: 'amount', width: '10%' },
-      { text: 'Actions', value: 'action', width: '20%', align: 'center' },
+      { text: 'Actions', value: 'action', width: '20%', align: 'center' }
     ],
     view_invoice_dialog: false,
-    view_item: null,
+    view_item: null
   }),
 
   created() {
@@ -73,16 +73,15 @@ export default {
       this.set_dialog({ type: 'edit', open: true })
     },
     fetch_data() {
-      apiTo
-        .get_all_projects()
-        .then(res2 => {
-          this.set_projects(res2.data)
-        })
+      apiTo.get_all_projects().then(res2 => {
+        this.set_projects(res2.data)
+      })
     },
     getInvoices() {
       this.loading = true
-      apiTo.getInvoices(this.id, this.pagination.current)
-        .then(({data}) => {
+      apiTo
+        .getInvoices(this.id, this.pagination.current)
+        .then(({ data }) => {
           this.items = data.data
           this.pagination.current = data.current_page
           this.pagination.total = data.last_page
@@ -95,19 +94,20 @@ export default {
     },
     getMoreInvoices() {
       this.loading = true
-      apiTo.getInvoices(this.id,this.pagination.current+1)
-      .then(({data}) =>{
-        data.data.forEach(item => {
-          this.items.push(item)
+      apiTo
+        .getInvoices(this.id, this.pagination.current + 1)
+        .then(({ data }) => {
+          data.data.forEach(item => {
+            this.items.push(item)
+          })
+          this.pagination.current = data.current_page
+          this.pagination.total = data.last_page
+          this.hasMoreData()
         })
-        this.pagination.current = data.current_page
-        this.pagination.total = data.last_page
-        this.hasMoreData()
-      })
-      .finally(() => {
-        this.loading = false
-        this.$event.$emit('btnloading_off', false)
-      })
+        .finally(() => {
+          this.loading = false
+          this.$event.$emit('btnloading_off', false)
+        })
     },
     invoice_updated(invoice) {
       const index = this.items.findIndex(item => item.id === invoice.id)

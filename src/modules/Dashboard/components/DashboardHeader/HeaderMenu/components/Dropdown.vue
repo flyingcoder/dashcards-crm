@@ -145,6 +145,7 @@ export default {
   }
   .user-chevron img {
     width: 25px !important;
+    margin-left: 5px;
   }
 }
 

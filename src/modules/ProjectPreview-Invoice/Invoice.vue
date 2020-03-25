@@ -17,7 +17,7 @@
     />
 
     <VueTable
-      :items="items" 
+      :items="items"
       :headers="headers"
       :showRowActions="true"
       @load-more="getMoreInvoices"
@@ -25,8 +25,8 @@
       title="Project Invoice"
       :key="componentKey"
       :noMoreData="noMoreData"
-    > 
-      <template v-slot:row-slot="{item}">
+    >
+      <template v-slot:row-slot="{ item }">
         <tr>
           <td>{{ item.title }}</td>
           <td>{{ item.billed_to }}</td>
@@ -41,7 +41,6 @@
         </tr>
       </template>
     </VueTable>
-
   </div>
 </template>
 

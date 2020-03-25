@@ -36,7 +36,7 @@
       :key="componentKey"
       :noMoreData="noMoreData"
     >
-      <template v-slot:row-slot="{item}">
+      <template v-slot:row-slot="{ item }">
         <tr :key="item.id">
           <td class="service__name text-cap">{{ item.service_name }}</td>
           <td class="text-cap">{{ item.name }}</td>
@@ -51,7 +51,9 @@
         </tr>
       </template>
       <template slot="empty-slot">
-        <v-btn tile text outlined @click="add_dialog = true"><v-icon left>add</v-icon> Add Service</v-btn>
+        <v-btn tile text outlined @click="add_dialog = true"
+          ><v-icon left>add</v-icon> Add Service</v-btn
+        >
       </template>
     </VueTable>
   </div>

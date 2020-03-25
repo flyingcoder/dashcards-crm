@@ -2,9 +2,9 @@ import request from '@/services/axios_instance'
 
 export const apiTo = {
   getInvoices(projectId, page) {
-    return request.get( `api/projects/${projectId}/invoice?page=${page}` )
+    return request.get(`api/projects/${projectId}/invoice?page=${page}`)
   },
-  
+
   delete_invoice(id) {
     return request.delete(`api/invoice/${id}`)
   },

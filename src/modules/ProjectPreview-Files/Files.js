@@ -35,7 +35,7 @@ export default {
       { text: 'Filename', value: 'filename', width: '35%' },
       { text: 'Added by', value: 'member' },
       { text: 'Project', value: 'project' },
-      { text: 'Action', value: 'action' },
+      { text: 'Action', value: 'action' }
     ],
     table_config: {
       route_name: 'project_preview',
@@ -91,8 +91,7 @@ export default {
         iconText: 'Other'
       }
     ],
-    log_id: null,
-   
+    log_id: null
   }),
 
   computed: {
@@ -100,7 +99,7 @@ export default {
       return this.$_permissions.get('hq_files')
     },
     filteredItems() {
-      if (this.filter === 'all')  return this.items
+      if (this.filter === 'all') return this.items
       return this.items.filter(item =>
         item.collection_name.includes(this.filter)
       )
@@ -125,57 +124,55 @@ export default {
     },
     can_delete() {
       if (this.user.is_admin) return true
-      return (
-        this.permissions &&
-        this.permissions.delete
-      )
+      return this.permissions && this.permissions.delete
     }
   },
 
   created() {
-
     this.view = this.getPreferredView()
-    this.get_files()//fill_table('get_files', true, this.dynamic_api)
+    this.get_files() //fill_table('get_files', true, this.dynamic_api)
   },
 
   methods: {
-    get_files(){
+    get_files() {
       this.item = []
       var payload = {
-        page : 1,
-        type : this.filter
+        page: 1,
+        type: this.filter
       }
-      apiTo.getFilesByTypes(this.id, payload)
-      .then(({data}) =>{
-        this.items = data.data
-        this.pagination.current = data.current_page
-        this.pagination.total = data.last_page
-        this.hasMoreData()
-      })
-      .finally(() => {
-        this.loading = false
-        this.$event.$emit('btnloading_off', false)
-      })
-    },
-    get_more_files(){
-      this.item = []
-      var payload = {
-        page : this.pagination.current + 1,
-        type : 'all'
-      }
-      apiTo.getFilesByTypes(this.id, payload)
-      .then(({data}) =>{
-        data.data.forEach(item => {
-           this.items.push(item)
+      apiTo
+        .getFilesByTypes(this.id, payload)
+        .then(({ data }) => {
+          this.items = data.data
+          this.pagination.current = data.current_page
+          this.pagination.total = data.last_page
+          this.hasMoreData()
         })
-        this.pagination.current = data.current_page
-        this.pagination.total = data.last_page
-        this.hasMoreData()
-      })
-      .finally(() => {
-        this.loading = false
-        this.$event.$emit('btnloading_off', false)
-      })
+        .finally(() => {
+          this.loading = false
+          this.$event.$emit('btnloading_off', false)
+        })
+    },
+    get_more_files() {
+      this.item = []
+      var payload = {
+        page: this.pagination.current + 1,
+        type: 'all'
+      }
+      apiTo
+        .getFilesByTypes(this.id, payload)
+        .then(({ data }) => {
+          data.data.forEach(item => {
+            this.items.push(item)
+          })
+          this.pagination.current = data.current_page
+          this.pagination.total = data.last_page
+          this.hasMoreData()
+        })
+        .finally(() => {
+          this.loading = false
+          this.$event.$emit('btnloading_off', false)
+        })
     },
     manual_upload() {
       this.$refs.dropzone.process_queue()
@@ -200,30 +197,38 @@ export default {
     },
 
     addLink(payload) {
-      apiTo.addProjectLink(this.id, payload).then(({ data }) => {
-        this.items.push(data)
-        this.$refs.link_dialog.closeAndClearDialog()
-      })
-      .finally(() => this.$event.$emit('btnloading_off', false))
+      apiTo
+        .addProjectLink(this.id, payload)
+        .then(({ data }) => {
+          this.items.push(data)
+          this.$refs.link_dialog.closeAndClearDialog()
+        })
+        .finally(() => this.$event.$emit('btnloading_off', false))
     },
 
     delete_item() {
-      apiTo.deleteFile(this.delete_item_id).then(() => {
-        const indexFound = this.items.findIndex(
-          item => item.id === this.delete_item_id
-        )
-        if (~indexFound) {
-          this.items.splice(indexFound, 1)
-          this.delete_item_id = null
-          this.delete_dialog = false
-          this.$event.$emit('open_snackbar', this.table_config.delete_message)
-        }
-      })
-      .finally(() => this.$event.$emit('btnloading_off', false))
+      apiTo
+        .deleteFile(this.delete_item_id)
+        .then(() => {
+          const indexFound = this.items.findIndex(
+            item => item.id === this.delete_item_id
+          )
+          if (~indexFound) {
+            this.items.splice(indexFound, 1)
+            this.delete_item_id = null
+            this.delete_dialog = false
+            this.$event.$emit('open_snackbar', this.table_config.delete_message)
+          }
+        })
+        .finally(() => this.$event.$emit('btnloading_off', false))
     },
 
     file_failed([file, response]) {
-      this.$event.$emit( 'open_snackbar', typeof response === 'object' ? response[0] : response, 'error' )
+      this.$event.$emit(
+        'open_snackbar',
+        typeof response === 'object' ? response[0] : response,
+        'error'
+      )
     },
 
     goto_link(url) {

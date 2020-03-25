@@ -1,6 +1,6 @@
 import request from '@/services/axios_instance'
 import moment from 'moment'
- import { global_utils } from '@/global_utils/global_utils'
+import { global_utils } from '@/global_utils/global_utils'
 //Components
 import Empty from '@/common/Empty.vue'
 import DashCard from '@/common/DashCard.vue'

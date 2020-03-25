@@ -1,7 +1,7 @@
 import { settings } from '@/variables'
 export default {
   data: () => ({
-  	homepage : settings.BaseURL+'/login'
+    homepage: settings.BaseURL + '/login'
   }),
   created() {
     this.$event.$emit(
@@ -10,13 +10,13 @@ export default {
       'error'
     )
   },
-  methods : {
-  	gotohome(){
-  		if (this.$store.getters.user) {
-  			this.$router.push(`/dashboard`)
-  		} else {
-  			this.$router.push(`/login`)
-  		}
-  	}
+  methods: {
+    gotohome() {
+      if (this.$store.getters.user) {
+        this.$router.push(`/dashboard`)
+      } else {
+        this.$router.push(`/login`)
+      }
+    }
   }
 }

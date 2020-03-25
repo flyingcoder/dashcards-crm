@@ -41,7 +41,7 @@ export default {
       { text: 'Dashboard', disabled: false, router_name: 'default-content' },
       { text: 'Projects', disabled: true, router_name: null }
     ],
-    selected:[],
+    selected: [],
     headers: [
       {
         text: 'Project Title',
@@ -79,7 +79,7 @@ export default {
         sortable: true,
         align: 'left'
       },
-      {  
+      {
         text: 'Action',
         value: 'actions',
         sortable: false,
@@ -88,7 +88,7 @@ export default {
     ],
     pagination: {
       current: 1,
-      total: 0,
+      total: 0
     },
     table_config: {
       add_message: 'New project added successfully!',
@@ -100,40 +100,43 @@ export default {
   }),
 
   created() {
-    this.load_projects();
-    this.$event.$on('open-new-service-dialog', () => this.add_new_service_dialog = true)
-    this.$event.$on('open-new-client-dialog', () => this.add_new_client_dialog = true)
-    this.$event.$on('open-new-member-dialog', () => this.add_new_member_dialog = true)
+    this.load_projects()
+    this.$event.$on(
+      'open-new-service-dialog',
+      () => (this.add_new_service_dialog = true)
+    )
+    this.$event.$on(
+      'open-new-client-dialog',
+      () => (this.add_new_client_dialog = true)
+    )
+    this.$event.$on(
+      'open-new-member-dialog',
+      () => (this.add_new_member_dialog = true)
+    )
   },
   methods: {
-    load_more(){
+    load_more() {
       this.loading = true
-      apiTo.get_projects(this.pagination.current + 1)
-      .then(({data}) =>{
+      apiTo.get_projects(this.pagination.current + 1).then(({ data }) => {
         data.data.forEach(item => {
           this.items.push(item)
         })
-        this.pagination.current = data.current_page
-        this.pagination.total = data.last_page
-        this.hasMoreData()
-      })
-      .finally(() => {
-        this.loading = false
-        this.$event.$emit('btnloading_off', false)
       })
     },
-    load_projects(){
-      this.loading = true
-      apiTo.get_projects(1).then(({data}) =>{
-        this.items = data.data
-        this.pagination.current = data.current_page
-        this.pagination.total = data.last_page
-        this.hasMoreData()
-      })
-      .finally(() => {
-        this.loading = false
-        this.$event.$emit('btnloading_off', false)
-      })
+    load_projects() {
+      ;(this.loading = true),
+        apiTo
+          .get_projects(1)
+          .then(({ data }) => {
+            this.items = data.data
+            this.pagination.current = data.current_page
+            this.pagination.total = data.last_page
+            this.hasMoreData()
+          })
+          .finally(() => {
+            this.loading = false
+            this.$event.$emit('btnloading_off', false)
+          })
     },
     navigate_to_view_project(id) {
       this.$router.push({
@@ -158,15 +161,16 @@ export default {
     },
 
     save_new_member(datus) {
-      apiTo.add_new_member(datus)
-      .then(({data}) => {
-        this.$event.$emit('new_member_added', data)
-        this.$refs.add_member_dialog.$refs.dialog.clear_and_close()
-      })
-      .finally(() => this.$event.$emit('btnloading_off', false))
+      apiTo
+        .add_new_member(datus)
+        .then(({ data }) => {
+          this.$event.$emit('new_member_added', data)
+          this.$refs.add_member_dialog.$refs.dialog.clear_and_close()
+        })
+        .finally(() => this.$event.$emit('btnloading_off', false))
     },
-    filter_projects(filter){
+    filter_projects(filter) {
       //todo
-    },
+    }
   }
 }

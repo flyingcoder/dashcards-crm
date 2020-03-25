@@ -27,15 +27,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '~@/sass/_variables';
-  @include emptyTable('.empty');
+@import '~@/sass/_variables';
+@include emptyTableInner('.empty');
 
-  .justify-content-center {
-    display: flex;
-    justify-content: center;
-  }
-  .empty{
-    margin: 5px;
-  }
+.justify-content-center {
+  display: flex;
+  justify-content: center;
+}
+.empty {
+  margin: 5px;
+}
 
+.justify-content-center {
+  display: flex;
+  justify-content: center;
+}
+.empty-div {
+  margin: 5px;
+}
+</style>
+
+<style lang="scss" scoped>
+@import '~@/sass/_variables';
+@include emptyTableInner('.empty');
 </style>

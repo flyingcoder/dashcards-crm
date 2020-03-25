@@ -1,10 +1,6 @@
 <template>
   <div class="question-fields">
-    <v-layout
-      group
-      v-for="(section, index) of dynamicSections"
-      :key="index"
-    >
+    <v-layout group v-for="(section, index) of dynamicSections" :key="index">
       <v-flex xs12>
         <div class="field">
           <v-layout align-center>

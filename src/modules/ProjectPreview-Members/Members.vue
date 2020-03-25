@@ -35,7 +35,7 @@
 
     <VueTable
       v-if="view === 'list'"
-      :items="items" 
+      :items="items"
       :headers="headers"
       :showRowActions="true"
       icon="mdi-clock"
@@ -44,7 +44,7 @@
       :noMoreData="noMoreData"
       :hasFooter="false"
     >
-      <template v-slot:row-slot="{item}">
+      <template v-slot:row-slot="{ item }">
         <tr>
           <td class="text-cap">
             <v-avatar size="36" class="mr-1">
@@ -66,10 +66,12 @@
         </tr>
       </template>
       <template v-slot:empty-slot>
-        <v-btn tile text outlined @click="add_dialog = true"><v-icon left>add</v-icon> Add Member</v-btn>
+        <v-btn tile text outlined @click="add_dialog = true"
+          ><v-icon left>add</v-icon> Add Member</v-btn
+        >
       </template>
     </VueTable>
-    
+
     <VueGrid
       v-else
       :items="items"

@@ -1,7 +1,7 @@
 <template>
   <div class="timer__tab">
     <VueTable
-      :items="items" 
+      :items="items"
       :headers="headers"
       :showRowActions="true"
       @load-more="get_more_timers"
@@ -11,22 +11,19 @@
       :noMoreData="noMoreData"
       :hasFooter="false"
     >
-      <template v-slot:row-slot="{item}">
+      <template v-slot:row-slot="{ item }">
         <tr>
           <td class="text-cap clickable-td" @click="view_task(item.id)">
-          {{ item.title }}
-        </td>
-        <td>
-          <!-- <assigned-btn :users="item.assignee" /> -->
-          <v-avatar size="36"
-            v-for="user in item.assignee"
-            :key="user.id"
-            >
-            <v-img :src="user.image_url" :title="user.fullname"></v-img>
-          </v-avatar>
-        </td>
-        <td>{{ item.total_time }}</td>
-        <td class="text-cap">{{ item.status }}</td>
+            {{ item.title }}
+          </td>
+          <td>
+            <!-- <assigned-btn :users="item.assignee" /> -->
+            <v-avatar size="36" v-for="user in item.assignee" :key="user.id">
+              <v-img :src="user.image_url" :title="user.fullname"></v-img>
+            </v-avatar>
+          </td>
+          <td>{{ item.total_time }}</td>
+          <td class="text-cap">{{ item.status }}</td>
         </tr>
       </template>
     </VueTable>

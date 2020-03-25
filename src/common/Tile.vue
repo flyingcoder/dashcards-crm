@@ -45,7 +45,7 @@ export default {
 .tile {
   display: grid;
   grid-template-columns: 1.5fr 2.5fr;
-  height: 80px;
+  height: 60px;
   border-radius: 9px;
   overflow: hidden;
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
@@ -68,10 +68,11 @@ export default {
     .text-counter,
     .text-title {
       color: $titleDarkBlue;
+      font-size: 20px;
     }
 
     .text-title {
-      font-size: 18px;
+      font-size: 16px;
     }
   }
 }

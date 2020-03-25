@@ -14,7 +14,7 @@
             v-if="loading"
             :indeterminate="true"
           ></v-progress-linear>
-          <Empty 
+          <Empty
             v-else-if="timeline_items.length === 0"
             slug="empty-timeline"
             headline="No timeline yet"
@@ -34,15 +34,15 @@
                 </div>
                 <v-flex>
                   <h2 class="t__title">{{ item.description }}</h2>
-                  <Carousel 
+                  <Carousel
                     v-if="item.properties.media.length"
-                    :autoplay="true" 
+                    :autoplay="true"
                     :nav="false"
                     :items="5"
                     :showPrev="false"
                     :showNext="false"
-                    >
-                    <v-img 
+                  >
+                    <v-img
                       v-for="media in item.properties.media"
                       :src="media.thumb_url"
                       width="60px"
@@ -51,8 +51,8 @@
                     ></v-img>
                   </Carousel>
                   <!-- else if single media old uploaded -->
-                  <v-img  
-                    v-else 
+                  <v-img
+                    v-else
                     :src="addHost(item.properties.thumb_url)"
                     width="60px"
                     height="60px"

@@ -45,8 +45,16 @@
         </v-col>
         <v-col md="2" sm="3" xs="12">
           <v-spacer></v-spacer>
-          <v-btn icon text right @click="setPreferredView('list')"><v-icon :color="view == 'list' ? 'primary' : ''">list</v-icon></v-btn>
-          <v-btn icon text right @click="setPreferredView('grid')"><v-icon :color="view == 'grid' ? 'primary' : ''">grid_on</v-icon></v-btn>
+          <v-btn icon text right @click="setPreferredView('list')"
+            ><v-icon :color="view == 'list' ? 'primary' : ''"
+              >list</v-icon
+            ></v-btn
+          >
+          <v-btn icon text right @click="setPreferredView('grid')"
+            ><v-icon :color="view == 'grid' ? 'primary' : ''"
+              >grid_on</v-icon
+            ></v-btn
+          >
         </v-col>
       </v-row>
 
@@ -63,27 +71,56 @@
                 >
                 </v-img>
                 <v-card-text>
-                <v-list-item two-line>
-                  <v-list-item-content>
-                    <v-list-item-subtitle>
-                    <div class="break-word-container" :title="item.name"> {{ item.name | str_limit(25) }} </div>
-                    </v-list-item-subtitle>
-                    <v-list-item-subtitle>
-                    <span class="grey--text"> Added by: {{ item.custom_properties.user.first_name }}</span>
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
+                  <v-list-item two-line>
+                    <v-list-item-content>
+                      <v-list-item-subtitle>
+                        <div class="break-word-container" :title="item.name">
+                          {{ item.name | str_limit(25) }}
+                        </div>
+                      </v-list-item-subtitle>
+                      <v-list-item-subtitle>
+                        <span class="grey--text">
+                          Added by:
+                          {{ item.custom_properties.user.first_name }}</span
+                        >
+                      </v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
                 </v-card-text>
                 <v-card-actions>
-                  <span class="text-upper">{{ item.custom_properties.ext }}</span>
+                  <span class="text-upper">{{
+                    item.custom_properties.ext
+                  }}</span>
                   <v-spacer></v-spacer>
-                  <v-btn fab small depressed title="Download" :href="item.download_url" v-if="item.mime_type !== 'link'">
+                  <v-btn
+                    fab
+                    small
+                    depressed
+                    title="Download"
+                    :href="item.download_url"
+                    v-if="item.mime_type !== 'link'"
+                  >
                     <v-icon small>cloud_download</v-icon>
                   </v-btn>
-                  <v-btn fab small depressed title="Go to link" @click="goto_link(item.download_url)" v-else >
+                  <v-btn
+                    fab
+                    small
+                    depressed
+                    title="Go to link"
+                    @click="goto_link(item.download_url)"
+                    v-else
+                  >
                     <v-icon small>link</v-icon>
                   </v-btn>
-                  <v-btn v-if="can_delete" @click="open_delete_dialog(item)" fab small text pressed title="Delete" >
+                  <v-btn
+                    v-if="can_delete"
+                    @click="open_delete_dialog(item)"
+                    fab
+                    small
+                    text
+                    pressed
+                    title="Delete"
+                  >
                     <img src="@/assets/icons/groups/delete.svg" alt="" />
                   </v-btn>
                 </v-card-actions>
@@ -94,8 +131,17 @@
           <v-row no-gutters v-if="filteredItems.length">
             <v-spacer></v-spacer>
             <v-card-actions class="py-2">
-              <v-btn tile text v-if="noMoreData === true"  disabled>NO MORE DATA</v-btn>
-              <v-btn tile text :loading="btnloading" v-else @click="get_more_files">LOAD MORE</v-btn>
+              <v-btn tile text v-if="noMoreData === true" disabled
+                >NO MORE DATA</v-btn
+              >
+              <v-btn
+                tile
+                text
+                :loading="btnloading"
+                v-else
+                @click="get_more_files"
+                >LOAD MORE</v-btn
+              >
             </v-card-actions>
             <v-spacer></v-spacer>
           </v-row>
@@ -119,7 +165,7 @@
 
       <VueTable
         v-else-if="view == 'list'"
-        :items="filteredItems" 
+        :items="filteredItems"
         :headers="headers"
         :showRowActions="true"
         @load-more="get_more_files"
@@ -128,8 +174,8 @@
         :key="componentKey"
         :noMoreData="noMoreData"
         :permission="$_permissions.get('hq_files')"
-      >      
-        <template v-slot:row-slot="{item}">
+      >
+        <template v-slot:row-slot="{ item }">
           <tr>
             <td @click="pop(item.public_url)">
               <v-img
@@ -142,16 +188,41 @@
             </td>
             <td class="text-upper">{{ item.custom_properties.ext }}</td>
             <td class="text-cap">{{ item.name }}</td>
-            <td class="text-cap"> {{ item.custom_properties.user.first_name }} </td>
+            <td class="text-cap">
+              {{ item.custom_properties.user.first_name }}
+            </td>
             <td class="text-cap">Project</td>
             <td class="text-xs-center">
-              <v-btn fab small depressed title="Download" :href="item.download_url" v-if="item.mime_type !== 'link'" >
+              <v-btn
+                fab
+                small
+                depressed
+                title="Download"
+                :href="item.download_url"
+                v-if="item.mime_type !== 'link'"
+              >
                 <v-icon>cloud_download</v-icon>
               </v-btn>
-              <v-btn fab text small  depressed title="Go to link" @click="goto_link(item.download_url)" v-else >
+              <v-btn
+                fab
+                text
+                small
+                depressed
+                title="Go to link"
+                @click="goto_link(item.download_url)"
+                v-else
+              >
                 <v-icon>link</v-icon>
               </v-btn>
-              <v-btn v-if="can_delete" @click="open_delete_dialog(item)" fab small text depressed title="Delete" >
+              <v-btn
+                v-if="can_delete"
+                @click="open_delete_dialog(item)"
+                fab
+                small
+                text
+                depressed
+                title="Delete"
+              >
                 <img src="@/assets/icons/groups/delete.svg" alt="" />
               </v-btn>
             </td>

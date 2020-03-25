@@ -5,17 +5,19 @@ export const methods = {
   methods: {
     add_item(api_name, item, dynamic_api = null) {
       makeRequestTo[api_name](item, dynamic_api)
-      .then(response => {
-        const new_items = response.data
-        if (Array.isArray(new_items)) {
-          new_items.reverse().forEach(new_item => this.items.unshift(new_item))
-        } else {
-          this.items.unshift(new_items)
-        }
-        this.$refs.add_dialog.clear_and_close()
-        this.$event.$emit('open_snackbar', this.table_config.add_message)
-      })
-      .finally(() => this.$event.$emit('btnloading_off', false))
+        .then(response => {
+          const new_items = response.data
+          if (Array.isArray(new_items)) {
+            new_items
+              .reverse()
+              .forEach(new_item => this.items.unshift(new_item))
+          } else {
+            this.items.unshift(new_items)
+          }
+          this.$refs.add_dialog.clear_and_close()
+          this.$event.$emit('open_snackbar', this.table_config.add_message)
+        })
+        .finally(() => this.$event.$emit('btnloading_off', false))
     },
 
     extract_per_page(string) {
@@ -36,8 +38,7 @@ export const methods = {
 
     update_item(api_name, item, dynamic_api = null) {
       makeRequestTo[api_name](this.edit_item.id, item, dynamic_api)
-      .then(
-        response => {
+        .then(response => {
           const index = this.items.findIndex(
             data_item => data_item.id === response.data.id
           )
@@ -48,23 +49,22 @@ export const methods = {
           }
           this.edit_dialog = false
           this.$event.$emit('open_snackbar', this.table_config.update_message)
-        }
-      )
-      .finally(() => this.$event.$emit('btnloading_off', false))
+        })
+        .finally(() => this.$event.$emit('btnloading_off', false))
     },
 
     delete_item(api_name, dynamic_api = null) {
       makeRequestTo[api_name](this.delete_item_id, dynamic_api)
-      .then(() => {
-        const index = this.items.findIndex(
-          data_item => data_item.id === this.delete_item_id
-        )
-        if (~index) this.items.splice(index, 1)
-        this.delete_item_id = null
-        this.delete_dialog = false
-        this.$event.$emit('open_snackbar', this.table_config.delete_message)
-      })
-      .finally(() => this.$event.$emit('btnloading_off', false))
+        .then(() => {
+          const index = this.items.findIndex(
+            data_item => data_item.id === this.delete_item_id
+          )
+          if (~index) this.items.splice(index, 1)
+          this.delete_item_id = null
+          this.delete_dialog = false
+          this.$event.$emit('open_snackbar', this.table_config.delete_message)
+        })
+        .finally(() => this.$event.$emit('btnloading_off', false))
     },
 
     open_edit_dialog(item) {
@@ -91,7 +91,7 @@ export const methods = {
       })
     },
 
-    fill_table_with_data (data) {
+    fill_table_with_data(data) {
       this.items = data
     },
 
@@ -111,8 +111,7 @@ export const methods = {
 
     refresh_table(query) {
       makeRequestTo[this.table_config.refresh_table_api_name](query)
-      .then(
-        response => {
+        .then(response => {
           this.$event.$emit(
             'open_snackbar',
             this.table_config.refresh_table_message
@@ -120,9 +119,8 @@ export const methods = {
           this.loading = false
           this.items_response = response.data
           this.items = response.data.data
-        }
-      )
-      .finally(() => this.$event.$emit('btnloading_off', false))
+        })
+        .finally(() => this.$event.$emit('btnloading_off', false))
     },
 
     update_table_actions(query) {
@@ -136,7 +134,7 @@ export const methods = {
         else if (sort[1] === 'desc') this.sort.descending = true
       }
     },
-    hasMoreData(){
+    hasMoreData() {
       this.componentKey += 1
       if (this.pagination.current >= this.pagination.total) {
         this.noMoreData = true
@@ -146,13 +144,13 @@ export const methods = {
       if (this.selected.length) this.selected = []
       else this.selected = this.items.slice()
     },
-    
-    setPreferredView(view){
+
+    setPreferredView(view) {
       window.localStorage.setItem('bzk_prefer_view', view)
       this.view = view
     },
 
-    getPreferredView(){
+    getPreferredView() {
       return window.localStorage.getItem('bzk_prefer_view') || 'list'
     },
 

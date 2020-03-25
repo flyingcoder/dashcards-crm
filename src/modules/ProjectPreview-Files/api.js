@@ -9,5 +9,7 @@ export const addProjectLink = (projectId, payload) => {
 }
 
 export const getFilesByTypes = (projectId, payload) => {
-  return request.get(`api/projects/${projectId}/file?page=${payload.page}&type=${payload.type}`)
+  return request.get(
+    `api/projects/${projectId}/file?page=${payload.page}&type=${payload.type}`
+  )
 }

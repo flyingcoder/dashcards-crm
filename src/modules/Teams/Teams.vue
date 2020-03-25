@@ -1,14 +1,14 @@
 <template>
   <div class="teams-page">
-    <table-header 
-      :paths="paths" 
-      :noListButton="false" 
-      :noGridButton="false" 
+    <table-header
+      :paths="paths"
+      :noListButton="false"
+      :noGridButton="false"
       @click="add_dialog = true"
       @click-list-view="setPreferredView('list')"
-      @click-grid-view="setPreferredView('grid')" 
+      @click-grid-view="setPreferredView('grid')"
     />
-    
+
     <v-progress-linear
       v-show="loading"
       :indeterminate="true"
@@ -39,7 +39,7 @@
 
     <VueTable
       v-if="view === 'list'"
-      :items="items" 
+      :items="items"
       :headers="headers"
       :showRowActions="true"
       @load-more="load_more_users"
@@ -47,23 +47,23 @@
       title="Members"
       :key="componentKey"
       :noMoreData="noMoreData"
-    > 
-      <template v-slot:row-slot="{item}">
+    >
+      <template v-slot:row-slot="{ item }">
         <tr>
           <td @click="navigate_to_view_profile(item)">
-            <v-avatar size="30" color="teal" >
+            <v-avatar size="30" color="teal">
               <v-img :src="item.image_url" :title="item.fullname">
                 <template v-slot:placeholder>
                   <span class="white--text headline">U</span>
                 </template>
               </v-img>
             </v-avatar>
-            {{item.fullname}}
+            {{ item.fullname }}
           </td>
-          <td>{{item.job_title}}</td>
-          <td>{{item.location}}</td>
-          <td>{{item.tasks}}</td>
-          <td>{{item.projects}}</td>
+          <td>{{ item.job_title }}</td>
+          <td>{{ item.location }}</td>
+          <td>{{ item.tasks }}</td>
+          <td>{{ item.projects }}</td>
           <Actions
             :item="item"
             :permissions="$_permissions.get('hq_members')"
@@ -74,7 +74,9 @@
         </tr>
       </template>
       <template v-slot:empty-slot>
-        <v-btn tile text outlined @click="add_dialog = true"><v-icon left>add</v-icon> Add Member</v-btn>
+        <v-btn tile text outlined @click="add_dialog = true"
+          ><v-icon left>add</v-icon> Add Member</v-btn
+        >
       </template>
     </VueTable>
 
