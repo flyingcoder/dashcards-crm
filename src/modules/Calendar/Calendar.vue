@@ -27,17 +27,25 @@
 
     <div class="calendar-wrapper">
       <div class="calendar-content">
+        
         <div class="calendar_header">
           <div class="left_option">
-            <v-btn dark color="#3b589e">Add Template</v-btn>
-            <v-btn dark color="#3b589e">Customize Event</v-btn>
+            <v-btn dark color="#3b589e" large>Add Template</v-btn>
+            <v-btn dark color="#3b589e" large>Customize Event</v-btn>
             <span class="date_title"> March 12, 2020</span>
           </div>
           <div class="right_option">
-            <v-icon>list</v-icon>
-            <v-icon>grid_on</v-icon>
+            <v-btn fab large text color="#b3b7c3" class="action"><v-icon>list</v-icon></v-btn>
+            <v-btn fab large text color="#b3b7c3" class="action"><v-icon>grid_on</v-icon></v-btn>
+            <div class="event_tab">
+              <v-tabs class="event_tab_items" centered grow hide-slider v-model="active_tab">
+                <v-tab>Today</v-tab>
+                <v-tab>All</v-tab>
+              </v-tabs>
+            </div>
           </div>
         </div>
+
         <div class="calendar_body">
           <div class="left">
             <div class="date">
@@ -51,147 +59,90 @@
               </div>
               <div class="date_text">
                 <h3>Today</h3>
-                <p>12 March</p>
+                <div>12 March</div>
               </div>
             </div>
             <vc-calendar
               :attributes="attributes"
               nav-visibility="visible"
               is-expanded
+              class="px-3"
             />
             <div class="calendar_label">
               <div class="label_left">
-                <h4>Events</h4>
-                <ul>
-                  <li>Default</li>
-                  <li>Ranking Report</li>
-                  <li>Video Marketing</li>
-                  <li>Local Seo</li>
-                  <li>Social Post</li>
-                  <li>Report Files</li>
-                  <li>Others</li>
-                </ul>
+                <h3>Events</h3>
+                <div class="event-item" v-for="elabel in eventlabels">
+                  <v-avatar width="15" height="15" min-width="15"  :color="elabel.color"><span></span></v-avatar>
+                  <div class="event-title"> {{ elabel.title }} </div>
+                </div>
               </div>
               <div class="label_right">
-                <h4>Calendars</h4>
-                <v-checkbox label="Reports"></v-checkbox>
-                <v-checkbox label="Local SEO"></v-checkbox>
-                <v-checkbox label="Social Posts"></v-checkbox>
-                <v-checkbox label="Questionnaires"></v-checkbox>
+                <h3>Calendars</h3>
+                <v-checkbox hide-details label="Reports"></v-checkbox>
+                <v-checkbox hide-details label="Local SEO"></v-checkbox>
+                <v-checkbox hide-details label="Social Posts"></v-checkbox>
+                <v-checkbox hide-details label="Questionnaires"></v-checkbox>
               </div>
             </div>
           </div>
 
           <div class="right">
-            <div class="event_card">
+
+            <div class="event_card" v-for="event in events">
               <div class="card_header">
-                <div class="card_title">Event</div>
+                <h3 class="card_title"> {{event.type}} </h3>
                 <div class="card_actions">
-                  <v-btn fab small text class="action">
+                  <v-btn fab small text color="#b3b7c3" class="action">
                     <v-icon>edit</v-icon>
                   </v-btn>
-                  <v-btn fab small text class="action">
+                  <v-btn fab small text color="#b3b7c3" class="action">
                     <v-icon>delete</v-icon>
                   </v-btn>
-                  <v-btn fab small text class="action">
+                  <v-btn fab small depressed dark color="#1fb868" class="action">
                     <v-icon>add</v-icon>
                   </v-btn>
                 </div>
               </div>
               <div class="card_body">
-                <p class="event_time">12:00PM - 1:30PM</p>
-                <h2 class="event_title">Video Product Roadmap 02</h2>
+                <v-avatar class="event_color" width="15" height="15" min-width="15"  :color="event.color"><span></span></v-avatar>
+                <div class="event_time"> {{event.time}} </div>
+                <h3 class="event_title"> {{event.title}} </h3>
                 <div class="invited">
-                  <ul>
-                    <li>Person A</li>
-                    <li>Person B</li>
-                    <li>Person C</li>
-                  </ul>
+                  <div class="invited-inner">
+                    <div class="invited-icon">
+                      <template v-for="user in event.users">
+                        <v-avatar
+                          v-if="user.image_url"
+                          class="user-icon responsive-img"
+                          size="40"
+                        >
+                          <img class="atomic-icon" :src="user.image_url" alt="user" />
+                        </v-avatar>
+                        <v-avatar
+                          v-else
+                          color="red"
+                          size="40"
+                          class="user-icon responsive-img"
+                        >
+                          <span class="white--text">
+                            {{ user.first_name.charAt(0) + user.last_name.charAt(0) }}
+                          </span>
+                        </v-avatar>
+                      </template>
+                    </div>
+                    <div class="more"> +2 more invited</div>
+                  </div>
+                  <!-- <ul>
+                    <li v-for="person in event.persons"> {{ person }} </li>
+                  </ul> -->
                 </div>
-                <v-btn dark color="#3b589e">Add Template</v-btn>
+                <v-btn dark :color="event.color">Join Meeting</v-btn>
               </div>
               <div class="card_footer">
                 <v-btn class="view_more" text color="white">View More</v-btn>
               </div>
             </div>
 
-            <div class="event_card">
-              <div class="card_header">
-                <div class="card_title">Event</div>
-                <div class="card_actions">
-                  <v-icon>edit</v-icon>
-                  <v-icon>delete</v-icon>
-                  <v-icon>add</v-icon>
-                </div>
-              </div>
-              <div class="card_body">
-                <p class="event_time">12:00PM - 1:30PM</p>
-                <h2 class="event_title">Video Product Roadmap 02</h2>
-                <div class="invited">
-                  <ul>
-                    <li>Person A</li>
-                    <li>Person B</li>
-                    <li>Person C</li>
-                  </ul>
-                </div>
-                <v-btn dark color="#3b589e">Add Template</v-btn>
-              </div>
-              <div class="card_footer">
-                <v-btn class="view_more" text color="white">View More</v-btn>
-              </div>
-            </div>
-
-            <div class="event_card">
-              <div class="card_header">
-                <div class="card_title">Event</div>
-                <div class="card_actions">
-                  <v-icon>edit</v-icon>
-                  <v-icon>delete</v-icon>
-                  <v-icon>add</v-icon>
-                </div>
-              </div>
-              <div class="card_body">
-                <p class="event_time">12:00PM - 1:30PM</p>
-                <h2 class="event_title">Video Product Roadmap 02</h2>
-                <div class="invited">
-                  <ul>
-                    <li>Person A</li>
-                    <li>Person B</li>
-                    <li>Person C</li>
-                  </ul>
-                </div>
-                <v-btn dark color="#3b589e">Add Template</v-btn>
-              </div>
-              <div class="card_footer">
-                <v-btn class="view_more" text color="white">View More</v-btn>
-              </div>
-            </div>
-
-            <div class="event_card">
-              <div class="card_header">
-                <div class="card_title">Event</div>
-                <div class="card_actions">
-                  <v-icon>edit</v-icon>
-                  <v-icon>delete</v-icon>
-                  <v-icon>add</v-icon>
-                </div>
-              </div>
-              <div class="card_body">
-                <p class="event_time">12:00PM - 1:30PM</p>
-                <h2 class="event_title">Video Product Roadmap 02</h2>
-                <div class="invited">
-                  <ul>
-                    <li>Person A</li>
-                    <li>Person B</li>
-                    <li>Person C</li>
-                  </ul>
-                </div>
-                <v-btn dark color="#3b589e">Add Template</v-btn>
-              </div>
-              <div class="card_footer">
-                <v-btn class="view_more" text color="white">View More</v-btn>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -226,3 +177,8 @@
 </template>
 <script src="./Calendar.js"></script>
 <style lang="scss" scoped src="./Calendar.scss"></style>
+<style lang="css" scoped>
+>>> .event_tab .v-item-group.theme--light.v-slide-group.v-tabs-bar.primary--text {
+      height: 35px !important;
+  }
+</style>
