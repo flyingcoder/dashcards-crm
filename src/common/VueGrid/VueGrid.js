@@ -14,9 +14,12 @@ export default {
 		hasEdit : { type : Boolean, default : true },
 		hasView : { type : Boolean, default : true },
 		noMoreData: { type: Boolean, default: false },
+		hasFooter: { type: Boolean, default: true },
+		showTaskCount: { type: Boolean, default: true },
+		showProjectCount: { type: Boolean, default: true },
 	},
 	data: () => ({
-		btnloading: false
+		btnloading: false,
 	}),
 	computed: {
 		logged_user() {
@@ -55,6 +58,12 @@ export default {
 			} else {
 				this.$router.push(`/dashboard/team/profile/${user.user_id}`)
 			}
+	    },
+	    count(item){
+	    	if (typeof item === 'object') {
+	    		return item.length
+	    	}
+	    	return item
 	    }
 	}
 }

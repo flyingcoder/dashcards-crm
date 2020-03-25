@@ -66,6 +66,10 @@ export default {
         this.pagination.total = data.last_page
         this.hasMoreData()
       })
+      .finally(() => {
+        this.loading = false
+        this.$event.$emit('btnloading_off', false)
+      })
     },
     load_more(){
       request.get(`api/clients?page=${this.pagination.current+1}`).then(({data}) => {
@@ -75,6 +79,10 @@ export default {
         this.pagination.current = data.current_page
         this.pagination.total = data.last_page
         this.hasMoreData()
+      })
+      .finally(() => {
+        this.loading = false
+        this.$event.$emit('btnloading_off', false)
       })
     }
   }

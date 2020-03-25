@@ -28,13 +28,13 @@ export default {
 
 <style lang="scss" scoped>
   @import '~@/sass/_variables';
-  @include emptyTable('.empty-div');
+  @include emptyTable('.empty');
 
   .justify-content-center {
     display: flex;
     justify-content: center;
   }
-  .empty-div{
+  .empty{
     margin: 5px;
   }
 

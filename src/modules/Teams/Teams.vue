@@ -8,6 +8,11 @@
       @click-list-view="setPreferredView('list')"
       @click-grid-view="setPreferredView('grid')" 
     />
+    
+    <v-progress-linear
+      v-show="loading"
+      :indeterminate="true"
+    ></v-progress-linear>
 
     <teams-dialog
       ref="add_dialog"

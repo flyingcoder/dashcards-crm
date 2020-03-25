@@ -78,9 +78,9 @@
               <v-flex xs12 md12>Tax : {{item.tax}}</v-flex>
               <v-flex xs12 md12>Discount : {{item.discount}}</v-flex>
           </v-row>
-          <v-layout row v-if="item.terms">
+          <v-row no-gutters class="my-2 py-3" v-if="item.terms">
               <v-flex xs12 md12 >Terms : {{item.terms}}</v-flex>
-          </v-layout>
+          </v-row>
         </v-container>
         <!-- <v-container class="invoice-viewbox-action">
           <v-card-actions hide>

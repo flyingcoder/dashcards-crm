@@ -108,7 +108,8 @@ export default {
   methods: {
     load_more(){
       this.loading = true
-      apiTo.get_projects(this.pagination.current + 1).then(({data}) =>{
+      apiTo.get_projects(this.pagination.current + 1)
+      .then(({data}) =>{
         data.data.forEach(item => {
           this.items.push(item)
         })

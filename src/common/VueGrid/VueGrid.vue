@@ -52,22 +52,22 @@
 							<v-icon small left color="indigo">mdi-map-marker</v-icon> {{item.location}}
 						</v-btn>
 					</v-row>
-		      	<v-row>
-		      		<v-col>
-		      			<h5 class="text-center">Tasks</h5>
-		      			<h4 class="text-center">{{item.tasks}}</h4>
-		      		</v-col>
-		      		<v-col>
-		      			<h5 class="text-center">Projects</h5>
-		      			<h4 class="text-center">{{item.projects}}</h4>
-		      		</v-col>
-		      	</v-row>
+			      	<v-row>
+			      		<v-col v-if="showTaskCount">
+			      			<h5 class="text-center">Tasks</h5>
+			      			<h4 class="text-center">{{ count(item.tasks) }}</h4>
+			      		</v-col>
+			      		<v-col v-if="showProjectCount">
+			      			<h5 class="text-center">Projects</h5>
+			      			<h4 class="text-center">{{ count(item.projects)}}</h4>
+			      		</v-col>
+			      	</v-row>
 		    	</v-card-text>
 			</v-card>
 		</v-col>
 	</v-row>
 
-	<v-card-actions class="py-2">
+	<v-card-actions class="py-2" v-if="hasFooter">
       <v-spacer></v-spacer>
       <v-btn tile text v-if="noMoreData === true"  disabled>NO MORE DATA</v-btn>
 		<v-btn tile text :loading="btnloading" v-else @click="handleLoadMore">LOAD MORE</v-btn>

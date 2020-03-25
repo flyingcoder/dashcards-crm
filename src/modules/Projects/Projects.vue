@@ -1,6 +1,12 @@
 <template>
   <div class="projects">
     <table-header :paths="paths" @click="add_dialog = true" />
+
+    <v-progress-linear
+      v-show="loading"
+      :indeterminate="true"
+    ></v-progress-linear>
+    
     <ProjectModal
       :dialog.sync="add_dialog"
       ref="add_dialog"

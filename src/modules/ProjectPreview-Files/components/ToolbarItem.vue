@@ -2,9 +2,10 @@
   <v-btn
     :class="['button', { active: props.isActive }]"
     color="#b3b7c3"
-    flat
     medium
+    text
     v-on="listeners"
+    class="mr-1"
   >
     <v-icon dark left :class="props.iconClass">{{ props.icon }}</v-icon>
     {{ props.iconText }}

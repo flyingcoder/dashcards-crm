@@ -7,3 +7,7 @@ export const deleteFile = fileId => {
 export const addProjectLink = (projectId, payload) => {
   return request.post(`api/projects/${projectId}/link`, payload)
 }
+
+export const getFilesByTypes = (projectId, payload) => {
+  return request.get(`api/projects/${projectId}/file?page=${payload.page}&type=${payload.type}`)
+}

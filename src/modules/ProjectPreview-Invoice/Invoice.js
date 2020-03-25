@@ -1,22 +1,25 @@
 import { apiTo } from './api'
-import { table_functionality } from '@/services/table-functionality/table-functionality'
+import { list_functionality } from '@/services/list-functionality/list-functionality'
 import { mapMutations } from 'vuex'
 import _cloneDeep from 'lodash/cloneDeep'
 //Components
-import CustomTable from '@/common/CustomTable/CustomTable.vue'
+
 import ViewInvoice from '@/modules/Invoice/components/ViewInvoice/ViewInvoice.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import InvoiceDialog from '@/modules/Invoice/components/InvoiceDialog/InvoiceDialog.vue'
+import VueTable from '@/common/VueTable/VueTable.vue'
+import Actions from '@/common/VueTable/Actions.vue'
 
 export default {
   name: 'Invoice',
-  mixins: [table_functionality],
+  mixins: [list_functionality],
 
   components: {
-    CustomTable,
+    VueTable,
     DeleteDialog,
     ViewInvoice,
-    InvoiceDialog
+    InvoiceDialog,
+    Actions
   },
 
   props: {
@@ -25,21 +28,14 @@ export default {
 
   data: () => ({
     headers: [
-      { id: 1, text: 'Invoice', value: 'invoice', width: '30%' },
-      { id: 2, text: 'Client', value: 'client', width: '30%' },
-      { id: 3, text: 'Due Date', value: 'due_date', width: '10%' },
-      { id: 4, text: 'Amount', value: 'amount', width: '10%' },
-      { id: 5, is_action: true, width: '20%' }
+      { text: 'Invoice', value: 'invoice', width: '30%' },
+      { text: 'Client', value: 'client', width: '30%' },
+      { text: 'Due Date', value: 'due_date', width: '10%' },
+      { text: 'Amount', value: 'amount', width: '10%' },
+      { text: 'Actions', value: 'action', width: '20%', align: 'center' },
     ],
     view_invoice_dialog: false,
     view_item: null,
-    items: [],
-    page: 1,
-    rows_per_page: 10,
-    pagination: {
-      current: 1,
-      total: 0
-    }
   }),
 
   created() {
@@ -82,22 +78,36 @@ export default {
         .then(res2 => {
           this.set_projects(res2.data)
         })
-        .finally(() => (this.loading = false))
     },
     getInvoices() {
       this.loading = true
-      apiTo
-        .getInvoices(this.id, this.pagination.current, this.rows_per_page)
-        .then(response => {
-          this.items = response.data.data
-          this.pagination.current = response.data.current_page
-          this.pagination.total = response.data.last_page
-          this.rows_per_page = response.data.per_page
+      apiTo.getInvoices(this.id, this.pagination.current)
+        .then(({data}) => {
+          this.items = data.data
+          this.pagination.current = data.current_page
+          this.pagination.total = data.last_page
+          this.hasMoreData()
         })
-        .finally(() => (this.loading = false))
+        .finally(() => {
+          this.loading = false
+          this.$event.$emit('btnloading_off', false)
+        })
     },
-    onPageChange() {
-      this.getInvoices()
+    getMoreInvoices() {
+      this.loading = true
+      apiTo.getInvoices(this.id,this.pagination.current+1)
+      .then(({data}) =>{
+        data.data.forEach(item => {
+          this.items.push(item)
+        })
+        this.pagination.current = data.current_page
+        this.pagination.total = data.last_page
+        this.hasMoreData()
+      })
+      .finally(() => {
+        this.loading = false
+        this.$event.$emit('btnloading_off', false)
+      })
     },
     invoice_updated(invoice) {
       const index = this.items.findIndex(item => item.id === invoice.id)

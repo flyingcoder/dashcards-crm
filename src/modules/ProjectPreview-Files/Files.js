@@ -1,9 +1,9 @@
-import { table_functionality } from '@/services/table-functionality/table-functionality'
+import { list_functionality } from '@/services/list-functionality/list-functionality'
 import { global_utils } from '@/global_utils/global_utils'
 import { settings } from '@/variables'
 import * as apiTo from './api'
 //Components
-import CustomTable from '@/common/CustomTable/CustomTable.vue'
+import VueTable from '@/common/VueTable/VueTable.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import CustomDropzone from '@/common/CustomDropzone.vue'
 import LinkDialog from './components/LinkDialog.vue'
@@ -13,10 +13,10 @@ import ToolbarItem from './components/ToolbarItem.vue'
 export default {
   name: 'FilesTab',
 
-  mixins: [table_functionality, global_utils],
+  mixins: [list_functionality, global_utils],
 
   components: {
-    CustomTable,
+    VueTable,
     TableHeader,
     CustomDropzone,
     LinkDialog,
@@ -35,7 +35,7 @@ export default {
       { text: 'Filename', value: 'filename', width: '35%' },
       { text: 'Added by', value: 'member' },
       { text: 'Project', value: 'project' },
-      { is_action: true }
+      { text: 'Action', value: 'action' },
     ],
     table_config: {
       route_name: 'project_preview',
@@ -91,8 +91,8 @@ export default {
         iconText: 'Other'
       }
     ],
-    layout: 'grid', //list or grid
-    log_id: null
+    log_id: null,
+   
   }),
 
   computed: {
@@ -100,7 +100,7 @@ export default {
       return this.$_permissions.get('hq_files')
     },
     filteredItems() {
-      if (this.filter === 'all') return this.items
+      if (this.filter === 'all')  return this.items
       return this.items.filter(item =>
         item.collection_name.includes(this.filter)
       )
@@ -133,10 +133,50 @@ export default {
   },
 
   created() {
-    this.fill_table('get_files', true, this.dynamic_api)
+
+    this.view = this.getPreferredView()
+    this.get_files()//fill_table('get_files', true, this.dynamic_api)
   },
 
   methods: {
+    get_files(){
+      this.item = []
+      var payload = {
+        page : 1,
+        type : this.filter
+      }
+      apiTo.getFilesByTypes(this.id, payload)
+      .then(({data}) =>{
+        this.items = data.data
+        this.pagination.current = data.current_page
+        this.pagination.total = data.last_page
+        this.hasMoreData()
+      })
+      .finally(() => {
+        this.loading = false
+        this.$event.$emit('btnloading_off', false)
+      })
+    },
+    get_more_files(){
+      this.item = []
+      var payload = {
+        page : this.pagination.current + 1,
+        type : 'all'
+      }
+      apiTo.getFilesByTypes(this.id, payload)
+      .then(({data}) =>{
+        data.data.forEach(item => {
+           this.items.push(item)
+        })
+        this.pagination.current = data.current_page
+        this.pagination.total = data.last_page
+        this.hasMoreData()
+      })
+      .finally(() => {
+        this.loading = false
+        this.$event.$emit('btnloading_off', false)
+      })
+    },
     manual_upload() {
       this.$refs.dropzone.process_queue()
     },
@@ -183,11 +223,7 @@ export default {
     },
 
     file_failed([file, response]) {
-      this.$event.$emit(
-        'open_snackbar',
-        typeof response === 'object' ? response[0] : response,
-        'error'
-      )
+      this.$event.$emit( 'open_snackbar', typeof response === 'object' ? response[0] : response, 'error' )
     },
 
     goto_link(url) {

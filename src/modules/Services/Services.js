@@ -62,14 +62,20 @@ export default {
       else this.selected = this.items.slice()
     },
     load_services(){
+      this.loading = true
       request.get('api/services?page=1').then(({data}) => {
         this.items = data.data
         this.pagination.current = data.current_page
         this.pagination.total = data.last_page
         this.hasMoreData()
       })
+      .finally(() => {
+        this.loading = false
+        this.$event.$emit('btnloading_off', false)
+      })
     },
     load_more_services(){
+      this.loading = true
       request.get(`api/services?page=${this.pagination.current+1}`).then(({data}) => {
         data.data.forEach(item => {
           this.items.push(item)
@@ -77,6 +83,10 @@ export default {
         this.pagination.current = data.current_page
         this.pagination.total = data.last_page
         this.hasMoreData()
+      })
+      .finally(() => {
+        this.loading = false
+        this.$event.$emit('btnloading_off', false)
       })
     }
   }
