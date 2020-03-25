@@ -18,10 +18,11 @@
             font-family: Roboto,sans-serif!important;
         }
         .actions {
+            text-align: right;
             .action{
                 background-color: $tableBlueBg;
                 border: 1px solid $tableBorderBlue;
-                margin: 0 0 0 10px;
+                margin: 0 0 10px 10px;
                 .v-btn__content .v-icon{
                     color: $tableTitleBlue;
                 }

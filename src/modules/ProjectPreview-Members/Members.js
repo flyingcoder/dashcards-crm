@@ -1,15 +1,20 @@
-import CustomTable from '@/common/CustomTable/CustomTable.vue'
+import { list_functionality } from '@/services/list-functionality/list-functionality'
+//components
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import AddDialog from './components/AddDialog/AddDialog.vue'
-import { table_functionality } from '@/services/table-functionality/table-functionality'
+import VueTable from '@/common/VueTable/VueTable.vue'
+import Actions from '@/common/VueTable/Actions.vue'
+import VueGrid from '@/common/VueGrid/VueGrid.vue'
 
 export default {
   name: 'MembersTab',
-  mixins: [table_functionality],
+  mixins: [list_functionality],
   components: {
-    CustomTable,
+    VueTable,
     AddDialog,
-    DeleteDialog
+    DeleteDialog,
+    Actions,
+    VueGrid
   },
   inheritAttrs: false,
 
@@ -18,14 +23,13 @@ export default {
   },
 
   data: () => ({
-    add_dialog: false,
     headers: [
       { text: 'Member', value: 'member' },
       { text: 'Email', value: 'email' },
       { text: 'Telephone', value: 'telephone' },
       { text: 'Position', value: 'position' },
       { text: 'Tasks', value: 'tasks' },
-      { id: 4, is_action: true }
+      { text: 'Action', value: 'action' }
     ],
     sortList: [
       { title: 'Sort by member' },
@@ -50,6 +54,7 @@ export default {
   },
 
   created() {
+    this.view = this.getPreferredView()
     this.fill_table('get_members', true, this.dynamic_api)
   },
 
@@ -58,6 +63,14 @@ export default {
       return !(
         item.job_title === 'Administrator' || item.job_title === 'Client'
       )
+    },
+    navigate_to_view_profile(user) {
+      let item = Object.values(user.user_roles)
+      if (item[0].indexOf('client') >= 0 || item[0].indexOf('agent') >= 0) {
+        this.$router.push(`/dashboard/clients/profile/${user.id}`)
+      } else {
+        this.$router.push(`/dashboard/team/profile/${user.id}`)
+      }
     }
   }
 }

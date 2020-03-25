@@ -13,21 +13,21 @@
       :value="value"
       @input="$emit('input', $event)"
     >
-      <v-tooltip class="toggle-btn" slot="prepend" bottom v-if="!noSymbol">
-        <v-btn
-          text
-          color="#657186"
-          slot="activator"
-          icon
-          @click="$emit('toggle-symbol', symbolType)"
-        >
-          <v-icon >compare_arrows</v-icon>
-        </v-btn>
-
-        Toggle {{ title }}
+      <v-tooltip class="toggle-btn" bottom v-if="!noSymbol">
+        <template v-slot:activator="{ on }">
+          <v-btn
+            icon
+            color="#657186"
+            text
+            v-on="on"
+            @click="$emit('toggle-symbol', symbolType)"
+            ><v-icon>compare_arrows</v-icon></v-btn
+          >
+        </template>
+        <span>Toggle {{ title }}</span>
       </v-tooltip>
 
-      <template slot="append" v-if="!noSymbol">
+      <template v-slot:append v-if="!noSymbol">
         <span slot="activator">{{ symbol }}</span>
       </template>
     </v-text-field>
@@ -36,6 +36,7 @@
       outlined
       color="#ff7f7c"
       icon
+      class="ml-1"
       @click="$emit('toggle_visibility', !show)"
     >
       <v-icon>delete</v-icon>

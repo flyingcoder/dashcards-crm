@@ -4,11 +4,38 @@
       <dash-card
         title="Clients"
         :view-more-link="viewMoreLink"
-        class="client__content"
         :dashboard="dashboard"
         @close="$emit('close')"
       >
         <div class="content-wrapper" slot="content">
+          <v-layout>
+            <v-flex class="mx-auto">
+              <small>Total Sales</small>
+              <h2>3491</h2>
+            </v-flex>
+            <v-flex class="mx-auto">
+              <small>New Orders</small>
+              <h2>721</h2>
+            </v-flex>
+            <v-flex class="mx-auto">
+              <small>Total Earnings</small>
+              <h2>$8103</h2>
+            </v-flex>
+          </v-layout>
+
+          <v-sparkline
+            :value="value"
+            :smooth="radius || false"
+            :padding="padding"
+            :line-width="width"
+            :stroke-linecap="lineCap"
+            color="#3b589e"
+            :fill="fill"
+            :type="type"
+            :auto-line-width="autoLineWidth"
+            auto-draw
+          ></v-sparkline>
+
           <v-data-table
             v-if="items.length || loading"
             :headers="headers"

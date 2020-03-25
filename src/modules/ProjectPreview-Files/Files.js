@@ -1,9 +1,9 @@
-import { table_functionality } from '@/services/table-functionality/table-functionality'
+import { list_functionality } from '@/services/list-functionality/list-functionality'
 import { global_utils } from '@/global_utils/global_utils'
 import { settings } from '@/variables'
 import * as apiTo from './api'
 //Components
-import CustomTable from '@/common/CustomTable/CustomTable.vue'
+import VueTable from '@/common/VueTable/VueTable.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import CustomDropzone from '@/common/CustomDropzone.vue'
 import LinkDialog from './components/LinkDialog.vue'
@@ -13,10 +13,10 @@ import ToolbarItem from './components/ToolbarItem.vue'
 export default {
   name: 'FilesTab',
 
-  mixins: [table_functionality, global_utils],
+  mixins: [list_functionality, global_utils],
 
   components: {
-    CustomTable,
+    VueTable,
     TableHeader,
     CustomDropzone,
     LinkDialog,
@@ -35,7 +35,7 @@ export default {
       { text: 'Filename', value: 'filename', width: '35%' },
       { text: 'Added by', value: 'member' },
       { text: 'Project', value: 'project' },
-      { is_action: true }
+      { text: 'Action', value: 'action' }
     ],
     table_config: {
       route_name: 'project_preview',
@@ -91,7 +91,6 @@ export default {
         iconText: 'Other'
       }
     ],
-    layout: 'grid', //list or grid
     log_id: null
   }),
 
@@ -125,18 +124,56 @@ export default {
     },
     can_delete() {
       if (this.user.is_admin) return true
-      return (
-        this.permissions &&
-        this.permissions.delete
-      )
+      return this.permissions && this.permissions.delete
     }
   },
 
   created() {
-    this.fill_table('get_files', true, this.dynamic_api)
+    this.view = this.getPreferredView()
+    this.get_files() //fill_table('get_files', true, this.dynamic_api)
   },
 
   methods: {
+    get_files() {
+      this.item = []
+      var payload = {
+        page: 1,
+        type: this.filter
+      }
+      apiTo
+        .getFilesByTypes(this.id, payload)
+        .then(({ data }) => {
+          this.items = data.data
+          this.pagination.current = data.current_page
+          this.pagination.total = data.last_page
+          this.hasMoreData()
+        })
+        .finally(() => {
+          this.loading = false
+          this.$event.$emit('btnloading_off', false)
+        })
+    },
+    get_more_files() {
+      this.item = []
+      var payload = {
+        page: this.pagination.current + 1,
+        type: 'all'
+      }
+      apiTo
+        .getFilesByTypes(this.id, payload)
+        .then(({ data }) => {
+          data.data.forEach(item => {
+            this.items.push(item)
+          })
+          this.pagination.current = data.current_page
+          this.pagination.total = data.last_page
+          this.hasMoreData()
+        })
+        .finally(() => {
+          this.loading = false
+          this.$event.$emit('btnloading_off', false)
+        })
+    },
     manual_upload() {
       this.$refs.dropzone.process_queue()
     },
@@ -160,26 +197,30 @@ export default {
     },
 
     addLink(payload) {
-      apiTo.addProjectLink(this.id, payload).then(({ data }) => {
-        this.items.push(data)
-        this.$refs.link_dialog.closeAndClearDialog()
-      })
-      .finally(() => this.$event.$emit('btnloading_off', false))
+      apiTo
+        .addProjectLink(this.id, payload)
+        .then(({ data }) => {
+          this.items.push(data)
+          this.$refs.link_dialog.closeAndClearDialog()
+        })
+        .finally(() => this.$event.$emit('btnloading_off', false))
     },
 
     delete_item() {
-      apiTo.deleteFile(this.delete_item_id).then(() => {
-        const indexFound = this.items.findIndex(
-          item => item.id === this.delete_item_id
-        )
-        if (~indexFound) {
-          this.items.splice(indexFound, 1)
-          this.delete_item_id = null
-          this.delete_dialog = false
-          this.$event.$emit('open_snackbar', this.table_config.delete_message)
-        }
-      })
-      .finally(() => this.$event.$emit('btnloading_off', false))
+      apiTo
+        .deleteFile(this.delete_item_id)
+        .then(() => {
+          const indexFound = this.items.findIndex(
+            item => item.id === this.delete_item_id
+          )
+          if (~indexFound) {
+            this.items.splice(indexFound, 1)
+            this.delete_item_id = null
+            this.delete_dialog = false
+            this.$event.$emit('open_snackbar', this.table_config.delete_message)
+          }
+        })
+        .finally(() => this.$event.$emit('btnloading_off', false))
     },
 
     file_failed([file, response]) {

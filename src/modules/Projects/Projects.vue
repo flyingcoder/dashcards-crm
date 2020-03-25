@@ -1,6 +1,12 @@
 <template>
   <div class="projects">
     <table-header :paths="paths" @click="add_dialog = true" />
+
+    <v-progress-linear
+      v-show="loading"
+      :indeterminate="true"
+    ></v-progress-linear>
+
     <ProjectModal
       :dialog.sync="add_dialog"
       ref="add_dialog"
@@ -46,7 +52,7 @@
     />
 
     <VueTable
-      :items="items" 
+      :items="items"
       :headers="headers"
       :showRowActions="true"
       @load-more="load_more"
@@ -69,22 +75,27 @@
           </v-col>
         </v-row>
       </template> -->
-      
-      <template v-slot:row-slot="{item}">
+
+      <template v-slot:row-slot="{ item }">
         <tr>
-          <td class="clickable-td" @click="navigate_to_view_project(item.id)">{{item.title}}</td>
-          <td>{{item.company_name}}</td>
-          <td>{{item.service_name}}</td>
+          <td class="clickable-td" @click="navigate_to_view_project(item.id)">
+            {{ item.title }}
+          </td>
+          <td>{{ item.company_name }}</td>
+          <td>{{ item.service_name }}</td>
           <td>
             <v-avatar size="30" color="teal">
-              <v-img :src="item.project_manager.user.image_url" :title="item.project_manager.user.fullname">
+              <v-img
+                :src="item.project_manager.user.image_url"
+                :title="item.project_manager.user.fullname"
+              >
                 <template v-slot:placeholder>
                   <span class="white--text headline">U</span>
                 </template>
               </v-img>
             </v-avatar>
           </td>
-          <td>{{item.started_at | bzFromNow}}</td>
+          <td>{{ item.started_at | bzFromNow }}</td>
           <td>
             <v-progress-linear
               v-if="item.progress < 100"
@@ -108,7 +119,9 @@
         </tr>
       </template>
       <template v-slot:empty-slot>
-        <v-btn tile text outlined @click="add_dialog = true"><v-icon left>add</v-icon> Add Project</v-btn>
+        <v-btn tile text outlined @click="add_dialog = true"
+          ><v-icon left>add</v-icon> Add Project</v-btn
+        >
       </template>
     </VueTable>
   </div>

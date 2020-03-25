@@ -1,12 +1,13 @@
 <template>
   <v-flex xs12 class="project-overview-card">
     <div class="project__overview_content">
-      <dash-card 
+      <dash-card
         title="Project Overview"
         :view-more-link="viewMoreLink"
         class="timer__content"
         :dashboard="dashboard"
-        @close="$emit('close')">
+        @close="$emit('close')"
+      >
         <v-card slot="content">
           <template v-if="loading">
             <v-progress-linear :indeterminate="true"></v-progress-linear>
@@ -88,10 +89,10 @@ export default {
     ProjectRow
   },
 
-  props: { 
+  props: {
     id: [Number, String],
     dashboard: Boolean,
-    viewMoreLink: Object  
+    viewMoreLink: Object
   },
 
   data: () => ({

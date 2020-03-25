@@ -1,11 +1,6 @@
 <template>
   <div class="set__password">
-    <v-layout
-      wrap
-      justify-center
-      align-center
-      class="set__password__content"
-    >
+    <v-layout wrap justify-center align-center class="set__password__content">
       <v-flex md6 xs12 fill-height class="l__form">
         <login-component
           title-text="Set Password"

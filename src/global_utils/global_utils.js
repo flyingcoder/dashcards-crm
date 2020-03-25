@@ -27,14 +27,14 @@ export const global_utils = {
     truncate(text, stop, clamp) {
       return text.slice(0, stop) + (stop < text.length ? clamp || '...' : '')
     },
-    str_limit(value, size){
-      if (!value) return '';
-      value = value.toString();
+    str_limit(value, size) {
+      if (!value) return ''
+      value = value.toString()
 
       if (value.length <= size) {
-        return value;
+        return value
       }
-      return value.substr(0, size) + '...';
+      return value.substr(0, size) + '...'
     }
   },
   methods: {

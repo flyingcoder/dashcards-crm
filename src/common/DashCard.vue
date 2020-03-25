@@ -5,7 +5,7 @@
         {{ title }}
       </v-flex>
       <slot name="actions" v-if="dashboard">
-        <div class="actions">
+        <v-flex xs8 class="actions">
           <v-btn fab small text class="action">
             <v-icon>list</v-icon>
           </v-btn>
@@ -24,7 +24,7 @@
           <v-btn fab small text class="action">
             <v-icon @click="$emit('close')">close</v-icon>
           </v-btn>
-        </div>
+        </v-flex>
       </slot>
     </v-row>
 

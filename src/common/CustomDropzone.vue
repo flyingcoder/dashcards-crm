@@ -35,23 +35,34 @@
         </vue-dropzone>
       </v-flex>
     </v-layout>
-    <v-layout v-if="needConfirmation">
+    <v-row no-gutters v-if="needConfirmation" class="py-1">
       <v-flex xs12 md12 justify-content-between>
-        <v-btn dark color="#3b589e" @click="$emit('open-add-link-dialog')">
+        <v-btn
+          dark
+          class="mr-1"
+          color="#3b589e"
+          @click="$emit('open-add-link-dialog')"
+        >
           Add Link <v-icon right>link</v-icon>
         </v-btn>
         <v-btn
           color="success"
           :disabled="counts < 1"
+          class="mr-1"
           @click="$emit('upload-this-files')"
         >
           Upload Selected Files <v-icon right dark>cloud_upload</v-icon>
         </v-btn>
-        <v-btn v-show="counts > 0" color="error" @click="remove_all_files()">
+        <v-btn
+          v-show="counts > 0"
+          class="mr-1"
+          color="error"
+          @click="remove_all_files()"
+        >
           Remove All Files <v-icon right>close</v-icon>
         </v-btn>
       </v-flex>
-    </v-layout>
+    </v-row>
   </div>
 </template>
 

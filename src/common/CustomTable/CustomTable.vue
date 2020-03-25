@@ -4,7 +4,7 @@
       <div class="buzz__tablesTwo">
         <slot name="toolbar">
           <div class="table__toolbar">
-              {{ toolbarTitle }}
+            {{ toolbarTitle }}
           </div>
         </slot>
 
@@ -69,9 +69,9 @@
               </th>
             </tr>
           </template>
-          
+
           <template v-slot:item="{ item }">
-            <slot name="custom-item" v-bind:item="item"></slot>
+            <slot name="custom-item" :item="item"></slot>
           </template>
 
           <template slot="items" slot-scope="props">

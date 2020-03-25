@@ -41,15 +41,17 @@
             align-items: center;
             justify-items: center;
             justify-content: space-evenly;
+            .user-icon img{
+                width: 40px;
+            }
             .chevron{
-                justify-self: flex-end;
-                width: 2vw;
+                width: 25px;
             }
         }
         .user-dropdown{
             width: 100%;
             .user-chevron{
-                margin-left: 0.5vw;
+                margin-left: 5px;
             }
         }
     }

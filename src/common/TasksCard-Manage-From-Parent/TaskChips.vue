@@ -56,6 +56,7 @@ export default {
 .task__chips {
   padding: 20px 0;
   border-bottom: 1px solid $borderGray;
+  text-align: center;
   .theme--light.v-chip {
     background-color: $white;
     border: 1px solid $borderGray;

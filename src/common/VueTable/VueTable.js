@@ -2,36 +2,36 @@ import Empty from '@/common/Empty.vue'
 import _cloneDeep from 'lodash/cloneDeep'
 
 export default {
-	name: 'VueTable',
-	components : {
-		Empty
-	},
-	props: {
-		title : { type : String, default : '' },
-		items: { type : Array, default : [] },
-		headers: { type : Array, default : [] },
-		showRowActions: { type: Boolean, default: false },
-		sortingEnable : { type: Boolean, default: false },
-		hasSearch : { type: Boolean, default: false },
-		hasFooter : { type: Boolean, default: true },
-		hasHeader : { type: Boolean, default: true },
-		showSelect : { type: Boolean, default: false },
-		icon: String,
-  	noMoreData: { type: Boolean, default: false },
-	}, 
+  name: 'VueTable',
+  components: {
+    Empty
+  },
+  props: {
+    title: { type: String, default: '' },
+    items: { type: Array, default: [] },
+    headers: { type: Array, default: [] },
+    showRowActions: { type: Boolean, default: false },
+    sortingEnable: { type: Boolean, default: false },
+    hasSearch: { type: Boolean, default: false },
+    hasFooter: { type: Boolean, default: true },
+    hasHeader: { type: Boolean, default: true },
+    showSelect: { type: Boolean, default: false },
+    icon: String,
+    noMoreData: { type: Boolean, default: false }
+  },
   data: () => ({
     itemsPerPage: 1000,
     dialog: false,
     editedIndex: -1,
-    editedItem: { },
-    defaultItem: { },
-    sortby : false,
+    editedItem: {},
+    defaultItem: {},
+    sortby: false,
     computedHeaders: [],
     search: '',
     page: 1,
     selected: [],
-  	can_bulk_delete: false,
-  	btnloading: false
+    can_bulk_delete: false,
+    btnloading: false
   }),
   watch: {
     selected(newVal) {
@@ -39,16 +39,16 @@ export default {
       this.$emit('items-selected', selected_ids)
     }
   },
-  created(){
-  	this.$event.$on('btnloading_off', value => this.btnloading = false )
+  created() {
+    this.$event.$on('btnloading_off', value => (this.btnloading = false))
   },
   methods: {
-  	handleSelectAllToggle(event){
-		this.can_bulk_delete = event.value
-  	},
-  	handleLoadMore(){
-  		this.btnloading = true
-  		this.$emit('load-more')
-  	}
-  },
+    handleSelectAllToggle(event) {
+      this.can_bulk_delete = event.value
+    },
+    handleLoadMore() {
+      this.btnloading = true
+      this.$emit('load-more')
+    }
+  }
 }

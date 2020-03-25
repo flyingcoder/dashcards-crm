@@ -8,18 +8,18 @@
     offset-y
     min-width="290px"
   >
-  <template v-slot:activator="{ on }">
-    <v-text-field
-      slot="activator"
-      :value="value"
-      v-bind="$attrs"
-      solo
-      hide-details
-      color="#657186"
-      readonly
-      v-on="on"
-    ></v-text-field>
-  </template>
+    <template v-slot:activator="{ on }">
+      <v-text-field
+        slot="activator"
+        :value="value"
+        v-bind="$attrs"
+        solo
+        hide-details
+        color="#657186"
+        readonly
+        v-on="on"
+      ></v-text-field>
+    </template>
     <v-date-picker
       clearable
       color="#657186"

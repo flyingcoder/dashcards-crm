@@ -90,9 +90,9 @@ export default {
   .task_header {
     border-bottom: 1px solid $borderGray;
     background-color: $tableBlueBg;
-    padding: 10px 0;
+    padding: 5px 0;
     .task__tableHead {
-      padding: 10px;
+      padding: 5px 10px;
       color: $tableTitleBlue;
       font-size: 15px;
       font-weight: 500;
@@ -119,7 +119,7 @@ export default {
 
       .assignee__col,
       .project__col {
-        padding: 10px;
+        padding: 5px 10px;
         font-size: 17px;
         font-weight: 400;
       }

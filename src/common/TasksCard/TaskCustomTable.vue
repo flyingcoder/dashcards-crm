@@ -16,8 +16,8 @@
 
     <div class="task_body" :style="{ height: bodyMaxHeight }">
       <v-layout
-        row
         align-center
+        class="task-row"
         :class="['task__tableBody', { active: task.id === active_task_id }]"
         v-for="task in tasks"
         :key="task.id"
@@ -198,11 +198,21 @@ export default {
     background-color: $tableBlueBg;
     padding: 10px 0;
     .task__tableHead {
-      padding: 10px;
+      padding: 5px 10px;
       color: $tableTitleBlue;
       font-size: 15px;
       font-weight: 500;
     }
+  }
+
+  .task-row {
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap; 
+      /* -webkit-box-flex: 1; */
+      // -ms-flex: 1 1 auto;
+      /* flex: 1 1 auto; */
+      /* margin-right: -12px; */
+      /* margin-left: -12px; */
   }
 
   @include styledScrollFor('.task_body'); //style the scroll
@@ -225,7 +235,7 @@ export default {
 
       .assignee__col,
       .project__col {
-        padding: 10px;
+        padding: 5px 10px;
         font-size: 17px;
         font-weight: 400;
       }
@@ -272,7 +282,7 @@ export default {
       }
       .action__col {
         display: flex;
-        justify-content: end;
+        justify-content: center;
       }
     }
   }

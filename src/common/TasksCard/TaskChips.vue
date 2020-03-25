@@ -5,7 +5,7 @@
       :class="['task__chip', { active: props.activeChip === 'all' }]"
       @click="listeners['update:activeChip']('all')"
     >
-      <v-avatar class="task__avatar">{{ props.countAll }}</v-avatar>
+      <v-avatar left class="task__avatar">{{ props.countAll }}</v-avatar>
       All
     </v-chip>
 
@@ -14,7 +14,7 @@
       :class="['task__chip', { active: props.activeChip === 'completed' }]"
       @click="listeners['update:activeChip']('completed')"
     >
-      <v-avatar class="task__avatar">{{ props.countCompleted }}</v-avatar>
+      <v-avatar left class="task__avatar">{{ props.countCompleted }}</v-avatar>
       Done
     </v-chip>
 
@@ -23,7 +23,7 @@
       :class="['task__chip', { active: props.activeChip === 'pending' }]"
       @click="listeners['update:activeChip']('pending')"
     >
-      <v-avatar class="task__avatar">{{ props.countPending }}</v-avatar>
+      <v-avatar left class="task__avatar">{{ props.countPending }}</v-avatar>
       Pending
     </v-chip>
 
@@ -32,7 +32,7 @@
       :class="['task__chip', { active: props.activeChip === 'behind' }]"
       @click="listeners['update:activeChip']('behind')"
     >
-      <v-avatar class="task__avatar">{{ props.countBehind }}</v-avatar>
+      <v-avatar left class="task__avatar">{{ props.countBehind }}</v-avatar>
       Behind
     </v-chip>
   </div>
@@ -56,6 +56,7 @@ export default {
 .task__chips {
   padding: 10px 0;
   border-bottom: 1px solid $borderGray;
+  text-align: center;
   .theme--light.v-chip {
     background-color: $white;
     border: 1px solid $borderGray;

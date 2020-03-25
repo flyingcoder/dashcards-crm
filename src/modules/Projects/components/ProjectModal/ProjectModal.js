@@ -22,7 +22,7 @@ export default {
     DatePickers,
     MembersDropdown,
     TextField,
-    TextArea,
+    TextArea
   },
 
   props: {
@@ -33,8 +33,8 @@ export default {
   },
 
   data: () => ({
-    extraFields : [],
-    hasExtraInputs : false,
+    extraFields: [],
+    hasExtraInputs: false,
     open: false,
     dropdown_loading: false,
     client: {
@@ -82,8 +82,8 @@ export default {
 
   mounted() {
     this.init_dropdowns()
-    this.$event.$on( 'btnloading_off', (status) => (this.btnloading = status))
-    this.$event.$on( 'new_services_added', (data) => {
+    this.$event.$on('btnloading_off', status => (this.btnloading = status))
+    this.$event.$on('new_services_added', data => {
       for (var i = data.length - 1; i >= 0; i--) {
         let item = {}
         item.name = data[i].service_name
@@ -93,19 +93,17 @@ export default {
         this.service.selected = item
       }
     })
-    this.$event.$on( 'new_client_added', (data) => {
-        this.client.items.push(data)
-        this.client.all_items.push(data)
-        this.client.selected = data
+    this.$event.$on('new_client_added', data => {
+      this.client.items.push(data)
+      this.client.all_items.push(data)
+      this.client.selected = data
     })
-    this.$event.$on( 'new_member_added', (data) => {
-        makeRequestTo.getAllMembers()
-        .then(({data}) => {
-          this.members.all_items = data || []
-          this.members.items = _cloneDeep(this.members.all_items)
-        })
+    this.$event.$on('new_member_added', data => {
+      makeRequestTo.getAllMembers().then(({ data }) => {
+        this.members.all_items = data || []
+        this.members.items = _cloneDeep(this.members.all_items)
+      })
     })
-    
   },
 
   computed: {
@@ -127,18 +125,18 @@ export default {
       this.open = new_val
       if (new_val) this.init_dropdowns()
     },
-    
+
     open(new_val) {
       this.$emit('update:dialog', new_val)
     },
-    
+
     fieldsToEdit: {
       handler(new_val) {
         this.isEditDialog && this.update_fields(new_val)
       },
       deep: true
     },
-    
+
     'service.selected'(new_val, old_val) {
       if (new_val) {
         if (this.isEditDialog) {
@@ -157,23 +155,22 @@ export default {
         }
       }
     }
-
   },
 
   methods: {
-    setDatesAndCloseMenu(val){
+    setDatesAndCloseMenu(val) {
       if (val.length < 2) {
         this.$event.$emit('open_snackbar', 'Select start and end date', 'error')
       } else {
-        var x = new Date(val[0]);
-        var y = new Date(val[1]);
+        var x = new Date(val[0])
+        var y = new Date(val[1])
         this.date_pickers.start_date = x <= y ? val[0] : val[1]
         this.date_pickers.end_date = x <= y ? val[1] : val[0]
         this.rangemenu = false
       }
     },
-    closemenu(){
-      this.shown = false;
+    closemenu() {
+      this.shown = false
     },
     init_dropdowns() {
       this.dropdown_loading = true
@@ -213,7 +210,7 @@ export default {
 
     save() {
       if (this.disabled) return
-      this.btnloading =  true
+      this.btnloading = true
       const fields_to_save = {
         title: this.project_title,
         client_id: this.client.selected.id || null,
@@ -221,8 +218,10 @@ export default {
         start_at: this.date_pickers.start_date,
         end_at: this.date_pickers.end_date,
         description: this.quill_editor.content,
-        members: this.members.selected.map((value,index) => { return value.user_id }),
-        extra_fields : this.extraFields
+        members: this.members.selected.map((value, index) => {
+          return value.user_id
+        }),
+        extra_fields: this.extraFields
       }
 
       if (!this.isEditDialog) fields_to_save.comment = this.comment
@@ -250,11 +249,10 @@ export default {
       this.$set(
         this.members,
         'selected',
-        new_fields.members//.map(member => member.user_id)
+        new_fields.members //.map(member => member.user_id)
       )
       this.project_title = new_fields.title
       this.$set(this.quill_editor, 'content', new_fields.description)
-
     },
 
     clear_and_close() {
@@ -279,10 +277,11 @@ export default {
 
     get_extra_inputs(serviceId) {
       if (serviceId) {
-        makeRequestTo.get_projects_extra_inputs(serviceId)
+        makeRequestTo
+          .get_projects_extra_inputs(serviceId)
           .then(({ data }) => {
-            this.extraFields = JSON.parse(data.questions) 
-            this.hasExtraInputs = true;
+            this.extraFields = JSON.parse(data.questions)
+            this.hasExtraInputs = true
           })
           .catch(() => (this.hasExtraInputs = false))
       } else {
@@ -297,14 +296,18 @@ export default {
     open_add_new_client() {
       this.$event.$emit('open-new-client-dialog', true)
     },
-    add_to_selected_members(item){
-      let index = this.members.selected.findIndex((user) => user.user_id === item.user_id)
+    add_to_selected_members(item) {
+      let index = this.members.selected.findIndex(
+        user => user.user_id === item.user_id
+      )
       if (index === -1) {
         this.members.selected.push(item)
       }
     },
-    remove_from_selected_members(item){
-      let index = this.members.selected.findIndex((user) => user.user_id === item.user_id)
+    remove_from_selected_members(item) {
+      let index = this.members.selected.findIndex(
+        user => user.user_id === item.user_id
+      )
       if (~index) {
         this.members.selected.splice(index, 1)
       }

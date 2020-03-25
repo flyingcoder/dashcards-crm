@@ -23,7 +23,7 @@ export default {
       { text: 'Contact No.', value: 'contact' },
       { text: 'Email', value: 'email' },
       { text: 'Status', value: 'status' },
-      { text: 'Action',value: 'actions', sortable: false, align: 'center' }
+      { text: 'Action', value: 'actions', sortable: false, align: 'center' }
     ],
     table_config: {
       route_name: 'clients',
@@ -58,24 +58,36 @@ export default {
     navigate_to_view_profile(id) {
       this.$router.push(`/dashboard/clients/profile/${id}`)
     },
-    loadClients(){
+    loadClients() {
       this.loading = true
-      request.get('api/clients?page=1').then(({data}) => {
-        this.items = data.data
-        this.pagination.current = data.current_page
-        this.pagination.total = data.last_page
-        this.hasMoreData()
-      })
-    },
-    load_more(){
-      request.get(`api/clients?page=${this.pagination.current+1}`).then(({data}) => {
-        data.data.forEach(item => {
-          this.items.push(item)
+      request
+        .get('api/clients?page=1')
+        .then(({ data }) => {
+          this.items = data.data
+          this.pagination.current = data.current_page
+          this.pagination.total = data.last_page
+          this.hasMoreData()
         })
-        this.pagination.current = data.current_page
-        this.pagination.total = data.last_page
-        this.hasMoreData()
-      })
+        .finally(() => {
+          this.loading = false
+          this.$event.$emit('btnloading_off', false)
+        })
+    },
+    load_more() {
+      request
+        .get(`api/clients?page=${this.pagination.current + 1}`)
+        .then(({ data }) => {
+          data.data.forEach(item => {
+            this.items.push(item)
+          })
+          this.pagination.current = data.current_page
+          this.pagination.total = data.last_page
+          this.hasMoreData()
+        })
+        .finally(() => {
+          this.loading = false
+          this.$event.$emit('btnloading_off', false)
+        })
     }
   }
 }

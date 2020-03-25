@@ -78,6 +78,7 @@
               src="@/assets/icons/header/chevron-down.svg"
               class="chevron responsive-img"
               alt="chevron"
+              style="margin-left: 5px"
             />
           </div>
         </div>

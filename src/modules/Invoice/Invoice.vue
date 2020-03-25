@@ -1,9 +1,6 @@
 <template>
   <div class="invoice">
-    <table-header
-      :paths="paths"
-      @click="open_create_dialog"
-    />
+    <table-header :paths="paths" @click="open_create_dialog" />
 
     <InvoiceDialog type="create" @created="items.unshift($event)" />
     <InvoiceDialog type="edit" @updated="invoice_updated" />
@@ -23,7 +20,7 @@
     />
 
     <VueTable
-      :items="items" 
+      :items="items"
       :headers="headers"
       :showRowActions="true"
       icon="list"
@@ -49,7 +46,9 @@
         </tr>
       </template>
       <template v-slot:empty-slot>
-        <v-btn tile text outlined @click="open_create_dialog"><v-icon left>add</v-icon> Add Invoice</v-btn>
+        <v-btn tile text outlined @click="open_create_dialog"
+          ><v-icon left>add</v-icon> Add Invoice</v-btn
+        >
       </template>
     </VueTable>
   </div>

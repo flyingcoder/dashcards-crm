@@ -8,7 +8,7 @@
         :dashboard="dashboard"
         @close="$emit('close')"
       >
-        <div class="content-wrapper" slot="content">
+        <div slot="content">
           <v-data-table
             v-if="items.length || loading"
             :headers="headers"
@@ -27,7 +27,7 @@
               <td>{{ props.item.status }}</td>
             </template>
           </v-data-table>
-          <div
+          <!-- <div
             class="flex justify-content-center"
             v-if="items.length || loading"
           >
@@ -37,7 +37,7 @@
               :length="pagination.total"
               @input="onPageChange"
             ></v-pagination>
-          </div>
+          </div> -->
           <div class="empty-timer" v-else>
             <div class="empty-content">
               <div class="empty-svg">
@@ -61,7 +61,7 @@
 <script src="./TimerCard.js"></script>
 <style lang="scss" scoped>
 @import '~@/sass/_variables';
-@include emptyTable('.empty-timer');
+@include emptyTableInner('.empty-timer');
 
 .justify-content-center {
   display: flex;

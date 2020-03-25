@@ -34,12 +34,11 @@ export default {
         { text: 'Service', value: 'service_name', sortable: true },
         { text: 'Created By', value: 'name', sortable: true },
         {
-         
           text: 'Date Created',
           value: 'service_created_at',
           sortable: true
         },
-        { text: 'Action', is_action: true, sortable : false }
+        { text: 'Actions', is_action: true, sortable: false, align: 'center' }
       ],
       table_config: {
         route_name: 'services',
@@ -61,23 +60,37 @@ export default {
       if (this.selected.length) this.selected = []
       else this.selected = this.items.slice()
     },
-    load_services(){
-      request.get('api/services?page=1').then(({data}) => {
-        this.items = data.data
-        this.pagination.current = data.current_page
-        this.pagination.total = data.last_page
-        this.hasMoreData()
-      })
-    },
-    load_more_services(){
-      request.get(`api/services?page=${this.pagination.current+1}`).then(({data}) => {
-        data.data.forEach(item => {
-          this.items.push(item)
+    load_services() {
+      this.loading = true
+      request
+        .get('api/services?page=1')
+        .then(({ data }) => {
+          this.items = data.data
+          this.pagination.current = data.current_page
+          this.pagination.total = data.last_page
+          this.hasMoreData()
         })
-        this.pagination.current = data.current_page
-        this.pagination.total = data.last_page
-        this.hasMoreData()
-      })
+        .finally(() => {
+          this.loading = false
+          this.$event.$emit('btnloading_off', false)
+        })
+    },
+    load_more_services() {
+      this.loading = true
+      request
+        .get(`api/services?page=${this.pagination.current + 1}`)
+        .then(({ data }) => {
+          data.data.forEach(item => {
+            this.items.push(item)
+          })
+          this.pagination.current = data.current_page
+          this.pagination.total = data.last_page
+          this.hasMoreData()
+        })
+        .finally(() => {
+          this.loading = false
+          this.$event.$emit('btnloading_off', false)
+        })
     }
   }
 }

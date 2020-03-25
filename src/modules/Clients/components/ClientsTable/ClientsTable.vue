@@ -24,7 +24,7 @@
     />
 
     <VueTable
-      :items="items" 
+      :items="items"
       :headers="headers"
       :showRowActions="true"
       icon="people_outline"
@@ -34,7 +34,6 @@
       :noMoreData="noMoreData"
       @load-more="load_more"
     >
-
       <template v-slot:row-slot="{ item }">
         <tr>
           <td @click="navigate_to_view_profile(item.id)">
@@ -56,11 +55,13 @@
         </tr>
       </template>
       <template v-slot:empty-slot>
-        <v-btn tile text outlined @click="add_dialog = true"><v-icon left>add</v-icon> Add Client</v-btn>
+        <v-btn tile text outlined @click="add_dialog = true"
+          ><v-icon left>add</v-icon> Add Client</v-btn
+        >
       </template>
     </VueTable>
 
-  <!--   <custom-table
+    <!--   <custom-table
       v-if="items.length || loading"
       :headers="headers"
       :items="items"
@@ -130,7 +131,7 @@
       </template>
     </custom-table> -->
 
-   <!--  <div class="empty-client" v-else>
+    <!--  <div class="empty-client" v-else>
       <div class="empty-content">
         <div class="empty-svg">
           <svg viewBox="0 0 250 250">
