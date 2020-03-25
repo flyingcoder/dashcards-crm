@@ -58,11 +58,7 @@
 <script>
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
-<<<<<<< HEAD
 import { v4 as uuidv4 } from 'uuid';
-=======
-import { v4 as uuidv4 } from 'uuid'
->>>>>>> daa0fab96f41c60c6ebc5a9a23dc61643904b0f6
 
 export default {
   inheritAttrs: false,
@@ -77,21 +73,6 @@ export default {
   data: () => ({
     counts: 0,
     session_id: 0
-<<<<<<< HEAD
-  }), 
-  created(){
-    this.session_id = uuidv4()
-  },
-  methods: {
-    getCount(){
-      setTimeout(() => {
-        this.counts = this.$refs.dropzone.getAcceptedFiles().length
-      }, 1);
-    },
-    remove_file(file) {
-      this.$refs.dropzone.removeFile(file)
-      this.getCount() 
-=======
   }),
   created() {
     this.session_id = uuidv4()
@@ -105,25 +86,11 @@ export default {
     remove_file(file) {
       this.$refs.dropzone.removeFile(file)
       this.getCount()
->>>>>>> daa0fab96f41c60c6ebc5a9a23dc61643904b0f6
     },
     remove_all_files() {
       this.$refs.dropzone.removeAllFiles()
       this.counts = 0
     },
-<<<<<<< HEAD
-    process_queue(){
-      this.$refs.dropzone.processQueue()
-    },
-    file_is_uploaded(event){
-      this.$emit('file-added', event)
-      this.getCount()
-    },
-    file_is_removed(){
-      this.getCount()
-    },
-    file_is_sending(file, xhr, formData){
-=======
     process_queue() {
       this.$refs.dropzone.processQueue()
     },
@@ -135,7 +102,6 @@ export default {
       this.getCount()
     },
     file_is_sending(file, xhr, formData) {
->>>>>>> daa0fab96f41c60c6ebc5a9a23dc61643904b0f6
       formData.append('file_upload_session', this.session_id)
     }
   }
