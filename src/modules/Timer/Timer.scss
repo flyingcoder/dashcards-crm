@@ -1,8 +1,10 @@
 @import '~@/sass/_variables';
-
+.table-header{
+    margin: 0 25px;
+}
 .timer__tab{
   padding: 25px;
-  margin: 25px;
+  margin: 0 25px;
   background-color: $white;
   border: 1px solid $tableBorderBlue;
   border-radius: 10px;
@@ -41,7 +43,6 @@
 }
 
 .timer {
-    padding: 14px 28px;
     @include customTableRow;
 
     .table__toolbar-title{
@@ -76,6 +77,9 @@
 }
 
 @media only screen and (max-width: 480px){
+    .table-header{
+        margin: 0 15px;
+    }
     .timer {
         padding: 15px;
 

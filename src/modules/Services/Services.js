@@ -38,7 +38,7 @@ export default {
           value: 'service_created_at',
           sortable: true
         },
-        { text: 'Action', is_action: true, sortable: false }
+        { text: 'Actions', is_action: true, sortable: false, align: 'center' }
       ],
       table_config: {
         route_name: 'services',

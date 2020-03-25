@@ -1,5 +1,5 @@
 <template>
-  <td align="center">
+  <td class="table-actions" align="center">
     <v-icon
       dense
       v-if="hasEdit"
@@ -76,3 +76,12 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+@import '~@/sass/_variables';
+.table-actions .theme--light.v-icon {
+  color: $btnGray;
+}
+.table-actions .theme--light.v-icon:hover {
+  color: $tableDarkText;
+}
+</style>

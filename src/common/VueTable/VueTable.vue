@@ -1,12 +1,12 @@
 <template>
-  <v-card flat>
-    <v-container>
+  <v-card flat class="custom-table-wrapper">
+    <v-container class="custom-table-inner">
       <v-data-table
         :headers="headers"
         :items="items"
         :disable-sort="sortingEnable"
         :show-select="showSelect"
-        class="elevation-1"
+        class="custom-table"
         v-bind="$attrs"
         shaped
         hide-default-footer
@@ -15,9 +15,12 @@
         :items-per-page="itemsPerPage"
       >
         <template v-slot:top>
-          <v-toolbar flat color="white">
-            <v-toolbar-title>
+          <v-toolbar flat>
+            <!-- <v-toolbar-title class="custom-table-title">
               <v-icon>{{ icon }}</v-icon> {{ title }}
+            </v-toolbar-title> -->
+            <v-toolbar-title class="custom-table-title">
+              {{ title }}
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-flex sm12 md3 v-if="hasSearch">
@@ -83,3 +86,4 @@
 </template>
 
 <script src="./VueTable.js"></script>
+<style lang="scss" src="./VueTable.scss"></style>
