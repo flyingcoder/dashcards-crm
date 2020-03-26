@@ -15,9 +15,12 @@ export default {
     hasSearch: { type: Boolean, default: false },
     hasFooter: { type: Boolean, default: true },
     hasHeader: { type: Boolean, default: true },
-    showSelect: { type: Boolean, default: false },
+    showSelect: { type: Boolean, default: true },
     icon: String,
-    noMoreData: { type: Boolean, default: false }
+    noMoreData: { type: Boolean, default: false },
+    noRowEdit: { type: Boolean, default: false },
+    noRowDelete: { type: Boolean, default: false },
+    noRowView: { type: Boolean, default: false },
   },
   data: () => ({
     itemsPerPage: 1000,
@@ -29,18 +32,14 @@ export default {
     computedHeaders: [],
     search: '',
     page: 1,
-    selected: [],
     can_bulk_delete: false,
-    btnloading: false
+    btnloading: false,
+    selected : []
   }),
-  watch: {
-    selected(newVal) {
-      const selected_ids = newVal.map(item => item.id)
-      this.$emit('items-selected', selected_ids)
-    }
-  },
+
   created() {
-    this.$event.$on('btnloading_off', value => (this.btnloading = false))
+    this.$event.$on('btnloading_off', () => (this.btnloading = false))
+    this.$event.$on('clear_selected', () => (this.selected = []))
   },
   methods: {
     handleSelectAllToggle(event) {
@@ -50,5 +49,6 @@ export default {
       this.btnloading = true
       this.$emit('load-more')
     }
+
   }
 }

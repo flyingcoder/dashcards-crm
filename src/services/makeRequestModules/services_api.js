@@ -21,6 +21,10 @@ export const services_api = {
     return request.delete(`api/services/${id}`)
   },
 
+  bulk_delete_services(payload) {
+    return request.delete(`api/services/bulk-delete`, payload)
+  },
+
   paginate_services_table(query) {
     return request.get(`api/services?${query}`)
   }

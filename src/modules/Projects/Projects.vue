@@ -26,8 +26,15 @@
     <delete-dialog
       :open-dialog.sync="delete_dialog"
       title="Delete Project"
-      text-content="Are you sure you want to delete this project?"
+      text-content="Are you sure you want to delete this project? "
       @delete="delete_item('delete_project')"
+    />
+
+    <delete-dialog
+      :open-dialog.sync="bulk_delete_dialog"
+      title="Delete Projects"
+      text-content="Are you sure you want to delete these projects? This can't be undone."
+      @delete="bulk_delete('bulk_delete_project')"
     />
 
     <services-add-dialog
@@ -56,33 +63,19 @@
       :headers="headers"
       :showRowActions="true"
       @load-more="load_more"
+      @delete-selected="open_bulk_delete_dialog($event)"
       icon="widgets"
       title="Projects"
       :key="componentKey"
       :noMoreData="noMoreData"
+      :showSelect="true"
     >
-      <!-- <template v-slot:header>
-        <v-row class="py-1 px-2" no-gutters>
-          <v-col md="12">
-            <v-btn-toggle dense block mandatory group>
-              <v-btn dense block tile outlined @click="filter_projects('all')">
-                All Projects
-              </v-btn>
-              <v-btn dense block tile outlined @click="filter_projects('mine')">
-                My Projects
-              </v-btn>
-            </v-btn-toggle>
-          </v-col>
-        </v-row>
-      </template> -->
-
       <template v-slot:row-slot="{ item }">
-        <tr>
           <td class="clickable-td" @click="navigate_to_view_project(item.id)">
             {{ item.title }}
           </td>
           <td>{{ item.company_name }}</td>
-          <td>{{ item.service_name }}</td>
+          <td>{{ item.service_name | str_limit }}</td>
           <td>
             <v-avatar size="30" color="teal">
               <v-img
@@ -116,7 +109,6 @@
             @edit="open_edit_dialog(item)"
             @view="navigate_to_view_project(item.id)"
           ></Actions>
-        </tr>
       </template>
       <template v-slot:empty-slot>
         <v-btn tile text outlined @click="add_dialog = true"

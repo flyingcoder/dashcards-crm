@@ -156,7 +156,7 @@
                   </v-btn>
                 </template>
                 <v-list dense>
-                  <v-list-item @click="$emit('open-new-member-dialog', true)">
+                  <v-list-item @click="open_add_new_member_dialog">
                     <v-icon left>add</v-icon> Add new member
                   </v-list-item>
                   <v-list-item
@@ -217,6 +217,7 @@
             <v-col md="12">
               <span>Comments</span>
               <v-textarea
+                :rows="1"
                 background-color="grey lighten-5"
                 solo
                 v-model="comment"

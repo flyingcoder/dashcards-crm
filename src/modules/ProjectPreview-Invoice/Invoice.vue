@@ -15,6 +15,12 @@
       text-content="Are you sure you want to delete this invoice?"
       @delete="delete_invoice"
     />
+    <delete-dialog
+      :open-dialog.sync="bulk_delete_dialog"
+      title="Delete Invoices"
+      text-content="Are you sure you want to delete these invoices? This can't be undone."
+      @delete="bulk_delete('bulk_delete_invoices')"
+    />
 
     <VueTable
       :items="items"
@@ -25,20 +31,19 @@
       title="Project Invoice"
       :key="componentKey"
       :noMoreData="noMoreData"
+      @delete-selected="open_bulk_delete_dialog($event)"
     >
       <template v-slot:row-slot="{ item }">
-        <tr>
-          <td>{{ item.title }}</td>
-          <td>{{ item.billed_to }}</td>
-          <td>{{ item.due_date }}</td>
-          <td>{{ item.total_amount }}</td>
-          <Actions
-            :item="item"
-            @delete="open_delete_dialog(item)"
-            @edit="open_edit_dialog(item)"
-            @view="open_view_dialog(item)"
-          ></Actions>
-        </tr>
+        <td>{{ item.title }}</td>
+        <td>{{ item.billed_to }}</td>
+        <td>{{ item.due_date }}</td>
+        <td>{{ item.total_amount }}</td>
+        <Actions
+          :item="item"
+          @delete="open_delete_dialog(item)"
+          @edit="open_edit_dialog(item)"
+          @view="open_view_dialog(item)"
+        ></Actions>
       </template>
     </VueTable>
   </div>

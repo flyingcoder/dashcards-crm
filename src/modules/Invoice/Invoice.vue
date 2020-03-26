@@ -19,6 +19,13 @@
       @delete="delete_invoice"
     />
 
+    <delete-dialog
+      :open-dialog.sync="bulk_delete_dialog"
+      title="Delete Invoices"
+      text-content="Are you sure you want to delete these invoices? This can't be undone."
+      @delete="bulk_delete('bulk_delete_invoices')"
+    />
+
     <VueTable
       :items="items"
       :headers="headers"
@@ -28,22 +35,22 @@
       title="Invoice"
       :key="componentKey"
       :noMoreData="noMoreData"
+      :showSelect="true"
+      @delete-selected="open_bulk_delete_dialog($event)"
       @load-more="load_more"
     >
       <template v-slot:row-slot="{ item }">
-        <tr>
-          <td @click="open_view_dialog(item)">{{ item.title }}</td>
-          <td>{{ item.due_date }}</td>
-          <td>{{ item.billed_to }}</td>
-          <td>$ {{ item.total_amount }}</td>
-          <Actions
-            :item="item"
-            :permissions="$_permissions.get('invoices')"
-            @delete="open_delete_dialog(item)"
-            @edit="open_edit_dialog(item)"
-            @view="open_view_dialog(item)"
-          ></Actions>
-        </tr>
+        <td @click="open_view_dialog(item)">{{ item.title }}</td>
+        <td>{{ item.due_date }}</td>
+        <td>{{ item.billed_to }}</td>
+        <td>$ {{ item.total_amount }}</td>
+        <Actions
+          :item="item"
+          :permissions="$_permissions.get('invoices')"
+          @delete="open_delete_dialog(item)"
+          @edit="open_edit_dialog(item)"
+          @view="open_view_dialog(item)"
+        ></Actions>
       </template>
       <template v-slot:empty-slot>
         <v-btn tile text outlined @click="open_create_dialog"

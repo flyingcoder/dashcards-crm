@@ -38,7 +38,7 @@ export default {
       { text: 'Due Date', value: 'due_date', sortable: false },
       { text: 'Client', value: 'client', sortable: false },
       { text: 'Amount', value: 'amount', sortable: false },
-      { text: 'Action', value: 'actions', sortable: false }
+      { text: 'Action', value: 'actions', sortable: false, width: '140px' }
     ],
     view_item: null,
     table_config: {

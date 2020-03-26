@@ -1,15 +1,18 @@
-import { table_functionality } from '@/services/table-functionality/table-functionality'
+import { list_functionality } from '@/services/list-functionality/list-functionality'
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import MilestoneTemplateDialog from './components/MilestoneTemplateDialog/MilestoneTemplateDialog.vue'
+import VueTable from '@/common/VueTable/VueTable.vue'
+import Actions from '@/common/VueTable/Actions.vue'
 
 export default {
   name: 'MilestoneTemplate',
-  mixins: [table_functionality],
+  mixins: [list_functionality],
   components: {
-    CustomTable,
+    VueTable,
+    Actions,
     MilestoneTemplateDialog,
     DeleteDialog,
     TableHeader

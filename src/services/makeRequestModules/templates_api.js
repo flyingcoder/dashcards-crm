@@ -1,8 +1,8 @@
 import request from '@/services/axios_instance'
 
 export const templates_api = {
-  get_milestone_templates() {
-    return request.get('/api/template')
+  get_milestone_templates(payload) {
+    return request.get('/api/template', payload)
   },
 
   add_new_milestone_template(payload) {
@@ -15,5 +15,10 @@ export const templates_api = {
 
   delete_milestone_template(id) {
     return request.delete(`/api/template/${id}`)
+  },
+
+  bulk_delete_milestone_template(payload){
+    return request.delete(`/api/template/bulk-delete`, payload)
   }
+
 }
