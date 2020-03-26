@@ -57,10 +57,10 @@ export default {
       { title: 'Others', color: '#088f81' }
     ],
     events: [
-      { 
-        type: 'Event', 
+      {
+        type: 'Event',
         color: '#f56c6c',
-        time: '12:00PM - 1:30PM', 
+        time: '12:00PM - 1:30PM',
         title: 'Video Product Roadmap 01',
         users: [
           {
@@ -77,13 +77,13 @@ export default {
             first_name: 'Moe',
             last_name: 'Alongan',
             image_url: false
-          },
-         ]
+          }
+        ]
       },
-      { 
-        type: 'Event', 
+      {
+        type: 'Event',
         color: '#f56c6c',
-        time: '12:00PM - 1:30PM', 
+        time: '12:00PM - 1:30PM',
         title: 'Video Product Roadmap 02',
         users: [
           {
@@ -100,13 +100,13 @@ export default {
             first_name: 'Moe',
             last_name: 'Alongan',
             image_url: false
-          },
-         ]
+          }
+        ]
       },
-      { 
-        type: 'Event', 
+      {
+        type: 'Event',
         color: '#f56c6c',
-        time: '12:00PM - 1:30PM', 
+        time: '12:00PM - 1:30PM',
         title: 'Video Product Roadmap 03',
         users: [
           {
@@ -123,13 +123,13 @@ export default {
             first_name: 'Moe',
             last_name: 'Alongan',
             image_url: false
-          },
-         ]
+          }
+        ]
       },
-      { 
-        type: 'Event', 
+      {
+        type: 'Event',
         color: '#f56c6c',
-        time: '12:00PM - 1:30PM', 
+        time: '12:00PM - 1:30PM',
         title: 'Video Product Roadmap 04',
         users: [
           {
@@ -146,10 +146,10 @@ export default {
             first_name: 'Moe',
             last_name: 'Alongan',
             image_url: false
-          },
-         ]
-      },
-    ],
+          }
+        ]
+      }
+    ]
   }),
 
   computed: {

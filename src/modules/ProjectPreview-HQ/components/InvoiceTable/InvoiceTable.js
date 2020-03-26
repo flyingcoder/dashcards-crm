@@ -31,7 +31,7 @@ export default {
       { text: 'Client', value: 'client', sortable: false },
       { text: 'Amount', value: 'amount', sortable: false },
       { text: 'Actions', sortable: false }
-    ],
+    ]
   }),
 
   created() {

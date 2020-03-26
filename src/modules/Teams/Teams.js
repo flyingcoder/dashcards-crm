@@ -41,7 +41,13 @@ export default {
       { text: 'Location', value: 'location' },
       { text: 'Tasks', value: 'tasks' },
       { text: 'Projects', value: 'projects' },
-      { text: 'Action', value: 'actions', sortable: false, align: 'center', width: '140px' }
+      {
+        text: 'Action',
+        value: 'actions',
+        sortable: false,
+        align: 'center',
+        width: '140px'
+      }
     ],
     table_config: {
       route_name: 'team',

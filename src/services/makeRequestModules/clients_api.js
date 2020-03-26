@@ -27,5 +27,5 @@ export const clients_api = {
 
   bulk_delete_clients(payload) {
     return request.delete(`api/clients/bulk-delete`, payload)
-  },
+  }
 }

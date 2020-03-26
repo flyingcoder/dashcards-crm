@@ -50,13 +50,13 @@
               {{ item.name }}
             </td>
             <td class="text-cap">{{ item.status }}</td>
-              <Actions
-                :item="item"
-                :permission="$_permissions.get('templates')"
-                @delete="open_delete_dialog(item)"
-                @edit="open_edit_dialog(item)"
-                @view="navigate_to_milestone_page(item)"
-              ></Actions>
+            <Actions
+              :item="item"
+              :permission="$_permissions.get('templates')"
+              @delete="open_delete_dialog(item)"
+              @edit="open_edit_dialog(item)"
+              @view="navigate_to_milestone_page(item)"
+            ></Actions>
           </template>
           <template v-slot:empty-slot>
             <v-btn tile text outlined @click="add_dialog = true"

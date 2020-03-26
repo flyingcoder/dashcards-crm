@@ -27,7 +27,6 @@
 
     <div class="calendar-wrapper">
       <div class="calendar-content">
-        
         <div class="calendar_header">
           <div class="left_option">
             <v-btn dark color="#3b589e" large>Add Template</v-btn>
@@ -35,10 +34,20 @@
             <span class="date_title"> March 12, 2020</span>
           </div>
           <div class="right_option">
-            <v-btn fab large text color="#b3b7c3" class="action"><v-icon>list</v-icon></v-btn>
-            <v-btn fab large text color="#b3b7c3" class="action"><v-icon>grid_on</v-icon></v-btn>
+            <v-btn fab large text color="#b3b7c3" class="action"
+              ><v-icon>list</v-icon></v-btn
+            >
+            <v-btn fab large text color="#b3b7c3" class="action"
+              ><v-icon>grid_on</v-icon></v-btn
+            >
             <div class="event_tab">
-              <v-tabs class="event_tab_items" centered grow hide-slider v-model="active_tab">
+              <v-tabs
+                class="event_tab_items"
+                centered
+                grow
+                hide-slider
+                v-model="active_tab"
+              >
                 <v-tab>Today</v-tab>
                 <v-tab>All</v-tab>
               </v-tabs>
@@ -72,8 +81,14 @@
               <div class="label_left">
                 <h3>Events</h3>
                 <div class="event-item" v-for="elabel in eventlabels">
-                  <v-avatar width="15" height="15" min-width="15"  :color="elabel.color"><span></span></v-avatar>
-                  <div class="event-title"> {{ elabel.title }} </div>
+                  <v-avatar
+                    width="15"
+                    height="15"
+                    min-width="15"
+                    :color="elabel.color"
+                    ><span></span
+                  ></v-avatar>
+                  <div class="event-title">{{ elabel.title }}</div>
                 </div>
               </div>
               <div class="label_right">
@@ -87,10 +102,9 @@
           </div>
 
           <div class="right">
-
             <div class="event_card" v-for="event in events">
               <div class="card_header">
-                <h3 class="card_title"> {{event.type}} </h3>
+                <h3 class="card_title">{{ event.type }}</h3>
                 <div class="card_actions">
                   <v-btn fab small text color="#b3b7c3" class="action">
                     <v-icon>edit</v-icon>
@@ -98,15 +112,29 @@
                   <v-btn fab small text color="#b3b7c3" class="action">
                     <v-icon>delete</v-icon>
                   </v-btn>
-                  <v-btn fab small depressed dark color="#1fb868" class="action">
+                  <v-btn
+                    fab
+                    small
+                    depressed
+                    dark
+                    color="#1fb868"
+                    class="action"
+                  >
                     <v-icon>add</v-icon>
                   </v-btn>
                 </div>
               </div>
               <div class="card_body">
-                <v-avatar class="event_color" width="15" height="15" min-width="15"  :color="event.color"><span></span></v-avatar>
-                <div class="event_time"> {{event.time}} </div>
-                <h3 class="event_title"> {{event.title}} </h3>
+                <v-avatar
+                  class="event_color"
+                  width="15"
+                  height="15"
+                  min-width="15"
+                  :color="event.color"
+                  ><span></span
+                ></v-avatar>
+                <div class="event_time">{{ event.time }}</div>
+                <h3 class="event_title">{{ event.title }}</h3>
                 <div class="invited">
                   <div class="invited-inner">
                     <div class="invited-icon">
@@ -116,7 +144,11 @@
                           class="user-icon responsive-img"
                           size="40"
                         >
-                          <img class="atomic-icon" :src="user.image_url" alt="user" />
+                          <img
+                            class="atomic-icon"
+                            :src="user.image_url"
+                            alt="user"
+                          />
                         </v-avatar>
                         <v-avatar
                           v-else
@@ -125,12 +157,15 @@
                           class="user-icon responsive-img"
                         >
                           <span class="white--text">
-                            {{ user.first_name.charAt(0) + user.last_name.charAt(0) }}
+                            {{
+                              user.first_name.charAt(0) +
+                                user.last_name.charAt(0)
+                            }}
                           </span>
                         </v-avatar>
                       </template>
                     </div>
-                    <div class="more"> +2 more invited</div>
+                    <div class="more">+2 more invited</div>
                   </div>
                   <!-- <ul>
                     <li v-for="person in event.persons"> {{ person }} </li>
@@ -142,7 +177,6 @@
                 <v-btn class="view_more" text color="white">View More</v-btn>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -178,7 +212,8 @@
 <script src="./Calendar.js"></script>
 <style lang="scss" scoped src="./Calendar.scss"></style>
 <style lang="css" scoped>
->>> .event_tab .v-item-group.theme--light.v-slide-group.v-tabs-bar.primary--text {
-      height: 35px !important;
-  }
+>>> .event_tab
+  .v-item-group.theme--light.v-slide-group.v-tabs-bar.primary--text {
+  height: 35px !important;
+}
 </style>

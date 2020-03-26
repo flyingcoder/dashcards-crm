@@ -206,13 +206,13 @@ export default {
   }
 
   .task-row {
-      -ms-flex-wrap: wrap;
-      flex-wrap: wrap; 
-      /* -webkit-box-flex: 1; */
-      // -ms-flex: 1 1 auto;
-      /* flex: 1 1 auto; */
-      /* margin-right: -12px; */
-      /* margin-left: -12px; */
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /* -webkit-box-flex: 1; */
+    // -ms-flex: 1 1 auto;
+    /* flex: 1 1 auto; */
+    /* margin-right: -12px; */
+    /* margin-left: -12px; */
   }
 
   @include styledScrollFor('.task_body'); //style the scroll

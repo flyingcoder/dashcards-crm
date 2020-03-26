@@ -88,7 +88,7 @@
 <script src="./ClientCard.js"></script>
 <style lang="scss" scoped>
 @import '~@/sass/_variables';
-@include emptyTable('.empty-client');
+@include emptyTableInner('.empty-client .empty-content');
 
 .justify-content-center {
   display: flex;

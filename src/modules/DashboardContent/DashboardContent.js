@@ -14,6 +14,7 @@ import CalendarCard from '@/common/CalendarCard/CalendarCard.vue'
 import ClientCard from '@/common/ClientCard/ClientCard.vue'
 import InvoiceCard from '@/common/InvoiceCard/InvoiceCard.vue'
 import TimerCard from '@/common/TimerCard/TimerCard.vue'
+import PaymentCard from '@/common/PaymentCard/PaymentCard.vue'
 
 import TaskViewDialog from '@/modules/ProjectPreview-Tasks/components/TaskViewDialog/TaskViewDialog.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
@@ -36,7 +37,8 @@ export default {
     TimerCard,
     TaskViewDialog,
     DeleteDialog,
-    ConfirmDialog
+    ConfirmDialog,
+    PaymentCard
   },
   props: {
     task: { type: Object, default: null },
@@ -86,7 +88,8 @@ export default {
             'calendar',
             'invoice',
             'client',
-            'timer'
+            'timer',
+            'payment'
           ].includes(card.slug)
         ) {
           card.component = card.slug + '-card'

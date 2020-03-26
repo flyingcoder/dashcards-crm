@@ -45,16 +45,16 @@
       @delete-selected="open_bulk_delete_dialog($event)"
     >
       <template v-slot:row-slot="{ item }">
-          <td class="service__name text-cap">{{ item.service_name }}</td>
-          <td class="text-cap">{{ item.name }}</td>
-          <td>{{ item.service_created_at }}</td>
-          <Actions
-            :item="item"
-            :hasView="false"
-            :permissions="$_permissions.get('services')"
-            @delete="open_delete_dialog(item)"
-            @edit="open_edit_dialog(item)"
-          ></Actions>
+        <td class="service__name text-cap">{{ item.service_name }}</td>
+        <td class="text-cap">{{ item.name }}</td>
+        <td>{{ item.service_created_at }}</td>
+        <Actions
+          :item="item"
+          :hasView="false"
+          :permissions="$_permissions.get('services')"
+          @delete="open_delete_dialog(item)"
+          @edit="open_edit_dialog(item)"
+        ></Actions>
       </template>
       <template slot="empty-slot">
         <v-btn tile text outlined @click="add_dialog = true"

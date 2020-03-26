@@ -5,8 +5,10 @@
       v-if="hasEdit"
       v-show="can_edit"
       dense
-      icon @click="handle_action('edit')">
-      <v-icon  small> mdi-pencil </v-icon>
+      icon
+      @click="handle_action('edit')"
+    >
+      <v-icon small> mdi-pencil </v-icon>
     </v-btn>
     <v-btn
       dense
@@ -14,7 +16,7 @@
       v-show="can_delete"
       icon
       @click="handle_action('delete')"
-      >
+    >
       <v-icon small>mdi-delete</v-icon>
     </v-btn>
     <v-btn
@@ -23,7 +25,7 @@
       v-show="can_view"
       icon
       @click="handle_action('view')"
-      >
+    >
       <v-icon small>pageview</v-icon>
     </v-btn>
   </td>

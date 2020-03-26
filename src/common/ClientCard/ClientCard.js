@@ -1,15 +1,6 @@
 import DashCard from '@/common/DashCard.vue'
 import request from '@/services/axios_instance'
 
-const gradients = [
-  ['#222'],
-  ['#42b3f4'],
-  ['red', 'orange', 'yellow'],
-  ['purple', 'violet'],
-  ['#00c6ff', '#F0F', '#FF0'],
-  ['#f72047', '#ffd200', '#1feaea']
-]
-
 export default {
   name: 'TasksCard',
   components: {
@@ -38,10 +29,7 @@ export default {
         { id: 4, text: 'Email', value: 'email' }
       ],
 
-      gradient: gradients[5],
       value: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0],
-      gradientDirection: 'top',
-      gradients,
       radius: 0,
       padding: 8,
       width: 2,

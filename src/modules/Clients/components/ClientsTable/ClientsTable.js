@@ -22,7 +22,13 @@ export default {
       { text: 'Contact No.', value: 'contact' },
       { text: 'Email', value: 'email' },
       { text: 'Status', value: 'status' },
-      { text: 'Action', value: 'actions', sortable: false, align: 'center',width: '140px' }
+      {
+        text: 'Action',
+        value: 'actions',
+        sortable: false,
+        align: 'center',
+        width: '140px'
+      }
     ],
     table_config: {
       route_name: 'clients',

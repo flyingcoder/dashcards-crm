@@ -39,7 +39,12 @@
         <template v-slot:item="{ item }">
           <tr>
             <td v-if="showSelect && !noRowDelete">
-              <v-checkbox v-model="selected" style="margin:0px;padding:0px" :value="item" hide-details ></v-checkbox>
+              <v-checkbox
+                v-model="selected"
+                style="margin:0px;padding:0px"
+                :value="item"
+                hide-details
+              ></v-checkbox>
             </td>
             <slot name="row-slot" :item="item"></slot>
           </tr>

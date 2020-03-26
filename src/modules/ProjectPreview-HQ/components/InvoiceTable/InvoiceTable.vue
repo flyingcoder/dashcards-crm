@@ -22,13 +22,13 @@
                 <v-spacer></v-spacer>
                 <v-col md="6" sm="12">
                   <v-select
-              class="dialog__selectfield"
-              solo
-              hide-details
-              color="#657186"
-              :items="['Remind', 'Cancel', 'Archive']"
-              label="Batch Actions"
-            ></v-select>
+                    class="dialog__selectfield"
+                    solo
+                    hide-details
+                    color="#657186"
+                    :items="['Remind', 'Cancel', 'Archive']"
+                    label="Batch Actions"
+                  ></v-select>
                 </v-col>
               </v-row>
             </template>
@@ -41,13 +41,18 @@
                 <td>
                   <v-menu bottom left>
                     <template v-slot:activator="{ on }">
-                      <v-btn icon v-on="on" >
+                      <v-btn icon v-on="on">
                         <v-icon color="gray">mdi-dots-vertical</v-icon>
                       </v-btn>
                     </template>
                     <v-list>
                       <v-list-item
-                        v-for="(item, i) in ['Copy', 'Print', 'PDF', 'Share link']"
+                        v-for="(item, i) in [
+                          'Copy',
+                          'Print',
+                          'PDF',
+                          'Share link'
+                        ]"
                         :key="i"
                         @click=""
                       >

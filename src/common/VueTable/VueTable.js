@@ -20,7 +20,7 @@ export default {
     noMoreData: { type: Boolean, default: false },
     noRowEdit: { type: Boolean, default: false },
     noRowDelete: { type: Boolean, default: false },
-    noRowView: { type: Boolean, default: false },
+    noRowView: { type: Boolean, default: false }
   },
   data: () => ({
     itemsPerPage: 1000,
@@ -34,7 +34,7 @@ export default {
     page: 1,
     can_bulk_delete: false,
     btnloading: false,
-    selected : []
+    selected: []
   }),
 
   created() {
@@ -49,6 +49,5 @@ export default {
       this.btnloading = true
       this.$emit('load-more')
     }
-
   }
 }

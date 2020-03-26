@@ -122,18 +122,18 @@ export default {
     },
     load_projects() {
       this.loading = true
-        apiTo
-          .get_projects(1)
-          .then(({ data }) => {
-            this.items = data.data
-            this.pagination.current = data.current_page
-            this.pagination.total = data.last_page
-            this.hasMoreData()
-          })
-          .finally(() => {
-            this.loading = false
-            this.$event.$emit('btnloading_off', false)
-          })
+      apiTo
+        .get_projects(1)
+        .then(({ data }) => {
+          this.items = data.data
+          this.pagination.current = data.current_page
+          this.pagination.total = data.last_page
+          this.hasMoreData()
+        })
+        .finally(() => {
+          this.loading = false
+          this.$event.$emit('btnloading_off', false)
+        })
     },
     navigate_to_view_project(id) {
       this.$router.push({

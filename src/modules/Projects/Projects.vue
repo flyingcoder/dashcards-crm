@@ -71,44 +71,44 @@
       :showSelect="true"
     >
       <template v-slot:row-slot="{ item }">
-          <td class="clickable-td" @click="navigate_to_view_project(item.id)">
-            {{ item.title }}
-          </td>
-          <td>{{ item.company_name }}</td>
-          <td>{{ item.service_name | str_limit }}</td>
-          <td>
-            <v-avatar size="30" color="teal">
-              <v-img
-                :src="item.project_manager.user.image_url"
-                :title="item.project_manager.user.fullname"
-              >
-                <template v-slot:placeholder>
-                  <span class="white--text headline">U</span>
-                </template>
-              </v-img>
-            </v-avatar>
-          </td>
-          <td>{{ item.started_at | bzFromNow }}</td>
-          <td>
-            <v-progress-linear
-              v-if="item.progress < 100"
-              color="#9095AB"
-              height="5"
-              value="100"
-            ></v-progress-linear>
-            <v-progress-linear
-              v-else
-              color="#1fb868"
-              height="5"
-              value="100"
-            ></v-progress-linear>
-          </td>
-          <Actions
-            :item="item"
-            @delete="open_delete_dialog(item)"
-            @edit="open_edit_dialog(item)"
-            @view="navigate_to_view_project(item.id)"
-          ></Actions>
+        <td class="clickable-td" @click="navigate_to_view_project(item.id)">
+          {{ item.title }}
+        </td>
+        <td>{{ item.company_name }}</td>
+        <td>{{ item.service_name | str_limit }}</td>
+        <td>
+          <v-avatar size="30" color="teal">
+            <v-img
+              :src="item.project_manager.user.image_url"
+              :title="item.project_manager.user.fullname"
+            >
+              <template v-slot:placeholder>
+                <span class="white--text headline">U</span>
+              </template>
+            </v-img>
+          </v-avatar>
+        </td>
+        <td>{{ item.started_at | bzFromNow }}</td>
+        <td>
+          <v-progress-linear
+            v-if="item.progress < 100"
+            color="#9095AB"
+            height="5"
+            value="100"
+          ></v-progress-linear>
+          <v-progress-linear
+            v-else
+            color="#1fb868"
+            height="5"
+            value="100"
+          ></v-progress-linear>
+        </td>
+        <Actions
+          :item="item"
+          @delete="open_delete_dialog(item)"
+          @edit="open_edit_dialog(item)"
+          @view="navigate_to_view_project(item.id)"
+        ></Actions>
       </template>
       <template v-slot:empty-slot>
         <v-btn tile text outlined @click="add_dialog = true"

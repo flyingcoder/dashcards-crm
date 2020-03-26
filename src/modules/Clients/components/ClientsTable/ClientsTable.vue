@@ -67,7 +67,6 @@
         >
       </template>
     </VueTable>
-
   </div>
 </template>
 
