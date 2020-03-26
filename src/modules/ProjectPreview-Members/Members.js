@@ -29,7 +29,7 @@ export default {
       { text: 'Telephone', value: 'telephone' },
       { text: 'Position', value: 'position' },
       { text: 'Tasks', value: 'tasks' },
-      { text: 'Action', value: 'action' }
+      { text: 'Action', value: 'action', width: '140px' }
     ],
     sortList: [
       { title: 'Sort by member' },

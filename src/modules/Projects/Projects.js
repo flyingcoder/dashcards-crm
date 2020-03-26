@@ -41,7 +41,6 @@ export default {
       { text: 'Dashboard', disabled: false, router_name: 'default-content' },
       { text: 'Projects', disabled: true, router_name: null }
     ],
-    selected: [],
     headers: [
       {
         text: 'Project Title',
@@ -50,7 +49,7 @@ export default {
         align: 'left'
       },
       {
-        text: 'Business Name',
+        text: 'Business',
         value: 'company_name',
         sortable: true,
         align: 'left'
@@ -83,13 +82,11 @@ export default {
         text: 'Action',
         value: 'actions',
         sortable: false,
-        align: 'center'
+        align: 'center',
+        width: '140px'
       }
     ],
-    pagination: {
-      current: 1,
-      total: 0
-    },
+
     table_config: {
       add_message: 'New project added successfully!',
       update_message: 'Project updated successfully!',
@@ -124,7 +121,7 @@ export default {
       })
     },
     load_projects() {
-      ;(this.loading = true),
+      this.loading = true
         apiTo
           .get_projects(1)
           .then(({ data }) => {
@@ -169,6 +166,7 @@ export default {
         })
         .finally(() => this.$event.$emit('btnloading_off', false))
     },
+
     filter_projects(filter) {
       //todo
     }

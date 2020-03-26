@@ -1,30 +1,31 @@
 <template>
   <td class="table-actions" align="center">
-    <v-icon
+    <v-btn
       dense
       v-if="hasEdit"
       v-show="can_edit"
-      class="mr-2"
-      @click="handle_action('edit')"
-    >
-      mdi-pencil
-    </v-icon>
-    <v-icon
+      dense
+      icon @click="handle_action('edit')">
+      <v-icon  small> mdi-pencil </v-icon>
+    </v-btn>
+    <v-btn
       dense
       v-if="hasDelete"
       v-show="can_delete"
-      class="mr-2"
+      icon
       @click="handle_action('delete')"
-      >mdi-delete</v-icon
-    >
-    <v-icon
+      >
+      <v-icon small>mdi-delete</v-icon>
+    </v-btn>
+    <v-btn
       dense
       v-if="hasView"
       v-show="can_view"
-      class="mr-2"
+      icon
       @click="handle_action('view')"
-      >search</v-icon
-    >
+      >
+      <v-icon small>pageview</v-icon>
+    </v-btn>
   </td>
 </template>
 <script>

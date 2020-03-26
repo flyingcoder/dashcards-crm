@@ -7,6 +7,7 @@ export const list_functionality = {
     add_dialog: false,
     delete_dialog: false,
     permissionDialog: false,
+    bulk_delete_dialog: false,
     loading: false,
     items: [],
     items_response: null,
@@ -17,6 +18,7 @@ export const list_functionality = {
     delete_item_id: null,
     show_delete_selected: false,
     selected_ids: [],
+    selected: [],
     rows_per_page: null,
     page: 1,
     sort: {

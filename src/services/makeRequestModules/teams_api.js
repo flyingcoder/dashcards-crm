@@ -37,6 +37,10 @@ export const teams_api = {
     return request.delete(`api/company/teams/${id}`)
   },
 
+  bulk_delete_member(payload) {
+    return request.delete(`api/company/teams/bulk-delete`, payload)
+  },
+
   paginate_teams_table(query) {
     return request.get(`api/company/teams?${query}`)
   }

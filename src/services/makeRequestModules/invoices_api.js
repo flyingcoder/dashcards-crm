@@ -8,5 +8,9 @@ export const invoices_api = {
 
   delete_invoice(id) {
     return request.delete(`api/invoice/${id}`)
+  },
+
+  bulk_delete_invoices(payload){
+  	return request.delete(`api/invoice/bulk-delete`, payload)
   }
 }

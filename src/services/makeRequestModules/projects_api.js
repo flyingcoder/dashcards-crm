@@ -21,6 +21,10 @@ export const projects_api = {
     return request.delete(`api/projects/${id}`)
   },
 
+  bulk_delete_project(payload) {
+    return request.delete(`api/projects/bulk-delete`, payload)
+  },
+
   paginate_projects_table(query) {
     return request.get(`api/projects?${query}`)
   },

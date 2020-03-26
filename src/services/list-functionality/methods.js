@@ -66,7 +66,26 @@ export const methods = {
         })
         .finally(() => this.$event.$emit('btnloading_off', false))
     },
+    bulk_delete(api_name){
+      var payload = { ids : this.selected.map( ii => { return ii.id }) }
 
+      makeRequestTo[api_name]({ data : payload })
+        .then(({data}) => {
+          this.selected.forEach( item => {
+            const index = this.items.findIndex(
+              data_item => data_item.id === item.id
+            )
+            if (~index) this.items.splice(index, 1)
+          })
+          this.bulk_delete_dialog = false
+          this.selected = []
+          this.$event.$emit('clear_selected')
+          this.$event.$emit('open_snackbar', data.message)
+        })
+        .finally(() => {
+          this.$event.$emit('btnloading_off', false)
+        })
+    },
     open_edit_dialog(item) {
       this.edit_dialog = true
       this.$set(this.edit_item, 'id', item.id)
@@ -78,19 +97,49 @@ export const methods = {
       this.delete_item_id = item.id
     },
 
+    open_bulk_delete_dialog(items) {
+      this.bulk_delete_dialog = true
+      this.selected = items
+    },
+
     fill_table(api_name, nested_response = false, dynamic_api = null) {
       this.loading = true
       makeRequestTo[api_name](dynamic_api).then(response => {
         this.items_response = response.data
-        this.loading = false
         if (nested_response) {
           this.items = response.data.data
+          this.pagination.current = response.data.current_page
+          this.pagination.total   = response.data.last_page
+          this.hasMoreData()
         } else {
           this.items = response.data
         }
       })
+      .finally(() => {
+        this.loading = false
+        this.$event.$emit('btnloading_off', false)
+      })
     },
 
+    load_more_on_table(api_name) {
+      this.loading = true
+      var payload = { page : this.pagination.current+1 }
+      makeRequestTo[api_name]({ params: payload  })
+      .then(({data}) => {
+          this.items_response = data.data
+          data.data.forEach(item => {
+            this.items.push(item)
+          })
+          this.pagination.current = data.current_page
+          this.pagination.total   = data.last_page
+          this.hasMoreData()
+      })
+      .finally(() => {
+        this.loading = false
+        this.$event.$emit('btnloading_off', false)
+      })
+    },
+    
     fill_table_with_data(data) {
       this.items = data
     },

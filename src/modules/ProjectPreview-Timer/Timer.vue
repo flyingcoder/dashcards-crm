@@ -10,21 +10,20 @@
       :key="componentKey"
       :noMoreData="noMoreData"
       :hasFooter="false"
+      :showSelect="false"
     >
       <template v-slot:row-slot="{ item }">
-        <tr>
-          <td class="text-cap clickable-td" @click="view_task(item.id)">
-            {{ item.title }}
-          </td>
-          <td>
-            <!-- <assigned-btn :users="item.assignee" /> -->
-            <v-avatar size="36" v-for="user in item.assignee" :key="user.id">
-              <v-img :src="user.image_url" :title="user.fullname"></v-img>
-            </v-avatar>
-          </td>
-          <td>{{ item.total_time }}</td>
-          <td class="text-cap">{{ item.status }}</td>
-        </tr>
+        <td class="text-cap clickable-td" @click="view_task(item.id)">
+          {{ item.title }}
+        </td>
+        <td>
+          <!-- <assigned-btn :users="item.assignee" /> -->
+          <v-avatar size="36" v-for="user in item.assignee" :key="user.id">
+            <v-img :src="user.image_url" :title="user.fullname"></v-img>
+          </v-avatar>
+        </td>
+        <td>{{ item.total_time }}</td>
+        <td class="text-cap">{{ item.status }}</td>
       </template>
     </VueTable>
   </div>

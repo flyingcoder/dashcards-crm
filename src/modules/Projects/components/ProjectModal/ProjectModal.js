@@ -288,7 +288,9 @@ export default {
         this.hasExtraInputs = false
       }
     },
-
+    open_add_new_member_dialog(){
+      this.$event.$emit('open-new-member-dialog', true)
+    },
     open_add_new_service() {
       this.$event.$emit('open-new-service-dialog', true)
     },

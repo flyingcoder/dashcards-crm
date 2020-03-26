@@ -22,7 +22,7 @@
     >
       <template slot="selection" slot-scope="data">
         <v-chip
-          :selected="data.selected"
+          :input-value="data.selected"
           outlined
           class="chip--select-multi"
           close

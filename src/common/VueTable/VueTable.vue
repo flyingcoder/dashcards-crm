@@ -1,7 +1,8 @@
 <template>
   <v-card flat class="custom-table-wrapper">
-    <v-container class="custom-table-inner">
+    <v-container fluid class="custom-table-inner">
       <v-data-table
+        v-model="selected"
         :headers="headers"
         :items="items"
         :disable-sort="sortingEnable"
@@ -10,15 +11,11 @@
         v-bind="$attrs"
         shaped
         hide-default-footer
-        @toggle-select-all="handleSelectAllToggle"
         height="500"
         :items-per-page="itemsPerPage"
       >
         <template v-slot:top>
           <v-toolbar flat>
-            <!-- <v-toolbar-title class="custom-table-title">
-              <v-icon>{{ icon }}</v-icon> {{ title }}
-            </v-toolbar-title> -->
             <v-toolbar-title class="custom-table-title">
               {{ title }}
             </v-toolbar-title>
@@ -40,7 +37,12 @@
         </template>
 
         <template v-slot:item="{ item }">
-          <slot name="row-slot" :item="item"></slot>
+          <tr>
+            <td v-if="showSelect && !noRowDelete">
+              <v-checkbox v-model="selected" style="margin:0px;padding:0px" :value="item" hide-details ></v-checkbox>
+            </td>
+            <slot name="row-slot" :item="item"></slot>
+          </tr>
         </template>
 
         <template v-slot:no-data>
@@ -56,9 +58,11 @@
               <v-btn
                 tile
                 text
-                v-if="can_bulk_delete"
+                v-if="showSelect && !noRowDelete && selected.length > 0"
                 outlined
-                @click="$emit('delete-selected')"
+                color="red"
+                @click="$emit('delete-selected', selected)"
+                v-show="selected.length > 0"
                 >DELETE SELECTED <v-icon right small>delete</v-icon></v-btn
               >
             </v-col>

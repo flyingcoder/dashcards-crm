@@ -17,13 +17,12 @@ export default {
   },
 
   data: () => ({
-    items: [],
     headers: [
       { text: 'Business Name', align: 'left', value: 'company_name' },
       { text: 'Contact No.', value: 'contact' },
       { text: 'Email', value: 'email' },
       { text: 'Status', value: 'status' },
-      { text: 'Action', value: 'actions', sortable: false, align: 'center' }
+      { text: 'Action', value: 'actions', sortable: false, align: 'center',width: '140px' }
     ],
     table_config: {
       route_name: 'clients',

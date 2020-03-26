@@ -25,19 +25,26 @@
       @delete="delete_item('delete_service')"
     />
 
+    <delete-dialog
+      :open-dialog.sync="bulk_delete_dialog"
+      title="Delete Services"
+      text-content="Are you sure you want to delete these services? This can't be undone."
+      @delete="bulk_delete('bulk_delete_services')"
+    />
+
     <VueTable
       :headers="headers"
       :items="items"
       :loading="loading"
       title="Services"
       :permission="$_permissions.get('services')"
-      @items-selected="selected_ids = $event"
-      @load-more="load_more_services"
       :key="componentKey"
       :noMoreData="noMoreData"
+      :showSelect="true"
+      @load-more="load_more_services"
+      @delete-selected="open_bulk_delete_dialog($event)"
     >
       <template v-slot:row-slot="{ item }">
-        <tr :key="item.id">
           <td class="service__name text-cap">{{ item.service_name }}</td>
           <td class="text-cap">{{ item.name }}</td>
           <td>{{ item.service_created_at }}</td>
@@ -48,7 +55,6 @@
             @delete="open_delete_dialog(item)"
             @edit="open_edit_dialog(item)"
           ></Actions>
-        </tr>
       </template>
       <template slot="empty-slot">
         <v-btn tile text outlined @click="add_dialog = true"

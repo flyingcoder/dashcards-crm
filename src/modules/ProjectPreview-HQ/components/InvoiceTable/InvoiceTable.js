@@ -1,31 +1,37 @@
+import { list_functionality } from '@/services/list-functionality/list-functionality'
 import request from '@/services/axios_instance'
 
 //Components
 import DashCard from '@/common/DashCard.vue'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
+import VueTable from '@/common/VueTable/VueTable.vue'
 
 export default {
+  mixins: [list_functionality],
   components: {
     DashCard,
-    CustomTable
+    VueTable
   },
 
   props: {
-    id: [Number, String]
+    id: [Number, String],
+    dashboard: Boolean,
+    viewMoreLink: Object
   },
 
   data: () => ({
+    enableViewMore: true,
+    pagination: {
+      current: 1,
+      total: 0
+    },
     headers: [
-      { id: 1, text: 'Due Date', value: 'due_date' },
-      { id: 2, text: 'Invoice Number', value: 'invoice_number' },
-      { id: 3, text: 'Client', value: 'client' },
-      { id: 4, text: 'Status', value: 'status' },
-      { id: 5, text: 'Amount', value: 'amount' },
-      { id: 6, text: 'Actions' }
+      { text: 'Due Date', value: 'due_date', sortable: false },
+      { text: 'Invoice No.', value: 'invoice_number', sortable: false },
+      { text: 'Client', value: 'client', sortable: false },
+      { text: 'Amount', value: 'amount', sortable: false },
+      { text: 'Actions', sortable: false }
     ],
-    items: [],
-    selected_ids: [],
-    loading: false
   }),
 
   created() {
