@@ -1,15 +1,16 @@
-import { table_functionality } from '@/services/table-functionality/table-functionality'
+import { list_functionality } from '@/services/list-functionality/list-functionality'
 
 //Components
-import CustomTable from '@/common/CustomTable/CustomTable.vue'
+import VueTable from '@/common/VueTable/VueTable.vue'
+import Actions from '@/common/VueTable/Actions.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import MilestoneDialog from './components/MilestoneDialog/MilestoneDialog.vue'
 
 export default {
   name: 'Milestone',
-  mixins: [table_functionality],
-  components: { CustomTable, MilestoneDialog, DeleteDialog, TableHeader },
+  mixins: [list_functionality],
+  components: { VueTable, MilestoneDialog, DeleteDialog, TableHeader, Actions },
 
   props: {
     id: [Number, String] //route param
@@ -25,7 +26,7 @@ export default {
       { text: 'Title', value: 'title' },
       { text: 'Status', value: 'status' },
       { text: 'Days', value: 'days' },
-      { text: 'Action', value: 'action' }
+      { text: 'Action', value: 'action', align: 'center' }
     ],
     table_config: {
       route_name: 'templates/milestone',
@@ -42,7 +43,7 @@ export default {
   },
 
   created() {
-    this.fill_table('get_milestones', true, this.dynamic_api)
+    this.fill_table_via_url(this.dynamic_api)
   },
 
   methods: {
@@ -54,6 +55,9 @@ export default {
           template_id: this.id
         }
       })
+    },
+    load_more(){
+      this.load_more_via_url(this.dynamic_api)
     }
   }
 }

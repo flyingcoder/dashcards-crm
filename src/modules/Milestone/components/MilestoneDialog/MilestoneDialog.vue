@@ -14,7 +14,7 @@
             class="dialog__textfield d-field"
             label="Milestone Title"
             v-model.trim="title"
-            box
+            solo
             hide-details
             color="blue"
           ></v-text-field>
@@ -26,7 +26,7 @@
             label="Status"
             v-model.trim="status"
             :items="['Active', 'Inactive']"
-            box
+            solo
             hide-details
             color="blue"
           ></v-select>
@@ -38,7 +38,7 @@
             label="Days"
             v-model.number="days"
             type="number"
-            box
+            solo
             hide-details
             color="blue"
           ></v-text-field>

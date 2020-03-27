@@ -34,7 +34,8 @@
     color: #657186;
     background-color: #ffffff;
     height: auto;
-    width: 110px;
+    min-width: 110px;
+    width: auto;
     margin: 0 9px;
 }
 >>> .custom__dialog .dialog__body{

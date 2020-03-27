@@ -176,7 +176,6 @@
         :permission="$_permissions.get('hq_files')"
       >
         <template v-slot:row-slot="{ item }">
-          <tr>
             <td @click="pop(item.public_url)">
               <v-img
                 class="my-1"
@@ -226,7 +225,6 @@
                 <img src="@/assets/icons/groups/delete.svg" alt="" />
               </v-btn>
             </td>
-          </tr>
         </template>
       </VueTable>
     </v-card>

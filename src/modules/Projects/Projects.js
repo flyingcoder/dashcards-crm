@@ -119,6 +119,10 @@ export default {
           this.items.push(item)
         })
       })
+      .finally(() => {
+        this.loading = false
+        this.$event.$emit('btnloading_off', false)
+      })
     },
     load_projects() {
       this.loading = true
