@@ -19,6 +19,7 @@
       title="Add New Member"
       :dialog.sync="add_dialog"
       @save="add_item('add_new_team', $event)"
+      @close-dialog="add_dialog = false"
     />
 
     <teams-dialog
@@ -28,6 +29,7 @@
       :fields-to-edit="edit_item"
       :is-edit-dialog="edit_dialog"
       @save="update_item('update_team', $event)"
+      @close-dialog="edit_dialog = false"
     />
 
     <delete-dialog
@@ -77,7 +79,7 @@
           :permissions="$_permissions.get('hq_members')"
           @delete="open_delete_dialog(item)"
           @edit="open_edit_dialog(item)"
-          @view="navigate_to_view_profile(item.id)"
+          @view="navigate_to_view_profile(item)"
         ></Actions>
       </template>
       <template v-slot:empty-slot>

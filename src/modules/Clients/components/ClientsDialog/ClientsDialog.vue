@@ -1,6 +1,6 @@
 <template>
   <custom-dialog
-    title="Add New Client"
+    :title="title"
     ref="dialog"
     :open.sync="open"
     button2-text="Save"

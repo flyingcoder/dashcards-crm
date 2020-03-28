@@ -11,19 +11,39 @@ import App from './App.vue'
 import vuetify from '@/plugins/vuetify'
 import router from './router/router'
 import store from './store/store'
+import middlewarePipeline from './router/middlewarePipeline'
+import methods from '@/global_utils/global_mixin'
 
 Vue.config.productionTip = false
 
-router.beforeEach((to, from, next) => {
-  const authenticated = !!localStorage.getItem('token')
+Vue.mixin({ methods : methods })
 
-  if (
+router.beforeEach((to, from, next) => {
+
+  if (!to.meta.middleware) {
+      return next()
+  }
+
+  const middleware = to.meta.middleware
+
+  const context = {
+      to,
+      from,
+      next,
+      store
+  }
+
+  return middleware[0]({
+      ...context,
+      next: middlewarePipeline(context, middleware, 1)
+  })
+/*  if (
     ['login', 'signup', 'set_password', 'forgot_password'].includes(to.name) &&
     !authenticated
   ) {
     next()
   } else if (
-    ['login', 'signup', 'set_password', , 'forgot_password'].includes(
+    ['login', 'signup', 'set_password', 'forgot_password'].includes(
       to.name
     ) &&
     authenticated
@@ -37,7 +57,7 @@ router.beforeEach((to, from, next) => {
     next({ name: 'not_found' })
   } else {
     next()
-  }
+  }*/
 })
 
 new Vue({

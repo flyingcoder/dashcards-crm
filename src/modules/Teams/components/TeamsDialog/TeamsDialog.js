@@ -8,20 +8,21 @@ export default {
   props: {
     dialog: Boolean,
     title: String,
-    isEditDialog: Boolean,
+    isEditDialog: { type: Boolean, default: false },
     fieldsToEdit: { type: Object, default: () => {} },
-    btnloading: { type: Boolean, default: false }
   },
 
   components: {
     CustomDialog
   },
 
-  mounted() {
+  created() {
     this.$event.$on('btnloading_off', status => (this.btnloading = status))
+    this.show_create_password = this.isEditDialog
   },
 
   data: () => ({
+    btnloading: false,
     open: false,
     first_name: '',
     last_name: '',
@@ -36,7 +37,9 @@ export default {
     group_items: [],
     show_password: false,
     show_repeat_password: false,
-    loading: false
+    loading: false,
+    show_create_password: false,
+    show_create_password_label : 'Let user set their password'
   }),
 
   watch: {
@@ -52,6 +55,12 @@ export default {
         this.isEditDialog && this.update_fields(new_val)
       },
       deep: true
+    },
+    show_create_password(new_val){
+      if (!this.show_create_password) {
+        this.password = this.repeat_password = ''
+      }
+      this.show_create_password_label = !this.show_create_password ? 'Let user set their password' : 'Let admin set their password'
     }
   },
 
@@ -67,6 +76,7 @@ export default {
     cancel() {
       this.open = false
       this.btnloading = false
+      this.$emit('close-dialog')
     },
 
     save() {

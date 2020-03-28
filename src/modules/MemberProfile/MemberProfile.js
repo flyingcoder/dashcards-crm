@@ -1,4 +1,4 @@
-import { mapMutations, mapActions } from 'vuex'
+import { mapMutations, mapActions  } from 'vuex'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
 import Upper from './components/Upper/Upper.vue'
@@ -32,5 +32,10 @@ export default {
   methods: {
     ...mapMutations('memberProfile', ['set_user_id']),
     ...mapActions('memberProfile', ['get_single_member'])
+  },
+  beforeRouteEnter(to, from, next) {
+    next( vm => {
+      vm.verifyUser(to, from, next)
+    })
   }
 }

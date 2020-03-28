@@ -2,6 +2,7 @@ import { list_functionality } from '@/services/list-functionality/list-functiona
 import { global_utils } from '@/global_utils/global_utils'
 import { settings } from '@/variables'
 import * as apiTo from './api'
+
 //Components
 import VueTable from '@/common/VueTable/VueTable.vue'
 import TableHeader from '@/common/TableHeader.vue'

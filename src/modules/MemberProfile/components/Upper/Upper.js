@@ -4,12 +4,14 @@ import { api_to } from '../../api'
 import UserInfo from '../UserInfo.vue'
 import AddPicture from '../AddPicture/AddPicture.vue'
 import TeamsDialog from '../../../Teams/components/TeamsDialog/TeamsDialog.vue'
+import UpdatePasswordDialog from '../UpdatePasswordDialog/UpdatePasswordDialog.vue'
 
 export default {
   components: {
     UserInfo,
     AddPicture,
-    TeamsDialog
+    TeamsDialog,
+    UpdatePasswordDialog
   },
 
   props: {
@@ -23,7 +25,7 @@ export default {
       fields: null
     }
   }),
-
+  
   computed: {
     ...mapGetters('memberProfile', ['user', 'set_user_loading']),
     logged_user() {
@@ -56,11 +58,17 @@ export default {
       this.$set(this.edit_item, 'id', item.id)
       this.$set(this.edit_item, 'fields', item)
     },
+    open_update_password_dialog(item){
+      this.$refs.update_password_dialog.open()
+      this.$set(this.edit_item, 'id', item.id)
+      this.$set(this.edit_item, 'fields', item)
+    },
     update_user_profile(item) {
       item['id'] = this.edit_item.id
       this.update_profile(item)
       this.edit_dialog = this.set_user_loading
       this.$set(this.edit_item, 'fields', this.user)
+      this.$event.$emit('btnloading_off', false)
     },
     image_clicked() {
       if (this.can_edit) {

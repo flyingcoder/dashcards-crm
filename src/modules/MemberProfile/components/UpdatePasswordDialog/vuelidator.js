@@ -3,18 +3,13 @@ import upperFirst from 'lodash/upperFirst'
 
 export const validations = {
   validations: {
-    first_name: { required },
-    last_name: { required },
-    group_name: { required },
-    job_title: { required },
-    email: { required, email },
-    rate: { numeric },
-    contact_number: { required, numeric },
-
+    current_password: { 
+      required : requiredIf(function(){
+        return this.required_current_password
+      })
+    },
     password: {
-      required : requiredIf(function () {
-        return this.show_create_password
-      }),
+      required,
       minLength: minLength(6),
       containsNumber(password) {
         if (!password || password.length < 6) return true
@@ -22,9 +17,7 @@ export const validations = {
       }
     },
     repeat_password: {
-      required : requiredIf(function () {
-        return this.show_create_password
-      }),
+      required,
       matchPassword(repeat_password) {
         return repeat_password === this.password
       }
