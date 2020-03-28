@@ -43,7 +43,8 @@
                     :showNext="false"
                   >
                     <v-img
-                      v-for="media in item.properties.media"
+                      v-for="(media, i) in item.properties.media"
+                      :key="i"
                       :src="media.thumb_url"
                       width="60px"
                       height="60px"

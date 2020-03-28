@@ -59,8 +59,8 @@
             ></Actions>
           </template>
           <template v-slot:empty-slot>
-            <v-btn tile text outlined @click="add_dialog = true"
-              ><v-icon left>add</v-icon> Add Template</v-btn
+            <v-btn dark color="#3b589e" @click="add_dialog = true"
+              >Add Template</v-btn
             >
           </template>
         </VueTable>

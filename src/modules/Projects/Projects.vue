@@ -111,8 +111,8 @@
         ></Actions>
       </template>
       <template v-slot:empty-slot>
-        <v-btn tile text outlined @click="add_dialog = true"
-          ><v-icon left>add</v-icon> Add Project</v-btn
+        <v-btn dark color="#3b589e" @click="add_dialog = true"
+          >Add Project</v-btn
         >
       </template>
     </VueTable>

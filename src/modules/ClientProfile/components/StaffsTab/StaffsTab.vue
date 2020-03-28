@@ -68,7 +68,7 @@
           </svg>
         </div>
         <div class="empty-btn">
-          <v-btn large dark color="#3b589e" @click="add_dialog = true"
+          <v-btn dark color="#3b589e" @click="add_dialog = true"
             >Add Member
           </v-btn>
         </div>
