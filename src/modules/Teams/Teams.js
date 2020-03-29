@@ -1,6 +1,5 @@
 import { list_functionality } from '@/services/list-functionality/list-functionality'
 import isEmpty from 'lodash/isEmpty'
-import request from '@/services/axios_instance'
 
 //Components
 import VueGrid from '@/common/VueGrid/VueGrid.vue'
@@ -66,36 +65,10 @@ export default {
 
   methods: {
     load_users() {
-      this.loading = true
-      request
-        .get(`api/company/teams?page=1`)
-        .then(({ data }) => {
-          this.items = data.data
-          this.pagination.current = data.current_page
-          this.pagination.total = data.last_page
-          this.hasMoreData()
-        })
-        .finally(() => {
-          this.loading = false
-          this.$event.$emit('btnloading_off', false)
-        })
+      this.fill_table_via_url(`api/company/teams`)
     },
     load_more_users() {
-      this.loading = true
-      request
-        .get(`api/company/teams?page=${this.pagination.current + 1}`)
-        .then(({ data }) => {
-          data.data.forEach(item => {
-            this.items.push(item)
-          })
-          this.pagination.current = data.current_page
-          this.pagination.total = data.last_page
-          this.hasMoreData()
-        })
-        .finally(() => {
-          this.loading = false
-          this.$event.$emit('btnloading_off', false)
-        })
+      this.load_more_via_url(`api/company/teams`)
     },
     toggleAll() {
       if (this.selected.length) this.selected = []

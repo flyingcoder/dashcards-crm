@@ -13,11 +13,11 @@
         <v-layout align-center>
           <v-flex xs6>
             <v-avatar
-              v-if="!user.image_url"
+              v-if="user.image_url"
               class="user-icon responsive-img"
               :size="avatarSize"
             >
-              <img class="atomic-icon" :src="user.image_url" alt="user" />
+              <img :src="user.image_url" alt="user" />
             </v-avatar>
             <v-avatar
               v-else

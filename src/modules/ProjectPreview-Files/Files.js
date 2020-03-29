@@ -31,12 +31,12 @@ export default {
 
   data: () => ({
     headers: [
-      { text: 'Thumbnail', value: 'thumbnail' },
+      { text: 'Thumbnail', value: 'thumbnail', sortable : false },
       { text: 'Filetype', value: 'filetype' },
       { text: 'Filename', value: 'filename', width: '35%' },
       { text: 'Added by', value: 'member' },
-      { text: 'Project', value: 'project' },
-      { text: 'Action', value: 'action' }
+      { text: 'Project', value: 'project', sortable : false },
+      { text: 'Action', value: 'action', sortable : false, align : 'center', width : '120px' }
     ],
     table_config: {
       route_name: 'project_preview',

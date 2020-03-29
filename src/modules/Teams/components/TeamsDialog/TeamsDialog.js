@@ -116,6 +116,7 @@ export default {
         job_title: this.job_title
       }
       if (!this.isEditDialog) {
+        fields.id = this.fieldsToEdit.id
         fields.password = this.password
         fields.password_confirmation = this.repeat_password
       }

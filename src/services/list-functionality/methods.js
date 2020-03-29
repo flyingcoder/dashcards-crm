@@ -180,6 +180,7 @@ export const methods = {
         })
         .finally(() => {
           this.loading = false
+          this.scrollToBottom()
           this.$event.$emit('btnloading_off', false)
         })
     },
@@ -198,6 +199,7 @@ export const methods = {
       })
       .finally(() => {
         this.loading = false
+        this.scrollToBottom()
         this.$event.$emit('btnloading_off', false)
       })
     },    
@@ -264,6 +266,14 @@ export const methods = {
       return window.localStorage.getItem('bzk_prefer_view') || 'list'
     },
 
+    scrollToBottom() {
+      setTimeout(() => {
+        const wrapper = document.getElementsByClassName('v-data-table__wrapper')
+        if (wrapper) {
+          wrapper.scrollTop = wrapper.scrollHeight
+        }
+      }, 1)
+    },
     debounce: _debounce(function(value) {
       this.search = value
     }, 500)

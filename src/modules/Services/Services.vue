@@ -46,8 +46,17 @@
     >
       <template v-slot:row-slot="{ item }">
         <td class="service__name text-cap">{{ item.service_name }}</td>
-        <td class="text-cap">{{ item.name }}</td>
-        <td>{{ item.service_created_at }}</td>
+        <td class="text-cap">
+          <v-avatar size="30" color="teal">
+            <v-img :src="item.image_url" :title="item.name">
+              <template v-slot:placeholder>
+                <span class="white--text headline">U</span>
+              </template>
+            </v-img>
+          </v-avatar>
+          {{ item.name }}
+        </td>
+        <td>{{ item.service_created_at | bzFromNow }}</td>
         <Actions
           :item="item"
           :hasView="false"

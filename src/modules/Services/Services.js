@@ -1,7 +1,7 @@
 import { list_functionality } from '@/services/list-functionality/list-functionality'
 import isEmpty from 'lodash/isEmpty'
 import request from '@/services/axios_instance'
-
+import { global_utils } from '@/global_utils/global_utils'
 //Components
 import VueTable from '@/common/VueTable/VueTable.vue'
 import Breadcrumb from '@/common/Breadcrumb.vue'
@@ -13,7 +13,7 @@ import Actions from '@/common/VueTable/Actions.vue'
 
 export default {
   name: 'Services',
-  mixins: [list_functionality],
+  mixins: [list_functionality, global_utils],
   components: {
     VueTable,
     Breadcrumb,
@@ -67,36 +67,10 @@ export default {
       else this.selected = this.items.slice()
     },
     load_services() {
-      this.loading = true
-      request
-        .get('api/services?page=1')
-        .then(({ data }) => {
-          this.items = data.data
-          this.pagination.current = data.current_page
-          this.pagination.total = data.last_page
-          this.hasMoreData()
-        })
-        .finally(() => {
-          this.loading = false
-          this.$event.$emit('btnloading_off', false)
-        })
+      this.fill_table_via_url(`api/services`)
     },
     load_more_services() {
-      this.loading = true
-      request
-        .get(`api/services?page=${this.pagination.current + 1}`)
-        .then(({ data }) => {
-          data.data.forEach(item => {
-            this.items.push(item)
-          })
-          this.pagination.current = data.current_page
-          this.pagination.total = data.last_page
-          this.hasMoreData()
-        })
-        .finally(() => {
-          this.loading = false
-          this.$event.$emit('btnloading_off', false)
-        })
+      this.load_more_via_url(`api/services`)
     }
   }
 }

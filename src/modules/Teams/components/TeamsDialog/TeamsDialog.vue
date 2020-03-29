@@ -79,6 +79,7 @@
             @blur="on_blur_field('email')"
             :error="$v.email.$error"
             label="Email"
+            :disabled="isEditDialog"
             v-model.trim="email"
           ></v-text-field>
         </v-flex>

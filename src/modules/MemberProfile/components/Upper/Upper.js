@@ -64,7 +64,7 @@ export default {
       this.$set(this.edit_item, 'fields', item)
     },
     update_user_profile(item) {
-      item['id'] = this.edit_item.id
+      item.id = this.edit_item.id
       this.update_profile(item)
       this.edit_dialog = this.set_user_loading
       this.$set(this.edit_item, 'fields', this.user)
