@@ -1,4 +1,3 @@
-
 import TasksCard from '@/common/TasksCard/TasksCard.vue'
 import TimelineCard from '@/common/TimelineCard/TimelineCard.vue'
 import ProjectOverviewCard from './components/ProjectOverviewCard/ProjectOverviewCard.vue'
@@ -21,7 +20,7 @@ export default {
   }),
 
   beforeRouteEnter(to, from, next) {
-    next( vm => {
+    next(vm => {
       vm.verifyProject(to, from, next)
     })
   }

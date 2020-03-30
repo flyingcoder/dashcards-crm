@@ -22,7 +22,7 @@ export default {
       { text: 'Description', value: 'description' },
       { text: 'Status', value: 'status' },
       { text: 'Days', value: 'days' },
-      { text: 'Action', value: 'action', width : '140px', align :'center' }
+      { text: 'Action', value: 'action', width: '140px', align: 'center' }
     ],
     table_config: {
       route_name: 'templates/milestone/task',
@@ -62,7 +62,7 @@ export default {
     short_description_text(text) {
       return text.length > 12 ? text.slice(0, 11) + '...' : text
     },
-    load_more(){
+    load_more() {
       this.load_more_via_url(this.dynamic_api)
     }
   }

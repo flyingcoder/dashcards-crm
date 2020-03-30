@@ -28,36 +28,39 @@
         <table-header :paths="paths" @click="add_dialog = true" />
 
         <VueTable
-        :items="items"
-        :headers="headers"
-        :showRowActions="true"
-        title="Milestones"
-        :key="componentKey"
-        :noMoreData="noMoreData"
-        @load-more="load_more"
-        @delete-selected="open_bulk_delete_dialog($event)"
-      >
-        <template v-slot:row-slot="{ item }">
-          <td class="text-xs-left text-cap"  @click="navigate_to_milestone_page(item)" >
-            {{ item.title }}
-          </td>
-          <td class="text-xs-left text-cap">{{ item.status }}</td>
-          <td class="text-xs-left">{{ item.days }}</td>
-          <Actions
-            :item="item"
-            :hasEdit="false"
-            :permissions="$_permissions.get('hq_milestones')"
-            @edit="open_edit_dialog(item)"
-            @delete="open_delete_dialog(item)"
-            @view="navigate_to_milestone_page(item)"
-          ></Actions>
-        </template>
-        <template v-slot:empty-slot>
-          <v-btn tile text outlined @click="add_dialog = true"
-            ><v-icon left>add</v-icon> Add Milestone</v-btn
-          >
-        </template>
-      </VueTable>
+          :items="items"
+          :headers="headers"
+          :showRowActions="true"
+          title="Milestones"
+          :key="componentKey"
+          :noMoreData="noMoreData"
+          @load-more="load_more"
+          @delete-selected="open_bulk_delete_dialog($event)"
+        >
+          <template v-slot:row-slot="{ item }">
+            <td
+              class="text-xs-left text-cap"
+              @click="navigate_to_milestone_page(item)"
+            >
+              {{ item.title }}
+            </td>
+            <td class="text-xs-left text-cap">{{ item.status }}</td>
+            <td class="text-xs-left">{{ item.days }}</td>
+            <Actions
+              :item="item"
+              :hasEdit="false"
+              :permissions="$_permissions.get('hq_milestones')"
+              @edit="open_edit_dialog(item)"
+              @delete="open_delete_dialog(item)"
+              @view="navigate_to_milestone_page(item)"
+            ></Actions>
+          </template>
+          <template v-slot:empty-slot>
+            <v-btn tile text outlined @click="add_dialog = true"
+              ><v-icon left>add</v-icon> Add Milestone</v-btn
+            >
+          </template>
+        </VueTable>
       </v-flex>
     </v-layout>
   </div>

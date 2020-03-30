@@ -31,12 +31,12 @@ export default {
   methods: {
     ...mapMutations('memberProfile', ['set_user_id']),
     ...mapActions('memberProfile', ['get_single_client']),
-    client_updated(item){
+    client_updated(item) {
       this.get_single_client(this.user_id)
     }
   },
   beforeRouteEnter(to, from, next) {
-    next( vm => {
+    next(vm => {
       vm.verifyUser(to, from, next)
     })
   }

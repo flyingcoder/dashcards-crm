@@ -31,7 +31,7 @@ export default {
       { text: 'Telephone', value: 'telephone' },
       { text: 'Position', value: 'position' },
       { text: 'Tasks', value: 'tasks' },
-      { text: 'Action', value: 'action', align:'center', width: '140px' }
+      { text: 'Action', value: 'action', align: 'center', width: '140px' }
     ],
     sortList: [
       { title: 'Sort by member' },
@@ -67,11 +67,16 @@ export default {
     load_more_members() {
       this.load_more_via_url(this.dynamic_api)
     },
-    bulk_remove_members(){
-      var payload = { ids : this.selected.map( ii => { return ii.id }) }
-      request.delete(`api/projects/${this.id}/member/bulk-delete`, { data : payload })
-        .then(({data}) => {
-          data.ids.forEach( item => {
+    bulk_remove_members() {
+      var payload = {
+        ids: this.selected.map(ii => {
+          return ii.id
+        })
+      }
+      request
+        .delete(`api/projects/${this.id}/member/bulk-delete`, { data: payload })
+        .then(({ data }) => {
+          data.ids.forEach(item => {
             const index = this.items.findIndex(
               data_item => data_item.id === item.user_id
             )

@@ -2,19 +2,26 @@
   <div class="profile-upper">
     <div class="background">
       <v-icon class="camera">camera_alt</v-icon>
-      <v-menu bottom left >
+      <v-menu bottom left>
         <template v-slot:activator="{ on }">
-          <v-btn dark icon v-on="on" class="settings" >
+          <v-btn dark icon v-on="on" class="settings">
             <v-icon large>settings</v-icon>
           </v-btn>
         </template>
 
         <v-list>
-          <v-list-item v-if="can_edit"  @click="open_edit_dialog(user)">
-            <v-list-item-title><v-icon left>mdi-account</v-icon> Edit Profile</v-list-item-title>
+          <v-list-item v-if="can_edit" @click="open_edit_dialog(user)">
+            <v-list-item-title
+              ><v-icon left>mdi-account</v-icon> Edit Profile</v-list-item-title
+            >
           </v-list-item>
-          <v-list-item v-if="can_edit" @click="open_update_password_dialog(user)">
-            <v-list-item-title><v-icon left>lock</v-icon> Update Password</v-list-item-title>
+          <v-list-item
+            v-if="can_edit"
+            @click="open_update_password_dialog(user)"
+          >
+            <v-list-item-title
+              ><v-icon left>lock</v-icon> Update Password</v-list-item-title
+            >
           </v-list-item>
         </v-list>
       </v-menu>

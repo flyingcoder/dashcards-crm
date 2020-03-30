@@ -2,13 +2,13 @@
   <div class="members-tab">
     <v-row no-gutters class="mb-2">
       <v-spacer></v-spacer>
-      <v-btn fab small class="mr-1" @click="add_dialog = true">
+      <v-btn fab small dark color="#3b589e" class="mr-1" @click="add_dialog = true">
         <v-icon>add</v-icon>
       </v-btn>
-      <v-btn fab small class="mr-1" @click="setPreferredView('list')">
+      <v-btn fab small dark color="#3b589e" class="mr-1" @click="setPreferredView('list')">
         <v-icon>list</v-icon>
       </v-btn>
-      <v-btn fab small class="mr-1" @click="setPreferredView('grid')">
+      <v-btn fab small dark color="#3b589e" class="mr-1" @click="setPreferredView('grid')">
         <v-icon>mdi-view-dashboard</v-icon>
       </v-btn>
     </v-row>

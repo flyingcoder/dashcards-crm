@@ -70,7 +70,6 @@
             >
           </template>
         </VueTable>
-    
       </v-flex>
     </v-layout>
   </div>

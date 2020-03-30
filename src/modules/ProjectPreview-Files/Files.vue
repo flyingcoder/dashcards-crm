@@ -176,55 +176,55 @@
         :permission="$_permissions.get('hq_files')"
       >
         <template v-slot:row-slot="{ item }">
-            <td @click="pop(item.public_url)">
-              <v-img
-                class="my-1"
-                :src="item.thumb_url"
-                width="50px"
-                height="50px"
-                @error="altImage(item.item)"
-              ></v-img>
-            </td>
-            <td class="text-upper">{{ item.custom_properties.ext }}</td>
-            <td class="text-cap">{{ item.name }}</td>
-            <td class="text-cap">
-              {{ item.custom_properties.user.first_name }}
-            </td>
-            <td class="text-cap">Project</td>
-            <td class="text-xs-center">
-              <v-btn
-                fab
-                small
-                depressed
-                title="Download"
-                :href="item.download_url"
-                v-if="item.mime_type !== 'link'"
-              >
-                <v-icon>cloud_download</v-icon>
-              </v-btn>
-              <v-btn
-                fab
-                text
-                small
-                depressed
-                title="Go to link"
-                @click="goto_link(item.download_url)"
-                v-else
-              >
-                <v-icon>link</v-icon>
-              </v-btn>
-              <v-btn
-                v-if="can_delete"
-                @click="open_delete_dialog(item)"
-                fab
-                small
-                text
-                depressed
-                title="Delete"
-              >
-                <img src="@/assets/icons/groups/delete.svg" alt="" />
-              </v-btn>
-            </td>
+          <td @click="pop(item.public_url)">
+            <v-img
+              class="my-1"
+              :src="item.thumb_url"
+              width="50px"
+              height="50px"
+              @error="altImage(item.item)"
+            ></v-img>
+          </td>
+          <td class="text-upper">{{ item.custom_properties.ext }}</td>
+          <td class="text-cap">{{ item.name }}</td>
+          <td class="text-cap">
+            {{ item.custom_properties.user.first_name }}
+          </td>
+          <td class="text-cap">Project</td>
+          <td class="text-xs-center">
+            <v-btn
+              fab
+              small
+              depressed
+              title="Download"
+              :href="item.download_url"
+              v-if="item.mime_type !== 'link'"
+            >
+              <v-icon>cloud_download</v-icon>
+            </v-btn>
+            <v-btn
+              fab
+              text
+              small
+              depressed
+              title="Go to link"
+              @click="goto_link(item.download_url)"
+              v-else
+            >
+              <v-icon>link</v-icon>
+            </v-btn>
+            <v-btn
+              v-if="can_delete"
+              @click="open_delete_dialog(item)"
+              fab
+              small
+              text
+              depressed
+              title="Delete"
+            >
+              <img src="@/assets/icons/groups/delete.svg" alt="" />
+            </v-btn>
+          </td>
         </template>
       </VueTable>
     </v-card>

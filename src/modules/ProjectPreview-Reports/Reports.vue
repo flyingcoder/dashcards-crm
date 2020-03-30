@@ -20,18 +20,18 @@
       @delete="deleteReport"
     />
 
-    <v-flex xs12 class="text-xs-right" v-if="has_permission">
+    <v-layout class="actions justify-end" v-if="has_permission">
       <v-btn
-        color="indigo"
+        color="#3b589e"
         dark
-        right
-        icon
+        fab
+        small
         title="Add New Report"
         @click="open_dialog"
       >
         <v-icon>add</v-icon>
       </v-btn>
-    </v-flex>
+    </v-layout>
 
     <v-layout wrap v-if="reports.length || loading">
       <v-flex xs12 :md3="has_permission || !reports.length">

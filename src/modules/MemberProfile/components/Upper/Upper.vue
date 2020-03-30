@@ -10,11 +10,18 @@
         </template>
 
         <v-list>
-          <v-list-item v-if="can_edit"  @click="open_edit_dialog(user)">
-            <v-list-item-title><v-icon left>mdi-account</v-icon> Edit Profile</v-list-item-title>
+          <v-list-item v-if="can_edit" @click="open_edit_dialog(user)">
+            <v-list-item-title
+              ><v-icon left>mdi-account</v-icon> Edit Profile</v-list-item-title
+            >
           </v-list-item>
-          <v-list-item v-if="can_edit" @click="open_update_password_dialog(user)">
-            <v-list-item-title><v-icon left>lock</v-icon> Update Password</v-list-item-title>
+          <v-list-item
+            v-if="can_edit"
+            @click="open_update_password_dialog(user)"
+          >
+            <v-list-item-title
+              ><v-icon left>lock</v-icon> Update Password</v-list-item-title
+            >
           </v-list-item>
         </v-list>
       </v-menu>
@@ -40,10 +47,10 @@
       ref="update_password_dialog"
       :fieldsToEdit="edit_item"
     ></UpdatePasswordDialog>
-    
-    <AddPicture ></AddPicture>
-    
-    <UserInfo ></UserInfo>
+
+    <AddPicture></AddPicture>
+
+    <UserInfo></UserInfo>
   </div>
 </template>
 

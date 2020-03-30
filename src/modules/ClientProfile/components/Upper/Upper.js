@@ -33,7 +33,7 @@ export default {
       refresh_table_message: 'Table refreshed'
     }
   }),
-  
+
   computed: {
     ...mapGetters('memberProfile', ['user']),
     logged_user() {
@@ -66,7 +66,7 @@ export default {
       this.$set(this.edit_item, 'id', item.id)
       this.$set(this.edit_item, 'fields', item)
     },
-    open_update_password_dialog(item){
+    open_update_password_dialog(item) {
       this.$refs.update_password_dialog.open()
       this.$set(this.edit_item, 'id', item.id)
       this.$set(this.edit_item, 'fields', item)

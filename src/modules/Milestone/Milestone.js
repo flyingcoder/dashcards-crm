@@ -56,7 +56,7 @@ export default {
         }
       })
     },
-    load_more(){
+    load_more() {
       this.load_more_via_url(this.dynamic_api)
     }
   }

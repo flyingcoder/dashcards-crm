@@ -4,7 +4,7 @@
 
     <div class="profile">
       <div class="profile-content">
-        <Upper @client-updated="client_updated"/>
+        <Upper @client-updated="client_updated" />
         <Lower :user_id="user_id" />
       </div>
     </div>

@@ -114,15 +114,17 @@ export default {
   methods: {
     load_more() {
       this.loading = true
-      apiTo.get_projects(this.pagination.current + 1).then(({ data }) => {
-        data.data.forEach(item => {
-          this.items.push(item)
+      apiTo
+        .get_projects(this.pagination.current + 1)
+        .then(({ data }) => {
+          data.data.forEach(item => {
+            this.items.push(item)
+          })
         })
-      })
-      .finally(() => {
-        this.loading = false
-        this.$event.$emit('btnloading_off', false)
-      })
+        .finally(() => {
+          this.loading = false
+          this.$event.$emit('btnloading_off', false)
+        })
     },
     load_projects() {
       this.loading = true

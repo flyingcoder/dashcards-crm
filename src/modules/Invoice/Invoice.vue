@@ -53,8 +53,8 @@
         ></Actions>
       </template>
       <template v-slot:empty-slot>
-        <v-btn dark color="#3b589e" @click="open_create_dialog"
-          > Add Invoice</v-btn
+        <v-btn dark color="#3b589e" @click="open_create_dialog">
+          Add Invoice</v-btn
         >
       </template>
     </VueTable>

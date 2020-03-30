@@ -71,7 +71,11 @@
                 ></v-text-field>
               </v-layout>
               <v-layout>
-                <v-text-field filled disabled label="Short Answer"></v-text-field>
+                <v-text-field
+                  filled
+                  disabled
+                  label="Short Answer"
+                ></v-text-field>
               </v-layout>
             </template>
 

@@ -12,7 +12,7 @@
             v-model.trim="title"
             class="dialog__textfield d-field"
             label="Title"
-            box
+            filled
             clearable
             hide-details
             prepend-icon="text_fields"
@@ -29,7 +29,7 @@
             label="https://"
             clearable
             @keydown="validate_url"
-            box
+            filled
             hide-details
             color="#657186"
           />

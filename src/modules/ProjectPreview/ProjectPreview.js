@@ -61,7 +61,7 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    next( vm => {
+    next(vm => {
       vm.verifyProject(to, from, next, 'project')
     })
   }

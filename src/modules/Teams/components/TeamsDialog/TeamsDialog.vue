@@ -107,7 +107,7 @@
           ></v-checkbox>
         </v-flex>
 
-         <v-flex xs12 sm6 v-if="!isEditDialog && show_create_password">
+        <v-flex xs12 sm6 v-if="!isEditDialog && show_create_password">
           <v-text-field
             class="dialog__password d-field"
             color="#667187"
@@ -131,12 +131,14 @@
             hide-details
             @blur="on_blur_field('repeat_password')"
             :error="$v.repeat_password.$error"
-            :append-icon="show_repeat_password ? 'visibility_off' : 'visibility'"
+            :append-icon="
+              show_repeat_password ? 'visibility_off' : 'visibility'
+            "
             label="Repeat Password"
             :type="show_repeat_password ? 'text' : 'password'"
             v-model.trim="repeat_password"
             @click:append="show_repeat_password = !show_repeat_password"
-          ></v-text-field> 
+          ></v-text-field>
         </v-flex>
       </v-layout>
 

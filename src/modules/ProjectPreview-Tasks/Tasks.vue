@@ -38,18 +38,19 @@
       @confirm="confirm_mark_as_complete_task"
     />
 
-    <div class="actions">
+    <div class="cards">
+    <v-layout justify-end class="actions">
       <v-btn
-        color="indigo"
+        color="#3b589e"
         dark
-        icon
+        fab
+        small
         title="Add New Task"
         @click="add_task_dialog = true"
       >
         <v-icon>add</v-icon>
       </v-btn>
-    </div>
-    <div class="cards">
+    </v-layout>
       <tasks-card :id="id" />
       <preview-card
         v-if="active_task_id"

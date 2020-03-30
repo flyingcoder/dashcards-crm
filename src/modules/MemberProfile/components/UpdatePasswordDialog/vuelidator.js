@@ -1,10 +1,16 @@
-import { required, requiredIf, numeric, email, minLength } from 'vuelidate/lib/validators'
+import {
+  required,
+  requiredIf,
+  numeric,
+  email,
+  minLength
+} from 'vuelidate/lib/validators'
 import upperFirst from 'lodash/upperFirst'
 
 export const validations = {
   validations: {
-    current_password: { 
-      required : requiredIf(function(){
+    current_password: {
+      required: requiredIf(function() {
         return this.required_current_password
       })
     },

@@ -9,7 +9,7 @@ export default {
     dialog: Boolean,
     title: String,
     isEditDialog: { type: Boolean, default: false },
-    fieldsToEdit: { type: Object, default: () => {} },
+    fieldsToEdit: { type: Object, default: () => {} }
   },
 
   components: {
@@ -39,7 +39,7 @@ export default {
     show_repeat_password: false,
     loading: false,
     show_create_password: false,
-    show_create_password_label : 'Let user set their password'
+    show_create_password_label: 'Let user set their password'
   }),
 
   watch: {
@@ -56,11 +56,13 @@ export default {
       },
       deep: true
     },
-    show_create_password(new_val){
+    show_create_password(new_val) {
       if (!this.show_create_password) {
         this.password = this.repeat_password = ''
       }
-      this.show_create_password_label = !this.show_create_password ? 'Let user set their password' : 'Let admin set their password'
+      this.show_create_password_label = !this.show_create_password
+        ? 'Let user set their password'
+        : 'Let admin set their password'
     }
   },
 

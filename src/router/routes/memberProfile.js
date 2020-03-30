@@ -5,7 +5,7 @@ export const member_profile = {
   name: 'team/profile',
   props: true,
   component: () => import('@/modules/MemberProfile/MemberProfile.vue'),
-  meta : {
-  	middleware: [ auth ]
+  meta: {
+    middleware: [auth]
   }
 }

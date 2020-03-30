@@ -1,11 +1,17 @@
 <<template>
   <v-row justify="center">
     <v-dialog v-model="dialog" scrollable max-width="700px" persistent>
-      <v-card  class="custom__dialog">
+      <v-card class="custom__dialog">
         <v-card-title class="dialog__header">
           <span class="dialog__title">{{ title }}</span>
           <v-spacer></v-spacer>
-          <v-btn fab small depressed class="close__dialog" @click="dialog = false">
+          <v-btn
+            fab
+            small
+            depressed
+            class="close__dialog"
+            @click="dialog = false"
+          >
             <v-icon>close</v-icon>
           </v-btn>
         </v-card-title>
@@ -269,9 +275,7 @@
           </v-row>
         </v-card-text>
         <v-card-actions class="dialog__actions">
-          <v-btn @click="cancel" class="dialog__actions_btn"
-            >Close</v-btn
-          >
+          <v-btn @click="cancel" class="dialog__actions_btn">Close</v-btn>
           <v-btn
             class="dialog__actions_btn"
             :loading="btnloading"

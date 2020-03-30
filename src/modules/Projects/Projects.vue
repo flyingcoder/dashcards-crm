@@ -52,7 +52,7 @@
       :dialog.sync="add_new_member_dialog"
       @save="save_new_member($event)"
     />
-    
+
     <v-progress-linear
       v-show="loading"
       :indeterminate="true"

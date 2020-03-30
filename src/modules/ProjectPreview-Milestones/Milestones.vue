@@ -61,17 +61,18 @@
         right
         transition="slide-y-transition"
       >
-        <v-btn
-          slot="activator"
-          v-model="is_open_speed_dial"
-          color="#3b589e"
-          dark
-          fab
-          small
-        >
-          <v-icon>add</v-icon>
-          <v-icon>close</v-icon>
-        </v-btn>
+        <template v-slot:activator>
+          <v-btn
+            v-model="is_open_speed_dial"
+            color="#3b589e"
+            dark
+            fab
+            small
+          >
+            <v-icon v-if="is_open_speed_dial">close</v-icon>
+            <v-icon v-else>add</v-icon>
+          </v-btn>
+        </template>
 
         <v-btn color="#3b589e" dark small fab @click="add_dialog = true">
           <v-icon title="Add Milestone">add</v-icon>

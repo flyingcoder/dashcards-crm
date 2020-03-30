@@ -8,6 +8,14 @@
   }
 }
 
+
+.actions {
+  padding-bottom: 12px;
+  .v-btn{
+    margin-right: 8px;
+  }
+}
+
 @include actionButtonsDialog('.disable-btn');
 
 .theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat){
