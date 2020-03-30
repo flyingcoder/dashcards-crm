@@ -4,10 +4,12 @@
       <v-layout>
         <v-flex xs12>
           <v-text-field
+            filled
             label="Title of form"
             v-model.trim="form_title"
           ></v-text-field>
           <v-textarea
+            filled
             label="Descriptions"
             auto-grow
             rows="1"
@@ -25,12 +27,14 @@
           <div class="title-description-section" v-if="section.type === 'TD'">
             <v-layout>
               <v-text-field
+                filled
                 :label="section.title.placeholder"
                 v-model="section.title.text"
               ></v-text-field>
             </v-layout>
             <v-layout>
               <v-textarea
+                filled
                 :label="section.description.placeholder"
                 v-model="section.description.text"
               ></v-textarea>
@@ -41,6 +45,7 @@
             <v-layout>
               <v-flex xs8 class="pr-5">
                 <v-text-field
+                  filled
                   :label="section.question_field.placeholder"
                   v-model="section.question_field.text"
                 ></v-text-field>
@@ -48,6 +53,7 @@
 
               <v-flex xs4>
                 <v-select
+                  filled
                   :value="section.selected"
                   @change="dropdown_changed(index, $event)"
                   :items="section.items"
@@ -59,24 +65,26 @@
             <template v-if="section.short_answer.show">
               <v-layout>
                 <v-text-field
+                  filled
                   label="Descriptions"
                   v-model="section.short_answer.text"
                 ></v-text-field>
               </v-layout>
               <v-layout>
-                <v-text-field disabled label="Short Answer"></v-text-field>
+                <v-text-field filled disabled label="Short Answer"></v-text-field>
               </v-layout>
             </template>
 
             <template v-else-if="section.long_answer.show">
               <v-layout>
                 <v-textarea
+                  filled
                   label="Descriptions"
                   v-model="section.long_answer.text"
                 ></v-textarea>
               </v-layout>
               <v-layout>
-                <v-textarea disabled label="Long Answer"></v-textarea>
+                <v-textarea filled disabled label="Long Answer"></v-textarea>
               </v-layout>
             </template>
 
@@ -87,6 +95,7 @@
                 </v-flex>
                 <v-flex xs10>
                   <v-text-field
+                    filled
                     label="Default Text"
                     v-model.trim="section.new_field_text"
                     @keyup.enter="
@@ -117,6 +126,7 @@
                 </v-flex>
                 <v-flex xs10>
                   <v-text-field
+                    filled
                     readonly
                     v-model.trim="field.text"
                   ></v-text-field>
@@ -148,5 +158,11 @@
     padding: 10px;
     margin-bottom: 5px;
   }
+}
+</style>
+
+<style lang="css" scoped>
+>>> .theme--light.v-text-field--filled > .v-input__control > .v-input__slot {
+  background-color: #fff;
 }
 </style>

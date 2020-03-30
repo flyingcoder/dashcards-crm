@@ -13,15 +13,18 @@
     }
     .form-wrapper {
       display: grid;
-      grid-template-columns: 10fr 1fr;
+      grid-template-columns: 1fr;
+    }
+    .v-tab.v-tab--active{
+      background-color: $white;
+      color: $tableDarkText;
+    }
+    .v-tab{
+      background-color: $tableBlueBg;
+      border: 1px solid $tableBorderBlue;
     }
 }
 
-.add__btn.v-btn.v-btn--floating.v-btn--small {
-    background-color: $blue;
-
-    .v-icon {
-      color: $white;
-      font-size: 22px;
-    }
+.add__btn:first-child {
+    margin-right: 8px;
 }

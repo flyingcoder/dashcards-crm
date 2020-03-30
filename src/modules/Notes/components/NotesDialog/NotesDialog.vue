@@ -15,7 +15,7 @@
               label="Add Title"
               class="dialog__textfield d-field"
               color="#667187"
-              box
+              filled
               hide-details
             >
             </v-text-field>

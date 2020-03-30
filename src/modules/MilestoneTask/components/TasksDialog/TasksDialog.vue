@@ -15,7 +15,7 @@
             label="Add task title"
             v-model.trim="title"
             color="#667187"
-            box
+            filled
             hide-details
           ></v-text-field>
         </v-flex>
@@ -29,7 +29,7 @@
             item-text="name"
             item-value="id"
             color="#667187"
-            box
+            filled
             hide-details
           ></v-select>
         </v-flex>
@@ -42,7 +42,7 @@
             type="number"
             min="0"
             color="#667187"
-            box
+            filled
             hide-details
           ></v-text-field>
         </v-flex>
@@ -53,7 +53,7 @@
             label="Add task description"
             v-model.trim="description"
             color="#667187"
-            box
+            filled
             hide-details
           ></v-textarea>
         </v-flex>

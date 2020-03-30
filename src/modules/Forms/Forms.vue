@@ -24,6 +24,8 @@
               fab
               small
               slot="activator"
+              dark
+              color="#3b589e"
               @click="add_title_and_descriptions"
             >
               <v-icon>text_fields</v-icon>
@@ -73,5 +75,8 @@
 >>> .tabs a.v-tabs__item.v-tabs__item--active {
   background: #3b589e;
   color: white;
+}
+>>> .theme--light.v-text-field--filled > .v-input__control > .v-input__slot {
+  background-color: #fff;
 }
 </style>

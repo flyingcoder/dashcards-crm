@@ -6,6 +6,8 @@
         v-if="!noButton"
         fab
         small
+        dark
+        color="#3b589e"
         class="add__btn mr-2"
         @click="$emit('click')"
       >
@@ -15,6 +17,8 @@
         v-if="!noSortButton"
         fab
         small
+        dark
+        color="#3b589e"
         class="add__btn mr-2"
         @click="$emit('click-sort-by')"
       >
@@ -24,6 +28,8 @@
         v-if="!noListButton"
         fab
         small
+        dark
+        color="#3b589e"
         class="add__btn mr-2"
         @click="$emit('click-list-view')"
       >
@@ -33,6 +39,8 @@
         v-if="!noGridButton"
         fab
         small
+        dark
+        color="#3b589e"
         class="add__btn mr-2"
         @click="$emit('click-grid-view')"
       >

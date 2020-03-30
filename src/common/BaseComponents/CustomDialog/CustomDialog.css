@@ -22,6 +22,9 @@
     color: #657186;
 }
 
+>>> .theme--light.v-text-field--filled > .v-input__control > .v-input__slot {
+  background-color: #fff;
+}
 >>> .theme--light.v-text-field--box>.v-input__control>.v-input__slot{
     background-color: #fff;
 }

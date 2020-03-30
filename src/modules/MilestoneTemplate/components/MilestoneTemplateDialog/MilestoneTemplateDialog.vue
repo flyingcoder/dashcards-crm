@@ -13,7 +13,7 @@
         label="Add template name"
         v-model.trim="name"
         color="#667187"
-        box
+        filled
         hide-details
       ></v-text-field>
     </template>

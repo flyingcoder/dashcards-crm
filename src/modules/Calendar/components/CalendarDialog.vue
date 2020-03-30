@@ -23,6 +23,7 @@
         v-model.trim="description"
         color="#667187"
         filled
+        rows="2"
         hide-details
       ></v-textarea>
 

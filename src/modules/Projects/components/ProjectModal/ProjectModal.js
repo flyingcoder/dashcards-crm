@@ -66,7 +66,7 @@ export default {
     quill_editor: {
       content: '',
       editorOption: {
-        placeholder: 'Add text',
+        placeholder: 'Add description',
         modules: {
           toolbar: [
             ['bold', 'italic', 'underline', 'strike'],
