@@ -1,0 +1,97 @@
+@import '~@/sass/_variables';
+.passbox-card-content{
+
+    .content-wrapper{
+        border: 1px solid $borderLightGray;
+        background-color: $tableBlueBg;
+    }
+    .passbox{
+        text-align: center;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+
+        .passbox-body{
+            width: 80%;
+            margin: 0 auto;
+            min-width: 300px;
+        }
+        .v-expansion-panel-content__wrap{
+            padding: 0 5px 16px !important;
+        }
+        img {
+            width: 80%;
+            min-width: 300px;
+            margin-bottom: 20px;
+        }
+        .actions a{
+            text-decoration: none;
+            color: $textDark;
+            margin-top: 10px;
+        }
+    }
+    @include styledScrollFor('.passbox-inner');
+
+    @include styledScrollFor('.passbox-body');
+
+    .passbox2{
+        .passbox-body{
+            height: 300px;
+            overflow: auto;
+            background-color: $white;
+        }
+        .add-form{
+            width: 80%;
+            margin: 0 auto;
+        }
+        .d-field{
+            margin: 10px 0;
+        }
+        .user-detail h2{
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: $textDark;
+        }
+        .user-detail span{
+            color: $gray-3;
+        }
+        .passbox-header{
+            text-align: center;
+            padding: 10px 0;
+            img{
+                width: 200px;
+            }
+        }
+        .account {
+            display: flex;
+            flex: 1 1 auto;
+            text-align: left;
+            align-items: center;
+            padding: 5px 24px;
+            border-bottom: 1px solid $borderLightGray;
+        }
+        .account:first-child{
+            border-top: 1px solid $borderLightGray;
+        }
+        .account h2{
+            font-size: 20px;
+            color: $textDark;
+        }
+        .account span{
+            color: $gray-3;
+        }
+        .acc-actions{
+            margin-left: auto;
+            .v-icon{
+                color: $btnGray;
+            }
+        }
+        
+        @include actionButtonsDialog('.form-actions');
+        .form-actions{
+            text-align: center;
+            margin: 20px 0;
+        }
+    }
+    
+}
