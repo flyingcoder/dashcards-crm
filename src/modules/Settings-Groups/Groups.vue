@@ -36,19 +36,42 @@
         <table-header :paths="paths" @click="add_dialog = true" />
 
         <v-card>
-          <v-card-title>
-            <v-flex xs12 md4>
-              <v-text-field
-                placeholder="Search on the table"
-                append-icon="search"
-                @input="debounce"
-                :value="search"
-                @keydown.esc="search = ''"
-              ></v-text-field>
-            </v-flex>
-          </v-card-title>
+          <VueTable
+            :items="indexes_items"
+            :headers="headers"
+            :showRowActions="true"
+            title="User Groups"
+            :key="componentKey"
+            :noMoreData="noMoreData"
+            :showSelect="false"
+            :hasFooter="false"
+          >
+            <template v-slot:header>
+              <v-row>
+                <v-progress-linear
+                  v-show="loading"
+                  :indeterminate="true"
+                ></v-progress-linear>
+              </v-row>
+            </template>
+            <template v-slot:row-slot="{ item }">
+              <td>{{ item.index }}</td>
+              <td class="text-cap">{{ item.name }}</td>
+              <td>{{ item.description }}</td>
+              <Actions
+                :item="item"
+                :hasView="false"
+                :hasEdit="item.company_id > 0"
+                :hasDelete="item.company_id > 0"
+                editIcon="vpn_key"
+                :permissions="$_permissions.get('settings_group')"
+                @delete="open_delete_dialog(item)"
+                @edit="open_permission_dialog(item)"
+              ></Actions>
+            </template>
+          </VueTable>
 
-          <custom-table
+          <!-- <custom-table
             :headers="headers"
             :items="indexes_items"
             :loading="loading"
@@ -143,7 +166,7 @@
                 </div>
               </div>
             </template>
-          </custom-table>
+          </custom-table> -->
         </v-card>
       </v-flex>
     </v-layout>

@@ -1,22 +1,24 @@
-import { table_functionality } from '@/services/table-functionality/table-functionality'
+import { list_functionality } from '@/services/list-functionality/list-functionality'
 import isEmpty from 'lodash/isEmpty'
+import { api_to } from './api'
 //Components
-import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import PermissionsDialog from './components/PermissionsDialog/PermissionsDialog.vue'
-import { api_to } from './api'
+import VueTable from '@/common/VueTable/VueTable.vue'
+import Actions from '@/common/VueTable/Actions.vue'
 
 export default {
   name: 'PermissionsTable',
-  mixins: [table_functionality],
+  mixins: [list_functionality],
   components: {
-    CustomTable,
+    VueTable,
     Breadcrumb,
     PermissionsDialog,
     DeleteDialog,
-    TableHeader
+    TableHeader,
+    Actions
   },
 
   data: () => ({
@@ -25,22 +27,29 @@ export default {
       { text: 'Permissions', disabled: true, router_name: null }
     ],
     headers: [
-      { id: 1, text: 'Name', value: 'name', sortable: true, align: 'left' },
+      { 
+        text: 'Name', 
+        value: 'name', 
+        sortable: true, 
+        align: 'left' },
       {
-        id: 2,
         text: 'Description',
         value: 'description',
         sortable: true,
         align: 'left'
       },
       {
-        id: 3,
         text: 'Capability',
         value: 'capability',
         sortable: false,
         align: 'left'
       },
-      { id: 4, is_action: true }
+      { 
+        text: 'Action', 
+        sortable : false, 
+        width : '120px', 
+        align : 'center'
+      }
     ],
     table_config: {
       route_name: 'settings',

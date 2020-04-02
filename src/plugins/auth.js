@@ -2,6 +2,7 @@ import Vue from 'vue'
 import store from '@/store/store'
 import make_request_to from '@/services/makeRequestTo'
 import router from '@/router/router'
+
 ;(function() {
   //for setting the user when the page refreshes
   const user = localStorage.getItem('user')
@@ -30,7 +31,7 @@ export const auth = {
     make_request_to.logout().then(() => {
       localStorage.removeItem('token')
       localStorage.removeItem('user')
-      router.push({ name: 'login' })
+      router.go('/login')
     })
   },
 

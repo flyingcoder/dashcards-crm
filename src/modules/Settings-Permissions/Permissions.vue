@@ -23,76 +23,51 @@
       @delete="delete_item('delete_permission')"
     />
 
-    <!--kirby:notes removed, new permissions will be handle by backend observer  -->
-    <!-- <table-header :paths="paths" @click="add_dialog = true" /> -->
-
-    <custom-table
-      :headers="headers"
+    <VueTable
       :items="items"
-      :loading="loading"
-      :sort="sort"
-      :has-checkbox="false"
-      hide-default-footer
-      toolbar-title="Permissions"
-      no-row-view
-      :noRowDelete="true"
-      :permission="$_permissions.get('permissions')"
-      @items-selected="selected_ids = $event"
-      @sorted="changeSort"
-      @edit="open_edit_dialog"
+      :headers="headers"
+      :showRowActions="true"
+      @load-more="load_more_users"
+      icon="widgets"
+      title="Permissions"
+      :key="componentKey"
+      :noMoreData="noMoreData"
+      :showSelect="false"
+      :hasFooter="false"
     >
-      <template slot="right_toolbar">
-        <v-flex xs12 sm3>
-          <v-select
-            label="Select Group"
-            :items="groups"
-            v-model="selected_group"
-          ></v-select>
-        </v-flex>
+      <template v-slot:header>
+        <v-row no-gutters>
+          <v-spacer></v-spacer>
+          <v-col md="3" sm="12">
+            <v-select
+              solo
+              label="Select Group"
+              :items="groups"
+              v-model="selected_group"
+            ></v-select>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-progress-linear
+            v-show="loading"
+            :indeterminate="true"
+          ></v-progress-linear>
+        </v-row>
       </template>
-
-      <template slot="custom-item" slot-scope="{ item }">
+      <template v-slot:row-slot="{ item }">
         <td>{{ item.name | removeSlug }}</td>
         <td>{{ item.description }}</td>
         <td>{{ capability_column(item.slug) }}</td>
+        <Actions
+          :item="item"
+          :hasDelete="false"
+          :hasView="false"
+          :permissions="$_permissions.get('permissions')"
+          @edit="open_edit_dialog(item)"
+        ></Actions>
       </template>
-
-      <!-- <template slot="table-actions">
-        <div class="actions-wrapper">
-          <div class="bulk-delete">
-            <v-btn
-              color="#3b589e"
-              dark
-              outline
-              :disabled="!show_delete_selected"
-            >
-              Delete Selected
-            </v-btn>
-          </div>
-
-          <div class="rows-per-page-dropdown">
-            Rows per page:
-            <v-select
-              :items="rows_per_page_items"
-              menu-props="auto"
-              v-model="rows_per_page"
-              color="#3b589e"
-            ></v-select>
-          </div>
-
-          <div class="pagination">
-            <div class="text-xs-center pt-2">
-              <v-pagination
-                :length="total_items"
-                :total-visible="5"
-                v-model="page"
-                color="#3b589e"
-              ></v-pagination>
-            </div>
-          </div>
-        </div>
-      </template> -->
-    </custom-table>
+    </VueTable>
+  
   </div>
 </template>
 <script src="./Permissions.js"></script>

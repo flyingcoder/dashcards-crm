@@ -203,13 +203,14 @@ export const methods = {
           this.pagination.current = data.current_page
           this.pagination.total = data.last_page
           this.hasMoreData()
-        })
-        .finally(() => {
-          this.loading = false
-          this.scrollToBottom()
-          this.$event.$emit('btnloading_off', false)
-        })
-    },
+      })
+      .finally(() => {
+        this.loading = false
+        this.scrollToBottom()
+        this.$event.$emit('btnloading_off', false)
+      })
+    },    
+
     fill_table_with_data(data) {
       this.items = data
     },

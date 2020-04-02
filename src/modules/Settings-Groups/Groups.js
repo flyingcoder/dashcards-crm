@@ -1,19 +1,22 @@
-import { table_functionality } from '@/services/table-functionality/table-functionality'
+import { list_functionality } from '@/services/list-functionality/list-functionality'
 import _cloneDeep from 'lodash/cloneDeep'
+import isEmpty from 'lodash/isEmpty'
+import request from '@/services/axios_instance'
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import GroupsDialog from './components/GroupsDialog/GroupsDialog.vue'
 import PermissionsDialog from './components/PermissionsDialog/PermissionsDialog.vue'
-import isEmpty from 'lodash/isEmpty'
-import request from '@/services/axios_instance'
+import VueTable from '@/common/VueTable/VueTable.vue'
+import Actions from '@/common/VueTable/Actions.vue'
 
 export default {
   name: 'Groups',
-  mixins: [table_functionality],
+  mixins: [list_functionality],
   components: {
-    CustomTable,
+    VueTable,
+    Actions,
     GroupsDialog,
     PermissionsDialog,
     TableHeader,
@@ -27,10 +30,10 @@ export default {
       { text: 'Groups', disabled: true, router_name: null }
     ],
     headers: [
-      { id: 1, text: 'Index', value: 'index', width: '10%' },
-      { id: 2, text: 'Group Name', value: 'group_name', width: '20%' },
-      { id: 3, text: 'Description', value: 'description', width: '40%' },
-      { id: 4, is_action: true, width: '30%' }
+      { text: 'Index', value: 'index', width: '10%' },
+      { text: 'Group Name', value: 'group_name', width: '20%' },
+      { text: 'Description', value: 'description', width: '40%' },
+      { text: 'Action', width: '30%', sortable: false, align: 'center'}
     ],
     actions: [
       {
@@ -135,6 +138,7 @@ export default {
         .put('api/roles/' + payload.role_id + '/permissions', payload)
         .then(data => {
           this.$emit('open_snackbar', data.message, data.type)
+          this.$event.$emit('btnloading_off', false)
         })
     }
   }
