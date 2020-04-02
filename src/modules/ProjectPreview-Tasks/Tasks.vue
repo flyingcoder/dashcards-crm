@@ -37,8 +37,7 @@
       text-content="Mark task as completed?"
       @confirm="confirm_mark_as_complete_task"
     />
-
-    <div class="cards">
+    
     <v-layout justify-end class="actions">
       <v-btn
         color="#3b589e"
@@ -51,6 +50,8 @@
         <v-icon>add</v-icon>
       </v-btn>
     </v-layout>
+    
+    <div class="cards">
       <tasks-card :id="id" />
       <preview-card
         v-if="active_task_id"

@@ -9,6 +9,40 @@
         @close="$emit('close')"
       >
         <div slot="content">
+
+          <div class="timer">
+            <div class="date"> {{dayNow}} {{dateNow}} </div>
+            <div class="time"> {{timeNow}} </div>
+            <div class="hours-detail">
+              <div class="today">
+                <p>HRS OF WORK TODAY</p>
+                <div class="hours-box">
+                  <div class="box"><span class="hrs">8</span><span class="lbl">HRS</span></div>
+                  <div class="box"><span class="hrs">56</span><span class="lbl">MIN</span></div>
+                  <div class="box"><span class="hrs">21</span><span class="lbl">SEC</span></div>
+                </div>
+              </div>
+              <div class="today">
+                <p>TOTAL HRS OF WORK</p>
+                <div class="hours-box">
+                  <div class="box"><span class="hrs">1384</span><span class="lbl">HRS</span></div>
+                  <div class="box"><span class="hrs">56</span><span class="lbl">MIN</span></div>
+                  <div class="box"><span class="hrs">21</span><span class="lbl">SEC</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <v-tabs class="timer__tabs" centered grow hide-slider>
+            <v-tab href="#">
+              <v-icon left>access_alarm</v-icon>
+              Alarm
+            </v-tab>
+            <v-tab href="#">
+              <v-icon left>access_time</v-icon>
+              Timer
+            </v-tab>
+          </v-tabs>
+
           <v-data-table
             v-if="items.length || loading"
             :headers="headers"
@@ -62,6 +96,52 @@
 <style lang="scss" scoped>
 @import '~@/sass/_variables';
 @include emptyTableInner('.empty-timer');
+
+.timer__tabs {
+  border: 1px solid $borderGray;
+  .v-tab:nth-child(1) {
+    border-right: 1px solid $borderGray;
+  }
+}
+.timer {
+    background: #3B589E;
+    color: #fff;
+    text-align: center;
+    padding: 12px 24px;
+
+    .date {
+        font-size: 24px;
+        font-family: 'Digital-7';
+    }
+    .time{
+      font-size: 60px;
+      font-family: 'Digital-7';
+    }
+    .hours-detail {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+    }
+    .today p, .total p{
+      text-align: left;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    .hours-box {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 10px;
+    }
+    .box {
+        display: grid;
+    }
+    span.hrs {
+        padding: 5px;
+        font-size: 28px;
+        border: 1px solid #fff;
+        border-radius: 5px;
+    }
+}
 
 .justify-content-center {
   display: flex;

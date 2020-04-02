@@ -1,5 +1,6 @@
 import { mapGetters } from 'vuex'
 import request from '@/services/axios_instance'
+import moment from 'moment'
 
 import DashCard from '@/common/DashCard.vue'
 import AssignedBtn from '@/common/AssignedBtn.vue'
@@ -22,6 +23,9 @@ export default {
       loading: true,
       items: [],
       page: 1,
+      timeNow: new Date().toLocaleTimeString(),
+      dayNow: moment().format('ddd'),
+      dateNow: moment().format('LL'),
       pagination: {
         current: 1,
         total: 0
@@ -39,6 +43,10 @@ export default {
   },
   created() {
     this.getTimers()
+    // `this` points to the vm instance
+		setInterval( () => {
+			this.timeNow = new Date().toLocaleTimeString();
+		}, 1000);
   },
 
   methods: {
