@@ -90,7 +90,7 @@ export default {
           action: 'calendar',
           can_view: () => {
             if (this.user.is_admin) return true
-            return this.user.can.hasOwnProperty('calendar')
+            return this.user.can.hasOwnProperty('calendars') || this.user.can.hasOwnProperty('calendars_own')
           }
         },
         {

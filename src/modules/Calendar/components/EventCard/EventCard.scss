@@ -1,0 +1,76 @@
+@import "~@/sass/_variables";
+.event_card{
+    margin: 0;
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    
+  .card_title{
+    color: $textDark;
+  }
+  .card_header{
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .card_body{
+    text-align: center;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+    padding: 15px;
+    position: relative;
+    margin-bottom: 10px;
+    min-height: 220px;
+  }
+
+  .event_color {
+    position: absolute;
+    left: 10px;
+  }
+  .invited {
+    margin: 20px 0;
+  }
+  .invited ul{
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  .card_footer{
+    text-align: center;
+    .view_more{
+      color: $tableDarkText !important;
+    }
+  }
+
+  .card_footer{
+    display: flex;
+    align-content: flex-end;
+    justify-content: center;
+  }
+  .invited-inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  .invited-icon{
+    display: flex;
+  }
+  .v-avatar.user-icon.responsive-img.red {
+      margin-left: -15px;
+  }
+  .v-avatar.user-icon.responsive-img.red:first-child{
+    margin-left: 0;
+  }
+  .more{
+    color: $orange;
+    font-size: 18px;
+    margin-left: 10px;
+  }
+
+}

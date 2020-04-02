@@ -11,6 +11,7 @@ export default {
     items: { type: Array, default: [] },
     headers: { type: Array, default: [] },
     showRowActions: { type: Boolean, default: false },
+    showTopHeader: { type: Boolean, default: true },
     sortingEnable: { type: Boolean, default: false },
     hasSearch: { type: Boolean, default: false },
     hasFooter: { type: Boolean, default: true },

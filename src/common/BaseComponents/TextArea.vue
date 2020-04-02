@@ -3,6 +3,7 @@
     :value="props.value"
     @input="listeners['update:value']($event)"
     filled
+    :rows="props.rows"
     hide-details
     v-bind="data.attrs"
   >
@@ -13,7 +14,8 @@
 export default {
   inheritAttrs: false,
   props: {
-    value: String
+    value: String,
+    rows : {type : Number, default : 5}
   }
 }
 </script>

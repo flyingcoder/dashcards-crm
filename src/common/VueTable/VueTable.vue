@@ -14,7 +14,7 @@
         height="500"
         :items-per-page="itemsPerPage"
       >
-        <template v-slot:top>
+        <template v-slot:top v-if="showTopHeader">
           <v-toolbar flat>
             <v-toolbar-title class="custom-table-title">
               {{ title }}
