@@ -32,29 +32,30 @@
         <v-icon>add</v-icon>
       </v-btn>
     </v-layout>
-
-    <v-layout wrap v-if="reports.length || loading">
-      <v-flex xs12 :md3="has_permission || !reports.length">
-        <reports-list
-          v-if="reports.length"
-          :reports="reports"
-          :active-report="active_report"
-          :loading="loading"
-          @row-clicked="preview_row_url"
-          @edit="openEditDialog"
-          @delete="openDeleteDialog"
-        />
-      </v-flex>
-
-      <v-flex xs12 md9 v-if="has_permission && reports.length">
-        <div class="body-wrapper">
-          <ReportsSection
-            :iframe_src="iframe_src"
-            @iframe-loaded="iframeLoaded"
+      <v-flex xs12 wrap v-if="reports.length || loading">
+        <v-layout>
+          <v-flex xs12 :md3="has_permission || !reports.length">
+          <reports-list
+            v-if="reports.length"
+            :reports="reports"
+            :active-report="active_report"
+            :loading="loading"
+            @row-clicked="preview_row_url"
+            @edit="openEditDialog"
+            @delete="openDeleteDialog"
           />
-        </div>
-      </v-flex>
-    </v-layout>
+        </v-flex>
+
+        <v-flex xs12 md9 v-if="has_permission && reports.length">
+          <div class="body-wrapper">
+            <ReportsSection
+              :iframe_src="iframe_src"
+              @iframe-loaded="iframeLoaded"
+            />
+          </div>
+        </v-flex>
+      </v-layout>
+    </v-flex>
 
     <v-flex xs12 md12 class="empty-reports" v-else>
       <div class="empty-content">
