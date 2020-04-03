@@ -17,51 +17,55 @@
         </v-card-title>
 
         <v-card-text style="height: 350px;">
-        	<v-row>
-	            <v-col md="12" xs="12">
-	            	<label>Event Type Name</label>
-	              <TextField
-	                :value.sync="name"
-	                label="Event Type Name"
-	                color="#657186"
-	                filled
-	              ></TextField>
-	            </v-col>
-	            <v-col md="12" xs="12">
-	            	<label>Event Theme</label>
-	            	<v-row no-gutters>
-	            		<v-col md="12">
-	            			<v-radio-group v-model="theme" row>
-	            				<v-radio
-	            					v-for="(color, index) in colors" :key="index"
-				                :label="color"
-				              	:color="color"
-				              	:value="color"
-				              	hide-details
-				              >
-				              	<template v-slot:label>
-				            			<span :class="color+`--text`">{{color | capitalizeFirst }}</span>
-				            		</template>
-				              </v-radio>
-            				</v-radio-group>
-	            		</v-col>
-	            	</v-row>
-	            </v-col>
-	            <v-col md="12">
-	            	<v-checkbox
-		              v-model="is_private"
-		              label="Private Event Type (If private, it will be only available for you)"
-		              color="blue"
-		              :value="false"
-		              hide-details
-		            ></v-checkbox>
-	            </v-col>
-	        </v-row>
-      
+          <v-row>
+            <v-col md="12" xs="12">
+              <label>Event Type Name</label>
+              <TextField
+                :value.sync="name"
+                label="Event Type Name"
+                color="#657186"
+                filled
+              ></TextField>
+            </v-col>
+            <v-col md="12" xs="12">
+              <label>Event Theme</label>
+              <v-row no-gutters>
+                <v-col md="12">
+                  <v-radio-group v-model="theme" row>
+                    <v-radio
+                      v-for="(color, index) in colors"
+                      :key="index"
+                      :label="color"
+                      :color="color"
+                      :value="color"
+                      hide-details
+                    >
+                      <template v-slot:label>
+                        <span :class="color + `--text`">{{
+                          color | capitalizeFirst
+                        }}</span>
+                      </template>
+                    </v-radio>
+                  </v-radio-group>
+                </v-col>
+              </v-row>
+            </v-col>
+            <v-col md="12">
+              <v-checkbox
+                v-model="is_private"
+                label="Private Event Type (If private, it will be only available for you)"
+                color="blue"
+                :value="false"
+                hide-details
+              ></v-checkbox>
+            </v-col>
+          </v-row>
         </v-card-text>
 
         <v-card-actions class="dialog__actions">
-          <v-btn @click="clear_and_close" class="dialog__actions_btn">Cancel</v-btn>
+          <v-btn @click="clear_and_close" class="dialog__actions_btn"
+            >Cancel</v-btn
+          >
           <v-btn
             class="dialog__actions_btn"
             :loading="btnloading"

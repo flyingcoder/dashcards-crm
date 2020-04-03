@@ -7,24 +7,33 @@ import * as apiTo from '@/modules/Calendar/api'
 import TextField from '@/common/BaseComponents/TextField.vue'
 export default {
   name: 'EventTypeDialog',
-  components : {
+  components: {
     TextField
   },
   props: {
-    dialogTitle: { type : String, default : 'Add New Event Type'},
-    calendar: { type: Object, default: () => {} },
+    dialogTitle: { type: String, default: 'Add New Event Type' },
+    calendar: { type: Object, default: () => {} }
   },
 
   data: () => ({
-		dialog: false,
+    dialog: false,
     btnloading: false,
-		name: '',
-    theme : 'blue',
-    is_private : false,
+    name: '',
+    theme: 'blue',
+    is_private: false,
     colors: [
-      `gray`, `red`, `orange`, `yellow`, `green`, `teal`, `blue`, `indigo`, `purple`, `pink`
+      `gray`,
+      `red`,
+      `orange`,
+      `yellow`,
+      `green`,
+      `teal`,
+      `blue`,
+      `indigo`,
+      `purple`,
+      `pink`
     ]
-	}),
+  }),
   computed: {
     disabled() {
       if (!this.name) {
@@ -33,32 +42,33 @@ export default {
       return false
     }
   },
-  filters : {
-    capitalizeFirst: (s) => {
+  filters: {
+    capitalizeFirst: s => {
       if (typeof s !== 'string') return ''
       return s.charAt(0).toUpperCase() + s.slice(1)
     }
-  }, 
+  },
   methods: {
-  	openDialog() {
-  		this.dialog = true
-  	},
-		save() {
+    openDialog() {
+      this.dialog = true
+    },
+    save() {
       this.btnloading = true
-			var payload = {
-        name : this.name,
-        is_public : !this.is_private,
-        color : this.theme
-			}
-			apiTo.addNewEventType(payload)
-			.then(({data}) => {
-				this.$emit('new-event-type-added', data)
-        this.$event.$emit('open_snackbar', 'Event type successfully added!')
-        this.clear_and_close()
-			})
-      .finally(() => {
-        this.btnloading = false
-      })
+      var payload = {
+        name: this.name,
+        is_public: !this.is_private,
+        color: this.theme
+      }
+      apiTo
+        .addNewEventType(payload)
+        .then(({ data }) => {
+          this.$emit('new-event-type-added', data)
+          this.$event.$emit('open_snackbar', 'Event type successfully added!')
+          this.clear_and_close()
+        })
+        .finally(() => {
+          this.btnloading = false
+        })
     },
     clear_and_close() {
       this.dialog = false

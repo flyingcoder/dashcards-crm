@@ -27,11 +27,12 @@ export default {
       { text: 'Permissions', disabled: true, router_name: null }
     ],
     headers: [
-      { 
-        text: 'Name', 
-        value: 'name', 
-        sortable: true, 
-        align: 'left' },
+      {
+        text: 'Name',
+        value: 'name',
+        sortable: true,
+        align: 'left'
+      },
       {
         text: 'Description',
         value: 'description',
@@ -44,11 +45,11 @@ export default {
         sortable: false,
         align: 'left'
       },
-      { 
-        text: 'Action', 
-        sortable : false, 
-        width : '120px', 
-        align : 'center'
+      {
+        text: 'Action',
+        sortable: false,
+        width: '120px',
+        align: 'center'
       }
     ],
     table_config: {

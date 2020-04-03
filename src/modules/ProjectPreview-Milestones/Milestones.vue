@@ -62,13 +62,7 @@
         transition="slide-y-transition"
       >
         <template v-slot:activator>
-          <v-btn
-            v-model="is_open_speed_dial"
-            color="#3b589e"
-            dark
-            fab
-            small
-          >
+          <v-btn v-model="is_open_speed_dial" color="#3b589e" dark fab small>
             <v-icon v-if="is_open_speed_dial">close</v-icon>
             <v-icon v-else>add</v-icon>
           </v-btn>

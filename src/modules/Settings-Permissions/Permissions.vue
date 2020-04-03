@@ -67,7 +67,6 @@
         ></Actions>
       </template>
     </VueTable>
-  
   </div>
 </template>
 <script src="./Permissions.js"></script>

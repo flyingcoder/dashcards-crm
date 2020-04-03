@@ -2,7 +2,6 @@ import Vue from 'vue'
 import store from '@/store/store'
 import make_request_to from '@/services/makeRequestTo'
 import router from '@/router/router'
-
 ;(function() {
   //for setting the user when the page refreshes
   const user = localStorage.getItem('user')

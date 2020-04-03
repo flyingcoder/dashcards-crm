@@ -8,7 +8,7 @@
       icon
       @click="handle_action('edit')"
     >
-      <v-icon small>{{editIcon}}</v-icon>
+      <v-icon small>{{ editIcon }}</v-icon>
     </v-btn>
     <v-btn
       dense
@@ -17,7 +17,7 @@
       icon
       @click="handle_action('delete')"
     >
-      <v-icon small>{{deleteIcon}}</v-icon>
+      <v-icon small>{{ deleteIcon }}</v-icon>
     </v-btn>
     <v-btn
       dense
@@ -26,7 +26,7 @@
       icon
       @click="handle_action('view')"
     >
-      <v-icon small>{{viewIcon}}</v-icon>
+      <v-icon small>{{ viewIcon }}</v-icon>
     </v-btn>
   </td>
 </template>
@@ -43,9 +43,9 @@ export default {
         view: true
       })
     },
-    editIcon : { type: String, default: 'mdi-pencil' },
-    viewIcon : { type: String, default: 'pageview' },
-    deleteIcon : { type: String, default: 'mdi-delete' },
+    editIcon: { type: String, default: 'mdi-pencil' },
+    viewIcon: { type: String, default: 'pageview' },
+    deleteIcon: { type: String, default: 'mdi-delete' },
     hasDelete: { type: Boolean, default: true },
     hasEdit: { type: Boolean, default: true },
     hasView: { type: Boolean, default: true }

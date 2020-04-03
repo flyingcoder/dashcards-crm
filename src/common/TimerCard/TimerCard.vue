@@ -10,7 +10,7 @@
       >
         <div slot="content">
 
-          <div class="timer">
+          <div class="timer" v-show="true">
             <div class="date"> {{dayNow}} {{dateNow}} </div>
             <div class="time"> {{timeNow}} </div>
             <div class="hours-detail">
@@ -32,14 +32,114 @@
               </div>
             </div>
           </div>
+          <div class="sel-timer" v-show="false">
+            <div class="timer-body">
+              <v-carousel
+                hide-delimiters
+                show-arrows
+                height="auto"
+              >
+                <v-carousel-item
+                  v-for="(slide, i) in slides"
+                  :key="i"
+                >
+                  <v-sheet color="transparent">
+                    <div class="t-slide">
+                      <div class="slide-left">
+                        <div class="t-person">
+                          <v-avatar size="40"><img src="@/assets/temp/user2.png" alt=""></v-avatar>
+                          <span>William Stomhson</span>
+                        </div>
+                        <div class="t-title">
+                          <h3>Website Design Wirefram</h3>
+                          <span>Assigned to you 1 day ago</span>
+                        </div>
+                        <div class="t-service">Website Design</div>
+                      </div>
+                      <div class="slide-right">
+                        <div class="s-hours-detail">
+                          <div class="today">
+                            <p>START TIME</p>
+                            <div class="hours-box">
+                              <div class="box"><span class="hrs">8</span><span class="lbl">HRS</span></div>
+                              <div class="box"><span class="hrs">56</span><span class="lbl">MIN</span></div>
+                              <div class="box"><span class="hrs">21</span><span class="lbl">SEC</span></div>
+                            </div>
+                          </div>
+                          <div class="today">
+                            <p>END TIME</p>
+                            <div class="hours-box">
+                              <div class="box"><span class="hrs">1384</span><span class="lbl">HRS</span></div>
+                              <div class="box"><span class="hrs">56</span><span class="lbl">MIN</span></div>
+                              <div class="box"><span class="hrs">21</span><span class="lbl">SEC</span></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="s-total-hours">
+                          <span>TOTAL HOURS</span>
+                          <div class="time"> {{timeNow}} </div>
+                        </div>
+                        <v-btn color="#fff" class="start-btn" tile text block>START TIMER</v-btn>
+                      </div>
+                    </div>
+                  </v-sheet>
+                </v-carousel-item>
+              </v-carousel>
+            </div>
+          </div>
+          <div class="alarm" v-show="false">
+            <div class="alarm-body">
+              <v-carousel
+                hide-delimiters
+                show-arrows
+                height="auto"
+              >
+                <v-carousel-item
+                  v-for="(slide, i) in slides"
+                  :key="i"
+                >
+                  <v-sheet color="transparent">
+                    <div class="alarm-header">
+                      <div class="a-label">
+                        <v-avatar color="cyan" size="15"></v-avatar>
+                        <span>Ranking Report</span>
+                      </div>
+                      <div class="a-date">
+                        <h3>March 21</h3>
+                        <span>2:00 PM - 3:30 PM</span>
+                      </div>
+                      <div class="a-actions">
+                        <v-btn fab text small color="#fff"><v-icon>edit</v-icon></v-btn>
+                        <v-btn fab text small color="#fff"><v-icon>delete</v-icon></v-btn>
+                      </div>
+                    </div>
+                    <div class="a-slide">
+                      <h4 class="a-title">XYZ Ranking Report</h4>
+                      <div class="a-members">
+                        <div class="a-imgs">
+                          <v-avatar><img src="@/assets/temp/user2.png" alt=""></v-avatar>
+                          <v-avatar><img src="@/assets/temp/user2.png" alt=""></v-avatar>
+                          <v-avatar><img src="@/assets/temp/user2.png" alt=""></v-avatar>
+                        </div>
+                        <div class="a-more"><span>+2 more invited</span></div>
+                      </div>
+                      <v-btn large outlined dark>Invite</v-btn>
+                    </div>
+                  </v-sheet>
+                </v-carousel-item>
+              </v-carousel>
+            </div>
+          </div>
           <v-tabs class="timer__tabs" centered grow hide-slider>
             <v-tab href="#">
               <v-icon left>access_alarm</v-icon>
               Alarm
+              <v-avatar color="#f56c6c" size="25"><span class="notif-text">25</span></v-avatar>
             </v-tab>
             <v-tab href="#">
               <v-icon left>access_time</v-icon>
               Timer
+              <v-avatar color="#f56c6c" size="25"><span class="notif-text">14</span></v-avatar>
             </v-tab>
           </v-tabs>
 
@@ -93,58 +193,4 @@
 </template>
 
 <script src="./TimerCard.js"></script>
-<style lang="scss" scoped>
-@import '~@/sass/_variables';
-@include emptyTableInner('.empty-timer');
-
-.timer__tabs {
-  border: 1px solid $borderGray;
-  .v-tab:nth-child(1) {
-    border-right: 1px solid $borderGray;
-  }
-}
-.timer {
-    background: #3B589E;
-    color: #fff;
-    text-align: center;
-    padding: 12px 24px;
-
-    .date {
-        font-size: 24px;
-        font-family: 'Digital-7';
-    }
-    .time{
-      font-size: 60px;
-      font-family: 'Digital-7';
-    }
-    .hours-detail {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 20px;
-    }
-    .today p, .total p{
-      text-align: left;
-      margin-bottom: 10px;
-      font-size: 14px;
-    }
-    .hours-box {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-gap: 10px;
-    }
-    .box {
-        display: grid;
-    }
-    span.hrs {
-        padding: 5px;
-        font-size: 28px;
-        border: 1px solid #fff;
-        border-radius: 5px;
-    }
-}
-
-.justify-content-center {
-  display: flex;
-  justify-content: center;
-}
-</style>
+<style lang="scss" src="./TimerCard.scss" scoped></style>

@@ -35,7 +35,8 @@ export default {
         { id: 2, text: 'Type', value: 'type', sortable: false },
         { id: 3, text: 'Total Time', value: 'total_time', sortable: false },
         { id: 4, text: 'Status', value: 'status', sortable: false }
-      ]
+      ],
+      slides: 5,
     }
   },
   computed: {
@@ -44,9 +45,9 @@ export default {
   created() {
     this.getTimers()
     // `this` points to the vm instance
-		setInterval( () => {
-			this.timeNow = new Date().toLocaleTimeString();
-		}, 1000);
+    setInterval(() => {
+      this.timeNow = new Date().toLocaleTimeString()
+    }, 1000)
   },
 
   methods: {
