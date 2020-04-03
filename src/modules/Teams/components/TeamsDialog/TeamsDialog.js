@@ -117,8 +117,10 @@ export default {
         group_name: this.group_name,
         job_title: this.job_title
       }
-      if (!this.isEditDialog) {
+       if (this.isEditDialog) {
         fields.id = this.fieldsToEdit.id
+      }
+      if (this.show_create_password && !this.isEditDialog) {
         fields.password = this.password
         fields.password_confirmation = this.repeat_password
       }
