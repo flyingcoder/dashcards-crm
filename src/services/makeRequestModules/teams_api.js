@@ -12,6 +12,10 @@ export const teams_api = {
   getAllMembers() {
     return request.get('api/company/members?for=project')
   },
+  
+  getAllMembersExcept(payload) {
+    return request.get('api/company/members?for=project', { params: payload })
+  },
 
   getAllNormalMembers() {
     return request.get('api/company/members?for=project&type=member')

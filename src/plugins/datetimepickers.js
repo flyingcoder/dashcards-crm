@@ -3,4 +3,4 @@ import { Datetime } from 'vue-datetime'
 // You need a specific loader for CSS files
 import 'vue-datetime/dist/vue-datetime.css'
 
-Vue.component('v-datetime', Datetime)
+Vue.component('v-datetime', Datetime);

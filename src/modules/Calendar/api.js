@@ -15,7 +15,7 @@ export const getCalendarAttributes = () => {
   return request.get(`api/events/attributes`)
 }
 
-export const addNewEvent = payload => {
+export const addNewEvent = ( payload) => {
   return request.post(`api/events`, payload)
 }
 
@@ -23,7 +23,7 @@ export const updateEvent = (id, payload) => {
   return request.put(`api/events/${id}`, payload)
 }
 
-export const addNewEventType = payload => {
+export const addNewEventType = (payload) => {
   return request.post(`api/calendars/event-types`, payload)
 }
 

@@ -22,7 +22,7 @@
             :attributes="attributes"
             nav-visibility="visible"
             is-expanded
-          />
+          ></vc-calendar>
         </div>
       </dash-card>
     </div>
