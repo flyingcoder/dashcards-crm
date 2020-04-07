@@ -209,6 +209,7 @@ export default {
         .then(({ data }) => {
           this.items.push(data)
           this.$refs.link_dialog.closeAndClearDialog()
+          this.$event.$emit('open_snackbar', "New link added!")
         })
         .finally(() => this.$event.$emit('btnloading_off', false))
     },

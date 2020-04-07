@@ -2,13 +2,14 @@
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import ClientsTable from './components/ClientsTable/ClientsTable.vue'
-
+import Viewer from '@/common/Viewer/Viewer.vue'
 export default {
   name: 'Clients',
   components: {
     Breadcrumb,
     ClientsTable,
-    TableHeader
+    TableHeader,
+    Viewer
   },
 
   data: () => ({

@@ -9,7 +9,7 @@
     v-model="dropdownVisible"
   >
     <template v-slot:activator="{ on }">
-      <div class="chat__button">
+      <div class="chat__button" v-on="on">
         <HeaderIcon
           :image-src="notificationIcon"
           :hovered-image-src="hoveredNotificationIcon"

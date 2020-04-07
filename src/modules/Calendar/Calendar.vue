@@ -68,7 +68,7 @@
     >
     </AddParticipantDialog>
 
-    <table-header :paths="paths" @click="add_dialog = true" />
+    <table-header :paths="paths" :noButton="true" />
 
     <div class="calendar-wrapper">
       <div class="calendar-content">

@@ -28,22 +28,23 @@
       </slot>
     </v-row>
 
-    <v-flex xs12 class="card__content">
-      <slot name="content" />
-    </v-flex>
+    <v-row no-gutters class="card__content">
+      <slot name="content" ></slot>
+    </v-row>
 
-    <v-flex xs12 class="card__footer">
+    <v-row no-gutters class="card__footer">
       <slot name="footer">
         <v-btn
           v-if="viewMoreBtn"
           text
+          :loading="btnloading"
           class="view__more_btn mx-auto"
           @click="$emit('view-more')"
         >
           VIEW MORE
         </v-btn>
       </slot>
-    </v-flex>
+    </v-row>
   </div>
 </template>
 
@@ -54,6 +55,12 @@ export default {
     title: String,
     viewMoreBtn: Boolean,
     dashboard: Boolean
+  },
+  data: () => ({
+    btnloading: false
+  }),
+  created() {
+    this.$event.$on('btnloading_off', () => { this.btnloading = false })
   }
 }
 </script>

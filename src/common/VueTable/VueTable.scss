@@ -26,6 +26,12 @@
         border-right: 1px solid $tableBorderBlue;
         border-bottom: 1px solid $tableBorderBlue;
         border-left: 1px solid $tableBorderBlue;
+
+        .clickable-td {
+            color: #3b589e;
+            cursor: pointer;
+            font-weight: bold;
+        }
     }
     .theme--light.v-data-table thead tr th{
         color: $tableTitleBlue;

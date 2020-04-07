@@ -60,7 +60,7 @@
       @delete-selected="open_bulk_delete_dialog($event)"
     >
       <template v-slot:row-slot="{ item }">
-        <td @click="navigate_to_view_profile(item)">
+        <td @click="navigate_to_view_profile(item)" class="clickable-td">
           <v-avatar size="30" color="teal">
             <v-img :src="item.image_url" :title="item.fullname">
               <template v-slot:placeholder>

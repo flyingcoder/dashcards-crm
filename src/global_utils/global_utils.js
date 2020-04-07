@@ -44,19 +44,23 @@ export const global_utils = {
       })
     },
     addHost(urlString) {
-      if (
-        !(
-          urlString.indexOf('http://') === 0 ||
-          urlString.indexOf('https://') === 0
-        )
-      ) {
+      if (typeof urlString === 'undefined') {
+        return settings.apiHostBaseURL
+      }
+      
+      if ( !( urlString.indexOf('http://') === 0 || urlString.indexOf('https://') === 0 ) ) {
         return settings.apiHostBaseURL + urlString
       }
       return urlString
     },
     altImage(item) {
-      item.thumb_url = require('@/assets/temp/no-image.jpg')
-      item.public_url = require('@/assets/temp/no-image.jpg')
+      if (item.hasOwnProperty('collection_name') && item.collection_name === 'project.files.videos') {
+        item.thumb_url = require('@/assets/temp/no-video-preview.png')
+        item.public_url = require('@/assets/temp/no-video-preview.png')
+      } else {
+        item.thumb_url = require('@/assets/temp/no-image.jpg')
+        item.public_url = require('@/assets/temp/no-image.jpg')
+      }
     }
   }
 }

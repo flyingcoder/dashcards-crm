@@ -9,11 +9,12 @@
         :viewMoreBtn="enableViewMore"
         @view-more="load_more_timeline"
       >
-        <div class="timeline__inner_content" slot="content">
+        <template v-slot:content>
           <v-progress-linear
             v-if="loading"
             :indeterminate="true"
           ></v-progress-linear>
+
           <Empty
             v-else-if="timeline_items.length === 0"
             slug="empty-timeline"
@@ -25,46 +26,24 @@
             <v-timeline-item
               v-for="item of timeline_items"
               :key="item.id"
-              color="#1fb868"
               small
+              :icon="set_icon(item)"
+              fill-dot
             >
-              <div class="timeline__item">
-                <div class="t__time">
-                  {{ get_calendar_time(item.created_at) }}
-                </div>
-                <v-flex>
-                  <h2 class="t__title">{{ item.description }}</h2>
-                  <Carousel
-                    v-if="item.properties.media.length"
-                    :autoplay="true"
-                    :nav="false"
-                    :items="5"
-                    :showPrev="false"
-                    :showNext="false"
-                  >
-                    <v-img
-                      v-for="(media, i) in item.properties.media"
-                      :key="i"
-                      :src="media.thumb_url"
-                      width="60px"
-                      height="60px"
-                      @error="altImage(media)"
-                    ></v-img>
-                  </Carousel>
-                  <!-- else if single media old uploaded -->
-                  <v-img
-                    v-else
-                    :src="addHost(item.properties.thumb_url)"
-                    width="60px"
-                    height="60px"
-                    @error="altImage(item.properties)"
-                  ></v-img>
-                  <!-- {{item.properties}} -->
-                </v-flex>
-              </div>
+
+            <v-row class="pt-1">
+              <v-col>
+                <strong>{{ item.created_at | from_now }}</strong>
+                <div class="caption mb-2">{{ item.description }}</div>
+                <FilesPreview 
+                  :item="item"
+                  :limit="5"
+                ></FilesPreview>
+              </v-col>
+            </v-row>
             </v-timeline-item>
           </v-timeline>
-        </div>
+        </template>
       </dash-card>
     </div>
   </v-col>

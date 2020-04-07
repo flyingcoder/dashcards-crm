@@ -30,6 +30,7 @@
     <v-dialog v-model="dialog" width="500">
       <img :src="url" width="500" />
     </v-dialog>
+    
     <v-card class="p-2">
       <v-row class="py-2 px-1">
         <v-col md="10" sm="9" xs="12">
