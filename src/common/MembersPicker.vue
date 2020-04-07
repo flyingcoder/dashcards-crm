@@ -152,7 +152,6 @@ export default {
           return o.id
         })
       }
-      console.log(payload)
       makeRequestTo.getAllMembersExcept(payload).then(({ data }) => {
         this.original = _cloneDeep(data)
         this.members = data

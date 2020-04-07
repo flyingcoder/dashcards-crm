@@ -1,0 +1,21 @@
+@import "~@/sass/_variables";
+
+@include pagePadding ('.calendar');
+
+.date{
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  align-items: center;
+  grid-gap: 20px;
+  margin-bottom: 10px;
+  .icon{
+    fill: #fff;
+  }
+  .date_icon{
+    width: 50px;
+    background-color: $blue;
+    padding: 4px 5px;
+    border-radius: 5px;
+  }
+}

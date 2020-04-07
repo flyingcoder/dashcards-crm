@@ -4,7 +4,9 @@ import Avatars from '@/common/Avatars.vue'
 
 export default {
   props: {
-    event: Object
+    event: Object,
+    dense: { type: Boolean, default: false },
+    avatarCount: { type: Number, default: 2 },
   },
   components: {
     Avatars
