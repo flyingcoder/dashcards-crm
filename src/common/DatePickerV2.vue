@@ -10,7 +10,7 @@
     >
       <template v-slot:activator="{ on }">
         <v-btn :color="buttonColor" v-on="on" :block="isBtnBlock">
-          <v-icon left>{{ icon }}</v-icon> {{buttonLabel}}
+          <v-icon left>{{ icon }}</v-icon> {{ buttonLabel }}
         </v-btn>
       </template>
 
@@ -36,35 +36,35 @@
 </template>
 
 <script>
-  export default {
-    name : 'DatePicker',
-    props : {
-      buttonColor : { type: String, default : 'white' },
-      buttonLabel : { type: String, default : 'Date' },
-      icon : { type: String, default : 'mdi-calendar' },
-      value: { type: String, default: null },
-      min: { type: String, default: null },
-      max: { type: String, default: null },
-      noTitle: { type: Boolean, default: true },
-      isBtnBlock: { type: Boolean, default : false }
+export default {
+  name: 'DatePicker',
+  props: {
+    buttonColor: { type: String, default: 'white' },
+    buttonLabel: { type: String, default: 'Date' },
+    icon: { type: String, default: 'mdi-calendar' },
+    value: { type: String, default: null },
+    min: { type: String, default: null },
+    max: { type: String, default: null },
+    noTitle: { type: Boolean, default: true },
+    isBtnBlock: { type: Boolean, default: false }
+  },
+  data: () => ({
+    selected: [],
+    members: [],
+    menu: false,
+    picker_date: null
+  }),
+  methods: {
+    clear() {
+      this.picker_date = null
     },
-    data: () => ({
-      selected: [],
-      members: [],
-      menu: false,
-      picker_date: null
-    }),
-    methods: {
-      clear() {
-        this.picker_date = null
-      },
-      cancel(){
-        this.menu = false
-      },
-      save(){
-        this.$emit('input', this.picker_date)
-        this.cancel()
-      },
+    cancel() {
+      this.menu = false
     },
+    save() {
+      this.$emit('input', this.picker_date)
+      this.cancel()
+    }
   }
+}
 </script>

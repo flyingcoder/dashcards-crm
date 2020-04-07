@@ -33,6 +33,9 @@ import { client_profile } from './routes/clientProfile'
 import { notes } from './routes/notes'
 import { questionnaire } from './routes/questionnaire'
 import { projectDetails } from './routes/projectDetails'
+import { expanded_clients } from './routes/expanded/expandedClients'
+import { expanded_payments } from './routes/expanded/expandedPayments'
+
 
 Vue.use(Router)
 
@@ -65,7 +68,9 @@ export default new Router({
         client_profile, //path: /dashboard/clients/profile/:id
         notes, //path: /dashboard/notes/
         questionnaire, //path: /dashboard/forms/questionnaire
-        projectDetails //path: /dashboard/forms/project-details
+        projectDetails, //path: /dashboard/forms/project-details
+        expanded_clients, //path: /dashboard/expanded-clients
+        expanded_payments, //path: /dashboard/expanded-payments
       ]
     },
     setPassword, // path: /set-password

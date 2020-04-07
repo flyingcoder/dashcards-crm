@@ -20,7 +20,7 @@
     <NoCards v-if="!cards.length" />
 
     <v-layout class="dashcard-content">
-      <draggable class="d__cards" v-model="cards">
+      <draggable class="row d__cards" v-model="cards">
         <template v-for="card in card_components">
           <component
             :is="card.component"

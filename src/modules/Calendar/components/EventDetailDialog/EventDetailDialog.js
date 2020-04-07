@@ -11,14 +11,14 @@ import Comment from '@/common/Comment/Comment.vue'
 
 export default {
   name: 'EventDetailDialog',
-  components : {
+  components: {
     TextField,
     Avatars,
     RichEditor,
     Comment
   },
   props: {
-    event : Object
+    event: Object
   },
   data: () => ({
     dialog: false,
@@ -30,15 +30,15 @@ export default {
     ],
     commenter: null,
     hover: false,
-    activeComment: null,
+    activeComment: null
   }),
-  created(){
+  created() {
     this.$event.$on('close-all-dialog', () => {
       this.clear_and_close()
     })
   },
-  computed : {
-    dialogTitle (){
+  computed: {
+    dialogTitle() {
       return this.event.title
     },
     event_date() {
@@ -61,28 +61,27 @@ export default {
       if (this.user.is_admin) return true
       return this.permission && this.permission.update
     },
-    addCommentApi(){
+    addCommentApi() {
       return `api/events/${this.event.id}/comments`
     },
-    deleteCommentApi(){
+    deleteCommentApi() {
       return `api/events/${this.event.id}/comments`
-    },
+    }
   },
   methods: {
-    getComments(){
+    getComments() {
       this.all_comments = []
-      makeRequestTo.eventComments(this.event.id)
-      .then(({ data }) => {
+      makeRequestTo.eventComments(this.event.id).then(({ data }) => {
         this.all_comments = data
       })
     },
-  	openDialog() {
-  		this.dialog = true
+    openDialog() {
+      this.dialog = true
 
       setTimeout(() => {
         this.getComments()
       }, 1)
-  	},
+    },
     clear_and_close() {
       this.dialog = false
     }

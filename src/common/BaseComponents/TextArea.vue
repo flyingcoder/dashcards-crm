@@ -15,7 +15,7 @@ export default {
   inheritAttrs: false,
   props: {
     value: String,
-    rows : {type : Number, default : 5}
+    rows: { type: Number, default: 5 }
   }
 }
 </script>

@@ -32,9 +32,9 @@
         <v-icon>add</v-icon>
       </v-btn>
     </v-layout>
-      <v-flex xs12 wrap v-if="reports.length || loading">
-        <v-layout>
-          <v-flex xs12 :md3="has_permission || !reports.length">
+    <v-flex xs12 wrap v-if="reports.length || loading">
+      <v-layout>
+        <v-flex xs12 :md3="has_permission || !reports.length">
           <reports-list
             v-if="reports.length"
             :reports="reports"

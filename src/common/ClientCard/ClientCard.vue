@@ -1,11 +1,12 @@
 <template>
-  <div class="client-card">
+  <v-col cols="12" :md="md"  class="client-card">
     <div class="client__content">
       <dash-card
         title="Clients"
         :view-more-link="viewMoreLink"
         :dashboard="dashboard"
         @close="$emit('close')"
+        @expand="expand"
       >
         <div class="content-wrapper" slot="content">
           <v-layout>
@@ -82,7 +83,7 @@
         </div>
       </dash-card>
     </div>
-  </div>
+  </v-col>
 </template>
 
 <script src="./ClientCard.js"></script>

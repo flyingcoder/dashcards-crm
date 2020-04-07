@@ -10,7 +10,8 @@ export default {
   props: {
     id: [Number, String],
     viewMoreLink: Object,
-    dashboard: Boolean
+    dashboard: Boolean,
+    md: { type: Number, default: 6 }
   },
 
   data() {
@@ -58,6 +59,9 @@ export default {
     },
     onPageChange() {
       this.getClients()
+    },
+    expand(){
+      this.$router.push({ name: 'expanded-clients' })
     }
   }
 }

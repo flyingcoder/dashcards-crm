@@ -1,5 +1,5 @@
 <template>
-  <div class="timeline-card">
+  <v-col cols="12" md="6" class="timeline-card">
     <div class="timeline__content">
       <dash-card
         title="Timeline"
@@ -67,6 +67,6 @@
         </div>
       </dash-card>
     </div>
-  </div>
+  </v-col>
 </template>
 <script src="./TimelineCard.js"></script>

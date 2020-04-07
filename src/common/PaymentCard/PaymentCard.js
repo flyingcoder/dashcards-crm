@@ -9,7 +9,8 @@ export default {
   props: {
     id: [Number, String],
     viewMoreLink: Object,
-    dashboard: Boolean
+    dashboard: Boolean,
+    md: { type: Number, default: 6 }
   },
 
   data: () => ({
@@ -20,5 +21,14 @@ export default {
     autoLineWidth: true,
     fill: false,
     type: 'bar'
-  })
+  }),
+
+  methods: {
+    expand() {
+      this.$router.push({ name: 'expanded-payments' })
+    },
+    minimize() {
+      this.$router.push({ name: 'default-content' })
+    }
+  },
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="timer-card">
+  <v-col cols="12" md="6" class="timer-card">
     <div class="timer__content">
       <dash-card
         title="Timer"
@@ -9,45 +9,51 @@
         @close="$emit('close')"
       >
         <div slot="content">
-
           <div class="timer" v-show="true">
-            <div class="date"> {{dayNow}} {{dateNow}} </div>
-            <div class="time"> {{timeNow}} </div>
+            <div class="date">{{ dayNow }} {{ dateNow }}</div>
+            <div class="time">{{ timeNow }}</div>
             <div class="hours-detail">
               <div class="today">
                 <p>HRS OF WORK TODAY</p>
                 <div class="hours-box">
-                  <div class="box"><span class="hrs">8</span><span class="lbl">HRS</span></div>
-                  <div class="box"><span class="hrs">56</span><span class="lbl">MIN</span></div>
-                  <div class="box"><span class="hrs">21</span><span class="lbl">SEC</span></div>
+                  <div class="box">
+                    <span class="hrs">8</span><span class="lbl">HRS</span>
+                  </div>
+                  <div class="box">
+                    <span class="hrs">56</span><span class="lbl">MIN</span>
+                  </div>
+                  <div class="box">
+                    <span class="hrs">21</span><span class="lbl">SEC</span>
+                  </div>
                 </div>
               </div>
               <div class="today">
                 <p>TOTAL HRS OF WORK</p>
                 <div class="hours-box">
-                  <div class="box"><span class="hrs">1384</span><span class="lbl">HRS</span></div>
-                  <div class="box"><span class="hrs">56</span><span class="lbl">MIN</span></div>
-                  <div class="box"><span class="hrs">21</span><span class="lbl">SEC</span></div>
+                  <div class="box">
+                    <span class="hrs">1384</span><span class="lbl">HRS</span>
+                  </div>
+                  <div class="box">
+                    <span class="hrs">56</span><span class="lbl">MIN</span>
+                  </div>
+                  <div class="box">
+                    <span class="hrs">21</span><span class="lbl">SEC</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="sel-timer" v-show="false">
             <div class="timer-body">
-              <v-carousel
-                hide-delimiters
-                show-arrows
-                height="auto"
-              >
-                <v-carousel-item
-                  v-for="(slide, i) in slides"
-                  :key="i"
-                >
+              <v-carousel hide-delimiters show-arrows height="auto">
+                <v-carousel-item v-for="(slide, i) in slides" :key="i">
                   <v-sheet color="transparent">
                     <div class="t-slide">
                       <div class="slide-left">
                         <div class="t-person">
-                          <v-avatar size="40"><img src="@/assets/temp/user2.png" alt=""></v-avatar>
+                          <v-avatar size="40"
+                            ><img src="@/assets/temp/user2.png" alt=""
+                          /></v-avatar>
                           <span>William Stomhson</span>
                         </div>
                         <div class="t-title">
@@ -61,25 +67,45 @@
                           <div class="today">
                             <p>START TIME</p>
                             <div class="hours-box">
-                              <div class="box"><span class="hrs">8</span><span class="lbl">HRS</span></div>
-                              <div class="box"><span class="hrs">56</span><span class="lbl">MIN</span></div>
-                              <div class="box"><span class="hrs">21</span><span class="lbl">SEC</span></div>
+                              <div class="box">
+                                <span class="hrs">8</span
+                                ><span class="lbl">HRS</span>
+                              </div>
+                              <div class="box">
+                                <span class="hrs">56</span
+                                ><span class="lbl">MIN</span>
+                              </div>
+                              <div class="box">
+                                <span class="hrs">21</span
+                                ><span class="lbl">SEC</span>
+                              </div>
                             </div>
                           </div>
                           <div class="today">
                             <p>END TIME</p>
                             <div class="hours-box">
-                              <div class="box"><span class="hrs">1384</span><span class="lbl">HRS</span></div>
-                              <div class="box"><span class="hrs">56</span><span class="lbl">MIN</span></div>
-                              <div class="box"><span class="hrs">21</span><span class="lbl">SEC</span></div>
+                              <div class="box">
+                                <span class="hrs">1384</span
+                                ><span class="lbl">HRS</span>
+                              </div>
+                              <div class="box">
+                                <span class="hrs">56</span
+                                ><span class="lbl">MIN</span>
+                              </div>
+                              <div class="box">
+                                <span class="hrs">21</span
+                                ><span class="lbl">SEC</span>
+                              </div>
                             </div>
                           </div>
                         </div>
                         <div class="s-total-hours">
                           <span>TOTAL HOURS</span>
-                          <div class="time"> {{timeNow}} </div>
+                          <div class="time">{{ timeNow }}</div>
                         </div>
-                        <v-btn color="#fff" class="start-btn" tile text block>START TIMER</v-btn>
+                        <v-btn color="#fff" class="start-btn" tile text block
+                          >START TIMER</v-btn
+                        >
                       </div>
                     </div>
                   </v-sheet>
@@ -89,15 +115,8 @@
           </div>
           <div class="alarm" v-show="false">
             <div class="alarm-body">
-              <v-carousel
-                hide-delimiters
-                show-arrows
-                height="auto"
-              >
-                <v-carousel-item
-                  v-for="(slide, i) in slides"
-                  :key="i"
-                >
+              <v-carousel hide-delimiters show-arrows height="auto">
+                <v-carousel-item v-for="(slide, i) in slides" :key="i">
                   <v-sheet color="transparent">
                     <div class="alarm-header">
                       <div class="a-label">
@@ -109,17 +128,27 @@
                         <span>2:00 PM - 3:30 PM</span>
                       </div>
                       <div class="a-actions">
-                        <v-btn fab text small color="#fff"><v-icon>edit</v-icon></v-btn>
-                        <v-btn fab text small color="#fff"><v-icon>delete</v-icon></v-btn>
+                        <v-btn fab text small color="#fff"
+                          ><v-icon>edit</v-icon></v-btn
+                        >
+                        <v-btn fab text small color="#fff"
+                          ><v-icon>delete</v-icon></v-btn
+                        >
                       </div>
                     </div>
                     <div class="a-slide">
                       <h4 class="a-title">XYZ Ranking Report</h4>
                       <div class="a-members">
                         <div class="a-imgs">
-                          <v-avatar><img src="@/assets/temp/user2.png" alt=""></v-avatar>
-                          <v-avatar><img src="@/assets/temp/user2.png" alt=""></v-avatar>
-                          <v-avatar><img src="@/assets/temp/user2.png" alt=""></v-avatar>
+                          <v-avatar
+                            ><img src="@/assets/temp/user2.png" alt=""
+                          /></v-avatar>
+                          <v-avatar
+                            ><img src="@/assets/temp/user2.png" alt=""
+                          /></v-avatar>
+                          <v-avatar
+                            ><img src="@/assets/temp/user2.png" alt=""
+                          /></v-avatar>
                         </div>
                         <div class="a-more"><span>+2 more invited</span></div>
                       </div>
@@ -134,12 +163,16 @@
             <v-tab href="#">
               <v-icon left>access_alarm</v-icon>
               Alarm
-              <v-avatar color="#f56c6c" size="25"><span class="notif-text">25</span></v-avatar>
+              <v-avatar color="#f56c6c" size="25"
+                ><span class="notif-text">25</span></v-avatar
+              >
             </v-tab>
             <v-tab href="#">
               <v-icon left>access_time</v-icon>
               Timer
-              <v-avatar color="#f56c6c" size="25"><span class="notif-text">14</span></v-avatar>
+              <v-avatar color="#f56c6c" size="25"
+                ><span class="notif-text">14</span></v-avatar
+              >
             </v-tab>
           </v-tabs>
 
@@ -189,7 +222,7 @@
         </div>
       </dash-card>
     </div>
-  </div>
+  </v-col>
 </template>
 
 <script src="./TimerCard.js"></script>

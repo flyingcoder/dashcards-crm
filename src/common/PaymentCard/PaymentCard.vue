@@ -1,11 +1,12 @@
 <template>
-  <div class="payment-card">
+  <v-col cols="12" :md="md" class="payment-card">
     <div class="payment-card-content">
       <dash-card
         title="Payment"
         :view-more-link="viewMoreLink"
         :dashboard="dashboard"
         @close="$emit('close')"
+        @expand="expand"
       >
         <div class="content-wrapper" slot="content">
           <v-layout class="mb-5 payment-graph">
@@ -37,7 +38,7 @@
         </div>
       </dash-card>
     </div>
-  </div>
+  </v-col>
 </template>
 
 <script src="./PaymentCard.js"></script>

@@ -36,7 +36,7 @@ export default {
         { id: 3, text: 'Total Time', value: 'total_time', sortable: false },
         { id: 4, text: 'Status', value: 'status', sortable: false }
       ],
-      slides: 5,
+      slides: 5
     }
   },
   computed: {

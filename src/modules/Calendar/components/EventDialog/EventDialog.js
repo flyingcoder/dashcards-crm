@@ -25,21 +25,21 @@ export default {
     DatePicker,
     TimePicker
   },
-  
+
   props: {
-    dialogTitle: { type : String, default : 'Add New Event'},
-    isEditDialog: { type : Boolean, default : false },
+    dialogTitle: { type: String, default: 'Add New Event' },
+    isEditDialog: { type: Boolean, default: false },
     fieldsToEdit: { type: Object, default: () => {} },
     calendar: { type: Object, default: () => {} }
   },
 
   data: () => ({
-		dialog: false,
-		title: '',
-		rangemenu: true,
-		dates: [],
-		nullDatetime: null,
-		currentDateTime: moment().format('YYYY-MM-DD HH:mm'),
+    dialog: false,
+    title: '',
+    rangemenu: true,
+    dates: [],
+    nullDatetime: null,
+    currentDateTime: moment().format('YYYY-MM-DD HH:mm'),
     start_date: null,
     end_date: null,
     btnloading: false,
@@ -50,97 +50,111 @@ export default {
     },
     notify: false,
     all_day: true,
-    timezone : '',
+    timezone: '',
     description: '',
-    event_type : null,
-    dialogKey : 0,
-    time : null
-	}),
+    event_type: null,
+    dialogKey: 0,
+    time: null
+  }),
   computed: {
     disabled() {
-      if (!this.description || !this.event_type || !this.title || !this.start_date || !this.time) {
-      	return true
+      if (
+        !this.description ||
+        !this.event_type ||
+        !this.title ||
+        !this.start_date ||
+        !this.time
+      ) {
+        return true
       }
       return false
     }
   },
-  filters :{
-    readableFormat(val){
+  filters: {
+    readableFormat(val) {
       return moment(val).format('MMMM D YYYY')
     }
   },
   methods: {
-  	openDialog() {
-  		this.dialog = true
-  		this.timezone = moment.tz.guess()
+    openDialog() {
+      this.dialog = true
+      this.timezone = moment.tz.guess()
 
       setTimeout(() => {
         if (this.isEditDialog && this.fieldsToEdit) {
           this.all_day = this.fieldsToEdit.all_day
-          this.start_date  = this.fieldsToEdit.start
+          this.start_date = this.fieldsToEdit.start
           this.end_date = this.fieldsToEdit.end
           this.event_type = this.fieldsToEdit.event_type
           this.description = this.fieldsToEdit.description
           this.notify = this.fieldsToEdit.properties.send_notify
           this.timezone = this.fieldsToEdit.properties.timezone
           this.title = this.fieldsToEdit.title
-          this.members.selected  = this.fieldsToEdit.participants.map( item => {  
-            return item.user  
+          this.members.selected = this.fieldsToEdit.participants.map(item => {
+            return item.user
           })
           this.time = this.fieldsToEdit.properties.time || null
           this.alarm = this.fieldsToEdit.properties.alarm || false
         }
-      },1)
-  	},
-		save() {
-			this.btnloading = true
-			var payload = {
-				title : this.title,
-				notify : this.notify,
-				start_date : moment(`${this.start_date} ${this.time.his}`).format('YYYY-MM-DD HH:mm:ss'),
-				end_date : moment(`${this.start_date} ${this.time.his}`).format('YYYY-MM-DD HH:mm:ss'),
-				timezone : this.timezone,
-				all_day : this.all_day,
-				description : this.description,
-				event_type : this.event_type.id,
-        alarm : this.time.alarm,
-        time : this.time
-			}
-			
-			if (this.members.selected.length > 0) {
-				payload.participants = this.members.selected.map(o => { return o.id })
-			}
-      
+      }, 1)
+    },
+    save() {
+      this.btnloading = true
+      var payload = {
+        title: this.title,
+        notify: this.notify,
+        start_date: moment(`${this.start_date} ${this.time.his}`).format(
+          'YYYY-MM-DD HH:mm:ss'
+        ),
+        end_date: moment(`${this.start_date} ${this.time.his}`).format(
+          'YYYY-MM-DD HH:mm:ss'
+        ),
+        timezone: this.timezone,
+        all_day: this.all_day,
+        description: this.description,
+        event_type: this.event_type.id,
+        alarm: this.time.alarm,
+        time: this.time
+      }
+
+      if (this.members.selected.length > 0) {
+        payload.participants = this.members.selected.map(o => {
+          return o.id
+        })
+      }
+
       if (this.isEditDialog && this.fieldsToEdit) {
         this.sendUpdateEvent(payload)
       } else {
         this.sendAddNewEvent(payload)
       }
     },
-    sendUpdateEvent(payload){
-      apiTo.updateEvent(this.fieldsToEdit.id, payload)
-      .then(({data}) => {
-        this.$emit('event-updated', data)
-        this.$event.$emit('open_snackbar', 'Event successfully updated!')
-      })
-      .finally(() => {
-        this.btnloading = false
-        this.clear_and_close()
-      })
+    sendUpdateEvent(payload) {
+      apiTo
+        .updateEvent(this.fieldsToEdit.id, payload)
+        .then(({ data }) => {
+          this.$emit('event-updated', data)
+          this.$event.$emit('open_snackbar', 'Event successfully updated!')
+        })
+        .finally(() => {
+          this.btnloading = false
+          this.clear_and_close()
+        })
     },
-    sendAddNewEvent(payload){
-			apiTo.addNewEvent(payload)
-			.then(({data}) => {
-				this.$emit('new-event-added', data)
-				this.$event.$emit('open_snackbar', 'Event successfully added!')
-			})
-			.finally(() => {
-				this.btnloading = false
-				this.clear_and_close()
-			})
+    sendAddNewEvent(payload) {
+      apiTo
+        .addNewEvent(payload)
+        .then(({ data }) => {
+          this.$emit('new-event-added', data)
+          this.$event.$emit('open_snackbar', 'Event successfully added!')
+        })
+        .finally(() => {
+          this.btnloading = false
+          this.clear_and_close()
+        })
     },
     clear_and_close() {
-    	this.title = this.description = ''
+      this.title = this.description = ''
       this.dialogKey += 1
       this.dialog = false
     },

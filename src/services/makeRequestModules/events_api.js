@@ -15,5 +15,5 @@ export const events_api = {
   },
   addParticipants(id, payload) {
     return request.post(`api/events/${id}/participants`, payload)
-  },
+  }
 }

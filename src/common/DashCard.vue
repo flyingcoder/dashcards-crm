@@ -1,5 +1,5 @@
 <template>
-  <v-container class="dash__card">
+  <div class="dash__card">
     <v-row wrap no-gutters class="card__header" align-center>
       <v-flex xs4 class="card__title">
         {{ title }}
@@ -19,7 +19,7 @@
             <v-icon>remove</v-icon>
           </v-btn>
           <v-btn fab small text class="action">
-            <v-icon>zoom_out_map</v-icon>
+            <v-icon @click="$emit('expand')">zoom_out_map</v-icon>
           </v-btn>
           <v-btn fab small text class="action">
             <v-icon @click="$emit('close')">close</v-icon>
@@ -44,7 +44,7 @@
         </v-btn>
       </slot>
     </v-flex>
-  </v-container>
+  </div>
 </template>
 
 <script>

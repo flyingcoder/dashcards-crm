@@ -1,5 +1,5 @@
 <template>
-  <div class="calendar-card">
+  <v-col cols="12" md="6" class="calendar-card">
     <div class="calendar__content">
       <dash-card
         title="Calendar"
@@ -26,7 +26,7 @@
         </div>
       </dash-card>
     </div>
-  </div>
+  </v-col>
 </template>
 
 <script src="./CalendarCard.js"></script>
