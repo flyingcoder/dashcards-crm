@@ -6,7 +6,7 @@ export const settings = {
   allowedImageType: ['image/jpg', 'image/png', 'image/jpeg', 'image/gif'],
   fileSizeMaxUploadLimit: '10MB',
   pusher: {
-    key: '0594afc8c3bfe95e8a06', //pusher-key'
+    key: 'ef1f370c90ad3e704acd', //pusher-key'
     cluster: 'ap1', //pusher cluster
     forceTLS: true,
     logging: false

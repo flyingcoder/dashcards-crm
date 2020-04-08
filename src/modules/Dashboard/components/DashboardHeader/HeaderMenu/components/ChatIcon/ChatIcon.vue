@@ -7,16 +7,18 @@
     offset-y
     :close-on-content-click="false"
     v-model="dropdownVisible"
+
   >
     <template v-slot:activator="{ on }">
-      <div class="chat__button" :data-notify="chat" slot="activator" v-on="on">
+      <div class="chat__button" :data-notify="chat_counts === 0 ? false : chat_counts" slot="activator" v-on="on">
         <HeaderIcon
           :image-src="chatIcon"
           :hovered-image-src="hoveredChatIcon"
         />
       </div>
     </template>
-    <ChatDropdown />
+    <ChatDropdown 
+      @close="dropdownVisible = false"/>
   </v-menu>
 </template>
 
@@ -35,6 +37,7 @@ export default {
 
   computed: {
     ...mapGetters('headerIcons', ['chat']),
+    ...mapGetters('notifications', ['chat_counts']),
     chatIcon() {
       return require('@/assets/icons/header/chat__default.png')
     },

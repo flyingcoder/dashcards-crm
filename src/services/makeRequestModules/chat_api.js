@@ -15,5 +15,9 @@ export const chat_api = {
 
   get_old_messages(api) {
     return request.get(api)
+  },
+
+  mark_all_as_read() {
+    return request.get('api/chat/mark-read')
   }
 }

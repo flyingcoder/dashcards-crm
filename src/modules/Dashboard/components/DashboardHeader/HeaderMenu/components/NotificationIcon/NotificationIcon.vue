@@ -18,7 +18,8 @@
     </template>
 
     <NotificationDropdown
-      :visible="dropdownVisible"
+      :visible="init"
+      @close="dropdownVisible = false"
       @notification-clicked="dropdownVisible = false"
     />
   </v-menu>
@@ -32,7 +33,8 @@ export default {
   components: { HeaderIcon, NotificationDropdown },
 
   data: () => ({
-    dropdownVisible: false
+    dropdownVisible: false,
+    init : 1
   }),
 
   computed: {

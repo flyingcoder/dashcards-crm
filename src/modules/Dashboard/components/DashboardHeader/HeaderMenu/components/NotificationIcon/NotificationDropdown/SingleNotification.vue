@@ -20,7 +20,7 @@ export default {
     user: String,
     description: String,
     userImage: String,
-    read: Boolean
+    read: [Boolean, Number]
   }
 }
 </script>

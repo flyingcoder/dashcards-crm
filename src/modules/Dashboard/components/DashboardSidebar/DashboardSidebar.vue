@@ -23,7 +23,7 @@
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
-  <!-- v-list class="sidebar">
+ <!--  <v-list class="sidebar">
     <div
       class="sidebar-inner"
       v-for="item in items"
@@ -56,7 +56,7 @@
         <div class="item" @click="sidebar_item_clicked('reports')">
           Reports
         </div>
-        <! div class="item" @click="sidebar_item_clicked('invoices')">
+        <div class="item" @click="sidebar_item_clicked('invoices')">
           Invoice
         </div>
       </div>
@@ -70,7 +70,7 @@
         </div>
       </div>
     </div>
-  </v-list -->
+  </v-list> -->
 </template>
 
 <script src="./DashboardSidebar.js"></script>

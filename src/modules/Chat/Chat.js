@@ -47,6 +47,9 @@ export default {
     },
     has_more_message() {
       return this.pagination.current < this.pagination.total
+    },
+    onlineUsers() {
+      return this.$store.getters['onlineUsers/all_users']
     }
   },
   created() {
@@ -76,8 +79,6 @@ export default {
       this.chat_channel(chat_channel)
     },
     subscribeToGroupChat(id) {
-      // this.$pusher.authenticate()
-      console.log(id)
       const group_channel = this.$pusher.subscribe(`mc-chat-conversation.${id}`)
       this.group_chat_channel(group_channel)
     },
@@ -86,7 +87,14 @@ export default {
       api_to
         .get_chat_list()
         .then(({ data }) => {
-          this.all_users = data
+          /*map online to list*/
+          var users = data.map(each => {
+            let has = this.onlineUsers.find(us => us.id === each.id)
+            each.is_online = has ? true : false
+            return each
+          }) 
+
+          setTimeout(() => { this.all_users = users }, 1) 
         })
         .finally(() => (this.userLoading = false))
     },

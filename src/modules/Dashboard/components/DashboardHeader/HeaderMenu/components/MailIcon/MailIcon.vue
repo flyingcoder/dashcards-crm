@@ -17,7 +17,7 @@
       </div>
     </template>
 
-    <MailDropdown />
+    <MailDropdown @close="dropdownVisible = false" />
   </v-menu>
 </template>
 
