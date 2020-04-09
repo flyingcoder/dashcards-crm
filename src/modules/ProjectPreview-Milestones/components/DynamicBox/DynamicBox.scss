@@ -9,16 +9,6 @@
     }
   }
 
-  @include styledScrollFor('.content');
-
-  .content {
-    height: 470px;
-    max-height: 470px;
-    border: 1px solid $tableBorderBlue;
-    padding: 0;
-    overflow: auto;
-  }
-
   .tasks-progress {
     height: 15px;
     background: darkgreen;
@@ -30,6 +20,7 @@
   }
 
   .task-custom-table {
+    border: 1px solid $borderGray;
     .header {
       border-bottom: 1px solid $borderGray;
       background-color: $tableBlueBg;

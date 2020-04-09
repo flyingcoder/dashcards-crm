@@ -31,8 +31,8 @@ export default {
       current: 1,
       total: 0
     },
-    selected_item : null,
-    default_img : require('@/assets/temp/no-image.jpg')
+    selected_item: null,
+    default_img: require('@/assets/temp/no-image.jpg')
   }),
   computed: {
     api() {
@@ -79,7 +79,12 @@ export default {
         .finally(() => (this.loading = false))
     },
     set_icon(item) {
-      const items = ['mdi-buffer', 'mdi-book-variant','mdi-airballoon', 'mdi-access-point']
+      const items = [
+        'mdi-buffer',
+        'mdi-book-variant',
+        'mdi-airballoon',
+        'mdi-access-point'
+      ]
       let icon = items[Math.floor(Math.random() * items.length)]
       //todo set icon by types
       return icon

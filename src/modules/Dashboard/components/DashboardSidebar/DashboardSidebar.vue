@@ -23,7 +23,7 @@
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
- <!--  <v-list class="sidebar">
+  <!--  <v-list class="sidebar">
     <div
       class="sidebar-inner"
       v-for="item in items"

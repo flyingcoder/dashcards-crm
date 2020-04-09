@@ -1,5 +1,5 @@
 <template>
-  <v-col cols="12" md="6" class="passbox-card">
+  <div class="passbox-card">
     <div class="passbox-card-content">
       <dash-card
         title="Pass Box"
@@ -144,7 +144,7 @@
         </div>
       </dash-card>
     </div>
-  </v-col>
+  </div>
 </template>
 
 <script src="./PassboxCard.js"></script>

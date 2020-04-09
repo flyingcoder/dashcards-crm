@@ -1,91 +1,87 @@
 <template>
-	<div class="files-preview">
-		<!-- for videos -->
-	  <v-avatar 
-			v-if="display_videos.length > 0"
-			tile
-			class="mr-1 clickable"
-			v-for="(media, index) in display_videos"
-			:key="index"
-			@click="openViewer(media, index, 'video')"
-
-		>
-			<v-img :src="getMediaSrc(media)" outlined>
-				<template v-slot:placeholder>
+  <div class="files-preview">
+    <!-- for videos -->
+    <v-avatar
+      v-if="display_videos.length > 0"
+      tile
+      class="mr-1 clickable"
+      v-for="(media, index) in display_videos"
+      :key="index"
+      @click="openViewer(media, index, 'video')"
+    >
+      <v-img :src="getMediaSrc(media)" outlined>
+        <template v-slot:placeholder>
           <v-img :src="default_video" :contain="true"></v-img>
         </template>
-			</v-img>
-		</v-avatar>
+      </v-img>
+    </v-avatar>
 
-		<!-- for images -->
-		<v-avatar 
-			v-if="display_medias.length > 0"
-			v-for="(media, index) in display_medias"
-			:key="index"
-			tile
-			class="mr-1 clickable"
-			@click="openViewer(media, index, 'image')"
-		>
-			<v-img :src="getMediaSrc(media)" >
-				<template v-slot:placeholder>
+    <!-- for images -->
+    <v-avatar
+      v-if="display_medias.length > 0"
+      v-for="(media, index) in display_medias"
+      :key="index"
+      tile
+      class="mr-1 clickable"
+      @click="openViewer(media, index, 'image')"
+    >
+      <v-img :src="getMediaSrc(media)">
+        <template v-slot:placeholder>
           <v-img :src="default_img" :contain="true"></v-img>
         </template>
-			</v-img>
-		</v-avatar>
+      </v-img>
+    </v-avatar>
 
-		<!-- for docs -->
-		<v-avatar 
-			v-if="display_docs.length > 0"
-			v-for="(media, index) in display_docs"
-			:key="index"
-			tile
-			class="mr-1 clickable"
-			@click="openViewer(media, index, 'image')"
-		>
-			<v-img :src="getMediaSrc(media)" >
-				<template v-slot:placeholder>
+    <!-- for docs -->
+    <v-avatar
+      v-if="display_docs.length > 0"
+      v-for="(media, index) in display_docs"
+      :key="index"
+      tile
+      class="mr-1 clickable"
+      @click="openViewer(media, index, 'image')"
+    >
+      <v-img :src="getMediaSrc(media)">
+        <template v-slot:placeholder>
           <v-img :src="default_img" :contain="true"></v-img>
         </template>
-			</v-img>
-		</v-avatar>
+      </v-img>
+    </v-avatar>
 
-		<!-- for others -->
-		<v-avatar 
-			v-if="display_others.length > 0"
-			v-for="(media, index) in display_others"
-			:key="index"
-			tile
-			class="mr-1 clickable"
-			@click="openViewer(media, index, 'other')"
-		>
-			<v-img :src="getMediaSrc(media)" >
-				<template v-slot:placeholder>
+    <!-- for others -->
+    <v-avatar
+      v-if="display_others.length > 0"
+      v-for="(media, index) in display_others"
+      :key="index"
+      tile
+      class="mr-1 clickable"
+      @click="openViewer(media, index, 'other')"
+    >
+      <v-img :src="getMediaSrc(media)">
+        <template v-slot:placeholder>
           <v-img :src="default_other" :contain="true"></v-img>
         </template>
-			</v-img>
-		</v-avatar>
+      </v-img>
+    </v-avatar>
 
-		<!-- for links -->
-		<v-avatar 
-			v-if="display_links.length > 0"
-			v-for="(media, index) in display_links"
-			:key="index"
-			tile
-			class="mr-1 clickable"
-			@click="openViewer(media, index, 'link')"
-		>
-			<v-img :src="getMediaSrc(media)" >
-				<template v-slot:placeholder>
+    <!-- for links -->
+    <v-avatar
+      v-if="display_links.length > 0"
+      v-for="(media, index) in display_links"
+      :key="index"
+      tile
+      class="mr-1 clickable"
+      @click="openViewer(media, index, 'link')"
+    >
+      <v-img :src="getMediaSrc(media)">
+        <template v-slot:placeholder>
           <v-img :src="default_other" :contain="true"></v-img>
         </template>
-			</v-img>
-		</v-avatar>
+      </v-img>
+    </v-avatar>
 
-		<Viewer
-    	ref="viewer_dialog"
-    	:media="selected_medias"> 
-    </Viewer>
-	</div>
+    <Viewer ref="viewer_dialog" :media="selected_medias"> </Viewer>
+  </div>
 </template>
 
 <script scoped>
@@ -94,108 +90,118 @@ import _cloneDeep from 'lodash/cloneDeep'
 import Viewer from '@/common/Viewer/Viewer.vue'
 
 export default {
-	mixins: [global_utils],
-	components :{
-    Viewer,
-	},
-	props : {
-	 	item : Object,
-	 	limit: { type: Number, default: 5 }
-	},
-	data: () => ({
-		items : [],
-		selected_medias: [],
-		default_img : require('@/assets/temp/no-image.jpg'),
-		default_video : require('@/assets/temp/no-video-preview.png'),
-		default_other : require('@/assets/temp/no-others-available.jpg'),
-		image_less : 0,
-		video_less : 0,
-		other_less : 0,
-		docs_less : 0,
-		links_less: 0,
-	}),
-	computed : {
-		display_medias() {
-			var images = this.item.properties.media.filter(i => { return i.collection_name === 'project.files.images'})
-			if (images.length <= this.limit) {
-				return  images
-			}
-			this.image_less = images.length - this.limit
-			return _cloneDeep(images).splice(0, this.limit)
-		},
-		display_videos() {
-			var videos = this.item.properties.media.filter(i => { return i.collection_name === 'project.files.videos'})
-			if (videos.length <= this.limit) {
-				return  videos
-			}
-			this.video_less = videos.length - this.limit
-			return _cloneDeep(videos).splice(0, this.limit)
-		},
-		display_others(){
-			var others = this.item.properties.media.filter(i => { return i.collection_name === 'project.files.others'})
-			if (others.length <= this.limit) {
-				return  others
-			}
-			this.other_less = others.length - this.limit
-			return _cloneDeep(others).splice(0, this.limit)
-		},
-		display_docs(){
-			var docxs = this.item.properties.media.filter(i => { return i.collection_name === 'project.files.documents'})
-			if (docxs.length <= this.limit) {
-				return  docxs
-			}
-			this.docs_less = docxs.length - this.limit
-			return _cloneDeep(docxs).splice(0, this.limit)
-		},
-		display_links(){
-			var links = this.item.properties.media.filter(i => { return i.collection_name === 'project.files.links'})
-			if (links.length <= this.limit) {
-				return  links
-			}
-			this.links_less = links.length - this.limit
-			return _cloneDeep(links).splice(0, this.limit)
-		}
-	},
-	methods : {
-		getMediaSrc(media){
-			// console.log(media)
-			if (!media.hasOwnProperty('collection_name')) {
-				return this.addHost(this.default_img)
-			}
-			if (media.collection_name === 'project.files.videos') { 
-      	return this.addHost(this.default_video)
+  mixins: [global_utils],
+  components: {
+    Viewer
+  },
+  props: {
+    item: Object,
+    limit: { type: Number, default: 5 }
+  },
+  data: () => ({
+    items: [],
+    selected_medias: [],
+    default_img: require('@/assets/temp/no-image.jpg'),
+    default_video: require('@/assets/temp/no-video-preview.png'),
+    default_other: require('@/assets/temp/no-others-available.jpg'),
+    image_less: 0,
+    video_less: 0,
+    other_less: 0,
+    docs_less: 0,
+    links_less: 0
+  }),
+  computed: {
+    display_medias() {
+      var images = this.item.properties.media.filter(i => {
+        return i.collection_name === 'project.files.images'
+      })
+      if (images.length <= this.limit) {
+        return images
       }
-      if (media.collection_name === 'project.files.others') { 
-      	return this.addHost(this.default_img)
+      this.image_less = images.length - this.limit
+      return _cloneDeep(images).splice(0, this.limit)
+    },
+    display_videos() {
+      var videos = this.item.properties.media.filter(i => {
+        return i.collection_name === 'project.files.videos'
+      })
+      if (videos.length <= this.limit) {
+        return videos
       }
-      if (media.collection_name === 'project.files.links') { 
-      	return media.custom_properties.thumb
+      this.video_less = videos.length - this.limit
+      return _cloneDeep(videos).splice(0, this.limit)
+    },
+    display_others() {
+      var others = this.item.properties.media.filter(i => {
+        return i.collection_name === 'project.files.others'
+      })
+      if (others.length <= this.limit) {
+        return others
       }
-      if (media.collection_name === 'project.files.documents') { 
-      	var urls = {
-      		'pdf': require('@/assets/temp/pdf-icon.jpg'),
-      		'docx': require('@/assets/temp/docx-icon.png'),
-      		'txt': require('@/assets/temp/txt-icon.png'),
-      	}
+      this.other_less = others.length - this.limit
+      return _cloneDeep(others).splice(0, this.limit)
+    },
+    display_docs() {
+      var docxs = this.item.properties.media.filter(i => {
+        return i.collection_name === 'project.files.documents'
+      })
+      if (docxs.length <= this.limit) {
+        return docxs
+      }
+      this.docs_less = docxs.length - this.limit
+      return _cloneDeep(docxs).splice(0, this.limit)
+    },
+    display_links() {
+      var links = this.item.properties.media.filter(i => {
+        return i.collection_name === 'project.files.links'
+      })
+      if (links.length <= this.limit) {
+        return links
+      }
+      this.links_less = links.length - this.limit
+      return _cloneDeep(links).splice(0, this.limit)
+    }
+  },
+  methods: {
+    getMediaSrc(media) {
+      // console.log(media)
+      if (!media.hasOwnProperty('collection_name')) {
+        return this.addHost(this.default_img)
+      }
+      if (media.collection_name === 'project.files.videos') {
+        return this.addHost(this.default_video)
+      }
+      if (media.collection_name === 'project.files.others') {
+        return this.addHost(this.default_img)
+      }
+      if (media.collection_name === 'project.files.links') {
+        return media.custom_properties.thumb
+      }
+      if (media.collection_name === 'project.files.documents') {
+        var urls = {
+          pdf: require('@/assets/temp/pdf-icon.jpg'),
+          docx: require('@/assets/temp/docx-icon.png'),
+          txt: require('@/assets/temp/txt-icon.png')
+        }
 
-      	return urls[media.custom_properties.ext] || url['docx']
+        return urls[media.custom_properties.ext] || url['docx']
       }
-			return this.addHost(media.thumb_url)
-		},
-		openViewer(media, index, type){
-			this.selected_medias = this.item.properties.media
-			this.$refs.viewer_dialog.openDialog()
-		}
-	}
+      return this.addHost(media.thumb_url)
+    },
+    openViewer(media, index, type) {
+      this.selected_medias = this.item.properties.media
+      this.$refs.viewer_dialog.openDialog()
+    }
+  }
 }
 </script>
 
 <style scoped>
 >>> .clickable {
-	cursor: pointer;
+  cursor: pointer;
 }
 
->>> .clickable:hover{
-		border: 1px solid gray;
+>>> .clickable:hover {
+  border: 1px solid gray;
 }
 </style>

@@ -43,19 +43,25 @@
       </div>
       <v-menu bottom left v-if="dense">
         <template v-slot:activator="{ on }">
-          <v-btn dark icon v-on="on" >
+          <v-btn dark icon v-on="on">
             <v-icon color="primary">mdi-dots-horizontal</v-icon>
           </v-btn>
         </template>
         <v-list>
-          <v-list-item   @click="$emit('edit-event')" >
-            <v-list-item-title><v-icon left>edit</v-icon> Edit</v-list-item-title>
+          <v-list-item @click="$emit('edit-event')">
+            <v-list-item-title
+              ><v-icon left>edit</v-icon> Edit</v-list-item-title
+            >
           </v-list-item>
-          <v-list-item   @click="$emit('delete-event')" >
-            <v-list-item-title><v-icon left>delete</v-icon> Delete</v-list-item-title>
+          <v-list-item @click="$emit('delete-event')">
+            <v-list-item-title
+              ><v-icon left>delete</v-icon> Delete</v-list-item-title
+            >
           </v-list-item>
-          <v-list-item   @click="$emit('view-event')" >
-            <v-list-item-title><v-icon left>pageview</v-icon> View</v-list-item-title>
+          <v-list-item @click="$emit('view-event')">
+            <v-list-item-title
+              ><v-icon left>pageview</v-icon> View</v-list-item-title
+            >
           </v-list-item>
         </v-list>
       </v-menu>
@@ -65,7 +71,11 @@
       <h3 class="event_title">{{ event.title }}</h3>
       <div class="invited">
         <v-spacer></v-spacer>
-        <Avatars :items="event.participants" :count="avatarCount" :deep="true"></Avatars>
+        <Avatars
+          :items="event.participants"
+          :count="avatarCount"
+          :deep="true"
+        ></Avatars>
         <v-spacer></v-spacer>
       </div>
     </div>

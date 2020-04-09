@@ -17,6 +17,7 @@
     "pusher-js": "^4.4.0",
     "uuid": "^7.0.2",
     "v-calendar": "^1.0.0-beta.23",
+    "video.js": "^7.7.5",
     "vue": "^2.6.11",
     "vue-datetime": "^1.0.0-beta.11",
     "vue-emoji-picker": "^1.0.1",

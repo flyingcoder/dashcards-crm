@@ -74,8 +74,7 @@ export default {
       delete_message: 'Events deleted successfully!',
       refresh_table_message: 'Table refreshed',
       refresh_table_api_name: 'paginate_clients_table'
-    },
-    
+    }
   }),
   created() {
     apiTo.myCalendar().then(({ data }) => {

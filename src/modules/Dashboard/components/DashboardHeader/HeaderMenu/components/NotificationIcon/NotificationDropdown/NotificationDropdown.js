@@ -9,7 +9,7 @@ export default {
   mixins: [global_utils],
   components: { SingleNotification },
   props: {
-    visible: { type : Number, default : 0 }
+    visible: { type: Number, default: 0 }
   },
 
   data: () => ({
@@ -20,16 +20,18 @@ export default {
     types: [],
     btnloading: false,
     noMoreData: false,
-    current_page : 1,
-    total_page : 0,
+    current_page: 1,
+    total_page: 0,
     total_counts: 0
   }),
   computed: {
     ...mapGetters('notifications', { notifications: 'notification' })
   },
-  created(){
+  created() {
     if (this.current_page === 1) {
-      this.visible > 0 && !this.notificationsFetched && this.fetchNotifications()
+      this.visible > 0 &&
+        !this.notificationsFetched &&
+        this.fetchNotifications()
     }
   },
   /*watch: {
@@ -42,7 +44,7 @@ export default {
     fetchNotifications() {
       this.notificationsFetched = true
       apiTo
-        .getUnreadNotifications({ page : this.current_page })
+        .getUnreadNotifications({ page: this.current_page })
         .then(({ data }) => {
           this.$store.commit('notifications/setNotification', data.data)
           this.current_page = data.current_page
@@ -61,7 +63,7 @@ export default {
       this.notificationsFetched = true
       this.btnloading = true
       apiTo
-        .getUnreadNotifications({ page : this.current_page+1 })
+        .getUnreadNotifications({ page: this.current_page + 1 })
         .then(({ data }) => {
           this.$store.commit('notifications/addMoreNotification', data.data)
           this.current_page = data.current_page

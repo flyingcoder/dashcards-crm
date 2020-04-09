@@ -92,9 +92,11 @@ export default {
             let has = this.onlineUsers.find(us => us.id === each.id)
             each.is_online = has ? true : false
             return each
-          }) 
+          })
 
-          setTimeout(() => { this.all_users = users }, 1) 
+          setTimeout(() => {
+            this.all_users = users
+          }, 1)
         })
         .finally(() => (this.userLoading = false))
     },

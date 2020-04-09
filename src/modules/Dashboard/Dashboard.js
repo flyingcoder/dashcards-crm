@@ -100,7 +100,7 @@ export default {
             id: Number(key),
             name: `${value.first_name}, ${value.last_name}`,
             is_online: !!value.is_online,
-            image_url : value.image_url
+            image_url: value.image_url
           })
         })
         this.set_all_users(all_users)
@@ -122,7 +122,7 @@ export default {
           this.$store.commit('onlineUsers/user_logged_out', index)
         }
       })
-      
+
       channel.bind('pusher:subscription_error', function(status) {
         console.log('Error subscription', status)
       })

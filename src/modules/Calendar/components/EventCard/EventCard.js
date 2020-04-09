@@ -6,7 +6,7 @@ export default {
   props: {
     event: Object,
     dense: { type: Boolean, default: false },
-    avatarCount: { type: Number, default: 2 },
+    avatarCount: { type: Number, default: 2 }
   },
   components: {
     Avatars

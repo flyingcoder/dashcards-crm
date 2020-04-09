@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 class="project-overview-card">
+  <div class="project-overview-card">
     <div class="project__overview_content">
       <dash-card
         title="Project Overview"
@@ -73,7 +73,7 @@
         </v-card>
       </dash-card>
     </div>
-  </v-flex>
+  </div>
 </template>
 
 <script>

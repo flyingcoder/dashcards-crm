@@ -4,7 +4,7 @@ export const getNotifications = () => {
   return request.get('api/activities/log')
 }
 
-export const getUnreadNotifications = (payload) => {
+export const getUnreadNotifications = payload => {
   return request.get('api/activities/unread', { params: payload })
 }
 

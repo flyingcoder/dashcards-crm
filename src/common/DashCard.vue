@@ -1,11 +1,11 @@
 <template>
   <div class="dash__card">
     <v-row wrap no-gutters class="card__header" align-center>
-      <v-flex xs4 class="card__title">
+      <v-flex xs5 class="card__title">
         {{ title }}
       </v-flex>
       <slot name="actions" v-if="dashboard">
-        <v-flex xs8 class="actions">
+        <v-flex xs7 class="actions">
           <v-btn fab small text class="action">
             <v-icon>list</v-icon>
           </v-btn>
@@ -28,9 +28,9 @@
       </slot>
     </v-row>
 
-    <v-row no-gutters class="card__content">
-      <slot name="content" ></slot>
-    </v-row>
+    <div class="card__content">
+      <slot name="content"></slot>
+    </div>
 
     <v-row no-gutters class="card__footer">
       <slot name="footer">
@@ -60,7 +60,9 @@ export default {
     btnloading: false
   }),
   created() {
-    this.$event.$on('btnloading_off', () => { this.btnloading = false })
+    this.$event.$on('btnloading_off', () => {
+      this.btnloading = false
+    })
   }
 }
 </script>

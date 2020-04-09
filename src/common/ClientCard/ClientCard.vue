@@ -1,5 +1,5 @@
 <template>
-  <v-col cols="12" :md="md"  class="client-card">
+  <div class="client-card">
     <div class="client__content">
       <dash-card
         title="Clients"
@@ -83,7 +83,7 @@
         </div>
       </dash-card>
     </div>
-  </v-col>
+  </div>
 </template>
 
 <script src="./ClientCard.js"></script>

@@ -34,7 +34,7 @@ export default {
 
   data: () => ({
     dropdownVisible: false,
-    init : 1
+    init: 1
   }),
 
   computed: {

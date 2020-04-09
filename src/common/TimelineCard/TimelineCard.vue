@@ -1,5 +1,5 @@
 <template>
-  <v-col cols="12" md="6" class="timeline-card">
+  <div class="timeline-card">
     <div class="timeline__content">
       <dash-card
         title="Timeline"
@@ -30,22 +30,18 @@
               :icon="set_icon(item)"
               fill-dot
             >
-
-            <v-row class="pt-1">
-              <v-col>
-                <strong>{{ item.created_at | from_now }}</strong>
-                <div class="caption mb-2">{{ item.description }}</div>
-                <FilesPreview 
-                  :item="item"
-                  :limit="5"
-                ></FilesPreview>
-              </v-col>
-            </v-row>
+              <v-row class="pt-1">
+                <v-col>
+                  <strong>{{ item.created_at | from_now }}</strong>
+                  <div class="caption mb-2">{{ item.description }}</div>
+                  <FilesPreview :item="item" :limit="5"></FilesPreview>
+                </v-col>
+              </v-row>
             </v-timeline-item>
           </v-timeline>
         </template>
       </dash-card>
     </div>
-  </v-col>
+  </div>
 </template>
 <script src="./TimelineCard.js"></script>

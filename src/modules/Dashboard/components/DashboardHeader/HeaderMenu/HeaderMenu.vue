@@ -3,7 +3,7 @@
     <add-cards v-if="$route.name === 'default-content'" />
 
     <MailIcon />
-    
+
     <NotificationIcon />
 
     <ChatIcon />

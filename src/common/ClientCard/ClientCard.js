@@ -60,7 +60,7 @@ export default {
     onPageChange() {
       this.getClients()
     },
-    expand(){
+    expand() {
       this.$router.push({ name: 'expanded-clients' })
     }
   }

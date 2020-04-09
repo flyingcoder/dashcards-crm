@@ -1,5 +1,5 @@
 <template>
-  <v-col cols="12" md="6" class="timer-card">
+  <div class="timer-card">
     <div class="timer__content">
       <dash-card
         title="Timer"
@@ -222,7 +222,7 @@
         </div>
       </dash-card>
     </div>
-  </v-col>
+  </div>
 </template>
 
 <script src="./TimerCard.js"></script>

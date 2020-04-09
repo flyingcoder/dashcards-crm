@@ -18,16 +18,22 @@ const mutations = {
     state.chat_counts = payload.length
   },
   add_to_chat: (state, payload) => {
-    let index = state.chat.findIndex(i => i.conversation_id === payload.conversation_id)
+    let index = state.chat.findIndex(
+      i => i.conversation_id === payload.conversation_id
+    )
     if (~index) {
       state.chat.splice(index, 1)
-    } 
+    }
     state.chat.unshift(payload)
     state.chat_counts = state.chat.length
   },
   setNotification: (state, payload) => (state.notification = payload),
-  addMoreNotification: (state, payload) => { Array.prototype.push.apply(state.notification, payload) },
-  addNotification: (state, payload) => { state.notification.unshift(payload) },
+  addMoreNotification: (state, payload) => {
+    Array.prototype.push.apply(state.notification, payload)
+  },
+  addNotification: (state, payload) => {
+    state.notification.unshift(payload)
+  },
   removeChat: (state, user) => {
     const index = state.chat.findIndex(n => n.sender.id === user.id)
     if (~index) {
@@ -45,8 +51,8 @@ const actions = {
   },
   markAllAsRead({ commit }) {
     makeRequestTo
-     .mark_all_as_read()
-     .then(({ data }) => commit('setNotification', []))
+      .mark_all_as_read()
+      .then(({ data }) => commit('setNotification', []))
   }
 }
 

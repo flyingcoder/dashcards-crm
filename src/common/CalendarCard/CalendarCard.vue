@@ -1,73 +1,73 @@
 <template>
-  <v-col cols="12" md="6" class="calendar-card">
+  <div class="calendar-card">
     <div class="calendar__content">
       <calendar-dialog
-      :dialog.sync="add_dialog"
-      ref="add_dialog"
-      dialogTitle="Add New Calendar"
-      @save="add_item('add_new_calendar', $event)"
-    />
+        :dialog.sync="add_dialog"
+        ref="add_dialog"
+        dialogTitle="Add New Calendar"
+        @save="add_item('add_new_calendar', $event)"
+      />
 
-    <calendar-dialog
-      :dialog.sync="edit_dialog"
-      ref="edit_dialog"
-      dialogTitle="Edit Calendar"
-      :is-edit-dialog="edit_dialog"
-      :fields-to-edit="edit_item"
-      @save="update_item('edit_calendar', $event)"
-    />
+      <calendar-dialog
+        :dialog.sync="edit_dialog"
+        ref="edit_dialog"
+        dialogTitle="Edit Calendar"
+        :is-edit-dialog="edit_dialog"
+        :fields-to-edit="edit_item"
+        @save="update_item('edit_calendar', $event)"
+      />
 
-    <delete-dialog
-      :open-dialog.sync="delete_dialog"
-      title="Delete Event"
-      ref="delete_event_dialog"
-      text-content="Are you sure you want to delete this event?"
-      @delete="closeDialogAndDelete"
-    />
+      <delete-dialog
+        :open-dialog.sync="delete_dialog"
+        title="Delete Event"
+        ref="delete_event_dialog"
+        text-content="Are you sure you want to delete this event?"
+        @delete="closeDialogAndDelete"
+      />
 
-    <ConfirmDialog
-      ref="confirm_leave_event"
-      title="Confirmation required!"
-      confirm-button-text="Yes"
-      text-content="Leave this event?"
-      @confirm="confirmed_leave"
-    />
+      <ConfirmDialog
+        ref="confirm_leave_event"
+        title="Confirmation required!"
+        confirm-button-text="Yes"
+        text-content="Leave this event?"
+        @confirm="confirmed_leave"
+      />
 
-    <EventDialog
-      v-if="calendar"
-      ref="event_dialog"
-      :dialogTitle="event_dialog_title"
-      :isEditDialog="isEventEditDialog"
-      :fieldsToEdit="eventToEdit"
-      :calendar="calendar"
-      @new-event-added="insert_new_event"
-      @event-updated="updated_event"
-      @open-custom-event-type="open_add_event_type_dialog"
-    ></EventDialog>
+      <EventDialog
+        v-if="calendar"
+        ref="event_dialog"
+        :dialogTitle="event_dialog_title"
+        :isEditDialog="isEventEditDialog"
+        :fieldsToEdit="eventToEdit"
+        :calendar="calendar"
+        @new-event-added="insert_new_event"
+        @event-updated="updated_event"
+        @open-custom-event-type="open_add_event_type_dialog"
+      ></EventDialog>
 
-    <EventTypeDialog
-      v-if="calendar"
-      ref="event_type_dialog"
-      :calendar="calendar"
-      @new-event-type-added="insert_new_event_type"
-    ></EventTypeDialog>
+      <EventTypeDialog
+        v-if="calendar"
+        ref="event_type_dialog"
+        :calendar="calendar"
+        @new-event-type-added="insert_new_event_type"
+      ></EventTypeDialog>
 
-    <EventDetailDialog
-      v-if="eventToEdit"
-      ref="event_detail_dialog"
-      :event="eventToEdit"
-      @edit-event="open_add_event_dialog(true, eventToEdit)"
-      @delete-event="open_delete_dialog(eventToEdit)"
-      @add-participant="open_add_participant_dialog(eventToEdit)"
-    ></EventDetailDialog>
+      <EventDetailDialog
+        v-if="eventToEdit"
+        ref="event_detail_dialog"
+        :event="eventToEdit"
+        @edit-event="open_add_event_dialog(true, eventToEdit)"
+        @delete-event="open_delete_dialog(eventToEdit)"
+        @add-participant="open_add_participant_dialog(eventToEdit)"
+      ></EventDetailDialog>
 
-    <AddParticipantDialog
-      v-if="eventToEdit"
-      ref="add_participant_dialog"
-      :event="eventToEdit"
-      @participants-refresh="refreshParticipants"
-    >
-    </AddParticipantDialog>
+      <AddParticipantDialog
+        v-if="eventToEdit"
+        ref="add_participant_dialog"
+        :event="eventToEdit"
+        @participants-refresh="refreshParticipants"
+      >
+      </AddParticipantDialog>
 
       <dash-card
         title="Calendar"
@@ -83,8 +83,7 @@
             v-if="loading"
             :indeterminate="true"
           ></v-progress-linear>
-          
-          
+
           <v-row no-gutters>
             <v-col md="12" class="mb-1">
               <vc-calendar
@@ -141,12 +140,16 @@
         </div>
       </dash-card>
     </div>
-  </v-col>
+  </div>
 </template>
 
 <script src="./CalendarCard.js"></script>
 <style lang="scss" scoped src="./CalendarCard.scss"></style>
 <style scoped>
->>> .card__content .calendar__inner_content { width: 100%; }
->>> .event_card { margin: 2px auto; }
+>>> .card__content .calendar__inner_content {
+  width: 100%;
+}
+>>> .event_card {
+  margin: 2px auto;
+}
 </style>

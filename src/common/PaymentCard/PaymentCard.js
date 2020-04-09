@@ -30,5 +30,5 @@ export default {
     minimize() {
       this.$router.push({ name: 'default-content' })
     }
-  },
+  }
 }

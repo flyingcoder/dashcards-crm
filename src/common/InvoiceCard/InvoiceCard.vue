@@ -1,5 +1,5 @@
 <template>
-  <v-col cols="12" md="6" class="invoice-card">
+  <div class="invoice-card">
     <div class="invoice__content">
       <dash-card
         title="Invoice"
@@ -62,7 +62,7 @@
         </v-card>
       </dash-card>
     </div>
-  </v-col>
+  </div>
 </template>
 
 <script src="./InvoiceCard.js"></script>

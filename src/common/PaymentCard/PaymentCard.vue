@@ -1,5 +1,5 @@
 <template>
-  <v-col cols="12" :md="md" class="payment-card">
+  <div class="payment-card">
     <div class="payment-card-content">
       <dash-card
         title="Payment"
@@ -38,7 +38,7 @@
         </div>
       </dash-card>
     </div>
-  </v-col>
+  </div>
 </template>
 
 <script src="./PaymentCard.js"></script>

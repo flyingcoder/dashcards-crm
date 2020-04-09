@@ -22,7 +22,8 @@
     <v-layout class="dashcard-content">
       <draggable class="row d__cards" v-model="cards">
         <template v-for="card in card_components">
-          <component
+          <v-col cols="12" md="6">
+            <component
             :is="card.component"
             :key="card.component"
             v-bind="args"
@@ -45,6 +46,7 @@
               </div>
             </v-flex>
           </template>
+          </v-col>
         </template>
         <div class="timeline-card" v-if="cards.length == 1">
           <NoCards />
