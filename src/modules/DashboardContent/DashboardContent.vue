@@ -24,28 +24,28 @@
         <template v-for="card in card_components">
           <v-col cols="12" md="6">
             <component
-            :is="card.component"
-            :key="card.component"
-            v-bind="args"
-            v-if="
-              should_show(card.slug) &&
-                card.hasOwnProperty('component') &&
-                card.can_view()
-            "
-            @close="close(card.id)"
-          ></component>
+              :is="card.component"
+              :key="card.component"
+              v-bind="args"
+              v-if="
+                should_show(card.slug) &&
+                  card.hasOwnProperty('component') &&
+                  card.can_view()
+              "
+              @close="close(card.id)"
+            ></component>
 
-          <template v-else-if="should_show(card.slug) && card.can_view()">
-            <v-flex xs12 :key="card.id">
-              <div>
-                <dash-card
-                  @close="close(card.id)"
-                  :title="card.name"
-                  :dashboard="args.dashboard"
-                ></dash-card>
-              </div>
-            </v-flex>
-          </template>
+            <template v-else-if="should_show(card.slug) && card.can_view()">
+              <v-flex xs12 :key="card.id">
+                <div>
+                  <dash-card
+                    @close="close(card.id)"
+                    :title="card.name"
+                    :dashboard="args.dashboard"
+                  ></dash-card>
+                </div>
+              </v-flex>
+            </template>
           </v-col>
         </template>
         <div class="timeline-card" v-if="cards.length == 1">

@@ -16,7 +16,7 @@
     </v-layout>
     <v-row>
       <v-col cols="12">
-        <payment-card/>
+        <payment-card />
       </v-col>
     </v-row>
   </div>

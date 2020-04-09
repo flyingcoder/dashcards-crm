@@ -16,7 +16,7 @@
       color="#657186"
       label="Assign member(s)"
       v-bind="$attrs"
-      box
+      filled
       :append-outer-icon="showOuterIcon ? 'add' : ''"
       @click:append-outer="open_add_new_member"
     >
@@ -62,7 +62,7 @@
 <style lang="scss" scoped src="./MembersDropdown.scss"></style>
 
 <style scoped>
->>> .theme--light.v-text-field--box > .v-input__control > .v-input__slot {
+>>> .theme--light.v-text-field--filled > .v-input__control > .v-input__slot {
   background-color: #fff;
 }
 </style>

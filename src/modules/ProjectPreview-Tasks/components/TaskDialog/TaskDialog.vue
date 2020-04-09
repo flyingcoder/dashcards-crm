@@ -7,8 +7,8 @@
       @button1="clear_and_close"
     >
       <template #content>
-        <v-layout wrap class="custom-dialog">
-          <v-flex xs12 md12>
+        <v-row wrap class="custom-dialog">
+          <v-col cols="12" class="pt-0">
             <v-select
               v-model="milestones.selected"
               :items="milestones.items"
@@ -16,25 +16,25 @@
               item-value="id"
               label="Milestone"
               placeholder="Select Milestone"
-              box
+              filled
               color="#657186"
               hide-details
               class="d-field"
             ></v-select>
-          </v-flex>
+          </v-col>
 
-          <v-flex xs12 md12>
+          <v-col cols="12" class="pt-0">
             <v-text-field
               class="dialog__textfield d-field"
               label="Add task title"
               v-model.trim="title"
-              box
+              filled
               hide-details
               color="#657186"
             ></v-text-field>
-          </v-flex>
+          </v-col>
 
-          <v-flex xs12 md6>
+          <v-col cols="12" md="6" class="pt-0">
             <date-picker
               class="dialog__date d-field"
               label="Start Date"
@@ -43,9 +43,9 @@
               v-model="start_date"
               :max="end_date"
             />
-          </v-flex>
+          </v-col>
 
-          <v-flex xs12 md6>
+          <v-col cols="12" md="6" class="pt-0 pr-4">
             <date-picker
               class="dialog__date d-field"
               label="End Date"
@@ -54,9 +54,9 @@
               v-model="end_date"
               :min="start_date"
             />
-          </v-flex>
+          </v-col>
 
-          <v-flex xs12>
+          <v-col cols="12" class="pt-0">
             <members-dropdown
               :members.sync="members.selected"
               :member-items="members.items"
@@ -64,16 +64,16 @@
               @search="filter_dropdown_items('members', $event)"
               class="task-member"
             />
-          </v-flex>
+          </v-col>
 
-          <v-flex xs12>
+          <v-col cols="12" class="pt-0">
             <rich-editor
               placeholder="Description"
               v-model="description"
               class="task-description"
             />
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </template>
 
       <template slot="button2">

@@ -16,7 +16,7 @@
     </v-layout>
     <v-row>
       <v-col cols="12">
-        <client-card/>
+        <client-card />
       </v-col>
     </v-row>
   </div>

@@ -8,21 +8,17 @@
     @button2="save"
   >
     <template #content>
-      <v-layout wrap>
-        <v-flex xs12>
-          <v-select
-            class="dialog__selectfield"
-            label="Select Template"
-            :items="templates"
-            item-text="name"
-            item-value="id"
-            v-model="selected_template"
-            color="#667187"
-            box
-            hide-details
-          ></v-select>
-        </v-flex>
-      </v-layout>
+      <v-select
+        class="dialog__selectfield mb-1"
+        label="Select Template"
+        :items="templates"
+        item-text="name"
+        item-value="id"
+        v-model="selected_template"
+        color="#667187"
+        filled
+        hide-details
+      ></v-select>
     </template>
   </custom-dialog>
 </template>
