@@ -8,10 +8,11 @@
     position: relative;
   }
 
-  .s__content .v-list-item__title{
+  .s__content{
     font-size: 1.3rem;
     height: 1.3rem;
     line-height: 1.3rem;
+    padding: 0;
   }
 
   .v-list__tile {
@@ -35,6 +36,8 @@
   }
 
   .s__list {
+    background: transparent;
+    color: #fff;
     display: flex;
     height: 50px;
     width: 200px;
@@ -42,11 +45,13 @@
     justify-content: flex-start;
     align-items: center;
     z-index: 1;
+    padding: 8px;
 
     &:hover {
       background: #f2f1f7;
       color: $blue;
       border-radius: 8px 0 0 8px;
+      cursor: pointer;
 
       svg {
         fill: $blue;

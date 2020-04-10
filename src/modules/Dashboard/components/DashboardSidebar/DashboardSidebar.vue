@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer class="sidebar" permanent>
+  <!-- <v-navigation-drawer class="sidebar" permanent>
     <v-list dense nav>
       <v-list-item
         v-for="item in items"
@@ -22,31 +22,31 @@
         </v-list-item-content>
       </v-list-item>
     </v-list>
-  </v-navigation-drawer>
-  <!--  <v-list class="sidebar">
+  </v-navigation-drawer> -->
+  <v-list class="sidebar">
     <div
       class="sidebar-inner"
-      v-for="item in items"
+      v-for="(item, index) in items"
       :data-nav="item.title"
       :key="item.action"
+      @click="sidebar_item_clicked(item.action)"
       tile
     >
       <v-list
         v-if="item.can_view()"
         class="s__list"
-        :key="item.title"
+        :key="index"
         :class="{ active: item.action === selected_route_name }"
-        @click="sidebar_item_clicked(item.action)"
       >
-        <v-list-tile-action class="s__icons">
+        <v-list-item-action class="s__icons">
           <svg viewBox="0 0 250 250">
             <path class="icon" :d="item.icon" />
           </svg>
-        </v-list-tile-action>
+        </v-list-item-action>
 
-        <v-list-tile-content class="s__content">
+        <v-list-item-content class="s__content">
           {{ item.title }}
-        </v-list-tile-content>
+        </v-list-item-content>
       </v-list>
 
       <div class="submenu" v-if="item.title === 'Templates'">
@@ -70,7 +70,7 @@
         </div>
       </div>
     </div>
-  </v-list> -->
+  </v-list>
 </template>
 
 <script src="./DashboardSidebar.js"></script>
