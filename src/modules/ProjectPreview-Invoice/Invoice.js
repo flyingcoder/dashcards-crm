@@ -2,6 +2,7 @@ import { apiTo } from './api'
 import { list_functionality } from '@/services/list-functionality/list-functionality'
 import { mapMutations } from 'vuex'
 import _cloneDeep from 'lodash/cloneDeep'
+import { global_utils } from '@/global_utils/global_utils'
 //Components
 
 import ViewInvoice from '@/modules/Invoice/components/ViewInvoice/ViewInvoice.vue'
@@ -12,7 +13,7 @@ import Actions from '@/common/VueTable/Actions.vue'
 
 export default {
   name: 'Invoice',
-  mixins: [list_functionality],
+  mixins: [list_functionality, global_utils],
 
   components: {
     VueTable,

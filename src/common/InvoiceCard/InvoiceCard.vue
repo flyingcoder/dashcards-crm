@@ -11,20 +11,20 @@
         @view-more="loadMore"
       >
         <v-card class="mx-auto" slot="content">
-          <v-layout>
-            <v-flex class="mx-auto">
-              <small>Clients</small>
-              <h2>{{ total_clients }}</h2>
-            </v-flex>
-            <v-flex class="mx-auto">
-              <small>This Month</small>
-              <h2>{{ current_month_total }}</h2>
-            </v-flex>
-            <v-flex class="mx-auto">
-              <small>Last Month</small>
-              <h2>{{ last_month_total }}</h2>
-            </v-flex>
-          </v-layout>
+          <v-row no-gutters>
+            <v-col class="mx-auto">
+              <h4 class="text-center grey--text">Clients</h4>
+              <h2 class="text-center">{{ total_clients }}</h2>
+            </v-col>
+            <v-col class="mx-auto">
+              <h4 class="text-center grey--text">This Month</h4>
+              <h2 class="text-center">{{ current_month_total }}</h2>
+            </v-col>
+            <v-col class="mx-auto">
+              <h4 class="text-center grey--text">Last Month</h4>
+              <h2 class="text-center">{{ last_month_total }}</h2>
+            </v-col>
+          </v-row>
 
           <v-sparkline
             :value="value"

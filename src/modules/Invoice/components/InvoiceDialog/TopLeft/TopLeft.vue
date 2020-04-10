@@ -1,6 +1,6 @@
 <template>
-  <div class="left__side">
-    <div
+  <v-row wrap class="left__side">
+    <v-col md="12"
       v-if="!(dialog.type === 'view' && !image_preview)"
       class="add__logo_box"
       @click="dialog.type !== 'view' && $refs.hidden_input.click()"
@@ -20,45 +20,124 @@
         @change="file_selected"
         class="hidden-input"
       />
-    </div>
+    </v-col>
 
-    <div class="bill__from">
+    <v-col md="12">
       <div class="form__label">Bill From: <span class="required">*</span></div>
-      <v-text-field
-        :disabled="dialog.type === 'view'"
-        class="textfield"
-        label="Who is this invoice from"
+      <v-autocomplete
         v-model="billed_from"
+        :items="members"
+        chips
+        item-text="fullname"
+        item-value="id"
         solo
-        hide-details
-        color="#657186"
+        full-width
+        outlined
         flat
-      ></v-text-field>
-    </div>
+        dense
+        :value="billed_from"
+        prepend-inner-icon="mdi-account-plus"
+        @click:prepend-inner="show_add_member_dialog('billed_from')"
+      >
+        <template v-slot:selection="data">
+          <v-chip
+            v-bind="data.attrs"
+            tile
+            outlined
+          >
+            <v-avatar left>
+              <v-icon>mdi-account-circle</v-icon>
+            </v-avatar>
+            {{ data.item.fullname }}
+          </v-chip>
+        </template>
+        <template v-slot:item="{ item }">
+          <template>
+            <v-list-item-avatar>
+              <img :src="item.image_url">
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title v-html="item.fullname"></v-list-item-title>
+              <v-list-item-subtitle v-html="item.job_title"></v-list-item-subtitle>
+            </v-list-item-content>
+          </template>
+        </template>
+      </v-autocomplete>
+    </v-col>
 
-    <div class="bill__to">
+    <v-col md="12">
       <div class="form__label">Bill To: <span class="required">*</span></div>
-      <v-text-field
-        :disabled="dialog.type === 'view'"
-        class="textfield"
-        label="Who is this invoice to"
+      <v-autocomplete
         v-model="billed_to"
+        :items="members"
+        chips
+        item-text="fullname"
+        item-value="id"
         solo
-        hide-details
-        color="#657186"
+        full-width
+        outlined
         flat
-      ></v-text-field>
-    </div>
-  </div>
+        dense
+        :value="billed_to"
+        prepend-inner-icon="mdi-account-plus"
+        @click:prepend-inner="show_add_member_dialog('billed_to')"
+      >
+        <template v-slot:selection="data">
+          <v-chip
+            v-bind="data.attrs"
+            tile
+            outlined
+          >
+          <v-avatar left>
+            <v-icon>mdi-account-circle</v-icon>
+          </v-avatar>
+            {{ data.item.fullname }}
+          </v-chip>
+        </template>
+        <template v-slot:item="{ item }">
+          <template>
+            <v-list-item-avatar>
+              <img :src="item.image_url">
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title v-html="item.fullname"></v-list-item-title>
+              <v-list-item-subtitle v-html="item.job_title"></v-list-item-subtitle>
+            </v-list-item-content>
+          </template>
+        </template>
+      </v-autocomplete>
+    </v-col>
+    
+    <teams-dialog
+      ref="add_dialog"
+      title="Add New Member"
+      :dialog.sync="add_dialog"
+      @save="add_member"
+      @close-dialog="add_dialog = false"
+    />
+
+  </v-row>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import axios from '@/services/axios_instance'
+import makeRequestTo from '@/services/makeRequestTo'
+import _cloneDeep from 'lodash/cloneDeep'
+
+import TeamsDialog from '@/modules/Teams/components/TeamsDialog/TeamsDialog.vue'
 
 export default {
+  components : {
+    TeamsDialog,
+  },
   data: () => ({
-    image_preview: null
+    image_preview: null,
+    members: [],
+    original: [],
+    selected: 0,
+    add_dialog: false,
+    target_add: ''
   }),
 
   computed: {
@@ -79,9 +158,12 @@ export default {
       set(newVal) {
         this.$store.commit('invoice/set_billed_from', newVal)
       }
-    }
+    },
+    
   },
-
+  created(){
+    setTimeout(() => {this.getMembers() }, 1)
+  },
   watch: {
     company_logo(val) {
       if (!val) {
@@ -113,6 +195,39 @@ export default {
             this.$store.commit('invoice/set_company_logo', data.url)
           })
       }
+    },
+    setFrom(val){
+      this.billed_from = val
+    },
+    setTo(val){
+      this.billed_to = val
+    },
+    getMembers() {
+      makeRequestTo.get_all_teams()
+      .then(({ data }) => {
+        this.original = _cloneDeep(data)
+        this.members = data
+      })
+    },
+    show_add_member_dialog(target){
+      this.target_add = target
+      this.add_dialog = true
+    },
+    add_member(payload){
+      makeRequestTo.add_new_team(payload)
+      .then(({data}) => {
+        this.members.push(data)
+        if (this.target_add === 'billed_from') {
+          this.billed_from = data.id
+        } else if (this.target_add === 'billed_to') {
+          this.billed_to = data.id
+        }
+        this.$refs.add_dialog.clear_and_close()
+      })
+      .finally(() => {
+        this.target_add = ''
+        this.$event.$emit('btnloading_off', false)
+      })
     }
   }
 }
@@ -183,10 +298,9 @@ export default {
     }
   }
 
-  .bill__from,
-  .bill__to {
-    .form__label {
-      width: 300px;
+
+  .form__label {
+      width: 100%;
       background-color: $fieldLabel;
       border: 1px solid $fieldLabel;
       color: $textDark;
@@ -199,7 +313,7 @@ export default {
       width: 300px;
       margin-bottom: 2px;
     }
-  }
+  
   .required {
     color: red;
   }

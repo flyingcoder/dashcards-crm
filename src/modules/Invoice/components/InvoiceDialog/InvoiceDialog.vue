@@ -15,25 +15,22 @@
         />
         <div class="content">
           <v-container fluid style="max-width:900px;">
-            <v-layout wrap class="first-row info-section">
-              <v-flex xs12 sm6><TopLeft /></v-flex>
-              <v-flex xs12 sm6><TopRight /></v-flex>
-            </v-layout>
-            <v-layout wrap class="second-row">
+            <v-row no-gutters>
+              <v-col xs="12" md="5"><TopLeft></TopLeft></v-col>
+              <v-spacer></v-spacer>
+              <v-col xs="12" md="5"><TopRight></TopRight></v-col>
+            </v-row>
+            <v-row no-gutters>
               <TableSection />
-            </v-layout>
-            <v-layout
-              wrap
-              justify-space-between
-              class="third-row additional-info-section"
-            >
-              <v-flex sm6 xs12 class="left-content">
+            </v-row>
+            <v-row no-gutters wrap justify-space-between class="third-row additional-info-section" >
+              <v-col sm="6" xs="12" class="left-content">
                 <BottomLeft />
-              </v-flex>
-              <v-flex sm6 xs12 class="right-content">
+              </v-col>
+              <v-col sm="6" xs="12" class="right-content">
                 <BottomRight />
-              </v-flex>
-            </v-layout>
+              </v-col>
+            </v-row>
           </v-container>
         </div>
       </v-dialog>

@@ -40,9 +40,20 @@
       @load-more="load_more"
     >
       <template v-slot:row-slot="{ item }">
-        <td @click="open_view_dialog(item)">{{ item.title }}</td>
-        <td>{{ item.due_date }}</td>
-        <td>{{ item.billed_to }}</td>
+        <td @click="open_view_dialog(item)">#INV-{{ item.id }}</td>
+        <td @click="open_view_dialog(item)">{{ item.title | ucwords }}</td>
+        <td>{{ item.due_date | format }}</td>
+        <td>
+          <v-avatar size="30" color="teal">
+            <v-img :src="item.billedTo.image_url" :title="item.billedTo.fullname">
+              <template v-slot:placeholder>
+                <span class="white--text headline">C</span>
+              </template>
+            </v-img>
+          </v-avatar>
+          {{item.billedTo.fullname | ucwords }}
+        </td>
+        <td>{{ item.status | ucwords }}</td>
         <td>$ {{ item.total_amount }}</td>
         <Actions
           :item="item"

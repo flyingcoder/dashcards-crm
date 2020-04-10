@@ -10,7 +10,7 @@ export const teams_api = {
   },
 
   getAllMembers() {
-    return request.get('api/company/members?for=project')
+    return request.get('api/company/members?for=project&all=true')
   },
 
   getAllMembersExcept(payload) {

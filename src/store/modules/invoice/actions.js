@@ -8,8 +8,8 @@ export const actions = {
   },
 
   set_table_rows({ commit }, payload) {
-    commit('set_billed_to', payload.billed_to)
-    commit('set_billed_from', payload.billed_from)
+    commit('set_billed_to', payload.billed_to.id)
+    commit('set_billed_from', payload.billed_from.id)
     const rows = payload.tasks.map(task => ({
       descriptions: task.title,
       hours: get_hours(task.total_time),

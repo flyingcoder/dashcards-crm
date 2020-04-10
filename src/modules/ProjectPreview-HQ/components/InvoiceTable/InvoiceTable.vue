@@ -34,10 +34,23 @@
             </template>
             <template v-slot:item="{ item }">
               <tr>
-                <td>{{ item.due_date }}</td>
-                <td>{{ item.id }}</td>
-                <td class="text-cap">{{ item.bill_to }}</td>
-                <td>{{ item.total_amount }}</td>
+                <td>{{ item.due_date | format }}</td>
+                <td>#INV-{{ item.id }}</td>
+                <td class="text-cap">
+                   <v-tooltip left>
+                    <template v-slot:activator="{ on }">
+                      <v-avatar size="30" color="teal" v-on="on">
+                      <v-img :src="item.billed_to.image_url" :title="item.billed_to.fullname">
+                        <template v-slot:placeholder>
+                          <span class="white--text headline">C</span>
+                        </template>
+                      </v-img>
+                    </v-avatar>
+                    </template>
+                    <span>{{item.billed_to.fullname | ucwords }}</span>
+                  </v-tooltip>
+                </td>
+                <td>{{ item.total_amount | money }}</td>
                 <td>
                   <v-menu bottom left>
                     <template v-slot:activator="{ on }">

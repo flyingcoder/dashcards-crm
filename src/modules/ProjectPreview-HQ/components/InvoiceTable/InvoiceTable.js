@@ -1,13 +1,13 @@
 import { list_functionality } from '@/services/list-functionality/list-functionality'
 import request from '@/services/axios_instance'
-
+import { global_utils } from '@/global_utils/global_utils'
 //Components
 import DashCard from '@/common/DashCard.vue'
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import VueTable from '@/common/VueTable/VueTable.vue'
 
 export default {
-  mixins: [list_functionality],
+  mixins: [list_functionality, global_utils],
   components: {
     DashCard,
     VueTable

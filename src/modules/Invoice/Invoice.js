@@ -2,6 +2,7 @@ import { api_to } from './api'
 import { list_functionality } from '@/services/list-functionality/list-functionality'
 import { mapMutations } from 'vuex'
 import _cloneDeep from 'lodash/cloneDeep'
+import { global_utils } from '@/global_utils/global_utils'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
 // import CustomTable from '@/common/CustomTable/CustomTable.vue'
@@ -14,7 +15,7 @@ import VueTable from '@/common/VueTable/VueTable.vue'
 
 export default {
   name: 'Invoice',
-  mixins: [list_functionality],
+  mixins: [list_functionality, global_utils],
 
   components: {
     TableHeader,
@@ -34,9 +35,11 @@ export default {
       { text: 'Invoice', disabled: true, router_name: null }
     ],
     headers: [
-      { text: 'Invoice', value: 'invoice', sortable: false },
+      { text: 'Invoice #', value: 'id', sortable: false },
+      { text: 'Title', value: 'invoice', sortable: false },
       { text: 'Due Date', value: 'due_date', sortable: false },
       { text: 'Client', value: 'client', sortable: false },
+      { text: 'Status', value: 'Status', sortable: false },
       { text: 'Amount', value: 'amount', sortable: false },
       {
         text: 'Action',

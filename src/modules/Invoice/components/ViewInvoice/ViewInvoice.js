@@ -1,4 +1,7 @@
+import { global_utils } from '@/global_utils/global_utils'
+
 export default {
+  mixins: [global_utils],
   props: {
     item: Object,
     open: Boolean
@@ -8,17 +11,16 @@ export default {
     loading: false,
     list_items: [],
     headers: [
-      { text: '#', align: 'left', sortable: false, width: '20px' },
       {
         text: 'Descriptions',
         align: 'left',
         sortable: false,
         value: 'descriptions'
       },
-      { text: 'Rate', value: 'rate', align: 'left', sortable: false },
-      { text: 'Hours', value: 'hours', align: 'left', sortable: false },
-      { text: 'Amount', value: 'amount', align: 'left', sortable: false }
-    ]
+      { text: 'Rate', value: 'rate', align: 'left', sortable: false, width: 100 },
+      { text: 'Hours', value: 'hours', align: 'left', sortable: false, width: 100 },
+      { text: 'Amount', value: 'amount', align: 'left', sortable: false, width: 100 }
+    ],
   }),
 
   computed: {
@@ -29,6 +31,7 @@ export default {
       set(val) {
         this.$emit('close', val)
       }
-    }
+    },
+
   }
 }

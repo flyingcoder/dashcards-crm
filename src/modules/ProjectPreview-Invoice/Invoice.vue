@@ -36,8 +36,8 @@
       <template v-slot:row-slot="{ item }">
         <td>{{ item.title }}</td>
         <td>{{ item.billed_to }}</td>
-        <td>{{ item.due_date }}</td>
-        <td>{{ item.total_amount }}</td>
+        <td>{{ item.due_date | format }}</td>
+        <td>{{ item.total_amount | money }}</td>
         <Actions
           :item="item"
           @delete="open_delete_dialog(item)"

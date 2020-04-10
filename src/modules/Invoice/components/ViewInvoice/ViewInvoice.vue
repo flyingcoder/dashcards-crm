@@ -13,88 +13,162 @@
           <v-icon>list</v-icon>
           <v-toolbar-title>Invoice : {{ item.title }}</v-toolbar-title>
           <v-spacer></v-spacer>
-
-          <v-btn icon @click="view_invoice_dialog = false">
-            <v-icon>close</v-icon>
-          </v-btn>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn icon v-on="on" disabled>
+                <v-icon>mdi-download</v-icon>
+              </v-btn>
+            </template>
+            <span>Download PDF</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn icon @click="view_invoice_dialog = false" v-on="on">
+                <v-icon>close</v-icon>
+              </v-btn>
+            </template>
+            <span>Close</span>
+          </v-tooltip>
+          
         </v-toolbar>
 
-        <v-container class="invoice-viewbox">
+        <v-container class="invoice-viewbox mb-3">
           <hr class="mb-4" />
+          <v-row>
+            <v-col><h1 class="display-3 font-weight-bold grey--text">INVOICE</h1></v-col>
+            <v-spacer></v-spacer>
+            <v-col md="2"><label>Page 1 of 1</label></v-col>
+          </v-row>
           <v-row no-gutters justify-space-between>
             <v-col md="7">
-              <v-img :src="item.company_logo">
-                <template v-slot:placeholder>
-                  <span class="blue--text headline">No Image Available</span>
-                </template>
-              </v-img>
+              <v-row>
+                <v-col md="4">
+                  <v-img :src="require('@/assets/logo/mini-blue.png')">
+                    <template v-slot:placeholder>
+                      <span class="blue--text headline">No Image Available</span>
+                    </template>
+                  </v-img>
+                </v-col>
+                <v-col md="8">
+                  <h4>Billed From</h4>
+                  <h3>{{item.billedFrom.fullname | ucwords }}</h3>
+                  <p class="body-2" v-if="item.billedFrom.location !== `Unknown`">{{item.billedFrom.location | ucwords }}</p>
+                  <p class="body-2">Phone : {{item.billedFrom.telephone }}<br>
+                      Email : {{item.billedFrom.email }}</p>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col md="4">
+                  <v-img :src="item.company_logo">
+                    <template v-slot:placeholder>
+                      <span class="blue--text headline">No Image Available</span>
+                    </template>
+                  </v-img>
+                </v-col>
+                <v-col md="8">
+                  <h4>Billed To</h4>
+                  <h3>{{item.billedTo.fullname | ucwords }}</h3>
+                  <p class="body-2" v-if="item.billedFrom.location !== `Unknown`">{{item.billedTo.location | ucwords }}</p>
+                  <p class="body-2">Phone : {{item.billedTo.telephone }}<br>
+                      Email : {{item.billedTo.email }}</p>
+                </v-col>
+              </v-row>
+
             </v-col>
             <v-col md="5">
+              <v-row no-gutters class="mb-3">
+                <v-col class="table-cell head" md="6" offset="6" sm="12">Invoice ID</v-col>
+                <v-col class="table-cell value mb-1" md="6" offset="6" sm="12">#INV-{{ item.id }}</v-col>
+                <v-col class="table-cell head" md="6" offset="6" sm="12">Balance Due</v-col>
+                <v-col class="table-cell value mb-1" md="6" offset="6" sm="12">${{ item.total_amount }}</v-col>
+              </v-row>
               <v-row no-gutters>
-                <v-col md="6" sm="6">Invoice ID</v-col
-                ><v-col md="6" sm="6">: {{ item.id }}</v-col>
-                <v-col md="6" sm="6">Created</v-col
-                ><v-col md="6" sm="6">: {{ item.created_at }}</v-col>
-                <v-col md="6" sm="6">Due </v-col
-                ><v-col md="6" sm="6">: {{ item.due_date }}</v-col>
-                <v-col md="6" sm="6">Type </v-col
-                ><v-col md="6" sm="6">: {{ item.type }}</v-col>
+
+                <v-col md="6" class="table-cell head" sm="12">Payment Terms </v-col>
+                <v-col md="6" class="table-cell head" sm="12">Due on Receipt</v-col>
+                <v-col md="6" class="table-cell head" sm="12">Invoice Date </v-col>
+                <v-col md="6" class="table-cell value" sm="12">{{ item.date | format }}</v-col>
+                <v-col md="6" class="table-cell head" sm="12">Due Date</v-col>
+                <v-col md="6" class="table-cell value" sm="12">{{ item.due_date | format }}</v-col>
               </v-row>
             </v-col>
           </v-row>
-
-          <v-row no-gutters justify-space-between class="mt-2">
-            <v-col md="6">
-              Billed From:<br />
-              {{ item.billed_from }}
-            </v-col>
-            <v-col md="6">
-              Billed To:<br />
-              {{ item.billed_to }}
+          <v-row no-gutters class="mb-3">
+            <v-col md="12">
+              <v-data-table
+                flat
+                class="mt-3 border"
+                :headers="headers"
+                :items="item.items"
+                hide-default-footer
+              >
+                <template v-slot:items="{ item }">
+                  <td>{{ item.descriptions }}</td>
+                  <td>{{ item.rate }}</td>
+                  <td>{{ item.hours }}</td>
+                  <td>$ {{ item.amount }}</td>
+                </template>
+              </v-data-table>
             </v-col>
           </v-row>
 
-          <v-row no-gutters justify-space-center class="py-3">
-            <v-flex>{{ item.title }}</v-flex>
-          </v-row>
+          <v-row no-gutters >
+            <v-col md="6">
+              <p class="mt-3">Payment Method: <br>
+                Mode of Payment: <br>
+                Account Name: <br>
+                Transaction Code: <br>
+                Swift Code: <br>
+              </p>
+            </v-col>
 
-          <v-data-table
-            :headers="headers"
-            :items="item.items"
-            hide-default-footer
-            hide-default-footer
-            class="elevation-1"
-          >
-            <template v-slot:items="props">
-              <td>{{ props.index + 1 }}</td>
-              <td>{{ props.item.descriptions }}</td>
-              <td>{{ props.item.rate }}</td>
-              <td>{{ props.item.hours }}</td>
-              <td>{{ props.item.amount }}</td>
-            </template>
-          </v-data-table>
+            <v-col md="6" class="">
+              <v-list disabled dense class="border">
+                <v-list-item-group>
+                  <v-list-item color="#E8F1FA">
+                    <v-list-item-content>
+                      <v-list-item-title>Total</v-list-item-title>
+                    </v-list-item-content>
+                    <v-list-item-action>
+                        ${{ item.total_amount }}
+                    </v-list-item-action>
+                  </v-list-item>
+                  <v-divider></v-divider>
+                  <v-list-item >
+                    <v-list-item-content>
+                      <v-list-item-title>Tax</v-list-item-title>
+                    </v-list-item-content>
+                    <v-list-item-action>
+                        ${{ item.tax }}
+                    </v-list-item-action>
+                  </v-list-item>
+                  <v-divider></v-divider>
+                  <v-list-item >
+                    <v-list-item-content>
+                      <v-list-item-title>Discount</v-list-item-title>
+                    </v-list-item-content>
+                    <v-list-item-action>
+                        {{ item.discount }}%
+                    </v-list-item-action>
+                  </v-list-item>
+                  <v-divider></v-divider>
+                  <v-list-item >
+                    <v-list-item-content>
+                      <v-list-item-title>Shipping</v-list-item-title>
+                    </v-list-item-content>
+                    <v-list-item-action>
+                        ${{ item.shipping }}
+                    </v-list-item-action>
+                  </v-list-item>
+                </v-list-item-group>
+              </v-list>
+            </v-col>
+          </v-row>
 
           <v-row no-gutters class="my-2 py-3">
-            <v-flex xs12 md12>Total : {{ item.total_amount }}</v-flex>
-            <v-flex xs12 md12>Tax : {{ item.tax }}</v-flex>
-            <v-flex xs12 md12>Discount : {{ item.discount }}</v-flex>
-          </v-row>
-          <v-row no-gutters class="my-2 py-3" v-if="item.terms">
             <v-flex xs12 md12>Terms : {{ item.terms }}</v-flex>
           </v-row>
         </v-container>
-        <!-- <v-container class="invoice-viewbox-action">
-          <v-card-actions hide>
-            <v-spacer></v-spacer>
-            <v-btn
-              color="orange"
-              text
-              @click="alert('to be added soon')"
-            >
-            Download PDF
-            </v-btn>
-          </v-card-actions>
-        </v-container> -->
       </v-card>
     </v-dialog>
   </v-row>
@@ -116,5 +190,20 @@
 }
 .invoice-viewbox-action {
   max-width: 700px;
+}
+.table-cell {
+  padding: 5px;
+  font-weight:bold;
+  border: 1px solid #EEEFF1;
+}
+.table-cell.head{
+  background: #E8F1FA;
+}
+.table-cell.value{
+  background: #fff;
+}
+.border { border : 1px solid #EEEFF1; }
+.v-data-table-header { 
+  background-color: #e8f1fa; 
 }
 </style>

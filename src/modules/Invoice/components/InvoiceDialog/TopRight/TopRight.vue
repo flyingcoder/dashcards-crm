@@ -1,19 +1,6 @@
 <template>
-  <v-layout column align-end wrap class="right__side">
-    <div class="invoice__title">
-      <v-text-field
-        :disabled="dialog.type === 'view'"
-        class="titlefield"
-        color="#657186"
-        solo
-        hide-details
-        flat
-        placeholder="Add Invoice Title *"
-        v-model.trim="title"
-      ></v-text-field>
-    </div>
-
-    <div class="field" v-if="!(dialog.type === 'create')">
+  <v-row wrap class="right__side">
+    <v-col md="12" v-if="!(dialog.type === 'create')">
       <div class="field__label">Invoice ID:</div>
       <v-text-field
         :disabled="dialog.type === 'view' || dialog.type === 'edit'"
@@ -23,18 +10,35 @@
         hide-details
         flat
         placeholder="#"
-        :value="invoice_id"
+        :value="`#INV-`+invoice_id"
       ></v-text-field>
-    </div>
+    </v-col>
+    
+    <v-col md="12">
+      <div class="field__label">Invoice Title:</div>
+      <v-text-field
+        class="titlefield"
+        color="#657186"
+        solo
+        hide-details
+        flat
+        dense
+        outlined
+        placeholder="Add Invoice Title *"
+        v-model.trim="title"
+      ></v-text-field>
+    </v-col>
 
-    <div class="invoice__type field">
+    <v-col md="12">
       <div class="field__label">
         {{ dialog.type === 'view' ? 'Type:' : 'Select Type:' }}
       </div>
       <v-select
         :disabled="dialog.type === 'view'"
-        class="textfield"
         solo
+        outlined
+        full-width
+        dense
         hide-details
         color="#657186"
         flat
@@ -42,30 +46,31 @@
         v-model="type"
         placeholder="Select Invoice Type"
       ></v-select>
-    </div>
+    </v-col>
 
-    <div class="field" v-if="type === 'hourly'">
+    <v-col md="12" v-if="type === 'hourly'">
       <div class="field__label">
         {{ dialog.type === 'view' ? 'Project:' : 'Select Project:' }}
       </div>
       <v-select
         :disabled="dialog.type === 'view'"
-        class="textfield"
         solo
         hide-details
         color="#657186"
         flat
+        full-width
+        outlined
+        dense
         :items="projects"
         :value="selected_project"
-        @change="set_selected_project($event)"
+        @change="setBillingTargets"
         item-text="title"
         item-value="id"
         placeholder="Select Project"
       ></v-select>
-    </div>
+    </v-col>
 
-    <div class="invoice__dates">
-      <div class="created__date">
+      <v-col md="12">
         <div class="field__label">
           Invoice Date:<span class="required">*</span>
         </div>
@@ -76,6 +81,8 @@
           class="textfield"
           flat
           solo
+          dense
+          outlined
           hide-details
           color="#657186"
           disabled
@@ -85,17 +92,19 @@
           v-else
           class="textfield"
           solo
+          outlined
           hide-details
           color="#657186"
           flat
+          dense
           placeholder="Select Date"
           :value="date"
           :max="due_date"
           @input="update_date({ date: $event, field: 'date' })"
         />
-      </div>
+      </v-col>
 
-      <div class="due__date">
+      <v-col md="12">
         <div class="field__label">Due Date:<span class="required">*</span></div>
 
         <v-text-field
@@ -104,6 +113,7 @@
           class="textfield"
           flat
           solo
+          outlined
           hide-details
           color="#657186"
           disabled
@@ -112,7 +122,8 @@
         <date-picker
           v-else
           class="textfield"
-          solo
+          dense
+          outlined
           hide-details
           color="#657186"
           flat
@@ -121,9 +132,8 @@
           :min="date"
           @input="update_date({ date: $event, field: 'due_date' })"
         />
-      </div>
-    </div>
-  </v-layout>
+      </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -146,6 +156,15 @@ export default {
       'invoice_id',
       'type'
     ]),
+    
+    type: {
+      get() {
+        return this.$store.getters['invoice/type']
+      },
+      set(newVal) {
+        this.set_type(newVal)
+      }
+    },
     title: {
       get() {
         return this.$store.getters['invoice/title']
@@ -154,14 +173,6 @@ export default {
         this.$store.commit('invoice/set_title', new_title)
       }
     },
-    type: {
-      get() {
-        return this.$store.getters['invoice/type']
-      },
-      set(newVal) {
-        this.set_type(newVal)
-      }
-    }
   },
 
   watch: {
@@ -180,7 +191,11 @@ export default {
       'set_type',
       'set_selected_project',
       'update_date'
-    ])
+    ]),
+    setBillingTargets(event){
+      this.set_selected_project(event)
+      // this.$event.$emit('')
+    }
   }
 }
 </script>
@@ -216,15 +231,10 @@ export default {
     font-weight: 500;
     padding: 6px 8px;
     margin-bottom: 20px;
-
-    .titlefield {
-      font-size: 26px;
-      width: 300px;
-    }
   }
 
   .field__label {
-    width: 300px;
+    width: 100%;
     background-color: $fieldLabel;
     border: 1px solid $fieldLabel;
     color: $textDark;

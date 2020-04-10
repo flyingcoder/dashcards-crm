@@ -35,6 +35,24 @@ export const global_utils = {
         return value
       }
       return value.substr(0, size) + '...'
+    },
+    format(value, format ){
+      var form = typeof format === 'undefined' ? 'MMM D YYYY' : format 
+      return moment(value).format(form)
+    },
+    ucwords(value){
+      return (value + '') .replace(/^(.)|\s+(.)/g, function ($1) {
+        return $1.toUpperCase()
+      })
+    },
+    money(value, currency){
+
+      var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: currency || 'USD',
+      });
+
+      return formatter.format(value);
     }
   },
   methods: {

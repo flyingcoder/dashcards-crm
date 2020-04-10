@@ -9,6 +9,9 @@
         class="textarea__field"
         flat
         solo
+        dense
+        outlined
+        :rows="2"
         hide-details
         color="#657186"
         @input="update_textarea($event, 'notes')"
@@ -23,6 +26,9 @@
         class="textarea__field"
         flat
         solo
+        dense
+        outlined
+        :rows="2"
         hide-details
         color="#657186"
         @input="update_textarea($event, 'terms')"

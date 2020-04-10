@@ -23,7 +23,7 @@
           text
           @click="save_invoice"
         >
-          Submit
+          <v-icon left>save</v-icon> Submit
         </v-btn>
         <v-btn icon dark @click="close_dialog">
           <v-icon>close</v-icon>

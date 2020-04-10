@@ -110,7 +110,8 @@ export default {
         this.$store.commit('onlineUsers/user_logged_in', {
           id: member.id,
           name: `${member.first_name}, ${member.last_name}`,
-          is_online: !!member.is_online
+          is_online: !!member.is_online,
+          image_url : member.image_url
         })
       })
 

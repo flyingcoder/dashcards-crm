@@ -30,7 +30,7 @@
               :icon="set_icon(item)"
               fill-dot
             >
-              <v-row class="pt-1">
+              <v-row class="pt-1" no-gutters>
                 <v-col>
                   <strong>{{ item.created_at | from_now }}</strong>
                   <div class="caption mb-2">{{ item.description }}</div>
