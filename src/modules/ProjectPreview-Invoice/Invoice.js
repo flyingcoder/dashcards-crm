@@ -30,8 +30,8 @@ export default {
   data: () => ({
     headers: [
       { text: 'Invoice', value: 'invoice', width: '30%' },
-      { text: 'Client', value: 'client', width: '30%' },
-      { text: 'Due Date', value: 'due_date', width: '10%' },
+      { text: 'Client', value: 'client', width: '20%' },
+      { text: 'Due Date', value: 'due_date', width: '20%' },
       { text: 'Amount', value: 'amount', width: '10%' },
       { text: 'Actions', value: 'action', width: '20%', align: 'center' }
     ],

@@ -38,7 +38,7 @@
             <date-picker
               class="dialog__date d-field"
               label="Start Date"
-              prepend-icon="event"
+              prepend-inner-icon="event"
               readonly
               v-model="start_date"
               :max="end_date"
@@ -49,7 +49,7 @@
             <date-picker
               class="dialog__date d-field"
               label="End Date"
-              prepend-icon="event"
+              prepend-inner-icon="event"
               readonly
               v-model="end_date"
               :min="start_date"

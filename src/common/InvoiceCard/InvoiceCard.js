@@ -1,6 +1,6 @@
 import DashCard from '@/common/DashCard.vue'
 import request from '@/services/axios_instance'
-
+import { global_utils } from '@/global_utils/global_utils'
 const gradients = [
   ['#222'],
   ['#42b3f4'],
@@ -12,6 +12,7 @@ const gradients = [
 
 export default {
   name: 'InvoiceCard',
+  mixins: [global_utils],
   components: {
     DashCard
   },
@@ -43,7 +44,7 @@ export default {
       padding: 8,
       lineCap: 'round',
       gradient: gradients[5],
-      value: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0],
+      value: this.generate_random(10, 0, 10),
       gradientDirection: 'top',
       gradients,
       fill: false,

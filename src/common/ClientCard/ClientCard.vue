@@ -9,20 +9,21 @@
         @expand="expand"
       >
         <div class="content-wrapper" slot="content">
-          <v-layout>
-            <v-flex class="mx-auto">
-              <small>Total Sales</small>
-              <h2>3491</h2>
-            </v-flex>
-            <v-flex class="mx-auto">
-              <small>New Orders</small>
-              <h2>721</h2>
-            </v-flex>
-            <v-flex class="mx-auto">
-              <small>Total Earnings</small>
-              <h2>$8103</h2>
-            </v-flex>
-          </v-layout>
+
+          <v-row no-gutters>
+            <v-col class="mx-auto">
+              <h4 class="text-center grey--text">Total Sales</h4>
+              <h2 class="text-center">{{ total_sales }}</h2>
+            </v-col>
+            <v-col class="mx-auto">
+              <h4 class="text-center grey--text">New Orders</h4>
+              <h2 class="text-center">{{ new_orders }}</h2>
+            </v-col>
+            <v-col class="mx-auto">
+              <h4 class="text-center grey--text">Total Earnings</h4>
+              <h2 class="text-center">{{ total_earnings }}</h2>
+            </v-col>
+          </v-row>
 
           <v-sparkline
             :value="value"
@@ -45,14 +46,34 @@
             hide-default-footer
             :loading="loading"
             loading-text="Loading... Please wait"
-            class="elevation-1 buzzooka__table"
+            class="buzzooka__table"
             @page-count="pageCount = $event"
           >
-            <template v-slot:items="props">
-              <td>{{ props.item.company_name }}</td>
-              <td>{{ props.item.full_name }}</td>
-              <td>{{ props.item.status }}</td>
-              <td>{{ props.item.email }}</td>
+            <template v-slot:item="{ item }">
+              <tr>
+                <td>{{ item.company_name }}</td>
+                <td>
+                  <v-tooltip left>
+                    <template v-slot:activator="{ on }">
+                      <v-avatar v-on="on" color="teal" size="35">
+                        <v-img :src="item.image_url"></v-img>
+                      </v-avatar>
+                    </template>
+                    <span>{{ item.full_name }}</span>
+                  </v-tooltip>
+                </td>
+                <td>{{ item.email }}</td>
+                <td>
+                  <v-tooltip left>
+                    <template v-slot:activator="{ on }">
+                      <v-icon color="success" v-if="item.status === `Active`" v-on="on">mdi-account-check</v-icon>
+                      <v-icon color="error" v-else v-on="on">mdi-account-cancel</v-icon>
+                    </template>
+                    <span v-if="item.status === `Active`">Active</span>
+                    <span v-else>Inactive</span>
+                  </v-tooltip>
+                </td>
+              </tr>
             </template>
           </v-data-table>
           <div

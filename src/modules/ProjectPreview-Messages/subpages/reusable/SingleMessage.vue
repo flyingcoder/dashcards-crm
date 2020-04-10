@@ -3,7 +3,7 @@
     <v-layout wrap class="sender">
       <v-flex xs3 class="sender__img">
         <v-img :src="message.sender.image_url" />
-        <span class="status online"></span>
+        <span class="status" :class="is_online"></span>
       </v-flex>
       <v-flex xs5 class="sender__name">
         <h5>{{ message.sender.first_name }} {{ message.sender.last_name }}</h5>
@@ -24,6 +24,13 @@ export default {
   props: {
     isMyMessage: Boolean,
     message: Object // TODO implement message for displaying to the template
+  },
+  computed :{
+    is_online() {
+      var onlineUsers = this.$store.getters['onlineUsers/all_users']
+      var is_online = onlineUsers.findIndex( ou => ou.id === this.message.sender.id)
+      return ~is_online ? 'online' : 'offline'
+    }
   }
 }
 </script>

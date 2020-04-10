@@ -1,5 +1,8 @@
+ import { global_utils } from '@/global_utils/global_utils'
+
 export default {
   name: 'VueGrid',
+  mixins: [global_utils],
   props: {
     items: Array,
     permissions: {
@@ -61,9 +64,9 @@ export default {
     navigate_to_view_profile(user) {
       let item = Object.values(user.user_roles)
       if (item[0].indexOf('client') >= 0 || item[0].indexOf('agent') >= 0) {
-        this.$router.push(`/dashboard/clients/profile/${user.user_id}`)
+        this.$router.push(`/dashboard/clients/profile/${user.id}`)
       } else {
-        this.$router.push(`/dashboard/team/profile/${user.user_id}`)
+        this.$router.push(`/dashboard/team/profile/${user.id}`)
       }
     },
     count(item) {

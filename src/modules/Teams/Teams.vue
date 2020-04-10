@@ -71,7 +71,7 @@
           {{ item.fullname }}
         </td>
         <td>{{ item.job_title }}</td>
-        <td>{{ item.location }}</td>
+        <td>{{ item.email }}</td>
         <td>{{ item.tasks }}</td>
         <td>{{ item.projects }}</td>
         <Actions

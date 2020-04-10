@@ -1,8 +1,10 @@
 import DashCard from '@/common/DashCard.vue'
 import request from '@/services/axios_instance'
+import { global_utils } from '@/global_utils/global_utils'
 
 export default {
   name: 'TasksCard',
+  mixins: [global_utils],
   components: {
     DashCard
   },
@@ -24,20 +26,23 @@ export default {
         total: 0
       },
       headers: [
-        { id: 1, text: 'Company', value: 'company_name' },
-        { id: 2, text: 'Contact Name', value: 'full_name' },
-        { id: 3, text: 'Status', value: 'status' },
-        { id: 4, text: 'Email', value: 'email' }
+        { text: 'Company',  sortable: false },
+        { text: 'Contact' , sortable: false },
+        { text: 'Email', sortable: false },
+        { text: 'Status', sortable: false },
       ],
 
-      value: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0],
+      value: this.generate_random(10, 0, 10),
       radius: 0,
       padding: 8,
       width: 2,
       autoLineWidth: false,
       lineCap: 'round',
       fill: false,
-      type: 'trend'
+      type: 'trend',
+      total_sales : (Math.random() * (99 - 1) + 1).toFixed(0),
+      new_orders : (Math.random() * (99 - 1) + 1).toFixed(0),
+      total_earnings : `$`+(Math.random() * (999 - 1) + 1).toFixed(2),
     }
   },
 

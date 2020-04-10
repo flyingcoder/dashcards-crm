@@ -7,7 +7,7 @@
       :search-input.sync="search"
       :loading="isLoading"
       item-value="id"
-      prepend-icon="search"
+      prepend-inner-icon="search"
       no-filter
       chips
       multiple

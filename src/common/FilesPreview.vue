@@ -1,84 +1,119 @@
 <template>
   <div class="files-preview">
     <!-- for videos -->
-    <v-avatar
-      v-if="display_videos.length > 0"
-      tile
-      class="mr-1 clickable"
-      v-for="(media, index) in display_videos"
-      :key="index"
-      @click="openViewer(media, index, 'video')"
-    >
-      <v-img :src="getMediaSrc(media)" outlined>
-        <template v-slot:placeholder>
-          <v-img :src="default_video" :contain="true"></v-img>
-        </template>
-      </v-img>
-    </v-avatar>
-
+    <v-tooltip left
+        v-if="display_videos.length > 0"
+        v-for="(media, index) in display_videos"
+        :key="media.id"
+     >
+      <template v-slot:activator="{ on }">
+        <v-avatar
+          tile
+          v-on="on"
+          class="mr-1 clickable"
+          @click="openViewer(media, index, 'video')"
+        >
+          <v-img :src="getMediaSrc(media)" outlined>
+            <template v-slot:placeholder>
+              <v-img :src="default_video" :contain="true"></v-img>
+            </template>
+          </v-img>
+        </v-avatar>
+      </template>
+      <span>{{media.name}}</span>
+    </v-tooltip>
+    
     <!-- for images -->
-    <v-avatar
-      v-if="display_medias.length > 0"
-      v-for="(media, index) in display_medias"
-      :key="index"
-      tile
-      class="mr-1 clickable"
-      @click="openViewer(media, index, 'image')"
-    >
-      <v-img :src="getMediaSrc(media)">
-        <template v-slot:placeholder>
-          <v-img :src="default_img" :contain="true"></v-img>
-        </template>
-      </v-img>
-    </v-avatar>
+    <v-tooltip left
+        v-if="display_medias.length > 0"
+        v-for="(media, index) in display_medias"
+        :key="media.id"
+     >
+      <template v-slot:activator="{ on }">
+        <v-avatar
+          v-on="on"
+          tile
+          class="mr-1 clickable"
+          @click="openViewer(media, index, 'image')"
+        >
+          <v-img :src="getMediaSrc(media)">
+            <template v-slot:placeholder>
+              <v-img :src="default_img" :contain="true"></v-img>
+            </template>
+          </v-img>
+        </v-avatar>
+      </template>
+      <span>{{media.name}}</span>
+    </v-tooltip>
 
     <!-- for docs -->
-    <v-avatar
-      v-if="display_docs.length > 0"
-      v-for="(media, index) in display_docs"
-      :key="index"
-      tile
-      class="mr-1 clickable"
-      @click="openViewer(media, index, 'image')"
-    >
-      <v-img :src="getMediaSrc(media)">
-        <template v-slot:placeholder>
-          <v-img :src="default_img" :contain="true"></v-img>
-        </template>
-      </v-img>
-    </v-avatar>
+    <v-tooltip left
+        v-if="display_docs.length > 0"
+        v-for="(media, index) in display_docs"
+        :key="media.id"
+     >
+      <template v-slot:activator="{ on }">
+        <v-avatar
+          tile
+          v-on="on"
+          class="mr-1 clickable"
+          @click="openViewer(media, index, 'image')"
+        >
+          <v-img :src="getMediaSrc(media)">
+            <template v-slot:placeholder>
+              <v-img :src="default_img" :contain="true"></v-img>
+            </template>
+          </v-img>
+        </v-avatar>
+      </template>
+      <span>{{media.name}}</span>
+    </v-tooltip>
 
     <!-- for others -->
-    <v-avatar
-      v-if="display_others.length > 0"
-      v-for="(media, index) in display_others"
-      :key="index"
-      tile
-      class="mr-1 clickable"
-      @click="openViewer(media, index, 'other')"
-    >
-      <v-img :src="getMediaSrc(media)">
-        <template v-slot:placeholder>
-          <v-img :src="default_other" :contain="true"></v-img>
-        </template>
-      </v-img>
-    </v-avatar>
+    <v-tooltip left
+        v-if="display_others.length > 0"
+        v-for="(media, index) in display_others"
+        :key="media.id"
+     >
+      <template v-slot:activator="{ on }">
+        <v-avatar
+          v-on="on"
+          tile
+          class="mr-1 clickable"
+          @click="openViewer(media, index, 'other')"
+        >
+          <v-img :src="getMediaSrc(media)">
+            <template v-slot:placeholder>
+              <v-img :src="default_other" :contain="true"></v-img>
+            </template>
+          </v-img>
+        </v-avatar>
+      </template>
+      <span>{{media.name}}</span>
+    </v-tooltip>
 
     <!-- for links -->
-    <v-avatar
-      v-if="display_links.length > 0"
-      v-for="(media, index) in display_links"
-      :key="index"
-      tile
-      class="mr-1 clickable"
-      @click="openViewer(media, index, 'link')"
-    >
-      <v-img :src="getMediaSrc(media)">
-        <template v-slot:placeholder>
-          <v-img :src="default_other" :contain="true"></v-img>
-        </template>
-      </v-img>
-    </v-avatar>
+     <v-tooltip left
+        v-if="display_links.length > 0"
+        v-for="(media, index) in display_links"
+        :key="media.id"
+     >
+      <template v-slot:activator="{ on }">
+        <v-avatar
+          v-on="on"
+          tile
+          class="mr-1 clickable"
+          @click="openViewer(media, index, 'link')"
+        >
+          <v-img :src="getMediaSrc(media)">
+            <template v-slot:placeholder>
+              <v-img :src="default_other" :contain="true"></v-img>
+            </template>
+          </v-img>
+        </v-avatar>
+      </template>
+      <span>{{media.name}}</span>
+    </v-tooltip>
 
     <Viewer ref="viewer_dialog" :media="selected_medias"> </Viewer>
   </div>
@@ -190,7 +225,9 @@ export default {
     },
     openViewer(media, index, type) {
       this.selected_medias = this.item.properties.media
-      this.$refs.viewer_dialog.openDialog()
+      // if (type === 'image' || type === 'video' || type === 'link')
+        this.$refs.viewer_dialog.openDialog()
+      
     }
   }
 }

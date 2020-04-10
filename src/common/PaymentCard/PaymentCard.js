@@ -1,7 +1,8 @@
 import DashCard from '@/common/DashCard.vue'
-
+import { global_utils } from '@/global_utils/global_utils'
 export default {
   name: 'PaymentCard',
+  mixins: [global_utils],
   components: {
     DashCard
   },
@@ -14,15 +15,21 @@ export default {
   },
 
   data: () => ({
-    value: [1, 2, 5, 9, 5, 10, 3, 5],
     labels: ['1', '2', '3', '4', '5', '6', '7', '8'],
     padding: 8,
     width: 2,
     autoLineWidth: true,
     fill: false,
-    type: 'bar'
+    type: 'bar',
+    total_earnings : `$`+(Math.random() * (959 - 1) + 1).toFixed(0),
+    completed : (Math.random() * (99 - 1) + 1).toFixed(0),
+    remaining : (Math.random() * (99 - 1) + 1).toFixed(0),
   }),
-
+  computed : {
+    value() {
+      return this.generate_random(8, 1, 10)
+    }
+  },
   methods: {
     expand() {
       this.$router.push({ name: 'expanded-payments' })

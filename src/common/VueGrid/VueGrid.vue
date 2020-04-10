@@ -10,7 +10,7 @@
               >
               <v-icon small v-else></v-icon>
               <v-spacer></v-spacer>
-              <span>{{ item.job_title }}</span>
+              <span>{{ item.job_title | ucwords }}</span>
               <v-spacer></v-spacer>
               <v-menu bottom left>
                 <template v-slot:activator="{ on }">
@@ -36,13 +36,13 @@
             </v-row>
             <v-row align="center" class="my-2">
               <v-spacer></v-spacer>
-              <v-avatar size="75">
+              <v-avatar size="75" color="#3b589e">
                 <v-img :src="item.image_url" :alt="item.first_name"></v-img>
               </v-avatar>
               <v-spacer></v-spacer>
             </v-row>
             <v-col md="12" class="text-center"
-              ><strong>{{ item.fullname }}</strong></v-col
+              ><strong>{{ item.fullname |ucwords }}</strong></v-col
             >
             <v-row>
               <v-btn
@@ -56,10 +56,9 @@
                 <v-icon small left color="success">account_circle</v-icon>
                 Profile
               </v-btn>
-              <v-btn text block dense class small disabled>
-                <v-icon small left color="indigo">mdi-map-marker</v-icon>
-                {{ item.location }}
-              </v-btn>
+              <v-col class="text-center py-0 my-0 caption">
+                <v-icon small left color="indigo">mdi-email</v-icon> {{ item.email }}
+              </v-col>
             </v-row>
             <v-row>
               <v-col v-if="showTaskCount">

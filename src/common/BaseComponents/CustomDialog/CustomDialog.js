@@ -37,6 +37,7 @@ export default {
   methods: {
     button1clicked() {
       this.$emit('button1')
+      this.close_dialog()
     },
 
     button2clicked() {

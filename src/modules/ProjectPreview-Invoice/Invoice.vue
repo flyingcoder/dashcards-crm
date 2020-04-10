@@ -35,7 +35,17 @@
     >
       <template v-slot:row-slot="{ item }">
         <td>{{ item.title }}</td>
-        <td>{{ item.billed_to }}</td>
+        <td>
+          <v-tooltip top>
+            <template v-slot:activator="{ on }">
+              <v-avatar color="teal" v-on="on" size="35">
+                <v-img :src="item.billed_to.image_url"></v-img>
+              </v-avatar>
+            </template>
+            <span>{{ item.billed_to.fullname }}</span>
+          </v-tooltip>
+          {{ item.billed_to.fullname }}
+        </td>
         <td>{{ item.due_date | format }}</td>
         <td>{{ item.total_amount | money }}</td>
         <Actions

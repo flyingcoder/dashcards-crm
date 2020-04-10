@@ -23,20 +23,21 @@
               </div>
             </v-flex>
 
-            <v-menu offset-y>
+            <v-menu offset-y left>
               <template v-slot:activator="{ on }">
                 <v-btn icon fab small outlined v-on="on">
                   <v-icon>more_horiz</v-icon>
                 </v-btn>
               </template>
               <v-list>
-                <v-list-tile
-                  v-for="item of dropdown_actions"
-                  :key="item.id"
-                  @click="$emit('dropdown-action', item.value)"
-                >
-                  <v-list-tile-action>{{ item.text }}</v-list-tile-action>
-                </v-list-tile>
+                <v-list-item 
+                    v-for="item of dropdown_actions"
+                    :key="item.id"
+                    @click="$emit('dropdown-action', item.value)">
+                  <v-list-item-content>
+                    <v-list-item-title>{{ item.text }}</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
               </v-list>
             </v-menu>
           </v-layout>
@@ -64,25 +65,14 @@
               v-html="content.description"
             ></div>
 
-            <div class="task__assigned_to" v-if="content.assignee">
-              <v-flex>
-                <div><v-icon>list</v-icon> Assigned to:</div>
-              </v-flex>
-              <v-flex>
-                <v-chip
-                  class="ma-2"
-                  outlined
-                  light
-                  disabled
-                  v-for="collaborator in content.assignee"
-                >
-                  <v-avatar left>
-                    <v-img :src="collaborator.image_url"></v-img>
-                  </v-avatar>
-                  {{ collaborator.first_name }}, {{ collaborator.last_name }}
-                </v-chip>
-              </v-flex>
-            </div>
+            <v-row no-gutters class="task__assigned_to" v-if="content.assignee">
+              <v-col md="12">
+                <div>Assigned to:</div>
+              </v-col>
+              <v-col md="12">
+                <Avatars :deep="false" :items="content.assignee" :count="6"></Avatars>
+              </v-col>
+            </v-row>
 
             <div class="task__comment_section">
               <div class="mb-1"><v-icon>chat</v-icon> Comments</div>

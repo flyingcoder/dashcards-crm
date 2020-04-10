@@ -22,20 +22,16 @@
     <v-layout class="dashcard-content">
       <draggable class="row d__cards" v-model="cards">
         <template v-for="card in card_components">
-          <v-col cols="12" md="6">
+          <v-col cols="12" md="6" v-if="should_show(card.slug) && card.can_view()">
             <component
               :is="card.component"
               :key="card.component"
               v-bind="args"
-              v-if="
-                should_show(card.slug) &&
-                  card.hasOwnProperty('component') &&
-                  card.can_view()
-              "
+              v-if="card.hasOwnProperty('component')"
               @close="close(card.id)"
             ></component>
 
-            <template v-else-if="should_show(card.slug) && card.can_view()">
+            <template v-else>
               <v-flex xs12 :key="card.id">
                 <div>
                   <dash-card
@@ -48,6 +44,7 @@
             </template>
           </v-col>
         </template>
+
         <div class="timeline-card" v-if="cards.length == 1">
           <NoCards />
         </div>

@@ -3,13 +3,13 @@ import request from '@/services/axios_instance'
 import moment from 'moment'
 
 import DashCard from '@/common/DashCard.vue'
-import AssignedBtn from '@/common/AssignedBtn.vue'
+import Avatars from '@/common/Avatars.vue'
 
 export default {
   name: 'TimerCard',
   components: {
     DashCard,
-    AssignedBtn
+    Avatars
   },
 
   props: {
@@ -31,12 +31,13 @@ export default {
         total: 0
       },
       headers: [
-        { id: 1, text: 'Task', value: 'title', sortable: false },
-        { id: 2, text: 'Type', value: 'type', sortable: false },
-        { id: 3, text: 'Total Time', value: 'total_time', sortable: false },
-        { id: 4, text: 'Status', value: 'status', sortable: false }
+        { text: 'Task', sortable: false },
+        { text: 'Assigned',  sortable: false },
+        { text: 'Total Time', sortable: false },
+        { text: 'Status', sortable: false }
       ],
-      slides: 5
+      slides: 5,
+      tab : 'timer'
     }
   },
   computed: {

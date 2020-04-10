@@ -65,10 +65,10 @@ export default {
 
   methods: {
     load_users() {
-      this.fill_table_via_url(`api/company/teams`)
+      this.fill_table_via_url(`api/company/teams?no-clients=true&per_page=12`)
     },
     load_more_users() {
-      this.load_more_via_url(`api/company/teams`)
+      this.load_more_via_url(`api/company/teams?no-clients=true&per_page=12`)
     },
     toggleAll() {
       if (this.selected.length) this.selected = []

@@ -9,20 +9,21 @@
         @expand="expand"
       >
         <div class="content-wrapper" slot="content">
-          <v-layout class="mb-5 payment-graph">
-            <v-flex xs12 class="mx-auto">
-              <small>Total Earnings</small>
-              <h2>$100,000</h2>
-            </v-flex>
-            <v-flex xs6 class="mx-auto">
-              <small>Completed</small>
-              <h2>$75,000</h2>
-            </v-flex>
-            <v-flex xs6 class="mx-auto">
-              <small>Remaining</small>
-              <h2>$25,000</h2>
-            </v-flex>
-          </v-layout>
+          
+          <v-row no-gutters class="mb-5 payment-graph">
+            <v-col class="mx-auto">
+              <h4 class="text-center grey--text">Total Earnings</h4>
+              <h2 class="text-center">{{ total_earnings }}</h2>
+            </v-col>
+            <v-col class="mx-auto">
+              <h4 class="text-center grey--text">Completed</h4>
+              <h2 class="text-center">{{ completed }}</h2>
+            </v-col>
+            <v-col class="mx-auto">
+              <h4 class="text-center grey--text">Remaining</h4>
+              <h2 class="text-center">{{ remaining }}</h2>
+            </v-col>
+          </v-row>
 
           <v-sparkline
             :value="value"

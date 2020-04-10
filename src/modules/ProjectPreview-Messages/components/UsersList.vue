@@ -9,7 +9,7 @@
             <v-img :src="user.image_url" />
             <span
               class="status"
-              :class="user.is_online ? 'online' : 'offline'"
+              :class="is_online(user)"
             ></span>
           </div>
 
@@ -39,11 +39,20 @@ export default {
   computed: {
     loggedUser() {
       return this.$store.getters.user
+    },
+    onlineUsers(){
+      return this.$store.getters['onlineUsers/all_users']
     }
   },
 
   created() {
     getMembers(this.id).then(({ data }) => (this.users = data.data))
+  },
+  methods: {
+    is_online(user){
+      var is_online = this.onlineUsers.findIndex( ou => ou.id === user.id)
+      return ~is_online ? 'online' : 'offline'
+    },
   }
 }
 </script>

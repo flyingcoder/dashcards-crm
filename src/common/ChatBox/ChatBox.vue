@@ -3,7 +3,7 @@
     <v-card class="chat__header" @click="toggle_chat_box(conv.id)">
       <div class="user-info">
         <div class="user__img">
-          <v-img :src="require('@/assets/temp/user.png')" />
+          <v-img :src="conv.user.image_url" />
           <span
             :class="['status', conv.user.is_online ? 'online' : 'offline']"
           ></span>
@@ -51,7 +51,7 @@
             >
               <div class="sender">
                 <div class="sender__img">
-                  <v-img :src="require('@/assets/temp/user.png')" />
+                  <v-img :src="message.sender.image_url" />
                   <span class="status online"></span>
                 </div>
                 <h5 class="sender__name">Me</h5>
@@ -65,7 +65,7 @@
             <div class="message" :key="message.id" v-else>
               <div class="sender">
                 <div class="sender__img">
-                  <v-img :src="require('@/assets/temp/user.png')" />
+                  <v-img :src="message.sender.image_url" />
                   <span
                     :class="[
                       'status',

@@ -43,7 +43,7 @@
               </div>
             </div>
           </div>
-          <div class="sel-timer" v-show="false">
+          <div class="sel-timer" v-if="tab === `timer`">
             <div class="timer-body">
               <v-carousel hide-delimiters show-arrows height="auto">
                 <v-carousel-item v-for="(slide, i) in slides" :key="i">
@@ -113,7 +113,7 @@
               </v-carousel>
             </div>
           </div>
-          <div class="alarm" v-show="false">
+          <div class="alarm" v-if="tab == `alarm`">
             <div class="alarm-body">
               <v-carousel hide-delimiters show-arrows height="auto">
                 <v-carousel-item v-for="(slide, i) in slides" :key="i">
@@ -160,15 +160,15 @@
             </div>
           </div>
           <v-tabs class="timer__tabs" centered grow hide-slider>
-            <v-tab href="#">
-              <v-icon left>access_alarm</v-icon>
+            <v-tab href="#" @click="tab = `alarm`">
+              <v-icon left >access_alarm</v-icon>
               Alarm
               <v-avatar color="#f56c6c" size="25"
                 ><span class="notif-text">25</span></v-avatar
               >
             </v-tab>
-            <v-tab href="#">
-              <v-icon left>access_time</v-icon>
+            <v-tab href="#" @click="tab = `timer`">
+              <v-icon left >access_time</v-icon>
               Timer
               <v-avatar color="#f56c6c" size="25"
                 ><span class="notif-text">14</span></v-avatar
@@ -187,11 +187,15 @@
             class="elevation-1 buzzooka__table"
             @page-count="pageCount = $event"
           >
-            <template v-slot:items="props">
-              <td>{{ props.item.title }}</td>
-              <td><assigned-btn :users="props.item.assignee" /></td>
-              <td>{{ props.item.total_time }}</td>
-              <td>{{ props.item.status }}</td>
+            <template v-slot:item="{ item }">
+              <tr>
+              <td>{{item.title }}</td>
+              <td>
+                <Avatars :items="item.assignee" :count="1" ></Avatars>
+              </td>
+              <td>{{item.total_time }}</td>
+              <td>{{item.status }}</td>
+            </tr>
             </template>
           </v-data-table>
           <!-- <div

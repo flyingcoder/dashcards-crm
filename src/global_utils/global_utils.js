@@ -87,6 +87,13 @@ export const global_utils = {
         item.thumb_url = require('@/assets/temp/no-image.jpg')
         item.public_url = require('@/assets/temp/no-image.jpg')
       }
+    },
+    generate_random(qty, min, max){
+      var items = []
+      for (var i = 0; i < qty; i++) {
+        items.push(parseInt((Math.random() * (max - min) + min).toFixed(0)))
+      }
+      return items
     }
   }
 }

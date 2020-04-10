@@ -31,7 +31,7 @@
         @click="open_chat_box(user)"
       >
         <div class="user__img">
-          <v-img :src="require('@/assets/temp/user.png')" />
+          <v-img :src="user.image_url" />
           <span
             class="status"
             :class="[user.is_online ? 'online' : 'offline']"

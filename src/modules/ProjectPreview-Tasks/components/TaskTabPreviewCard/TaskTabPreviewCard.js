@@ -8,15 +8,18 @@ import RichEditor from '@/common/RichEditor.vue'
 import EmojiPicker from '@/common/EmojiPicker/EmojiPicker.vue'
 import HoursBox from '@/common/HoursBox/HoursBox.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
+import Avatars from '@/common/Avatars.vue'
 
 export default {
+  name: 'TaskTabPreviewCard',
   mixins: [global_utils],
   components: {
     DashCard,
     RichEditor,
     HoursBox,
     EmojiPicker,
-    DeleteDialog
+    DeleteDialog,
+    Avatars
   },
   props: {
     activeId: [Number, String],
