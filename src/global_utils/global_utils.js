@@ -36,23 +36,22 @@ export const global_utils = {
       }
       return value.substr(0, size) + '...'
     },
-    format(value, format ){
-      var form = typeof format === 'undefined' ? 'MMM D YYYY' : format 
+    format(value, format) {
+      var form = typeof format === 'undefined' ? 'MMM D YYYY' : format
       return moment(value).format(form)
     },
-    ucwords(value){
-      return (value + '') .replace(/^(.)|\s+(.)/g, function ($1) {
+    ucwords(value) {
+      return (value + '').replace(/^(.)|\s+(.)/g, function($1) {
         return $1.toUpperCase()
       })
     },
-    money(value, currency){
-
+    money(value, currency) {
       var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
-        currency: currency || 'USD',
-      });
+        currency: currency || 'USD'
+      })
 
-      return formatter.format(value);
+      return formatter.format(value)
     }
   },
   methods: {

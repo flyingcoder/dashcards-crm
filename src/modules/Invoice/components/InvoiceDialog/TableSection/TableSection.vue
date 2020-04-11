@@ -1,11 +1,19 @@
 <template>
   <v-row no-gutters>
     <v-row class="table-headers mb-1">
-      <v-col md="5" class="text-left">Description<span class="required">*</span></v-col>
-      <v-col md="2" class="text-center">Rate<span class="required">*</span></v-col>
-      <v-col md="2" class="text-center">Hours<span class="required">*</span></v-col>
+      <v-col md="5" class="text-left"
+        >Description<span class="required">*</span></v-col
+      >
+      <v-col md="2" class="text-center"
+        >Rate<span class="required">*</span></v-col
+      >
+      <v-col md="2" class="text-center"
+        >Hours<span class="required">*</span></v-col
+      >
       <v-col md="2" class="text-center">Amount</v-col>
-      <v-col md="1" ><v-icon class="green--text">mdi-check-circle</v-icon></v-col>
+      <v-col md="1"
+        ><v-icon class="green--text">mdi-check-circle</v-icon></v-col
+      >
     </v-row>
     <v-row v-for="(row, index) of rows" :key="index">
       <v-col md="5">
@@ -73,7 +81,7 @@
       </v-col>
       <v-col md="1">
         <v-spacer></v-spacer>
-        
+
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
             <v-btn
@@ -156,7 +164,7 @@
       <v-col md="1">
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
-            <v-btn 
+            <v-btn
               v-on="on"
               class="action"
               color="#1fb868"
@@ -172,10 +180,8 @@
         </v-tooltip>
       </v-col>
     </v-row>
-    
-    <v-divider></v-divider>
 
-    
+    <v-divider></v-divider>
   </v-row>
 </template>
 
@@ -186,5 +192,7 @@
 >>> .table-headers .col {
   background: #e8f1fa;
 }
->>> .required { color: red; }
+>>> .required {
+  color: red;
+}
 </style>

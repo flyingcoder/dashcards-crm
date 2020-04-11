@@ -45,13 +45,16 @@
         <td>{{ item.due_date | format }}</td>
         <td>
           <v-avatar size="30" color="teal">
-            <v-img :src="item.billedTo.image_url" :title="item.billedTo.fullname">
+            <v-img
+              :src="item.billedTo.image_url"
+              :title="item.billedTo.fullname"
+            >
               <template v-slot:placeholder>
                 <span class="white--text headline">C</span>
               </template>
             </v-img>
           </v-avatar>
-          {{item.billedTo.fullname | ucwords }}
+          {{ item.billedTo.fullname | ucwords }}
         </td>
         <td>{{ item.status | ucwords }}</td>
         <td>$ {{ item.total_amount }}</td>

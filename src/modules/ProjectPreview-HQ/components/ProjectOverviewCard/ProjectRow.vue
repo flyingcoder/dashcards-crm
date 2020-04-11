@@ -1,14 +1,14 @@
 <template functional>
   <v-row no-gutters class="project__overview_row">
-    <v-flex xs5 class="project__label">
-      <v-flex class="project__label_icon">
+    <v-col sm="5" class="project__label">
+      <div class="project__label_icon">
         <svg viewBox="0 0 250 250">
           <path class="icon" :d="props.labelIcon" />
         </svg>
-      </v-flex>
-      <v-flex class="project__label_title">{{ props.col1 }}</v-flex>
-    </v-flex>
-    <v-flex xs7 class="project__value">{{ props.col2 }}</v-flex>
+      </div>
+      <div class="project__label_title">{{ props.col1 }}</div>
+    </v-col>
+    <v-col sm="7" class="project__value">{{ props.col2 }}</v-col>
   </v-row>
 </template>
 

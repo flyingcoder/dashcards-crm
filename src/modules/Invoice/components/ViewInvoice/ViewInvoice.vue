@@ -29,13 +29,16 @@
             </template>
             <span>Close</span>
           </v-tooltip>
-          
         </v-toolbar>
 
         <v-container class="invoice-viewbox mb-3">
           <hr class="mb-4" />
           <v-row>
-            <v-col><h1 class="display-3 font-weight-bold grey--text">INVOICE</h1></v-col>
+            <v-col
+              ><h1 class="display-3 font-weight-bold grey--text">
+                INVOICE
+              </h1></v-col
+            >
             <v-spacer></v-spacer>
             <v-col md="2"><label>Page 1 of 1</label></v-col>
           </v-row>
@@ -45,51 +48,85 @@
                 <v-col md="4">
                   <v-img :src="require('@/assets/logo/mini-blue.png')">
                     <template v-slot:placeholder>
-                      <span class="blue--text headline">No Image Available</span>
+                      <span class="blue--text headline"
+                        >No Image Available</span
+                      >
                     </template>
                   </v-img>
                 </v-col>
                 <v-col md="8">
                   <h4>Billed From</h4>
-                  <h3>{{item.billedFrom.fullname | ucwords }}</h3>
-                  <p class="body-2" v-if="item.billedFrom.location !== `Unknown`">{{item.billedFrom.location | ucwords }}</p>
-                  <p class="body-2">Phone : {{item.billedFrom.telephone }}<br>
-                      Email : {{item.billedFrom.email }}</p>
+                  <h3>{{ item.billedFrom.fullname | ucwords }}</h3>
+                  <p
+                    class="body-2"
+                    v-if="item.billedFrom.location !== `Unknown`"
+                  >
+                    {{ item.billedFrom.location | ucwords }}
+                  </p>
+                  <p class="body-2">
+                    Phone : {{ item.billedFrom.telephone }}<br />
+                    Email : {{ item.billedFrom.email }}
+                  </p>
                 </v-col>
               </v-row>
               <v-row>
                 <v-col md="4">
                   <v-img :src="item.company_logo">
                     <template v-slot:placeholder>
-                      <span class="blue--text headline">No Image Available</span>
+                      <span class="blue--text headline"
+                        >No Image Available</span
+                      >
                     </template>
                   </v-img>
                 </v-col>
                 <v-col md="8">
                   <h4>Billed To</h4>
-                  <h3>{{item.billedTo.fullname | ucwords }}</h3>
-                  <p class="body-2" v-if="item.billedFrom.location !== `Unknown`">{{item.billedTo.location | ucwords }}</p>
-                  <p class="body-2">Phone : {{item.billedTo.telephone }}<br>
-                      Email : {{item.billedTo.email }}</p>
+                  <h3>{{ item.billedTo.fullname | ucwords }}</h3>
+                  <p
+                    class="body-2"
+                    v-if="item.billedFrom.location !== `Unknown`"
+                  >
+                    {{ item.billedTo.location | ucwords }}
+                  </p>
+                  <p class="body-2">
+                    Phone : {{ item.billedTo.telephone }}<br />
+                    Email : {{ item.billedTo.email }}
+                  </p>
                 </v-col>
               </v-row>
-
             </v-col>
             <v-col md="5">
               <v-row no-gutters class="mb-3">
-                <v-col class="table-cell head" md="6" offset="6" sm="12">Invoice ID</v-col>
-                <v-col class="table-cell value mb-1" md="6" offset="6" sm="12">#INV-{{ item.id }}</v-col>
-                <v-col class="table-cell head" md="6" offset="6" sm="12">Balance Due</v-col>
-                <v-col class="table-cell value mb-1" md="6" offset="6" sm="12">${{ item.total_amount }}</v-col>
+                <v-col class="table-cell head" md="6" offset="6" sm="12"
+                  >Invoice ID</v-col
+                >
+                <v-col class="table-cell value mb-1" md="6" offset="6" sm="12"
+                  >#INV-{{ item.id }}</v-col
+                >
+                <v-col class="table-cell head" md="6" offset="6" sm="12"
+                  >Balance Due</v-col
+                >
+                <v-col class="table-cell value mb-1" md="6" offset="6" sm="12"
+                  >${{ item.total_amount }}</v-col
+                >
               </v-row>
               <v-row no-gutters>
-
-                <v-col md="6" class="table-cell head" sm="12">Payment Terms </v-col>
-                <v-col md="6" class="table-cell head" sm="12">Due on Receipt</v-col>
-                <v-col md="6" class="table-cell head" sm="12">Invoice Date </v-col>
-                <v-col md="6" class="table-cell value" sm="12">{{ item.date | format }}</v-col>
+                <v-col md="6" class="table-cell head" sm="12"
+                  >Payment Terms
+                </v-col>
+                <v-col md="6" class="table-cell head" sm="12"
+                  >Due on Receipt</v-col
+                >
+                <v-col md="6" class="table-cell head" sm="12"
+                  >Invoice Date
+                </v-col>
+                <v-col md="6" class="table-cell value" sm="12">{{
+                  item.date | format
+                }}</v-col>
                 <v-col md="6" class="table-cell head" sm="12">Due Date</v-col>
-                <v-col md="6" class="table-cell value" sm="12">{{ item.due_date | format }}</v-col>
+                <v-col md="6" class="table-cell value" sm="12">{{
+                  item.due_date | format
+                }}</v-col>
               </v-row>
             </v-col>
           </v-row>
@@ -112,13 +149,14 @@
             </v-col>
           </v-row>
 
-          <v-row no-gutters >
+          <v-row no-gutters>
             <v-col md="6">
-              <p class="mt-3">Payment Method: <br>
-                Mode of Payment: <br>
-                Account Name: <br>
-                Transaction Code: <br>
-                Swift Code: <br>
+              <p class="mt-3">
+                Payment Method: <br />
+                Mode of Payment: <br />
+                Account Name: <br />
+                Transaction Code: <br />
+                Swift Code: <br />
               </p>
             </v-col>
 
@@ -130,34 +168,32 @@
                       <v-list-item-title>Total</v-list-item-title>
                     </v-list-item-content>
                     <v-list-item-action>
-                        ${{ item.total_amount }}
+                      ${{ item.total_amount }}
                     </v-list-item-action>
                   </v-list-item>
                   <v-divider></v-divider>
-                  <v-list-item >
+                  <v-list-item>
                     <v-list-item-content>
                       <v-list-item-title>Tax</v-list-item-title>
                     </v-list-item-content>
-                    <v-list-item-action>
-                        ${{ item.tax }}
-                    </v-list-item-action>
+                    <v-list-item-action> ${{ item.tax }} </v-list-item-action>
                   </v-list-item>
                   <v-divider></v-divider>
-                  <v-list-item >
+                  <v-list-item>
                     <v-list-item-content>
                       <v-list-item-title>Discount</v-list-item-title>
                     </v-list-item-content>
                     <v-list-item-action>
-                        {{ item.discount }}%
+                      {{ item.discount }}%
                     </v-list-item-action>
                   </v-list-item>
                   <v-divider></v-divider>
-                  <v-list-item >
+                  <v-list-item>
                     <v-list-item-content>
                       <v-list-item-title>Shipping</v-list-item-title>
                     </v-list-item-content>
                     <v-list-item-action>
-                        ${{ item.shipping }}
+                      ${{ item.shipping }}
                     </v-list-item-action>
                   </v-list-item>
                 </v-list-item-group>
@@ -193,17 +229,19 @@
 }
 .table-cell {
   padding: 5px;
-  font-weight:bold;
-  border: 1px solid #EEEFF1;
+  font-weight: bold;
+  border: 1px solid #eeeff1;
 }
-.table-cell.head{
-  background: #E8F1FA;
+.table-cell.head {
+  background: #e8f1fa;
 }
-.table-cell.value{
+.table-cell.value {
   background: #fff;
 }
-.border { border : 1px solid #EEEFF1; }
-.v-data-table-header { 
-  background-color: #e8f1fa; 
+.border {
+  border: 1px solid #eeeff1;
+}
+.v-data-table-header {
+  background-color: #e8f1fa;
 }
 </style>

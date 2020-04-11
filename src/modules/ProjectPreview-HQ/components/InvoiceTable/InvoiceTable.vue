@@ -37,17 +37,20 @@
                 <td>{{ item.due_date | format }}</td>
                 <td>#INV-{{ item.id }}</td>
                 <td class="text-cap">
-                   <v-tooltip left>
+                  <v-tooltip left>
                     <template v-slot:activator="{ on }">
                       <v-avatar size="30" color="teal" v-on="on">
-                      <v-img :src="item.billed_to.image_url" :title="item.billed_to.fullname">
-                        <template v-slot:placeholder>
-                          <span class="white--text headline">C</span>
-                        </template>
-                      </v-img>
-                    </v-avatar>
+                        <v-img
+                          :src="item.billed_to.image_url"
+                          :title="item.billed_to.fullname"
+                        >
+                          <template v-slot:placeholder>
+                            <span class="white--text headline">C</span>
+                          </template>
+                        </v-img>
+                      </v-avatar>
                     </template>
-                    <span>{{item.billed_to.fullname | ucwords }}</span>
+                    <span>{{ item.billed_to.fullname | ucwords }}</span>
                   </v-tooltip>
                 </td>
                 <td>{{ item.total_amount | money }}</td>

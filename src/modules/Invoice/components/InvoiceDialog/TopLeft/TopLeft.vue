@@ -1,6 +1,7 @@
 <template>
   <v-row wrap class="left__side">
-    <v-col md="12"
+    <v-col
+      md="12"
       v-if="!(dialog.type === 'view' && !image_preview)"
       class="add__logo_box"
       @click="dialog.type !== 'view' && $refs.hidden_input.click()"
@@ -40,11 +41,7 @@
         @click:prepend-inner="show_add_member_dialog('billed_from')"
       >
         <template v-slot:selection="data">
-          <v-chip
-            v-bind="data.attrs"
-            tile
-            outlined
-          >
+          <v-chip v-bind="data.attrs" tile outlined>
             <v-avatar left>
               <v-icon>mdi-account-circle</v-icon>
             </v-avatar>
@@ -54,11 +51,13 @@
         <template v-slot:item="{ item }">
           <template>
             <v-list-item-avatar>
-              <img :src="item.image_url">
+              <img :src="item.image_url" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title v-html="item.fullname"></v-list-item-title>
-              <v-list-item-subtitle v-html="item.job_title"></v-list-item-subtitle>
+              <v-list-item-subtitle
+                v-html="item.job_title"
+              ></v-list-item-subtitle>
             </v-list-item-content>
           </template>
         </template>
@@ -83,31 +82,29 @@
         @click:prepend-inner="show_add_member_dialog('billed_to')"
       >
         <template v-slot:selection="data">
-          <v-chip
-            v-bind="data.attrs"
-            tile
-            outlined
-          >
-          <v-avatar left>
-            <v-icon>mdi-account-circle</v-icon>
-          </v-avatar>
+          <v-chip v-bind="data.attrs" tile outlined>
+            <v-avatar left>
+              <v-icon>mdi-account-circle</v-icon>
+            </v-avatar>
             {{ data.item.fullname }}
           </v-chip>
         </template>
         <template v-slot:item="{ item }">
           <template>
             <v-list-item-avatar>
-              <img :src="item.image_url">
+              <img :src="item.image_url" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title v-html="item.fullname"></v-list-item-title>
-              <v-list-item-subtitle v-html="item.job_title"></v-list-item-subtitle>
+              <v-list-item-subtitle
+                v-html="item.job_title"
+              ></v-list-item-subtitle>
             </v-list-item-content>
           </template>
         </template>
       </v-autocomplete>
     </v-col>
-    
+
     <teams-dialog
       ref="add_dialog"
       title="Add New Member"
@@ -115,7 +112,6 @@
       @save="add_member"
       @close-dialog="add_dialog = false"
     />
-
   </v-row>
 </template>
 
@@ -128,8 +124,8 @@ import _cloneDeep from 'lodash/cloneDeep'
 import TeamsDialog from '@/modules/Teams/components/TeamsDialog/TeamsDialog.vue'
 
 export default {
-  components : {
-    TeamsDialog,
+  components: {
+    TeamsDialog
   },
   data: () => ({
     image_preview: null,
@@ -158,11 +154,12 @@ export default {
       set(newVal) {
         this.$store.commit('invoice/set_billed_from', newVal)
       }
-    },
-    
+    }
   },
-  created(){
-    setTimeout(() => {this.getMembers() }, 1)
+  created() {
+    setTimeout(() => {
+      this.getMembers()
+    }, 1)
   },
   watch: {
     company_logo(val) {
@@ -196,38 +193,38 @@ export default {
           })
       }
     },
-    setFrom(val){
+    setFrom(val) {
       this.billed_from = val
     },
-    setTo(val){
+    setTo(val) {
       this.billed_to = val
     },
     getMembers() {
-      makeRequestTo.get_all_teams()
-      .then(({ data }) => {
+      makeRequestTo.get_all_teams().then(({ data }) => {
         this.original = _cloneDeep(data)
         this.members = data
       })
     },
-    show_add_member_dialog(target){
+    show_add_member_dialog(target) {
       this.target_add = target
       this.add_dialog = true
     },
-    add_member(payload){
-      makeRequestTo.add_new_team(payload)
-      .then(({data}) => {
-        this.members.push(data)
-        if (this.target_add === 'billed_from') {
-          this.billed_from = data.id
-        } else if (this.target_add === 'billed_to') {
-          this.billed_to = data.id
-        }
-        this.$refs.add_dialog.clear_and_close()
-      })
-      .finally(() => {
-        this.target_add = ''
-        this.$event.$emit('btnloading_off', false)
-      })
+    add_member(payload) {
+      makeRequestTo
+        .add_new_team(payload)
+        .then(({ data }) => {
+          this.members.push(data)
+          if (this.target_add === 'billed_from') {
+            this.billed_from = data.id
+          } else if (this.target_add === 'billed_to') {
+            this.billed_to = data.id
+          }
+          this.$refs.add_dialog.clear_and_close()
+        })
+        .finally(() => {
+          this.target_add = ''
+          this.$event.$emit('btnloading_off', false)
+        })
     }
   }
 }
@@ -298,22 +295,21 @@ export default {
     }
   }
 
-
   .form__label {
-      width: 100%;
-      background-color: $fieldLabel;
-      border: 1px solid $fieldLabel;
-      color: $textDark;
-      font-size: 16px;
-      font-weight: 500;
-      padding: 6px 8px;
-      margin-bottom: 2px;
-    }
-    .textfield {
-      width: 300px;
-      margin-bottom: 2px;
-    }
-  
+    width: 100%;
+    background-color: $fieldLabel;
+    border: 1px solid $fieldLabel;
+    color: $textDark;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 6px 8px;
+    margin-bottom: 2px;
+  }
+  .textfield {
+    width: 300px;
+    margin-bottom: 2px;
+  }
+
   .required {
     color: red;
   }

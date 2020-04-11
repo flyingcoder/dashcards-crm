@@ -23,7 +23,12 @@
             <v-row no-gutters>
               <TableSection />
             </v-row>
-            <v-row no-gutters wrap justify-space-between class="third-row additional-info-section" >
+            <v-row
+              no-gutters
+              wrap
+              justify-space-between
+              class="third-row additional-info-section"
+            >
               <v-col sm="6" xs="12" class="left-content">
                 <BottomLeft />
               </v-col>

@@ -17,10 +17,28 @@ export default {
         sortable: false,
         value: 'descriptions'
       },
-      { text: 'Rate', value: 'rate', align: 'left', sortable: false, width: 100 },
-      { text: 'Hours', value: 'hours', align: 'left', sortable: false, width: 100 },
-      { text: 'Amount', value: 'amount', align: 'left', sortable: false, width: 100 }
-    ],
+      {
+        text: 'Rate',
+        value: 'rate',
+        align: 'left',
+        sortable: false,
+        width: 100
+      },
+      {
+        text: 'Hours',
+        value: 'hours',
+        align: 'left',
+        sortable: false,
+        width: 100
+      },
+      {
+        text: 'Amount',
+        value: 'amount',
+        align: 'left',
+        sortable: false,
+        width: 100
+      }
+    ]
   }),
 
   computed: {
@@ -31,7 +49,6 @@ export default {
       set(val) {
         this.$emit('close', val)
       }
-    },
-
+    }
   }
 }

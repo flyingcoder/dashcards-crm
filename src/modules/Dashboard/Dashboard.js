@@ -111,7 +111,7 @@ export default {
           id: member.id,
           name: `${member.first_name}, ${member.last_name}`,
           is_online: !!member.is_online,
-          image_url : member.image_url
+          image_url: member.image_url
         })
       })
 

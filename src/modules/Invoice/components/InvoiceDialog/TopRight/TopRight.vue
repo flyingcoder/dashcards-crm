@@ -10,10 +10,10 @@
         hide-details
         flat
         placeholder="#"
-        :value="`#INV-`+invoice_id"
+        :value="`#INV-` + invoice_id"
       ></v-text-field>
     </v-col>
-    
+
     <v-col md="12">
       <div class="field__label">Invoice Title:</div>
       <v-text-field
@@ -70,69 +70,69 @@
       ></v-select>
     </v-col>
 
-      <v-col md="12">
-        <div class="field__label">
-          Invoice Date:<span class="required">*</span>
-        </div>
+    <v-col md="12">
+      <div class="field__label">
+        Invoice Date:<span class="required">*</span>
+      </div>
 
-        <v-text-field
-          v-if="dialog.type === 'view'"
-          :value="date"
-          class="textfield"
-          flat
-          solo
-          dense
-          outlined
-          hide-details
-          color="#657186"
-          disabled
-        ></v-text-field>
+      <v-text-field
+        v-if="dialog.type === 'view'"
+        :value="date"
+        class="textfield"
+        flat
+        solo
+        dense
+        outlined
+        hide-details
+        color="#657186"
+        disabled
+      ></v-text-field>
 
-        <date-picker
-          v-else
-          class="textfield"
-          solo
-          outlined
-          hide-details
-          color="#657186"
-          flat
-          dense
-          placeholder="Select Date"
-          :value="date"
-          :max="due_date"
-          @input="update_date({ date: $event, field: 'date' })"
-        />
-      </v-col>
+      <date-picker
+        v-else
+        class="textfield"
+        solo
+        outlined
+        hide-details
+        color="#657186"
+        flat
+        dense
+        placeholder="Select Date"
+        :value="date"
+        :max="due_date"
+        @input="update_date({ date: $event, field: 'date' })"
+      />
+    </v-col>
 
-      <v-col md="12">
-        <div class="field__label">Due Date:<span class="required">*</span></div>
+    <v-col md="12">
+      <div class="field__label">Due Date:<span class="required">*</span></div>
 
-        <v-text-field
-          v-if="dialog.type === 'view'"
-          :value="due_date"
-          class="textfield"
-          flat
-          solo
-          outlined
-          hide-details
-          color="#657186"
-          disabled
-        ></v-text-field>
+      <v-text-field
+        v-if="dialog.type === 'view'"
+        :value="due_date"
+        class="textfield"
+        flat
+        solo
+        outlined
+        hide-details
+        color="#657186"
+        disabled
+      ></v-text-field>
 
-        <date-picker
-          v-else
-          class="textfield"
-          dense
-          outlined
-          hide-details
-          color="#657186"
-          flat
-          placeholder="Select Date"
-          :value="due_date"
-          :min="date"
-          @input="update_date({ date: $event, field: 'due_date' })"
-        />
-      </v-col>
+      <date-picker
+        v-else
+        class="textfield"
+        dense
+        outlined
+        hide-details
+        color="#657186"
+        flat
+        placeholder="Select Date"
+        :value="due_date"
+        :min="date"
+        @input="update_date({ date: $event, field: 'due_date' })"
+      />
+    </v-col>
   </v-row>
 </template>
 
@@ -156,7 +156,7 @@ export default {
       'invoice_id',
       'type'
     ]),
-    
+
     type: {
       get() {
         return this.$store.getters['invoice/type']
@@ -172,7 +172,7 @@ export default {
       set(new_title) {
         this.$store.commit('invoice/set_title', new_title)
       }
-    },
+    }
   },
 
   watch: {
@@ -192,7 +192,7 @@ export default {
       'set_selected_project',
       'update_date'
     ]),
-    setBillingTargets(event){
+    setBillingTargets(event) {
       this.set_selected_project(event)
       // this.$event.$emit('')
     }
