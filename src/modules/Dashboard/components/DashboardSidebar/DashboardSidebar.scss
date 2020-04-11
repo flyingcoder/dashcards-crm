@@ -24,6 +24,7 @@
     display: flex;
     justify-content: center;
     height: 35px;
+    margin-left: 8px;
 
     svg {
       fill: $white;
@@ -58,11 +59,14 @@
       }
     }
 
+    &:hover{
+      box-shadow: -10px 2px 15px 0px rgba(0, 0, 0, 0.4);
+    }
+
     &.active {
       background: #f2f1f7;
       color: $blue;
       border-radius: 8px 0 0 8px;
-      box-shadow: -10px 2px 15px 0px rgba(0, 0, 0, 0.4);
 
       .s__icons {
         svg {
