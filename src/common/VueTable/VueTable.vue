@@ -13,6 +13,7 @@
         hide-default-footer
         height="500"
         :items-per-page="itemsPerPage"
+        :loading="loading"
       >
         <template v-slot:top v-if="showTopHeader">
           <v-toolbar flat>
@@ -50,9 +51,19 @@
           </tr>
         </template>
 
-        <template v-slot:no-data>
+        <template v-slot:loading>
+          <v-skeleton-loader
+            ref="skeleton"
+            :boilerplate="false"
+            type="table-tbody"
+            class="mx-auto mt-3"
+          ></v-skeleton-loader>
+        </template>
+
+        <template v-slot:no-data v-if="!loading">
           <Empty>
-            <slot slot="extra" name="empty-slot"></slot>
+            <slot slot="extra" name="empty-slot">
+            </slot>
           </Empty>
         </template>
 

@@ -35,6 +35,7 @@
     </v-row>
 
     <v-progress-linear
+      v-if="view === 'grid'"
       v-show="loading"
       :indeterminate="true"
     ></v-progress-linear>
@@ -69,6 +70,7 @@
       :headers="headers"
       :showRowActions="true"
       title="Project Members"
+      :loading="loading"
       :key="componentKey"
       :noMoreData="noMoreData"
       @load-more="load_more_members"

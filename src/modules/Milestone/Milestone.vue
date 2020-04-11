@@ -33,6 +33,7 @@
           :showRowActions="true"
           title="Milestones"
           :key="componentKey"
+          :loading="loading"
           :noMoreData="noMoreData"
           @load-more="load_more"
           @delete-selected="open_bulk_delete_dialog($event)"

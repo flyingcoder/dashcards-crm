@@ -28,6 +28,7 @@
       :showRowActions="true"
       @load-more="getMoreInvoices"
       icon="list"
+      :loading="loading"
       title="Project Invoice"
       :key="componentKey"
       :noMoreData="noMoreData"

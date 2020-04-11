@@ -7,6 +7,7 @@ import TasksTab from '@/modules/ProjectPreview-Tasks/routes'
 import ReportsTab from '@/modules/ProjectPreview-Reports/routes'
 import TimerTab from '@/modules/ProjectPreview-Timer/routes'
 import InvoiceTab from '@/modules/ProjectPreview-Invoice/routes'
+import auth from '../middleware/auth'
 
 export const project_preview = {
   path: 'project-preview/:id',
@@ -22,5 +23,9 @@ export const project_preview = {
     ReportsTab,
     TimerTab,
     InvoiceTab
-  ]
+  ],
+
+  meta: {
+      middleware: [auth]
+    }
 }

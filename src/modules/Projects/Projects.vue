@@ -6,7 +6,7 @@
       :dialog.sync="add_dialog"
       ref="add_dialog"
       title="Add New Project"
-      @save="add_item('add_new_project', $event)"
+      @save="handleSaveProject"
     ></ProjectModal>
 
     <ProjectModal
@@ -42,7 +42,7 @@
     <clients-dialog
       :dialog.sync="add_new_client_dialog"
       ref="add_client_dialog"
-      dialog-title="Add Client"
+      title="Add New Client"
       @save="save_new_client($event)"
     />
 
@@ -52,11 +52,6 @@
       :dialog.sync="add_new_member_dialog"
       @save="save_new_member($event)"
     />
-
-    <v-progress-linear
-      v-show="loading"
-      :indeterminate="true"
-    ></v-progress-linear>
 
     <VueTable
       :items="items"
@@ -69,6 +64,7 @@
       :key="componentKey"
       :noMoreData="noMoreData"
       :showSelect="true"
+      :loading="loading"
     >
       <template v-slot:row-slot="{ item }">
         <td class="clickable-td" @click="navigate_to_view_project(item.id)">
@@ -77,16 +73,21 @@
         <td>{{ item.company_name }}</td>
         <td>{{ item.service_name | str_limit }}</td>
         <td>
-          <v-avatar size="30" color="teal">
-            <v-img
-              :src="item.project_manager.user.image_url"
-              :title="item.project_manager.user.fullname"
-            >
-              <template v-slot:placeholder>
-                <span class="white--text headline">U</span>
-              </template>
-            </v-img>
-          </v-avatar>
+          <v-tooltip left>
+            <template v-slot:activator="{ on }">
+              <v-avatar size="35" color="teal" dark v-on="on">
+                <v-img
+                  :src="item.project_manager.user.image_url"
+                  :title="item.project_manager.user.fullname"
+                >
+                  <template v-slot:placeholder>
+                    <span class="white--text headline">U</span>
+                  </template>
+                </v-img>
+              </v-avatar>
+            </template>
+            <span>{{item.project_manager.user.fullname | ucwords}}</span>
+          </v-tooltip>
         </td>
         <td>{{ item.started_at | bzFromNow }}</td>
         <td>

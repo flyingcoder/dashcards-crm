@@ -54,10 +54,10 @@
                     </v-list-item-avatar>
                     <v-list-item-content>
                       <v-list-item-title
-                        v-html="item.company_name"
+                        v-html="item.fullname"
                       ></v-list-item-title>
                       <v-list-item-subtitle
-                        v-html="item.fullname"
+                        v-html="item.company_name"
                       ></v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
@@ -68,7 +68,7 @@
                   <v-avatar left>
                     <v-img :src="client.selected.image_url"></v-img>
                   </v-avatar>
-                  {{ client.selected.company_name }}
+                  {{ client.selected.fullname }}
                 </v-chip>
               </div>
             </v-col>
@@ -112,14 +112,14 @@
                 </v-list>
               </v-menu>
               <div class="choosen" v-if="service.selected">
-                <v-chip outlined label class="mt-1 tile">
+                <p class="mt-1 tile bordered">
                   {{ service.selected.name }}
-                </v-chip>
+                </p>
               </div>
             </v-col>
 
             <v-col md="4" sm="6">
-              <v-btn class="attachment d__btn">
+              <v-btn class="attachment d__btn" disabled>
                 <v-icon> attach_file</v-icon>
                 <div class="d__title">Attach</div>
               </v-btn>
@@ -177,14 +177,72 @@
                 </v-chip>
               </div>
             </v-col>
-
-            <v-col md="8" sm="12">
+            <!-- Managers -->
+            <v-col md="4" sm="6">
               <v-menu
                 bottom
                 close-on-content-click
                 transition="slide-y-transition"
                 bottom
                 max-height="300"
+                offset-y
+              >
+                <template v-slot:activator="{ on }">
+                  <v-btn v-on="on" class="d__btn">
+                    <div class="d__icon">
+                      <svg viewBox="0 0 250 250">
+                        <path
+                          class="icon"
+                          d="M125 1c17,0 31,7 42,19 11,12 17,28 17,46 0,17 -6,33 -17,45 -1,1 -2,2 -3,3 -5,29 58,15 58,69l0 19c0,13 -6,25 -14,33 -9,9 -21,14 -34,14l-20 0 0 0 -3 0 -55 0 0 0 -20 0c-13,0 -25,-5 -34,-14 -8,-8 -14,-20 -14,-33l0 -19c0,-54 63,-40 58,-69 -1,-1 -2,-2 -3,-3 -11,-12 -17,-28 -17,-45 0,-18 6,-34 17,-46 11,-12 25,-19 42,-19zm26 232l3 0 0 0 20 0c9,0 17,-3 22,-9 6,-6 10,-14 10,-22l0 -19c0,-38 -49,-23 -57,-58 -8,4 -16,5 -24,5 -8,0 -16,-1 -24,-5 -9,36 -57,18 -57,58l0 19c0,8 4,16 10,22 5,6 13,9 22,9l20 0 0 0 55 0 0 0zm-34 -68c0,-4 4,-8 8,-8 4,0 8,4 8,8l0 50c0,5 -4,8 -8,8 -4,0 -8,-3 -8,-8l0 -50zm38 -134c-8,-9 -18,-14 -30,-14 -12,0 -22,5 -30,14 -8,8 -13,21 -13,35 0,13 5,26 13,34 8,9 18,14 30,14 12,0 22,-5 30,-14 8,-8 13,-21 13,-34 0,-14 -5,-27 -13,-35z"
+                        />
+                      </svg>
+                    </div>
+                    <div class="d__title">
+                      <span>Select Manager</span>
+                    </div>
+                  </v-btn>
+                </template>
+                <v-list dense>
+                  <v-list-item @click="open_add_new_member_dialog">
+                    <v-icon left>add</v-icon> Add new manager
+                  </v-list-item>
+                  <v-list-item
+                    v-for="(item, index) in manager.items"
+                    :key="index"
+                    @click="manager.selected = item"
+                  >
+                    <v-list-item-avatar>
+                      <v-img :src="item.image_url"></v-img>
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                      <v-list-item-title
+                        v-html="item.fullname"
+                      ></v-list-item-title>
+                      <v-list-item-subtitle
+                        v-html="item.job_title"
+                      ></v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+              <div class="choosen" v-if="manager.selected">
+                <v-chip outlined label class="mt-1 tile">
+                  <v-avatar left>
+                    <v-img :src="manager.selected.image_url"></v-img>
+                  </v-avatar>
+                  {{ manager.selected.fullname }}
+                </v-chip>
+              </div>
+            </v-col>
+            <!-- Members -->
+            <v-col md="4" sm="12">
+              <v-menu
+                bottom
+                close-on-content-click
+                transition="slide-y-transition"
+                bottom
+                max-height="300"
+                offset-y
               >
                 <template v-slot:activator="{ on }">
                   <v-btn v-on="on" class="d__btn">
@@ -260,7 +318,7 @@
                 </quill-editor>
               </div>
             </v-col>
-            <v-col md="12">
+            <!-- <v-col md="12">
               <v-textarea
                 :rows="1"
                 background-color="grey lighten-5"
@@ -271,7 +329,7 @@
                 v-model="comment"
                 color="#657186"
               ></v-textarea>
-            </v-col>
+            </v-col> -->
           </v-row>
         </v-card-text>
         <v-card-actions class="dialog__actions">
@@ -294,5 +352,8 @@
 <style lang="css" scoped>
 >>> .theme--light.v-text-field--filled > .v-input__control > .v-input__slot {
   background-color: #fff;
+}
+>>> .project__description .ql-container {
+  height: 120px !important;
 }
 </style>

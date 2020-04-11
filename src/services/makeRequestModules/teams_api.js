@@ -21,6 +21,9 @@ export const teams_api = {
     return request.get('api/company/members?for=project&type=member')
   },
 
+  getManagerMembers() {
+    return request.get('api/company/members?for=project&type=manager')
+  },
   get_project_members(id) {
     return request.get(`api/projects/${id}/member?all=true`)
   },

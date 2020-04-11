@@ -8,8 +8,8 @@ export default {
   },
   props: {
     title: { type: String, default: '' },
-    items: { type: Array, default: [] },
-    headers: { type: Array, default: [] },
+    items: { type: Array, default: () => [] },
+    headers: { type: Array, default: () => [] },
     showRowActions: { type: Boolean, default: false },
     showTopHeader: { type: Boolean, default: true },
     sortingEnable: { type: Boolean, default: false },
@@ -21,7 +21,8 @@ export default {
     noMoreData: { type: Boolean, default: false },
     noRowEdit: { type: Boolean, default: false },
     noRowDelete: { type: Boolean, default: false },
-    noRowView: { type: Boolean, default: false }
+    noRowView: { type: Boolean, default: false },
+    loading: { type: Boolean, default: true }
   },
   data: () => ({
     itemsPerPage: 1000,
@@ -35,12 +36,13 @@ export default {
     page: 1,
     can_bulk_delete: false,
     btnloading: false,
-    selected: []
+    selected: [],
   }),
 
   created() {
     this.$event.$on('btnloading_off', () => (this.btnloading = false))
     this.$event.$on('clear_selected', () => (this.selected = []))
+    this.$event.$on('loading_off', () => (this.loading = false))
   },
   methods: {
     handleSelectAllToggle(event) {

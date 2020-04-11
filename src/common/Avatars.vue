@@ -22,7 +22,12 @@
         </v-tooltip>
       </li>
       <li class="avatars__item" v-if="less > 0">
-        <span class="avatars__others">+{{ less }}</span>
+        <v-tooltip top>
+          <template v-slot:activator="{ on }">
+            <span class="avatars__others" v-on="on">+{{ less }}</span>
+          </template>
+          <span v-html="lessList"></span>
+        </v-tooltip>
       </li>
       <li class="avatars__item" v-if="hasAddMember">
         <span class="avatars__add">
@@ -51,6 +56,9 @@ export default {
         return this.items
       }
       return _cloneDeep(this.items).slice(0, this.count)
+    },
+    lessList(){
+      return _cloneDeep(this.items).slice(this.count, this.items.length).map( o => { return o.fullname }).join('<br>')
     }
   }
 }

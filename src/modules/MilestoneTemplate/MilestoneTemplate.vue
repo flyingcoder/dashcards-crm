@@ -44,6 +44,7 @@
           :key="componentKey"
           :noMoreData="noMoreData"
           :showSelect="true"
+          :loading="loading"
         >
           <template v-slot:row-slot="{ item }">
             <td class="text-cap" @click="navigate_to_milestone_page(item)">

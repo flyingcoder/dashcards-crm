@@ -44,13 +44,15 @@
     </template>
     <v-list>
       <v-list-item class="dropdown-img">
-        <v-row>
+        <v-row no-gutters>
           <v-col cols="12">
             <v-img max-width="50px" :src="user.image_url" />
           </v-col>
           <v-col cols="12">
             <div class="hero-name">
-              {{ user.first_name + ' ' + user.last_name }}
+              <h3>{{ user.fullname }}</h3>
+              <h6 class="overline">{{user.job_title}}</h6>
+              <small>{{user.company.name}}</small>
             </div>
           </v-col>
         </v-row>

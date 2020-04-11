@@ -54,6 +54,12 @@ export default {
       items: [],
       selected: []
     },
+    manager: {
+      selected: null,
+      items: [],
+      all_items: [],
+      show: false
+    },
     comment: '',
     date_pickers: {
       start_date: '',
@@ -66,11 +72,11 @@ export default {
     quill_editor: {
       content: '',
       editorOption: {
-        placeholder: 'Add description',
+        placeholder: 'Add Project Description',
         modules: {
           toolbar: [
             ['bold', 'italic', 'underline', 'strike'],
-            ['link', 'image'],
+            ['link', /*'image'*/],
             [{ align: [] }]
           ]
         }
@@ -178,14 +184,17 @@ export default {
         .all([
           makeRequestTo.get_all_clients(),
           makeRequestTo.get_all_services(),
-          makeRequestTo.getAllNormalMembers()
+          makeRequestTo.getAllNormalMembers(),
+          makeRequestTo.getManagerMembers()
         ])
         .then(
-          axios.spread((res1, res2, res3) => {
+          axios.spread((res1, res2, res3, res4) => {
             this.client.all_items = res1.data || []
             this.service.all_items = res2.data || []
             this.members.all_items = res3.data || []
+            this.manager.all_items = res4.data || []
             this.client.items = _cloneDeep(this.client.all_items)
+            this.manager.items = _cloneDeep(this.manager.all_items)
             this.service.items = _cloneDeep(this.service.all_items)
             this.members.items = _cloneDeep(this.members.all_items)
           })
@@ -214,13 +223,12 @@ export default {
       const fields_to_save = {
         title: this.project_title,
         client_id: this.client.selected.id || null,
+        manager_id: this.manager.selected.id || null,
         service_id: this.service.selected.id || null,
         start_at: this.date_pickers.start_date,
         end_at: this.date_pickers.end_date,
         description: this.quill_editor.content,
-        members: this.members.selected.map((value, index) => {
-          return value.user_id
-        }),
+        members: this.members.selected.map((value, index) => { return value.id }),
         extra_fields: this.extraFields
       }
 
@@ -230,15 +238,14 @@ export default {
     },
 
     update_fields({ fields }) {
+      console.log(fields)
       const new_fields = _cloneDeep(fields)
       this.$set(this.service, 'selected', {
         name: new_fields.service_name,
         id: new_fields.service_id
       })
-      this.$set(this.client, 'selected', {
-        company_name: new_fields.company_name,
-        id: new_fields.client_id
-      })
+      this.$set(this.client, 'selected', new_fields.project_client.user )
+      this.$set(this.manager, 'selected', new_fields.project_manager.user)
       this.$set(
         this.date_pickers,
         'start_date',
@@ -300,7 +307,7 @@ export default {
     },
     add_to_selected_members(item) {
       let index = this.members.selected.findIndex(
-        user => user.user_id === item.user_id
+        user => user.id === item.id
       )
       if (index === -1) {
         this.members.selected.push(item)
@@ -308,7 +315,7 @@ export default {
     },
     remove_from_selected_members(item) {
       let index = this.members.selected.findIndex(
-        user => user.user_id === item.user_id
+        user => user.id === item.id
       )
       if (~index) {
         this.members.selected.splice(index, 1)

@@ -27,14 +27,13 @@
 }
 
 .choosen {
-  padding: 5px;
+  padding: 0px;
   color: $textDark;
   font-size: 14px;
   width: 170px;
   margin: 0 auto;
+  margin-top: 2px;
   text-align: left;
-  background-color: $white;
-  border: 2px solid $green;
   border-radius: 4px;
   text-transform: capitalize;
 }

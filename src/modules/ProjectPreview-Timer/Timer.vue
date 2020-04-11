@@ -11,6 +11,7 @@
       :noMoreData="noMoreData"
       :hasFooter="false"
       :showSelect="false"
+      :loading="loading"
     >
       <template v-slot:row-slot="{ item }">
         <td class="text-cap clickable-td" @click="view_task(item.id)">
@@ -18,9 +19,10 @@
         </td>
         <td>
           <!-- <assigned-btn :users="item.assignee" /> -->
-          <v-avatar size="36" v-for="user in item.assignee" :key="user.id">
+          <!-- <v-avatar size="36" v-for="user in item.assignee" :key="user.id">
             <v-img :src="user.image_url" :title="user.fullname"></v-img>
-          </v-avatar>
+          </v-avatar> -->
+          <Avatars :items="item.assignee" :deep="false" :count="5"></Avatars>
         </td>
         <td>{{ item.total_time }}</td>
         <td class="text-cap">{{ item.status }}</td>

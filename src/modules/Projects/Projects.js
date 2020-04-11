@@ -61,10 +61,11 @@ export default {
         align: 'left'
       },
       {
-        text: 'Created By',
+        text: 'Manager',
         value: 'manager_name',
         sortable: true,
-        align: 'left'
+        align: 'center',
+        sortable: false
       },
       {
         text: 'Start Date',
@@ -76,6 +77,7 @@ export default {
         text: 'Progress',
         value: 'progress',
         sortable: true,
+        sortable: false,
         align: 'left'
       },
       {
@@ -175,6 +177,10 @@ export default {
 
     filter_projects(filter) {
       //todo
+    },
+    handleSaveProject(event){
+      this.add_item('add_new_project',event)
+      this.$refs.add_dialog.clear_and_close()
     }
   }
 }

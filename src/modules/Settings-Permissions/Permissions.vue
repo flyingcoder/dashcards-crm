@@ -33,6 +33,7 @@
       :key="componentKey"
       :noMoreData="noMoreData"
       :showSelect="false"
+      :loading="loading"
       :hasFooter="false"
     >
       <template v-slot:header>
@@ -46,12 +47,6 @@
               v-model="selected_group"
             ></v-select>
           </v-col>
-        </v-row>
-        <v-row>
-          <v-progress-linear
-            v-show="loading"
-            :indeterminate="true"
-          ></v-progress-linear>
         </v-row>
       </template>
       <template v-slot:row-slot="{ item }">

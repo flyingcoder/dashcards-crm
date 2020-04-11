@@ -45,15 +45,8 @@
             :noMoreData="noMoreData"
             :showSelect="false"
             :hasFooter="false"
+            :loading="loading"
           >
-            <template v-slot:header>
-              <v-row>
-                <v-progress-linear
-                  v-show="loading"
-                  :indeterminate="true"
-                ></v-progress-linear>
-              </v-row>
-            </template>
             <template v-slot:row-slot="{ item }">
               <td>{{ item.index }}</td>
               <td class="text-cap">{{ item.name }}</td>

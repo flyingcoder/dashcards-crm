@@ -10,6 +10,7 @@
     />
 
     <v-progress-linear
+      v-if="view === 'grid'"
       v-show="loading"
       :indeterminate="true"
     ></v-progress-linear>
@@ -52,6 +53,7 @@
       :headers="headers"
       :showRowActions="true"
       @load-more="load_more_users"
+      :loading="loading"
       icon="widgets"
       title="Members"
       :key="componentKey"

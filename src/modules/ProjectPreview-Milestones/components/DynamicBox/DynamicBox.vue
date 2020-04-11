@@ -89,7 +89,7 @@
       <v-btn
         large
         slot="footer"
-        round
+        rounded
         class="add__new_btn"
         color="#3b589e"
         dark

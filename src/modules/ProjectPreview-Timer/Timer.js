@@ -2,14 +2,14 @@ import { list_functionality } from '@/services/list-functionality/list-functiona
 import request from '@/services/axios_instance'
 //Components
 import VueTable from '@/common/VueTable/VueTable.vue'
-import AssignedBtn from '@/common/AssignedBtn.vue'
+import Avatars from '@/common/Avatars.vue'
 
 export default {
   name: 'TimerTab',
   mixins: [list_functionality],
   components: {
     VueTable,
-    AssignedBtn
+    Avatars
   },
   props: {
     id: [Number, String]

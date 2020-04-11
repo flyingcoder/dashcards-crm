@@ -42,6 +42,7 @@
           :items="items"
           :headers="headers"
           :showRowActions="true"
+          :loading="loading"
           title="Task"
           :key="componentKey"
           :noMoreData="noMoreData"

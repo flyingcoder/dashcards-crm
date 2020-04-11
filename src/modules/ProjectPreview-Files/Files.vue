@@ -172,6 +172,7 @@
         @load-more="get_more_files"
         icon="widgets"
         title="Files"
+        :loading="loading"
         :key="componentKey"
         :noMoreData="noMoreData"
         :permission="$_permissions.get('hq_files')"
