@@ -42,7 +42,7 @@ import _cloneDeep from 'lodash/cloneDeep'
 export default {
   inheritAttrs: false,
   props: {
-    items: { type: Array, default: [] },
+    items: { type: Array, default: () => [] },
     count: { type: Number, default: 3 },
     deep: { type: Boolean, default: false },
     hasAddMember: { type: Boolean, default: false }
@@ -58,7 +58,8 @@ export default {
       return _cloneDeep(this.items).slice(0, this.count)
     },
     lessList(){
-      return _cloneDeep(this.items).slice(this.count, this.items.length).map( o => { return o.fullname }).join('<br>')
+      return _cloneDeep(this.items).slice(this.count, this.items.length)
+        .map( o => { return this.deep ? o.user.fullname : o.fullname }).join('<br>')
     }
   }
 }

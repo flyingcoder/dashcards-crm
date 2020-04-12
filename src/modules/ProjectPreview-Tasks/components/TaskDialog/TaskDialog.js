@@ -83,7 +83,9 @@ export default {
     open_dialog() {
       this.fill_dropdowns()
       this.$refs.dialog.open_dialog()
-      this.update_fields(this.task)
+      if (this.task) {
+        this.update_fields(this.task)
+      }
     },
 
     save() {

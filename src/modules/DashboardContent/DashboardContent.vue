@@ -17,7 +17,15 @@
 
     <dashboard-tiles />
     <!-- custom component -->
-    <NoCards v-if="!cards.length" />
+    <v-row v-if="loading">
+      <v-boilerplate 
+        v-for="i in [1,2]"
+        class="mb-6 col-md-6 col-xs-12"
+        type="table-tfoot,table-heading, list-item-two-line, image "
+      ></v-boilerplate>
+    </v-row>
+
+    <NoCards v-if="!cards.length && !loading" />
 
     <v-layout class="dashcard-content">
       <draggable class="row d__cards" v-model="cards">
@@ -46,34 +54,10 @@
         </template>
 
         <div class="timeline-card" v-if="cards.length == 1">
-          <NoCards />
+          <NoCards/>
         </div>
       </draggable>
     </v-layout>
-
-    <DeleteDialog
-      ref="delete_task_dialog"
-      :open-dialog.sync="delete_task_dialog"
-      title="Delete Task"
-      text-content="Are you sure you want to delete this task?"
-      @delete="confirm_delete_task"
-    />
-
-    <ConfirmDialog
-      ref="confirm_mark_as_complete_dialog"
-      :open-dialog.sync="confirm_mark_as_complete_dialog"
-      title="Confirmation required!"
-      confirm-button-text="Yes"
-      text-content="Mark task as completed?"
-      @confirm="confirm_mark_as_complete_task"
-    />
-
-    <TaskViewDialog
-      ref="view_task_dialog"
-      :dialog.sync="open_view_task_dialog"
-      :task="active_task"
-      @close-task-preview="open_view_task_dialog = false"
-    />
   </div>
 </template>
 <script src="./DashboardContent.js"></script>

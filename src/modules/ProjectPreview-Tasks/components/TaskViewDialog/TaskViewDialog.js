@@ -19,7 +19,6 @@ export default {
   },
   props: {
     task: { type: Object, default: null },
-    dialog: { type: Boolean, default: false }
   },
   created() {
     if (this.task) {
@@ -27,72 +26,35 @@ export default {
     }
   },
   data: () => ({
-    delete_dialog: false,
+    dialog: false,
+    delete_task_dialog: false,
     confirm_mark_as_complete_dialog: false,
     id: null,
     componentKey: 0
   }),
-  computed: {
-    active_task: {
-      get() {
-        return this.task
-      },
-      set(value) {
-        return value
-      }
-    }
-  },
+
   methods: {
     forcerender() {
       this.componentKey += 1
     },
-    close() {
+    open_dialog(){
+      this.dialog = true
+    },
+    close_dialog() {
       this.dialog = false
-      this.$emit('update:dialog', false)
     },
     handle_dropdown_action(action) {
       const method = `open_${action}_task_dialog`
       this[method]()
     },
     open_delete_task_dialog() {
-      this.$refs.delete_task_dialog.showDialog()
+      this.$event.$emit('task-delete', this.task)
     },
     open_edit_task_dialog() {
-      this.$refs.edit_task_dialog.open_dialog()
+      this.$event.$emit('task-edit', this.task)
     },
     open_mark_as_complete_task_dialog() {
-      this.$refs.confirm_mark_as_complete_dialog.showDialog()
+      this.$event.$emit('task-mark-as-complete', this.task)
     },
-    edit_task_save(payload) {
-      apiTo.edit_task(this.task.id, payload).then(({ data }) => {
-        this.active_task = data
-        this.$refs.edit_task_dialog.$refs.dialog.clear_and_close()
-        this.$event.$emit('open_snackbar', 'Task updated successfully')
-        this.$event.$emit('btnloading_off', false)
-        this.forcerender()
-      })
-    },
-    confirmed_delete_task() {
-      apiTo.delete_task(this.task.id).then(() => {
-        this.$event.$emit('task_deleted', this.task)
-        this.$event.$emit('btnloading_off', false)
-        this.$refs.delete_task_dialog.closeDialog()
-        this.$emit('close-task-preview', true)
-      })
-    },
-    closeEditDialog() {
-      this.$refs.edit_task_dialog.$refs.dialog.clear_and_close()
-    },
-    confirm_mark_as_complete_task() {
-      var payload = { status: 'completed' }
-      apiTo.mark_as_complete_task(this.task.id, payload).then(({ data }) => {
-        this.active_task = data
-        this.$refs.confirm_mark_as_complete_dialog.closeDialog()
-        this.$event.$emit('open_snackbar', 'Task is completed')
-        this.$event.$emit('btnloading_off', false)
-        this.$event.$emit('task_completed', data)
-        this.forcerender()
-      })
-    }
   }
 }

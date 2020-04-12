@@ -15,9 +15,9 @@
           <v-btn fab small text class="action" v-if="hasRemove" @click="$emit('remove')">
             <v-icon>remove</v-icon>
           </v-btn>
-          <!-- <v-btn fab small text class="action" v-if="has">
-            <v-icon>remove</v-icon>
-          </v-btn> -->
+          <v-btn fab small text class="action" v-if="hasAdd" @click="$emit('add')">
+            <v-icon>add</v-icon>
+          </v-btn>
           <v-btn fab small text class="action" v-if="hasExpand" @click="$emit('expand')">
             <v-icon >zoom_out_map</v-icon>
           </v-btn>
@@ -58,6 +58,7 @@ export default {
     hasListView : { type : Boolean, default : false },
     hasGridView : { type : Boolean, default : false },
     hasRemove : { type : Boolean, default : false },
+    hasAdd : { type : Boolean, default : false },
     hasExpand : { type : Boolean, default : true },
     hasClose : { type : Boolean, default : true },
   },

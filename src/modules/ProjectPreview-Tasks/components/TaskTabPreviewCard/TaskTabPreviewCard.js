@@ -9,6 +9,7 @@ import EmojiPicker from '@/common/EmojiPicker/EmojiPicker.vue'
 import HoursBox from '@/common/HoursBox/HoursBox.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import Avatars from '@/common/Avatars.vue'
+import Comment from '@/common/Comment/Comment.vue'
 
 export default {
   name: 'TaskTabPreviewCard',
@@ -19,7 +20,22 @@ export default {
     HoursBox,
     EmojiPicker,
     DeleteDialog,
-    Avatars
+    Avatars,
+    Comment,
+    VBoilerplate: {
+      functional: true,
+
+      render (h, { data, props, children }) {
+        return h('v-skeleton-loader', {
+          ...data,
+          props: {
+            boilerplate: true,
+            elevation: 2,
+            ...props,
+          },
+        }, children)
+      },
+    }
   },
   props: {
     activeId: [Number, String],
@@ -33,8 +49,8 @@ export default {
     all_comments: [],
     comment: '',
     dropdown_actions: [
-      { id: 1, text: 'Edit', value: 'edit' },
-      { id: 2, text: 'Delete', value: 'delete' }
+      { id: 1, text: 'Edit', value: 'edit', icon : 'edit' },
+      { id: 2, text: 'Delete', value: 'delete', icon : 'delete' }
     ],
     commenter: null,
     hover: false,
@@ -44,6 +60,11 @@ export default {
   }),
   created() {
     this.commenter = this.$store.getters.user
+    this.$event.$on('task-is-updated', task => {
+      if (this.activeId === task.id) {
+        this.content = task
+      }
+    })
   },
   computed: {
     full_name() {
@@ -77,6 +98,12 @@ export default {
     can_edit_comment() {
       if (this.user.is_admin) return true
       return this.permission && this.permission.update
+    },
+    addApi () {
+      return `api/task/${this.activeId}/comments`
+    },
+    delApi () {
+      return `api/comments`
     }
   },
   watch: {
@@ -105,6 +132,9 @@ export default {
   },
 
   methods: {
+    dropdownAction(action){
+      this.$event.$emit(`task-${action}`, this.content)
+    },
     can_delete_comment(comment) {
       if (this.user.is_admin) return true
       if (comment.causer.id === this.user.id) return true
@@ -142,7 +172,8 @@ export default {
       var xtra_action = {
         id: 3,
         text: 'Mark as Complete',
-        value: 'mark_as_complete'
+        value: 'mark-as-complete',
+        icon : 'check'
       }
       var index = this.dropdown_actions.findIndex(function(item) {
         return item.id === 3
@@ -157,28 +188,5 @@ export default {
         }
       }
     },
-    confirm_delete_comment(item) {
-      this.activeComment = item
-      this.$refs.delete_comment_dialog.showDialog()
-    },
-    confirmed_delete_comment() {
-      request
-        .delete(`api/comments/${this.activeComment.id}`, {
-          id: this.activeComment.id
-        })
-        .then(response => {
-          let index = this.all_comments.findIndex(
-            item => item.id === this.activeComment.id
-          )
-          if (~index) {
-            this.all_comments.splice(index, 1)
-            this.activeComment = null
-          }
-        })
-        .finally(() => {
-          this.$refs.delete_comment_dialog.closeDialog()
-          this.$event.$emit('btnloading_off', false)
-        })
-    }
   }
 }

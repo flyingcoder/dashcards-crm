@@ -43,7 +43,7 @@
               </div>
             </div>
           </div>
-          <div class="sel-timer" v-if="tab === `timer`">
+          <div class="sel-timer">
             <div class="timer-body">
               <v-carousel hide-delimiters show-arrows height="auto">
                 <v-carousel-item v-for="(slide, i) in slides" :key="i">
@@ -113,70 +113,9 @@
               </v-carousel>
             </div>
           </div>
-          <div class="alarm" v-if="tab == `alarm`">
-            <div class="alarm-body">
-              <v-carousel hide-delimiters show-arrows height="auto">
-                <v-carousel-item v-for="(slide, i) in slides" :key="i">
-                  <v-sheet color="transparent">
-                    <div class="alarm-header">
-                      <div class="a-label">
-                        <v-avatar color="cyan" size="15"></v-avatar>
-                        <span>Ranking Report</span>
-                      </div>
-                      <div class="a-date">
-                        <h3>March 21</h3>
-                        <span>2:00 PM - 3:30 PM</span>
-                      </div>
-                      <div class="a-actions">
-                        <v-btn fab text small color="#fff"
-                          ><v-icon>edit</v-icon></v-btn
-                        >
-                        <v-btn fab text small color="#fff"
-                          ><v-icon>delete</v-icon></v-btn
-                        >
-                      </div>
-                    </div>
-                    <div class="a-slide">
-                      <h4 class="a-title">XYZ Ranking Report</h4>
-                      <div class="a-members">
-                        <div class="a-imgs">
-                          <v-avatar
-                            ><img src="@/assets/temp/user2.png" alt=""
-                          /></v-avatar>
-                          <v-avatar
-                            ><img src="@/assets/temp/user2.png" alt=""
-                          /></v-avatar>
-                          <v-avatar
-                            ><img src="@/assets/temp/user2.png" alt=""
-                          /></v-avatar>
-                        </div>
-                        <div class="a-more"><span>+2 more invited</span></div>
-                      </div>
-                      <v-btn large outlined dark>Invite</v-btn>
-                    </div>
-                  </v-sheet>
-                </v-carousel-item>
-              </v-carousel>
-            </div>
-          </div>
-          <v-tabs class="timer__tabs" centered grow hide-slider>
-            <v-tab href="#" @click="tab = `alarm`">
-              <v-icon left >access_alarm</v-icon>
-              Alarm
-              <v-avatar color="#f56c6c" size="25"
-                ><span class="notif-text">25</span></v-avatar
-              >
-            </v-tab>
-            <v-tab href="#" @click="tab = `timer`">
-              <v-icon left >access_time</v-icon>
-              Timer
-              <v-avatar color="#f56c6c" size="25"
-                ><span class="notif-text">14</span></v-avatar
-              >
-            </v-tab>
-          </v-tabs>
 
           <v-data-table
+            v-show="false"
             v-if="items.length || loading"
             :headers="headers"
             :items="items"

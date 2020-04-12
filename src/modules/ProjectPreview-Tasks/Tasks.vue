@@ -5,39 +5,6 @@
       :indeterminate="true"
     ></v-progress-linear>
 
-    <TaskDialog
-      :dialog.sync="add_task_dialog"
-      ref="add_task_dialog"
-      dialog-title="Add Task"
-      :id="id"
-      @save="create_new_task"
-      @close="add_task_dialog = false"
-    />
-
-    <TaskDialog
-      :id="id"
-      :task="task"
-      ref="edit_task_dialog"
-      dialog-title="Edit Task"
-      @save="edit_task"
-      @close="closeEditDialog"
-    />
-
-    <DeleteDialog
-      :open-dialog.sync="delete_dialog"
-      title="Delete Task"
-      text-content="Are you sure you want to delete this task?"
-      @delete="delete_task"
-    />
-
-    <ConfirmDialog
-      :open-dialog.sync="confirm_mark_as_complete_dialog"
-      title="Confirmation required!"
-      confirm-button-text="Yes"
-      text-content="Mark task as completed?"
-      @confirm="confirm_mark_as_complete_task"
-    />
-
     <v-layout justify-end class="actions">
       <v-btn
         color="#3b589e"
@@ -45,20 +12,23 @@
         fab
         small
         title="Add New Task"
-        @click="add_task_dialog = true"
+        @click="open_new_task_dialog"
       >
         <v-icon>add</v-icon>
       </v-btn>
     </v-layout>
 
     <div class="cards">
-      <tasks-card :id="id" />
+      <tasks-card 
+        :id="id" 
+        page="project-preview" 
+      ></tasks-card>
+
       <preview-card
         v-if="active_task_id"
         :id="id"
-        :active-id="active_task_id"
-        @dropdown-action="handle_dropdown_action"
-      />
+        :activeId="active_task_id"
+      ></preview-card>
     </div>
     <div class="empty-task" v-show="false">
       <div class="empty-content">

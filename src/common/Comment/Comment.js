@@ -15,7 +15,8 @@ export default {
   props: {
     items: Array,
     deleteApi: { type: String, default: 'api/comments' },
-    addApi: { type: String, default: 'api/comments' }
+    addApi: { type: String, default: 'api/comments' },
+    maxHeight: { type: Number, default: 400 },
   },
 
   data: () => ({
@@ -41,7 +42,7 @@ export default {
     },
     addComment() {
       this.btnloading = true
-      var payload = { comment: this.comment }
+      var payload = { comment: this.comment , body: this.comment }
       request
         .post(this.addApi, payload)
         .then(({ data }) => {

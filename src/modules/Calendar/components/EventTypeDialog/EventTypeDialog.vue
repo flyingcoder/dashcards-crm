@@ -91,14 +91,14 @@
             <v-col md="2" xs="12">
               <v-btn
                 block
-                dark
                 :loading="btnloading2"
                 tile
                 icon
+                outlined
                 class="action__btn"
                 @click="remove(index)"
               >
-                <v-icon color="gray">delete</v-icon>
+                <v-icon color="error">delete</v-icon>
               </v-btn>
             </v-col>
           </v-row>

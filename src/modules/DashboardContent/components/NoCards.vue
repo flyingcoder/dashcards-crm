@@ -63,7 +63,8 @@ export default {
       payment: 'sidebar/payment.svg',
       invoice: 'sidebar/invoice.svg',
       calendar: 'sidebar/calendar.svg',
-      passbox: 'header/user/lock.svg'
+      passbox: 'header/user/lock.svg',
+      alarm: 'sidebar/alarms.svg',
     },
     selected: []
   }),

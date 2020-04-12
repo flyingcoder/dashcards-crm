@@ -27,7 +27,8 @@ export default {
       payment: 'sidebar/payment.svg',
       invoice: 'sidebar/invoice.svg',
       calendar: 'sidebar/calendar.svg',
-      passbox: 'header/user/lock.svg'
+      passbox: 'header/user/lock.svg',
+      alarm: 'sidebar/alarms.svg',
     }
   }),
 
@@ -81,7 +82,9 @@ export default {
       this.loading = true
       request
         .get('api/dashitems')
-        .then(({ data }) => this.set_dash_items(data))
+        .then(({ data }) => {
+          this.set_dash_items(data)
+        })
         .finally(() => (this.loading = false))
     },
 

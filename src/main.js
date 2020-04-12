@@ -15,10 +15,11 @@ import router from './router/router'
 import store from './store/store'
 import middlewarePipeline from './router/middlewarePipeline'
 import methods from '@/global_utils/global_mixin'
+import { global_filters } from '@/global_utils/global_filters'
 
 Vue.config.productionTip = false
 
-Vue.mixin({ methods: methods })
+Vue.mixin({ methods: methods, filters : global_filters })
 
 router.beforeEach((to, from, next) => {
   if (!to.meta.middleware) {

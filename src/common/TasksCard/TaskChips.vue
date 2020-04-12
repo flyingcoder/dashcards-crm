@@ -2,6 +2,7 @@
   <div class="task__chips text-xs-center">
     <v-chip
       small
+      class="mx-1"
       :class="['task__chip', { active: props.activeChip === 'all' }]"
       @click="listeners['update:activeChip']('all')"
     >
@@ -11,6 +12,7 @@
 
     <v-chip
       small
+      class="mx-1"
       :class="['task__chip', { active: props.activeChip === 'completed' }]"
       @click="listeners['update:activeChip']('completed')"
     >
@@ -20,6 +22,7 @@
 
     <v-chip
       small
+      class="mx-1"
       :class="['task__chip', { active: props.activeChip === 'pending' }]"
       @click="listeners['update:activeChip']('pending')"
     >
@@ -29,6 +32,7 @@
 
     <v-chip
       small
+      class="mx-1"
       :class="['task__chip', { active: props.activeChip === 'behind' }]"
       @click="listeners['update:activeChip']('behind')"
     >
@@ -71,6 +75,7 @@ export default {
     color: $white;
     font-size: 12px;
     font-weight: 500;
+    left: -6px;
   }
   .task__chip.active {
     background-color: $chipDark;

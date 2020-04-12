@@ -6,6 +6,7 @@
           :value="switch1"
           :disabled="disabled"
           @change="switch1_changed"
+          dense
         ></v-switch>
       </div>
       <div class="tile-text">

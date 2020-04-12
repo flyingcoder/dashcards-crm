@@ -155,6 +155,8 @@ export default {
     },
     clear_and_close() {
       this.title = this.description = ''
+      this.members.selected = []
+      this.start_date = this.time = null
       this.dialogKey += 1
       this.dialog = false
     },

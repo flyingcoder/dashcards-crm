@@ -1,6 +1,7 @@
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 import _cloneDeep from 'lodash/cloneDeep'
 import request from '@/services/axios_instance'
+
 //Components
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import TasksCard from '@/common/TasksCard/TasksCard.vue'
@@ -16,10 +17,8 @@ import InvoiceCard from '@/common/InvoiceCard/InvoiceCard.vue'
 import TimerCard from '@/common/TimerCard/TimerCard.vue'
 import PaymentCard from '@/common/PaymentCard/PaymentCard.vue'
 import PassboxCard from '@/common/PassboxCard/PassboxCard.vue'
+import AlarmCard from '@/common/AlarmCard/AlarmCard.vue'
 
-import TaskViewDialog from '@/modules/ProjectPreview-Tasks/components/TaskViewDialog/TaskViewDialog.vue'
-import DeleteDialog from '@/common/DeleteDialog.vue'
-import ConfirmDialog from '@/common/ConfirmDialog.vue'
 
 export default {
   name: 'DashboardContent',
@@ -36,28 +35,34 @@ export default {
     ClientCard,
     InvoiceCard,
     TimerCard,
-    TaskViewDialog,
-    DeleteDialog,
-    ConfirmDialog,
     PaymentCard,
-    PassboxCard
+    PassboxCard,
+    AlarmCard,
+    VBoilerplate: {
+      functional: true,
+      render (h, { data, props, children }) {
+        return h('v-skeleton-loader', {
+          ...data,
+          props: {
+            boilerplate: true,
+            elevation: 2,
+            ...props,
+          },
+        }, children)
+      },
+    }
   },
   props: {
-    task: { type: Object, default: null },
     id: [Number, String]
   },
   data: () => ({
+    loading: true,
     init: true,
     paths: [{ text: 'Dashboard', disabled: true, router_name: null }],
     isRequestInProgress: false,
     args: {
       dashboard: true
-    },
-    delete_task_dialog: false,
-    open_view_task_dialog: false,
-    confirm_mark_as_complete_dialog: false,
-    active_task_id: null,
-    active_task: null
+    }
   }),
 
   computed: {
@@ -92,7 +97,8 @@ export default {
             'client',
             'timer',
             'payment',
-            'passbox'
+            'passbox',
+            'alarm'
           ].includes(card.slug)
         ) {
           card.component = card.slug + '-card'
@@ -115,27 +121,7 @@ export default {
   },
 
   created() {
-    this.fill_cards()
-    this.$event.$on('task-mark-as-complete', task => {
-      this.task = task
-      this.$refs.confirm_mark_as_complete_dialog.open = true
-    })
-    this.$event.$on('close_confirm_dialog', status => {
-      this.task = null
-      this.$refs.confirm_mark_as_complete_dialog.open = false
-    })
-    this.$event.$on('task-delete', task => {
-      this.task = task
-      this.delete_task_dialog = true
-    })
-    this.$event.$on('close_delete_dialog', status => {
-      this.task = null
-      this.delete_task_dialog = false
-    })
-    this.$event.$on('task-view', task => {
-      this.active_task = task
-      this.open_view_task_dialog = true
-    })
+    this.fill_cards().finally(() => this.loading = false)
   },
 
   methods: {
@@ -171,6 +157,13 @@ export default {
         user.is_admin
       )
     },
+    can_view_alarm(user) {
+      return (
+        user.can.hasOwnProperty('timers') ||
+        user.can.hasOwnProperty('timers_own') ||
+        user.is_admin
+      )
+    },
     can_view_payment(user) {
       return user ? true : false
     },
@@ -186,12 +179,6 @@ export default {
     },
     can_view_passbox(user) {
       return user ? true : false
-    },
-    confirm_mark_as_complete_task() {
-      this.$event.$emit('task_completed', this.task)
-    },
-    confirm_delete_task() {
-      this.$event.$emit('task_deleted', this.task)
     }
   }
 }

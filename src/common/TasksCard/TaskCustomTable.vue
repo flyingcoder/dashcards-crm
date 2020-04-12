@@ -1,17 +1,17 @@
 <template>
   <div class="task-custom-table">
     <v-layout class="task_header">
-      <v-flex xs2 class="task__tableHead" v-if="tab == 'All Tasks'"
-        >Assignee</v-flex
+      <v-flex xs3 class="task__tableHead" v-if="tab == 'All Tasks'"
+        >Assigned </v-flex
       >
       <v-flex xs5 class="task__tableHead" v-if="tab == 'All Tasks'"
         >Task</v-flex
       >
-      <v-flex xs7 class="task__tableHead" v-if="tab != 'All Tasks'"
+      <v-flex xs8 class="task__tableHead" v-if="tab != 'All Tasks'"
         >Task</v-flex
       >
       <v-flex xs2 class="task__tableHead">Status</v-flex>
-      <v-flex xs3 class="task__tableHead">Action</v-flex>
+      <v-flex xs2 class="task__tableHead text-center">Action</v-flex>
     </v-layout>
 
     <div class="task_body" :style="{ height: bodyMaxHeight }">
@@ -21,21 +21,22 @@
         :class="['task__tableBody', { active: task.id === active_task_id }]"
         v-for="task in tasks"
         :key="task.id"
-        @click="row_clicked(task)"
+        @click="task_view_action(task)"
       >
-        <v-flex xs2 class="assignee__col" v-if="tab == 'All Tasks'">
-          <span v-if="task.assignee.length">
+        <v-flex xs3 class="assignee__col" v-if="tab == 'All Tasks'">
+<!--           <span v-if="task.assignee.length">
             <v-img :src="task.assignee[0].image_url" height="40" width="40" />
-          </span>
+          </span> -->
+          <Avatars v-if="task.assignee.length" :deep="false" :items="task.assignee" :count="1" style="display: inline-block;"></Avatars>
           <span v-if="!task.assignee.length"></span>
         </v-flex>
 
         <v-flex xs5 class="project__col" v-if="tab == 'All Tasks'">
-          {{ task.title }}
+          {{ task.title | ucwords }}
         </v-flex>
 
-        <v-flex xs7 class="project__col" v-if="tab != 'All Tasks'">
-          {{ task.title }}
+        <v-flex xs8 class="project__col" v-if="tab != 'All Tasks'">
+          {{ task.title | ucwords }}
         </v-flex>
 
         <v-flex xs2 class="status__col">
@@ -57,34 +58,40 @@
             <div class="status__open"></div>
           </div>
         </v-flex>
-        <v-flex xs3 class="action__col">
-          <v-btn
-            icon
-            v-if="task.status !== 'completed' && can_edit_task"
-            @click="task_action(task, 'task-mark-as-complete')"
-            title="Mark as complete"
-          >
-            <v-icon color="grey">check</v-icon>
-          </v-btn>
-          <v-btn icon v-else disabled>
-            <v-icon color="#1fb868">like</v-icon>
-          </v-btn>
-          <v-btn
-            icon
-            v-if="can_delete_task"
-            @click="task_action(task, 'task-delete')"
-            title="Delete Task"
-          >
-            <v-icon color="grey">delete</v-icon>
-          </v-btn>
-          <v-btn
-            icon
-            v-if="can_view_task"
-            @click="task_action(task, 'task-view')"
-            title="View Task"
-          >
-            <v-icon color="grey">search</v-icon>
-          </v-btn>
+        <v-flex xs2 class="action__col">
+          <v-menu offset-y left>
+            <template v-slot:activator="{ on: menu }">
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on: tooltip }">
+                  <v-btn color="grey" dark icon  v-on="{ ...tooltip, ...menu }"
+                  ><v-icon>mdi-dots-horizontal</v-icon></v-btn>
+                </template>
+                <span>Actions</span>
+              </v-tooltip>
+            </template>
+            <v-list dense>
+              <v-list-item 
+                v-if="task.status !== 'completed' && can_edit_task" 
+                @click="task_action(task, 'task-edit')">
+                <v-list-item-title><v-icon color="grey" left>edit</v-icon> Edit Task</v-list-item-title>
+              </v-list-item>
+              <v-list-item 
+                v-if="can_delete_task"
+                @click="task_action(task, 'task-delete')">
+                <v-list-item-title><v-icon color="grey" left>delete</v-icon> Delete Task</v-list-item-title>
+              </v-list-item>
+              <v-list-item 
+                v-if="can_view_task"
+                @click="task_view_action(task)">
+                <v-list-item-title><v-icon color="grey" left>pageview</v-icon> View Task</v-list-item-title>
+              </v-list-item>
+              <v-list-item 
+                v-if="task.status !== 'completed' && can_edit_task" 
+                @click="task_action(task, 'task-mark-as-complete')">
+                <v-list-item-title><v-icon color="grey" left>check</v-icon> Mark as Complete</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
         </v-flex>
       </v-layout>
     </div>
@@ -93,8 +100,11 @@
 
 <script>
 import apiTo from '@/modules/ProjectPreview-Tasks/api'
+import Avatars from '@/common/Avatars'
+
 export default {
   name: 'TaskCustomTable',
+  components : { Avatars },
   props: {
     tasks: Array,
     tab: String
@@ -125,6 +135,10 @@ export default {
       }
       this.task_is_deleted()
     })
+
+    this.$event.$on('task-is-updated', task => {
+      this.replace_task(task, task.id)
+    })
   },
   computed: {
     user() {
@@ -153,6 +167,11 @@ export default {
     },
     task_action(item, event) {
       this.$event.$emit(event, item)
+    },
+    task_view_action(item) {
+      var page = this.$store.getters['taskCards/page']
+      if(page === 'project-preview') this.row_clicked(item)
+      else this.task_action(item, 'task-view')
     },
     replace_task(task, id) {
       let index = this.tasks.findIndex(item => item.id === id)

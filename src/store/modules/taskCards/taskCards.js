@@ -7,7 +7,8 @@ const state = {
   total: 0,
   loading: null,
   id: null,
-  see_more_url: null
+  see_more_url: null,
+  page: null
 }
 
 const getters = {
@@ -16,11 +17,14 @@ const getters = {
   counter: state => state.tasks_res.counter,
   total: state => state.total,
   loading: state => state.loading,
-  see_more_url: state => state.see_more_url
+  see_more_url: state => state.see_more_url,
+  page : state => state.page,
+  id : state => state.id,
 }
 
 const mutations = {
   set_id: (state, payload) => (state.id = payload),
+  set_page: (state, payload) => (state.page = payload),
   set_tasks: (state, payload) => (state.tasks = payload),
   set_total: (state, payload) => (state.total = payload),
   set_tasks_res: (state, payload) => (state.tasks_res = payload),
