@@ -17,7 +17,7 @@
               <v-list-item-title
                 v-html="item.causer.fullname"
               ></v-list-item-title>
-              <v-list-item-subtitle>{{
+              <v-list-item-subtitle class="caption">{{
                 item.created_at | from_now
               }}</v-list-item-subtitle>
               <v-list-item-subtitle v-html="item.body"></v-list-item-subtitle>

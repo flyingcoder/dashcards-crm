@@ -123,7 +123,6 @@
             @confirm="confirmed_leave"
           />
       <EventDialog
-            v-if="calendar"
             ref="event_dialog"
             :dialogTitle="event_dialog_title"
             :isEditDialog="isEventEditDialog"
@@ -140,7 +139,6 @@
             @new-event-type-added="insert_new_event_type"
           ></EventTypeDialog>
       <EventDetailDialog
-            v-if="eventToEdit"
             ref="event_detail_dialog"
             :event="eventToEdit"
             @edit-event="open_add_event_dialog(true, eventToEdit)"
@@ -148,7 +146,6 @@
             @add-participant="open_add_participant_dialog(eventToEdit)"
           ></EventDetailDialog>
       <AddParticipantDialog
-            v-if="eventToEdit"
             ref="add_participant_dialog"
             :event="eventToEdit"
             @participants-refresh="refreshParticipants"

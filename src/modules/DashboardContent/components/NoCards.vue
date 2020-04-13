@@ -42,7 +42,7 @@
 
 <script>
 import _cloneDeep from 'lodash/cloneDeep'
-import { mapActions } from 'vuex'
+import { mapActions,mapGetters } from 'vuex'
 //Components
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 import DashCard from '@/common/BaseComponents/DashCard.vue'
@@ -52,7 +52,6 @@ export default {
     CustomDialog,
     DashCard
   },
-
   data: () => ({
     dialog: false,
     icons: {
@@ -68,8 +67,11 @@ export default {
     },
     selected: []
   }),
-
+  created(){
+    this.selected = _cloneDeep(this.cards).map(i => { return i.id})
+  },
   computed: {
+    ...mapGetters('cards', ['cards']),
     dash_items() {
       let items = _cloneDeep(this.$store.getters['cards/dash_items'])
       return items.map(item => {

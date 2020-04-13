@@ -29,8 +29,8 @@ export default {
   props: {
     dialogTitle: { type: String, default: 'Add New Event' },
     isEditDialog: { type: Boolean, default: false },
-    fieldsToEdit: { type: Object, default: () => {} },
-    calendar: { type: Object, default: () => {} }
+    fieldsToEdit: { type: Object, default: null },
+    calendar: { type: Object, default: null }
   },
 
   data: () => ({

@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center">
+  <v-row justify="center" v-if="event">
     <v-dialog v-model="dialog" scrollable max-width="600px" persistent>
       <v-card class="custom__dialog">
         <v-card-title class="dialog__header">
@@ -51,7 +51,7 @@
             </v-menu>
           </v-row>
 
-          <v-row no-gutters>
+          <v-row no-gutters v-if="event">
             <v-col md="12" class="pa-4">
               <v-avatar
                 size="20"

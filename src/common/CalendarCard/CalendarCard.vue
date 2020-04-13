@@ -34,7 +34,6 @@
       />
 
       <EventDialog
-        v-if="calendar"
         ref="event_dialog"
         :dialogTitle="event_dialog_title"
         :isEditDialog="isEventEditDialog"
@@ -46,14 +45,12 @@
       ></EventDialog>
 
       <EventTypeDialog
-        v-if="calendar"
         ref="event_type_dialog"
         :calendar="calendar"
         @new-event-type-added="insert_new_event_type"
       ></EventTypeDialog>
 
       <EventDetailDialog
-        v-if="eventToEdit"
         ref="event_detail_dialog"
         :event="eventToEdit"
         @edit-event="open_add_event_dialog(true, eventToEdit)"
@@ -62,7 +59,6 @@
       ></EventDetailDialog>
 
       <AddParticipantDialog
-        v-if="eventToEdit"
         ref="add_participant_dialog"
         :event="eventToEdit"
         @participants-refresh="refreshParticipants"

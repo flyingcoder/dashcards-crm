@@ -18,11 +18,10 @@
     <dashboard-tiles />
     <!-- custom component -->
     <v-row v-if="loading">
-      <v-boilerplate 
-        v-for="i in [1,2]"
-        class="mb-6 col-md-6 col-xs-12"
-        type="table-tfoot,table-heading, list-item-two-line, image "
-      ></v-boilerplate>
+      <v-progress-linear
+      height="10"
+      indeterminate
+    ></v-progress-linear>
     </v-row>
 
     <NoCards v-if="!cards.length && !loading" />
@@ -53,8 +52,8 @@
           </v-col>
         </template>
 
-        <div class="timeline-card" v-if="cards.length == 1">
-          <NoCards/>
+        <div class="timeline-card col-md-6 col-xs-12"  v-if="cards.length !== 0 && cards.length < dash_items.length">
+          <NoCards></NoCards>
         </div>
       </draggable>
     </v-layout>

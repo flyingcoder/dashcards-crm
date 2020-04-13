@@ -91,6 +91,7 @@
             <v-col md="8" xs="12">
               <v-select
                 v-model="event_type"
+                v-if="calendar"
                 :items="calendar.event_types"
                 menu-props="auto"
                 label="Select Event Category"

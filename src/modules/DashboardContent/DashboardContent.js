@@ -62,11 +62,11 @@ export default {
     isRequestInProgress: false,
     args: {
       dashboard: true
-    }
+    },
   }),
 
   computed: {
-    ...mapGetters('cards', ['should_show']),
+    ...mapGetters('cards', ['should_show','dash_items']),
     ...mapGetters(['user']),
     cards: {
       get() {
