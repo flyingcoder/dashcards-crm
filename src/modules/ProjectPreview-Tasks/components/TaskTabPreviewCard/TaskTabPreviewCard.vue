@@ -5,7 +5,7 @@
         class="mb-6"
         type="list-item-avatar, divider, list-item-three-line, card-heading, image, actions"
       ></v-boilerplate>
-      <v-card class="mx-auto" v-else-if="content && !loading">
+      <v-card class="mx-auto" v-else-if="content && !loading" style="box-shadow: none;">
           <v-list-item>
             <v-list-item-content>
               <v-col>
@@ -69,7 +69,6 @@
             ></Comment>
           </v-card-actions>
       </v-card>
-      
     </v-col>
   </v-row>
 </template>

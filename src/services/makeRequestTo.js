@@ -39,6 +39,14 @@ export default {
     return request.get(`api/timer/${type}`)
   },
 
+  timer_status(user_id) {
+    if (!user_id ) {
+      return request.get(`api/timer/status`)
+    }
+    return  request.get(`api/timer/status/${user_id}`)
+  },
+
+
   ...groups_api,
   ...clients_api,
   ...teams_api,

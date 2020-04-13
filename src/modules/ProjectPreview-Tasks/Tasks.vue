@@ -21,7 +21,7 @@
     <div class="cards">
       <tasks-card 
         :id="id" 
-        page="project-preview" 
+        :page="page" 
       ></tasks-card>
 
       <preview-card

@@ -9,35 +9,42 @@
         @close="$emit('close')"
       >
         <div slot="content">
-          <div class="timer" v-show="true">
+          <div class="timer" >
             <div class="date">{{ dayNow }} {{ dateNow }}</div>
             <div class="time">{{ timeNow }}</div>
-            <div class="hours-detail">
+            <div class="hours-detail" v-show="true">
               <div class="today">
-                <p>HRS OF WORK TODAY</p>
+                <p>HRS OF WORK TODAY 
+                  <v-tooltip top>
+                    <template v-slot:activator="{ on }">
+                      <v-icon small :color="user_global_status ? `success` : `grey`" v-on="on">mdi-circle</v-icon>
+                    </template>
+                    <span>{{ user_global_status ? `Timer Ongoing` : `Timer Stop`}}</span>
+                  </v-tooltip>
+                  </p>
                 <div class="hours-box">
                   <div class="box">
-                    <span class="hrs">8</span><span class="lbl">HRS</span>
+                    <span class="hrs">{{ user_today.hrs }}</span><span class="lbl">HRS</span>
                   </div>
                   <div class="box">
-                    <span class="hrs">56</span><span class="lbl">MIN</span>
+                    <span class="hrs">{{ user_today.min }}</span><span class="lbl">MIN</span>
                   </div>
                   <div class="box">
-                    <span class="hrs">21</span><span class="lbl">SEC</span>
+                    <span class="hrs">{{ user_today.sec }}</span><span class="lbl">SEC</span>
                   </div>
                 </div>
               </div>
               <div class="today">
-                <p>TOTAL HRS OF WORK</p>
+                <p>MONTH TOTAL HRS OF WORK</p>
                 <div class="hours-box">
                   <div class="box">
-                    <span class="hrs">1384</span><span class="lbl">HRS</span>
+                    <span class="hrs">{{ user_monthly.hrs }}</span><span class="lbl">HRS</span>
                   </div>
                   <div class="box">
-                    <span class="hrs">56</span><span class="lbl">MIN</span>
+                    <span class="hrs">{{ user_monthly.min }}</span><span class="lbl">MIN</span>
                   </div>
                   <div class="box">
-                    <span class="hrs">21</span><span class="lbl">SEC</span>
+                    <span class="hrs">{{ user_monthly.sec }}</span><span class="lbl">SEC</span>
                   </div>
                 </div>
               </div>
@@ -45,22 +52,24 @@
           </div>
           <div class="sel-timer">
             <div class="timer-body">
-              <v-carousel hide-delimiters show-arrows height="auto">
-                <v-carousel-item v-for="(slide, i) in slides" :key="i">
+              <div class="pa-2" v-if="loading">
+                <v-boilerplate 
+                  type="article, actions"
+                ></v-boilerplate>
+              </div>
+              <v-carousel hide-delimiters show-arrows height="auto" v-else-if="items.length > 0">
+                <v-carousel-item v-for="(slide, i) in items" :key="slide.id" >
                   <v-sheet color="transparent">
                     <div class="t-slide">
                       <div class="slide-left">
                         <div class="t-person">
-                          <v-avatar size="40"
-                            ><img src="@/assets/temp/user2.png" alt=""
-                          /></v-avatar>
-                          <span>William Stomhson</span>
+                          <Avatars :count="2" :items="slide.assignee"></Avatars>
                         </div>
                         <div class="t-title">
-                          <h3>Website Design Wirefram</h3>
-                          <span>Assigned to you 1 day ago</span>
+                          <h3 class="subtitle-2 font-weight-bold">{{slide.title | ucwords }}</h3>
+                          <div class="caption" :inner-html.prop="slide.description | truncate(50)"></div>
                         </div>
-                        <div class="t-service">Website Design</div>
+                        <div class="t-service">{{ slide.service | ucwords }}</div>
                       </div>
                       <div class="slide-right">
                         <div class="s-hours-detail">
@@ -101,20 +110,36 @@
                         </div>
                         <div class="s-total-hours">
                           <span>TOTAL HOURS</span>
-                          <div class="time">{{ timeNow }}</div>
+                          <div class="time">{{ slide.timer.timer_stats.format }}</div>
                         </div>
-                        <v-btn color="#fff" class="start-btn" tile text block
-                          >START TIMER</v-btn
-                        >
+                          
+                        <div v-if="task_belongs_to_logged_user(slide)">
+                          <v-btn color="#fff" 
+                            v-if="slide.status === `completed`"
+                            :disabled="true"
+                            class="start-btn" tile text block>TASK COMPLETED</v-btn>
+
+                          <v-btn color="#fff" 
+                            @click="timerClick(slide)" 
+                            v-else-if="slide.timer.timer_started" 
+                            :disabled="slide.timer.timer_disabled"
+                            class="start-btn" tile text block><v-icon small left>pause</v-icon>PAUSED TIMER</v-btn>
+                          <v-btn color="#fff" 
+                            @click="timerClick(slide)" 
+                            v-else 
+                            :disabled="slide.timer.timer_disabled"
+                            class="start-btn" tile text block><v-icon small left>play_arrow</v-icon>START TIMER</v-btn>
+                        </div>
                       </div>
                     </div>
                   </v-sheet>
                 </v-carousel-item>
               </v-carousel>
+              <Empty v-else headline="No Timer Found!"></Empty>
             </div>
           </div>
 
-          <v-data-table
+<!--           <v-data-table
             v-show="false"
             v-if="items.length || loading"
             :headers="headers"
@@ -136,7 +161,7 @@
               <td>{{item.status }}</td>
             </tr>
             </template>
-          </v-data-table>
+          </v-data-table> -->
           <!-- <div
             class="flex justify-content-center"
             v-if="items.length || loading"
@@ -148,7 +173,7 @@
               @input="onPageChange"
             ></v-pagination>
           </div> -->
-          <div class="empty-timer" v-else>
+<!--           <div class="empty-timer" v-else>
             <div class="empty-content">
               <div class="empty-svg">
                 <svg viewBox="0 0 250 250">
@@ -161,7 +186,7 @@
                 No Timer yet
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </dash-card>
     </div>

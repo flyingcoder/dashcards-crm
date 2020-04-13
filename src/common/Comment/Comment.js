@@ -28,6 +28,9 @@ export default {
   computed: {
     user() {
       return this.$store.getters.user
+    },
+    isEmptyComment() {
+      return !this.comment || this.comment === ''
     }
   },
   methods: {
@@ -41,6 +44,9 @@ export default {
       this.$refs.delete_comment_dialog.showDialog()
     },
     addComment() {
+      if (!this.comment || this.comment === '') {
+        return 
+      }
       this.btnloading = true
       var payload = { comment: this.comment , body: this.comment }
       request

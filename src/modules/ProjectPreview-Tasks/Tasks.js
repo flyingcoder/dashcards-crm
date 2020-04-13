@@ -15,11 +15,14 @@ export default {
 
   data : () => ({
     loading: false,
-    active_task_id : null
+    active_task_id : null,
+    page : 'project-preview'
   }),
+  
   created() {
     this.$event.$on('show-task-side-preview', task => { this.active_task_id = task.id })
   },
+
   provide() {
     const properties = {}
     Object.defineProperty(properties, 'loading', {

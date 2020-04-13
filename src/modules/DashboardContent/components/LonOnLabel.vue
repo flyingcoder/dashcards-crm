@@ -3,14 +3,14 @@
     <div class="tile">
       <div class="tile-icon">
         <v-switch
-          :value="switch1"
+          v-model="status"
           :disabled="disabled"
           @change="switch1_changed"
           dense
         ></v-switch>
       </div>
       <div class="tile-text">
-        Log Off
+        {{ label }}
       </div>
     </div>
 
@@ -32,10 +32,23 @@ export default {
   name: 'LogOnLable',
 
   data: () => ({
-    switch1: true,
+    status: false,
     disabled: false,
-    timer_icon: 'timer_off'
+    timer_icon: 'timer_off',
   }),
+  computed : {
+    label() {
+      return this.status === true ? 'Log On' : 'Log Off'
+    }
+  },
+  created() {
+    makeRequestTo.timer_status()
+    .then(({ data }) => {
+      if (data) {
+        this.status = data.action === 'start' ? true : false
+      }
+    })
+  },
 
   methods: {
     switch1_changed(new_val) {
@@ -44,6 +57,9 @@ export default {
       makeRequestTo.change_timer(type).then(() => {
         this.disabled = false
         const timer_message = new_val ? 'started' : 'stopped'
+        
+        this.$event.$emit(new_val ? 'global-timer-started' : 'global-timer-stopped')
+
         this.$event.$emit(
           'open_snackbar',
           `Timer ${timer_message}`,

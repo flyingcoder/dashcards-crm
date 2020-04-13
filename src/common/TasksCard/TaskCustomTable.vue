@@ -101,6 +101,7 @@
 <script>
 import apiTo from '@/modules/ProjectPreview-Tasks/api'
 import Avatars from '@/common/Avatars'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'TaskCustomTable',
@@ -122,7 +123,7 @@ export default {
 
   created() {
     this.active_task_id = this.tasks[0].id
-    this.$event.$emit('task-row-clicked', this.tasks[0])
+    this.$event.$emit('show-task-side-preview', this.tasks[0])
     this.$event.$on('task_completed', task => {
       if (!this.active_task_id) {
         this.active_task_id = task.id
@@ -141,6 +142,7 @@ export default {
     })
   },
   computed: {
+    ...mapGetters('taskCards', ['page']),
     user() {
       return this.$store.getters.user
     },
@@ -163,14 +165,14 @@ export default {
   methods: {
     row_clicked(row) {
       this.active_task_id = row.id
-      this.$event.$emit('task-row-clicked', row)
+      // this.$event.$emit('task-row-clicked', row)
+      this.$event.$emit('show-task-side-preview', row)
     },
     task_action(item, event) {
       this.$event.$emit(event, item)
     },
     task_view_action(item) {
-      var page = this.$store.getters['taskCards/page']
-      if(page === 'project-preview') this.row_clicked(item)
+      if(this.page === 'project-preview') this.row_clicked(item)
       else this.task_action(item, 'task-view')
     },
     replace_task(task, id) {

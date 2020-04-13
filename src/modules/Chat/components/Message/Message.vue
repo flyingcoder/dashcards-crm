@@ -28,6 +28,9 @@ export default {
     message: Object
   },
   computed: {
+    onlineUsers() {
+      return this.$store.getters['onlineUsers/all_users']
+    },
     mine() {
       return this.message.sender.id === this.$store.getters.user.id
     },
@@ -35,7 +38,8 @@ export default {
       return this.mine ? 'me' : ''
     },
     is_user_online() {
-      return this.message.sender.is_online ? 'online' : 'offline'
+      let inx = this.onlineUsers.findIndex(ii => ii.id === this.message.sender.id)
+      return ~inx ? 'online' : 'offline'
     }
   }
 }

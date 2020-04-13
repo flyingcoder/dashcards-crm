@@ -85,11 +85,11 @@
             <Empty v-else headline="No viewable items"></Empty>
 
         </v-card-text>
-        <v-divider></v-divider>
+        <!-- <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="closeDialog">Close</v-btn>
-        </v-card-actions>
+        </v-card-actions> -->
       </v-card>
     </v-dialog>
 </template>

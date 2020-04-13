@@ -29,7 +29,6 @@
       ></TaskDialog>
 
       <TaskDialog
-        v-if="task"
         :id="project_id"
         :task="task"
         ref="edit_task_dialog"
@@ -54,7 +53,6 @@
       ></ConfirmDialog>
 
       <TaskViewDialog
-        v-if="task"
         ref="view_task_dialog"
         :task="task"
         @close-task-preview="closeViewDialog"
@@ -305,7 +303,11 @@ export default {
     },
     set_and_open_side_preview(task){
       this.task = task
-      this.$event.$emit('show-task-side-preview', task)
+      if (this.page === 'project-preview') {
+        this.$event.$emit('show-task-side-preview', task)
+      } else {
+        this.set_and_view_task(task)
+      }
     }
   }
 }

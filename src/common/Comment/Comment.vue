@@ -54,6 +54,7 @@
             :loading="btnloading"
             @click="addComment"
             tile
+            :disabled="isEmptyComment"
             color="gray">
               <v-icon small left>mdi-send</v-icon>Send
           </v-btn>
