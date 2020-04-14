@@ -13,6 +13,7 @@ import TextArea from '@/common/BaseComponents/TextArea.vue'
 import AutoComplete from '../AutoComplete'
 import DatePickers from '../DatePickers/DatePickers.vue' //used for Due Date field
 import MembersDropdown from '../MembersDropdown/MembersDropdown.vue'
+import RichEditor from '@/common/RichEditor.vue'
 
 export default {
   name: 'ProjectModal',
@@ -22,7 +23,8 @@ export default {
     DatePickers,
     MembersDropdown,
     TextField,
-    TextArea
+    TextArea,
+    RichEditor
   },
 
   props: {
@@ -70,25 +72,15 @@ export default {
     project_title: '',
     is_autocomplete_loading: false,
     quill_editor: {
-      content: '',
-      editorOption: {
-        placeholder: 'Add Project Description',
-        modules: {
-          toolbar: [
-            ['bold', 'italic', 'underline', 'strike'],
-            ['link' /*'image'*/],
-            [{ align: [] }]
-          ]
-        }
-      }
+      content: ''
     },
     rangemenu: true,
     btnloading: false
   }),
 
   mounted() {
-    this.init_dropdowns()
-    this.$event.$on('btnloading_off', status => (this.btnloading = status))
+    // this.init_dropdowns()
+    this.$event.$on('btnloading_off', status => (this.btnloading = false))
     this.$event.$on('new_services_added', data => {
       for (var i = data.length - 1; i >= 0; i--) {
         let item = {}
@@ -105,9 +97,27 @@ export default {
       this.client.selected = data
     })
     this.$event.$on('new_member_added', data => {
-      makeRequestTo.getAllMembers().then(({ data }) => {
+      makeRequestTo.getAllNormalMembers().then(({ data }) => {
         this.members.all_items = data || []
         this.members.items = _cloneDeep(this.members.all_items)
+        setTimeout(() => {
+          let found = this.members.findIndex(us => us.id === data.id)
+          if (~found) {
+            this.members.selected = data
+          }
+        },1)
+      })
+    })
+    this.$event.$on('new_manager_added', data => {
+      makeRequestTo.getManagerMembers().then(({ data }) => {
+        this.manager.all_items = data || []
+        this.manager.items = _cloneDeep(this.manager.all_items)
+        setTimeout(() => {
+          let found = this.manager.findIndex(us => us.id === data.id)
+          if (~found) {
+            this.manager.selected = data
+          }
+        },1)
       })
     })
   },
@@ -123,7 +133,7 @@ export default {
         return true
 
       return false
-    }
+    },
   },
 
   watch: {
@@ -265,7 +275,11 @@ export default {
     },
 
     clear_and_close() {
-      Object.assign(this.$data, this.$options.data.apply(this))
+      this.members.selected = []
+      this.manager.selected = this.client.selected = null
+      this.quill_editor.content = this.project_title = ""
+      this.service.selected = null,
+      this.date_pickers.start_date = this.date_pickers.end_date = ''
       this.cancel() //close the modal
     },
 

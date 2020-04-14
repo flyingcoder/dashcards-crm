@@ -1,6 +1,6 @@
-<<template>
+<template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" scrollable max-width="700px" persistent>
+    <v-dialog v-model="open" scrollable max-width="700px" persistent>
       <v-card class="custom__dialog">
         <v-card-title class="dialog__header">
           <span class="dialog__title">{{ title }}</span>
@@ -10,7 +10,7 @@
             small
             depressed
             class="close__dialog"
-            @click="dialog = false"
+            @click="clear_and_close"
           >
             <v-icon>close</v-icon>
           </v-btn>
@@ -26,7 +26,7 @@
                 max-height="300"
               >
                 <template v-slot:activator="{ on }">
-                  <v-btn v-on="on" class="d__btn">
+                  <v-btn v-on="on" class="d__btn" block>
                     <div class="d__icon">
                       <svg viewBox="0 0 250 250">
                         <path
@@ -82,7 +82,7 @@
                 max-height="300"
               >
                 <template v-slot:activator="{ on }">
-                  <v-btn v-on="on" class="d__btn">
+                  <v-btn v-on="on" class="d__btn" block>
                     <div class="d__icon">
                       <svg viewBox="0 0 250 250">
                         <path
@@ -112,14 +112,14 @@
                 </v-list>
               </v-menu>
               <div class="choosen" v-if="service.selected">
-                <p class="mt-1 tile bordered">
-                  {{ service.selected.name }}
+                <p disabled block dense outlined class="mt-1 bordered-p">
+                  {{ service.selected.name}}
                 </p>
               </div>
             </v-col>
 
             <v-col md="4" sm="6">
-              <v-btn class="attachment d__btn" disabled>
+              <v-btn class="attachment d__btn" disabled block>
                 <v-icon> attach_file</v-icon>
                 <div class="d__title">Attach</div>
               </v-btn>
@@ -134,7 +134,7 @@
                 min-width="290px"
               >
                 <template v-slot:activator="{ on }">
-                  <v-btn v-on="on" class="d__btn">
+                  <v-btn v-on="on" class="d__btn" block>
                     <div class="d__icon">
                       <svg viewBox="0 0 250 250">
                         <path
@@ -188,7 +188,7 @@
                 offset-y
               >
                 <template v-slot:activator="{ on }">
-                  <v-btn v-on="on" class="d__btn">
+                  <v-btn v-on="on" class="d__btn" block>
                     <div class="d__icon">
                       <svg viewBox="0 0 250 250">
                         <path
@@ -245,7 +245,7 @@
                 offset-y
               >
                 <template v-slot:activator="{ on }">
-                  <v-btn v-on="on" class="d__btn">
+                  <v-btn v-on="on" class="d__btn" block>
                     <div class="d__icon">
                       <svg viewBox="0 0 250 250">
                         <path
@@ -311,29 +311,17 @@
             </v-col>
             <v-col md="12" class="project__description">
               <div class="project__description">
-                <quill-editor
+                <rich-editor
+                  placeholder="Add Project Description"
+                  ref="editor"
                   v-model="quill_editor.content"
-                  :options="quill_editor.editorOption"
-                >
-                </quill-editor>
+                ></rich-editor>
               </div>
             </v-col>
-            <!-- <v-col md="12">
-              <v-textarea
-                :rows="1"
-                background-color="grey lighten-5"
-                label="Comments"
-                filled
-                rows="2"
-                hide-details
-                v-model="comment"
-                color="#657186"
-              ></v-textarea>
-            </v-col> -->
           </v-row>
         </v-card-text>
         <v-card-actions class="dialog__actions">
-          <v-btn @click="cancel" class="dialog__actions_btn">Close</v-btn>
+          <v-btn @click="clear_and_close" class="dialog__actions_btn">Close</v-btn>
           <v-btn
             class="dialog__actions_btn"
             :loading="btnloading"
@@ -354,6 +342,9 @@
   background-color: #fff;
 }
 >>> .project__description .ql-container {
-  height: 120px !important;
+  min-height: 120px !important;
 }
+>>> .project__description .quillWrapper { background: #fff; }
+>>> .bordered-p { border: 1px solid #d1d1d6;  text-align: center; border-radius: 5px; font-size: 14px; padding: 5px; }
+>>> .choosen .v-chip { width: 100%; }
 </style>

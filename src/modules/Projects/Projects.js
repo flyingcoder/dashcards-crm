@@ -146,7 +146,7 @@ export default {
     navigate_to_view_project(id) {
       this.$router.push({
         name: 'project_preview',
-        params: { id }
+        params: { id : id }
       })
     },
     save_new_services(datus) {
@@ -169,6 +169,7 @@ export default {
       apiTo
         .add_new_member(datus)
         .then(({ data }) => {
+          this.$event.$emit('new_manager_added', data)
           this.$event.$emit('new_member_added', data)
           this.$refs.add_member_dialog.$refs.dialog.clear_and_close()
         })

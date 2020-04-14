@@ -11,6 +11,6 @@ export default {
     return request.post('api/company/teams', payload)
   },
   get_projects(page) {
-    return request.get(`api/projects?page=${page}`)
+    return request.get(`api/projects?per_page=5&page=${page}`)
   }
 }

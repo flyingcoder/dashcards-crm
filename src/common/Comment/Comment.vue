@@ -46,7 +46,7 @@
         </v-col>
         <v-col md="10" class="pr-3 pl-4">
           <rich-editor
-            placeholder="Enter a coment"
+            placeholder="Enter a comment"
             ref="editor"
             v-model="comment"
             :uploadApi="uploadApi"
