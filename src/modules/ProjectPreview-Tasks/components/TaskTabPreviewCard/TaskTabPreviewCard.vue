@@ -88,14 +88,14 @@
             </v-col>
           </v-row>
         </v-card-text>
-
-        <v-card-actions class="px-4">
-          <Comment
-            :items="all_comments"
-            :deleteApi="delApi"
-            :addApi="addApi"
-          ></Comment>
-        </v-card-actions>
+          <v-card-actions class="px-4">
+            <Comment 
+              :items="all_comments"
+              :deleteApi="delApi"
+              :addApi="addApi"
+              :uploadApi="uploadApi"
+            ></Comment>
+          </v-card-actions>
       </v-card>
     </v-col>
   </v-row>

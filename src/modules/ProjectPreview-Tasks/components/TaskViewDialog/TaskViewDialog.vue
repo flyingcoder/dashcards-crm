@@ -20,7 +20,7 @@
         </v-toolbar>
         <v-card-text style="height: 600px;" class="pa-0">
           <preview-card
-            :id="task.id"
+            :id="task.project_id"
             :active-id="task.id"
             :key="componentKey"
             @dropdown-action="handle_dropdown_action"

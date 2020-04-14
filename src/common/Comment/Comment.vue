@@ -49,6 +49,7 @@
             placeholder="Enter a coment"
             ref="editor"
             v-model="comment"
+            :uploadApi="uploadApi"
           ></rich-editor>
           <v-btn
             :loading="btnloading"
@@ -80,6 +81,7 @@
 }
 
 >>> .ql-container.ql-snow {
-  height: 120px;
+  min-height: 120px;
 }
+>>> .v-list-item__subtitle img { max-width: 100%; }
 </style>

@@ -65,7 +65,7 @@
     >
     </AddParticipantDialog>
 
-    <table-header :paths="paths" :noButton="true" />
+    <table-header :paths="paths" :noButton="true" v-if="hasBreadCrumbs" />
 
     <div class="calendar-wrapper">
       <div class="calendar-content">

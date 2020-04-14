@@ -108,6 +108,9 @@ export default {
     },
     delApi() {
       return `api/comments`
+    },
+    uploadApi(){
+      return `api/projects/${this.id}/file`
     }
   },
   watch: {

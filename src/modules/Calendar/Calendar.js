@@ -37,7 +37,9 @@ export default {
     EventDetailDialog,
     AddParticipantDialog
   },
-
+  props: {
+    hasBreadCrumbs : { type: Boolean, default : true }
+  },
   data: () => ({
     paths: [
       { text: 'Dashboard', disabled: false, router_name: 'default-content' },

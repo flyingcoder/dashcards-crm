@@ -54,7 +54,7 @@
         </template>
 
         <div
-          class="timeline-card col-md-6 col-xs-12"
+          class="extra-added timeline-card col-md-6 col-xs-12"
           v-if="cards.length !== 0 && cards.length < dash_items.length"
         >
           <NoCards></NoCards>
@@ -65,3 +65,7 @@
 </template>
 <script src="./DashboardContent.js"></script>
 <style lang="scss" scoped src="./DashboardContent.scss"></style>
+<style scoped>
+  >>> .extra-added.timeline-card { display: grid; }
+  >>> .extra-added.timeline-card .empty-cards { margin: auto; }
+</style>

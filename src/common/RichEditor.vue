@@ -2,13 +2,13 @@
   <div class="rich-editor">
     <vue-editor
       ref="richEditor"
-      use-custom-image-handler
+      useCustomImageHandler 
       :value="value"
       :editor-toolbar="custom_toolbar"
       :editor-options="custom_options"
       v-bind="$attrs"
       @input="$emit('input', $event)"
-      @imageAdded="handleImageAdded"
+      @image-added="handleImageAdded"
     />
   </div>
 </template>
@@ -16,6 +16,7 @@
 <script>
 import { VueEditor } from 'vue2-editor'
 import isEmpty from 'lodash/isEmpty'
+import request from '@/services/axios_instance'
 
 export default {
   name: 'RichEditor',
@@ -31,7 +32,8 @@ export default {
     options: {
       type: Object,
       default: () => ({})
-    }
+    },
+    uploadApi : { type : String, default : `api/file/image-upload` }
   },
 
   computed: {
@@ -69,13 +71,18 @@ export default {
         )
         return
       }
-      const reader = new FileReader()
-      reader.onload = e => {
-        const image = e.target.result
-        Editor.insertEmbed(cursorLocation, 'image', image)
-        resetUploader()
-      }
-      reader.readAsDataURL(file)
+      var formData = new FormData()
+      formData.append("file", file)
+
+      request.post(this.uploadApi, formData )
+        .then(({ data }) => {
+          let url =  data.public_url
+          Editor.insertEmbed(cursorLocation, "image", url)
+          resetUploader()
+        })
+        .catch(err => {
+          this.$event.$emit( 'open_snackbar', err, 'error' )
+        })
     }
   }
 }

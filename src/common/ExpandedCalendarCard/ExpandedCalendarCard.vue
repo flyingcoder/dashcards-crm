@@ -16,7 +16,7 @@
     </v-layout>
     <v-row>
       <v-col cols="12">
-        Expanded Calendar
+        <Calendar :hasBreadCrumbs="false"></Calendar>
       </v-col>
     </v-row>
   </div>
@@ -24,10 +24,11 @@
 
 <script>
 import Breadcrumb from '@/common/Breadcrumb.vue'
+import Calendar from '@/modules/Calendar/Calendar.vue'
 
 export default {
   name: 'ExpandedCalendarCard',
-  components: { Breadcrumb },
+  components: { Breadcrumb , Calendar },
 
   data: () => ({
     paths: [
