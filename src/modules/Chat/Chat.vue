@@ -115,7 +115,10 @@
         </v-flex>
 
         <v-flex md8 sm7 xs12 class="chat__message">
-          <v-card text class="mx-auto message__content" v-if="activeChat">
+          <v-card class="mx-auto message__content" v-if="!activeChat && !cardLoading" style="height: 100%;background:#f5f7fa;">
+            <Empty headline="Send a message now"></Empty>
+          </v-card>
+          <v-card text class="mx-auto message__content" v-else-if="activeChat">
             <v-toolbar color="#3b589e">
               <v-layout wrap class="message__header">
                 <v-flex xs2 class="sender__img">
@@ -255,7 +258,7 @@
                 id="messageContainer"
               >
                 <div class="view__more" v-show="has_more_message">
-                  <v-btn class="view__more_btn" @click="get_previous_message"
+                  <v-btn class="overline" block text dense :disabled="view__more_loading" :loading="view__more_loading" @click="get_previous_message"
                     >VIEW MORE</v-btn
                   >
                 </div>
@@ -267,7 +270,7 @@
                 ></Message>
               </div>
 
-              <div class="messages-empty" v-else>
+              <div class="messages-empty" color="#f5f7fa" v-else>
                 <Empty
                   slug="empty-chat"
                   headline="Start sending messages"

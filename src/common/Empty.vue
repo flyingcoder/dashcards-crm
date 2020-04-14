@@ -1,6 +1,7 @@
 <template>
   <div class="empty my-1" :id="slug">
     <div class="empty-content">
+      <div class="center-wrapper">
       <div class="empty-svg">
         <svg viewBox="0 0 250 250">
           <path
@@ -12,6 +13,7 @@
         <p>{{ headline }}</p>
         <slot name="extra"></slot>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -36,6 +38,7 @@ export default {
 }
 .empty {
   margin: 5px;
+  height: 100%;
 }
 
 .justify-content-center {
@@ -44,6 +47,13 @@ export default {
 }
 .empty-div {
   margin: 5px;
+}
+.empty-content{
+  display: grid;
+  height: 100%;
+}
+.center-wrapper {
+  margin: auto;
 }
 </style>
 

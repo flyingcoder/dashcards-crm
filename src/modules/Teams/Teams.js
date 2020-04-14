@@ -99,6 +99,6 @@ export default {
       } else {
         this.$router.push(`/dashboard/team/profile/${user.id}`)
       }
-    }
+    },
   }
 }

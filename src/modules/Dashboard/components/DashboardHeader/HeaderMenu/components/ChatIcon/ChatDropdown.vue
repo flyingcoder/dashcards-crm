@@ -101,12 +101,18 @@ export default {
   methods: {
     ...mapActions('notifications', ['markAllAsRead']),
     open_chat_box(user) {
-      this.$store.dispatch('chat/open_conversation', {
-        id: user.id,
-        is_online: this.is_user_online(user.id),
-        name: `${user.first_name}, ${user.last_name}`
-      })
-      this.$emit('close')
+      let is_online = this.is_user_online(user.id)
+      if (is_online && this.$route.name !== 'chat') {
+        this.$store.dispatch('chat/open_conversation', {
+          id: user.id,
+          is_online: is_online,
+          name: `${user.first_name}, ${user.last_name}`
+        })
+        this.$emit('close')
+      } else {
+        // console.log(user)
+        this.go_to_chat(user.id)
+      }
     },
     is_user_online(id) {
       const user = this.all_users.find(user => user.id === id)
@@ -114,7 +120,7 @@ export default {
       return user.is_online
     },
     go_to_chat(id) {
-      this.$router.push({ name: 'chat', params: { id: id } })
+      this.$router.push({ name: 'chat', params: { target: id } })
       this.$emit('close')
     }
   }

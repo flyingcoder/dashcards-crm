@@ -38,7 +38,9 @@ export default {
     },
     cardLoading: false,
     userLoading: false,
-    current_members: []
+    current_members: [],
+    target : null,
+    view__more_loading : false
   }),
   computed: {
     ...mapGetters('chat', ['unread_messages', 'all_conversations']),
@@ -53,6 +55,9 @@ export default {
     }
   },
   created() {
+    if(typeof this.$route.params.target !== 'undefined')
+      this.target = parseInt(this.$route.params.target)   
+
     this.$store.commit('set_floating_button', false)
     this.subscribePusher()
     this.get_chat_list()
@@ -96,9 +101,15 @@ export default {
 
           setTimeout(() => {
             this.all_users = users
+            if (this.target) {
+              let found = this.all_users.find(u => u.id === this.target)
+              if (found)  this.open_conversation(found)
+            }
           }, 1)
         })
-        .finally(() => (this.userLoading = false))
+        .finally(() => {
+          this.userLoading = false
+        })
     },
     get_groupchat_list() {
       this.userLoading = true
@@ -131,6 +142,7 @@ export default {
         })
     },
     get_previous_message() {
+      this.view__more_loading = true
       api_to
         .get_more_messages(this.activeChat.id, this.pagination.current)
         .then(({ data }) => {
@@ -139,6 +151,7 @@ export default {
           })
           this.pagination.current = data.current_page
         })
+        .finally(() => {this.view__more_loading = false })
     },
     copyOf(items) {
       return _cloneDeep(items)
@@ -182,7 +195,6 @@ export default {
     },
     group_chat_channel(channel) {
       channel.bind(`App\\Events\\GroupChatSent`, ({ message }) => {
-        console.log(message)
         if (this.activeChat && this.activeChat.id === message.conversation_id) {
           this.add_new_message(message)
           this.scrollToBottom()

@@ -31,6 +31,12 @@
                       Delete</v-list-item-subtitle
                     >
                   </v-list-item>
+                  <v-list-item v-if="not_self(item)" @click="chatMe(item)">
+                    <v-list-item-subtitle
+                      ><v-icon small>mail</v-icon>
+                      Message</v-list-item-subtitle
+                    >
+                  </v-list-item>
                 </v-list>
               </v-menu>
             </v-row>

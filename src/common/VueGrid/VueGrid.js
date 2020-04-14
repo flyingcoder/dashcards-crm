@@ -34,6 +34,9 @@ export default {
     this.$event.$on('btnloading_off', value => (this.btnloading = false))
   },
   methods: {
+    not_self(item){
+      return this.logged_user.id !== item.id
+    },
     handle_action(event) {
       if (this.item) {
         this.$emit(event, this.item)
@@ -74,6 +77,9 @@ export default {
         return item.length
       }
       return item
+    },
+    chatMe(user) {
+      this.$router.push(`/dashboard/chat/${user.id}`)
     }
   }
 }
