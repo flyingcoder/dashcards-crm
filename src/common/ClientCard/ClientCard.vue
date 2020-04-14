@@ -9,7 +9,6 @@
         @expand="expand"
       >
         <div class="content-wrapper" slot="content">
-
           <v-row no-gutters>
             <v-col class="mx-auto">
               <h4 class="text-center grey--text">Total Sales</h4>
@@ -66,8 +65,15 @@
                 <td>
                   <v-tooltip left>
                     <template v-slot:activator="{ on }">
-                      <v-icon color="success" v-if="item.status === `Active`" v-on="on">mdi-account-check</v-icon>
-                      <v-icon color="error" v-else v-on="on">mdi-account-cancel</v-icon>
+                      <v-icon
+                        color="success"
+                        v-if="item.status === `Active`"
+                        v-on="on"
+                        >mdi-account-check</v-icon
+                      >
+                      <v-icon color="error" v-else v-on="on"
+                        >mdi-account-cancel</v-icon
+                      >
                     </template>
                     <span v-if="item.status === `Active`">Active</span>
                     <span v-else>Inactive</span>

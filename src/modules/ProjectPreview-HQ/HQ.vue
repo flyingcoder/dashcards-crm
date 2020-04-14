@@ -8,7 +8,11 @@
         <timeline-card :id="id"></timeline-card>
       </v-col>
       <v-col cols="12" md="6">
-        <tasks-card :id="id" :view-more-link="taskPath" page="project-hq"></tasks-card>
+        <tasks-card
+          :id="id"
+          :view-more-link="taskPath"
+          page="project-hq"
+        ></tasks-card>
       </v-col>
       <v-col cols="12" md="6">
         <invoice-table :id="id"></invoice-table>

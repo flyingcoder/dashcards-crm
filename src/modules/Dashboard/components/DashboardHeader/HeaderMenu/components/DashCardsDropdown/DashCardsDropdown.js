@@ -28,7 +28,7 @@ export default {
       invoice: 'sidebar/invoice.svg',
       calendar: 'sidebar/calendar.svg',
       passbox: 'header/user/lock.svg',
-      alarm: 'sidebar/alarms.svg',
+      alarm: 'sidebar/alarms.svg'
     }
   }),
 

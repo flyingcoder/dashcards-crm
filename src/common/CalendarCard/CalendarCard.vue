@@ -73,6 +73,7 @@
         :view-more-link="viewMoreLink"
         @view-more="load_more_events"
         :dashboard="dashboard"
+        @expand="expand"
       >
         <div class="calendar__inner_content" slot="content">
           <v-progress-linear

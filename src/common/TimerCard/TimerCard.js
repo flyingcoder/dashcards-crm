@@ -15,16 +15,20 @@ export default {
     VBoilerplate: {
       functional: true,
 
-      render (h, { data, props, children }) {
-        return h('v-skeleton-loader', {
-          ...data,
-          props: {
-            boilerplate: true,
-            elevation: 2,
-            ...props,
+      render(h, { data, props, children }) {
+        return h(
+          'v-skeleton-loader',
+          {
+            ...data,
+            props: {
+              boilerplate: true,
+              elevation: 2,
+              ...props
+            }
           },
-        }, children)
-      },
+          children
+        )
+      }
     }
   },
 
@@ -48,25 +52,25 @@ export default {
       },
       headers: [
         { text: 'Task', sortable: false },
-        { text: 'Assigned',  sortable: false },
+        { text: 'Assigned', sortable: false },
         { text: 'Total Time', sortable: false },
         { text: 'Status', sortable: false }
       ],
       slides: 5,
-      tab : 'timer',
-      user_today : {
-        hrs : 0,
-        min : 0,
-        sec : 0,
+      tab: 'timer',
+      user_today: {
+        hrs: 0,
+        min: 0,
+        sec: 0,
         interval: null
       },
-      user_monthly : {
-        hrs : 0,
-        min : 0,
-        sec : 0,
+      user_monthly: {
+        hrs: 0,
+        min: 0,
+        sec: 0,
         interval: null
       },
-      user_global_status : false
+      user_global_status: false
     }
   },
   beforeDestroy() {
@@ -82,26 +86,28 @@ export default {
     }, 1000)
     this.getUserTimers()
 
-    this.$event.$on('global-timer-started', () => { 
+    this.$event.$on('global-timer-started', () => {
       this.setGlobalTimerRunning(this.user_today)
       this.setGlobalTimerRunning(this.user_monthly)
       this.user_global_status = true
     })
-    this.$event.$on('global-timer-stopped', () => { 
+    this.$event.$on('global-timer-stopped', () => {
       this.user_global_status = false
       clearInterval(this.user_today.interval)
       clearInterval(this.user_monthly.interval)
     })
   },
-  
+
   computed: {
-    ...mapGetters(['user']),
+    ...mapGetters(['user'])
   },
 
   methods: {
     task_belongs_to_logged_user(task) {
       if (!task.assignee.length) return
-      let ind = task.assignee.findIndex(i => i.id === this.$auth.logged_user().id)
+      let ind = task.assignee.findIndex(
+        i => i.id === this.$auth.logged_user().id
+      )
       return ~ind ? true : false
     },
     getUserTimers() {
@@ -121,7 +127,9 @@ export default {
     getTaskTimers() {
       this.loading = true
       request
-        .get(`/api/user/${this.user.id}/task-timers?page=${this.pagination.current}`)
+        .get(
+          `/api/user/${this.user.id}/task-timers?page=${this.pagination.current}`
+        )
         .then(({ data }) => {
           this.items = data.data
           this.items.map(ii => {
@@ -134,7 +142,7 @@ export default {
         })
         .finally(() => (this.loading = false))
     },
-    setGlobalTimerRunning(type){
+    setGlobalTimerRunning(type) {
       type.interval = setInterval(() => {
         let hours = type.hrs
         let mins = type.min
@@ -170,10 +178,9 @@ export default {
 
       return `${hours}:${mins}:${secs}`
     },
-    timerClick(item){
+    timerClick(item) {
       if (item.timer.timer_disabled) return
-      if (item.timer.timer_started)
-        this.pause_timer(item)
+      if (item.timer.timer_started) this.pause_timer(item)
       else {
         this.start_timer(item)
         let api = 'api/timer/start'
@@ -196,7 +203,7 @@ export default {
           item.timer.timer_started = false
         })
     },
-    start_timer(item){
+    start_timer(item) {
       item.timer.timer_started = true
       item.timer.timer_interval = setInterval(() => {
         let hours = this.get_hours(item.timer.timer_stats.format)

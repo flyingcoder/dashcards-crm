@@ -5,7 +5,7 @@ export default {
   name: 'client-profile-invoice',
   component: () => import('./Invoice.vue'),
   props: true,
-	meta: {
-		    middleware: [auth]
-		  }
+  meta: {
+    middleware: [auth]
+  }
 }

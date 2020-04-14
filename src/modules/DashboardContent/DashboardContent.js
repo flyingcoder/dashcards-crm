@@ -19,7 +19,6 @@ import PaymentCard from '@/common/PaymentCard/PaymentCard.vue'
 import PassboxCard from '@/common/PassboxCard/PassboxCard.vue'
 import AlarmCard from '@/common/AlarmCard/AlarmCard.vue'
 
-
 export default {
   name: 'DashboardContent',
   components: {
@@ -40,16 +39,20 @@ export default {
     AlarmCard,
     VBoilerplate: {
       functional: true,
-      render (h, { data, props, children }) {
-        return h('v-skeleton-loader', {
-          ...data,
-          props: {
-            boilerplate: true,
-            elevation: 2,
-            ...props,
+      render(h, { data, props, children }) {
+        return h(
+          'v-skeleton-loader',
+          {
+            ...data,
+            props: {
+              boilerplate: true,
+              elevation: 2,
+              ...props
+            }
           },
-        }, children)
-      },
+          children
+        )
+      }
     }
   },
   props: {
@@ -62,11 +65,11 @@ export default {
     isRequestInProgress: false,
     args: {
       dashboard: true
-    },
+    }
   }),
 
   computed: {
-    ...mapGetters('cards', ['should_show','dash_items']),
+    ...mapGetters('cards', ['should_show', 'dash_items']),
     ...mapGetters(['user']),
     cards: {
       get() {
@@ -121,7 +124,7 @@ export default {
   },
 
   created() {
-    this.fill_cards().finally(() => this.loading = false)
+    this.fill_cards().finally(() => (this.loading = false))
   },
 
   methods: {

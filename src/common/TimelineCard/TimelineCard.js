@@ -88,6 +88,9 @@ export default {
       let icon = items[Math.floor(Math.random() * items.length)]
       //todo set icon by types
       return icon
+    },
+    expand() {
+      this.$router.push({ name: 'expanded-timeline' })
     }
   }
 }

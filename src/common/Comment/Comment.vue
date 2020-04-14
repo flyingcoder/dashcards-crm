@@ -50,13 +50,14 @@
             ref="editor"
             v-model="comment"
           ></rich-editor>
-          <v-btn 
+          <v-btn
             :loading="btnloading"
             @click="addComment"
             tile
             :disabled="isEmptyComment"
-            color="gray">
-              <v-icon small left>mdi-send</v-icon>Send
+            color="gray"
+          >
+            <v-icon small left>mdi-send</v-icon>Send
           </v-btn>
           <!-- <emoji-picker @emoji-added="emoji_added" /> -->
         </v-col>

@@ -7,7 +7,7 @@ export const timer = {
   name: 'timer',
   component: () => import('@/modules/Timer/Timer.vue'), //,
   //children: [globalTimerTab, taskTimerTab]
-	meta: {
-		    middleware: [auth]
-		  }
+  meta: {
+    middleware: [auth]
+  }
 }

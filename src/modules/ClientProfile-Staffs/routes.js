@@ -5,7 +5,7 @@ export default {
   name: 'client-profile-staffs',
   props: true,
   component: () => import('./Staffs.vue'),
-	meta: {
-		    middleware: [auth]
-		  }
+  meta: {
+    middleware: [auth]
+  }
 }

@@ -21,11 +21,11 @@ export default {
     autoLineWidth: true,
     fill: false,
     type: 'bar',
-    total_earnings : `$`+(Math.random() * (959 - 1) + 1).toFixed(0),
-    completed : (Math.random() * (99 - 1) + 1).toFixed(0),
-    remaining : (Math.random() * (99 - 1) + 1).toFixed(0),
+    total_earnings: `$` + (Math.random() * (959 - 1) + 1).toFixed(0),
+    completed: (Math.random() * (99 - 1) + 1).toFixed(0),
+    remaining: (Math.random() * (99 - 1) + 1).toFixed(0)
   }),
-  computed : {
+  computed: {
     value() {
       return this.generate_random(8, 1, 10)
     }

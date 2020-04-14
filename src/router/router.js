@@ -35,6 +35,9 @@ import { questionnaire } from './routes/questionnaire'
 import { projectDetails } from './routes/projectDetails'
 import { expanded_clients } from './routes/expanded/expandedClients'
 import { expanded_payments } from './routes/expanded/expandedPayments'
+import { expanded_calendar } from './routes/expanded/expandedCalendar'
+import { expanded_invoice } from './routes/expanded/expandedInvoice'
+import { expanded_timeline } from './routes/expanded/expandedTimeline'
 
 Vue.use(Router)
 
@@ -69,7 +72,10 @@ export default new Router({
         questionnaire, //path: /dashboard/forms/questionnaire
         projectDetails, //path: /dashboard/forms/project-details
         expanded_clients, //path: /dashboard/expanded-clients
-        expanded_payments //path: /dashboard/expanded-payments
+        expanded_payments, //path: /dashboard/expanded-payments
+        expanded_calendar, //path: /dashboard/expanded-calendar
+        expanded_invoice, //path: /dashboard/expanded-invoice
+        expanded_timeline, //path: /dashboard/expanded-timeline
       ]
     },
     setPassword, // path: /set-password

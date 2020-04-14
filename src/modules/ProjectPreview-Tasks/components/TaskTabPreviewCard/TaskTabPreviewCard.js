@@ -25,16 +25,20 @@ export default {
     VBoilerplate: {
       functional: true,
 
-      render (h, { data, props, children }) {
-        return h('v-skeleton-loader', {
-          ...data,
-          props: {
-            boilerplate: true,
-            elevation: 2,
-            ...props,
+      render(h, { data, props, children }) {
+        return h(
+          'v-skeleton-loader',
+          {
+            ...data,
+            props: {
+              boilerplate: true,
+              elevation: 2,
+              ...props
+            }
           },
-        }, children)
-      },
+          children
+        )
+      }
     }
   },
   props: {
@@ -49,8 +53,8 @@ export default {
     all_comments: [],
     comment: '',
     dropdown_actions: [
-      { id: 1, text: 'Edit', value: 'edit', icon : 'edit' },
-      { id: 2, text: 'Delete', value: 'delete', icon : 'delete' }
+      { id: 1, text: 'Edit', value: 'edit', icon: 'edit' },
+      { id: 2, text: 'Delete', value: 'delete', icon: 'delete' }
     ],
     commenter: null,
     hover: false,
@@ -99,10 +103,10 @@ export default {
       if (this.user.is_admin) return true
       return this.permission && this.permission.update
     },
-    addApi () {
+    addApi() {
       return `api/task/${this.activeId}/comments`
     },
-    delApi () {
+    delApi() {
       return `api/comments`
     }
   },
@@ -132,7 +136,7 @@ export default {
   },
 
   methods: {
-    dropdownAction(action){
+    dropdownAction(action) {
       this.$event.$emit(`task-${action}`, this.content)
     },
     can_delete_comment(comment) {
@@ -173,7 +177,7 @@ export default {
         id: 3,
         text: 'Mark as Complete',
         value: 'mark-as-complete',
-        icon : 'check'
+        icon: 'check'
       }
       var index = this.dropdown_actions.findIndex(function(item) {
         return item.id === 3
@@ -187,6 +191,6 @@ export default {
           this.dropdown_actions.push(xtra_action)
         }
       }
-    },
+    }
   }
 }

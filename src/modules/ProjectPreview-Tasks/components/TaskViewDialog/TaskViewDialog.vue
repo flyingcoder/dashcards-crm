@@ -8,7 +8,9 @@
     >
       <v-card>
         <v-toolbar dense dark color="#3b589e">
-          <v-toolbar-title>Task Preview : {{task.title | ucwords }}</v-toolbar-title>
+          <v-toolbar-title
+            >Task Preview : {{ task.title | ucwords }}</v-toolbar-title
+          >
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn icon dark @click="close_dialog">
@@ -32,5 +34,7 @@
 <script src="./TaskViewDialog.js"></script>
 <style lang="scss" scoped src="./TaskViewDialog.scss"></style>
 <style scoped>
-  >>> .task__tab_preview_card .content__wrapper { box-shadow: none; }
+>>> .task__tab_preview_card .content__wrapper {
+  box-shadow: none;
+}
 </style>

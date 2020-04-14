@@ -36,7 +36,7 @@ export const global_utils = {
         item.public_url = require('@/assets/temp/no-image.jpg')
       }
     },
-    generate_random(qty, min, max){
+    generate_random(qty, min, max) {
       var items = []
       for (var i = 0; i < qty; i++) {
         items.push(parseInt((Math.random() * (max - min) + min).toFixed(0)))

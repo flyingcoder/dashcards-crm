@@ -62,8 +62,7 @@
 
         <template v-slot:no-data v-if="!loading">
           <Empty>
-            <slot slot="extra" name="empty-slot">
-            </slot>
+            <slot slot="extra" name="empty-slot"> </slot>
           </Empty>
         </template>
 

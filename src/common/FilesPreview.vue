@@ -1,11 +1,12 @@
 <template>
   <div class="files-preview">
     <!-- for videos -->
-    <v-tooltip left
-        v-if="display_videos.length > 0"
-        v-for="(media, index) in display_videos"
-        :key="media.id"
-     >
+    <v-tooltip
+      left
+      v-if="display_videos.length > 0"
+      v-for="(media, index) in display_videos"
+      :key="media.id"
+    >
       <template v-slot:activator="{ on }">
         <v-avatar
           tile
@@ -20,15 +21,16 @@
           </v-img>
         </v-avatar>
       </template>
-      <span>{{media.name}}</span>
+      <span>{{ media.name }}</span>
     </v-tooltip>
-    
+
     <!-- for images -->
-    <v-tooltip left
-        v-if="display_medias.length > 0"
-        v-for="(media, index) in display_medias"
-        :key="media.id"
-     >
+    <v-tooltip
+      left
+      v-if="display_medias.length > 0"
+      v-for="(media, index) in display_medias"
+      :key="media.id"
+    >
       <template v-slot:activator="{ on }">
         <v-avatar
           v-on="on"
@@ -43,15 +45,16 @@
           </v-img>
         </v-avatar>
       </template>
-      <span>{{media.name}}</span>
+      <span>{{ media.name }}</span>
     </v-tooltip>
 
     <!-- for docs -->
-    <v-tooltip left
-        v-if="display_docs.length > 0"
-        v-for="(media, index) in display_docs"
-        :key="media.id"
-     >
+    <v-tooltip
+      left
+      v-if="display_docs.length > 0"
+      v-for="(media, index) in display_docs"
+      :key="media.id"
+    >
       <template v-slot:activator="{ on }">
         <v-avatar
           tile
@@ -66,15 +69,16 @@
           </v-img>
         </v-avatar>
       </template>
-      <span>{{media.name}}</span>
+      <span>{{ media.name }}</span>
     </v-tooltip>
 
     <!-- for others -->
-    <v-tooltip left
-        v-if="display_others.length > 0"
-        v-for="(media, index) in display_others"
-        :key="media.id"
-     >
+    <v-tooltip
+      left
+      v-if="display_others.length > 0"
+      v-for="(media, index) in display_others"
+      :key="media.id"
+    >
       <template v-slot:activator="{ on }">
         <v-avatar
           v-on="on"
@@ -89,15 +93,16 @@
           </v-img>
         </v-avatar>
       </template>
-      <span>{{media.name}}</span>
+      <span>{{ media.name }}</span>
     </v-tooltip>
 
     <!-- for links -->
-     <v-tooltip left
-        v-if="display_links.length > 0"
-        v-for="(media, index) in display_links"
-        :key="media.id"
-     >
+    <v-tooltip
+      left
+      v-if="display_links.length > 0"
+      v-for="(media, index) in display_links"
+      :key="media.id"
+    >
       <template v-slot:activator="{ on }">
         <v-avatar
           v-on="on"
@@ -112,7 +117,7 @@
           </v-img>
         </v-avatar>
       </template>
-      <span>{{media.name}}</span>
+      <span>{{ media.name }}</span>
     </v-tooltip>
 
     <Viewer ref="viewer_dialog" :media="selected_medias"> </Viewer>
@@ -226,8 +231,7 @@ export default {
     openViewer(media, index, type) {
       this.selected_medias = this.item.properties.media
       // if (type === 'image' || type === 'video' || type === 'link')
-        this.$refs.viewer_dialog.openDialog()
-      
+      this.$refs.viewer_dialog.openDialog()
     }
   }
 }

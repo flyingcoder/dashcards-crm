@@ -2,8 +2,8 @@
   <div class="task-custom-table">
     <v-layout class="task_header">
       <v-flex xs3 class="task__tableHead" v-if="tab == 'All Tasks'"
-        >Assigned </v-flex
-      >
+        >Assigned
+      </v-flex>
       <v-flex xs5 class="task__tableHead" v-if="tab == 'All Tasks'"
         >Task</v-flex
       >
@@ -24,10 +24,16 @@
         @click="task_view_action(task)"
       >
         <v-flex xs3 class="assignee__col" v-if="tab == 'All Tasks'">
-<!--           <span v-if="task.assignee.length">
+          <!--           <span v-if="task.assignee.length">
             <v-img :src="task.assignee[0].image_url" height="40" width="40" />
           </span> -->
-          <Avatars v-if="task.assignee.length" :deep="false" :items="task.assignee" :count="1" style="display: inline-block;"></Avatars>
+          <Avatars
+            v-if="task.assignee.length"
+            :deep="false"
+            :items="task.assignee"
+            :count="1"
+            style="display: inline-block;"
+          ></Avatars>
           <span v-if="!task.assignee.length"></span>
         </v-flex>
 
@@ -63,32 +69,46 @@
             <template v-slot:activator="{ on: menu }">
               <v-tooltip bottom>
                 <template v-slot:activator="{ on: tooltip }">
-                  <v-btn color="grey" dark icon  v-on="{ ...tooltip, ...menu }"
-                  ><v-icon>mdi-dots-horizontal</v-icon></v-btn>
+                  <v-btn color="grey" dark icon v-on="{ ...tooltip, ...menu }"
+                    ><v-icon>mdi-dots-horizontal</v-icon></v-btn
+                  >
                 </template>
                 <span>Actions</span>
               </v-tooltip>
             </template>
             <v-list dense>
-              <v-list-item 
-                v-if="task.status !== 'completed' && can_edit_task" 
-                @click="task_action(task, 'task-edit')">
-                <v-list-item-title><v-icon color="grey" left>edit</v-icon> Edit Task</v-list-item-title>
+              <v-list-item
+                v-if="task.status !== 'completed' && can_edit_task"
+                @click="task_action(task, 'task-edit')"
+              >
+                <v-list-item-title
+                  ><v-icon color="grey" left>edit</v-icon> Edit
+                  Task</v-list-item-title
+                >
               </v-list-item>
-              <v-list-item 
+              <v-list-item
                 v-if="can_delete_task"
-                @click="task_action(task, 'task-delete')">
-                <v-list-item-title><v-icon color="grey" left>delete</v-icon> Delete Task</v-list-item-title>
+                @click="task_action(task, 'task-delete')"
+              >
+                <v-list-item-title
+                  ><v-icon color="grey" left>delete</v-icon> Delete
+                  Task</v-list-item-title
+                >
               </v-list-item>
-              <v-list-item 
-                v-if="can_view_task"
-                @click="task_view_action(task)">
-                <v-list-item-title><v-icon color="grey" left>pageview</v-icon> View Task</v-list-item-title>
+              <v-list-item v-if="can_view_task" @click="task_view_action(task)">
+                <v-list-item-title
+                  ><v-icon color="grey" left>pageview</v-icon> View
+                  Task</v-list-item-title
+                >
               </v-list-item>
-              <v-list-item 
-                v-if="task.status !== 'completed' && can_edit_task" 
-                @click="task_action(task, 'task-mark-as-complete')">
-                <v-list-item-title><v-icon color="grey" left>check</v-icon> Mark as Complete</v-list-item-title>
+              <v-list-item
+                v-if="task.status !== 'completed' && can_edit_task"
+                @click="task_action(task, 'task-mark-as-complete')"
+              >
+                <v-list-item-title
+                  ><v-icon color="grey" left>check</v-icon> Mark as
+                  Complete</v-list-item-title
+                >
               </v-list-item>
             </v-list>
           </v-menu>
@@ -105,7 +125,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'TaskCustomTable',
-  components : { Avatars },
+  components: { Avatars },
   props: {
     tasks: Array,
     tab: String
@@ -172,7 +192,7 @@ export default {
       this.$event.$emit(event, item)
     },
     task_view_action(item) {
-      if(this.page === 'project-preview') this.row_clicked(item)
+      if (this.page === 'project-preview') this.row_clicked(item)
       else this.task_action(item, 'task-view')
     },
     replace_task(task, id) {

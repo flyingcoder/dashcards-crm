@@ -39,8 +39,8 @@ export default {
     cardLoading: false,
     userLoading: false,
     current_members: [],
-    target : null,
-    view__more_loading : false
+    target: null,
+    view__more_loading: false
   }),
   computed: {
     ...mapGetters('chat', ['unread_messages', 'all_conversations']),
@@ -55,8 +55,8 @@ export default {
     }
   },
   created() {
-    if(typeof this.$route.params.target !== 'undefined')
-      this.target = parseInt(this.$route.params.target)   
+    if (typeof this.$route.params.target !== 'undefined')
+      this.target = parseInt(this.$route.params.target)
 
     this.$store.commit('set_floating_button', false)
     this.subscribePusher()
@@ -103,7 +103,7 @@ export default {
             this.all_users = users
             if (this.target) {
               let found = this.all_users.find(u => u.id === this.target)
-              if (found)  this.open_conversation(found)
+              if (found) this.open_conversation(found)
             }
           }, 1)
         })
@@ -151,7 +151,9 @@ export default {
           })
           this.pagination.current = data.current_page
         })
-        .finally(() => {this.view__more_loading = false })
+        .finally(() => {
+          this.view__more_loading = false
+        })
     },
     copyOf(items) {
       return _cloneDeep(items)

@@ -7,10 +7,7 @@
         <div class="friend user" v-for="user of users" :key="user.id">
           <div class="user__img">
             <v-img :src="user.image_url" />
-            <span
-              class="status"
-              :class="is_online(user)"
-            ></span>
+            <span class="status" :class="is_online(user)"></span>
           </div>
 
           <span class="user__name">{{ user.first_name }}</span>
@@ -40,7 +37,7 @@ export default {
     loggedUser() {
       return this.$store.getters.user
     },
-    onlineUsers(){
+    onlineUsers() {
       return this.$store.getters['onlineUsers/all_users']
     }
   },
@@ -49,10 +46,10 @@ export default {
     getMembers(this.id).then(({ data }) => (this.users = data.data))
   },
   methods: {
-    is_online(user){
-      var is_online = this.onlineUsers.findIndex( ou => ou.id === user.id)
+    is_online(user) {
+      var is_online = this.onlineUsers.findIndex(ou => ou.id === user.id)
       return ~is_online ? 'online' : 'offline'
-    },
+    }
   }
 }
 </script>

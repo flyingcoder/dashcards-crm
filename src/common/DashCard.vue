@@ -6,23 +6,65 @@
       </v-flex>
       <slot name="actions" v-if="dashboard">
         <v-flex xs7 class="actions">
-          <v-btn fab small text class="action" v-if="hasListView" @click="$emit('list-view')">
+          <v-btn
+            fab
+            small
+            text
+            class="action"
+            v-if="hasListView"
+            @click="$emit('list-view')"
+          >
             <v-icon>list</v-icon>
           </v-btn>
-          <v-btn fab small text class="action" v-if="hasGridView" @click="$emit('grid-view')">
+          <v-btn
+            fab
+            small
+            text
+            class="action"
+            v-if="hasGridView"
+            @click="$emit('grid-view')"
+          >
             <v-icon>grid_on</v-icon>
           </v-btn>
-          <v-btn fab small text class="action" v-if="hasRemove" @click="$emit('remove')">
+          <v-btn
+            fab
+            small
+            text
+            class="action"
+            v-if="hasRemove"
+            @click="$emit('remove')"
+          >
             <v-icon>remove</v-icon>
           </v-btn>
-          <v-btn fab small text class="action" v-if="hasAdd" @click="$emit('add')">
+          <v-btn
+            fab
+            small
+            text
+            class="action"
+            v-if="hasAdd"
+            @click="$emit('add')"
+          >
             <v-icon>add</v-icon>
           </v-btn>
-          <v-btn fab small text class="action" v-if="hasExpand" @click="$emit('expand')">
-            <v-icon >zoom_out_map</v-icon>
+          <v-btn
+            fab
+            small
+            text
+            class="action"
+            v-if="hasExpand"
+            @click="$emit('expand')"
+          >
+            <v-icon>zoom_out_map</v-icon>
           </v-btn>
-          <v-btn fab small text class="action" v-if="hasClose" @click="$emit('close')">
-            <v-icon >close</v-icon>
+          <v-btn
+            fab
+            small
+            text
+            class="action"
+            v-if="hasClose"
+            @click="$emit('close')"
+          >
+            <v-icon>close</v-icon>
           </v-btn>
         </v-flex>
       </slot>
@@ -55,12 +97,12 @@ export default {
     title: String,
     viewMoreBtn: Boolean,
     dashboard: Boolean,
-    hasListView : { type : Boolean, default : false },
-    hasGridView : { type : Boolean, default : false },
-    hasRemove : { type : Boolean, default : false },
-    hasAdd : { type : Boolean, default : false },
-    hasExpand : { type : Boolean, default : true },
-    hasClose : { type : Boolean, default : true },
+    hasListView: { type: Boolean, default: false },
+    hasGridView: { type: Boolean, default: false },
+    hasRemove: { type: Boolean, default: false },
+    hasAdd: { type: Boolean, default: false },
+    hasExpand: { type: Boolean, default: true },
+    hasClose: { type: Boolean, default: true }
   },
   data: () => ({
     btnloading: false

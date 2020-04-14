@@ -9,6 +9,7 @@
         :viewMoreBtn="enableViewMore"
         @close="$emit('close')"
         @view-more="loadMore"
+        @expand="expand"
       >
         <v-card class="mx-auto" slot="content">
           <v-row no-gutters>

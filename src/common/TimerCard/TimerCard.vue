@@ -9,28 +9,39 @@
         @close="$emit('close')"
       >
         <div slot="content">
-          <div class="timer" >
+          <div class="timer">
             <div class="date">{{ dayNow }} {{ dateNow }}</div>
             <div class="time">{{ timeNow }}</div>
             <div class="hours-detail" v-show="true">
               <div class="today">
-                <p>HRS OF WORK TODAY 
+                <p>
+                  HRS OF WORK TODAY
                   <v-tooltip top>
                     <template v-slot:activator="{ on }">
-                      <v-icon small :color="user_global_status ? `success` : `grey`" v-on="on">mdi-circle</v-icon>
+                      <v-icon
+                        small
+                        :color="user_global_status ? `success` : `grey`"
+                        v-on="on"
+                        >mdi-circle</v-icon
+                      >
                     </template>
-                    <span>{{ user_global_status ? `Timer Ongoing` : `Timer Stop`}}</span>
+                    <span>{{
+                      user_global_status ? `Timer Ongoing` : `Timer Stop`
+                    }}</span>
                   </v-tooltip>
-                  </p>
+                </p>
                 <div class="hours-box">
                   <div class="box">
-                    <span class="hrs">{{ user_today.hrs }}</span><span class="lbl">HRS</span>
+                    <span class="hrs">{{ user_today.hrs }}</span
+                    ><span class="lbl">HRS</span>
                   </div>
                   <div class="box">
-                    <span class="hrs">{{ user_today.min }}</span><span class="lbl">MIN</span>
+                    <span class="hrs">{{ user_today.min }}</span
+                    ><span class="lbl">MIN</span>
                   </div>
                   <div class="box">
-                    <span class="hrs">{{ user_today.sec }}</span><span class="lbl">SEC</span>
+                    <span class="hrs">{{ user_today.sec }}</span
+                    ><span class="lbl">SEC</span>
                   </div>
                 </div>
               </div>
@@ -38,13 +49,16 @@
                 <p>MONTH TOTAL HRS OF WORK</p>
                 <div class="hours-box">
                   <div class="box">
-                    <span class="hrs">{{ user_monthly.hrs }}</span><span class="lbl">HRS</span>
+                    <span class="hrs">{{ user_monthly.hrs }}</span
+                    ><span class="lbl">HRS</span>
                   </div>
                   <div class="box">
-                    <span class="hrs">{{ user_monthly.min }}</span><span class="lbl">MIN</span>
+                    <span class="hrs">{{ user_monthly.min }}</span
+                    ><span class="lbl">MIN</span>
                   </div>
                   <div class="box">
-                    <span class="hrs">{{ user_monthly.sec }}</span><span class="lbl">SEC</span>
+                    <span class="hrs">{{ user_monthly.sec }}</span
+                    ><span class="lbl">SEC</span>
                   </div>
                 </div>
               </div>
@@ -53,12 +67,15 @@
           <div class="sel-timer">
             <div class="timer-body">
               <div class="pa-2" v-if="loading">
-                <v-boilerplate 
-                  type="article, actions"
-                ></v-boilerplate>
+                <v-boilerplate type="article, actions"></v-boilerplate>
               </div>
-              <v-carousel hide-delimiters show-arrows height="auto" v-else-if="items.length > 0">
-                <v-carousel-item v-for="(slide, i) in items" :key="slide.id" >
+              <v-carousel
+                hide-delimiters
+                show-arrows
+                height="auto"
+                v-else-if="items.length > 0"
+              >
+                <v-carousel-item v-for="(slide, i) in items" :key="slide.id">
                   <v-sheet color="transparent">
                     <div class="t-slide">
                       <div class="slide-left">
@@ -66,10 +83,17 @@
                           <Avatars :count="2" :items="slide.assignee"></Avatars>
                         </div>
                         <div class="t-title">
-                          <h3 class="subtitle-2 font-weight-bold">{{slide.title | ucwords }}</h3>
-                          <div class="caption" :inner-html.prop="slide.description | truncate(50)"></div>
+                          <h3 class="subtitle-2 font-weight-bold">
+                            {{ slide.title | ucwords }}
+                          </h3>
+                          <div
+                            class="caption"
+                            :inner-html.prop="slide.description | truncate(50)"
+                          ></div>
                         </div>
-                        <div class="t-service">{{ slide.service | ucwords }}</div>
+                        <div class="t-service">
+                          {{ slide.service | ucwords }}
+                        </div>
                       </div>
                       <div class="slide-right">
                         <div class="s-hours-detail">
@@ -110,25 +134,47 @@
                         </div>
                         <div class="s-total-hours">
                           <span>TOTAL HOURS</span>
-                          <div class="time">{{ slide.timer.timer_stats.format }}</div>
+                          <div class="time">
+                            {{ slide.timer.timer_stats.format }}
+                          </div>
                         </div>
-                          
+
                         <div v-if="task_belongs_to_logged_user(slide)">
-                          <v-btn color="#fff" 
+                          <v-btn
+                            color="#fff"
                             v-if="slide.status === `completed`"
                             :disabled="true"
-                            class="start-btn" tile text block>TASK COMPLETED</v-btn>
+                            class="start-btn"
+                            tile
+                            text
+                            block
+                            >TASK COMPLETED</v-btn
+                          >
 
-                          <v-btn color="#fff" 
-                            @click="timerClick(slide)" 
-                            v-else-if="slide.timer.timer_started" 
+                          <v-btn
+                            color="#fff"
+                            @click="timerClick(slide)"
+                            v-else-if="slide.timer.timer_started"
                             :disabled="slide.timer.timer_disabled"
-                            class="start-btn" tile text block><v-icon small left>pause</v-icon>PAUSED TIMER</v-btn>
-                          <v-btn color="#fff" 
-                            @click="timerClick(slide)" 
-                            v-else 
+                            class="start-btn"
+                            tile
+                            text
+                            block
+                            ><v-icon small left>pause</v-icon>PAUSED
+                            TIMER</v-btn
+                          >
+                          <v-btn
+                            color="#fff"
+                            @click="timerClick(slide)"
+                            v-else
                             :disabled="slide.timer.timer_disabled"
-                            class="start-btn" tile text block><v-icon small left>play_arrow</v-icon>START TIMER</v-btn>
+                            class="start-btn"
+                            tile
+                            text
+                            block
+                            ><v-icon small left>play_arrow</v-icon>START
+                            TIMER</v-btn
+                          >
                         </div>
                       </div>
                     </div>
@@ -139,7 +185,7 @@
             </div>
           </div>
 
-<!--           <v-data-table
+          <!--           <v-data-table
             v-show="false"
             v-if="items.length || loading"
             :headers="headers"
@@ -173,7 +219,7 @@
               @input="onPageChange"
             ></v-pagination>
           </div> -->
-<!--           <div class="empty-timer" v-else>
+          <!--           <div class="empty-timer" v-else>
             <div class="empty-content">
               <div class="empty-svg">
                 <svg viewBox="0 0 250 250">

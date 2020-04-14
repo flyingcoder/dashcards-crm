@@ -3,7 +3,6 @@ import timezone from 'moment-timezone'
 import { settings } from '@/variables'
 
 export const global_filters = {
-
   bzFromNow(date) {
     //bz = buzzooka
     const tz_date = moment.tz(date, 'America/Toronto')

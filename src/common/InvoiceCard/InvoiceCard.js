@@ -95,6 +95,10 @@ export default {
           setTimeout(() => this.manageViewMorebtn(), 1)
         })
         .finally(() => (this.loading = false))
+    },
+    
+    expand() {
+      this.$router.push({ name: 'expanded-invoice' })
     }
   }
 }

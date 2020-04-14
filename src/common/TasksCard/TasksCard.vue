@@ -78,22 +78,22 @@ import TaskViewDialog from '@/modules/ProjectPreview-Tasks/components/TaskViewDi
 
 export default {
   name: 'TasksCard',
-  mixin: [ list_functionality ],
+  mixin: [list_functionality],
   components: {
     DashCard,
     TasksContent,
     TaskDialog,
     DeleteDialog,
     ConfirmDialog,
-    TaskViewDialog,
+    TaskViewDialog
   },
 
-  props: { 
-    id: [Number, String], 
-    dashboard: Boolean ,
-    page: { type : String , default : 'dashboard'}
+  props: {
+    id: [Number, String],
+    dashboard: Boolean,
+    page: { type: String, default: 'dashboard' }
   },
-  
+
   beforeDestroy() {
     this.$event.$off('task-row-clicked')
   },
@@ -115,7 +115,7 @@ export default {
     logged_user() {
       return this.$store.getters.user
     },
-    project_id () {
+    project_id() {
       return this.$store.getters['taskCards/id']
     }
   },
@@ -128,7 +128,7 @@ export default {
     add_task_dialog: false,
     edit_task_dialog: false,
     confirm_mark_as_complete_dialog: false,
-    delete_task_dialog: false,
+    delete_task_dialog: false
   }),
 
   created() {
@@ -137,9 +137,13 @@ export default {
 
     this.set_page(this.page)
 
-    this.$event.$on('task-row-clicked', task => this.set_and_open_side_preview(task))
+    this.$event.$on('task-row-clicked', task =>
+      this.set_and_open_side_preview(task)
+    )
     this.$event.$on('task-card-tab', tab => (this.selected_tab = tab))
-    this.$event.$on('task-mark-as-complete', task => this.set_and_mark_complete_task(task))
+    this.$event.$on('task-mark-as-complete', task =>
+      this.set_and_mark_complete_task(task)
+    )
     this.$event.$on('task-add', () => this.set_and_add_task())
     this.$event.$on('task-edit', task => this.set_and_edit_task(task))
     this.$event.$on('task-delete', task => this.set_and_delete_task(task))
@@ -148,7 +152,13 @@ export default {
 
   methods: {
     ...mapActions('taskCards', ['see_more', 'get_tasks']),
-    ...mapMutations('taskCards', ['set_id', 'set_page','add_task', 'del_task', 'replace_task']),
+    ...mapMutations('taskCards', [
+      'set_id',
+      'set_page',
+      'add_task',
+      'del_task',
+      'replace_task'
+    ]),
     loadMore() {
       this.see_more()
     },
@@ -291,7 +301,7 @@ export default {
       this.task = task
       this.set_id(task.project_id)
       this.open_mark_as_complete_task_dialog()
-    }, 
+    },
     set_and_view_task(task) {
       this.task = task
       this.set_id(task.project_id)
@@ -301,7 +311,7 @@ export default {
       this.set_id(this.id)
       this.open_add_task_dialog()
     },
-    set_and_open_side_preview(task){
+    set_and_open_side_preview(task) {
       this.task = task
       if (this.page === 'project-preview') {
         this.$event.$emit('show-task-side-preview', task)

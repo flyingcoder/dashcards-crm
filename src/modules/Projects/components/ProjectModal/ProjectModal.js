@@ -76,7 +76,7 @@ export default {
         modules: {
           toolbar: [
             ['bold', 'italic', 'underline', 'strike'],
-            ['link', /*'image'*/],
+            ['link' /*'image'*/],
             [{ align: [] }]
           ]
         }
@@ -228,7 +228,9 @@ export default {
         start_at: this.date_pickers.start_date,
         end_at: this.date_pickers.end_date,
         description: this.quill_editor.content,
-        members: this.members.selected.map((value, index) => { return value.id }),
+        members: this.members.selected.map((value, index) => {
+          return value.id
+        }),
         extra_fields: this.extraFields
       }
 
@@ -244,7 +246,7 @@ export default {
         name: new_fields.service_name,
         id: new_fields.service_id
       })
-      this.$set(this.client, 'selected', new_fields.project_client.user )
+      this.$set(this.client, 'selected', new_fields.project_client.user)
       this.$set(this.manager, 'selected', new_fields.project_manager.user)
       this.$set(
         this.date_pickers,
@@ -306,17 +308,13 @@ export default {
       this.$event.$emit('open-new-client-dialog', true)
     },
     add_to_selected_members(item) {
-      let index = this.members.selected.findIndex(
-        user => user.id === item.id
-      )
+      let index = this.members.selected.findIndex(user => user.id === item.id)
       if (index === -1) {
         this.members.selected.push(item)
       }
     },
     remove_from_selected_members(item) {
-      let index = this.members.selected.findIndex(
-        user => user.id === item.id
-      )
+      let index = this.members.selected.findIndex(user => user.id === item.id)
       if (~index) {
         this.members.selected.splice(index, 1)
       }

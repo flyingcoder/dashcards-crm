@@ -38,7 +38,9 @@ export default {
       return this.mine ? 'me' : ''
     },
     is_user_online() {
-      let inx = this.onlineUsers.findIndex(ii => ii.id === this.message.sender.id)
+      let inx = this.onlineUsers.findIndex(
+        ii => ii.id === this.message.sender.id
+      )
       return ~inx ? 'online' : 'offline'
     }
   }

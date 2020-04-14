@@ -9,7 +9,6 @@
         @expand="expand"
       >
         <div class="content-wrapper" slot="content">
-          
           <v-row no-gutters class="mb-5 payment-graph">
             <v-col class="mx-auto">
               <h4 class="text-center grey--text">Total Earnings</h4>

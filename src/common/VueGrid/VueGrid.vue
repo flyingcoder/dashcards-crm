@@ -33,8 +33,7 @@
                   </v-list-item>
                   <v-list-item v-if="not_self(item)" @click="chatMe(item)">
                     <v-list-item-subtitle
-                      ><v-icon small>mail</v-icon>
-                      Message</v-list-item-subtitle
+                      ><v-icon small>mail</v-icon> Message</v-list-item-subtitle
                     >
                   </v-list-item>
                 </v-list>
@@ -48,7 +47,7 @@
               <v-spacer></v-spacer>
             </v-row>
             <v-col md="12" class="text-center"
-              ><strong>{{ item.fullname |ucwords }}</strong></v-col
+              ><strong>{{ item.fullname | ucwords }}</strong></v-col
             >
             <v-row>
               <v-btn
@@ -63,7 +62,8 @@
                 Profile
               </v-btn>
               <v-col class="text-center py-0 my-0 caption">
-                <v-icon small left color="indigo">mdi-email</v-icon> {{ item.email }}
+                <v-icon small left color="indigo">mdi-email</v-icon>
+                {{ item.email }}
               </v-col>
             </v-row>
             <v-row>

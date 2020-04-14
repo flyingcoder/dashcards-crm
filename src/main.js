@@ -19,7 +19,7 @@ import { global_filters } from '@/global_utils/global_filters'
 
 Vue.config.productionTip = false
 
-Vue.mixin({ methods: methods, filters : global_filters })
+Vue.mixin({ methods: methods, filters: global_filters })
 
 router.beforeEach((to, from, next) => {
   if (!to.meta.middleware) {

@@ -178,8 +178,8 @@ export default {
     filter_projects(filter) {
       //todo
     },
-    handleSaveProject(event){
-      this.add_item('add_new_project',event)
+    handleSaveProject(event) {
+      this.add_item('add_new_project', event)
       this.$refs.add_dialog.clear_and_close()
     }
   }

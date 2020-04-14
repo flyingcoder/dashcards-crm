@@ -34,16 +34,15 @@ export default {
   data: () => ({
     status: false,
     disabled: false,
-    timer_icon: 'timer_off',
+    timer_icon: 'timer_off'
   }),
-  computed : {
+  computed: {
     label() {
       return this.status === true ? 'Log On' : 'Log Off'
     }
   },
   created() {
-    makeRequestTo.timer_status()
-    .then(({ data }) => {
+    makeRequestTo.timer_status().then(({ data }) => {
       if (data) {
         this.status = data.action === 'start' ? true : false
       }
@@ -57,8 +56,10 @@ export default {
       makeRequestTo.change_timer(type).then(() => {
         this.disabled = false
         const timer_message = new_val ? 'started' : 'stopped'
-        
-        this.$event.$emit(new_val ? 'global-timer-started' : 'global-timer-stopped')
+
+        this.$event.$emit(
+          new_val ? 'global-timer-started' : 'global-timer-stopped'
+        )
 
         this.$event.$emit(
           'open_snackbar',

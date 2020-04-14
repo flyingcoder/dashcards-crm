@@ -9,7 +9,7 @@ export const client_profile = {
   props: true,
   component: () => import('@/modules/ClientProfile/ClientProfile.vue'),
   children: [TaskTab, InvoiceTab, StaffTab],
-	meta: {
-	    middleware: [auth]
-	  }
+  meta: {
+    middleware: [auth]
+  }
 }

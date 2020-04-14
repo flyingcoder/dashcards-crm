@@ -18,8 +18,8 @@ const getters = {
   total: state => state.total,
   loading: state => state.loading,
   see_more_url: state => state.see_more_url,
-  page : state => state.page,
-  id : state => state.id,
+  page: state => state.page,
+  id: state => state.id
 }
 
 const mutations = {

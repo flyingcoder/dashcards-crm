@@ -26,6 +26,6 @@ export const project_preview = {
   ],
 
   meta: {
-      middleware: [auth]
-    }
+    middleware: [auth]
+  }
 }

@@ -19,10 +19,7 @@
     </v-layout>
 
     <div class="cards">
-      <tasks-card 
-        :id="id" 
-        :page="page" 
-      ></tasks-card>
+      <tasks-card :id="id" :page="page"></tasks-card>
 
       <preview-card
         v-if="active_task_id"

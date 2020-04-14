@@ -86,7 +86,7 @@
                 </v-img>
               </v-avatar>
             </template>
-            <span>{{item.project_manager.user.fullname | ucwords}}</span>
+            <span>{{ item.project_manager.user.fullname | ucwords }}</span>
           </v-tooltip>
         </td>
         <td>{{ item.started_at | bzFromNow }}</td>

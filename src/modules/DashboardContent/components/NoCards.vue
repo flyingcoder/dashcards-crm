@@ -42,7 +42,7 @@
 
 <script>
 import _cloneDeep from 'lodash/cloneDeep'
-import { mapActions,mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 //Components
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 import DashCard from '@/common/BaseComponents/DashCard.vue'
@@ -63,12 +63,14 @@ export default {
       invoice: 'sidebar/invoice.svg',
       calendar: 'sidebar/calendar.svg',
       passbox: 'header/user/lock.svg',
-      alarm: 'sidebar/alarms.svg',
+      alarm: 'sidebar/alarms.svg'
     },
     selected: []
   }),
-  created(){
-    this.selected = _cloneDeep(this.cards).map(i => { return i.id})
+  created() {
+    this.selected = _cloneDeep(this.cards).map(i => {
+      return i.id
+    })
   },
   computed: {
     ...mapGetters('cards', ['cards']),

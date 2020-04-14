@@ -6,21 +6,23 @@ export default {
   name: 'TasksTab',
   components: {
     TasksCard,
-    PreviewCard,
+    PreviewCard
   },
 
   props: {
     id: [Number, String]
   },
 
-  data : () => ({
+  data: () => ({
     loading: false,
-    active_task_id : null,
-    page : 'project-preview'
+    active_task_id: null,
+    page: 'project-preview'
   }),
-  
+
   created() {
-    this.$event.$on('show-task-side-preview', task => { this.active_task_id = task.id })
+    this.$event.$on('show-task-side-preview', task => {
+      this.active_task_id = task.id
+    })
   },
 
   provide() {
@@ -31,7 +33,6 @@ export default {
     return { properties, bodyMaxHeight: '1200px' }
   },
 
-
   watch: {
     selected_tab: {
       handler(val) {
@@ -41,7 +42,7 @@ export default {
       immediate: true
     }
   },
-  methods : {
+  methods: {
     open_new_task_dialog() {
       this.$event.$emit('task-add')
     }

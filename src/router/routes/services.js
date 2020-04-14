@@ -4,7 +4,7 @@ export const services = {
   path: 'services',
   name: 'services',
   component: () => import('@/modules/Services/Services.vue'),
-	meta: {
-		    middleware: [auth]
-		  }
+  meta: {
+    middleware: [auth]
+  }
 }

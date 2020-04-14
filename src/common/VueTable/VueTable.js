@@ -36,7 +36,7 @@ export default {
     page: 1,
     can_bulk_delete: false,
     btnloading: false,
-    selected: [],
+    selected: []
   }),
 
   created() {

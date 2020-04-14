@@ -57,9 +57,13 @@ export default {
       }
       return _cloneDeep(this.items).slice(0, this.count)
     },
-    lessList(){
-      return _cloneDeep(this.items).slice(this.count, this.items.length)
-        .map( o => { return this.deep ? o.user.fullname : o.fullname }).join('<br>')
+    lessList() {
+      return _cloneDeep(this.items)
+        .slice(this.count, this.items.length)
+        .map(o => {
+          return this.deep ? o.user.fullname : o.fullname
+        })
+        .join('<br>')
     }
   }
 }

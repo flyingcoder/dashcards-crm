@@ -25,10 +25,12 @@ export default {
     isMyMessage: Boolean,
     message: Object // TODO implement message for displaying to the template
   },
-  computed :{
+  computed: {
     is_online() {
       var onlineUsers = this.$store.getters['onlineUsers/all_users']
-      var is_online = onlineUsers.findIndex( ou => ou.id === this.message.sender.id)
+      var is_online = onlineUsers.findIndex(
+        ou => ou.id === this.message.sender.id
+      )
       return ~is_online ? 'online' : 'offline'
     }
   }

@@ -5,7 +5,7 @@ export const milestones = {
   name: 'templates/milestone',
   props: true,
   component: () => import('@/modules/Milestone/Milestone.vue'),
-	meta: {
-	    middleware: [auth]
-	  }
+  meta: {
+    middleware: [auth]
+  }
 }

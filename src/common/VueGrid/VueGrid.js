@@ -1,4 +1,4 @@
- import { global_utils } from '@/global_utils/global_utils'
+import { global_utils } from '@/global_utils/global_utils'
 
 export default {
   name: 'VueGrid',
@@ -34,7 +34,7 @@ export default {
     this.$event.$on('btnloading_off', value => (this.btnloading = false))
   },
   methods: {
-    not_self(item){
+    not_self(item) {
       return this.logged_user.id !== item.id
     },
     handle_action(event) {

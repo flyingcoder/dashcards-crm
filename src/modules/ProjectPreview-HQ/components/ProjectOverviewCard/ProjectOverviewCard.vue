@@ -12,7 +12,7 @@
           <template v-if="loading">
             <v-skeleton-loader
               ref="skeleton"
-              v-for="i in [1,2,3,4,5,6,7,8,,9]"
+              v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, , 9]"
               :boilerplate="false"
               type="list-item"
               class="mx-auto mt-3"

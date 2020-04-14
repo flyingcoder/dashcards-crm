@@ -59,5 +59,10 @@ export default {
       this.attributes = data.attributes
     })
     this.load_events()
+  },
+  methods: {
+    expand() {
+      this.$router.push({ name: 'expanded-calendar' })
+    }
   }
 }

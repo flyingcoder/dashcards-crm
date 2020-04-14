@@ -7,7 +7,7 @@ import * as apiTo from '@/modules/Calendar/api'
 
 import DashCard from '@/common/DashCard.vue'
 import Avatars from '@/common/Avatars.vue'
-import Empty  from '@/common/Empty'
+import Empty from '@/common/Empty'
 import EventDialog from '@/modules/Calendar/components/EventDialog/EventDialog.vue'
 import EventTypeDialog from '@/modules/Calendar/components/EventTypeDialog/EventTypeDialog.vue'
 import EventDetailDialog from '@/modules/Calendar/components/EventDetailDialog/EventDetailDialog.vue'
@@ -42,7 +42,7 @@ export default {
       items: [],
       timeNow: new Date().toLocaleTimeString(),
       dayNow: moment().format('ddd'),
-      dateNow: moment().format('LL'),
+      dateNow: moment().format('LL')
     }
   },
   computed: {
@@ -57,13 +57,13 @@ export default {
       this.timeNow = new Date().toLocaleTimeString()
     }, 1000)
   },
-  computed :{
-    logged(){
+  computed: {
+    logged() {
       return this.$store.getters.user
     }
   },
-  filters :{
-    format(value, format){
+  filters: {
+    format(value, format) {
       var forms = format || 'MMM D YYYY | HH:mm A'
       return moment(value).format(forms)
     }

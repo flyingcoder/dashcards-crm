@@ -5,7 +5,7 @@ export const milestoneTasks = {
   name: 'templates/milestone/task',
   props: true,
   component: () => import('@/modules/MilestoneTask/MilestoneTask.vue'),
-	meta: {
-	    middleware: [auth]
-	  }
+  meta: {
+    middleware: [auth]
+  }
 }

@@ -5,14 +5,14 @@ import { mapActions, mapMutations } from 'vuex'
 import TaskChips from '@/common/TasksCard/TaskChips.vue'
 
 export default {
-	name: 'TaskCardV2',
-	mixins: [list_functionality, global_utils],
+  name: 'TaskCardV2',
+  mixins: [list_functionality, global_utils],
   props: { id: [Number, String], dashboard: Boolean },
-	components : {
-		TaskChips
-	},
+  components: {
+    TaskChips
+  },
 
-	data: () => ({
+  data: () => ({
     dropdown_actions: [
       { id: 1, text: 'Edit', value: 'edit' },
       { id: 2, text: 'Delete', value: 'delete' }

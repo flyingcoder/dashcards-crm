@@ -8,6 +8,7 @@
         :view-more-link="viewMoreLink"
         :viewMoreBtn="enableViewMore"
         @view-more="load_more_timeline"
+        @expand="expand"
       >
         <template v-slot:content>
           <v-progress-linear

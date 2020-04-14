@@ -18,7 +18,7 @@ export default {
     ConfirmDialog
   },
   props: {
-    task: { type: Object, default: null },
+    task: { type: Object, default: null }
   },
   created() {
     if (this.task) {
@@ -37,7 +37,7 @@ export default {
     forcerender() {
       this.componentKey += 1
     },
-    open_dialog(){
+    open_dialog() {
       this.dialog = true
     },
     close_dialog() {
@@ -55,6 +55,6 @@ export default {
     },
     open_mark_as_complete_task_dialog() {
       this.$event.$emit('task-mark-as-complete', this.task)
-    },
+    }
   }
 }

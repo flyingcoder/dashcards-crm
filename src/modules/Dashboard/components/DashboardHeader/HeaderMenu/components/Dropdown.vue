@@ -51,8 +51,8 @@
           <v-col cols="12">
             <div class="hero-name">
               <h3>{{ user.fullname }}</h3>
-              <h6 class="overline">{{user.job_title}}</h6>
-              <small>{{user.company.name}}</small>
+              <h6 class="overline">{{ user.job_title }}</h6>
+              <small>{{ user.company.name }}</small>
             </div>
           </v-col>
         </v-row>

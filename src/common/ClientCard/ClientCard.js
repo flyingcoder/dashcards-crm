@@ -26,10 +26,10 @@ export default {
         total: 0
       },
       headers: [
-        { text: 'Company',  sortable: false },
-        { text: 'Contact' , sortable: false },
+        { text: 'Company', sortable: false },
+        { text: 'Contact', sortable: false },
         { text: 'Email', sortable: false },
-        { text: 'Status', sortable: false },
+        { text: 'Status', sortable: false }
       ],
 
       value: this.generate_random(10, 0, 10),
@@ -40,9 +40,9 @@ export default {
       lineCap: 'round',
       fill: false,
       type: 'trend',
-      total_sales : (Math.random() * (99 - 1) + 1).toFixed(0),
-      new_orders : (Math.random() * (99 - 1) + 1).toFixed(0),
-      total_earnings : `$`+(Math.random() * (999 - 1) + 1).toFixed(2),
+      total_sales: (Math.random() * (99 - 1) + 1).toFixed(0),
+      new_orders: (Math.random() * (99 - 1) + 1).toFixed(0),
+      total_earnings: `$` + (Math.random() * (999 - 1) + 1).toFixed(2)
     }
   },
 

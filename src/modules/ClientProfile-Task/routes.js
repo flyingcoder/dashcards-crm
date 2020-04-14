@@ -5,7 +5,7 @@ export default {
   name: 'client-profile-tasks',
   props: true,
   component: () => import('./Tasks.vue'),
-	meta: {
-		    middleware: [auth]
-		  }
+  meta: {
+    middleware: [auth]
+  }
 }

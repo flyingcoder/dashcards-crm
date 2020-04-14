@@ -18,10 +18,7 @@
     <dashboard-tiles />
     <!-- custom component -->
     <v-row v-if="loading">
-      <v-progress-linear
-      height="10"
-      indeterminate
-    ></v-progress-linear>
+      <v-progress-linear height="10" indeterminate></v-progress-linear>
     </v-row>
 
     <NoCards v-if="!cards.length && !loading" />
@@ -29,7 +26,11 @@
     <v-layout class="dashcard-content">
       <draggable class="row d__cards" v-model="cards">
         <template v-for="card in card_components">
-          <v-col cols="12" md="6" v-if="should_show(card.slug) && card.can_view()">
+          <v-col
+            cols="12"
+            md="6"
+            v-if="should_show(card.slug) && card.can_view()"
+          >
             <component
               :is="card.component"
               :key="card.component"
@@ -52,7 +53,10 @@
           </v-col>
         </template>
 
-        <div class="timeline-card col-md-6 col-xs-12"  v-if="cards.length !== 0 && cards.length < dash_items.length">
+        <div
+          class="timeline-card col-md-6 col-xs-12"
+          v-if="cards.length !== 0 && cards.length < dash_items.length"
+        >
           <NoCards></NoCards>
         </div>
       </draggable>
