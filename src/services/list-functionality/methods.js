@@ -4,6 +4,11 @@ import request from '@/services/axios_instance'
 
 export const methods = {
   methods: {
+    resetPagination(){
+      this.pagination.current = 1
+      this.pagination.total = 0
+      this.noMoreData = false
+    },
     add_item(api_name, item, dynamic_api = null) {
       makeRequestTo[api_name](item, dynamic_api)
         .then(response => {

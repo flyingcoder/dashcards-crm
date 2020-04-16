@@ -16,7 +16,7 @@ export default {
   },
 
   mounted() {
-    this.recommendedServices = this.get_recommended_services()
+    // this.recommendedServices = this.get_recommended_services()
   },
 
   data: () => ({

@@ -42,7 +42,7 @@
     <clients-dialog
       :dialog.sync="add_new_client_dialog"
       ref="add_client_dialog"
-      title="Add New Client"
+      dialogTitle="Add New Client"
       @save="save_new_client($event)"
     />
 

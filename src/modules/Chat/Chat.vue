@@ -81,7 +81,11 @@
                       <div class="friend user" @click="open_conversation(user)">
                         <div class="user-wrap">
                           <div class="user__img">
-                            <v-img :src="user.image_url"></v-img>
+                            <v-img :src="user.image_url" color="grey">
+                              <template v-slot:placeholder>
+                                <span class="black--text">{{user.fullname.charAt(0)}}</span>
+                              </template>
+                            </v-img>
                             <span
                               class="status"
                               :class="[user.is_online ? 'online' : 'offline']"

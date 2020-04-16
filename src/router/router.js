@@ -19,7 +19,9 @@ import { services } from './routes/services'
 import { teams } from './routes/teams'
 import { settings } from './routes/settings'
 import { project_preview } from './routes/projectPreview'
-import { timer } from './routes/timer'
+import { taskTimer } from './routes/taskTimer'
+import { globalTimer } from './routes/globalTimer'
+import { alarm } from './routes/alarm'
 import { invoice } from './routes/invoice'
 import { forms } from './routes/forms'
 import { chat } from './routes/chat'
@@ -58,7 +60,9 @@ export default new Router({
         teams, // path: /dashboard/team
         settings, // path: /dashboard/settings,
         project_preview, //path: /dashboard1/project-preview
-        timer, //path: /dashboard/timer
+        taskTimer, //path: /dashboard/task-timer
+        globalTimer, //path: /dashboard/global-timer
+        alarm, //path: /dashboard/alarm
         invoice, //path: /dashboard/invoice
         forms, //path: /dashboard/forms
         chat, //path: /dashboard/chat

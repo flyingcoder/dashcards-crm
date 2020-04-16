@@ -11,6 +11,7 @@
         </v-breadcrumbs-item>
       </template>
     </v-breadcrumbs>
+    <slot name="extra"></slot>
   </div>
 </template>
 

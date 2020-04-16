@@ -69,13 +69,14 @@
         </v-card-text>
 
         <v-card-actions class="service__actions">
+          <v-btn class="service__actions_btn" :disabled="btnloading" @click="cancel">Cancel</v-btn>
           <v-btn
             class="service__actions_btn"
             :disabled="is_disabled"
+            :loading="btnloading"
             @click="save"
             >Save</v-btn
           >
-          <v-btn class="service__actions_btn" @click="cancel">Cancel</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

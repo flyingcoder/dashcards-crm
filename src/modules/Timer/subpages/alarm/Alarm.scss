@@ -1,0 +1,62 @@
+@import '~@/sass/_variables';
+
+@include emptyTable('.empty-timer');
+
+.timer {
+    padding: 14px 28px;
+    @include customTableRow;
+
+    .table__toolbar-title{
+        color: $tableTitleBlue;
+        text-align: left;
+        font-size: 30px;
+    }
+
+    .client-name{
+        color: $tableBlueText;
+        font-weight: 500;
+        flex: 3;
+    }
+    .client-img{
+        display: flex;
+        align-items: center;
+        flex: 1;
+        img{
+            height: 52px;
+            border-radius: 50%;
+            margin-right: 30px;
+        }
+    }
+
+    .timer__option{
+        .v-icon{
+            font-size: 24px;
+            color: $sortOptionGray;
+        }
+    }
+    
+}
+
+@media only screen and (max-width: 480px){
+    .timer {
+        padding: 15px;
+
+        .table__toolbar-title{
+            font-size: 18px;
+        }
+    
+        .timer__option{
+
+            .v-btn--floating.v-btn--small{
+                height: 30px;
+                width: 30px;
+            }
+
+            .v-icon{
+                font-size: 24px;
+                color: $sortOptionGray;
+            }
+        }
+        
+    }
+}

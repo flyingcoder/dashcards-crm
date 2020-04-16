@@ -18,6 +18,7 @@
         color="#657186"
         readonly
         v-on="on"
+        :width="minWidth"
       ></v-text-field>
     </template>
     <v-date-picker
@@ -44,7 +45,8 @@ export default {
   props: {
     value: { type: String, default: null },
     min: { type: String, default: null },
-    max: { type: String, default: null }
+    max: { type: String, default: null },
+    minWidth : { type : String, default : '290px' }
   },
 
   data: () => ({

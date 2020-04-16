@@ -32,6 +32,7 @@
                 solo
               ></v-text-field>
             </v-flex>
+            <slot name="header-toolbar"></slot>
           </v-toolbar>
           <slot name="header"></slot>
           <v-divider></v-divider>

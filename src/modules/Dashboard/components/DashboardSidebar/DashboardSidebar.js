@@ -12,7 +12,10 @@ export default {
     ...mapGetters(['user']),
 
     items() {
-      if (!this.user) return []
+      if (!this.user) {
+        this.$router.push({ name : 'login' })
+        return []
+      }
       return [
         {
           title: 'Dashboard',
@@ -120,7 +123,7 @@ export default {
           title: 'Timers',
           icon:
             'M125 0c35,0 66,14 88,37 23,22 37,53 37,88 0,35 -14,66 -37,88 -22,23 -53,37 -88,37 -35,0 -66,-14 -88,-37 -23,-22 -37,-53 -37,-88 0,-35 14,-66 37,-88 22,-23 53,-37 88,-37zm-4 56c0,-4 4,-8 8,-8 5,0 8,4 8,8l0 54c5,3 8,8 8,14 0,9 -8,16 -17,16 -1,0 -2,0 -3,0l-46 56c-3,4 -8,4 -11,1 -4,-2 -4,-8 -1,-11l46 -56c-1,-2 -1,-4 -1,-6 0,-7 4,-12 9,-15l0 -53zm81 -8c-20,-20 -47,-32 -77,-32 -30,0 -57,12 -77,32 -20,20 -32,47 -32,77 0,30 12,57 32,77 20,20 47,32 77,32 30,0 57,-12 77,-32 20,-20 32,-47 32,-77 0,-30 -12,-57 -32,-77z M121 135c0,-4 4,-8 8,-8 5,0 8,4 8,8l0 68c0,5 -3,8 -8,8 -4,0 -8,-3 -8,-8l0 -68z M131 136c-3,-3 -3,-8 0,-11 3,-3 8,-3 11,0l48 48c3,3 3,8 0,11 -3,3 -8,3 -12,0l-47 -48z M141 132c-5,0 -8,-3 -8,-8 0,-4 3,-8 8,-8l67 0c5,0 9,4 9,8 0,5 -4,8 -9,8l-67 0z',
-          action: 'timer',
+          action: 'globalTimer',
           can_view: () => {
             if (this.user.is_admin) return true
             return this.user.can.hasOwnProperty('timer')
@@ -141,11 +144,7 @@ export default {
           icon:
             'M123 1c28,0 54,11 72,30 18,18 29,43 29,71 0,79 -88,128 -153,145 -4,1 -8,-2 -9,-6 -1,-4 1,-8 5,-9 34,-8 58,-20 77,-31 -7,1 -14,2 -21,2 -27,0 -53,-12 -71,-30 -18,-18 -29,-43 -29,-71 0,-28 11,-53 29,-71 18,-19 44,-30 71,-30zm-38 84c8,0 15,6 15,14 0,8 -7,15 -15,15 -8,0 -14,-7 -14,-15 0,-8 6,-14 14,-14zm77 0c8,0 14,6 14,14 0,8 -6,15 -14,15 -8,0 -15,-7 -15,-15 0,-8 7,-14 15,-14zm-39 0c8,0 15,6 15,14 0,8 -7,15 -15,15 -8,0 -15,-7 -15,-15 0,-8 7,-14 15,-14zm61 -44c-15,-15 -37,-25 -61,-25 -23,0 -45,10 -60,25 -16,16 -25,37 -25,61 0,24 9,45 25,61 15,15 37,25 60,25 24,0 46,-10 61,-25 16,-16 25,-37 25,-61 0,-24 -9,-45 -25,-61z',
           action: 'chat',
-          can_view: () => {
-            return true //give access to all afterall this is a team collaboration tool
-            // if (this.user.is_admin) return true
-            // return this.user.can.hasOwnProperty('messages')
-          }
+          can_view: () => true
         },
         {
           title: 'Reports',
@@ -190,8 +189,9 @@ export default {
 
   methods: {
     sidebar_item_clicked(action) {
+      console.log(action)
       if (action === 'logout') this.$auth.logout()
-      else this.$router.push({ name: action })
+      else this.$router.push({ name: action }).catch(err => {})
     }
   }
 }

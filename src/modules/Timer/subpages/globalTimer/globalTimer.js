@@ -1,13 +1,20 @@
-import { table_functionality } from '@/services/table-functionality/table-functionality'
+import { list_functionality } from '@/services/list-functionality/list-functionality'
 import isEmpty from 'lodash/isEmpty'
+import moment from 'moment'
 //Components
-import CustomTable from '@/common/CustomTable/CustomTable.vue'
+import VueTable from '@/common/VueTable/VueTable.vue'
+import Actions from '@/common/VueTable/Actions.vue'
+import TableHeader from '@/common/TableHeader.vue'
+import DatePicker from '@/common/DatePicker.vue'
 
 export default {
-  name: 'Global Timer',
-  mixins: [table_functionality],
+  name: 'GlobalTimer',
+  mixins: [list_functionality],
   components: {
-    CustomTable
+    VueTable,
+    Actions,
+    TableHeader,
+    DatePicker
   },
 
   data: () => ({
@@ -23,39 +30,75 @@ export default {
       { title: 'Sort by Date' }
     ],
     headers: [
-      { text: 'Client', value: 'client', sortable: true, align: 'left' },
-      { text: 'Task', value: 'task', sortable: true, align: 'left' },
-      { text: 'Service', value: 'service', sortable: true, align: 'left' },
+      { text: 'Member', sortable: true, align: 'left' },
+      { text: 'Position',  sortable: true, align: 'left' },
       {
         text: 'Time Start',
-        value: 'time_start',
         sortable: true,
         align: 'left'
       },
       { text: 'Time End', value: 'time_end', sortable: true, align: 'left' },
       {
         text: 'Total Time',
-        value: 'total_time',
         sortable: true,
         align: 'left'
       },
-      { is_action: true }
-    ]
+      { 
+        text: 'Action',
+        sortable: false,
+        align: 'center',
+        width: '50px' 
+      },
+    ],
+    timer_tab: 'global-timers',
+    currentTab : 'global-timers',
+    filter_date : moment().format('YYYY-MM-DD'),
+    today: moment().format('YYYY-MM-DD'),
   }),
 
   created() {
-    const query = this.$route.query
-    if (isEmpty(query)) {
-      this.fill_table('get_timers', true)
-    } else {
-      this.update_table_actions(query)
+    this.fill_table_via_url(this.api)
+  },
+
+  computed: {
+    loggeduser() {
+      return this.$store.getters.user
+    },
+    dateSelected(){
+      return moment(this.filter_date).format('YYYY-MM-DD')
+    },
+    api(){
+      return `api/timer/global?all=true&date=${this.dateSelected}`
     }
   },
 
   methods: {
-    toggleAll() {
-      if (this.selected.length) this.selected = []
-      else this.selected = this.items.slice()
+    load_more() {
+      this.load_more_via_url(this.api)
+    },
+    can_run_timer(item){
+      if (this.loggeduser.is_admin) { return true }
+
+      return item.id  === this.loggeduser.id 
+    },
+    handleChangeTab(event){
+      if (this.timer_tab === 'task-timers') 
+        this.$router.push({ name : 'taskTimer' })
+      if (this.timer_tab === 'alarm')
+        this.$router.push({ name : 'alarm' })
+    },
+    handleChangeDate(value) {
+      this.resetPagination()
+      setTimeout(() => { this.fill_table_via_url(this.api) }, 1)
+    },
+    timerEnd(item) {
+      if (item.timer.timer_status === 'open') {
+        return 'Ongoing'
+      }
+      return '-'
+    },
+    handleActionClick(item){
+      this.$event.$emit('open_snackbar', 'Coming soon, working on it!')
     }
   }
 }

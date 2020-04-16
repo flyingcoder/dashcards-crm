@@ -85,6 +85,10 @@
   display: block;
 }
 
+[data-nav="Timers"]:hover > .submenu {
+  display: block;
+}
+
 .submenu {
   position: absolute;
   right: -150px;
