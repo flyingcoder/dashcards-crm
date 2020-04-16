@@ -28,7 +28,7 @@ import Calendar from '@/modules/Calendar/Calendar.vue'
 
 export default {
   name: 'ExpandedCalendarCard',
-  components: { Breadcrumb , Calendar },
+  components: { Breadcrumb, Calendar },
 
   data: () => ({
     paths: [

@@ -41,7 +41,7 @@
     >
       <template v-slot:row-slot="{ item }">
         <td @click="open_view_dialog(item)">#INV-{{ item.id }}</td>
-        <td @click="open_view_dialog(item)">{{ item.title | ucwords }}</td>
+        <td @click="open_view_dialog(item)" class="clickable-td">{{ item.title | ucwords }}</td>
         <td>{{ item.due_date | format }}</td>
         <td>
           <v-avatar size="30" color="teal">

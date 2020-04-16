@@ -146,7 +146,7 @@ export default {
     navigate_to_view_project(id) {
       this.$router.push({
         name: 'project_preview',
-        params: { id : id }
+        params: { id: id }
       })
     },
     save_new_services(datus) {

@@ -9,7 +9,7 @@ export default {
 
   props: {
     dialog: Boolean,
-    title: String,
+    dialogTitle: String,
     isEditDialog: Boolean,
     fieldsToEdit: { type: Object, default: () => {} }
   },

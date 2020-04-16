@@ -105,7 +105,7 @@ export default {
           if (~found) {
             this.members.selected = data
           }
-        },1)
+        }, 1)
       })
     })
     this.$event.$on('new_manager_added', data => {
@@ -117,7 +117,7 @@ export default {
           if (~found) {
             this.manager.selected = data
           }
-        },1)
+        }, 1)
       })
     })
   },
@@ -133,7 +133,7 @@ export default {
         return true
 
       return false
-    },
+    }
   },
 
   watch: {
@@ -277,9 +277,9 @@ export default {
     clear_and_close() {
       this.members.selected = []
       this.manager.selected = this.client.selected = null
-      this.quill_editor.content = this.project_title = ""
-      this.service.selected = null,
-      this.date_pickers.start_date = this.date_pickers.end_date = ''
+      this.quill_editor.content = this.project_title = ''
+      ;(this.service.selected = null),
+        (this.date_pickers.start_date = this.date_pickers.end_date = '')
       this.cancel() //close the modal
     },
 

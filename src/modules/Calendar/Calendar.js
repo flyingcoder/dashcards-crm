@@ -38,7 +38,7 @@ export default {
     AddParticipantDialog
   },
   props: {
-    hasBreadCrumbs : { type: Boolean, default : true }
+    hasBreadCrumbs: { type: Boolean, default: true }
   },
   data: () => ({
     paths: [

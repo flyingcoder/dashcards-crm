@@ -77,7 +77,7 @@
       @delete-selected="open_bulk_delete_dialog($event)"
     >
       <template v-slot:row-slot="{ item }">
-        <td class="text-cap">
+        <td class="text-cap clickable-td" @click="navigate_to_view_profile(item)">
           <v-avatar size="36" class="mr-1">
             <v-img :src="item.image_url" :title="item.fullname"></v-img>
           </v-avatar>

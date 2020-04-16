@@ -38,6 +38,7 @@ import { expanded_payments } from './routes/expanded/expandedPayments'
 import { expanded_calendar } from './routes/expanded/expandedCalendar'
 import { expanded_invoice } from './routes/expanded/expandedInvoice'
 import { expanded_timeline } from './routes/expanded/expandedTimeline'
+import { expanded_tasks } from './routes/expanded/expandedTasks'
 
 Vue.use(Router)
 
@@ -76,6 +77,7 @@ export default new Router({
         expanded_calendar, //path: /dashboard/expanded-calendar
         expanded_invoice, //path: /dashboard/expanded-invoice
         expanded_timeline, //path: /dashboard/expanded-timeline
+        expanded_tasks //path: /dashboard/expanded-timeline
       ]
     },
     setPassword, // path: /set-password

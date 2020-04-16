@@ -96,7 +96,7 @@ export default {
         })
         .finally(() => (this.loading = false))
     },
-    
+
     expand() {
       this.$router.push({ name: 'expanded-invoice' })
     }

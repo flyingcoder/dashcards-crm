@@ -33,9 +33,6 @@ export default {
   methods: {
     expand() {
       this.$router.push({ name: 'expanded-payments' })
-    },
-    minimize() {
-      this.$router.push({ name: 'default-content' })
     }
   }
 }

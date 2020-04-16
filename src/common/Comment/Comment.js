@@ -17,7 +17,7 @@ export default {
     deleteApi: { type: String, default: 'api/comments' },
     addApi: { type: String, default: 'api/comments' },
     uploadApi: { type: String, default: 'api/file/image-upload' },
-    maxHeight: { type: Number, default: 400 },
+    maxHeight: { type: Number, default: 400 }
   },
 
   data: () => ({

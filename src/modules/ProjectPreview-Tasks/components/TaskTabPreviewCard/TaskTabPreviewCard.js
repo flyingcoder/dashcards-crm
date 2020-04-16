@@ -109,7 +109,7 @@ export default {
     delApi() {
       return `api/comments`
     },
-    uploadApi(){
+    uploadApi() {
       return `api/projects/${this.id}/file`
     }
   },

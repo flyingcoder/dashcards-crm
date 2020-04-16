@@ -43,7 +43,7 @@
           :headers="headers"
           :showRowActions="true"
           :loading="loading"
-          title="Task"
+          title="Tasks"
           :key="componentKey"
           :noMoreData="noMoreData"
           @load-more="load_more"

@@ -1,6 +1,6 @@
 <template>
   <custom-dialog
-    :title="title"
+    :title="dialogTitle"
     ref="dialog"
     :open.sync="open"
     button2-text="Save"

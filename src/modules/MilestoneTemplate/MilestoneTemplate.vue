@@ -40,14 +40,14 @@
           @load-more="load_more_on_table('get_milestone_templates')"
           @delete-selected="open_bulk_delete_dialog($event)"
           icon="widgets"
-          title="Projects"
+          title="Templates"
           :key="componentKey"
           :noMoreData="noMoreData"
           :showSelect="true"
           :loading="loading"
         >
           <template v-slot:row-slot="{ item }">
-            <td class="text-cap" @click="navigate_to_milestone_page(item)">
+            <td class="text-cap clickable-td" @click="navigate_to_milestone_page(item)">
               {{ item.name }}
             </td>
             <td class="text-cap">{{ item.status }}</td>

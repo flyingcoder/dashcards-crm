@@ -113,7 +113,7 @@
               </v-menu>
               <div class="choosen" v-if="service.selected">
                 <p disabled block dense outlined class="mt-1 bordered-p">
-                  {{ service.selected.name}}
+                  {{ service.selected.name }}
                 </p>
               </div>
             </v-col>
@@ -321,7 +321,9 @@
           </v-row>
         </v-card-text>
         <v-card-actions class="dialog__actions">
-          <v-btn @click="clear_and_close" class="dialog__actions_btn">Close</v-btn>
+          <v-btn @click="clear_and_close" class="dialog__actions_btn"
+            >Close</v-btn
+          >
           <v-btn
             class="dialog__actions_btn"
             :loading="btnloading"
@@ -344,7 +346,17 @@
 >>> .project__description .ql-container {
   min-height: 120px !important;
 }
->>> .project__description .quillWrapper { background: #fff; }
->>> .bordered-p { border: 1px solid #d1d1d6;  text-align: center; border-radius: 5px; font-size: 14px; padding: 5px; }
->>> .choosen .v-chip { width: 100%; }
+>>> .project__description .quillWrapper {
+  background: #fff;
+}
+>>> .bordered-p {
+  border: 1px solid #d1d1d6;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 5px;
+}
+>>> .choosen .v-chip {
+  width: 100%;
+}
 </style>

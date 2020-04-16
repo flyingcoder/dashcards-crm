@@ -83,5 +83,7 @@
 >>> .ql-container.ql-snow {
   min-height: 120px;
 }
->>> .v-list-item__subtitle img { max-width: 100%; }
+>>> .v-list-item__subtitle img {
+  max-width: 100%;
+}
 </style>

@@ -66,6 +66,10 @@
 <script src="./DashboardContent.js"></script>
 <style lang="scss" scoped src="./DashboardContent.scss"></style>
 <style scoped>
-  >>> .extra-added.timeline-card { display: grid; }
-  >>> .extra-added.timeline-card .empty-cards { margin: auto; }
+>>> .extra-added.timeline-card {
+  display: grid;
+}
+>>> .extra-added.timeline-card .empty-cards {
+  margin: auto;
+}
 </style>

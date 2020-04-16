@@ -73,7 +73,11 @@
             </v-col>
 
             <v-col md="12" class="pa-4">
-              <div v-if="event.description" class="responsive" v-html="event.description"></div>
+              <div
+                v-if="event.description"
+                class="responsive"
+                v-html="event.description"
+              ></div>
             </v-col>
 
             <v-col>
@@ -97,5 +101,7 @@
 >>> .rich-editor .ql-editor {
   min-height: 100px;
 }
->>> .responsive img { max-width: 100%; }
+>>> .responsive img {
+  max-width: 100%;
+}
 </style>

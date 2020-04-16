@@ -40,7 +40,7 @@
         >
           <template v-slot:row-slot="{ item }">
             <td
-              class="text-xs-left text-cap"
+              class="text-xs-left text-cap clickable-td"
               @click="navigate_to_milestone_page(item)"
             >
               {{ item.title }}

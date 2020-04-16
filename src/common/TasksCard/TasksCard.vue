@@ -7,6 +7,7 @@
         class="task__content"
         :dashboard="dashboard"
         @close="$emit('close')"
+        @expand="expand"
       >
         <div class="content-wrapper" slot="content">
           <div class="tasks-items">
@@ -318,6 +319,9 @@ export default {
       } else {
         this.set_and_view_task(task)
       }
+    },
+    expand() {
+      this.$router.push({ name: 'expanded-tasks' })
     }
   }
 }

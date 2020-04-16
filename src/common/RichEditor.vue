@@ -2,7 +2,7 @@
   <div class="rich-editor">
     <vue-editor
       ref="richEditor"
-      useCustomImageHandler 
+      useCustomImageHandler
       :value="value"
       :editor-toolbar="custom_toolbar"
       :editor-options="custom_options"
@@ -33,7 +33,7 @@ export default {
       type: Object,
       default: () => ({})
     },
-    uploadApi : { type : String, default : `api/file/image-upload` }
+    uploadApi: { type: String, default: `api/file/image-upload` }
   },
 
   computed: {
@@ -72,16 +72,17 @@ export default {
         return
       }
       var formData = new FormData()
-      formData.append("file", file)
+      formData.append('file', file)
 
-      request.post(this.uploadApi, formData )
+      request
+        .post(this.uploadApi, formData)
         .then(({ data }) => {
-          let url =  data.public_url
-          Editor.insertEmbed(cursorLocation, "image", url)
+          let url = data.public_url
+          Editor.insertEmbed(cursorLocation, 'image', url)
           resetUploader()
         })
         .catch(err => {
-          this.$event.$emit( 'open_snackbar', err, 'error' )
+          this.$event.$emit('open_snackbar', err, 'error')
         })
     }
   }
