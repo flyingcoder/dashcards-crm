@@ -69,7 +69,12 @@
         </v-card-text>
 
         <v-card-actions class="service__actions">
-          <v-btn class="service__actions_btn" :disabled="btnloading" @click="cancel">Cancel</v-btn>
+          <v-btn
+            class="service__actions_btn"
+            :disabled="btnloading"
+            @click="cancel"
+            >Cancel</v-btn
+          >
           <v-btn
             class="service__actions_btn"
             :disabled="is_disabled"

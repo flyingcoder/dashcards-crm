@@ -50,39 +50,37 @@
       </v-list>
 
       <div class="submenu" v-if="item.title === 'Timers'">
-        <div class="item" v-on:click.stop="sidebar_item_clicked('taskTimer')">
+        <div class="item" @click.stop="sidebar_item_clicked('taskTimer')">
           Task Timers
         </div>
-        <div class="item" v-on:click.stop="sidebar_item_clicked('globalTimer')">
+        <div class="item" @click.stop="sidebar_item_clicked('globalTimer')">
           Global Timers
         </div>
-        <div class="item" v-on:click.stop="sidebar_item_clicked('alarm')">
+        <div class="item" @click.stop="sidebar_item_clicked('alarm')">
           Alarms
         </div>
       </div>
 
       <div class="submenu" v-if="item.title === 'Templates'">
-        <div class="item" v-on:click.stop="sidebar_item_clicked('templates')">
+        <div class="item" @click.stop="sidebar_item_clicked('templates')">
           Milestone
         </div>
-        <div class="item" v-on:click.stop="sidebar_item_clicked('reports')">
+        <div class="item" @click.stop="sidebar_item_clicked('reports')">
           Reports
         </div>
-        <div class="item" v-on:click.stop="sidebar_item_clicked('invoices')">
+        <div class="item" @click.stop="sidebar_item_clicked('invoices')">
           Invoice
         </div>
       </div>
 
       <div class="submenu" v-if="item.title === 'Forms'">
-        <div class="item" v-on:click.stop="sidebar_item_clicked('questionnaire')">
+        <div class="item" @click.stop="sidebar_item_clicked('questionnaire')">
           Questionnaire
         </div>
-        <div class="item" v-on:click.stop="sidebar_item_clicked('projectDetails')">
+        <div class="item" @click.stop="sidebar_item_clicked('projectDetails')">
           Project Details
         </div>
       </div>
-
-      
     </div>
   </v-list>
 </template>

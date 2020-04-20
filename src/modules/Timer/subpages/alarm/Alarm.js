@@ -34,24 +34,24 @@ export default {
     headers: [
       { text: 'Events', sortable: true, align: 'left' },
       { text: 'Participants', sortable: true, align: 'left' },
-      { text: 'Type',  sortable: true, align: 'left' },
+      { text: 'Type', sortable: true, align: 'left' },
       {
         text: 'Date',
         sortable: true,
         align: 'left'
       },
       { text: 'Time', value: 'time_end', sortable: true, align: 'left' },
-      { 
+      {
         text: 'Action',
         sortable: false,
         align: 'center',
         width: '100px;'
-      },
+      }
     ],
     timer_tab: 'alarm',
-    currentTab : 'alarm',
-    filter_date : moment().format('YYYY-MM-DD'),
-    today: moment().format('YYYY-MM-DD'),
+    currentTab: 'alarm',
+    filter_date: moment().format('YYYY-MM-DD'),
+    today: moment().format('YYYY-MM-DD')
   }),
 
   created() {
@@ -62,10 +62,10 @@ export default {
     loggeduser() {
       return this.$store.getters.user
     },
-    dateSelected(){
+    dateSelected() {
       return moment(this.filter_date).format('YYYY-MM-DD')
     },
-    api(){
+    api() {
       return `/api/events?alarm=true&page=${this.pagination.current}`
     }
   },
@@ -74,27 +74,31 @@ export default {
     load_more() {
       this.load_more_via_url(this.api)
     },
-    can_run_timer(item){
-      if (this.loggeduser.is_admin) { return true }
+    can_run_timer(item) {
+      if (this.loggeduser.is_admin) {
+        return true
+      }
 
-      return item.id  === this.loggeduser.id 
+      return item.id === this.loggeduser.id
     },
-    handleChangeTab(event){
-      if (this.timer_tab === 'task-timers') 
-        this.$router.push({ name : 'taskTimer' })
+    handleChangeTab(event) {
+      if (this.timer_tab === 'task-timers')
+        this.$router.push({ name: 'taskTimer' })
       if (this.timer_tab === 'global-timers')
-        this.$router.push({ name : 'globalTimer' })
+        this.$router.push({ name: 'globalTimer' })
     },
     handleChangeDate(value) {
       this.resetPagination()
-      setTimeout(() => { this.fill_table_via_url(this.api) }, 1)
+      setTimeout(() => {
+        this.fill_table_via_url(this.api)
+      }, 1)
     },
-    is_event_owner(item){
-    	//todo
-    	return true
+    is_event_owner(item) {
+      //todo
+      return true
     },
-    handleAction(){
-    	this.$event.$emit('open_snackbar', 'Coming soon, working on it!')
+    handleAction() {
+      this.$event.$emit('open_snackbar', 'Coming soon, working on it!')
     }
   }
 }

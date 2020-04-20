@@ -75,7 +75,9 @@ export default {
           this.total_clients = data.total_clients
           this.current_month_total = data.current_month_total
           this.last_month_total = data.last_month_total
-          setTimeout(() => { this.manageViewMorebtn() }, 1)
+          setTimeout(() => {
+            this.manageViewMorebtn()
+          }, 1)
         })
         .finally(() => (this.loading = false))
     },
@@ -92,7 +94,9 @@ export default {
           }
           this.uniquekey += 1
           this.pagination.current = data.current_page
-          setTimeout(() => { this.manageViewMorebtn() }, 1)
+          setTimeout(() => {
+            this.manageViewMorebtn()
+          }, 1)
         })
         .finally(() => (this.loading = false))
     },

@@ -19,8 +19,10 @@ export default {
     this.services = []
     // this.recommendedServices = this.get_recommended_services()
   },
-  created(){
-    this.$event.$on('btnloading_off', (val) => { this.btnloading = false })
+  created() {
+    this.$event.$on('btnloading_off', val => {
+      this.btnloading = false
+    })
   },
   computed: {
     is_disabled() {

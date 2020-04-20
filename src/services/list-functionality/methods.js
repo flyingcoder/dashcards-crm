@@ -4,7 +4,7 @@ import request from '@/services/axios_instance'
 
 export const methods = {
   methods: {
-    resetPagination(){
+    resetPagination() {
       this.pagination.current = 1
       this.pagination.total = 0
       this.noMoreData = false

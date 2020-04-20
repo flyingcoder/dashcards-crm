@@ -46,7 +46,7 @@ export default {
     value: { type: String, default: null },
     min: { type: String, default: null },
     max: { type: String, default: null },
-    minWidth : { type : String, default : '290px' }
+    minWidth: { type: String, default: '290px' }
   },
 
   data: () => ({

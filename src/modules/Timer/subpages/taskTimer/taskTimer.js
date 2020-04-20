@@ -29,8 +29,8 @@ export default {
       { title: 'Sort by Date' }
     ],
     headers: [
-      { text: 'Assigned To',  sortable: false, align: 'left', width: 150 },
-      { text: 'Task',  sortable: false, align: 'left' },
+      { text: 'Assigned To', sortable: false, align: 'left', width: 150 },
+      { text: 'Task', sortable: false, align: 'left' },
       { text: 'Service', sortable: false, align: 'left' },
       {
         text: 'Time Start',
@@ -43,21 +43,21 @@ export default {
         sortable: false,
         align: 'left'
       },
-      { 
+      {
         text: 'Action',
         sortable: false,
         align: 'center',
-        width: '50px' 
-      },
+        width: '50px'
+      }
     ],
     timer_tab: 'task-timers',
-    currentTab : 'task-timers'
+    currentTab: 'task-timers'
   }),
 
   created() {
     // const query = this.$route.query
     // if (isEmpty(query)) {
-      this.fill_table_via_url('api/timer/tasks?all=true')
+    this.fill_table_via_url('api/timer/tasks?all=true')
     /*} else {
       this.update_table_actions(query)
     }*/
@@ -71,15 +71,14 @@ export default {
     load_more() {
       this.load_more_via_url('api/timer/tasks?all=true')
     },
-    can_run_timer(item){
-      let find = item.assignee.find(u => u.id === this.loggeduser.id )
+    can_run_timer(item) {
+      let find = item.assignee.find(u => u.id === this.loggeduser.id)
       return find ? true : false
     },
-    handleChangeTab(event){
-      if (this.timer_tab === 'global-timers') 
-        this.$router.push({ name : 'globalTimer' })
-      if (this.timer_tab === 'alarm')
-        this.$router.push({ name : 'alarm' })
+    handleChangeTab(event) {
+      if (this.timer_tab === 'global-timers')
+        this.$router.push({ name: 'globalTimer' })
+      if (this.timer_tab === 'alarm') this.$router.push({ name: 'alarm' })
     },
     timerEnd(item) {
       if (item.timer.timer_status === 'open') {
@@ -87,7 +86,7 @@ export default {
       }
       return item.timer.timer_stats.format
     },
-    handleActionClick(item){
+    handleActionClick(item) {
       this.$event.$emit('open_snackbar', 'Coming soon, working on it!')
     }
   }

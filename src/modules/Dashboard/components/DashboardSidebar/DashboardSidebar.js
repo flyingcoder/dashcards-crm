@@ -13,7 +13,7 @@ export default {
 
     items() {
       if (!this.user) {
-        this.$router.push({ name : 'login' })
+        this.$router.push({ name: 'login' })
         return []
       }
       return [

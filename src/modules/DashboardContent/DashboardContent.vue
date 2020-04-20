@@ -24,7 +24,12 @@
     <NoCards v-if="!cards.length && !loading" />
 
     <v-layout class="dashcard-content">
-      <draggable class="row d__cards" v-model="cards">
+      <draggable
+        class="row d__cards"
+        v-model="cards"
+        scroll-sensitivity="300"
+        force-fallback="true"
+      >
         <template v-for="card in card_components">
           <v-col
             cols="12"

@@ -83,7 +83,9 @@
                           <div class="user__img">
                             <v-img :src="user.image_url" color="grey">
                               <template v-slot:placeholder>
-                                <span class="black--text">{{user.fullname.charAt(0)}}</span>
+                                <span class="black--text">{{
+                                  user.fullname.charAt(0)
+                                }}</span>
                               </template>
                             </v-img>
                             <span

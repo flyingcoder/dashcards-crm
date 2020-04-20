@@ -31,7 +31,7 @@ export default {
     ],
     headers: [
       { text: 'Member', sortable: true, align: 'left' },
-      { text: 'Position',  sortable: true, align: 'left' },
+      { text: 'Position', sortable: true, align: 'left' },
       {
         text: 'Time Start',
         sortable: true,
@@ -43,17 +43,17 @@ export default {
         sortable: true,
         align: 'left'
       },
-      { 
+      {
         text: 'Action',
         sortable: false,
         align: 'center',
-        width: '50px' 
-      },
+        width: '50px'
+      }
     ],
     timer_tab: 'global-timers',
-    currentTab : 'global-timers',
-    filter_date : moment().format('YYYY-MM-DD'),
-    today: moment().format('YYYY-MM-DD'),
+    currentTab: 'global-timers',
+    filter_date: moment().format('YYYY-MM-DD'),
+    today: moment().format('YYYY-MM-DD')
   }),
 
   created() {
@@ -64,10 +64,10 @@ export default {
     loggeduser() {
       return this.$store.getters.user
     },
-    dateSelected(){
+    dateSelected() {
       return moment(this.filter_date).format('YYYY-MM-DD')
     },
-    api(){
+    api() {
       return `api/timer/global?all=true&date=${this.dateSelected}`
     }
   },
@@ -76,20 +76,23 @@ export default {
     load_more() {
       this.load_more_via_url(this.api)
     },
-    can_run_timer(item){
-      if (this.loggeduser.is_admin) { return true }
+    can_run_timer(item) {
+      if (this.loggeduser.is_admin) {
+        return true
+      }
 
-      return item.id  === this.loggeduser.id 
+      return item.id === this.loggeduser.id
     },
-    handleChangeTab(event){
-      if (this.timer_tab === 'task-timers') 
-        this.$router.push({ name : 'taskTimer' })
-      if (this.timer_tab === 'alarm')
-        this.$router.push({ name : 'alarm' })
+    handleChangeTab(event) {
+      if (this.timer_tab === 'task-timers')
+        this.$router.push({ name: 'taskTimer' })
+      if (this.timer_tab === 'alarm') this.$router.push({ name: 'alarm' })
     },
     handleChangeDate(value) {
       this.resetPagination()
-      setTimeout(() => { this.fill_table_via_url(this.api) }, 1)
+      setTimeout(() => {
+        this.fill_table_via_url(this.api)
+      }, 1)
     },
     timerEnd(item) {
       if (item.timer.timer_status === 'open') {
@@ -97,7 +100,7 @@ export default {
       }
       return '-'
     },
-    handleActionClick(item){
+    handleActionClick(item) {
       this.$event.$emit('open_snackbar', 'Coming soon, working on it!')
     }
   }

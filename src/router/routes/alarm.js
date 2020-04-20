@@ -8,6 +8,6 @@ export const alarm = {
   component: () => import('@/modules/Timer/subpages/alarm/Alarm.vue'), //,
   // children: [globalTimerTab, taskTimerTab],
   meta: {
-    middleware: [ auth ]
+    middleware: [auth]
   }
 }
