@@ -19,6 +19,9 @@ export default {
   created() {
     this.$event.$on('btnloading_off', status => (this.btnloading = status))
     this.show_create_password = this.isEditDialog
+    this.$event.$on('new-user-group-added', data => {
+      this.group_items.push(data)
+    })
   },
 
   data: () => ({
@@ -120,7 +123,9 @@ export default {
       if (this.isEditDialog) {
         fields.id = this.fieldsToEdit.id
       }
+        fields.admin_set_password = false
       if (this.show_create_password) {
+        fields.admin_set_password = true
         fields.password = this.password
         fields.password_confirmation = this.repeat_password
       }
@@ -133,6 +138,7 @@ export default {
       this.password = this.repeat_password = ''
       this.rate = this.address = ''
       this.cancel() //close the modal
-    }
+    },
+    
   }
 }

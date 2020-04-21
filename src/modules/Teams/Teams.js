@@ -1,5 +1,6 @@
 import { list_functionality } from '@/services/list-functionality/list-functionality'
 import isEmpty from 'lodash/isEmpty'
+import request from '@/services/axios_instance'
 
 //Components
 import VueGrid from '@/common/VueGrid/VueGrid.vue'
@@ -8,6 +9,7 @@ import TableHeader from '@/common/TableHeader.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import TeamsDialog from './components/TeamsDialog/TeamsDialog.vue'
 import Actions from '@/common/VueTable/Actions.vue'
+import GroupsDialog from '@/modules/Settings-Groups/components/GroupsDialog/GroupsDialog.vue'
 
 export default {
   name: 'Teams',
@@ -18,7 +20,8 @@ export default {
     TableHeader,
     DeleteDialog,
     Actions,
-    VueGrid
+    VueGrid,
+    GroupsDialog
   },
 
   data: () => ({
@@ -99,6 +102,26 @@ export default {
       } else {
         this.$router.push(`/dashboard/team/profile/${user.id}`)
       }
+    },
+
+    show_add_group_dialog(){
+      this.$refs.add_group_dialog.openDialog()
+    },
+
+    save_new_user_group(item) {
+      if (!item) {
+        this.$event.$emit('open_snackbar', 'Cant create user group.')
+        this.$refs.add_group_dialog.cancel()
+        return
+      }
+      request.post('api/groups', item)
+      .then(({data}) => {
+        this.$event.$emit('new-user-group-added', data)
+        this.$event.$emit('open_snackbar', 'New user group created')
+      })
+      .finally(() => {
+        this.$refs.add_group_dialog.cancel()
+      })
     }
   }
 }

@@ -54,6 +54,8 @@
             :items="group_items"
             item-text="name"
             item-value="id"
+            append-outer-icon="mdi-account-multiple-plus"
+            @click:append-outer="$emit('add-new-group')"
           ></v-select>
         </v-flex>
 

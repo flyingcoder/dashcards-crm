@@ -48,18 +48,7 @@ export default {
         { text: 'Date', value: 'date', sortable: true, align: 'left' },
         { is_action: true }
       ],
-      friends: [
-        { id: 0, name: 'Friend One', status: 'online' },
-        { id: 1, name: 'Friend Two', status: 'offline' },
-        { id: 2, name: 'Friend Three', status: 'dnd' },
-        { id: 3, name: 'Friend Four', status: 'online' },
-        { id: 4, name: 'Friend Five', status: 'offline' },
-        { id: 5, name: 'Friend Six', status: 'dnd' },
-        { id: 6, name: 'Friend Seven', status: 'online' },
-        { id: 7, name: 'Friend Eight', status: 'online' },
-        { id: 8, name: 'Friend Nine', status: 'offline' },
-        { id: 9, name: 'Friend Ten', status: 'offline' }
-      ]
+      friends: []
     }
   }
 }

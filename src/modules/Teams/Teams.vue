@@ -20,6 +20,7 @@
       title="Add New Member"
       :dialog.sync="add_dialog"
       @save="add_item('add_new_team', $event)"
+      @add-new-group="show_add_group_dialog"
       @close-dialog="add_dialog = false"
     />
 
@@ -30,6 +31,7 @@
       :fields-to-edit="edit_item"
       :is-edit-dialog="edit_dialog"
       @save="update_item('update_team', $event)"
+      @add-new-group="show_add_group_dialog"
       @close-dialog="edit_dialog = false"
     />
 
@@ -47,6 +49,13 @@
       @delete="bulk_delete('bulk_delete_member')"
     />
 
+    <groups-dialog
+      ref="add_group_dialog"
+      title="Add New Group"
+      @save="save_new_user_group"
+    />
+
+    
     <VueTable
       v-if="view === 'list'"
       :items="items"

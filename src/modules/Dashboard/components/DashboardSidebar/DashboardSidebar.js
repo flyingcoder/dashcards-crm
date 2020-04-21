@@ -126,7 +126,7 @@ export default {
           action: 'globalTimer',
           can_view: () => {
             if (this.user.is_admin) return true
-            return this.user.can.hasOwnProperty('timer')
+            return this.user.can.hasOwnProperty('hq_timers_own') || this.user.can.hasOwnProperty('timers_own')
           }
         },
         {
@@ -189,7 +189,6 @@ export default {
 
   methods: {
     sidebar_item_clicked(action) {
-      console.log(action)
       if (action === 'logout') this.$auth.logout()
       else this.$router.push({ name: action }).catch(err => {})
     }

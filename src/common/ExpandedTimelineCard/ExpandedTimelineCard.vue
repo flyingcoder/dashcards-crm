@@ -16,7 +16,7 @@
     </v-layout>
     <v-row>
       <v-col cols="12">
-        <timeline-card />
+        <timeline-card isExpanded />
       </v-col>
     </v-row>
   </div>

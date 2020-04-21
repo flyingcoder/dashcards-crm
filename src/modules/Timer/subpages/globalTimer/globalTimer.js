@@ -98,6 +98,9 @@ export default {
       if (item.timer.timer_status === 'open') {
         return 'Ongoing'
       }
+      if (item.timer.timer_status === 'close') {
+        return moment(item.timer.timer_stopped).format('MMM D YYYY HH:mm:ss')
+      }
       return '-'
     },
     handleActionClick(item) {

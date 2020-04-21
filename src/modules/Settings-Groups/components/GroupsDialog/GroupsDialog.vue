@@ -13,6 +13,7 @@
           <v-text-field
             class="dialog__textfield d-field"
             box
+            solo
             hide-details
             color="#657186"
             v-model.trim="name"
@@ -24,6 +25,7 @@
           <v-select
             class="dialog__selectfield d-field"
             box
+            solo
             hide-details
             color="#657186"
             label="Copy Permission"
@@ -38,6 +40,7 @@
           <v-textarea
             class="dialog__textarea d-field"
             box
+            solo
             hide-details
             color="#657186"
             label="Description"

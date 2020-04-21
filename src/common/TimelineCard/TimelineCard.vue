@@ -32,9 +32,12 @@
               fill-dot
             >
               <v-row class="pt-1" no-gutters>
-                <v-col>
+                <v-col >
                   <strong>{{ item.created_at | from_now }}</strong>
                   <div class="caption mb-2">{{ item.description }}</div>
+                  <FilesPreview v-if="!isExpanded" :item="item" :limit="5"></FilesPreview>
+                </v-col>
+                <v-col v-if="isExpanded">
                   <FilesPreview :item="item" :limit="5"></FilesPreview>
                 </v-col>
               </v-row>

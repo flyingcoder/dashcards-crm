@@ -111,4 +111,6 @@
 >>> .task__tab_preview_card .v-card.v-sheet {
   border-radius: 10px;
 }
+
+.task__tab_preview_card .v-card >>> img { max-width: 100%; }
 </style>

@@ -20,7 +20,8 @@ export default {
   props: {
     id: [Number, String],
     dashboard: Boolean,
-    viewMoreLink: Object
+    viewMoreLink: Object,
+    isExpanded: { type : Boolean, default: false }
   },
 
   data: () => ({

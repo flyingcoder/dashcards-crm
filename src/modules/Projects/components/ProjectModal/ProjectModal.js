@@ -57,7 +57,7 @@ export default {
       selected: []
     },
     manager: {
-      selected: null,
+      selected: [],
       items: [],
       all_items: [],
       show: false
@@ -233,12 +233,14 @@ export default {
       const fields_to_save = {
         title: this.project_title,
         client_id: this.client.selected.id || null,
-        manager_id: this.manager.selected.id || null,
         service_id: this.service.selected.id || null,
         start_at: this.date_pickers.start_date,
         end_at: this.date_pickers.end_date,
         description: this.quill_editor.content,
         members: this.members.selected.map((value, index) => {
+          return value.id
+        }),
+        managers: this.manager.selected.map((value, index) => {
           return value.id
         }),
         extra_fields: this.extraFields
@@ -256,27 +258,18 @@ export default {
         name: new_fields.service_name,
         id: new_fields.service_id
       })
-      this.$set(this.client, 'selected', new_fields.project_client.user)
-      this.$set(this.manager, 'selected', new_fields.project_manager.user)
-      this.$set(
-        this.date_pickers,
-        'start_date',
-        new_fields.started_at.split(' ')[0]
-      )
+      this.$set(  this.date_pickers, 'start_date', new_fields.started_at.split(' ')[0] )
       this.$set(this.date_pickers, 'end_date', new_fields.end_at.split(' ')[0])
-      this.$set(this.members, 'items', new_fields.members)
-      this.$set(
-        this.members,
-        'selected',
-        new_fields.members //.map(member => member.user_id)
-      )
+      this.$set(this.client, 'selected', new_fields.project_client.user)
+      this.$set(this.manager, 'selected', new_fields.project_managers.map(member => member.user))
+      this.$set(this.members,'selected',new_fields.project_members.map(member => member.user))
       this.project_title = new_fields.title
       this.$set(this.quill_editor, 'content', new_fields.description)
     },
 
     clear_and_close() {
-      this.members.selected = []
-      this.manager.selected = this.client.selected = null
+      this.members.selected =  this.manager.selected = []
+      this.client.selected = null
       this.quill_editor.content = this.project_title = ''
       ;(this.service.selected = null),
         (this.date_pickers.start_date = this.date_pickers.end_date = '')
@@ -331,6 +324,18 @@ export default {
       let index = this.members.selected.findIndex(user => user.id === item.id)
       if (~index) {
         this.members.selected.splice(index, 1)
+      }
+    },
+    add_to_selected_managers(item) {
+      let index = this.manager.selected.findIndex(user => user.id === item.id)
+      if (index === -1) {
+        this.manager.selected.push(item)
+      }
+    },
+    remove_from_selected_managers(item) {
+      let index = this.manager.selected.findIndex(user => user.id === item.id)
+      if (~index) {
+        this.manager.selected.splice(index, 1)
       }
     }
   }

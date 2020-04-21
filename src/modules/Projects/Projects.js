@@ -2,12 +2,11 @@ import { list_functionality } from '@/services/list-functionality/list-functiona
 import { global_utils } from '@/global_utils/global_utils'
 import apiTo from './api'
 import isEmpty from 'lodash/isEmpty'
-
+import request from '@/services/axios_instance'
 //Components
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
-// import ProjectDialog from './components/ProjectDialog/ProjectDialog.vue'
 import ServicesAddDialog from '@/modules/Services/components/ServicesAddDialog/ServicesAddDialog.vue'
 import ClientsDialog from '@/modules/Clients/components/ClientsDialog/ClientsDialog.vue'
 import TeamsDialog from '@/modules/Teams/components/TeamsDialog/TeamsDialog.vue'
@@ -15,6 +14,8 @@ import Empty from '@/common/Empty.vue'
 import VueTable from '@/common/VueTable/VueTable.vue'
 import Actions from '@/common/VueTable/Actions.vue'
 import ProjectModal from './components/ProjectModal/ProjectModal.vue'
+import GroupsDialog from '@/modules/Settings-Groups/components/GroupsDialog/GroupsDialog.vue'
+import Avatars from '@/common/Avatars.vue'
 
 export default {
   name: 'Projects',
@@ -22,7 +23,7 @@ export default {
   components: {
     Breadcrumb,
     TableHeader,
-    // ProjectDialog,
+    GroupsDialog,
     DeleteDialog,
     ServicesAddDialog,
     ClientsDialog,
@@ -30,7 +31,8 @@ export default {
     Empty,
     VueTable,
     Actions,
-    ProjectModal
+    ProjectModal,
+    Avatars
   },
 
   data: () => ({
@@ -44,13 +46,11 @@ export default {
     headers: [
       {
         text: 'Project Title',
-        value: 'title',
         sortable: true,
         align: 'left'
       },
       {
         text: 'Business',
-        value: 'company_name',
         sortable: true,
         align: 'left'
       },
@@ -61,28 +61,18 @@ export default {
         align: 'left'
       },
       {
-        text: 'Manager',
-        value: 'manager_name',
+        text: 'Managers',
         sortable: true,
         align: 'center',
         sortable: false
       },
       {
         text: 'Start Date',
-        value: 'started_at',
         sortable: true,
-        align: 'left'
-      },
-      {
-        text: 'Progress',
-        value: 'progress',
-        sortable: true,
-        sortable: false,
         align: 'left'
       },
       {
         text: 'Action',
-        value: 'actions',
         sortable: false,
         align: 'center',
         width: '140px'
@@ -99,6 +89,7 @@ export default {
   }),
 
   created() {
+    this.view = this.getPreferredView()
     this.load_projects()
     this.$event.$on(
       'open-new-service-dialog',
@@ -113,35 +104,29 @@ export default {
       () => (this.add_new_member_dialog = true)
     )
   },
+  computed : {
+    loggeduser() {
+      return this.$store.getters.user
+    }
+  },
   methods: {
+    can_edit(proj){
+      if (this.loggeduser.is_admin) { return true }
+      let found = proj.project_managers.find(ii => ii.user_id === this.loggeduser.id)
+      if (found) return true
+      return false
+    },
+    can_delete(proj){
+      if (this.loggeduser.is_admin) { return true }
+      let found = proj.project_managers.find(ii => ii.user_id === this.loggeduser.id)
+      if (found) return true
+      return false
+    },
     load_more() {
-      this.loading = true
-      apiTo
-        .get_projects(this.pagination.current + 1)
-        .then(({ data }) => {
-          data.data.forEach(item => {
-            this.items.push(item)
-          })
-        })
-        .finally(() => {
-          this.loading = false
-          this.$event.$emit('btnloading_off', false)
-        })
+      this.load_more_via_url(`api/projects`)
     },
     load_projects() {
-      this.loading = true
-      apiTo
-        .get_projects(1)
-        .then(({ data }) => {
-          this.items = data.data
-          this.pagination.current = data.current_page
-          this.pagination.total = data.last_page
-          this.hasMoreData()
-        })
-        .finally(() => {
-          this.loading = false
-          this.$event.$emit('btnloading_off', false)
-        })
+      this.fill_table_via_url(`api/projects`)
     },
     navigate_to_view_project(id) {
       this.$router.push({
@@ -182,6 +167,24 @@ export default {
     handleSaveProject(event) {
       this.add_item('add_new_project', event)
       this.$refs.add_dialog.clear_and_close()
+    },
+    show_add_group_dialog(){
+      this.$refs.add_group_dialog.openDialog()
+    },
+    save_new_user_group(item) {
+      if (!item) {
+        this.$event.$emit('open_snackbar', 'Cant create user group.')
+        this.$refs.add_group_dialog.cancel()
+        return
+      }
+      request.post('api/groups', item)
+      .then(({data}) => {
+        this.$event.$emit('new-user-group-added', data)
+        this.$event.$emit('open_snackbar', 'New user group created')
+      })
+      .finally(() => {
+        this.$refs.add_group_dialog.cancel()
+      })
     }
   }
 }

@@ -11,7 +11,7 @@ export default {
   props: {
     dialog: Boolean,
     title: String,
-    isEditDialog: Boolean,
+    isEditDialog: { type: Boolean, default : false },
     fieldsToEdit: { type: Object, default: () => {} }
   },
 
@@ -41,9 +41,7 @@ export default {
     dialog(new_val) {
       if (new_val) {
         //when dialog opens
-        request
-          .get(`api/groups?all=true`)
-          .then(({ data }) => (this.group_items = data))
+        this.get_current_group()
       }
       this.open = new_val
     },
@@ -62,6 +60,15 @@ export default {
     cancel() {
       this.open = false
     },
+    openDialog() {
+      this.get_current_group()
+      this.open = true
+    },
+    get_current_group(){
+      request
+          .get(`api/groups?all=true`)
+          .then(({ data }) => (this.group_items = data))
+        },
     save() {
       if (this.validation_passed()) {
         const fields_to_save = {
@@ -76,7 +83,8 @@ export default {
       if (this.name && this.selected_group && this.does_something_changed) {
         return true
       }
-      this.$event.$emit('open_snackbar', 'Nothing Changed!', 'notification')
+      this.$event.$emit('open_snackbar', 'Fill in required fields!', 'error')
+      this.$event.$emit('btnloading_off', false)
       return false
     },
     update_fields({ fields }) {

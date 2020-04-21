@@ -1,6 +1,10 @@
 <template>
   <div class="projects">
-    <table-header :paths="paths" @click="add_dialog = true" />
+    <table-header :paths="paths" :noListButton="false"  :noGridButton="false" 
+    @click="add_dialog = true" 
+    @click-list-view="view = `list`"
+    @click-grid-view="view =  `grid`"
+    />
 
     <ProjectModal
       :dialog.sync="add_dialog"
@@ -51,9 +55,104 @@
       title="Add New Member"
       :dialog.sync="add_new_member_dialog"
       @save="save_new_member($event)"
+      @add-new-group="show_add_group_dialog"
     />
 
+    <groups-dialog
+      ref="add_group_dialog"
+      title="Add New Group"
+      @save="save_new_user_group"
+    />
+
+    <v-card class="row pa-2" style="background:#f5f7fa;" v-if="view === `grid`">
+      <v-col md="12"><h4 class="headline">Projects</h4></v-col>
+      <v-progress-linear
+        v-show="loading"
+        :indeterminate="true"
+      ></v-progress-linear>
+      <v-col md="3" sm="4" xs="12" v-for="item in items" class="pa-2">
+        <v-card class="mx-auto" >
+          <v-card-title>
+              <Avatar :user="item.project_client.user"></Avatar>
+          </v-card-title>
+
+          <v-divider></v-divider>
+
+          <v-card-title class="title" @click="navigate_to_view_project(item.id)">
+            {{item.title | ucwords }}
+          </v-card-title>
+          <v-card-subtitle class="subtitle-2">
+           {{ item.service_name }}
+            <p class="caption text-left">
+             {{ item.started_at | format }} - {{ item.end_at | format }}
+            </p>
+          </v-card-subtitle>
+          <v-card-text>
+            <v-row>
+            <v-col>
+              <h6 class="text-center caption">Managers</h6>
+              <Avatars deep :items="item.project_managers" :count="2"></Avatars>
+            </v-col>
+            <v-col>
+              <h6 class="text-center caption">Members</h6>
+              <Avatars deep :items="item.project_members" :count="2"></Avatars>
+            </v-col>
+          </v-row>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-menu top offset-y>
+            <template v-slot:activator="{ on }">
+              <v-btn icon v-on="on" >
+                <v-icon>mdi-dots-vertical</v-icon>
+              </v-btn>
+            </template>
+
+            <v-list dense>
+              <v-list-item v-if="can_edit(item)" @click="open_edit_dialog(item)" >
+                <v-list-item-title><v-icon small left>edit</v-icon> Edit</v-list-item-title>
+              </v-list-item>
+              <v-list-item v-if="can_delete(item)" @click="open_delete_dialog(item)" >
+                <v-list-item-title><v-icon small left>delete</v-icon> Delete</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="navigate_to_view_project(item.id)" >
+                <v-list-item-title><v-icon small left>pageview</v-icon> View</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+            <v-btn text @click="navigate_to_view_project(item.id)"> Go to Project </v-btn>
+            <v-spacer></v-spacer>
+             <v-tooltip left>
+              <template v-slot:activator="{ on }">
+                <v-btn icon @click="item.expand = !item.expand" v-on="on">
+                  <v-icon>{{ item.expand ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                </v-btn>
+              </template>
+              <span>{{ item.expand ? 'Hide Details' : 'Show Details' }}</span>
+            </v-tooltip>
+          </v-card-actions>
+
+          <v-expand-transition>
+            <div v-show="item.expand">
+              <v-divider></v-divider>
+              <v-card-text v-html="item.description">
+              </v-card-text>
+            </div>
+          </v-expand-transition>
+        </v-card>
+      </v-col>
+      <v-col md="12">
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn tile text v-if="noMoreData === true" disabled >NO MORE DATA</v-btn >
+          <v-btn tile text :loading="btnloading" v-else @click="load_more">LOAD MORE</v-btn>
+          <v-spacer></v-spacer>
+      </v-card-actions>
+      </v-col>
+    </v-card>
+
     <VueTable
+      v-else
       :items="items"
       :headers="headers"
       :showRowActions="true"
@@ -73,39 +172,13 @@
         <td>{{ item.company_name }}</td>
         <td>{{ item.service_name | str_limit }}</td>
         <td>
-          <v-tooltip left>
-            <template v-slot:activator="{ on }">
-              <v-avatar size="35" color="teal" dark v-on="on">
-                <v-img
-                  :src="item.project_manager.user.image_url"
-                  :title="item.project_manager.user.fullname"
-                >
-                  <template v-slot:placeholder>
-                    <span class="white--text headline">U</span>
-                  </template>
-                </v-img>
-              </v-avatar>
-            </template>
-            <span>{{ item.project_manager.user.fullname | ucwords }}</span>
-          </v-tooltip>
+          <Avatars deep :items="item.project_managers" :count="1"></Avatars>
         </td>
         <td>{{ item.started_at | bzFromNow }}</td>
-        <td>
-          <v-progress-linear
-            v-if="item.progress < 100"
-            color="#9095AB"
-            height="5"
-            value="100"
-          ></v-progress-linear>
-          <v-progress-linear
-            v-else
-            color="#1fb868"
-            height="5"
-            value="100"
-          ></v-progress-linear>
-        </td>
         <Actions
           :item="item"
+          :hasEdit="can_edit(item)"
+          :hasDelete="can_delete(item)"
           @delete="open_delete_dialog(item)"
           @edit="open_edit_dialog(item)"
           @view="navigate_to_view_project(item.id)"

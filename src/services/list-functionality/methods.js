@@ -9,6 +9,10 @@ export const methods = {
       this.pagination.total = 0
       this.noMoreData = false
     },
+    clear_selected(){
+      this.selected = []
+      this.$event.$emit('clear_selected', [])
+    },
     add_item(api_name, item, dynamic_api = null) {
       makeRequestTo[api_name](item, dynamic_api)
         .then(response => {
@@ -16,10 +20,11 @@ export const methods = {
           if (Array.isArray(new_items)) {
             new_items
               .reverse()
-              .forEach(new_item => this.items.unshift(new_item))
+              .forEach(new_item => this.items.push(new_item))
           } else {
-            this.items.unshift(new_items)
+            this.items.push(new_items)
           }
+          this.clear_selected()
           this.$refs.add_dialog.clear_and_close()
           this.$event.$emit('open_snackbar', this.table_config.add_message)
         })
@@ -54,6 +59,7 @@ export const methods = {
             fields: null
           }
           this.edit_dialog = false
+          this.clear_selected()
           this.$event.$emit('open_snackbar', this.table_config.update_message)
         })
         .finally(() => this.$event.$emit('btnloading_off', false))
@@ -68,6 +74,7 @@ export const methods = {
           if (~index) this.items.splice(index, 1)
           this.delete_item_id = null
           this.delete_dialog = false
+          this.clear_selected()
           this.$event.$emit('open_snackbar', this.table_config.delete_message)
         })
         .finally(() => this.$event.$emit('btnloading_off', false))
@@ -88,8 +95,7 @@ export const methods = {
             if (~index) this.items.splice(index, 1)
           })
           this.bulk_delete_dialog = false
-          this.selected = []
-          this.$event.$emit('clear_selected')
+          this.clear_selected()
           this.$event.$emit('open_snackbar', data.message)
         })
         .finally(() => {
@@ -112,8 +118,7 @@ export const methods = {
             if (~index) this.items.splice(index, 1)
           })
           this.bulk_delete_dialog = false
-          this.selected = []
-          this.$event.$emit('clear_selected')
+          this.clear_selected()
           this.$event.$emit('open_snackbar', data.message)
         })
         .finally(() => {
@@ -151,6 +156,7 @@ export const methods = {
           }
         })
         .finally(() => {
+          this.clear_selected()
           this.loading = false
           this.$event.$emit('btnloading_off', false)
         })
@@ -172,6 +178,7 @@ export const methods = {
           }
         })
         .finally(() => {
+          this.clear_selected()
           this.loading = false
           this.$event.$emit('btnloading_off', false)
         })
@@ -190,6 +197,7 @@ export const methods = {
           this.hasMoreData()
         })
         .finally(() => {
+          this.clear_selected()
           this.loading = false
           this.scrollToBottom()
           this.$event.$emit('btnloading_off', false)
@@ -210,6 +218,7 @@ export const methods = {
           this.hasMoreData()
         })
         .finally(() => {
+          this.clear_selected()
           this.loading = false
           this.scrollToBottom()
           this.$event.$emit('btnloading_off', false)
@@ -242,6 +251,7 @@ export const methods = {
             this.table_config.refresh_table_message
           )
           this.loading = false
+          this.clear_selected()
           this.items_response = response.data
           this.items = response.data.data
         })
@@ -266,7 +276,7 @@ export const methods = {
       }
     },
     toggleAll() {
-      if (this.selected.length) this.selected = []
+      if (this.selected.length) this.clear_selected()
       else this.selected = this.items.slice()
     },
 
