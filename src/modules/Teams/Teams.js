@@ -104,7 +104,7 @@ export default {
       }
     },
 
-    show_add_group_dialog(){
+    show_add_group_dialog() {
       this.$refs.add_group_dialog.openDialog()
     },
 
@@ -114,14 +114,15 @@ export default {
         this.$refs.add_group_dialog.cancel()
         return
       }
-      request.post('api/groups', item)
-      .then(({data}) => {
-        this.$event.$emit('new-user-group-added', data)
-        this.$event.$emit('open_snackbar', 'New user group created')
-      })
-      .finally(() => {
-        this.$refs.add_group_dialog.cancel()
-      })
+      request
+        .post('api/groups', item)
+        .then(({ data }) => {
+          this.$event.$emit('new-user-group-added', data)
+          this.$event.$emit('open_snackbar', 'New user group created')
+        })
+        .finally(() => {
+          this.$refs.add_group_dialog.cancel()
+        })
     }
   }
 }

@@ -6,6 +6,7 @@ import Actions from '@/common/VueTable/Actions.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import TaskDialog from './components/TasksDialog/TasksDialog.vue'
+import makerequest from '@/services/makeRequestTo'
 
 export default {
   mixins: [list_functionality],
@@ -17,6 +18,8 @@ export default {
   },
 
   data: () => ({
+    template_name: '',
+    milestone_name: '',
     headers: [
       { text: 'Title', value: 'title' },
       { text: 'Description', value: 'description' },
@@ -51,11 +54,32 @@ export default {
         },
         { text: 'Tasks', disabled: true, router_name: null }
       ]
+    },
+    table_title() {
+      if (this.milestone_name && this.template_name) {
+        return this.template_name + ': ' + this.milestone_name
+      }
+      return ''
     }
   },
 
   created() {
     this.fill_table_via_url(this.dynamic_api, true)
+    makerequest
+      .get_milestones(`api/template/${this.template_id}`)
+      .then(({ data }) => {
+        this.template_name = data.name
+      })
+      .finally(() => (this.loading = false))
+
+    makerequest
+      .get_milestones(
+        `api/template/${this.template_id}/milestone/${this.milestone_id}`
+      )
+      .then(({ data }) => {
+        this.milestone_name = data.title
+      })
+      .finally(() => (this.loading = false))
   },
 
   methods: {

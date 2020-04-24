@@ -40,7 +40,8 @@ export default {
     activeReport: null,
     deleteDialog: false,
     deleteReportId: null,
-    reportIdToEdit: null
+    reportIdToEdit: null,
+    reports_selected: ''
   }),
 
   computed: {

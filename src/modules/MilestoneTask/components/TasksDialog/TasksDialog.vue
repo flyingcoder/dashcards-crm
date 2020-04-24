@@ -20,7 +20,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex xs6>
+        <v-flex xs12>
           <v-select
             class="dialog__selectfield d-field"
             label="Select Group"
@@ -34,7 +34,12 @@
           ></v-select>
         </v-flex>
 
-        <v-flex xs6>
+        <v-flex xs12>
+          <v-checkbox
+            v-model="disabled"
+            class="mx-2"
+            label="No Specific Days"
+          ></v-checkbox>
           <v-text-field
             class="dialog__textfield d-field"
             label="Add days"
@@ -44,18 +49,18 @@
             color="#667187"
             filled
             hide-details
+            :disabled="disabled"
           ></v-text-field>
         </v-flex>
 
         <v-flex xs12>
-          <v-textarea
-            class="dialog__textarea d-field"
-            label="Add task description"
-            v-model.trim="description"
-            color="#667187"
-            filled
-            hide-details
-          ></v-textarea>
+          <div class="dialog__textarea d-field">
+            <rich-editor
+              placeholder="Add task description"
+              ref="editor"
+              v-model="quill_editor.description"
+            ></rich-editor>
+          </div>
         </v-flex>
       </v-layout>
     </template>

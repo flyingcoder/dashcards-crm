@@ -1,10 +1,20 @@
+// vue-quill-editor require styles
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+import { quillEditor } from 'vue-quill-editor'
+
+//Components
 import request from '@/services/axios_instance'
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
+import RichEditor from '@/common/RichEditor.vue'
 
 export default {
   name: 'TasksDialog',
   components: {
-    CustomDialog
+    CustomDialog,
+    RichEditor,
+    quillEditor
   },
 
   props: {
@@ -17,11 +27,14 @@ export default {
   data: () => ({
     open: false,
     title: null,
-    description: null,
+    quill_editor: {
+      description: ''
+    },
     status: 'open',
     selected_group: null,
     group_items: [],
-    days_init_value: 1
+    days_init_value: 1,
+    disabled: false
   }),
 
   computed: {
@@ -72,9 +85,9 @@ export default {
     save() {
       const fields_to_save = {
         title: this.title,
-        description: this.description,
+        description: this.quill_editor.description,
         status: this.status,
-        days: this.days,
+        days: this.disabled ? 0 : this.days,
         role_id: this.selected_group
       }
       this.$emit('save', fields_to_save)
@@ -83,9 +96,9 @@ export default {
     update_fields({ fields }) {
       const new_fields = Object.assign({}, fields)
       this.title = new_fields.title
-      this.description = new_fields.description
+      this.$set(this.quill_editor, 'description', new_fields.description)
       this.status = new_fields.status
-      this.days = new_fields.days
+      this.days = this.disabled ? 0 : new_fields.days
       this.selected_group = new_fields.role_id
     },
 

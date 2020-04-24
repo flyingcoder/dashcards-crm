@@ -9,7 +9,7 @@ export const methods = {
       this.pagination.total = 0
       this.noMoreData = false
     },
-    clear_selected(){
+    clear_selected() {
       this.selected = []
       this.$event.$emit('clear_selected', [])
     },
@@ -18,9 +18,7 @@ export const methods = {
         .then(response => {
           const new_items = response.data
           if (Array.isArray(new_items)) {
-            new_items
-              .reverse()
-              .forEach(new_item => this.items.push(new_item))
+            new_items.reverse().forEach(new_item => this.items.push(new_item))
           } else {
             this.items.push(new_items)
           }

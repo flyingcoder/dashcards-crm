@@ -2,6 +2,8 @@
 
 @include pagePadding ('.reports');
 
+@include emptyTable('.empty-reports');
+
 .custom-dialog {
   .dialog__link, .dialog__textfield{
     margin: 10px 5px;

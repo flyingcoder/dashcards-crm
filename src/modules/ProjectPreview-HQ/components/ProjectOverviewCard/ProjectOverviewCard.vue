@@ -110,7 +110,9 @@ export default {
     this.loading = true
     request
       .get('api/projects/' + this.id)
-      .then(({ data }) => { this.project = data })
+      .then(({ data }) => {
+        this.project = data
+      })
       .finally(() => (this.loading = false))
   },
 

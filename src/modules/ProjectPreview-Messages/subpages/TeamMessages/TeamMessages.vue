@@ -4,9 +4,13 @@
       <v-row no-gutters class="pa-3" v-if="noMoreData === false && !loading">
         <v-col md="12" xs="12">
           <v-spacer></v-spacer>
-          <v-btn text block
-          class="view__more_btn overline" 
-          @click="load_previous">Load Previous Messages</v-btn>
+          <v-btn
+            text
+            block
+            class="view__more_btn overline"
+            @click="load_previous"
+            >Load Previous Messages</v-btn
+          >
           <v-spacer></v-spacer>
         </v-col>
       </v-row>
@@ -91,7 +95,9 @@ export default {
   created() {
     this.loading = true
     this.fill_table_via_url(`api/projects/${this.id}/messages?type=team`)
-    setTimeout(() => { this.scrollToBottomDiv() } ,1 )
+    setTimeout(() => {
+      this.scrollToBottomDiv()
+    }, 1)
   },
 
   methods: {
@@ -103,7 +109,7 @@ export default {
         }
       }, 1)
     },
-    load_previous(){
+    load_previous() {
       this.load_more_via_url(`api/projects/${this.id}/messages?type=team`)
     },
     add_new_message(message) {
@@ -139,14 +145,16 @@ export default {
         message,
         from_id: this.loggedUser.id
       }
-      apiTo.send_message(this.id, payload).then(({ data }) => {
-        this.add_new_message(data)
-      })
-      .finally(() => {
-        this.scrollToBottomDiv()
-      })
+      apiTo
+        .send_message(this.id, payload)
+        .then(({ data }) => {
+          this.add_new_message(data)
+        })
+        .finally(() => {
+          this.scrollToBottomDiv()
+        })
     },
-    messages (items) {
+    messages(items) {
       return _cloneDeep(items).reverse()
     }
   }

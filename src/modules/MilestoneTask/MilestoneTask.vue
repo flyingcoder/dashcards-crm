@@ -33,17 +33,13 @@
     <v-layout>
       <v-flex xs12>
         <table-header :paths="paths" @click="add_dialog = true" />
-        <v-progress-linear
-          v-show="loading"
-          :indeterminate="true"
-        ></v-progress-linear>
 
         <VueTable
           :items="items"
           :headers="headers"
           :showRowActions="true"
           :loading="loading"
-          title="Tasks"
+          :title="table_title"
           :key="componentKey"
           :noMoreData="noMoreData"
           @load-more="load_more"
@@ -51,11 +47,12 @@
         >
           <template v-slot:row-slot="{ item }">
             <td class="text-xs-left text-cap">{{ item.title }}</td>
-            <td class="text-xs-left textarea-cap">
-              {{ short_description_text(item.description) }}
-            </td>
+            <td
+              class="text-xs-left textarea-cap desc"
+              v-html="short_description_text(item.description)"
+            ></td>
             <td class="text-xs-left text-cap">{{ item.status }}</td>
-            <td class="text-xs-left">{{ item.days }}</td>
+            <td class="text-xs-left">{{ item.days === 0 ? '' : item.days }}</td>
             <Actions
               :item="item"
               :hasView="false"
@@ -86,5 +83,10 @@
   @include customTableRow; //css used for styling the last row of the table
 
   @include emptyTable('.empty-task');
+}
+</style>
+<style scoped>
+>>> .desc p {
+  margin-bottom: 0;
 }
 </style>

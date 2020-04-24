@@ -4,22 +4,25 @@
       <v-row no-gutters class="pa-3">
         <v-spacer></v-spacer>
         <v-col>
-          <v-btn text 
-          v-if="noMoreData === false && !loading"
-          class="view__more_btn overline" 
-          @click="load_previous">Load Previous Messages</v-btn>
+          <v-btn
+            text
+            v-if="noMoreData === false && !loading"
+            class="view__more_btn overline"
+            @click="load_previous"
+            >Load Previous Messages</v-btn
+          >
         </v-col>
         <v-spacer></v-spacer>
         <v-col md="1">
           <v-menu bottom left offset-y>
             <template v-slot:activator="{ on }">
-              <v-btn  outlined icon v-on="on" >
+              <v-btn outlined icon v-on="on">
                 <v-icon small>settings</v-icon>
               </v-btn>
             </template>
 
             <v-list>
-              <v-list-item @click="open_manage_member_dialog" >
+              <v-list-item @click="open_manage_member_dialog">
                 <v-list-item-title>Manage Members</v-list-item-title>
               </v-list-item>
             </v-list>
@@ -95,19 +98,21 @@ export default {
     loading: false,
     message: null,
     can_message: false,
-    activeChat : null
+    activeChat: null
   }),
 
   computed: {
     loggedUser() {
       return this.$store.getters.user
-    },
+    }
   },
 
   created() {
     this.loading = true
     this.fill_table_via_url(`api/projects/${this.id}/messages?type=client`)
-    setTimeout(() => { this.scrollToBottomDiv() } ,1 )
+    setTimeout(() => {
+      this.scrollToBottomDiv()
+    }, 1)
     this.getConvoDetails(this.id)
   },
   mounted() {
@@ -118,12 +123,11 @@ export default {
     this.$pusher.unsubscribe(`private-project.client-message.${this.id}`)
   },
   methods: {
-    open_manage_member_dialog(){
+    open_manage_member_dialog() {
       this.$refs.manage_group_members_dialog.open_dialog()
     },
     getConvoDetails(id) {
-      apiTo.get_client_convo_details(id)
-      .then(({ data }) => {
+      apiTo.get_client_convo_details(id).then(({ data }) => {
         this.activeChat = data
       })
     },
@@ -135,7 +139,7 @@ export default {
         }
       }, 1)
     },
-    load_previous(){
+    load_previous() {
       this.load_more_via_url(`api/projects/${this.id}/messages?type=client`)
     },
     add_new_message(message) {
@@ -175,14 +179,16 @@ export default {
         message,
         from_id: this.loggedUser.id
       }
-      apiTo.send_message(this.id, payload).then(({ data }) => {
-        this.add_new_message(data)
-      }).
-      finally(() => {
-        this.scrollToBottomDiv()
-      })
+      apiTo
+        .send_message(this.id, payload)
+        .then(({ data }) => {
+          this.add_new_message(data)
+        })
+        .finally(() => {
+          this.scrollToBottomDiv()
+        })
     },
-    messages (items) {
+    messages(items) {
       return _cloneDeep(items).reverse()
     }
   }

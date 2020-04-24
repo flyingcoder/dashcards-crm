@@ -104,21 +104,29 @@ export default {
       () => (this.add_new_member_dialog = true)
     )
   },
-  computed : {
+  computed: {
     loggeduser() {
       return this.$store.getters.user
     }
   },
   methods: {
-    can_edit(proj){
-      if (this.loggeduser.is_admin) { return true }
-      let found = proj.project_managers.find(ii => ii.user_id === this.loggeduser.id)
+    can_edit(proj) {
+      if (this.loggeduser.is_admin) {
+        return true
+      }
+      let found = proj.project_managers.find(
+        ii => ii.user_id === this.loggeduser.id
+      )
       if (found) return true
       return false
     },
-    can_delete(proj){
-      if (this.loggeduser.is_admin) { return true }
-      let found = proj.project_managers.find(ii => ii.user_id === this.loggeduser.id)
+    can_delete(proj) {
+      if (this.loggeduser.is_admin) {
+        return true
+      }
+      let found = proj.project_managers.find(
+        ii => ii.user_id === this.loggeduser.id
+      )
       if (found) return true
       return false
     },
@@ -168,7 +176,7 @@ export default {
       this.add_item('add_new_project', event)
       this.$refs.add_dialog.clear_and_close()
     },
-    show_add_group_dialog(){
+    show_add_group_dialog() {
       this.$refs.add_group_dialog.openDialog()
     },
     save_new_user_group(item) {
@@ -177,14 +185,15 @@ export default {
         this.$refs.add_group_dialog.cancel()
         return
       }
-      request.post('api/groups', item)
-      .then(({data}) => {
-        this.$event.$emit('new-user-group-added', data)
-        this.$event.$emit('open_snackbar', 'New user group created')
-      })
-      .finally(() => {
-        this.$refs.add_group_dialog.cancel()
-      })
+      request
+        .post('api/groups', item)
+        .then(({ data }) => {
+          this.$event.$emit('new-user-group-added', data)
+          this.$event.$emit('open_snackbar', 'New user group created')
+        })
+        .finally(() => {
+          this.$refs.add_group_dialog.cancel()
+        })
     }
   }
 }

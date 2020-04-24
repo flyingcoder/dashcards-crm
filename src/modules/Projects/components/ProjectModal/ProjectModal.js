@@ -258,17 +258,29 @@ export default {
         name: new_fields.service_name,
         id: new_fields.service_id
       })
-      this.$set(  this.date_pickers, 'start_date', new_fields.started_at.split(' ')[0] )
+      this.$set(
+        this.date_pickers,
+        'start_date',
+        new_fields.started_at.split(' ')[0]
+      )
       this.$set(this.date_pickers, 'end_date', new_fields.end_at.split(' ')[0])
       this.$set(this.client, 'selected', new_fields.project_client.user)
-      this.$set(this.manager, 'selected', new_fields.project_managers.map(member => member.user))
-      this.$set(this.members,'selected',new_fields.project_members.map(member => member.user))
+      this.$set(
+        this.manager,
+        'selected',
+        new_fields.project_managers.map(member => member.user)
+      )
+      this.$set(
+        this.members,
+        'selected',
+        new_fields.project_members.map(member => member.user)
+      )
       this.project_title = new_fields.title
       this.$set(this.quill_editor, 'content', new_fields.description)
     },
 
     clear_and_close() {
-      this.members.selected =  this.manager.selected = []
+      this.members.selected = this.manager.selected = []
       this.client.selected = null
       this.quill_editor.content = this.project_title = ''
       ;(this.service.selected = null),

@@ -126,7 +126,10 @@ export default {
           action: 'globalTimer',
           can_view: () => {
             if (this.user.is_admin) return true
-            return this.user.can.hasOwnProperty('hq_timers_own') || this.user.can.hasOwnProperty('timers_own')
+            return (
+              this.user.can.hasOwnProperty('hq_timers_own') ||
+              this.user.can.hasOwnProperty('timers_own')
+            )
           }
         },
         {

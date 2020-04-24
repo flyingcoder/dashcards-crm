@@ -17,7 +17,8 @@ export default {
     open: false,
     title: null,
     status: null,
-    days_init_value: 1
+    days_init_value: 1,
+    disabled: false
   }),
 
   computed: {
@@ -58,16 +59,19 @@ export default {
       const fields_to_save = {
         title: this.title,
         status: this.status,
-        days: this.days
+        days: this.disabled ? 0 : this.days
       }
+
       this.$emit('save', fields_to_save)
+      console.log(fields_to_save)
     },
 
     update_fields({ fields }) {
       const new_fields = Object.assign({}, fields)
       this.title = new_fields.title
       this.status = new_fields.status
-      this.days = new_fields.days
+      this.days = this.disabled ? 0 : new_fields.days
+      console.log(new_fields)
     },
 
     clear_and_close() {

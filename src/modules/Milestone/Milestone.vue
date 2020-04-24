@@ -31,7 +31,7 @@
           :items="items"
           :headers="headers"
           :showRowActions="true"
-          title="Milestones"
+          :title="template_name"
           :key="componentKey"
           :loading="loading"
           :noMoreData="noMoreData"
@@ -46,10 +46,9 @@
               {{ item.title }}
             </td>
             <td class="text-xs-left text-cap">{{ item.status }}</td>
-            <td class="text-xs-left">{{ item.days }}</td>
+            <td class="text-xs-left">{{ item.days === 0 ? '' : item.days }}</td>
             <Actions
               :item="item"
-              :hasEdit="false"
               :permissions="$_permissions.get('hq_milestones')"
               @edit="open_edit_dialog(item)"
               @delete="open_delete_dialog(item)"

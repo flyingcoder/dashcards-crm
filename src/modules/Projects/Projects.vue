@@ -1,9 +1,12 @@
 <template>
   <div class="projects">
-    <table-header :paths="paths" :noListButton="false"  :noGridButton="false" 
-    @click="add_dialog = true" 
-    @click-list-view="view = `list`"
-    @click-grid-view="view =  `grid`"
+    <table-header
+      :paths="paths"
+      :noListButton="false"
+      :noGridButton="false"
+      @click="add_dialog = true"
+      @click-list-view="view = `list`"
+      @click-grid-view="view = `grid`"
     />
 
     <ProjectModal
@@ -71,61 +74,90 @@
         :indeterminate="true"
       ></v-progress-linear>
       <v-col md="3" sm="4" xs="12" v-for="item in items" class="pa-2">
-        <v-card class="mx-auto" >
+        <v-card class="mx-auto">
           <v-card-title>
-              <Avatar :user="item.project_client.user"></Avatar>
+            <Avatar :user="item.project_client.user"></Avatar>
           </v-card-title>
 
           <v-divider></v-divider>
 
-          <v-card-title class="title" @click="navigate_to_view_project(item.id)">
-            {{item.title | ucwords }}
+          <v-card-title
+            class="title"
+            @click="navigate_to_view_project(item.id)"
+          >
+            {{ item.title | ucwords }}
           </v-card-title>
           <v-card-subtitle class="subtitle-2">
-           {{ item.service_name }}
+            {{ item.service_name }}
             <p class="caption text-left">
-             {{ item.started_at | format }} - {{ item.end_at | format }}
+              {{ item.started_at | format }} - {{ item.end_at | format }}
             </p>
           </v-card-subtitle>
           <v-card-text>
             <v-row>
-            <v-col>
-              <h6 class="text-center caption">Managers</h6>
-              <Avatars deep :items="item.project_managers" :count="2"></Avatars>
-            </v-col>
-            <v-col>
-              <h6 class="text-center caption">Members</h6>
-              <Avatars deep :items="item.project_members" :count="2"></Avatars>
-            </v-col>
-          </v-row>
+              <v-col>
+                <h6 class="text-center caption">Managers</h6>
+                <Avatars
+                  deep
+                  :items="item.project_managers"
+                  :count="2"
+                ></Avatars>
+              </v-col>
+              <v-col>
+                <h6 class="text-center caption">Members</h6>
+                <Avatars
+                  deep
+                  :items="item.project_members"
+                  :count="2"
+                ></Avatars>
+              </v-col>
+            </v-row>
           </v-card-text>
 
           <v-card-actions>
             <v-menu top offset-y>
-            <template v-slot:activator="{ on }">
-              <v-btn icon v-on="on" >
-                <v-icon>mdi-dots-vertical</v-icon>
-              </v-btn>
-            </template>
+              <template v-slot:activator="{ on }">
+                <v-btn icon v-on="on">
+                  <v-icon>mdi-dots-vertical</v-icon>
+                </v-btn>
+              </template>
 
-            <v-list dense>
-              <v-list-item v-if="can_edit(item)" @click="open_edit_dialog(item)" >
-                <v-list-item-title><v-icon small left>edit</v-icon> Edit</v-list-item-title>
-              </v-list-item>
-              <v-list-item v-if="can_delete(item)" @click="open_delete_dialog(item)" >
-                <v-list-item-title><v-icon small left>delete</v-icon> Delete</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="navigate_to_view_project(item.id)" >
-                <v-list-item-title><v-icon small left>pageview</v-icon> View</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-            <v-btn text @click="navigate_to_view_project(item.id)"> Go to Project </v-btn>
+              <v-list dense>
+                <v-list-item
+                  v-if="can_edit(item)"
+                  @click="open_edit_dialog(item)"
+                >
+                  <v-list-item-title
+                    ><v-icon small left>edit</v-icon> Edit</v-list-item-title
+                  >
+                </v-list-item>
+                <v-list-item
+                  v-if="can_delete(item)"
+                  @click="open_delete_dialog(item)"
+                >
+                  <v-list-item-title
+                    ><v-icon small left>delete</v-icon>
+                    Delete</v-list-item-title
+                  >
+                </v-list-item>
+                <v-list-item @click="navigate_to_view_project(item.id)">
+                  <v-list-item-title
+                    ><v-icon small left>pageview</v-icon>
+                    View</v-list-item-title
+                  >
+                </v-list-item>
+              </v-list>
+            </v-menu>
+            <v-btn text @click="navigate_to_view_project(item.id)">
+              Go to Project
+            </v-btn>
             <v-spacer></v-spacer>
-             <v-tooltip left>
+            <v-tooltip left>
               <template v-slot:activator="{ on }">
                 <v-btn icon @click="item.expand = !item.expand" v-on="on">
-                  <v-icon>{{ item.expand ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                  <v-icon>{{
+                    item.expand ? 'mdi-chevron-up' : 'mdi-chevron-down'
+                  }}</v-icon>
                 </v-btn>
               </template>
               <span>{{ item.expand ? 'Hide Details' : 'Show Details' }}</span>
@@ -135,8 +167,7 @@
           <v-expand-transition>
             <div v-show="item.expand">
               <v-divider></v-divider>
-              <v-card-text v-html="item.description">
-              </v-card-text>
+              <v-card-text v-html="item.description"> </v-card-text>
             </div>
           </v-expand-transition>
         </v-card>
@@ -144,10 +175,14 @@
       <v-col md="12">
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn tile text v-if="noMoreData === true" disabled >NO MORE DATA</v-btn >
-          <v-btn tile text :loading="btnloading" v-else @click="load_more">LOAD MORE</v-btn>
+          <v-btn tile text v-if="noMoreData === true" disabled
+            >NO MORE DATA</v-btn
+          >
+          <v-btn tile text :loading="btnloading" v-else @click="load_more"
+            >LOAD MORE</v-btn
+          >
           <v-spacer></v-spacer>
-      </v-card-actions>
+        </v-card-actions>
       </v-col>
     </v-card>
 

@@ -6,6 +6,7 @@ import Actions from '@/common/VueTable/Actions.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import MilestoneDialog from './components/MilestoneDialog/MilestoneDialog.vue'
+import makerequest from '@/services/makeRequestTo'
 
 export default {
   name: 'Milestone',
@@ -17,6 +18,7 @@ export default {
   },
 
   data: () => ({
+    template_name: '',
     paths: [
       { text: 'Dashboard', disabled: false, router_name: 'default-content' },
       { text: 'Templates', disabled: false, router_name: 'templates' },
@@ -44,6 +46,10 @@ export default {
 
   created() {
     this.fill_table_via_url(this.dynamic_api)
+    makerequest
+      .get_milestones(`api/template/${this.id}`)
+      .then(({ data }) => (this.template_name = data.name))
+      .finally(() => (this.loading = false))
   },
 
   methods: {

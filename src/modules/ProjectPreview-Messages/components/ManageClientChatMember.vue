@@ -111,8 +111,8 @@
 </style>
 
 <script>
-  import { api_to } from '@/modules/Chat/api'
-  import _cloneDeep from 'lodash/cloneDeep'
+import { api_to } from '@/modules/Chat/api'
+import _cloneDeep from 'lodash/cloneDeep'
 
 export default {
   name: 'ManageClientChatMember',
@@ -210,5 +210,4 @@ export default {
     }
   }
 }
-
 </script>

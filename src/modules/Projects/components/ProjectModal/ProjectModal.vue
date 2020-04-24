@@ -64,7 +64,13 @@
                 </v-list>
               </v-menu>
               <div class="choosen" v-if="client.selected">
-                <v-chip close @click:close="client.selected = null" outlined label class="mt-1 tile">
+                <v-chip
+                  close
+                  @click:close="client.selected = null"
+                  outlined
+                  label
+                  class="mt-1 tile"
+                >
                   <v-avatar left>
                     <v-img :src="client.selected.image_url"></v-img>
                   </v-avatar>
@@ -112,7 +118,13 @@
                 </v-list>
               </v-menu>
               <div class="choosen" v-if="service.selected">
-                <v-chip close @click:close="service.selected = null" outlined label class="mt-1 tile">
+                <v-chip
+                  close
+                  @click:close="service.selected = null"
+                  outlined
+                  label
+                  class="mt-1 tile"
+                >
                   {{ service.selected.name | truncate(18) }}
                 </v-chip>
               </div>

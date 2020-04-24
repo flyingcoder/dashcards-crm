@@ -55,7 +55,6 @@
       @save="save_new_user_group"
     />
 
-    
     <VueTable
       v-if="view === 'list'"
       :items="items"

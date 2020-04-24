@@ -21,7 +21,7 @@ export default {
     id: [Number, String],
     dashboard: Boolean,
     viewMoreLink: Object,
-    isExpanded: { type : Boolean, default: false }
+    isExpanded: { type: Boolean, default: false }
   },
 
   data: () => ({

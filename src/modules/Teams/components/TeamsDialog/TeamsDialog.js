@@ -123,7 +123,7 @@ export default {
       if (this.isEditDialog) {
         fields.id = this.fieldsToEdit.id
       }
-        fields.admin_set_password = false
+      fields.admin_set_password = false
       if (this.show_create_password) {
         fields.admin_set_password = true
         fields.password = this.password
@@ -138,7 +138,6 @@ export default {
       this.password = this.repeat_password = ''
       this.rate = this.address = ''
       this.cancel() //close the modal
-    },
-    
+    }
   }
 }

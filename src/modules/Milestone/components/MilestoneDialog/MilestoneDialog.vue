@@ -20,7 +20,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex xs12 sm6>
+        <v-flex xs12>
           <v-select
             class="dialog__selectfield d-field"
             label="Status"
@@ -32,7 +32,12 @@
           ></v-select>
         </v-flex>
 
-        <v-flex xs12 sm6>
+        <v-flex xs12>
+          <v-checkbox
+            v-model="disabled"
+            class="mx-2"
+            label="No Specific Days"
+          ></v-checkbox>
           <v-text-field
             class="dialog__textfield d-field"
             label="Days"
@@ -41,6 +46,7 @@
             filled
             hide-details
             color="blue"
+            :disabled="disabled"
           ></v-text-field>
         </v-flex>
       </v-layout>

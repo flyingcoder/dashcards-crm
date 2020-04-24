@@ -11,7 +11,7 @@ export default {
   props: {
     dialog: Boolean,
     title: String,
-    isEditDialog: { type: Boolean, default : false },
+    isEditDialog: { type: Boolean, default: false },
     fieldsToEdit: { type: Object, default: () => {} }
   },
 
@@ -64,11 +64,11 @@ export default {
       this.get_current_group()
       this.open = true
     },
-    get_current_group(){
+    get_current_group() {
       request
-          .get(`api/groups?all=true`)
-          .then(({ data }) => (this.group_items = data))
-        },
+        .get(`api/groups?all=true`)
+        .then(({ data }) => (this.group_items = data))
+    },
     save() {
       if (this.validation_passed()) {
         const fields_to_save = {
