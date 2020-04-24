@@ -1,24 +1,34 @@
 <template>
-  <v-flex sm3 xs12 class="users-list">
-    <div class="sidebar__chatlist">
-      <div class="chatlist-header user">User List</div>
+  <v-card
+    class="mx-auto users-list"
+    :width="240"
+  >
+    <v-toolbar color="#3b589e" dark >
+      <v-icon large left>people</v-icon>
 
-      <div class="friend__list">
-        <div class="friend user" v-for="user of users" :key="user.id">
-          <div class="user__img">
-            <v-img :src="user.image_url" />
-            <span class="status" :class="is_online(user)"></span>
-          </div>
+      <v-toolbar-title class="subtitle">Project Users</v-toolbar-title>
 
-          <span class="user__name">{{ user.first_name }}</span>
-        </div>
-      </div>
-
-      <div class="view__more">
-        <v-btn text normal class="view__more_btn">VIEW MORE</v-btn>
-      </div>
-    </div>
-  </v-flex>
+      <v-spacer></v-spacer>
+    </v-toolbar>
+    <v-card-text>
+      <!-- <v-divider></v-divider> -->
+      <v-list subheader dense>
+        <v-list-item
+          v-for="user of users" 
+          :key="user.id"
+        >
+          <v-list-item-content>
+            <Avatar :user="user"></Avatar>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn text disabled>Load More</v-btn>
+      <v-spacer></v-spacer>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
@@ -30,32 +40,34 @@ export default {
   },
 
   data: () => ({
-    users: []
+    users: [],
   }),
 
   computed: {
     loggedUser() {
       return this.$store.getters.user
-    },
-    onlineUsers() {
-      return this.$store.getters['onlineUsers/all_users']
     }
   },
 
   created() {
     getMembers(this.id).then(({ data }) => (this.users = data.data))
-  },
-  methods: {
-    is_online(user) {
-      var is_online = this.onlineUsers.findIndex(ou => ou.id === user.id)
-      return ~is_online ? 'online' : 'offline'
-    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '~@/sass/_variables';
+
+.online {
+  background-color: $green;
+}
+
+.offline {
+  background-color: $gray;
+}
+
+
+
 
 .users-list {
   .sidebar__chatlist {
@@ -87,14 +99,6 @@ export default {
       height: 15px;
       border: 2px solid $lightViolete;
       border-radius: 50%;
-    }
-
-    .online {
-      background-color: $green;
-    }
-
-    .offline {
-      background-color: $gray;
     }
 
     .dnd {

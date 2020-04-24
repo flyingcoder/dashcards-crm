@@ -20,10 +20,18 @@ export const api_to = {
     return request.get(`api/chat/private/${id}?page=${page + 1}`)
   },
   send_message(payload) {
-    return request.post(`api/chat/private`, payload)
+    return request.post(`api/chat/private`, payload , {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
   },
   send_group_message(payload) {
-    return request.post(`api/chat/group/private`, payload)
+    return request.post(`api/chat/group/private`, payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
   },
   save_group(payload) {
     return request.post(`api/chat/group`, payload)

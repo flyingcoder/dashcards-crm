@@ -32,7 +32,7 @@
     </v-dialog>
 
     <v-card class="p-2">
-      <v-row class="py-2 px-1">
+      <v-row no-gutters class="pa-3">
         <v-col md="10" sm="9" xs="12">
           <ToolbarItem
             v-for="item of toolbarItems"
@@ -44,7 +44,8 @@
             @click="filter = item.type"
           ></ToolbarItem>
         </v-col>
-        <v-col md="2" sm="3" xs="12">
+        <v-spacer></v-spacer>
+        <v-col>
           <v-spacer></v-spacer>
           <v-btn icon text right @click="setPreferredView('list')"
             ><v-icon :color="view == 'list' ? 'primary' : ''"
@@ -58,21 +59,19 @@
           >
         </v-col>
       </v-row>
-
       <v-card v-if="view == 'grid'">
         <v-container fluid grid-list-md>
           <v-layout wrap v-if="filteredItems.length">
-            <v-flex v-for="item in filteredItems" :key="item.id" xs12 sm4 md3>
-              <v-card class="xs-12 sm-3">
-                <v-img
-                  :src="item.thumb_url"
-                  @click="pop(item.public_url)"
-                  height="200px"
-                  @error="altImage(item)"
-                >
-                </v-img>
+            <v-col v-for="item in filteredItems" :key="item.id" xs="12" sm="4" md="3">
+              <v-card>
+                <Media
+                  :height="150"
+                  :media="item"
+                  @click-main="pop(item.public_url)"
+                ></Media>
                 <v-card-text>
-                  <v-list-item two-line>
+                  <v-list dense class="pa-0">
+                  <v-list-item two-line class="pa-0">
                     <v-list-item-content>
                       <v-list-item-subtitle>
                         <div class="break-word-container" :title="item.name">
@@ -87,14 +86,15 @@
                       </v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
+                </v-list>
                 </v-card-text>
+
                 <v-card-actions>
-                  <span class="text-upper">{{
+                  <span class="overline">{{
                     item.custom_properties.ext
                   }}</span>
                   <v-spacer></v-spacer>
                   <v-btn
-                    fab
                     small
                     depressed
                     title="Download"
@@ -104,7 +104,6 @@
                     <v-icon small>cloud_download</v-icon>
                   </v-btn>
                   <v-btn
-                    fab
                     small
                     depressed
                     title="Go to link"
@@ -116,17 +115,15 @@
                   <v-btn
                     v-if="can_delete"
                     @click="open_delete_dialog(item)"
-                    fab
                     small
-                    text
-                    pressed
+                    depressed
                     title="Delete"
                   >
-                    <img src="@/assets/icons/groups/delete.svg" alt="" />
+                    <v-icon small>delete</v-icon>
                   </v-btn>
                 </v-card-actions>
               </v-card>
-            </v-flex>
+            </v-col>
           </v-layout>
 
           <v-row no-gutters v-if="filteredItems.length">
@@ -147,20 +144,8 @@
             <v-spacer></v-spacer>
           </v-row>
 
-          <div class="justify-content-center empty-files" v-else>
-            <div class="empty-content">
-              <div class="empty-svg">
-                <svg viewBox="0 0 250 250">
-                  <path
-                    d="M37 11l176 0c11,0 20,4 26,11 7,6 11,16 11,26l0 154c0,10 -4,19 -11,26 -2,2 -4,3 -6,5 -17,13 -33,1 -48,-11 -10,-7 -19,-14 -26,-11 -5,2 -9,7 -12,13 -12,18 -31,17 -46,4 -5,-5 -11,-10 -16,-11 -6,-1 -12,4 -19,9 -11,8 -23,17 -39,11 -6,-1 -12,-5 -16,-9 -7,-7 -11,-16 -11,-26l0 -154c0,-10 4,-20 11,-26 6,-7 15,-11 26,-11zm22 108c8,0 15,7 15,15 0,8 -7,15 -15,15 -8,0 -15,-7 -15,-15 0,-8 7,-15 15,-15zm0 -56c8,0 15,7 15,15 0,8 -7,15 -15,15 -8,0 -15,-7 -15,-15 0,-8 7,-15 15,-15zm44 24c-4,0 -7,-4 -7,-8 0,-4 3,-7 7,-7l96 0c4,0 7,3 7,7 0,4 -3,8 -7,8l-96 0zm0 56c-4,0 -7,-4 -7,-8 0,-4 3,-7 7,-7l96 0c4,0 7,3 7,7 0,4 -3,8 -7,8l-96 0zm129 70c2,-3 3,-7 3,-11l0 -154c0,-6 -2,-12 -6,-16 -4,-4 -10,-6 -16,-6l-176 0c-6,0 -12,2 -16,6 -4,4 -6,10 -6,16l0 154c0,6 2,11 6,15 1,2 3,3 4,3 13,8 23,1 32,-6 9,-7 18,-13 30,-12 10,2 17,8 24,15 8,7 17,8 24,-1 4,-8 9,-15 19,-19 14,-6 27,3 39,13 13,10 26,20 39,3z"
-                  />
-                </svg>
-              </div>
-              <div class="empty-text">
-                No file found
-              </div>
-            </div>
-          </div>
+          <Empty headline="No file found" v-else></Empty>
+
         </v-container>
       </v-card>
 
@@ -179,13 +164,12 @@
       >
         <template v-slot:row-slot="{ item }">
           <td @click="pop(item.public_url)">
-            <v-img
-              class="my-1"
-              :src="item.thumb_url"
-              width="50px"
-              height="50px"
-              @error="altImage(item.item)"
-            ></v-img>
+            <Media
+              :height="50"
+              :width="50"
+              :media="item"
+              size="lg"
+            ></Media>
           </td>
           <td class="text-upper">{{ item.custom_properties.ext }}</td>
           <td class="text-cap">{{ item.name }}</td>
@@ -242,4 +226,5 @@
   border: none;
   background-color: #fff;
 }
+
 </style>

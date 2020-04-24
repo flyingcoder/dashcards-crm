@@ -10,6 +10,7 @@ import CustomDropzone from '@/common/CustomDropzone.vue'
 import LinkDialog from './components/LinkDialog.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import ToolbarItem from './components/ToolbarItem.vue'
+import Empty from '@/common/Empty.vue'
 
 export default {
   name: 'FilesTab',
@@ -22,7 +23,8 @@ export default {
     CustomDropzone,
     LinkDialog,
     DeleteDialog,
-    ToolbarItem
+    ToolbarItem,
+    Empty
   },
 
   props: {
@@ -51,6 +53,7 @@ export default {
       refresh_table_message: 'Table refreshed',
       refresh_table_api_name: 'paginate_tab_files_table'
     },
+    btnloading : false,
     url: '',
     dialog: false,
     filter: 'all',
@@ -108,7 +111,7 @@ export default {
     filteredItems() {
       if (this.filter === 'all') return this.items
       return this.items.filter(item =>
-        item.collection_name.includes(this.filter)
+        item.category.includes(this.filter)
       )
     },
 
@@ -241,6 +244,6 @@ export default {
 
     goto_link(url) {
       window.open(url)
-    }
+    },
   }
 }

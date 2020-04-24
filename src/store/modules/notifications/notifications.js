@@ -35,10 +35,12 @@ const mutations = {
     state.notification.unshift(payload)
   },
   removeChat: (state, user) => {
-    const index = state.chat.findIndex(n => n.sender.id === user.id)
-    if (~index) {
-      state.chat.splice(index, 1)
-      state.chat_counts = state.chat.length
+    if (state.chat.length > 0) {
+      const index = state.chat.findIndex(n => n.sender.id === user.id)
+      if (~index) {
+        state.chat.splice(index, 1)
+        state.chat_counts = state.chat.length
+      }
     }
   }
 }

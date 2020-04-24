@@ -10,15 +10,15 @@
       <template v-slot:activator="{ on }">
         <v-avatar
           tile
+          size="50"
           v-on="on"
           class="mr-1 clickable"
           @click="openViewer(media, index, 'video')"
         >
-          <v-img :src="getMediaSrc(media)" outlined>
-            <template v-slot:placeholder>
-              <v-img :src="default_video" :contain="true"></v-img>
-            </template>
-          </v-img>
+          <Media
+            :media="media"
+            size="md"
+          ></Media>
         </v-avatar>
       </template>
       <span>{{ media.name }}</span>
@@ -40,7 +40,10 @@
         >
           <v-img :src="getMediaSrc(media)">
             <template v-slot:placeholder>
-              <v-img :src="default_img" :contain="true"></v-img>
+              <Media
+                :media="media"
+                size="md"
+              ></Media>
             </template>
           </v-img>
         </v-avatar>
@@ -62,11 +65,10 @@
           class="mr-1 clickable"
           @click="openViewer(media, index, 'image')"
         >
-          <v-img :src="getMediaSrc(media)">
-            <template v-slot:placeholder>
-              <v-img :src="default_img" :contain="true"></v-img>
-            </template>
-          </v-img>
+          <Media
+            :media="media"
+            size="md"
+          ></Media>
         </v-avatar>
       </template>
       <span>{{ media.name }}</span>
@@ -86,11 +88,10 @@
           class="mr-1 clickable"
           @click="openViewer(media, index, 'other')"
         >
-          <v-img :src="getMediaSrc(media)">
-            <template v-slot:placeholder>
-              <v-img :src="default_other" :contain="true"></v-img>
-            </template>
-          </v-img>
+          <Media
+            :media="media"
+            size="md"
+          ></Media>
         </v-avatar>
       </template>
       <span>{{ media.name }}</span>

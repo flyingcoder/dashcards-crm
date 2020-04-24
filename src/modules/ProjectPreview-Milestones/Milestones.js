@@ -67,7 +67,10 @@ export default {
       await request
         .post(`api/project/${this.id}/milestone`, milestone)
         .then(({ data }) => this.boxes.push(data))
-        .finally(() => (this.loading = false))
+        .finally(() => {
+          this.loading = false
+          this.$event.$emit('btnloading_off', false)    
+        })
       this.$event.$emit('open_snackbar', 'New Milestone added successfully')
     },
 
@@ -90,6 +93,7 @@ export default {
         .finally(() => (this.loading = false))
       this.$event.$emit('open_snackbar', 'Milestone deleted successfully')
       this.id_to_delete = null
+      this.$event.$emit('btnloading_off', false)    
     },
 
     open_edit_dialog(item_to_edit) {
@@ -113,6 +117,7 @@ export default {
         })
         .finally(() => (this.boxIdInProgress = null))
       this.$event.$emit('open_snackbar', 'Milestone updated successfully')
+      this.$event.$emit('btnloading_off', false)    
       this.edit_item = {
         id: null,
         fields: null
@@ -131,6 +136,7 @@ export default {
         template_id: template
       })
       this.get_dynamic_boxes()
+      this.$event.$emit('btnloading_off', false)    
     },
 
     edit_task({ task, index, box_id }) {

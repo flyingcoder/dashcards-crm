@@ -1,7 +1,11 @@
 <template>
   <div class="message__body team-messages">
+      <v-system-bar lights-out :height="40" v-if="can_manage_members">
+      <v-spacer></v-spacer>
+        <v-btn text small @click="open_manage_member_dialog">Manage Members <v-icon right>settings</v-icon></v-btn>
+    </v-system-bar>
     <div class="messages" ref="messages-container">
-      <v-row no-gutters class="pa-3">
+      <v-row no-gutters class="pa-3" v-if="can_send_message">
         <v-spacer></v-spacer>
         <v-col>
           <v-btn
@@ -13,54 +17,35 @@
           >
         </v-col>
         <v-spacer></v-spacer>
-        <v-col md="1">
-          <v-menu bottom left offset-y>
-            <template v-slot:activator="{ on }">
-              <v-btn outlined icon v-on="on">
-                <v-icon small>settings</v-icon>
-              </v-btn>
-            </template>
-
-            <v-list>
-              <v-list-item @click="open_manage_member_dialog">
-                <v-list-item-title>Manage Members</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
+      </v-row>
+      <v-progress-linear
+          v-if="loading"
+          :indeterminate="true"
+        ></v-progress-linear>
+      <v-row no-gutters v-if="items.length && can_send_message">
+        <v-col md="12" class="px-3 py-2" style="min-height: 350px;">
+          <Message
+            v-for="message in messages(items)"
+            :message="message"
+            :key="message.id"
+          ></Message>
         </v-col>
       </v-row>
-      <Loader :loading="loading" />
-      <template v-if="items.length">
-        <SingleMessage
-          v-for="message of messages(items)"
-          :key="message.id"
-          :is-my-message="message.sender.id === loggedUser.id"
-          :message="message"
-        />
-      </template>
+      <div class="no-messages" v-else-if="!can_send_message">
+        <Empty headline="Client messages unavailable! "></Empty>
+      </div>
       <div class="no-messages" v-else>
         <Empty headline="No messages yet"></Empty>
       </div>
     </div>
-    <div class="write">
-      <div class="avatar-wrapper">
-        <img :src="loggedUser.image_url" class="sender-avatar" />
-      </div>
-      <v-text-field
-        v-model="message"
-        class="write__msg"
-        solo
-        flat
-        hide-details
-        color="#667187"
-        label="Type a message..."
-        @keyup.enter="sendMessage($event.target.value)"
-      ></v-text-field>
-      <div class="write__actions">
-        <v-icon class="action insert__emoticon">insert_emoticon</v-icon>
-        <v-icon class="action attach_file">attach_file</v-icon>
-        <v-icon class="action send" @click="sendMessage(message)">send</v-icon>
-      </div>
+    <div class="write px-3">
+      <ChatField 
+        v-if="can_send_message"
+        class="mt-2"
+        :mentionables="mentionables"
+        @typing=""
+        @send-message="sendMessage"
+      ></ChatField>
     </div>
 
     <ManageClientChatMember
@@ -77,42 +62,52 @@ import { list_functionality } from '@/services/list-functionality/list-functiona
 import _cloneDeep from 'lodash/cloneDeep'
 
 // Components
-import Loader from '@/common/BaseComponents/Loader.vue'
-import SingleMessage from '../reusable/SingleMessage.vue'
+
 import Empty from '@/common/Empty.vue'
 import ManageClientChatMember from '@/modules/ProjectPreview-Messages/components/ManageClientChatMember.vue'
+import ChatField from '@/common/ChatBox/ChatField.vue'
+import Message from '@/modules/Chat/components/Message/Message.vue'
 
 export default {
+  name : 'ClientMessages',
   mixins: [global_utils, list_functionality],
   props: {
     id: [Number, String]
   },
   components: {
-    Loader,
-    SingleMessage,
     Empty,
-    ManageClientChatMember
+    ManageClientChatMember,
+    ChatField,
+    Message
   },
 
   data: () => ({
     loading: false,
     message: null,
     can_message: false,
-    activeChat: null
+    activeChat : null,
   }),
 
   computed: {
     loggedUser() {
       return this.$store.getters.user
+    },
+    can_manage_members(){
+      if (this.loggedUser.is_admin) return true
+      var role = Object.values(this.loggedUser.user_roles)[0]
+      return ~role.indexOf('manager') ? true : false
+    },
+    can_send_message() {
+      return this.can_message
+    },
+    mentionables() {
+      if (!this.activeChat) { return [] }
+      return this.activeChat.members
     }
   },
 
   created() {
     this.loading = true
-    this.fill_table_via_url(`api/projects/${this.id}/messages?type=client`)
-    setTimeout(() => {
-      this.scrollToBottomDiv()
-    }, 1)
     this.getConvoDetails(this.id)
   },
   mounted() {
@@ -129,6 +124,9 @@ export default {
     getConvoDetails(id) {
       apiTo.get_client_convo_details(id).then(({ data }) => {
         this.activeChat = data
+      })
+      .finally(() => {
+        this.loading = false
       })
     },
     scrollToBottomDiv() {
@@ -149,13 +147,14 @@ export default {
     },
     user_can_message(can) {
       this.can_message = can
-      if (can) this.$event.$emit('open_snackbar', 'Client chat connected')
+      if (can) {
+        this.fill_table_via_url(`api/projects/${this.id}/messages?type=client`)
+        setTimeout(() => { this.scrollToBottomDiv() } ,1 )
+        console.log('Client chat connected')
+        // this.$event.$emit('open_snackbar', 'Client chat connected') 
+      }
       else
-        this.$event.$emit(
-          'open_snackbar',
-          'Client chat unavailable for you.',
-          'error'
-        )
+        console.log('Client chat unavailable for you.')
     },
     subscribePusher() {
       const client_message_channel = this.$pusher.subscribe(
@@ -171,22 +170,23 @@ export default {
         this.user_can_message(false)
       )
     },
-    sendMessage(message) {
-      if (!message) return
-      this.message = null
-      let payload = {
-        type: 'client',
-        message,
-        from_id: this.loggedUser.id
-      }
-      apiTo
-        .send_message(this.id, payload)
-        .then(({ data }) => {
-          this.add_new_message(data)
-        })
-        .finally(() => {
-          this.scrollToBottomDiv()
-        })
+    sendMessage(data) {
+      let formData = new FormData();
+          formData.append('message', data.message)
+          formData.append('type','client')
+          formData.append('from_id', this.loggedUser.id)
+
+          if (data.files.length > 0) {
+            formData.append('file',  data.files[0])
+          }
+
+      apiTo.send_message(this.id, formData).then(({ data }) => {
+        this.add_new_message(data)
+      }).
+      finally(() => {
+        this.scrollToBottomDiv()
+        this.$event.$emit('btnsending_off', false)
+      })
     },
     messages(items) {
       return _cloneDeep(items).reverse()

@@ -8,6 +8,7 @@ import Message from './components/Message/Message.vue'
 import GroupChatDialog from './components/GroupChatDialog/GroupChatDialog.vue'
 import Empty from '@/common/Empty.vue'
 import ManageMembersDialog from './components/ManageMembersDialog/ManageMembersDialog.vue'
+import ChatField from '@/common/ChatBox/ChatField.vue'
 
 export default {
   name: 'Chat',
@@ -16,7 +17,8 @@ export default {
     Message,
     Empty,
     GroupChatDialog,
-    ManageMembersDialog
+    ManageMembersDialog,
+    ChatField
   },
 
   data: () => ({
@@ -40,7 +42,7 @@ export default {
     userLoading: false,
     current_members: [],
     target: null,
-    view__more_loading: false
+    view__more_loading: false,
   }),
   computed: {
     ...mapGetters('chat', ['unread_messages', 'all_conversations']),
@@ -52,6 +54,15 @@ export default {
     },
     onlineUsers() {
       return this.$store.getters['onlineUsers/all_users']
+    },
+    mentionables(){
+      if (!this.activeChat) {
+        return []
+      }
+      if (this.activeChat.type === `group`) {
+        return this.activeChat.members
+      }
+      return [ this.activeChat ]
     }
   },
   created() {
@@ -94,8 +105,8 @@ export default {
         .then(({ data }) => {
           /*map online to list*/
           var users = data.map(each => {
-            let has = this.onlineUsers.find(us => us.id === each.id)
-            each.is_online = has ? true : false
+            let has = this.onlineUsers.findIndex(us => us.id === each.id)
+            each.is_online = ~has ? true : false
             return each
           })
 
@@ -176,7 +187,6 @@ export default {
       channel.bind(
         `App\\Events\\PrivateChatSent`,
         ({ message, sender, receiver }) => {
-          // console.log(message, sender, receiver )
           const conv = this.all_messages.find(
             conv => conv.conversation_id === message.conversation_id
           )
@@ -196,13 +206,14 @@ export default {
       )
     },
     group_chat_channel(channel) {
-      channel.bind(`App\\Events\\GroupChatSent`, ({ message }) => {
-        if (this.activeChat && this.activeChat.id === message.conversation_id) {
-          this.add_new_message(message)
+      channel.bind(`App\\Events\\GroupChatSent`, data => {
+        console.log(data)
+        if (this.activeChat && this.activeChat.id === data.conversation_id) {
+          this.add_new_message(data)
           this.scrollToBottom()
         } else {
           const grpIndx = this.all_groups.findIndex(
-            grp => grp.id === message.conversation_id
+            grp => grp.id === data.conversation_id
           )
           if (~grpIndx) {
             this.all_groups[grpIndx].message_count += 1
@@ -238,43 +249,58 @@ export default {
         this.$router.push(`/dashboard/team/profile/${user.id}`)
       }
     },
-    sendMessage(message) {
-      if (!message) return
+    sendMessage(data) {
+      if (!data) {
+        this.$event.$emit('btnsending_off', false)
+        return
+      }
       if (this.activeChat.type === 'group') {
-        this.sendGroupMessage(message)
+        this.sendGroupMessage(data)
       } else {
-        this.sendPrivateMessage(message)
+        this.sendPrivateMessage(data)
       }
     },
-    sendGroupMessage(message) {
-      this.message = null
-      let payload = {
-        type: 'group',
-        message,
-        from_id: this.loggeduser.id,
-        convo_id: this.activeChat.id
-      }
+    sendGroupMessage(data) {
+      let formData = new FormData();
+          formData.append('message', data.message)
+          formData.append('type','group')
+          formData.append('from_id', this.loggeduser.id)
+          formData.append('convo_id', this.activeChat.id)
+
+          if (data.files.length > 0) {
+            formData.append('file',  data.files[0])
+          }
+
       api_to
-        .send_group_message(payload)
+        .send_group_message(formData)
         .then(({ data }) => {
           this.add_new_message(data)
         })
-        .finally(() => this.scrollToBottom())
+        .finally(() => {
+          this.scrollToBottom()
+          this.$event.$emit('btnsending_off', false)
+        })
     },
-    sendPrivateMessage(message) {
-      this.message = null
-      let payload = {
-        type: 'private',
-        message,
-        from_id: this.loggeduser.id,
-        to_id: this.activeChat.id
-      }
+    sendPrivateMessage(data) {
+      let formData = new FormData();
+          formData.append('message', data.message)
+          formData.append('type','private')
+          formData.append('from_id', this.loggeduser.id)
+          formData.append('to_id', this.activeChat.id)
+
+        if (data.files.length > 0) {
+          formData.append('file',  data.files[0])
+        }
+
       api_to
-        .send_message(payload)
+        .send_message(formData)
         .then(({ data }) => {
           this.add_new_message(data)
         })
-        .finally(() => this.scrollToBottom())
+        .finally(() => {
+          this.scrollToBottom()
+          this.$event.$emit('btnsending_off', false)
+        })
     },
     add_new_message(message) {
       if (!this.all_messages.some(msg => msg.id === message.id)) {
@@ -308,6 +334,9 @@ export default {
           return a.is_online - b.is_online
         })
         .reverse()
+    },
+    handleTyping(){
+      console.log('typing')
     }
   }
 }

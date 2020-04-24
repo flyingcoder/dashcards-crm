@@ -6,7 +6,7 @@
       <v-spacer></v-spacer>
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
-          <v-btn class="mr-1" small icon v-on="on" @click="go_to_chat"
+          <v-btn class="mr-1" small icon v-on="on" :to="{ name: 'chat' }"
             ><v-icon>mdi-chat</v-icon></v-btn
           >
         </template>

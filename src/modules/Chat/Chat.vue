@@ -25,10 +25,14 @@
                 >{{ loggeduser.first_name }} {{ loggeduser.last_name }}</span
               >
               <v-spacer></v-spacer>
-
-              <v-btn icon @click="$refs.creategroupchat.open_dialog()">
-                <v-icon>add</v-icon>
-              </v-btn>
+              <v-tooltip left>
+                <template v-slot:activator="{ on }">
+                  <v-btn icon v-on="on" @click="$refs.creategroupchat.open_dialog()">
+                    <v-icon>add</v-icon>
+                  </v-btn>
+                </template>
+                <span>New Group</span>
+              </v-tooltip>
             </v-app-bar>
 
             <v-card text class="mx-auto">
@@ -294,29 +298,13 @@
                 ></Empty>
               </div>
 
-              <div class="write" v-if="!cardLoading">
-                <div class="avatar-wrapper">
-                  <img :src="loggeduser.image_url" class="sender-avatar" />
-                </div>
-                <v-text-field
-                  v-model="message"
-                  class="write__msg"
-                  solo
-                  flat
-                  hide-details
-                  color="#667187"
-                  label="Type a message..."
-                  @keyup.enter="sendMessage($event.target.value)"
-                ></v-text-field>
-                <div class="write__actions">
-                  <v-icon class="action insert__emoticon"
-                    >insert_emoticon</v-icon
-                  >
-                  <v-icon class="action attach_file">attach_file</v-icon>
-                  <v-icon class="action send" @click="sendMessage(message)"
-                    >send</v-icon
-                  >
-                </div>
+              <div class="write px-2" v-if="!cardLoading">
+                <ChatField 
+                  class="mt-2"
+                  :mentionables="mentionables"
+                  @typing="handleTyping"
+                  @send-message="sendMessage"
+                ></ChatField>
               </div>
             </v-flex>
           </v-card>

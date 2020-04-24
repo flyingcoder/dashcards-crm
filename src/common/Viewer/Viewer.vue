@@ -71,7 +71,7 @@
                               src: slide.public_url
                             }],
                             controls: true,
-                            height: 400
+                            fluid: true
                           }"
                        :playsinline="true"
                        ></video-player>

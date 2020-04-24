@@ -11,6 +11,7 @@
         <v-avatar color="grey" :size="size">
           <v-img :src="user.image_url" class="hover"></v-img>
         </v-avatar>
+        <v-icon x-small v-on="on" :color="is_online ? `success` : `grey`" class="status">mdi-circle</v-icon>
         <span class="ml-1" v-if="!iconOnly">{{
           displayName | ucwords | truncate
         }}</span>
@@ -79,8 +80,16 @@ export default {
         return this.user.fullname
       }
       return this.display
+    },
+    onlineUsers() {
+      return this.$store.getters['onlineUsers/all_users']
+    },
+    is_online() {
+      var is_online = this.onlineUsers.findIndex(ou => ou.id === this.user.id)
+      return ~is_online ? true : false
     }
   },
+      
   methods: {
     navigate_to_profile() {
       if (typeof this.user.user_roles === 'undefined') {
@@ -98,12 +107,17 @@ export default {
     },
     navigate_to_email() {
       //todo
-    }
+    },
   }
 }
 </script>
 <style scoped>
 >>> .hover {
   cursor: pointer;
+}
+>>> .status {
+  position: relative;
+  bottom: -15px;
+  left: -10px;
 }
 </style>
