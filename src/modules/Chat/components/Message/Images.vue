@@ -1,6 +1,11 @@
 <template>
 	<div class="pa-2">
-		<v-img :src="media.thumb_url"></v-img>
+		<v-dialog width="500">
+			<template v-slot:activator="{ on }">
+				<v-img :src="media.thumb_url" v-on="on"></v-img>
+	      </template>
+	      <img :src="media.public_url" width="500" />
+	    </v-dialog>
 	</div>
 </template>
 <script>

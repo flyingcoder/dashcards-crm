@@ -4,6 +4,13 @@ import { global_utils } from '@/global_utils/global_utils'
 import _isEqual from 'lodash/isEqual'
 import _throttle from 'lodash/throttle'
 import _cloneDeep from 'lodash/cloneDeep'
+// components
+import Images from '@/modules/Chat/components/Message/Images.vue'
+import Docs from '@/modules/Chat/components/Message/Docs.vue'
+import Link from '@/modules/Chat/components/Message/Link.vue'
+import Other from '@/modules/Chat/components/Message/Other.vue'
+import Video from '@/modules/Chat/components/Message/Video.vue'
+import ChatField from '@/common/ChatBox/ChatField.vue'
 
 export default {
   mixins: [global_utils],
@@ -11,7 +18,14 @@ export default {
   props: {
     conv: Object
   },
-
+  components :{
+    Images,
+    Docs,
+    Link,
+    Other,
+    Video,
+    ChatField,
+  },
   data: () => ({
     message: null,
     scroll_load: false,
@@ -61,18 +75,27 @@ export default {
       'replace_message'
     ]),
 
-    send_message() {
-      if (!this.message) return
-      let payload = {
+    send_message(data) {
+      let formData = new FormData();
+          formData.append('message', data.message)
+          formData.append('type','private')
+          formData.append('from_id', this.user.id)
+          formData.append('to_id', this.conv.id)
+
+        if (data.files.length > 0) {
+          formData.append('file',  data.files[0])
+        }
+
+/*      let payload = {
         message: this.message,
         from_id: this.user.id,
         to_id: this.conv.id
-      }
-      this.send_message_request(payload)
+      }*/
+      this.send_message_request(formData)
     },
 
     send_message_request(payload) {
-      this.add_message_to_conv({
+/*      this.add_message_to_conv({
         id: this.conv.id,
         message: {
           body: payload.message,
@@ -80,13 +103,17 @@ export default {
           id: 'temporary'
         }
       })
-      this.message = null
-      this.scrollToBottom(this.$refs.chat_box)
+      this.message = null*/
+      
       makeRequestTo.send_message(payload).then(({ data }) => {
-        this.replace_message({
+        this.add_message_to_conv({
           id: this.conv.id,
           message: data
         })
+      })
+      .finally(() => { 
+        this.scrollToBottom(this.$refs.chat_box)
+        this.$event.$emit('btnsending_off', false) 
       })
     },
 
@@ -109,9 +136,9 @@ export default {
       const height = el.scrollHeight + el.scrollTop
 
       this.scroll_load = true
-      const url = this.conv.next_url.split('.com/')[1]
+      const url = this.conv.next_url.split('/api/')[1]
       makeRequestTo
-        .get_old_messages(url)
+        .get_old_messages(`/api/${url}`)
         .then(({ data }) => {
           this.add_older_messages({
             id: this.conv.id,

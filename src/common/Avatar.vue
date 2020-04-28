@@ -15,6 +15,7 @@
         <span class="ml-1" v-if="!iconOnly">{{
           displayName | ucwords | truncate
         }}</span>
+        <slot></slot>
       </div>
     </template>
 
@@ -118,6 +119,9 @@ export default {
 >>> .status {
   position: relative;
   bottom: -15px;
-  left: -10px;
+  left: -15px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #fff;
 }
 </style>

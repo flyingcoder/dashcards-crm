@@ -59,7 +59,16 @@
                   {{ message.created_at | chat_format }}
                 </span>
               </div>
-              <p class="sender__message">{{ message.body }}</p>
+              <p class="sender__message">
+                <div v-html="message.body" class="body-2 px-2"></div>
+                <div v-if="message.media">
+                  <Images v-if="message.media.category === `images`" :media="message.media"></Images>
+                  <Docs v-if="message.media.category === `documents`" :media="message.media"></Docs>
+                  <Link v-if="message.media.category === `links`" :media="message.media"></Link>
+                  <Video v-if="message.media.category === `videos`" :media="message.media"></Video>
+                  <Other v-if="message.media.category === `others`" :media="message.media"></Other>
+                </div>
+              </p>
             </div>
 
             <div class="message" :key="message.id" v-else>
@@ -78,7 +87,16 @@
                   {{ message.created_at | chat_format }}
                 </span>
               </div>
-              <p class="sender__message">{{ message.body }}</p>
+              <p class="sender__message">
+                <div v-html="message.body" class="body-2 px-2"></div>
+                <div v-if="message.media">
+                  <Images v-if="message.media.category === `images`" :media="message.media"></Images>
+                  <Docs v-if="message.media.category === `documents`" :media="message.media"></Docs>
+                  <Link v-if="message.media.category === `links`" :media="message.media"></Link>
+                  <Video v-if="message.media.category === `videos`" :media="message.media"></Video>
+                  <Other v-if="message.media.category === `others`" :media="message.media"></Other>
+                </div>
+              </p>
             </div>
           </template>
         </div>
@@ -87,8 +105,16 @@
           ... {{ conv.user.name.split(',')[1] }} is typing
         </div>
 
-        <div class="write">
-          <v-text-field
+        <div class="write px-1">
+          <ChatField 
+          class="mt-2"
+          :hasAvatar="false"
+          :small="true"
+          :mentionables="[]"
+          @typing="user_typing"
+          @send-message="send_message"
+        ></ChatField>
+         <!--  <v-text-field
             solo
             flat
             hide-details
@@ -98,14 +124,18 @@
             @keydown.exact="user_typing"
             @keydown.enter="send_message"
           ></v-text-field>
-
+          <v-icon
+            color="#3b589e"
+            class="send"
+            @click="send_message"
+            >attach</v-icon>
           <v-icon
             :disabled="!message"
             color="#3b589e"
             class="send"
             @click="send_message"
             >send</v-icon
-          >
+          > -->
         </div>
       </v-card>
     </transition>

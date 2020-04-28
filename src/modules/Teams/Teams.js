@@ -38,7 +38,7 @@ export default {
     ],
 
     headers: [
-      { text: 'Member', align: 'left', value: 'name' },
+      { text: 'Member', align: 'left', value: 'name', sortable : false },
       { text: 'Position', value: 'position' },
       { text: 'Location', value: 'location' },
       { text: 'Tasks', value: 'tasks' },
@@ -65,8 +65,30 @@ export default {
     this.view = this.getPreferredView()
     this.load_users()
   },
-
+  computed : {
+    logged_user() {
+      return this.$store.getters.user
+    },
+    permissions(){
+      return this.$_permissions.get('hq_members')
+    }
+  },
   methods: {
+    can_delete(item) {
+      if (this.logged_user.is_admin) {
+        return true
+      }
+      return this.permissions && this.permissions.delete
+    },
+    can_edit(item) {
+      if (this.logged_user.is_admin) {
+        return true
+      }
+      if (this.logged_user.id === item.id) {
+        return true
+      }
+      return this.permissions && this.permissions.update
+    },
     load_users() {
       this.fill_table_via_url(`api/company/teams?no-clients=true&per_page=12`)
     },

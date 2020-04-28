@@ -6,6 +6,10 @@
     padding: 14px 28px;
     @include customTableRow;
 
+    .dialog__date {
+        cursor : pointer;
+    }
+
     .table__toolbar-title{
         color: $tableTitleBlue;
         text-align: left;

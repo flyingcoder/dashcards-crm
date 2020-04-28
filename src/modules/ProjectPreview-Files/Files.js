@@ -200,6 +200,7 @@ export default {
         typeof response === 'string' ? JSON.parse(response) : response
       this.items.unshift(fileUploaded)
       this.$refs.dropzone.remove_file(file)
+      this.clear_selected()
     },
 
     open_link_dialog() {
@@ -213,6 +214,7 @@ export default {
           this.items.push(data)
           this.$refs.link_dialog.closeAndClearDialog()
           this.$event.$emit('open_snackbar', 'New link added!')
+          this.clear_selected()
         })
         .finally(() => this.$event.$emit('btnloading_off', false))
     },
@@ -228,6 +230,7 @@ export default {
             this.items.splice(indexFound, 1)
             this.delete_item_id = null
             this.delete_dialog = false
+            this.clear_selected()
             this.$event.$emit('open_snackbar', this.table_config.delete_message)
           }
         })

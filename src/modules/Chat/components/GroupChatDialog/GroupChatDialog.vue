@@ -99,11 +99,11 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn @click="clear_and_close">
+          <v-btn @click="clear_and_close" :disabled="btnloading">
             Cancel
           </v-btn>
-          <v-btn color="primary" @click="save_group" :loading="btnloading">
-            Create
+          <v-btn color="primary" :disabled="btnloading" @click="save_group" :loading="btnloading">
+            <v-icon small left>save</v-icon> Create
           </v-btn>
         </v-card-actions>
       </v-card>

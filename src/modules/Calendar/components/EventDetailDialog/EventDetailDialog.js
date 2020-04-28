@@ -66,6 +66,21 @@ export default {
     },
     deleteCommentApi() {
       return `api/events/${this.event.id}/comments`
+    },
+    can_edit_event(){
+      if (this.user.is_admin) return true
+      return this.event.properties.creator === this.user.id
+    },
+    can_delete_event(){
+      if (this.user.is_admin) return true
+      return this.event.properties.creator === this.user.id
+    },
+    can_add_participants(){
+      if (this.user.is_admin) return true
+      return this.event.properties.creator === this.user.id
+    },
+    hasActions(){
+      return this.can_add_participants || this.can_edit_event || this.can_delete_event
     }
   },
   methods: {

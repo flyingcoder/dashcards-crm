@@ -6,6 +6,7 @@
         :view-more-link="true"
         :dashboard="dashboard"
         @close="$emit('close')"
+        :hasExpand="false"
       >
         <div class="content-wrapper fill-height" slot="content">
           <div class="passbox fill-height" v-show="true">

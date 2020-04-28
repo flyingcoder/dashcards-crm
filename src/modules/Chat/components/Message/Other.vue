@@ -1,7 +1,8 @@
 <template>
 	<div class="pa-2">
-		<v-icon large left color="success">mdi-book-play</v-icon>
-		<small class="caption">{{media.file_name}}</small>
+		<Media :media="media" size="md" style="display:inline-block;">
+			<small class="caption">{{media.file_name}}</small>
+		</Media>
 		<v-tooltip top>
 	      <template v-slot:activator="{ on }">
 			<v-btn icon right v-on="on" :href="media.download_url" class="ml-2"><v-icon small>mdi-cloud-download</v-icon></v-btn>

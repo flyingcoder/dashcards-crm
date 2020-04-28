@@ -21,30 +21,30 @@
             <v-divider class="mx-2" vertical></v-divider>
             <label>{{ event_time }}</label>
             <v-spacer></v-spacer>
-            <v-btn icon outlined class="mr-1"
+            <v-btn icon outlined v-if="can_edit_event" class="mr-1"
               ><v-icon @click="$emit('edit-event')">edit</v-icon></v-btn
             >
-            <v-btn icon outlined class="mr-1"
+            <v-btn icon outlined v-if="can_delete_event" class="mr-1"
               ><v-icon @click="$emit('delete-event')">delete</v-icon></v-btn
             >
             <!-- <v-btn icon outlined ><v-icon @click="">mdi-dots-horizontal</v-icon></v-btn> -->
-            <v-menu bottom left offset-y>
+            <v-menu bottom left offset-y v-if="hasActions">
               <template v-slot:activator="{ on }">
                 <v-btn icon outlined class="mr-1" v-on="on">
                   <v-icon>mdi-dots-horizontal</v-icon>
                 </v-btn>
               </template>
               <v-list>
-                <v-list-item @click="$emit('add-participant')">
+                <v-list-item @click="$emit('add-participant')" v-if="can_add_participants">
                   <v-list-item-title>Add Member</v-list-item-title>
                 </v-list-item>
                 <!-- <v-list-item @click="$emit('open-custom-event-type')" >
                     <v-list-item-title>Custom Event</v-list-item-title>
                   </v-list-item> -->
-                <v-list-item @click="$emit('edit-event')">
+                <v-list-item @click="$emit('edit-event')" v-if="can_edit_event">
                   <v-list-item-title>Edit Event</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="$emit('delete-event')">
+                <v-list-item @click="$emit('delete-event')" v-if="can_delete_event">
                   <v-list-item-title>Delete Event</v-list-item-title>
                 </v-list-item>
               </v-list>
@@ -65,7 +65,7 @@
             <v-col md="4" class="pa-4">
               <Avatars
                 :items="event.participants"
-                :hasAddMember="true"
+                :hasAddMember="can_add_participants"
                 :count="7"
                 :deep="true"
                 @add-member="$emit('add-participant')"

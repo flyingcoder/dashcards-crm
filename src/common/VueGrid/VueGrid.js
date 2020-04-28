@@ -5,15 +5,6 @@ export default {
   mixins: [global_utils],
   props: {
     items: Array,
-    permissions: {
-      type: Object,
-      default: () => ({
-        delete: true,
-        update: true,
-        create: true,
-        view: true
-      })
-    },
     hasDelete: { type: Boolean, default: true },
     hasEdit: { type: Boolean, default: true },
     hasView: { type: Boolean, default: true },
@@ -28,6 +19,12 @@ export default {
   computed: {
     logged_user() {
       return this.$store.getters.user
+    },
+    onlineUsers() {
+      return this.$store.getters['onlineUsers/all_users']
+    },
+    permissions(){
+      return this.$_permissions.get('hq_members')
     }
   },
   created() {
@@ -42,23 +39,26 @@ export default {
         this.$emit(event, this.item)
       }
     },
-    can_delete() {
+    can_delete(item) {
       if (this.logged_user.is_admin) {
         return true
       }
-      return this.permissions && this.permissions.can.delete
+      return this.permissions && this.permissions.delete
     },
-    can_edit() {
+    can_edit(item) {
       if (this.logged_user.is_admin) {
         return true
       }
-      return this.permissions && this.permissions.can.update
+      if (this.logged_user.id === item.id) {
+        return true
+      }
+      return this.permissions && this.permissions.update
     },
     can_view() {
       if (this.logged_user.is_admin) {
         return true
       }
-      return this.permissions && this.permissions.can.view
+      return this.permissions && this.permissions.view
     },
     handleLoadMore() {
       this.btnloading = true
@@ -80,6 +80,10 @@ export default {
     },
     chatMe(user) {
       this.$router.push(`/dashboard/chat/${user.id}`)
+    },
+    is_online(item) {
+      let index = this.onlineUsers.findIndex(i => i.id === item.id)
+      return ~index ? true : false
     }
   }
 }

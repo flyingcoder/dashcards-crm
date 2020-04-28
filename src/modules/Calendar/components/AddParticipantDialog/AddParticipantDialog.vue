@@ -19,7 +19,7 @@
         <v-card-text style="height: 200px;">
           <MembersPicker
             @input="to_be_added = $event"
-            :maxHeight="300"
+            :maxHeight="240"
             :isBtnBlock="true"
             :except="user_participants"
           >

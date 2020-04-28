@@ -68,7 +68,7 @@ const mutations = {
   add_older_messages(state, { id, data }) {
     const index = state.conversations.findIndex(conv => conv.id === id)
     if (~index) {
-      state.conversations[index].messages.unshift(...data.data)
+      state.conversations[index].messages.unshift(...data.data.reverse())
       state.conversations[index].next_url = data.next_page_url
     }
   }
@@ -85,7 +85,7 @@ const actions = {
         commit('add_conversation', {
           id: user.id,
           user,
-          messages: data.data,
+          messages: data.data.reverse(),
           open: true,
           active: true,
           next_url: data.next_page_url

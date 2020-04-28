@@ -9,6 +9,7 @@ import GroupChatDialog from './components/GroupChatDialog/GroupChatDialog.vue'
 import Empty from '@/common/Empty.vue'
 import ManageMembersDialog from './components/ManageMembersDialog/ManageMembersDialog.vue'
 import ChatField from '@/common/ChatBox/ChatField.vue'
+import Avatars from '@/common/Avatars.vue'
 
 export default {
   name: 'Chat',
@@ -18,7 +19,8 @@ export default {
     Empty,
     GroupChatDialog,
     ManageMembersDialog,
-    ChatField
+    ChatField,
+    Avatars
   },
 
   data: () => ({
@@ -63,7 +65,7 @@ export default {
         return this.activeChat.members
       }
       return [ this.activeChat ]
-    }
+    },
   },
   created() {
     if (typeof this.$route.params.target !== 'undefined')
@@ -85,6 +87,13 @@ export default {
     // ...mapMutations('notifications', ['add_to_chat']),
     // ...mapActions('notifications', ['fetch_chat']),
 
+    creator(id) {
+      var inx = this.activeChat.members.findIndex(i => i.id == id)
+      if (~inx) {
+        return this.activeChat.members[inx].fullname
+      }
+      return ''
+    },
     subscribePusher() {
       this.$pusher.authenticate()
 
@@ -154,9 +163,12 @@ export default {
     },
     get_previous_message() {
       this.view__more_loading = true
-      api_to
-        .get_more_messages(this.activeChat.id, this.pagination.current)
-        .then(({ data }) => {
+      if (this.activeChat.type === `group`) {
+        var req = api_to.get_group_more_messages(this.activeChat.id, this.pagination.current)
+      } else {
+        var req = api_to.get_more_messages(this.activeChat.id, this.pagination.current)
+      }
+        req.then(({ data }) => {
           data.data.forEach(item => {
             this.all_messages.unshift(item)
           })

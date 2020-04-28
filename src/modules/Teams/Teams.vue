@@ -70,15 +70,8 @@
       @delete-selected="open_bulk_delete_dialog($event)"
     >
       <template v-slot:row-slot="{ item }">
-        <td @click="navigate_to_view_profile(item)" class="clickable-td">
-          <v-avatar size="30" color="teal">
-            <v-img :src="item.image_url" :title="item.fullname">
-              <template v-slot:placeholder>
-                <span class="white--text headline">U</span>
-              </template>
-            </v-img>
-          </v-avatar>
-          {{ item.fullname }}
+        <td>
+          <Avatar :user="item"></Avatar>
         </td>
         <td>{{ item.job_title }}</td>
         <td>{{ item.email }}</td>
@@ -87,6 +80,8 @@
         <Actions
           :item="item"
           :permissions="$_permissions.get('hq_members')"
+          :hasEdit="can_edit(item)"
+          :hasDelete="can_delete(item)"
           @delete="open_delete_dialog(item)"
           @edit="open_edit_dialog(item)"
           @view="navigate_to_view_profile(item)"
@@ -104,7 +99,6 @@
       :items="items"
       @load-more="load_more_users"
       :key="componentKey"
-      :permissions="$_permissions.get('hq_members')"
       :noMoreData="noMoreData"
       @delete="open_delete_dialog"
       @edit="open_edit_dialog"

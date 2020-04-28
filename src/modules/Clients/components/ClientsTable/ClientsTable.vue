@@ -44,11 +44,10 @@
       @delete-selected="open_bulk_delete_dialog($event)"
     >
       <template v-slot:row-slot="{ item }">
-        <td class="clickable-td" @click="navigate_to_view_profile(item.id)">
-          <v-avatar color="teal" size="36">
-            <v-img :src="item.image_url"></v-img>
-          </v-avatar>
-          {{ item.company_name }}
+        <td class="clickable-td">
+          <Avatar :user="item" iconOnly>
+            {{ item.company_name }}
+          </Avatar>
         </td>
         <td>{{ item.telephone | phoneDisplayForm }}</td>
         <td>{{ item.email }}</td>

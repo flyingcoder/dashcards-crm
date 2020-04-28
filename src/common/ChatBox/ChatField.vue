@@ -9,7 +9,7 @@
           @click:close="removeFile(file, inx)"
         ><v-icon left>mdi-file</v-icon> {{file.name}}</v-chip>
     </v-col>
-  	<v-col class="avatar--wrapper">
+  	<v-col class="avatar--wrapper" v-if="hasAvatar">
   		<v-avatar size="45">
   			<v-img :src="loggedUser.image_url"></v-img>
   		</v-avatar>
@@ -33,23 +33,36 @@
         </template>
         <textarea
           class="write__msg solo"
-          placeholder="Type a message..."
+          placeholder="Type a message...@name..."
           :rows="1"
-          @keyup="$emit('typing')"
+          @keydown.exact="$emit('typing')"
+          @keydown.enter="$emit('key-enter')"
         ></textarea>
       </at-ta>
   	</v-col>
-  	<v-col class="action--wrapper">
+  	<v-col class="action--wrapper" v-if="!small">
       <v-btn icon class="action ml-1" >
         <EmojiPicker @emoji-selected="appendEmoji"></EmojiPicker>
       </v-btn>
       <v-btn icon class="action ml-1" @click="$refs.hidden_input.click()"> 
-        <v-icon>attach_file</v-icon>
+        <v-icon >attach_file</v-icon>
       </v-btn>
       <v-btn :disabled="disabled" :loading="btnsending" icon @click="sendMessage(message)" class="action ml-1">
         <v-icon color="primary" >send</v-icon>
       </v-btn>
   	</v-col>
+    <v-col v-else md="12" style="display:flex;">
+      <v-btn icon>
+        <EmojiPicker @emoji-selected="appendEmoji"></EmojiPicker>
+      </v-btn>
+      <v-btn icon class="action ml-1" @click="$refs.hidden_input.click()"> 
+        <v-icon >attach_file</v-icon>
+      </v-btn>
+      <v-spacer></v-spacer>
+      <v-btn :disabled="disabled" :loading="btnsending" icon @click="sendMessage(message)">
+        <v-icon color="primary" >send</v-icon>
+      </v-btn>
+    </v-col>
   </v-row>
 </template>
 
@@ -63,7 +76,9 @@ import AtTa from 'vue-at/dist/vue-at-textarea'
       AtTa,
     },
     props: {
-      mentionables : { type : Array, default: () => [] }
+      mentionables : { type : Array, default: () => [] },
+      hasAvatar : { type : Boolean, default: true },
+      small : { type : Boolean, default: false },
     },
 		data: ()  => ({
       message : '',

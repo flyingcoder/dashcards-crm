@@ -6,6 +6,7 @@ import VueTable from '@/common/VueTable/VueTable.vue'
 import Actions from '@/common/VueTable/Actions.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import DatePicker from '@/common/DatePicker.vue'
+import PlayStop from '@/modules/Timer/components/PlayStop.vue'
 
 export default {
   name: 'GlobalTimer',
@@ -14,7 +15,8 @@ export default {
     VueTable,
     Actions,
     TableHeader,
-    DatePicker
+    DatePicker,
+    PlayStop
   },
 
   data: () => ({
@@ -41,13 +43,7 @@ export default {
       {
         text: 'Total Time',
         sortable: true,
-        align: 'left'
-      },
-      {
-        text: 'Action',
-        sortable: false,
-        align: 'center',
-        width: '50px'
+        align: 'center'
       }
     ],
     timer_tab: 'global-timers',
@@ -68,7 +64,7 @@ export default {
       return moment(this.filter_date).format('YYYY-MM-DD')
     },
     api() {
-      return `api/timer/global?all=true&date=${this.dateSelected}`
+      return `api/timer/global?per_page=25&all=true&date=${this.dateSelected}`
     }
   },
 
@@ -103,8 +99,8 @@ export default {
       }
       return '-'
     },
-    handleActionClick(item) {
-      this.$event.$emit('open_snackbar', 'Coming soon, working on it!')
-    }
+    handleItemUpdated(item) {
+      
+    },
   }
 }

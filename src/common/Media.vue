@@ -1,12 +1,12 @@
 <template>
 	<div :class="wclass">
 		<v-img
-      v-if="media.image_exist"
+      v-if="image_exist"
       :src="media.thumb_url"
       @click="$emit('click-main')"
       :height="height"
       :width="width"
-      @error="media.image_exist = false"
+      @error="image_exist = false"
     >
     </v-img>
     <v-img v-else 
@@ -18,6 +18,7 @@
         <span class="fiv-icon fiv-sqo" :class="[`fiv-icon-`+media.custom_properties.ext, `fiv-size-`+size]"></span>
       </div>
     </v-img>
+    <slot></slot>
 	</div>
 </template>
 
@@ -41,6 +42,8 @@
 			wclass : { type : String, default : 'img-wrapper' },
 			size : { type : String, default : 'xl' },
 		},
-
+    data : () => ({
+      image_exist : true
+    })
 	}
 </script>

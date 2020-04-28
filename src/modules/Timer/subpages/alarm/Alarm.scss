@@ -2,7 +2,7 @@
 
 @include emptyTable('.empty-timer');
 
-.timer {
+.alarm {
     padding: 14px 28px;
     @include customTableRow;
 
@@ -38,7 +38,7 @@
 }
 
 @media only screen and (max-width: 480px){
-    .timer {
+    .alarm {
         padding: 15px;
 
         .table__toolbar-title{

@@ -147,7 +147,7 @@ let uroles = Object.values(this.loggedUser.user_roles)[0]
     clear_and_close() {
       this.dialog = false
     },
-    get_chat_list() {
+    get_chat_list_only() {
       api_to.get_chat_list().then(({ data }) => {
         this.filtered_by_search = this.filter_users_for_selected(data)
         this.all_users = _cloneDeep(data)

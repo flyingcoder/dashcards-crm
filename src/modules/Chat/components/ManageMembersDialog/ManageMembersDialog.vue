@@ -95,7 +95,7 @@
             Cancel
           </v-btn>
           <v-btn color="primary" @click="update_members" :loading="btnloading">
-            Save
+            <v-icon left>save</v-icon> Save
           </v-btn>
         </v-card-actions>
       </v-card>

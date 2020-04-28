@@ -29,11 +29,17 @@ export default {
         id: 2,
         name: 'Task Timer',
         route: `/dashboard/timer/task`
+      },
+      {
+        id: 3,
+        name: 'Alarm',
+        route: `/dashboard/alarm`
       }
     ],
     texts: [
       { title: 'Global Timer', content: 'Global timer ...' },
-      { title: 'Task Timer', content: 'Task timer ...' }
+      { title: 'Task Timer', content: 'Task timer ...' },
+      { title: 'Alarms', content: 'Alarms ...' }
     ]
   })
 }

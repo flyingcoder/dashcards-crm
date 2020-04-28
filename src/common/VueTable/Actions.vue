@@ -65,19 +65,19 @@ export default {
       if (this.logged_user.is_admin) {
         return true
       }
-      return this.permissions && this.permissions.can.delete
+      return this.permissions && this.permissions.delete
     },
     can_edit() {
       if (this.logged_user.is_admin) {
         return true
       }
-      return this.permissions && this.permissions.can.update
+      return this.permissions && this.permissions.update
     },
     can_view() {
       if (this.logged_user.is_admin) {
         return true
       }
-      return this.permissions && this.permissions.can.view
+      return this.permissions && this.permissions.view
     }
   }
 }

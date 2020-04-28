@@ -10,7 +10,11 @@ export const chat_api = {
   },
 
   send_message(payload) {
-    return request.post('api/chat/private', payload)
+    return request.post('api/chat/private', payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
   },
 
   get_old_messages(api) {

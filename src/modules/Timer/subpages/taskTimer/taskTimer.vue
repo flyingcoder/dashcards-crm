@@ -24,6 +24,16 @@
       :showSelect="false"
     >
       <template v-slot:header-toolbar>
+        <v-col>
+          <v-select
+            :items="task_status"
+            label="Task Status"
+            solo
+            :value="filter_task"
+            class="mt-7"
+            @change="filterTask"
+          ></v-select>
+        </v-col>
         <v-btn-toggle
           mandatory
           v-model="timer_tab"
@@ -31,60 +41,48 @@
           @change="handleChangeTab"
         >
           <v-btn text class="px-5" value="task-timers">
-            <v-icon left>mdi-timeline-clock-outline</v-icon> Task Timers
+            <v-icon left>mdi-folder-clock-outline</v-icon> Task Timers
           </v-btn>
           <v-btn text class="px-5" value="global-timers">
-            <v-icon left>mdi-map-clock-outline</v-icon> Global Timers
+            <v-icon left>mdi-web-clock</v-icon> Global Timers
           </v-btn>
           <v-btn text class="px-5" value="alarm">
             <v-icon left>mdi-alarm</v-icon> Alarms
           </v-btn>
         </v-btn-toggle>
       </template>
+
       <template v-slot:row-slot="{ item }">
         <td>
           <Avatars
             :items="item.assignee"
-            :count="2"
+            :count="1"
             style="display:inline-block"
           ></Avatars>
         </td>
-        <td>{{ item.title | ucwords | truncate }}</td>
-        <td>{{ item.service | ucwords | truncate }}</td>
-        <td>{{ item.timer.timer_created | format('HH:mm:ss') }}</td>
-        <td>{{ item.timer.timer_stopped | format('HH:mm:ss') }}</td>
+        <td>
+          <v-tooltip right>
+            <template v-slot:activator="{ on }">
+              <span v-on="on">{{ item.title | ucwords | truncate(15) }}</span>
+            </template>
+            <span>{{ item.title | ucwords }}</span>
+          </v-tooltip>
+          </td>
+        <td>
+          <v-tooltip left>
+            <template v-slot:activator="{ on }">
+              <span v-on="on">{{ item.service | ucwords | truncate(15) }}</span>
+            </template>
+            <span>{{ item.service | ucwords }}</span>
+          </v-tooltip>
+        </td>
+        <td>{{ item.timer.timer_created | format('MMM D YYYY HH:mm:ss') }}</td>
         <td>{{ timerEnd(item) }}</td>
         <td>
-          <v-tooltip
-            left
-            v-if="
-              can_run_timer(item) &&
-                item.timer.timer_status === 'ongoing' &&
-                item.status !== `completed`
-            "
-          >
-            <template v-slot:activator="{ on }">
-              <v-icon v-on="on" @click="handleActionClick(item)">pause</v-icon>
-            </template>
-            <span>Pause the timer</span>
-          </v-tooltip>
-          <v-tooltip
-            left
-            v-else-if="can_run_timer(item) && item.status !== `completed`"
-          >
-            <template v-slot:activator="{ on }">
-              <v-icon v-on="on" @click="handleActionClick(item)"
-                >play_arrow</v-icon
-              >
-            </template>
-            <span>Start the timer</span>
-          </v-tooltip>
-          <v-tooltip left v-else>
-            <template v-slot:activator="{ on }">
-              <v-icon v-on="on">mdi-clock-alert-outline</v-icon>
-            </template>
-            <span>Timer unavailable</span>
-          </v-tooltip>
+          <PlayPause 
+            :item="item" 
+            @row-item-updated="item = $event"
+          ></PlayPause>
         </td>
       </template>
     </VueTable>

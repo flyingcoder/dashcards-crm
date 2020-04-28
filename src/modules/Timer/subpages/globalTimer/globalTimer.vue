@@ -41,10 +41,10 @@
           @change="handleChangeTab"
         >
           <v-btn text class="px-5" value="task-timers">
-            <v-icon left>mdi-timeline-clock-outline</v-icon> Task Timers
+            <v-icon left>mdi-folder-clock-outline</v-icon> Task Timers
           </v-btn>
           <v-btn text class="px-5" value="global-timers">
-            <v-icon left>mdi-map-clock-outline</v-icon> Global Timers
+            <v-icon left>mdi-web-clock</v-icon> Global Timers
           </v-btn>
           <v-btn text class="px-5" value="alarm">
             <v-icon left>mdi-alarm</v-icon> Alarms
@@ -58,38 +58,12 @@
         <td>{{ item.job_title | ucwords }}</td>
         <td>{{ item.timer.timer_created | format('MMM DD YYYY HH:mm:ss') }}</td>
         <td>{{ timerEnd(item) }}</td>
-        <td>{{ item.timer.format }}</td>
         <td>
-          <v-tooltip
-            left
-            v-if="
-              can_run_timer(item) &&
-                item.timer.timer_status === 'ongoing' &&
-                item.status !== `completed`
-            "
-          >
-            <template v-slot:activator="{ on }">
-              <v-icon v-on="on" @click="handleActionClick(item)">pause</v-icon>
-            </template>
-            <span>Pause the timer</span>
-          </v-tooltip>
-          <v-tooltip
-            left
-            v-else-if="can_run_timer(item) && item.status !== `completed`"
-          >
-            <template v-slot:activator="{ on }">
-              <v-icon v-on="on" @click="handleActionClick(item)"
-                >play_arrow</v-icon
-              >
-            </template>
-            <span>Start the timer</span>
-          </v-tooltip>
-          <v-tooltip left v-else>
-            <template v-slot:activator="{ on }">
-              <v-icon v-on="on">mdi-clock-alert-outline</v-icon>
-            </template>
-            <span>Timer unavailable</span>
-          </v-tooltip>
+          <PlayStop 
+            :item="item" 
+            :forDate="dateSelected"
+            @row-item-updated="item = $event"
+          ></PlayStop>
         </td>
       </template>
     </VueTable>

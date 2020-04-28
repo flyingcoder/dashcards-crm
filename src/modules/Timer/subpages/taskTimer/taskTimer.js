@@ -5,6 +5,7 @@ import VueTable from '@/common/VueTable/VueTable.vue'
 import Actions from '@/common/VueTable/Actions.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import Avatars from '@/common/Avatars'
+import PlayPause from '@/modules/Timer/components/PlayPause.vue'
 
 export default {
   name: 'TaskTimer',
@@ -13,7 +14,8 @@ export default {
     VueTable,
     Actions,
     Avatars,
-    TableHeader
+    TableHeader,
+    PlayPause
   },
 
   data: () => ({
@@ -41,26 +43,22 @@ export default {
       {
         text: 'Total Time',
         sortable: false,
-        align: 'left'
-      },
-      {
-        text: 'Action',
-        sortable: false,
-        align: 'center',
-        width: '50px'
+        align: 'center'
       }
     ],
     timer_tab: 'task-timers',
-    currentTab: 'task-timers'
+    currentTab: 'task-timers',
+    task_status : [
+      { text: 'All', value: 'all' }, 
+      { text: 'Open',  value : 'open' },
+      { text: 'Behind', value : 'behind' }, 
+      { text: 'Completed', value : 'completed' },
+    ],
+    filter_task : 'all'
   }),
 
   created() {
-    // const query = this.$route.query
-    // if (isEmpty(query)) {
-    this.fill_table_via_url('api/timer/tasks?all=true')
-    /*} else {
-      this.update_table_actions(query)
-    }*/
+    this.fill_table_via_url(`api/timer/tasks?all=true&filter=${this.filter_task}`)
   },
   computed: {
     loggeduser() {
@@ -69,7 +67,7 @@ export default {
   },
   methods: {
     load_more() {
-      this.load_more_via_url('api/timer/tasks?all=true')
+      this.load_more_via_url(`api/timer/tasks?all=true&filter=${this.filter_task}`)
     },
     can_run_timer(item) {
       let find = item.assignee.find(u => u.id === this.loggeduser.id)
@@ -81,13 +79,19 @@ export default {
       if (this.timer_tab === 'alarm') this.$router.push({ name: 'alarm' })
     },
     timerEnd(item) {
-      if (item.timer.timer_status === 'open') {
+      if (item.timer.timer_status === 'ongoing') {
         return 'Ongoing'
       }
-      return item.timer.timer_stats.format
+   
+      if (item.timer.timer_status === 'pause') {
+        return 'Paused'
+      }
+
+      return '-'
     },
-    handleActionClick(item) {
-      this.$event.$emit('open_snackbar', 'Coming soon, working on it!')
+    filterTask(value) {
+      this.filter_task = value
+      this.fill_table_via_url(`api/timer/tasks?&all=true&filter=${value}`)
     }
   }
 }

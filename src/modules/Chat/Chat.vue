@@ -28,10 +28,10 @@
               <v-tooltip left>
                 <template v-slot:activator="{ on }">
                   <v-btn icon v-on="on" @click="$refs.creategroupchat.open_dialog()">
-                    <v-icon>add</v-icon>
+                    <v-icon color="primary">mdi-comment-plus</v-icon>
                   </v-btn>
                 </template>
-                <span>New Group</span>
+                <span>New Group Chat</span>
               </v-tooltip>
             </v-app-bar>
 
@@ -175,12 +175,13 @@
                       </div>
                       <div class="h__details">
                         <h2 class="h__name">{{ activeChat.fullname }}</h2>
-                        <p class="h__job">
+                        <p class="h__job subtitle">
                           {{
                             activeChat.type === 'group'
                               ? current_members.length + ' members'
                               : activeChat.job_title
-                          }}
+                          }}<br>
+                          {{ activeChat.type === 'group' ? 'Admin : '+creator(activeChat.data.group_creator.id): '' }}
                         </p>
                         <div
                           class="info__anchor"
@@ -200,9 +201,10 @@
                         </div>
                         <div
                           class="info__anchor"
-                          v-show="activeChat.type === 'group'"
+                          v-if="activeChat.type === 'group'"
                         >
                           <v-btn
+                            v-if="loggeduser.id === activeChat.data.group_creator.id"
                             text
                             small
                             outlined
@@ -213,6 +215,7 @@
                             <v-icon small>settings</v-icon> Manage Members
                           </v-btn>
                         </div>
+                        <Avatars v-if="activeChat.type === 'group'" :items="activeChat.members" class="mt-1" :count="6"></Avatars>
                       </div>
                     </div>
                     <div class="info__two" v-show="activeChat.type !== 'group'">
