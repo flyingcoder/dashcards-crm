@@ -9,6 +9,7 @@ import ReportsSection from './components/ReportsSection.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import ReportsEditDialog from './components/ReportEditDialog.vue'
 import ReportsAddDialog from './components/ReportAddDialog.vue'
+import Empty from '@/common/Empty.vue'
 
 export default {
   components: {
@@ -18,7 +19,8 @@ export default {
     ReportsSection,
     DeleteDialog,
     ReportsEditDialog,
-    ReportsAddDialog
+    ReportsAddDialog,
+    Empty
   },
 
   props: {
@@ -41,7 +43,7 @@ export default {
     deleteDialog: false,
     deleteReportId: null,
     reportIdToEdit: null,
-    reports_selected: ''
+    reports_selected: null
   }),
 
   computed: {
@@ -54,7 +56,9 @@ export default {
     this.loading = true
     makeRequestTo
       .get_reports()
-      .then(({ data }) => (this.reports = data.data))
+      .then(({ data }) => {
+        this.reports = data.data
+      })
       .finally(() => (this.loading = false))
   },
 
@@ -63,13 +67,16 @@ export default {
       this.$refs.dialog.open_dialog()
     },
 
-    openDeleteDialog({ report }) {
-      this.deleteReportId = report.id
+    openDeleteDialog() {
+      this.deleteReportId = this.activeReport.id
       this.deleteDialog = true
     },
 
-    openEditDialog({ report, index }) {
-      this.$refs.editDialog.open_dialog(report, index)
+    openEditDialog() {
+      let index = this.reports.findIndex(i => i.id === this.activeReport.id)
+      if (~index) {
+        this.$refs.editDialog.open_dialog(this.activeReport, index)
+      }
     },
 
     iframe_loaded() {
@@ -90,30 +97,17 @@ export default {
     },*/
 
     previewRowUrl(report) {
-      this.iframeSrc = report.url
       this.activeReport = report
+      if (this.activeReport) {
+        this.iframeSrc = report.url
+      }
     },
 
     add_new_report(report) {
       this.reports.push(report)
+      this.previewRowUrl(report)
+      this.$event.$emit('btnloading_off', false)
     },
-
-    /*  save_report() { //kirby:removed, transfer to ReportAddDialog component
-      this.$store.commit('set_custom_loader', true)
-      makeRequestTo
-        .add_new_report({
-          url: this.link,
-          title: this.title
-        })
-        .then(({ data }) => {
-          this.link = ''
-          this.title = ''
-          this.activateSave = false
-          this.iframeSrc = null
-          this.reports.push(data)
-        })
-        .finally(() => this.$store.commit('set_custom_loader', false))
-    },*/
 
     deleteReport() {
       this.$store.commit('set_custom_loader', true)
@@ -125,17 +119,20 @@ export default {
           )
           if (~index) {
             this.reports.splice(index, 1)
+            this.activeReport = null
             this.$event.$emit('open_snackbar', 'Report deleted successfully')
           }
         })
         .finally(() => {
           this.deleteDialog = false
           this.$store.commit('set_custom_loader', false)
+          this.$event.$emit('btnloading_off', false)
         })
     },
 
     reportUpdated({ data, index }) {
       this.$set(this.reports, index, data)
+      this.$event.$emit('btnloading_off', false)
     }
   }
 }

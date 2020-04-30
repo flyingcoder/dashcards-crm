@@ -13,7 +13,7 @@
         </v-avatar>
         <v-icon x-small v-on="on" :color="is_online ? `success` : `grey`" class="status">mdi-circle</v-icon>
         <span class="ml-1" v-if="!iconOnly">{{
-          displayName | ucwords | truncate
+          displayName | ucwords | truncate(20)
         }}</span>
         <slot></slot>
       </div>
@@ -28,12 +28,16 @@
                 <v-img :src="user.image_url"></v-img>
               </v-col>
               <v-col md="9">
-                <v-list-item-title class="title">{{
+                <v-list-item-title :title="user.fullname" class="title">{{
                   user.fullname | ucwords
                 }}</v-list-item-title>
                 <v-list-item-subtitle class="caption"
                   ><v-icon small left>email</v-icon>
                   {{ user.email }}</v-list-item-subtitle
+                >
+                <v-list-item-subtitle class="caption" v-if="user.telephone"
+                  ><v-icon small left>phone</v-icon>
+                  {{ user.telephone.formatInternational }}</v-list-item-subtitle
                 >
                 <v-list-item-subtitle class="body-2"
                   ><v-icon small left>person</v-icon>

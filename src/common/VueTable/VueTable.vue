@@ -11,7 +11,6 @@
         v-bind="$attrs"
         shaped
         hide-default-footer
-        height="500"
         :items-per-page="itemsPerPage"
         :loading="loading"
       >

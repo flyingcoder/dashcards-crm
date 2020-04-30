@@ -12,6 +12,7 @@ export const methods = {
     clear_selected() {
       this.selected = []
       this.$event.$emit('clear_selected', [])
+      this.$event.$emit('btnloading_off', false)
     },
     add_item(api_name, item, dynamic_api = null) {
       makeRequestTo[api_name](item, dynamic_api)
@@ -289,7 +290,7 @@ export const methods = {
 
     scrollToBottom() {
       setTimeout(() => {
-        const wrapper = document.getElementsByClassName('v-data-table__wrapper')
+        const wrapper = document.getElementsByClassName('v-data-table__wrapper')[0]
         if (wrapper) {
           wrapper.scrollTop = wrapper.scrollHeight
         }

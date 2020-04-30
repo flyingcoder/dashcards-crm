@@ -30,7 +30,7 @@ export default {
     Object.defineProperty(properties, 'loading', {
       get: () => this.loading
     })
-    return { properties, bodyMaxHeight: '1200px' }
+    return { properties, bodyMaxHeight: 'auto' }
   },
 
   watch: {

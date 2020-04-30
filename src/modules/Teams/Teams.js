@@ -115,15 +115,7 @@ export default {
     },
 
     navigate_to_view_profile(user) {
-      if (typeof user.user_roles === 'undefined') {
-        this.$router.push(`/dashboard/team/profile/${user.id}`)
-      }
-      let item = Object.values(user.user_roles)
-      if (item[0].indexOf('client') >= 0 || item[0].indexOf('agent') >= 0) {
-        this.$router.push(`/dashboard/clients/profile/${user.id}`)
-      } else {
-        this.$router.push(`/dashboard/team/profile/${user.id}`)
-      }
+      this.$router.push(`/dashboard/team/profile/${user.id}`)
     },
 
     show_add_group_dialog() {

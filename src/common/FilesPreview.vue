@@ -13,7 +13,7 @@
           size="50"
           v-on="on"
           class="mr-1 clickable"
-          @click="openViewer(media, index, 'video')"
+          @click="openViewer(media, 'video')"
         >
           <Media
             :media="media"
@@ -36,7 +36,7 @@
           v-on="on"
           tile
           class="mr-1 clickable"
-          @click="openViewer(media, index, 'image')"
+          @click="openViewer(media, 'image')"
         >
           <v-img :src="getMediaSrc(media)">
             <template v-slot:placeholder>
@@ -63,7 +63,7 @@
           tile
           v-on="on"
           class="mr-1 clickable"
-          @click="openViewer(media, index, 'image')"
+          @click="openViewer(media, 'doc')"
         >
           <Media
             :media="media"
@@ -86,7 +86,7 @@
           v-on="on"
           tile
           class="mr-1 clickable"
-          @click="openViewer(media, index, 'other')"
+          @click="openViewer(media, 'other')"
         >
           <Media
             :media="media"
@@ -109,11 +109,14 @@
           v-on="on"
           tile
           class="mr-1 clickable"
-          @click="openViewer(media, index, 'link')"
+          @click="openViewer(media,'link')"
         >
           <v-img :src="getMediaSrc(media)">
             <template v-slot:placeholder>
-              <v-img :src="default_other" :contain="true"></v-img>
+              <Media
+                :media="media"
+                size="md"
+              ></Media>
             </template>
           </v-img>
         </v-avatar>
@@ -121,19 +124,36 @@
       <span>{{ media.name }}</span>
     </v-tooltip>
 
-    <Viewer ref="viewer_dialog" :media="selected_medias"> </Viewer>
+
+    <EmbedViewer ref="embed_viewer_dialog" :media="selected_media"></EmbedViewer>
+    <VideoViewer ref="video_viewer_dialog" :media="selected_media"></VideoViewer>
+    <ImageViewer ref="image_viewer_dialog" :media="selected_media"></ImageViewer>
+    <DocsViewer ref="doc_viewer_dialog" :media="selected_media"></DocsViewer>
+    <IframeViewer ref="iframe_viewer_dialog" :media="selected_media"></IframeViewer>
+    <OtherViewer ref="other_viewer_dialog" :media="selected_media"></OtherViewer>
   </div>
 </template>
 
 <script scoped>
 import { global_utils } from '@/global_utils/global_utils'
 import _cloneDeep from 'lodash/cloneDeep'
-import Viewer from '@/common/Viewer/Viewer.vue'
+
+import EmbedViewer from '@/common/Viewer/EmbedViewer.vue'
+import VideoViewer from '@/common/Viewer/VideoViewer.vue'
+import ImageViewer from '@/common/Viewer/ImageViewer.vue'
+import DocsViewer from '@/common/Viewer/DocsViewer.vue'
+import IframeViewer from '@/common/Viewer/IframeViewer.vue'
+import OtherViewer from '@/common/Viewer/OtherViewer.vue'
 
 export default {
   mixins: [global_utils],
   components: {
-    Viewer
+    EmbedViewer,
+    VideoViewer,
+    ImageViewer,
+    DocsViewer,
+    OtherViewer,
+    IframeViewer
   },
   props: {
     item: Object,
@@ -142,6 +162,7 @@ export default {
   data: () => ({
     items: [],
     selected_medias: [],
+    selected_media : null,
     default_img: require('@/assets/temp/no-image.jpg'),
     default_video: require('@/assets/temp/no-video-preview.png'),
     default_other: require('@/assets/temp/no-others-available.jpg'),
@@ -153,8 +174,8 @@ export default {
   }),
   computed: {
     display_medias() {
-      var images = this.item.properties.media.filter(i => {
-        return i.collection_name === 'project.files.images'
+      var images = this.item.attachments.filter(i => {
+        return i.category === 'images'
       })
       if (images.length <= this.limit) {
         return images
@@ -163,8 +184,8 @@ export default {
       return _cloneDeep(images).splice(0, this.limit)
     },
     display_videos() {
-      var videos = this.item.properties.media.filter(i => {
-        return i.collection_name === 'project.files.videos'
+      var videos = this.item.attachments.filter(i => {
+        return i.category === 'videos'
       })
       if (videos.length <= this.limit) {
         return videos
@@ -173,8 +194,8 @@ export default {
       return _cloneDeep(videos).splice(0, this.limit)
     },
     display_others() {
-      var others = this.item.properties.media.filter(i => {
-        return i.collection_name === 'project.files.others'
+      var others = this.item.attachments.filter(i => {
+        return i.category === 'others'
       })
       if (others.length <= this.limit) {
         return others
@@ -183,8 +204,8 @@ export default {
       return _cloneDeep(others).splice(0, this.limit)
     },
     display_docs() {
-      var docxs = this.item.properties.media.filter(i => {
-        return i.collection_name === 'project.files.documents'
+      var docxs = this.item.attachments.filter(i => {
+        return i.category === 'documents'
       })
       if (docxs.length <= this.limit) {
         return docxs
@@ -193,8 +214,8 @@ export default {
       return _cloneDeep(docxs).splice(0, this.limit)
     },
     display_links() {
-      var links = this.item.properties.media.filter(i => {
-        return i.collection_name === 'project.files.links'
+      var links = this.item.attachments.filter(i => {
+        return i.category === 'links'
       })
       if (links.length <= this.limit) {
         return links
@@ -206,33 +227,44 @@ export default {
   methods: {
     getMediaSrc(media) {
       // console.log(media)
-      if (!media.hasOwnProperty('collection_name')) {
+      if (!media.hasOwnProperty('category')) {
         return this.addHost(this.default_img)
       }
-      if (media.collection_name === 'project.files.videos') {
+      if (media.category === 'videos') {
         return this.addHost(this.default_video)
       }
-      if (media.collection_name === 'project.files.others') {
+      if (media.category === 'others') {
         return this.addHost(this.default_img)
       }
-      if (media.collection_name === 'project.files.links') {
+      if (media.category === 'links') {
         return media.custom_properties.thumb
       }
-      if (media.collection_name === 'project.files.documents') {
+      if (media.category === 'documents') {
         var urls = {
           pdf: require('@/assets/temp/pdf-icon.jpg'),
           docx: require('@/assets/temp/docx-icon.png'),
           txt: require('@/assets/temp/txt-icon.png')
         }
-
         return urls[media.custom_properties.ext] || url['docx']
       }
       return this.addHost(media.thumb_url)
     },
-    openViewer(media, index, type) {
-      this.selected_medias = this.item.properties.media
-      // if (type === 'image' || type === 'video' || type === 'link')
-      this.$refs.viewer_dialog.openDialog()
+
+    openViewer(media, type) {
+      this.selected_media =  media
+      if (type === 'link' && media.custom_properties.hasOwnProperty('embed') && media.custom_properties.embed){
+        this.$refs.embed_viewer_dialog.openDialog()
+      } else if (type === 'video') {
+        this.$refs.video_viewer_dialog.openDialog()
+      } else if (type === 'image') {
+        this.$refs.image_viewer_dialog.openDialog()
+      } else if (type === 'doc') {
+        this.$refs.doc_viewer_dialog.openDialog()
+      } else if (type === 'link') {
+        this.$refs.iframe_viewer_dialog.openDialog()
+      } else {
+        this.$refs.other_viewer_dialog.openDialog()
+      }
     }
   }
 }

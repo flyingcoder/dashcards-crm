@@ -72,7 +72,7 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex xs12 sm6>
+        <v-flex xs12 sm12>
           <v-text-field
             class="dialog__email d-field"
             color="#667187"
@@ -86,8 +86,8 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex xs12 sm6>
-          <v-text-field
+        <v-flex xs12 sm12>
+         <!--  <v-text-field
             class="dialog__textfield d-field"
             color="#667187"
             filled
@@ -97,7 +97,17 @@
             label="Contact Number"
             mask="phone"
             v-model.trim="contact_number"
-          ></v-text-field>
+          ></v-text-field> -->
+          <vue-phone-number-input
+            class="dialog__textfield d-field"
+            v-model="contact_number" 
+            size="lg"
+            required
+            clearable
+            :default-country-code="defaultCountryCode"
+            @phone-number-blur="telephone_on_blur"
+            @update="showUpdate"
+          ></vue-phone-number-input>
         </v-flex>
 
         <v-flex xs12 sm12 v-if="!isEditDialog">
@@ -157,7 +167,7 @@
             color="#667187"
             filled
             hide-details
-            label="Address"
+            label="Location"
             v-model.trim="address"
           ></v-text-field>
         </v-flex>

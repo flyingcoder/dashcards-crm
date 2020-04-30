@@ -27,9 +27,12 @@
       </div>
     </div>
 
-    <v-dialog v-model="dialog" width="500">
-      <img :src="url" width="500" />
-    </v-dialog>
+    <EmbedViewer ref="embed_viewer_dialog" :media="selected_media"></EmbedViewer>
+    <VideoViewer ref="video_viewer_dialog" :media="selected_media"></VideoViewer>
+    <ImageViewer ref="image_viewer_dialog" :media="selected_media"></ImageViewer>
+    <DocsViewer ref="doc_viewer_dialog" :media="selected_media"></DocsViewer>
+    <IframeViewer ref="iframe_viewer_dialog" :media="selected_media"></IframeViewer>
+    <OtherViewer ref="other_viewer_dialog" :media="selected_media"></OtherViewer>
 
     <v-card class="p-2">
       <v-row no-gutters class="pa-3">
@@ -67,7 +70,8 @@
                 <Media
                   :height="150"
                   :media="item"
-                  @click-main="pop(item.public_url)"
+                  @click-alt="openViewer(item)"
+                  @click-main="openViewer(item)"
                 ></Media>
                 <v-card-text>
                   <v-list dense class="pa-0">
@@ -163,12 +167,14 @@
         :permission="$_permissions.get('hq_files')"
       >
         <template v-slot:row-slot="{ item }">
-          <td @click="pop(item.public_url)">
+          <td>
             <Media
               :height="50"
               :width="50"
               :media="item"
               size="lg"
+              @click-alt="openViewer(item)"
+              @click-main="openViewer(item)"
             ></Media>
           </td>
           <td class="text-upper">{{ item.custom_properties.ext }}</td>

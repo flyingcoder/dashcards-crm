@@ -1,5 +1,10 @@
 <template>
   <v-card>
+    <v-row>
+      <v-col>
+        <h4 class="display-1 px-4 pt-2" style="color:#667381;">Members</h4>
+      </v-col>
+    </v-row>
     <v-row no-gutters class="py-3 px-3 grid--wrapper">
       <v-col md="3" sm="6" xs="12" v-for="item in items" :key="item.user_id">
         <v-card class="mx-2 my-2">
@@ -19,7 +24,7 @@
                   </v-btn>
                 </template>
 
-                <v-list>
+                <v-list dense>
                   <v-list-item v-if="can_edit(item)" @click="$emit('edit', item)">
                     <v-list-item-subtitle
                       ><v-icon small>edit</v-icon> Edit</v-list-item-subtitle
@@ -39,9 +44,9 @@
                 </v-list>
               </v-menu>
             </v-row>
-            <v-row align="center" class="my-2">
+            <v-row align="center" class="my-1">
               <v-spacer></v-spacer>
-              <v-avatar size="75" color="#3b589e">
+              <v-avatar size="80" color="#fff">
                 <v-img :src="item.image_url" :alt="item.first_name"></v-img>
               </v-avatar>
               <v-spacer></v-spacer>

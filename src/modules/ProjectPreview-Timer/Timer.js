@@ -3,13 +3,15 @@ import request from '@/services/axios_instance'
 //Components
 import VueTable from '@/common/VueTable/VueTable.vue'
 import Avatars from '@/common/Avatars.vue'
+import PlayPause from '@/modules/Timer/components/PlayPause.vue'
 
 export default {
   name: 'TimerTab',
   mixins: [list_functionality],
   components: {
     VueTable,
-    Avatars
+    Avatars,
+    PlayPause
   },
   props: {
     id: [Number, String]
@@ -23,10 +25,11 @@ export default {
       { title: 'Sort by Date' }
     ],
     headers: [
-      { text: 'Task', value: 'title' },
       { text: 'Assignee', value: 'assignee' },
+      { text: 'Task', value: 'title' },
+      { text: 'Milestone', value: 'milestone' },
+      { text: 'Status', value: 'status' },
       { text: 'Total Time', value: 'total_time' },
-      { text: 'Status', value: 'status' }
     ]
   }),
 
@@ -38,7 +41,7 @@ export default {
 
   computed: {
     dynamic_api() {
-      return `api/projects/${this.id}/timers`
+      return `api/projects/${this.id}/project-tasks-timers`
     },
     client() {
       return this.id
@@ -46,42 +49,15 @@ export default {
   },
 
   created() {
-    // this.get_timers()
-    this.fill_table('get_project_timers', false, this.dynamic_api)
+    this.get_timers()
   },
 
   methods: {
     get_timers() {
-      this.loading = true
-      request
-        .get(`${this.dynamic_api}?page=1`)
-        .then(({ data }) => {
-          data.data.forEach(item => {
-            this.items.push(item)
-          })
-          this.pagination.current = data.current_page
-          this.pagination.total = data.last_page
-          this.hasMoreData()
-        })
-        .finally(() => {
-          this.loading = false
-          this.$event.$emit('btnloading_off', false)
-        })
+      this.fill_table_via_url(this.dynamic_api)
     },
     get_more_timers() {
-      this.loading = true
-      request
-        .get(`${this.dynamic_api}?page=${this.pagination.current + 1}`)
-        .then(({ data }) => {
-          this.items = data.data
-          this.pagination.current = data.current_page
-          this.pagination.total = data.last_page
-          this.hasMoreData()
-        })
-        .finally(() => {
-          this.loading = false
-          this.$event.$emit('btnloading_off', false)
-        })
+      this.load_more_via_url(this.dynamic_api)
     }
   }
 }

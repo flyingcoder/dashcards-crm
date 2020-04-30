@@ -23,6 +23,10 @@ export default new Vuex.Store({
   },
   mutations: {
     set_user: (state, payload) => (state.user = payload),
+    set_login_user: (state, payload) => {
+      state.user = payload
+      localStorage.setItem('user', JSON.stringify(state.user))
+    },
     set_user_image: (state, payload) => {
       state.user.image_url = payload
       localStorage.setItem('user', JSON.stringify(state.user))

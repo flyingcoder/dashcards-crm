@@ -5,13 +5,14 @@ export default {
     button1Text: { type: String, default: 'Cancel' },
     button2Text: { type: String, default: 'Delete' },
     open: Boolean,
-    value: Boolean
+    value: Boolean,
+    mainBtnDisabled : { type : Boolean, default : false }
   },
 
   data: () => ({
     dialog: false,
     loading: false,
-    btnloading: false
+    btnloading: false,
   }),
 
   mounted() {

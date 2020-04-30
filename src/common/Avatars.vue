@@ -108,7 +108,7 @@ span.avatars__add {
 }
 
 span.avatars__others {
-  background-color: #1e8fe1;
+  background-color: #3b589e;
 }
 span.avatars__add {
 }

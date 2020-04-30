@@ -11,49 +11,52 @@
         v-else-if="content && !loading"
         style="box-shadow: none;"
       >
+      <v-list>
         <v-list-item>
           <v-list-item-content>
-            <v-col>
-              <v-list-item-title class="body-2 font-weight-medium">
-                <v-avatar color="grey">
-                  <v-img :src="assignee_url" height="45" width="45"></v-img>
-                </v-avatar>
-                <span class="title"
-                  >&nbsp;{{ full_name | ucwords | truncate }}</span
-                >
-              </v-list-item-title>
-            </v-col>
-            <v-col class="body-2">
-              <v-icon left>date_range</v-icon
-              >{{ date_created(content.created_at) }}
-            </v-col>
-            <v-col md="2" xs="2">
-              <v-spacer></v-spacer>
-              <v-menu offset-y left>
-                <template v-slot:activator="{ on }">
-                  <v-btn icon fab small outlined v-on="on">
-                    <v-icon>more_horiz</v-icon>
-                  </v-btn>
-                </template>
-                <v-list>
-                  <v-list-item
-                    v-for="item of dropdown_actions"
-                    :key="item.id"
-                    @click="dropdownAction(item.value)"
+            <v-row no-gutters>
+              <v-col>
+                <v-list-item-title class="body-2 font-weight-medium">
+                  <v-avatar color="grey">
+                    <v-img :src="assignee_url" height="45" width="45"></v-img>
+                  </v-avatar>
+                  <span class="title"
+                    >&nbsp;{{ full_name | ucwords | truncate }}</span
                   >
-                    <v-list-item-content>
-                      <v-list-item-title
-                        ><v-icon left>{{ item.icon }}</v-icon>
-                        {{ item.text }}</v-list-item-title
-                      >
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list>
-              </v-menu>
-            </v-col>
+                </v-list-item-title>
+              </v-col>
+              <v-col class="body-2 py-2">
+                <v-icon left>date_range</v-icon
+                >{{ date_created(content.created_at) }}
+              </v-col>
+              <v-col md="1" xs="2">
+                <v-spacer></v-spacer>
+                <v-menu offset-y left>
+                  <template v-slot:activator="{ on }">
+                    <v-btn icon fab small outlined v-on="on">
+                      <v-icon>more_horiz</v-icon>
+                    </v-btn>
+                  </template>
+                  <v-list>
+                    <v-list-item
+                      v-for="item of dropdown_actions"
+                      :key="item.id"
+                      @click="dropdownAction(item.value)"
+                    >
+                      <v-list-item-content>
+                        <v-list-item-title
+                          ><v-icon left>{{ item.icon }}</v-icon>
+                          {{ item.text }}</v-list-item-title
+                        >
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
+                </v-menu>
+              </v-col>
+            </v-row>
           </v-list-item-content>
         </v-list-item>
-
+      </v-list>
         <v-card-text class="px-4">
           <v-row class="px-4" v-if="content">
             <v-col xs="12" v-if="job_title"
@@ -66,6 +69,7 @@
                 content.status
               }}</v-btn></v-col
             >
+            <v-spacer></v-spacer>
             <v-col xs="12"
               ><hours-box
                 :content="content"

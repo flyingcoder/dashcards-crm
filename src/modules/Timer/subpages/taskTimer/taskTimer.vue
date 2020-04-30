@@ -71,9 +71,9 @@
         <td>
           <v-tooltip left>
             <template v-slot:activator="{ on }">
-              <span v-on="on">{{ item.service | ucwords | truncate(15) }}</span>
+              <span v-on="on">{{ item.project.title | ucwords | truncate(15) }}</span>
             </template>
-            <span>{{ item.service | ucwords }}</span>
+            <span>{{ item.project.title | ucwords }}</span>
           </v-tooltip>
         </td>
         <td>{{ item.timer.timer_created | format('MMM D YYYY HH:mm:ss') }}</td>

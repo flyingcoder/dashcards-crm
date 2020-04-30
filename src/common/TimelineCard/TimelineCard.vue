@@ -11,13 +11,9 @@
         @expand="expand"
       >
         <template v-slot:content>
-          <v-progress-linear
-            v-if="loading"
-            :indeterminate="true"
-          ></v-progress-linear>
 
           <Empty
-            v-else-if="timeline_items.length === 0"
+            v-if="!loading && items.length === 0"
             slug="empty-timeline"
             headline="No timeline yet"
           >
@@ -25,7 +21,7 @@
 
           <v-timeline align-top dense v-else>
             <v-timeline-item
-              v-for="item of timeline_items"
+              v-for="item of items"
               :key="item.id"
               small
               :icon="set_icon(item)"
@@ -47,6 +43,12 @@
               </v-row>
             </v-timeline-item>
           </v-timeline>
+
+          <v-progress-linear
+            v-if="loading"
+            :indeterminate="true"
+            class="mb-1"
+          ></v-progress-linear>
         </template>
       </dash-card>
     </div>

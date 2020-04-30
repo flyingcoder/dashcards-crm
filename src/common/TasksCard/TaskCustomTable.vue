@@ -24,9 +24,6 @@
         @click="task_view_action(task)"
       >
         <v-flex xs3 class="assignee__col" v-if="tab == 'All Tasks'">
-          <!--           <span v-if="task.assignee.length">
-            <v-img :src="task.assignee[0].image_url" height="40" width="40" />
-          </span> -->
           <Avatars
             v-if="task.assignee.length"
             :deep="false"

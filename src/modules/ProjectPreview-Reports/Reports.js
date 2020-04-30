@@ -6,6 +6,7 @@ import ReportsDialog from './components/ReportsDialog.vue'
 import ReportsSection from './components/ReportsSection.vue'
 import ReportsEditDialog from './components/ReportEditDialog.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
+import Empty from '@/common/Empty.vue'
 
 export default {
   components: {
@@ -13,7 +14,8 @@ export default {
     ReportsDialog,
     ReportsSection,
     ReportsEditDialog,
-    DeleteDialog
+    DeleteDialog,
+    Empty
   },
 
   props: {
@@ -49,7 +51,6 @@ export default {
 
   methods: {
     iframeLoaded() {
-      console.log('this')
       this.iframe_loading = false
     },
     open_dialog() {
@@ -58,23 +59,33 @@ export default {
 
     add_new_report(report) {
       this.reports.push(report)
+      this.preview_row_url(report)
+      this.$event.$emit('btnloading_off', false)
     },
     preview_row_url(report) {
-      this.iframe_src = report.url
       this.active_report = report
+      if (this.active_report) {
+        this.iframe_src = report.url
+      }
     },
 
-    openEditDialog({ report, index }) {
-      this.$refs.editDialog.open_dialog(report, index)
+    openEditDialog() {
+      this.reportIdToEdit = this.active_report.id
+      let index = this.reports.findIndex(i => i.id === this.active_report.id)
+      if (~index) {
+        this.$refs.editDialog.open_dialog(this.active_report, index)
+      }
     },
 
-    openDeleteDialog({ report }) {
-      this.deleteReportId = report.id
+    openDeleteDialog() {
+      this.deleteReportId = this.active_report.id
       this.deleteDialog = true
     },
 
     reportUpdated({ data, index }) {
       this.$set(this.reports, index, data)
+      this.active_report = data
+      this.$event.$emit('btnloading_off', false)    
     },
 
     deleteReport() {
@@ -87,11 +98,13 @@ export default {
           )
           if (~index) {
             this.reports.splice(index, 1)
+            this.active_report = null
             this.$event.$emit('open_snackbar', 'Report deleted successfully')
           }
         })
         .finally(() => {
           this.deleteDialog = false
+          this.$event.$emit('btnloading_off', false)
           this.$store.commit('set_custom_loader', false)
         })
     }

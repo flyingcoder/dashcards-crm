@@ -33,6 +33,7 @@ import { support } from './routes/support'
 import { member_profile } from './routes/memberProfile'
 import { client_profile } from './routes/clientProfile'
 import { notes } from './routes/notes'
+import { bugs } from './routes/bugs'
 import { questionnaire } from './routes/questionnaire'
 import { projectDetails } from './routes/projectDetails'
 import { expanded_clients } from './routes/expanded/expandedClients'
@@ -81,7 +82,8 @@ export default new Router({
         expanded_calendar, //path: /dashboard/expanded-calendar
         expanded_invoice, //path: /dashboard/expanded-invoice
         expanded_timeline, //path: /dashboard/expanded-timeline
-        expanded_tasks //path: /dashboard/expanded-timeline
+        expanded_tasks, //path: /dashboard/expanded-timeline
+        bugs, // path: /dashboard/bugs
       ]
     },
     setPassword, // path: /set-password

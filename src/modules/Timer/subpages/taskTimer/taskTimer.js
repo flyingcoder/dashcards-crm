@@ -33,7 +33,7 @@ export default {
     headers: [
       { text: 'Assigned To', sortable: false, align: 'left', width: 150 },
       { text: 'Task', sortable: false, align: 'left' },
-      { text: 'Service', sortable: false, align: 'left' },
+      { text: 'Project', sortable: false, align: 'left' },
       {
         text: 'Time Start',
         sortable: false,
@@ -91,6 +91,7 @@ export default {
     },
     filterTask(value) {
       this.filter_task = value
+      this.resetPagination()
       this.fill_table_via_url(`api/timer/tasks?&all=true&filter=${value}`)
     }
   }

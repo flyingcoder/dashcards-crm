@@ -59,3 +59,8 @@
 
 <script src="./Tasks.js"></script>
 <style lang="scss" scoped src="./Tasks.scss"></style>
+<style type="text/css">
+  .dash__card .card__content {
+    min-height: 600px;
+  }
+</style>

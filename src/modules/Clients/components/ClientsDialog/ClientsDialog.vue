@@ -6,6 +6,7 @@
     button2-text="Save"
     @button1="cancel"
     @button2="save"
+    :mainBtnDisabled="!readyForSubmit"
   >
     <template slot="content">
       <v-layout wrap class="clients__dialog">
@@ -44,17 +45,6 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex xs12>
-          <v-text-field
-            class="dialog__textfield d-field"
-            label="Location"
-            v-model.trim="location"
-            filled
-            hide-details
-            color="#657186"
-          ></v-text-field>
-        </v-flex>
-
         <v-flex xs12 sm6>
           <v-text-field
             class="dialog__textfield d-field"
@@ -69,13 +59,35 @@
         <v-flex xs12 sm6>
           <v-text-field
             class="dialog__textfield d-field"
+            label="Location"
+            v-model.trim="location"
+            filled
+            hide-details
+            color="#657186"
+          ></v-text-field>
+        </v-flex>
+
+        <v-flex xs12 sm12>
+          <!-- <v-text-field
+            class="dialog__textfield d-field"
             label="Telephone"
             mask="phone"
             v-model.trim="telephone"
             filled
             hide-details
             color="#657186"
-          ></v-text-field>
+          ></v-text-field> -->
+          <vue-phone-number-input
+            class="dialog__textfield d-field"
+            v-model="contact_number" 
+            size="lg"
+            required
+            clearable
+            show-code-on-list
+            :default-country-code="defaultCountryCode"
+            @update="showUpdate"
+            @phone-number-blur="telephone_on_blur"
+          ></vue-phone-number-input>
         </v-flex>
 
         <v-flex xs12 sm6>

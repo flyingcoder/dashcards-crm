@@ -11,6 +11,12 @@ import LinkDialog from './components/LinkDialog.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import ToolbarItem from './components/ToolbarItem.vue'
 import Empty from '@/common/Empty.vue'
+import EmbedViewer from '@/common/Viewer/EmbedViewer.vue'
+import VideoViewer from '@/common/Viewer/VideoViewer.vue'
+import ImageViewer from '@/common/Viewer/ImageViewer.vue'
+import DocsViewer from '@/common/Viewer/DocsViewer.vue'
+import IframeViewer from '@/common/Viewer/IframeViewer.vue'
+import OtherViewer from '@/common/Viewer/OtherViewer.vue'
 
 export default {
   name: 'FilesTab',
@@ -24,7 +30,13 @@ export default {
     LinkDialog,
     DeleteDialog,
     ToolbarItem,
-    Empty
+    Empty,
+    EmbedViewer,
+    VideoViewer,
+    ImageViewer,
+    DocsViewer,
+    OtherViewer,
+    IframeViewer
   },
 
   props: {
@@ -101,7 +113,8 @@ export default {
         iconText: 'Other'
       }
     ],
-    log_id: null
+    log_id: null,
+    selected_media : null
   }),
 
   computed: {
@@ -248,5 +261,22 @@ export default {
     goto_link(url) {
       window.open(url)
     },
+
+    openViewer(media) {
+      this.selected_media =  media
+      if (media.category === 'links' && media.custom_properties.hasOwnProperty('embed') && media.custom_properties.embed){
+        this.$refs.embed_viewer_dialog.openDialog()
+      } else if (media.category === 'videos') {
+        this.$refs.video_viewer_dialog.openDialog()
+      } else if (media.category === 'images') {
+        this.$refs.image_viewer_dialog.openDialog()
+      } else if (media.category === 'documents') {
+        this.$refs.doc_viewer_dialog.openDialog()
+      } else if (media.category === 'links') {
+        this.$refs.iframe_viewer_dialog.openDialog()
+      } else {
+        this.$refs.other_viewer_dialog.openDialog()
+      }
+    }
   }
 }

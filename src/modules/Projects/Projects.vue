@@ -94,13 +94,13 @@
             </p>
           </v-card-subtitle>
           <v-card-text>
-            <v-row>
+            <v-row no-gutters>
               <v-col>
                 <h6 class="text-center caption">Managers</h6>
                 <Avatars
                   deep
                   :items="item.project_managers"
-                  :count="2"
+                  :count="1"
                 ></Avatars>
               </v-col>
               <v-col>
@@ -108,7 +108,7 @@
                 <Avatars
                   deep
                   :items="item.project_members"
-                  :count="2"
+                  :count="1"
                 ></Avatars>
               </v-col>
             </v-row>

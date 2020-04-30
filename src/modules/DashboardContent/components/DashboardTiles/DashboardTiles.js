@@ -64,7 +64,7 @@ export default {
             user.can.hasOwnProperty('timers') ||
             user.can.hasOwnProperty('timers_own') ||
             user.is_admin,
-          route: '/dashboard/timer'
+          route: '/dashboard/task-timer'
         },
         {
           title: 'Inbound',

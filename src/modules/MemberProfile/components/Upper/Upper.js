@@ -69,6 +69,11 @@ export default {
       this.edit_dialog = this.set_user_loading
       this.$set(this.edit_item, 'fields', this.user)
       this.$event.$emit('btnloading_off', false)
+      setTimeout(() => {
+        if (this.logged_user.id === item.id) {
+          this.$store.commit('set_login_user', item )
+        }
+      }, 1)
     },
     image_clicked() {
       if (this.can_edit) {

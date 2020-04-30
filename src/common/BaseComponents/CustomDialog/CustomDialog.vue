@@ -41,7 +41,7 @@
               <v-btn :disabled="btnloading" @click="button1clicked">{{ button1Text }}</v-btn>
             </slot>
             <slot name="button2">
-              <v-btn :loading="btnloading" @click="button2clicked">{{
+              <v-btn :loading="btnloading" :disabled="mainBtnDisabled" @click="button2clicked">{{
                 button2Text
               }}</v-btn>
             </slot>

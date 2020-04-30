@@ -1,6 +1,7 @@
 import request from '@/services/axios_instance'
 import moment from 'moment'
 import { global_utils } from '@/global_utils/global_utils'
+import { list_functionality } from '@/services/list-functionality/list-functionality'
 //Components
 import Empty from '@/common/Empty.vue'
 import DashCard from '@/common/DashCard.vue'
@@ -9,7 +10,7 @@ import FilesPreview from '@/common/FilesPreview.vue'
 
 export default {
   name: 'TimelineCard',
-  mixins: [global_utils],
+  mixins: [global_utils,list_functionality ],
   components: {
     DashCard,
     Empty,
@@ -25,23 +26,22 @@ export default {
   },
 
   data: () => ({
-    timeline_items: [],
-    loading: false,
-    enableViewMore: true,
-    pagination: {
-      current: 1,
-      total: 0
-    },
     selected_item: null,
     default_img: require('@/assets/temp/no-image.jpg')
   }),
   computed: {
     api() {
       return this.id ? `api/projects/${this.id}/timeline` : 'api/activities'
+    },
+    enableViewMore () {
+      return !this.noMoreData
+    },
+    per_page(){
+      return this.isExpanded ? 50 : 10
     }
   },
   created() {
-    this.fill_timeline_card(this.api)
+    this.fill_timeline_card()
   },
 
   methods: {
@@ -51,33 +51,11 @@ export default {
         .split('at')
       return string.join('')
     },
-    fill_timeline_card(api) {
-      this.loading = true
-      request
-        .get(`${api}?page=${this.pagination.current}`)
-        .then(response => {
-          this.timeline_items = response.data.data
-          this.pagination.current = response.data.current_page
-          this.pagination.total = response.data.total
-          this.enableViewMore =
-            response.data.to !== null && response.data.to < response.data.total
-        })
-        .finally(() => (this.loading = false))
+    fill_timeline_card() {
+      this.fill_table_via_url(this.api+`?per_page=${this.per_page}`)
     },
     load_more_timeline() {
-      this.loading = true
-      request
-        .get(`${this.api}?page=${this.pagination.current + 1}`)
-        .then(response => {
-          response.data.data.forEach(item => {
-            this.timeline_items.push(item)
-          })
-          this.pagination.current = response.data.current_page
-          this.pagination.total = response.data.total
-          this.enableViewMore =
-            response.data.to !== null && response.data.to < response.data.total
-        })
-        .finally(() => (this.loading = false))
+      this.load_more_via_url(this.api)
     },
     set_icon(item) {
       const items = [
@@ -92,6 +70,6 @@ export default {
     },
     expand() {
       this.$router.push({ name: 'expanded-timeline' })
-    }
+    },
   }
 }
