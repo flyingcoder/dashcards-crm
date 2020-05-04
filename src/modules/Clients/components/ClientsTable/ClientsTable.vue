@@ -49,7 +49,7 @@
             {{ item.company_name }}
           </Avatar>
         </td>
-        <td>{{ item.telephone ? item.telephone.formatInternational : ''}}</td>
+        <td>{{ item.telephone ? item.telephone.formatInternational : '' }}</td>
         <td>{{ item.email }}</td>
         <td>{{ item.status }}</td>
         <Actions

@@ -10,7 +10,7 @@ import FilesPreview from '@/common/FilesPreview.vue'
 
 export default {
   name: 'TimelineCard',
-  mixins: [global_utils,list_functionality ],
+  mixins: [global_utils, list_functionality],
   components: {
     DashCard,
     Empty,
@@ -33,10 +33,10 @@ export default {
     api() {
       return this.id ? `api/projects/${this.id}/timeline` : 'api/activities'
     },
-    enableViewMore () {
+    enableViewMore() {
       return !this.noMoreData
     },
-    per_page(){
+    per_page() {
       return this.isExpanded ? 50 : 10
     }
   },
@@ -52,7 +52,7 @@ export default {
       return string.join('')
     },
     fill_timeline_card() {
-      this.fill_table_via_url(this.api+`?per_page=${this.per_page}`)
+      this.fill_table_via_url(this.api + `?per_page=${this.per_page}`)
     },
     load_more_timeline() {
       this.load_more_via_url(this.api)
@@ -70,6 +70,6 @@ export default {
     },
     expand() {
       this.$router.push({ name: 'expanded-timeline' })
-    },
+    }
   }
 }

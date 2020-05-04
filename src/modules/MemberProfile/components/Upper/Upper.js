@@ -71,7 +71,7 @@ export default {
       this.$event.$emit('btnloading_off', false)
       setTimeout(() => {
         if (this.logged_user.id === item.id) {
-          this.$store.commit('set_login_user', item )
+          this.$store.commit('set_login_user', item)
         }
       }, 1)
     },

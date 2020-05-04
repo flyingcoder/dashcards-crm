@@ -38,7 +38,7 @@ export default {
     ],
 
     headers: [
-      { text: 'Member', align: 'left', value: 'name', sortable : false },
+      { text: 'Member', align: 'left', value: 'name', sortable: false },
       { text: 'Position', value: 'position' },
       { text: 'Location', value: 'location' },
       { text: 'Tasks', value: 'tasks' },
@@ -65,11 +65,11 @@ export default {
     this.view = this.getPreferredView()
     this.load_users()
   },
-  computed : {
+  computed: {
     logged_user() {
       return this.$store.getters.user
     },
-    permissions(){
+    permissions() {
       return this.$_permissions.get('hq_members')
     }
   },

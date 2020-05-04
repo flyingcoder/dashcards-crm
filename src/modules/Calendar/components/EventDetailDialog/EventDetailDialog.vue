@@ -35,7 +35,10 @@
                 </v-btn>
               </template>
               <v-list>
-                <v-list-item @click="$emit('add-participant')" v-if="can_add_participants">
+                <v-list-item
+                  @click="$emit('add-participant')"
+                  v-if="can_add_participants"
+                >
                   <v-list-item-title>Add Member</v-list-item-title>
                 </v-list-item>
                 <!-- <v-list-item @click="$emit('open-custom-event-type')" >
@@ -44,7 +47,10 @@
                 <v-list-item @click="$emit('edit-event')" v-if="can_edit_event">
                   <v-list-item-title>Edit Event</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="$emit('delete-event')" v-if="can_delete_event">
+                <v-list-item
+                  @click="$emit('delete-event')"
+                  v-if="can_delete_event"
+                >
                   <v-list-item-title>Delete Event</v-list-item-title>
                 </v-list-item>
               </v-list>

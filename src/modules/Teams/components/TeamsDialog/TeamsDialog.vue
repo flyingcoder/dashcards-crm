@@ -87,7 +87,7 @@
         </v-flex>
 
         <v-flex xs12 sm12>
-         <!--  <v-text-field
+          <!--  <v-text-field
             class="dialog__textfield d-field"
             color="#667187"
             filled
@@ -100,7 +100,7 @@
           ></v-text-field> -->
           <vue-phone-number-input
             class="dialog__textfield d-field"
-            v-model="contact_number" 
+            v-model="contact_number"
             size="lg"
             required
             clearable

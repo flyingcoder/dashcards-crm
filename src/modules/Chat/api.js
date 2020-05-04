@@ -4,7 +4,7 @@ export const api_to = {
   get_chat_list() {
     return request.get(`api/chat/list?for=project&has_msg_count=true`)
   },
-  get_chat_list_only(){
+  get_chat_list_only() {
     return request.get(`api/chat/list?for=project`)
   },
   get_groupchat_list() {
@@ -26,7 +26,7 @@ export const api_to = {
     return request.get(`api/chat/group/private/${id}?page=${page + 1}`)
   },
   send_message(payload) {
-    return request.post(`api/chat/private`, payload , {
+    return request.post(`api/chat/private`, payload, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }

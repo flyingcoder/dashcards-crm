@@ -67,11 +67,13 @@
             </template>
             <span>{{ item.title | ucwords }}</span>
           </v-tooltip>
-          </td>
+        </td>
         <td>
           <v-tooltip left>
             <template v-slot:activator="{ on }">
-              <span v-on="on">{{ item.project.title | ucwords | truncate(15) }}</span>
+              <span v-on="on">{{
+                item.project.title | ucwords | truncate(15)
+              }}</span>
             </template>
             <span>{{ item.project.title | ucwords }}</span>
           </v-tooltip>
@@ -79,10 +81,7 @@
         <td>{{ item.timer.timer_created | format('MMM D YYYY HH:mm:ss') }}</td>
         <td>{{ timerEnd(item) }}</td>
         <td>
-          <PlayPause 
-            :item="item" 
-            @row-item-updated="item = $event"
-          ></PlayPause>
+          <PlayPause :item="item" @row-item-updated="item = $event"></PlayPause>
         </td>
       </template>
     </VueTable>

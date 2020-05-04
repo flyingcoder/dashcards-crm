@@ -18,13 +18,13 @@ export default {
   props: {
     conv: Object
   },
-  components :{
+  components: {
     Images,
     Docs,
     Link,
     Other,
     Video,
-    ChatField,
+    ChatField
   },
   data: () => ({
     message: null,
@@ -76,17 +76,17 @@ export default {
     ]),
 
     send_message(data) {
-      let formData = new FormData();
-          formData.append('message', data.message)
-          formData.append('type','private')
-          formData.append('from_id', this.user.id)
-          formData.append('to_id', this.conv.id)
+      let formData = new FormData()
+      formData.append('message', data.message)
+      formData.append('type', 'private')
+      formData.append('from_id', this.user.id)
+      formData.append('to_id', this.conv.id)
 
-        if (data.files.length > 0) {
-          formData.append('file',  data.files[0])
-        }
+      if (data.files.length > 0) {
+        formData.append('file', data.files[0])
+      }
 
-/*      let payload = {
+      /*      let payload = {
         message: this.message,
         from_id: this.user.id,
         to_id: this.conv.id
@@ -95,7 +95,7 @@ export default {
     },
 
     send_message_request(payload) {
-/*      this.add_message_to_conv({
+      /*      this.add_message_to_conv({
         id: this.conv.id,
         message: {
           body: payload.message,
@@ -104,17 +104,19 @@ export default {
         }
       })
       this.message = null*/
-      
-      makeRequestTo.send_message(payload).then(({ data }) => {
-        this.add_message_to_conv({
-          id: this.conv.id,
-          message: data
+
+      makeRequestTo
+        .send_message(payload)
+        .then(({ data }) => {
+          this.add_message_to_conv({
+            id: this.conv.id,
+            message: data
+          })
         })
-      })
-      .finally(() => { 
-        this.scrollToBottom(this.$refs.chat_box)
-        this.$event.$emit('btnsending_off', false) 
-      })
+        .finally(() => {
+          this.scrollToBottom(this.$refs.chat_box)
+          this.$event.$emit('btnsending_off', false)
+        })
     },
 
     toggle_chat_box(id) {

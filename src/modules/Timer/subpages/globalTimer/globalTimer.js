@@ -99,8 +99,6 @@ export default {
       }
       return '-'
     },
-    handleItemUpdated(item) {
-      
-    },
+    handleItemUpdated(item) {}
   }
 }

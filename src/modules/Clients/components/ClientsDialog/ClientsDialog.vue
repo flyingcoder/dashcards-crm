@@ -79,7 +79,7 @@
           ></v-text-field> -->
           <vue-phone-number-input
             class="dialog__textfield d-field"
-            v-model="contact_number" 
+            v-model="contact_number"
             size="lg"
             required
             clearable

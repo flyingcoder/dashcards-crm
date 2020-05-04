@@ -27,12 +27,27 @@
       </div>
     </div>
 
-    <EmbedViewer ref="embed_viewer_dialog" :media="selected_media"></EmbedViewer>
-    <VideoViewer ref="video_viewer_dialog" :media="selected_media"></VideoViewer>
-    <ImageViewer ref="image_viewer_dialog" :media="selected_media"></ImageViewer>
+    <EmbedViewer
+      ref="embed_viewer_dialog"
+      :media="selected_media"
+    ></EmbedViewer>
+    <VideoViewer
+      ref="video_viewer_dialog"
+      :media="selected_media"
+    ></VideoViewer>
+    <ImageViewer
+      ref="image_viewer_dialog"
+      :media="selected_media"
+    ></ImageViewer>
     <DocsViewer ref="doc_viewer_dialog" :media="selected_media"></DocsViewer>
-    <IframeViewer ref="iframe_viewer_dialog" :media="selected_media"></IframeViewer>
-    <OtherViewer ref="other_viewer_dialog" :media="selected_media"></OtherViewer>
+    <IframeViewer
+      ref="iframe_viewer_dialog"
+      :media="selected_media"
+    ></IframeViewer>
+    <OtherViewer
+      ref="other_viewer_dialog"
+      :media="selected_media"
+    ></OtherViewer>
 
     <v-card class="p-2">
       <v-row no-gutters class="pa-3">
@@ -65,7 +80,13 @@
       <v-card v-if="view == 'grid'">
         <v-container fluid grid-list-md>
           <v-layout wrap v-if="filteredItems.length">
-            <v-col v-for="item in filteredItems" :key="item.id" xs="12" sm="4" md="3">
+            <v-col
+              v-for="item in filteredItems"
+              :key="item.id"
+              xs="12"
+              sm="4"
+              md="3"
+            >
               <v-card>
                 <Media
                   :height="150"
@@ -75,28 +96,26 @@
                 ></Media>
                 <v-card-text>
                   <v-list dense class="pa-0">
-                  <v-list-item two-line class="pa-0">
-                    <v-list-item-content>
-                      <v-list-item-subtitle>
-                        <div class="break-word-container" :title="item.name">
-                          {{ item.name | str_limit(25) }}
-                        </div>
-                      </v-list-item-subtitle>
-                      <v-list-item-subtitle>
-                        <span class="grey--text">
-                          Added by:
-                          {{ item.custom_properties.user.first_name }}</span
-                        >
-                      </v-list-item-subtitle>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list>
+                    <v-list-item two-line class="pa-0">
+                      <v-list-item-content>
+                        <v-list-item-subtitle>
+                          <div class="break-word-container" :title="item.name">
+                            {{ item.name | str_limit(25) }}
+                          </div>
+                        </v-list-item-subtitle>
+                        <v-list-item-subtitle>
+                          <span class="grey--text">
+                            Added by:
+                            {{ item.custom_properties.user.first_name }}</span
+                          >
+                        </v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
                 </v-card-text>
 
                 <v-card-actions>
-                  <span class="overline">{{
-                    item.custom_properties.ext
-                  }}</span>
+                  <span class="overline">{{ item.custom_properties.ext }}</span>
                   <v-spacer></v-spacer>
                   <v-btn
                     small
@@ -149,7 +168,6 @@
           </v-row>
 
           <Empty headline="No file found" v-else></Empty>
-
         </v-container>
       </v-card>
 
@@ -167,7 +185,7 @@
         :permission="$_permissions.get('hq_files')"
       >
         <template v-slot:row-slot="{ item }">
-          <td>
+          <td class="clickable-td">
             <Media
               :height="50"
               :width="50"
@@ -232,5 +250,4 @@
   border: none;
   background-color: #fff;
 }
-
 </style>

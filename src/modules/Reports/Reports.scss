@@ -23,31 +23,27 @@
   border-radius: 10px;
   padding: 20px;
 
-  .reports__body{
-    background-color: $tableBlueBg;
-    border: 1px solid $tableBorderBlue;
-    padding: 25px;
-    display: grid;
-
-    .reports__buttons{
-      height: auto;
-      padding: 25px;
-
-      .reports__option{
-        text-align: right;
-        .add__link{
-          color: $white;
-          width: 100px;
-        }
-        .save{
-          color: $white;
-          width: 100px;
-        }
-      }
-
-    }
-
+  .reports-actions{
+    text-align: right;
+    margin-bottom: 20px;
   }
+  .theme--dark.v-tabs>.v-tabs-bar{
+    background-color: $modalBgGray !important;
+  }
+  .v-tab.v-tab--active{
+    background-color: #fff;
+    color: $tableBlueText;
+    border-bottom: none;
+  }
+  .v-tab{
+    background-color: $modalBgGray;
+    color: $tableBlueText !important;
+    border-top: 1px solid $borderGray;
+    border-right: 1px solid $borderGray;
+    border-left: 1px solid $borderGray;
+    border-bottom: 1px solid $borderGray;
+  }
+
   .reports-content{
     background-color: $white;
   }
@@ -67,23 +63,6 @@
     .reports__body{
       padding: 18px;
 
-      .reports__buttons{
-        height: auto;
-        padding: 18px;
-
-        .reports__option{
-          .add__link{
-            width: 80px;
-            font-size: 14px;
-          }
-          .save{
-            width: 80px;
-            font-size: 14px;
-          }
-        }
-
-      }
-
     }
   }
 }
@@ -94,31 +73,11 @@
 
     .reports__body{
       padding: 10px;
-
-      .reports__buttons{
-        height: 300px;
-        padding: 10px;
-
-        .reports__option{
-          text-align: center;
-          .add__link{
-            width: 70px;
-            height: 35px;
-            font-size: 12px;
-          }
-          .save{
-            width: 70px;
-            font-size: 12px;
-            height: 35px;
-          }
-          .v-btn--floating.v-btn--small{
-            height: 35px;
-            width: 35px;
-          }
-        }
-
-      }
-
+    }
+    
+    .v-btn--floating.v-btn--small{
+      height: 35px;
+      width: 35px;
     }
   }
 }

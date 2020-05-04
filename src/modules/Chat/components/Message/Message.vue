@@ -1,19 +1,24 @@
 <template>
   <div class="msg" :class="me_sender">
-
     <Avatar iconOnly :user="message.sender" v-if="!mine"></Avatar>
-    
+
     <div class="msg-bubble">
       <div class="msg-info" v-if="mine">
-        <div class="msg-info-time caption">{{ message.created_at | from_now }}</div>
+        <div class="msg-info-time caption">
+          {{ message.created_at | from_now }}
+        </div>
         <div class="msg-info-name subtitle-2">Me</div>
       </div>
       <div class="msg-info" v-else>
-        <div class="msg-info-name subtitle-2">{{ message.sender.fullname }}</div>
-        <div class="msg-info-time caption">{{ message.created_at | from_now }}</div>
+        <div class="msg-info-name subtitle-2">
+          {{ message.sender.fullname }}
+        </div>
+        <div class="msg-info-time caption">
+          {{ message.created_at | from_now }}
+        </div>
       </div>
 
-      <div class="msg-text" >
+      <div class="msg-text">
         <div v-html="message.body" class="body-2"></div>
         <div v-if="message.media">
           <Images v-if="isImage" :media="message.media"></Images>
@@ -38,12 +43,12 @@ import Video from './Video.vue'
 
 export default {
   mixins: [global_utils],
-  components : {
+  components: {
     Images,
     Docs,
     Link,
     Other,
-    Video,
+    Video
   },
   props: {
     id: Number,
@@ -65,19 +70,19 @@ export default {
       )
       return ~inx ? 'online' : 'offline'
     },
-    isImage(){
+    isImage() {
       return this.message.media.category === `images`
     },
-    isVideo(){
+    isVideo() {
       return this.message.media.category === `videos`
     },
-    isOther(){
+    isOther() {
       return this.message.media.category === `others`
     },
-    isLink(){
+    isLink() {
       return this.message.media.category === `links`
     },
-    isDocs(){
+    isDocs() {
       return this.message.media.category === `documents`
     }
   }

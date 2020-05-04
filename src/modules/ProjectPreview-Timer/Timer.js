@@ -29,7 +29,7 @@ export default {
       { text: 'Task', value: 'title' },
       { text: 'Milestone', value: 'milestone' },
       { text: 'Status', value: 'status' },
-      { text: 'Total Time', value: 'total_time' },
+      { text: 'Total Time', value: 'total_time' }
     ]
   }),
 

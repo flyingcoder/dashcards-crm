@@ -1,9 +1,6 @@
 <template>
-  <v-card
-    class="mx-auto users-list"
-    :width="240"
-  >
-    <v-toolbar color="#3b589e" dark >
+  <v-card class="mx-auto users-list" :width="240">
+    <v-toolbar color="#3b589e" dark>
       <v-icon large left>people</v-icon>
 
       <v-toolbar-title class="subtitle">Project Users</v-toolbar-title>
@@ -13,10 +10,7 @@
     <v-card-text>
       <!-- <v-divider></v-divider> -->
       <v-list subheader dense>
-        <v-list-item
-          v-for="user of users" 
-          :key="user.id"
-        >
+        <v-list-item v-for="user of users" :key="user.id">
           <v-list-item-content>
             <Avatar :user="user"></Avatar>
           </v-list-item-content>
@@ -40,7 +34,7 @@ export default {
   },
 
   data: () => ({
-    users: [],
+    users: []
   }),
 
   computed: {
@@ -65,9 +59,6 @@ export default {
 .offline {
   background-color: $gray;
 }
-
-
-
 
 .users-list {
   .sidebar__chatlist {

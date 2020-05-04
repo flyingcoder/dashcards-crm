@@ -15,10 +15,7 @@
           class="mr-1 clickable"
           @click="openViewer(media, 'video')"
         >
-          <Media
-            :media="media"
-            size="md"
-          ></Media>
+          <Media :media="media" size="md"></Media>
         </v-avatar>
       </template>
       <span>{{ media.name }}</span>
@@ -40,10 +37,7 @@
         >
           <v-img :src="getMediaSrc(media)">
             <template v-slot:placeholder>
-              <Media
-                :media="media"
-                size="md"
-              ></Media>
+              <Media :media="media" size="md"></Media>
             </template>
           </v-img>
         </v-avatar>
@@ -65,10 +59,7 @@
           class="mr-1 clickable"
           @click="openViewer(media, 'doc')"
         >
-          <Media
-            :media="media"
-            size="md"
-          ></Media>
+          <Media :media="media" size="md"></Media>
         </v-avatar>
       </template>
       <span>{{ media.name }}</span>
@@ -88,10 +79,7 @@
           class="mr-1 clickable"
           @click="openViewer(media, 'other')"
         >
-          <Media
-            :media="media"
-            size="md"
-          ></Media>
+          <Media :media="media" size="md"></Media>
         </v-avatar>
       </template>
       <span>{{ media.name }}</span>
@@ -109,14 +97,11 @@
           v-on="on"
           tile
           class="mr-1 clickable"
-          @click="openViewer(media,'link')"
+          @click="openViewer(media, 'link')"
         >
           <v-img :src="getMediaSrc(media)">
             <template v-slot:placeholder>
-              <Media
-                :media="media"
-                size="md"
-              ></Media>
+              <Media :media="media" size="md"></Media>
             </template>
           </v-img>
         </v-avatar>
@@ -124,13 +109,27 @@
       <span>{{ media.name }}</span>
     </v-tooltip>
 
-
-    <EmbedViewer ref="embed_viewer_dialog" :media="selected_media"></EmbedViewer>
-    <VideoViewer ref="video_viewer_dialog" :media="selected_media"></VideoViewer>
-    <ImageViewer ref="image_viewer_dialog" :media="selected_media"></ImageViewer>
+    <EmbedViewer
+      ref="embed_viewer_dialog"
+      :media="selected_media"
+    ></EmbedViewer>
+    <VideoViewer
+      ref="video_viewer_dialog"
+      :media="selected_media"
+    ></VideoViewer>
+    <ImageViewer
+      ref="image_viewer_dialog"
+      :media="selected_media"
+    ></ImageViewer>
     <DocsViewer ref="doc_viewer_dialog" :media="selected_media"></DocsViewer>
-    <IframeViewer ref="iframe_viewer_dialog" :media="selected_media"></IframeViewer>
-    <OtherViewer ref="other_viewer_dialog" :media="selected_media"></OtherViewer>
+    <IframeViewer
+      ref="iframe_viewer_dialog"
+      :media="selected_media"
+    ></IframeViewer>
+    <OtherViewer
+      ref="other_viewer_dialog"
+      :media="selected_media"
+    ></OtherViewer>
   </div>
 </template>
 
@@ -162,7 +161,7 @@ export default {
   data: () => ({
     items: [],
     selected_medias: [],
-    selected_media : null,
+    selected_media: null,
     default_img: require('@/assets/temp/no-image.jpg'),
     default_video: require('@/assets/temp/no-video-preview.png'),
     default_other: require('@/assets/temp/no-others-available.jpg'),
@@ -251,8 +250,12 @@ export default {
     },
 
     openViewer(media, type) {
-      this.selected_media =  media
-      if (type === 'link' && media.custom_properties.hasOwnProperty('embed') && media.custom_properties.embed){
+      this.selected_media = media
+      if (
+        type === 'link' &&
+        media.custom_properties.hasOwnProperty('embed') &&
+        media.custom_properties.embed
+      ) {
         this.$refs.embed_viewer_dialog.openDialog()
       } else if (type === 'video') {
         this.$refs.video_viewer_dialog.openDialog()

@@ -129,12 +129,12 @@ export default {
       btnloading: false
     }
   },
- /* created() {
+  /* created() {
 let uroles = Object.values(this.loggedUser.user_roles)[0]
   console.log(uroles.includes('manager'))
   },*/
   computed: {
-    loggedUser(){
+    loggedUser() {
       return this.$store.getters.user
     }
   },
@@ -171,26 +171,28 @@ let uroles = Object.values(this.loggedUser.user_roles)[0]
     },
     can_be_remove(user) {
       if (user.id === this.loggedUser.id) return false //cant delete self
-      
-      if (user.is_company_owner)  return false
 
-      if (this.loggedUser.is_company_owner)  return true
+      if (user.is_company_owner) return false
+
+      if (this.loggedUser.is_company_owner) return true
 
       let uroles = Object.values(this.loggedUser.user_roles)[0]
 
       let roles = Object.values(user.user_roles)[0]
 
-      if (uroles.includes('admin') && roles.includes('admin')) { //both admin
+      if (uroles.includes('admin') && roles.includes('admin')) {
+        //both admin
         return false
       } else if (uroles.includes('admin') && !roles.includes('admin')) {
         return true
-      } else if (uroles.includes('manager') && roles.includes('manager')) { //both manager
+      } else if (uroles.includes('manager') && roles.includes('manager')) {
+        //both manager
         return false
       } else if (uroles.includes('manager') && roles.includes('admin')) {
         return false
       }
-      
-      if (uroles.includes('client') || uroles.includes('member')){
+
+      if (uroles.includes('client') || uroles.includes('member')) {
         return false
       }
 

@@ -105,7 +105,7 @@ export default {
     is_event_owner(item) {
       return item.properties.creator === this.loggeduser.id
     },
-    
+
     handleAction() {
       this.$event.$emit('open_snackbar', 'Coming soon, working on it!')
     }

@@ -25,7 +25,8 @@ export const global_utils = {
       return urlString
     },
     altImage(item) {
-      if (item && 
+      if (
+        item &&
         item.hasOwnProperty('collection_name') &&
         item.collection_name === 'project.files.videos'
       ) {

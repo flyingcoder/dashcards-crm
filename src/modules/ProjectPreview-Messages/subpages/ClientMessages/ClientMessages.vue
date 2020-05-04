@@ -1,8 +1,10 @@
 <template>
   <div class="message__body team-messages">
-      <v-system-bar lights-out :height="40" v-if="can_manage_members">
+    <v-system-bar lights-out :height="40" v-if="can_manage_members">
       <v-spacer></v-spacer>
-        <v-btn text small @click="open_manage_member_dialog">Manage Members <v-icon right>settings</v-icon></v-btn>
+      <v-btn text small @click="open_manage_member_dialog"
+        >Manage Members <v-icon right>settings</v-icon></v-btn
+      >
     </v-system-bar>
     <div class="messages" ref="messages-container">
       <v-row no-gutters class="pa-3" v-if="can_send_message">
@@ -19,9 +21,9 @@
         <v-spacer></v-spacer>
       </v-row>
       <v-progress-linear
-          v-if="loading"
-          :indeterminate="true"
-        ></v-progress-linear>
+        v-if="loading"
+        :indeterminate="true"
+      ></v-progress-linear>
       <v-row no-gutters v-if="items.length && can_send_message">
         <v-col md="12" class="px-3 py-2" style="min-height: 350px;">
           <Message
@@ -39,7 +41,7 @@
       </div>
     </div>
     <div class="write px-3">
-      <ChatField 
+      <ChatField
         v-if="can_send_message"
         class="mt-2"
         :mentionables="mentionables"
@@ -69,7 +71,7 @@ import ChatField from '@/common/ChatBox/ChatField.vue'
 import Message from '@/modules/Chat/components/Message/Message.vue'
 
 export default {
-  name : 'ClientMessages',
+  name: 'ClientMessages',
   mixins: [global_utils, list_functionality],
   props: {
     id: [Number, String]
@@ -85,14 +87,14 @@ export default {
     loading: false,
     message: null,
     can_message: false,
-    activeChat : null,
+    activeChat: null
   }),
 
   computed: {
     loggedUser() {
       return this.$store.getters.user
     },
-    can_manage_members(){
+    can_manage_members() {
       if (this.loggedUser.is_admin) return true
       var role = Object.values(this.loggedUser.user_roles)[0]
       return ~role.indexOf('manager') ? true : false
@@ -101,7 +103,9 @@ export default {
       return this.can_message
     },
     mentionables() {
-      if (!this.activeChat) { return [] }
+      if (!this.activeChat) {
+        return []
+      }
       return this.activeChat.members
     }
   },
@@ -122,12 +126,14 @@ export default {
       this.$refs.manage_group_members_dialog.open_dialog()
     },
     getConvoDetails(id) {
-      apiTo.get_client_convo_details(id).then(({ data }) => {
-        this.activeChat = data
-      })
-      .finally(() => {
-        this.loading = false
-      })
+      apiTo
+        .get_client_convo_details(id)
+        .then(({ data }) => {
+          this.activeChat = data
+        })
+        .finally(() => {
+          this.loading = false
+        })
     },
     scrollToBottomDiv() {
       setTimeout(() => {
@@ -149,12 +155,12 @@ export default {
       this.can_message = can
       if (can) {
         this.fill_table_via_url(`api/projects/${this.id}/messages?type=client`)
-        setTimeout(() => { this.scrollToBottomDiv() } ,1 )
+        setTimeout(() => {
+          this.scrollToBottomDiv()
+        }, 1)
         console.log('Client chat connected')
-        // this.$event.$emit('open_snackbar', 'Client chat connected') 
-      }
-      else
-        console.log('Client chat unavailable for you.')
+        // this.$event.$emit('open_snackbar', 'Client chat connected')
+      } else console.log('Client chat unavailable for you.')
     },
     subscribePusher() {
       const client_message_channel = this.$pusher.subscribe(
@@ -171,22 +177,24 @@ export default {
       )
     },
     sendMessage(data) {
-      let formData = new FormData();
-          formData.append('message', data.message)
-          formData.append('type','client')
-          formData.append('from_id', this.loggedUser.id)
+      let formData = new FormData()
+      formData.append('message', data.message)
+      formData.append('type', 'client')
+      formData.append('from_id', this.loggedUser.id)
 
-          if (data.files.length > 0) {
-            formData.append('file',  data.files[0])
-          }
+      if (data.files.length > 0) {
+        formData.append('file', data.files[0])
+      }
 
-      apiTo.send_message(this.id, formData).then(({ data }) => {
-        this.add_new_message(data)
-      }).
-      finally(() => {
-        this.scrollToBottomDiv()
-        this.$event.$emit('btnsending_off', false)
-      })
+      apiTo
+        .send_message(this.id, formData)
+        .then(({ data }) => {
+          this.add_new_message(data)
+        })
+        .finally(() => {
+          this.scrollToBottomDiv()
+          this.$event.$emit('btnsending_off', false)
+        })
     },
     messages(items) {
       return _cloneDeep(items).reverse()

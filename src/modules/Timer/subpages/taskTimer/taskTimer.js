@@ -48,17 +48,19 @@ export default {
     ],
     timer_tab: 'task-timers',
     currentTab: 'task-timers',
-    task_status : [
-      { text: 'All', value: 'all' }, 
-      { text: 'Open',  value : 'open' },
-      { text: 'Behind', value : 'behind' }, 
-      { text: 'Completed', value : 'completed' },
+    task_status: [
+      { text: 'All', value: 'all' },
+      { text: 'Open', value: 'open' },
+      { text: 'Behind', value: 'behind' },
+      { text: 'Completed', value: 'completed' }
     ],
-    filter_task : 'all'
+    filter_task: 'all'
   }),
 
   created() {
-    this.fill_table_via_url(`api/timer/tasks?all=true&filter=${this.filter_task}`)
+    this.fill_table_via_url(
+      `api/timer/tasks?all=true&filter=${this.filter_task}`
+    )
   },
   computed: {
     loggeduser() {
@@ -67,7 +69,9 @@ export default {
   },
   methods: {
     load_more() {
-      this.load_more_via_url(`api/timer/tasks?all=true&filter=${this.filter_task}`)
+      this.load_more_via_url(
+        `api/timer/tasks?all=true&filter=${this.filter_task}`
+      )
     },
     can_run_timer(item) {
       let find = item.assignee.find(u => u.id === this.loggeduser.id)
@@ -82,7 +86,7 @@ export default {
       if (item.timer.timer_status === 'ongoing') {
         return 'Ongoing'
       }
-   
+
       if (item.timer.timer_status === 'pause') {
         return 'Paused'
       }

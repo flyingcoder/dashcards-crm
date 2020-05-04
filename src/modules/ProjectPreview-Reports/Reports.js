@@ -69,23 +69,23 @@ export default {
       }
     },
 
-    openEditDialog() {
-      this.reportIdToEdit = this.active_report.id
-      let index = this.reports.findIndex(i => i.id === this.active_report.id)
+    openEditDialog(report, index) {
+      this.active_report = report
+      this.reportIdToEdit = index
       if (~index) {
         this.$refs.editDialog.open_dialog(this.active_report, index)
       }
     },
 
-    openDeleteDialog() {
-      this.deleteReportId = this.active_report.id
+    openDeleteDialog(index) {
+      this.deleteReportId = index
       this.deleteDialog = true
     },
 
     reportUpdated({ data, index }) {
       this.$set(this.reports, index, data)
       this.active_report = data
-      this.$event.$emit('btnloading_off', false)    
+      this.$event.$emit('btnloading_off', false)
     },
 
     deleteReport() {

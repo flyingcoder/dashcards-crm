@@ -10,4 +10,3 @@ export const get_groupchat_list = () => {
 }
 
 export { send_message, get_client_convo_details }
-

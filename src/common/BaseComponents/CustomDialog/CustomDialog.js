@@ -6,13 +6,13 @@ export default {
     button2Text: { type: String, default: 'Delete' },
     open: Boolean,
     value: Boolean,
-    mainBtnDisabled : { type : Boolean, default : false }
+    mainBtnDisabled: { type: Boolean, default: false }
   },
 
   data: () => ({
     dialog: false,
     loading: false,
-    btnloading: false,
+    btnloading: false
   }),
 
   mounted() {

@@ -23,7 +23,7 @@ export default {
     onlineUsers() {
       return this.$store.getters['onlineUsers/all_users']
     },
-    permissions(){
+    permissions() {
       return this.$_permissions.get('hq_members')
     }
   },

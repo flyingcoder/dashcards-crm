@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-menu 
+    <v-menu
       :close-on-content-click="false"
       :nudge-width="200"
       offset-y
@@ -8,7 +8,9 @@
       left
     >
       <template v-slot:activator="{ on }">
-        <v-icon class="action insert__emoticon" v-on="on">insert_emoticon</v-icon>
+        <v-icon class="action insert__emoticon" v-on="on"
+          >insert_emoticon</v-icon
+        >
       </template>
       <VEmojiPicker
         v-show="true"
@@ -19,17 +21,16 @@
   </div>
 </template>
 
-
 <script>
-  import VEmojiPicker from 'v-emoji-picker'
-  export default {
-    components: {
-      VEmojiPicker
-    },
-    methods : {
-      onSelectEmoji(emoji){
-        this.$emit('emoji-selected', emoji)
-      }
+import VEmojiPicker from 'v-emoji-picker'
+export default {
+  components: {
+    VEmojiPicker
+  },
+  methods: {
+    onSelectEmoji(emoji) {
+      this.$emit('emoji-selected', emoji)
     }
   }
+}
 </script>

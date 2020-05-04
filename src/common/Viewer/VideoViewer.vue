@@ -1,13 +1,23 @@
 <template>
   <v-dialog
-      v-model="dialog" 
-      transition="dialog-bottom-transition"
-      @click:outside="closeDialog"
-      :max-width="700"
-    >
-    <v-card v-if="media">
-      <v-btn icon color="red" outlined fab @click="closeDialog" style="position: absolute;right: 55px;top:10px; z-index: 1;"><v-icon>close</v-icon></v-btn>
-        <video-player  
+    v-model="dialog"
+    @click:outside="closeDialog"
+    :max-width="700"
+  >
+    <div v-if="media" class="video-wrapper">
+      <div class="dialog-header">
+        <v-btn
+          icon
+          fab
+          small
+          text
+          class="action"
+          @click="closeDialog"
+          ><v-icon>close</v-icon></v-btn
+        >
+      </div>
+      <div class="dialog-body">
+        <video-player
           class="video-player-box"
           ref="videoPlayer"
           :playsinline="true"
@@ -16,16 +26,19 @@
             autoplay: false,
             language: 'en',
             playbackRates: [0.7, 1.0, 1.5, 2.0],
-            sources: [{
-              type: media.mime_type,
-              src: media.public_url
-            }],
+            sources: [
+              {
+                type: media.mime_type,
+                src: media.public_url
+              }
+            ],
             controls: true,
             fluid: true
           }"
-       ></video-player>
-     </v-card>
-	</v-dialog>
+        ></video-player>
+      </div>
+    </div>
+  </v-dialog>
 </template>
 
 <script>
@@ -35,11 +48,9 @@ export default {
     media: Object
   },
   data: () => ({
-    dialog: false,
+    dialog: false
   }),
-  computed :{ 
-   
-  },
+  computed: {},
   methods: {
     closeAllIframe() {
       const iframes = document.getElementsByTagName('iframe')
@@ -57,5 +68,24 @@ export default {
       this.dialog = false
     }
   }
-}	
+}
 </script>
+<style lang="scss" scoped>
+@import '~@/sass/_variables';
+
+.dialog-header .action{
+  position: absolute;
+  top: 20px;
+  right: 55px;
+  z-index: 1;
+  .v-btn__content .v-icon{
+    color: $black;
+  }
+}
+</style>
+<style scoped>
+  >>> .video-js .vjs-big-play-button{
+    top: calc(50% - 25px);
+    left: calc(50% - 45px);
+  }
+</style>

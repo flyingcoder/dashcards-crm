@@ -11,7 +11,13 @@
         <v-avatar color="grey" :size="size">
           <v-img :src="user.image_url" class="hover"></v-img>
         </v-avatar>
-        <v-icon x-small v-on="on" :color="is_online ? `success` : `grey`" class="status">mdi-circle</v-icon>
+        <v-icon
+          x-small
+          v-on="on"
+          :color="is_online ? `success` : `grey`"
+          class="status"
+          >mdi-circle</v-icon
+        >
         <span class="ml-1" v-if="!iconOnly">{{
           displayName | ucwords | truncate(20)
         }}</span>
@@ -94,7 +100,7 @@ export default {
       return ~is_online ? true : false
     }
   },
-      
+
   methods: {
     navigate_to_profile() {
       if (typeof this.user.user_roles === 'undefined') {
@@ -112,7 +118,7 @@ export default {
     },
     navigate_to_email() {
       //todo
-    },
+    }
   }
 }
 </script>

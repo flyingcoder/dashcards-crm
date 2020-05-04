@@ -1,28 +1,28 @@
 <template>
   <v-col md="12" class="pa-0 ma-0">
-  <div class="loading" v-if="loading">
-    <v-progress-linear :indeterminate="true"></v-progress-linear>
-  </div>
-
-  <div class="no-data" v-if="!loading && tasks_are_empty">
-    <div class="empty-content">
-      <v-icon class="empty-icon">list</v-icon>
-      <p class="empty-text">List Empty</p>
+    <div class="loading" v-if="loading">
+      <v-progress-linear :indeterminate="true"></v-progress-linear>
     </div>
-  </div>
 
-  <div class="tasks-tab" v-else>
-    <task-chips
-      :count-all="total"
-      :count-completed="counter.completed"
-      :count-pending="counter.pending"
-      :count-behind="counter.behind"
-      :count-open="counter.open"
-      :active-chip.sync="active_chip"
-    ></task-chips>
+    <div class="no-data" v-if="!loading && tasks_are_empty">
+      <div class="empty-content">
+        <v-icon class="empty-icon">list</v-icon>
+        <p class="empty-text">List Empty</p>
+      </div>
+    </div>
 
-    <task-custom-table :tasks="filtered_tasks" :tab="tab" ></task-custom-table>
-  </div>
+    <div class="tasks-tab" v-else>
+      <task-chips
+        :count-all="total"
+        :count-completed="counter.completed"
+        :count-pending="counter.pending"
+        :count-behind="counter.behind"
+        :count-open="counter.open"
+        :active-chip.sync="active_chip"
+      ></task-chips>
+
+      <task-custom-table :tasks="filtered_tasks" :tab="tab"></task-custom-table>
+    </div>
   </v-col>
 </template>
 

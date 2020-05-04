@@ -9,6 +9,18 @@
       <v-layout wrap class="custom-dialog">
         <v-flex xs12>
           <v-text-field
+            v-model.trim="title"
+            class="dialog__textfield d-field"
+            label="Title"
+            filled
+            clearable
+            hide-details
+            prepend-icon="text_fields"
+            color="#657186"
+          />
+        </v-flex>
+        <v-flex xs12>
+          <v-text-field
             class="dialog__link d-field"
             pattern="https://.*"
             type="url"
@@ -19,18 +31,6 @@
             @keydown="validate_url"
             filled
             hide-details
-            color="#657186"
-          />
-        </v-flex>
-        <v-flex xs12>
-          <v-text-field
-            v-model.trim="title"
-            class="dialog__textfield d-field"
-            label="Title"
-            filled
-            clearable
-            hide-details
-            prepend-icon="text_fields"
             color="#657186"
           />
         </v-flex>

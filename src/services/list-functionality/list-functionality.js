@@ -33,7 +33,7 @@ export const list_functionality = {
     noMoreData: false,
     componentKey: 1,
     view: 'list',
-    btnloading : false
+    btnloading: false
   }),
 
   watch: {

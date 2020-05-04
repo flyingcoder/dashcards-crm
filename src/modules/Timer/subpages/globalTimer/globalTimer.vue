@@ -59,8 +59,8 @@
         <td>{{ item.timer.timer_created | format('MMM DD YYYY HH:mm:ss') }}</td>
         <td>{{ timerEnd(item) }}</td>
         <td>
-          <PlayStop 
-            :item="item" 
+          <PlayStop
+            :item="item"
             :forDate="dateSelected"
             @row-item-updated="item = $event"
           ></PlayStop>

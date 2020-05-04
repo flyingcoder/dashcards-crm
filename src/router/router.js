@@ -83,7 +83,7 @@ export default new Router({
         expanded_invoice, //path: /dashboard/expanded-invoice
         expanded_timeline, //path: /dashboard/expanded-timeline
         expanded_tasks, //path: /dashboard/expanded-timeline
-        bugs, // path: /dashboard/bugs
+        bugs // path: /dashboard/bugs
       ]
     },
     setPassword, // path: /set-password

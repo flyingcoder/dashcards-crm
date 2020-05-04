@@ -16,9 +16,9 @@
       </v-row>
 
       <v-progress-linear
-          v-if="loading"
-          :indeterminate="true"
-        ></v-progress-linear>
+        v-if="loading"
+        :indeterminate="true"
+      ></v-progress-linear>
 
       <v-row no-gutters v-if="items.length">
         <v-col md="12" class="px-3 py-2" style="min-height: 350px;">
@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="write px-3">
-      <ChatField 
+      <ChatField
         class="mt-2"
         :mentionables="mentionables"
         @typing=""
@@ -57,7 +57,7 @@ import ChatField from '@/common/ChatBox/ChatField.vue'
 import Message from '@/modules/Chat/components/Message/Message.vue'
 
 export default {
-  name : 'TeamMessages',
+  name: 'TeamMessages',
   mixins: [global_utils, list_functionality],
   props: {
     id: [Number, String]
@@ -72,7 +72,7 @@ export default {
     loading: false,
     message: null,
     can_message: false,
-    activeChat : null,
+    activeChat: null
   }),
 
   computed: {
@@ -80,7 +80,9 @@ export default {
       return this.$store.getters.user
     },
     mentionables() {
-      if (!this.activeChat) { return [] }
+      if (!this.activeChat) {
+        return []
+      }
       return this.activeChat.members
     }
   },
@@ -94,19 +96,22 @@ export default {
   created() {
     this.loading = true
     this.fill_table_via_url(`api/projects/${this.id}/messages?type=team`)
-    setTimeout(() => { this.scrollToBottomDiv() } ,1 )
+    setTimeout(() => {
+      this.scrollToBottomDiv()
+    }, 1)
     this.getConvoDetails(this.id)
   },
 
   methods: {
     getConvoDetails(id) {
-      apiTo.get_client_convo_details(id)
-      .then(({ data }) => {
-        this.activeChat = data
-      })
-      .finally(() => {
-        this.loading = false
-      })
+      apiTo
+        .get_client_convo_details(id)
+        .then(({ data }) => {
+          this.activeChat = data
+        })
+        .finally(() => {
+          this.loading = false
+        })
     },
     scrollToBottomDiv() {
       setTimeout(() => {
@@ -127,8 +132,7 @@ export default {
     user_can_message(can) {
       this.can_message = can
       if (can) console.log('Client chat connected')
-      else
-        this.$event.$emit('open_snackbar', 'Team chat unavailable.', 'error')
+      else this.$event.$emit('open_snackbar', 'Team chat unavailable.', 'error')
     },
     subscribePusher() {
       const team_message_channel = this.$pusher.subscribe(
@@ -145,22 +149,24 @@ export default {
       )
     },
     sendMessage(data) {
-      let formData = new FormData();
-          formData.append('message', data.message)
-          formData.append('type','team')
-          formData.append('from_id', this.loggedUser.id)
+      let formData = new FormData()
+      formData.append('message', data.message)
+      formData.append('type', 'team')
+      formData.append('from_id', this.loggedUser.id)
 
-          if (data.files.length > 0) {
-            formData.append('file',  data.files[0])
-          }
+      if (data.files.length > 0) {
+        formData.append('file', data.files[0])
+      }
 
-      apiTo.send_message(this.id, formData).then(({ data }) => {
-        this.add_new_message(data)
-      }).
-      finally(() => {
-        this.scrollToBottomDiv()
-        this.$event.$emit('btnsending_off', false)
-      })
+      apiTo
+        .send_message(this.id, formData)
+        .then(({ data }) => {
+          this.add_new_message(data)
+        })
+        .finally(() => {
+          this.scrollToBottomDiv()
+          this.$event.$emit('btnsending_off', false)
+        })
     },
     messages(items) {
       return _cloneDeep(items).reverse()

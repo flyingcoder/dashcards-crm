@@ -20,15 +20,12 @@
         <td class="text-cap clickable-td" @click="view_task(item.id)">
           {{ item.title }}
         </td>
-         <td>
+        <td>
           {{ item.milestone.title }}
         </td>
         <td class="text-cap">{{ item.status }}</td>
         <td>
-          <PlayPause 
-            :item="item" 
-            @row-item-updated="item = $event"
-          ></PlayPause>
+          <PlayPause :item="item" @row-item-updated="item = $event"></PlayPause>
         </td>
       </template>
     </VueTable>

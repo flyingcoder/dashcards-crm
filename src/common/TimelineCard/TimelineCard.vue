@@ -11,7 +11,6 @@
         @expand="expand"
       >
         <template v-slot:content>
-
           <Empty
             v-if="!loading && items.length === 0"
             slug="empty-timeline"

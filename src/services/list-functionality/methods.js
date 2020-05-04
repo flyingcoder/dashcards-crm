@@ -290,7 +290,9 @@ export const methods = {
 
     scrollToBottom() {
       setTimeout(() => {
-        const wrapper = document.getElementsByClassName('v-data-table__wrapper')[0]
+        const wrapper = document.getElementsByClassName(
+          'v-data-table__wrapper'
+        )[0]
         if (wrapper) {
           wrapper.scrollTop = wrapper.scrollHeight
         }

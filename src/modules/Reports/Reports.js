@@ -67,15 +67,18 @@ export default {
       this.$refs.dialog.open_dialog()
     },
 
-    openDeleteDialog() {
-      this.deleteReportId = this.activeReport.id
+    openDeleteDialog(index) {
+      this.deleteReportId = index
       this.deleteDialog = true
     },
 
-    openEditDialog() {
-      let index = this.reports.findIndex(i => i.id === this.activeReport.id)
+    openEditDialog(report, index) {
+      // let index = this.reports.findIndex(i => i.id === this.activeReport.id)
+      // if (~index) {
+      //   this.$refs.editDialog.open_dialog(this.activeReport, index)
+      // }
       if (~index) {
-        this.$refs.editDialog.open_dialog(this.activeReport, index)
+        this.$refs.editDialog.open_dialog(report, index)
       }
     },
 
@@ -97,6 +100,7 @@ export default {
     },*/
 
     previewRowUrl(report) {
+      console.log(report.id)
       this.activeReport = report
       if (this.activeReport) {
         this.iframeSrc = report.url

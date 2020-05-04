@@ -65,7 +65,7 @@ export default {
       refresh_table_message: 'Table refreshed',
       refresh_table_api_name: 'paginate_tab_files_table'
     },
-    btnloading : false,
+    btnloading: false,
     url: '',
     dialog: false,
     filter: 'all',
@@ -114,7 +114,7 @@ export default {
       }
     ],
     log_id: null,
-    selected_media : null
+    selected_media: null
   }),
 
   computed: {
@@ -123,9 +123,7 @@ export default {
     },
     filteredItems() {
       if (this.filter === 'all') return this.items
-      return this.items.filter(item =>
-        item.category.includes(this.filter)
-      )
+      return this.items.filter(item => item.category.includes(this.filter))
     },
 
     user() {
@@ -263,8 +261,12 @@ export default {
     },
 
     openViewer(media) {
-      this.selected_media =  media
-      if (media.category === 'links' && media.custom_properties.hasOwnProperty('embed') && media.custom_properties.embed){
+      this.selected_media = media
+      if (
+        media.category === 'links' &&
+        media.custom_properties.hasOwnProperty('embed') &&
+        media.custom_properties.embed
+      ) {
         this.$refs.embed_viewer_dialog.openDialog()
       } else if (media.category === 'videos') {
         this.$refs.video_viewer_dialog.openDialog()

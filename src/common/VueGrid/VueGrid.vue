@@ -10,7 +10,11 @@
         <v-card class="mx-2 my-2">
           <v-card-text class="px-5">
             <v-row>
-              <v-icon small v-if="is_online(item)" title="Online" color="success"
+              <v-icon
+                small
+                v-if="is_online(item)"
+                title="Online"
+                color="success"
                 >mdi-check-circle</v-icon
               >
               <v-icon small v-else title="Offline">mdi-circle</v-icon>
@@ -25,12 +29,18 @@
                 </template>
 
                 <v-list dense>
-                  <v-list-item v-if="can_edit(item)" @click="$emit('edit', item)">
+                  <v-list-item
+                    v-if="can_edit(item)"
+                    @click="$emit('edit', item)"
+                  >
                     <v-list-item-subtitle
                       ><v-icon small>edit</v-icon> Edit</v-list-item-subtitle
                     >
                   </v-list-item>
-                  <v-list-item v-if="can_delete(item)" @click="$emit('delete', item)">
+                  <v-list-item
+                    v-if="can_delete(item)"
+                    @click="$emit('delete', item)"
+                  >
                     <v-list-item-subtitle
                       ><v-icon small>delete</v-icon>
                       Delete</v-list-item-subtitle

@@ -44,7 +44,7 @@ export default {
     userLoading: false,
     current_members: [],
     target: null,
-    view__more_loading: false,
+    view__more_loading: false
   }),
   computed: {
     ...mapGetters('chat', ['unread_messages', 'all_conversations']),
@@ -57,15 +57,15 @@ export default {
     onlineUsers() {
       return this.$store.getters['onlineUsers/all_users']
     },
-    mentionables(){
+    mentionables() {
       if (!this.activeChat) {
         return []
       }
       if (this.activeChat.type === `group`) {
         return this.activeChat.members
       }
-      return [ this.activeChat ]
-    },
+      return [this.activeChat]
+    }
   },
   created() {
     if (typeof this.$route.params.target !== 'undefined')
@@ -164,11 +164,18 @@ export default {
     get_previous_message() {
       this.view__more_loading = true
       if (this.activeChat.type === `group`) {
-        var req = api_to.get_group_more_messages(this.activeChat.id, this.pagination.current)
+        var req = api_to.get_group_more_messages(
+          this.activeChat.id,
+          this.pagination.current
+        )
       } else {
-        var req = api_to.get_more_messages(this.activeChat.id, this.pagination.current)
+        var req = api_to.get_more_messages(
+          this.activeChat.id,
+          this.pagination.current
+        )
       }
-        req.then(({ data }) => {
+      req
+        .then(({ data }) => {
           data.data.forEach(item => {
             this.all_messages.unshift(item)
           })
@@ -273,15 +280,15 @@ export default {
       }
     },
     sendGroupMessage(data) {
-      let formData = new FormData();
-          formData.append('message', data.message)
-          formData.append('type','group')
-          formData.append('from_id', this.loggeduser.id)
-          formData.append('convo_id', this.activeChat.id)
+      let formData = new FormData()
+      formData.append('message', data.message)
+      formData.append('type', 'group')
+      formData.append('from_id', this.loggeduser.id)
+      formData.append('convo_id', this.activeChat.id)
 
-          if (data.files.length > 0) {
-            formData.append('file',  data.files[0])
-          }
+      if (data.files.length > 0) {
+        formData.append('file', data.files[0])
+      }
 
       api_to
         .send_group_message(formData)
@@ -294,15 +301,15 @@ export default {
         })
     },
     sendPrivateMessage(data) {
-      let formData = new FormData();
-          formData.append('message', data.message)
-          formData.append('type','private')
-          formData.append('from_id', this.loggeduser.id)
-          formData.append('to_id', this.activeChat.id)
+      let formData = new FormData()
+      formData.append('message', data.message)
+      formData.append('type', 'private')
+      formData.append('from_id', this.loggeduser.id)
+      formData.append('to_id', this.activeChat.id)
 
-        if (data.files.length > 0) {
-          formData.append('file',  data.files[0])
-        }
+      if (data.files.length > 0) {
+        formData.append('file', data.files[0])
+      }
 
       api_to
         .send_message(formData)
@@ -347,7 +354,7 @@ export default {
         })
         .reverse()
     },
-    handleTyping(){
+    handleTyping() {
       console.log('typing')
     }
   }

@@ -27,7 +27,11 @@
               <v-spacer></v-spacer>
               <v-tooltip left>
                 <template v-slot:activator="{ on }">
-                  <v-btn icon v-on="on" @click="$refs.creategroupchat.open_dialog()">
+                  <v-btn
+                    icon
+                    v-on="on"
+                    @click="$refs.creategroupchat.open_dialog()"
+                  >
                     <v-icon color="primary">mdi-comment-plus</v-icon>
                   </v-btn>
                 </template>
@@ -180,8 +184,13 @@
                             activeChat.type === 'group'
                               ? current_members.length + ' members'
                               : activeChat.job_title
-                          }}<br>
-                          {{ activeChat.type === 'group' ? 'Admin : '+creator(activeChat.data.group_creator.id): '' }}
+                          }}<br />
+                          {{
+                            activeChat.type === 'group'
+                              ? 'Admin : ' +
+                                creator(activeChat.data.group_creator.id)
+                              : ''
+                          }}
                         </p>
                         <div
                           class="info__anchor"
@@ -204,7 +213,9 @@
                           v-if="activeChat.type === 'group'"
                         >
                           <v-btn
-                            v-if="loggeduser.id === activeChat.data.group_creator.id"
+                            v-if="
+                              loggeduser.id === activeChat.data.group_creator.id
+                            "
                             text
                             small
                             outlined
@@ -215,7 +226,12 @@
                             <v-icon small>settings</v-icon> Manage Members
                           </v-btn>
                         </div>
-                        <Avatars v-if="activeChat.type === 'group'" :items="activeChat.members" class="mt-1" :count="6"></Avatars>
+                        <Avatars
+                          v-if="activeChat.type === 'group'"
+                          :items="activeChat.members"
+                          class="mt-1"
+                          :count="6"
+                        ></Avatars>
                       </div>
                     </div>
                     <div class="info__two" v-show="activeChat.type !== 'group'">
@@ -302,7 +318,7 @@
               </div>
 
               <div class="write px-2" v-if="!cardLoading">
-                <ChatField 
+                <ChatField
                   class="mt-2"
                   :mentionables="mentionables"
                   @typing="handleTyping"
