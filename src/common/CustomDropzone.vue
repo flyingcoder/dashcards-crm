@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-layout row>
-      <v-flex xs12 md12>
+    <v-row>
+      <v-col md="12">
         <vue-dropzone
           ref="dropzone"
           id="dropzone"
@@ -14,9 +14,9 @@
           @vdropzone-removed-file="file_is_removed()"
           @vdropzone-canceled="file_is_removed()"
           @vdropzone-sending="file_is_sending"
+          @vdropzone-max-files-exceeded="max_file_exceed"
         >
-          <v-layout
-            row
+          <v-row
             align-center
             justify-center
             fill-height
@@ -31,12 +31,11 @@
             <div class="drop__btn">
               <v-btn large dark color="#3b589e">Choose your files</v-btn>
             </div>
-          </v-layout>
+          </v-row>
         </vue-dropzone>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
     <v-row no-gutters v-if="needConfirmation" class="py-1">
-      <v-flex xs12 md12 justify-content-between>
         <v-btn
           dark
           v-if="hasAddLink"
@@ -46,6 +45,7 @@
         >
           Add Link <v-icon right>link</v-icon>
         </v-btn>
+        <v-spacer></v-spacer>
         <v-btn
           color="success"
           :disabled="counts < 1"
@@ -55,14 +55,22 @@
           Upload Selected Files <v-icon right dark>cloud_upload</v-icon>
         </v-btn>
         <v-btn
-          v-show="counts > 0"
+          :disabled="counts < 1"
           class="mr-1"
           color="error"
           @click="remove_all_files()"
         >
-          Remove All Files <v-icon right>close</v-icon>
+          Remove All Files <v-icon right>delete</v-icon>
         </v-btn>
-      </v-flex>
+      
+      <v-spacer></v-spacer>
+
+      <v-tooltip left>
+        <template v-slot:activator="{ on }">
+          <span class="caption" v-on="on">{{file_counter}}</span>
+        </template>
+        <span>Max Number of Files</span>
+      </v-tooltip>
     </v-row>
   </div>
 </template>
@@ -90,10 +98,15 @@ export default {
   created() {
     this.session_id = uuidv4()
   },
+  computed : {
+    file_counter(){
+      return this.counts+'/'+this.options.maxFiles
+    },
+  },
   methods: {
     getCount() {
       setTimeout(() => {
-        this.counts = this.$refs.dropzone.getAcceptedFiles().length
+        this.counts = this.$refs.dropzone ? this.$refs.dropzone.getAcceptedFiles().length : 0
       }, 1)
     },
     remove_file(file) {
@@ -116,6 +129,9 @@ export default {
     },
     file_is_sending(file, xhr, formData) {
       formData.append('file_upload_session', this.session_id)
+    },
+    max_file_exceed(file) {
+      this.$refs.dropzone.removeFile(file)
     }
   }
 }

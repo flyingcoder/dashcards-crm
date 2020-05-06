@@ -9,23 +9,39 @@
           width="100%"
           height="800"
           @load="load"
+          @error="error"
         ></iframe>
       </div>
     </div>
+    <Empty v-show="hasError" headline="Unable to fetch contents!">
+      <template v-slot:extra>
+        <v-btn color="primary" :href="iframe_src" target="_blank" ><v-icon left>mdi-link</v-icon> Follow Link?</v-btn>
+      </template>
+    </Empty>
   </div>
 </template>
 
 <script>
+import Empty from '@/common/Empty'
 export default {
   props: {
     iframe_src: String
   },
+  components: {
+    Empty
+  },
   data: () => ({
-    loaded: false
+    loaded: false,
+    hasError: false
   }),
   methods: {
     load() {
       this.loaded = true
+    },
+    error(e) {
+      this.loaded = true
+      hasError = true
+      console.log(e)
     }
   }
 }

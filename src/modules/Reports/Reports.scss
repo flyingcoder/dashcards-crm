@@ -5,79 +5,89 @@
 @include emptyTable('.empty-reports');
 
 .custom-dialog {
-  .dialog__link, .dialog__textfield{
-    margin: 10px 5px;
-  }
+
+    .dialog__link,
+    .dialog__textfield {
+        margin: 10px 5px;
+    }
 }
 
 @include actionButtonsDialog('.disable-btn');
 
-.theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat){
-  background-color: $white;
-}
-
-.body-wrapper{
-  margin: 10px;
-  background-color: $white;
-  border: 1px solid $tableBorderBlue;
-  border-radius: 10px;
-  padding: 20px;
-
-  .reports-actions{
-    text-align: right;
-    margin-bottom: 20px;
-  }
-  .theme--dark.v-tabs>.v-tabs-bar{
-    background-color: $modalBgGray !important;
-  }
-  .v-tab.v-tab--active{
-    background-color: #fff;
-    color: $tableBlueText;
-    border-bottom: none;
-  }
-  .v-tab{
-    background-color: $modalBgGray;
-    color: $tableBlueText !important;
-    border-top: 1px solid $borderGray;
-    border-right: 1px solid $borderGray;
-    border-left: 1px solid $borderGray;
-    border-bottom: 1px solid $borderGray;
-  }
-
-  .reports-content{
+.theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat) {
     background-color: $white;
-  }
-  .site-preview{
+}
+
+.body-wrapper {
+    background-color: $white;
     border: 1px solid $tableBorderBlue;
-    margin: 5px 10px;
-  }
+    border-radius: 10px;
+    max-width: 100%;
+
+    .reports-actions {
+        text-align: right;
+        margin-bottom: 20px;
+    }
+
+    .theme--dark.v-tabs>.v-tabs-bar {
+        background-color: $modalBgGray !important;
+    }
+
+    .v-tab.v-tab--active {
+        background-color: #fff;
+        color: $tableBlueText;
+        border-bottom: none;
+    }
+
+    .v-tab {
+        background-color: $modalBgGray;
+        color: $tableBlueText !important;
+        border-top: 1px solid $borderGray;
+        border-right: 1px solid $borderGray;
+        border-left: 1px solid $borderGray;
+        border-bottom: 1px solid $borderGray;
+    }
+
+    .reports-content {
+        background-color: $white;
+    }
+
+    .site-preview {
+        border: 1px solid $tableBorderBlue;
+        margin: 5px 10px;
+
+        iframe {
+          min-height: 700px;
+        }
+    }
 }
 
-@media only screen and (max-width: 768px){
-  .reports {
-    padding: 7px 14px;
-  }
-  .body-wrapper{
-    padding: 15px;
-
-    .reports__body{
-      padding: 18px;
-
+@media only screen and (max-width: 768px) {
+    .reports {
+        padding: 7px 14px;
     }
-  }
+
+    .body-wrapper {
+        padding: 15px;
+
+        .reports__body {
+            padding: 18px;
+
+        }
+    }
 }
 
-@media only screen and (max-width: 599px){
-  .body-wrapper{
-    padding: 10px;
+@media only screen and (max-width: 599px) {
+    .body-wrapper {
+        padding: 10px;
 
-    .reports__body{
-      padding: 10px;
+        .reports__body {
+            padding: 10px;
+        }
+
+        .v-btn--floating.v-btn--small {
+            height: 35px;
+            width: 35px;
+        }
     }
-    
-    .v-btn--floating.v-btn--small{
-      height: 35px;
-      width: 35px;
-    }
-  }
 }

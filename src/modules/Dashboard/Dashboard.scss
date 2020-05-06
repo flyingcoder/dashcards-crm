@@ -2,82 +2,86 @@
 
 
 .dashboard__container {
-  min-height : 100%;
-  display: grid;
-  grid-template-areas: 'sidebar header' 'sidebar content';
-  grid-template-columns: auto 1fr;
-  grid-template-rows: 60px 1fr;
+    min-height: 100%;
+    display: grid;
+    grid-template-areas: 'sidebar header''sidebar content';
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 60px 1fr;
 
-  .d__sidebar {
-    width: 100%;
-    grid-area: sidebar;
-    background: $blue;
-    transition: width .3s linear;
-  }
-
-  .d__header {
-    grid-area: header;
-    height: 60px;
-  }
-
-  .d__content {
-    grid-area: content;
-    background-color: #f2f1f7;
-  }
-
-  .v-list__tile {
-    padding: 0;
-    width: 100%;
-  }
-
-  .d__logo {
-    background: $blue;
-    height: 60px;
-
-    .s__logo {
-      .b__icon {
-        display: none;
-      }
-    }
-  }
-
-  .d__sidebar.collapse {
-    width: 60px;
-
-    .s__content {
-      width: 0;
-      opacity: 0;
+    .d__sidebar {
+        width: 100%;
+        grid-area: sidebar;
+        background: $blue;
+        transition: width .3s linear;
     }
 
-    .s__list {
-      padding: 0;
-      width: 100%;
+    .d__header {
+        grid-area: header;
+        height: 60px;
     }
-    .s__list {
-      position: relative;
-      width: 88%;
 
-      &:hover {
-        width: 190px;
-        border-radius: 8px;
-
-        .s__content {
-          opacity: 1;
-        }
-      }
-
-      .s__content {
-        width: 0;
-        opacity: 0;
-      }
+    .d__content {
+        grid-area: content;
+        background-color: #f2f1f7;
+        max-width: 100%;
     }
-    .sidebar {
-      //transition: width 1s;
-      a {
+
+    .v-list__tile {
         padding: 0;
         width: 100%;
-        height: 100%;
-      }
     }
-  }
+
+    .d__logo {
+        background: $blue;
+        height: 60px;
+
+        .s__logo {
+            .b__icon {
+                display: none;
+            }
+        }
+    }
+
+    .d__sidebar.collapse {
+        width: 60px;
+
+        .s__content {
+            width: 0;
+            opacity: 0;
+        }
+
+        .s__list {
+            padding: 0;
+            width: 100%;
+        }
+
+        .s__list {
+            position: relative;
+            width: 88%;
+
+            &:hover {
+                width: 190px;
+                border-radius: 8px;
+
+                .s__content {
+                    opacity: 1;
+                }
+            }
+
+            .s__content {
+                width: 0;
+                opacity: 0;
+            }
+        }
+
+        .sidebar {
+
+            //transition: width 1s;
+            a {
+                padding: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
 }
