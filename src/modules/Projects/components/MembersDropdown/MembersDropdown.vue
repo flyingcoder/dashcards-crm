@@ -2,7 +2,6 @@
   <div class="members-dropdown">
     <v-autocomplete
       :value="members"
-      @input="members_selected"
       :items="items"
       :search-input.sync="search"
       :loading="isLoading"
@@ -10,7 +9,7 @@
       prepend-inner-icon="search"
       no-filter
       chips
-      multiple
+      :multiple="multiple"
       clearable
       hide-details
       color="#657186"
@@ -20,39 +19,36 @@
       :append-outer-icon="showOuterIcon ? 'add' : ''"
       @click:append-outer="open_add_new_member"
     >
-      <template slot="selection" slot-scope="data">
+      <template v-slot:selection="data">
         <v-chip
+          v-bind="data.attrs"
           :input-value="data.selected"
-          outlined
-          class="chip--select-multi"
           close
-          @input="remove_chip(data.index)"
+          @click="data.select"
+          @click:close="remove_chip(data.index)"
         >
-          <img :src="data.item.image_url" width="30" height="30" />
-          &nbsp;<span class="chip-member-name">{{ data.item.name }}</span>
+          <v-avatar left>
+            <v-img :src="data.item.image_url"></v-img>
+          </v-avatar>
+          {{ data.item.name }}
         </v-chip>
       </template>
+      <template v-slot:item="data">
+          <v-list-item :key="data.item.id" @click="add_to_selected(data.item)">
+            <v-list-item-avatar>
+              <v-img :src="data.item.image_url"></v-img>
+            </v-list-item-avatar>
 
-      <template slot="item" slot-scope="{ item }">
-        <div class="member">
-          <div class="member-avatar">
-            <img :src="item.image_url" />
-          </div>
-          <div class="member-info">
-            <div class="full-name">
-              {{ item.first_name }}
-            </div>
-            <div class="job-title">
-              {{ item.job_title }}
-            </div>
-          </div>
-          <div class="checked-icon" v-if="!is_item_active(item.id)">
-            <v-icon color="gray">check_circle_outline</v-icon>
-          </div>
-          <div class="checked-icon" v-if="is_item_active(item.id)">
-            <v-icon color="green">check_circle</v-icon>
-          </div>
-        </div>
+            <v-list-item-content>
+              <v-list-item-title v-html="data.item.fullname"></v-list-item-title>
+              <v-list-item-subtitle v-html="data.item.job_title"></v-list-item-subtitle>
+            </v-list-item-content>
+            
+            <v-list-item-action>
+                <v-icon v-if="!is_item_active(data.item.id)" color="grey lighten-1">check_circle_outline</v-icon>
+                <v-icon v-if="is_item_active(data.item.id)" color="success">check_circle</v-icon>
+            </v-list-item-action>
+          </v-list-item>
       </template>
     </v-autocomplete>
   </div>

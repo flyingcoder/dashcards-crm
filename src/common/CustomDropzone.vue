@@ -39,6 +39,7 @@
       <v-flex xs12 md12 justify-content-between>
         <v-btn
           dark
+          v-if="hasAddLink"
           class="mr-1"
           color="#3b589e"
           @click="$emit('open-add-link-dialog')"
@@ -79,7 +80,8 @@ export default {
 
   props: {
     options: Object,
-    needConfirmation: { type: Boolean, default: false }
+    needConfirmation: { type: Boolean, default: false },
+    hasAddLink: { type: Boolean, default: true },
   },
   data: () => ({
     counts: 0,

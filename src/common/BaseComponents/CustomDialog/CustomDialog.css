@@ -1,35 +1,44 @@
- >>> .d-field {
+>>>.v-dialog:not(.v-dialog--fullscreen) {
+    max-height: 100%;
+}
+
+>>>.d-field {
     margin: 5px;
 }
->>> .theme--light.v-input:not(.v-input--is-disabled) input, >>> .theme--light.v-input:not(.v-input--is-disabled) textarea{
+
+>>>.theme--light.v-input:not(.v-input--is-disabled) input,
+>>>.theme--light.v-input:not(.v-input--is-disabled) textarea {
     color: #657186;
 }
 
->>> .dialog__textfield input{
+>>>.dialog__textfield input {
     text-transform: capitalize;
 }
 
->>> .task-description .ql-toolbar.ql-snow{
+>>>.task-description .ql-toolbar.ql-snow {
     border-top: none;
     border-right: none;
     border-left: none;
     border-bottom-color: #dce1e5;
 }
->>> .task-description .ql-container.ql-snow{
+
+>>>.task-description .ql-container.ql-snow {
     border: none;
 }
->>> .task-description .ql-editor{
+
+>>>.task-description .ql-editor {
     color: #657186;
 }
 
->>> .theme--light.v-text-field--filled > .v-input__control > .v-input__slot {
-  background-color: #fff;
-}
->>> .theme--light.v-text-field--box>.v-input__control>.v-input__slot{
+>>>.theme--light.v-text-field--filled>.v-input__control>.v-input__slot {
     background-color: #fff;
 }
 
->>> .custom__dialog .dialog__actions .v-btn{
+>>>.theme--light.v-text-field--box>.v-input__control>.v-input__slot {
+    background-color: #fff;
+}
+
+>>>.custom__dialog .dialog__actions .v-btn {
     font-size: 14px;
     padding: 8px;
     border-radius: 5px;
@@ -41,15 +50,18 @@
     width: auto;
     margin: 0 9px;
 }
->>> .custom__dialog .dialog__body{
+
+>>>.custom__dialog .dialog__body {
     padding: 0;
 }
 
-@media only screen and (max-width: 480px){
-    >>> .dialog__body .v-input__slot{
+@media only screen and (max-width: 480px) {
+    >>>.dialog__body .v-input__slot {
         font-size: 12px;
     }
-    >>> .dialog__body label.v-label.theme--light, >>> .dialog__body label.v-label.theme--light{
+
+    >>>.dialog__body label.v-label.theme--light,
+    >>>.dialog__body label.v-label.theme--light {
         font-size: 12px;
     }
 }

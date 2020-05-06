@@ -15,7 +15,8 @@
               label="Edit Title"
               class="dialog__textfield d-field"
               color="#667187"
-              box
+              solo
+              clearable
               hide-details
             >
             </v-text-field>

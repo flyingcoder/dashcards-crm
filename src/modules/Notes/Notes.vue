@@ -26,11 +26,13 @@
     <div v-if="notes" class="notes-wrapper">
       <div class="notes-content">
         <notes-list
-          :notes="notes"
+          :notes="items"
           :loading="loading"
           :active-note="selected_note"
+          :noMoreData="noMoreData"
           @clicked="change_selected"
           @toggle-pin="toggle_pin"
+          @view-more="fetch_more_notes"
         />
         <note-form
           :note="selected_note"

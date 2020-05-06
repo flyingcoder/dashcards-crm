@@ -139,8 +139,10 @@ export default {
   }),
 
   created() {
-    this.active_task_id = this.tasks[0].id
-    this.$event.$emit('show-task-side-preview', this.tasks[0])
+    if (this.tasks.length > 0) {
+      this.active_task_id = this.tasks[0].id
+      this.$event.$emit('show-task-side-preview', this.tasks[0])
+    }
     this.$event.$on('task_completed', task => {
       if (!this.active_task_id) {
         this.active_task_id = task.id

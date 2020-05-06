@@ -23,13 +23,13 @@
           </v-icon>
         </div>
         <div class="note-desc">
-          <p v-html="note.content"></p>
+          <p :inner-html.prop="note.content | truncate(30)"></p>
         </div>
       </div>
     </div>
 
     <div class="view__more">
-      <v-btn text normal class="view__more_btn">VIEW MORE</v-btn>
+      <v-btn text normal :disabled="noMoreData" @click="$emit('view-more')" class="view__more_btn">VIEW MORE</v-btn>
     </div>
   </div>
 </template>

@@ -6,6 +6,7 @@
       @click="$emit('click-main')"
       :height="height"
       :width="width"
+      contain
       @error="image_exist = false"
     >
     </v-img>

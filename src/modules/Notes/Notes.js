@@ -1,4 +1,9 @@
-import { api_to } from './api'
+import {
+    api_to
+} from './api'
+import {
+    list_functionality
+} from '@/services/list-functionality/list-functionality'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
 import NotesList from './components/NotesList/NotesList.vue'
@@ -7,157 +12,191 @@ import NotesDialog from './components/NotesDialog/NotesDialog'
 import EditNotesDialog from './components/NotesDialog/EditNotesDialog'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import CollaboratorDialog from './components/CollaboratorDialog/CollaboratorDialog.vue'
-import { cloneDeep } from 'lodash'
+import {
+    cloneDeep
+} from 'lodash'
 
 export default {
-  name: 'Notes',
-  components: {
-    TableHeader,
-    NotesList,
-    NoteForm,
-    NotesDialog,
-    EditNotesDialog,
-    CollaboratorDialog,
-    DeleteDialog
-  },
-
-  data: () => ({
-    paths: [
-      { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-      { text: 'Notes', disabled: true, router_name: null }
-    ],
-    notes_dialog: false,
-    edit_note_dialog: false,
-    delete_note_dialog: false,
-    coll_dialog: false,
-    notes: [],
-    loading: false,
-    selected_note: null,
-    collaborators: [],
-    pin_api: false,
-    note_to_edit: null,
-    note_to_delete: null
-  }),
-
-  created() {
-    this.fetch_notes()
-  },
-
-  methods: {
-    fetch_notes() {
-      this.loading = true
-      api_to
-        .get_notes()
-        .then(({ data }) => {
-          this.notes = data.data
-          this.select_first_note(data.data)
-        })
-        .finally(() => (this.loading = false))
+    name: 'Notes',
+    mixins: [list_functionality],
+    components: {
+        TableHeader,
+        NotesList,
+        NoteForm,
+        NotesDialog,
+        EditNotesDialog,
+        CollaboratorDialog,
+        DeleteDialog
     },
 
-    save(payload) {
-      api_to.add_new_note(payload).then(({ data }) => {
-        this.notes.push(data)
-        this.$event.$emit('open_snackbar', 'Note Added Successfully')
-        this.notes_dialog = false
-      })
+    data: () => ({
+        paths: [{
+            text: 'Dashboard',
+            disabled: false,
+            router_name: 'default-content'
+        }, {
+            text: 'Notes',
+            disabled: true,
+            router_name: null
+        }],
+        notes_dialog: false,
+        edit_note_dialog: false,
+        delete_note_dialog: false,
+        coll_dialog: false,
+        notes: [],
+        loading: false,
+        selected_note: null,
+        collaborators: [],
+        pin_api: false,
+        note_to_edit: null,
+        note_to_delete: null
+    }),
+
+    created() {
+        this.fetch_notes()
     },
 
-    updateNote(payload) {
-      if (payload) {
-        api_to.updateNote(payload).then(this.update_notes)
-      }
-    },
-    update_notes({ data }) {
-      const index = this.notes.findIndex(
-        note => note.id === this.selected_note.id
-      )
-      if (~index) {
-        this.notes[index].title = data.title
-        this.notes[index].content = data.content
-        this.$event.$emit('open_snackbar', 'Note updated successfully!')
-      }
-      this.edit_note_dialog = false
-    },
+    methods: {
+        fetch_notes() {
+            this.fill_table_via_url('api/note', true, (response) => {
+                this.select_first_note()
+            })
+        },
+        fetch_more_notes() {
+            this.load_more_via_url(`api/note`)
+        },
+        save(payload) {
+            api_to.add_new_note(payload).then(({
+                    data
+                }) => {
+                    this.items.unshift(data)
+                    this.$event.$emit('open_snackbar', 'Note Added Successfully')
+                    this.notes_dialog = false
+                    this.select_first_note()
+                })
+                .finally(() => {
+                    this.$event.$emit('btnloading_off', false)
+                })
+        },
 
-    save_collaborators(payload) {
-      api_to
-        .save_collaborators(payload, this.selected_note.id)
-        .then(this.update_collaborators)
-    },
-
-    select_first_note(notes) {
-      if (notes.length) {
-        this.selected_note = notes[0]
-      }
-    },
-
-    change_selected(note) {
-      this.selected_note = note
-    },
-
-    open_collaborators_dialog(collaborators) {
-      this.collaborators = collaborators
-      this.coll_dialog = true
-    },
-
-    open_edit_note_dialog(note) {
-      this.note_to_edit = cloneDeep(note)
-      this.edit_note_dialog = true
-    },
-
-    update_collaborators({ data }) {
-      const index = this.notes.findIndex(
-        note => note.id === this.selected_note.id
-      )
-      if (~index) {
-        this.notes[index].collaborators = data
-        this.$event.$emit(
-          'open_snackbar',
-          'Collaborators updated successfully!'
-        )
-      }
-    },
-    toggle_pin({ note, index }) {
-      if (this.pin_api) return
-      this.pin_api = true
-      const text = note.pivot.is_pinned ? 'Unpinned' : 'Pinned'
-      api_to
-        .toggle_pin(note)
-        .then(({ data }) =>
-          this.$set(this.notes[index].pivot, 'is_pinned', data)
-        )
-        .finally(() => {
-          this.pin_api = false
-          this.$event.$emit('open_snackbar', `${text} successfully!`)
-        })
-    },
-
-    open_delete_note_dialog(note) {
-      this.note_to_delete = cloneDeep(note)
-      this.delete_note_dialog = true
-    },
-
-    delete_note() {
-      api_to
-        .deleteNote(this.note_to_delete)
-        .then(({ data }) => {
-          const index = this.notes.findIndex(
-            note => note.id === this.note_to_delete.id
-          )
-          if (~index) {
-            this.notes.splice(index, 1)
-            this.$event.$emit(
-              'open_snackbar',
-              data.message ? data.message : data.error,
-              data.message ? 'success' : 'error'
+        updateNote(payload) {
+            if (payload) {
+                api_to.updateNote(payload)
+                    .then(this.update_notes)
+                    .finally(() => {
+                        this.$event.$emit('btnloading_off', false)
+                    })
+            }
+        },
+        update_notes({
+            data
+        }) {
+            let index = this.items.findIndex(
+                note => note.id === this.note_to_edit.id
             )
-          }
-        })
-        .finally(() => {
-          this.delete_note_dialog = false
-          this.note_to_delete = null
-        })
+            if (~index) {
+                this.items[index].title = data.title
+                this.items[index].content = data.content
+                this.$event.$emit('open_snackbar', 'Note updated successfully!')
+            }
+            this.edit_note_dialog = false
+        },
+
+        save_collaborators(payload) {
+            api_to
+                .save_collaborators(payload, this.selected_note.id)
+                .then(this.update_collaborators)
+                .finally(() => {
+                    this.$event.$emit('btnloading_off', false)
+                })
+        },
+
+        select_first_note() {
+            if (this.items.length > 0) {
+                this.selected_note = this.items[0]
+            } else {
+                this.selected_note = null
+            }
+        },
+
+        change_selected(note) {
+            this.selected_note = note
+            note_to_edit = note
+            note_to_delete = note
+        },
+
+        open_collaborators_dialog(collaborators) {
+            this.collaborators = collaborators
+            this.coll_dialog = true
+        },
+
+        open_edit_note_dialog(note) {
+            this.note_to_edit = cloneDeep(note)
+            this.edit_note_dialog = true
+        },
+
+        update_collaborators({
+            data
+        }) {
+            const index = this.items.findIndex(
+                note => note.id === this.selected_note.id
+            )
+            if (~index) {
+                this.items[index].collaborators = data
+                this.$event.$emit(
+                    'open_snackbar',
+                    'Collaborators updated successfully!'
+                )
+            }
+        },
+        toggle_pin({
+            note,
+            index
+        }) {
+            if (this.pin_api) return
+            this.pin_api = true
+            const text = note.pivot.is_pinned ? 'Unpinned' : 'Pinned'
+            api_to
+                .toggle_pin(note)
+                .then(({
+                        data
+                    }) =>
+                    this.$set(this.items[index].pivot, 'is_pinned', data)
+                )
+                .finally(() => {
+                    this.pin_api = false
+                    this.$event.$emit('open_snackbar', `${text} successfully!`)
+                })
+        },
+
+        open_delete_note_dialog(note) {
+            this.note_to_delete = cloneDeep(note)
+            this.delete_note_dialog = true
+        },
+
+        delete_note() {
+            api_to
+                .deleteNote(this.note_to_delete)
+                .then(({
+                    data
+                }) => {
+                    const index = this.items.findIndex(
+                        note => note.id === this.note_to_delete.id
+                    )
+                    if (~index) {
+                        this.items.splice(index, 1)
+                        this.select_first_note()
+                        this.$event.$emit(
+                            'open_snackbar',
+                            data.message ? data.message : data.error,
+                            data.message ? 'success' : 'error'
+                        )
+                    }
+                })
+                .finally(() => {
+                    this.delete_note_dialog = false
+                    this.note_to_delete = null
+                })
+        }
     }
-  }
 }

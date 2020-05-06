@@ -1,0 +1,110 @@
+@import '~@/sass/variables';
+@include emptyTable('.empty-files');
+@include firstColumnHover;
+
+.justify-content-center {
+  display: flex;
+  justify-content: center;
+
+  .empty-content{
+    width: 100%;
+  }
+}
+
+.files__tab {
+  padding: 24px;
+
+  .drop__files {
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 22px;
+
+    .drop__files_body {
+      .vue-dropzone {
+        background-color: $tableBlueBg;
+        border: 1px solid $tableBorderBlue;
+
+        &:hover {
+          background-color: #dedede;
+        }
+      }
+    }
+  }
+
+  .file__list_header {
+    margin-bottom: 17px;
+
+    .file__option {
+      .v-icon {
+        font-size: 24px;
+        color: $sortOptionGray;
+      }
+    }
+  }
+
+  .text-upper {
+    text-transform: uppercase;
+  }
+  .break-word-container {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    word-wrap: break-word;
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 768px) and (min-width: 481px) {
+  .files__tab {
+    padding: 20px;
+
+    .drop__files {
+      padding: 20px;
+    }
+
+    .file__list_header {
+      margin-bottom: 17px;
+      flex-direction: column;
+
+      .file__tab {
+        order: 2;
+        text-align: center;
+      }
+
+      .file__option {
+        order: 1;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .files__tab {
+    padding: 15px;
+
+    .drop__files {
+      padding: 15px;
+    }
+
+    .file__list_header {
+      margin-bottom: 17px;
+      flex-direction: column;
+
+      .file__tab {
+        order: 2;
+        text-align: center;
+      }
+
+      .file__option {
+        order: 1;
+
+        .v-btn--floating.v-btn--small {
+          height: 30px;
+          width: 30px;
+        }
+      }
+    }
+  }
+}

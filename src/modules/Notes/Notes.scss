@@ -2,11 +2,11 @@
 
 @include pagePadding ('.notes');
 
-.notes{
-    
+.notes {
+
     @include emptyTable('.empty-notes');
 
-    .notes-wrapper{
+    .notes-wrapper {
         margin: 10px;
         background-color: $white;
         border: 1px solid $tableBorderBlue;
@@ -14,7 +14,7 @@
         padding: 20px;
     }
 
-    .notes-content{
+    .notes-content {
         background-color: $tableBlueBg;
         border: 1px solid $tableBorderBlue;
         padding: 15px;

@@ -8,7 +8,7 @@
         indeterminate
       ></v-progress-linear>
 
-      <v-card class="custom__dialog" v-else>
+      <v-card tile class="custom__dialog" v-else>
         <v-card-title class="dialog__header">
           <slot name="entire-header">
             <slot name="title">

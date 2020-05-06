@@ -20,7 +20,13 @@
               color="#657186"
               hide-details
               class="d-field"
-            ></v-select>
+            >
+              <template v-slot:append-outer>
+                <v-btn icon large @click="open_add_milestone_dialog" class="btn-add-milestone">
+                  <v-icon>mdi-plus</v-icon>
+                </v-btn>
+              </template>
+            </v-select>
           </v-col>
 
           <v-col cols="12" class="pt-0">
@@ -80,6 +86,13 @@
         <v-btn @click="save" :loading="btnloading">Save</v-btn>
       </template>
     </custom-dialog>
+
+    <milestone-tab-dialog
+      :dialog.sync="add_milestone_dialog"
+      ref="add_milestone_dialog"
+      dialog-title="Add New Milestone"
+      @save="add_new_milestone"
+    />
   </div>
 </template>
 

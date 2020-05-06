@@ -1,284 +1,61 @@
-import { list_functionality } from '@/services/list-functionality/list-functionality'
-import { global_utils } from '@/global_utils/global_utils'
-import { settings } from '@/variables'
-import * as apiTo from './api'
+import {
+    is_screen_medium_and_down
+} from '@/global_utils/is_screen_medium_and_down'
 
-//Components
-import VueTable from '@/common/VueTable/VueTable.vue'
-import TableHeader from '@/common/TableHeader.vue'
-import CustomDropzone from '@/common/CustomDropzone.vue'
-import LinkDialog from './components/LinkDialog.vue'
-import DeleteDialog from '@/common/DeleteDialog.vue'
-import ToolbarItem from './components/ToolbarItem.vue'
-import Empty from '@/common/Empty.vue'
-import EmbedViewer from '@/common/Viewer/EmbedViewer.vue'
-import VideoViewer from '@/common/Viewer/VideoViewer.vue'
-import ImageViewer from '@/common/Viewer/ImageViewer.vue'
-import DocsViewer from '@/common/Viewer/DocsViewer.vue'
-import IframeViewer from '@/common/Viewer/IframeViewer.vue'
-import OtherViewer from '@/common/Viewer/OtherViewer.vue'
+//components
+import BuzzookaTab from '@/modules/ProjectPreview-Files/tabs/Buzzooka/BuzzookaTab.vue'
+import GoogleDriveTab from '@/modules/ProjectPreview-Files/tabs/GoogleDrive/GoogleDriveTab.vue'
+import DropboxTab from '@/modules/ProjectPreview-Files/tabs/Dropbox/DropboxTab.vue'
 
 export default {
-  name: 'FilesTab',
-
-  mixins: [list_functionality, global_utils],
-
-  components: {
-    VueTable,
-    TableHeader,
-    CustomDropzone,
-    LinkDialog,
-    DeleteDialog,
-    ToolbarItem,
-    Empty,
-    EmbedViewer,
-    VideoViewer,
-    ImageViewer,
-    DocsViewer,
-    OtherViewer,
-    IframeViewer
-  },
-
-  props: {
-    id: [String, Number]
-  },
-
-  data: () => ({
-    headers: [
-      { text: 'Thumbnail', value: 'thumbnail', sortable: false },
-      { text: 'Filetype', value: 'filetype' },
-      { text: 'Filename', value: 'filename', width: '35%' },
-      { text: 'Added by', value: 'member' },
-      { text: 'Project', value: 'project', sortable: false },
-      {
-        text: 'Action',
-        value: 'action',
-        sortable: false,
-        align: 'center',
-        width: '120px'
-      }
-    ],
-    table_config: {
-      route_name: 'project_preview',
-      add_message: 'New File(s) added successfully!',
-      delete_message: 'File deleted successfully!',
-      refresh_table_message: 'Table refreshed',
-      refresh_table_api_name: 'paginate_tab_files_table'
+    name: 'FilesTab',
+    mixins: [is_screen_medium_and_down],
+    components: {
+        BuzzookaTab,
+        GoogleDriveTab,
+        DropboxTab,
     },
-    btnloading: false,
-    url: '',
-    dialog: false,
-    filter: 'all',
-    toolbarItems: [
-      {
-        id: 1,
-        className: 'all',
-        type: 'all',
-        icon: 'select_all',
-        iconText: 'All'
-      },
-      {
-        id: 2,
-        className: 'image',
-        type: 'image',
-        icon: 'image',
-        iconText: 'Image'
-      },
-      {
-        id: 3,
-        className: 'video',
-        type: 'video',
-        icon: 'video_library',
-        iconText: 'Video'
-      },
-      {
-        id: 4,
-        className: 'docs',
-        type: 'document',
-        icon: 'file_copy',
-        iconText: 'Docs'
-      },
-      {
-        id: 5,
-        className: 'links',
-        type: 'link',
-        icon: 'link',
-        iconText: 'Links'
-      },
-      {
-        id: 6,
-        className: 'other',
-        type: 'other',
-        icon: 'settings_applications',
-        iconText: 'Other'
-      }
-    ],
-    log_id: null,
-    selected_media: null
-  }),
-
-  computed: {
-    permissions() {
-      return this.$_permissions.get('hq_files')
-    },
-    filteredItems() {
-      if (this.filter === 'all') return this.items
-      return this.items.filter(item => item.category.includes(this.filter))
+    props: {
+        id: [Number, String] //from route prop
     },
 
-    user() {
-      return this.$store.getters.user
+    data() {
+        return {
+            active_tab: 'files',
+            view: 'files',
+            tabs: [{
+                name: 'Project Files',
+                view: `files`,
+                icon: 'mdi-file'
+            }, {
+                name: 'Google Drive',
+                view: `google-drive`,
+                icon: 'mdi-google-drive'
+            }, {
+                name: 'Dropbox',
+                view: `dropbox`,
+                icon: 'mdi-dropbox'
+            }, ]
+        }
     },
-    dropzoneOptions() {
-      return {
-        autoProcessQueue: false,
-        thumbnailWidth: 150,
-        timeout: 500000,
-        addRemoveLinks: true,
-        maxFiles: 10,
-        url: settings.apiHostBaseURL + `/api/projects/${this.id}/file`,
-        headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
-      }
+    created() {
+        if (this.$route.params.view) {
+            this.view = this.$route.params.view
+            let index = this.tabs.findIndex(i => i.view === this.view)
+            this.active_tab = ~index ? index : 0
+        }
     },
-    dynamic_api() {
-      return `api/projects/${this.id}/file`
-    },
-    can_delete() {
-      if (this.user.is_admin) return true
-      return this.permissions && this.permissions.delete
+
+    methods: {
+        changeTab(tab) {
+            this.view = tab
+            this.$router.push({
+                name: 'project-preview-files',
+                params: {
+                    id: this.id,
+                    view: this.view
+                }
+            })
+        }
     }
-  },
-
-  created() {
-    this.view = this.getPreferredView()
-    this.get_files() //fill_table('get_files', true, this.dynamic_api)
-  },
-
-  methods: {
-    get_files() {
-      this.item = []
-      var payload = {
-        page: 1,
-        type: this.filter
-      }
-      apiTo
-        .getFilesByTypes(this.id, payload)
-        .then(({ data }) => {
-          this.items = data.data
-          this.pagination.current = data.current_page
-          this.pagination.total = data.last_page
-          this.hasMoreData()
-        })
-        .finally(() => {
-          this.loading = false
-          this.$event.$emit('btnloading_off', false)
-        })
-    },
-    get_more_files() {
-      this.item = []
-      var payload = {
-        page: this.pagination.current + 1,
-        type: 'all'
-      }
-      apiTo
-        .getFilesByTypes(this.id, payload)
-        .then(({ data }) => {
-          data.data.forEach(item => {
-            this.items.push(item)
-          })
-          this.pagination.current = data.current_page
-          this.pagination.total = data.last_page
-          this.hasMoreData()
-        })
-        .finally(() => {
-          this.loading = false
-          this.$event.$emit('btnloading_off', false)
-        })
-    },
-    manual_upload() {
-      this.$refs.dropzone.process_queue()
-    },
-    pop(url) {
-      this.dialog = true
-      this.url = url
-    },
-    sortFile(type) {
-      alert('This feature is under-construction.')
-    },
-    file_added([file, response]) {
-      this.$event.$emit('open_snackbar', 'File(s) uploaded successfully')
-      var fileUploaded =
-        typeof response === 'string' ? JSON.parse(response) : response
-      this.items.unshift(fileUploaded)
-      this.$refs.dropzone.remove_file(file)
-      this.clear_selected()
-    },
-
-    open_link_dialog() {
-      this.$refs.link_dialog.openDialog()
-    },
-
-    addLink(payload) {
-      apiTo
-        .addProjectLink(this.id, payload)
-        .then(({ data }) => {
-          this.items.push(data)
-          this.$refs.link_dialog.closeAndClearDialog()
-          this.$event.$emit('open_snackbar', 'New link added!')
-          this.clear_selected()
-        })
-        .finally(() => this.$event.$emit('btnloading_off', false))
-    },
-
-    delete_item() {
-      apiTo
-        .deleteFile(this.delete_item_id)
-        .then(() => {
-          const indexFound = this.items.findIndex(
-            item => item.id === this.delete_item_id
-          )
-          if (~indexFound) {
-            this.items.splice(indexFound, 1)
-            this.delete_item_id = null
-            this.delete_dialog = false
-            this.clear_selected()
-            this.$event.$emit('open_snackbar', this.table_config.delete_message)
-          }
-        })
-        .finally(() => this.$event.$emit('btnloading_off', false))
-    },
-
-    file_failed([file, response]) {
-      this.$event.$emit(
-        'open_snackbar',
-        typeof response === 'object' ? response[0] : response,
-        'error'
-      )
-    },
-
-    goto_link(url) {
-      window.open(url)
-    },
-
-    openViewer(media) {
-      this.selected_media = media
-      if (
-        media.category === 'links' &&
-        media.custom_properties.hasOwnProperty('embed') &&
-        media.custom_properties.embed
-      ) {
-        this.$refs.embed_viewer_dialog.openDialog()
-      } else if (media.category === 'videos') {
-        this.$refs.video_viewer_dialog.openDialog()
-      } else if (media.category === 'images') {
-        this.$refs.image_viewer_dialog.openDialog()
-      } else if (media.category === 'documents') {
-        this.$refs.doc_viewer_dialog.openDialog()
-      } else if (media.category === 'links') {
-        this.$refs.iframe_viewer_dialog.openDialog()
-      } else {
-        this.$refs.other_viewer_dialog.openDialog()
-      }
-    }
-  }
 }

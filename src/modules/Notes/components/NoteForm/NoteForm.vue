@@ -1,6 +1,6 @@
 <template>
   <div class="no-data" v-if="!loading && !note">
-    No notes yet
+    <Empty headline="No notes yet"></Empty>
   </div>
   <v-progress-linear
     v-else-if="loading"
@@ -23,58 +23,64 @@
           </v-text-field>
         </v-flex>
         <v-flex shrink align-center class="action-wrapper">
-          <v-btn
-            flat
-            class="action-btn"
-            @click="$emit('collaborator', note.collaborators)"
-          >
-            <v-icon>add</v-icon>
-          </v-btn>
-          <v-btn text class="action-btn" @click="$emit('editNotes', note)">
-            <v-icon color="indigo">edit</v-icon>
-          </v-btn>
-          <v-btn text class="action-btn" @click="$emit('deleteNotes', note)">
-            <v-icon color="red">delete</v-icon>
-          </v-btn>
+          <v-tooltip left>
+            <template v-slot:activator="{ on }">
+            <v-btn
+              icon
+              v-on="on"
+              class="action-btn"
+              @click="$emit('collaborator', note.users)"
+            >
+              <v-icon>mdi-account-plus</v-icon>
+            </v-btn>
+            </template>
+            <span>Add Collaborators</span>
+          </v-tooltip>
+          <v-tooltip left>
+            <template v-slot:activator="{ on }">
+              <v-btn icon  class="action-btn" v-on="on" @click="$emit('editNotes', note)">
+                <v-icon color="indigo">edit</v-icon>
+              </v-btn>
+            </template>
+            <span>Edit Note</span>
+          </v-tooltip>
+          <v-tooltip left>
+            <template v-slot:activator="{ on }">
+              <v-btn icon  class="action-btn" v-on="on" @click="$emit('deleteNotes', note)">
+                <v-icon color="red">delete</v-icon>
+              </v-btn>
+            </template>
+            <span>Delete Note</span>
+          </v-tooltip>
         </v-flex>
       </v-layout>
     </div>
     <div class="note-content">
-      <v-layout>
-        <v-col xs12>
-          <v-textarea
-            solo
-            hide-details
-            color="#657186"
-            flat
-            placeholder="Note description ..."
-            class="note-text"
-            readonly
-            v-html="note.content"
-          >
-          </v-textarea>
+      <v-row>
+        <v-col md="12">
+          <div class="pa-1 content" v-html="note.content"></div>
         </v-col>
-      </v-layout>
+      </v-row>
 
-      <v-layout>Collaborators:</v-layout>
-
-      <v-layout>
-        <v-chip
-          class="ma-2"
-          outlined
-          light
-          disabled
-          v-for="collaborator in note.collaborators"
+      <v-row no-gutters class="pa-3">
+        <v-col md="12">Collaborators:</v-col>
+        <v-col
+          v-for="collaborator in note.users"
+          class="my-1 flex"
+          md="4"
         >
-          <v-avatar left>
-            <v-img :src="collaborator.image_url"></v-img>
-          </v-avatar>
-          {{ collaborator.name }}
-        </v-chip>
-      </v-layout>
+          <Avatar 
+            :user="collaborator"
+          ></Avatar>
+        </v-col>
+      </v-row>
     </div>
   </div>
 </template>
 <script src="./NoteForm.js"></script>
 <style lang="scss" scoped src="./NoteForm.scss"></style>
 <style scoped src="./NoteForm.css"></style>
+<style type="text/css">
+ .content img ,
+ .content video { max-width: 100%; }
+</style>

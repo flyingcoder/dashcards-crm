@@ -3,90 +3,26 @@
 @include firstColumnHover;
 
 .justify-content-center {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 
-  .empty-content{
-    width: 100%;
-  }
+    .empty-content {
+        width: 100%;
+    }
 }
 
 .files__tab {
-  padding: 24px;
-
-  .drop__files {
-    background-color: $white;
-    border: 1px solid $tableBorderBlue;
-    border-radius: 10px;
-    padding: 25px;
-    margin-bottom: 22px;
-
-    .drop__files_body {
-      .vue-dropzone {
-        background-color: $tableBlueBg;
-        border: 1px solid $tableBorderBlue;
-
-        &:hover {
-          background-color: $darkGray;
-        }
-      }
-    }
-  }
-
-  .file-header{
-    padding: 20px 20px 10px 20px;
-  }
-
-  .table-switcher{
-    text-align: right;
-  }
-
-  .table-switcher .v-btn--round .v-btn__content .v-icon {
-    font-size: 24px;
-    color: $sortOptionGray;
-  }
-  
-  .file-name{
-    max-width: 500px;
-  }
-  .action-btn{
-    .ext{
-      font-size: 14px;
-      color: $textDark-2;
-    }
-  }
-  .action-btn .v-btn--round .v-btn__content .v-icon{
-    color: $btnGray;
-  }
-
-  .text-upper {
-    text-transform: uppercase;
-  }
-  .break-word-container {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-    word-wrap: break-word;
-    font-size: 14px;
-  }
+    padding: 24px;
 }
 
 @media only screen and (max-width: 768px) and (min-width: 481px) {
-  .files__tab {
-    padding: 20px;
-
-    .drop__files {
-      padding: 20px;
+    .files__tab {
+        padding: 20px;
     }
-  }
 }
 
 @media only screen and (max-width: 480px) {
-  .files__tab {
-    padding: 15px;
-
-    .drop__files {
-      padding: 15px;
+    .files__tab {
+        padding: 15px;
     }
-  }
 }

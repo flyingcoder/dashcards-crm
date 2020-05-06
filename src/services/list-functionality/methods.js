@@ -160,7 +160,7 @@ export const methods = {
           this.$event.$emit('btnloading_off', false)
         })
     },
-    fill_table_via_url(url, nested_response = true) {
+    fill_table_via_url(url, nested_response = true, cb) {
       this.loading = true
       var payload = { page: this.pagination.current }
       request
@@ -174,6 +174,9 @@ export const methods = {
             this.hasMoreData()
           } else {
             this.items = response.data
+          }
+          if (typeof cb === 'function') {
+            cb(response)
           }
         })
         .finally(() => {

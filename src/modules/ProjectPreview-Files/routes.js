@@ -1,6 +1,7 @@
 export default {
-  path: 'files',
-  name: 'project-preview-files',
-  component: () => import('./Files.vue'),
-  props: true
+    path: 'files/:view?',
+    name: 'project-preview-files',
+    component: () =>
+        import ('./Files.vue'),
+    props: true,
 }

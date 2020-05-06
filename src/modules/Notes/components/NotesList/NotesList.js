@@ -3,6 +3,7 @@ export default {
   props: {
     notes: Array,
     loading: Boolean,
-    activeNote: Object
+    activeNote: Object,
+    noMoreData: { type: Boolean, default: true }
   }
 }
