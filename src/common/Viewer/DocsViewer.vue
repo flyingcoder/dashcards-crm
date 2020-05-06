@@ -6,35 +6,45 @@
     @click:outside="closeDialog"
   >
     <v-card v-if="media" class="docs-wrapper">
-      <div class="dialog-header">
-        <v-btn icon fab small text class="action" @click="closeDialog"
-          ><v-icon>close</v-icon></v-btn
-        >
+      <div class="voc-view" v-if="viewableTxt">
+        <div class="dialog-header">
+          <v-btn outlined fab small text class="action" @click="closeDialog"
+            ><v-icon>close</v-icon></v-btn
+          >
+        </div>
+        <div class="dialog-body">
+          <VueDocPreview
+            class="text-preview"
+            :url="media.download_url"
+            type="text"
+          ></VueDocPreview>
+        </div>
       </div>
-      <div class="dialog-body">
-        <VueDocPreview
-          class="text-preview"
-          :url="media.download_url"
-          v-if="viewableTxt"
-          type="text"
-        ></VueDocPreview>
-        <v-row v-else no-gutters class="pa-2 mb-5">
-          <v-col md="3">
-            <Media :media="media" size="xl"></Media>
-            <v-btn text small block disabled>{{
-              media.size | bytesToSize
-            }}</v-btn>
-          </v-col>
-          <v-col grow>
-            <p class="headline file-title">File preview not yet supported</p>
-            <p class="subtitle file-subtitle">
-              {{ media.file_name }}
-            </p>
-            <v-btn dark color="#3b589e" :href="media.download_url"
-              ><v-icon left>mdi-cloud-download</v-icon> Download file
-            </v-btn>
-          </v-col>
-        </v-row>
+      <div v-else class="not-supported">
+        <div class="dialog-header">
+          <v-btn icon fab small text class="action" @click="closeDialog"
+            ><v-icon>close</v-icon></v-btn
+          >
+        </div>
+        <div class="dialog-body">
+          <v-row no-gutters class="pa-2 mb-5">
+            <v-col md="3">
+              <Media :media="media" size="xl"></Media>
+              <v-btn text small block disabled>{{
+                media.size | bytesToSize
+              }}</v-btn>
+            </v-col>
+            <v-col grow>
+              <p class="headline file-title">File preview not yet supported</p>
+              <p class="subtitle file-subtitle">
+                {{ media.file_name }}
+              </p>
+              <v-btn dark color="#3b589e" :href="media.download_url"
+                ><v-icon left>mdi-cloud-download</v-icon> Download file
+              </v-btn>
+            </v-col>
+          </v-row>
+        </div>
       </div>
     </v-card>
   </v-dialog>
@@ -82,20 +92,41 @@ export default {
 
 .docs-wrapper {
   border-radius: 15px;
-  background-color: $modalBgGray;
   height: 100%;
   .file-title,
   .file-subtitle {
     color: $titleDarkBlue;
   }
 }
+.voc-view {
+  .dialog-header {
+    text-align: right;
+    background: $white;
+    padding: 10px;
+    border-bottom: 1px solid $borderGray;
 
-.dialog-header {
-  text-align: right;
+    .v-btn__content .v-icon {
+      color: $btnGray;
+    }
+    .v-btn--outlined {
+      border: thin solid $btnGray;
+      margin-left: 5px;
+    }
+  }
+  .dialog-body {
+    background: $white;
+    max-height: 500px;
+    overflow: auto;
+  }
 }
-.dialog-body {
-  max-height: 500px;
-  overflow: auto;
+.not-supported {
+  .dialog-header {
+    text-align: right;
+  }
+  .dialog-body {
+    max-height: 500px;
+    overflow: auto;
+  }
 }
 #VueDocPreviewRoot {
   height: 100% !important;

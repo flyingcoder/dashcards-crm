@@ -22,7 +22,12 @@
               class="d-field"
             >
               <template v-slot:append-outer>
-                <v-btn icon large @click="open_add_milestone_dialog" class="btn-add-milestone">
+                <v-btn
+                  icon
+                  large
+                  @click="open_add_milestone_dialog"
+                  class="btn-add-milestone"
+                >
                   <v-icon>mdi-plus</v-icon>
                 </v-btn>
               </template>

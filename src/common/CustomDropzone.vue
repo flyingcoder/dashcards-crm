@@ -81,7 +81,7 @@ export default {
   props: {
     options: Object,
     needConfirmation: { type: Boolean, default: false },
-    hasAddLink: { type: Boolean, default: true },
+    hasAddLink: { type: Boolean, default: true }
   },
   data: () => ({
     counts: 0,

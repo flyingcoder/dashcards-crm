@@ -29,7 +29,14 @@
     </div>
 
     <div class="view__more">
-      <v-btn text normal :disabled="noMoreData" @click="$emit('view-more')" class="view__more_btn">VIEW MORE</v-btn>
+      <v-btn
+        text
+        normal
+        :disabled="noMoreData"
+        @click="$emit('view-more')"
+        class="view__more_btn"
+        >VIEW MORE</v-btn
+      >
     </div>
   </div>
 </template>

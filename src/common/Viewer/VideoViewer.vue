@@ -2,7 +2,7 @@
   <v-dialog v-model="dialog" @click:outside="closeDialog" :max-width="700">
     <div v-if="media" class="video-wrapper">
       <div class="dialog-header">
-        <v-btn icon fab small text class="action" @click="closeDialog"
+        <v-btn outlined fab small text class="action" @click="closeDialog"
           ><v-icon>close</v-icon></v-btn
         >
       </div>
@@ -63,14 +63,29 @@ export default {
 <style lang="scss" scoped>
 @import '~@/sass/_variables';
 
-.dialog-header .action {
-  position: absolute;
-  top: 20px;
-  right: 55px;
-  z-index: 1;
+.dialog-header {
+  text-align: right;
+  background: $white;
+  padding: 10px;
+  border-bottom: 1px solid $borderGray;
+
   .v-btn__content .v-icon {
-    color: $black;
+    color: $btnGray;
   }
+  .v-btn--outlined {
+    border: thin solid $btnGray;
+    margin-left: 5px;
+  }
+}
+
+@include styledScrollFor('.dialog-body');
+
+.dialog-body {
+  background: $white;
+  padding: 20px;
+  max-height: 500px;
+  overflow: auto;
+  margin: 0 auto;
 }
 </style>
 <style scoped>

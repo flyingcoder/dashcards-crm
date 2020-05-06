@@ -14,6 +14,18 @@
 .files__tab {
   padding: 24px;
 
+  .file-name{
+    max-width: 500px;
+  }
+  .action-btn{
+    .v-icon{
+      color: $btnGray;
+    }
+  }
+  .overline{
+    color: $textDark-2;
+  }
+
   .drop__files {
     background-color: $white;
     border: 1px solid $tableBorderBlue;

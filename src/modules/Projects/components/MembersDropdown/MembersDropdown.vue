@@ -34,21 +34,27 @@
         </v-chip>
       </template>
       <template v-slot:item="data">
-          <v-list-item :key="data.item.id" @click="add_to_selected(data.item)">
-            <v-list-item-avatar>
-              <v-img :src="data.item.image_url"></v-img>
-            </v-list-item-avatar>
+        <v-list-item :key="data.item.id" @click="add_to_selected(data.item)">
+          <v-list-item-avatar>
+            <v-img :src="data.item.image_url"></v-img>
+          </v-list-item-avatar>
 
-            <v-list-item-content>
-              <v-list-item-title v-html="data.item.fullname"></v-list-item-title>
-              <v-list-item-subtitle v-html="data.item.job_title"></v-list-item-subtitle>
-            </v-list-item-content>
-            
-            <v-list-item-action>
-                <v-icon v-if="!is_item_active(data.item.id)" color="grey lighten-1">check_circle_outline</v-icon>
-                <v-icon v-if="is_item_active(data.item.id)" color="success">check_circle</v-icon>
-            </v-list-item-action>
-          </v-list-item>
+          <v-list-item-content>
+            <v-list-item-title v-html="data.item.fullname"></v-list-item-title>
+            <v-list-item-subtitle
+              v-html="data.item.job_title"
+            ></v-list-item-subtitle>
+          </v-list-item-content>
+
+          <v-list-item-action>
+            <v-icon v-if="!is_item_active(data.item.id)" color="grey lighten-1"
+              >check_circle_outline</v-icon
+            >
+            <v-icon v-if="is_item_active(data.item.id)" color="success"
+              >check_circle</v-icon
+            >
+          </v-list-item-action>
+        </v-list-item>
       </template>
     </v-autocomplete>
   </div>

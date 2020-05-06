@@ -1,18 +1,27 @@
 <template>
-	<div class="files__tab">
-		<v-card>
-			<v-card-title class="py-1">
-					<v-col class="headline"><v-icon left>mdi-dropbox</v-icon> Dropbox</v-col>
-					<v-spacer></v-spacer>
-					<v-col>
-						<v-text-field solo flat outlined dense prepend-inner-icon="search" hide-details></v-text-field>
-					</v-col>
-				</v-card-title>
-				<v-card-text>
-					<Empty headline="No content found!"></Empty>
-			</v-card-text>
-		</v-card>
-	</div>
+  <div class="files__tab">
+    <v-card>
+      <v-card-title class="py-1">
+        <v-col class="headline"
+          ><v-icon left>mdi-dropbox</v-icon> Dropbox</v-col
+        >
+        <v-spacer></v-spacer>
+        <v-col>
+          <v-text-field
+            solo
+            flat
+            outlined
+            dense
+            prepend-inner-icon="search"
+            hide-details
+          ></v-text-field>
+        </v-col>
+      </v-card-title>
+      <v-card-text>
+        <Empty headline="No content found!"></Empty>
+      </v-card-text>
+    </v-card>
+  </div>
 </template>
 
 <style lang="scss">
@@ -22,13 +31,12 @@
 </style>
 
 <script>
-	import Empty from '@/common/Empty.vue'
+import Empty from '@/common/Empty.vue'
 
-	export default {
-		name: 'DropboxTab',
-		components : {
-			Empty
-		}
-	}
+export default {
+  name: 'DropboxTab',
+  components: {
+    Empty
+  }
+}
 </script>
-

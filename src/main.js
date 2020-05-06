@@ -17,41 +17,38 @@ import router from './router/router'
 import store from './store/store'
 import middlewarePipeline from './router/middlewarePipeline'
 import methods from '@/global_utils/global_mixin'
-import {
-    global_filters
-} from '@/global_utils/global_filters'
+import { global_filters } from '@/global_utils/global_filters'
 
 Vue.config.productionTip = false
 
 Vue.mixin({
-    methods: methods,
-    filters: global_filters
+  methods: methods,
+  filters: global_filters
 })
 
 router.beforeEach((to, from, next) => {
-    if (!to.meta.middleware) {
-        return next()
-    }
+  if (!to.meta.middleware) {
+    return next()
+  }
 
-    const middleware = to.meta.middleware
+  const middleware = to.meta.middleware
 
-    const context = {
-        to,
-        from,
-        next,
-        store
-    }
+  const context = {
+    to,
+    from,
+    next,
+    store
+  }
 
-    return middleware[0]({
-        ...context,
-        next: middlewarePipeline(context, middleware, 1)
-    })
-
+  return middleware[0]({
+    ...context,
+    next: middlewarePipeline(context, middleware, 1)
+  })
 })
 
 new Vue({
-    vuetify,
-    router,
-    store,
-    render: h => h(App)
+  vuetify,
+  router,
+  store,
+  render: h => h(App)
 }).$mount('#app')

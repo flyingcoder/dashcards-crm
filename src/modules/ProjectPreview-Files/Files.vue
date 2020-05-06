@@ -10,17 +10,24 @@
       dense
       centered
     >
-      <v-tab v-for="(tab, index) in tabs" :key="index"  @click="changeTab(tab.view)" exact>
+      <v-tab
+        v-for="(tab, index) in tabs"
+        :key="index"
+        @click="changeTab(tab.view)"
+        exact
+      >
         <div>
           <v-icon left>{{ tab.icon }}</v-icon> {{ tab.name }}
         </div>
       </v-tab>
     </v-tabs>
-    
-  <BuzzookaTab :projectId="id" v-if="view === `files`"></BuzzookaTab>
-  <GoogleDriveTab :projectId="id" v-else-if="view === `google-drive`"></GoogleDriveTab>
-  <DropboxTab :projectId="id" v-else-if="view === `dropbox`"></DropboxTab>
 
+    <BuzzookaTab :projectId="id" v-if="view === `files`"></BuzzookaTab>
+    <GoogleDriveTab
+      :projectId="id"
+      v-else-if="view === `google-drive`"
+    ></GoogleDriveTab>
+    <DropboxTab :projectId="id" v-else-if="view === `dropbox`"></DropboxTab>
   </div>
 </template>
 

@@ -1,41 +1,28 @@
 <template>
-  <v-dialog
-    v-model="dialog"
-    transition="dialog-bottom-transition"
-    @click:outside="closeDialog"
-  >
+  <v-dialog v-model="dialog" width="800" @click:outside="closeDialog">
     <v-card v-if="media">
-      <v-tooltip left>
-        <template v-slot:activator="{ on }">
-          <v-btn
-            icon
-            outlined
-            color="primary"
-            v-on="on"
-            fab
-            :href="mainurl"
-            style="position: absolute;right: 115px;top:10px; z-index: 1;"
-            ><v-icon>link</v-icon></v-btn
-          >
-        </template>
-        <span>Go to link site</span>
-      </v-tooltip>
-      <v-btn
-        icon
-        outlined
-        color="error"
-        fab
-        @click="closeDialog"
-        style="position: absolute;right: 55px;top:10px; z-index: 1;"
-        ><v-icon>close</v-icon></v-btn
-      >
-      <iframe
-        :src="mainurl"
-        frameborder="0"
-        width="100%"
-        height="800"
-        @load="iframeLoaded"
-      ></iframe>
+      <div class="dialog-header">
+        <v-tooltip left>
+          <template v-slot:activator="{ on }">
+            <v-btn icon outlined v-on="on" fab small :href="mainurl"
+              ><v-icon>link</v-icon></v-btn
+            >
+          </template>
+          <span>Go to link site</span>
+        </v-tooltip>
+        <v-btn icon outlined fab small @click="closeDialog"
+          ><v-icon>close</v-icon></v-btn
+        >
+      </div>
+      <div class="dialog-body">
+        <iframe
+          :src="mainurl"
+          frameborder="0"
+          width="100%"
+          height="450"
+          @load="iframeLoaded"
+        ></iframe>
+      </div>
     </v-card>
   </v-dialog>
 </template>
@@ -73,3 +60,30 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+@import '~@/sass/_variables';
+
+.dialog-header {
+  text-align: right;
+  background: $white;
+  padding: 10px;
+  border-bottom: 1px solid $borderGray;
+
+  .v-btn__content .v-icon {
+    color: $btnGray;
+  }
+  .v-btn--outlined {
+    border: thin solid $btnGray;
+    margin-left: 5px;
+  }
+}
+
+@include styledScrollFor('.dialog-body');
+.dialog-body {
+  max-height: 500px;
+  overflow: auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+</style>

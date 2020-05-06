@@ -1,8 +1,13 @@
 <template>
-  <v-dialog v-model="dialog" @click:outside="closeDialog" class="image-dialog">
+  <v-dialog
+    v-model="dialog"
+    @click:outside="closeDialog"
+    width="800"
+    class="image-dialog"
+  >
     <div class="mx-auto image-wrapper" tile v-if="media">
       <div class="dialog-header">
-        <v-btn icon fab small text class="action" @click="closeDialog"
+        <v-btn outlined fab small text class="action" @click="closeDialog"
           ><v-icon>close</v-icon></v-btn
         >
       </div>
@@ -44,30 +49,35 @@ export default {
 @include styledScrollFor('.dialog-body');
 
 .image-wrapper {
-  background-color: transparent;
-
   img {
     max-width: 100%;
-    max-height: 600px;
+    max-height: 460px;
   }
 
-  .dialog-header .action {
-    position: absolute;
-    top: 20px;
-    right: 55px;
+  .dialog-header {
+    text-align: right;
+    background: $white;
+    padding: 10px;
+    border-bottom: 1px solid $borderGray;
+
     .v-btn__content .v-icon {
-      color: $black;
+      color: $btnGray;
+    }
+    .v-btn--outlined {
+      border: thin solid $btnGray;
+      margin-left: 5px;
     }
   }
 
+  @include styledScrollFor('.dialog-body');
+
   .dialog-body {
-    text-align: center;
+    background: $white;
+    padding: 20px;
+    max-height: 500px;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
   }
-}
-</style>
-<style scoped>
->>> .v-dialog {
-  box-shadow: none;
-  width: auto;
 }
 </style>

@@ -34,21 +34,23 @@ export const auth = {
     })
   },
 
-  login({ email, password },  success_cb, err_cb ) {
+  login({ email, password }, success_cb, err_cb) {
     store.commit('set_custom_loader', true)
     make_request_to
       .login({ email, password })
-      .then((response) => {
-        set_to_localStorage(response)
-        if (typeof success_cb === 'function') {
-          success_cb(response)
+      .then(
+        response => {
+          set_to_localStorage(response)
+          if (typeof success_cb === 'function') {
+            success_cb(response)
+          }
+        },
+        error => {
+          if (typeof err_cb === 'function') {
+            err_cb(error)
+          }
         }
-      },
-      (error) => {
-        if (typeof err_cb === 'function') {
-          err_cb(error)
-        }
-      })
+      )
       .finally(() => store.commit('set_custom_loader', false))
   },
 

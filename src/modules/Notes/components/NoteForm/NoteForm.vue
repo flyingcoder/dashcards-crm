@@ -25,20 +25,25 @@
         <v-flex shrink align-center class="action-wrapper">
           <v-tooltip left>
             <template v-slot:activator="{ on }">
-            <v-btn
-              icon
-              v-on="on"
-              class="action-btn"
-              @click="$emit('collaborator', note.users)"
-            >
-              <v-icon>mdi-account-plus</v-icon>
-            </v-btn>
+              <v-btn
+                icon
+                v-on="on"
+                class="action-btn"
+                @click="$emit('collaborator', note.users)"
+              >
+                <v-icon>mdi-account-plus</v-icon>
+              </v-btn>
             </template>
             <span>Add Collaborators</span>
           </v-tooltip>
           <v-tooltip left>
             <template v-slot:activator="{ on }">
-              <v-btn icon  class="action-btn" v-on="on" @click="$emit('editNotes', note)">
+              <v-btn
+                icon
+                class="action-btn"
+                v-on="on"
+                @click="$emit('editNotes', note)"
+              >
                 <v-icon color="indigo">edit</v-icon>
               </v-btn>
             </template>
@@ -46,7 +51,12 @@
           </v-tooltip>
           <v-tooltip left>
             <template v-slot:activator="{ on }">
-              <v-btn icon  class="action-btn" v-on="on" @click="$emit('deleteNotes', note)">
+              <v-btn
+                icon
+                class="action-btn"
+                v-on="on"
+                @click="$emit('deleteNotes', note)"
+              >
                 <v-icon color="red">delete</v-icon>
               </v-btn>
             </template>
@@ -64,14 +74,8 @@
 
       <v-row no-gutters class="pa-3">
         <v-col md="12">Collaborators:</v-col>
-        <v-col
-          v-for="collaborator in note.users"
-          class="my-1 flex"
-          md="4"
-        >
-          <Avatar 
-            :user="collaborator"
-          ></Avatar>
+        <v-col v-for="collaborator in note.users" class="my-1 flex" md="4">
+          <Avatar :user="collaborator"></Avatar>
         </v-col>
       </v-row>
     </div>
@@ -81,6 +85,8 @@
 <style lang="scss" scoped src="./NoteForm.scss"></style>
 <style scoped src="./NoteForm.css"></style>
 <style type="text/css">
- .content img ,
- .content video { max-width: 100%; }
+.content img,
+.content video {
+  max-width: 100%;
+}
 </style>
