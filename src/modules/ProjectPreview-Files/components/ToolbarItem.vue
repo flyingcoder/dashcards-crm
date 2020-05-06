@@ -45,6 +45,9 @@ export default {
     .docs.v-icon {
       color: $lightBlue;
     }
+    .links.v-icon {
+      color: $blue;
+    }
     .other.v-icon {
       color: $lightGreen;
     }

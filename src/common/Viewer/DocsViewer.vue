@@ -2,23 +2,18 @@
   <v-dialog
     v-model="dialog"
     scrollable
-    :max-width="viewableTxt ? `` : `500`"
+    :max-width="viewableTxt ? `800` : `500`"
     @click:outside="closeDialog"
   >
     <v-card v-if="media" class="docs-wrapper">
       <div class="dialog-header">
-        <v-btn
-          icon
-          fab
-          small
-          text
-          class="action"
-          @click="closeDialog"
+        <v-btn icon fab small text class="action" @click="closeDialog"
           ><v-icon>close</v-icon></v-btn
         >
       </div>
       <div class="dialog-body">
         <VueDocPreview
+          class="text-preview"
           :url="media.download_url"
           v-if="viewableTxt"
           type="text"
@@ -81,26 +76,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 @import '~@/sass/_variables';
 
 @include styledScrollFor('.dialog-body');
 
-.docs-wrapper{
-    border-radius: 15px;
-    background-color: $modalBgGray;
-    height: 100%;
-    .file-title, .file-subtitle{
-      color: $titleDarkBlue;
-    }
+.docs-wrapper {
+  border-radius: 15px;
+  background-color: $modalBgGray;
+  height: 100%;
+  .file-title,
+  .file-subtitle {
+    color: $titleDarkBlue;
+  }
 }
 
 .dialog-header {
-    text-align: right;
+  text-align: right;
 }
 .dialog-body {
-    max-height: 500px;
-    overflow: auto;
+  max-height: 500px;
+  overflow: auto;
 }
 #VueDocPreviewRoot {
   height: 100% !important;
@@ -118,5 +113,10 @@ export default {
   word-wrap: break-word;
   overflow-y: auto;
   height: 100%;
+}
+</style>
+<style scoped>
+>>> #VueDocPreviewRoot .content pre {
+  font-size: 14px !important;
 }
 </style>

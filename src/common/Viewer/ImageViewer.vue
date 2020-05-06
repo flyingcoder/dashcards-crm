@@ -1,27 +1,15 @@
 <template>
-  <v-dialog
-    v-model="dialog"
-    @click:outside="closeDialog"
-    class="image-dialog"
-  >
+  <v-dialog v-model="dialog" @click:outside="closeDialog" class="image-dialog">
     <div class="mx-auto image-wrapper" tile v-if="media">
+      <div class="dialog-header">
+        <v-btn icon fab small text class="action" @click="closeDialog"
+          ><v-icon>close</v-icon></v-btn
+        >
+      </div>
 
-        <div class="dialog-header">
-          <v-btn
-            icon
-            fab
-            small
-            text
-            class="action"
-            @click="closeDialog"
-            ><v-icon>close</v-icon></v-btn
-          >
-        </div>
-
-        <div class="dialog-body">
-          <img :src="mainurl" />
-        </div>
-      
+      <div class="dialog-body">
+        <img :src="mainurl" />
+      </div>
     </div>
   </v-dialog>
 </template>
@@ -51,7 +39,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
 @import '~@/sass/_variables';
 
 @include styledScrollFor('.dialog-body');
@@ -64,23 +51,23 @@ export default {
     max-height: 600px;
   }
 
-  .dialog-header .action{
+  .dialog-header .action {
     position: absolute;
     top: 20px;
     right: 55px;
-    .v-btn__content .v-icon{
+    .v-btn__content .v-icon {
       color: $black;
     }
   }
 
-  .dialog-body{
+  .dialog-body {
     text-align: center;
   }
 }
 </style>
 <style scoped>
-  >>> .v-dialog{
-    box-shadow: none;
-    width: auto;
-  }
+>>> .v-dialog {
+  box-shadow: none;
+  width: auto;
+}
 </style>

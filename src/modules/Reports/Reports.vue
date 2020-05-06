@@ -131,7 +131,6 @@
   border-right: 1px solid #b2b6c0;
   border-left: 1px solid #b2b6c0;
 }
-
 >>> .reports-tab .v-slide-group__prev .v-icon,
 >>> .reports-tab .v-slide-group__next .v-icon {
   color: #8090aa;

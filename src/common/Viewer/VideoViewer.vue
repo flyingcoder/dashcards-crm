@@ -1,18 +1,8 @@
 <template>
-  <v-dialog
-    v-model="dialog"
-    @click:outside="closeDialog"
-    :max-width="700"
-  >
+  <v-dialog v-model="dialog" @click:outside="closeDialog" :max-width="700">
     <div v-if="media" class="video-wrapper">
       <div class="dialog-header">
-        <v-btn
-          icon
-          fab
-          small
-          text
-          class="action"
-          @click="closeDialog"
+        <v-btn icon fab small text class="action" @click="closeDialog"
           ><v-icon>close</v-icon></v-btn
         >
       </div>
@@ -73,19 +63,19 @@ export default {
 <style lang="scss" scoped>
 @import '~@/sass/_variables';
 
-.dialog-header .action{
+.dialog-header .action {
   position: absolute;
   top: 20px;
   right: 55px;
   z-index: 1;
-  .v-btn__content .v-icon{
+  .v-btn__content .v-icon {
     color: $black;
   }
 }
 </style>
 <style scoped>
-  >>> .video-js .vjs-big-play-button{
-    top: calc(50% - 25px);
-    left: calc(50% - 45px);
-  }
+>>> .video-js .vjs-big-play-button {
+  top: calc(50% - 25px);
+  left: calc(50% - 45px);
+}
 </style>

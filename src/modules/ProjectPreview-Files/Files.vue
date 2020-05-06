@@ -50,7 +50,7 @@
     ></OtherViewer>
 
     <v-card class="p-2">
-      <v-row no-gutters class="pa-3">
+      <v-row no-gutters class="file-header">
         <v-col md="10" sm="9" xs="12">
           <ToolbarItem
             v-for="item of toolbarItems"
@@ -64,17 +64,23 @@
         </v-col>
         <v-spacer></v-spacer>
         <v-col>
-          <v-spacer></v-spacer>
-          <v-btn icon text right @click="setPreferredView('list')"
-            ><v-icon :color="view == 'list' ? 'primary' : ''"
-              >list</v-icon
-            ></v-btn
-          >
-          <v-btn icon text right @click="setPreferredView('grid')"
-            ><v-icon :color="view == 'grid' ? 'primary' : ''"
-              >grid_on</v-icon
-            ></v-btn
-          >
+          <div class="table-switcher">
+            <v-btn
+              class="mr-2"
+              icon
+              text
+              right
+              @click="setPreferredView('list')"
+              ><v-icon large :color="view == 'list' ? '#3b589e' : ''"
+                >list</v-icon
+              ></v-btn
+            >
+            <v-btn icon text right @click="setPreferredView('grid')"
+              ><v-icon large :color="view == 'grid' ? '#3b589e' : ''"
+                >grid_on</v-icon
+              ></v-btn
+            >
+          </div>
         </v-col>
       </v-row>
       <v-card v-if="view == 'grid'">
@@ -114,12 +120,13 @@
                   </v-list>
                 </v-card-text>
 
-                <v-card-actions>
-                  <span class="overline">{{ item.custom_properties.ext }}</span>
+                <v-card-actions class="action-btn">
+                  <span class="ext">{{ item.custom_properties.ext }}</span>
                   <v-spacer></v-spacer>
                   <v-btn
                     small
                     depressed
+                    fab
                     title="Download"
                     :href="item.download_url"
                     v-if="item.mime_type !== 'link'"
@@ -129,6 +136,7 @@
                   <v-btn
                     small
                     depressed
+                    fab
                     title="Go to link"
                     @click="goto_link(item.download_url)"
                     v-else
@@ -139,6 +147,7 @@
                     v-if="can_delete"
                     @click="open_delete_dialog(item)"
                     small
+                    fab
                     depressed
                     title="Delete"
                   >
@@ -196,12 +205,12 @@
             ></Media>
           </td>
           <td class="text-upper">{{ item.custom_properties.ext }}</td>
-          <td class="text-cap">{{ item.name }}</td>
+          <td class="file-name">{{ item.name }}</td>
           <td class="text-cap">
             {{ item.custom_properties.user.first_name }}
           </td>
           <td class="text-cap">Project</td>
-          <td class="text-xs-center">
+          <td class="text-xs-center action-btn">
             <v-btn
               fab
               small
@@ -216,7 +225,6 @@
               fab
               text
               small
-              depressed
               title="Go to link"
               @click="goto_link(item.download_url)"
               v-else
@@ -249,5 +257,11 @@
   padding: 0;
   border: none;
   background-color: #fff;
+}
+>>> .custom-table-wrapper .img-wrapper .v-image__image--cover {
+  background-size: cover;
+}
+>>> .img-wrapper .v-image__image--cover {
+  background-size: unset;
 }
 </style>

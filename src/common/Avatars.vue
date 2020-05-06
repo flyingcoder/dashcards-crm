@@ -93,10 +93,10 @@ img.avatars__img,
 span.avatars__initials,
 span.avatars__others,
 span.avatars__add {
-  background-color: #3b589e;
-  border: 2px solid #1f2532;
+  background-color: $lightGray-3;
+  border: 2px solid $borderGray;
   border-radius: 100px 100px 100px 100px;
-  color: #ffffff;
+  color: $textGray;
   display: block;
   font-family: sans-serif;
   font-size: 12px;
@@ -108,7 +108,7 @@ span.avatars__add {
 }
 
 span.avatars__others {
-  background-color: #3b589e;
+  background-color: $lightGray-3;
 }
 span.avatars__add {
 }

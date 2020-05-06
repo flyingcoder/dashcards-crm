@@ -27,21 +27,36 @@
         border: 1px solid $tableBorderBlue;
 
         &:hover {
-          background-color: #dedede;
+          background-color: $darkGray;
         }
       }
     }
   }
 
-  .file__list_header {
-    margin-bottom: 17px;
+  .file-header{
+    padding: 20px 20px 10px 20px;
+  }
 
-    .file__option {
-      .v-icon {
-        font-size: 24px;
-        color: $sortOptionGray;
-      }
+  .table-switcher{
+    text-align: right;
+  }
+
+  .table-switcher .v-btn--round .v-btn__content .v-icon {
+    font-size: 24px;
+    color: $sortOptionGray;
+  }
+  
+  .file-name{
+    max-width: 500px;
+  }
+  .action-btn{
+    .ext{
+      font-size: 14px;
+      color: $textDark-2;
     }
+  }
+  .action-btn .v-btn--round .v-btn__content .v-icon{
+    color: $btnGray;
   }
 
   .text-upper {
@@ -63,20 +78,6 @@
     .drop__files {
       padding: 20px;
     }
-
-    .file__list_header {
-      margin-bottom: 17px;
-      flex-direction: column;
-
-      .file__tab {
-        order: 2;
-        text-align: center;
-      }
-
-      .file__option {
-        order: 1;
-      }
-    }
   }
 }
 
@@ -86,25 +87,6 @@
 
     .drop__files {
       padding: 15px;
-    }
-
-    .file__list_header {
-      margin-bottom: 17px;
-      flex-direction: column;
-
-      .file__tab {
-        order: 2;
-        text-align: center;
-      }
-
-      .file__option {
-        order: 1;
-
-        .v-btn--floating.v-btn--small {
-          height: 30px;
-          width: 30px;
-        }
-      }
     }
   }
 }
