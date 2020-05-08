@@ -120,14 +120,17 @@ export default {
             iconText: 'Other'
         }],
         log_id: null,
-        selected_media: null
+        selected_media: null,
+        bulk_delete_dialog: false
     }),
 
     computed: {
-        permissions() {
+        permissionsAll() {
             return this.$_permissions.get('hq_files')
         },
-
+        permissionsOwn() {
+            return this.$_permissions.get('hq_files_own')
+        },
         filteredItems() {
             if (this.items.length === 0) return []
             if (this.filter === 'all') return this.items
@@ -156,11 +159,6 @@ export default {
             return `api/projects/${this.id}/file`
         },
 
-        can_delete() {
-            if (this.user.is_admin) return true
-            return this.permissions && this.permissions.delete
-        },
-
         id() {
             return this.projectId ? this.projectId : this.$route.params.id
         }
@@ -172,6 +170,14 @@ export default {
     },
 
     methods: {
+        can_delete(item) {
+            if (this.user.is_admin) return true
+            if (this.permissionsAll && this.permissionsAll.delete) return true
+            return this.permissionsOwn && this.permissionsOwn.delete && this.is_file_owner(file)
+        },
+        is_file_owner(file) {
+            return file.custom_properties.user && file.custom_properties.user.id === this.user.id
+        },
         get_files() {
             this.item = []
             var payload = {
@@ -256,6 +262,14 @@ export default {
                     this.clear_selected()
                 })
                 .finally(() => this.$event.$emit('btnloading_off', false))
+        },
+        confirmBulkDeleteFiles(selected) {
+            this.selected = selected
+            this.bulk_delete_dialog = true
+        },
+        bulk_delete_files() {
+            this.bulk_delete_via_url(`${this.dynamic_api}/bulk-delete`)
+            this.bulk_delete_dialog = false
         },
 
         delete_item() {

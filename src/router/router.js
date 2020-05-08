@@ -46,54 +46,53 @@ import { expanded_tasks } from './routes/expanded/expandedTasks'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/dashboard',
-      component: () => import('@/modules/Dashboard/Dashboard.vue'),
-      children: [
-        dashboard, // path: '' => info the path is empty because is the default component for the parent
-        clients, // path: /dashboard/clients
-        templates, // path: /dashboard/templates
-        milestones, // path: /dashboard/templates/:id/milestone
-        milestoneTasks, // path: /dashboard/templates/:id/milestone/:id2/task
-        projects, // path: /dashboard/projects
-        services, // path: /dashboard/services
-        teams, // path: /dashboard/team
-        settings, // path: /dashboard/settings,
-        project_preview, //path: /dashboard1/project-preview
-        taskTimer, //path: /dashboard/task-timer
-        globalTimer, //path: /dashboard/global-timer
-        alarm, //path: /dashboard/alarm
-        invoice, //path: /dashboard/invoice
-        forms, //path: /dashboard/forms
-        chat, //path: /dashboard/chat
-        calendar, //path: /dashboard/calendar
-        reports, //path: /dashboard/reports
-        payment, //path: /dashboard/payment
-        cloud, //path: /dashboard/cloud
-        support, //path: /dashboard/support
-        member_profile, //path: /dashboard/team/profile/:id
-        client_profile, //path: /dashboard/clients/profile/:id
-        notes, //path: /dashboard/notes/
-        questionnaire, //path: /dashboard/forms/questionnaire
-        projectDetails, //path: /dashboard/forms/project-details
-        expanded_clients, //path: /dashboard/expanded-clients
-        expanded_payments, //path: /dashboard/expanded-payments
-        expanded_calendar, //path: /dashboard/expanded-calendar
-        expanded_invoice, //path: /dashboard/expanded-invoice
-        expanded_timeline, //path: /dashboard/expanded-timeline
-        expanded_tasks, //path: /dashboard/expanded-timeline
-        bugs // path: /dashboard/bugs
-      ]
-    },
-    setPassword, // path: /set-password
-    home, // path: /
-    checkout, // path: /checkout
-    login, // path: /login
-    signup, // path: /signup
-    forgotPassword, // path: /forgot-password
-    pricing, // path: /pricing,
-    notFound // path: /404
-  ],
-  mode: 'history'
+    routes: [{
+            path: '/dashboard',
+            component: () => import('@/modules/Dashboard/Dashboard.vue'),
+            children: [
+                dashboard, // path: '' => info the path is empty because is the default component for the parent
+                clients, // path: /dashboard/clients
+                templates, // path: /dashboard/templates
+                milestones, // path: /dashboard/templates/:id/milestone
+                milestoneTasks, // path: /dashboard/templates/:id/milestone/:id2/task
+                projects, // path: /dashboard/projects
+                services, // path: /dashboard/services
+                teams, // path: /dashboard/team
+                settings, // path: /dashboard/settings,
+                project_preview, //path: /dashboard1/project-preview
+                taskTimer, //path: /dashboard/task-timer
+                globalTimer, //path: /dashboard/global-timer
+                alarm, //path: /dashboard/alarm
+                invoice, //path: /dashboard/invoice
+                forms, //path: /dashboard/forms
+                chat, //path: /dashboard/chat
+                calendar, //path: /dashboard/calendar
+                reports, //path: /dashboard/reports
+                payment, //path: /dashboard/payment
+                cloud, //path: /dashboard/cloud
+                support, //path: /dashboard/support
+                member_profile, //path: /dashboard/team/profile/:id
+                client_profile, //path: /dashboard/clients/profile/:id
+                notes, //path: /dashboard/notes/
+                questionnaire, //path: /dashboard/forms/questionnaire
+                projectDetails, //path: /dashboard/forms/project-details
+                expanded_clients, //path: /dashboard/expanded-clients
+                expanded_payments, //path: /dashboard/expanded-payments
+                expanded_calendar, //path: /dashboard/expanded-calendar
+                expanded_invoice, //path: /dashboard/expanded-invoice
+                expanded_timeline, //path: /dashboard/expanded-timeline
+                expanded_tasks, //path: /dashboard/expanded-timeline
+                bugs // path: /dashboard/bugs
+            ]
+        },
+        setPassword, // path: /set-password
+        home, // path: /
+        checkout, // path: /checkout
+        login, // path: /login
+        signup, // path: /signup
+        forgotPassword, // path: /forgot-password
+        pricing, // path: /pricing,
+        notFound // path: /404
+    ],
+    mode: 'history'
 })

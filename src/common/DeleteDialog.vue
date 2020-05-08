@@ -8,7 +8,18 @@
       :open.sync="open"
       @button1="cancel_clicked"
       @button2="delete_clicked"
-    ></custom-dialog>
+    >
+      <template v-slot:content>
+        <v-alert
+          prominent
+          type="warning"
+        >
+          <v-row align="center">
+            <v-col class="grow" v-html="textContent"></v-col>
+          </v-row>
+        </v-alert>
+      </template>
+    </custom-dialog>
   </div>
 </template>
 
@@ -23,7 +34,7 @@ export default {
     title: { type: String, default: 'Default Modal Title' },
     textContent: { type: String, default: 'Default Modal Text Content' },
     cancelButtonText: { type: String, default: 'Cancel' },
-    deleteButtonText: { type: String, default: 'Delete' },
+    deleteButtonText: { type: String, default: 'Yes, Delete' },
     openDialog: Boolean
   },
 

@@ -6,7 +6,8 @@ export default {
     button2Text: { type: String, default: 'Delete' },
     open: Boolean,
     value: Boolean,
-    mainBtnDisabled: { type: Boolean, default: false }
+    mainBtnDisabled: { type: Boolean, default: false },
+    maxWidth: { type: [Number, String], default: '600px' }
   },
 
   data: () => ({
@@ -16,7 +17,7 @@ export default {
   }),
 
   mounted() {
-    this.$event.$on('btnloading_off', status => (this.btnloading = status))
+    this.$event.$on('btnloading_off', status => { this.btnloading = false })
   },
 
   watch: {
@@ -28,6 +29,7 @@ export default {
     },
     open(new_val) {
       this.dialog = new_val
+      this.btnloading = false
     },
     dialog(val) {
       this.$emit('update:open', val)
@@ -52,6 +54,7 @@ export default {
 
     close_dialog() {
       this.dialog = false
+      this.btnloading = false
     },
 
     clear_and_close() {

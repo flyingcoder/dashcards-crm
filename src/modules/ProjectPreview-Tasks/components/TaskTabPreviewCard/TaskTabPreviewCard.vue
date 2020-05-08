@@ -81,7 +81,7 @@
               <h3 class="headline mb-3">{{ content.title | ucwords }}</h3>
               <p v-html="content.description" class="body-2"></p>
             </v-col>
-            <v-col md="12" v-if="content.assignee">
+            <v-col md="12" v-if="content.assignee.length > 0">
               <h5 class="body-2 mb-3">Assigned to:</h5>
               <Avatars
                 :deep="false"

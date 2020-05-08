@@ -126,7 +126,7 @@ export default {
     disabled() {
       if (
         isEmpty(this.client.selected) ||
-        isEmpty(this.members.selected) ||
+        isEmpty(this.manager.selected) ||
         !this.project_title ||
         !this.quill_editor.content
       )

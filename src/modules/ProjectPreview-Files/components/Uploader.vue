@@ -32,15 +32,18 @@
             </v-tooltip>
             <v-spacer></v-spacer>
             <v-btn large text outlined :disabled="isMaxFile || btnloading" @click="$refs.hidden_file_input.click()">
-                Add Files <v-icon small right>mdi-file-plus</v-icon>
+                <v-icon small left>mdi-file-plus</v-icon> Add Files
             </v-btn>
             <v-btn large @click="removeFiles" text outlined :disabled="!hasFile || btnloading">
-                Remove Files <v-icon small right>mdi-file-remove</v-icon>
+                 <v-icon small left>mdi-file-remove</v-icon>Remove Files
             </v-btn>
             <v-btn large @click="uploadFiles" text outlined :disabled="!hasFile" :loading="btnloading">
-                Upload Files <v-icon small right>mdi-cloud-upload</v-icon>
+                <v-icon small left>mdi-cloud-upload</v-icon>Upload Files 
             </v-btn>
             <v-spacer></v-spacer>
+            <v-btn large outlined v-if="can_create_folder" @click="$emit('open-create-folder-dialog')">
+                <v-icon left small>mdi-folder-plus</v-icon> Create Folder
+            </v-btn>
         </v-card-actions>
     </v-card>
 </template>
@@ -71,6 +74,8 @@
 export default {
     name: 'Uploader',
     props: {
+        maxFiles: { type: Number, default: 5 },
+        can_create_folder : { type : Boolean, default : false },
         maxFiles: { type: Number, default: 5 }
     },
 

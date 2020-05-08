@@ -1,6 +1,6 @@
 <template>
   <v-layout justify-center>
-    <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-dialog v-model="dialog" persistent :max-width="maxWidth">
       <v-progress-linear
         v-if="loading"
         slot="progress"
@@ -31,12 +31,13 @@
 
         <v-card-text class="dialog__body">
           <slot name="content">
-            {{ content }}
+            <div v-html="content"></div>
           </slot>
         </v-card-text>
 
         <v-card-actions class="dialog__actions">
           <slot name="entire-actions">
+            <slot name="extras"></slot>
             <slot name="button1">
               <v-btn :disabled="btnloading" @click="button1clicked">{{
                 button1Text
