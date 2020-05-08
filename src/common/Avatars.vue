@@ -1,14 +1,14 @@
 <template>
     <div class="avatar-wrapper">
         <ul class="avatars">
-            <li class="avatars__item" v-if="cutList.length > 0" v-for="(item, index) in cutList" :key="index">
+            <li class="avatars__item" v-if="cutList.length > 0 " v-for="(item, index) in cutList" :key="index">
                 <v-tooltip top>
                     <template v-slot:activator="{ on }">
-                        <img v-on="on" v-if="deep" :src="item.user.image_url" class="avatars__img" />
-                        <img v-on="on" v-else :src="item.image_url" class="avatars__img" />
+                        <img v-on="on" v-if="deep && item.user" :src="item.user.image_url" class="avatars__img" />
+                        <img v-on="on" v-else-if="item" :src="item.image_url" class="avatars__img" />
                     </template>
-                    <span v-if="deep">{{ item.user.fullname }}</span>
-                    <span v-else>{{ item.fullname }}</span>
+                    <span v-if="deep && item.user">{{ item.user.fullname }}</span>
+                    <span v-else-if="item">{{ item.fullname }}</span>
                 </v-tooltip>
             </li>
             <li class="avatars__item" v-if="less > 0">
@@ -48,12 +48,16 @@ export default {
             return _cloneDeep(this.items).slice(0, this.count)
         },
         lessList() {
-            return _cloneDeep(this.items)
+            var remain = _cloneDeep(this.items)
                 .slice(this.count, this.items.length)
-                .map(o => {
-                    return this.deep ? o.user.fullname : o.fullname
-                })
-                .join('<br>')
+            if (remain.length > 0) {
+                return remain.map(o => {
+                        return this.deep ? (o.user ? o.user.fullname : 'Deleted User') : (o ? o.fullname : 'Deleted User')
+                    })
+                    .join('<br>')
+            }
+            return "Deleted User"
+
         }
     }
 }

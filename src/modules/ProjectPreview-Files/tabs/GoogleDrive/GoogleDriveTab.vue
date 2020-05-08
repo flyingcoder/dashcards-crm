@@ -13,7 +13,7 @@
                 </v-col>
                 <v-spacer></v-spacer>
                 <v-btn large text outlined @click="openAddFolderDialog">
-                    <v-icon left small>mdi-folder-plus</v-icon> Manage Google Drive Folder Links
+                    <v-icon left small>mdi-folder-plus</v-icon> Manage Google Drive Folders
                 </v-btn>
                 <v-col v-if="isGoogleAuthorized">
                     <v-text-field solo flat outlined dense append-icon="search" placeholder="Search..." hide-details v-model="search" clearable @keydown.enter="searchDrive" @click:append="searchDrive" @click:clear="getRootFiles"></v-text-field>

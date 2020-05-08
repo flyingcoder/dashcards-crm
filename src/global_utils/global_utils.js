@@ -6,7 +6,9 @@ export const global_utils = {
   methods: {
     scrollToBottom(e) {
       this.$nextTick(() => {
-        e.scrollTop = e.scrollHeight - e.getBoundingClientRect().height
+        if (typeof e !== 'undefined') {
+          e.scrollTop = e.scrollHeight - e.getBoundingClientRect().height
+        }
       })
     },
     addHost(urlString) {
