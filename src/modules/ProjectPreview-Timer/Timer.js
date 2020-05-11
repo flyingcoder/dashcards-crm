@@ -25,11 +25,11 @@ export default {
       { title: 'Sort by Date' }
     ],
     headers: [
-      { text: 'Assigned To', sortable : false  },
-      { text: 'Task', sortable : false  },
-      { text: 'Milestone', sortable : false  },
-      { text: 'Status', sortable : false  },
-      { text: 'Total Time' , sortable : false }
+      { text: 'Assigned To', sortable: false },
+      { text: 'Task', sortable: false },
+      { text: 'Milestone', sortable: false },
+      { text: 'Status', sortable: false },
+      { text: 'Total Time', sortable: false }
     ]
   }),
 

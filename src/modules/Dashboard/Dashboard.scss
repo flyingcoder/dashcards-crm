@@ -11,7 +11,7 @@
     .d__sidebar {
         width: 100%;
         grid-area: sidebar;
-        background: $blue;
+        background: $white;
         transition: width .3s linear;
     }
 
@@ -32,7 +32,7 @@
     }
 
     .d__logo {
-        background: $blue;
+        background: $white;
         height: 60px;
 
         .s__logo {

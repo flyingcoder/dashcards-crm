@@ -36,38 +36,38 @@
       </v-col>
     </v-row>
     <v-row no-gutters v-if="needConfirmation" class="py-1">
-        <v-btn
-          dark
-          v-if="hasAddLink"
-          class="mr-1"
-          color="#3b589e"
-          @click="$emit('open-add-link-dialog')"
-        >
-          Add Link <v-icon right>link</v-icon>
-        </v-btn>
-        <v-spacer></v-spacer>
-        <v-btn
-          color="success"
-          :disabled="counts < 1"
-          class="mr-1"
-          @click="$emit('upload-this-files')"
-        >
-          Upload Selected Files <v-icon right dark>cloud_upload</v-icon>
-        </v-btn>
-        <v-btn
-          :disabled="counts < 1"
-          class="mr-1"
-          color="error"
-          @click="remove_all_files()"
-        >
-          Remove All Files <v-icon right>delete</v-icon>
-        </v-btn>
-      
+      <v-btn
+        dark
+        v-if="hasAddLink"
+        class="mr-1"
+        color="#3b589e"
+        @click="$emit('open-add-link-dialog')"
+      >
+        Add Link <v-icon right>link</v-icon>
+      </v-btn>
+      <v-spacer></v-spacer>
+      <v-btn
+        color="success"
+        :disabled="counts < 1"
+        class="mr-1"
+        @click="$emit('upload-this-files')"
+      >
+        Upload Selected Files <v-icon right dark>cloud_upload</v-icon>
+      </v-btn>
+      <v-btn
+        :disabled="counts < 1"
+        class="mr-1"
+        color="error"
+        @click="remove_all_files()"
+      >
+        Remove All Files <v-icon right>delete</v-icon>
+      </v-btn>
+
       <v-spacer></v-spacer>
 
       <v-tooltip left>
         <template v-slot:activator="{ on }">
-          <span class="caption" v-on="on">{{file_counter}}</span>
+          <span class="caption" v-on="on">{{ file_counter }}</span>
         </template>
         <span>Max Number of Files</span>
       </v-tooltip>
@@ -98,15 +98,17 @@ export default {
   created() {
     this.session_id = uuidv4()
   },
-  computed : {
-    file_counter(){
-      return this.counts+'/'+this.options.maxFiles
-    },
+  computed: {
+    file_counter() {
+      return this.counts + '/' + this.options.maxFiles
+    }
   },
   methods: {
     getCount() {
       setTimeout(() => {
-        this.counts = this.$refs.dropzone ? this.$refs.dropzone.getAcceptedFiles().length : 0
+        this.counts = this.$refs.dropzone
+          ? this.$refs.dropzone.getAcceptedFiles().length
+          : 0
       }, 1)
     },
     remove_file(file) {

@@ -1,158 +1,188 @@
 <template>
-    <v-menu offset-y class="user-dropdown" transition="slide-y-transition" :nudge-width="10" :nudge-bottom="10" :nudge-left="70" bottom>
-        <template v-slot:activator="{ on }">
-            <div class="dropdown" v-on="on">
-                <v-layout align-center>
-                    <v-flex xs6>
-                        <v-avatar v-if="user.image_url" class="user-icon responsive-img" :size="avatarSize">
-                            <img :src="user.image_url" alt="user" />
-                        </v-avatar>
-                        <v-avatar v-else color="red" :size="avatarSize" class="user-icon responsive-img">
-                            <span class="white--text">
-                                {{ user.first_name.charAt(0) + user.last_name.charAt(0) }}
-                            </span>
-                        </v-avatar>
-                    </v-flex>
-                    <v-flex xs6>
-                        <div class="user-chevron">
-                            <img src="@/assets/icons/header/chevron-down.svg" class="chevron responsive-img" alt="chevron" />
-                        </div>
-                    </v-flex>
-                </v-layout>
+  <v-menu
+    offset-y
+    class="user-dropdown"
+    transition="slide-y-transition"
+    :nudge-width="10"
+    :nudge-bottom="10"
+    :nudge-left="70"
+    bottom
+  >
+    <template v-slot:activator="{ on }">
+      <div class="dropdown" v-on="on">
+        <v-layout align-center>
+          <v-flex xs6>
+            <v-avatar
+              v-if="user.image_url"
+              class="user-icon responsive-img"
+              :size="avatarSize"
+            >
+              <img :src="user.image_url" alt="user" />
+            </v-avatar>
+            <v-avatar
+              v-else
+              color="red"
+              :size="avatarSize"
+              class="user-icon responsive-img"
+            >
+              <span class="white--text">
+                {{ user.first_name.charAt(0) + user.last_name.charAt(0) }}
+              </span>
+            </v-avatar>
+          </v-flex>
+          <v-flex xs6>
+            <div class="user-chevron">
+              <img
+                src="@/assets/icons/header/chevron-down.svg"
+                class="chevron responsive-img"
+                alt="chevron"
+              />
             </div>
-        </template>
-        <v-list>
-            <v-list-item class="dropdown-img">
-                <v-row no-gutters>
-                    <v-col cols="12">
-                        <v-img max-width="50px" :src="user.image_url" />
-                    </v-col>
-                    <v-col cols="12">
-                        <div class="hero-name">
-                            <h3>{{ user.fullname }}</h3>
-                            <h6 class="overline">{{ user.job_title }}</h6>
-                            <small>{{ user.company.name }}</small>
-                        </div>
-                    </v-col>
-                </v-row>
-            </v-list-item>
-            <v-list-item class="h__list" v-for="(item, index) in items" :key="index" @click="handle_action(item.action)">
-                <v-list-item-icon class="h__icons">
-                    <v-img max-width="25px" :src="item.icon" />
-                </v-list-item-icon>
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item>
-        </v-list>
-    </v-menu>
+          </v-flex>
+        </v-layout>
+      </div>
+    </template>
+    <v-list>
+      <v-list-item class="dropdown-img">
+        <v-row no-gutters>
+          <v-col cols="12">
+            <v-img max-width="50px" :src="user.image_url" />
+          </v-col>
+          <v-col cols="12">
+            <div class="hero-name">
+              <h3>{{ user.fullname }}</h3>
+              <h6 class="overline">{{ user.job_title }}</h6>
+              <small>{{ user.company.name }}</small>
+            </div>
+          </v-col>
+        </v-row>
+      </v-list-item>
+      <v-list-item
+        class="h__list"
+        v-for="(item, index) in items"
+        :key="index"
+        @click="handle_action(item.action)"
+      >
+        <v-list-item-icon class="h__icons">
+          <v-img max-width="25px" :src="item.icon" />
+        </v-list-item-icon>
+        <v-list-item-title>{{ item.title }}</v-list-item-title>
+      </v-list-item>
+    </v-list>
+  </v-menu>
 </template>
 <script>
 import { mapMutations, mapActions } from 'vuex'
 export default {
-    name: 'Dropdown',
+  name: 'Dropdown',
 
-    data: () => ({
-        avatarSize: '40px',
-        items: [{
-                title: 'Profile',
-                icon: require('@/assets/icons/header/user/profile.svg'),
-                action: 'navigate_to_profile'
-            },
-            {
-                title: 'Settings',
-                icon: require('@/assets/icons/header/user/settings.svg'),
-                action: 'navigate_to_settings'
-            },
-            {
-                title: 'Help',
-                icon: require('@/assets/icons/header/user/help.svg')
-            },
-            {
-                title: 'Logout',
-                icon: require('@/assets/icons/header/user/logout.svg'),
-                action: 'logout'
-            }
-        ]
-    }),
+  data: () => ({
+    avatarSize: '40px',
+    items: [
+      {
+        title: 'Profile',
+        icon: require('@/assets/icons/header/user/profile.svg'),
+        action: 'navigate_to_profile'
+      },
+      {
+        title: 'Settings',
+        icon: require('@/assets/icons/header/user/settings.svg'),
+        action: 'navigate_to_settings'
+      },
+      {
+        title: 'Help',
+        icon: require('@/assets/icons/header/user/help.svg')
+      },
+      {
+        title: 'Logout',
+        icon: require('@/assets/icons/header/user/logout.svg'),
+        action: 'logout'
+      }
+    ]
+  }),
 
-    computed: {
-        user() {
-            return this.$store.getters.user
-        }
+  computed: {
+    user() {
+      return this.$store.getters.user
+    }
+  },
+
+  methods: {
+    ...mapMutations('memberProfile', ['set_user_id']),
+    ...mapActions('memberProfile', ['get_single_member']),
+    handle_action(action) {
+      this[action]() //i.e the action is logout will call this.logout()
     },
 
-    methods: {
-        ...mapMutations('memberProfile', ['set_user_id']),
-        ...mapActions('memberProfile', ['get_single_member']),
-        handle_action(action) {
-            this[action]() //i.e the action is logout will call this.logout()
+    logout() {
+      this.$auth.logout(
+        response => {
+          window.location.reload()
         },
-
-        logout() {
-            this.$auth.logout((response) => {
-              window.location.reload()
-            }, (error) => {
-              console.log('error', error)
-            })
-        },
-
-        navigate_to_settings() {
-            this.$router.push({ name: 'settings' })
-        },
-
-        navigate_to_profile() {
-            if (this.user.role === 'client') {
-                this.$router.push(`/dashboard/clients/profile/${this.user.id}`)
-            } else {
-                this.$router.push(`/dashboard/team/profile/${this.user.id}`)
-                this.set_user_id(this.user.id)
-                this.get_single_member(this.user.id)
-            }
-            //location.reload();
+        error => {
+          console.log('error', error)
         }
+      )
+    },
+
+    navigate_to_settings() {
+      this.$router.push({ name: 'settings' })
+    },
+
+    navigate_to_profile() {
+      if (this.user.role === 'client') {
+        this.$router.push(`/dashboard/clients/profile/${this.user.id}`)
+      } else {
+        this.$router.push(`/dashboard/team/profile/${this.user.id}`)
+        this.set_user_id(this.user.id)
+        this.get_single_member(this.user.id)
+      }
+      //location.reload();
     }
+  }
 }
 </script>
 <style lang="scss" scoped>
 .dropdown {
-    width: 75px;
-    cursor: pointer;
+  width: 75px;
+  cursor: pointer;
 
-    .atomic-icon {
-        width: 30px;
-    }
+  .atomic-icon {
+    width: 30px;
+  }
 
-    .user-chevron img {
-        width: 25px !important;
-        margin-left: 5px;
-    }
+  .user-chevron img {
+    width: 25px !important;
+    margin-left: 5px;
+  }
 }
 
 .dropdown-img {
-    .v-image {
-        margin: 0 auto;
-        display: block;
-    }
+  .v-image {
+    margin: 0 auto;
+    display: block;
+  }
 
-    .hero-name {
-        text-align: center;
-        padding-bottom: 10px;
-        font-size: 16px;
-    }
+  .hero-name {
+    text-align: center;
+    padding-bottom: 10px;
+    font-size: 16px;
+  }
 }
 
 @media only screen and (max-width: 480px) {
-    .user-dropdown {
-        .dropdown {
-            width: 50px;
+  .user-dropdown {
+    .dropdown {
+      width: 50px;
 
-            .atomic-icon {
-                width: 22px;
-            }
+      .atomic-icon {
+        width: 22px;
+      }
 
-            .user-chevron img {
-                width: 20px;
-            }
-        }
+      .user-chevron img {
+        width: 20px;
+      }
     }
+  }
 }
 </style>

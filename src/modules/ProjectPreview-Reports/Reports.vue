@@ -20,61 +20,87 @@
       @delete="deleteReport"
     />
 
-    <v-btn color="#3b589e" small dark fab class="add-btn" @click="open_dialog"
-      ><v-icon>add</v-icon></v-btn
-    >
-
     <v-col md="12" v-if="has_permission && reports.length">
-      <div class="body-wrapper">
-        <v-row no-gutters class="pa-2">
-          <v-col cols="12" xs="12">
-            <v-card>
-              <v-tabs class="reports-tab" v-model="active_report" dark>
-                <v-tab v-for="report in reports" :key="report.title">
-                  {{ report.title }}
-                </v-tab>
-              </v-tabs>
+      <v-divider></v-divider>
+      <div class="reports-tab">
+        <v-tabs
+          grow
+          height="50px"
+          :show-arrows="is_screen_medium_and_down"
+          v-model="active_report"
+          dense
+          centered
+        >
+          <v-tab v-for="report in reports" :key="report.title">
+            <img class="tab-img mr-2" src="@/assets/logo/mini-blue.png" />
+            {{ report.title }}
+          </v-tab>
+          <v-tab
+            v-if="reports.length <= 2"
+            class="reports-tab"
+            @click="open_dialog"
+          >
+            <v-icon class="mr-2" color="#8090aa">add</v-icon>
+            Add Reports
+          </v-tab>
+          <v-tab
+            v-if="reports.length <= 1"
+            class="reports-tab"
+            @click="open_dialog"
+          >
+            <v-icon class="mr-2" color="#8090aa">add</v-icon>
+            Add Reports
+          </v-tab>
+          <v-tab
+            v-if="reports.length <= 0"
+            class="reports-tab"
+            @click="open_dialog"
+          >
+            <v-icon class="mr-2" color="#8090aa">add</v-icon>
+            Add Reports
+          </v-tab>
+        </v-tabs>
 
-              <v-tabs-items v-model="active_report">
-                <v-tab-item v-for="report in reports" :key="report.title">
-                  <v-card flat>
-                    <v-card-text>
-                      <div class="reports-actions">
-                        <v-spacer></v-spacer>
-                        <v-btn
-                          color="#3b589e"
-                          small
-                          dark
-                          fab
-                          class="ml-1"
-                          @click="openEditDialog(report, report.id)"
-                          ><v-icon>edit</v-icon></v-btn
-                        >
-                        <v-btn
-                          color="#3b589e"
-                          small
-                          dark
-                          fab
-                          class="ml-1"
-                          @click="openDeleteDialog(report.id)"
-                          ><v-icon>delete</v-icon></v-btn
-                        >
-                      </div>
-                      <div class="reports-content">
-                        <div class="site-preview">
-                          <ReportsSection
-                            :iframe_src="report.url"
-                            @iframe-loaded="iframeLoaded"
-                          />
-                        </div>
-                      </div>
-                    </v-card-text>
-                  </v-card>
-                </v-tab-item>
-              </v-tabs-items>
+        <v-tabs-items v-model="active_report" class="reports-tab-content">
+          <v-tab-item v-for="report in reports" :key="report.title">
+            <v-card>
+              <v-card-text>
+                <div class="reports-actions">
+                  <v-spacer></v-spacer>
+                  <v-btn color="#3b589e" small dark fab @click="open_dialog"
+                    ><v-icon>add</v-icon></v-btn
+                  >
+                  <v-btn
+                    color="#3b589e"
+                    small
+                    dark
+                    fab
+                    class="ml-1"
+                    @click="openEditDialog(report, report.id)"
+                    ><v-icon>edit</v-icon></v-btn
+                  >
+                  <v-btn
+                    color="#3b589e"
+                    small
+                    dark
+                    fab
+                    class="ml-1"
+                    @click="openDeleteDialog(report.id)"
+                    ><v-icon>delete</v-icon></v-btn
+                  >
+                </div>
+                <div class="reports-content">
+                  <div class="site-preview">
+                    <ReportsSection
+                      :iframe_src="report.url"
+                      @iframe-loaded="iframeLoaded"
+                    />
+                  </div>
+                </div>
+              </v-card-text>
             </v-card>
-          </v-col>
-        </v-row>
+          </v-tab-item>
+        </v-tabs-items>
       </div>
     </v-col>
     <v-col md="12" xs="12" class="ma-0 pa-0" v-else>
@@ -91,19 +117,4 @@
 
 <script src="./Reports.js"></script>
 <style lang="scss" scoped src="./Reports.scss"></style>
-<style scoped>
->>> .reports-tab
-  .v-item-group.theme--dark.v-slide-group.v-tabs-bar.white--text {
-  background: #eeeef3;
-}
-
->>> .reports-tab .v-slide-group__wrapper {
-  border-right: 1px solid #b2b6c0;
-  border-left: 1px solid #b2b6c0;
-}
-
->>> .reports-tab .v-slide-group__prev .v-icon,
->>> .reports-tab .v-slide-group__next .v-icon {
-  color: #8090aa;
-}
-</style>
+<style scoped></style>

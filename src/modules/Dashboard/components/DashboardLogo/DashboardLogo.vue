@@ -4,13 +4,13 @@
       <img
         v-show="miniSidebar"
         class="mini__logo"
-        src="@/assets/logo/mini-white.png"
+        src="@/assets/logo/mini-blue.png"
         alt="logo"
       />
       <img
         v-show="!miniSidebar"
         class="logo"
-        src="@/assets/logo/buzzooka-white.png"
+        src="@/assets/logo/buzzooka-blue.png"
       />
     </div>
     <span :class="['icon', { close: miniSidebar }]" @click="rotateIcon">

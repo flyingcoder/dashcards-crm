@@ -24,28 +24,18 @@
     border-radius: 10px;
     max-width: 100%;
 
+    .tab-img{
+      max-height: 30px; 
+      max-width: 100px;
+    }
+
     .reports-actions {
         text-align: right;
         margin-bottom: 20px;
     }
 
-    .theme--dark.v-tabs>.v-tabs-bar {
-        background-color: $modalBgGray !important;
-    }
-
-    .v-tab.v-tab--active {
-        background-color: #fff;
-        color: $tableBlueText;
-        border-bottom: none;
-    }
-
     .v-tab {
-        background-color: $modalBgGray;
         color: $tableBlueText !important;
-        border-top: 1px solid $borderGray;
-        border-right: 1px solid $borderGray;
-        border-left: 1px solid $borderGray;
-        border-bottom: 1px solid $borderGray;
     }
 
     .reports-content {
@@ -57,7 +47,7 @@
         margin: 5px 10px;
 
         iframe {
-          min-height: 700px;
+          min-height: 100vh;
         }
     }
 }

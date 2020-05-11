@@ -1,18 +1,27 @@
 @import "~@/sass/_variables";
 
 .sidebar {
-  background: $blue;
-  color: $white;
+  background: $white;
+  color: $blue;
 
   .sidebar-inner{
     position: relative;
   }
 
+  .sidebar-inner.active{
+    .s_submenu{
+      i.v-icon.notranslate.mdi.mdi-chevron-down.theme--light{
+        color: $white !important;
+      }
+    }
+  }
+
   .s__content{
-    font-size: 1.3rem;
+    font-size: 1rem;
     height: 1.3rem;
     line-height: 1.3rem;
     padding: 0;
+    color: $blue;
   }
 
   .v-list__tile {
@@ -23,39 +32,41 @@
   .s__icons {
     display: flex;
     justify-content: center;
-    height: 35px;
+    height: 25px;
     margin-left: 8px;
 
     svg {
-      fill: $white;
-      width: 35px;
+      fill: $blue;
+      width: 25px;
     }
   }
   
   .s__icons.v-list-item__icon:first-child {
       margin-right: 20px;
   }
-
   .s__list {
     background: transparent;
-    color: #fff;
+    color: $white;
     display: flex;
-    height: 50px;
+    height: 45px;
     width: 200px;
     margin-left: 7px;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     z-index: 1;
     padding: 8px;
 
     &:hover {
-      background: #f2f1f7;
-      color: $blue;
+      background: $blue;
       border-radius: 8px 0 0 8px;
       cursor: pointer;
 
+      .s__content{
+        color: $white;
+      }
+
       svg {
-        fill: $blue;
+        fill: $white;
       }
     }
 
@@ -64,13 +75,17 @@
     }
 
     &.active {
-      background: #f2f1f7;
-      color: $blue;
+      background: $blue;
+      color: $white;
       border-radius: 8px 0 0 8px;
+
+      .s__content{
+        color: $white;
+      }
 
       .s__icons {
         svg {
-          fill: $blue;
+          fill: $white;
         }
       }
     }
@@ -89,32 +104,41 @@
   display: block;
 }
 
-.submenu {
-  position: absolute;
-  right: -150px;
-  top: 0;
-  background: $blue;
-  padding: 5px;
-  width: 150px;
-  color: white;
-  border-radius: 0 20px;
-  display: none;
-  z-index: 999999;
+.s_submenu{
+  .v-list-item{
+    cursor: pointer;
+    margin-left: 8px;
+    height: 45px;
+    min-height: 45px;
+    -webkit-transition: -webkit-box-shadow .28s cubic-bezier(.4,0,.2,1);
+    transition: -webkit-box-shadow .28s cubic-bezier(.4,0,.2,1);
+    transition: box-shadow .28s cubic-bezier(.4,0,.2,1);
+    transition: box-shadow .28s cubic-bezier(.4,0,.2,1), -webkit-box-shadow .28s cubic-bezier(.4,0,.2,1);
+    will-change: box-shadow;
+    
 
-  .item ~ .item {
-    margin-top: 2px;
-  }
+    &:hover{
+      background-color: $blue;
+      border-radius: 8px 0 0 8px;
+      box-shadow: -10px 2px 15px 0px rgba(0, 0, 0, 0.4);
 
-  .item {
-    padding: 10px;
-    border-radius: 10px;
-    text-align: center;
-
-    &:hover {
-      background: white;
-      color: $blue;
-      cursor: pointer;
+      v-list-tile-title{
+        color: $white;
+      }
     }
+    &.active{
+      background-color: $blue;
+      border-radius: 8px 0 0 8px;
+
+      v-list-tile-title{
+        color: $white;
+      }
+    }
+  }
+  v-list-tile-title{
+    margin-left: 45px;
+    color: $blue;
+    font-size: 16px;
   }
 }
 

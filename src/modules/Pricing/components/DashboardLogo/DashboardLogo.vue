@@ -5,13 +5,13 @@
     <div class="s__logo">
       <img
         class="logo__img w__icon"
-        src="@/assets/logo/buzzooka-white.png"
+        src="@/assets/logo/buzzooka-blue.png"
         width="20px"
         height="20px"
       />
       <img
         class="logo__img hidden"
-        src="@/assets/logo/mini-white.png"
+        src="@/assets/logo/mini-blue.png"
         width="20px"
         height="20px"
         alt="logo"

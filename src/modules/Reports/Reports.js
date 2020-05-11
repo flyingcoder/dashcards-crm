@@ -1,6 +1,7 @@
 //TODO DRY, uses the same code as ReportsTab
 import makeRequestTo from '@/services/makeRequestTo'
 import apiTo from './api'
+import { is_screen_medium_and_down } from '@/global_utils/is_screen_medium_and_down'
 //Components
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 import ReportsList from './components/ReportsList/ReportsList.vue'
@@ -12,6 +13,8 @@ import ReportsAddDialog from './components/ReportAddDialog.vue'
 import Empty from '@/common/Empty.vue'
 
 export default {
+  name: 'Reports',
+  mixins: [is_screen_medium_and_down],
   components: {
     CustomDialog,
     ReportsList,

@@ -7,15 +7,17 @@
           :src="iframe_src"
           frameborder="0"
           width="100%"
-          height="800"
           @load="load"
           @error="error"
+          style="min-height: 100vh"
         ></iframe>
       </div>
     </div>
     <Empty v-show="hasError" headline="Unable to fetch contents!">
       <template v-slot:extra>
-        <v-btn color="primary" :href="iframe_src" target="_blank" ><v-icon left>mdi-link</v-icon> Follow Link?</v-btn>
+        <v-btn color="primary" :href="iframe_src" target="_blank"
+          ><v-icon left>mdi-link</v-icon> Follow Link?</v-btn
+        >
       </template>
     </Empty>
   </div>
@@ -60,18 +62,6 @@ export default {
     background-color: $white;
     height: auto;
     padding: 25px;
-
-    .reports__option {
-      text-align: right;
-      .add__link {
-        color: $white;
-        width: 100px;
-      }
-      .save {
-        color: $white;
-        width: 100px;
-      }
-    }
   }
 }
 

@@ -17,7 +17,9 @@ export default {
   }),
 
   mounted() {
-    this.$event.$on('btnloading_off', status => { this.btnloading = false })
+    this.$event.$on('btnloading_off', status => {
+      this.btnloading = false
+    })
   },
 
   watch: {
