@@ -11,14 +11,6 @@ module.exports = {
     'no-console': 'off',
     'no-debugger': 'off',
     semi: 'off',
-    'prettier/prettier': [
-      'warn',
-      {
-        singleQuote: true,
-        semi: false,
-        trailingComma: 'none'
-      }
-    ],
     'vue/attribute-hyphenation': 'warning',
     'vue/component-name-in-template-casing': 'warning',
     'vue/html-indent': 'warning',

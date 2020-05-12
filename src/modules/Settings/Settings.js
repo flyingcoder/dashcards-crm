@@ -9,7 +9,7 @@ export default {
     tabs: [
       { id: 1, name: 'Permissions', route: '/dashboard/settings' },
       { id: 2, name: 'Groups', route: '/dashboard/settings/groups' },
-      { id: 3, name: 'General' },
+      { id: 3, name: 'Users and Roles', route: '/dashboard/settings/users' },
       { id: 4, name: 'Company' },
       { id: 5, name: 'Invoice' }
     ]

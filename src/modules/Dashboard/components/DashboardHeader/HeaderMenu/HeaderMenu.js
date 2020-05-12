@@ -6,17 +6,17 @@ import NotificationIcon from './components/NotificationIcon/NotificationIcon.vue
 import ChatIcon from './components/ChatIcon/ChatIcon.vue'
 
 export default {
-  components: {
-    Dropdown,
-    AddCards,
-    MailIcon,
-    NotificationIcon,
-    ChatIcon
-  },
-
-  methods: {
-    go_to_pricing_page() {
-      this.$router.push({ name: 'pricing' })
+    components: {
+        Dropdown,
+        AddCards,
+        MailIcon,
+        NotificationIcon,
+        ChatIcon
+    },
+    
+    methods: {
+        go_to_pricing_page() {
+            this.$router.push({ name: 'pricing' })
+        }
     }
-  }
 }

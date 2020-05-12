@@ -1,12 +1,13 @@
 import GroupsTab from '@/modules/Settings-Groups/routes'
 import PermissionsTab from '@/modules/Settings-Permissions/routes'
-import auth from '../middleware/auth'
+import UsersTab from '@/modules/Settings-Users/routes'
+import admin_manager from '../middleware/admin_manager'
 
 export const settings = {
-  path: 'settings',
-  component: () => import('@/modules/Settings/Settings.vue'),
-  children: [GroupsTab, PermissionsTab],
-  meta: {
-    middleware: [auth]
-  }
+    path: 'settings',
+    component: () => import('@/modules/Settings/Settings.vue'),
+    children: [GroupsTab, PermissionsTab, UsersTab],
+    meta: {
+        middleware: [ admin_manager ]
+    }
 }

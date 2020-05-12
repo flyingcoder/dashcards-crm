@@ -1,3 +1,7 @@
 export default {
-  name: 'HeaderSearch'
+    name: 'HeaderSearch',
+    data: () => ({
+        globalsearchbox: null,
+        search: null
+    }),
 }

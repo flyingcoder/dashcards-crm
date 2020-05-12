@@ -40,8 +40,7 @@ export default {
     custom_toolbar() {
       if (isEmpty(this.options)) {
         return [
-          ['bold', 'italic', 'underline', 'strike'],
-          ['link', 'image'],
+          ['bold', 'italic', 'underline', 'strike','link', 'image'],
           [{ align: [] }]
         ]
       } else {

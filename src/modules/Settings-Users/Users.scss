@@ -1,0 +1,7 @@
+@import "~@/sass/_variables";
+
+@include pagePadding ('.users-table');
+
+.users-table {
+    @include customTableRow; //css used for styling the last row of the table
+}

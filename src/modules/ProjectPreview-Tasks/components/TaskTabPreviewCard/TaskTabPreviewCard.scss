@@ -1,26 +1,27 @@
 @import "~@/sass/variables";
 
 .task__tab_preview_card {
-    .task__preview_content{
+    .task__preview_content {
         padding: 17px 25px 25px 25px;
         border: 1px solid $tableBorderBlue;
         border-radius: 10px;
-        background-color:$white;
+        background-color: $white;
 
         .card__content {
             margin-bottom: 24px;
 
             .task__header {
                 -webkit-box-align: center;
-                        align-items: center;
+                align-items: center;
                 margin-bottom: 30px;
 
                 .assignee {
                     display: -webkit-box;
                     display: flex;
                     -webkit-box-align: center;
-                            align-items: center;
-                    .assignee__name{
+                    align-items: center;
+
+                    .assignee__name {
                         color: $tableDarkText;
                         font-size: 14px;
                     }
@@ -30,8 +31,9 @@
                     display: -webkit-box;
                     display: flex;
                     -webkit-box-align: center;
-                            align-items: center;              
-                    .date__icon{
+                    align-items: center;
+
+                    .date__icon {
                         color: $tableBlueText;
                         border: 1px solid $tableBlueText;
                         border-radius: 30px;
@@ -39,19 +41,21 @@
                         font-size: 27px;
                         margin-right: 5px;
                     }
-                    .date__text{
+
+                    .date__text {
                         font-size: 14px;
                         color: $red;
                     }
                 }
 
-                .more__button{
-                    .action{
+                .more__button {
+                    .action {
                         background-color: $white;
                         border: 1px solid $tableBorderBlue;
                         color: $tableBlueText;
-                        .v-icon{
-                            font-size:20px;
+
+                        .v-icon {
+                            font-size: 20px;
                         }
                     }
                 }
@@ -61,19 +65,20 @@
                 display: -webkit-box;
                 display: flex;
                 -webkit-box-pack: space-evenly;
-                        justify-content: space-evenly;
+                justify-content: space-evenly;
                 -webkit-box-align: center;
-                        align-items: center;
+                align-items: center;
                 margin-bottom: 10px;
 
-                .boxes{
+                .boxes {
                     height: auto;
                     width: 125px;
                     border: 1px solid $tableBorderBlue;
                     border-radius: 5px;
                     text-align: center;
                     padding: 8px 0;
-                    span.box__content{
+
+                    span.box__content {
                         font-size: 16px;
                         color: $tableBlueText;
                         opacity: 0.7;
@@ -81,14 +86,16 @@
                     }
                 }
             }
-            .mobile__hours-box{
+
+            .mobile__hours-box {
                 display: none;
                 width: 150px;
-                margin-left:auto;
+                margin-left: auto;
                 padding: 8px 0;
             }
 
-            @include styledScrollFor('.task__content'); /*style the scroll*/
+            @include styledScrollFor('.task__content');
+            /*style the scroll*/
 
             .task__content {
                 padding: 15px 0;
@@ -96,14 +103,14 @@
                 max-height: 1200px;
                 overflow: auto;
 
-                .task__title{
+                .task__title {
                     font-size: 17px;
                     font-weight: 500;
                     color: $tableDarkText;
                     margin-bottom: 20px;
                 }
 
-                .task__comment_section{
+                .task__comment_section {
                     margin-top: 30px;
 
                     .comment {
@@ -112,7 +119,7 @@
                         padding: 10px;
                         border: 1px solid #dce1e5;
 
-                        & + .comment {
+                        &+.comment {
                             margin-top: 10px;
                         }
                     }
@@ -122,20 +129,20 @@
             .task__comments {
                 padding: 15px;
                 background-color: $bgLightBlue;
-                display:-webkit-box;
-                display:flex;
+                display: -webkit-box;
+                display: flex;
 
-                .rich__editor{
+                .rich__editor {
                     background-color: $white;
                 }
-                
+
                 .comments__actions {
                     display: -webkit-box;
                     display: flex;
                     -webkit-box-pack: start;
-                            justify-content: flex-start;
+                    justify-content: flex-start;
                     -webkit-box-align: center;
-                            align-items: center;
+                    align-items: center;
                     background-color: $white;
                     border: 1px solid $gray;
                     border-top: none;
@@ -148,6 +155,7 @@
 
             }
         }
+
         /**/
         @include styledScrollFor('text.content');
 
@@ -155,21 +163,21 @@
             overflow: auto;
         }
 
-        .card__content{
+        .card__content {
             margin-bottom: 24px;
         }
 
-        .card__footer{
-            .view__more_btn{
+        .card__footer {
+            .view__more_btn {
                 color: $tableDarkText;
             }
         }
     }
 
-    .commenter{
+    .commenter {
         margin-bottom: 5px;
 
-        .btn-comment-delete{
+        .btn-comment-delete {
             position: relative;
             top: -10px;
             right: -10px;
@@ -177,45 +185,46 @@
         }
     }
 
-    .comment-name{
+    .comment-name {
         color: $textDark;
     }
-    
-    .comment-time{
+
+    .comment-time {
         color: $textDark;
         opacity: 0.7;
     }
 
-    .comment-msg{
+    .comment-msg {
         color: $textDark-2;
     }
 }
 
 /*Laptop Or iPad Pro View*/
-@media only screen and (max-width: 1170px) and (min-width: 960px){
+@media only screen and (max-width: 1170px) and (min-width: 960px) {
     .task__tab_preview_card {
-        .task__preview_content{
+        .task__preview_content {
             padding: 17px;
             margin: 12px;
-    
+
             .card__content {
-    
+
                 .task__header {
                     margin-bottom: 24px;
 
-                    .assignee{
+                    .assignee {
                         -webkit-box-orient: vertical;
                         -webkit-box-direction: normal;
-                                flex-direction: column;
+                        flex-direction: column;
                     }
-    
+
                     .date {
                         -webkit-box-orient: vertical;
                         -webkit-box-direction: normal;
-                                flex-direction: column;
+                        flex-direction: column;
                         -webkit-box-align: center;
-                                align-items: center;
-                        .date__icon{
+                        align-items: center;
+
+                        .date__icon {
                             margin: 0;
                         }
                     }
@@ -223,21 +232,22 @@
 
                 .task__sub_header {
                     -webkit-box-pack: center;
-                            justify-content: center;
+                    justify-content: center;
 
-                    .boxes:first-child{
+                    .boxes:first-child {
                         margin-right: 20px;
                     }
 
-                    .boxes{
+                    .boxes {
                         width: 150px;
                     }
 
-                    .hours__box{
+                    .hours__box {
                         display: none;
                     }
                 }
-                .mobile__hours-box{
+
+                .mobile__hours-box {
                     display: block;
                 }
             }
@@ -246,35 +256,34 @@
 }
 
 /*Tablet View*/
-@media only screen and (max-width: 768px) and (min-width: 481px){
-
-}
+@media only screen and (max-width: 768px) and (min-width: 481px) {}
 
 /*Mobile View*/
-@media only screen and (max-width: 480px){
+@media only screen and (max-width: 480px) {
     .task__tab_preview_card {
-        .task__preview_content{
+        .task__preview_content {
             padding: 17px;
             margin: 12px;
-    
+
             .card__content {
-    
+
                 .task__header {
                     margin-bottom: 24px;
 
-                    .assignee{
+                    .assignee {
                         -webkit-box-orient: vertical;
                         -webkit-box-direction: normal;
-                                flex-direction: column;
+                        flex-direction: column;
                     }
-    
+
                     .date {
                         -webkit-box-orient: vertical;
                         -webkit-box-direction: normal;
-                                flex-direction: column;
+                        flex-direction: column;
                         -webkit-box-align: center;
-                                align-items: center;
-                        .date__icon{
+                        align-items: center;
+
+                        .date__icon {
                             margin: 0;
                         }
                     }
@@ -282,21 +291,22 @@
 
                 .task__sub_header {
                     -webkit-box-pack: center;
-                            justify-content: center;
+                    justify-content: center;
 
-                    .boxes:first-child{
+                    .boxes:first-child {
                         margin-right: 20px;
                     }
 
-                    .boxes{
+                    .boxes {
                         width: 150px;
                     }
 
-                    .hours__box{
+                    .hours__box {
                         display: none;
                     }
                 }
-                .mobile__hours-box{
+
+                .mobile__hours-box {
                     display: block;
                 }
             }
