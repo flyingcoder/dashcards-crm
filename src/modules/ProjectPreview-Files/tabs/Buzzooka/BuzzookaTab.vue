@@ -54,15 +54,47 @@
                                 <v-card-actions>
                                     <span class="overline">{{ item.custom_properties.ext }}</span>
                                     <v-spacer></v-spacer>
-                                    <v-btn small depressed title="Download" :href="item.download_url" v-if="item.mime_type !== 'link'">
-                                        <v-icon small>cloud_download</v-icon>
-                                    </v-btn>
-                                    <v-btn small depressed title="Go to link" @click="goto_link(item.download_url)" v-else>
-                                        <v-icon small>link</v-icon>
-                                    </v-btn>
-                                    <v-btn v-if="can_delete(item)" @click="open_delete_dialog(item)" small depressed title="Delete">
-                                        <v-icon small>delete</v-icon>
-                                    </v-btn>
+                                    <v-menu top v-if="item.category === 'videos' || item.category === 'images'">
+                                        <template v-slot:activator="{ on: menu }">
+                                            <v-tooltip top>
+                                                <template v-slot:activator="{ on: tooltip }">
+                                                    <v-btn class="ml-1" small v-on="{ ...tooltip, ...menu }" depressed text title="Approval">
+                                                        <v-icon small>mdi-dots-horizontal</v-icon>
+                                                    </v-btn>
+                                                </template>
+                                                <span>Approval Status</span>
+                                            </v-tooltip>
+                                        </template>
+                                        <v-list>
+                                            <v-list-item v-for="(action, i) in approval_actions(item)" :key="i" @click="update_status(item, action)">
+                                                <v-list-item-title>{{ action.title }}</v-list-item-title>
+                                            </v-list-item>
+                                        </v-list>
+                                    </v-menu>
+                                    <v-tooltip top v-if="item.mime_type !== 'link'">
+                                        <template v-slot:activator="{ on }">
+                                            <v-btn class="ml-1" v-on="on" small depressed text :href="item.download_url">
+                                                <v-icon small>cloud_download</v-icon>
+                                            </v-btn>
+                                        </template>
+                                        <span>Download File</span>
+                                    </v-tooltip>
+                                    <v-tooltip top v-else>
+                                        <template v-slot:activator="{ on }">
+                                            <v-btn class="ml-1" text small depressed v-on="on" @click="goto_link(item.download_url)">
+                                                <v-icon small>link</v-icon>
+                                            </v-btn>
+                                        </template>
+                                        <span>Go to link</span>
+                                    </v-tooltip>
+                                    <v-tooltip top v-if="can_delete(item)">
+                                        <template v-slot:activator="{ on }">
+                                            <v-btn class="ml-1" v-on="on" @click="open_delete_dialog(item)" small text depressed>
+                                                <v-icon small>delete</v-icon>
+                                            </v-btn>
+                                        </template>
+                                        <span>Delete File</span>
+                                    </v-tooltip>
                                 </v-card-actions>
                             </v-card>
                         </v-col>
@@ -88,17 +120,48 @@
                     <td class="text-cap">
                         {{ item.custom_properties.user.first_name }}
                     </td>
-                    <td class="text-cap">Project</td>
-                    <td class="text-xs-center">
-                        <v-btn fab small depressed title="Download" :href="item.download_url" v-if="item.mime_type !== 'link'">
-                            <v-icon>cloud_download</v-icon>
-                        </v-btn>
-                        <v-btn fab text small depressed title="Go to link" @click="goto_link(item.download_url)" v-else>
-                            <v-icon>link</v-icon>
-                        </v-btn>
-                        <v-btn v-if="can_delete(item)" @click="open_delete_dialog(item)" fab small text depressed title="Delete">
-                            <img src="@/assets/icons/groups/delete.svg" alt="" />
-                        </v-btn>
+                    <td class="text-xs-center text-right">
+                        <v-menu top v-if="item.category === 'videos' || item.category === 'images'">
+                            <template v-slot:activator="{ on: menu }">
+                                <v-tooltip left>
+                                    <template v-slot:activator="{ on: tooltip }">
+                                        <v-btn fab small v-on="{ ...tooltip, ...menu }" depressed text title="Approval">
+                                            <v-icon small>mdi-dots-horizontal</v-icon>
+                                        </v-btn>
+                                    </template>
+                                    <span>Approval Status</span>
+                                </v-tooltip>
+                            </template>
+                            <v-list>
+                                <v-list-item v-for="(action, i) in approval_actions(item)" :key="i" @click="update_status(item, action)">
+                                    <v-list-item-title>{{ action.title }}</v-list-item-title>
+                                </v-list-item>
+                            </v-list>
+                        </v-menu>
+                        <v-tooltip left v-if="item.mime_type !== 'link'">
+                            <template v-slot:activator="{ on }">
+                                <v-btn v-on="on" fab small depressed :href="item.download_url">
+                                    <v-icon small>cloud_download</v-icon>
+                                </v-btn>
+                            </template>
+                            <span>Download File</span>
+                        </v-tooltip>
+                        <v-tooltip left v-else>
+                            <template v-slot:activator="{ on }">
+                                <v-btn fab text small depressed v-on="on" @click="goto_link(item.download_url)">
+                                    <v-icon small>link</v-icon>
+                                </v-btn>
+                            </template>
+                            <span>Go to link</span>
+                        </v-tooltip>
+                        <v-tooltip left v-if="can_delete(item)">
+                            <template v-slot:activator="{ on }">
+                                <v-btn v-on="on" @click="open_delete_dialog(item)" fab small text depressed>
+                                    <v-icon small>delete</v-icon>
+                                </v-btn>
+                            </template>
+                            <span>Delete File</span>
+                        </v-tooltip>
                     </td>
                 </template>
             </VueTable>

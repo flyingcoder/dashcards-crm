@@ -59,16 +59,11 @@ export default {
                 value: 'member'
             },
             {
-                text: 'Project',
-                value: 'project',
-                sortable: false
-            },
-            {
                 text: 'Action',
                 value: 'action',
                 sortable: false,
                 align: 'center',
-                width: '120px'
+                width: '180px'
             }
         ],
         table_config: {
@@ -123,6 +118,13 @@ export default {
                 type: 'other',
                 icon: 'settings_applications',
                 iconText: 'Other'
+            },
+            {
+                id: 7,
+                className: 'approval',
+                type: 'approval',
+                icon: 'mdi-thumb-up',
+                iconText: 'Approval'
             }
         ],
         log_id: null,
@@ -142,6 +144,9 @@ export default {
         filteredItems() {
             if (this.items.length === 0) return []
             if (this.filter === 'all') return this.items
+            if(this.filter === 'approval'){
+                return this.items.filter(item => item.approved === 1 && (item.category === 'videos' || item.category === 'images' ) )
+            }
             return this.items.filter(item => item.category.includes(this.filter))
         },
 
@@ -331,6 +336,21 @@ export default {
             } else {
                 this.$refs.other_viewer_dialog.openDialog()
             }
+        },
+        approval_actions(item) {
+            const list = [{ id: 2, title: 'Approved', action: 'approved' }, { id: 0, title: 'Reject', action: 'reject' }, { id: 1, title: 'For Modification', action: 'modification' }]
+            return list.filter(i => { return i.id !== item.approved })
+        },
+        update_status(item, action) {
+            var payload = { action : action.id }
+            apiTo.updateMediaStatus(item.id, payload)
+            .then(({ data }) => {
+                let index = this.items.findIndex(i => i.id === item.id)
+                if (~index) {
+                    this.$event.$emit('open_snackbar', data.message)
+                    this.items[index].approved = action.id
+                }
+            })
         }
     }
 }

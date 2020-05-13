@@ -74,7 +74,6 @@ export default {
             this.$event.$emit('task-add')
         },
         showTask(item) {
-            console.log(item)
             this.$event.$emit('show-task-side-preview', item)
         }
     }

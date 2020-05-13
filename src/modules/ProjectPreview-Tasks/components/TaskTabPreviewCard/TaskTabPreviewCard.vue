@@ -10,7 +10,8 @@
                                 <v-col>
                                     <v-list-item-title class="body-2 font-weight-medium">
                                         <v-avatar color="grey">
-                                            <v-img :src="assignee_url" height="45" width="45"></v-img>
+                                            <v-img v-if="assignee_url" :src="assignee_url" height="45" width="45"></v-img>
+                                            <v-icon large v-else>mdi-account-question-outline</v-icon>
                                         </v-avatar>
                                         <span class="title">&nbsp;{{ full_name | ucwords | truncate }}</span>
                                     </v-list-item-title>
@@ -55,7 +56,7 @@
                         </v-col>
                         <v-spacer></v-spacer>
                         <v-col xs="12">
-                            <hours-box :content="content" v-if="content.status != 'completed'"></hours-box>
+                            <hours-box :content="content" v-if="content.status != 'completed'" @timer-started="timerStarted" @timer-paused="timerPaused"></hours-box>
                         </v-col>
                         <v-col md="12">
                             <h3 class="headline mb-3">{{ content.title | ucwords }}</h3>

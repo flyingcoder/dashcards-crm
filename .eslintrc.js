@@ -5,7 +5,7 @@ module.exports = {
     node: true
   },
 
-  extends: ['plugin:vue/strongly-recommended', '@vue/prettier'],
+  extends: ['plugin:vue/strongly-recommended' ],
 
   rules: {
     'no-console': 'off',

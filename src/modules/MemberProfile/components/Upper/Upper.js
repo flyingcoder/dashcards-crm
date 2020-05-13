@@ -7,78 +7,74 @@ import TeamsDialog from '../../../Teams/components/TeamsDialog/TeamsDialog.vue'
 import UpdatePasswordDialog from '../UpdatePasswordDialog/UpdatePasswordDialog.vue'
 
 export default {
-  components: {
-    UserInfo,
-    AddPicture,
-    TeamsDialog,
-    UpdatePasswordDialog
-  },
-
-  props: {
-    currentuserid: [Number, String]
-  },
-
-  data: () => ({
-    edit_dialog: false,
-    edit_item: {
-      id: null,
-      fields: null
-    }
-  }),
-
-  computed: {
-    ...mapGetters('memberProfile', ['user', 'set_user_loading']),
-    logged_user() {
-      return this.$store.getters.user
+    components: {
+        UserInfo,
+        AddPicture,
+        TeamsDialog,
+        UpdatePasswordDialog
     },
-    permission() {
-      return this.$_permissions.get('user_profile')
-    },
-    can_edit() {
-      if (this.logged_user.is_admin) return true
 
-      if (this.logged_user.id === parseInt(this.currentuserid)) return true //allow edit to self
-
-      let role = this.logged_user.role
-        .split('-')
-        .pop()
-        .toLowerCase()
-      if (role === 'manager') {
-        return this.permission && this.permission.update
-      }
-      return false
-    }
-  },
-
-  methods: {
-    ...mapMutations('memberProfile', ['set_picture_dialog']),
-    ...mapActions('memberProfile', ['update_profile']),
-    open_edit_dialog(item) {
-      this.edit_dialog = true
-      this.$set(this.edit_item, 'id', item.id)
-      this.$set(this.edit_item, 'fields', item)
+    props: {
+        currentuserid: [Number, String]
     },
-    open_update_password_dialog(item) {
-      this.$refs.update_password_dialog.open()
-      this.$set(this.edit_item, 'id', item.id)
-      this.$set(this.edit_item, 'fields', item)
-    },
-    update_user_profile(item) {
-      item.id = this.edit_item.id
-      this.update_profile(item)
-      this.edit_dialog = this.set_user_loading
-      this.$set(this.edit_item, 'fields', this.user)
-      this.$event.$emit('btnloading_off', false)
-      setTimeout(() => {
-        if (this.logged_user.id === item.id) {
-          this.$store.commit('set_login_user', item)
+
+    data: () => ({
+        edit_dialog: false,
+        edit_item: {
+            id: null,
+            fields: null
         }
-      }, 1)
+    }),
+
+    computed: {
+        ...mapGetters('memberProfile', ['user', 'set_user_loading']),
+        logged_user() {
+            return this.$store.getters.user
+        },
+        permission() {
+            return this.$_permissions.get('user_profile')
+        },
+        can_edit() {
+            if (this.logged_user.is_admin) return true
+
+            if (this.logged_user.id === parseInt(this.currentuserid)) return true //allow edit to self
+
+            if (this.logged_user.is_manager) {
+                return this.permission && this.permission.update
+            }
+            return false
+        }
     },
-    image_clicked() {
-      if (this.can_edit) {
-        this.set_picture_dialog(true) //open picture dialog
-      }
+
+    methods: {
+        ...mapMutations('memberProfile', ['set_picture_dialog']),
+        ...mapActions('memberProfile', ['update_profile']),
+        open_edit_dialog(item) {
+            this.edit_dialog = true
+            this.$set(this.edit_item, 'id', item.id)
+            this.$set(this.edit_item, 'fields', item)
+        },
+        open_update_password_dialog(item) {
+            this.$refs.update_password_dialog.open()
+            this.$set(this.edit_item, 'id', item.id)
+            this.$set(this.edit_item, 'fields', item)
+        },
+        update_user_profile(item) {
+            item.id = this.edit_item.id
+            this.update_profile(item)
+            this.edit_dialog = this.set_user_loading
+            this.$set(this.edit_item, 'fields', this.user)
+            this.$event.$emit('btnloading_off', false)
+            setTimeout(() => {
+                if (this.logged_user.id === item.id) {
+                    this.$store.commit('set_login_user', item)
+                }
+            }, 1)
+        },
+        image_clicked() {
+            if (this.can_edit) {
+                this.set_picture_dialog(true) //open picture dialog
+            }
+        }
     }
-  }
 }
