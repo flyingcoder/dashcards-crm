@@ -92,7 +92,7 @@
               fab
               large
               text
-              :color="view == 'list' ? 'primary' : ''"
+              :color="view == 'list' ? '#3b589e' : '#aaa'"
               @click="view = 'list'"
               class="mr-1 action"
               ><v-icon>list</v-icon></v-btn
@@ -101,7 +101,7 @@
               fab
               large
               text
-              :color="view == 'grid' ? 'primary' : ''"
+              :color="view == 'grid' ? '#3b589e' : '#aaa'"
               @click="view = 'grid'"
               class="mr-1 action"
               ><v-icon>grid_on</v-icon></v-btn
@@ -170,57 +170,62 @@
           </div>
 
           <div class="right">
-            <EventCard
-              v-if="view === 'grid'"
-              v-for="(event, index) in items"
-              :event="event"
-              :key="event.id"
-              @edit-event="open_add_event_dialog(true, event)"
-              @delete-event="open_delete_dialog(event)"
-              @leave-event="open_confirm_leave_dialog(event)"
-              @view-event="open_event_detail_dialog(event)"
-              @add-participant="open_add_participant_dialog(event)"
-            ></EventCard>
+            <div class="grid-view">
+              <EventCard
+                v-if="view === 'grid'"
+                v-for="(event, index) in items"
+                :event="event"
+                :key="event.id"
+                @edit-event="open_add_event_dialog(true, event)"
+                @delete-event="open_delete_dialog(event)"
+                @leave-event="open_confirm_leave_dialog(event)"
+                @view-event="open_event_detail_dialog(event)"
+                @add-participant="open_add_participant_dialog(event)"
+              ></EventCard>
+              <v-btn class="load-more">Load More</v-btn>
+            </div>
 
-            <VueTable
-              v-if="view == 'list'"
-              :items="items"
-              :headers="headers"
-              :showRowActions="true"
-              @load-more="load_more_events"
-              @delete-selected="open_bulk_delete_dialog($event)"
-              icon="widgets"
-              :showTopHeader="false"
-              :key="componentKey"
-              :noMoreData="noMoreData"
-              :showSelect="false"
-            >
-              <template v-slot:row-slot="{ item }">
-                <td>{{ item.title }}</td>
-                <td>{{ datetimedisplay(item) }}</td>
-                <td>
-                  <Avatars
-                    :items="item.participants"
-                    :count="2"
-                    :deep="true"
-                  ></Avatars>
-                </td>
-                <Actions
-                  :item="item"
-                  @delete="open_delete_dialog(item)"
-                  @edit="open_edit_dialog(item)"
-                  @view="open_event_detail_dialog(item)"
-                ></Actions>
-              </template>
-              <template v-slot:empty-slot>
-                <v-btn
-                  dark
-                  color="#3b589e"
-                  @click="open_add_event_dialog(false)"
-                  >Add Event</v-btn
-                >
-              </template>
-            </VueTable>
+            <div class="list-view">
+              <VueTable
+                v-if="view == 'list'"
+                :items="items"
+                :headers="headers"
+                :showRowActions="true"
+                @load-more="load_more_events"
+                @delete-selected="open_bulk_delete_dialog($event)"
+                icon="widgets"
+                :showTopHeader="false"
+                :key="componentKey"
+                :noMoreData="noMoreData"
+                :showSelect="false"
+              >
+                <template v-slot:row-slot="{ item }">
+                  <td>{{ item.title }}</td>
+                  <td>{{ datetimedisplay(item) }}</td>
+                  <td>
+                    <Avatars
+                      :items="item.participants"
+                      :count="2"
+                      :deep="true"
+                    ></Avatars>
+                  </td>
+                  <Actions
+                    :item="item"
+                    @delete="open_delete_dialog(item)"
+                    @edit="open_edit_dialog(item)"
+                    @view="open_event_detail_dialog(item)"
+                  ></Actions>
+                </template>
+                <template v-slot:empty-slot>
+                  <v-btn
+                    dark
+                    color="#3b589e"
+                    @click="open_add_event_dialog(false)"
+                    >Add Event</v-btn
+                  >
+                </template>
+              </VueTable>
+            </div>
           </div>
         </div>
       </div>

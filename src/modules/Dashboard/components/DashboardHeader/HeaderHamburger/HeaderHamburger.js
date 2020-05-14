@@ -10,6 +10,7 @@ export default {
               .classList.toggle('collapse')
             let sidebar__collapse = document.querySelector('.sidebar__collapse')
             let logo__img = document.querySelectorAll('.logo__img')
+            console.log(is_collapsed)
 
             if (is_collapsed) {
               sidebar__collapse.classList.remove('opened')

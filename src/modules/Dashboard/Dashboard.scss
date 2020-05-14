@@ -58,6 +58,9 @@
         .s__list {
             position: relative;
             width: 88%;
+            .s__icons {
+                padding-left: 8px;
+            }
 
             &:hover {
                 width: 190px;
@@ -69,6 +72,55 @@
             }
 
             .s__content {
+                width: 0;
+                opacity: 0;
+            }
+        }
+
+        .s_submenu .v-list-group__header {
+            position: relative;
+            width: 88%;
+            z-index: 1;
+
+            &:hover {
+                width: 190px;
+                border-radius: 8px;
+
+                .s__content {
+                    opacity: 1;
+                    width: auto;
+                }
+                
+                .v-list-item__icon.v-list-group__header__append-icon{
+                    opacity: 1;
+                }
+            }
+            .v-list-item__icon.v-list-group__header__append-icon{
+                opacity: 0;
+                width: 0;
+            }
+
+            .s__content {
+                width: 0;
+                opacity: 0;
+            }
+        }
+
+        .submenu-item {
+            position: relative;
+            width: 88%;
+            z-index: 1;
+
+            &:hover {
+                width: 190px;
+                border-radius: 8px;
+
+                .v-list-item__title {
+                    opacity: 1;
+                }
+            }
+
+            .v-list-item__title {
                 width: 0;
                 opacity: 0;
             }

@@ -10,7 +10,7 @@
         </div>
         <EmbedViewer ref="embed_viewer_dialog" :media="selected_media"></EmbedViewer>
         <VideoViewer ref="video_viewer_dialog" :media="selected_media"></VideoViewer>
-        <ImageViewer ref="image_viewer_dialog" :media="selected_media"></ImageViewer>
+        <ImageViewer ref="image_viewer_dialog" :media="selected_media" previewFrom="files"></ImageViewer>
         <DocsViewer ref="doc_viewer_dialog" :media="selected_media"></DocsViewer>
         <IframeViewer ref="iframe_viewer_dialog" :media="selected_media"></IframeViewer>
         <OtherViewer ref="other_viewer_dialog" :media="selected_media"></OtherViewer>

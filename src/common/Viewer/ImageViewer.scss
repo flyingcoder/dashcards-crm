@@ -1,0 +1,280 @@
+@import '~@/sass/_variables';
+
+@include styledScrollFor('.dialog-body');
+.v-dialog {
+  border-radius: 10px;
+}
+.image-wrapper {
+  .img-preview{
+    max-height: 460px;
+  }
+  img {
+    max-width: 100%;
+    max-height: 460px;
+    height: 100%;
+    margin: auto;
+  }
+
+  .dialog-header {
+    text-align: right;
+    background: $white;
+    padding: 10px;
+    border-bottom: 1px solid $borderGray;
+    background-color: $modalBgGray;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+
+    .v-btn__content .v-icon {
+      color: $btnGray;
+    }
+    .v-btn--outlined {
+      border: thin solid $btnGray;
+      margin-left: 5px;
+      background-color: $white;
+    }
+    .uploaded-info {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      grid-gap: 20px;
+      align-items: center;
+    }
+    .client,
+    .project,
+    .service {
+      display: grid;
+      grid-template-columns: auto auto;
+      grid-gap: 10px;
+      align-items: center;
+    }
+    .b-icon {
+      width: 30px;
+    }
+    .b-icon-inner {
+      fill: $tableBlueText;
+    }
+    .b-info {
+      text-align: left;
+
+      .name {
+        font-size: 14px;
+        color: $textDark-2;
+      }
+      .subname {
+        font-size: 12px;
+        color: $textDark;
+      }
+    }
+  }
+
+  @include styledScrollFor('.dialog-body');
+
+  .dialog-body {
+    background: $dashboardBg;
+    padding: 10px 20px;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 2fr 1fr;
+    max-height: none;
+
+    .img-controls {
+      display: flex;
+    }
+    .img-controls .v-btn {
+      color: $textDark-2;
+      margin: 5px;
+      border-color: $gray-2;
+      background-color: $white;
+    }
+    .img-controls .v-btn:hover {
+      color: $white !important;
+      background-color: $blue;
+    }
+    .img-controls .v-btn:hover:before {
+      opacity: 0;
+    }
+    .img-preview {
+      padding: 10px;
+      text-align: center;
+      border-radius: 10px;
+      border: 1px solid $gray;
+      background: $white;
+      height: 400px;
+      margin: 20px 0;
+      display: grid;
+      justify-content: center;
+      align-items: center;
+    }
+    .img-footer {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: auto auto;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .img-footer .b-info {
+      text-align: left;
+
+      .name {
+        font-size: 14px;
+        color: $textDark-2;
+      }
+      .subname {
+        font-size: 12px;
+        color: $textDark;
+      }
+    }
+    .img-footer .uploaded-by {
+      display: flex;
+
+      .v-avatar{
+          margin-right: 10px;
+      }
+    }
+    .slide-control {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      align-items: center;
+      grid-gap: 10px;
+    }
+    .slide-control .v-btn {
+      color: $textDark-2;
+      margin: 5px;
+      border-color: $gray-2;
+      background-color: $white;
+    }
+    .slide-control .v-btn:hover {
+      color: $white !important;
+      background-color: $blue;
+    }
+    .slide-control .v-btn:hover:before {
+      opacity: 0;
+    }
+    .approval .v-btn {
+      background: $blue;
+      color: $white;
+      text-transform: capitalize;
+    }
+    .approval .v-btn span {
+      text-transform: capitalize;
+    }
+    .approve.v-btn {
+        background: $blue;
+    }
+    .modif.v-btn {
+        background: $orange;
+    }
+    .reject.v-btn {
+        background: $red;
+    }
+    .chat-controls {
+      display: flex;
+    }
+    .members {
+      margin-right: 10px;
+    }
+    .members .v-avatar {
+      margin-right: -10px;
+      border: 1px solid $white;
+      background: $blue;
+    }
+    .chat-controls .v-btn {
+      background-color: $blue;
+      color: $white;
+      margin-left: 5px;
+      border: none;
+    }
+    .chat-controls .v-btn.share-btn {
+      border-radius: 50px;
+    }
+  }
+  
+  @include styledScrollFor('.dialog-body');
+
+  .dialog-body-preview {
+    background: $dashboardBg;
+    padding: 10px 20px;
+    display: grid;
+    max-height: none;
+
+    .img-controls {
+      display: flex;
+    }
+    .img-controls .v-btn {
+      color: $textDark-2;
+      margin: 5px;
+      border-color: $gray-2;
+      background-color: $white;
+    }
+    .img-controls .v-btn:hover {
+      color: $white !important;
+      background-color: $blue;
+    }
+    .img-controls .v-btn:hover:before {
+      opacity: 0;
+    }
+    .img-preview {
+      padding: 10px;
+      text-align: center;
+      border-radius: 10px;
+      border: 1px solid $gray;
+      background: $white;
+      height: 400px;
+      margin: 20px 0;
+      display: grid;
+      justify-content: center;
+      align-items: center;
+    }
+    .img-footer {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .img-footer .b-info {
+      text-align: left;
+
+      .name {
+        font-size: 14px;
+        color: $textDark-2;
+      }
+      .subname {
+        font-size: 12px;
+        color: $textDark;
+      }
+    }
+    .img-footer .uploaded-by {
+      display: flex;
+
+      .v-avatar{
+          margin-right: 10px;
+      }
+    }
+    .slide-control {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      align-items: center;
+      grid-gap: 10px;
+    }
+    .chat-controls {
+      display: flex;
+    }
+    .members {
+      margin-right: 10px;
+    }
+    .members .v-avatar {
+      margin-right: -10px;
+      border: 1px solid $white;
+      background: $blue;
+    }
+  }
+}
+@media only screen and (min-width:960px){
+    .dialog-body{
+        grid-template-columns: 1fr;
+    }
+}

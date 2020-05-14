@@ -120,6 +120,7 @@
     <ImageViewer
       ref="image_viewer_dialog"
       :media="selected_media"
+      previewFrom="timeline"
     ></ImageViewer>
     <DocsViewer ref="doc_viewer_dialog" :media="selected_media"></DocsViewer>
     <IframeViewer

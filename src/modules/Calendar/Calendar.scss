@@ -69,12 +69,16 @@
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
   }
-  .right{
+  .grid-view{
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
+    position: relative;
   }
-  
+  .load-more{position: absolute;
+    left: 42%;
+    bottom: -55px;
+  }
   
   .calendar-actions {
     display: flex;
