@@ -220,6 +220,11 @@ export default {
                 }
                 item.timer.timer_stats.format = this.set_time_running(hours, mins, secs)
             }, 1000)
+        },
+        expand() {
+            this.$router.push({
+                name: 'taskTimer'
+            })
         }
     }
 }

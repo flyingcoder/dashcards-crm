@@ -11,7 +11,7 @@ export const global_filters = {
         }
         return tz_date.calendar().split(' ')[0]
     },
-    
+
     from_now(date) {
         const tz_date = moment.tz(date, 'America/Toronto')
         return moment(tz_date).fromNow()
@@ -20,10 +20,7 @@ export const global_filters = {
     chat_format(date) {
         const tz = timezone.tz.guess()
         const tz_date = timezone.tz(date, 'America/Toronto')
-        return tz_date
-            .clone()
-            .tz(tz)
-            .format('YY/MM/DD, h:mm A')
+        return tz_date.clone().tz(tz).format('YY/MM/DD, h:mm A')
     },
 
     truncate(text, stop, clamp) {
@@ -41,7 +38,7 @@ export const global_filters = {
     },
 
     format(value, format) {
-        if (typeof value !== 'string') {
+        if (!value || typeof value !== 'string') {
             return '-'
         }
         var form = typeof format === 'undefined' ? 'MMM D YYYY' : format

@@ -61,7 +61,7 @@ export default {
     }),
 
     created() {
-        this.fill_table_via_url( `api/timer/tasks?all=true&filter=${this.filter_task}`)
+        this.fill_table_via_url(`api/timer/tasks?all=true&filter=${this.filter_task}`)
     },
     computed: {
         loggeduser() {
@@ -106,5 +106,8 @@ export default {
             this.task = task
             this.$refs.view_task_dialog.open_dialog()
         },
+        minimize() {
+            this.$router.push({ name: 'default-content' })
+        }
     }
 }

@@ -20,94 +20,97 @@ import AddParticipantDialog from '@/modules/Calendar/components/AddParticipantDi
 import EventCard from '@/modules/Calendar/components/EventCard/EventCard.vue'
 
 export default {
-  name: 'Alarm',
-  mixins: [list_functionality, calendar_utils],
-  components: {
-    VueTable,
-    Actions,
-    TableHeader,
-    DatePicker,
-    CalendarDialog,
-    DeleteDialog,
-    ConfirmDialog,
-    EventCard,
-    EventDialog,
-    EventTypeDialog,
-    Empty,
-    Avatars,
-    EventDetailDialog,
-    AddParticipantDialog
-  },
-
-  data: () => ({
-    paths: [
-      { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-      { text: 'Alarm', disabled: true, router_name: null }
-    ],
-    sortList: [
-      { title: 'Sort by Client' },
-      { title: 'Sort by Task' },
-      { title: 'Sort by Services' },
-      { title: 'Sort by Time' },
-      { title: 'Sort by Date' }
-    ],
-    headers: [
-      { text: 'Events', sortable: true, align: 'left' },
-      { text: 'Participants', sortable: true, align: 'left' },
-      { text: 'Type', sortable: true, align: 'left' },
-      {
-        text: 'Date',
-        sortable: true,
-        align: 'left'
-      },
-      { text: 'Time', value: 'time_end', sortable: true, align: 'left' },
-      {
-        text: 'Action',
-        sortable: false,
-        align: 'center',
-        width: '100px;'
-      }
-    ],
-    timer_tab: 'alarm',
-    currentTab: 'alarm',
-    filter_date: moment().format('YYYY-MM-DD'),
-    today: moment().format('YYYY-MM-DD')
-  }),
-
-  created() {
-    this.fill_table_via_url(this.api)
-  },
-
-  computed: {
-    loggeduser() {
-      return this.$store.getters.user
+    name: 'Alarm',
+    mixins: [list_functionality, calendar_utils],
+    components: {
+        VueTable,
+        Actions,
+        TableHeader,
+        DatePicker,
+        CalendarDialog,
+        DeleteDialog,
+        ConfirmDialog,
+        EventCard,
+        EventDialog,
+        EventTypeDialog,
+        Empty,
+        Avatars,
+        EventDetailDialog,
+        AddParticipantDialog
     },
-    dateSelected() {
-      return moment(this.filter_date).format('YYYY-MM-DD')
+
+    data: () => ({
+        paths: [
+            { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+            { text: 'Alarm', disabled: true, router_name: null }
+        ],
+        sortList: [
+            { title: 'Sort by Client' },
+            { title: 'Sort by Task' },
+            { title: 'Sort by Services' },
+            { title: 'Sort by Time' },
+            { title: 'Sort by Date' }
+        ],
+        headers: [
+            { text: 'Events', sortable: true, align: 'left' },
+            { text: 'Participants', sortable: true, align: 'left' },
+            { text: 'Type', sortable: true, align: 'left' },
+            {
+                text: 'Date',
+                sortable: true,
+                align: 'left'
+            },
+            { text: 'Time', value: 'time_end', sortable: true, align: 'left' },
+            {
+                text: 'Action',
+                sortable: false,
+                align: 'center',
+                width: '100px;'
+            }
+        ],
+        timer_tab: 'alarm',
+        currentTab: 'alarm',
+        filter_date: moment().format('YYYY-MM-DD'),
+        today: moment().format('YYYY-MM-DD')
+    }),
+
+    created() {
+        this.fill_table_via_url(this.api)
     },
-    api() {
-      return `/api/events?alarm=true&page=${this.pagination.current}`
+
+    computed: {
+        loggeduser() {
+            return this.$store.getters.user
+        },
+        dateSelected() {
+            return moment(this.filter_date).format('YYYY-MM-DD')
+        },
+        api() {
+            return `/api/events?alarm=true&page=${this.pagination.current}`
+        }
+    },
+
+    methods: {
+        load_more() {
+            this.load_more_via_url(this.api)
+        },
+
+        handleChangeTab(event) {
+            if (this.timer_tab === 'task-timers')
+                this.$router.push({ name: 'taskTimer' })
+            if (this.timer_tab === 'global-timers')
+                this.$router.push({ name: 'globalTimer' })
+        },
+
+        is_event_owner(item) {
+            return item.properties.creator === this.loggeduser.id
+        },
+
+        handleAction() {
+            this.$event.$emit('open_snackbar', 'Coming soon, working on it!')
+        },
+        minimize() {
+            this.$router.push({ name: 'default-content' })
+        }
     }
-  },
-
-  methods: {
-    load_more() {
-      this.load_more_via_url(this.api)
-    },
-
-    handleChangeTab(event) {
-      if (this.timer_tab === 'task-timers')
-        this.$router.push({ name: 'taskTimer' })
-      if (this.timer_tab === 'global-timers')
-        this.$router.push({ name: 'globalTimer' })
-    },
-
-    is_event_owner(item) {
-      return item.properties.creator === this.loggeduser.id
-    },
-
-    handleAction() {
-      this.$event.$emit('open_snackbar', 'Coming soon, working on it!')
-    }
-  }
 }

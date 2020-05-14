@@ -9,7 +9,7 @@
     </div>
 
     <div class="d__content">
-      <router-view></router-view>
+      <router-view :key="$route.fullPath"></router-view>
       <floating-chat-button></floating-chat-button>
     </div>
   </div>

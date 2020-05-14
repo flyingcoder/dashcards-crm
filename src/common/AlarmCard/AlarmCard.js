@@ -16,75 +16,80 @@ import ConfirmDialog from '@/common/ConfirmDialog.vue'
 import AddParticipantDialog from '@/modules/Calendar/components/AddParticipantDialog/AddParticipantDialog.vue'
 
 export default {
-  name: 'AlarmCard',
-  mixins: [list_functionality, calendar_utils],
-  components: {
-    DashCard,
-    Avatars,
-    Empty,
-    DeleteDialog,
-    ConfirmDialog,
-    EventDialog,
-    EventTypeDialog,
-    EventDetailDialog,
-    AddParticipantDialog
-  },
+    name: 'AlarmCard',
+    mixins: [list_functionality, calendar_utils],
+    components: {
+        DashCard,
+        Avatars,
+        Empty,
+        DeleteDialog,
+        ConfirmDialog,
+        EventDialog,
+        EventTypeDialog,
+        EventDetailDialog,
+        AddParticipantDialog
+    },
 
-  props: {
-    id: [Number, String],
-    viewMoreLink: Object,
-    dashboard: Boolean
-  },
+    props: {
+        id: [Number, String],
+        viewMoreLink: Object,
+        dashboard: Boolean
+    },
 
-  data() {
-    return {
-      loading: true,
-      items: [],
-      timeNow: new Date().toLocaleTimeString(),
-      dayNow: moment().format('ddd'),
-      dateNow: moment().format('LL')
-    }
-  },
-  computed: {
-    ...mapGetters(['user'])
-  },
-  created() {
-    this.getTimers()
-    apiTo.myCalendar().then(({ data }) => {
-      this.calendar = data.calendar
-    })
-    setInterval(() => {
-      this.timeNow = new Date().toLocaleTimeString()
-    }, 1000)
-  },
-  computed: {
-    logged() {
-      return this.$store.getters.user
-    }
-  },
-  filters: {
-    format(value, format) {
-      var forms = format || 'MMM D YYYY | HH:mm A'
-      return moment(value).format(forms)
-    }
-  },
-  methods: {
-    getTimers() {
-      this.loading = true
-      request
-        .get(`/api/events?alarm=true&page=${this.pagination.current}`)
-        .then(response => {
-          this.items = response.data.data
-          this.pagination.current = response.data.current_page
-          this.pagination.total = response.data.last_page
+    data() {
+        return {
+            loading: true,
+            items: [],
+            timeNow: new Date().toLocaleTimeString(),
+            dayNow: moment().format('ddd'),
+            dateNow: moment().format('LL')
+        }
+    },
+    computed: {
+        ...mapGetters(['user'])
+    },
+    created() {
+        this.getTimers()
+        apiTo.myCalendar().then(({ data }) => {
+            this.calendar = data.calendar
         })
-        .finally(() => (this.loading = false))
+        setInterval(() => {
+            this.timeNow = new Date().toLocaleTimeString()
+        }, 1000)
     },
-    onPageChange() {
-      this.getTimers()
+    computed: {
+        logged() {
+            return this.$store.getters.user
+        }
     },
-    is_owner(item) {
-      return item.properties.creator === this.logged.id
+    filters: {
+        format(value, format) {
+            var forms = format || 'MMM D YYYY | HH:mm A'
+            return moment(value).format(forms)
+        }
+    },
+    methods: {
+        getTimers() {
+            this.loading = true
+            request
+                .get(`/api/events?alarm=true&page=${this.pagination.current}`)
+                .then(response => {
+                    this.items = response.data.data
+                    this.pagination.current = response.data.current_page
+                    this.pagination.total = response.data.last_page
+                })
+                .finally(() => (this.loading = false))
+        },
+        onPageChange() {
+            this.getTimers()
+        },
+        is_owner(item) {
+            return item.properties.creator === this.logged.id
+        },
+        expand() {
+            this.$router.push({
+                name: 'alarm'
+            })
+        }
     }
-  }
 }

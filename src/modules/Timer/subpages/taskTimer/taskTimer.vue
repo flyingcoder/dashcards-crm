@@ -5,7 +5,7 @@
                 <v-btn fab outlined small class="mx-1" color="gray" icon>
                     <v-icon>mdi-dots-horizontal</v-icon>
                 </v-btn>
-                <v-btn fab outlined small class="mx-1" color="gray" icon>
+                <v-btn fab outlined small class="mx-1" color="gray" icon @click="minimize">
                     <v-icon>close</v-icon>
                 </v-btn>
             </template>
@@ -14,17 +14,17 @@
         <VueTable :items="items" :headers="headers" :showRowActions="true" @load-more="load_more" :loading="loading" icon="widgets" title="Task Timers" :key="componentKey" :noMoreData="noMoreData" :showSelect="false">
             <template v-slot:header-toolbar>
                 <v-col>
-                    <v-select :items="task_status" label="Task Status" solo :value="filter_task" class="mt-7" @change="filterTask"></v-select>
+                    <v-select flat :items="task_status" label="Task Status" solo :value="filter_task" class="mt-7" @change="filterTask"></v-select>
                 </v-col>
                 <v-btn-toggle mandatory v-model="timer_tab" :value="timer_tab" @change="handleChangeTab">
                     <v-btn text class="px-5" value="task-timers">
                         <v-icon left>mdi-folder-clock-outline</v-icon> Task Timers
                     </v-btn>
                     <v-btn text class="px-5" value="global-timers">
-                        <v-icon left>mdi-web-clock</v-icon> Global Timers
+                        <v-icon left>mdi-account-clock</v-icon> Global Timers
                     </v-btn>
                     <v-btn text class="px-5" value="alarm">
-                        <v-icon left>mdi-alarm</v-icon> Alarms
+                        <v-icon left>mdi-clock-digital</v-icon> Alarms
                     </v-btn>
                 </v-btn-toggle>
             </template>

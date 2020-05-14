@@ -1,11 +1,10 @@
 @import '~@/sass/_variables';
 
-.notes-list{
+.notes-list {
     background-color: #ffffff;
     border: 1px solid #dce1e5;
-    border-radius: 10px;
 
-    .note-header{
+    .note-header {
         padding: 10px;
         font-size: 24px;
         color: $textDark;
@@ -16,34 +15,36 @@
 
     @include styledScrollFor('.notes-body');
 
-    .notes-body{
-        overflow: auto;
+    .notes-body {
+        overflow-x: hidden;
+        overflow-y: auto;
         max-height: 500px;
     }
 
-    .note{
+    .note {
         padding: 10px;
         border-bottom: 1px solid $borderLightGray;
         border-left: 1px solid transparent;
         cursor: pointer;
 
-        &:hover, &.active{
+        &:hover,
+        &.active {
             background: $lightGray;
         }
     }
 
-    .note-name{
+    .note-name {
         display: -ms-grid;
         display: grid;
         -ms-grid-columns: 1fr 30px;
         grid-template-columns: 1fr 30px;
         -webkit-box-pack: justify;
-                justify-content: space-between;
+        justify-content: space-between;
         grid-gap: 10px;
         -webkit-box-align: center;
-                align-items: center;
+        align-items: center;
 
-        span{
+        span {
             font-size: 16px;
             color: $textDark;
             font-weight: 500;
@@ -54,24 +55,24 @@
         }
     }
 
-    .notify{
+    .notify {
         color: $gray;
         cursor: pointer;
 
-        &.selected{
+        &.selected {
             color: $blue;
         }
 
-        &:hover{
+        &:hover {
             color: $blue;
         }
 
-        &.active{
+        &.active {
             color: $blue;
         }
     }
 
-    .note-desc p{
+    .note-desc p {
         font-size: 14px;
         color: $textDark;
         white-space: nowrap;
@@ -81,11 +82,12 @@
         margin: 0;
     }
 
-    .view__more{
+    .view__more {
         text-align: center;
         padding: 10px;
         border-top: 1px solid $borderLightGray;
-        .view__more_btn{
+
+        .view__more_btn {
             color: $tableDarkText;
         }
     }
