@@ -25,13 +25,12 @@
           {{ item.title }}
         </v-list-item-content>
       </v-list>
-      <v-list-group class="s_submenu" v-if="item.title === 'Timers'">
+      <v-list-group class="s_submenu" v-if="item.can_view() && item.title === 'Timers'">
         <template v-slot:activator>
           <v-list
             class="s__list-group"
             :key="index"
             :class="{ active: item.action === selected_route_name }"
-            v-if="item.can_view()"
           >
             <v-list-item-action class="s__icons mr-5">
               <svg viewBox="0 0 250 250">
@@ -78,13 +77,12 @@
           <v-list-item-title>Alarms</v-list-item-title>
         </v-list-item>
       </v-list-group>
-      <v-list-group class="s_submenu" v-if="item.title === 'Templates'">
+      <v-list-group class="s_submenu" v-if="item.can_view() && item.title === 'Templates'">
         <template v-slot:activator>
           <v-list
             class="s__list-group"
             :key="index"
             :class="{ active: item.action === selected_route_name }"
-            v-if="item.can_view()"
           >
             <v-list-item-action class="s__icons mr-5">
               <svg viewBox="0 0 250 250">
@@ -120,13 +118,12 @@
           <v-list-item-title>Invoices</v-list-item-title>
         </v-list-item>
       </v-list-group>
-      <v-list-group class="s_submenu" v-if="item.title === 'Forms'">
+      <v-list-group class="s_submenu" v-if="item.can_view() && item.title === 'Forms'">
         <template v-slot:activator>
           <v-list
             class="s__list-group"
             :key="index"
             :class="{ active: item.action === selected_route_name }"
-            v-if="item.can_view()"
           >
             <v-list-item-action class="s__icons mr-5">
               <svg viewBox="0 0 250 250">
