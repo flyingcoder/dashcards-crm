@@ -7,6 +7,7 @@ export default {
     open: Boolean,
     value: Boolean,
     mainBtnDisabled: { type: Boolean, default: false },
+    hasFooter: { type: Boolean, default: true },
     maxWidth: { type: [Number, String], default: '600px' }
   },
 

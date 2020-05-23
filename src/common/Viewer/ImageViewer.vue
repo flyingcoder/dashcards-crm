@@ -94,7 +94,7 @@
             </div> -->
                         <div class="approval">
                             <v-btn @click="update_status(2)" v-if="media.approved !== 2" class="approve mr-1">Approve</v-btn>
-                            <v-btn @click="update_status(1)" v-if="media.approved !== 1" class="modif mr-1">For Modification</v-btn>
+                            <v-btn @click="update_status(1)" class="modif mr-1">For Modification</v-btn>
                             <v-btn @click="update_status(0)" v-if="media.approved !== 0" class="reject mr-1">Reject</v-btn>
                             <!-- <v-btn>
                                 <v-icon>delete</v-icon>

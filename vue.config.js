@@ -1,11 +1,15 @@
 module.exports = {
-  lintOnSave: true,
-  chainWebpack: config => {
-    config.module
-      .rule('raw')
-      .test(/\.txt$/)
-      .use('raw-loader')
-      .loader('raw-loader')
-      .end()
-  }
+    lintOnSave: true,
+    chainWebpack: config => {
+        config.module
+            .rule('raw')
+            .test(/\.txt$/)
+            .use('raw-loader')
+            .loader('raw-loader')
+            .end()
+    },
+    devServer: {
+        host: 'crm.buzzookalocal.net',
+        https: true
+    }
 }

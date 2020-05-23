@@ -131,7 +131,7 @@ export default {
         },
 
         folderRemovedFromDB(item) {
-            let index = this.project_folders.findIndex(i => i.id === item.id)
+            let index = this.project_folders.findIndex(i => i.id === item.id || (i.hasOwnProperty('folder_id') && i.folder_id === item.id))
             if (~index) {
                 this.project_folders.splice(index, 1)
             }
