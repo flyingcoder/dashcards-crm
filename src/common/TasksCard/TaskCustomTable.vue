@@ -52,22 +52,22 @@
                         <v-list dense>
                             <v-list-item v-if="task.status !== 'completed' && can_edit_task" @click="task_action(task, 'task-edit')">
                                 <v-list-item-title>
-                                    <v-icon color="grey" left>edit</v-icon> Edit Task
+                                    <v-icon color="grey" left>mdi-file-document-edit-outline</v-icon> Edit Task
                                 </v-list-item-title>
                             </v-list-item>
                             <v-list-item v-if="can_delete_task" @click="task_action(task, 'task-delete')">
                                 <v-list-item-title>
-                                    <v-icon color="grey" left>delete</v-icon> Delete Task
+                                    <v-icon color="grey" left>mdi-delete-alert-outline</v-icon> Delete Task
                                 </v-list-item-title>
                             </v-list-item>
                             <v-list-item v-if="can_view_task" @click="task_view_action(task)">
                                 <v-list-item-title>
-                                    <v-icon color="grey" left>pageview</v-icon> View Task
+                                    <v-icon color="grey" left>mdi-clipboard-text-play</v-icon> View Task
                                 </v-list-item-title>
                             </v-list-item>
                             <v-list-item v-if="task.status !== 'completed' && can_edit_task" @click="task_action(task, 'task-mark-as-complete')">
                                 <v-list-item-title>
-                                    <v-icon color="grey" left>check</v-icon> Mark as Complete
+                                    <v-icon color="grey" left>mdi-clipboard-check</v-icon> Mark as Complete
                                 </v-list-item-title>
                             </v-list-item>
                         </v-list>

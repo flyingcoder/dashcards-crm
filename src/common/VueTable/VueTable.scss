@@ -2,30 +2,33 @@
 
 @include styledScrollFor('.custom-table .v-data-table__wrapper');
 
-.custom-table-wrapper{
+.custom-table-wrapper {
     padding: 20px;
     background-color: $white;
     border: 1px solid $tableBorderBlue;
     border-radius: 10px;
 
-    .custom-table-inner{
+    .custom-table-inner {
         padding: 20px;
         background-color: $tableBlueBg;
         border: 1px solid $tableBorderBlue;
         border-radius: 10px;
     }
-    .custom-table{
+
+    .custom-table {
         background-color: $tableBlueBg;
 
     }
-    .custom-table header{
+
+    .custom-table header {
         background-color: $tableBlueBg !important;
     }
 
-    .v-data-table__wrapper{
+    .v-data-table__wrapper {
         border-right: 1px solid $tableBorderBlue;
         border-bottom: 1px solid $tableBorderBlue;
         border-left: 1px solid $tableBorderBlue;
+        min-height: 300px;
 
         .clickable-td {
             color: #3b589e;
@@ -33,23 +36,26 @@
             font-weight: bold;
         }
     }
-    .theme--light.v-data-table thead tr th{
+
+    .theme--light.v-data-table thead tr th {
         color: $tableTitleBlue;
     }
-    
-    .v-data-table-header{
+
+    .v-data-table-header {
         background-color: $white;
     }
-    .custom-table-title{
+
+    .custom-table-title {
         color: $tableTitleBlue;
         text-align: left;
         font-size: 30px;
     }
-    
-    .theme--light.v-data-table{
+
+    .theme--light.v-data-table {
         color: $tableDarkText;
     }
-    tbody tr:nth-child(even){
+
+    tbody tr:nth-child(even) {
         background-color: $white;
     }
 }

@@ -36,12 +36,12 @@ export default {
             { text: 'Invoice', disabled: true, router_name: null }
         ],
         headers: [
-            { text: 'Invoice #', value: 'id', sortable: false },
-            { text: 'Title', value: 'invoice', sortable: false },
-            { text: 'Due Date', value: 'due_date', sortable: false },
-            { text: 'Client', value: 'client', sortable: false },
-            { text: 'Status', value: 'Status', sortable: false },
-            { text: 'Amount', value: 'amount', sortable: false },
+            { text: 'Invoice #', sortable: false },
+            { text: 'Title', sortable: false },
+            { text: 'Due Date', sortable: false },
+            { text: 'Billed To', sortable: false },
+            { text: 'Status', sortable: false },
+            { text: 'Amount', sortable: false },
             {
                 text: 'Action',
                 value: 'actions',
@@ -81,7 +81,7 @@ export default {
         open_create_dialog() {
             this.set_toolbar({ title: 'Create Invoice' })
             this.set_dialog({ type: 'create', open: true })
-            this.set_props({ send_email : 'no', template: 1})
+            this.set_props({ send_email: 'no', template: 1 })
             this.$refs.invoiceCreateDialog.openDialog()
         },
 
@@ -162,3 +162,5 @@ export default {
         }
     }
 }
+
+

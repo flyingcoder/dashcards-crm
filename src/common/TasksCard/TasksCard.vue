@@ -16,8 +16,17 @@
             <TaskDialog ref="add_task_dialog" dialog-title="Add Task" :id="project_id" @save="create_new_task($event)" @close="closeAddDialog()"></TaskDialog>
             <TaskDialog :id="project_id" :task="task" ref="edit_task_dialog" dialog-title="Edit Task" @save="edit_task($event)" @close="closeEditDialog()"></TaskDialog>
             <DeleteDialog :open-dialog.sync="delete_task_dialog" title="Delete Task" text-content="Are you sure you want to delete this task?" @delete="delete_task()"></DeleteDialog>
-            <ConfirmDialog :open-dialog.sync="confirm_mark_as_complete_dialog" title="Confirmation required!" confirm-button-text="Yes" text-content="Mark task as completed?" @confirm="confirm_mark_as_complete_task()"></ConfirmDialog>
             <TaskViewDialog ref="view_task_dialog" :task="task" @close-task-preview="closeViewDialog"></TaskViewDialog>
+            <ConfirmDialog :open-dialog.sync="confirm_mark_as_complete_dialog" title="Confirmation required!" confirm-button-text="Yes" @confirm="confirm_mark_as_complete_task()">
+                <template v-slot:content>
+                    <v-row no-gutters>
+                        <v-col md="12" class="title">
+                            <v-alert outlined type="success">Mark task as completed?</v-alert>
+                            <v-checkbox v-model="notifytaskcomplete" label="Notify next task assignee."></v-checkbox>
+                        </v-col>
+                    </v-row>
+                </template>
+            </ConfirmDialog>
         </div>
     </div>
 </template>
@@ -96,6 +105,7 @@ export default {
         add_task_dialog: false,
         edit_task_dialog: false,
         confirm_mark_as_complete_dialog: false,
+        notifytaskcomplete: false,
         delete_task_dialog: false
     }),
 
@@ -149,10 +159,13 @@ export default {
         },
 
         create_new_task(payload) {
-            apiTo.create_new_task(payload).then(({ data }) => {
+            apiTo.create_new_task(payload)
+            .then(({ data }) => {
                 this.add_task(data)
                 this.$refs.add_task_dialog.clear_and_close()
                 this.$event.$emit('open_snackbar', 'New Task added successfully')
+            })
+            .finally(() => {
                 this.$event.$emit('btnloading_off', false)
             })
         },
@@ -163,14 +176,18 @@ export default {
                 this.update_task(data, this.task.id, 'tasks_own')
                 this.$refs.edit_task_dialog.$refs.dialog.clear_and_close()
                 this.$event.$emit('open_snackbar', 'Task updated successfully')
-                this.$event.$emit('btnloading_off', false)
                 this.$event.$emit('task-is-updated', data)
+            })
+            .finally(() => {
+                this.$event.$emit('btnloading_off', false)
             })
         },
 
         delete_task() {
             apiTo.delete_task(this.task.id).then(() => {
                 this.remove_task(this.task)
+            })
+            .finally(() => {
                 this.$event.$emit('btnloading_off', false)
             })
         },
@@ -241,16 +258,18 @@ export default {
         },
 
         confirm_mark_as_complete_task() {
-            var payload = { status: 'completed' }
-            apiTo.mark_as_complete_task(this.task.id, payload).then(({ data }) => {
-                this.confirm_mark_as_complete_dialog = false
-                this.$event.$emit('open_snackbar', 'Task is completed')
-                this.update_task(data, this.task.id, 'all_tasks')
-                this.update_task(data, this.task.id, 'tasks_own')
-                this.replace_task(data)
-                this.$event.$emit('btnloading_off', false)
-                this.$event.$emit('task-is-updated', data)
-            })
+            var payload = { status: 'completed', notify_complete: this.notifytaskcomplete }
+
+            apiTo.mark_as_complete_task(this.task.id, payload)
+                .then(({ data }) => {
+                    this.confirm_mark_as_complete_dialog = false
+                    this.$event.$emit('open_snackbar', 'Task is completed')
+                    this.update_task(data, this.task.id, 'all_tasks')
+                    this.update_task(data, this.task.id, 'tasks_own')
+                    this.replace_task(data)
+                    this.$event.$emit('btnloading_off', false)
+                    this.$event.$emit('task-is-updated', data)
+                })
         },
 
         set_and_delete_task(task) {

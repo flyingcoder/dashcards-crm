@@ -25,9 +25,17 @@
                                     <v-img :src="item.image_url"></v-img>
                                 </v-list-item-avatar>
                                 <v-list-item-content>
-                                    <v-list-item-title v-html="item.fullname"></v-list-item-title>
+                                    <v-list-item-title>{{item.fullname}}</v-list-item-title>
                                     <v-list-item-subtitle v-html="item.job_title"></v-list-item-subtitle>
                                 </v-list-item-content>
+                                <v-list-item-icon v-if="item.deleted_at">
+                                    <v-tooltip left >
+                                            <template v-slot:activator="{ on } ">
+                                                <v-icon small right v-on="on">mdi-account-lock</v-icon>
+                                            </template>
+                                            <span>Account Deleted</span>
+                                        </v-tooltip>
+                                </v-list-item-icon>
                             </v-list-item>
                         </template>
                     </v-list>
@@ -49,10 +57,18 @@
                                 <v-col md="8" class="subtitle-1">{{activeUser.job_title}}</v-col>
                                 <v-col md="4">Email :</v-col>
                                 <v-col md="8" class="subtitle-1">{{activeUser.email}}</v-col>
+                                <v-col md="4">Contact Number :</v-col>
+                                <v-col md="8" class="subtitle-1">{{activeUser.telephone ? activeUser.telephone.formatInternational : 'none'}}</v-col>
                                 <v-col md="4">Is company owner :</v-col>
                                 <v-col md="8" class="subtitle-1">{{activeUser.is_company_owner ? 'Yes' : 'No'}}</v-col>
-                                <v-col md="4">Contact Number :</v-col>
-                                <v-col md="8" class="subtitle-1">{{activeUser.telephone ? activeUser.telephone.formatInternational : ''}}</v-col>
+                                <v-col md="4">Is account disabled :</v-col>
+                                <v-col md="8" class="subtitle-1" style="display:flex;justify-content: space-between;">
+                                    <span>{{activeUser.deleted_at ? 'Yes' : 'No'}}</span>
+                                    <v-btn right outlined v-if="can_update_user_roles" :loading="restoring" text @click="controlAccount()">
+                                        <v-icon left small>{{activeUser.deleted_at ? 'mdi-account-convert' : 'mdi-account-lock'}}</v-icon>
+                                        {{activeUser.deleted_at ? 'Restore Account?' : 'Disable Account?'}}
+                                    </v-btn>
+                                </v-col>
                                 <v-col md="4">Roles :</v-col>
                                 <v-col md="8">
                                     <v-alert v-if="!can_update_user_roles" dense outlined class="ma-0" type="error">
@@ -72,7 +88,7 @@
                                     </v-autocomplete>
                                 </v-col>
                                 <v-col md="4" class="mt-2">Permissions</v-col>
-                                <v-col md="8" class="mt-2">
+                                <v-col md="8" class="mt-2" v-if="!activeUser.deleted_at">
                                     <v-divider></v-divider>
                                     <v-simple-table fixed-header>
                                         <template v-slot:default>
@@ -109,6 +125,9 @@
                                         </template>
                                     </v-simple-table>
                                     <v-divider></v-divider>
+                                </v-col>
+                                <v-col md="8" class="mt-2" v-else>
+                                    <v-alert>No permission granted for disabled accounts.</v-alert>
                                 </v-col>
                             </v-row>
                         </v-card-text>

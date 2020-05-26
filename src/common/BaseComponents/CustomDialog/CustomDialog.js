@@ -1,7 +1,7 @@
 export default {
   props: {
-    title: { type: String, default: 'Default Modal Title' },
-    content: { type: String, default: 'Default Modal Text Content' },
+    title: { type: String, default: '' },
+    content: { type: String, default: '' },
     button1Text: { type: String, default: 'Cancel' },
     button2Text: { type: String, default: 'Delete' },
     open: Boolean,

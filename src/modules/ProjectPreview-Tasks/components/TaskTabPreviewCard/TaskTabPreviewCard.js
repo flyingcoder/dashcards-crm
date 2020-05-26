@@ -52,8 +52,8 @@ export default {
         all_comments: [],
         comment: '',
         dropdown_actions: [
-            { id: 1, text: 'Edit', value: 'edit', icon: 'edit' },
-            { id: 2, text: 'Delete', value: 'delete', icon: 'delete' }
+            { id: 1, text: 'Edit', value: 'edit', icon: 'mdi-file-document-edit-outline' },
+            { id: 2, text: 'Delete', value: 'delete', icon: 'mdi-delete-alert-outline' }
         ],
         commenter: null,
         hover: false,
@@ -178,7 +178,7 @@ export default {
                 id: 3,
                 text: 'Mark as Complete',
                 value: 'mark-as-complete',
-                icon: 'check'
+                icon: 'mdi-clipboard-check'
             }
             var index = this.dropdown_actions.findIndex(function(item) {
                 return item.id === 3

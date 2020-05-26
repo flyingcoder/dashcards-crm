@@ -54,9 +54,11 @@ export default {
             const chat_channel = this.$pusher.subscribe(
                 `private-chat.new-message.${this.user.id}`
             )
+
             const friends_channel = this.$pusher.subscribe(
                 `presence-friend-list-${this.user.company_id}`
             )
+
             const chat_notification_channel = this.$pusher.subscribe(
                 `private-chat.notification.${this.user.id}`
             )
@@ -124,6 +126,20 @@ export default {
                 }
             })
 
+            channel.bind('App\\Events\\ProjectTaskNotification', ({ payload }) => {
+                let index = payload.receivers.findIndex(i => i === this.user.id)
+                if (~index) {
+                    let notification = new Notification(payload.title, {
+                        icon : require('@/assets/logo/mini-blue.png'),
+                        body : payload.message
+                    })
+                }
+            })
+
+            channel.bind('App\\Events\\CompanyNotification', ({ data }) => {
+                console.log(data)
+            })
+
             channel.bind('pusher:subscription_error', (status) => {
                 console.log('Subscription error', status)
             })
@@ -137,6 +153,8 @@ export default {
                     this.add_to_chat(notification)
                 }
             })
+
+
         },
 
         handle_unread_message(sender) {
@@ -144,6 +162,6 @@ export default {
             if (conv && !conv.open && conv.active) {
                 this.add_unread_messages(sender.id)
             }
-        }
+        },
     }
 }

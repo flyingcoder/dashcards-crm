@@ -27,7 +27,7 @@
                                                 <v-icon>more_horiz</v-icon>
                                             </v-btn>
                                         </template>
-                                        <v-list>
+                                        <v-list dense>
                                             <v-list-item v-for="item of dropdown_actions" :key="item.id" @click="dropdownAction(item.value)">
                                                 <v-list-item-content>
                                                     <v-list-item-title>

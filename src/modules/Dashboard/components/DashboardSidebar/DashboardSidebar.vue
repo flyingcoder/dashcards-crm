@@ -106,7 +106,7 @@
           </v-list-item-action>
           <v-list-item-title>Milestone</v-list-item-title>
         </v-list-item>
-        <v-list-item
+        <!-- <v-list-item
           :class="{ active: selected_route_name === 'invoices' }"
           sub-group
           class="submenu-item"
@@ -116,7 +116,7 @@
             <span>I</span>
           </v-list-item-action>
           <v-list-item-title>Invoices</v-list-item-title>
-        </v-list-item>
+        </v-list-item> -->
       </v-list-group>
       <v-list-group class="s_submenu" v-if="item.can_view() && item.title === 'Forms'">
         <template v-slot:activator>

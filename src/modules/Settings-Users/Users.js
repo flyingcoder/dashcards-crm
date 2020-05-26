@@ -26,6 +26,7 @@ export default {
         currentRoles: [],
         tobeAddedRoles: [],
         search: '',
+        restoring: false
     }),
     mounted() {
         this.getUsers()
@@ -68,7 +69,7 @@ export default {
             return this.filteredUsers = []
         },
         getUsers() {
-            this.fill_table_via_url(`api/company/teams?basics=true&per_page=50`)
+            this.fill_table_via_url(`api/company/teams?basics=true&per_page=50&withTrashed=true`)
         },
         getGroups() {
             request.get(`api/groups?all=true`)
@@ -85,7 +86,9 @@ export default {
         setActiveUser(item) {
             this.activeUser = item
             this.tobeAddedRoles = item.roles
-            this.getUserPermissions()
+            if (!item.deleted_at) {
+                this.getUserPermissions()
+            }
         },
         updateRoles() {
             if (this.tobeAddedRoles.length === 0) {
@@ -109,6 +112,28 @@ export default {
                 .finally(() => {
                     this.btnloading = false
                 })
+        },
+        controlAccount(){
+            this.restoring = true
+            var payload = {
+                action : this.activeUser.deleted_at ? 'restore' : 'delete',
+                user : this.activeUser.id
+            }
+            request.post(`api/groups/user/restore-delete`, payload)
+            .then(({ data }) => {
+                    this.activeUser = data
+                    let index = this.items.findIndex(i => i.id === data.id)
+                    if (~index) {
+                        this.items[index] = data
+                    }
+                    if (payload.action === 'restore') {
+                        this.getUserPermissions()
+                    }
+                    this.$event.$emit('open_snackbar', this.activeUser.deleted_at ? 'User successfully restored' : 'User successfully disabled')
+                })
+            .finally(() => {
+                this.restoring = false
+            })
         }
     }
 }
