@@ -48,7 +48,7 @@ export const getters = {
         if (state.hasOwnProperty('invoice')) return state.invoice.shipping
     },
     props: state => {
-        if (state.hasOwnProperty('invoice')) return state.invoice.props
+        if (state.hasOwnProperty('invoice')) return typeof state.invoice.props === 'string' ? JSON.parse(state.invoice.props) : state.invoice.props
     },
     dialog: state => state.dialog,
     toolbar: state => state.toolbar,

@@ -42,6 +42,7 @@ import { expanded_calendar } from './routes/expanded/expandedCalendar'
 import { expanded_invoice } from './routes/expanded/expandedInvoice'
 import { expanded_timeline } from './routes/expanded/expandedTimeline'
 import { expanded_tasks } from './routes/expanded/expandedTasks'
+import { pay_invoice } from './routes/payInvoice'
 
 Vue.use(Router)
 
@@ -70,6 +71,7 @@ export default new Router({
         calendar, //path: /dashboard/calendar
         reports, //path: /dashboard/reports
         payment, //path: /dashboard/payment
+        pay_invoice, //path: /dashboard/pay-invoice/:id
         cloud, //path: /dashboard/cloud
         support, //path: /dashboard/support
         member_profile, //path: /dashboard/team/profile/:id

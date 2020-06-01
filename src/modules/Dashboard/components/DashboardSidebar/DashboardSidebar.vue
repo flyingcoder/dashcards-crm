@@ -50,7 +50,7 @@
           @click.stop="sidebar_item_clicked('globalTimer')"
         >
           <v-list-item-action class="s__icons mr-5 pl-4">
-            <span>GT</span>
+            <span><v-icon>mdi-account-clock</v-icon></span>
           </v-list-item-action>
           <v-list-item-title>Global Timers</v-list-item-title>
         </v-list-item>
@@ -61,7 +61,7 @@
           @click.stop="sidebar_item_clicked('taskTimer')"
         >
           <v-list-item-action class="s__icons mr-5 pl-4">
-            <span>TT</span>
+            <span><v-icon>mdi-folder-clock-outline</v-icon></span>
           </v-list-item-action>
           <v-list-item-title>Task Timers</v-list-item-title>
         </v-list-item>
@@ -72,7 +72,7 @@
           @click.stop="sidebar_item_clicked('alarm')"
         >
           <v-list-item-action class="s__icons mr-5 pl-4">
-            <span>A</span>
+            <span><v-icon>mdi-clock-digital</v-icon></span>
           </v-list-item-action>
           <v-list-item-title>Alarms</v-list-item-title>
         </v-list-item>

@@ -1,15 +1,33 @@
 const developmentApp = {
     localhost: {
-        BaseURL: 'http://localhost:8080',
-        apiHostBaseURL: 'http://localhost:8000' //for local dev,
+        BaseURL: 'https://crm.buzzookalocal.net:8080',
+        apiHostBaseURL: 'https://api.buzzookalocal.net', //for local dev,
+        pusher: {
+            key: 'ef1f370c90ad3e704acd',
+            cluster: 'ap1', //pusher cluster
+            forceTLS: true,
+            logging: false
+        },
     },
     staging: {
         BaseURL: 'https://crm.bizzooka.com',
-        apiHostBaseURL: 'https://api.bizzooka.com'
+        apiHostBaseURL: 'https://api.bizzooka.com',
+        pusher: {
+            key: '67f7c7c9ef03e67434e7',
+            cluster: 'ap1', //pusher cluster
+            forceTLS: true,
+            logging: false
+        },
     },
     live: {
         BaseURL: 'https://crm.dashcards.com',
-        apiHostBaseURL: 'https://api.dashcards.com'
+        apiHostBaseURL: 'https://api.dashcards.com',
+        pusher: {
+            key: '9faf3281e9c67cce3e70',
+            cluster: 'ap1', //pusher cluster
+            forceTLS: true,
+            logging: false
+        },
     }
 }
 var dev = developmentApp.localhost
@@ -21,14 +39,8 @@ if (window.location.host.includes('bizzooka')) {
 
 const variables = {
     SiteName: 'Dashcards',
-    allowedImageType: ['image/jpg', 'image/png', 'image/jpeg', 'image/gif'],
-    fileSizeMaxUploadLimit: '10MB',
-    pusher: {
-        key: 'ef1f370c90ad3e704acd',
-        cluster: 'ap1', //pusher cluster
-        forceTLS: true,
-        logging: false
-    },
+    allowedImageType: ["image/jpg", "image/png", "image/jpeg", "image/gif"],
+    fileSizeMaxUploadLimit: '5MB',
     defaultCurrency: {
         name: 'US Dollar',
         symbol: '$'
@@ -43,9 +55,9 @@ const variables = {
             'https://www.googleapis.com/auth/drive.file'
         ],
         redirectUris: [
-            'http://localhost:8080/dashboard/cloud',
+            'https://crm.buzzookalocal.net:8080/dashboard/cloud',
             'https://crm.bizooka.com/dashboard/cloud',
-            'https://crm.dashcards.com/dashboard/cloud'
+            'https://crm.dashcards.com/dashboard/cloud',
         ]
     },
     stripe: {

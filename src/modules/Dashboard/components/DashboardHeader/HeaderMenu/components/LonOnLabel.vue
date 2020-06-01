@@ -8,7 +8,7 @@
       dense
       color="#3b589e"
     ></v-switch>
-
+    
     <!-- <v-tooltip bottom>
       <template v-slot:activator="{ on }">
         <v-btn @click="switch1_changed">

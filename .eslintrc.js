@@ -13,7 +13,7 @@ module.exports = {
     semi: 'off',
     'vue/attribute-hyphenation': 'warning',
     'vue/component-name-in-template-casing': 'warning',
-    'vue/html-indent': 'warning',
+    'vue/html-indent': 'off',
     'vue/require-default-prop': 'off',
     'vue/prop-name-casing': 'off'
   },

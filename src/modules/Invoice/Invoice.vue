@@ -26,8 +26,19 @@
                     {{ item.billedTo.fullname | ucwords }}
                 </td>
                 <td>{{ item.status | ucwords }}</td>
-                <td>$ {{ item.total_amount }}</td>
-                <Actions :item="item" :permissions="$_permissions.get('invoices')" @delete="open_delete_dialog(item)" @edit="open_edit_dialog(item)" @view="open_view_dialog(item)"></Actions>
+                <td>{{ item.total_amount | money }}</td>
+                <Actions :item="item" :permissions="$_permissions.get('invoices')" @delete="open_delete_dialog(item)" @edit="open_edit_dialog(item)" @view="open_view_dialog(item)">
+                    <template v-slot:extra v-if="can_pay(item)">
+                        <v-tooltip left>
+                            <template v-slot:activator="{ on }">
+                                <v-btn dense v-on="on" icon @click="navigatePayment(item)">
+                                    <v-icon small>mdi-cash</v-icon>
+                                </v-btn>
+                            </template>
+                            <span>Pay</span>
+                        </v-tooltip>
+                    </template>
+                </Actions>
             </template>
             <template v-slot:empty-slot>
                 <v-btn dark color="#3b589e" @click="open_create_dialog">

@@ -6,6 +6,7 @@ import DashboardSidebar from './components/DashboardSidebar/DashboardSidebar.vue
 import FloatingChatButton from '../.././common/FloatingChatButton/FloatingChatButton.vue'
 
 export default {
+    name : 'MainDashboard',
     components: {
         DashboardLogo,
         DashboardHeader,

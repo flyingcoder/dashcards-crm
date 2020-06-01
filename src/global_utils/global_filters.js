@@ -56,17 +56,6 @@ export const global_filters = {
         return value.toUpperCase()
     },
 
-    money(value, currency) {
-        var formatter = new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: currency || 'USD'
-        })
-        if (value.length <= size) {
-            return value
-        }
-        return value.substr(0, size) + '...'
-    },
-
     format(value, format) {
         if (typeof value !== 'string') {
             return '-'

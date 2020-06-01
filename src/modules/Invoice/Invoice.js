@@ -46,7 +46,7 @@ export default {
                 text: 'Action',
                 value: 'actions',
                 sortable: false,
-                width: '140px',
+                width: '180px',
                 align: 'center'
             }
         ],
@@ -68,6 +68,12 @@ export default {
         this.$store.commit('invoice/reset_state')
     },
 
+    computed: {
+        user(){
+            return this.$store.getters.user
+        }
+    },
+
     methods: {
         ...mapMutations('invoice', [
             'set_dialog',
@@ -77,7 +83,12 @@ export default {
             'set_selected_project',
             'set_props'
         ]),
-
+        can_pay(item){
+            return item.billed_to === this.user.id
+        },
+        navigatePayment(item){
+            this.$router.push({ name: 'pay-invoice', params : { id : item.id }})
+        },
         open_create_dialog() {
             this.set_toolbar({ title: 'Create Invoice' })
             this.set_dialog({ type: 'create', open: true })

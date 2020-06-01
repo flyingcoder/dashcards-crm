@@ -49,6 +49,15 @@ export default {
             set(val) {
                 this.$emit('close', val)
             }
+        },
+        user(){
+            return this.$store.getters.user
+        },
+        can_pay(){
+            return this.item.billed_to === this.user.id
+        },
+        property(){
+            return JSON.parse(this.item.props)
         }
     },
     methods: {

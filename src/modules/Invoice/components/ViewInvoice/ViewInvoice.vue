@@ -114,12 +114,11 @@
                     </v-row>
                     <v-row no-gutters>
                         <v-col md="6">
-                            <p class="mt-3">
-                                Payment Method: <br />
-                                Mode of Payment: <br />
-                                Account Name: <br />
-                                Transaction Code: <br />
-                                Swift Code: <br />
+                            <p class="mt-3" v-if="item.status === `paid`">
+                                Payment Method: <span class="subtitle-2">Card</span><br />
+                                <!-- Mode of Payment: <span class="subtitle-2"></span><br /> -->
+                                <!-- Account Name: <span class="subtitle-2"></span><br /> -->
+                                TXID: <span class="subtitle-2">{{property.payment_intent_id}}</span><br />
                             </p>
                         </v-col>
                         <v-col md="6" class="">

@@ -24,6 +24,7 @@
             </template>
             <span>View</span>
         </v-tooltip>
+        <slot name="extra"></slot>
     </td>
 </template>
 <script>

@@ -63,62 +63,73 @@ $bgLightBlue: #f8f8ff;
 $bgLightBlue-2: #f5f7fa;
 $borderLightGray: #dce1e5;
 $fieldLabel: #e8f1fa;
-$darkBoxShadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+$darkBoxShadow: 0 3px 1px -2px rgba(0, 0, 0, .2),
+0 2px 2px 0 rgba(0, 0, 0, .14),
+0 1px 5px 0 rgba(0, 0, 0, .12);
+
 // @font-face {
 //   font-family: "Digital-7";
 //   src: url("~@/assets/fonts/digital-7.ttf") format("ttf");
 // }
 @font-face {
-  font-family: "Digital-7";
-  src: url("~@/assets/fonts/Digital-7-V7.eot"); /* IE9*/
-  src: url("~@/assets/fonts/Digital-7-V7.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-  url("~@/assets/fonts/Digital-7-V7.woff2") format("woff2"), /* chrome、firefox */
-  url("~@/assets/fonts/Digital-7-V7.woff") format("woff"), /* chrome、firefox */
-  url("~@/assets/fonts/Digital-7-V7.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-  url("~@/assets/fonts/Digital-7-V7.svg#Digital-7-V7") format("svg"); /* iOS 4.1- */
+    font-family: "Digital-7";
+    src: url("~@/assets/fonts/Digital-7-V7.eot");
+    /* IE9*/
+    src: url("~@/assets/fonts/Digital-7-V7.eot?#iefix") format("embedded-opentype"),
+        /* IE6-IE8 */
+        url("~@/assets/fonts/Digital-7-V7.woff2") format("woff2"),
+        /* chrome、firefox */
+        url("~@/assets/fonts/Digital-7-V7.woff") format("woff"),
+        /* chrome、firefox */
+        url("~@/assets/fonts/Digital-7-V7.ttf") format("truetype"),
+        /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+        url("~@/assets/fonts/Digital-7-V7.svg#Digital-7-V7") format("svg");
+    /* iOS 4.1- */
 }
+
 // Mixin for styled scroll
 
 @mixin styledScrollFor($selector) {
-  /* width */
-  #{$selector}::-webkit-scrollbar {
-    width: 15px;
-  }
 
-  /* Track */
-  #{$selector}::-webkit-scrollbar-track {
-    background: #DAE1E7;
-    border-radius: 15px;
-  }
+    /* width */
+    #{$selector}::-webkit-scrollbar {
+        width: 15px;
+    }
 
-  /* Handle */
-  #{$selector}::-webkit-scrollbar-thumb {
-    background: #B4B6C3;
-    border-radius: 10px;
-  }
+    /* Track */
+    #{$selector}::-webkit-scrollbar-track {
+        background: #DAE1E7;
+        border-radius: 15px;
+    }
+
+    /* Handle */
+    #{$selector}::-webkit-scrollbar-thumb {
+        background: #B4B6C3;
+        border-radius: 10px;
+    }
 }
 
 // Mixin for custom table pagination row
 
 @mixin customTableRow {
-  .actions-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 160px 320px;
-    justify-content: space-between;
-    align-items: center;
+    .actions-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 160px 320px;
+        justify-content: space-between;
+        align-items: center;
 
-    .rows-per-page-dropdown {
-      display: grid;
-      grid-template-columns: 3fr 1fr;
-      align-items: center;
-      justify-content: center;
+        .rows-per-page-dropdown {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pagination {
+            justify-self: end;
+        }
+
     }
-
-    .pagination {
-      justify-self: end;
-    }
-
-  }
 }
 
 /********************************************************************
@@ -128,83 +139,85 @@ $darkBoxShadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14)
 
 // Dialog style
 @mixin styledDialog($selector) {
-  #{$selector} {
-    border-radius: 15px;
-    background-color: $modalBgGray;
-    padding: 24px;
-  }
-  @media only screen and (max-width: 480px) {
     #{$selector} {
-      padding: 15px;
+        border-radius: 15px;
+        background-color: $modalBgGray;
+        padding: 24px;
     }
-  }
+
+    @media only screen and (max-width: 480px) {
+        #{$selector} {
+            padding: 15px;
+        }
+    }
 }
 
 // Close button in Dialog
 @mixin styledCloseDialog($selector) {
-  #{$selector} {
-    border: 1px solid $sortOptionGray;
-    background-color: $white;
-
-    .v-icon {
-      font-size: 24px;
-      color: $sortOptionGray;
-    }
-  }
-
-  @media only screen and (max-width: 480px) {
     #{$selector} {
-      height: 30px;
-      width: 30px;
+        border: 1px solid $sortOptionGray;
+        background-color: $white;
 
-      .v-icon {
-        font-size: 20px;
-      }
+        .v-icon {
+            font-size: 24px;
+            color: $sortOptionGray;
+        }
     }
-  }
+
+    @media only screen and (max-width: 480px) {
+        #{$selector} {
+            height: 30px;
+            width: 30px;
+
+            .v-icon {
+                font-size: 20px;
+            }
+        }
+    }
 }
 
 // Title style in Dialog
 @mixin styledTitleDialog($selector) {
-  #{$selector} {
-    font-size: 24px;
-    font-weight: 500;
-    color: $modalTitle;
-  }
-
-  @media only screen and (max-width: 480px) {
     #{$selector} {
-      font-size: 20px;
+        font-size: 24px;
+        font-weight: 500;
+        color: $modalTitle;
     }
-  }
+
+    @media only screen and (max-width: 480px) {
+        #{$selector} {
+            font-size: 20px;
+        }
+    }
 }
 
 // Action buttons in Dialog
 @mixin actionButtonsDialog($selector) {
-  #{$selector} {
-    justify-content: center;
-
-    .v-btn {
-      font-size: 14px;
-      padding: 8px;
-      border-radius: 5px;
-      border: 1px solid $borderLightGray;
-      color: $modalTitle;
-      background-color: $white;
-      height: auto;
-      width: 110px;
-      margin: 0 9px;
-    }
-  }
-  @media only screen and (max-width: 480px) {
     #{$selector} {
-      .v-btn {
-        font-size: 14px;
-        padding: 8px;
-        width: 80px;
-      }
+        justify-content: center;
+
+        .v-btn {
+            font-size: 14px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid $borderLightGray;
+            color: $modalTitle;
+            background-color: $white;
+            height: auto;
+            width: 110px;
+            margin: 0 9px;
+        }
     }
-  }
+
+    @media only screen and (max-width: 480px) {
+        #{$selector} {
+            .v-btn {
+                font-size: 14px;
+                padding: 8px;
+                width: 80px;
+            }
+        }
+    }
 }
 
 /********************************************************************
@@ -213,295 +226,306 @@ $darkBoxShadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14)
  ********************************************************************/
 
 @mixin userImgWithStatus($selector) {
-  #{$selector} {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    border: 1px solid $borderLightGray;
-    position: relative;
+    #{$selector} {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        border: 1px solid $borderLightGray;
+        position: relative;
 
-    .v-responsive {
-      border-radius: 50%;
-    }
+        .v-responsive {
+            border-radius: 50%;
+        }
 
-    .status {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 13px;
-      height: 13px;
-      border: 2px solid $lightViolete;
-      border-radius: 50%;
-    }
+        .status {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 13px;
+            height: 13px;
+            border: 2px solid $lightViolete;
+            border-radius: 50%;
+        }
 
-    .online {
-      background-color: $green;
-    }
+        .online {
+            background-color: $green;
+        }
 
-    .offline {
-      background-color: $gray;
-    }
+        .offline {
+            background-color: $gray;
+        }
 
-    .dnd {
-      background-color: $red;
+        .dnd {
+            background-color: $red;
+        }
     }
-  }
 }
 
 @mixin cardTitle($selector) {
-  #{$selector} {
-    color: $tableTitleBlue;
-    font-size: 24px;
-    font-weight: 500;
-    letter-spacing: .02em !important;
-    font-family: Roboto, sans-serif !important;
-  }
-  @media only screen and (max-width: 599px) {
     #{$selector} {
-      font-size: 16px;
+        color: $tableTitleBlue;
+        font-size: 24px;
+        font-weight: 500;
+        letter-spacing: .02em !important;
+        font-family: Roboto, sans-serif !important;
     }
-  }
+
+    @media only screen and (max-width: 599px) {
+        #{$selector} {
+            font-size: 16px;
+        }
+    }
 }
 
 @mixin firstColumnHover {
-  .table__body-row {
-    td:nth-child(2) {
-      cursor: pointer;
-      color: $blue;
-      text-transform: capitalize;
-      font-weight: bold;
-    }
+    .table__body-row {
+        td:nth-child(2) {
+            cursor: pointer;
+            color: $blue;
+            text-transform: capitalize;
+            font-weight: bold;
+        }
 
-    td:nth-child(2):hover,
-    td:nth-child(2):visited,
-    td:nth-child(2):active {
-      color: $darkGray;
+        td:nth-child(2):hover,
+        td:nth-child(2):visited,
+        td:nth-child(2):active {
+            color: $darkGray;
+        }
     }
-  }
 }
 
 @mixin emptyTable($selector) {
-  #{$selector} {
-    background-color: $white;
-    border: 1px solid $tableBorderBlue;
-    border-radius: 10px;
-    padding: 25px;
-
-    .empty-content {
-      display: grid;
-      grid-template-columns: 1fr;
-      justify-items: center;
-      background-color: $tableBlueBg;
-      border: 1px solid $tableBorderBlue;
-      padding: 25px;
-    }
-
-    .empty-icon .v-icon {
-      font-size: 120px;
-      color: $btnGray;
-    }
-
-    .empty-svg {
-      svg {
-        fill: $btnGray;
-        width: 100px;
-        margin-bottom: 20px;
-      }
-    }
-
-    .empty-text {
-      color: $btnGray;
-      font-size: 20px;
-    }
-  }
-
-  @media only screen and (max-width: 768px) {
-
     #{$selector} {
-      padding: 20px;
+        background-color: $white;
+        border: 1px solid $tableBorderBlue;
+        border-radius: 10px;
+        padding: 25px;
 
-      .empty-content {
-        padding: 20px;
-      }
-
-      .empty-icon .v-icon {
-        font-size: 100px;
-      }
-
-      .empty-btn {
-        .v-btn--large {
-          font-size: 13px;
-          height: 38px;
-          padding: 0 22px;
+        .empty-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            justify-items: center;
+            background-color: $tableBlueBg;
+            border: 1px solid $tableBorderBlue;
+            padding: 25px;
         }
-      }
 
-      .empty-text {
-        font-size: 18px;
-      }
+        .empty-icon .v-icon {
+            font-size: 120px;
+            color: $btnGray;
+        }
+
+        .empty-svg {
+            svg {
+                fill: $btnGray;
+                width: 100px;
+                margin-bottom: 20px;
+            }
+        }
+
+        .empty-text {
+            color: $btnGray;
+            font-size: 20px;
+        }
     }
-  }
 
-  @media only screen and (max-width: 480px) {
+    @media only screen and (max-width: 768px) {
 
-    #{$selector} {
-      padding: 15px;
+        #{$selector} {
+            padding: 20px;
 
-      .empty-content {
-        padding: 15px;
-      }
+            .empty-content {
+                padding: 20px;
+            }
 
-      .empty-icon .v-icon {
-        font-size: 70px;
-      }
+            .empty-icon .v-icon {
+                font-size: 100px;
+            }
 
-      .empty-btn {
-        .v-btn--large {
-          height: 33px;
-          padding: 0 20px;
+            .empty-btn {
+                .v-btn--large {
+                    font-size: 13px;
+                    height: 38px;
+                    padding: 0 22px;
+                }
+            }
+
+            .empty-text {
+                font-size: 18px;
+            }
         }
-      }
-
-      .empty-svg {
-        svg {
-          width: 70px;
-        }
-      }
-
-      .empty-text {
-        font-size: 16px;
-      }
     }
-  }
+
+    @media only screen and (max-width: 480px) {
+
+        #{$selector} {
+            padding: 15px;
+
+            .empty-content {
+                padding: 15px;
+            }
+
+            .empty-icon .v-icon {
+                font-size: 70px;
+            }
+
+            .empty-btn {
+                .v-btn--large {
+                    height: 33px;
+                    padding: 0 20px;
+                }
+            }
+
+            .empty-svg {
+                svg {
+                    width: 70px;
+                }
+            }
+
+            .empty-text {
+                font-size: 16px;
+            }
+        }
+    }
 }
 
 @mixin emptyTableInner($selector) {
 
     #{$selector} {
-      display: grid;
-      grid-template-columns: 1fr;
-      justify-items: center;
-      background-color: $tableBlueBg;
-      // border: 1px solid $tableBorderBlue;
-      padding: 25px;
-      text-align: center;
-      
-      .empty-icon .v-icon {
-        font-size: 120px;
-        color: $btnGray;
-      }
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        background-color: $tableBlueBg;
+        // border: 1px solid $tableBorderBlue;
+        padding: 25px;
+        text-align: center;
 
-      .empty-svg {
-        svg {
-          fill: $btnGray;
-          width: 100px;
-          margin-bottom: 20px;
-        }
-      }
-
-      .empty-text {
-        color: $btnGray;
-        font-size: 20px;
-      }
-    }
-
-  @media only screen and (max-width: 768px) {
-
-      #{$selector} {
-        padding: 20px;
-        
         .empty-icon .v-icon {
-          font-size: 100px;
-        }
-
-        .empty-btn {
-          .v-btn--large {
-            font-size: 13px;
-            height: 38px;
-            padding: 0 22px;
-          }
-        }
-
-        .empty-text {
-          font-size: 18px;
-        }
-      }
-  }
-
-  @media only screen and (max-width: 480px) {
-
-      #{$selector} {
-        padding: 15px;
-        
-        .empty-icon .v-icon {
-          font-size: 70px;
-        }
-
-        .empty-btn {
-          .v-btn--large {
-            height: 33px;
-            padding: 0 20px;
-          }
+            font-size: 120px;
+            color: $btnGray;
         }
 
         .empty-svg {
-          svg {
-            width: 70px;
-          }
+            svg {
+                fill: $btnGray;
+                width: 100px;
+                margin-bottom: 20px;
+            }
         }
 
         .empty-text {
-          font-size: 16px;
+            color: $btnGray;
+            font-size: 20px;
         }
-      }
-  }
+    }
+
+    @media only screen and (max-width: 768px) {
+
+        #{$selector} {
+            padding: 20px;
+
+            .empty-icon .v-icon {
+                font-size: 100px;
+            }
+
+            .empty-btn {
+                .v-btn--large {
+                    font-size: 13px;
+                    height: 38px;
+                    padding: 0 22px;
+                }
+            }
+
+            .empty-text {
+                font-size: 18px;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 480px) {
+
+        #{$selector} {
+            padding: 15px;
+
+            .empty-icon .v-icon {
+                font-size: 70px;
+            }
+
+            .empty-btn {
+                .v-btn--large {
+                    height: 33px;
+                    padding: 0 20px;
+                }
+            }
+
+            .empty-svg {
+                svg {
+                    width: 70px;
+                }
+            }
+
+            .empty-text {
+                font-size: 16px;
+            }
+        }
+    }
 }
 
 // For v-autocomplete field, v-select
 .v-text-field .v-input__append-inner .v-input__icon--append {
-  cursor: pointer;
+    cursor: pointer;
+}
+
+pre {
+    overflow-x: auto;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
 }
 
 @mixin pagePadding($selector) {
-  #{$selector} {
-    padding: 0 20px;
-  }
-
-  @media only screen and (max-width: 768px) {
     #{$selector} {
-      padding: 0 10px;
+        padding: 0 20px;
     }
-  }
 
-  @media only screen and (max-width: 480px) {
-    #{$selector} {
-      padding: 0 5px;
+    @media only screen and (max-width: 768px) {
+        #{$selector} {
+            padding: 0 10px;
+        }
     }
-  }
+
+    @media only screen and (max-width: 480px) {
+        #{$selector} {
+            padding: 0 5px;
+        }
+    }
 }
 
 @mixin headerIcons() {
-  .v-menu__content.theme--light.menuable__content__active {
-    box-shadow: 0 15px 5px -3px rgba(0, 0, 0, 0.2),
-    0 18px 10px -3px rgba(0, 0, 0, 0.14), 0 13px 14px -3px rgba(0, 0, 0, 0.12);
-  }
+    .v-menu__content.theme--light.menuable__content__active {
+        box-shadow: 0 15px 5px -3px rgba(0, 0, 0, 0.2),
+            0 18px 10px -3px rgba(0, 0, 0, 0.14), 0 13px 14px -3px rgba(0, 0, 0, 0.12);
+    }
 
-  .chat__button {
-    position: relative;
-  }
-  .chat__button[data-notify]:after {
-    content: attr(data-notify);
-    position: absolute;
-    bottom: 18px;
-    right: 4px;
-    font-size: 0.7em;
-    background: $red;
-    color: $white;
-    width: 18px;
-    height: 18px;
-    text-align: center;
-    line-height: 18px;
-    border-radius: 50%;
-    font-size: 12px;
-  }
+    .chat__button {
+        position: relative;
+    }
+
+    .chat__button[data-notify]:after {
+        content: attr(data-notify);
+        position: absolute;
+        bottom: 18px;
+        right: 4px;
+        font-size: 0.7em;
+        background: $red;
+        color: $white;
+        width: 18px;
+        height: 18px;
+        text-align: center;
+        line-height: 18px;
+        border-radius: 50%;
+        font-size: 12px;
+    }
 }

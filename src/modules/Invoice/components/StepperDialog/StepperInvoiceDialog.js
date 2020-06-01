@@ -17,7 +17,7 @@ export default {
     data: () => ({
         open: false,
         stepper: 1,
-        btnloading : false
+        btnloading: false
     }),
     props: {
         type: { type: String, default: 'create' }
@@ -52,6 +52,9 @@ export default {
             if (this.dialog.type === 'create') return this.can_create_invoice
             if (this.dialog.type === 'edit') return this.can_edit_invoice
             return false
+        },
+        buttonLabel() {
+            return this.dialog.type === 'create' ? 'Create' : 'Save'
         }
     },
     methods: {

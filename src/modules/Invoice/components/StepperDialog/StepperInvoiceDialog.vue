@@ -47,11 +47,11 @@
                                 <v-icon left>mdi-arrow-left</v-icon> Previous
                             </v-btn>
                             <v-spacer></v-spacer>
-                            <v-btn outlined text>
+                           <!--  <v-btn outlined text disabled>
                                 <v-icon left>pageview</v-icon> Preview
-                            </v-btn>
-                            <v-btn class="mx-1" color="primary" :loading="btnloading" :disabled="!can_submit" text @click="save_invoice">
-                                Save <v-icon right>mdi-content-save-move-outline</v-icon>
+                            </v-btn> -->
+                            <v-btn class="mx-1" outlined color="primary" :loading="btnloading" :disabled="!can_submit" text @click="save_invoice">
+                                {{ buttonLabel }} <v-icon right>mdi-content-save-move-outline</v-icon>
                             </v-btn>
                         </v-row>
                     </v-stepper-content>
