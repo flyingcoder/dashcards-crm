@@ -7,9 +7,5 @@ module.exports = {
             .use('raw-loader')
             .loader('raw-loader')
             .end()
-    },
-    devServer: {
-        host: 'crm.buzzookalocal.net',
-        https: true
     }
 }

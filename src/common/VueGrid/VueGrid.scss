@@ -1,0 +1,22 @@
+@import '~@/sass/_variables';
+
+.grid-view {
+  padding: 20px;
+  box-shadow: none;
+}
+
+.grid-wrapper {
+  width: 100%;
+  padding: 20px;
+  background: $tableBlueBg;
+  border: 1px solid $borderLightGray;
+  margin: 0;
+  .v-toolbar.v-sheet{
+    background: $tableBlueBg;
+  }
+}
+.grid-view-title{
+  color: #667381;
+  text-align: left;
+  font-size: 30px;
+}

@@ -3,7 +3,6 @@
         <div class="d__breadcrumbs">
             <div class="page__options">
                 <breadcrumb :paths="paths" />
-                <logon-label />
                 <!--custom component-->
                 <div class="option themes">
                     <div class="color"></div>

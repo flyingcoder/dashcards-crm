@@ -7,7 +7,6 @@ import Breadcrumb from '@/common/Breadcrumb.vue'
 import TasksCard from '@/common/TasksCard/TasksCard.vue'
 import TimelineCard from '@/common/TimelineCard/TimelineCard.vue'
 import DashCard from '@/common/DashCard.vue'
-import LogonLabel from './components/LonOnLabel.vue'
 import DashboardTiles from './components/DashboardTiles/DashboardTiles.vue'
 import NoCards from './components/NoCards.vue'
 import draggable from 'vuedraggable'
@@ -23,7 +22,6 @@ export default {
   name: 'DashboardContent',
   components: {
     Breadcrumb,
-    LogonLabel,
     TasksCard,
     TimelineCard,
     DashCard,

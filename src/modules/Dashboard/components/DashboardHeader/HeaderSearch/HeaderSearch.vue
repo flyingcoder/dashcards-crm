@@ -1,6 +1,23 @@
 <template>
     <div class="search">
-        <v-autocomplete class="mx-1" hide-details dense solo flat :items="globalSearchResult" :loading="isGlobalFetching" v-model="globalSearchbox" :search-input.sync="globalSearch" no-filter clearable disable-lookup item-text="title" placeholder="Start typing to Search" prepend-inner-icon="mdi-database-search" outlined persistent-hint @click:clear="globalSearchResult = []" :menu-props="menuprops">
+        <v-autocomplete 
+          class="search-field" 
+          hide-details 
+          :items="globalSearchResult" 
+          :loading="isGlobalFetching" 
+          v-model="globalSearchbox" 
+          :search-input.sync="globalSearch" 
+          no-filter 
+          clearable
+          disable-lookup 
+          item-text="title" 
+          placeholder="Start typing to search..." 
+          prepend-inner-icon="search" 
+          persistent-hint 
+          @click:clear="globalSearchResult = []" 
+          :menu-props="menuprops"
+          color="#3b589e"
+        >
             <template v-slot:no-data>
                 <v-list-item>
                     <v-list-item-title>
@@ -8,7 +25,7 @@
                     </v-list-item-title>
                 </v-list-item>
             </template>
-            <template v-slot:item="{ item }">
+            <template v-slot:item="{ item }" class="find">
                 <v-list-item v-if="item.modelType === 'user'" @click="navigate_search(item)">
                     <v-list-item-avatar>
                         <v-img v-if="item.image_url" :src="item.image_url"></v-img>

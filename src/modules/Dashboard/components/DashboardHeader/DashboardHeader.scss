@@ -2,10 +2,11 @@
 
 .header {
   display: flex;
-  width: 100%;
   height: 100%;
   background: $white;
   justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
 }
 
 .h__hamburger{
@@ -13,16 +14,22 @@
   align-items: center;
 }
 
-.h__search {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+.h__pagetitle h4{
+  color: #667381;
+  text-align: left;
+  font-size: 18px;
+  font-weight: normal;
 }
 
 .h__menu {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+
+.h__search{
+  width: 100%;
+  min-width: 300px;
 }
 
 // Small Laptop - Large Desktop
@@ -37,8 +44,5 @@
   .h__hamburger{
     flex-basis: 10%;
     justify-content: center;
-  } 
-  .h__search {
-    flex-basis: 65%;
   }
 }

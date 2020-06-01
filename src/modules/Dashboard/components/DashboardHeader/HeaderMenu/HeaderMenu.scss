@@ -17,7 +17,7 @@
             border-right: 2px solid $tableBorderBlue;
           }
         .premium__btn{
-            font-weight: 500;   
+            font-weight: 500;
             width: 170px;
             border: 1px solid $blue;
             color: $blue;
@@ -37,14 +37,14 @@
 
 @media only screen and (max-width: 600px){
     .header-menu {
-    
+
         .try__premium{
             &:before {
                 top: 6px;
                 height: 25px;
               }
             .premium__btn{
-                font-weight: 500;   
+                font-weight: 500;
                 width: 100px;
                 margin: 0 5px 0 10px;
                 padding: 2px;

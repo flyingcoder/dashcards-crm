@@ -1,5 +1,8 @@
 <template>
   <div class="header-menu">
+
+    <logon-label />
+
     <add-cards v-if="$route.name === 'default-content'" />
 
     <MailIcon />

@@ -23,6 +23,27 @@
     justify-content: center;
     margin-top: 3px;
   }
+  .grid-view{
+    background:$white; 
+    margin: 0; 
+    box-shadow: none;
+    padding: 20px;
+  }
+  .grid-wrapper {
+    width: 100%;
+    padding: 20px;
+    background: $tableBlueBg;
+    border: 1px solid $borderLightGray;
+    margin: 0;
+    .v-toolbar.v-sheet{
+      background: $tableBlueBg;
+    }
+  }
+  .grid-view-title{
+    color: #667381;
+    text-align: left;
+    font-size: 30px;
+  }
 
   @include customTableRow;
   @include firstColumnHover;

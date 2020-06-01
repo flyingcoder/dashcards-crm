@@ -4,6 +4,7 @@ import AddCards from './components/DashCardsDropdown/DashCardsDropdown.vue'
 import MailIcon from './components/MailIcon/MailIcon.vue'
 import NotificationIcon from './components/NotificationIcon/NotificationIcon.vue'
 import ChatIcon from './components/ChatIcon/ChatIcon.vue'
+import LogonLabel from './components/LonOnLabel.vue'
 
 export default {
     components: {
@@ -11,6 +12,7 @@ export default {
         AddCards,
         MailIcon,
         NotificationIcon,
+        LogonLabel,
         ChatIcon
     },
     
