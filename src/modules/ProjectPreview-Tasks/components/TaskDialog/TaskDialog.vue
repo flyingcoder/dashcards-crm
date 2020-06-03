@@ -22,10 +22,11 @@
                         <date-picker :hasButtons="false" class="dialog__date d-field" label="End Date" prepend-inner-icon="event" readonly v-model="end_date" :min="start_date" />
                     </v-col>
                     <v-col cols="12" class="pt-0">
-                        <members-dropdown :members.sync="members.selected" :member-items="members.items" :is-loading="members.loading" @search="filter_dropdown_items('members', $event)" class="task-member" />
+                        <members-dropdown :members.sync="members.selected" :member-items="members.items" :is-loading="members.loading" @search="filter_dropdown_items('members', $event)" class="task-member d-field" />
                     </v-col>
                     <v-col cols="12" class="pt-0">
-                        <rich-editor placeholder="Task Details" v-model="description" class="task-description" />
+                        <!-- <rich-editor placeholder="Task Details" v-model="description" class="task-description" /> -->
+                        <Editor v-model="description" :key="task ? task.id : 0" :hasFloatingTools="false" @onchange="description = $event" :content="description" placeholder="Task description" ></Editor>
                     </v-col>
                 </v-row>
             </template>

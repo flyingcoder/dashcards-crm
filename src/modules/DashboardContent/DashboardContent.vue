@@ -2,7 +2,7 @@
     <div class="dashboard-content">
         <div class="d__breadcrumbs">
             <div class="page__options">
-                <breadcrumb :paths="paths" />
+                <!-- <breadcrumb :paths="paths" /> -->
                 <!--custom component-->
                 <div class="option themes">
                     <div class="color"></div>

@@ -13,7 +13,8 @@ import TextArea from '@/common/BaseComponents/TextArea.vue'
 import AutoComplete from '../AutoComplete'
 import DatePickers from '../DatePickers/DatePickers.vue' //used for Due Date field
 import MembersDropdown from '../MembersDropdown/MembersDropdown.vue'
-import RichEditor from '@/common/RichEditor.vue'
+// import RichEditor from '@/common/RichEditor.vue'
+import Editor from '@/common/Editor/Editor.vue'
 
 export default {
   name: 'ProjectModal',
@@ -24,7 +25,8 @@ export default {
     MembersDropdown,
     TextField,
     TextArea,
-    RichEditor
+    // RichEditor,
+    Editor
   },
 
   props: {

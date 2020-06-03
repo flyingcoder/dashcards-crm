@@ -4,7 +4,15 @@
             Notes
         </div>
         <div class="notes-body">
-            <v-list two-line>
+            <v-list v-if="notes.length == 0">
+                <v-list-item>
+                    <v-list-item-content>
+                        <!-- <v-list-item-title>No notes yet</v-list-item-title> -->
+                        <Empty headline="No notes yet"></Empty>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list>
+            <v-list two-line v-if="notes.length > 0">
                 <v-list-item :class="['note', { active: activeNote && activeNote.id === note.id }]" v-for="(note, index) of notes" :key="note.id" @click="$emit('clicked', note)">
                     <v-list-item-content>
                         <v-list-item-title v-html="note.title"></v-list-item-title>
@@ -30,7 +38,7 @@
             </div> -->
         </div>
         <v-progress-linear v-if="loading" :indeterminate="true"></v-progress-linear>
-        <div class="view__more">
+        <div class="view__more" v-if="notes.length > 0">
             <v-btn text normal :disabled="noMoreData" @click="$emit('view-more')" class="view__more_btn">VIEW MORE</v-btn>
         </div>
     </div>

@@ -18,183 +18,182 @@ import GroupsDialog from '@/modules/Settings-Groups/components/GroupsDialog/Grou
 import Avatars from '@/common/Avatars.vue'
 
 export default {
-  name: 'Projects',
-  mixins: [list_functionality, global_utils],
-  components: {
-    Breadcrumb,
-    TableHeader,
-    GroupsDialog,
-    DeleteDialog,
-    ServicesAddDialog,
-    ClientsDialog,
-    TeamsDialog,
-    Empty,
-    VueTable,
-    Actions,
-    ProjectModal,
-    Avatars
-  },
+    name: 'Projects',
+    mixins: [list_functionality, global_utils],
+    components: {
+        Breadcrumb,
+        TableHeader,
+        GroupsDialog,
+        DeleteDialog,
+        ServicesAddDialog,
+        ClientsDialog,
+        TeamsDialog,
+        Empty,
+        VueTable,
+        Actions,
+        ProjectModal,
+        Avatars
+    },
 
-  data: () => ({
-    add_new_service_dialog: false,
-    add_new_client_dialog: false,
-    add_new_member_dialog: false,
-    paths: [
-      { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-      { text: 'Projects', disabled: true, router_name: null }
-    ],
-    headers: [
-      {
-        text: 'Project Title',
-        sortable: true,
-        align: 'left'
-      },
-      {
-        text: 'Business',
-        sortable: true,
-        align: 'left'
-      },
-      {
-        text: 'Service',
-        value: 'service_name',
-        sortable: true,
-        align: 'left'
-      },
-      {
-        text: 'Managers',
-        sortable: true,
-        align: 'center',
-        sortable: false
-      },
-      {
-        text: 'Start Date',
-        sortable: true,
-        align: 'left'
-      },
-      {
-        text: 'Action',
-        sortable: false,
-        align: 'center',
-        width: '140px'
-      }
-    ],
+    data: () => ({
+        add_new_service_dialog: false,
+        add_new_client_dialog: false,
+        add_new_member_dialog: false,
+        paths: [
+            { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+            { text: 'Projects', disabled: true, router_name: null }
+        ],
+        headers: [{
+                text: 'Project Title',
+                sortable: true,
+                align: 'left'
+            },
+            {
+                text: 'Business',
+                sortable: true,
+                align: 'left'
+            },
+            {
+                text: 'Service',
+                value: 'service_name',
+                sortable: true,
+                align: 'left'
+            },
+            {
+                text: 'Managers',
+                sortable: true,
+                align: 'center',
+                sortable: false
+            },
+            {
+                text: 'Start Date',
+                sortable: true,
+                align: 'left'
+            },
+            {
+                text: 'Action',
+                sortable: false,
+                align: 'center',
+                width: '140px'
+            }
+        ],
 
-    table_config: {
-      add_message: 'New project added successfully!',
-      update_message: 'Project updated successfully!',
-      delete_message: 'Project deleted successfully!',
-      refresh_table_message: 'Table refreshed',
-      refresh_table_api_name: 'paginate_clients_table'
+        table_config: {
+            add_message: 'New project added successfully!',
+            update_message: 'Project updated successfully!',
+            delete_message: 'Project deleted successfully!',
+            refresh_table_message: 'Table refreshed',
+            refresh_table_api_name: 'paginate_clients_table'
+        }
+    }),
+
+    created() {
+        this.view = this.getPreferredView()
+        this.load_projects()
+        this.$event.$on(
+            'open-new-service-dialog',
+            () => (this.add_new_service_dialog = true)
+        )
+        this.$event.$on(
+            'open-new-client-dialog',
+            () => (this.add_new_client_dialog = true)
+        )
+        this.$event.$on(
+            'open-new-member-dialog',
+            () => (this.add_new_member_dialog = true)
+        )
+    },
+    computed: {
+        loggeduser() {
+            return this.$store.getters.user
+        }
+    },
+    methods: {
+        can_edit(proj) {
+            if (this.loggeduser.is_admin) {
+                return true
+            }
+            let found = proj.project_managers.find(
+                ii => ii.user_id === this.loggeduser.id
+            )
+            if (found) return true
+            return false
+        },
+        can_delete(proj) {
+            if (this.loggeduser.is_admin) {
+                return true
+            }
+            let found = proj.project_managers.find(
+                ii => ii.user_id === this.loggeduser.id
+            )
+            if (found) return true
+            return false
+        },
+        load_more() {
+            this.load_more_via_url(`api/projects`)
+        },
+        load_projects() {
+            this.fill_table_via_url(`api/projects`)
+        },
+        navigate_to_view_project(id) {
+            this.$router.push({
+                name: 'project_preview',
+                params: { id: id }
+            })
+        },
+        save_new_services(datus) {
+            apiTo.add_new_services(datus).then(({ data }) => {
+                this.$event.$emit('new_services_added', data)
+                this.add_new_service_dialog = false
+            })
+        },
+        save_new_client(datus) {
+            apiTo
+                .add_new_client(datus)
+                .then(({ data }) => {
+                    this.$event.$emit('new_client_added', data)
+                    this.$refs.add_client_dialog.$refs.dialog.clear_and_close()
+                })
+                .finally(() => this.$event.$emit('btnloading_off', false))
+        },
+
+        save_new_member(datus) {
+            apiTo
+                .add_new_member(datus)
+                .then(({ data }) => {
+                    this.$event.$emit('new_manager_added', data)
+                    this.$event.$emit('new_member_added', data)
+                    this.$refs.add_member_dialog.$refs.dialog.clear_and_close()
+                })
+                .finally(() => this.$event.$emit('btnloading_off', false))
+        },
+
+        filter_projects(filter) {
+            //todo
+        },
+
+        handleSaveProject(event) {
+            this.add_item('add_new_project', event)
+            // this.$refs.add_dialog.clear_and_close()
+        },
+        show_add_group_dialog() {
+            this.$refs.add_group_dialog.openDialog()
+        },
+        save_new_user_group(item) {
+            if (!item) {
+                this.$event.$emit('open_snackbar', 'Cant create user group.')
+                this.$refs.add_group_dialog.cancel()
+                return
+            }
+            request
+                .post('api/groups', item)
+                .then(({ data }) => {
+                    this.$event.$emit('new-user-group-added', data)
+                    this.$event.$emit('open_snackbar', 'New user group created')
+                })
+                .finally(() => {
+                    this.$refs.add_group_dialog.cancel()
+                })
+        }
     }
-  }),
-
-  created() {
-    this.view = this.getPreferredView()
-    this.load_projects()
-    this.$event.$on(
-      'open-new-service-dialog',
-      () => (this.add_new_service_dialog = true)
-    )
-    this.$event.$on(
-      'open-new-client-dialog',
-      () => (this.add_new_client_dialog = true)
-    )
-    this.$event.$on(
-      'open-new-member-dialog',
-      () => (this.add_new_member_dialog = true)
-    )
-  },
-  computed: {
-    loggeduser() {
-      return this.$store.getters.user
-    }
-  },
-  methods: {
-    can_edit(proj) {
-      if (this.loggeduser.is_admin) {
-        return true
-      }
-      let found = proj.project_managers.find(
-        ii => ii.user_id === this.loggeduser.id
-      )
-      if (found) return true
-      return false
-    },
-    can_delete(proj) {
-      if (this.loggeduser.is_admin) {
-        return true
-      }
-      let found = proj.project_managers.find(
-        ii => ii.user_id === this.loggeduser.id
-      )
-      if (found) return true
-      return false
-    },
-    load_more() {
-      this.load_more_via_url(`api/projects`)
-    },
-    load_projects() {
-      this.fill_table_via_url(`api/projects`)
-    },
-    navigate_to_view_project(id) {
-      this.$router.push({
-        name: 'project_preview',
-        params: { id: id }
-      })
-    },
-    save_new_services(datus) {
-      apiTo.add_new_services(datus).then(({ data }) => {
-        this.$event.$emit('new_services_added', data)
-        this.add_new_service_dialog = false
-      })
-    },
-    save_new_client(datus) {
-      apiTo
-        .add_new_client(datus)
-        .then(({ data }) => {
-          this.$event.$emit('new_client_added', data)
-          this.$refs.add_client_dialog.$refs.dialog.clear_and_close()
-        })
-        .finally(() => this.$event.$emit('btnloading_off', false))
-    },
-
-    save_new_member(datus) {
-      apiTo
-        .add_new_member(datus)
-        .then(({ data }) => {
-          this.$event.$emit('new_manager_added', data)
-          this.$event.$emit('new_member_added', data)
-          this.$refs.add_member_dialog.$refs.dialog.clear_and_close()
-        })
-        .finally(() => this.$event.$emit('btnloading_off', false))
-    },
-
-    filter_projects(filter) {
-      //todo
-    },
-
-    handleSaveProject(event) {
-      this.add_item('add_new_project', event)
-      // this.$refs.add_dialog.clear_and_close()
-    },
-    show_add_group_dialog() {
-      this.$refs.add_group_dialog.openDialog()
-    },
-    save_new_user_group(item) {
-      if (!item) {
-        this.$event.$emit('open_snackbar', 'Cant create user group.')
-        this.$refs.add_group_dialog.cancel()
-        return
-      }
-      request
-        .post('api/groups', item)
-        .then(({ data }) => {
-          this.$event.$emit('new-user-group-added', data)
-          this.$event.$emit('open_snackbar', 'New user group created')
-        })
-        .finally(() => {
-          this.$refs.add_group_dialog.cancel()
-        })
-    }
-  }
 }

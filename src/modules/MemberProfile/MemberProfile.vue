@@ -1,8 +1,8 @@
 <template>
   <div class="member-profile">
-    <table-header :paths="paths" :no-button="true" />
+    <!-- <table-header :paths="paths" :no-button="true" /> -->
 
-    <div class="profile">
+    <div class="profile mt-1">
       <div class="profile-content">
         <Upper :currentuserid="user_id" />
         <Lower />

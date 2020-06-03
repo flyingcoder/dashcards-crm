@@ -5,7 +5,7 @@
 
     <add-cards v-if="$route.name === 'default-content'" />
 
-    <MailIcon />
+    <!-- <MailIcon /> --><!-- hide temporary -->
 
     <NotificationIcon />
 

@@ -14,7 +14,7 @@
                 </div>
             </dash-card>
             <TaskDialog ref="add_task_dialog" dialog-title="Add Task" :id="project_id" @save="create_new_task($event)" @close="closeAddDialog()"></TaskDialog>
-            <TaskDialog :id="project_id" :task="task" ref="edit_task_dialog" dialog-title="Edit Task" @save="edit_task($event)" @close="closeEditDialog()"></TaskDialog>
+            <TaskDialog ref="edit_task_dialog" dialog-title="Edit Task" :id="project_id" @save="edit_task($event)" @close="closeEditDialog()"></TaskDialog>
             <DeleteDialog :open-dialog.sync="delete_task_dialog" title="Delete Task" text-content="Are you sure you want to delete this task?" @delete="delete_task()"></DeleteDialog>
             <TaskViewDialog ref="view_task_dialog" :task="task" @close-task-preview="closeViewDialog"></TaskViewDialog>
             <ConfirmDialog :open-dialog.sync="confirm_mark_as_complete_dialog" title="Confirmation required!" confirm-button-text="Yes" @confirm="confirm_mark_as_complete_task()">
@@ -160,36 +160,36 @@ export default {
 
         create_new_task(payload) {
             apiTo.create_new_task(payload)
-            .then(({ data }) => {
-                this.add_task(data)
-                this.$refs.add_task_dialog.clear_and_close()
-                this.$event.$emit('open_snackbar', 'New Task added successfully')
-            })
-            .finally(() => {
-                this.$event.$emit('btnloading_off', false)
-            })
+                .then(({ data }) => {
+                    this.add_task(data)
+                    this.$refs.add_task_dialog.clear_and_close()
+                    this.$event.$emit('open_snackbar', 'New Task added successfully')
+                })
+                .finally(() => {
+                    this.$event.$emit('btnloading_off', false)
+                })
         },
 
         edit_task(payload) {
             apiTo.edit_task(this.task.id, payload).then(({ data }) => {
-                this.update_task(data, this.task.id, 'all_tasks')
-                this.update_task(data, this.task.id, 'tasks_own')
-                this.$refs.edit_task_dialog.$refs.dialog.clear_and_close()
-                this.$event.$emit('open_snackbar', 'Task updated successfully')
-                this.$event.$emit('task-is-updated', data)
-            })
-            .finally(() => {
-                this.$event.$emit('btnloading_off', false)
-            })
+                    this.update_task(data, this.task.id, 'all_tasks')
+                    this.update_task(data, this.task.id, 'tasks_own')
+                    this.$refs.edit_task_dialog.$refs.dialog.clear_and_close()
+                    this.$event.$emit('open_snackbar', 'Task updated successfully')
+                    this.$event.$emit('task-is-updated', data)
+                })
+                .finally(() => {
+                    this.$event.$emit('btnloading_off', false)
+                })
         },
 
         delete_task() {
             apiTo.delete_task(this.task.id).then(() => {
-                this.remove_task(this.task)
-            })
-            .finally(() => {
-                this.$event.$emit('btnloading_off', false)
-            })
+                    this.remove_task(this.task)
+                })
+                .finally(() => {
+                    this.$event.$emit('btnloading_off', false)
+                })
         },
 
         update_task(new_task, id, target) {
@@ -234,7 +234,10 @@ export default {
         },
 
         open_edit_task_dialog() {
-            this.$refs.edit_task_dialog.open_dialog()
+            if (this.$refs.edit_task_dialog) {
+                this.$refs.edit_task_dialog.setTask(this.task)
+                this.$refs.edit_task_dialog.open_dialog()
+            }
         },
 
         closeEditDialog() {

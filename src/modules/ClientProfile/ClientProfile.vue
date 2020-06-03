@@ -1,8 +1,8 @@
 <template>
   <div class="client-profile">
-    <table-header :paths="paths" :no-button="true" />
+    <!-- <table-header :paths="paths" :no-button="true" /> -->
 
-    <div class="profile">
+    <div class="profile mt-1">
       <div class="profile-content">
         <Upper @client-updated="client_updated" />
         <Lower :user_id="user_id" />

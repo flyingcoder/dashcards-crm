@@ -11,3 +11,4 @@ Vue.component('vue-phone-number-input', VuePhoneNumberInput)
 Vue.component('Avatar', Avatar)
 
 Vue.component('Media', Media)
+

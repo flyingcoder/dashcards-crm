@@ -9,7 +9,7 @@
           v-bind="$attrs"
           @vdropzone-thumbnail="$emit('thumbnail', arguments)"
           @vdropzone-file-added="file_is_uploaded(arguments)"
-          @vdropzone-success="$emit('success', arguments)"
+          @vdropzone-success="upload_success"
           @vdropzone-error="$emit('failed', arguments)"
           @vdropzone-removed-file="file_is_removed()"
           @vdropzone-canceled="file_is_removed()"
@@ -134,6 +134,9 @@ export default {
     },
     max_file_exceed(file) {
       this.$refs.dropzone.removeFile(file)
+    },
+    upload_success(file, response){
+      this.$emit('success', { file : file, response : response })
     }
   }
 }

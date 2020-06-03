@@ -61,7 +61,7 @@ export default {
         permissions: null,
         btnloading: false
     }),
-    created() {
+    mounted() {
         this.commenter = this.$store.getters.user
         this.$event.$on('task-is-updated', task => {
             if (this.activeId === task.id) {

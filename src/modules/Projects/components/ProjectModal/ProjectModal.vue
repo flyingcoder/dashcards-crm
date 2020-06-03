@@ -204,7 +204,8 @@
                         </v-col>
                         <v-col md="12" class="project__description">
                             <div class="project__description">
-                                <rich-editor placeholder="Add Project Description" ref="editor" v-model="quill_editor.content"></rich-editor>
+                                <!-- <rich-editor placeholder="Add Project Description" ref="editor" v-model="quill_editor.content"></rich-editor> -->
+                                <Editor :hasFloatingTools="false" v-model="quill_editor.content" @onchange="quill_editor.content = $event" :content="quill_editor.content" placeholder="Project Description" ></Editor>
                             </div>
                         </v-col>
                     </v-row>

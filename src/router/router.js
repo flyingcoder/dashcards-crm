@@ -43,6 +43,7 @@ import { expanded_invoice } from './routes/expanded/expandedInvoice'
 import { expanded_timeline } from './routes/expanded/expandedTimeline'
 import { expanded_tasks } from './routes/expanded/expandedTasks'
 import { pay_invoice } from './routes/payInvoice'
+import { test } from './routes/test'
 
 Vue.use(Router)
 
@@ -85,7 +86,8 @@ export default new Router({
         expanded_invoice, //path: /dashboard/expanded-invoice
         expanded_timeline, //path: /dashboard/expanded-timeline
         expanded_tasks, //path: /dashboard/expanded-timeline
-        bugs // path: /dashboard/bugs
+        bugs, // path: /dashboard/bugs
+        test //path: /dashboard/test
       ]
     },
     setPassword, // path: /set-password
