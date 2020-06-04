@@ -1,7 +1,7 @@
 <template>
     <div class="pay-invoice">
         <div class="pay-invoice-wrapper">
-            <v-card class="ma-5 pay-invoice-content">
+            <v-card flat class="ma-2 pay-invoice-content">
                 <v-card-title>
                     Pay Invoice #INV-{{invoice_id}}
                 </v-card-title>
@@ -113,12 +113,12 @@
         background-color: $white;
         border: 1px solid $tableBorderBlue;
         border-radius: 10px;
-        padding: 20px;
+        padding: 10px;
 
         .pay-invoice-content {
             background-color: $tableBlueBg;
             border: 1px solid $tableBorderBlue;
-            padding: 15px;
+            padding: 10px;
         }
     }
 }

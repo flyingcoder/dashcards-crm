@@ -25,8 +25,8 @@
                         <members-dropdown :members.sync="members.selected" :member-items="members.items" :is-loading="members.loading" @search="filter_dropdown_items('members', $event)" class="task-member d-field" />
                     </v-col>
                     <v-col cols="12" class="pt-0">
-                        <!-- <rich-editor placeholder="Task Details" v-model="description" class="task-description" /> -->
-                        <Editor v-model="description" :key="task ? task.id : 0" :hasFloatingTools="false" @onchange="description = $event" :content="description" placeholder="Task description" ></Editor>
+                        <Editor ref="editor" v-model="description" :key="task ? task.id : 0" :hasFloatingTools="false" :content="description" placeholder="Task description" ></Editor>
+
                     </v-col>
                 </v-row>
             </template>

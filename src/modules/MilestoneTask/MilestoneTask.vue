@@ -12,7 +12,7 @@
       ref="edit_dialog"
       dialog-title="Edit Task"
       :is-edit-dialog="edit_dialog"
-      :fields-to-edit="edit_item"
+      :fieldsToEdit="edit_item"
       @save="update_item('edit_task', $event, dynamic_api)"
     />
 

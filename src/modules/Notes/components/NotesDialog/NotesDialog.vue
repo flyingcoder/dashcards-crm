@@ -1,28 +1,27 @@
 <template>
     <div class="notes-dialog">
-        <CustomDialog title="Add Notes" v-model="showDialog" button2-text="Save" @button1="showDialog = false" @button2="save">
+        <CustomDialog title="Add Notes" @click:close="closeDialog" v-model="showDialog" button2-text="Save" @button1="closeDialog" @button2="save">
             <template #content>
-                <v-layout wrap class="custom-dialog">
-                    <v-flex xs12>
+                <v-row class="custom-dialog" no-gutters>
+                    <v-col md="12">
                         <v-text-field v-model.trim="payload.title" label="Add Title" class="dialog__textfield d-field" color="#667187" solo clearable hide-details>
                         </v-text-field>
-                    </v-flex>
-                    <v-flex xs12>
-                        <rich-editor placeholder="Description" v-model.trim="payload.content" class="note-description" />
-                        <!-- <Editor></Editor> -->
-                    </v-flex>
-                </v-layout>
+                    </v-col>
+                    <v-col md="12">
+                        <Editor ref="editor" :hasFloatingTools="false" v-model="payload.content" class="note-description" placeholder="Description" ></Editor>
+                    </v-col>
+                </v-row>
             </template>
         </CustomDialog>
     </div>
 </template>
 <script>
-import RichEditor from '@/common/RichEditor.vue'
+import Editor from '@/common/Editor/Editor.vue'
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 
 export default {
     components: {
-        RichEditor,
+        Editor,
         CustomDialog
     },
 
@@ -50,8 +49,23 @@ export default {
 
     methods: {
         save() {
+            if (!this.payload.title) {
+                this.$event.$emit('open_snackbar', 'Title is required', 'error')
+                this.$event.$emit('btnloading_off', false)
+                return
+            }
+            if (!this.payload.content || this.payload.content === '<p></p>') {
+                this.$event.$emit('open_snackbar', 'Description is required', 'error')
+                this.$event.$emit('btnloading_off', false)
+                return
+            }
             this.$emit('save', this.payload)
             Object.assign(this.$data, this.$options.data.apply(this))
+            this.$refs.editor.setValue(null)
+        },
+        closeDialog(){
+            this.$refs.editor.setValue(null)
+            this.showDialog = false
         }
     }
 }

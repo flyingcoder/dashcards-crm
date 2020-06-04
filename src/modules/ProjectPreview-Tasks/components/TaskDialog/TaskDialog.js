@@ -125,7 +125,9 @@ export default {
         clear_and_close() {
             this.title = this.description = this.start_date = this.end_date = null
             this.members.selected = [];
-            (this.milestones.selected = null), this.cancel()
+            this.milestones.selected = null 
+            this.$refs.editor.setValue(null)
+            this.cancel()
         },
 
         async fill_dropdowns() {

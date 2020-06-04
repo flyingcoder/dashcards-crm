@@ -43,17 +43,24 @@ export default {
         }
     },
     mounted() {
-        this.requesting = true
-        makeRequestTo.timer_status()
-            .then(({ data }) => {
-                if (data) {
-                    this.status = data.action === 'start' ? true : false
-                }
-            })
-            .finally(() => this.requesting = false)
+        this.get_timer_status()
+
+        this.$event.$on('self-global-timer-updated', () => {
+            this.get_timer_status()
+        })
     },
 
     methods: {
+        get_timer_status() {
+            this.requesting = true
+            makeRequestTo.timer_status()
+                .then(({ data }) => {
+                    if (data) {
+                        this.status = data.action === 'start' ? true : false
+                    }
+                })
+                .finally(() => this.requesting = false)
+        },
         switch1_changed() {
             const type = !this.status ? 'start' : 'stop'
             this.disabled = true
@@ -78,9 +85,4 @@ export default {
     }
 }
 </script>
-<style lang="scss" scoped>
-@import "~@/sass/_variables";
 
-
-@media only screen and (max-width: 480px) {}
-</style>

@@ -1,0 +1,19 @@
+@import '~@/sass/_variables';
+
+@include pagePadding('.payment');
+
+.payment {
+    .payment-wrapper {
+        margin: 10px;
+        background-color: $white;
+        border: 1px solid $tableBorderBlue;
+        border-radius: 10px;
+        padding: 10px;
+
+        .payment-content {
+            background-color: $tableBlueBg;
+            border: 1px solid $tableBorderBlue;
+            padding: 10px;
+        }
+    }
+}

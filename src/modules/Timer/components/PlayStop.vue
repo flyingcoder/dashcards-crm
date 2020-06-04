@@ -192,7 +192,9 @@ export default {
                         )
                     }
                     this.$emit('row-item-updated', this.item)
-
+                    if (this.is_own_timer) {
+                        this.$event.$emit('self-global-timer-updated')
+                    }
                     this.$event.$emit(
                         'open_snackbar',
                         `Timer ${timer_message}`,

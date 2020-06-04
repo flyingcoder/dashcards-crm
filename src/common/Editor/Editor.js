@@ -45,6 +45,7 @@ export default {
         EditorMenuBubble
     },
     props: {
+        componentKey: { type: Number, default: Math.floor(Date.now() / 1000) },
         content: { type: String, default: '' },
         placeholder: { type: String, default: 'Write something...' },
         hasFloatingTools: { type: Boolean, default: true },
@@ -93,7 +94,7 @@ export default {
                 content: self.content,
                 onUpdate: ({ getHTML }) => {
                     const newContent = getHTML()
-                    self.$emit('onchange', newContent)
+                    self.$emit('input', newContent)
                 },
             }),
             fontSizes: [
@@ -121,7 +122,7 @@ export default {
                 { label: 'Horizontal Line', icon: 'mdi-minus', method: (command) => { return command.horizontal_rule() }, active: (isActive) => { return false } },
                 { label: 'Youtube Embed', icon: 'mdi-youtube', method: (command) => { self.openModal('youtube', command.youtube) }, active: (isActive) => { return false } },
                 { label: 'Image', icon: 'mdi-image', method: (command) => { self.openModal('image', command.image) }, active: (isActive) => { return false } },
-                { label: 'Table', icon: 'mdi-table', method: (command) => { return command.createTable({ rowsCount: 3, colsCount: 3, withHeaderRow: false }) }, active: (isActive) => { return isActive.table() } },
+                { label: 'Table', icon: 'mdi-table-plus', method: (command) => { return command.createTable({ rowsCount: 3, colsCount: 3, withHeaderRow: false }) }, active: (isActive) => { return isActive.table() } },
             ],
             tableCommandList: [
                 { label: 'Delete table', icon: 'mdi-table-remove', method: (command) => { command.deleteTable() }, active: (isActive) => { return false } },
@@ -140,6 +141,17 @@ export default {
     },
     mounted() {
         this.setContent()
+    },
+    watch: {
+        componentKey: {
+            handler: function(newval, oldval) {
+                if (this.editor && newval) {
+                    this.editor.setContent(this._props.content)
+                }
+            },
+            deep: true,
+            immediate: true
+        }
     },
     methods: {
         openModal(modal, command) {
@@ -166,9 +178,14 @@ export default {
                 this.editor.setContent(this.content)
             }
         },
-        clearContent(){
+        setValue(value) {
             if (this.editor) {
-                this.editor.setContent('')
+                this.editor.setContent(value)
+            }
+        },
+        clearContent() {
+            if (this.editor) {
+                this.editor.setContent(null)
             }
         },
         showLinkMenu(attrs) {

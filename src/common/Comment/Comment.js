@@ -1,7 +1,7 @@
 import request from '@/services/axios_instance'
 import { global_utils } from '@/global_utils/global_utils'
 
-import RichEditor from '@/common/RichEditor.vue'
+import Editor from '@/common/Editor/Editor.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import Empty from '@/common/Empty.vue'
 
@@ -9,7 +9,7 @@ export default {
     name: 'Comment',
     mixins: [global_utils],
     components: {
-        RichEditor,
+        Editor,
         DeleteDialog,
         Empty
     },
@@ -31,7 +31,8 @@ export default {
         btnloading: false,
         hover: false,
         activeComment: null,
-        next_page_url : null
+        next_page_url : null,
+        counterReset: 0
     }),
     mounted() {
         this.comments = this.items
@@ -78,6 +79,7 @@ export default {
                 .then(({ data }) => {
                     this.comments.push(data)
                     this.comment = ''
+                    this.counterReset += 1
                 })
                 .finally(() => (this.btnloading = false))
         },

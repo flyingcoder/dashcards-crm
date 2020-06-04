@@ -42,8 +42,8 @@
             <v-row>
                 <v-spacer></v-spacer>
                 <p class="mr-3 caption py-0 my-0 text-right">
-                    <span>Created : {{ note.created_at | format }}</span><br />
-                    <span v-if="note.updated_at">Last Updated: {{ note.updated_at | format }}</span>
+                    <span>Created : {{ note.created_at | format('MMM D YYYY HH:mm A') }}</span><br />
+                    <span v-if="note.updated_at">Last Updated: {{ note.updated_at | format('MMM D YYYY HH:mm A') }}</span>
                 </p>
                 <v-col md="12">
                     <div class="pa-1 content" v-html="note.content"></div>

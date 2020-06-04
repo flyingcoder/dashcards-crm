@@ -1,6 +1,21 @@
 @import "~@/sass/variables";
 
 .task__tab_preview_card {
+    .description-wrapper {
+        table {
+            border-collapse: collapse;
+            table-layout: fixed;
+            width: 100%;
+            margin: 0;
+
+            td {
+                width: 50%;
+                text-align: left;
+                border: 1px solid black;
+            }
+        }
+    }
+
     .task__preview_content {
         padding: 17px 25px 25px 25px;
         border: 1px solid $tableBorderBlue;

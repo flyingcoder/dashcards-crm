@@ -58,6 +58,7 @@ export default {
     close_dialog() {
       this.dialog = false
       this.btnloading = false
+      this.$emit('click:close', true)
     },
 
     clear_and_close() {

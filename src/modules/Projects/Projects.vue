@@ -31,16 +31,16 @@
                                     </Avatar>
                                 </v-card-title>
                                 <v-divider></v-divider>
-                                <v-card-title class="title" @click="navigate_to_view_project(item.id)">
-                                    {{ item.title | ucwords }}
-                                </v-card-title>
-                                <v-card-subtitle class="subtitle-2">
-                                    {{ item.service_name }}
-                                    <p class="caption text-left">
-                                        {{ item.started_at | format }} - {{ item.end_at | format }}
-                                    </p>
-                                </v-card-subtitle>
-                                <v-card-text>
+                                <v-card-text class="pa-1">
+                                    <v-card-title class="title cursor-pointer" @click="navigate_to_view_project(item.id)">
+                                        {{ item.title | ucwords }}
+                                    </v-card-title>
+                                    <v-card-subtitle class="subtitle-2">
+                                        {{ item.service_name }}
+                                        <p class="caption text-left">
+                                            {{ item.started_at | format }} - {{ item.end_at | format }}
+                                        </p>
+                                    </v-card-subtitle>
                                     <v-row no-gutters>
                                         <v-col>
                                             <h6 class="text-center caption">Managers</h6>
