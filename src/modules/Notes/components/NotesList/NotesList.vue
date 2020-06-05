@@ -7,12 +7,11 @@
             <v-list v-if="notes.length == 0">
                 <v-list-item>
                     <v-list-item-content>
-                        <!-- <v-list-item-title>No notes yet</v-list-item-title> -->
                         <Empty headline="No notes yet"></Empty>
                     </v-list-item-content>
                 </v-list-item>
             </v-list>
-            <v-list two-line v-if="notes.length > 0">
+            <v-list two-line class="list-wrapper" v-if="notes.length > 0">
                 <v-list-item :class="['note', { active: activeNote && activeNote.id === note.id }]" v-for="(note, index) of notes" :key="note.id" @click="$emit('clicked', note)">
                     <v-list-item-content>
                         <v-list-item-title v-html="note.title"></v-list-item-title>
@@ -20,22 +19,11 @@
                     </v-list-item-content>
                     <v-list-item-icon>
                         <v-icon small :class="['notify', { active: note.pivot.is_pinned }]" @click="$emit('toggle-pin', { note, index })">
-                        mdi-pin
-                    </v-icon>
+                            mdi-pin
+                        </v-icon>
                     </v-list-item-icon>
                 </v-list-item>
             </v-list>
-            <!-- <div :class="['note', { active: activeNote && activeNote.id === note.id }]" v-for="(note, index) of notes" :key="note.id" @click="$emit('clicked', note)">
-                <div class="note-name">
-                    <span>{{ note.title }}</span>
-                    <v-icon small :class="['notify', { active: note.pivot.is_pinned }]" @click="$emit('toggle-pin', { note, index })">
-                        mdi-pin
-                    </v-icon>
-                </div>
-                <div class="note-desc">
-                    <p :inner-html.prop="note.content | truncate(30)"></p>
-                </div>
-            </div> -->
         </div>
         <v-progress-linear v-if="loading" :indeterminate="true"></v-progress-linear>
         <div class="view__more" v-if="notes.length > 0">

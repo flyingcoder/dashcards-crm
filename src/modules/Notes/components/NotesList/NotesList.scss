@@ -16,9 +16,11 @@
     @include styledScrollFor('.notes-body');
 
     .notes-body {
-        overflow-x: hidden;
-        overflow-y: auto;
-        max-height: 500px;
+        .list-wrapper {
+            max-height: 1000px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
     }
 
     .note {
