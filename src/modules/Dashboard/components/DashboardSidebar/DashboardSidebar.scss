@@ -28,6 +28,13 @@
     padding: 0;
     width: 100%;
   }
+  
+  .submenu-item.active .s__icons span i{
+    color: #fff !important;
+  }
+  .submenu-item:hover .s__icons span i{
+    color: #fff !important;
+  }
 
   .s__icons {
     display: flex;

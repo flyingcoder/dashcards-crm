@@ -43,6 +43,11 @@
       @load-more="load_more"
       @delete-selected="open_bulk_delete_dialog($event)"
     >
+      <template slot="header-toolbar">
+        <table-header
+        @click="add_dialog = true"
+        />
+      </template>
       <template v-slot:row-slot="{ item }">
         <td class="clickable-td">
           <Avatar :user="item" iconOnly>

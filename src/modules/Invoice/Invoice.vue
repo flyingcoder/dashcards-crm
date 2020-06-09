@@ -1,6 +1,5 @@
 <template>
     <div class="invoice">
-        <table-header :paths="paths" @click="open_create_dialog" />
         <!-- <InvoiceDialog type="create" @created="items.unshift($event)" /> -->
         <!-- <InvoiceDialog type="edit" @updated="invoice_updated" /> -->
         <StepperInvoiceDialog ref="invoiceEditDialog" type="edit" @updated="invoice_updated"></StepperInvoiceDialog>
@@ -9,6 +8,11 @@
         <delete-dialog :open-dialog.sync="delete_dialog" title="Delete Invoice" text-content="Are you sure you want to delete this invoice?" @delete="delete_invoice" />
         <delete-dialog :open-dialog.sync="bulk_delete_dialog" title="Delete Invoices" text-content="Are you sure you want to delete these invoices? This can't be undone." @delete="bulk_delete('bulk_delete_invoices')" />
         <VueTable :items="items" :headers="headers" :showRowActions="true" icon="list" :loading="loading" title="Invoice" :key="componentKey" :noMoreData="noMoreData" :showSelect="true" @delete-selected="open_bulk_delete_dialog($event)" @load-more="load_more">
+          <template slot="header-toolbar">
+            <table-header
+            @click="open_create_dialog"
+            />
+          </template>
             <template v-slot:row-slot="{ item }">
                 <td @click="open_view_dialog(item)">#INV-{{ item.id }}</td>
                 <td @click="open_view_dialog(item)" class="clickable-td">

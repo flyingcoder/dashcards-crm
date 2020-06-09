@@ -1,32 +1,32 @@
 <template>
-    <v-row no-gutters>
-        <v-col md="3" sm="4" class="label" v-if="!(dialog.type === 'create')">Invoice ID</v-col>
-        <v-col md="9" sm="8" class="value" v-if="!(dialog.type === 'create')">
+    <v-row align="center" no-gutters class="step-one">
+        <v-col cols="12" md="3" sm="12" class="label" v-if="!(dialog.type === 'create')">Invoice ID</v-col>
+        <v-col cols="12" md="9" sm="12" class="value" v-if="!(dialog.type === 'create')">
             <v-text-field :disabled="dialog.type === 'edit'" outlined dense class="textfield" color="#657186" solo hide-details flat placeholder="#" :value="`#INV-` + invoice_id"></v-text-field>
         </v-col>
-        <v-col md="3" sm="4" class="label">Invoice Title <span class="required">*</span></v-col>
-        <v-col md="9" sm="8" class="value">
+        <v-col cols="12" md="3" sm="4" xs="12" class="label">Invoice Title <span class="required">*</span></v-col>
+        <v-col cols="12" md="9" sm="8" xs="12" class="value">
             <v-text-field class="titlefield" color="#657186" solo hide-details flat dense outlined placeholder="Add Invoice Title *" v-model.trim="title"></v-text-field>
         </v-col>
-        <v-col md="3" sm="4" class="label">Select Type <span class="required">*</span></v-col>
-        <v-col md="9" sm="8" class="value">
+        <v-col cols="12" md="3" sm="4" xs="12" class="label">Select Type <span class="required">*</span></v-col>
+        <v-col cols="12" md="9" sm="8" xs="12" class="value">
             <v-select :disabled="dialog.type === 'view'" solo outlined full-width dense hide-details color="#657186" flat :items="['hourly', 'monthly']" v-model="type" placeholder="Select Invoice Type"></v-select>
         </v-col>
-        <v-col md="3" sm="4" class="label" v-if="type === 'hourly'">Select Project <span class="required">*</span></v-col>
-        <v-col md="9" sm="8" class="value" v-if="type === 'hourly'">
+        <v-col cols="12" md="3" sm="4" xs="12" class="label" v-if="type === 'hourly'">Select Project <span class="required">*</span></v-col>
+        <v-col cols="12" md="9" sm="8" xs="12" class="value" v-if="type === 'hourly'">
             <v-select clearable solo hide-details color="#657186" flat full-width outlined dense :items="projects" :value="selected_project" @change="setBillingTargets" item-text="title" item-value="id" placeholder="Select Project"></v-select>
         </v-col>
-        <v-col md="3" sm="4" class="label">Invoice Date <span class="required">*</span></v-col>
-        <v-col md="9" sm="8" class="value">
-            <date-picker :hasButtons="false" class="textfield" dense outlined hide-details color="#657186" flat placeholder="Select Date" :value="date" :max="due_date" @input="update_date({ date: $event, field: 'date' })" />
+        <v-col cols="12" md="3" sm="4" xs="12" class="label">Invoice Date <span class="required">*</span></v-col>
+        <v-col cols="12" md="9" sm="8" xs="12" class="value">
+            <date-picker :hasButtons="false" prepend-inner-icon="date_range" class="textfield" dense outlined hide-details color="#657186" flat placeholder="Select Date" :value="date" :max="due_date" @input="update_date({ date: $event, field: 'date' })" />
         </v-col>
-        <v-col md="3" sm="4" class="label">Due Date <span class="required">*</span></v-col>
-        <v-col md="9" sm="8" class="value">
-            <date-picker :hasButtons="false" class="textfield" dense outlined hide-details color="#657186" flat placeholder="Select Date" :value="due_date" :min="date" @input="update_date({ date: $event, field: 'due_date' })" />
+        <v-col cols="12" md="3" sm="4" xs="12" class="label">Due Date <span class="required">*</span></v-col>
+        <v-col cols="12" md="9" sm="8" xs="12" class="value">
+            <date-picker :hasButtons="false" prepend-inner-icon="date_range" class="textfield" dense outlined hide-details color="#657186" flat placeholder="Select Date" :value="due_date" :min="date" @input="update_date({ date: $event, field: 'due_date' })" />
         </v-col>
-        <v-col md="3" sm="4">Billed From <span class="required">*</span></v-col>
-        <v-col md="9" sm="8">
-            <v-autocomplete v-model="billed_from" :items="members" chips item-text="fullname" item-value="id" solo full-width outlined flat dense :value="billed_from" prepend-inner-icon="mdi-account-plus" @click:prepend-inner="show_add_member_dialog('billed_from')">
+        <v-col cols="12" md="3" sm="4" xs="12">Billed From <span class="required">*</span></v-col>
+        <v-col cols="12" md="9" sm="8" xs="12">
+            <v-autocomplete class="value" color="#657186" hide-details v-model="billed_from" :items="members" chips item-text="fullname" item-value="id" solo full-width outlined flat dense :value="billed_from" prepend-inner-icon="mdi-account-plus" @click:prepend-inner="show_add_member_dialog('billed_from')">
                 <template v-slot:selection="data">
                     <v-chip v-bind="data.attrs" tile outlined>
                         <v-avatar left>
@@ -48,9 +48,9 @@
                 </template>
             </v-autocomplete>
         </v-col>
-        <v-col md="3" sm="4">Billed To <span class="required">*</span></v-col>
-        <v-col md="9" sm="8">
-            <v-autocomplete v-model="billed_to" :items="members" chips item-text="fullname" item-value="id" solo full-width outlined flat dense :value="billed_to" prepend-inner-icon="mdi-account-plus" @click:prepend-inner="show_add_member_dialog('billed_to')">
+        <v-col cols="12" md="3" sm="4" xs="12">Billed To <span class="required">*</span></v-col>
+        <v-col cols="12" md="9" sm="8" xs="12">
+            <v-autocomplete class="value" color="#657186" hide-details v-model="billed_to" :items="members" chips item-text="fullname" item-value="id" solo full-width outlined flat dense :value="billed_to" prepend-inner-icon="mdi-account-plus" @click:prepend-inner="show_add_member_dialog('billed_to')">
                 <template v-slot:selection="data">
                     <v-chip v-bind="data.attrs" tile outlined>
                         <v-avatar left>
@@ -211,11 +211,20 @@ export default {
 @import '~@/sass/variables';
 
 .required {
-    color: red;
+    color: $red;
 }
 
 .label,
 .value {
     margin-bottom: 10px;
 }
+</style>
+<style scoped>
+    >>> .v-select__selection.v-select__selection--comma{
+        color: #667381;
+    }
+    >>> .v-list-item__title{
+        color: #667381;
+        font-size: 16px;
+    }
 </style>

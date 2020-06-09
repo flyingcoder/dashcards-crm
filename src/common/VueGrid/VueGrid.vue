@@ -1,10 +1,12 @@
 <template>
     <v-card class="grid-view">
-        <div class="grid-wrapper">
+        <div class="grid-wrapper">            
             <v-toolbar flat>
-                <v-toolbar-title class="grid-view-title">
+                <v-toolbar-title class="custom-grid-title">
                     Members
                 </v-toolbar-title>
+                <v-spacer></v-spacer>
+                <slot name="header-toolbar"></slot>
             </v-toolbar>
             <v-row>
                 <v-col md="3" sm="6" xs="12" v-for="item in items" :key="item.user_id">

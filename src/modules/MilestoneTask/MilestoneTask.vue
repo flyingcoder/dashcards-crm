@@ -32,7 +32,6 @@
 
     <v-layout>
       <v-flex xs12>
-        <table-header :paths="paths" @click="add_dialog = true" />
 
         <VueTable
           :items="items"
@@ -45,6 +44,12 @@
           @load-more="load_more"
           @delete-selected="open_bulk_delete_dialog($event)"
         >
+          <template slot="header-toolbar">
+            <table-header
+            @click="add_dialog = true"
+            />
+          </template>
+
           <template v-slot:row-slot="{ item }">
             <td class="text-xs-left text-cap">{{ item.title }}</td>
             <td

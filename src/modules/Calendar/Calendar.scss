@@ -3,18 +3,144 @@
 @include pagePadding ('.calendar');
 
 .calendar {
-    .calendar-wrapper {
-        margin: 10px;
-        background-color: $white;
-        border: 1px solid $tableBorderBlue;
-        border-radius: 10px;
-        padding: 20px;
-    }
+  .calendar-wrapper{
+    margin: 10px;
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+    padding: 20px;
+  }
 
-    .calendar-content {
-        background-color: $tableBlueBg;
-        border: 1px solid $tableBorderBlue;
-        padding: 15px;
+  .calendar-content{
+      background-color: $tableBlueBg;
+      border: 1px solid $tableBorderBlue;
+      padding: 15px;
+  }
+
+  .calendar_header{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    align-items: center;
+  }
+  .event_tab{
+    background-color: $gray-2;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    .v-tab.v-tab--active{
+      background-color: $white;
+      color: $textDark;
+    }
+    .v-tab{
+      background-color: $gray-2;
+      color: $textDark;
+    }
+  }
+
+  .calendar_body{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 10px;
+    margin: 0 0 60px;
+  }
+
+  .date{
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    align-items: center;
+    grid-gap: 20px;
+    margin-bottom: 10px;
+    .icon{
+      fill: #fff;
+    }
+    .date_icon{
+      width: 50px;
+      background-color: $blue;
+      padding: 4px 5px;
+      border-radius: 5px;
+    }
+  }
+  .calendar_label{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
+  .grid-view{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    position: relative;
+  }
+  .load-more{position: absolute;
+    left: 42%;
+    bottom: -55px;
+  }
+  
+  .calendar-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .left_option{
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+  }
+  .right_option {
+      display: flex;
+  }
+  .date_title{
+    font-size: 18px;
+    color: $textDarkBlue;
+  }
+  .calendar_body .left{
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+    padding: 15px;
+  }
+  .event_title{
+    font-size: 20px;
+  }
+  .left .vc-border {
+    border-width: 0px;
+  }
+  .calendar_label{
+    color: $textGray;
+    .label_left h3{
+      color: $textDark;
+    }
+    .label_right h3{
+      color: $textDark;
+    }
+    .event-item{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .event-item .v-avatar{
+      margin-right: 10px;
+    }
+    .label_right .v-input--selection-controls{
+      margin-top: 0;
+      padding: 0;
+      margin-bottom: 8px;
+    }
+  }
+   
+}
+@media only screen and (max-width: 1024px){
+  .calendar{
+    .right{
+      grid-template-columns: 1fr;
     }
 
     .calendar_header {
@@ -154,7 +280,7 @@
             margin-bottom: 8px;
         }
     }
-
+  }
 }
 
 @media only screen and (max-width: 1024px) {
@@ -176,5 +302,3 @@
         }
     }
 }
-
-@media only screen and (max-width: 768px) {}

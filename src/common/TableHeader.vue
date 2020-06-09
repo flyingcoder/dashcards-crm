@@ -1,7 +1,5 @@
 <template>
-  <v-layout wrap class="table-header">
-    <breadcrumb :paths="paths" />
-    <v-flex>
+  <div class="table-header">
       <v-btn
         v-if="!noButton"
         fab
@@ -47,8 +45,7 @@
         <v-icon>mdi-view-dashboard</v-icon>
       </v-btn>
       <slot name="form-btn" />
-    </v-flex>
-  </v-layout>
+  </div>
 </template>
 
 <script>
@@ -57,7 +54,7 @@ import Breadcrumb from '@/common/Breadcrumb.vue'
 export default {
   name: 'TableHeader',
   props: {
-    paths: { type: Array, default: [] },
+    // paths: { type: Array, default: [] },
     noButton: { type: Boolean, default: false },
     noListButton: { type: Boolean, default: true },
     noGridButton: { type: Boolean, default: true },
@@ -77,11 +74,10 @@ export default {
 @import '~@/sass/variables';
 
 .table-header {
-  display: grid;
-  grid-auto-flow: column;
-  justify-content: space-between;
-  align-items: center;
-
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
   button.add__btn {
     .v-icon {
       font-size: 24px;

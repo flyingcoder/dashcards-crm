@@ -3,7 +3,6 @@ import _cloneDeep from 'lodash/cloneDeep'
 import request from '@/services/axios_instance'
 
 //Components
-import Breadcrumb from '@/common/Breadcrumb.vue'
 import TasksCard from '@/common/TasksCard/TasksCard.vue'
 import TimelineCard from '@/common/TimelineCard/TimelineCard.vue'
 import DashCard from '@/common/DashCard.vue'
@@ -21,7 +20,6 @@ import AlarmCard from '@/common/AlarmCard/AlarmCard.vue'
 export default {
   name: 'DashboardContent',
   components: {
-    Breadcrumb,
     TasksCard,
     TimelineCard,
     DashCard,

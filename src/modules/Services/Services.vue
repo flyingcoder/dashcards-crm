@@ -1,6 +1,5 @@
 <template>
   <div class="services">
-    <table-header :paths="paths" @click="add_dialog = true" />
 
     <services-add-dialog
       :dialog.sync="add_dialog"
@@ -44,6 +43,11 @@
       @load-more="load_more_services"
       @delete-selected="open_bulk_delete_dialog($event)"
     >
+    <template slot="header-toolbar">
+      <table-header
+      @click="add_dialog = true"
+      />
+    </template>
       <template v-slot:row-slot="{ item }">
         <td class="service__name text-cap">{{ item.service_name }}</td>
         <td class="text-cap">

@@ -29,10 +29,6 @@
       text-content="Are you sure you want to delete these template? This can't be undone."
       @delete="bulk_delete('bulk_delete_milestone_template')"
     />
-
-    <v-layout>
-      <v-flex xs12>
-        <table-header :paths="paths" @click="add_dialog = true" />
         <VueTable
           :items="items"
           :headers="headers"
@@ -46,6 +42,11 @@
           :showSelect="true"
           :loading="loading"
         >
+        <template slot="header-toolbar">
+          <table-header
+          @click="add_dialog = true"
+          />
+        </template>
           <template v-slot:row-slot="{ item }">
             <td
               class="text-cap clickable-td"
@@ -68,8 +69,6 @@
             >
           </template>
         </VueTable>
-      </v-flex>
-    </v-layout>
   </div>
 </template>
 

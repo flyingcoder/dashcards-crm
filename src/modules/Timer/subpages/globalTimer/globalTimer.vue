@@ -1,15 +1,13 @@
 <template>
     <div class="timer">
-        <table-header :paths="paths" :noButton="true">
-            <template v-slot:form-btn>
-                <v-btn fab outlined small class="mx-1" color="gray" icon>
-                    <v-icon>mdi-dots-horizontal</v-icon>
-                </v-btn>
-                <v-btn fab outlined small class="mx-1" color="gray" icon @click="minimize">
-                    <v-icon>close</v-icon>
-                </v-btn>
-            </template>
-        </table-header>
+        <div class="timer-actions text-right mb-4">
+            <v-btn fab small dark color="#3b589e" class="mr-1">
+                <v-icon>mdi-dots-horizontal</v-icon>
+            </v-btn>
+            <v-btn fab small dark color="#3b589e" class="mr-1" @click="minimize">
+                <v-icon>close</v-icon>
+            </v-btn>
+        </div>
         <VueTable :items="items" :headers="headers" :showRowActions="true" @load-more="load_more" :loading="loading" title="Global Timers" :key="componentKey" :noMoreData="noMoreData" :showSelect="false">
             <template v-slot:header-toolbar>
                 <v-col>

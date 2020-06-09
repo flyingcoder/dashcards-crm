@@ -6,11 +6,12 @@ import VueTable from '@/common/VueTable/VueTable.vue'
 import ClientsDialog from '../ClientsDialog/ClientsDialog.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import Actions from '@/common/VueTable/Actions.vue'
+import TableHeader from '@/common/TableHeader.vue'
 
 export default {
   name: 'ClientsVueTable',
   mixins: [list_functionality],
-  components: { VueTable, ClientsDialog, DeleteDialog, Actions },
+  components: { VueTable, ClientsDialog, DeleteDialog, Actions, TableHeader },
 
   props: {
     dialog: Boolean

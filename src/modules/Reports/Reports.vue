@@ -12,9 +12,7 @@
       :id="id"
       @report-updated="reportUpdated"
     />
-    <v-col md="12" class="ma-0">
-      <table-header :paths="paths" @click="open_dialog"></table-header>
-    </v-col>
+
     <v-col md="12" xs="12" class="px-3 pa-0" v-if="reports.length > 0">
       <div class="pa-2 body-wrapper">
         <v-tabs
@@ -58,6 +56,17 @@
               <v-card-text>
                 <div class="reports-actions">
                   <v-spacer></v-spacer>
+                  <v-btn
+                    v-if="reports.length >= 3"
+                    color="#3b589e"
+                    small
+                    dark
+                    fab
+                    class="ml-1"
+                    @click="open_dialog"
+                  >
+                    <v-icon>add</v-icon>
+                  </v-btn>
                   <v-btn
                     color="#3b589e"
                     small

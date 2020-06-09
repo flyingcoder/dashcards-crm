@@ -1,17 +1,5 @@
 <template>
     <div class="dashboard-content">
-        <div class="d__breadcrumbs">
-            <div class="page__options">
-                <!-- <breadcrumb :paths="paths" /> -->
-                <!--custom component-->
-                <div class="option themes">
-                    <div class="color"></div>
-                    <div class="title">
-                        <span>Themes</span>
-                    </div>
-                </div>
-            </div>
-        </div>
         <dashboard-tiles />
         <!-- custom component -->
         <v-row v-if="loading">

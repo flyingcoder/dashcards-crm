@@ -13,14 +13,14 @@
         </v-col>
         <v-col md="5" sm="6" class="label">Send email to recepient?</v-col>
         <v-col md="7" sm="6" class="value">
-            <v-radio-group :mandatory="true" row v-model="props.send_email" >
-                <v-radio label="Yes" value="yes"></v-radio>
-                <v-radio label="No" value="no"></v-radio>
+            <v-radio-group :mandatory="true" row v-model="props.send_email" class="mt-0 pt-0">
+                <v-radio label="Yes" value="yes" color="#3b589e"></v-radio>
+                <v-radio label="No" value="no" color="#3b589e"></v-radio>
             </v-radio-group>
         </v-col>
         <v-col md="5" sm="6" class="label">Invoice Template </v-col>
         <v-col md="7" sm="6" class="value">
-            <v-select :items="templates"  v-model="props.template" placeholder="Select template" item-text="name" item-value="id" solo flat outlined dense></v-select>
+            <v-select color="#657186" :items="templates"  v-model="props.template" placeholder="Select template" item-text="name" item-value="id" solo flat outlined dense></v-select>
         </v-col>
     </v-row>
 </template>
@@ -122,4 +122,13 @@ export default {
         visibility: hidden;
     }
 }
+</style>
+<style scoped>
+    >>> .v-select__selection.v-select__selection--comma{
+        color: #667381;
+    }
+    >>> .v-list-item__title{
+        color: #667381;
+        font-size: 16px;
+    }
 </style>
