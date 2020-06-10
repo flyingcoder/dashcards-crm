@@ -10,7 +10,7 @@
             
                 <div class="notes-action">
                     <table-header
-                        @click="add_dialog = true"
+                        @click="notes_dialog = true"
                     />
                 </div>
 

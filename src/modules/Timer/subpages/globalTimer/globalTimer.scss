@@ -38,6 +38,16 @@
             color: $sortOptionGray;
         }
     }
+
+    .tab-buttons{
+        .v-btn{
+            background-color: $blue;
+            color: $white;
+        }
+        i{
+            color: $white !important; 
+        }
+    }
     
 }
 

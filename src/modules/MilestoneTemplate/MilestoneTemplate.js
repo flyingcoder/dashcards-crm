@@ -25,7 +25,7 @@ export default {
     headers: [
       { text: 'Name', value: 'name' },
       { text: 'Status', value: 'status' },
-      { text: 'Action', value: 'action' }
+      { text: 'Action', value: 'action', align: 'center' }
     ],
     table_config: {
       route_name: 'templates',

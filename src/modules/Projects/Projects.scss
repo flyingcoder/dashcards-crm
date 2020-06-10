@@ -68,3 +68,30 @@
         background-color: rgba(0, 0, 0, .05);
     }
 }
+.project-card{
+
+    &:hover{
+        box-shadow: $darkBoxShadow-2;
+    }
+
+    .card-header{
+        .v-btn{
+            color: $btnGray;
+        }
+    }
+
+    .client-name{
+        color: $textDark;
+        font-size: 16px;
+    }
+
+    .caption {
+        color: $textDark;
+    }
+    .card-footer{
+        .goto.v-btn{
+            color: $white;
+            background-color: $blue;
+        }
+    }   
+}

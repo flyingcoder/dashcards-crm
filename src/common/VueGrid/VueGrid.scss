@@ -25,3 +25,56 @@
   text-align: left;
   font-size: 30px;
 }
+.member-card{
+
+  &:hover{
+    box-shadow: $darkBoxShadow-2;
+  }
+
+  .card-header{
+    color: $textDark-2;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    position: relative;
+
+    .active-status{
+      position: absolute;
+      left: 0;
+      font-size: 20px;
+    }
+    .settings{
+      position: absolute;
+      right: 0;
+    }
+  }
+  .card-actions{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: $textDark-2;
+    
+    i{
+      margin-right: 5px;
+    }
+
+    div{
+      display: flex;
+      align-items: center;
+    }
+  }
+  .card-footer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: $tableBlueBg;
+    color: $textDark-2;
+    border-top: 1px solid $borderLightGray;
+
+    h5, h4{
+      font-weight: normal;
+    }
+  }
+}

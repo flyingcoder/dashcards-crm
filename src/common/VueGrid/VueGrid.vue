@@ -10,17 +10,15 @@
             </v-toolbar>
             <v-row>
                 <v-col md="3" sm="6" xs="12" v-for="item in items" :key="item.user_id">
-                    <v-card>
+                    <v-card class="member-card">
                         <v-card-text class="px-5">
-                            <v-row>
-                                <v-icon small v-if="is_online(item)" title="Online" color="success">mdi-check-circle</v-icon>
-                                <v-icon small v-else title="Offline">mdi-circle</v-icon>
-                                <v-spacer></v-spacer>
+                            <v-layout class="card-header align-center">
+                                <v-icon class="active-status" v-if="is_online(item)" title="Online" color="success">mdi-check-circle</v-icon>
+                                <v-icon class="active-status" v-else title="Offline">mdi-circle</v-icon>
                                 <span>{{ item.job_title | ucwords }}</span>
-                                <v-spacer></v-spacer>
-                                <v-menu bottom left>
+                                <v-menu bottom>
                                     <template v-slot:activator="{ on }">
-                                        <v-btn icon v-on="on">
+                                        <v-btn class="settings" icon v-on="on">
                                             <v-icon>settings</v-icon>
                                         </v-btn>
                                     </template>
@@ -43,36 +41,36 @@
                                         </v-list-item>
                                     </v-list>
                                 </v-menu>
-                            </v-row>
-                            <v-row align="center" class="my-1">
+                            </v-layout>
+                            <v-layout class="align-center">
                                 <v-spacer></v-spacer>
                                 <v-avatar size="80" color="#fff">
                                     <v-img :src="item.image_url" :alt="item.first_name"></v-img>
                                 </v-avatar>
                                 <v-spacer></v-spacer>
-                            </v-row>
-                            <v-col md="12" class="text-center"><strong>{{ item.fullname | ucwords }}</strong></v-col>
-                            <v-row>
-                                <v-btn text block dense class small @click="navigate_to_view_profile(item)">
-                                    <v-icon small left color="success">account_circle</v-icon>
+                            </v-layout>
+                            <div class="text-center mb-3"><strong>{{ item.fullname | ucwords }}</strong></div>
+                            <div class="card-actions">
+                                <div class="" @click="navigate_to_view_profile(item)">
+                                    <v-icon>account_circle</v-icon>
                                     Profile
-                                </v-btn>
-                                <v-col class="text-center py-0 my-0 caption">
-                                    <v-icon small left color="indigo">mdi-email</v-icon>
+                                </div>
+                                <div>
+                                    <v-icon>mdi-email</v-icon>
                                     {{ item.email }}
-                                </v-col>
-                            </v-row>
-                            <v-row>
-                                <v-col v-if="showTaskCount">
-                                    <h5 class="text-center">Tasks</h5>
-                                    <h4 class="text-center">{{ count(item.tasks) }}</h4>
-                                </v-col>
-                                <v-col v-if="showProjectCount">
-                                    <h5 class="text-center">Projects</h5>
-                                    <h4 class="text-center">{{ count(item.projects) }}</h4>
-                                </v-col>
-                            </v-row>
+                                </div>
+                            </div>
                         </v-card-text>
+                        <v-card-actions class="card-footer">
+                            <div class="text-center" v-if="showTaskCount">
+                                <h5>Tasks</h5>
+                                <h4>{{ count(item.tasks) }}</h4>
+                            </div>
+                            <div class="text-center" v-if="showProjectCount">
+                                <h5>Projects</h5>
+                                <h4>{{ count(item.projects) }}</h4>
+                            </div>
+                        </v-card-actions>
                     </v-card>
                 </v-col>
             </v-row>

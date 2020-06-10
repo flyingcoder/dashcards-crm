@@ -11,7 +11,7 @@
 
         <VueTable :items="items" :headers="headers" :showRowActions="true" @load-more="load_more" :loading="loading" title="Alarms" :key="componentKey" :noMoreData="noMoreData" :showSelect="false">
             <template v-slot:header-toolbar>
-                <v-btn-toggle mandatory v-model="timer_tab" :value="timer_tab" @change="handleChangeTab">
+                <v-btn-toggle class="tab-buttons" mandatory v-model="timer_tab" :value="timer_tab" @change="handleChangeTab">
                     <v-btn text class="px-5" value="task-timers">
                         <v-icon left>mdi-folder-clock-outline</v-icon> Task Timers
                     </v-btn>

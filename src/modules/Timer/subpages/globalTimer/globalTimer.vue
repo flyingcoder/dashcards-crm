@@ -13,7 +13,7 @@
                 <v-col>
                     <date-picker :hasButtons="false" flat class="dialog__date d-field text-center mr-1" label="Start Date" prepend-inner-icon="event" readonly v-model="filter_date" :max="today" @input="handleChangeDate"></date-picker>
                 </v-col>
-                <v-btn-toggle mandatory v-model="timer_tab" :value="timer_tab" @change="handleChangeTab">
+                <v-btn-toggle class="tab-buttons" mandatory v-model="timer_tab" :value="timer_tab" @change="handleChangeTab">
                     <v-btn text class="px-5" value="task-timers">
                         <v-icon left>mdi-folder-clock-outline</v-icon> Task Timers
                     </v-btn>

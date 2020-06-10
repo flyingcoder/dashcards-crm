@@ -14,7 +14,7 @@
                 <v-col>
                     <v-select flat :items="task_status" label="Task Status" solo :value="filter_task" class="mt-7" @change="filterTask"></v-select>
                 </v-col>
-                <v-btn-toggle mandatory v-model="timer_tab" :value="timer_tab" @change="handleChangeTab">
+                <v-btn-toggle class="tab-buttons" mandatory v-model="timer_tab" :value="timer_tab" @change="handleChangeTab">
                     <v-btn text class="px-5" value="task-timers">
                         <v-icon left>mdi-folder-clock-outline</v-icon> Task Timers
                     </v-btn>
