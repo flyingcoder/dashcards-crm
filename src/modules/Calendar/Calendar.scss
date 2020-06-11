@@ -73,11 +73,12 @@
   .grid-view{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
     position: relative;
+    grid-gap: 10px;
   }
-  .load-more{position: absolute;
-    left: 42%;
+  .load-more{
+    position: absolute;
+    left: calc(50% - 60px);
     bottom: -55px;
   }
   
@@ -205,7 +206,6 @@
     .grid-view {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-gap: 10px;
         position: relative;
     }
 

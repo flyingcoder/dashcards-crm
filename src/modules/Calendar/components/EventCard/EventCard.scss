@@ -7,7 +7,7 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    height: 350px;
+    min-height: 350px;
     
   .card_title{
     color: $textDark;

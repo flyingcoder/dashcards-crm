@@ -33,8 +33,6 @@
 
     <v-layout>
       <v-flex xs12>
-        <table-header :paths="paths" @click="add_dialog = true" />
-
         <v-card>
           <VueTable
             :items="indexes_items"
@@ -47,6 +45,11 @@
             :hasFooter="false"
             :loading="loading"
           >
+            <template slot="header-toolbar">
+              <table-header
+               @click="add_dialog = true"
+              />
+            </template>
             <template v-slot:row-slot="{ item }">
               <td>{{ item.index }}</td>
               <td class="text-cap">{{ item.name }}</td>

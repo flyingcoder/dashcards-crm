@@ -31,9 +31,3 @@
 </template>
 <script src="./Files.js"></script>
 <style lang="scss" scoped src="./Files.scss"></style>
-<style scoped>
->>> .tabs a.v-tabs__item.v-tabs__item--active {
-  background: #3b589e;
-  color: white;
-}
-</style>

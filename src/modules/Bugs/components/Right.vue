@@ -1,10 +1,10 @@
 <template>
-  <v-card class="mx-auto">
+  <div class="mx-auto bugs-preview">
     <v-row no-gutters class="pa-3">
-      <v-toolbar-title>General > Questions</v-toolbar-title>
+      <p>General > Questions</p>
       <v-spacer></v-spacer>
-      <v-btn icon small outlined class="mr-1">
-        <v-icon>mdi-dots-vertical</v-icon>
+      <v-btn icon small class="mr-1">
+        <v-icon>more_horiz</v-icon>
       </v-btn>
     </v-row>
 
@@ -15,7 +15,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </v-card>
+  </div>
 </template>
 
 <script>
@@ -28,3 +28,24 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  @import '~@/sass/_variables';
+
+  .bugs-preview{
+    padding: 20px;
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+
+    p{
+      color: $textDark;
+      font-size: 18px;
+    }
+    
+    .v-btn{
+      color: $btnGray;
+      border: 1px solid $btnGray;
+    }
+  }
+</style>

@@ -1,0 +1,63 @@
+@import '~@/sass/_variables';
+
+.support{
+    padding: 20px;
+    margin: 20px;
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+
+    .support-wrapper {
+        padding: 20px;
+        background-image: linear-gradient($lightblue-3 60%, $modalBgGray 40%);
+        border: 1px solid $tableBorderBlue;
+        border-radius: 10px;
+    }
+    .support-header{
+        max-width: 600px;
+        margin: 0 auto;
+        h2{
+            margin-bottom: 30px;
+        }
+    }
+    .support-body{
+        background-color: $white;
+        padding: 20px 3vw;
+        .actions .v-btn{
+            background-color: $blue;
+            color: $white;
+            margin-right: 10px;
+        }
+        .v-btn.v-btn--flat{
+            color: $blue;
+            background-color: transparent;
+        }
+        .row{
+            margin-bottom: 48px;
+        }
+    }
+    .help, h3{
+        color: $blue;
+    }
+    .s-features{
+        display: flex;
+        flex-direction: column;
+    }
+    .support-cta{
+        padding: 10px 2vw 20px;
+        background-color: $modalBgGray;
+        border: 1px solid $tableBorderBlue;
+        border-radius: 10px;
+    }
+    .support-icons{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+        .s-icon{
+            flex-basis: 16%;
+            text-align: center;
+        }
+    }
+}

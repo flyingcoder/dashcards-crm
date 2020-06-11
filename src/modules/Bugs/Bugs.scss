@@ -3,10 +3,24 @@
 @include pagePadding ('.bugs');
 
 .bugs {
-    
-    .wrapper{
-        
-    }
+    padding: 20px;
+    margin: 20px;
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
 
+    .bugs-wrapper {
+        padding: 20px;
+        background-image: linear-gradient($lightblue-3 60%, $modalBgGray 40%);
+        border: 1px solid $tableBorderBlue;
+        border-radius: 10px;
+    }
+    .update-btn{
+        background-color: $white;
+        border: 1px solid $tableBorderBlue;
+    }
+    .topics{
+        font-size: 18px;
+    }
 
 }

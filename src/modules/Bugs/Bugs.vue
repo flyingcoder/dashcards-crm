@@ -1,7 +1,6 @@
 <template>
   <div class="bugs">
-    <table-header :paths="paths" :noButton="true" />
-    <v-card class="wrapper pa-5">
+    <div class="bugs-wrapper pa-5 ">
       <v-row no-gutters>
         <v-col md="12" class="py-5">
           <h2 class="headline text-center">
@@ -17,6 +16,7 @@
             :menu-props="{ maxHeight: '400' }"
             label="Select"
             solo
+            flat
             :height="50"
           ></v-select>
         </v-col>
@@ -27,14 +27,15 @@
             :menu-props="{ maxHeight: '400' }"
             label="Select"
             solo
+            flat
             :height="50"
           ></v-select>
         </v-col>
         <v-col>
-          <v-btn block :height="50">Updates</v-btn>
+          <v-btn class="update-btn" block text :height="50">Updates</v-btn>
         </v-col>
         <v-col md="12">
-          Topics 21 - 30 of 1439
+          <span class="topics">Topics <strong>21 - 30</strong> of <strong>1439</strong></span>
         </v-col>
       </v-row>
       <v-row>
@@ -45,7 +46,7 @@
           <Right></Right>
         </v-col>
       </v-row>
-    </v-card>
+    </div>
   </div>
 </template>
 
