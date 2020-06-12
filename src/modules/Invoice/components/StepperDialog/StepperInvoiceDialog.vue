@@ -12,7 +12,7 @@
                 <v-stepper-items>
                     <v-stepper-content step="1">
                         <v-card flat>
-                            <StepOne></StepOne>
+                            <StepOne :projectLock="projectLock"></StepOne>
                         </v-card>
                         <v-row no-gutters>
                             <v-spacer></v-spacer>

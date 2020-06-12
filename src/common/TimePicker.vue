@@ -44,6 +44,11 @@ export default {
         picker: null,
         alarm: false
     }),
+    computed:{
+        tp() {
+            return this.$refs.vtimepicker
+        }
+    },
     methods: {
         clear() {
             this.picker = null
@@ -52,23 +57,20 @@ export default {
             this.menu = false
         },
         save() {
-            const tp = this.$refs.vtimepicker
-            if (!tp.inputHour) {
-                return
-            }
             var payload = {
-                hour: tp.lazyInputHour,
-                hour24: tp.inputHour,
-                mins: tp.inputMinute,
-                secs: tp.inputSecond,
-                period: tp.period,
-                hi: `${tp.lazyInputHour}:${tp.inputMinute}`,
-                his: `${tp.lazyInputHour}:${tp.inputMinute}:${tp.inputSecond}0`,
-                Hms: `${tp.inputHour}:${tp.inputMinute}:${tp.inputSecond}0`,
-                hia: `${tp.lazyInputHour}:${tp.inputMinute} ${tp.period}`,
-                hisa: `${tp.lazyInputHour}:${tp.inputMinute}:${tp.inputSecond}0 ${tp.period}`,
+                hour: this.tp.lazyInputHour,
+                hour24: this.tp.inputHour,
+                mins: this.tp.inputMinute,
+                secs: this.tp.inputSecond,
+                period: this.tp.period,
+                hi: `${this.tp.inputHour}:${this.tp.inputMinute}`,
+                his: `${this.tp.genValue()}:${this.tp.inputSecond}0`,
+                Hms: `${this.tp.genValue()}:${this.tp.inputSecond}0`,
+                hia: `${this.tp.lazyInputHour}:${this.tp.inputMinute} ${this.tp.period}`,
+                hisa: `${this.tp.lazyInputHour}:${this.tp.inputMinute}:${this.tp.inputSecond}0 ${this.tp.period}`,
                 alarm: this.alarm
             }
+            // console.log(payload)
             this.$emit('input', payload)
             this.cancel()
         },

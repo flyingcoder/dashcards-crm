@@ -11,11 +11,11 @@
 
         <v-col cols="12" md="3" sm="4" xs="12" class="label">Select Type <span class="required">*</span></v-col>
         <v-col cols="12" md="9" sm="8" xs="12" class="value">
-            <v-select solo outlined full-width dense hide-details color="#657186" flat :items="['hourly', 'monthly']" v-model="type" placeholder="Select Invoice Type"></v-select>
+            <v-select :disabled="projectLock" solo outlined full-width dense hide-details color="#657186" flat :items="['hourly', 'monthly']" v-model="type" placeholder="Select Invoice Type"></v-select>
         </v-col>
         <v-col cols="12" md="3" sm="4" xs="12" class="label" v-if="type === 'hourly'">Select Project <span class="required">*</span></v-col>
         <v-col cols="12" md="9" sm="8" xs="12" class="value" v-if="type === 'hourly'">
-            <v-select clearable solo hide-details color="#657186" flat full-width outlined dense :items="projects" :value="selected_project" @change="setBillingTargets" item-text="title" item-value="id" placeholder="Select Project"></v-select>
+            <v-select :disabled="projectLock" :clearable="!projectLock" solo hide-details color="#657186" flat full-width outlined dense :items="projects" :value="selected_project" @change="setBillingTargets" item-text="title" item-value="id" placeholder="Select Project"></v-select>
         </v-col>
         <v-col cols="12" md="3" sm="4" xs="12" class="label">Invoice Date <span class="required">*</span></v-col>
         <v-col cols="12" md="9" sm="8" xs="12" class="value">
@@ -89,6 +89,9 @@ export default {
     components: {
         DatePicker,
         TeamsDialog
+    },
+    props: { 
+        projectLock : { type: Boolean, default : false }
     },
     data: () => ({
         members: [],

@@ -26,25 +26,35 @@
                         <v-col md="4" sm="6" xs="12">
                             <DatePicker @input="start_date = $event" :isBtnBlock="true"></DatePicker>
                             <div class="choosen" v-if="start_date">
-                                <v-btn outlined disabled dense block class="mt-1">{{
-                                    start_date | readableFormat
-                                    }}</v-btn>
+                                <v-btn outlined disabled dense block class="mt-1">{{ start_date | readableFormat }}</v-btn>
                             </div>
                         </v-col>
                         <v-col md="4" sm="6" xs="12">
                             <TimePicker @input="time = $event" :isBtnBlock="true"></TimePicker>
-                            <div class="choosen" v-if="time">
+                            <div class="choosen" v-if="displayTime">
                                 <v-btn v-if="time.alarm" outlined disabled dense block class="mt-1">
-                                    <v-icon small left>mdi-alarm</v-icon>{{ time.hia }}
+                                    <v-icon small left>mdi-alarm</v-icon>{{ displayTime }}
                                 </v-btn>
-                                <v-btn v-else outlined disabled dense block class="mt-1">{{ time.hia }}</v-btn>
+                                <v-btn v-else outlined disabled dense block class="mt-1">{{ displayTime }}</v-btn>
                             </div>
                         </v-col>
                         <v-col md="12" xs="12">
-                            <TextField :value.sync="title" label="Event Title" color="#657186" filled></TextField>
+                            <TextField prepend-inner-icon="mdi-power-on" :value.sync="title" solo label="Event Title" color="#657186"></TextField>
+                        </v-col>
+                        <v-col md="12" xs="12">
+                            <TextField prepend-inner-icon="mdi-link-variant-plus" :value.sync="link" solo label="Event Link (Optional)" color="#657186">
+                                <template v-slot:append>
+                                    <v-tooltip left>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon v-bind="attrs" v-on="on">mdi-help-circle</v-icon>
+                                        </template>
+                                        <span>A link where participants can join. e.g Skype link, Zoom Link or a Google Meet link</span>
+                                    </v-tooltip>
+                                </template>
+                            </TextField>
                         </v-col>
                         <v-col md="8" xs="12">
-                            <v-select v-model="event_type" v-if="calendar" :items="calendar.event_types" menu-props="auto" label="Select Event Category" hide-details return-object item-text="name" item-value="id" solo single-line>
+                            <v-select prepend-inner-icon="mdi-party-popper" v-model="event_type" v-if="calendar" :items="calendar.event_types" menu-props="auto" label="Select Event Category" hide-details return-object item-text="name" item-value="id" solo single-line>
                                 <template v-slot:item="{ item }">
                                     <span>
                                         <v-icon left :color="item.properties.color">mdi-circle</v-icon>
@@ -54,7 +64,7 @@
                             </v-select>
                         </v-col>
                         <v-col md="4" xs="12">
-                            <v-btn large block @click="$emit('open-custom-event-type')">
+                            <v-btn :height="47" block @click="$emit('open-custom-event-type')">
                                 <v-icon left>mdi-calendar-plus</v-icon> Custom Event
                             </v-btn>
                         </v-col>

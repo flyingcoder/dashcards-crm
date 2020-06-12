@@ -29,11 +29,11 @@ export default {
     props: {
         dialogTitle: { type: String, default: 'Add New Event' },
         isEditDialog: { type: Boolean, default: false },
-        fieldsToEdit: { type: Object, default: null },
         calendar: { type: Object, default: null }
     },
 
     data: () => ({
+        fieldsToEdit: null,
         dialog: false,
         title: '',
         rangemenu: true,
@@ -54,7 +54,21 @@ export default {
         description: '',
         event_type: null,
         dialogKey: 0,
-        time: null
+        time: null,
+        link: null,
+        defTime: {
+            hour: null,
+            hour24: null,
+            mins: null,
+            secs: null,
+            period: null,
+            hi: null,
+            his: null,
+            Hms: null,
+            hia: null,
+            hisa: null,
+            alarm: false
+        }
     }),
     computed: {
         disabled() {
@@ -62,12 +76,14 @@ export default {
                 !this.description ||
                 !this.event_type ||
                 !this.title ||
-                !this.start_date ||
-                !this.time
+                !this.start_date
             ) {
                 return true
             }
             return false
+        },
+        displayTime() {
+            return this.time ? this.time.hia : null
         }
     },
     filters: {
@@ -76,8 +92,9 @@ export default {
         }
     },
     methods: {
-        openDialog() {
+        openDialog(item) {
             this.dialog = true
+            this.fieldsToEdit = item || null
             this.timezone = moment.tz.guess()
 
             setTimeout(() => {
@@ -87,7 +104,8 @@ export default {
                     this.end_date = this.fieldsToEdit.end
                     this.event_type = this.fieldsToEdit.event_type
                     this.description = this.fieldsToEdit.description
-                    this.notify = this.fieldsToEdit.properties.send_notify
+                    this.notify = this.fieldsToEdit.properties.send_notify || false
+                    this.link = this.fieldsToEdit.properties.link || null
                     this.timezone = this.fieldsToEdit.properties.timezone
                     this.title = this.fieldsToEdit.title
                     this.members.selected = this.fieldsToEdit.participants.map(item => {
@@ -99,19 +117,31 @@ export default {
                 }
             }, 1)
         },
+        getDateTime() {
+            if (this.start_date) {
+                let date = this.start_date.split(" ")[0]
+                if (!this.time) {
+                    return moment(`${date} 00:00:00`).format('YYYY-MM-DD HH:mm:ss')
+                } else {
+                    return moment(`${date} ${this.time.his}`).format('YYYY-MM-DD HH:mm:ss')
+                }
+            }
+            return null
+        },
         save() {
             this.btnloading = true
             var payload = {
                 title: this.title,
                 notify: this.notify,
-                start_date: moment(`${this.start_date} ${this.time.his}`).format('YYYY-MM-DD HH:mm:ss'),
-                end_date: moment(`${this.start_date} ${this.time.his}`).format('YYYY-MM-DD HH:mm:ss'),
+                start_date: this.getDateTime(),
+                end_date: this.getDateTime(),
                 timezone: this.timezone,
                 all_day: this.all_day,
                 description: this.description,
                 event_type: this.event_type.id,
                 alarm: this.time.alarm,
-                time: this.time
+                time: this.time,
+                link: this.link
             }
 
             if (this.members.selected.length > 0) {

@@ -51,13 +51,15 @@
             </div>
         </div>
         <div class="card_footer">
-            <v-btn v-if="is_creator" dark :color="event.event_type.properties.color" @click="$emit('add-participant')">
-                <v-icon left small>mdi-email-send-outline</v-icon> Invite
+            <v-btn v-if="is_creator" dark depressed :color="event.event_type.properties.color" @click="$emit('add-participant')">
+                <v-icon left small>mdi-account-multiple-plus-outline</v-icon> Invite
             </v-btn>
-            <v-btn v-else dark :color="event.event_type.properties.color" @click="$emit('leave-event')">
-                <v-icon left small>mdi-email-receive-outline</v-icon> Leave Event
+            <v-btn v-else dark depressed :color="event.event_type.properties.color" @click="$emit('leave-event')">
+                <v-icon left small>mdi-account-arrow-left-outline</v-icon> Leave Event
             </v-btn>
-            <!-- <v-btn class="view_more" text color="white">View More</v-btn> -->
+            <v-btn class="ml-1" depressed color="primary" v-if="event.properties.link" :href="event.properties.link">
+                <v-icon left  small>mdi-account-tie-voice-outline</v-icon> Open Link
+            </v-btn>
         </div>
     </div>
 </template>
