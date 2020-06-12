@@ -50,6 +50,12 @@ export const getters = {
     props: state => {
         if (state.hasOwnProperty('invoice')) return typeof state.invoice.props === 'string' ? JSON.parse(state.invoice.props) : state.invoice.props
     },
+    parent: state => {
+        if (state.hasOwnProperty('invoice')) return state.invoice.parent
+    },
+    is_recurring: state => {
+        if (state.hasOwnProperty('invoice')) return state.invoice.is_recurring
+    },
     dialog: state => state.dialog,
     toolbar: state => state.toolbar,
     projects: state => state.projects,

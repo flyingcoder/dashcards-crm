@@ -8,6 +8,7 @@ const developmentApp = {
             forceTLS: true,
             logging: false
         },
+        stripe_redirect: 'https://crm.buzzookalocal.net:8080/dashboard/cloud',
     },
     staging: {
         BaseURL: 'https://crm.bizzooka.com',
@@ -18,6 +19,7 @@ const developmentApp = {
             forceTLS: true,
             logging: false
         },
+        stripe_redirect: 'https://crm.bizzooka.com/dashboard/cloud',
     },
     live: {
         BaseURL: 'https://crm.dashcards.com',
@@ -28,6 +30,7 @@ const developmentApp = {
             forceTLS: true,
             logging: false
         },
+        stripe_redirect: 'https://crm.dashcards.com/dashboard/cloud',
     }
 }
 var dev = developmentApp.localhost
@@ -56,13 +59,15 @@ const variables = {
         ],
         redirectUris: [
             'https://crm.buzzookalocal.net:8080/dashboard/cloud',
-            'https://crm.bizooka.com/dashboard/cloud',
+            'https://crm.bizzooka.com/dashboard/cloud',
             'https://crm.dashcards.com/dashboard/cloud',
         ]
     },
     stripe: {
         pub_key: 'pk_test_belq6nyu6bc7c4jE9LFkYhYA00NmGeVEuD',
-        secret_key: 'sk_test_pwcd0h85Xnf4PkRyJ2gcKqXA007Ta4jrP0'
+        secret_key: 'sk_test_pwcd0h85Xnf4PkRyJ2gcKqXA007Ta4jrP0',
+        client_id: 'ca_HKv0JmMqwvSzh15ZaMvAQXoZOHbSgVjM',
+        redirect_uri: dev.stripe_redirect
     }
 }
 

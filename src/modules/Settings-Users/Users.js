@@ -29,7 +29,9 @@ export default {
         restoring: false
     }),
     mounted() {
-        this.getUsers()
+        this.getUsers(()=>{
+            this.setActiveUser(this.filteredUsers[0])
+        })
         this.getGroups()
     },
     computed: {
@@ -68,8 +70,8 @@ export default {
         filterSearch() {
             return this.filteredUsers = []
         },
-        getUsers() {
-            this.fill_table_via_url(`api/company/teams?basics=true&per_page=50&withTrashed=true`)
+        getUsers(cb) {
+            this.fill_table_via_url(`api/company/teams?basics=true&per_page=50&withTrashed=true`,true, cb)
         },
         getGroups() {
             request.get(`api/groups?all=true`)

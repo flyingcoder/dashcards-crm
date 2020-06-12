@@ -106,17 +106,17 @@
           </v-list-item-action>
           <v-list-item-title>Milestone</v-list-item-title>
         </v-list-item>
-        <!-- <v-list-item
-          :class="{ active: selected_route_name === 'invoices' }"
+        <v-list-item
+          :class="{ active: selected_route_name === 'templates/invoice' }"
           sub-group
           class="submenu-item"
-          @click.stop="sidebar_item_clicked('invoices')"
+          @click.stop="sidebar_item_clicked('templates/invoice')"
         >
           <v-list-item-action class="s__icons mr-5 pl-4">
             <span>I</span>
           </v-list-item-action>
           <v-list-item-title>Invoices</v-list-item-title>
-        </v-list-item> -->
+        </v-list-item>
       </v-list-group>
       <v-list-group class="s_submenu" v-if="item.can_view() && item.title === 'Forms'">
         <template v-slot:activator>

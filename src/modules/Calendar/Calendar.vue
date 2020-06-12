@@ -64,7 +64,7 @@
                     <div class="right">
                         <div class="grid-view" v-if="view === 'grid'">
                             <EventCard v-for="(event, index) in items" :event="event" :key="event.id" @edit-event="open_add_event_dialog(true, event)" @delete-event="open_delete_dialog(event)" @leave-event="open_confirm_leave_dialog(event)" @view-event="open_event_detail_dialog(event)" @add-participant="open_add_participant_dialog(event)"></EventCard>
-                            <v-btn class="load-more my-2">Load More</v-btn>
+                            <v-btn class="load-more my-2" v-if="!noMoreData" :loading="btnloading" @click="load_more_events">Load More</v-btn>
                         </div>
                         <div class="list-view" v-if="view == 'list'">
                             <VueTable :items="items" :headers="headers" :showRowActions="true" @load-more="load_more_events" @delete-selected="open_bulk_delete_dialog($event)" icon="widgets" :showTopHeader="false" :key="componentKey" :noMoreData="noMoreData" :showSelect="false" :loading="loading">
@@ -74,7 +74,7 @@
                                     <td>
                                         <Avatars :items="item.participants" :count="1" :deep="true"></Avatars>
                                     </td>
-                                    <Actions :item="item" @delete="open_delete_dialog(item)" @edit="open_edit_dialog(item)" @view="open_event_detail_dialog(item)"></Actions>
+                                    <Actions :item="item" @delete="open_delete_dialog(item)" @edit="open_add_event_dialog(true, item)" @view="open_event_detail_dialog(item)"></Actions>
                                 </template>
                                 <template v-slot:empty-slot>
                                     <v-btn dark color="#3b589e" @click="open_add_event_dialog(false)">Add Event</v-btn>

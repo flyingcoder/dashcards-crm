@@ -37,8 +37,9 @@
                     <v-divider></v-divider>
                     <v-row class="py-3 px-2" no-gutters>
                         <v-col>
-                            <v-btn tile text v-if="showSelect && !noRowDelete && selected.length > 0" outlined color="red" @click="$emit('delete-selected', selected)" v-show="selected.length > 0">DELETE SELECTED <v-icon right small>delete</v-icon>
+                            <v-btn v-if="showSelect && !noRowDelete && selected.length > 0" dark color="red" @click="$emit('delete-selected', selected)" v-show="selected.length > 0"> <v-icon left>mdi-delete-alert-outline</v-icon> DELETE SELECTED
                             </v-btn>
+                            <slot name="extra-bulk-buttons"></slot>
                         </v-col>
                         <v-col class="d-flex align-content-center">
                             <v-spacer></v-spacer>

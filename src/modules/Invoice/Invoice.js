@@ -36,11 +36,11 @@ export default {
             { text: 'Invoice', disabled: true, router_name: null }
         ],
         headers: [
-            { text: 'Invoice #', sortable: false },
-            { text: 'Title', sortable: false },
             { text: 'Due Date', sortable: false },
-            { text: 'Billed To', sortable: false },
+            { text: 'Invoice #', sortable: false },
+            { text: 'Client', sortable: false },
             { text: 'Status', sortable: false },
+            // { text: 'Title', sortable: false },
             { text: 'Amount', sortable: false },
             {
                 text: 'Action',
@@ -108,7 +108,7 @@ export default {
 
         open_view_dialog(data) {
             this.view_item = data
-            this.view_invoice_dialog = true
+            this.$refs.view_invoice_dialog.open_dialog(data)
         },
 
         async delete_invoice() {

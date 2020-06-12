@@ -130,6 +130,8 @@ export default {
             formData.append('items', JSON.stringify(this.invoice.rows))
             formData.append('terms', this.invoice.terms)
             formData.append('notes', this.invoice.notes)
+            formData.append('parent', this.invoice.parent)
+            formData.append('is_recurring', this.invoice.is_recurring)
 
             var tax = this.calculate_field(this.invoice, 'tax')
             var discount = this.calculate_field(this.invoice, 'discount')

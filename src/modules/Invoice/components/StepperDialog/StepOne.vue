@@ -8,9 +8,10 @@
         <v-col cols="12" md="9" sm="8" xs="12" class="value">
             <v-text-field class="titlefield" color="#657186" solo hide-details flat dense outlined placeholder="Add Invoice Title *" v-model.trim="title"></v-text-field>
         </v-col>
+
         <v-col cols="12" md="3" sm="4" xs="12" class="label">Select Type <span class="required">*</span></v-col>
         <v-col cols="12" md="9" sm="8" xs="12" class="value">
-            <v-select :disabled="dialog.type === 'view'" solo outlined full-width dense hide-details color="#657186" flat :items="['hourly', 'monthly']" v-model="type" placeholder="Select Invoice Type"></v-select>
+            <v-select solo outlined full-width dense hide-details color="#657186" flat :items="['hourly', 'monthly']" v-model="type" placeholder="Select Invoice Type"></v-select>
         </v-col>
         <v-col cols="12" md="3" sm="4" xs="12" class="label" v-if="type === 'hourly'">Select Project <span class="required">*</span></v-col>
         <v-col cols="12" md="9" sm="8" xs="12" class="value" v-if="type === 'hourly'">

@@ -5,7 +5,7 @@ import { settings } from '@/variables'
 export const global_filters = {
     bzFromNow(date) {
         //bz = buzzooka
-        const tz_date = moment.tz(date, 'America/Toronto')
+        const tz_date = moment.tz(date, 'UTC')
         if (moment().diff(date, 'days') >= 2) {
             return moment(tz_date).fromNow()
         }
@@ -13,13 +13,13 @@ export const global_filters = {
     },
 
     from_now(date) {
-        const tz_date = moment.tz(date, 'America/Toronto')
+        const tz_date = moment.tz(date, 'UTC')
         return moment(tz_date).fromNow()
     },
 
     chat_format(date) {
         const tz = timezone.tz.guess()
-        const tz_date = timezone.tz(date, 'America/Toronto')
+        const tz_date = timezone.tz(date, 'UTC')
         return tz_date.clone().tz(tz).format('YY/MM/DD, h:mm A')
     },
 

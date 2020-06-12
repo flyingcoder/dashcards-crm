@@ -532,8 +532,13 @@ $darkBoxShadow-2: 0 8px 9px -5px rgba(0,0,0,.2),0 15px 22px 2px rgba(0,0,0,.14),
 .v-text-field .v-input__append-inner .v-input__icon--append {
     cursor: pointer;
 }
-.cursor-pointer{
+
+.cursor-pointer {
     cursor: pointer;
+}
+
+.fullwidth {
+    width: 100%;
 }
 
 pre {

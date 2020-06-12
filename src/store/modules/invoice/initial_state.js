@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export const initial_state = () => ({
     invoice: {
         company_logo: null,
@@ -8,8 +10,8 @@ export const initial_state = () => ({
         rows: [],
         selected_project: null,
         type: 'monthly',
-        due_date: null,
-        date: null,
+        due_date: moment().endOf('month').format('YYYY-MM-DD'),
+        date: moment().startOf('month').format('YYYY-MM-DD'),
         total_amount: 0,
         notes: '',
         terms: '',
@@ -30,7 +32,9 @@ export const initial_state = () => ({
         props: {
           template: 1,
           send_email: 'no'
-        }
+        },
+        parent: null,
+        is_recurring: 0
     },
     copy_invoice: null,
     invoice_to_edit: null,

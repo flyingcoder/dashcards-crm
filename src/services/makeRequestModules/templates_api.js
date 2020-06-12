@@ -19,5 +19,9 @@ export const templates_api = {
 
   bulk_delete_milestone_template(payload) {
     return request.delete(`/api/template/bulk-delete`, payload)
+  },
+
+  delete_invoice_template(id) {
+    return request.delete(`api/template/invoices/${id}`)
   }
 }

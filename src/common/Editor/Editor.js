@@ -49,6 +49,7 @@ export default {
         content: { type: String, default: '' },
         placeholder: { type: String, default: 'Write something...' },
         hasFloatingTools: { type: Boolean, default: true },
+        hasTools: { type: Boolean, default: true },
         editable: { type: Boolean, default: true }
     },
     data() {

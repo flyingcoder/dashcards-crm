@@ -1,14 +1,13 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-// import { TiptapVuetifyPlugin } from 'tiptap-vuetify'
-// import 'tiptap-vuetify/dist/main.css'
-import 'vuetify/dist/vuetify.min.css'
+import VueClipboard from 'vue-clipboard2'
 
-// const vuetify = new Vuetify()
+import 'vuetify/dist/vuetify.min.css'
+import 'srcdoc-polyfill/srcdoc-polyfill.min.js'
+
+Vue.use(VueClipboard)
 
 Vue.use(Vuetify)
-
-// Vue.use(TiptapVuetifyPlugin, { vuetify, iconsGroup: 'md' })
 
 export default new Vuetify({
     theme: {

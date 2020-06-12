@@ -8,6 +8,7 @@
                         <slot name="title">
                             <span class="dialog__title">{{ title }}</span>
                         </slot>
+                        <slot name="extra-buttons"></slot>
                         <slot name="cancel-icon">
                             <v-btn fab small depressed class="close__dialog" @click="close_dialog">
                                 <v-icon>close</v-icon>

@@ -25,6 +25,8 @@ export const mutations = {
     set_props: (state, payload) => (state.invoice.props = payload),
     toggle_visibility: (state, { new_val, field }) => (state.invoice[field].show = new_val),
     set_field: (state, { new_val, field }) => (state.invoice[field].value = Number(new_val)),
+    set_parent: (state, payload) => (state.invoice.set_parent = payload),
+    set_is_recurring: (state, payload) => (state.invoice.is_recurring = payload),
     toggle_symbol(state, field) {
         if (state.invoice[field].symbol === '%') state.invoice[field].symbol = '$'
         else state.invoice[field].symbol = '%'
@@ -55,6 +57,8 @@ export const mutations = {
         state.invoice.type = payload.type
         state.invoice.notes = payload.notes
         state.invoice.terms = payload.terms
+        state.invoice.parent = payload.parent
+        state.invoice.is_recurring = payload.is_recurring
         if (!payload.props) {
           state.invoice.props = { send_email: 'no', template : 1 }
         } else {
@@ -68,14 +72,16 @@ export const mutations = {
         state.invoice.billed_from = null
         state.invoice.billed_to = null
         state.invoice.company_logo = null
-        state.invoice.date = null
-        state.invoice.due_date = null
+        state.invoice.date =  moment().startOf('month').format('YYYY-MM-DD')
+        state.invoice.due_date = moment().endOf('month').format('YYYY-MM-DD')
         state.invoice.rows = []
         state.invoice.project_id = null
         state.invoice.title = ''
         state.invoice.type = 'monthly'
         state.invoice.notes = ''
         state.invoice.terms = ''
+        state.invoice.parent = null
+        state.invoice.is_recurring = 0
         state.invoice.props = { send_email: 'no', template : 1 }
         state.invoice_to_edit = null
     }

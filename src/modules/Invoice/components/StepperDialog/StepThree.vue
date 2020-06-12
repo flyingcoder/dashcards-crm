@@ -1,26 +1,45 @@
 <template>
-    <v-row no-gutters>  
+    <v-row no-gutters>
         <v-col md="5" sm="6">Company Logo</v-col>
         <v-col md="7" sm="6">
-            <div class="add__logo_box" v-if="image_preview">
+            <div class="add__logo_box" v-if="image_preview && image_preview !== `null`">
                 <img :src="image_preview" class="image-preview" />
                 <v-btn outlined class="button" v-show="image_preview">Remove</v-btn>
             </div>
             <div class="add__logo_box" v-else @click="$refs.hidden_input.click()">
-                <span class="text">+ Add Your Logo</span> 
+                <span class="text">+ Add Your Logo</span>
                 <input type="file" accept="image/*" ref="hidden_input" @change="file_selected" class="hidden-input" />
             </div>
         </v-col>
-        <v-col md="5" sm="6" class="label">Send email to recepient?</v-col>
+        <v-col md="5" sm="6" v-if="type === `monthly`" class="label">
+            <p>Recurring Invoice?
+                <v-tooltip top>
+                    <template v-slot:activator="{ on }">
+                        <v-icon v-on="on">mdi-help-circle-outline</v-icon>
+                    </template>
+                    <span>An recurring invoice is merely an invoice that is sent to the same recepient at regular monthly intervals, containing the same invoice details</span>
+                </v-tooltip>
+            </p>
+        </v-col>
+        <v-col md="7" sm="6" v-if="type === `monthly`" class="value">
+            <v-radio-group hide-details :mandatory="true" row :input-value="is_recurring" v-model="is_recurring" class="mt-0 pt-0">
+                <v-radio label="Yes" value="1" color="#3b589e"></v-radio>
+                <v-radio label="No" value="0" color="#3b589e"></v-radio>
+            </v-radio-group>
+        </v-col>
+        <v-col md="5" sm="6" class="label">
+            <p>Send email to recepient?</p>
+        </v-col>
         <v-col md="7" sm="6" class="value">
-            <v-radio-group :mandatory="true" row v-model="props.send_email" class="mt-0 pt-0">
+            <v-radio-group :mandatory="true" row v-model="props.send_email" :input-value="props.send_email" class="mt-0 pt-0">
                 <v-radio label="Yes" value="yes" color="#3b589e"></v-radio>
                 <v-radio label="No" value="no" color="#3b589e"></v-radio>
             </v-radio-group>
+            <!-- <v-switch v-model.trim="props.send_email" :value="props.send_email"></v-switch> -->
         </v-col>
         <v-col md="5" sm="6" class="label">Invoice Template </v-col>
         <v-col md="7" sm="6" class="value">
-            <v-select color="#657186" :items="templates"  v-model="props.template" placeholder="Select template" item-text="name" item-value="id" solo flat outlined dense></v-select>
+            <v-select color="#657186" :items="templates" v-model="props.template" placeholder="Select template" item-text="name" item-value="id" solo flat outlined dense></v-select>
         </v-col>
     </v-row>
 </template>
@@ -31,13 +50,13 @@ import axios from '@/services/axios_instance'
 export default {
     name: 'StepThree',
     data: () => ({
-        templates: [{ id: 1, name: 'Default' }],
+        templates: [],
         image_preview: null,
     }),
     computed: {
-        ...mapGetters('invoice', [ 'props', 'dialog','company_logo'])
+        ...mapGetters('invoice', ['props', 'dialog', 'company_logo', 'type', 'parent', 'is_recurring']),
     },
-    watch : {
+    watch: {
         company_logo(val) {
             if (!val) {
                 this.image_preview = null
@@ -52,7 +71,13 @@ export default {
             } else {
                 this.image_preview = val
             }
+        },
+        is_recurring(val) {
+            this.$store.commit('invoice/set_is_recurring', val)
         }
+    },
+    mounted() {
+        this.getTemplates()
     },
     methods: {
         file_selected(event) {
@@ -68,6 +93,12 @@ export default {
                     })
             }
         },
+        getTemplates() {
+            axios.get(`api/template/invoices`)
+                .then(({ data }) => {
+                    this.templates = data.data
+                })
+        }
     }
 }
 </script>
@@ -124,11 +155,12 @@ export default {
 }
 </style>
 <style scoped>
-    >>> .v-select__selection.v-select__selection--comma{
-        color: #667381;
-    }
-    >>> .v-list-item__title{
-        color: #667381;
-        font-size: 16px;
-    }
+>>>.v-select__selection.v-select__selection--comma {
+    color: #667381;
+}
+
+>>>.v-list-item__title {
+    color: #667381;
+    font-size: 16px;
+}
 </style>

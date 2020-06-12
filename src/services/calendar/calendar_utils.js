@@ -110,7 +110,8 @@ export const calendar_utils = {
         },
         dayclick(event) {
             this.filters = {
-                date: moment(event.date).format('YYYY-MM-DD')
+                date: moment(event.date).format('YYYY-MM-DD'),
+                page: 1
             }
             this.selected_date = moment(event.date).format('MMMM D, YYYY')
             this.load_events()
@@ -118,7 +119,8 @@ export const calendar_utils = {
         tabFilter(event) {
             if (event === 'today') {
                 this.filters = {
-                    date: moment().format('YYYY-MM-DD')
+                    date: moment().format('YYYY-MM-DD'),
+                    page: 1
                 }
                 this.selected_date = moment().format('MMMM D, YYYY')
             } else if (event === 'all') {

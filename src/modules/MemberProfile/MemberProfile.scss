@@ -2,26 +2,26 @@
 
 @include pagePadding ('.member-profile');
 
-.profile{
+.profile {
     background-color: $white;
     border: 1px solid $borderLightGray;
     border-radius: 10px;
     padding: 25px;
 
-    .profile-content{
+    .profile-content {
         background-color: $lightViolete;
         border: 1px solid $borderLightGray;
     }
 }
 
-@media only screen and (max-width: 768px) and (min-width: 481px){
-    .profile{
+@media only screen and (max-width: 768px) and (min-width: 481px) {
+    .profile {
         padding: 17px;
     }
 }
 
-@media only screen and (max-width: 480px){
-    .profile{
+@media only screen and (max-width: 480px) {
+    .profile {
         padding: 10px;
     }
 }

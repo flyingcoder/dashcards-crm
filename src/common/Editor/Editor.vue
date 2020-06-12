@@ -1,6 +1,6 @@
 <template>
     <div class="editor">
-        <editor-menu-bar v-if="editable" :editor="editor" class="editor-menu-bar" v-slot="{ commands, isActive }">
+        <editor-menu-bar v-if="hasTools && editable" :editor="editor" class="editor-menu-bar" v-slot="{ commands, isActive }">
             <div class="menubar pa-1">
                 <v-menu bottom left>
                     <template v-slot:activator="{ on }">

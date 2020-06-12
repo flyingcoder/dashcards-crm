@@ -119,7 +119,7 @@
                 </v-card-actions>
             </div>
         </v-card>
-        <VueTable v-else :items="items" :headers="headers" :showRowActions="true" @load-more="load_more" @delete-selected="open_bulk_delete_dialog($event)" icon="widgets" title="Projects" :key="componentKey" :noMoreData="noMoreData" :showSelect="true" :loading="loading">
+        <VueTable v-else :items="items" :headers="headers" :showRowActions="true" @load-more="load_more" @delete-selected="open_bulk_delete_dialog($event)" icon="widgets" title="Projects" :key="componentKey" :noMoreData="noMoreData" :showSelect="false" :loading="loading">
                 <template slot="header-toolbar">
                   <table-header
                   :noListButton="false"
