@@ -84,7 +84,7 @@ export const calendar_utils = {
             this.event_dialog_title = is_edit ? 'Edit Event' : 'Add New Event'
             if (is_edit) this.eventToEdit = item
             setTimeout(() => {
-                this.$refs.event_dialog.openDialog()
+                this.$refs.event_dialog.openDialog(item)
             }, 1)
         },
         open_add_event_type_dialog() {

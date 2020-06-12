@@ -7,15 +7,19 @@
         <EventDialog ref="event_dialog" :dialogTitle="event_dialog_title" :isEditDialog="isEventEditDialog" :fieldsToEdit="eventToEdit" :calendar="calendar" @new-event-added="insert_new_event" @event-updated="updated_event" @open-custom-event-type="open_add_event_type_dialog"></EventDialog>
         <EventTypeDialog ref="event_type_dialog" :calendar="calendar" @new-event-type-added="insert_new_event_type"></EventTypeDialog>
         <EventDetailDialog ref="event_detail_dialog" :event="eventToEdit" @edit-event="open_add_event_dialog(true, eventToEdit)" @delete-event="open_delete_dialog(eventToEdit)" @add-participant="open_add_participant_dialog(eventToEdit)"></EventDetailDialog>
-        <AddParticipantDialog v-if="eventToEdit" ref="add_participant_dialog" :event="eventToEdit" @participants-refresh="refreshParticipants">
+        <AddParticipantDialog ref="add_participant_dialog" :event="eventToEdit" @participants-refresh="refreshParticipants">
         </AddParticipantDialog>
         <table-header :paths="paths" :noButton="true" v-if="hasBreadCrumbs" />
         <div class="calendar-wrapper">
             <div class="calendar-content">
                 <div class="calendar_header">
                     <div class="left_option">
-                        <v-btn dark color="#3b589e" large @click="open_add_event_dialog(false)">Add Event</v-btn>
-                        <v-btn dark color="#3b589e" large @click="open_add_event_type_dialog">Customize Event</v-btn>
+                        <v-btn dark color="#3b589e" depressed large @click="open_add_event_dialog(false)">
+                            Add Event
+                        </v-btn>
+                        <v-btn dark color="#3b589e" depressed large @click="open_add_event_type_dialog">
+                            Customize Event
+                        </v-btn>
                         <h1 class="date_title text-center"> {{ selected_date }}</h1>
                     </div>
                     <div class="right_option">
@@ -36,11 +40,9 @@
                 <div class="calendar_body">
                     <div class="left">
                         <div class="date">
-                            <div class="date_icon">
-                                <svg viewBox="0 0 250 250">
-                                    <path class="icon" :d="icon"></path>
-                                </svg>
-                            </div>
+                            <v-avatar tile :size="60">
+                                <v-icon :size="60">mdi-calendar-clock</v-icon>
+                            </v-avatar>
                             <div class="date_text">
                                 <h3>Today</h3>
                                 <div>{{ today }}</div>
