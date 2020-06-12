@@ -1,13 +1,9 @@
 <template>
   <div class="invoice">
-    <ViewInvoice
-      ref="view_invoice_dialog"
-      :item="view_item"
-      :open="view_invoice_dialog"
-      @close="view_invoice_dialog = false"
-    ></ViewInvoice>
 
-    <InvoiceDialog type="edit" @updated="invoice_updated" />
+    <StepperInvoiceDialog :projectLock="true" ref="invoiceEditDialog" type="edit" @updated="invoice_updated"></StepperInvoiceDialog>
+
+    <ViewInvoice ref="view_invoice_dialog" :item="view_item"></ViewInvoice>
 
     <delete-dialog
       :open-dialog.sync="delete_dialog"

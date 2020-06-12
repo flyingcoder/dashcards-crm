@@ -17,10 +17,11 @@ export default {
     data: () => ({
         open: false,
         stepper: 1,
-        btnloading: false
+        btnloading: false,
     }),
     props: {
-        type: { type: String, default: 'create' }
+        type: { type: String, default: 'create' },
+        projectLock: { type: Boolean, default: false }
     },
     computed: {
         ...mapGetters(['user']),
