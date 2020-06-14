@@ -1,13 +1,8 @@
 import request from '@/services/axios_instance'
 import { settings } from '@/variables'
-//components
-import TableHeader from '@/common/TableHeader.vue'
 
 export default {
     name: 'Cloud',
-    components: {
-        TableHeader
-    },
 
     data: () => ({
         paths: [{

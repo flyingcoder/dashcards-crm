@@ -37,36 +37,37 @@
                         </div>
                         <v-col v-else md="8" sm="12" class="offset-md-2">
                             <v-row>
-                                <v-col md="4">Company Name *</v-col>
-                                <v-col md="8">
+                                <v-col md="4" cols="12" class="c-label">Company Name <span class="required">*</span></v-col>
+                                <v-col md="8" cols="12" class="c-field">
                                     <v-text-field outlined placeholder="Name" dense class="fullwidth" hide-details solo flat v-model="company.name" :value="company.name"></v-text-field>
                                 </v-col>
-                                <v-col md="4">Slogan</v-col>
-                                <v-col md="8">
+                                <v-col md="4" cols="12" class="c-label">Slogan</v-col>
+                                <v-col md="8" cols="12" class="c-field">
                                     <v-text-field outlined placeholder="Slogan" dense class="fullwidth" hide-details solo flat v-model="company.short_description" :value="company.short_description"></v-text-field>
                                 </v-col>
-                                <v-col md="4">Long Description</v-col>
-                                <v-col md="8">
+                                <v-col md="4" cols="12" class="c-label">Long Description</v-col>
+                                <v-col md="8" cols="12" class="c-field">
                                     <v-textarea :rows="2" outlined placeholder="Description" dense class="fullwidth" hide-details solo flat v-model="company.long_description" :value="company.long_description"></v-textarea>
                                 </v-col>
-                                <v-col md="4">Website</v-col>
-                                <v-col md="8">
+                                <v-col md="4" cols="12" class="c-label">Website</v-col>
+                                <v-col md="8" cols="12" class="c-field">
                                     <v-text-field outlined placeholder="Website" dense class="fullwidth" hide-details solo flat v-model="company.domain" :value="company.domain"></v-text-field>
                                 </v-col>
-                                <v-col md="4">Company Address</v-col>
-                                <v-col md="8">
+                                <v-col md="4" cols="12" class="c-label">Company Address</v-col>
+                                <v-col md="8" cols="12" class="c-field">
                                     <v-text-field outlined placeholder="Address" dense class="fullwidth" hide-details solo flat v-model="company.address" :value="company.address"></v-text-field>
                                 </v-col>
-                                <v-col md="4">Contact Number</v-col>
-                                <v-col md="8">
+                                <v-col md="4" cols="12" class="c-label">Contact Number</v-col>
+                                <v-col md="8" cols="12" class="c-field">
                                     <vue-phone-number-input class="fullwidth" v-model="contact_number" size="md" clearable :default-country-code="defaultCountryCode" @phone-number-blur="telephone_on_blur" @update="showUpdate"></vue-phone-number-input>
                                 </v-col>
-                                <v-col md="4">Company Email</v-col>
-                                <v-col md="8">
+                                <v-col md="4" cols="12" class="c-label">Company Email</v-col>
+                                <v-col md="8" cols="12" class="c-field">
                                     <v-text-field outlined type="email" placeholder="Email" dense class="fullwidth" hide-details solo flat v-model="company.email" :value="company.email"></v-text-field>
                                 </v-col>
-                                <v-col md="12" class="">
-                                    <v-btn color="primary" @click="update_company" :loading="btnloading" class="float-right">
+                                <v-col md="4" cols="12" class="c-label"><span class="required">*</span> Required Fields</v-col>
+                                <v-col md="8" cols="12">
+                                    <v-btn @click="update_company" :loading="btnloading" class="float-right update-btn">
                                         <v-icon left small>save</v-icon> Update
                                     </v-btn>
                                 </v-col>
@@ -80,4 +81,4 @@
     </div>
 </template>
 <script src="./Company.js"></script>
-<style lang="scss" scoped src="./Company.scss"></style>
+<style lang="scss" src="./Company.scss"></style>

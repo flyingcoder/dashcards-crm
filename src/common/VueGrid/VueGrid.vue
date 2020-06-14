@@ -9,18 +9,16 @@
                 <slot name="header-toolbar"></slot>
             </v-toolbar>
             <v-row>
-                <v-col md="3" sm="6" xs="12" v-for="item in items" :key="item.user_id">
+                <v-col md="3" sm="4" xs="12" v-for="item in items" :key="item.user_id">
                     <v-card class="member-card">
-                        <v-card-text class="px-5">
+                        <v-card-text>
                             <v-layout class="card-header align-center">
                                 <v-icon class="active-status" v-if="is_online(item)" title="Online" color="success">mdi-check-circle</v-icon>
                                 <v-icon class="active-status" v-else title="Offline">mdi-circle</v-icon>
                                 <span>{{ item.job_title | ucwords }}</span>
                                 <v-menu bottom>
                                     <template v-slot:activator="{ on }">
-                                        <v-btn class="settings" icon v-on="on">
-                                            <v-icon>settings</v-icon>
-                                        </v-btn>
+                                            <v-icon class="settings" v-on="on">settings</v-icon>
                                     </template>
                                     <v-list dense>
                                         <v-list-item v-if="can_edit(item)" @click="$emit('edit', item)">

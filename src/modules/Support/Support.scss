@@ -43,11 +43,19 @@
         display: flex;
         flex-direction: column;
     }
+    .s-features img {
+        width: 120px;
+        margin: 0 auto;
+    }
     .support-cta{
         padding: 10px 2vw 20px;
         background-color: $modalBgGray;
         border: 1px solid $tableBorderBlue;
         border-radius: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
     }
     .support-icons{
         display: flex;
@@ -58,6 +66,16 @@
         .s-icon{
             flex-basis: 16%;
             text-align: center;
+        }
+        .s-icon span {
+            border-radius: 50%;
+            margin: 0 auto;
+            background: #f3f4f6;
+            height: 84px;
+            width: 84px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 }

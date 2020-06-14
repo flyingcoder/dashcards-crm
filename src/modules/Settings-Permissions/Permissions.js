@@ -4,7 +4,6 @@ import { api_to } from './api'
 //Components
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
-import TableHeader from '@/common/TableHeader.vue'
 import PermissionsDialog from './components/PermissionsDialog/PermissionsDialog.vue'
 import VueTable from '@/common/VueTable/VueTable.vue'
 import Actions from '@/common/VueTable/Actions.vue'
@@ -17,15 +16,10 @@ export default {
     Breadcrumb,
     PermissionsDialog,
     DeleteDialog,
-    TableHeader,
     Actions
   },
 
   data: () => ({
-    paths: [
-      { text: 'Settings', disabled: false, router_name: 'settings' },
-      { text: 'Permissions', disabled: true, router_name: null }
-    ],
     headers: [
       {
         text: 'Name',

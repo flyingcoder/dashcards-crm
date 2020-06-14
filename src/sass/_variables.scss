@@ -113,6 +113,14 @@ $darkBoxShadow-2: 0 8px 9px -5px rgba(0,0,0,.2),0 15px 22px 2px rgba(0,0,0,.14),
     /* iOS 4.1- */
 }
 
+//Custom Global Class
+.page-title {
+    color: #667381;
+    text-align: left;
+    font-size: 30px;
+}
+
+
 // Mixin for styled Tabs
 @mixin styledMenuTabs($selector){
     #{$selector}{
@@ -557,13 +565,13 @@ pre {
 
     @media only screen and (max-width: 768px) {
         #{$selector} {
-            padding: 0 10px;
+            padding: 10px;
         }
     }
 
     @media only screen and (max-width: 480px) {
         #{$selector} {
-            padding: 0 5px;
+            padding: 5px;
         }
     }
 }
