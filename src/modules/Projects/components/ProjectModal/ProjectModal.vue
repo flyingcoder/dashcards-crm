@@ -2,14 +2,14 @@
     <v-row justify="center">
         <v-dialog v-model="open" scrollable max-width="700px" persistent>
             <v-card class="custom__dialog">
-                <v-card-title class="dialog__header">
-                    <span class="dialog__title">{{ title }}</span>
+                <div class="dialog__header">
+                    <h3 class="dialog__title">{{ title }}</h3>
                     <v-spacer></v-spacer>
                     <v-btn fab small depressed class="close__dialog" @click="clear_and_close">
                         <v-icon>close</v-icon>
                     </v-btn>
-                </v-card-title>
-                <v-card-text style="height: 500px;">
+                </div>
+                <v-card-text class="dialog__body">
                     <v-row no-gutter class="dialog__buttons">
                         <v-col md="4" sm="6">
                             <v-menu bottom close-on-content-click transition="slide-y-transition" bottom max-height="300">

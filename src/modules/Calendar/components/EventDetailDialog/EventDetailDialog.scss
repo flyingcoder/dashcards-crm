@@ -1,5 +1,29 @@
 @import "~@/sass/variables";
 
+@include styledDialog('.custom__dialog');
+.custom__dialog{
+
+  @include styledDialogHeader('.dialog__header');
+
+  @include styledCloseDialog('.close__dialog');
+
+  @include styledTitleDialog('.dialog__title');
+  
+  @include styledDialogBody('.dialog__body');
+
+  @include styledScrollFor('.dialog__body');
+
+  @include actionButtonsDialog('.dialog__actions');
+
+  .v-card__text.dialog__body{
+    padding-bottom: 0;
+  }
+  .v-btn{
+      color: $btnGray;
+  }
+
+}
+
 .event__comment_section{
     margin-top: 30px;
 

@@ -29,7 +29,7 @@ import { chat } from './routes/chat'
 import { calendar } from './routes/calendar'
 import { reports } from './routes/reports'
 import { payment } from './routes/payment'
-import { cloud } from './routes/cloud'
+import { connect } from './routes/connect'
 import { support } from './routes/support'
 import { member_profile } from './routes/memberProfile'
 import { client_profile } from './routes/clientProfile'
@@ -76,7 +76,7 @@ export default new Router({
         reports, //path: /dashboard/reports
         payment, //path: /dashboard/payment
         pay_invoice, //path: /dashboard/pay-invoice/:id
-        cloud, //path: /dashboard/cloud
+        connect, //path: /dashboard/connect
         support, //path: /dashboard/support
         member_profile, //path: /dashboard/team/profile/:id
         client_profile, //path: /dashboard/clients/profile/:id

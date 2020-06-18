@@ -4,21 +4,15 @@ import request from '@/services/axios_instance'
 //Components
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
-import TableHeader from '@/common/TableHeader.vue'
 
 export default {
     name: 'UsersTable',
     mixins: [list_functionality],
     components: {
         Breadcrumb,
-        DeleteDialog,
-        TableHeader
+        DeleteDialog
     },
     data: () => ({
-        paths: [
-            { text: 'Settings', disabled: false, router_name: 'settings' },
-            { text: 'Users & Roles', disabled: true, router_name: null }
-        ],
         roles: [{ name: 'All', slug: 'all' }],
         permissions: null,
         activeUser: null,

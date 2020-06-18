@@ -4,6 +4,11 @@
 
 .permissions-table {
     @include customTableRow; //css used for styling the last row of the table
+    
+    .permissions-selection{
+      color: $blue !important;
+      caret-color: $blue !important;
+    }
 }
 
 

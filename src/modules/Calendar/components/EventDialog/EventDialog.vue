@@ -1,17 +1,17 @@
 <template>
     <v-row justify="center">
         <v-dialog v-model="dialog" scrollable max-width="700px" persistent :key="dialogKey">
-            <v-card class="custom__dialog">
+            <v-card class="custom__dialog event-dialog">
                 <v-card-title class="dialog__header">
-                    <span class="dialog__title">{{ dialogTitle }}</span>
+                    <h3 class="dialog__title">{{ dialogTitle }}</h3>
                     <v-spacer></v-spacer>
                     <v-btn fab small depressed class="close__dialog" @click="clear_and_close">
                         <v-icon>close</v-icon>
                     </v-btn>
                 </v-card-title>
-                <v-card-text style="height: 450px;">
+                <v-card-text class="dialog__body">
                     <v-row>
-                        <v-col md="4" sm="6" xs="12">
+                        <v-col md="4" sm="6" xs="12" class="d__btn">
                             <MembersPicker @input="members.selected = $event" :maxHeight="300" :isBtnBlock="true">
                             </MembersPicker>
                             <div class="choosen" v-if="members.selected.length > 0">
@@ -23,26 +23,26 @@
                                 </v-chip>
                             </div>
                         </v-col>
-                        <v-col md="4" sm="6" xs="12">
+                        <v-col md="4" sm="6" xs="12" class="d__btn">
                             <DatePicker @input="start_date = $event" :isBtnBlock="true"></DatePicker>
                             <div class="choosen" v-if="start_date">
-                                <v-btn outlined disabled dense block class="mt-1">{{ start_date | readableFormat }}</v-btn>
+                                <div class="c-inner mt-1 text-center">{{ start_date | readableFormat }}</div>
                             </div>
                         </v-col>
-                        <v-col md="4" sm="6" xs="12">
+                        <v-col md="4" sm="6" xs="12" class="d__btn">
                             <TimePicker @input="time = $event" :isBtnBlock="true"></TimePicker>
                             <div class="choosen" v-if="displayTime">
-                                <v-btn v-if="time.alarm" outlined disabled dense block class="mt-1">
+                                <div v-if="time.alarm" class="c-inner mt-1 text-center">
                                     <v-icon small left>mdi-alarm</v-icon>{{ displayTime }}
-                                </v-btn>
-                                <v-btn v-else outlined disabled dense block class="mt-1">{{ displayTime }}</v-btn>
+                                </div>
+                                <div v-else class="c-inner mt-1 text-center">{{ displayTime }}</div>
                             </div>
                         </v-col>
                         <v-col md="12" xs="12">
-                            <TextField prepend-inner-icon="mdi-power-on" :value.sync="title" solo label="Event Title" color="#657186"></TextField>
+                            <TextField :value.sync="title" filled label="Event Title" color="#657186"></TextField>
                         </v-col>
                         <v-col md="12" xs="12">
-                            <TextField prepend-inner-icon="mdi-link-variant-plus" :value.sync="link" solo label="Event Link (Optional)" color="#657186">
+                            <TextField :value.sync="link" filled label="Event Link (Optional)" color="#657186">
                                 <template v-slot:append>
                                     <v-tooltip left>
                                         <template v-slot:activator="{ on, attrs }">
@@ -54,7 +54,7 @@
                             </TextField>
                         </v-col>
                         <v-col md="8" xs="12">
-                            <v-select prepend-inner-icon="mdi-party-popper" v-model="event_type" v-if="calendar" :items="calendar.event_types" menu-props="auto" label="Select Event Category" hide-details return-object item-text="name" item-value="id" solo single-line>
+                            <v-select v-model="event_type" v-if="calendar" :items="calendar.event_types" menu-props="auto" label="Select Event Category" hide-details return-object item-text="name" item-value="id" filled single-line>
                                 <template v-slot:item="{ item }">
                                     <span>
                                         <v-icon left :color="item.properties.color">mdi-circle</v-icon>
@@ -63,7 +63,7 @@
                                 </template>
                             </v-select>
                         </v-col>
-                        <v-col md="4" xs="12">
+                        <v-col md="4" xs="12" class="d__btn">
                             <v-btn :height="47" block @click="$emit('open-custom-event-type')">
                                 <v-icon left>mdi-calendar-plus</v-icon> Custom Event
                             </v-btn>
@@ -82,7 +82,7 @@
     </v-row>
 </template>
 <script src="./EventDialog.js"></script>
-<style lang="scss" scoped src="./EventDialog.scss"></style>
+<style lang="scss" src="./EventDialog.scss"></style>
 <style lang="css" scoped>
 >>>.theme--light.v-text-field--filled>.v-input__control>.v-input__slot {
     background-color: #fff;

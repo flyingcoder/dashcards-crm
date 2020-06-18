@@ -1,14 +1,13 @@
 <template>
     <div class="expanded-timeline-card">
-        <v-layout class="table-header justify-space-between align-center">
-            <breadcrumb :paths="paths" />
+        <v-layout class="table-header justify-end align-center">
             <div class="header-actions">
                 <!-- <v-btn fab small dark color="#3b589e" class="mr-2">
-    <v-icon>add</v-icon>
-</v-btn>
-<v-btn fab small class="mr-2">
-    <v-icon>more_horiz</v-icon>
-</v-btn> -->
+                    <v-icon>add</v-icon>
+                </v-btn>
+                <v-btn fab small class="mr-2">
+                    <v-icon>more_horiz</v-icon>
+                </v-btn> -->
                 <v-btn fab small @click="minimize">
                     <v-icon>close</v-icon>
                 </v-btn>

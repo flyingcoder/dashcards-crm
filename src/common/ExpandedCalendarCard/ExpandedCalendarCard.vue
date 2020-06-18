@@ -1,7 +1,6 @@
 <template>
   <div class="expanded-calendar-card">
-    <v-layout class="table-header justify-space-between align-center">
-      <breadcrumb :paths="paths" />
+    <v-layout class="table-header justify-end align-center">
       <div class="header-actions">
         <v-btn fab small dark color="#3b589e" class="mr-2">
           <v-icon>add</v-icon>
@@ -14,11 +13,8 @@
         </v-btn>
       </div>
     </v-layout>
-    <v-row>
-      <v-col cols="12">
-        <Calendar :hasBreadCrumbs="false"></Calendar>
-      </v-col>
-    </v-row>
+    
+    <Calendar :hasBreadCrumbs="false"></Calendar>
   </div>
 </template>
 
@@ -52,6 +48,13 @@ export default {
 .expanded-calendar-card {
   .dash__card .card__content {
     height: 100%;
+  }
+  .calendar{
+    padding: 20px 0;
+    
+    .calendar-wrapper{
+      margin: 0;
+    }
   }
 }
 </style>

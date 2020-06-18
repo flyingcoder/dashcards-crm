@@ -41,11 +41,17 @@
     .active-status{
       position: absolute;
       left: 0;
-      font-size: 20px;
+      top: 0;
+      font-size: 24px;
     }
     .settings{
       position: absolute;
       right: 0;
+      top: 0;
+    }
+    span{
+      padding: 0 26px;
+      text-align: center;
     }
   }
   .card-actions{

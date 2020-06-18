@@ -3,3 +3,9 @@
 .dialog-description{
     margin: 5px;
 }
+.dialog__selectfield{
+
+    button.v-icon.notranslate.v-icon--link.mdi.mdi-account-multiple-plus.theme--light:hover{
+        color: $blue;
+    }
+}

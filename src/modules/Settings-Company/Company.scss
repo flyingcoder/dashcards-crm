@@ -8,13 +8,44 @@
     border-radius: 10px;
     padding: 25px;
 
-    .profile-content {
-        background-color: $lightViolete;
-        border: 1px solid $borderLightGray;
+    .c-label{
+        margin-top: 10px;
+        text-align: right;
+        color: $textDark;
+    }
+    .required{
+        color: $red;
+    }
+    .update-btn{
+        background-color: $blue !important;
+        color: $white;
+        margin-top: 10px;
+    }
+    .c-field .v-input{
+        input{
+            color: $textDark !important;
+        }
+    }
+    // .c-field{
+    //     .v-text-field--outlined fieldset{
+    //         border: 2px solid $borderGray;
+            
+    //         &:hover{
+    //             border-color: $blue;
+    //         }
+    //     }
+    //     .input-tel__input, #MazPhoneNumberInput-105_country_selector.country-selector__input{
+    //         border: 2px solid $borderGray;
+            
+    //         &:hover{
+    //             border-color: $blue;
+    //         }
+    //     }
+    // }
 
-        .profile-upper {
-            border-bottom: 1px solid $borderLightGray;
-            box-shadow: $darkBoxShadow;
+    .profile-content {
+        background-color: $tableBlueBg;
+        border: 1px solid $borderLightGray;
 
             .background {
                 height: 250px;
@@ -72,11 +103,9 @@
                     width: 150px;
                 }
             }
-        }
 
         .user-info {
             display: block;
-            background-color: $white;
             padding: 20px;
             align-items: center;
 

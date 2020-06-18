@@ -196,4 +196,4 @@
 </template>
 
 <script src="./TeamsDialog.js"></script>
-<style lang="scss" scoped src="./TeamsDialog.scss"></style>
+<style lang="scss" src="./TeamsDialog.scss"></style>

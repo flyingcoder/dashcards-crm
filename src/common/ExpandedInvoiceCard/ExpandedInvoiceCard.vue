@@ -1,7 +1,6 @@
 <template>
   <div class="expanded-invoice-card">
-    <v-layout class="table-header justify-space-between align-center">
-      <breadcrumb :paths="paths" />
+    <v-layout class="table-header justify-end align-center">
       <div class="header-actions">
         <v-btn fab small dark color="#3b589e" class="mr-2">
           <v-icon>add</v-icon>

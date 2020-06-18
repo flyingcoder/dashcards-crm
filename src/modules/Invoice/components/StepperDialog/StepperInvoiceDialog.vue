@@ -66,6 +66,7 @@
 
 .invoice-dialog.v-stepper{
     background-color: $modalBgGray;
+    box-shadow: none;
 
     .v-stepper__step__step.primary{
         background: $blue !important;

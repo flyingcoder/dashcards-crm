@@ -1,66 +1,67 @@
 @import '~@/sass/_variables';
 
 @include styledDialog('.custom__dialog');
+.custom__dialog.event-dialog {
+  background-color: $modalBgGray;
 
-.custom__dialog {
-  .dialog__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    padding: 0;
+  @include styledDialogHeader('.dialog__header');
 
-    @include styledCloseDialog('.close__dialog');
+  @include styledCloseDialog('.close__dialog');
 
-    @include styledTitleDialog('.dialog__title');
-  }
-}
+  @include styledTitleDialog('.dialog__title');
+  
+  @include styledDialogBody('.dialog__body');
 
-@include styledScrollFor('.dialog__body');
+  @include styledScrollFor('.dialog__body');
 
-.dialog__body {
-    max-height: 450px;
-    overflow: hidden auto;
-    padding: 0 15px;
-    margin: 0 20px;
-    color: $tableDarkText;
-}
+  @include actionButtonsDialog('.dialog__actions');
 
-
-.text-fields {
-  display: -ms-grid;
-  display: grid;
-  grid-gap: 10px 0;
-  padding: 10px 0;
-}
-
-
-.dialog__buttons {
-    margin-bottom: 0;
-
-    .d__btn {
-      width: 170px;
-      height: 47px;
-      padding: 5px 10px;
-      font-size: 18px;
-      background-color: $white;
-      color: $textDark;
-      border-radius: 4px 4px 0 0;
-
-      .d__icon {
-        width: 27px;
-        fill: $textDark;
-        margin-right: 10px;
-        margin-top: 3px;
-      }
-
-      .d__title {
-        text-transform: capitalize;
-        white-space: normal;
-        font-size: 15px;
-        letter-spacing: 0;
-      }
-    }
+  .v-card__text.dialog__body{
+    padding-bottom: 0;
   }
 
+  .d__btn {
+  
+      .v-btn {
+        width: 170px;
+        height: 47px;
+        padding: 5px 10px;
+        font-size: 18px;
+        background-color: $white !important;
+        color: $textDark;
+        border-radius: 4px 4px 0 0;
+  
+        i {
+          width: 27px;
+          fill: $textDark;
+          margin-right: 10px;
+          margin-top: 3px;
+        }
+  
+        .v-btn__content {
+          text-transform: capitalize;
+          white-space: normal;
+          font-size: 15px;
+          letter-spacing: 0;
+        }
+      }
+  }
+
+  .choosen .c-inner{
+      border: 1px solid $borderGray;
+      border-radius: 4px;
+      padding: 5px;
+  }
+
+  .text-fields {
+    display: -ms-grid;
+    display: grid;
+    grid-gap: 10px 0;
+    padding: 10px 0;
+  }
+  
   @include actionButtonsDialog('.dialog__actions')
+
+}
+
+

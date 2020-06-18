@@ -1,6 +1,5 @@
 @import '~@/sass/_variables';
 
-@include styledScrollFor('.v-card__text');
 
 .v-card__text{
     .theme--light.v-input:not(.v-input--is-disabled) input{
@@ -68,9 +67,15 @@
 
 .addService__dialog.v-card.theme--light{
 
+    @include styledDialogHeader('.dialog__header');
+    @include styledCloseDialog('.close__dialog');
+    @include styledTitleDialog('.dialog__title');
+    @include styledScrollFor('.dialog__body');
+    @include styledDialogBody('.dialog__body');
+
     .v-card__text{
-        max-height:600px;
-        padding: 0;
+        padding: 20px !important;
+
         .theme--light.v-input:not(.v-input--is-disabled) input{
             color: $modalTitle;
             caret-color: $modalTitle;
@@ -89,18 +94,6 @@
                 min-height: 65px;
             }
         }
-    }
-
-    .dialog__header{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        padding: 0;
-
-        @include styledCloseDialog('.close__dialog');
-
-        @include styledTitleDialog('.dialog__title');
     }
     
     .service__field{
