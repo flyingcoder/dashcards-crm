@@ -15,18 +15,12 @@
 
 .settings {
     .tabs {
-        box-shadow: 0px -2px 1px #e4d0d0;
+        box-shadow: 0px 2px 1px rgba(0, 0, 0, .2);
 
         .v-tabs__item--active {
             background: #3b589e;
             color: white;
         }
     }
-}
-</style>
-<style scoped>
->>>.tabs .v-tabs__item--active {
-    background: #3b589e;
-    color: white;
 }
 </style>

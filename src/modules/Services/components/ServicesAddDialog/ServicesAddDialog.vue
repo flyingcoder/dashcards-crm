@@ -2,14 +2,14 @@
   <v-layout justify-center>
     <v-dialog v-model="open" persistent scrollable max-width="600px">
       <v-card class="addService__dialog">
-        <v-card-title class="dialog__header">
-          <span class="dialog__title">{{ title }}</span>
-          <v-btn small fab @click="cancel" class="close__dialog">
+        <div class="dialog__header">
+          <h3 class="dialog__title">{{ title }}</h3>
+          <v-btn small fab depressed @click="cancel" class="close__dialog">
             <v-icon dark>close</v-icon>
           </v-btn>
-        </v-card-title>
+        </div>
 
-        <v-card-text scrollable>
+        <v-card-text scrollable class="dialog__body">
           <v-layout wrap>
             <v-layout align-center justify-space-between class="service__field">
               <v-flex xs10>

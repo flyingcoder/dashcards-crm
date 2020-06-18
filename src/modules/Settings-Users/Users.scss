@@ -4,4 +4,62 @@
 
 .users-table {
     @include customTableRow; //css used for styling the last row of the table
+    .users-table-wrapper{
+        padding: 20px;
+        background-color: $white;
+        border: 1px solid $borderLightGray;
+        border-radius: 10px;
+    }
+    .users-table-inner{
+        padding: 20px;
+        background-color: $tableBlueBg;
+        border: 1px solid $borderLightGray;
+        border-radius: 10px;
+
+        .v-toolbar.v-sheet{
+          background: transparent;
+        }
+    }
+    .table-title {
+      color: $tableTitleBlue;
+      text-align: left;
+      font-size: 30px;
+    }
+    .table-header{
+        .table-btn.v-btn{
+            background-color: $blue;
+            color: $white;
+        }
+    }
+    .users-list{
+        border: 1px solid $borderLightGray;
+        .v-list-item__title{
+            color: $textDark;
+        }
+        .v-list-item__subtitle{
+            color: $darkGray;
+            font-weight: normal;
+        }
+    }
+    .user-preview{
+        border: 1px solid $borderLightGray;
+        .info-label{
+            color: $textDark;
+            font-weight: bold;
+        }
+        .info-item{
+            color: $textDark;
+            font-weight: normal;
+        }
+        .disable-acc.v-btn{
+            background-color: $blue;
+            color: $white;
+        }
+        .save-btn{
+            color: $btnGray;
+        }
+        th, tr{
+           color: $textDark; 
+        }
+    }
 }

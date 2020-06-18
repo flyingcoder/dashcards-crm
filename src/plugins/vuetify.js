@@ -11,10 +11,10 @@ Vue.use(Vuetify)
 
 export default new Vuetify({
     theme: {
-        primary: '#ee44aa',
-        secondary: '#424242',
+        primary: '#3b589e',
+        secondary: '#657186',
         accent: '#82B1FF',
-        error: '#FF5252',
+        error: '#f56c6c',
         info: '#2196F3',
         success: '#4CAF50',
         warning: '#FFC107'

@@ -5,18 +5,21 @@ import makeRequestTo from '@/services/makeRequestTo'
 import * as apiTo from '@/modules/Calendar/api'
 //components
 import TextField from '@/common/BaseComponents/TextField.vue'
+import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 export default {
   name: 'EventTypeDialog',
   components: {
-    TextField
+    TextField,
+    CustomDialog
   },
   props: {
+    dialog: Boolean,
     dialogTitle: { type: String, default: 'Add New Event Type' },
     calendar: { type: Object, default: () => {} }
   },
 
   data: () => ({
-    dialog: false,
+    open: false,
     btnloading: false,
     btnloading2: false,
     name: '',
@@ -34,6 +37,13 @@ export default {
     ],
     to_be_added: []
   }),
+
+  watch: {
+    dialog(new_val) {
+      this.open = new_val
+    }
+  },
+
   computed: {
     disabled() {
       if (this.to_be_added.length <= 0) {
@@ -50,7 +60,7 @@ export default {
   },
   methods: {
     openDialog() {
-      this.dialog = true
+      this.open = true
     },
     save() {
       this.btnloading = true

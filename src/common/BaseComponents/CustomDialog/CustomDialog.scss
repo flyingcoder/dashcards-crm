@@ -1,28 +1,20 @@
 @import '~@/sass/_variables';
-
 @include styledDialog('.custom__dialog');
 
 .custom__dialog {
-  .dialog__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    padding: 0;
+  @include styledDialogHeader('.dialog__header');
 
-    @include styledCloseDialog('.close__dialog');
+  @include styledCloseDialog('.close__dialog');
 
-    @include styledTitleDialog('.dialog__title');
-  }
+  @include styledTitleDialog('.dialog__title');
+  
+  @include styledDialogBody('.dialog__body');
 
   @include styledScrollFor('.dialog__body');
 
-  .dialog__body {
-    max-height: 500px;
-    overflow: hidden auto;
-    color: $tableDarkText;
-    font-size: 16px;
-  }
-
   @include actionButtonsDialog('.dialog__actions');
+
+  .v-card__text.dialog__body{
+    padding: 0 20px 20px 20px;
+  }
 }

@@ -1,0 +1,49 @@
+@import '~@/sass/_variables';
+
+@include styledDialog('.custom__dialog');
+
+.custom__dialog.add-participant {
+    background-color: $modalBgGray;
+    min-height: 300px;
+
+  @include styledDialogHeader('.dialog__header');
+
+  @include styledCloseDialog('.close__dialog');
+
+  @include styledTitleDialog('.dialog__title');
+
+  @include styledScrollFor('.dialog__body');
+  
+  @include styledDialogBody('.dialog__body');
+  
+  @include actionButtonsDialog('.dialog__actions');
+
+    .dialog__body{
+
+        .v-btn {
+          width: 170px;
+          height: 47px;
+          padding: 5px 10px;
+          font-size: 18px;
+          background-color: $white;
+          color: $textDark;
+          border-radius: 4px 4px 0 0;
+    
+          i {
+            width: 27px;
+            fill: $textDark;
+            margin-right: 10px;
+            margin-top: 3px;
+          }
+    
+          .v-btn__content {
+            text-transform: capitalize;
+            white-space: normal;
+            font-size: 15px;
+            letter-spacing: 0;
+          }
+        }
+
+    }
+
+}

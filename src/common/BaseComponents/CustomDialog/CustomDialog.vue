@@ -2,11 +2,11 @@
     <v-layout justify-center>
         <v-dialog v-model="dialog" persistent :max-width="maxWidth">
             <v-progress-linear v-if="loading" slot="progress" color="blue" indeterminate></v-progress-linear>
-            <v-card tile class="custom__dialog" v-else>
-                <v-card-title class="dialog__header">
+            <v-card class="custom__dialog" v-else>
+                <div class="dialog__header">
                     <slot name="entire-header">
                         <slot name="title">
-                            <span class="dialog__title">{{ title }}</span>
+                            <h3 class="dialog__title">{{ title }}</h3>
                         </slot>
                         <slot name="extra-buttons"></slot>
                         <slot name="cancel-icon">
@@ -16,7 +16,7 @@
                         </slot>
                     </slot>
                     <slot name="below-title"></slot>
-                </v-card-title>
+                </div>
                 <v-card-text class="dialog__body">
                     <slot name="content">
                         <div v-html="content"></div>

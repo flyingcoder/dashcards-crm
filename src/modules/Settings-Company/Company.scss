@@ -19,6 +19,7 @@
     .update-btn{
         background-color: $blue !important;
         color: $white;
+        margin-top: 10px;
     }
     .c-field .v-input{
         input{
@@ -43,12 +44,8 @@
     // }
 
     .profile-content {
-        background-color: $lightViolete;
+        background-color: $tableBlueBg;
         border: 1px solid $borderLightGray;
-
-        .profile-upper {
-            border-bottom: 1px solid $borderLightGray;
-            box-shadow: $darkBoxShadow;
 
             .background {
                 height: 250px;
@@ -106,11 +103,9 @@
                     width: 150px;
                 }
             }
-        }
 
         .user-info {
             display: block;
-            background-color: $white;
             padding: 20px;
             align-items: center;
 

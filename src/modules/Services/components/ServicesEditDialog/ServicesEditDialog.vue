@@ -9,8 +9,6 @@
       @button2="save"
     >
       <template slot="content">
-        <v-layout wrap>
-          <v-flex xs12>
             <v-combobox
               class="service__input"
               label="Service name"
@@ -21,8 +19,6 @@
               color="#657186"
               :items="recommendedServices"
             ></v-combobox>
-          </v-flex>
-        </v-layout>
       </template>
     </CustomDialog>
   </div>

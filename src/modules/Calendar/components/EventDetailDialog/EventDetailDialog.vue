@@ -3,14 +3,14 @@
         <v-dialog v-model="dialog" scrollable max-width="600px" persistent>
             <v-card class="custom__dialog">
                 <v-card-title class="dialog__header">
-                    <span class="dialog__title">{{ dialogTitle }}</span>
+                    <h3 class="dialog__title">{{ dialogTitle }}</h3>
                     <v-spacer></v-spacer>
                     <v-btn fab small depressed class="close__dialog" @click="clear_and_close">
                         <v-icon>close</v-icon>
                     </v-btn>
                 </v-card-title>
-                <v-card-text style="height: 500px;">
-                    <v-row no-gutters>
+                <v-card-text class="dialog__body">
+                    <v-row no-gutters  class="justify-center align-center">
                         <label>{{ event_date }}</label>
                         <v-divider class="mx-2" vertical></v-divider>
                         <label>{{ event_time }}</label>

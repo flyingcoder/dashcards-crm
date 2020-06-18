@@ -13,8 +13,8 @@
       @report-updated="reportUpdated"
     />
 
-    <v-col md="12" xs="12" class="px-3 pa-0" v-if="reports.length > 0">
-      <div class="pa-2 body-wrapper">
+    <v-col md="12" xs="12" class="px-3 pa-0">
+      <div class="body-wrapper" v-if="reports.length > 0">
         <v-tabs
           grow
           :show-arrows="is_screen_medium_and_down"
@@ -101,15 +101,17 @@
           </v-tab-item>
         </v-tabs-items>
       </div>
-    </v-col>
-    <v-col md="12" xs="12" class="ma-0 pa-0" v-else>
-      <Empty headline="No reports yet">
-        <template v-slot:extra>
-          <v-btn large dark color="#3b589e" @click="open_dialog"
-            >Add Report
-          </v-btn>
-        </template>
-      </Empty>
+      
+      <div class="body-wrapper" v-else>
+      
+        <Empty headline="No reports yet">
+          <template v-slot:extra>
+            <v-btn large dark color="#3b589e" @click="open_dialog"
+              >Add Report
+            </v-btn>
+          </template>
+        </Empty>
+      </div>
     </v-col>
   </v-row>
 </template>
