@@ -1,0 +1,28 @@
+@import '~@/sass/variables';
+@include emptyTable('.empty-files');
+@include firstColumnHover;
+
+.justify-content-center {
+    display: flex;
+    justify-content: center;
+
+    .empty-content {
+        width: 100%;
+    }
+}
+
+.files__tab {
+    padding: 24px;
+}
+
+@media only screen and (max-width: 768px) and (min-width: 481px) {
+    .files__tab {
+        padding: 20px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .files__tab {
+        padding: 15px;
+    }
+}

@@ -9,8 +9,8 @@ export const services_api = {
     return request.get('api/services')
   },
 
-  add_new_services(services) {
-    return request.post('api/services', services)
+  add_new_service(service) {
+    return request.post('api/services', service)
   },
 
   update_service(id, new_name) {

@@ -1,0 +1,41 @@
+@import '~@/sass/_variables';
+
+.message__tab{
+  padding: 25px;
+  margin: 25px;
+  background-color: $white;
+  border: 1px solid $tableBorderBlue;
+  border-radius: 10px;
+  @include customTableRow;
+
+  .message__content{
+    background-color: $tableBlueBg;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+    padding: 15px;
+  }
+
+  .tabs{
+    margin: 0px 10px 0px 0px;
+  }
+
+  .option{
+    background-color: $bgLightBlue-2;
+    border: 1px solid $borderLightGray;
+  }
+
+  .tab-title{
+    margin-right: 20px;
+  }
+
+  .counter{
+    font-size: 12px;
+    line-height: 35px;
+    background-color: $red;
+    height: 35px;
+    width: 35px;
+    color: $white;
+    border-radius: 50%;
+  }
+
+}

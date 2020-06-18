@@ -57,7 +57,7 @@
             <v-btn v-else dark depressed :color="event.event_type.properties.color" @click="$emit('leave-event')">
                 <v-icon left small>mdi-account-arrow-left-outline</v-icon> Leave Event
             </v-btn>
-            <v-btn class="ml-1" depressed color="primary" v-if="event.properties.link" :href="event.properties.link">
+            <v-btn class="ml-1" depressed color="primary" v-if="event.properties.link" :href="event.properties.link" target="_blank">
                 <v-icon left  small>mdi-account-tie-voice-outline</v-icon> Open Link
             </v-btn>
         </div>

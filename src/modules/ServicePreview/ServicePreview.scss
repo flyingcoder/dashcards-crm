@@ -1,0 +1,8 @@
+@import '~@/sass/_variables';
+@include styledMenuTabs('.service-preview');
+
+.service-preview {
+    .tabs {
+        box-shadow: 0px 2px 1px rgba(0, 0, 0, .2);
+    }
+}

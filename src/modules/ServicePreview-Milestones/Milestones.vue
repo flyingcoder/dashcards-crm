@@ -1,0 +1,113 @@
+<template>
+  <div class="milestones__tab">
+    <milestone-tab-dialog
+      :dialog.sync="add_dialog"
+      ref="add_dialog"
+      dialog-title="Add Milestone"
+      @save="add_new_milestone"
+    />
+
+    <delete-dialog
+      :open-dialog.sync="delete_dialog"
+      title="Delete Milestone"
+      text-content="Are you sure you want to delete this milestone?"
+      @delete="delete_milestone"
+    />
+
+    <milestone-tab-dialog
+      :dialog.sync="edit_dialog"
+      ref="edit_dialog"
+      dialog-title="Edit Milestone"
+      :is-edit-dialog="edit_dialog"
+      :fields-to-edit="edit_item"
+      @save="update_milestone"
+    />
+
+    <select-template-dialog
+      :open.sync="select_template_dialog"
+      @save="add_template"
+      dialog-title="Add Milestone Template"
+    />
+
+    <add-task-dialog
+      :dialog.sync="add_task_dialog"
+      ref="add_task_dialog"
+      dialog-title="Add Task"
+      :milestone-start-date="add_task_start_date"
+      :id="id"
+      @save="add_new_task"
+    />
+
+    <add-task-dialog
+      :dialog.sync="edit_task_dialog"
+      ref="edit_task_dialog"
+      dialog-title="Edit Task"
+      :is-edit-dialog="edit_task_dialog"
+      :fields-to-edit="edit_task_item"
+      :id="id"
+      @save="update_task"
+    />
+
+    <v-progress-linear
+      v-show="loading"
+      :indeterminate="true"
+    ></v-progress-linear>
+
+    <v-layout justify-end>
+      <v-speed-dial
+        class="add-btn"
+        v-model="is_open_speed_dial"
+        direction="bottom"
+        right
+        transition="slide-y-transition"
+      >
+        <template v-slot:activator>
+          <v-btn v-model="is_open_speed_dial" color="#3b589e" dark fab small>
+            <v-icon v-if="is_open_speed_dial">close</v-icon>
+            <v-icon v-else>add</v-icon>
+          </v-btn>
+        </template>
+
+        <v-btn color="#3b589e" dark small fab @click="add_dialog = true">
+          <v-icon title="Add Milestone">add</v-icon>
+        </v-btn>
+
+        <v-btn
+          :disabled="boxes.length > 0"
+          color="#3b589e"
+          small
+          fab
+          @click="open_select_template_dialog"
+        >
+          <v-icon color="white" title="Select Template">touch_app</v-icon>
+        </v-btn>
+      </v-speed-dial>
+    </v-layout>
+
+    <v-layout wrap class="boxes__wrapper">
+      <v-flex
+        md6
+        xs12
+        class="milestone__box"
+        v-for="(box, index) of boxes"
+        :key="box.id"
+      >
+        <div class="milestone__dynamic_box">
+          <dynamic-box
+            :id="id"
+            :box="box"
+            :loading="box.id === boxIdInProgress"
+            @edit="open_edit_dialog"
+            @delete="open_delete_confirmation"
+            @edit-task="edit_task"
+            @remove-task="remove_task(index, $event)"
+            @add-task="open_add_task_dialog"
+          />
+        </div>
+      </v-flex>
+    </v-layout>
+  </div>
+</template>
+
+<script src="./Milestones.js"></script>
+<style lang="scss" scoped src="./Milestones.scss"></style>

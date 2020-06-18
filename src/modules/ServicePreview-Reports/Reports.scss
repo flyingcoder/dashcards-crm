@@ -1,0 +1,79 @@
+@import '~@/sass/_variables';
+
+@include emptyTable('.empty-reports');
+
+.custom-dialog {
+  .dialog__link, .dialog__textfield{
+    margin: 10px 5px;
+  }
+}
+
+.actions {
+  padding-bottom: 12px;
+  .v-btn{
+    margin-right: 8px;
+  }
+}
+.add-btn{
+  margin-right: 10px;
+}
+
+@include actionButtonsDialog('.disable-btn');
+
+.theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat){
+  background-color: $white;
+}
+.reports-tab{
+
+  .tab-img{
+    max-height: 30px; 
+    max-width: 100px;
+  }
+  .v-tab {
+    color: $tableBlueText !important;
+  }
+  .reports-tab-content{
+      margin: 24px;
+  }
+}
+.reports-tab.v-card.v-sheet.theme--light{
+  background-color: $dashboardBg;
+}
+
+
+.reports__body{
+  padding: 0px;
+}
+
+.reports-actions{
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 768px){
+  .reports__tab {
+    padding: 7px;
+  }
+  .body-wrapper{
+    padding: 15px;
+
+    .reports__body{
+      padding: 0px;
+    }
+  }
+}
+
+@media only screen and (max-width: 599px){
+  .body-wrapper{
+    padding: 10px;
+
+    .reports__body{
+      padding: 10px;
+    }
+    
+    .v-btn--floating.v-btn--small{
+      height: 35px;
+      width: 35px;
+    }
+  }
+}

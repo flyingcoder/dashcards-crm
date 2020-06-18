@@ -22,7 +22,7 @@
           v-model="reports_selected"
         >
           <v-tab v-for="(report, i) in reports" :key="i">
-            <img class="tab-img mr-2" src="@/assets/logo/mini-blue.png" />
+            <img class="tab-img mr-2" :src="getIconFromUrl(report)" />
             {{ report.title }}
           </v-tab>
           <v-tab
