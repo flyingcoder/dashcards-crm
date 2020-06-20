@@ -1,0 +1,87 @@
+@import '~@/sass/_variables';
+
+@include pagePadding('.cloud');
+
+.cloud {
+    @include customTableRow;
+}
+.cloud-wrapper{
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+    padding: 20px
+}
+.cloud-content {
+    background-color: $bgLightBlue-2;
+    border: 1px solid $tableBorderBlue;
+    padding: 20px;
+
+    .cloud-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+}
+.gdrive{
+    background-color: $googledrive;
+}
+.stripe{
+    background-color: $stripe;
+}
+.dropbox{
+    background-color: $dropbox;
+}
+.gmeet{
+    background-color: $googleMeet;
+}
+.zoom{
+    background-color: $zoom;
+}
+.skype{
+    background-color: $skype;
+}
+.seoprofiler{
+    background-color: $seoprofiler;
+}
+.integration.seoprofiler{
+    color: $black;
+
+    .app-actions{
+
+        .v-btn{
+            color: $black;
+        }
+        .v-btn--outlined{
+            border: 1px solid $black;
+        }
+        .v-btn--disabled{
+            color: $black !important;
+        }
+    }
+}
+.integration{
+    color: $white;
+
+    img {
+        height: 50px;
+        text-align: center;
+        margin: 0 auto !important;
+    }
+
+    .app-actions{
+        flex-direction: column;
+
+        .v-btn{
+            color: $white;
+            margin-left: 0px;
+        }
+        .v-btn--outlined{
+            border: 1px solid $white;
+        }
+        .v-btn--disabled{
+            color: $white !important;
+            opacity: 0.5;
+        }
+    }
+}

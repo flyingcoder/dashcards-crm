@@ -1,6 +1,8 @@
 <template>
   <div class="header-menu">
 
+    <connect-app/>
+
     <logon-label />
 
     <add-cards v-if="$route.name === 'default-content'" />

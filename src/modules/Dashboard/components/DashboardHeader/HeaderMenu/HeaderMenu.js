@@ -5,6 +5,7 @@ import MailIcon from './components/MailIcon/MailIcon.vue'
 import NotificationIcon from './components/NotificationIcon/NotificationIcon.vue'
 import ChatIcon from './components/ChatIcon/ChatIcon.vue'
 import LogonLabel from './components/LonOnLabel.vue'
+import ConnectApp from './components/ConnectApp/ConnectApp.vue'
 
 export default {
     components: {
@@ -13,7 +14,8 @@ export default {
         MailIcon,
         NotificationIcon,
         LogonLabel,
-        ChatIcon
+        ChatIcon,
+        ConnectApp
     },
     
     methods: {
