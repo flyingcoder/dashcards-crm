@@ -11,10 +11,8 @@
                 <div class="cloud-body">
                     <v-row>
                         <v-col md="4" cols="12">
-                            <v-card>
-                                <v-img :height="200" contain src="https://cdn1.iconfinder.com/data/icons/smallicons-logotypes/32/google_drive-512.png" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)">
-                                    <v-card-title>Google Drive Integration</v-card-title>
-                                </v-img>
+                            <v-card class="integration gdrive">
+                                <v-card-title><img  :src="require('@/assets/logo/gdrive.svg')" alt="Google Drive"></v-card-title>
                                 <v-list dense class="ma-0 pa-0" v-if="googleUser">
                                     <v-list-item>
                                         <v-list-item-avatar>
@@ -26,17 +24,13 @@
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-list>
-                                <v-card-actions>
-                                    <v-row no-gutters>
-                                        <v-col grow>
-                                            <v-btn block text outlined @click="handleGooglebtn">
-                                                {{ googleBtnLabel }}
-                                            </v-btn>
-                                        </v-col>
-                                        <v-btn class="mx-2 mt-1" icon @click="showGoogleDesc = !showGoogleDesc">
-                                            <v-icon>{{ showGoogleDesc ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
-                                        </v-btn>
-                                    </v-row>
+                                <v-card-actions class="app-actions">
+                                    <v-btn block text outlined @click="handleGooglebtn" class="mb-4">
+                                        {{ googleBtnLabel }}
+                                    </v-btn>
+                                    <v-btn block text @click="showGoogleDesc = !showGoogleDesc">
+                                        <v-icon>{{ showGoogleDesc ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                                    </v-btn>
                                 </v-card-actions>
                                 <v-expand-transition>
                                     <div v-show="showGoogleDesc">
@@ -49,10 +43,8 @@
                             </v-card>
                         </v-col>
                         <v-col md="4" cols="12">
-                            <v-card>
-                                <v-img :height="200" cover :src="require('@/assets/services/Stripe logo - slate_sm.png')" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)">
-                                    <v-card-title>Stripe Connect</v-card-title>
-                                </v-img>
+                            <v-card color="integration stripe">
+                                <v-card-title><img :src="require('@/assets/logo/stripe-logo-white-stripe-icon.png')" alt="Stripe"></v-card-title>
                                 <v-list dense class="ma-0 pa-0" v-if="stripeUser">
                                     <v-list-item>
                                         <v-list-item-avatar>
@@ -64,20 +56,16 @@
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-list>
-                                <v-card-actions>
-                                    <v-row no-gutters>
-                                        <v-col grow>
-                                            <v-btn text block v-if="!stripeUser" outlined :href="stripeConnect">
-                                                Connect with Stripe
-                                            </v-btn>
-                                            <v-btn block text v-else outlined @click="handleStripeDisconnectAccount">
-                                                Disconnect from Stripe
-                                            </v-btn>
-                                        </v-col>
-                                        <v-btn class="mx-2 mt-1" icon @click="showStripeDesc = !showStripeDesc">
-                                            <v-icon>{{ showStripeDesc ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
-                                        </v-btn>
-                                    </v-row>
+                                <v-card-actions class="app-actions">
+                                    <v-btn dark text block v-if="!stripeUser" outlined :href="stripeConnect" class="mb-4">
+                                        Connect with Stripe
+                                    </v-btn>
+                                    <v-btn dark block text v-else outlined @click="handleStripeDisconnectAccount" class="mb-4">
+                                        Disconnect from Stripe
+                                    </v-btn>
+                                    <v-btn dark block text @click="showStripeDesc = !showStripeDesc">
+                                        <v-icon>{{ showStripeDesc ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                                    </v-btn>
                                 </v-card-actions>
                                 <v-expand-transition>
                                     <div v-show="showStripeDesc">
@@ -90,14 +78,66 @@
                             </v-card>
                         </v-col>
                         <v-col md="4" cols="12">
-                            <v-card>
-                                <v-img :height="200" contain src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Dropbox_Logo_02.svg" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)">
-                                    <v-card-title>Dropbox Integration</v-card-title>
-                                </v-img>
-                                <v-card-actions>
-                                    <v-spacer></v-spacer>
-                                    <v-btn text block outlined disabled>
-                                        <v-icon color="success" left>mdi-dropbox</v-icon> Coming soon!
+                            <v-card class="integration dropbox">
+                                <v-card-title><img :src="require('@/assets/logo/dropbox-logo-white-80.png')" alt="Dropbox"></v-card-title>
+                                <v-card-actions class="app-actions">
+                                    <v-btn text block outlined disabled dark class="mb-4">
+                                        Coming soon!
+                                    </v-btn>
+                                    <v-btn dark block text disabled>
+                                        <v-icon>mdi-chevron-down</v-icon>
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-col>
+                        <v-col md="4" cols="12">
+                            <v-card class="integration gmeet">
+                                <v-card-title><img :src="require('@/assets/logo/google-meet-seeklogo.com.svg')" alt="Google Meet"></v-card-title>
+                                <v-card-actions class="app-actions">
+                                    <v-btn text block outlined disabled dark class="mb-4">
+                                        Coming soon!
+                                    </v-btn>
+                                    <v-btn dark block text disabled>
+                                        <v-icon>mdi-chevron-down</v-icon>
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-col>
+                        <v-col md="4" cols="12">
+                            <v-card class="integration zoom">
+                                <v-card-title><img :src="require('@/assets/logo/zoom-white-logo.png')" alt="Dropbox"></v-card-title>
+                                <v-card-actions class="app-actions">
+                                    <v-btn text block outlined disabled dark class="mb-4">
+                                        Coming soon!
+                                    </v-btn>
+                                    <v-btn dark block text disabled>
+                                        <v-icon>mdi-chevron-down</v-icon>
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-col>
+                        <v-col md="4" cols="12">
+                            <v-card class="integration seoprofiler">
+                                <v-card-title><img :src="require('@/assets/logo/seoprofiler-logo-black-shine.png')" alt="Dropbox"></v-card-title>
+                                <v-card-actions class="app-actions">
+                                    <v-btn text block outlined disabled class="mb-4">
+                                        Coming soon!
+                                    </v-btn>
+                                    <v-btn block text disabled>
+                                        <v-icon>mdi-chevron-down</v-icon>
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-col>
+                        <v-col md="4" cols="12">
+                            <v-card class="integration skype">
+                                <v-card-title><img :src="require('@/assets/logo/skype-white-logo.png')" alt="Dropbox"></v-card-title>
+                                <v-card-actions class="app-actions">
+                                    <v-btn text block outlined disabled dark class="mb-4">
+                                        Coming soon!
+                                    </v-btn>
+                                    <v-btn dark block text disabled>
+                                        <v-icon>mdi-chevron-down</v-icon>
                                     </v-btn>
                                 </v-card-actions>
                             </v-card>
@@ -109,30 +149,5 @@
     </div> <!-- .cloud -->
 </template>
 <script src="./Connect.js"></script>
-<style lang="scss" scoped>
-@import '~@/sass/_variables';
-
-@include pagePadding('.cloud');
-
-.cloud {
-    @include customTableRow;
-}
-.cloud-wrapper{
-    background-color: $white;
-    border: 1px solid $tableBorderBlue;
-    border-radius: 10px;
-    padding: 20px
-}
-.cloud-content {
-    background-color: $bgLightBlue-2;
-    border: 1px solid $tableBorderBlue;
-    padding: 20px;
-
-    .cloud-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 16px;
-    }
-}
+<style lang="scss" scoped src="./Connect.scss">
 </style>
