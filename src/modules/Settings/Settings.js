@@ -7,10 +7,16 @@ export default {
     data: () => ({
         active_tab: null,
         tabs: [
-            { id: 1, name: 'Permissions', route: '/dashboard/settings' },
-            { id: 2, name: 'Groups', route: '/dashboard/settings/groups' },
-            { id: 3, name: 'Users and Roles', route: '/dashboard/settings/users' },
-            { id: 4, name: 'Company', route: '/dashboard/settings/company' },
+            { id: 1, name: 'General', route: '/dashboard/settings' },
+            { id: 2, name: 'Company', route: '/dashboard/settings/company' },
+            { id: 3, name: 'Permissions', route: '/dashboard/settings/permissions' },
+            { id: 4, name: 'Groups', route: '/dashboard/settings/groups' },
+            { id: 5, name: 'Users and Roles', route: '/dashboard/settings/users' },
+            { id: 6, name: 'Payment Methods', route: '/dashboard/settings/payment-methods' },
+            { id: 7, name: 'Email Templates', route: '/dashboard/settings/email-templates' },
+            { id: 8, name: 'Cron', route: '/dashboard/settings/cron' },
+            { id: 9, name: 'DB Backup', route: '/dashboard/settings/db-backup' },
+            { id: 10, name: 'Updates', route: '/dashboard/settings/updates' },
         ]
     })
 }

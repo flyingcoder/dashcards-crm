@@ -1,0 +1,37 @@
+@import '~@/sass/variables';
+.v-card__text.apps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 350px;
+    padding: 8px;
+}
+.app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100px;
+    margin: 8px 4px;
+    padding: 8px 4px;
+    transition: .3s ease all;
+    cursor: pointer;
+    border-radius: 4px;
+
+    img{
+        width: 40px;
+        margin-bottom: 4px;
+    }
+
+    &:hover{
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .app-name{
+        color: $textDark;
+    }
+}
+.connect-btn{
+    color: $textDark;
+}
