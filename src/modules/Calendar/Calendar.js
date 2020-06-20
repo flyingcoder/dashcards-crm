@@ -83,5 +83,6 @@ export default {
             this.attributes = data.attributes
         })
         this.load_events()
+        this.$event.$emit('path-change', this.paths)
     }
 }

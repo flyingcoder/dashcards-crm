@@ -34,17 +34,28 @@ export default {
         active_report: null,
         reportIdToEdit: null,
         deleteDialog: false,
-        deleteReportId: null
+        deleteReportId: null,
     }),
 
     computed: {
         has_permission() {
             if (this.$store.getters.user.is_admin) return true
             return this.$_permissions.get('hq_reports')
+        },
+        type() {
+            return this.$route.params.type || 'project'
+        },
+        paths() {
+            return [
+                { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+                { text: this.type, disabled: true, router_name: null },
+                { text: 'Reports', disabled: true, router_name: null }
+            ]
         }
     },
 
-    created() {
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
         this.loading = true
         makeRequestTo
             .get_project_reports(this.id)

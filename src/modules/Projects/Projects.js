@@ -100,7 +100,9 @@ export default {
             refresh_table_api_name: 'paginate_clients_table'
         }
     }),
-
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
+    },
     created() {
         this.view = this.getPreferredView()
         this.load_projects()
@@ -151,8 +153,8 @@ export default {
         },
         navigate_to_view_project(id) {
             this.$router.push({
-                name: 'project_preview',
-                params: { id: id }
+                name: 'preview',
+                params: { id: id, type: 'project' }
             })
         },
         save_new_services(datus) {

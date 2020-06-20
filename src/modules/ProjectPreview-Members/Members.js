@@ -55,10 +55,24 @@ export default {
         },
         permissions() {
             return this.$_permissions.get('hq_members')
+        },
+        type(){
+            return this.$route.params.type || 'project'
+        },
+        tableTitle(){
+            return this.type === 'project' ? `Project Members` : 'Service Members'
+        },
+        paths() {
+            return [
+                { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+                { text: this.type, disabled: true, router_name: null },
+                { text: 'Members', disabled: true, router_name: null }
+            ]
         }
     },
 
-    created() {
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
         this.view = this.getPreferredView()
         this.load_users()
     },

@@ -35,7 +35,7 @@ export default {
             { text: 'Status', sortable: false },
             { text: 'Total Time', sortable: false }
         ],
-        task: null
+        task: null,
     }),
 
     computed: {
@@ -44,16 +44,30 @@ export default {
         },
         client() {
             return this.id
+        },
+        type(){
+            return this.$route.params.type || 'project'
+        },
+        paths() {
+            return [
+                { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+                { text: this.type, disabled: true, router_name: null },
+                { text: 'Timers', disabled: true, router_name: null }
+            ]
+        },
+        tableTitle(){
+            return this.type === 'project' ? `Project Timers` : 'Service Timers'
         }
     },
 
     mounted() {
+        this.$event.$emit('path-change', this.paths)
         this.get_timers()
     },
 
     methods: {
         view_task(id) {
-            this.$router.push(`/dashboard/project-preview/${this.id}/tasks?id=` + id)
+            this.$router.push(`/dashboard/${this.type}/preview/${this.id}/tasks?id=` + id)
         },
         get_timers() {
             this.fill_table_via_url(this.dynamic_api)

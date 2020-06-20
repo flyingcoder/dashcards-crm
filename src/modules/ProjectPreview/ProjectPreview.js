@@ -5,7 +5,8 @@ export default {
   mixins: [is_screen_medium_and_down],
 
   props: {
-    id: [Number, String] //from route prop
+    id: [Number, String], //from route prop
+    type: { type : String, default: 'project'}
   },
 
   data() {
@@ -15,47 +16,47 @@ export default {
         {
           id: 1,
           name: 'HQ',
-          route: `/dashboard/project-preview/${this.id}`
+          route: `/dashboard/${this.type}/preview/${this.id}`
         },
         {
           id: 2,
           name: 'Files',
-          route: `/dashboard/project-preview/${this.id}/files`
+          route: `/dashboard/${this.type}/preview/${this.id}/files`
         },
         {
           id: 3,
           name: 'Members',
-          route: `/dashboard/project-preview/${this.id}/members`
+          route: `/dashboard/${this.type}/preview/${this.id}/members`
         },
         {
           id: 4,
           name: 'Messages',
-          route: `/dashboard/project-preview/${this.id}/messages`
+          route: `/dashboard/${this.type}/preview/${this.id}/messages`
         },
         {
           id: 5,
           name: 'Milestones',
-          route: `/dashboard/project-preview/${this.id}/milestones`
+          route: `/dashboard/${this.type}/preview/${this.id}/milestones`
         },
         {
           id: 6,
           name: 'Tasks',
-          route: `/dashboard/project-preview/${this.id}/tasks`
+          route: `/dashboard/${this.type}/preview/${this.id}/tasks`
         },
         {
           id: 7,
           name: 'Reports',
-          route: `/dashboard/project-preview/${this.id}/reports`
+          route: `/dashboard/${this.type}/preview/${this.id}/reports`
         },
         {
           id: 8,
           name: 'Timer',
-          route: `/dashboard/project-preview/${this.id}/timer`
+          route: `/dashboard/${this.type}/preview/${this.id}/timer`
         },
         {
           id: 9,
           name: 'Invoice',
-          route: `/dashboard/project-preview/${this.id}/invoice`
+          route: `/dashboard/${this.type}/preview/${this.id}/invoice`
         }
       ]
     }

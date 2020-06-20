@@ -61,6 +61,9 @@ export default {
             })
         }
     },
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
+    },
     methods: {
         onChartReady(chart, google) {
             this.chartsLib = google

@@ -47,23 +47,8 @@ export const global_filters = {
         return result === 'Invalid date' ? '' : result
     },
 
-    ucwords(value) {
-        return (value + '').replace(/^(.)|\s+(.)/g, function($1) {
-            return $1.toUpperCase()
-        })
-    },
-
     uppercase(value) {
         return value.toUpperCase()
-    },
-
-    format(value, format) {
-        if (typeof value !== 'string') {
-            return '-'
-        }
-        var form = typeof format === 'undefined' ? 'MMM D YYYY' : format
-        var result = moment(value).format(form)
-        return result === 'Invalid date' ? '' : result
     },
 
     ucwords(value) {

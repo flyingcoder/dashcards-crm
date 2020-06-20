@@ -40,7 +40,7 @@ export default {
                 view: true
             })
         },
-        mainIcon: { type: String, default: 'mdi-table-settings' },
+        mainIcon: { type: String, default: 'mdi-progress-wrench' },
         editIcon: { type: String, default: 'mdi-content-save-edit' },
         viewIcon: { type: String, default: 'mdi-file-search' },
         deleteIcon: { type: String, default: 'mdi-delete-alert' },

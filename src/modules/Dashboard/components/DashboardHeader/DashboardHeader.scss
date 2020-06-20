@@ -1,48 +1,48 @@
 @import "~@/sass/_variables";
 
 .header {
-  display: flex;
-  height: 100%;
-  background: $white;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 20px;
+    display: flex;
+    height: 100%;
+    background: $white;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
 }
 
-.h__hamburger{
-  display: flex;
-  align-items: center;
+.h__hamburger {
+    display: flex;
+    align-items: center;
 }
 
-.h__pagetitle h4{
-  color: #667381;
-  text-align: left;
-  font-size: 18px;
-  font-weight: normal;
+.h__pagetitle h4 {
+    color: #667381;
+    text-align: left;
+    font-size: 18px;
+    font-weight: normal;
 }
 
 .h__menu {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
-.h__search{
-  width: 100%;
-  min-width: 300px;
+.h__search {
+    max-width: 100%;
+    min-width: 150px;
 }
 
 // Small Laptop - Large Desktop
 @media only screen and (min-width: 768px) {
-  .h__hamburger{
-    justify-content: flex-start;
-  } 
+    .h__hamburger {
+        justify-content: flex-start;
+    }
 }
 
 // Mobile Phone - Tablet
-@media only screen and (min-width: 320px) and (max-width: 767px){
-  .h__hamburger{
-    flex-basis: 10%;
-    justify-content: center;
-  }
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    .h__hamburger {
+        flex-basis: 10%;
+        justify-content: center;
+    }
 }

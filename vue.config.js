@@ -9,7 +9,7 @@ module.exports = {
             .end()
     },
     devServer: {
-    	https : false,
+    	https : true,
     	host : 'crm.buzzookalocal.net',
     	port : 8080
     }

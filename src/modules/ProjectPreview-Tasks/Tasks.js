@@ -29,8 +29,20 @@ export default {
         searchResult: [],
         timeout: null
     }),
-
-    created() {
+    computed: {
+        type() {
+            return this.$route.params.type || 'project'
+        },
+        paths() {
+            return [
+                { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+                { text: this.type, disabled: true, router_name: null },
+                { text: 'Tasks', disabled: true, router_name: null }
+            ]
+        }
+    },
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
         this.$event.$on('show-task-side-preview', task => {
             this.active_task_id = task.id
         })

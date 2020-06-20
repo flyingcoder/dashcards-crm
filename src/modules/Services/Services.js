@@ -105,7 +105,9 @@ export default {
             refresh_table_api_name: 'paginate_clients_table'
         }
     }),
-
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
+    },
     created() {
         this.view = this.getPreferredView()
         this.load_services()
@@ -142,20 +144,20 @@ export default {
             if (this.loggeduser.is_admin) {
                 return true
             }
-            let found = serv.managers.find( ii => ii.user_id === this.loggeduser.id )
+            let found = serv.managers.find(ii => ii.user_id === this.loggeduser.id)
             if (found) return true
             return false
         },
         load_more() {
-            this.load_more_via_url(`api/services`)
+            this.load_more_via_url(`api/services?per_page=12`)
         },
         load_services() {
-            this.fill_table_via_url(`api/services`)
+            this.fill_table_via_url(`api/services?per_page=12`)
         },
         navigate_to_view_service(id) {
             this.$router.push({
-                name: 'service_preview',
-                params: { id: id }
+                name: 'preview',
+                params: { id: id, type: 'service' }
             })
         },
         save_new_services(datus) {
@@ -190,8 +192,14 @@ export default {
         },
 
         handleSaveService(event) {
-            this.add_item('add_new_service', event)
-            // this.$refs.add_dialog.clear_and_close()
+            this.add_item('add_new_service', event, null, (response) => {
+                this.$refs.add_dialog.$refs.dialog.clear_and_close()
+            })
+        },
+        handleUpdateService(event) {
+            this.update_item('update_service', event, null, (response) => {
+                this.$refs.edit_dialog.$refs.dialog.clear_and_close()
+            })
         },
         show_add_group_dialog() {
             this.$refs.add_group_dialog.openDialog()
@@ -211,6 +219,14 @@ export default {
                 .finally(() => {
                     this.$refs.add_group_dialog.cancel()
                 })
+        },
+        open_edit_dialog(item) {
+            this.edit_item = item
+            this.$refs.edit_dialog.open_dialog(true, item)
+        },
+        open_add_dialog() {
+            this.$refs.add_dialog.open_dialog(false, null)
         }
+
     }
 }

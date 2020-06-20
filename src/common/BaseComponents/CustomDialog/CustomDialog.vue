@@ -1,6 +1,6 @@
 <template>
     <v-layout justify-center>
-        <v-dialog v-model="dialog" persistent :max-width="maxWidth">
+        <v-dialog v-model="dialog" persistent :max-width="maxWidth" scrollable>
             <v-progress-linear v-if="loading" slot="progress" color="blue" indeterminate></v-progress-linear>
             <v-card class="custom__dialog" v-else>
                 <div class="dialog__header">

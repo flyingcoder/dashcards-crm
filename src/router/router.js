@@ -19,7 +19,6 @@ import { services } from './routes/services'
 import { teams } from './routes/teams'
 import { settings } from './routes/settings'
 import { project_preview } from './routes/projectPreview'
-import { service_preview } from './routes/servicePreview'
 import { taskTimer } from './routes/taskTimer'
 import { globalTimer } from './routes/globalTimer'
 import { alarm } from './routes/alarm'
@@ -65,7 +64,6 @@ export default new Router({
         teams, // path: /dashboard/team
         settings, // path: /dashboard/settings,
         project_preview, //path: /dashboard/project-preview
-        service_preview, //path: /dashboard/service-preview
         taskTimer, //path: /dashboard/task-timer
         globalTimer, //path: /dashboard/global-timer
         alarm, //path: /dashboard/alarm

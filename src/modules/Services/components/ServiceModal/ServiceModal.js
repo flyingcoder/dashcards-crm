@@ -10,6 +10,7 @@ import DatePicker from '@/common/DatePickerV2.vue'
 import MembersDropdown from '@/modules/Projects/components/MembersDropdown/MembersDropdown.vue'
 import Editor from '@/common/Editor/Editor.vue'
 import ImgUpload from '@/common/Editor/components/ImgModal.vue'
+import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 export default {
     name: 'ServiceModal',
     components: {
@@ -18,17 +19,13 @@ export default {
         TextField,
         TextArea,
         Editor,
-        ImgUpload
-    },
-
-    props: {
-        dialog: Boolean,
-        title: String,
-        isEditDialog: Boolean,
-        fieldsToEdit: { type: Object, default: () => {} }
+        ImgUpload,
+        CustomDialog
     },
 
     data: () => ({
+        isEditDialog: false,
+        fieldsToEdit: null,
         extraFields: [],
         hasExtraInputs: false,
         open: false,
@@ -116,28 +113,23 @@ export default {
                 return true
 
             return false
+        },
+        title(){
+            return this.isEditDialog ? 'Edit Service' : 'Create Service'
         }
     },
 
-    watch: {
-        dialog(new_val) {
-            this.open = new_val
-            if (new_val) this.init_dropdowns()
-        },
-
-        open(new_val) {
-            this.$emit('update:dialog', new_val)
-        },
-
-        fieldsToEdit: {
-            handler(new_val) {
-                this.isEditDialog && this.update_fields(new_val)
-            },
-            deep: true
-        },
-    },
-
     methods: {
+        open_dialog(isEdit, fieldsToEdit){
+            this.isEditDialog = isEdit || false
+            this.fieldsToEdit = fieldsToEdit
+            if (isEdit) {
+                this.update_fields(fieldsToEdit)
+            }
+            this.init_dropdowns()
+            this.open = true
+            // this.$refs.dialog.open_dialog()
+        },
         init_dropdowns() {
             this.dropdown_loading = true
             axios
@@ -165,6 +157,7 @@ export default {
 
         cancel() {
             this.open = false
+            // this.$refs.dialog.close_dialog()
         },
 
         save() {
@@ -188,24 +181,24 @@ export default {
                 location: this.location
             }
 
-            if (this.isEditDialog) fields_to_save.id = this.id
+            if (this.isEditDialog) fields_to_save.id = this.fieldsToEdit.id
 
             this.$emit('save', fields_to_save)
         },
 
-        update_fields({ fields }) {
+        update_fields(fields) {
             const new_fields = _cloneDeep(fields)
             this.$set(this.date_pickers, 'start_date', new_fields.started_at)
             this.$set(this.date_pickers, 'end_date', new_fields.end_at)
             this.$set(this.client, 'selected', new_fields.client[0])
             this.$set(this.manager, 'selected', new_fields.managers)
             this.$set(this.members, 'selected', new_fields.members)
-            this.name = new_fields.name
+            this.name = new_fields.title
             this.status = new_fields.status
-            this.location = new_fields.props.location
-            this.business_name = new_fields.business_name || null
+            this.location = new_fields.props.location || null
+            this.business_name = new_fields.props.business_name || null
             this.description = new_fields.description
-            this.icon = new_fields.icon
+            this.icon = new_fields.props.icon || null
         },
 
         clear_and_close() {

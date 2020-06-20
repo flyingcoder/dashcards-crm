@@ -1,7 +1,7 @@
 <template>
     <div class="services">
-        <ServiceModal :dialog.sync="add_dialog" ref="add_dialog" title="Add New Service" @save="handleSaveService"></ServiceModal>
-        <ServiceModal :dialog.sync="edit_dialog" ref="edit_dialog" title="Edit Service" :is-edit-dialog="edit_dialog" :fields-to-edit="edit_item" @save="update_item('update_service', $event)"></ServiceModal>
+        <ServiceModal ref="add_dialog" @save="handleSaveService"></ServiceModal>
+        <ServiceModal ref="edit_dialog" @save="handleUpdateService"></ServiceModal>
         <delete-dialog :open-dialog.sync="delete_dialog" title="Delete Service" text-content="Are you sure you want to delete this service? " @delete="delete_item('delete_service')" />
         <!-- <delete-dialog :open-dialog.sync="bulk_delete_dialog" title="Delete Services" text-content="Are you sure you want to delete these services? This can't be undone." @delete="bulk_delete('bulk_delete_service')" /> -->
         <clients-dialog :dialog.sync="add_new_client_dialog" ref="add_client_dialog" dialogTitle="Add New Client" @save="save_new_client($event)" />
@@ -14,18 +14,18 @@
                         Services
                     </v-toolbar-title>
                     <v-spacer></v-spacer>
-                    <table-header :noListButton="false" :noGridButton="false" @click="add_dialog = true" @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')" />
+                    <table-header :noListButton="false" :noGridButton="false" @click="open_add_dialog" @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')" />
                 </v-toolbar>
                 <v-progress-linear v-show="loading" :indeterminate="true"></v-progress-linear>
                 <v-container class="pa-0">
-                    <v-row>
+                    <v-row v-if="items.length > 0">
                         <v-col md="3" sm="4" xs="12" v-for="item in items">
                             <v-card class="mx-auto service-card">
-                                <v-img :src="item.icon" :height="150">
+                                <v-img :src="item.props.icon" :height="150">
                                     <v-card-title class="card-header" style="background:rgba(105,178,255,.6);">
                                         <Avatar :user="item.client[0]" iconOnly>
                                             <template>
-                                                <span class="client-name subtitle-2">{{ item.business_name | truncate(15) }}</span>
+                                                <span class="client-name subtitle-2">{{ item.props.business_name | truncate(15) }}</span>
                                             </template>
                                         </Avatar>
                                         <v-spacer></v-spacer>
@@ -60,7 +60,7 @@
                                 <v-divider></v-divider>
                                 <v-card-text class="text-center card-body">
                                     <div class="title cursor-pointer mb-2" @click="navigate_to_view_service(item.id)">
-                                        {{ item.name | ucwords }}
+                                        {{ item.title | ucwords }}
                                     </div>
                                     <div class="subtitle-2">
                                         <p class="caption">
@@ -96,12 +96,16 @@
                                 <v-expand-transition>
                                     <div v-show="item.expand" class="description-wrapper">
                                         <v-divider></v-divider>
-                                        <v-card-text v-html="item.description"> </v-card-text>
+                                        <v-card-text > 
+                                            <p>Location: {{ item.props.location || ''}}</p>
+                                            <p v-html="item.description"></p>
+                                        </v-card-text>
                                     </div>
                                 </v-expand-transition>
                             </v-card>
                         </v-col>
                     </v-row>
+                    <Empty v-else headline="No services yet"></Empty>
                 </v-container>
                 <v-card-actions>
                     <v-spacer></v-spacer>
@@ -113,23 +117,23 @@
         </v-card>
         <VueTable v-else :items="items" :headers="headers" :showRowActions="true" @load-more="load_more" @delete-selected="open_bulk_delete_dialog($event)" icon="widgets" title="Services" :key="componentKey" :noMoreData="noMoreData" :showSelect="false" :loading="loading">
             <template slot="header-toolbar">
-                <table-header :noListButton="false" :noGridButton="false" @click="add_dialog = true" @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')" />
+                <table-header :noListButton="false" :noGridButton="false" @click="open_add_dialog" @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')" />
             </template>
             <template v-slot:row-slot="{ item }">
                 <td>
                     <v-avatar :size="40">
-                        <v-img :src="item.icon" v-if="item.icon" :width="50"></v-img>
+                        <v-img :src="item.props.icon" v-if="item.props.icon" :width="50"></v-img>
                         <v-icon v-else large>mdi-alpha-s-circle-outline</v-icon>
                     </v-avatar>
                 </td>
                 <td class="clickable-td" @click="navigate_to_view_service(item.id)">
-                    {{ item.name }}
+                    {{ item.title | ucwords }}
                 </td>
                 <td>
                     <Avatar :user="item.client[0]" iconOnly></Avatar>
                 </td>
-                <td>{{ item.business_name }}</td>
-                <td>{{ item.props.location }}</td>
+                <td>{{ item.props.business_name | ucwords  }}</td>
+                <td>{{ item.props.location | ucwords  }}</td>
                 <td>
                     <Avatars :items="item.managers" :count="1"></Avatars>
                 </td>

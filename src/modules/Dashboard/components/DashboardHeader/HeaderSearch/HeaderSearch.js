@@ -34,7 +34,7 @@ export default {
         },
         navigate_search(item) {
             if (item.modelType === 'project') {
-                this.$router.push(`/dashboard/project-preview/${item.id}`)
+                this.$router.push(`/dashboard/${item.type}/preview/${item.id}`)
             } else if (item.modelType === 'user') {
                 if (item.job_title.includes('Client')) {
                     this.$router.push(`/dashboard/clients/profile/${item.id}`)

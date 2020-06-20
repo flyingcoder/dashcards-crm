@@ -61,10 +61,15 @@ export default {
         }
     }),
 
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
+    },
+
     created() {
         this.view = this.getPreferredView()
         this.load_users()
     },
+
     computed: {
         logged_user() {
             return this.$store.getters.user
@@ -73,6 +78,7 @@ export default {
             return this.$_permissions.get('hq_members')
         }
     },
+
     methods: {
         can_delete(item) {
             if (this.logged_user.is_admin) {

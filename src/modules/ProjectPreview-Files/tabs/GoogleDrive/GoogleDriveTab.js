@@ -40,6 +40,7 @@ export default {
     }),
 
     mounted() {
+        this.$event.$emit('path-change', this.paths)
         this.getGoogleDriveFolders(this.projectId, () => {
             this.$gapi.isSignedIn().then(result => {
                     this.isGoogleAuthorized = result
@@ -89,6 +90,16 @@ export default {
         can_manage_folders() {
             if (this.user.is_admin || this.user.is_client || this.user.is_manager) return true
             return false
+        },
+        type() {
+            return this.$route.params.type || 'project'
+        },
+        paths() {
+            return [
+                { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+                { text: this.type, disabled: true, router_name: null },
+                { text: 'Google Drive', disabled: true, router_name: null }
+            ]
         }
     },
     methods: {

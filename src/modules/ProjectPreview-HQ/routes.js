@@ -1,6 +1,6 @@
 export default {
     path: '',
     component: () => import('./HQ.vue'),
-    name: 'project_preview',
+    name: 'preview',
     props: true
 }

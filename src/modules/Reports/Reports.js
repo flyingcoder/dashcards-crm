@@ -55,7 +55,8 @@ export default {
         }
     },
 
-    created() {
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
         this.loading = true
         makeRequestTo
             .get_reports()

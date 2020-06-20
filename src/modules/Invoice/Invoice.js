@@ -63,7 +63,9 @@ export default {
         this.fetch_data()
         this.getInvoices()
     },
-
+    mounted(){
+        this.$event.$emit('path-change', this.paths)
+    },
     beforeDestroy() {
         this.$store.commit('invoice/reset_state')
     },

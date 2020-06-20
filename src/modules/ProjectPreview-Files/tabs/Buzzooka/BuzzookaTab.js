@@ -144,8 +144,8 @@ export default {
         filteredItems() {
             if (this.items.length === 0) return []
             if (this.filter === 'all') return this.items
-            if(this.filter === 'approval'){
-                return this.items.filter(item => item.approved === 1 && (item.category === 'videos' || item.category === 'images' ) )
+            if (this.filter === 'approval') {
+                return this.items.filter(item => item.approved === 1 && (item.category === 'videos' || item.category === 'images'))
             }
             return this.items.filter(item => item.category.includes(this.filter))
         },
@@ -174,11 +174,22 @@ export default {
 
         id() {
             return this.projectId ? this.projectId : this.$route.params.id
+        },
+        type() {
+            return this.$route.params.type || 'project'
+        },
+        paths() {
+            return [
+                { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+                { text: this.type, disabled: true, router_name: null },
+                { text: 'Files', disabled: true, router_name: null }
+            ]
         }
 
     },
 
-    created() {
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
         this.view = this.getPreferredView()
         this.get_files()
     },
@@ -254,12 +265,11 @@ export default {
             alert('This feature is under-construction.')
         },
 
-        file_added([file, response]) {
+        file_added(emitted) {
             this.$event.$emit('open_snackbar', 'File(s) uploaded successfully')
-            var fileUploaded =
-                typeof response === 'string' ? JSON.parse(response) : response
+            var fileUploaded = typeof emitted.response === 'string' ? JSON.parse(emitted.response) : emitted.response
             this.items.unshift(fileUploaded)
-            this.$refs.dropzone.remove_file(file)
+            this.$refs.dropzone.remove_file(emitted.file)
             this.clear_selected()
         },
 
@@ -338,19 +348,21 @@ export default {
             }
         },
         approval_actions(item) {
-            const list = [{ id: 2, title: 'Approved', action: 'approved' }, { id: 0, title: 'Reject', action: 'reject' }, { id: 1, title: 'For Modification', action: 'modification' }]
-            return list.filter(i => { return i.id !== item.approved })
+            const list = [{ id: 2, title: 'Approved', action: 'approved', icon: 'mdi-file-check-outline' }, 
+                { id: 0, title: 'Reject', action: 'reject', icon: 'mdi-file-cancel-outline' }, 
+                { id: 1, title: 'For Modification', action: 'modification', icon: 'mdi-file-edit-outline' }]
+            return list.filter(i => { return i.id !== item.approved || i.id === 1 })
         },
         update_status(item, action) {
-            var payload = { action : action.id }
+            var payload = { action: action.id }
             apiTo.updateMediaStatus(item.id, payload)
-            .then(({ data }) => {
-                let index = this.items.findIndex(i => i.id === item.id)
-                if (~index) {
-                    this.$event.$emit('open_snackbar', data.message)
-                    this.items[index].approved = action.id
-                }
-            })
+                .then(({ data }) => {
+                    let index = this.items.findIndex(i => i.id === item.id)
+                    if (~index) {
+                        this.$event.$emit('open_snackbar', data.message)
+                        this.items[index].approved = action.id
+                    }
+                })
         }
     }
 }

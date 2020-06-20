@@ -36,15 +36,31 @@ export default {
             { text: 'Actions', value: 'action', width: '20%', align: 'center' }
         ],
         view_invoice_dialog: false,
-        view_item: null
+        view_item: null,
     }),
 
-    created() {
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
         this.loading = true
         this.fetch_data()
         this.getInvoices()
     },
+    computed: {
+        type() {
+            return this.$route.params.type || 'project'
+        },
+        tableTitle() {
+            return this.type === 'project' ? `Project Invoice` : 'Service Invoice'
+        },
+        paths() {
+            return [
+                { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+                { text: this.type, disabled: true, router_name: null },
+                { text: 'Invoice', disabled: true, router_name: null }
+            ]
+        }
 
+    },
     methods: {
         ...mapMutations('invoice', [
             'set_dialog',

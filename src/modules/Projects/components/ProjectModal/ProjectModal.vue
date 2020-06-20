@@ -198,13 +198,13 @@
                     </v-row>
                     <v-row>
                         <v-col md="12">
-                            <TextField dense outlined hide-details :value.sync="project_title" label="Project Title *" color="#657186"></TextField>
+                            <TextField prepend-inner-icon="mdi-alpha-p-box-outline" dense filled hide-details :value.sync="project_title" label="Project Title *" color="#657186"></TextField>
                         </v-col>
                         <v-col md="6" sm="12">
-                            <TextField dense outlined hide-details :value.sync="business_name" label="Business Name *" color="#657186"></TextField>
+                            <TextField prepend-inner-icon="mdi-office-building" dense filled hide-details :value.sync="business_name" label="Business Name *" color="#657186"></TextField>
                         </v-col>
                         <v-col md="6" sm="12">
-                            <TextField dense :value.sync="location" label="Location" color="#657186" outlined></TextField>
+                            <TextField prepend-inner-icon="mdi-map-marker" dense :value.sync="location" label="Location" color="#657186" filled></TextField>
                         </v-col>
                         <v-col md="12" class="project__description">
                             <div class="project__description">
