@@ -10,22 +10,22 @@ import InvoiceTab from '@/modules/ProjectPreview-Invoice/routes'
 import auth from '../middleware/auth'
 
 export const project_preview = {
-  path: 'project-preview/:id',
-  component: () => import('@/modules/ProjectPreview/ProjectPreview.vue'),
-  props: true,
-  children: [
-    HQTab,
-    FilesTab,
-    MembersTab,
-    MessagesTab,
-    MilestonesTab,
-    TasksTab,
-    ReportsTab,
-    TimerTab,
-    InvoiceTab
-  ],
+    path: ':type/preview/:id',
+    component: () => import('@/modules/ProjectPreview/ProjectPreview.vue'),
+    props: true,
+    children: [
+        HQTab,
+        FilesTab,
+        MembersTab,
+        MessagesTab,
+        MilestonesTab,
+        TasksTab,
+        ReportsTab,
+        TimerTab,
+        InvoiceTab
+    ],
 
-  meta: {
-    middleware: [auth]
-  }
+    meta: {
+        middleware: [auth]
+    }
 }

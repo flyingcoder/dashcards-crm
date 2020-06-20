@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <div class="h__pagetitle">
-            <h4>Dashboard</h4>
+            <v-breadcrumbs :items="paths"></v-breadcrumbs>
         </div>
         <div class="h__search">
             <header-search></header-search>
@@ -13,3 +13,10 @@
 </template>
 <script src="./DashboardHeader.js"></script>
 <style lang="scss" scoped src="./DashboardHeader.scss"></style>
+<style lang="scss">
+.v-breadcrumbs {
+    .v-breadcrumbs__item {
+        text-transform: capitalize;
+    }
+}
+</style>

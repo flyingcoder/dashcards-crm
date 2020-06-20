@@ -19,7 +19,7 @@
           <v-text-field
             class="dialog__password d-field"
             color="#667187"
-            solo
+            filled
             hide-details
             :disabled="disabled_all"
             @blur="on_blur_field('current_password')"
@@ -37,7 +37,7 @@
           <v-text-field
             class="dialog__password d-field"
             color="#667187"
-            solo
+            filled
             hide-details
             :disabled="disabled_all"
             @blur="on_blur_field('password')"
@@ -55,7 +55,7 @@
           <v-text-field
             class="dialog__password d-field"
             color="#667187"
-            solo
+            filled
             hide-details
             :disabled="disabled_all"
             @blur="on_blur_field('repeat_password')"

@@ -22,7 +22,8 @@ export default {
     data: () => ({
         paths: [
             { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-            { text: 'Timer', disabled: true, router_name: null }
+            { text: 'Timer', disabled: true, router_name: null },
+            { text: 'Global', disabled: true, router_name: null }
         ],
         sortList: [
             { title: 'Sort by Client' },
@@ -52,7 +53,8 @@ export default {
         today: moment().tz('America/Toronto').format('YYYY-MM-DD')
     }),
 
-    created() {
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
         this.fill_table_via_url(this.api)
     },
 

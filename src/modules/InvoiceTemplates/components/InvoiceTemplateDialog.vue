@@ -2,7 +2,7 @@
     <div class="invoice-template-dialog">
         <custom-dialog ref="dialog" :open.sync="computedDialog" :title="dialog_title" @button1="clear_and_close" :maxWidth="900">
             <template v-slot:content>
-                <v-row wrap class="custom-dialog">
+                <v-row no-gutters class="custom-dialog">
                     <v-col grow>
                         <h3 class="subtitle-2 mb-2">Template Name</h3>
                         <v-text-field placeholder="Enter Template Name" solo persistent-hint clearable :counter="25" hide-details class="mb-2" flat v-model="title"></v-text-field>

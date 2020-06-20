@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import modules from './modules'
+import VueCryptojs from 'vue-cryptojs'
 
+Vue.use(VueCryptojs)
 Vue.use(Vuex)
 
 export default new Vuex.Store({

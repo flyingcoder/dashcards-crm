@@ -1,3 +1,42 @@
 @import "~@/sass/_variables";
 
 @include pagePadding ('.clients');
+
+.clients {
+    .user__name {
+        display: grid;
+        grid-auto-flow: column;
+        align-items: center;
+        justify-content: flex-start;
+        grid-gap: 10px;
+        text-align: center;
+        cursor: pointer;
+
+        .v-responsive.v-image {
+            border-radius: 50%;
+        }
+    }
+
+    .actions-wrapper {
+        //TODO replace it with mixin since this code is repeated
+        display: grid;
+        grid-template-columns: 1fr 160px 320px;
+        justify-content: center;
+        align-items: center;
+
+        .rows-per-page-dropdown {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pagination {
+            justify-self: end;
+        }
+    }
+
+    @include emptyTable('.empty-client');
+
+    @include firstColumnHover;
+}

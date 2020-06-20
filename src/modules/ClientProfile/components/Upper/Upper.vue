@@ -1,7 +1,7 @@
 <template>
   <div class="profile-upper">
     <div class="background">
-      <v-icon class="camera">camera_alt</v-icon>
+      <!-- <v-icon class="camera">camera_alt</v-icon> -->
       <v-menu bottom left>
         <template v-slot:activator="{ on }">
           <v-btn dark icon v-on="on" class="settings">

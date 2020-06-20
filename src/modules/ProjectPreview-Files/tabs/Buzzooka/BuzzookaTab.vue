@@ -59,7 +59,7 @@
                                             <v-tooltip top>
                                                 <template v-slot:activator="{ on: tooltip }">
                                                     <v-btn class="ml-1" small v-on="{ ...tooltip, ...menu }" depressed text title="Approval">
-                                                        <v-icon small>mdi-dots-horizontal</v-icon>
+                                                        <v-icon small>mdi-file-question-outline</v-icon>
                                                     </v-btn>
                                                 </template>
                                                 <span>Approval Status</span>
@@ -67,7 +67,7 @@
                                         </template>
                                         <v-list>
                                             <v-list-item v-for="(action, i) in approval_actions(item)" :key="i" @click="update_status(item, action)">
-                                                <v-list-item-title>{{ action.title }}</v-list-item-title>
+                                                <v-list-item-title><v-icon left>{{action.icon}}</v-icon>{{ action.title }}</v-list-item-title>
                                             </v-list-item>
                                         </v-list>
                                     </v-menu>
@@ -126,7 +126,7 @@
                                 <v-tooltip left>
                                     <template v-slot:activator="{ on: tooltip }">
                                         <v-btn fab small v-on="{ ...tooltip, ...menu }" depressed text title="Approval">
-                                            <v-icon small>mdi-dots-horizontal</v-icon>
+                                            <v-icon small>mdi-file-question-outline</v-icon>
                                         </v-btn>
                                     </template>
                                     <span>Approval Status</span>
@@ -134,7 +134,7 @@
                             </template>
                             <v-list>
                                 <v-list-item v-for="(action, i) in approval_actions(item)" :key="i" @click="update_status(item, action)">
-                                    <v-list-item-title>{{ action.title }}</v-list-item-title>
+                                    <v-list-item-title><v-icon left>{{action.icon}}</v-icon> {{ action.title }}</v-list-item-title>
                                 </v-list-item>
                             </v-list>
                         </v-menu>

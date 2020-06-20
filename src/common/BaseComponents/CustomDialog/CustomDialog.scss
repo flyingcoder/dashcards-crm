@@ -2,6 +2,8 @@
 @include styledDialog('.custom__dialog');
 
 .custom__dialog {
+  border-radius: 10px !important;
+
   @include styledDialogHeader('.dialog__header');
 
   @include styledCloseDialog('.close__dialog');

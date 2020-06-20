@@ -25,7 +25,7 @@
       @load-more="getMoreInvoices"
       icon="list"
       :loading="loading"
-      title="Project Invoice"
+      :title="tableTitle"
       :key="componentKey"
       :noMoreData="noMoreData"
       @delete-selected="open_bulk_delete_dialog($event)"

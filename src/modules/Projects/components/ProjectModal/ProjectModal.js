@@ -5,16 +5,14 @@ import axios from 'axios'
 import makeRequestTo from '@/services/makeRequestTo'
 import TextField from '@/common/BaseComponents/TextField.vue'
 import TextArea from '@/common/BaseComponents/TextArea.vue'
-import AutoComplete from '../AutoComplete'
-import DatePickers from '../DatePickers/DatePickers.vue' //used for Due Date field
+import DatePicker from '@/common/DatePickerV2.vue'
 import MembersDropdown from '../MembersDropdown/MembersDropdown.vue'
 import Editor from '@/common/Editor/Editor.vue'
 
 export default {
     name: 'ProjectModal',
     components: {
-        AutoComplete,
-        DatePickers,
+        DatePicker,
         MembersDropdown,
         TextField,
         TextArea,
@@ -34,12 +32,6 @@ export default {
         open: false,
         dropdown_loading: false,
         client: {
-            selected: null,
-            items: [],
-            all_items: [],
-            show: false
-        },
-        service: {
             selected: null,
             items: [],
             all_items: [],
@@ -68,23 +60,18 @@ export default {
         quill_editor: {
             content: ''
         },
-        rangemenu: true,
-        btnloading: false
+        btnloading: false,
+        start_date_menu : false,
+        end_date_menu: false,
+        statuses : ['Active', 'Inactive', 'Paused'],
+        project_status : 'Active',
+        business_name: null,
+        location: null
     }),
 
     mounted() {
         // this.init_dropdowns()
         this.$event.$on('btnloading_off', status => (this.btnloading = false))
-        this.$event.$on('new_services_added', data => {
-            for (var i = data.length - 1; i >= 0; i--) {
-                let item = {}
-                item.name = data[i].service_name
-                item.id = data[i].id
-                this.service.items.push(item)
-                this.service.all_items.push(item)
-                this.service.selected = item
-            }
-        })
         this.$event.$on('new_client_added', data => {
             this.client.items.push(data)
             this.client.all_items.push(data)
@@ -95,7 +82,7 @@ export default {
                 this.members.all_items = data || []
                 this.members.items = _cloneDeep(this.members.all_items)
                 setTimeout(() => {
-                    let found = this.members.findIndex(us => us.id === data.id)
+                    let found = this.members.items.findIndex(us => us.id === data.id)
                     if (~found) {
                         this.members.selected = data
                     }
@@ -107,7 +94,7 @@ export default {
                 this.manager.all_items = data || []
                 this.manager.items = _cloneDeep(this.manager.all_items)
                 setTimeout(() => {
-                    let found = this.manager.findIndex(us => us.id === data.id)
+                    let found = this.manager.items.findIndex(us => us.id === data.id)
                     if (~found) {
                         this.manager.selected = data
                     }
@@ -146,38 +133,13 @@ export default {
             },
             deep: true
         },
-
-        'service.selected'(new_val, old_val) {
-            if (new_val) {
-                if (this.isEditDialog) {
-                    if (new_val.id === this.fieldsToEdit.fields.service_id) {
-                        if (this.fieldsToEdit.fields.extra_fields) {
-                            this.extraFields = this.fieldsToEdit.fields.extra_fields
-                            this.hasExtraInputs = true
-                        } else {
-                            this.get_extra_inputs(new_val.id)
-                        }
-                    } else {
-                        this.get_extra_inputs(new_val.id)
-                    }
-                } else {
-                    this.get_extra_inputs(new_val.id)
-                }
-            }
-        }
     },
 
     methods: {
-        setDatesAndCloseMenu(val) {
-            if (val.length < 2) {
-                this.$event.$emit('open_snackbar', 'Select start and end date', 'error')
-            } else {
-                var x = new Date(val[0])
-                var y = new Date(val[1])
-                this.date_pickers.start_date = x <= y ? val[0] : val[1]
-                this.date_pickers.end_date = x <= y ? val[1] : val[0]
+        setDatesAndCloseMenu(val, field) {
+                var y = new Date(val)
+                this.date_pickers.
                 this.rangemenu = false
-            }
         },
         closemenu() {
             this.shown = false
@@ -187,19 +149,16 @@ export default {
             axios
                 .all([
                     makeRequestTo.get_all_clients(),
-                    makeRequestTo.get_all_services(),
                     makeRequestTo.getAllNormalMembers(),
                     makeRequestTo.getManagerMembers()
                 ])
                 .then(
-                    axios.spread((res1, res2, res3, res4) => {
+                    axios.spread((res1, res2, res3) => {
                         this.client.all_items = res1.data || []
-                        this.service.all_items = res2.data || []
-                        this.members.all_items = res3.data || []
-                        this.manager.all_items = res4.data || []
+                        this.members.all_items = res2.data || []
+                        this.manager.all_items = res3.data || []
                         this.client.items = _cloneDeep(this.client.all_items)
                         this.manager.items = _cloneDeep(this.manager.all_items)
-                        this.service.items = _cloneDeep(this.service.all_items)
                         this.members.items = _cloneDeep(this.members.all_items)
                     })
                 )
@@ -227,7 +186,6 @@ export default {
             const fields_to_save = {
                 title: this.project_title,
                 client_id: this.client.selected.id || null,
-                service_id: this.service.selected.id || null,
                 start_at: this.date_pickers.start_date,
                 end_at: this.date_pickers.end_date,
                 description: this.quill_editor.content,
@@ -237,7 +195,10 @@ export default {
                 managers: this.manager.selected.map((value, index) => {
                     return value.id
                 }),
-                extra_fields: this.extraFields
+                extra_fields: this.extraFields,
+                project_status: this.project_status,
+                business_name: this.business_name,
+                location: this.location
             }
 
             if (!this.isEditDialog) fields_to_save.comment = this.comment
@@ -247,21 +208,22 @@ export default {
 
         update_fields({ fields }) {
             const new_fields = _cloneDeep(fields)
-            this.$set(this.service, 'selected', { name: new_fields.service_name, id: new_fields.service_id })
             this.$set(this.date_pickers, 'start_date', new_fields.started_at.split(' ')[0])
             this.$set(this.date_pickers, 'end_date', new_fields.end_at.split(' ')[0])
             this.$set(this.client, 'selected', new_fields.project_client.user)
             this.$set(this.manager, 'selected', new_fields.project_managers.map(member => member.user))
             this.$set(this.members, 'selected', new_fields.project_members.map(member => member.user))
             this.project_title = new_fields.title
+            this.project_status = new_fields.project_status
+            this.business_name = new_fields.props.business_name || null
+            this.location = new_fields.props.location || null
             this.$set(this.quill_editor, 'content', new_fields.description)
         },
 
         clear_and_close() {
             this.members.selected = this.manager.selected = []
-            this.client.selected = null
+            this.client.selected = this.project_status = this.business_name = this.location = null
             this.quill_editor.content = this.project_title = '';
-            (this.service.selected = null),
             (this.date_pickers.start_date = this.date_pickers.end_date = '')
             this.cancel() //close the modal
         },
@@ -281,24 +243,8 @@ export default {
             }
         },
 
-        get_extra_inputs(serviceId) {
-            if (serviceId) {
-                makeRequestTo
-                    .get_projects_extra_inputs(serviceId)
-                    .then(({ data }) => {
-                        this.extraFields = JSON.parse(data.questions)
-                        this.hasExtraInputs = true
-                    })
-                    .catch(() => (this.hasExtraInputs = false))
-            } else {
-                this.hasExtraInputs = false
-            }
-        },
         open_add_new_member_dialog() {
             this.$event.$emit('open-new-member-dialog', true)
-        },
-        open_add_new_service() {
-            this.$event.$emit('open-new-service-dialog', true)
         },
 
         open_add_new_client() {
