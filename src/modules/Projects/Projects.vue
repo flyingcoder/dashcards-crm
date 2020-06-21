@@ -19,7 +19,7 @@
                 <v-progress-linear v-show="loading" :indeterminate="true"></v-progress-linear>
                 <v-container class="pa-0">
                     <v-row>
-                        <v-col md="3" sm="4" xs="12" v-for="item in items">
+                        <v-col md="3" sm="4" xs="12" v-for="item in items" :key="item.id">
                             <v-card class="mx-auto project-card">
                                 <v-card-title class="card-header">
                                     <Avatar :user="item.project_client.user" iconOnly>
