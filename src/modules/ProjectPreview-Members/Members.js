@@ -7,6 +7,7 @@ import AddDialog from './components/AddDialog/AddDialog.vue'
 import VueTable from '@/common/VueTable/VueTable.vue'
 import Actions from '@/common/VueTable/Actions.vue'
 import VueGrid from '@/common/VueGrid/VueGrid.vue'
+import TableHeader from '@/common/TableHeader.vue'
 
 export default {
     name: 'MembersTab',
@@ -16,7 +17,8 @@ export default {
         AddDialog,
         DeleteDialog,
         Actions,
-        VueGrid
+        VueGrid,
+        TableHeader
     },
     inheritAttrs: false,
 

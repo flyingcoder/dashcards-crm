@@ -61,10 +61,10 @@ export default {
             content: ''
         },
         btnloading: false,
-        start_date_menu : false,
+        start_date_menu: false,
         end_date_menu: false,
-        statuses : ['Active', 'Inactive', 'Paused'],
-        project_status : 'Active',
+        statuses: ['Active', 'Inactive', 'Paused'],
+        project_status: 'Active',
         business_name: null,
         location: null
     }),
@@ -137,9 +137,9 @@ export default {
 
     methods: {
         setDatesAndCloseMenu(val, field) {
-                var y = new Date(val)
-                this.date_pickers.
-                this.rangemenu = false
+            var y = new Date(val)
+            this.date_pickers.
+            this.rangemenu = false
         },
         closemenu() {
             this.shown = false
@@ -208,15 +208,15 @@ export default {
 
         update_fields({ fields }) {
             const new_fields = _cloneDeep(fields)
-            this.$set(this.date_pickers, 'start_date', new_fields.started_at.split(' ')[0])
-            this.$set(this.date_pickers, 'end_date', new_fields.end_at.split(' ')[0])
-            this.$set(this.client, 'selected', new_fields.project_client.user)
-            this.$set(this.manager, 'selected', new_fields.project_managers.map(member => member.user))
-            this.$set(this.members, 'selected', new_fields.project_members.map(member => member.user))
+            this.$set(this.date_pickers, 'start_date', new_fields.started_at)
+            this.$set(this.date_pickers, 'end_date', new_fields.end_at)
+            this.$set(this.client, 'selected', new_fields.client[0])
+            this.$set(this.manager, 'selected', new_fields.manager.map(member => member))
+            this.$set(this.members, 'selected', new_fields.members.map(member => member))
             this.project_title = new_fields.title
-            this.project_status = new_fields.project_status
-            this.business_name = new_fields.props.business_name || null
-            this.location = new_fields.props.location || null
+            this.project_status = new_fields.status || 'Active'
+            this.business_name = new_fields.props ? new_fields.props.business_name : null
+            this.location = new_fields.props ? new_fields.props.location : null
             this.$set(this.quill_editor, 'content', new_fields.description)
         },
 

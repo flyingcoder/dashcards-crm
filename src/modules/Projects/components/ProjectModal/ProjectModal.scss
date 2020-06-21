@@ -4,11 +4,11 @@
 
 .custom__dialog {
 
-  @include styledDialogHeader('.dialog__header');
+    @include styledDialogHeader('.dialog__header');
 
-  @include styledCloseDialog('.close__dialog');
+    @include styledCloseDialog('.close__dialog');
 
-  @include styledTitleDialog('.dialog__title');
+    @include styledTitleDialog('.dialog__title');
 
 }
 
@@ -17,22 +17,22 @@
 @include styledDialogBody('.dialog__body');
 
 .choosen {
-  padding: 0px;
-  color: $textDark;
-  font-size: 14px;
-  width: 100%;
-  margin: 0 auto;
-  margin-top: 2px;
-  text-align: left;
-  border-radius: 4px;
-  text-transform: capitalize;
+    padding: 0px;
+    color: $textDark;
+    font-size: 14px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 2px;
+    text-align: left;
+    border-radius: 4px;
+    text-transform: capitalize;
 }
 
 .text-fields {
-  display: -ms-grid;
-  display: grid;
-  grid-gap: 10px 0;
-  padding: 10px 0;
+    display: -ms-grid;
+    display: grid;
+    grid-gap: 10px 0;
+    padding: 10px 0;
 }
 
 .project__description {
@@ -40,35 +40,35 @@
     border: none;
 
     .quill-editor {
-      height: auto;
-      background-color: $white;
-      border-radius: 4px 4px 0 0;
-      border: 1px solid $borderLightGray;
-      color: $textDark;
-
-      label {
+        height: auto;
+        background-color: $white;
+        border-radius: 4px 4px 0 0;
+        border: 1px solid $borderLightGray;
         color: $textDark;
-        caret-color: $textDark;
-      }
 
-      > .title {
-        border-left: none;
-        height: 3em;
-        line-height: 3em;
-        text-indent: 1rem;
-        font-weight: bold;
-      }
+        label {
+            color: $textDark;
+            caret-color: $textDark;
+        }
 
-      > code {
-        width: 100%;
-        margin: 0;
-        padding: 1rem;
-        border-top: none;
-        border-left: none;
-        border-radius: 0;
-        height: 30rem;
-        overflow-y: auto;
-      }
+        >.title {
+            border-left: none;
+            height: 3em;
+            line-height: 3em;
+            text-indent: 1rem;
+            font-weight: bold;
+        }
+
+        >code {
+            width: 100%;
+            margin: 0;
+            padding: 1rem;
+            border-top: none;
+            border-left: none;
+            border-radius: 0;
+            height: 30rem;
+            overflow-y: auto;
+        }
     }
 }
 
@@ -76,28 +76,28 @@
     margin-bottom: 0;
 
     .d__btn {
-      width: 170px;
-      height: 47px;
-      padding: 5px 10px;
-      font-size: 18px;
-      background-color: $white;
-      color: $textDark;
-      border-radius: 4px 4px 0 0;
+        width: 170px;
+        height: 47px;
+        padding: 5px 10px;
+        font-size: 18px;
+        background-color: $white;
+        color: $textDark;
+        border-radius: 4px 4px 0 0;
 
-      .d__icon {
-        width: 27px;
-        fill: $textDark;
-        margin-right: 10px;
-        margin-top: 3px;
-      }
+        .d__icon {
+            width: 27px;
+            fill: $textDark;
+            margin-right: 10px;
+            margin-top: 3px;
+        }
 
-      .d__title {
-        text-transform: capitalize;
-        white-space: normal;
-        font-size: 15px;
-        letter-spacing: 0;
-      }
+        .d__title {
+            text-transform: capitalize;
+            white-space: normal;
+            font-size: 15px;
+            letter-spacing: 0;
+        }
     }
-  }
+}
 
-  @include actionButtonsDialog('.dialog__actions')
+@include actionButtonsDialog('.dialog__actions')

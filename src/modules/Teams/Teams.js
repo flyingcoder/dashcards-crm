@@ -8,7 +8,7 @@ import VueTable from '@/common/VueTable/VueTable.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import TeamsDialog from './components/TeamsDialog/TeamsDialog.vue'
-import Actions from '@/common/VueTable/Actions.vue'
+import Actions from '@/common/VueTable/ActionDropdown.vue'
 import GroupsDialog from '@/modules/Settings-Groups/components/GroupsDialog/GroupsDialog.vue'
 
 export default {
@@ -48,7 +48,7 @@ export default {
                 value: 'actions',
                 sortable: false,
                 align: 'center',
-                width: '140px'
+                width: '40px'
             }
         ],
         table_config: {

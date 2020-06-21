@@ -22,9 +22,9 @@
                         <v-col md="3" sm="4" xs="12" v-for="item in items" :key="item.id">
                             <v-card class="mx-auto project-card">
                                 <v-card-title class="card-header">
-                                    <Avatar :user="item.project_client.user" iconOnly>
+                                    <Avatar :user="item.client[0]" iconOnly>
                                         <template>
-                                            <span :title='item.project_client.user.fullname' class="client-name">{{ item.project_client.user.fullname | truncate(10) }}</span>
+                                            <span :title='item.client[0].fullname' class="client-name">{{ item.client[0].fullname | truncate(10) }}</span>
                                         </template>
                                     </Avatar>
                                     <v-spacer></v-spacer>
@@ -68,11 +68,11 @@
                                     <v-row no-gutters>
                                         <v-col>
                                             <h6 class="text-center caption">Managers</h6>
-                                            <Avatars deep :items="item.project_managers" :count="1"></Avatars>
+                                            <Avatars :items="item.manager" :count="1"></Avatars>
                                         </v-col>
                                         <v-col>
                                             <h6 class="text-center caption">Members</h6>
-                                            <Avatars deep :items="item.project_members" :count="1"></Avatars>
+                                            <Avatars :items="item.members" :count="1"></Avatars>
                                         </v-col>
                                     </v-row>
                                 </v-card-text>
@@ -118,14 +118,14 @@
                     {{ item.title | ucwords }}
                 </td>
                 <td>
-                    <Avatar :user="item.project_client.user" iconOnly :count="1"></Avatar>
+                    <Avatar :user="item.client[0]" iconOnly :count="1"></Avatar>
                 </td>
                 <td>{{ item.company_name }}</td>
                 <td>
-                    <Avatars deep :items="item.project_managers" :count="1"></Avatars>
+                    <Avatars deep :items="item.manager" :count="1"></Avatars>
                 </td>
                 <td>
-                    <Avatars deep :items="item.project_members" :count="1"></Avatars>
+                    <Avatars deep :items="item.members" :count="1"></Avatars>
                 </td>
                 <td>{{ item.started_at | format }}</td>
                 <td v-if="item.end_at">{{ item.end_at | format }}</td>

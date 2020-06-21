@@ -35,7 +35,7 @@
                                         </v-list-item-avatar>
                                         <v-list-item-content>
                                             <v-list-item-title v-html="item.fullname"></v-list-item-title>
-                                            <v-list-item-subtitle v-html="item.company_name"></v-list-item-subtitle>
+                                            <v-list-item-subtitle v-html="item.company.name"></v-list-item-subtitle>
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-list>
@@ -124,7 +124,7 @@
                                 </v-list>
                             </v-menu>
                             <div class="choosen" v-if="manager.selected.length > 0">
-                                <v-chip outlined class="mt-1 tile" v-for="item in manager.selected" close label @click:close="remove_from_selected_managers(item)">
+                                <v-chip outlined class="mt-1 tile" v-for="item in manager.selected" :key="item.id" close label @click:close="remove_from_selected_managers(item)">
                                     <v-avatar left>
                                         <v-img :src="item.image_url"></v-img>
                                     </v-avatar>
@@ -149,7 +149,7 @@
                                     <v-list-item @click="open_add_new_member_dialog">
                                         <v-icon left>add</v-icon> Add new member
                                     </v-list-item>
-                                    <v-list-item v-for="item in members.items" :key="item.user_id" @click="add_to_selected_members(item)">
+                                    <v-list-item v-for="(item, index) in members.items" :key="index" @click="add_to_selected_members(item)">
                                         <v-list-item-avatar>
                                             <v-img :src="item.image_url"></v-img>
                                         </v-list-item-avatar>
@@ -161,7 +161,7 @@
                                 </v-list>
                             </v-menu>
                             <div class="choosen" v-if="members.selected.length > 0">
-                                <v-chip outlined class="mt-1 tile" v-for="item in members.selected" close label @click:close="remove_from_selected_members(item)">
+                                <v-chip outlined class="mt-1 tile" v-for="(item, index) in members.selected" :key="index" close label @click:close="remove_from_selected_members(item)">
                                     <v-avatar left>
                                         <v-img :src="item.image_url"></v-img>
                                     </v-avatar>

@@ -129,7 +129,7 @@ export default {
             if (this.loggeduser.is_admin) {
                 return true
             }
-            let found = proj.project_managers.find(
+            let found = proj.manager.find(
                 ii => ii.user_id === this.loggeduser.id
             )
             if (found) return true
@@ -139,7 +139,7 @@ export default {
             if (this.loggeduser.is_admin) {
                 return true
             }
-            let found = proj.project_managers.find(
+            let found = proj.manager.find(
                 ii => ii.user_id === this.loggeduser.id
             )
             if (found) return true

@@ -35,7 +35,11 @@
                 <v-btn dark color="#3b589e" @click="add_dialog = true">Add Member</v-btn>
             </template>
         </VueTable>
-        <VueGrid v-else :items="items" @load-more="load_more_users" :key="componentKey" :permissions="$_permissions.get('hq_members')" :noMoreData="noMoreData" @delete="open_delete_dialog" @edit="open_edit_dialog" :hasFooter="false" :showProjectCount="false"></VueGrid>
+        <VueGrid v-else :items="items" @load-more="load_more_members" :key="componentKey" :permissions="$_permissions.get('hq_members')" :noMoreData="noMoreData" @delete="open_delete_dialog" @edit="open_edit_dialog" :hasFooter="false" :showProjectCount="false">
+            <template slot="header-toolbar" class="icons">
+                <table-header :noListButton="false" :noGridButton="false" @click="add_dialog = true" @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')" />
+            </template>
+        </VueGrid>
     </div>
 </template>
 <script src="./Members.js"></script>
