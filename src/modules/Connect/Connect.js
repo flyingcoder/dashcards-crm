@@ -2,12 +2,12 @@ import request from '@/services/axios_instance'
 import { settings } from '@/variables'
 
 export default {
-    name: 'Cloud',
+    name: 'Connect',
 
     data: () => ({
         paths: [
             { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-            { text: 'Cloud', disabled: true, router_name: null }
+            { text: 'Connect', disabled: true, router_name: null }
         ],
         isGoogleSignIn: false,
         googleUser: null,

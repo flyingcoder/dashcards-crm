@@ -19,12 +19,13 @@ export default {
         user: '',
         paths: [
             { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-            { text: 'Teams', disabled: false, router_name: 'team' },
+            { text: 'Team', disabled: false, router_name: 'team' },
             { text: 'Profile', disabled: true, router_name: null }
         ]
     }),
 
-    created() {
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
         this.set_user_id(this.user_id)
         this.get_single_member(this.user_id)
     },

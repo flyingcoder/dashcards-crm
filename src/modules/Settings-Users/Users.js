@@ -13,6 +13,10 @@ export default {
         DeleteDialog
     },
     data: () => ({
+        paths: [
+            { text: 'Settings', disabled: false, router_name: 'settings' },
+            { text: 'Users & Roles', disabled: true, router_name: null }
+        ],
         roles: [{ name: 'All', slug: 'all' }],
         permissions: null,
         activeUser: null,
@@ -23,6 +27,7 @@ export default {
         restoring: false
     }),
     mounted() {
+        this.$event.$emit('path-change', this.paths)
         this.getUsers(()=>{
             this.setActiveUser(this.filteredUsers[0])
         })

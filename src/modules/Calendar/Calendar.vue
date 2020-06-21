@@ -23,11 +23,11 @@
                         <h1 class="date_title text-center"> {{ selected_date }}</h1>
                     </div>
                     <div class="right_option">
-                        <v-btn fab large text :color="view == 'list' ? '#3b589e' : '#aaa'" @click="view = 'list'" class="mr-1 action">
-                            <v-icon>list</v-icon>
+                        <v-btn fab large text :color="view === 'list' ? '#3b589e' : '#aaa'" @click="setPreferredView('list')" class="mr-1 action">
+                            <v-icon>mdi-view-sequential</v-icon>
                         </v-btn>
-                        <v-btn fab large text :color="view == 'grid' ? '#3b589e' : '#aaa'" @click="view = 'grid'" class="mr-1 action">
-                            <v-icon>grid_on</v-icon>
+                        <v-btn fab large text :color="view === 'grid' ? '#3b589e' : '#aaa'" @click="setPreferredView('grid')" class="mr-1 action">
+                            <v-icon>mdi-view-module</v-icon>
                         </v-btn>
                         <div class="event_tab">
                             <v-tabs class="event_tab_items" centered grow hide-slider v-model="active_tab">
