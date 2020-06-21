@@ -81,9 +81,9 @@ export default {
             // if (~index) {
             //   this.$refs.editDialog.open_dialog(this.activeReport, index)
             // }
-            if (~index) {
+            // if (~index) {
                 this.$refs.editDialog.open_dialog(report, index)
-            }
+            // }
         },
 
         iframe_loaded() {

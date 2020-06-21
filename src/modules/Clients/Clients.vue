@@ -13,9 +13,11 @@
                 <td class="clickable-td">
                     <Avatar :user="item"></Avatar>
                 </td>
-            	<td>{{ item.company.name | ucwords }}</td>
+            	<td v-if="item.company">{{ item.company.name | ucwords }}</td>
+                <td v-else></td>
                 <td>{{ item.telephone ? item.telephone.formatInternational : '-' }}</td>
-                <td>{{ item.company.address | ucwords }}</td>
+                <td v-if="item.company">{{ item.company.address | ucwords }}</td>
+                <td v-else></td>
                 <td>{{ item.props.status || 'Active' }}</td>
                 <Actions :item="item" :permissions="$_permissions.get('clients')" @delete="open_delete_dialog(item)" @edit="open_edit_dialog(item)" @view="navigate_to_view_profile(item.id)"></Actions>
             </template>
