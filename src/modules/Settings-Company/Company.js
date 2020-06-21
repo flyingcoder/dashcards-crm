@@ -30,6 +30,7 @@ export default {
         contact_number: null
     }),
     mounted() {
+        this.$event.$emit('path-change', this.paths)
         this.getCompanyDetails()
     },
     computed: {

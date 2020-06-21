@@ -14,7 +14,7 @@ import EventDetailDialog from './components/EventDetailDialog/EventDetailDialog.
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import Empty from '@/common/Empty.vue'
 import VueTable from '@/common/VueTable/VueTable.vue'
-import Actions from '@/common/VueTable/Actions.vue'
+import Actions from '@/common/VueTable/ActionDropdown.vue'
 import Avatars from '@/common/Avatars.vue'
 import ConfirmDialog from '@/common/ConfirmDialog.vue'
 import AddParticipantDialog from './components/AddParticipantDialog/AddParticipantDialog.vue'
@@ -66,7 +66,7 @@ export default {
                 value: 'actions',
                 sortable: false,
                 align: 'center',
-                width: '140px'
+                width: '40px'
             }
         ],
         table_config: {
@@ -78,6 +78,7 @@ export default {
         }
     }),
     mounted() {
+        this.view = this.getPreferredView()
         apiTo.myCalendar().then(({ data }) => {
             this.calendar = data.calendar
             this.attributes = data.attributes

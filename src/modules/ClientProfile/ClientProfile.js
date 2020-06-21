@@ -18,12 +18,13 @@ export default {
     data: () => ({
         paths: [
             { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-            { text: 'Clients', disabled: false, router_name: 'clients' },
+            { text: 'Client', disabled: false, router_name: 'clients' },
             { text: 'Profile', disabled: true, router_name: null }
         ]
     }),
 
-    created() {
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
         this.set_user_id(this.user_id)
         this.get_single_client(this.user_id)
     },
