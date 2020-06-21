@@ -33,6 +33,10 @@ export default {
                 width: '140px'
             }
         ],
+        paths: [
+            { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+            { text: 'Invoice Templates', disabled: false, router_name: 'templates' },
+        ],
         activeItem: null,
         isEdit: false,
         invoicefields: []
@@ -53,6 +57,7 @@ export default {
         }
     },
     mounted() {
+        this.$event.$emit('path-change', this.paths)
         this.getInvoiceTemplates()
         this.getFields()
         this.$event.$on('show-invoice-template-guide', ()=> {

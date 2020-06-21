@@ -3,7 +3,7 @@
         <div class="grid-wrapper">            
             <v-toolbar flat>
                 <v-toolbar-title class="custom-grid-title">
-                    Members
+                    {{ title }}
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 <slot name="header-toolbar"></slot>
@@ -42,19 +42,19 @@
                             </v-layout>
                             <v-layout class="align-center">
                                 <v-spacer></v-spacer>
-                                <v-avatar size="80" color="#fff">
+                                <v-avatar size="80" class="cursor-pointer" color="#fff" @click="navigate_to_view_profile(item)">
                                     <v-img :src="item.image_url" :alt="item.first_name"></v-img>
                                 </v-avatar>
                                 <v-spacer></v-spacer>
                             </v-layout>
-                            <div class="text-center mb-3"><strong>{{ item.fullname | ucwords }}</strong></div>
-                            <div class="card-actions">
-                                <div class="" @click="navigate_to_view_profile(item)">
-                                    <v-icon>account_circle</v-icon>
-                                    Profile
+                            <div class="text-center mb-3 cursor-pointer" @click="navigate_to_view_profile(item)"><strong>{{ item.fullname | ucwords }}</strong></div>
+                            <div class="card-actions"> 
+                                <div class="fullwidth" v-if="item.is_client && item.company"> 
+                                    <v-icon small left>mdi-office-building</v-icon>
+                                    {{item.company.name | ucwords}}
                                 </div>
-                                <div>
-                                    <v-icon>mdi-email</v-icon>
+                                <div class="fullwidth">
+                                    <v-icon small left>mdi-email</v-icon>
                                     {{ item.email }}
                                 </div>
                             </div>

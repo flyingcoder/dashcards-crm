@@ -63,7 +63,7 @@ export default new Router({
         services, // path: /dashboard/services
         teams, // path: /dashboard/team
         settings, // path: /dashboard/settings,
-        project_preview, //path: /dashboard1/project-preview
+        project_preview, //path: /dashboard/project-preview
         taskTimer, //path: /dashboard/task-timer
         globalTimer, //path: /dashboard/global-timer
         alarm, //path: /dashboard/alarm

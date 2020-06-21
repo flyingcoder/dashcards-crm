@@ -10,13 +10,15 @@
             </div>
             <div class="info-div">
                 <h4 class="name">{{ user.first_name }} {{ user.last_name }}</h4>
-                <div class="job-title" v-if="user.meta.company_name">
-                    {{ user.meta.company_name.value }}
+                <div class="job-title" v-if="user.company.name">
+                    {{ user.company.name | ucwords }}
                 </div>
                 <div class="job-title" v-else>Client</div>
-                <div class="address">
+                <div class="address" >
                     <v-icon>place</v-icon>
-                    <span v-if="user.meta.location">{{ user.meta.location.value }}</span>
+                    <span v-if="user.props.location">{{ user.props.location | ucwords }}</span>
+                    <span v-else-if="user.company.address">{{ user.company.address | ucwords }}</span>
+                    <span v-else>Unknown</span>
                 </div>
             </div>
             <div class="info-div">

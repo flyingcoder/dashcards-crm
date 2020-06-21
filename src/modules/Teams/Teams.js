@@ -8,7 +8,7 @@ import VueTable from '@/common/VueTable/VueTable.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import TeamsDialog from './components/TeamsDialog/TeamsDialog.vue'
-import Actions from '@/common/VueTable/Actions.vue'
+import Actions from '@/common/VueTable/ActionDropdown.vue'
 import GroupsDialog from '@/modules/Settings-Groups/components/GroupsDialog/GroupsDialog.vue'
 
 export default {
@@ -48,7 +48,7 @@ export default {
                 value: 'actions',
                 sortable: false,
                 align: 'center',
-                width: '140px'
+                width: '40px'
             }
         ],
         table_config: {
@@ -61,10 +61,15 @@ export default {
         }
     }),
 
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
+    },
+
     created() {
         this.view = this.getPreferredView()
         this.load_users()
     },
+
     computed: {
         logged_user() {
             return this.$store.getters.user
@@ -73,6 +78,7 @@ export default {
             return this.$_permissions.get('hq_members')
         }
     },
+
     methods: {
         can_delete(item) {
             if (this.logged_user.is_admin) {

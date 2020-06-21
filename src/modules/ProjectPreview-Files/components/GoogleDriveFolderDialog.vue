@@ -11,7 +11,7 @@
                     <v-col md="12">
                         <v-row>
                             <v-col md="10">
-                                <v-text-field :disabled="maxFolderExceed" label="Enter Google Drive Folder URL" clearable v-model.trim="url" type="url" solo hide-details color="#657186">
+                                <v-text-field :disabled="maxFolderExceed" label="Enter Google Drive Folder URL" clearable v-model.trim="url" type="url" filled hide-details color="#657186">
                                 </v-text-field>
                             </v-col>
                             <v-col>
@@ -47,7 +47,7 @@
                                 </v-list-item>
                             </v-card-actions>
                         </v-card>
-                        <v-card flat class="mx-auto mx-0 mb-1" dense v-for="folder in currentFolders" :key="folder.id">
+                        <v-card flat class="mx-auto mb-1" dense v-for="folder in currentFolders" :key="folder.id">
                             <v-card-actions>
                                 <v-list-item class="grow">
                                     <v-list-item-avatar tile color="grey darken-3">
@@ -71,7 +71,8 @@
                 </v-row>
             </template>
             <template v-slot:extras>
-                {{ futureTotal + '/' + maxFolderTotal }}<v-spacer></v-spacer>
+                <span class="ml-2">{{ futureTotal + '/' + maxFolderTotal }}</span>
+                <v-spacer></v-spacer>
             </template>
         </CustomDialog>
     </div>

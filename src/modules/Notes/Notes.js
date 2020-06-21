@@ -47,11 +47,10 @@ export default {
         note_to_edit: null,
         note_to_delete: null
     }),
-
-    created() {
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
         this.fetch_notes()
     },
-
     methods: {
         fetch_notes() {
             this.fill_table_via_url('api/note', true, response => {

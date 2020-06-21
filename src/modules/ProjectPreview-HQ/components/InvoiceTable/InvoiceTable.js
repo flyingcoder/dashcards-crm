@@ -7,38 +7,39 @@ import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import VueTable from '@/common/VueTable/VueTable.vue'
 
 export default {
-  mixins: [list_functionality, global_utils],
-  components: {
-    DashCard,
-    VueTable
-  },
-
-  props: {
-    id: [Number, String],
-    dashboard: Boolean,
-    viewMoreLink: Object
-  },
-
-  data: () => ({
-    enableViewMore: true,
-    pagination: {
-      current: 1,
-      total: 0
+    mixins: [list_functionality, global_utils],
+    components: {
+        DashCard,
+        VueTable
     },
-    headers: [
-      { text: 'Due Date', value: 'due_date', sortable: false },
-      { text: 'Invoice No.', value: 'invoice_number', sortable: false },
-      { text: 'Client', value: 'client', sortable: false },
-      { text: 'Amount', value: 'amount', sortable: false },
-      { text: 'Actions', sortable: false }
-    ]
-  }),
 
-  created() {
-    this.loading = true
-    request
-      .get(`api/projects/${this.id}/invoice`)
-      .then(response => (this.items = response.data.data))
-      .finally(() => (this.loading = false))
-  }
+    props: {
+        id: [Number, String],
+        dashboard: Boolean,
+        viewMoreLink: Object,
+        type: { type: String, default: 'projects'} //or services or projects-services
+    },
+
+    data: () => ({
+        enableViewMore: true,
+        pagination: {
+            current: 1,
+            total: 0
+        },
+        headers: [
+            { text: 'Due Date', value: 'due_date', sortable: false },
+            { text: 'Invoice No.', value: 'invoice_number', sortable: false },
+            { text: 'Client', value: 'client', sortable: false },
+            { text: 'Amount', value: 'amount', sortable: false },
+            { text: 'Actions', sortable: false }
+        ]
+    }),
+
+    created() {
+        this.loading = true
+        request
+            .get(`api/${this.type}/${this.id}/invoice`)
+            .then(response => (this.items = response.data.data))
+            .finally(() => (this.loading = false))
+    }
 }

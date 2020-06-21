@@ -1,12 +1,6 @@
 <template>
     <CustomDialog ref="dialog" :open.sync="dialog" title="Image URL" button1-text="Cancel" @button1="close_dialog" button2-text="Insert Image" @button2="insertImage">
         <template v-slot:content>
-            <!-- <v-layout wrap class="custom-dialog">
-    <v-flex xs12 md12>
-        <label class="mb-1 subtitle-2">Paste your Image URL:</label>
-        <v-text-field label="Image URL" v-model.trim="url" type="url" solo hide-details color="#657186"></v-text-field>
-    </v-flex>
-</v-layout> -->
             <v-card>
                 <v-tabs fixed-tabs dense v-model="tab" centered>
                     <v-tabs-slider></v-tabs-slider>

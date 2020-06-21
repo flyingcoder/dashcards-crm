@@ -23,7 +23,8 @@ export default {
     data: () => ({
         paths: [
             { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-            { text: 'Timers', disabled: true, router_name: null }
+            { text: 'Timers', disabled: true, router_name: null },
+            { text: 'Task', disabled: true, router_name: null }
         ],
         sortList: [
             { title: 'Sort by Client' },
@@ -35,7 +36,7 @@ export default {
         headers: [
             { text: 'Assigned To', sortable: false, align: 'left', width: 150 },
             { text: 'Task', sortable: false, align: 'left' },
-            { text: 'Project', sortable: false, align: 'left' },
+            { text: 'Project | Service', sortable: false, align: 'left' },
             {
                 text: 'Time Start',
                 sortable: false,
@@ -59,8 +60,8 @@ export default {
         filter_task: 'all',
         task: null
     }),
-
-    created() {
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
         this.fill_table_via_url(`api/timer/tasks?all=true&filter=${this.filter_task}`)
     },
     computed: {

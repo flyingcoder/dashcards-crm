@@ -22,6 +22,7 @@ export default {
         id: [Number, String],
         dashboard: Boolean,
         viewMoreLink: Object,
+        type: { type: String, default: 'projects' }, //or services
         isExpanded: {
             type: Boolean,
             default: false
@@ -34,7 +35,7 @@ export default {
     }),
     computed: {
         api() {
-            return this.id ? `api/projects/${this.id}/timeline` : 'api/activities'
+            return this.id ? `api/${this.type}/${this.id}/timeline` : 'api/activities'
         },
         enableViewMore() {
             return !this.noMoreData

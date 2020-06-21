@@ -7,12 +7,11 @@ import request from '@/services/axios_instance'
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
-import ServicesAddDialog from '@/modules/Services/components/ServicesAddDialog/ServicesAddDialog.vue'
 import ClientsDialog from '@/modules/Clients/components/ClientsDialog/ClientsDialog.vue'
 import TeamsDialog from '@/modules/Teams/components/TeamsDialog/TeamsDialog.vue'
 import Empty from '@/common/Empty.vue'
 import VueTable from '@/common/VueTable/VueTable.vue'
-import Actions from '@/common/VueTable/Actions.vue'
+import Actions from '@/common/VueTable/ActionDropdown.vue'
 import ProjectModal from './components/ProjectModal/ProjectModal.vue'
 import GroupsDialog from '@/modules/Settings-Groups/components/GroupsDialog/GroupsDialog.vue'
 import Avatars from '@/common/Avatars.vue'
@@ -25,7 +24,6 @@ export default {
         TableHeader,
         GroupsDialog,
         DeleteDialog,
-        ServicesAddDialog,
         ClientsDialog,
         TeamsDialog,
         Empty,
@@ -45,36 +43,52 @@ export default {
         ],
         headers: [{
                 text: 'Project Title',
-                sortable: true,
+                sortable: false,
                 align: 'left'
+            },
+            {
+                text: 'Client',
+                sortable: false,
+                align: 'left',
+                width: 90
             },
             {
                 text: 'Business',
-                sortable: true,
-                align: 'left'
-            },
-            {
-                text: 'Service',
-                value: 'service_name',
-                sortable: true,
+                sortable: false,
                 align: 'left'
             },
             {
                 text: 'Managers',
-                sortable: true,
+                sortable: false,
+                align: 'center',
+                sortable: false
+            },
+            {
+                text: 'Team',
+                sortable: false,
                 align: 'center',
                 sortable: false
             },
             {
                 text: 'Start Date',
-                sortable: true,
+                sortable: false,
+                align: 'left'
+            },
+            {
+                text: 'End Date',
+                sortable: false,
+                align: 'left'
+            },
+            {
+                text: 'Status',
+                sortable: false,
                 align: 'left'
             },
             {
                 text: 'Action',
                 sortable: false,
                 align: 'center',
-                width: '140px'
+                width: '40px'
             }
         ],
 
@@ -86,7 +100,9 @@ export default {
             refresh_table_api_name: 'paginate_clients_table'
         }
     }),
-
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
+    },
     created() {
         this.view = this.getPreferredView()
         this.load_projects()
@@ -113,7 +129,7 @@ export default {
             if (this.loggeduser.is_admin) {
                 return true
             }
-            let found = proj.project_managers.find(
+            let found = proj.manager.find(
                 ii => ii.user_id === this.loggeduser.id
             )
             if (found) return true
@@ -123,7 +139,7 @@ export default {
             if (this.loggeduser.is_admin) {
                 return true
             }
-            let found = proj.project_managers.find(
+            let found = proj.manager.find(
                 ii => ii.user_id === this.loggeduser.id
             )
             if (found) return true
@@ -137,8 +153,8 @@ export default {
         },
         navigate_to_view_project(id) {
             this.$router.push({
-                name: 'project_preview',
-                params: { id: id }
+                name: 'preview',
+                params: { id: id, type: 'project' }
             })
         },
         save_new_services(datus) {

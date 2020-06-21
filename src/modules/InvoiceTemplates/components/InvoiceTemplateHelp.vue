@@ -3,15 +3,12 @@
         <custom-dialog :hasFooter="false" ref="dialog" :open.sync="computedDialog" :title="dialogTitle" @button1="cancel" :maxWidth="900">
             <template v-slot:content>
                 <v-card flat>
-                    <v-card-title>
-                    </v-card-title>
                     <v-card-text>
                         <p>In this guide, you'll learn how to create a fully functional HTML invoice template, with only basic HTML and CSS knowledge. We created this guide with simplicity in mind, so the only thing you'll need are basic web design skills. The invoice template you'll be creating consists only of HTML, CSS, and optionally image and font files. No scripting or programming knowledge is required whatsoever. You just need to include a simple HTML document which works out of the box and doesn't require any modifications on your side.</p>
                         <h1 class="my-2">Start building your first HTML invoice template</h1>
                         <p>Starting from scratch can be painful and time-consuming so we highly encourage you to use our default template as a starting point. Here you can see all the placeholders that are can be used and your template should contain most of them (we highly recommend using them all). See the Placeholders reference for a list of available placeholders and their meaning.</p>
                         <v-alert type="info" class="ma-3 subtitle-2" dense>What is placeholder? Placeholder is special markup text that will be replaced with real data contained in the invoice. E.g. Placeholder <code>{company_name}</code> is replaced with the name of the company like "Buzzooka".</v-alert>
-                    </v-card-text>
-                    <v-card-text>
+
                         <h1 class="text-center my-3">Some simple rules</h1>
                         <ul>
                             <li class="mb-2"><strong>Resource paths:</strong> When you include files, for example, CSS files, in your HTML make sure the paths are complete path when viewed directly in the browser.
@@ -56,7 +53,7 @@
                                 <blockquote class="pa-3">
                                     <strong class="my-2">Recommended:</strong><br>
                                     <code class="px-5 fullwidth">
-                                    div#container {<br>
+                                        div#container {<br>
                                         font: normal 12px Arial, Helvetica, Sans-serif;<br>
                                         background: white;<br>
                                         padding: 20px;<br>
@@ -64,11 +61,11 @@
                                     </code><br>
                                     <strong class="my-2">Not recommended:</strong><br>
                                     <code class="px-5 fullwidth">
-                                    html {<br>
+                                        html {<br>
                                         font: normal 12px Arial, Helvetica, Sans-serif;<br>
                                         background: white;<br>
                                         }<br>
-                                    body {<br>
+                                        body {<br>
                                         margin: 30px;<br>
                                         padding: 10px;<br>
                                         }
@@ -218,12 +215,14 @@
                                 <thead>
                                     <tr>
                                         <th class="text-left">Placeholder</th>
+                                        <th class="text-left">Example</th>
                                         <th class="text-left">Description</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-for="(info, field) in invoicefields" :key="field">
                                         <td v-text="`{`+field+`}`"></td>
+                                        <td v-text="info.mock_data" class="caption"></td>
                                         <td v-html="info.description"></td>
                                     </tr>
                                 </tbody>

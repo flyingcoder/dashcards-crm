@@ -12,7 +12,7 @@
           disable-lookup 
           item-text="title" 
           placeholder="Start typing to search..." 
-          prepend-inner-icon="search" 
+          prepend-inner-icon="mdi-select-search" 
           persistent-hint 
           @click:clear="globalSearchResult = []" 
           :menu-props="menuprops"
@@ -21,7 +21,7 @@
             <template v-slot:no-data>
                 <v-list-item>
                     <v-list-item-title>
-                        Search for <strong>Users</strong> or <strong>Projects</strong>
+                        Search for <strong>Users</strong> or <strong>Projects</strong> or <strong>Services</strong>
                     </v-list-item-title>
                 </v-list-item>
             </template>

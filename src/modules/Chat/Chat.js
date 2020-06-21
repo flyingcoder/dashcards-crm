@@ -66,7 +66,8 @@ export default {
             return [this.activeChat]
         }
     },
-    created() {
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
         if (typeof this.$route.params.target !== 'undefined')
             this.target = parseInt(this.$route.params.target)
 

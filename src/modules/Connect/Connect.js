@@ -2,19 +2,12 @@ import request from '@/services/axios_instance'
 import { settings } from '@/variables'
 
 export default {
-    name: 'Cloud',
+    name: 'Connect',
 
     data: () => ({
-        paths: [{
-                text: 'Dashboard',
-                disabled: false,
-                router_name: 'default-content'
-            },
-            {
-                text: 'Cloud',
-                disabled: true,
-                router_name: null
-            }
+        paths: [
+            { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+            { text: 'Connect', disabled: true, router_name: null }
         ],
         isGoogleSignIn: false,
         googleUser: null,
@@ -30,42 +23,43 @@ export default {
                 'Connect to Google Drive'
         },
         stripeConnect() {
-          return `https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${settings.stripe.client_id}&scope=read_write&redirect_uri=${settings.stripe.redirect_uri}`
+            return `https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${settings.stripe.client_id}&scope=read_write&redirect_uri=${settings.stripe.redirect_uri}`
         }
     },
 
     mounted() {
+        this.$event.$emit('path-change', this.paths)
         this.handleClientLoad()
         if (this.$route.query.code) {
-          this.handleStripeConnectCode(this.$route.query.code)
+            this.handleStripeConnectCode(this.$route.query.code)
         } else {
-          this.getStripeConnectedAccount()
+            this.getStripeConnectedAccount()
         }
     },
 
     methods: {
-        handleStripeConnectCode(code){
-          request.post(`api/stripe/connect`, { code : code })
-          .then(({data}) => {
-            this.stripeUser = data
-            this.$event.$emit('open_snackbar', 'Successfully connect Stripe account')
-          })
-          .finally(() => {
-            this.$router.replace({ query: {} });
-          })
+        handleStripeConnectCode(code) {
+            request.post(`api/stripe/connect`, { code: code })
+                .then(({ data }) => {
+                    this.stripeUser = data
+                    this.$event.$emit('open_snackbar', 'Successfully connect Stripe account')
+                })
+                .finally(() => {
+                    this.$router.replace({ query: {} });
+                })
         },
-        handleStripeDisconnectAccount(){
-          request.post(`api/stripe/disconnect`)
-          .then(({data}) => {
-            this.stripeUser = null
-            this.$event.$emit('open_snackbar', data.message)
-          })
+        handleStripeDisconnectAccount() {
+            request.post(`api/stripe/disconnect`)
+                .then(({ data }) => {
+                    this.stripeUser = null
+                    this.$event.$emit('open_snackbar', data.message)
+                })
         },
-        getStripeConnectedAccount(){
-          request.get(`api/stripe/account`)
-          .then(({data}) => {
-            this.stripeUser = data
-          })
+        getStripeConnectedAccount() {
+            request.get(`api/stripe/account`)
+                .then(({ data }) => {
+                    this.stripeUser = data
+                })
         },
         handleClientLoad() {
             this.$gapi._load().then(gapi => {

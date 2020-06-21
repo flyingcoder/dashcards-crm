@@ -102,7 +102,7 @@
           @click.stop="sidebar_item_clicked('templates')"
         >
           <v-list-item-action class="s__icons mr-5 pl-4">
-            <span>M</span>
+            <span><v-icon>mdi-clipboard-file-outline</v-icon></span>
           </v-list-item-action>
           <v-list-item-title>Milestone</v-list-item-title>
         </v-list-item>
@@ -113,7 +113,7 @@
           @click.stop="sidebar_item_clicked('templates/invoice')"
         >
           <v-list-item-action class="s__icons mr-5 pl-4">
-            <span>I</span>
+            <span><v-icon>mdi-cash-register</v-icon></span>
           </v-list-item-action>
           <v-list-item-title>Invoices</v-list-item-title>
         </v-list-item>
@@ -143,21 +143,21 @@
           @click.stop="sidebar_item_clicked('questionnaire')"
         >
           <v-list-item-action class="s__icons mr-5 pl-4">
-            <span>Q</span>
+            <span><v-icon>mdi-alpha-q-box-outline</v-icon></span>
           </v-list-item-action>
           <v-list-item-title>Questionnaire</v-list-item-title>
         </v-list-item>
-        <v-list-item
+        <!-- <v-list-item
           :class="{ active: selected_route_name === 'projectDetails' }"
           sub-group
           class="submenu-item"
           @click.stop="sidebar_item_clicked('projectDetails')"
         >
           <v-list-item-action class="s__icons mr-5 pl-4">
-            <span>PD</span>
+            <span><v-icon>mdi-alpha-p-box-outline</v-icon></span>
           </v-list-item-action>
           <v-list-item-title>Project Details</v-list-item-title>
-        </v-list-item>
+        </v-list-item> -->
       </v-list-group>
     </div>
   </v-list>

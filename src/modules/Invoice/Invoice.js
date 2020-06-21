@@ -63,7 +63,9 @@ export default {
         this.fetch_data()
         this.getInvoices()
     },
-
+    mounted(){
+        this.$event.$emit('path-change', this.paths)
+    },
     beforeDestroy() {
         this.$store.commit('invoice/reset_state')
     },
@@ -158,7 +160,7 @@ export default {
             api_to
                 .get_invoices(this.pagination.current + 1)
                 .then(({ data }) => {
-                    console.log(data.data)
+                    // console.log(data.data)
                     data.data.forEach(item => {
                         this.items.push(item)
                     })

@@ -7,6 +7,7 @@ import AddDialog from './components/AddDialog/AddDialog.vue'
 import VueTable from '@/common/VueTable/VueTable.vue'
 import Actions from '@/common/VueTable/Actions.vue'
 import VueGrid from '@/common/VueGrid/VueGrid.vue'
+import TableHeader from '@/common/TableHeader.vue'
 
 export default {
     name: 'MembersTab',
@@ -16,7 +17,8 @@ export default {
         AddDialog,
         DeleteDialog,
         Actions,
-        VueGrid
+        VueGrid,
+        TableHeader
     },
     inheritAttrs: false,
 
@@ -55,10 +57,24 @@ export default {
         },
         permissions() {
             return this.$_permissions.get('hq_members')
+        },
+        type(){
+            return this.$route.params.type || 'project'
+        },
+        tableTitle(){
+            return this.type === 'project' ? `Project Members` : 'Service Members'
+        },
+        paths() {
+            return [
+                { text: 'Dashboard', disabled: false, router_name: 'default-content' },
+                { text: this.type, disabled: true, router_name: null },
+                { text: 'Members', disabled: true, router_name: null }
+            ]
         }
     },
 
-    created() {
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
         this.view = this.getPreferredView()
         this.load_users()
     },
