@@ -77,13 +77,7 @@ export default {
         },
 
         openEditDialog(report, index) {
-            // let index = this.reports.findIndex(i => i.id === this.activeReport.id)
-            // if (~index) {
-            //   this.$refs.editDialog.open_dialog(this.activeReport, index)
-            // }
-            if (~index) {
-                this.$refs.editDialog.open_dialog(report, index)
-            }
+            this.$refs.editDialog.open_dialog(report, index)
         },
 
         iframe_loaded() {
