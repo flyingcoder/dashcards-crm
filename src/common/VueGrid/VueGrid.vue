@@ -48,8 +48,8 @@
                                 <v-spacer></v-spacer>
                             </v-layout>
                             <div class="text-center mb-3 cursor-pointer" @click="navigate_to_view_profile(item)"><strong>{{ item.fullname | ucwords }}</strong></div>
-                            <div class="card-actions">
-                                <div class="fullwidth" v-if="item.is_client && item.company">
+                            <div class="card-actions"> 
+                                <div class="fullwidth" v-if="item.is_client && item.company"> 
                                     <v-icon small left>mdi-office-building</v-icon>
                                     {{item.company.name | ucwords}}
                                 </div>
