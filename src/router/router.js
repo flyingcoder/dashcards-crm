@@ -17,6 +17,7 @@ import { milestoneTasks } from './routes/milestoneTasks'
 import { projects } from './routes/projects'
 import { services } from './routes/services'
 import { teams } from './routes/teams'
+import { subscribers } from './routes/subscribers'
 import { settings } from './routes/settings'
 import { project_preview } from './routes/projectPreview'
 import { taskTimer } from './routes/taskTimer'
@@ -62,6 +63,7 @@ export default new Router({
         projects, // path: /dashboard/projects
         services, // path: /dashboard/services
         teams, // path: /dashboard/team
+        subscribers, // path: /dashboard/subscribers
         settings, // path: /dashboard/settings,
         project_preview, //path: /dashboard/project-preview
         taskTimer, //path: /dashboard/task-timer

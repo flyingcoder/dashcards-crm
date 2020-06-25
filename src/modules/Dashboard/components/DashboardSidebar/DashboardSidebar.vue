@@ -1,5 +1,34 @@
 <template>
   <v-list class="sidebar">
+    <span v-if="user.id == 1" class="sidebar-label">Super Admin</span>
+    <div
+      class="sidebar-inner"
+      v-for="(item, index) in admin_items"
+      :data-nav="item.title"
+      :key="item.index"
+      @click="sidebar_item_clicked(item.action)"
+      tile
+      :class="{active: item.action === selected_route_name}"
+      v-if="user.id == 1"
+    >
+      <v-list
+        class="s__list"
+        :key="index"
+        :class="{ active: item.action === selected_route_name }"
+      >
+        <v-list-item-action class="s__icons mr-5">
+          <svg viewBox="0 0 250 250">
+            <path class="icon" :d="item.icon" />
+          </svg>
+        </v-list-item-action>
+        
+        <v-list-item-content class="s__content">
+          {{ item.title }}
+        </v-list-item-content>
+      </v-list>
+    </div>
+    <v-divider></v-divider>
+    <span v-if="user.id == 1" class="sidebar-label">Regular</span>
     <div
       class="sidebar-inner"
       v-for="(item, index) in items"
@@ -166,6 +195,11 @@
 <script src="./DashboardSidebar.js"></script>
 <style lang="scss" scoped src="./DashboardSidebar.scss"></style>
 <style scoped>
+.sidebar-label {
+  padding-left: 15px;
+  font-size: 12px;
+  color: #22a7e5;
+}
 >>> .v-list-group.s_submenu .v-list-item{
   padding-left: 0;
   cursor: pointer;
