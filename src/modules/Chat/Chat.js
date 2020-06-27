@@ -5,8 +5,7 @@ import _cloneDeep from 'lodash/cloneDeep'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
 import Message from './components/Message/Message.vue'
-import GroupChatDialog from './components/GroupChatDialog/GroupChatDialog.vue'
-import Empty from '@/common/Empty.vue'
+import GroupChatDialog from './components/GroupChatDialog/GroupChatDialog.vue' 
 import ManageMembersDialog from './components/ManageMembersDialog/ManageMembersDialog.vue'
 import ChatField from '@/common/ChatBox/ChatField.vue'
 import Avatars from '@/common/Avatars.vue'
@@ -15,8 +14,7 @@ export default {
     name: 'Chat',
     components: {
         TableHeader,
-        Message,
-        Empty,
+        Message, 
         GroupChatDialog,
         ManageMembersDialog,
         ChatField,

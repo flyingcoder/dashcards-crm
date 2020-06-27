@@ -1,7 +1,6 @@
 <template>
     <div class="users-table">
         <div class="users-table-wrapper">
-        
             <v-card flat class="users-table-inner">
                 <v-toolbar flat class="table-header">
                     <v-toolbar-title class="table-title">Users and Roles</v-toolbar-title>
@@ -29,12 +28,12 @@
                                         <v-list-item-subtitle v-html="item.job_title"></v-list-item-subtitle>
                                     </v-list-item-content>
                                     <v-list-item-icon v-if="item.deleted_at">
-                                        <v-tooltip left >
-                                                <template v-slot:activator="{ on } ">
-                                                    <v-icon small right v-on="on">mdi-account-lock</v-icon>
-                                                </template>
-                                                <span>Account Deleted</span>
-                                            </v-tooltip>
+                                        <v-tooltip left>
+                                            <template v-slot:activator="{ on } ">
+                                                <v-icon small right v-on="on">mdi-account-lock</v-icon>
+                                            </template>
+                                            <span>Account Deleted</span>
+                                        </v-tooltip>
                                     </v-list-item-icon>
                                 </v-list-item>
                             </template>
@@ -102,7 +101,9 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr v-for="(perm,index) in permissions">
-                                                        <td>{{index}}</td>
+                                                        <td>
+                                                            {{ index | snakeCaseToNormal | removeSlug | ucwords }}
+                                                        </td>
                                                         <td>
                                                             <v-icon left color="success" v-if="perm.create">mdi-check-circle</v-icon>
                                                             <v-icon left color="red" v-else>mdi-close-circle</v-icon>

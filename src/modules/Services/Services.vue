@@ -10,16 +10,14 @@
         <v-card class="grid-view" v-if="view === `grid`">
             <div class="grid-wrapper">
                 <v-toolbar flat>
-                    <v-toolbar-title class="grid-view-title">
-                        Services
-                    </v-toolbar-title>
+                    <v-toolbar-title class="grid-view-title"> Services </v-toolbar-title>
                     <v-spacer></v-spacer>
                     <table-header :noListButton="false" :noGridButton="false" @click="open_add_dialog" @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')" />
                 </v-toolbar>
                 <v-progress-linear v-show="loading" :indeterminate="true"></v-progress-linear>
                 <v-container class="pa-0">
                     <v-row v-if="items.length > 0">
-                        <v-col md="3" sm="4" xs="12" v-for="item in items">
+                        <v-col md="3" sm="4" xs="12" v-for="item in items" :key="item.id">
                             <v-card class="mx-auto service-card">
                                 <v-img :src="item.props.icon" :height="150">
                                     <v-card-title class="card-header" style="background:rgba(105,178,255,.6);">

@@ -9,7 +9,7 @@
     ></v-switch> -->
         <v-tooltip bottom>
             <template v-slot:activator="{ on }">
-                <v-btn :loading="requesting" icon v-on="on" tile class="mx-2" @click="switch1_changed">
+                <v-btn :loading="requesting" icon v-on="on" tile class="mx-1" @click="switch1_changed">
                     <v-icon :color="timer_color" large>{{ timer_icon }}</v-icon>
                 </v-btn>
             </template>

@@ -28,7 +28,7 @@ export default {
     }),
     mounted() {
         this.$event.$emit('path-change', this.paths)
-        this.getUsers(()=>{
+        this.getUsers(() => {
             this.setActiveUser(this.filteredUsers[0])
         })
         this.getGroups()
@@ -70,7 +70,7 @@ export default {
             return this.filteredUsers = []
         },
         getUsers(cb) {
-            this.fill_table_via_url(`api/company/teams?basics=true&per_page=50&withTrashed=true`,true, cb)
+            this.fill_table_via_url(`api/company/teams?basics=true&per_page=500&withTrashed=true`, true, cb)
         },
         getGroups() {
             request.get(`api/groups?all=true`)
@@ -114,14 +114,14 @@ export default {
                     this.btnloading = false
                 })
         },
-        controlAccount(){
+        controlAccount() {
             this.restoring = true
             var payload = {
-                action : this.activeUser.deleted_at ? 'restore' : 'delete',
-                user : this.activeUser.id
+                action: this.activeUser.deleted_at ? 'restore' : 'delete',
+                user: this.activeUser.id
             }
             request.post(`api/groups/user/restore-delete`, payload)
-            .then(({ data }) => {
+                .then(({ data }) => {
                     this.activeUser = data
                     let index = this.items.findIndex(i => i.id === data.id)
                     if (~index) {
@@ -132,9 +132,9 @@ export default {
                     }
                     this.$event.$emit('open_snackbar', this.activeUser.deleted_at ? 'User successfully restored' : 'User successfully disabled')
                 })
-            .finally(() => {
-                this.restoring = false
-            })
+                .finally(() => {
+                    this.restoring = false
+                })
         }
     }
 }

@@ -68,7 +68,8 @@ const variables = {
         secret_key: 'sk_test_pwcd0h85Xnf4PkRyJ2gcKqXA007Ta4jrP0',
         client_id: 'ca_HKv0JmMqwvSzh15ZaMvAQXoZOHbSgVjM',
         redirect_uri: dev.stripe_redirect
-    }
+    },
+    paraphrase: 'secret12paraphrasesomethinfunny'
 }
 
 export const settings = Object.assign({}, variables, dev)

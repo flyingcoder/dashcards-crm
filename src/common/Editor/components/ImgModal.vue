@@ -1,7 +1,7 @@
 <template>
     <CustomDialog ref="dialog" :open.sync="dialog" title="Image URL" button1-text="Cancel" @button1="close_dialog" button2-text="Insert Image" @button2="insertImage">
         <template v-slot:content>
-            <v-card>
+            <v-card flat>
                 <v-tabs fixed-tabs dense v-model="tab" centered>
                     <v-tabs-slider></v-tabs-slider>
                     <v-tab href="#url">URL </v-tab>
@@ -118,7 +118,9 @@ export default {
             this.dialog = true
             this.url = null
             this.btnloading = false
-            this.$refs.dropzone.remove_all_files()
+            if (this.$refs.dropzone) {
+                this.$refs.dropzone.remove_all_files()
+            }
         },
         close_dialog() {
             this.dialog = false

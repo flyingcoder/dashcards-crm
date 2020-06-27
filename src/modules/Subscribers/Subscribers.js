@@ -36,11 +36,10 @@ export default {
         ],
 
         headers: [
-            { text: 'Name', align: 'left', value: 'name', sortable: false },
-            { text: 'Email', value: 'email' },
-            { text: 'Location', value: 'location' },
-            { text: 'Members', value: 'members' },
-            { text: 'Status', value: 'status' },
+            { text: 'Name', align: 'left', sortable: false },
+            { text: 'Email'  },
+            { text: 'Company' },
+            { text: 'Status' },
             {
                 text: 'Action',
                 value: 'actions',

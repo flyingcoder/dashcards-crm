@@ -51,7 +51,8 @@ export default {
             const colors = {
                 error: 'red',
                 notification: 'orange',
-                success: 'green'
+                success: 'green',
+                info: 'primary'
             }
             return colors[type]
         },
@@ -60,7 +61,8 @@ export default {
             const icons = {
                 error: 'mdi-alert-box',
                 notification: 'mdi-bell-outline',
-                success: 'mdi-check-decagram'
+                success: 'mdi-check-decagram',
+                info: 'mdi-information-outline'
             }
             return icons[type]
         }

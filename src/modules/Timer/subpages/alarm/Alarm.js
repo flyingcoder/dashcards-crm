@@ -13,8 +13,7 @@ import CalendarDialog from '@/modules/Calendar/components/CalendarDialog/Calenda
 import EventDialog from '@/modules/Calendar/components/EventDialog/EventDialog.vue'
 import EventTypeDialog from '@/modules/Calendar/components/EventTypeDialog/EventTypeDialog.vue'
 import EventDetailDialog from '@/modules/Calendar/components/EventDetailDialog/EventDetailDialog.vue'
-import DeleteDialog from '@/common/DeleteDialog.vue'
-import Empty from '@/common/Empty.vue'
+import DeleteDialog from '@/common/DeleteDialog.vue' 
 import ConfirmDialog from '@/common/ConfirmDialog.vue'
 import AddParticipantDialog from '@/modules/Calendar/components/AddParticipantDialog/AddParticipantDialog.vue'
 import EventCard from '@/modules/Calendar/components/EventCard/EventCard.vue'
@@ -32,8 +31,7 @@ export default {
         ConfirmDialog,
         EventCard,
         EventDialog,
-        EventTypeDialog,
-        Empty,
+        EventTypeDialog, 
         Avatars,
         EventDetailDialog,
         AddParticipantDialog

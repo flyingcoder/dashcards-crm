@@ -2,8 +2,7 @@ import request from '@/services/axios_instance'
 import moment from 'moment'
 import { global_utils } from '@/global_utils/global_utils'
 import { list_functionality } from '@/services/list-functionality/list-functionality'
-//Components
-import Empty from '@/common/Empty.vue'
+//Components 
 import DashCard from '@/common/DashCard.vue'
 import vcarousel from 'vue-owl-carousel'
 import FilesPreview from '@/common/FilesPreview.vue'
@@ -12,8 +11,7 @@ export default {
     name: 'TimelineCard',
     mixins: [global_utils, list_functionality],
     components: {
-        DashCard,
-        Empty,
+        DashCard, 
         vcarousel,
         FilesPreview
     },
@@ -41,10 +39,11 @@ export default {
             return !this.noMoreData
         },
         per_page() {
-            return this.isExpanded ? 50 : 10
+            var limit = this.$store.getters['configs/timeline_display_limits']
+            return this.isExpanded ? Math.ceil(limit * 1.5) : Math.ceil(limit)
         }
     },
-    created() {
+    mounted() {
         this.fill_timeline_card()
     },
 

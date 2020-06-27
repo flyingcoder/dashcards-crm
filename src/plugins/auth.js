@@ -2,17 +2,20 @@ import Vue from 'vue'
 import store from '@/store/store'
 import make_request_to from '@/services/makeRequestTo'
 import router from '@/router/router';
+import { settings } from '@/variables'
+
 (function() {
     //for setting the user when the page refreshes
     const user = localStorage.getItem('user')
     if (user) {
-        store.commit('set_user', JSON.parse(Vue.CryptoJS.AES.decrypt(user, "secret12paraphrasesomethinfunny").toString(Vue.CryptoJS.enc.Utf8)))
+        store.commit('set_user', JSON.parse(Vue.CryptoJS.AES.decrypt(user, settings.paraphrase ).toString(Vue.CryptoJS.enc.Utf8)))
+        store.dispatch('configs/fetchSettings', { company_id : store.getters.user.company_id })
     }
 })()
 
 async function set_to_localStorage({ data }) {
     localStorage.setItem('token', data.token)
-    localStorage.setItem('user', Vue.CryptoJS.AES.encrypt(JSON.stringify(data.user), 'secret12paraphrasesomethinfunny').toString())
+    localStorage.setItem('user', Vue.CryptoJS.AES.encrypt(JSON.stringify(data.user), settings.paraphrase).toString())
     await store.dispatch('login', data)
     router.push({ name: 'default-content' })
 }

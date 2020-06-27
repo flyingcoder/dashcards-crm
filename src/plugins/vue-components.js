@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Avatar from '@/common/Avatar.vue'
 import Media from '@/common/Media.vue'
+import Empty from '@/common/Empty.vue'
 import VuePhoneNumberInput from 'vue-phone-number-input'
 
 import 'file-icon-vectors/dist/file-icon-square-o.min.css'
@@ -12,3 +13,4 @@ Vue.component('Avatar', Avatar)
 
 Vue.component('Media', Media)
 
+Vue.component('Empty', Empty)

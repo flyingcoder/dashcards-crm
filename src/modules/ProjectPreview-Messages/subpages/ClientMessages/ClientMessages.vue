@@ -38,9 +38,7 @@ import { global_utils } from '@/global_utils/global_utils'
 import { list_functionality } from '@/services/list-functionality/list-functionality'
 import _cloneDeep from 'lodash/cloneDeep'
 
-// Components
-
-import Empty from '@/common/Empty.vue'
+// Components 
 import ManageClientChatMember from '@/modules/ProjectPreview-Messages/components/ManageClientChatMember.vue'
 import ChatField from '@/common/ChatBox/ChatField.vue'
 import Message from '@/modules/Chat/components/Message/Message.vue'
@@ -51,8 +49,7 @@ export default {
     props: {
         id: [Number, String]
     },
-    components: {
-        Empty,
+    components: { 
         ManageClientChatMember,
         ChatField,
         Message

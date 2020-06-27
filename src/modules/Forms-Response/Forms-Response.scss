@@ -1,0 +1,25 @@
+@import '~@/sass/_variables';
+
+@include pagePadding ('.forms-page-response');
+
+.forms-page-response {
+    .forms-page-response-wrapper {
+        background-color: $white;
+        border: 1px solid $tableBorderBlue;
+        border-radius: 10px;
+        padding: 20px;
+
+
+        .forms-page-response-content {
+            background-color: $tableBlueBg;
+            border: 1px solid $tableBorderBlue;
+            padding: 15px;
+
+
+            .form {
+                border-radius: 10px;
+                margin: 0;
+            }
+        }
+    }
+}

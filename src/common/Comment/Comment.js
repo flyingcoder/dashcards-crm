@@ -2,16 +2,14 @@ import request from '@/services/axios_instance'
 import { global_utils } from '@/global_utils/global_utils'
 
 import Editor from '@/common/Editor/Editor.vue'
-import DeleteDialog from '@/common/DeleteDialog.vue'
-import Empty from '@/common/Empty.vue'
+import DeleteDialog from '@/common/DeleteDialog.vue' 
 
 export default {
     name: 'Comment',
     mixins: [global_utils],
     components: {
         Editor,
-        DeleteDialog,
-        Empty
+        DeleteDialog 
     },
 
     props: {

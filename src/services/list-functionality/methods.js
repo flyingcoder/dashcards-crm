@@ -169,6 +169,9 @@ export const methods = {
         fill_table_via_url(url, nested_response = true, cb) {
             this.loading = true
             var payload = { page: this.pagination.current }
+            if (!url.includes('per_page')) {
+                payload.per_page = this.$store.getters['configs/general_page_limits']
+            }
             request
                 .get(url, { params: payload })
                 .then(response => {
@@ -194,6 +197,7 @@ export const methods = {
         load_more_on_table(api_name) {
             this.loading = true
             var payload = { page: this.pagination.current + 1 }
+
             makeRequestTo[api_name]({ params: payload })
                 .then(({ data }) => {
                     this.items_response = data.data
@@ -214,6 +218,9 @@ export const methods = {
         load_more_via_url(url) {
             this.loading = true
             var payload = { page: this.pagination.current + 1 }
+            if (!url.includes('per_page')) {
+                payload.per_page = this.$store.getters['configs/general_page_limits']
+            }
             request
                 .get(url, { params: payload })
                 .then(({ data }) => {

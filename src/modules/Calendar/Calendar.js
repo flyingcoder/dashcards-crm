@@ -12,7 +12,6 @@ import EventDialog from './components/EventDialog/EventDialog.vue'
 import EventTypeDialog from './components/EventTypeDialog/EventTypeDialog.vue'
 import EventDetailDialog from './components/EventDetailDialog/EventDetailDialog.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
-import Empty from '@/common/Empty.vue'
 import VueTable from '@/common/VueTable/VueTable.vue'
 import Actions from '@/common/VueTable/ActionDropdown.vue'
 import Avatars from '@/common/Avatars.vue'
@@ -30,7 +29,6 @@ export default {
         EventCard,
         EventDialog,
         EventTypeDialog,
-        Empty,
         VueTable,
         Actions,
         Avatars,

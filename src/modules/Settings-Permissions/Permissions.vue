@@ -5,7 +5,7 @@
         <delete-dialog :open-dialog.sync="delete_dialog" title="Delete Permission" text-content="Are you sure you want to delete this permission?" @delete="delete_item('delete_permission')" />
         <VueTable :items="items" :headers="headers" :showRowActions="true" icon="widgets" title="Permissions" :key="componentKey" :noMoreData="noMoreData" :showSelect="false" :loading="loading" :hasFooter="false">
             <template v-slot:header-toolbar>
-                <v-select solo flat outlined dense hide-details class="permissions-selection" label="Select Group" :items="groups" v-model="selected_group"></v-select>
+                <v-select solo flat outlined dense hide-details class="col-md-3 permissions-selection" label="Select Group" :items="groups" v-model="selected_group"></v-select>
             </template>
             <template v-slot:row-slot="{ item }">
                 <td>{{ item.name | removeSlug }}</td>

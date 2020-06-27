@@ -1,6 +1,5 @@
 import request from '@/services/axios_instance'
-//components
-import Empty from '@/common/Empty.vue'
+//components 
 import Uploader from '@/modules/ProjectPreview-Files/components/Uploader.vue'
 import FolderDialog from '@/modules/ProjectPreview-Files/components/FolderDialog.vue'
 import GDriveFolderDialog from '@/modules/ProjectPreview-Files/components/GoogleDriveFolderDialog.vue'
@@ -8,8 +7,7 @@ import DeleteDialog from '@/common/DeleteDialog.vue'
 
 export default {
     name: 'GoogleDriveTab',
-    components: {
-        Empty,
+    components: { 
         Uploader,
         DeleteDialog,
         FolderDialog,
