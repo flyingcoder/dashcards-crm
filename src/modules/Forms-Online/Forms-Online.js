@@ -27,7 +27,7 @@ export default {
     },
     computed: {
         textfield() {
-            return ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+            return ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'label']
         },
         disabled() {
             if (!this.form) {
@@ -45,6 +45,11 @@ export default {
         }
     },
     methods: {
+        alignClass(align) {
+            if (align === 'right') return 'ml-auto'
+            else if (align === 'center') return 'mx-auto'
+            else return 'mr-auto'
+        },
         getForm(slug) {
             request.get(`api/form/${slug}/online`)
                 .then(({ data }) => {

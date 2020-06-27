@@ -30,85 +30,31 @@
                                 </v-list-item>
                                 <v-card-text>
                                     <v-col md="12" v-for="(item, pIndex) in form.questions" :key="item.id">
-                                        <div class="section pa-2" v-if="item.type ===`section`">
-                                            <div v-for="(child,cIndex) in item.children" :key="child.id">
-                                                <div v-if="child.type === 'divider'">
-                                                    <hr />
-                                                </div>
-                                                <div v-else-if="child.type === 'image'">
-                                                    <p v-if="child.label">{{child.label}}</p>
-                                                    <v-img style="max-width: 100%;" :width="child.itemwidth" :height="child.itemheight" :src="child.src" :alt="child.alt"></v-img>
-                                                </div>
-                                                <div v-else-if="child.type === 'video'">
-                                                    <p v-if="child.label">{{child.label}}</p>
-                                                    <iframe style="max-width: 100%;" allow="fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" :src="getEmbed(child.src)" :width="child.itemwidth" :height="child.itemheight"></iframe>
-                                                </div>
-                                                <div v-else-if="child.type === 'paragraph' ">
-                                                    <p>{{child.text}}</p>
-                                                </div>
-                                                <div v-else-if="textfield.includes(child.type)">
-                                                    <component :is="child.type">
-                                                        {{child.text}}
-                                                    </component>
-                                                </div>
-                                                <div v-else-if="child.type === `date`">
-                                                    <label v-if="child.label">{{child.label}}</label>
-                                                    <v-menu v-model="child.popover" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y max-width="100%" min-width="250px">
-                                                        <template v-slot:activator="{ on, attrs }">
-                                                            <v-text-field v-model="child.value" filled hide-details="auto" :label="child.palceholder" readonly v-bind="attrs" v-on="on"></v-text-field>
-                                                        </template>
-                                                        <v-date-picker ref="picker" v-model="child.value" :max="child.max_date" :min="child.min_date"></v-date-picker>
-                                                    </v-menu>
-                                                </div>
-                                                <div v-else-if="child.type === `time`">
-                                                    <label v-if="child.label">{{child.label}}</label>
-                                                    <v-menu v-model="child.popover" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y max-width="100%" min-width="250px">
-                                                        <template v-slot:activator="{ on, attrs }">
-                                                            <v-text-field v-model="child.value" filled hide-details="auto" :label="child.palceholder" readonly v-bind="attrs" v-on="on"></v-text-field>
-                                                        </template>
-                                                        <v-time-picker v-model="child.value" full-width @click:minute="child.popover= false"></v-time-picker>
-                                                    </v-menu>
-                                                </div>
-                                                <div v-else-if="child.type === `checkbox`">
-                                                    <label v-if="child.label">{{child.label}}</label>
-                                                    <v-checkbox dense hide-details="auto" :label="child.text" v-model="child.value"></v-checkbox>
-                                                </div>
-                                                <div v-else-if="child.type === `multiple_choice`">
-                                                    <label v-if="child.label">{{child.label}}</label>
-                                                    <v-radio-group v-model="child.value" row :mandatory="child.required">
-                                                        <v-radio v-for="(option,i) in child.items" :key="i" :label="option" :value="option"></v-radio>
-                                                    </v-radio-group>
-                                                </div>
-                                                <div v-else>
-                                                    <label v-if="child.label">{{child.label}}</label>
-                                                    <component v-model="child.value" filled hide-details="auto" :is="child.tag" :required="child.required" :rows="child.rows" :items="child.items"></component>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div v-else-if="item.type === 'divider'">
+                                        <div v-if="item.type === 'divider'">
                                             <hr />
+                                            <v-icon small class="hr-action" @click="remove(pIndex)" v-if="item.hover">mdi-delete</v-icon>
                                         </div>
                                         <div v-else-if="item.type === 'image'">
                                             <p v-if="item.label">{{item.label}}</p>
-                                            <v-img style="max-width: 100%;" :width="item.itemwidth" :height="item.itemheight" :src="item.src" :alt="item.alt"></v-img>
+                                            <v-img style="max-width: 100%;" :class="alignClass(item.align)" :width="item.itemwidth" :height="item.itemheight" :src="item.src" :alt="item.alt"></v-img>
                                         </div>
                                         <div v-else-if="item.type === 'video'">
                                             <p v-if="item.label">{{item.label}}</p>
-                                            <iframe style="max-width: 100%;" allow="fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" :src="getEmbed(item.src)" :width="item.itemwidth" :height="item.itemheight"></iframe>
+                                            <iframe style="max-width: 100%;display:block;" :class="alignClass(item.align)" allow="fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" :src="getEmbed(item.src)" :width="item.itemwidth" :height="item.itemheight"></iframe>
                                         </div>
                                         <div v-else-if="item.type === 'paragraph'">
-                                            <p>
+                                            <p :style="`text-align:`+item.align">
                                                 {{item.text}}
                                             </p>
                                         </div>
                                         <div v-else-if="textfield.includes(item.type)">
-                                            <component :is="item.tag">
+                                            <component :is="item.tag" :style="`text-align:`+item.align">
                                                 {{item.text}}
                                             </component>
                                         </div>
                                         <div v-else-if="item.type === `date`">
                                             <label v-if="item.label">{{item.label}}</label>
-                                            <v-menu v-model="item.popover" :close-on-content-click="true" :nudge-right="40" transition="scale-transition" offset-y max-width="100%" min-width="250px">
+                                            <v-menu v-model="item.popover" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y max-width="100%" min-width="250px">
                                                 <template v-slot:activator="{ on, attrs }">
                                                     <v-text-field v-model="item.value" filled hide-details="auto" :label="item.placeholder" readonly v-bind="attrs" v-on="on"></v-text-field>
                                                 </template>
@@ -128,15 +74,31 @@
                                             <label v-if="item.label">{{item.label}}</label>
                                             <v-checkbox dense hide-details="auto" :label="item.text" v-model="item.value"></v-checkbox>
                                         </div>
-                                        <div v-else-if="item.type === `multiple_choice`">
+                                        <div v-else-if="item.type === `radio_group`">
                                             <label v-if="item.label">{{item.label}}</label>
-                                            <v-radio-group v-model="item.value" row :mandatory="item.required">
+                                            <v-radio-group v-model="item.value" v-if="item.direction === 'row'" row :mandatory="item.required">
+                                                <v-radio v-for="(option,i) in item.items" :key="i" :label="option" :value="option"></v-radio>
+                                            </v-radio-group>
+                                            <v-radio-group v-model="item.value" v-else column :mandatory="item.required">
                                                 <v-radio v-for="(option,i) in item.items" :key="i" :label="option" :value="option"></v-radio>
                                             </v-radio-group>
                                         </div>
+                                        <div v-else-if="item.type === `checkboxes`">
+                                            <label v-if="item.label">{{item.label}}</label>
+                                            <v-row no-gutters dense v-if="item.direction === 'row'">
+                                                <v-col md="12" class="d-flex flex-wrap">
+                                                    <v-checkbox v-model="item.value" hide-details="auto" class="mr-3 my-1" v-for="(option,i) in item.items" :key="i" :label="option" :value="option"></v-checkbox>
+                                                </v-col>
+                                            </v-row>
+                                            <v-row no-gutters dense v-else>
+                                                <v-col md="12">
+                                                    <v-checkbox v-model="item.value" hide-details="auto" v-for="(option,i) in item.items" :key="i" class="my-1" :label="option" :value="option"></v-checkbox>
+                                                </v-col>
+                                            </v-row>
+                                        </div>
                                         <div v-else>
                                             <label v-if="item.label">{{item.label}}</label>
-                                            <component v-model="item.value" filled hide-details="auto" :is="item.tag" :required="item.required" :rows="item.rows" :items="item.items"></component>
+                                            <component :placeholder="item.placeholder" :type="item.tag_type" v-model="item.value" filled hide-details="auto" :is="item.tag" :required="item.required" :rows="item.rows" :items="item.items"></component>
                                         </div>
                                     </v-col>
                                 </v-card-text>
@@ -146,39 +108,45 @@
                             <v-divider></v-divider>
                             <v-card flat max-width="1000" v-if="responses.length > 0">
                                 <v-row no-gutters>
-                                    <v-card-text class="col-md-8" v-if="activeResponder">
+                                    <v-card-text class="col-md-9" v-if="activeResponder">
                                         <template v-for="(data, i) in activeResponder.data">
-                                            <template v-if="data.type === 'section'">
-                                                <template v-for="(child, i) in data.children">
-                                                    <div class="pa-3" v-if="child.hasOwnProperty('value')">
-                                                        <p>
-                                                            <v-icon small left>mdi-comment-question-outline</v-icon>{{ child.label }}
-                                                        </p>
-                                                        <p class="subtitle-2">
-                                                            <v-icon x-small left>mdi-checkbox-marked-circle-outline</v-icon>{{child.value || 'No Answer'}}
-                                                        </p>
-                                                    </div>
-                                                    <div class="pa-3" v-else>
-                                                        <component :is="child.tag">{{child.text}}</component>
-                                                    </div>
-                                                </template>
-                                            </template>
-                                            <template v-else>
+                                            <template>
                                                 <div class="pa-3" v-if="data.hasOwnProperty('value')">
                                                     <p>
-                                                        <v-icon small left>mdi-comment-question-outline</v-icon>{{ data.label }}
+                                                        <v-icon small left>mdi-comment-question-outline</v-icon>
                                                     </p>
                                                     <p class="subtitle-2">
-                                                        <v-icon x-small left>mdi-checkbox-marked-circle-outline</v-icon>{{data.value || 'No Answer'}}
+                                                        <v-icon x-small left>mdi-checkbox-marked-circle-outline</v-icon>
+                                                        {{typeof data.value === 'object' ? data.value.join(',') : data.value }}
                                                     </p>
                                                 </div>
                                                 <div class="pa-3" v-else>
-                                                    <component :is="data.tag">{{data.text}}</component>
+                                                    <div v-if="data.type === 'divider'">
+                                                        <hr />
+                                                    </div>
+                                                    <div v-else-if="data.type === 'image'">
+                                                        <p v-if="data.label">{{data.label}}</p>
+                                                        <v-img style="max-width: 100%;" :class="alignClass(data.align)" :width="data.itemwidth" :height="data.itemheight" :src="data.src" :alt="data.alt"></v-img>
+                                                    </div>
+                                                    <div v-else-if="data.type === 'video'">
+                                                        <p v-if="data.label">{{data.label}}</p>
+                                                        <iframe style="max-width: 100%;display:block;" :class="alignClass(data.align)" allow="fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" :src="getEmbed(data.src)" :width="data.itemwidth" :height="data.itemheight"></iframe>
+                                                    </div>
+                                                    <div v-else-if="data.type === 'paragraph'">
+                                                        <p :style="`text-align:`+data.align">
+                                                            {{data.text}}
+                                                        </p>
+                                                    </div>
+                                                    <div v-else-if="textfield.includes(data.type)">
+                                                        <component :is="data.tag" :style="`text-align:`+data.align">
+                                                            {{data.text}}
+                                                        </component>
+                                                    </div>
                                                 </div>
                                             </template>
                                         </template>
                                     </v-card-text>
-                                    <v-col md="4">
+                                    <v-col md="3">
                                         <v-list subheader dense class="responses-list">
                                             <v-subheader class="subtitle-2">Recent Responses</v-subheader>
                                             <v-list-item :class="{active: activeResponder === item}" v-for="item in responses" :key="item.id" @click="activeResponder = item">
@@ -193,7 +161,7 @@
                                             </v-list-item>
                                             <v-list-item v-if="next_url">
                                                 <v-list-item-content>
-                                                    <v-btn block text :loading="loading_more"  @click="load_more_response">Load More</v-btn>
+                                                    <v-btn block text :loading="loading_more" @click="load_more_response">Load More</v-btn>
                                                 </v-list-item-content>
                                             </v-list-item>
                                         </v-list>
@@ -211,11 +179,12 @@
 <script src="./Forms-Response.js"></script>
 <style lang="scss" scoped src="./Forms-Response.scss"></style>
 <style type="text/css">
-    /**neeed styling improve*/
-    .v-list-item.active {
-        background: grey;
-    }
-    .v-list-item.active > * {
-        color: #fff;
-    }
+/**neeed styling improve*/
+.v-list-item.active {
+    background: grey;
+}
+
+.v-list-item.active>* {
+    color: #fff;
+}
 </style>

@@ -29,37 +29,46 @@ export default {
     },
     computed: {
         textfield() {
-            return ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+            return ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'label']
         },
         user() {
             return this.$store.getters.user
         }
     },
     methods: {
+        alignClass(align) {
+            if (align === 'right') return 'ml-auto'
+            else if (align === 'center') return 'mx-auto'
+            else return 'mr-auto'
+        },
+        getEmbed(src) {
+            let youtubeID = this.youtubeParser(src)
+            return `https://www.youtube.com/embed/${youtubeID}`
+        },
         getForm(id) {
-        	this.loading = true
+            this.loading = true
             axios.all([
-            		request.get(`api/forms/${id}`),
-            		request.get(`api/forms/${id}/responses`)
-            	])
-                .then( 
-                	axios.spread((res1, res2) => {
-                		this.form = res1.data
-                		this.responses = res2.data.data
-                		this.next_url = res2.data.next_page_url
-                		this.activeResponder = this.responses[0] || null
+                    request.get(`api/forms/${id}`),
+                    request.get(`api/forms/${id}/responses`)
+                ])
+                .then(
+                    axios.spread((res1, res2) => {
+                        this.form = res1.data
+                        this.responses = res2.data.data
+                        this.next_url = res2.data.next_page_url
+                        this.activeResponder = this.responses[0] || null
                     })
                 )
                 .finally(() => (this.loading = false))
         },
-        load_more_response(){
-        	this.loading_more = true
-        	request.get(this.next_url)
-        	.then(({ data }) => {
-        		this.responses.push(...data.data)
-        		this.next_url = data.next_page_url
-        	})
-        	.finally(() => this.loading_more = false)
+        load_more_response() {
+            this.loading_more = true
+            request.get(this.next_url)
+                .then(({ data }) => {
+                    this.responses.push(...data.data)
+                    this.next_url = data.next_page_url
+                })
+                .finally(() => this.loading_more = false)
         }
     }
 }

@@ -35,7 +35,8 @@ export default {
                 description: 'Heading 1',
                 text: '',
                 hover: false,
-                icon: 'mdi-format-header-1'
+                icon: 'mdi-format-header-1',
+                align: 'left'
             },
             h2: {
                 id: null,
@@ -44,7 +45,8 @@ export default {
                 description: 'Heading 2',
                 text: '',
                 hover: false,
-                icon: 'mdi-format-header-2'
+                icon: 'mdi-format-header-2',
+                align: 'left'
             },
             h3: {
                 id: null,
@@ -53,7 +55,8 @@ export default {
                 description: 'Heading 3',
                 text: '',
                 hover: false,
-                icon: 'mdi-format-header-3'
+                icon: 'mdi-format-header-3',
+                align: 'left'
             },
             h4: {
                 id: null,
@@ -62,7 +65,8 @@ export default {
                 description: 'Heading 4',
                 text: '',
                 hover: false,
-                icon: 'mdi-format-header-4'
+                icon: 'mdi-format-header-4',
+                align: 'left'
             },
             h5: {
                 id: null,
@@ -71,7 +75,8 @@ export default {
                 description: 'Heading 5',
                 text: '',
                 hover: false,
-                icon: 'mdi-format-header-5'
+                icon: 'mdi-format-header-5',
+                align: 'left'
             },
             h6: {
                 id: null,
@@ -80,7 +85,17 @@ export default {
                 description: 'Heading 6',
                 text: '',
                 hover: false,
-                icon: 'mdi-format-header-6'
+                icon: 'mdi-format-header-6',
+                align: 'left'
+            },
+            label: {
+                id: null,
+                type: 'label',
+                tag: 'label',
+                description: 'Label',
+                text: '',
+                hover: false,
+                icon: 'mdi-format-letter-case'
             }
         },
         paragraph: {
@@ -88,7 +103,8 @@ export default {
             type: 'paragraph',
             tag: 'p',
             text: '',
-            hover: false
+            hover: false,
+            align: 'left'
         },
         section: {
             id: null,
@@ -109,7 +125,8 @@ export default {
             alt: '',
             hover: false,
             icon: 'mdi-image',
-            label: null
+            label: null,
+            align: 'left'
         },
         video: {
             id: null,
@@ -121,8 +138,9 @@ export default {
             maxWidth: '100%',
             maxHeight: '100%',
             hover: false,
-            icon: 'mdi-video',
-            label: null
+            icon: 'mdi-youtube',
+            label: null,
+            align: 'left'
         },
         date: {
             id: null,
@@ -156,10 +174,50 @@ export default {
             id: null,
             type: 'text',
             tag: 'v-text-field',
+            tag_type: 'text',
             label: 'Untitle Question',
             icon: 'mdi-alpha-t-box-outline',
             show_icon: false,
             placeholder: 'Your answer',
+            value: null,
+            required: false,
+            hover: false
+        },
+        number: {
+            id: null,
+            type: 'number',
+            tag: 'v-text-field',
+            tag_type: 'number',
+            label: 'Untitle Question',
+            icon: 'mdi-alpha-n-box-outline',
+            show_icon: false,
+            placeholder: 'Your answer',
+            value: null,
+            required: false,
+            hover: false
+        },
+        link: {
+            id: null,
+            type: 'link',
+            tag: 'v-text-field',
+            tag_type: 'url',
+            label: 'URL',
+            icon: 'mdi-link-plus',
+            show_icon: false,
+            placeholder: 'https://',
+            value: null,
+            required: false,
+            hover: false
+        },
+        email: {
+            id: null,
+            type: 'email',
+            tag: 'v-text-field',
+            tag_type: 'email',
+            label: 'Untitle Question',
+            icon: 'mdi-email-outline',
+            show_icon: false,
+            placeholder: 'user@site.com',
             value: null,
             required: false,
             hover: false
@@ -190,16 +248,29 @@ export default {
             hover: false,
             items: ['Select 1', 'Select 2'],
         },
-        multiple_choice: {
+        radio_group: {
             id: null,
-            type: 'multiple_choice',
+            type: 'radio_group',
             tag: 'v-radio-group',
             label: 'Select',
             icon: 'mdi-radiobox-marked',
             show_icon: false,
             value: null,
+            hover: false,
+            direction: 'row', //or column
+            items: ['Option 1', 'Option 2'],
+        },
+        checkboxes: {
+            id: null,
+            type: 'checkboxes',
+            tag: 'checkboxes',
+            label: 'Select',
+            icon: 'mdi-checkbox-multiple-marked-outline',
+            show_icon: false,
+            value: [],
             required: false,
             hover: false,
+            direction: 'row', //or column
             items: ['Option 1', 'Option 2'],
         },
         checkbox: {
@@ -217,6 +288,11 @@ export default {
             { value: 'D-M-Y', text: 'D-M-Y e.g 01-12-2020' },
             { value: 'Y-M-D', text: 'Y-M-D e.g 2020-12-01' },
             { value: 'M-D-Y', text: 'M-D-Y e.g 12-01-2020' }
+        ],
+        alignItems: [
+            { value: 'left', text: 'Left Align' },
+            { value: 'center', text: 'Center Align' },
+            { value: 'right', text: 'Right Align' }
         ],
         list: [],
         structures: [],
@@ -245,16 +321,20 @@ export default {
             return this.activeType || this.parent ? false : true
         },
         textfield() {
-            return ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+            return ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'label']
         },
         formInputs() {
             return [
                 this.date,
                 this.time,
                 this.text,
+                this.number,
+                this.link,
+                this.email,
                 this.textarea,
                 this.dropdown,
-                this.multiple_choice,
+                this.radio_group,
+                this.checkboxes,
                 this.checkbox
             ]
         },
@@ -273,6 +353,11 @@ export default {
         }
     },
     methods: {
+        alignClass(align) {
+            if (align === 'right') return 'ml-auto'
+            else if (align === 'center') return 'mx-auto'
+            else return 'mr-auto'
+        },
         toggleParent(id) {
             this.parent = this.parent === id ? null : id
         },
@@ -431,7 +516,7 @@ export default {
                     }
                 })
         },
-        getFormsTemplate(){
+        getFormsTemplate() {
             request.get(`api/forms/list`)
                 .then(({ data }) => {
                     if (data) {

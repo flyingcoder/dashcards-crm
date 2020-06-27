@@ -11,7 +11,7 @@
                     <Avatar :user="item.user"></Avatar>
                 </td>
                 <td>{{ item.status | ucwords }}</td>
-                <td>{{ item.responses_count }}</td>
+                <td class="text-center">{{ item.responses_count }}</td>
                 <td>{{ item.created_at | format }}</td>
                 <Actions :item="item" :permissions="$_permissions.get('forms')" :hasEdit="can_edit(item)" :hasDelete="can_delete(item)" @delete="open_delete_dialog(item)" @edit="go_to_form_edit(item)" @view="go_to_form_preview(item)">
                     <template v-slot:extra>
