@@ -77,7 +77,7 @@ export default {
             clearInterval(i.timer.timer_interval)
         })
     },
-    created() {
+    mounted() {
         this.getTaskTimers()
 
         setInterval(() => {

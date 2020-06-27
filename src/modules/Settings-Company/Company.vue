@@ -67,7 +67,7 @@
                                 <v-col md="4" cols="12" class="c-label"><span class="required">*</span> Required Fields</v-col>
                                 <v-col md="8" cols="12">
                                     <v-btn @click="update_company" :loading="btnloading" class="float-right update-btn">
-                                        <v-icon left small>save</v-icon> Update
+                                        <v-icon left small>mdi-content-save</v-icon> Save Changes
                                     </v-btn>
                                 </v-col>
                             </v-row>

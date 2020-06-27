@@ -6,8 +6,7 @@ import ReportsList from './components/ReportsList/ReportsList.vue'
 import ReportsDialog from './components/ReportsDialog.vue'
 import ReportsSection from './components/ReportsSection.vue'
 import ReportsEditDialog from './components/ReportEditDialog.vue'
-import DeleteDialog from '@/common/DeleteDialog.vue'
-import Empty from '@/common/Empty.vue'
+import DeleteDialog from '@/common/DeleteDialog.vue' 
 
 export default {
     name: 'ReportsTab',
@@ -17,8 +16,7 @@ export default {
         ReportsDialog,
         ReportsSection,
         ReportsEditDialog,
-        DeleteDialog,
-        Empty
+        DeleteDialog, 
     },
 
     props: {

@@ -66,7 +66,7 @@ export default {
             return moment(this.filter_date).format('YYYY-MM-DD')
         },
         api() {
-            return `api/timer/global?per_page=25&all=true&date=${this.dateSelected}`
+            return `api/timer/global?all=true&date=${this.dateSelected}`
         }
     },
 

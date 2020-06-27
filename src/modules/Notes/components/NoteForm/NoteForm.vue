@@ -51,7 +51,7 @@
             </v-row>
             <v-row no-gutters class="pa-3">
                 <v-col md="12">Collaborators:</v-col>
-                <v-col v-for="collaborator in note.users" class="my-1 flex" md="4">
+                <v-col v-for="collaborator in note.users" :key="collaborator.id" class="my-1 flex" md="4">
                     <Avatar :user="collaborator"></Avatar>
                 </v-col>
             </v-row>

@@ -96,10 +96,10 @@ export default {
             return this.permissions && this.permissions.update
         },
         load_users() {
-            this.fill_table_via_url(`api/company/teams?no-clients=true&per_page=12`)
+            this.fill_table_via_url(`api/company/teams?no-clients=true`)
         },
         load_more_users() {
-            this.load_more_via_url(`api/company/teams?no-clients=true&per_page=12`)
+            this.load_more_via_url(`api/company/teams?no-clients=true`)
         },
         toggleAll() {
             if (this.selected.length) this.selected = []

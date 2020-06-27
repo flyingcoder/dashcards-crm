@@ -21,14 +21,10 @@
     padding: 24px;
 }
 </style>
-<script>
-import Empty from '@/common/Empty.vue'
+<script> 
 
 export default {
-    name: 'DropboxTab',
-    components: {
-        Empty
-    },
+    name: 'DropboxTab', 
     computed:{
         type() {
             return this.$route.params.type || 'project'

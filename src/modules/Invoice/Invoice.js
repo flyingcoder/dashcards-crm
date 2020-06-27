@@ -141,37 +141,10 @@ export default {
         },
 
         getInvoices() {
-            this.loading = true
-            api_to
-                .get_invoices(this.pagination.current, this.rows_per_page)
-                .then(({ data }) => {
-                    this.items = data.data
-                    this.pagination.current = data.current_page
-                    this.pagination.total = data.last_page
-                    this.hasMoreData()
-                })
-                .finally(() => {
-                    this.loading = false
-                    this.$event.$emit('btnloading_off', false)
-                })
+            this.fill_table_via_url(`api/invoice`)
         },
         load_more() {
-            this.loading = true
-            api_to
-                .get_invoices(this.pagination.current + 1)
-                .then(({ data }) => {
-                    // console.log(data.data)
-                    data.data.forEach(item => {
-                        this.items.push(item)
-                    })
-                    this.pagination.current = data.current_page
-                    this.pagination.total = data.last_page
-                    this.hasMoreData()
-                })
-                .finally(() => {
-                    this.loading = false
-                    this.$event.$emit('btnloading_off', false)
-                })
+            this.load_more_via_url(`api/invoice`)
         }
     }
 }

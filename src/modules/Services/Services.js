@@ -8,8 +8,7 @@ import Breadcrumb from '@/common/Breadcrumb.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import ClientsDialog from '@/modules/Clients/components/ClientsDialog/ClientsDialog.vue'
-import TeamsDialog from '@/modules/Teams/components/TeamsDialog/TeamsDialog.vue'
-import Empty from '@/common/Empty.vue'
+import TeamsDialog from '@/modules/Teams/components/TeamsDialog/TeamsDialog.vue' 
 import VueTable from '@/common/VueTable/VueTable.vue'
 import Actions from '@/common/VueTable/ActionDropdown.vue'
 import ServiceModal from './components/ServiceModal/ServiceModal.vue'
@@ -25,8 +24,7 @@ export default {
         GroupsDialog,
         DeleteDialog,
         ClientsDialog,
-        TeamsDialog,
-        Empty,
+        TeamsDialog, 
         VueTable,
         Actions,
         ServiceModal,
@@ -107,10 +105,10 @@ export default {
     }),
     mounted() {
         this.$event.$emit('path-change', this.paths)
+        this.load_services()
     },
     created() {
         this.view = this.getPreferredView()
-        this.load_services()
         this.$event.$on(
             'open-new-service-dialog',
             () => (this.add_new_service_dialog = true)
@@ -149,10 +147,10 @@ export default {
             return false
         },
         load_more() {
-            this.load_more_via_url(`api/services?per_page=12`)
+            this.load_more_via_url(`api/services`)
         },
         load_services() {
-            this.fill_table_via_url(`api/services?per_page=12`)
+            this.fill_table_via_url(`api/services`)
         },
         navigate_to_view_service(id) {
             this.$router.push({

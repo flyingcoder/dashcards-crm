@@ -8,9 +8,9 @@
                             {{ title }}
                         </v-toolbar-title>
                         <v-spacer></v-spacer>
-                        <v-flex sm12 md3 v-if="hasSearch">
+                        <v-col sm="12" md="3" v-if="hasSearch">
                             <v-text-field width="100" v-model="search" append-icon="mdi-magnify" label="Search" dense hide-details solo></v-text-field>
-                        </v-flex>
+                        </v-col>
                         <slot name="header-toolbar"></slot>
                     </v-toolbar>
                     <slot name="header"></slot>

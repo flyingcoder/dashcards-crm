@@ -5,7 +5,7 @@
                 {{ tab.name }}
             </v-tab>
         </v-tabs>
-        <router-view></router-view>
+        <router-view :key="$route.fullPath"></router-view>
     </div>
 </template>
 <script src="./Settings.js"></script>

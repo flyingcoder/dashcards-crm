@@ -21,11 +21,11 @@
                 </v-layout>
             </div>
         </template>
-        <v-list>
+        <v-list dense>
             <v-list-item class="dropdown-img">
                 <v-row no-gutters>
                     <v-col cols="12">
-                        <v-img max-width="50px" :src="user.image_url" />
+                        <v-img max-width="50px" :src="user.image_url"></v-img>
                     </v-col>
                     <v-col cols="12">
                         <div class="hero-name">
@@ -38,9 +38,10 @@
             </v-list-item>
             <v-list-item class="h__list" v-for="(item, index) in items" :key="index" @click="handle_action(item.action)">
                 <v-list-item-icon class="h__icons">
-                    <v-img max-width="25px" :src="item.icon" />
+                    <!-- <v-img max-width="25px" :src="item.icon" /> -->
+                    <v-icon>{{item.icon}}</v-icon>
                 </v-list-item-icon>
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
+                <v-list-item-title class="subtitle-1">{{ item.title }}</v-list-item-title>
             </v-list-item>
         </v-list>
     </v-menu>
@@ -54,24 +55,24 @@ export default {
         items: [{
                 id: 1,
                 title: 'Profile',
-                icon: require('@/assets/icons/header/user/profile.svg'),
+                icon: 'mdi-account-cog-outline', //require('@/assets/icons/header/user/profile.svg'),
                 action: 'navigate_to_profile'
             },
             {
                 id: 2,
                 title: 'Settings',
-                icon: require('@/assets/icons/header/user/settings.svg'),
+                icon: 'mdi-cogs', //require('@/assets/icons/header/user/settings.svg'),
                 action: 'navigate_to_settings'
             },
             {
                 id: 3,
                 title: 'Help',
-                icon: require('@/assets/icons/header/user/help.svg')
+                icon: 'mdi-help-circle-outline' //require('@/assets/icons/header/user/help.svg')
             },
             {
                 id: 4,
                 title: 'Logout',
-                icon: require('@/assets/icons/header/user/logout.svg'),
+                icon: 'mdi-power', //require('@/assets/icons/header/user/logout.svg'),
                 action: 'logout'
             }
         ]

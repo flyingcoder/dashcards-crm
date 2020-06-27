@@ -8,8 +8,7 @@ import VueTable from '@/common/VueTable/VueTable.vue'
 import CustomDropzone from '@/common/CustomDropzone.vue'
 import LinkDialog from '@/modules/ProjectPreview-Files/components/LinkDialog.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
-import ToolbarItem from '@/modules/ProjectPreview-Files/components/ToolbarItem.vue'
-import Empty from '@/common/Empty.vue'
+import ToolbarItem from '@/modules/ProjectPreview-Files/components/ToolbarItem.vue' 
 import EmbedViewer from '@/common/Viewer/EmbedViewer.vue'
 import VideoViewer from '@/common/Viewer/VideoViewer.vue'
 import ImageViewer from '@/common/Viewer/ImageViewer.vue'
@@ -29,8 +28,7 @@ export default {
         CustomDropzone,
         LinkDialog,
         DeleteDialog,
-        ToolbarItem,
-        Empty,
+        ToolbarItem, 
         EmbedViewer,
         VideoViewer,
         ImageViewer,

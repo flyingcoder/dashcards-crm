@@ -1,0 +1,110 @@
+@import '~@/sass/_variables';
+
+@include pagePadding ('.forms-page');
+
+.form-btn {
+    .v-btn {
+        margin-left: 10px;
+    }
+
+    .v-btn--outlined .v-btn__content .v-icon {
+        color: $btnGray;
+    }
+
+    .v-btn--outlined {
+        border: thin solid $btnGray;
+        background-color: $white;
+    }
+}
+
+.forms-page-wrapper {
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.forms-page-content {
+    background-color: $tableBlueBg;
+    border: 1px solid $tableBorderBlue;
+    padding: 15px;
+}
+
+.form {
+    border-radius: 10px;
+    margin: 0;
+
+    .form-header {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        background-color: $blue;
+        padding: 10px;
+
+        .v-btn--outlined .v-btn__content .v-icon {
+            color: $btnGray;
+        }
+
+        .v-btn--outlined {
+            border: thin solid $btnGray;
+            background-color: $white;
+        }
+    }
+
+    .title-field {
+        border: 1px solid $tableBorderBlue;
+
+        .f-title.v-input {
+            margin: 0 10px;
+        }
+    }
+
+    .desc-field {
+        border: 1px solid $tableBorderBlue;
+
+        .v-input {
+            margin: 0 10px;
+        }
+    }
+
+    .field-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px;
+        border: 1px solid $tableBorderBlue;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+
+        .v-icon {
+            color: $btnGray;
+        }
+
+        .left-action,
+        .right-action {
+            display: flex;
+        }
+
+        .switch-field {
+            display: flex;
+            align-items: center;
+
+            span {
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .form-options {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px;
+        background-color: $blue;
+        border-radius: 10px;
+        margin-top: 10px;
+
+        .v-icon {
+            color: $btnGray;
+        }
+    }
+}

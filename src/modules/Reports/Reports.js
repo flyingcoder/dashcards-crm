@@ -9,8 +9,7 @@ import TableHeader from '@/common/TableHeader.vue'
 import ReportsSection from './components/ReportsSection.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import ReportsEditDialog from './components/ReportEditDialog.vue'
-import ReportsAddDialog from './components/ReportAddDialog.vue'
-import Empty from '@/common/Empty.vue'
+import ReportsAddDialog from './components/ReportAddDialog.vue' 
 
 export default {
     name: 'Reports',
@@ -22,8 +21,7 @@ export default {
         ReportsSection,
         DeleteDialog,
         ReportsEditDialog,
-        ReportsAddDialog,
-        Empty
+        ReportsAddDialog 
     },
 
     props: {

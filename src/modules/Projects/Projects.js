@@ -8,8 +8,7 @@ import Breadcrumb from '@/common/Breadcrumb.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import ClientsDialog from '@/modules/Clients/components/ClientsDialog/ClientsDialog.vue'
-import TeamsDialog from '@/modules/Teams/components/TeamsDialog/TeamsDialog.vue'
-import Empty from '@/common/Empty.vue'
+import TeamsDialog from '@/modules/Teams/components/TeamsDialog/TeamsDialog.vue' 
 import VueTable from '@/common/VueTable/VueTable.vue'
 import Actions from '@/common/VueTable/ActionDropdown.vue'
 import ProjectModal from './components/ProjectModal/ProjectModal.vue'
@@ -25,8 +24,7 @@ export default {
         GroupsDialog,
         DeleteDialog,
         ClientsDialog,
-        TeamsDialog,
-        Empty,
+        TeamsDialog, 
         VueTable,
         Actions,
         ProjectModal,

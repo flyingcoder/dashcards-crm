@@ -1,11 +1,7 @@
-import Empty from '@/common/Empty.vue'
 import _cloneDeep from 'lodash/cloneDeep'
 
 export default {
-    name: 'VueTable',
-    components: {
-        Empty
-    },
+    name: 'VueTable', 
     props: {
         title: { type: String, default: '' },
         items: { type: Array, default: () => [] },

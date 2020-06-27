@@ -60,12 +60,12 @@
                             <v-card :loading="loading" class="ml-2 mt-4">
                                 <v-card-title>Recent Activities</v-card-title>
                                 <v-card-text>
-                                    <Empty headline="Under construction!"></Empty>
+                                    <Empty icon="mdi-hammer-wrench" headline="Under construction!"></Empty>
                                 </v-card-text>
                                 <v-divider class="mx-4"></v-divider>
                                 <v-card-title>Transaction History</v-card-title>
                                 <v-card-text>
-                                    <Empty headline="Under construction!"></Empty>
+                                    <Empty icon="mdi-hammer-wrench" headline="Under construction!"></Empty>
                                 </v-card-text>
                                 </v-card-actions>
                             </v-card>

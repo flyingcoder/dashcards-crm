@@ -21,13 +21,13 @@
         </v-toolbar>
         <v-card-text class="pa-0" style="max-height: 300px; overflow-x:hidden;overflow-y:auto;">
             <v-list dense class="pa-0" three-line>
-                <v-skeleton-loader ref="skeleton" v-if="notificationsFetched" v-for="item in [1, 2, 3]" :boilerplate="boilerplate" :type="type" :tile="tile" class="mx-auto"></v-skeleton-loader>
+                <v-skeleton-loader ref="skeleton" v-if="notificationsFetched" v-for="item in [1, 2, 3]" :key="item" :boilerplate="boilerplate" :type="type" :tile="tile" class="mx-auto"></v-skeleton-loader>
                 <v-list-item v-if="notifications.length === 0" class="new__message">
                     <v-list-item-content>
                         <v-list-item-title>No notification.</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item v-else v-for="(notification, index) of notifications" @click="notificationClicked(notification, index)">
+                <v-list-item v-else v-for="(notification, index) of notifications" :key="index" @click="notificationClicked(notification, index)">
                     <v-list-item-avatar color="grey">
                         <v-img :src="notification.causer.image_url"></v-img>
                     </v-list-item-avatar>

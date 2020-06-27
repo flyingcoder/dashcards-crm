@@ -2,16 +2,14 @@ import request from '@/services/axios_instance'
 //Components
 import TasksCard from '@/common/TasksCard/TasksCard.vue'
 import PreviewCard from './components/TaskTabPreviewCard/TaskTabPreviewCard.vue'
-import Avatars from '@/common/Avatars'
-import Empty from '@/common/Empty.vue'
+import Avatars from '@/common/Avatars' 
 
 export default {
     name: 'TasksTab',
     components: {
         TasksCard,
         PreviewCard,
-        Avatars,
-        Empty
+        Avatars, 
     },
 
     props: {
