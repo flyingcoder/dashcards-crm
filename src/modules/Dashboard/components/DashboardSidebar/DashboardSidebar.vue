@@ -1,6 +1,6 @@
 <template>
   <v-list class="sidebar">
-    <span v-if="user.id == 1" class="sidebar-label">Super Admin</span>
+    <span v-if="user.email == 'ross.buzzooka@gmail.com'" class="sidebar-label">Super Admin</span>
     <div
       class="sidebar-inner"
       v-for="(item, index) in admin_items"
@@ -9,7 +9,7 @@
       @click="sidebar_item_clicked(item.action)"
       tile
       :class="{active: item.action === selected_route_name}"
-      v-if="user.id == 1"
+      v-if="user.email == 'ross.buzzooka@gmail.com'"
     >
       <v-list
         class="s__list"
@@ -28,7 +28,7 @@
       </v-list>
     </div>
     <v-divider></v-divider>
-    <span v-if="user.id == 1" class="sidebar-label">Regular</span>
+    <span v-if="user.email == 'ross.buzzooka@gmail.com'" class="sidebar-label">Regular</span>
     <div
       class="sidebar-inner"
       v-for="(item, index) in items"
