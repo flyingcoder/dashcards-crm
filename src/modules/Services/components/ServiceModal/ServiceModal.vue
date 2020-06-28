@@ -5,7 +5,7 @@
                 <div style="height: 480px;">
                     <v-row no-gutter class="dialog__buttons">
                         <v-col md="4" sm="6">
-                            <v-menu bottom close-on-content-click transition="slide-y-transition" bottom max-height="300">
+                            <v-menu bottom close-on-content-click transition="slide-y-transition" max-height="300">
                                 <template v-slot:activator="{ on }">
                                     <v-btn v-on="on" class="d__btn" block>
                                         <div class="d__icon">
@@ -56,7 +56,7 @@
                                         </div>
                                     </v-btn>
                                 </template>
-                                <v-date-picker :max="date_pickers.end_date" v-model="date_pickers.start_date" no-title scrollable no-title></v-date-picker>
+                                <v-date-picker :max="date_pickers.end_date" v-model="date_pickers.start_date" no-title scrollable></v-date-picker>
                             </v-menu>
                             <div class="choosen" v-if="date_pickers.start_date">
                                 <v-chip block outlined label class="mt-1" close @click:close="date_pickers.start_date = null">
@@ -79,7 +79,7 @@
                                         </div>
                                     </v-btn>
                                 </template>
-                                <v-date-picker :min="date_pickers.start_date" v-model="date_pickers.end_date" no-title scrollable no-title></v-date-picker>
+                                <v-date-picker :min="date_pickers.start_date" v-model="date_pickers.end_date" no-title scrollable></v-date-picker>
                             </v-menu>
                             <div class="choosen" v-if="date_pickers.end_date">
                                 <v-chip block outlined label class="mt-1" close @click:close="date_pickers.end_date = null">
@@ -90,7 +90,7 @@
                         </v-col>
                         <!-- Managers -->
                         <v-col md="4" sm="6">
-                            <v-menu bottom close-on-content-click transition="slide-y-transition" bottom max-height="300" offset-y>
+                            <v-menu bottom close-on-content-click transition="slide-y-transition" max-height="300" offset-y>
                                 <template v-slot:activator="{ on }">
                                     <v-btn v-on="on" class="d__btn" block>
                                         <div class="d__icon">
@@ -193,14 +193,16 @@
                             </div>
                         </v-col>
                     </v-row>
-                    <v-row no-gutters>
+                    <v-row no-gutters class="align-center">
                         <v-col md="4" sm="12">
                             <div class="fullwidth mx-auto">
                                 <v-img v-if="icon" :src="icon"></v-img>
-                                <v-btn depressed block class="mt-2" @click="$refs.uploadModal.openDialog()">
-                                    <v-icon left>mdi-image-edit-outline</v-icon> Change Icon
+                                <v-btn block class="mt-2 d__btn" @click="$refs.uploadModal.openDialog()">
+                                    <v-icon class="d__icon">mdi-image-edit-outline</v-icon> 
+                                    <div class="d__title">
+                                        <span>Change Icon</span>
+                                    </div>
                                 </v-btn>
-                                <h6 class="mt-3 subtitle-2">* Required</h6>
                             </div>
                         </v-col>
                         <v-col md="8" sm="12">

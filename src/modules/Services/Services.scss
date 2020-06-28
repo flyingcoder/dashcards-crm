@@ -68,20 +68,21 @@
         background-color: rgba(0, 0, 0, .05);
     }
 }
-.project-card{
+.service-card{
 
     &:hover{
         box-shadow: $darkBoxShadow-2;
     }
 
     .card-header{
+        background-color: rgba(255, 255, 255, .5);
         .v-btn{
-            color: $btnGray;
+            color: $black;
         }
     }
 
     .client-name{
-        color: $textDark;
+        color: $black;
         font-size: 16px;
     }
 

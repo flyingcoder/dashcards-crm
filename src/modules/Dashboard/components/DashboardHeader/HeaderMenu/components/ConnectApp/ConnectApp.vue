@@ -3,8 +3,8 @@
   <v-menu
     class="apps-dropdown"
     transition="slide-y-transition"
-    :nudge-left="115"
-    :nudge-bottom="10"
+    :nudge-left="200"
+    :nudge-bottom="15"
     offset-y
     :close-on-content-click="false"
   >

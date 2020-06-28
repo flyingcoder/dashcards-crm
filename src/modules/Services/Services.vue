@@ -20,7 +20,7 @@
                         <v-col md="3" sm="4" xs="12" v-for="item in items" :key="item.id">
                             <v-card class="mx-auto service-card">
                                 <v-img :src="item.props.icon" :height="150">
-                                    <v-card-title class="card-header" style="background:rgba(105,178,255,.6);">
+                                    <v-card-title class="card-header">
                                         <Avatar :user="item.client[0]" iconOnly>
                                             <template>
                                                 <span class="client-name subtitle-2">{{ item.props.business_name | truncate(15) }}</span>

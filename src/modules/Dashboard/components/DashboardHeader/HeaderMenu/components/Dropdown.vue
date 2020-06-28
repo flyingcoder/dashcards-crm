@@ -2,30 +2,30 @@
     <v-menu offset-y class="user-dropdown" transition="slide-y-transition" :nudge-width="10" :nudge-bottom="10" :nudge-left="70" bottom>
         <template v-slot:activator="{ on }">
             <div class="dropdown" v-on="on">
-                <v-layout align-center>
-                    <v-flex xs6>
-                        <v-avatar v-if="user.image_url" class="user-icon responsive-img" :size="avatarSize">
-                            <img :src="user.image_url" alt="user" />
-                        </v-avatar>
-                        <v-avatar v-else color="red" :size="avatarSize" class="user-icon responsive-img">
-                            <span class="white--text">
-                                {{ user.first_name.charAt(0) + user.last_name.charAt(0) }}
-                            </span>
-                        </v-avatar>
-                    </v-flex>
-                    <v-flex xs6>
-                        <div class="user-chevron">
-                            <img src="@/assets/icons/header/chevron-down.svg" class="chevron responsive-img" alt="chevron" />
-                        </div>
-                    </v-flex>
-                </v-layout>
+            <v-badge
+                avatar
+                bordered
+                overlap
+                bottom
+                class="b-badge"
+                icon="expand_more"
+            >
+                <v-avatar v-if="user.image_url" class="user-icon responsive-img" :size="avatarSize">
+                    <img :src="user.image_url" alt="user" />
+                </v-avatar>
+                <v-avatar v-else color="red" :size="avatarSize" class="user-icon responsive-img">
+                    <span class="white--text">
+                        {{ user.first_name.charAt(0) + user.last_name.charAt(0) }}
+                    </span>
+                </v-avatar>
+            </v-badge>
             </div>
         </template>
-        <v-list dense>
+        <v-list dense class="dropdown-content">
             <v-list-item class="dropdown-img">
                 <v-row no-gutters>
-                    <v-col cols="12">
-                        <v-img max-width="50px" :src="user.image_url"></v-img>
+                    <v-col cols="12" class="text-center">
+                        <img class="user-img" :src="user.image_url" />
                     </v-col>
                     <v-col cols="12">
                         <div class="hero-name">
@@ -38,8 +38,7 @@
             </v-list-item>
             <v-list-item class="h__list" v-for="(item, index) in items" :key="index" @click="handle_action(item.action)">
                 <v-list-item-icon class="h__icons">
-                    <!-- <v-img max-width="25px" :src="item.icon" /> -->
-                    <v-icon>{{item.icon}}</v-icon>
+                    <img :src="item.icon" />
                 </v-list-item-icon>
                 <v-list-item-title class="subtitle-1">{{ item.title }}</v-list-item-title>
             </v-list-item>
@@ -126,47 +125,50 @@ export default {
     }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
+@import "~@/sass/_variables";
 .dropdown {
-    width: 75px;
+    width: 55px;
     cursor: pointer;
-
-    .atomic-icon {
-        width: 30px;
-    }
-
-    .user-chevron img {
-        width: 25px !important;
-        margin-left: 5px;
+    
+    .b-badge .v-badge__badge{
+        background-color: $blue !important;
     }
 }
-
+.h__list.v-list-item {
+    display: flex;
+    align-items: center;
+    min-height: auto;
+    padding: 0.5em 1em;
+}
+.dropdown-content.v-list{
+    width: 180px;
+    .v-list-item__title{
+        color: $textDark !important;
+    }
+}
+.v-list-item__icon.h__icons{
+    margin-top: 0;
+    margin-bottom: 0;
+    img {
+        width: 25px;
+        height: 25px;
+    }
+}
 .dropdown-img {
-    .v-image {
-        margin: 0 auto;
-        display: block;
+    
+    img.user-img {
+        width: 50px;
     }
 
     .hero-name {
         text-align: center;
         padding-bottom: 10px;
         font-size: 16px;
+        color: $textDark;
     }
 }
 
 @media only screen and (max-width: 480px) {
-    .user-dropdown {
-        .dropdown {
-            width: 50px;
-
-            .atomic-icon {
-                width: 22px;
-            }
-
-            .user-chevron img {
-                width: 20px;
-            }
-        }
-    }
 }
 </style>

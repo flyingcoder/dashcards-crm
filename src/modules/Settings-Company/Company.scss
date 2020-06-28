@@ -81,26 +81,49 @@
                 }
             }
 
-            .icons {
+            .profile-logo {
                 display: grid;
                 grid-template-columns: 1fr;
                 justify-content: center;
                 align-items: center;
                 padding: 0 15px;
-                background-color: $white;
-                border-bottom: 1px solid $borderLightGray;
+                background-color: $tableBlueBg;
             }
 
             .user-img {
                 justify-self: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 margin-top: -78px;
                 cursor: pointer;
                 z-index: 1;
+                border-radius: 50%;
+                background-color: $white;
+                height: 150px;
+                width: 150px;
 
-                img {
+                .user-img-hover{
+                    display: none;
                     border-radius: 50%;
+                    background-color: $gray;
                     height: 150px;
                     width: 150px;
+                    color: $black;
+                    opacity: 0.5;
+                    position: absolute;
+                }
+                &:hover .user-img-hover{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                img {
+                    height: 150px;
+                    width: 150px;
+                    background-color: $white;
+                    border-radius: 50%;
                 }
             }
 
@@ -213,7 +236,7 @@
         }
     }
 
-    .icons {
+    .profile-logo {
         padding: 0 12px;
     }
 }

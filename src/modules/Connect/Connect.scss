@@ -44,6 +44,25 @@
 .seoprofiler{
     background-color: $seoprofiler;
 }
+.paypal{
+    background-color: $paypal;
+    background-image: $paypalGradient;
+}
+.semrush{
+    background-color: $semrush;
+}
+.b-local{
+    background-color: $bLocal;
+}
+.gcalendar{
+    background-color: $gcalendar;
+}
+.ical{
+    background-color: $iCal;
+}
+.lastpass{
+    background-color: $lastpass;
+}
 .integration.seoprofiler{
     color: $black;
 
@@ -63,10 +82,18 @@
 .integration{
     color: $white;
 
+    &:hover{
+        box-shadow: $darkBoxShadow-2;
+    }
+
     img {
         height: 50px;
         text-align: center;
         margin: 0 auto !important;
+    }
+    
+    .app-body {
+        background-color: transparent;
     }
 
     .app-actions{

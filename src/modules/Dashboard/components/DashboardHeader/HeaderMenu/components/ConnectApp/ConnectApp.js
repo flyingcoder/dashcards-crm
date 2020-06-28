@@ -16,7 +16,12 @@ export default {
                 name: "Stripe"
             },
             {
-                id: 'dropbox',
+                id: 'paypal',
+                logo: require('@/assets/appIcons/paypal-favicon.png'),
+                name: "Paypal"
+            },
+            {
+                id: 'dropdown',
                 logo: require('@/assets/appIcons/dropbox-icon.svg'),
                 name: "Dropbox"
             },
@@ -39,6 +44,26 @@ export default {
                 id: 'skype',
                 logo: require('@/assets/appIcons/skype-icon.svg'),
                 name: "Skype"
+            },
+            {
+                id: 'semrush',
+                logo: require('@/assets/appIcons/semrush-favicon.png'),
+                name: "SEMrush"
+            },
+            {
+                id: 'brightlocal',
+                logo: require('@/assets/appIcons/brightlocal-favicon.png'),
+                name: "BrightLocal"
+            },
+            {
+                id: 'google-calendar',
+                logo: require('@/assets/appIcons/google-calendar-icon.png'),
+                name: "Google Calendar"
+            },
+            {
+                id: 'lastpass',
+                logo: require('@/assets/appIcons/lastpass-favicon.png'),
+                name: "LastPass"
             },
         ]
     }),

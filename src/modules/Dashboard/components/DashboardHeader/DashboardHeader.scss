@@ -1,6 +1,6 @@
 @import "~@/sass/_variables";
 
-.header {
+.b-header {
     display: flex;
     height: 100%;
     background: $white;
@@ -12,6 +12,14 @@
 .h__hamburger {
     display: flex;
     align-items: center;
+}
+.h__pagetitle{
+    flex-basis: 50%;
+    .b-breadcrumbs.v-breadcrumbs {
+        padding: 0;
+        text-transform: capitalize;
+        color: $textDark !important;
+    }
 }
 
 .h__pagetitle h4 {
@@ -28,8 +36,9 @@
 }
 
 .h__search {
-    max-width: 100%;
     min-width: 150px;
+    margin: 0 20px;
+    flex-basis: 100%;
 }
 
 // Small Laptop - Large Desktop
