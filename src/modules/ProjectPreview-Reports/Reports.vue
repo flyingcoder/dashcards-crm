@@ -53,7 +53,7 @@
             </div>
         </v-col>
         <v-col md="12" xs="12" class="ma-0 pa-0" v-else>
-            <Empty headline="No reports yet">
+            <Empty headline="No reports yet" icon="mdi-file-compare">
                 <template v-slot:extra>
                     <v-btn large dark color="#3b589e" @click="open_dialog">Add New Report
                     </v-btn>

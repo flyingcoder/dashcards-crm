@@ -1,11 +1,11 @@
 <template>
     <div class="dash__card">
         <v-row wrap no-gutters class="card__header" align-center>
-            <v-flex xs5 class="card__title">
+            <v-col xs="6" md="6" class="card__title ">
                 {{ title }}
-            </v-flex>
+            </v-col>
             <slot name="actions" v-if="dashboard">
-                <v-flex xs7 class="actions">
+                <v-col xs="6" md="6" class="actions">
                     <v-btn fab small text class="action" v-if="hasListView" @click="$emit('list-view')">
                         <v-icon>list</v-icon>
                     </v-btn>
@@ -24,7 +24,7 @@
                     <v-btn fab small text class="action" v-if="hasClose" @click="$emit('close')">
                         <v-icon>close</v-icon>
                     </v-btn>
-                </v-flex>
+                </v-col>
             </slot>
         </v-row>
         <div class="card__content">

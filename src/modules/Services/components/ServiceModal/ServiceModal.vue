@@ -22,7 +22,7 @@
                                     <v-list-item @click="open_add_new_client">
                                         <v-icon left>add</v-icon> Add new client
                                     </v-list-item>
-                                    <v-list-item v-for="(item, index) in client.items" :key="index" @click="client.selected = item">
+                                    <v-list-item v-for="(item, index) in client.items" :key="index" @click="clientSelected(item)">
                                         <v-list-item-avatar>
                                             <v-img :src="item.image_url"></v-img>
                                         </v-list-item-avatar>
@@ -174,7 +174,7 @@
                                             <v-icon>mdi-clipboard-pulse-outline</v-icon>
                                         </div>
                                         <div class="d__title">
-                                            <span>Service Status *</span>
+                                            <span>Campaign Status *</span>
                                         </div>
                                     </v-btn>
                                 </template>
@@ -207,18 +207,19 @@
                         </v-col>
                         <v-col md="8" sm="12">
                             <v-col md="12">
-                                <TextField prepend-inner-icon="mdi-alpha-s-box-outline" dense :value.sync="name" label="Service Name *" color="#657186" filled></TextField>
+                                <!-- <TextField prepend-inner-icon="mdi-alpha-s-box-outline" dense :value.sync="name" label="Service Name *" color="#657186" filled></TextField> -->
+                                <v-select required clearable prepend-inner-icon="mdi-alpha-s-box-outline" append-outer-icon="mdi-plus" filled hide-details="auto" placeholder="Select Service *"  v-model="service.selected" :items="service.items" return-object item-text="name" @click:close="service.selected = null" @click:append-outer="open_add_new_service_list"></v-select>
                             </v-col>
                             <v-col md="12" sm="12">
-                                <TextField prepend-inner-icon="mdi-office-building" dense :value.sync="business_name" label="Business Name *" color="#657186" filled></TextField>
+                                <TextField required clearable prepend-inner-icon="mdi-office-building" v-model="business_name" label="Business Name *" color="#657186" filled></TextField>
                             </v-col>
                             <v-col md="12" sm="12">
-                                <TextField prepend-inner-icon="mdi-map-marker" dense :value.sync="location" label="Location" color="#657186" filled></TextField>
+                                <TextField required clearable prepend-inner-icon="mdi-map-marker" dense v-model="location" label="Location" color="#657186" filled></TextField>
                             </v-col>
                         </v-col>
                         <v-col md="12" class="service__description">
                             <div class="service__description">
-                                <Editor :hasFloatingTools="false" v-model="description" :content="description" placeholder="Service Description *"></Editor>
+                                <Editor :hasFloatingTools="false" v-model="description" :content="description" placeholder="Campaign Description *"></Editor>
                             </div>
                         </v-col>
                     </v-row>

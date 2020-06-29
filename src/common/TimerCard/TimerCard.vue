@@ -66,9 +66,9 @@
                                                     </h3>
                                                     <div class="caption" :inner-html.prop="slide.description | truncate(50)"></div>
                                                 </div>
-                                                <div class="t-service">
+                                                <!-- <div class="t-service">
                                                     {{ slide.service | ucwords }}
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <div class="slide-right">
                                                 <div class="s-hours-detail">

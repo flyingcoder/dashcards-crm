@@ -111,16 +111,18 @@
                                     <v-card-text class="col-md-9" v-if="activeResponder">
                                         <template v-for="(data, i) in activeResponder.data">
                                             <template>
-                                                <div class="pa-3" v-if="data.hasOwnProperty('value')">
+                                                <div class="pa-2" v-if="data.hasOwnProperty('value')">
                                                     <p>
                                                         <v-icon small left>mdi-comment-question-outline</v-icon>
+                                                        <span class="subtitle-1" v-if="data.label">{{data.label}}</span>
                                                     </p>
                                                     <p class="subtitle-2">
                                                         <v-icon x-small left>mdi-checkbox-marked-circle-outline</v-icon>
-                                                        {{typeof data.value === 'object' ? data.value.join(',') : data.value }}
+                                                        <span v-if="data.value">{{typeof data.value === 'object' ? data.value.join(', ') : data.value }}</span>
+                                                        <span v-else class="text-italic">No answer</span>
                                                     </p>
                                                 </div>
-                                                <div class="pa-3" v-else>
+                                                <div class="pa-2" v-else>
                                                     <div v-if="data.type === 'divider'">
                                                         <hr />
                                                     </div>

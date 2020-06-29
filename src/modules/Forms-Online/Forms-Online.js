@@ -40,8 +40,8 @@ export default {
             }
             return false
         },
-        user(){
-        	return this.$store.getters.user
+        user() {
+            return this.$store.getters.user || null
         }
     },
     methods: {
@@ -62,10 +62,34 @@ export default {
             let youtubeID = this.youtubeParser(src)
             return `https://www.youtube.com/embed/${youtubeID}`
         },
+        formValid() {
+            if (!this.form) {
+                this.$event.$emit('open_snackbar', 'Form is invalid', 'error')
+                return false
+            }
+            let error = []
+            for (var i = 0; i < this.form.questions.length; i++) {
+                if (this.form.questions[i].required && !this.form.questions[i].value) {
+                    error.push(`${this.form.questions[i]} should have valid value!`)
+                }
+            }
+            if (error.length > 0) {
+                this.$event.$emit('open_snackbar', error.join('<br>'), 'error')
+                return false
+            }
+            return true
+        },
         submitForm() {
             if (this.viewMode) return
+            if (!this.formValid()) {
+                return
+            }
             this.submitting = true
-            request.post(`api/form/${this.form.id}/online`, { data : this.form.questions, user_id : this.user.id })
+            var payload = { data: this.form.questions }
+            if (this.user) {
+                payload.user_id  = this.user.id
+            }
+            request.post(`api/form/${this.form.id}/online`, payload)
                 .then(({ data }) => {
                     this.submitted = true
                 })

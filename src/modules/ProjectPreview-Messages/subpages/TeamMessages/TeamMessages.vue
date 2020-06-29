@@ -15,7 +15,7 @@
                 </v-col>
             </v-row>
             <div class="no-messages" v-else>
-                <Empty headline="No messages yet"></Empty>
+                <Empty  icon="mdi-cellphone-message-off" headline="No messages yet"></Empty>
             </div>
         </div>
         <div class="write px-3">

@@ -20,7 +20,7 @@ export default {
         id: [Number, String],
         dashboard: Boolean,
         viewMoreLink: Object,
-        type: { type: String, default: 'projects' }, //or services
+        type: { type: String, default: 'projects' }, //or campaigns
         isExpanded: {
             type: Boolean,
             default: false

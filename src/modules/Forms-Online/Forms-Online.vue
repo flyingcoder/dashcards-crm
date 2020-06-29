@@ -37,7 +37,7 @@
                                 </component>
                             </div>
                             <div v-else-if="item.type === `date`">
-                                <label v-if="item.label">{{item.label}}</label>
+                                <label v-if="item.label">{{item.label}}</label><sup v-if="item.required">*</sup>
                                 <v-menu v-model="item.popover" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y max-width="100%" min-width="250px">
                                     <template v-slot:activator="{ on, attrs }">
                                         <v-text-field v-model="item.value" filled hide-details="auto" :label="item.placeholder" readonly v-bind="attrs" v-on="on"></v-text-field>
@@ -46,7 +46,7 @@
                                 </v-menu>
                             </div>
                             <div v-else-if="item.type === `time`">
-                                <label v-if="item.label">{{item.label}}</label>
+                                <label v-if="item.label">{{item.label}}</label><sup v-if="item.required">*</sup>
                                 <v-menu v-model="item.popover" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y max-width="100%" min-width="250px">
                                     <template v-slot:activator="{ on, attrs }">
                                         <v-text-field v-model="item.value" filled hide-details="auto" :label="item.placeholder" readonly v-bind="attrs" v-on="on"></v-text-field>
@@ -55,17 +55,30 @@
                                 </v-menu>
                             </div>
                             <div v-else-if="item.type === `checkbox`">
-                                <label v-if="item.label">{{item.label}}</label>
+                                <label v-if="item.label">{{item.label}}</label><sup v-if="item.required">*</sup>
                                 <v-checkbox dense hide-details="auto" :label="item.text" v-model="item.value"></v-checkbox>
                             </div>
                             <div v-else-if="item.type === `radio_group`">
-                                <label v-if="item.label">{{item.label}}</label>
+                                <label v-if="item.label">{{item.label}}</label><sup v-if="item.required">*</sup>
                                 <v-radio-group v-model="item.value" v-if="item.direction === 'row'" row :mandatory="item.required">
                                     <v-radio v-for="(option,i) in item.items" :key="i" :label="option" :value="option"></v-radio>
                                 </v-radio-group>
                                 <v-radio-group v-model="item.value" v-else column :mandatory="item.required">
                                     <v-radio v-for="(option,i) in item.items" :key="i" :label="option" :value="option"></v-radio>
                                 </v-radio-group>
+                            </div>
+                            <div v-else-if="item.type === `checkboxes`">
+                                <label v-if="item.label">{{item.label}}</label><sup v-if="item.required">*</sup>
+                                <v-row no-gutters dense v-if="item.direction === 'row'">
+                                    <v-col md="12" class="d-flex flex-wrap">
+                                        <v-checkbox v-model="item.value" hide-details="auto" class="mr-3 my-1" v-for="(option,i) in item.items" :key="i" :label="option" :value="option"></v-checkbox>
+                                    </v-col>
+                                </v-row>
+                                <v-row no-gutters dense v-else>
+                                    <v-col md="12">
+                                        <v-checkbox v-model="item.value" hide-details="auto" v-for="(option,i) in item.items" :key="i" class="my-1" :label="option" :value="option"></v-checkbox>
+                                    </v-col>
+                                </v-row>
                             </div>
                             <div v-else-if="item.type === `checkboxes`">
                                 <label v-if="item.label">{{item.label}}</label>
@@ -81,7 +94,7 @@
                                 </v-row>
                             </div>
                             <div v-else>
-                                <label v-if="item.label">{{item.label}}</label>
+                                <label v-if="item.label">{{item.label}}</label><sup v-if="item.required">*</sup>
                                 <component :placeholder="item.placeholder" :type="item.tag_type" v-model="item.value" filled hide-details="auto" :is="item.tag" :required="item.required" :rows="item.rows" :items="item.items"></component>
                             </div>
                         </v-col>
@@ -100,7 +113,7 @@
                         </v-btn>
                         <v-btn v-else x-large depressed disabled class="px-5">No more response permitted</v-btn>
                     </v-card-actions>
-                    <v-card-text v-if="submitted">
+                    <v-card-text v-if="submitted" class="py-5 my-5">
                         <v-alert border="bottom" colored-border type="success" elevation="1">
                             <p class="subtitle">
                                 Your response has been recorded.

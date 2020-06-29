@@ -17,51 +17,53 @@ import { timers_api } from './makeRequestModules/timers_api'
 import { files_api } from './makeRequestModules/files_api'
 import { calendar_api } from './makeRequestModules/calendar_api'
 import { events_api } from './makeRequestModules/events_api'
+import { services_list_api } from './makeRequestModules/services-list_api'
 
 export default {
-  login({ email, password }) {
-    return request.post('/api/login', { email, password })
-  },
+    login({ email, password }) {
+        return request.post('/api/login', { email, password })
+    },
 
-  logout() {
-    return request.post('/api/logout')
-  },
+    logout() {
+        return request.post('/api/logout')
+    },
 
-  register(fields) {
-    return request.post('/api/register', fields)
-  },
+    register(fields) {
+        return request.post('/api/register', fields)
+    },
 
-  checkout(token) {
-    return request.post('/api/upgrade/checkout', { token })
-  },
+    checkout(token) {
+        return request.post('/api/upgrade/checkout', { token })
+    },
 
-  change_timer(type) {
-    return request.get(`api/timer/${type}`)
-  },
+    change_timer(type) {
+        return request.get(`api/timer/${type}`)
+    },
 
-  timer_status(user_id) {
-    if (!user_id) {
-      return request.get(`api/timer/status`)
-    }
-    return request.get(`api/timer/status/${user_id}`)
-  },
+    timer_status(user_id) {
+        if (!user_id) {
+            return request.get(`api/timer/status`)
+        }
+        return request.get(`api/timer/status/${user_id}`)
+    },
 
-  ...groups_api,
-  ...clients_api,
-  ...teams_api,
-  ...services_api,
-  ...templates_api,
-  ...templates_milestone_api,
-  ...milestone_tasks_api,
-  ...permissions_api,
-  ...autocomplete_api,
-  ...projects_api,
-  ...project_overview_tab_members,
-  ...invoices_api,
-  ...reports_api,
-  ...chat_api,
-  ...timers_api,
-  ...files_api,
-  ...calendar_api,
-  ...events_api
+    ...groups_api,
+    ...clients_api,
+    ...teams_api,
+    ...services_api,
+    ...templates_api,
+    ...templates_milestone_api,
+    ...milestone_tasks_api,
+    ...permissions_api,
+    ...autocomplete_api,
+    ...projects_api,
+    ...project_overview_tab_members,
+    ...invoices_api,
+    ...reports_api,
+    ...chat_api,
+    ...timers_api,
+    ...files_api,
+    ...calendar_api,
+    ...events_api,
+    ...services_list_api
 }

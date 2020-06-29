@@ -15,7 +15,7 @@ import { templates } from './routes/templates'
 import { milestones } from './routes/milestones'
 import { milestoneTasks } from './routes/milestoneTasks'
 import { projects } from './routes/projects'
-import { services } from './routes/services'
+import { campaigns } from './routes/campaigns'
 import { teams } from './routes/teams'
 import { subscribers } from './routes/subscribers'
 import { settings } from './routes/settings'
@@ -46,7 +46,7 @@ import { expanded_tasks } from './routes/expanded/expandedTasks'
 import { pay_invoice } from './routes/payInvoice'
 import { invoice_templates } from './routes/invoiceTemplates'
 import { formResponse } from './routes/formResponse'
-import { test } from './routes/test'
+import { servicesList } from './routes/servicesList'
 Vue.use(Router)
 
 export default new Router({
@@ -60,7 +60,7 @@ export default new Router({
                 milestones, // path: /dashboard/templates/:id/milestone
                 milestoneTasks, // path: /dashboard/templates/:id/milestone/:id2/task
                 projects, // path: /dashboard/projects
-                services, // path: /dashboard/services
+                campaigns, // path: /dashboard/campaigns
                 teams, // path: /dashboard/team
                 subscribers, // path: /dashboard/subscribers
                 settings, // path: /dashboard/settings,
@@ -92,7 +92,7 @@ export default new Router({
                 expanded_tasks, //path: /dashboard/expanded-timeline
                 bugs, // path: /dashboard/bugs
                 invoice_templates, //path: dashboard/invoice-templates
-                test //path: /dashboard/test
+                servicesList //path: /dashboard/services
             ]
         },
         setPassword, // path: /set-password
