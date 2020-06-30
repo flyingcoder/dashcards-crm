@@ -77,7 +77,7 @@ export const global_filters = {
         return value.replace(/[a-z][a-z]*-?/g, ([f, ...rest]) =>
             f.toUpperCase() + rest.join('').replace('-', ' '))
     },
-    
+
     removeSlug(text) {
         return text.split('.')[0]
     },
@@ -85,4 +85,5 @@ export const global_filters = {
     snakeCaseToNormal(text) {
         return text.split('_').join(' ')
     },
+    
 }
