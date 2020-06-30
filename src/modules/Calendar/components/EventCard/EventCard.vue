@@ -3,7 +3,7 @@
         <div class="card_header">
             <h3 class="card_title">
                 <v-icon small :color="event.event_type.properties.color">mdi-checkbox-blank-circle</v-icon>
-                {{ event.event_type.name }}
+                {{ event.event_type.name | ucwords }}
             </h3>
             <div class="card_actions" v-if="!dense">
                 <v-btn fab small text color="#b3b7c3" v-if="can_edit" class="action" @click="$emit('edit-event')">
@@ -43,7 +43,7 @@
         </div>
         <div class="card_body">
             <div class="event_time">{{ datetimedisplay }}</div>
-            <h3 class="event_title">{{ event.title }}</h3>
+            <h3 class="event_title">{{ event.title | ucwords }}</h3>
             <div class="invited">
                 <v-spacer></v-spacer>
                 <Avatars :items="event.participants" :count="avatarCount" :deep="true"></Avatars>
@@ -57,8 +57,11 @@
             <v-btn v-else dark depressed :color="event.event_type.properties.color" @click="$emit('leave-event')">
                 <v-icon left small>mdi-account-arrow-left-outline</v-icon> Leave Event
             </v-btn>
-            <v-btn class="ml-1" depressed color="primary" v-if="event.properties.link" :href="event.properties.link" target="_blank">
+            <v-btn depressed class="link-btn ml-1" v-if="event.properties.link" :href="event.properties.link" target="_blank">
                 <v-icon left  small>mdi-account-tie-voice-outline</v-icon> Open Link
+            </v-btn>
+            <v-btn depressed class="link-btn ml-1" v-else @click="$emit('edit-event')">
+                <v-icon left >insert_link</v-icon> Add Link
             </v-btn>
         </div>
     </div>

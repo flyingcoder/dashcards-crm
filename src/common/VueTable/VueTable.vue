@@ -5,7 +5,7 @@
                 <template v-slot:top v-if="showTopHeader">
                     <v-toolbar flat>
                         <v-toolbar-title class="custom-table-title">
-                            {{ title }}
+                            {{ title | ucwords}}
                         </v-toolbar-title>
                         <v-spacer></v-spacer>
                         <v-col sm="12" md="3" v-if="hasSearch">
@@ -29,7 +29,7 @@
                     <v-skeleton-loader ref="skeleton" :boilerplate="false" type="table-tbody" class="mx-auto mt-3"></v-skeleton-loader>
                 </template>
                 <template v-slot:no-data v-if="!loading">
-                    <Empty>
+                    <Empty :icon="icon">
                         <slot slot="extra" name="empty-slot"> </slot>
                     </Empty>
                 </template>

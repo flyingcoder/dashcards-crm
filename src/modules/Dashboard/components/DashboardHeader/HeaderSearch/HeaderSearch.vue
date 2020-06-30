@@ -21,7 +21,7 @@
             <template v-slot:no-data>
                 <v-list-item>
                     <v-list-item-title>
-                        Search for <strong>Users</strong> or <strong>Projects</strong> or <strong>Services</strong>
+                        Search for <strong>Users</strong>, <strong>Campaigns</strong>, <strong>Projects</strong> or <strong>Services</strong>
                     </v-list-item-title>
                 </v-list-item>
             </template>

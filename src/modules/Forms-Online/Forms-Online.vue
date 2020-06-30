@@ -15,85 +15,30 @@
                     </v-list-item>
                     <v-card-text v-if="form && !submitted">
                         <v-col md="12" v-for="(item, pIndex) in form.questions" :key="item.id">
-                            <div class="section pa-2" v-if="item.type ===`section`">
-                                <div v-for="(child,cIndex) in item.children" :key="child.id">
-                                    <div v-if="child.type === 'divider'">
-                                        <hr />
-                                    </div>
-                                    <div v-else-if="child.type === 'image'">
-                                        <p v-if="child.label">{{child.label}}</p>
-                                        <v-img style="max-width: 100%;" :width="child.itemwidth" :height="child.itemheight" :src="child.src" :alt="child.alt"></v-img>
-                                    </div>
-                                    <div v-else-if="child.type === 'video'">
-                                        <p v-if="child.label">{{child.label}}</p>
-                                        <iframe style="max-width: 100%;" allow="fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" :src="getEmbed(child.src)" :width="child.itemwidth" :height="child.itemheight"></iframe>
-                                    </div>
-                                    <div v-else-if="child.type === 'paragraph' ">
-                                        <p>{{child.text}}</p>
-                                    </div>
-                                    <div v-else-if="textfield.includes(child.type)">
-                                        <component :is="child.type">
-                                            {{child.text}}
-                                        </component>
-                                    </div>
-                                    <div v-else-if="child.type === `date`">
-                                        <label v-if="child.label">{{child.label}}</label>
-                                        <v-menu v-model="child.popover" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y max-width="100%" min-width="250px">
-                                            <template v-slot:activator="{ on, attrs }">
-                                                <v-text-field v-model="child.value" filled hide-details="auto" :label="child.palceholder" readonly v-bind="attrs" v-on="on"></v-text-field>
-                                            </template>
-                                            <v-date-picker ref="picker" v-model="child.value" :max="child.max_date" :min="child.min_date"></v-date-picker>
-                                        </v-menu>
-                                    </div>
-                                    <div v-else-if="child.type === `time`">
-                                        <label v-if="child.label">{{child.label}}</label>
-                                        <v-menu v-model="child.popover" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y max-width="100%" min-width="250px">
-                                            <template v-slot:activator="{ on, attrs }">
-                                                <v-text-field v-model="child.value" filled hide-details="auto" :label="child.palceholder" readonly v-bind="attrs" v-on="on"></v-text-field>
-                                            </template>
-                                            <v-time-picker v-model="child.value" full-width @click:minute="child.popover= false"></v-time-picker>
-                                        </v-menu>
-                                    </div>
-                                    <div v-else-if="child.type === `checkbox`">
-                                        <label v-if="child.label">{{child.label}}</label>
-                                        <v-checkbox dense hide-details="auto" :label="child.text" v-model="child.value"></v-checkbox>
-                                    </div>
-                                    <div v-else-if="child.type === `multiple_choice`">
-                                        <label v-if="child.label">{{child.label}}</label>
-                                        <v-radio-group v-model="child.value" row :mandatory="child.required">
-                                            <v-radio v-for="(option,i) in child.items" :key="i" :label="option" :value="option"></v-radio>
-                                        </v-radio-group>
-                                    </div>
-                                    <div v-else>
-                                        <label v-if="child.label">{{child.label}}</label>
-                                        <component v-model="child.value" filled hide-details="auto" :is="child.tag" :required="child.required" :rows="child.rows" :items="child.items"></component>
-                                    </div>
-                                </div>
-                            </div>
-                            <div v-else-if="item.type === 'divider'">
+                            <div v-if="item.type === 'divider'">
                                 <hr />
                             </div>
                             <div v-else-if="item.type === 'image'">
                                 <p v-if="item.label">{{item.label}}</p>
-                                <v-img style="max-width: 100%;" :width="item.itemwidth" :height="item.itemheight" :src="item.src" :alt="item.alt"></v-img>
+                                <v-img style="max-width: 100%;" :class="alignClass(item.align)" :width="item.itemwidth" :height="item.itemheight" :src="item.src" :alt="item.alt"></v-img>
                             </div>
                             <div v-else-if="item.type === 'video'">
                                 <p v-if="item.label">{{item.label}}</p>
-                                <iframe style="max-width: 100%;" allow="fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" :src="getEmbed(item.src)" :width="item.itemwidth" :height="item.itemheight"></iframe>
+                                <iframe style="max-width: 100%;display:block;" :class="alignClass(item.align)" allow="fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" :src="getEmbed(item.src)" :width="item.itemwidth" :height="item.itemheight"></iframe>
                             </div>
                             <div v-else-if="item.type === 'paragraph'">
-                                <p>
+                                <p :style="`text-align:`+item.align">
                                     {{item.text}}
                                 </p>
                             </div>
                             <div v-else-if="textfield.includes(item.type)">
-                                <component :is="item.tag">
+                                <component :is="item.tag" :style="`text-align:`+item.align">
                                     {{item.text}}
                                 </component>
                             </div>
                             <div v-else-if="item.type === `date`">
-                                <label v-if="item.label">{{item.label}}</label>
-                                <v-menu v-model="item.popover" :close-on-content-click="true" :nudge-right="40" transition="scale-transition" offset-y max-width="100%" min-width="250px">
+                                <label v-if="item.label">{{item.label}}</label><sup v-if="item.required">*</sup>
+                                <v-menu v-model="item.popover" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y max-width="100%" min-width="250px">
                                     <template v-slot:activator="{ on, attrs }">
                                         <v-text-field v-model="item.value" filled hide-details="auto" :label="item.placeholder" readonly v-bind="attrs" v-on="on"></v-text-field>
                                     </template>
@@ -101,7 +46,7 @@
                                 </v-menu>
                             </div>
                             <div v-else-if="item.type === `time`">
-                                <label v-if="item.label">{{item.label}}</label>
+                                <label v-if="item.label">{{item.label}}</label><sup v-if="item.required">*</sup>
                                 <v-menu v-model="item.popover" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y max-width="100%" min-width="250px">
                                     <template v-slot:activator="{ on, attrs }">
                                         <v-text-field v-model="item.value" filled hide-details="auto" :label="item.placeholder" readonly v-bind="attrs" v-on="on"></v-text-field>
@@ -110,18 +55,47 @@
                                 </v-menu>
                             </div>
                             <div v-else-if="item.type === `checkbox`">
-                                <label v-if="item.label">{{item.label}}</label>
+                                <label v-if="item.label">{{item.label}}</label><sup v-if="item.required">*</sup>
                                 <v-checkbox dense hide-details="auto" :label="item.text" v-model="item.value"></v-checkbox>
                             </div>
-                            <div v-else-if="item.type === `multiple_choice`">
-                                <label v-if="item.label">{{item.label}}</label>
-                                <v-radio-group v-model="item.value" row :mandatory="item.required">
+                            <div v-else-if="item.type === `radio_group`">
+                                <label v-if="item.label">{{item.label}}</label><sup v-if="item.required">*</sup>
+                                <v-radio-group v-model="item.value" v-if="item.direction === 'row'" row :mandatory="item.required">
+                                    <v-radio v-for="(option,i) in item.items" :key="i" :label="option" :value="option"></v-radio>
+                                </v-radio-group>
+                                <v-radio-group v-model="item.value" v-else column :mandatory="item.required">
                                     <v-radio v-for="(option,i) in item.items" :key="i" :label="option" :value="option"></v-radio>
                                 </v-radio-group>
                             </div>
-                            <div v-else>
+                            <div v-else-if="item.type === `checkboxes`">
+                                <label v-if="item.label">{{item.label}}</label><sup v-if="item.required">*</sup>
+                                <v-row no-gutters dense v-if="item.direction === 'row'">
+                                    <v-col md="12" class="d-flex flex-wrap">
+                                        <v-checkbox v-model="item.value" hide-details="auto" class="mr-3 my-1" v-for="(option,i) in item.items" :key="i" :label="option" :value="option"></v-checkbox>
+                                    </v-col>
+                                </v-row>
+                                <v-row no-gutters dense v-else>
+                                    <v-col md="12">
+                                        <v-checkbox v-model="item.value" hide-details="auto" v-for="(option,i) in item.items" :key="i" class="my-1" :label="option" :value="option"></v-checkbox>
+                                    </v-col>
+                                </v-row>
+                            </div>
+                            <div v-else-if="item.type === `checkboxes`">
                                 <label v-if="item.label">{{item.label}}</label>
-                                <component v-model="item.value" filled hide-details="auto" :is="item.tag" :required="item.required" :rows="item.rows" :items="item.items"></component>
+                                <v-row no-gutters dense v-if="item.direction === 'row'">
+                                    <v-col md="12" class="d-flex flex-wrap">
+                                        <v-checkbox v-model="item.value" hide-details="auto" class="mr-3 my-1" v-for="(option,i) in item.items" :key="i" :label="option" :value="option"></v-checkbox>
+                                    </v-col>
+                                </v-row>
+                                <v-row no-gutters dense v-else>
+                                    <v-col md="12">
+                                        <v-checkbox v-model="item.value" hide-details="auto" v-for="(option,i) in item.items" :key="i" class="my-1" :label="option" :value="option"></v-checkbox>
+                                    </v-col>
+                                </v-row>
+                            </div>
+                            <div v-else>
+                                <label v-if="item.label">{{item.label}}</label><sup v-if="item.required">*</sup>
+                                <component :placeholder="item.placeholder" :type="item.tag_type" v-model="item.value" filled hide-details="auto" :is="item.tag" :required="item.required" :rows="item.rows" :items="item.items"></component>
                             </div>
                         </v-col>
                     </v-card-text>
@@ -139,7 +113,7 @@
                         </v-btn>
                         <v-btn v-else x-large depressed disabled class="px-5">No more response permitted</v-btn>
                     </v-card-actions>
-                    <v-card-text v-if="submitted">
+                    <v-card-text v-if="submitted" class="py-5 my-5">
                         <v-alert border="bottom" colored-border type="success" elevation="1">
                             <p class="subtitle">
                                 Your response has been recorded.

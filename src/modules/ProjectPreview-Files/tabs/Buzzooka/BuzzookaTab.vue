@@ -107,10 +107,10 @@
                         </v-card-actions>
                         <v-spacer></v-spacer>
                     </v-row>
-                    <Empty headline="No file found" v-else></Empty>
+                    <Empty  icon="mdi-file-alert-outline" headline="No file found" v-else></Empty>
                 </v-container>
             </v-card>
-            <VueTable v-else-if="view == 'list'" :items="filteredItems" :headers="headers" :showRowActions="true" @load-more="get_more_files" icon="widgets" title="Files" :loading="loading" :key="componentKey" :noMoreData="noMoreData" :showSelect="user.is_admin" @delete-selected="confirmBulkDeleteFiles">
+            <VueTable v-else-if="view == 'list'" :items="filteredItems" :headers="headers" :showRowActions="true" @load-more="get_more_files" icon="mdi-file-alert-outline" title="Files" :loading="loading" :key="componentKey" :noMoreData="noMoreData" :showSelect="user.is_admin" @delete-selected="confirmBulkDeleteFiles">
                 <template v-slot:row-slot="{ item }">
                     <td>
                         <Media :height="50" :width="50" :media="item" size="lg" @click-alt="openViewer(item)" @click-main="openViewer(item)"></Media>

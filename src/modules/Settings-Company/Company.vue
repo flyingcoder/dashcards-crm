@@ -2,9 +2,9 @@
     <div class="company-profile">
         <div class="profile mt-1">
             <div class="profile-content">
-                    <!--<div class="background">
-                         <v-icon class="camera" v-if="can_update">camera_alt</v-icon> -->
-                        <!-- <v-menu bottom left v-if="can_update">
+                    <div class="background">
+                         <v-icon class="camera" v-if="can_update">camera_alt</v-icon>
+                        <v-menu bottom left v-if="can_update">
                             <template v-slot:activator="{ on }">
                                 <v-btn dark icon v-on="on" class="settings">
                                     <v-icon large>settings</v-icon>
@@ -24,12 +24,13 @@
                             </v-list>
                         </v-menu> 
                     </div>
-                    <div class="icons" v-if="company">
+                    <div class="profile-logo" v-if="company">
                         <div class="user-img" @click="image_clicked">
-                            <v-img v-if="company_logo" :src="company_logo" width="100%" height="auto"></v-img>
+                            <img v-if="true" :src="company_logo" width="100%" height="auto"/>
                             <v-icon v-else x-large>mdi-camera</v-icon>
+                            <v-icon class="user-img-hover" x-large>mdi-camera</v-icon>
                         </div>
-                    </div>-->
+                    </div>
                     <v-row no-gutters class="user-info" v-if="company">
                         <div class="loading" v-if="loading">
                             <v-progress-linear :indeterminate="true"></v-progress-linear>

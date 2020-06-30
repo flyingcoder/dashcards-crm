@@ -26,7 +26,6 @@ export default {
         edit_dialog: false,
         edit_task_dialog: false,
         delete_dialog: false,
-        select_template_dialog: false,
         add_task_dialog: false,
         boxes: [],
         loading: false,
@@ -78,12 +77,14 @@ export default {
             this.$refs.add_dialog.clear_and_close()
             await request
                 .post(`api/project/${this.id}/milestone`, milestone)
-                .then(({ data }) => this.boxes.push(data))
+                .then(({ data }) => {
+                    this.boxes.push(data)
+                    this.$event.$emit('open_snackbar', 'New Milestone added successfully')
+                })
                 .finally(() => {
                     this.loading = false
                     this.$event.$emit('btnloading_off', false)
                 })
-            this.$event.$emit('open_snackbar', 'New Milestone added successfully')
         },
 
         open_delete_confirmation(id) {
@@ -137,18 +138,22 @@ export default {
         },
 
         open_select_template_dialog() {
-            if (this.boxes.length > 0) return
-            this.select_template_dialog = true
+            // if (this.boxes.length > 0) return
+            this.$refs.select_template_dialog.open() 
         },
 
-        async add_template(template) {
-            this.select_template_dialog = false
+        add_template(templates) {
             this.loading = true
-            await request.post(`api/projects/${this.id}/milestone-import`, {
-                template_id: template
-            })
-            this.get_dynamic_boxes()
-            this.$event.$emit('btnloading_off', false)
+            request.post(`api/projects/${this.id}/milestone-import`, {
+                    milestone_ids: templates.map(i => i.id)
+                })
+                .then(({ data }) => {
+                    this.get_dynamic_boxes()
+                })
+                .finally(() => {
+                    this.$refs.select_template_dialog.cancel() 
+                    this.$event.$emit('btnloading_off', false)
+                })
         },
 
         edit_task({ task, index, box_id }) {

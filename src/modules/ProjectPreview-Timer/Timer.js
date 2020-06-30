@@ -56,7 +56,7 @@ export default {
             ]
         },
         tableTitle(){
-            return this.type === 'project' ? `Project Timers` : 'Service Timers'
+            return this.type === 'project' ? `Project Timers` : 'Campaign Timers'
         }
     },
 

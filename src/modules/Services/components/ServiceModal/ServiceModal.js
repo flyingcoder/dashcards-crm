@@ -12,7 +12,7 @@ import Editor from '@/common/Editor/Editor.vue'
 import ImgUpload from '@/common/Editor/components/ImgModal.vue'
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 export default {
-    name: 'ServiceModal',
+    name: 'CampaignModal', //from old servicemodal
     components: {
         DatePicker,
         MembersDropdown,
@@ -36,6 +36,12 @@ export default {
             all_items: [],
             show: false
         },
+        service: {
+            selected: null,
+            items: [],
+            all_items: [],
+            show: false
+        },
         members: {
             all_items: [],
             items: [],
@@ -54,14 +60,13 @@ export default {
             show: true
         },
         dates: [],
-        name: '',
         is_autocomplete_loading: false,
         description: null,
         btnloading: false,
-        start_date_menu : false,
+        start_date_menu: false,
         end_date_menu: false,
-        statuses : ['Active', 'Inactive', 'Paused'],
-        status : 'Active',
+        statuses: ['Active', 'Inactive', 'Paused'],
+        status: 'Active',
         business_name: null,
         location: null,
         icon: `${settings.apiHostBaseURL}/img/members/default-cover.png`
@@ -69,11 +74,19 @@ export default {
 
     mounted() {
         this.$event.$on('btnloading_off', status => (this.btnloading = false))
+
         this.$event.$on('new_client_added', data => {
             this.client.items.push(data)
             this.client.all_items.push(data)
             this.client.selected = data
         })
+
+        this.$event.$on('new-services-list-added', data => {
+            this.service.items.push(...data)
+            this.service.all_items.push(...data)
+            this.service.selected = data[0]
+        })
+
         this.$event.$on('new_member_added', data => {
             makeRequestTo.getAllNormalMembers().then(({ data }) => {
                 this.members.all_items = data || []
@@ -86,6 +99,7 @@ export default {
                 }, 1)
             })
         })
+
         this.$event.$on('new_manager_added', data => {
             makeRequestTo.getManagerMembers().then(({ data }) => {
                 this.manager.all_items = data || []
@@ -105,22 +119,23 @@ export default {
             if (
                 isEmpty(this.client.selected) ||
                 isEmpty(this.manager.selected) ||
-                !this.name ||
+                isEmpty(this.service.selected) ||
                 !this.description ||
                 !this.business_name ||
                 !this.date_pickers.start_date
-            )
+            ) {
                 return true
+            }
 
             return false
         },
-        title(){
-            return this.isEditDialog ? 'Edit Service' : 'Create Service'
+        title() {
+            return this.isEditDialog ? 'Edit Campaign' : 'Create Campaign'
         }
     },
 
     methods: {
-        open_dialog(isEdit, fieldsToEdit){
+        open_dialog(isEdit, fieldsToEdit) {
             this.isEditDialog = isEdit || false
             this.fieldsToEdit = fieldsToEdit
             if (isEdit) {
@@ -136,16 +151,19 @@ export default {
                 .all([
                     makeRequestTo.get_all_clients(),
                     makeRequestTo.getAllNormalMembers(),
-                    makeRequestTo.getManagerMembers()
+                    makeRequestTo.getManagerMembers(),
+                    makeRequestTo.get_all_services_list()
                 ])
                 .then(
-                    axios.spread((res1, res2, res3) => {
+                    axios.spread((res1, res2, res3, res4) => {
                         this.client.all_items = res1.data || []
                         this.members.all_items = res2.data || []
                         this.manager.all_items = res3.data || []
+                        this.service.all_items = res4.data || []
                         this.client.items = _cloneDeep(this.client.all_items)
                         this.manager.items = _cloneDeep(this.manager.all_items)
                         this.members.items = _cloneDeep(this.members.all_items)
+                        this.service.items = _cloneDeep(this.service.all_items)
                     })
                 )
                 .finally(() => (this.dropdown_loading = false))
@@ -164,7 +182,7 @@ export default {
             if (this.disabled) return
             this.btnloading = true
             const fields_to_save = {
-                name: this.name,
+                service_id: this.service.selected.id,
                 client_id: this.client.selected.id || null,
                 started_at: this.date_pickers.start_date,
                 end_at: this.date_pickers.end_date,
@@ -190,10 +208,10 @@ export default {
             const new_fields = _cloneDeep(fields)
             this.$set(this.date_pickers, 'start_date', new_fields.started_at)
             this.$set(this.date_pickers, 'end_date', new_fields.end_at)
+            this.$set(this.service, 'selected', new_fields.service)
             this.$set(this.client, 'selected', new_fields.client[0])
             this.$set(this.manager, 'selected', new_fields.managers)
             this.$set(this.members, 'selected', new_fields.members)
-            this.name = new_fields.title
             this.status = new_fields.status
             this.location = new_fields.props.location || null
             this.business_name = new_fields.props.business_name || null
@@ -204,7 +222,7 @@ export default {
         clear_and_close() {
             this.members.selected = this.manager.selected = []
             this.client.selected = this.status = this.business_name = this.location = null
-            this.description = this.name =  this.date_pickers.start_date = this.date_pickers.end_date = ''
+            this.description = this.name = this.date_pickers.start_date = this.date_pickers.end_date = ''
             this.cancel() //close the modal
         },
 
@@ -230,6 +248,10 @@ export default {
         open_add_new_client() {
             this.$event.$emit('open-new-client-dialog', true)
         },
+
+        open_add_new_service_list() {
+            this.$event.$emit('open-new-service-list-dialog', true)
+        },
         add_to_selected_members(item) {
             let index = this.members.selected.findIndex(user => user.id === item.id)
             if (index === -1) {
@@ -253,6 +275,11 @@ export default {
             if (~index) {
                 this.manager.selected.splice(index, 1)
             }
+        },
+        clientSelected(client) {
+            this.client.selected = client
+            this.business_name = client.company ? client.company.name : this.business_name
+            this.location = client.company ? client.company.address : this.location
         }
     }
 }

@@ -51,7 +51,7 @@
           </template>
 
           <template v-slot:row-slot="{ item }">
-            <td class="text-xs-left text-cap">{{ item.title }}</td>
+            <td class="text-xs-left text-cap">{{ item.title | ucwords }}</td>
             <td
               class="text-xs-left textarea-cap desc"
               v-html="short_description_text(item.description)"

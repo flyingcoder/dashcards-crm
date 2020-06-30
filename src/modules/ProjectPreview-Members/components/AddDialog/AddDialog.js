@@ -1,12 +1,14 @@
 import * as apiTo from '../../api'
 // Components
 import MembersDropdown from '@/modules/Projects/components/MembersDropdown/MembersDropdown.vue'
+import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 import _cloneDeep from 'lodash/cloneDeep'
 
 export default {
   name: 'AddDialog',
   components: {
-    MembersDropdown
+    MembersDropdown,
+    CustomDialog
   },
   props: {
     dialog: Boolean,

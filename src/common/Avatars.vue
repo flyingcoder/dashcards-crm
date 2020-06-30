@@ -82,7 +82,7 @@ ul.avatars {
 }
 
 li.avatars__item {
-    margin: 0px 0px 0px 0px;
+    margin: 0px -10px 0px 0px;
     padding: 0px 0px 0px 0px;
     position: relative;
 }
@@ -91,10 +91,10 @@ img.avatars__img,
 span.avatars__initials,
 span.avatars__others,
 span.avatars__add {
-    background-color: $lightGray-3;
-    border: 2px solid $borderGray;
-    border-radius: 100px 100px 100px 100px;
-    color: $textGray;
+    background-color: $blue !important;
+    border: 2px solid $white;
+    border-radius: 100px;
+    color: $white;
     display: block;
     font-family: sans-serif;
     font-size: 12px;

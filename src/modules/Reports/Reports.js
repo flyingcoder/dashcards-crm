@@ -9,7 +9,7 @@ import TableHeader from '@/common/TableHeader.vue'
 import ReportsSection from './components/ReportsSection.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import ReportsEditDialog from './components/ReportEditDialog.vue'
-import ReportsAddDialog from './components/ReportAddDialog.vue' 
+import ReportsAddDialog from './components/ReportAddDialog.vue'
 
 export default {
     name: 'Reports',
@@ -21,7 +21,7 @@ export default {
         ReportsSection,
         DeleteDialog,
         ReportsEditDialog,
-        ReportsAddDialog 
+        ReportsAddDialog
     },
 
     props: {
@@ -99,11 +99,7 @@ export default {
             return `https://www.google.com/s2/favicons?domain=${domain}&alt=feed`
         },
         previewRowUrl(report) {
-            // console.log(report.id)
-            this.activeReport = report
-            if (this.activeReport) {
-                this.iframeSrc = report.url
-            }
+            this.reports_selected = this.reports.length - 1
         },
 
         add_new_report(report) {
@@ -134,8 +130,13 @@ export default {
         },
 
         reportUpdated({ data, index }) {
-            this.$set(this.reports, index, data)
+            // this.$set(this.reports, index, data)
+            let indeX = this.reports.findIndex(i => i.id === data.id)
+            if (~indeX) {
+                this.reports.splice(indeX, 1, data)
+            }
             this.$event.$emit('btnloading_off', false)
-        }
+        },
+        
     }
 }

@@ -46,6 +46,10 @@
     .view_more{
       color: $tableDarkText !important;
     }
+    .link-btn.v-btn{
+      color: $white;
+      background-color: $blue;
+    }
   }
 
   .card_footer{

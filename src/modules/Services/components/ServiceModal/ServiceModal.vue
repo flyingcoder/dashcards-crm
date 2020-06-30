@@ -5,7 +5,7 @@
                 <div style="height: 480px;">
                     <v-row no-gutter class="dialog__buttons">
                         <v-col md="4" sm="6">
-                            <v-menu bottom close-on-content-click transition="slide-y-transition" bottom max-height="300">
+                            <v-menu bottom close-on-content-click transition="slide-y-transition" max-height="300">
                                 <template v-slot:activator="{ on }">
                                     <v-btn v-on="on" class="d__btn" block>
                                         <div class="d__icon">
@@ -22,7 +22,7 @@
                                     <v-list-item @click="open_add_new_client">
                                         <v-icon left>add</v-icon> Add new client
                                     </v-list-item>
-                                    <v-list-item v-for="(item, index) in client.items" :key="index" @click="client.selected = item">
+                                    <v-list-item v-for="(item, index) in client.items" :key="index" @click="clientSelected(item)">
                                         <v-list-item-avatar>
                                             <v-img :src="item.image_url"></v-img>
                                         </v-list-item-avatar>
@@ -56,7 +56,7 @@
                                         </div>
                                     </v-btn>
                                 </template>
-                                <v-date-picker :max="date_pickers.end_date" v-model="date_pickers.start_date" no-title scrollable no-title></v-date-picker>
+                                <v-date-picker :max="date_pickers.end_date" v-model="date_pickers.start_date" no-title scrollable></v-date-picker>
                             </v-menu>
                             <div class="choosen" v-if="date_pickers.start_date">
                                 <v-chip block outlined label class="mt-1" close @click:close="date_pickers.start_date = null">
@@ -79,7 +79,7 @@
                                         </div>
                                     </v-btn>
                                 </template>
-                                <v-date-picker :min="date_pickers.start_date" v-model="date_pickers.end_date" no-title scrollable no-title></v-date-picker>
+                                <v-date-picker :min="date_pickers.start_date" v-model="date_pickers.end_date" no-title scrollable></v-date-picker>
                             </v-menu>
                             <div class="choosen" v-if="date_pickers.end_date">
                                 <v-chip block outlined label class="mt-1" close @click:close="date_pickers.end_date = null">
@@ -90,7 +90,7 @@
                         </v-col>
                         <!-- Managers -->
                         <v-col md="4" sm="6">
-                            <v-menu bottom close-on-content-click transition="slide-y-transition" bottom max-height="300" offset-y>
+                            <v-menu bottom close-on-content-click transition="slide-y-transition" max-height="300" offset-y>
                                 <template v-slot:activator="{ on }">
                                     <v-btn v-on="on" class="d__btn" block>
                                         <div class="d__icon">
@@ -174,7 +174,7 @@
                                             <v-icon>mdi-clipboard-pulse-outline</v-icon>
                                         </div>
                                         <div class="d__title">
-                                            <span>Service Status *</span>
+                                            <span>Campaign Status *</span>
                                         </div>
                                     </v-btn>
                                 </template>
@@ -193,30 +193,33 @@
                             </div>
                         </v-col>
                     </v-row>
-                    <v-row no-gutters>
+                    <v-row no-gutters class="align-center">
                         <v-col md="4" sm="12">
                             <div class="fullwidth mx-auto">
                                 <v-img v-if="icon" :src="icon"></v-img>
-                                <v-btn depressed block class="mt-2" @click="$refs.uploadModal.openDialog()">
-                                    <v-icon left>mdi-image-edit-outline</v-icon> Change Icon
+                                <v-btn block class="mt-2 d__btn" @click="$refs.uploadModal.openDialog()">
+                                    <v-icon class="d__icon">mdi-image-edit-outline</v-icon> 
+                                    <div class="d__title">
+                                        <span>Change Icon</span>
+                                    </div>
                                 </v-btn>
-                                <h6 class="mt-3 subtitle-2">* Required</h6>
                             </div>
                         </v-col>
                         <v-col md="8" sm="12">
                             <v-col md="12">
-                                <TextField prepend-inner-icon="mdi-alpha-s-box-outline" dense :value.sync="name" label="Service Name *" color="#657186" filled></TextField>
+                                <!-- <TextField prepend-inner-icon="mdi-alpha-s-box-outline" dense :value.sync="name" label="Service Name *" color="#657186" filled></TextField> -->
+                                <v-select required clearable prepend-inner-icon="mdi-alpha-s-box-outline" append-outer-icon="mdi-plus" filled hide-details="auto" placeholder="Select Service *"  v-model="service.selected" :items="service.items" return-object item-text="name" @click:close="service.selected = null" @click:append-outer="open_add_new_service_list"></v-select>
                             </v-col>
                             <v-col md="12" sm="12">
-                                <TextField prepend-inner-icon="mdi-office-building" dense :value.sync="business_name" label="Business Name *" color="#657186" filled></TextField>
+                                <TextField required clearable prepend-inner-icon="mdi-office-building" v-model="business_name" label="Business Name *" color="#657186" filled></TextField>
                             </v-col>
                             <v-col md="12" sm="12">
-                                <TextField prepend-inner-icon="mdi-map-marker" dense :value.sync="location" label="Location" color="#657186" filled></TextField>
+                                <TextField required clearable prepend-inner-icon="mdi-map-marker" dense v-model="location" label="Location" color="#657186" filled></TextField>
                             </v-col>
                         </v-col>
                         <v-col md="12" class="service__description">
                             <div class="service__description">
-                                <Editor :hasFloatingTools="false" v-model="description" :content="description" placeholder="Service Description *"></Editor>
+                                <Editor :hasFloatingTools="false" v-model="description" :content="description" placeholder="Campaign Description *"></Editor>
                             </div>
                         </v-col>
                     </v-row>

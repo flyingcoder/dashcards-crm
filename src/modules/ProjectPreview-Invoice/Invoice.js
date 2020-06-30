@@ -50,7 +50,7 @@ export default {
             return this.$route.params.type || 'project'
         },
         tableTitle() {
-            return this.type === 'project' ? `Project Invoice` : 'Service Invoice'
+            return this.type === 'project' ? `Project Invoice` : 'Campaign Invoice'
         },
         paths() {
             return [

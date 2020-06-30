@@ -71,7 +71,7 @@
                         <div class="list-view" v-if="view == 'list'">
                             <VueTable :items="items" :headers="headers" :showRowActions="true" @load-more="load_more_events" @delete-selected="open_bulk_delete_dialog($event)" icon="widgets" :showTopHeader="false" :key="componentKey" :noMoreData="noMoreData" :showSelect="false" :loading="loading">
                                 <template v-slot:row-slot="{ item }">
-                                    <td>{{ item.title }}</td>
+                                    <td>{{ item.title | ucwords }}</td>
                                     <td>{{ datetimedisplay(item) }}</td>
                                     <td>
                                         <Avatars :items="item.participants" :count="1" :deep="true"></Avatars>

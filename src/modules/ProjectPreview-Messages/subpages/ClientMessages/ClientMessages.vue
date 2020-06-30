@@ -20,10 +20,10 @@
                 </v-col>
             </v-row>
             <div class="no-messages" v-else-if="!can_send_message">
-                <Empty headline="Client messages unavailable! "></Empty>
+                <Empty icon="mdi-cellphone-off" headline="Client messages unavailable! "></Empty>
             </div>
             <div class="no-messages" v-else>
-                <Empty headline="No messages yet"></Empty>
+                <Empty icon="mdi-cellphone-message-off" headline="No messages yet"></Empty>
             </div>
         </div>
         <div class="write px-3">

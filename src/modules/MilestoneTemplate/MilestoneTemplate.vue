@@ -52,7 +52,7 @@
               class="text-cap clickable-td"
               @click="navigate_to_milestone_page(item)"
             >
-              {{ item.name }}
+              {{ item.name | ucwords }}
             </td>
             <td class="text-cap">{{ item.status }}</td>
             <Actions

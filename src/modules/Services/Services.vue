@@ -7,10 +7,11 @@
         <clients-dialog :dialog.sync="add_new_client_dialog" ref="add_client_dialog" dialogTitle="Add New Client" @save="save_new_client($event)" />
         <teams-dialog ref="add_member_dialog" title="Add New Member" :dialog.sync="add_new_member_dialog" @save="save_new_member($event)" @add-new-group="show_add_group_dialog" />
         <groups-dialog ref="add_group_dialog" title="Add New Group" @save="save_new_user_group" />
+        <ServiceListDialog :dialog.sync="add_new_service_list_dialog" ref="add_new_service_list_dialog" title="Add New Service(s)" @save="save_new_services_list($event)" ></ServiceListDialog>
         <v-card class="grid-view" v-if="view === `grid`">
             <div class="grid-wrapper">
                 <v-toolbar flat>
-                    <v-toolbar-title class="grid-view-title"> Services </v-toolbar-title>
+                    <v-toolbar-title class="grid-view-title">Campaigns </v-toolbar-title>
                     <v-spacer></v-spacer>
                     <table-header :noListButton="false" :noGridButton="false" @click="open_add_dialog" @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')" />
                 </v-toolbar>
@@ -20,7 +21,7 @@
                         <v-col md="3" sm="4" xs="12" v-for="item in items" :key="item.id">
                             <v-card class="mx-auto service-card">
                                 <v-img :src="item.props.icon" :height="150">
-                                    <v-card-title class="card-header" style="background:rgba(105,178,255,.6);">
+                                    <v-card-title class="card-header">
                                         <Avatar :user="item.client[0]" iconOnly>
                                             <template>
                                                 <span class="client-name subtitle-2">{{ item.props.business_name | truncate(15) }}</span>
@@ -79,7 +80,7 @@
                                 <v-divider></v-divider>
                                 <v-card-actions class="card-footer">
                                     <v-btn class="goto" text @click="navigate_to_view_service(item.id)">
-                                        Go to Service
+                                        Go to Campaign
                                     </v-btn>
                                     <v-spacer></v-spacer>
                                     <v-tooltip left>
@@ -103,7 +104,7 @@
                             </v-card>
                         </v-col>
                     </v-row>
-                    <Empty v-else headline="No services yet"></Empty>
+                    <Empty v-else headline="No campaign yet"></Empty>
                 </v-container>
                 <v-card-actions>
                     <v-spacer></v-spacer>
@@ -113,7 +114,7 @@
                 </v-card-actions>
             </div>
         </v-card>
-        <VueTable v-else :items="items" :headers="headers" :showRowActions="true" @load-more="load_more" @delete-selected="open_bulk_delete_dialog($event)" icon="widgets" title="Services" :key="componentKey" :noMoreData="noMoreData" :showSelect="false" :loading="loading">
+        <VueTable v-else :items="items" :headers="headers" :showRowActions="true" @load-more="load_more" @delete-selected="open_bulk_delete_dialog($event)" icon="widgets" title="Campaigns" :key="componentKey" :noMoreData="noMoreData" :showSelect="false" :loading="loading">
             <template slot="header-toolbar">
                 <table-header :noListButton="false" :noGridButton="false" @click="open_add_dialog" @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')" />
             </template>
