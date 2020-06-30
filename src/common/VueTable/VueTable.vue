@@ -5,7 +5,7 @@
                 <template v-slot:top v-if="showTopHeader">
                     <v-toolbar flat>
                         <v-toolbar-title class="custom-table-title">
-                            {{ title }}
+                            {{ title | ucwords}}
                         </v-toolbar-title>
                         <v-spacer></v-spacer>
                         <v-col sm="12" md="3" v-if="hasSearch">

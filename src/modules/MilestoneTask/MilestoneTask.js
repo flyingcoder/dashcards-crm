@@ -68,7 +68,9 @@ export default {
             return ''
         }
     },
-
+    mounted() {
+        this.$event.$emit('path-change', this.paths)
+    },
     created() {
         this.fill_table_via_url(this.dynamic_api, true)
         makerequest

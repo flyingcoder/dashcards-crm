@@ -38,7 +38,7 @@
             </v-list-item>
             <v-list-item class="h__list" v-for="(item, index) in items" :key="index" @click="handle_action(item.action)">
                 <v-list-item-icon class="h__icons">
-                    <img :src="item.icon" />
+                    <v-icon>{{item.icon}}</v-icon>
                 </v-list-item-icon>
                 <v-list-item-title class="subtitle-1">{{ item.title }}</v-list-item-title>
             </v-list-item>

@@ -4,7 +4,7 @@ import { is_screen_medium_and_down } from '@/global_utils/is_screen_medium_and_d
 //Components
 import ReportsList from './components/ReportsList/ReportsList.vue'
 import ReportsDialog from './components/ReportsDialog.vue'
-import ReportsSection from './components/ReportsSection.vue'
+import ReportsSection from '@/modules/Reports/components/ReportsSection.vue'
 import ReportsEditDialog from './components/ReportEditDialog.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue' 
 
@@ -75,7 +75,8 @@ export default {
 
         add_new_report(report) {
             this.reports.push(report)
-            this.preview_row_url(report)
+            // this.preview_row_url(report)
+            this.active_report = this.reports.length - 1
             this.$event.$emit('btnloading_off', false)
         },
         preview_row_url(report) {
@@ -86,11 +87,9 @@ export default {
         },
 
         openEditDialog(report, index) {
-            this.active_report = report
-            this.reportIdToEdit = index
-            if (~index) {
-                this.$refs.editDialog.open_dialog(this.active_report, index)
-            }
+            // this.active_report = index
+            this.reportIdToEdit = report
+            this.$refs.editDialog.open_dialog(this.reportIdToEdit, index)
         },
 
         openDeleteDialog(index) {
@@ -99,8 +98,12 @@ export default {
         },
 
         reportUpdated({ data, index }) {
-            this.$set(this.reports, index, data)
-            this.active_report = data
+            let indeX = this.reports.findIndex(i => i.id === data.id)
+            console.log(indeX, index)
+            if (~indeX) {
+                this.reports.splice(indeX, 1, data)
+                this.active_report = indeX
+            }
             this.$event.$emit('btnloading_off', false)
         },
 

@@ -14,7 +14,7 @@
             <v-list two-line class="list-wrapper" v-if="notes.length > 0">
                 <v-list-item :class="['note', { active: activeNote && activeNote.id === note.id }]" v-for="(note, index) of notes" :key="note.id" @click="$emit('clicked', note)">
                     <v-list-item-content>
-                        <v-list-item-title v-html="note.title"></v-list-item-title>
+                        <v-list-item-title :inner-html.prop="note.title | ucwords"></v-list-item-title>
                         <v-list-item-subtitle :inner-html.prop="note.content | truncate(30)"></v-list-item-subtitle>
                     </v-list-item-content>
                     <v-list-item-icon>

@@ -48,7 +48,7 @@
               class="text-xs-left text-cap clickable-td"
               @click="navigate_to_milestone_page(item)"
             >
-              {{ item.title }}
+              {{ item.title | ucwords }}
             </td>
             <td class="text-xs-left text-cap">{{ item.status }}</td>
             <td class="text-xs-left">{{ item.days === 0 ? '' : item.days }}</td>

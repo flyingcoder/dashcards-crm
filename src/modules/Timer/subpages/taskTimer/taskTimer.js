@@ -36,7 +36,7 @@ export default {
         headers: [
             { text: 'Assigned To', sortable: false, align: 'left', width: 150 },
             { text: 'Task', sortable: false, align: 'left' },
-            { text: 'Project | Service', sortable: false, align: 'left' },
+            { text: 'Project | Campaign', sortable: false, align: 'left' },
             {
                 text: 'Time Start',
                 sortable: false,
