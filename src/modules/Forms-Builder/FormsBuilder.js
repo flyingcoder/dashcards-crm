@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import _cloneDeep from 'lodash/cloneDeep'
 import request from '@/services/axios_instance'
 import { global_utils } from '@/global_utils/global_utils'
+import { settings } from '@/variables'
 //components
 import TableHeader from '@/common/TableHeader.vue'
 import draggable from 'vuedraggable'
@@ -222,6 +223,19 @@ export default {
             required: false,
             hover: false
         },
+        phone: {
+            id: null,
+            type: 'phone',
+            tag: 'vue-phone-number-input',
+            tag_type: 'phone',
+            label: 'Untitle Question',
+            icon: 'mdi-file-phone-outline',
+            show_icon: false,
+            placeholder: '123-4568',
+            value: null,
+            required: false,
+            hover: false
+        },
         textarea: {
             id: null,
             type: 'textarea',
@@ -254,6 +268,7 @@ export default {
             tag: 'v-radio-group',
             label: 'Select',
             icon: 'mdi-radiobox-marked',
+            required: false,
             show_icon: false,
             value: null,
             hover: false,
@@ -303,8 +318,10 @@ export default {
         new_option: null,
         saving: false,
         form_title: null,
+        form_notif_receivers: null,
         isFormEdit: false,
-        formToEdit: null
+        formToEdit: null,
+        status : 'active'
     }),
     mounted() {
         this.$event.$emit('path-change', this.paths)
@@ -312,8 +329,12 @@ export default {
             this.getForm(this.$route.params.id)
         }
         this.getFormsTemplate()
+        this.form_notif_receivers = this.user.email
     },
     computed: {
+        user() {
+            return this.$store.getters.user
+        },
         headingList() {
             return Object.values(this.headings)
         },
@@ -331,6 +352,7 @@ export default {
                 this.number,
                 this.link,
                 this.email,
+                // this.phone,
                 this.textarea,
                 this.dropdown,
                 this.radio_group,
@@ -339,7 +361,23 @@ export default {
             ]
         },
         disabled() {
+            if (this.form_notif_receivers) {
+                for (var i = 0; i < this.notif_email_receivers.length; i++) {
+                    if (!this.validateEmail(this.notif_email_receivers[i].trim())) {
+                        return true
+                    }
+                }
+            }
             return this.structures.length === 0 || this.form_title === '' || this.form_title === null
+        },
+        notif_email_receivers() {
+            if (!this.form_notif_receivers) {
+                return []
+            }
+            return this.form_notif_receivers.split(',')
+        },
+        slugifyTitle() {
+            return `URL: ${settings.BaseURL}/form/${this.slugify(this.form_title || '')}`
         }
     },
     watch: {
@@ -353,6 +391,10 @@ export default {
         }
     },
     methods: {
+        validateEmail(email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        },
         alignClass(align) {
             if (align === 'right') return 'ml-auto'
             else if (align === 'center') return 'mx-auto'
@@ -484,7 +526,8 @@ export default {
             var payload = {
                 title: this.form_title,
                 questions: this.structures,
-                status: 'active'
+                status: this.status,
+                notif_email_receivers: this.notif_email_receivers
             }
             request.post(`api/forms`, payload)
                 .then(({ data }) => {
@@ -497,7 +540,9 @@ export default {
             var payload = {
                 title: this.form_title,
                 questions: this.structures,
-                id: this.formToEdit.id
+                id: this.formToEdit.id,
+                status : this.status,
+                notif_email_receivers: this.notif_email_receivers
             }
             request.put(`api/forms`, payload)
                 .then(({ data }) => {
@@ -511,8 +556,13 @@ export default {
                     if (data) {
                         this.formToEdit = data
                         this.isFormEdit = true
+                        this.status = data.status
                         this.structures = _cloneDeep(data.questions)
                         this.form_title = data.title
+                        this.form_notif_receivers = null
+                        if (data.props.notif_email_receivers) {
+                            this.form_notif_receivers = data.props.notif_email_receivers.join(',')
+                        }
                     }
                 })
         },

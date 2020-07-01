@@ -5,9 +5,6 @@
                 <div class="form">
                     <div class="form-header">
                         <v-row no-gutters>
-                            <v-col md="6" sm="5" xs="12">
-                                <v-text-field placeholder="Form Title" v-model="form_title" hide-details="auto" dense flat outlined solo class="ma-1"></v-text-field>
-                            </v-col>
                             <v-col md="3" sm="4" xs="12">
                                 <v-select clearable append-icon="mdi-content-copy" @change="structures = $event" :items="list" item-value="questions" item-text="title" placeholder="Copy Form From ..." solo dense hide-details="auto" class="ma-1" flat></v-select>
                             </v-col>
@@ -44,7 +41,7 @@
                                                 <v-img style="max-width: 100%;" :class="alignClass(item.align)" :width="item.itemwidth" :height="item.itemheight" :src="item.src" :alt="item.alt"></v-img>
                                             </div>
                                             <div v-else-if="item.type === 'video'" @mouseover="item.hover = true" @mouseleave="item.hover = false">
-                                                <p v-if="item.label">{{item.label}}</p>
+                                                <p v-if="item.label">{{item.label}} </p>
                                                 <iframe style="max-width: 100%;display:block;" :class="alignClass(item.align)" allow="fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" :src="getEmbed(item.src)" :width="item.itemwidth" :height="item.itemheight"></iframe>
                                                 <v-icon class="parent-btn" small @click="remove(pIndex)" v-if="item.hover">mdi-delete</v-icon>
                                                 <v-icon class="parent-btn" small @click="edit(item, null)" v-if="item.hover">edit</v-icon>
@@ -64,7 +61,7 @@
                                                 </component>
                                             </div>
                                             <div v-else-if="item.type === `date`" @mouseover="item.hover = true" @mouseleave="item.hover = false">
-                                                <label v-if="item.label">{{item.label}}</label>
+                                                <label v-if="item.label">{{item.label}}</label><sup v-if="item.required">*</sup>
                                                 <v-menu v-model="item.popover" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y max-width="100%" min-width="250px">
                                                     <template v-slot:activator="{ on, attrs }">
                                                         <v-text-field v-model="item.value" filled hide-details="auto" :label="item.placeholder" readonly v-bind="attrs" v-on="on"></v-text-field>
@@ -75,7 +72,7 @@
                                                 <v-icon class="parent-btn" small @click="edit(item, null)" v-if="item.hover">edit</v-icon>
                                             </div>
                                             <div v-else-if="item.type === `time`" @mouseover="item.hover = true" @mouseleave="item.hover = false">
-                                                <label v-if="item.label">{{item.label}}</label>
+                                                <label v-if="item.label">{{item.label}}</label><sup v-if="item.required">*</sup>
                                                 <v-menu v-model="item.popover" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y max-width="100%" min-width="250px">
                                                     <template v-slot:activator="{ on, attrs }">
                                                         <v-text-field v-model="item.value" filled hide-details="auto" :label="item.placeholder" readonly v-bind="attrs" v-on="on"></v-text-field>
@@ -86,13 +83,13 @@
                                                 <v-icon class="parent-btn" small @click="edit(item, null)" v-if="item.hover">edit</v-icon>
                                             </div>
                                             <div v-else-if="item.type === `checkbox`" @mouseover="item.hover = true" @mouseleave="item.hover = false">
-                                                <label v-if="item.label">{{item.label}}</label>
+                                                <label v-if="item.label">{{item.label}}</label><sup v-if="item.required">*</sup>
                                                 <v-checkbox dense hide-details="auto" :label="item.text" v-model="item.value"></v-checkbox>
                                                 <v-icon class="parent-btn" small @click="remove(pIndex)" v-if="item.hover">mdi-delete</v-icon>
                                                 <v-icon class="parent-btn" small @click="edit(item, null)" v-if="item.hover">edit</v-icon>
                                             </div>
                                             <div v-else-if="item.type === `radio_group`" @mouseover="item.hover = true" @mouseleave="item.hover = false">
-                                                <label v-if="item.label">{{item.label}}</label>
+                                                <label v-if="item.label">{{item.label}}</label><sup v-if="item.required">*</sup>
                                                 <v-icon class="parent-btn" small @click="remove(pIndex)" v-if="item.hover">mdi-delete</v-icon>
                                                 <v-icon class="parent-btn" small @click="edit(item, null)" v-if="item.hover">edit</v-icon>
                                                 <v-radio-group v-model="item.value" v-if="item.direction === 'row'" row :mandatory="item.required">
@@ -103,28 +100,29 @@
                                                 </v-radio-group>
                                             </div>
                                             <div v-else-if="item.type === `checkboxes`" @mouseover="item.hover = true" @mouseleave="item.hover = false">
-                                                <label v-if="item.label">{{item.label}}</label>
+                                                <label v-if="item.label">{{item.label}}</label><sup v-if="item.required">*</sup>
                                                 <v-icon class="parent-btn" small @click="remove(pIndex)" v-if="item.hover">mdi-delete</v-icon>
                                                 <v-icon class="parent-btn" small @click="edit(item, null)" v-if="item.hover">edit</v-icon>
-                                                <v-row no-gutters dense v-if="item.direction === 'row'" >
+                                                <v-row no-gutters dense v-if="item.direction === 'row'">
                                                     <v-col md="12" class="d-flex flex-wrap">
                                                         <v-checkbox v-model="item.value" hide-details="auto" class="mr-3 my-1" v-for="(option,i) in item.items" :key="i" :label="option" :value="option"></v-checkbox>
                                                     </v-col>
                                                 </v-row>
                                                 <v-row no-gutters dense v-else>
                                                     <v-col md="12">
-                                                        <v-checkbox v-model="item.value" hide-details="auto" v-for="(option,i) in item.items" :key="i" class="my-1"  :label="option" :value="option"></v-checkbox>
+                                                        <v-checkbox v-model="item.value" hide-details="auto" v-for="(option,i) in item.items" :key="i" class="my-1" :label="option" :value="option"></v-checkbox>
                                                     </v-col>
                                                 </v-row>
                                             </div>
                                             <div v-else @mouseover="item.hover = true" @mouseleave="item.hover = false">
-                                                <label v-if="item.label">{{item.label}}</label>
+                                                <label v-if="item.label">{{item.label}}</label><sup v-if="item.required">*</sup>
                                                 <component :placeholder="item.placeholder" :type="item.tag_type" v-model="item.value" filled hide-details="auto" :is="item.tag" :required="item.required" :rows="item.rows" :items="item.items"></component>
                                                 <v-icon class="parent-btn" small @click="remove(pIndex)" v-if="item.hover">mdi-delete</v-icon>
                                                 <v-icon class="parent-btn" small @click="edit(item, null)" v-if="item.hover">edit</v-icon>
                                             </div>
                                         </v-col>
                                     </draggable>
+                                    <div class="mt-5">* Required</div>
                                 </v-card-text>
                             </v-card>
                         </v-col>
@@ -208,7 +206,9 @@
                                     <v-tab-item value="Property">
                                         <v-card flat tile>
                                             <v-card-text v-if="activeType">
-                                                <h3 class="subtitle-2 mb-2 text-center"><v-icon left>{{activeType.icon}}</v-icon>{{activeType.type | snakeCaseToNormal | removeSlug | ucwords}}</h3>
+                                                <h3 class="subtitle-2 mb-2 text-center">
+                                                    <v-icon left>{{activeType.icon}}</v-icon>{{activeType.type | snakeCaseToNormal | removeSlug | ucwords}}
+                                                </h3>
                                                 <v-text-field v-model="activeType.label" label="Question" hide-details="auto" filled dense v-if="activeType.hasOwnProperty('label')" class="mb-1"></v-text-field>
                                                 <v-text-field v-model="activeType.text" label="Value" hide-details="auto" dense filled v-if="activeType.type !== 'paragraph' && activeType.hasOwnProperty('text')" class="mb-1"></v-text-field>
                                                 <v-textarea v-model="activeType.text" rows="3" v-if="activeType.type === 'paragraph'" label="Value" hide-details="auto" dense filled class="mb-1"></v-textarea>
@@ -249,7 +249,6 @@
                                                     </v-radio-group>
                                                 </div>
                                                 <!-- buttons -->
-
                                                 <v-btn text class="mt-2" v-if="!isEditing" depressed @click="insertTextContent">Insert</v-btn>
                                                 <v-btn text class="mt-2" v-else depressed @click="updateTextContent">Update</v-btn>
                                                 <v-btn text depressed @click="cancelTextContent">Cancel</v-btn>
@@ -258,6 +257,32 @@
                                     </v-tab-item>
                                 </v-tabs>
                                 <v-divider></v-divider>
+                                <v-card-text>
+                                    <label>Form Title *</label>
+                                    <v-tooltip left>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon class="ml-2" x-small v-bind="attrs" v-on="on">mdi-help-circle-outline</v-icon>
+                                        </template>
+                                        <span>Form {{slugifyTitle}}</span>
+                                    </v-tooltip>
+                                    <v-text-field placeholder="Form Title *" v-model="form_title" hide-details="auto" dense flat outlined solo class="ma-1"></v-text-field>
+                                    <label>Form Notifications</label>
+                                    <v-tooltip left>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon class="ml-2" x-small v-bind="attrs" v-on="on">mdi-help-circle-outline</v-icon>
+                                        </template>
+                                        <span>Email addresses separated by comma</span>
+                                    </v-tooltip>
+                                    <v-text-field placeholder="Send notification to" v-model="form_notif_receivers" hide-details="auto" dense flat outlined solo class="ma-1"></v-text-field>
+                                    <label>Form Status</label>
+                                    <v-tooltip left>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon class="ml-2" x-small v-bind="attrs" v-on="on">mdi-help-circle-outline</v-icon>
+                                        </template>
+                                        <span>Inactive form will no longer accept responses</span>
+                                    </v-tooltip>
+                                    <v-select v-model="status" :items="['active', 'inactive']" menu-props="auto" hide-details="auto" single-line dense filled></v-select>
+                                </v-card-text>
                                 <v-card-actions>
                                     <v-btn text v-if="!isFormEdit" block @click="save" :disabled="disabled || saving" :loading="saving">
                                         <v-icon left>mdi-content-save</v-icon> Save Form

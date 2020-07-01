@@ -23,8 +23,6 @@ export default {
         if (this.$route.params.id > 0) {
             this.getForm(this.$route.params.id)
         }
-    },
-    created() {
         this.$event.$emit('path-change', this.paths)
     },
     computed: {
