@@ -99,7 +99,7 @@ export default new Router({
         home, // path: /
         checkout, // path: /checkout
         login, // path: /login
-        // signup, // path: /signup
+        signup, // path: /signup
         forgotPassword, // path: /forgot-password
         pricing, // path: /pricing,
         notFound, // path: /404
