@@ -3,7 +3,7 @@
         <div class="grid-wrapper">            
             <v-toolbar flat>
                 <v-toolbar-title class="custom-grid-title">
-                    {{ title }}
+                    {{ title | ucwords }}
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 <slot name="header-toolbar"></slot>

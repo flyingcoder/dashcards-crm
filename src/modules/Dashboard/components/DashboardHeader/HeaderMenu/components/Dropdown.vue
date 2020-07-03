@@ -46,7 +46,7 @@
     </v-menu>
 </template>
 <script>
-import { mapMutations, mapActions } from 'vuex'
+import { mapMutations, mapActions, mapGetters } from 'vuex'
 export default {
     name: 'Dropdown',
     data: () => ({
@@ -70,6 +70,12 @@ export default {
             },
             {
                 id: 4,
+                title: 'Admin Area',
+                icon: 'mdi-account-key-outline', //require('@/assets/icons/header/user/logout.svg'),
+                action: 'adminDashboard'
+            },
+            {
+                id: 5,
                 title: 'Logout',
                 icon: 'mdi-power', //require('@/assets/icons/header/user/logout.svg'),
                 action: 'logout'
@@ -78,9 +84,7 @@ export default {
     }),
 
     computed: {
-        user() {
-            return this.$store.getters.user
-        },
+        ...mapGetters(['user']),
         can_settings() {
             return this.user.is_admin || this.user.is_manager
         }
@@ -96,7 +100,9 @@ export default {
         handle_action(action) {
             this[action]() //i.e the action is logout will call this.logout()
         },
-
+        adminDashboard(){
+            this.$router.push({ name: 'admin-dashboard' })
+        },
         logout() {
             this.$auth.logout(
                 response => {

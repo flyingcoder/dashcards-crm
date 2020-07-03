@@ -60,12 +60,15 @@ export default {
         isRequestInProgress: false,
         args: {
             dashboard: true
-        }
+        },
+        paths: [
+            { text: 'Dashboard', disabled: false, router_name: 'default-content' }
+        ],
     }),
 
     computed: {
         ...mapGetters('cards', ['should_show', 'dash_items']),
-        ...mapGetters(['user']),
+        ...mapGetters(['user', 'global_configs']),
         cards: {
             get() {
                 if (!this.user) return []
@@ -103,6 +106,9 @@ export default {
                 }
                 return card
             })
+        },
+        allowed_dashcards(){
+            return this.global_configs.allowed_dashcards
         }
     },
 
@@ -117,7 +123,9 @@ export default {
             }
         }
     },
-
+    mounted(){
+        this.$event.$emit('path-change', this.paths)
+    },
     created() {
         this.fill_cards().finally(() => (this.loading = false))
     },
@@ -177,6 +185,10 @@ export default {
         },
         can_view_passbox(user) {
             return user ? true : false
+        },
+
+        is_dashcard_enabled(slug){
+            return this.allowed_dashcards.includes(slug)
         }
     }
 }

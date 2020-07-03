@@ -1,0 +1,25 @@
+@import '~@/sass/_variables';
+
+@include pagePadding('.admin-dashboard');
+
+.admin-dashboard {
+    @include customTableRow;
+}
+.admin-dashboard-wrapper{
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+    padding: 20px
+}
+.admin-dashboard-content {
+    background-color: $bgLightBlue-2;
+    border: 1px solid $tableBorderBlue;
+    padding: 20px;
+
+    .admin-dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+}

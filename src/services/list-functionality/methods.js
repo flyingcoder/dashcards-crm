@@ -215,7 +215,7 @@ export const methods = {
                     this.$event.$emit('btnloading_off', false)
                 })
         },
-        load_more_via_url(url) {
+        load_more_via_url(url, cb) {
             this.loading = true
             var payload = { page: this.pagination.current + 1 }
             if (!url.includes('per_page')) {
@@ -231,6 +231,9 @@ export const methods = {
                     this.pagination.current = data.current_page
                     this.pagination.total = data.last_page
                     this.hasMoreData()
+                    if (typeof cb === 'function') {
+                        cb(data)
+                    }
                 })
                 .finally(() => {
                     this.clear_selected()

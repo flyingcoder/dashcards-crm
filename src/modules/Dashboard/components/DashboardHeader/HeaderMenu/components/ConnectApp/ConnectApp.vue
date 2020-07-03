@@ -14,8 +14,8 @@
         </v-btn>
     </template>
     <v-card>
-        <v-card-text class="apps">
-            <div v-for="app in apps" :key="app.id" class="app" @click="connect(app.id)">
+        <v-card-text class="apps" v-if="connects">
+            <div v-for="app in apps" v-if="connects[app.id]" :key="app.id" class="app" @click="connect(app.id)">
                 <img :src="app.logo" :alt="app.name">
                 <span class="app-name">{{app.name}}</span>
             </div>

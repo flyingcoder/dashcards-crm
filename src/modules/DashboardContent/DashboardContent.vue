@@ -10,7 +10,7 @@
             <div class="desktop-cards">
                 <draggable class="row d__cards" v-model="cards" scroll-sensitivity="300" force-fallback="true">
                     <template v-for="card in card_components">
-                        <v-col cols="12" md="6" v-if="should_show(card.slug) && card.can_view()">
+                        <v-col cols="12" md="6" v-if="should_show(card.slug) && card.can_view() && is_dashcard_enabled(card.slug)">
                             <component :is="card.component" :key="card.component" v-bind="args" v-if="card.hasOwnProperty('component')" @close="close(card.id)"></component>
                             <template v-else>
                                 <v-flex xs12 :key="card.id">
@@ -29,7 +29,7 @@
             <div class="mobile-cards">
                 <draggable class="row d__cards" v-model="cards" scroll-sensitivity="300" force-fallback="true" disabled="true">
                     <template v-for="card in card_components">
-                        <v-col cols="12" md="6" v-if="should_show(card.slug) && card.can_view()">
+                        <v-col cols="12" md="6" v-if="should_show(card.slug) && card.can_view() && is_dashcard_enabled(card.slug)">
                             <component :is="card.component" :key="card.component" v-bind="args" v-if="card.hasOwnProperty('component')" @close="close(card.id)"></component>
                             <template v-else>
                                 <v-flex xs12 :key="card.id">

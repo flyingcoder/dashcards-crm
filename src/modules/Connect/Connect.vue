@@ -10,8 +10,8 @@
                 </div>
                 <div class="cloud-body">
                     <v-row>
-                        <v-col md="4" cols="12">
-                            <v-card class="integration gdrive">
+                        <v-col md="4" cols="12" v-if="connects.google_drive">
+                            <v-card class="integration gdrive" >
                                 <v-card-title><img  :src="require('@/assets/logo/gdrive.svg')" alt="Google Drive"></v-card-title>
                                 <v-list dense class="app-body ma-0 pa-0" v-if="googleUser">
                                     <v-list-item>
@@ -42,7 +42,7 @@
                                 </v-expand-transition>
                             </v-card>
                         </v-col>
-                        <v-col md="4" cols="12">
+                        <v-col md="4" cols="12" v-if="connects.stripe">
                             <v-card color="integration stripe">
                                 <v-card-title><img :src="require('@/assets/logo/stripe-logo-white-stripe-icon.png')" alt="Stripe"></v-card-title>
                                 <v-list dense class="app-body ma-0 pa-0" v-if="stripeUser">
@@ -77,7 +77,7 @@
                                 </v-expand-transition>
                             </v-card>
                         </v-col>
-                        <v-col md="4" cols="12">
+                        <v-col md="4" cols="12" v-if="connects.paypal">
                             <v-card class="integration paypal">
                                 <v-card-title><img :src="require('@/assets/logo/paypal-png-logo.png')" alt="Paypal"></v-card-title>
                                 <v-card-actions class="app-actions">
@@ -90,7 +90,7 @@
                                 </v-card-actions>
                             </v-card>
                         </v-col>
-                        <v-col md="4" cols="12">
+                        <v-col md="4" cols="12" v-if="connects.dropbox">
                             <v-card class="integration dropbox">
                                 <v-card-title><img :src="require('@/assets/logo/dropbox-logo-white-80.png')" alt="Dropbox"></v-card-title>
                                 <v-card-actions class="app-actions">
@@ -103,7 +103,7 @@
                                 </v-card-actions>
                             </v-card>
                         </v-col>
-                        <v-col md="4" cols="12">
+                        <v-col md="4" cols="12" v-if="connects.google_meet">
                             <v-card class="integration gmeet">
                                 <v-card-title><img :src="require('@/assets/logo/google-meet-seeklogo.com.svg')" alt="Google Meet"></v-card-title>
                                 <v-card-actions class="app-actions">
@@ -116,7 +116,7 @@
                                 </v-card-actions>
                             </v-card>
                         </v-col>
-                        <v-col md="4" cols="12">
+                        <v-col md="4" cols="12" v-if="connects.zoom">
                             <v-card class="integration zoom">
                                 <v-card-title><img :src="require('@/assets/logo/zoom-white-logo.png')" alt="Zoom" style="height: 34px; margin: 8px auto !important;"></v-card-title>
                                 <v-card-actions class="app-actions">
@@ -129,7 +129,7 @@
                                 </v-card-actions>
                             </v-card>
                         </v-col>
-                        <v-col md="4" cols="12">
+                        <v-col md="4" cols="12" v-if="connects.seo_profiler">
                             <v-card class="integration seoprofiler">
                                 <v-card-title><img :src="require('@/assets/logo/seoprofiler-logo-black-shine.png')" alt="SEOprofiler" style="height: 40px; margin: 5px auto !important;"></v-card-title>
                                 <v-card-actions class="app-actions">
@@ -142,7 +142,7 @@
                                 </v-card-actions>
                             </v-card>
                         </v-col>
-                        <v-col md="4" cols="12">
+                        <v-col md="4" cols="12" v-if="connects.skype">
                             <v-card class="integration skype">
                                 <v-card-title><img :src="require('@/assets/logo/skype-white-logo.png')" alt="Skype"></v-card-title>
                                 <v-card-actions class="app-actions">
@@ -155,7 +155,7 @@
                                 </v-card-actions>
                             </v-card>
                         </v-col>
-                        <v-col md="4" cols="12">
+                        <v-col md="4" cols="12" v-if="connects.semrush">
                             <v-card class="integration semrush">
                                 <v-card-title><img :src="require('@/assets/logo/SEMrush-Logo.png')" alt="SEMRUSH"></v-card-title>
                                 <v-card-actions class="app-actions">
@@ -168,7 +168,7 @@
                                 </v-card-actions>
                             </v-card>
                         </v-col>
-                        <v-col md="4" cols="12">
+                        <v-col md="4" cols="12" v-if="connects.brightlocal">
                             <v-card class="integration b-local">
                                 <v-card-title><img :src="require('@/assets/logo/brightlocal_logo.svg')" alt="BrightLocal" style="height: 40px; margin: 5px auto !important;"></v-card-title>
                                 <v-card-actions class="app-actions">
@@ -181,7 +181,7 @@
                                 </v-card-actions>
                             </v-card>
                         </v-col>
-                        <v-col md="4" cols="12">
+                        <v-col md="4" cols="12" v-if="connects.google_calendar">
                             <v-card class="integration gcalendar">
                                 <v-card-title>
                                     <img :src="require('@/assets/appIcons/google-calendar-icon.png')" alt="Google Calendar Icon" style="margin: 0 0 0 auto !important;">
@@ -197,7 +197,7 @@
                                 </v-card-actions>
                             </v-card>
                         </v-col>
-                        <v-col md="4" cols="12">
+                        <v-col md="4" cols="12" v-if="connects.lastpass">
                             <v-card class="integration lastpass">
                                 <v-card-title><img :src="require('@/assets/logo/LastPass-Logo-White.png')" alt="LastPass" style="height: 34px; margin: 8px auto !important;"></v-card-title>
                                 <v-card-actions class="app-actions">

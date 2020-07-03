@@ -1,5 +1,6 @@
 import request from '@/services/axios_instance'
 import { settings } from '@/variables'
+import { mapGetters } from 'vuex'
 
 export default {
     name: 'Connect',
@@ -17,13 +18,15 @@ export default {
     }),
 
     computed: {
+        ...mapGetters(['global_configs']),
         googleBtnLabel() {
-            return this.isGoogleSignIn ?
-                'Disconnect Google Drive' :
-                'Connect to Google Drive'
+            return this.isGoogleSignIn ? 'Disconnect Google Drive' : 'Connect to Google Drive'
         },
         stripeConnect() {
             return `https://connect.stripe.com/oauth/authorize?response_type=code&client_id=${settings.stripe.client_id}&scope=read_write&redirect_uri=${settings.stripe.redirect_uri}`
+        },
+        connects(){
+            return this.global_configs.connects
         }
     },
 

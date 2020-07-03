@@ -17,7 +17,6 @@ import { milestoneTasks } from './routes/milestoneTasks'
 import { projects } from './routes/projects'
 import { campaigns } from './routes/campaigns'
 import { teams } from './routes/teams'
-import { subscribers } from './routes/subscribers'
 import { settings } from './routes/settings'
 import { project_preview } from './routes/projectPreview'
 import { taskTimer } from './routes/taskTimer'
@@ -47,6 +46,11 @@ import { pay_invoice } from './routes/payInvoice'
 import { invoice_templates } from './routes/invoiceTemplates'
 import { formResponse } from './routes/formResponse'
 import { servicesList } from './routes/servicesList'
+import { admin_dashboard } from './routes/admins/adminDashboard'
+import { admin_subscribers } from './routes/admins/adminSubscribers'
+import { admin_apis } from './routes/admins/adminApis'
+import { admin_logs } from './routes/admins/adminLogs'
+import { admin_database } from './routes/admins/adminDatabase'
 Vue.use(Router)
 
 export default new Router({
@@ -62,7 +66,6 @@ export default new Router({
                 projects, // path: /dashboard/projects
                 campaigns, // path: /dashboard/campaigns
                 teams, // path: /dashboard/team
-                subscribers, // path: /dashboard/subscribers
                 settings, // path: /dashboard/settings,
                 project_preview, //path: /dashboard/project-preview
                 taskTimer, //path: /dashboard/task-timer
@@ -104,6 +107,17 @@ export default new Router({
         pricing, // path: /pricing,
         notFound, // path: /404
         formResponse, //path: /form/:slug
+        {
+            path: '/admin-dashboard',
+            component: () => import('@/modules/Dashboard/Dashboard.vue'),
+            children: [
+                admin_dashboard, //path: admin-dashboard
+                admin_subscribers, //path: admin-dashboard/subscribers
+                admin_apis, //path: admin-dashboard/apis
+                admin_logs, //path: admin-dashboard/logs
+                admin_database, //path: admin-dashboard/database
+            ]
+        }
     ],
     mode: 'history'
 })

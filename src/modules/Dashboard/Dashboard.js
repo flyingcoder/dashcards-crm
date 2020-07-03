@@ -6,7 +6,7 @@ import DashboardSidebar from './components/DashboardSidebar/DashboardSidebar.vue
 import FloatingChatButton from '../.././common/FloatingChatButton/FloatingChatButton.vue'
 
 export default {
-    name : 'MainDashboard',
+    name: 'MainDashboard',
     components: {
         DashboardLogo,
         DashboardHeader,
@@ -15,7 +15,15 @@ export default {
     },
 
     data: () => ({
-        mini_sidebar: false
+        mini_sidebar: false,
+        admintabs: [
+            { text: 'General', route_name: 'admin-dashboard' },
+            { text: 'APIs', route_name: 'admin-apis' },
+            { text: 'Subscribers', route_name: 'admin-subscribers' },
+            { text: 'Database', route_name: 'admin-database' }, 
+            { text: 'Logs', route_name: 'admin-logs' },
+        ],
+        tab: 0
     }),
 
     computed: {
@@ -26,6 +34,17 @@ export default {
         },
         is_sm_and_down() {
             return this.$vuetify.breakpoint.smAndDown
+        },
+        is_admin_routes() {
+            return this.$route.path.includes('admin-dashboard')
+        }
+    },
+    mounted() {
+        if (this.$route.name) {
+            let index = this.admintabs.findIndex(i => i.route_name === this.$route.name)
+            if (~index) {
+                this.tab = index
+            }
         }
     },
 
@@ -51,6 +70,7 @@ export default {
 
         subscribe() {
             this.$pusher.authenticate()
+            const open_channel = this.$pusher.subscribe(`apps`)
 
             const chat_channel = this.$pusher.subscribe(
                 `private-chat.new-message.${this.user.id}`
@@ -67,6 +87,7 @@ export default {
             this.chat_channel(chat_channel)
             this.friends_channel(friends_channel)
             this.chat_notification_channel(chat_notification_channel)
+            this.open_channel(open_channel)
 
             if (this.user.is_admin) {
                 this.$pusher.authenticate()
@@ -131,8 +152,8 @@ export default {
                 let index = payload.receivers.findIndex(i => i === this.user.id)
                 if (~index) {
                     let notification = new Notification(payload.title, {
-                        icon : require('@/assets/logo/mini-blue.png'),
-                        body : payload.message
+                        icon: require('@/assets/logo/mini-blue.png'),
+                        body: payload.message
                     })
                 }
             })
@@ -154,8 +175,15 @@ export default {
                     this.add_to_chat(notification)
                 }
             })
+        },
 
-
+        open_channel(channel) {
+            channel.bind('App\\Events\\GlobalEvent', payload => {
+                // console.log(payload)
+                if (payload.type === 'configs') {
+                    this.$store.commit('set_global_configs', payload)
+                }
+            })
         },
 
         handle_unread_message(sender) {
@@ -164,5 +192,8 @@ export default {
                 this.add_unread_messages(sender.id)
             }
         },
+        navigate() {
+            this.$router.push({ name: this.admintabs[this.tab].route_name })
+        }
     }
 }

@@ -32,7 +32,7 @@
         <button @click="$emit('button-clicked')">{{ buttonText }}</button>
       </div>
 
-      <div class="l__signup" v-if="hasFooter">
+      <div class="l__signup" v-if="hasFooter && hasSignup">
         <label
           >{{ footerText }}
           <router-link tag="a" :to="footerLink">{{

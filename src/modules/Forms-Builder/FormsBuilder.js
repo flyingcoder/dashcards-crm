@@ -14,7 +14,6 @@ export default {
         TableHeader,
         draggable
     },
-
     data: () => ({
         paths: [
             { text: 'Dashboard', disabled: false, router_name: 'default-content' },
@@ -34,7 +33,7 @@ export default {
                 type: 'h1',
                 tag: 'h1',
                 description: 'Heading 1',
-                text: '',
+                text: 'Title...',
                 hover: false,
                 icon: 'mdi-format-header-1',
                 align: 'left'
@@ -44,7 +43,7 @@ export default {
                 type: 'h2',
                 tag: 'h2',
                 description: 'Heading 2',
-                text: '',
+                text: 'Title...',
                 hover: false,
                 icon: 'mdi-format-header-2',
                 align: 'left'
@@ -54,7 +53,7 @@ export default {
                 type: 'h3',
                 tag: 'h3',
                 description: 'Heading 3',
-                text: '',
+                text: 'Title...',
                 hover: false,
                 icon: 'mdi-format-header-3',
                 align: 'left'
@@ -64,7 +63,7 @@ export default {
                 type: 'h4',
                 tag: 'h4',
                 description: 'Heading 4',
-                text: '',
+                text: 'Title...',
                 hover: false,
                 icon: 'mdi-format-header-4',
                 align: 'left'
@@ -74,7 +73,7 @@ export default {
                 type: 'h5',
                 tag: 'h5',
                 description: 'Heading 5',
-                text: '',
+                text: 'Title...',
                 hover: false,
                 icon: 'mdi-format-header-5',
                 align: 'left'
@@ -93,8 +92,8 @@ export default {
                 id: null,
                 type: 'label',
                 tag: 'label',
-                description: 'Label',
-                text: '',
+                description: 'Normal',
+                text: 'Title...',
                 hover: false,
                 icon: 'mdi-format-letter-case'
             }
@@ -103,9 +102,10 @@ export default {
             id: null,
             type: 'paragraph',
             tag: 'p',
-            text: '',
+            text: 'Description...',
             hover: false,
-            align: 'left'
+            align: 'left',
+            icon: 'mdi-format-paragraph'
         },
         section: {
             id: null,
@@ -118,12 +118,12 @@ export default {
             id: null,
             type: 'image',
             tag: 'img',
-            src: '',
-            itemheight: 'auto',
-            itemwidth: 'auto',
+            src: 'https://via.placeholder.com/200x150.png?text=No+Image+Source+Found',
+            itemheight: '120',
+            itemwidth: '300',
             maxWidth: '100%',
             maxHeight: '100%',
-            alt: '',
+            alt: 'No image source found',
             hover: false,
             icon: 'mdi-image',
             label: null,
@@ -327,6 +327,9 @@ export default {
         this.$event.$emit('path-change', this.paths)
         if (this.$route.params.id > 0) {
             this.getForm(this.$route.params.id)
+        } else {
+            this.setProperty(this.headings.h1)
+            this.setProperty(this.paragraph)
         }
         this.getFormsTemplate()
         this.form_notif_receivers = this.user.email
@@ -403,22 +406,19 @@ export default {
         toggleParent(id) {
             this.parent = this.parent === id ? null : id
         },
-        setProperty(item, parentId) {
+        setProperty(item) {
             this.activeType = _cloneDeep(item)
+            this.insertTextContent()
+            this.edit(this.activeType)
+        },
+        editProperty(item){
+            this.activeType = item
             this.sidetab = 'Property'
-            if (parentId && typeof parentId !== 'undefined') {
-                this.parent = parentId
-            }
         },
         insertTextContent() {
             let element = this.activeType
             element.id = uuidv4()
-            if (this.parent) {
-                this.insertTo(element, this.parent)
-            } else {
-                this.insert(element)
-            }
-            this.cancelTextContent()
+            this.insert(element)
         },
         updateTextContent() {
             let active = this.activeType
@@ -444,10 +444,9 @@ export default {
             let index = this.getIndex(this.structures, parentId)
             this.structures[index].children.push(type)
         },
-        edit(item, parentId) {
+        edit(item) {
             this.isEditing = true
-            this.setProperty(item)
-            this.parent = parentId || null
+            this.editProperty(item)
         },
         getIndex(arr, findId) {
             let index = arr.findIndex(i => i.id === findId)

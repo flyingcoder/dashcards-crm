@@ -17,7 +17,14 @@ export default {
         /* Be sure we remove logged user */
         this.$store.dispatch('logout')
     },
-
+    computed: {
+        is_signup_enabled(){
+            if(this.$store.getters.global_configs) {
+                return this.$store.getters.global_configs.allowed_modules.includes('signup')
+            }
+            return false;
+        }
+    },
     methods: {
         set_checkbox(new_value) {
             this.remember_me = new_value
