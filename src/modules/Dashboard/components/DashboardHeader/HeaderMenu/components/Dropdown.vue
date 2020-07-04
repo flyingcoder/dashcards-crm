@@ -2,23 +2,16 @@
     <v-menu offset-y class="user-dropdown" transition="slide-y-transition" :nudge-width="10" :nudge-bottom="10" :nudge-left="70" bottom>
         <template v-slot:activator="{ on }">
             <div class="dropdown" v-on="on">
-            <v-badge
-                avatar
-                bordered
-                overlap
-                bottom
-                class="b-badge"
-                icon="expand_more"
-            >
-                <v-avatar v-if="user.image_url" class="user-icon responsive-img" :size="avatarSize">
-                    <img :src="user.image_url" alt="user" />
-                </v-avatar>
-                <v-avatar v-else color="red" :size="avatarSize" class="user-icon responsive-img">
-                    <span class="white--text">
-                        {{ user.first_name.charAt(0) + user.last_name.charAt(0) }}
-                    </span>
-                </v-avatar>
-            </v-badge>
+                <v-badge avatar bordered overlap bottom class="b-badge" icon="expand_more">
+                    <v-avatar v-if="user.image_url" class="user-icon responsive-img" :size="avatarSize">
+                        <img :src="user.image_url" alt="user" />
+                    </v-avatar>
+                    <v-avatar v-else color="red" :size="avatarSize" class="user-icon responsive-img">
+                        <span class="white--text">
+                            {{ user.first_name.charAt(0) + user.last_name.charAt(0) }}
+                        </span>
+                    </v-avatar>
+                </v-badge>
             </div>
         </template>
         <v-list dense class="dropdown-content">
@@ -51,42 +44,43 @@ export default {
     name: 'Dropdown',
     data: () => ({
         avatarSize: '40px',
-        items: [{
-                id: 1,
-                title: 'Profile',
-                icon: 'mdi-account-cog-outline', //require('@/assets/icons/header/user/profile.svg'),
-                action: 'navigate_to_profile'
-            },
-            {
-                id: 2,
-                title: 'Settings',
-                icon: 'mdi-cogs', //require('@/assets/icons/header/user/settings.svg'),
-                action: 'navigate_to_settings'
-            },
-            {
-                id: 3,
-                title: 'Help',
-                icon: 'mdi-help-circle-outline' //require('@/assets/icons/header/user/help.svg')
-            },
-            {
-                id: 4,
-                title: 'Admin Area',
-                icon: 'mdi-account-key-outline', //require('@/assets/icons/header/user/logout.svg'),
-                action: 'adminDashboard'
-            },
-            {
-                id: 5,
-                title: 'Logout',
-                icon: 'mdi-power', //require('@/assets/icons/header/user/logout.svg'),
-                action: 'logout'
-            }
-        ]
     }),
 
     computed: {
         ...mapGetters(['user']),
         can_settings() {
             return this.user.is_admin || this.user.is_manager
+        },
+        items() {
+            var list = [{
+                    title: 'Profile',
+                    icon: 'mdi-account-cog-outline', //require('@/assets/icons/header/user/profile.svg'),
+                    action: 'navigate_to_profile'
+                },
+                {
+                    title: 'Settings',
+                    icon: 'mdi-cogs', //require('@/assets/icons/header/user/settings.svg'),
+                    action: 'navigate_to_settings'
+                },
+                {
+                    title: 'Help',
+                    icon: 'mdi-help-circle-outline', //require('@/assets/icons/header/user/help.svg')
+                    action: false
+                },
+                {
+                    title: 'Logout',
+                    icon: 'mdi-power', //require('@/assets/icons/header/user/logout.svg'),
+                    action: 'logout'
+                }
+            ]
+            if (this.user.is_buzzooka_super_admin) {
+                list.push({
+                    title: 'Admin Area',
+                    icon: 'mdi-account-key-outline', //require('@/assets/icons/header/user/logout.svg'),
+                    action: 'adminDashboard'
+                })
+            }
+            return list
         }
     },
     mounted() {
@@ -98,9 +92,11 @@ export default {
         ...mapMutations('memberProfile', ['set_user_id']),
         ...mapActions('memberProfile', ['get_single_member']),
         handle_action(action) {
-            this[action]() //i.e the action is logout will call this.logout()
+            if (action) {
+                this[action]() //i.e the action is logout will call this.logout()
+            }
         },
-        adminDashboard(){
+        adminDashboard() {
             this.$router.push({ name: 'admin-dashboard' })
         },
         logout() {
@@ -126,43 +122,49 @@ export default {
                 this.set_user_id(this.user.id)
                 this.get_single_member(this.user.id)
             }
-            //location.reload();
         }
     }
 }
 </script>
 <style lang="scss">
 @import "~@/sass/_variables";
+
 .dropdown {
     width: 55px;
     cursor: pointer;
-    
-    .b-badge .v-badge__badge{
+
+    .b-badge .v-badge__badge {
         background-color: $blue !important;
     }
 }
+
 .h__list.v-list-item {
     display: flex;
     align-items: center;
     min-height: auto;
     padding: 0.5em 1em;
 }
-.dropdown-content.v-list{
+
+.dropdown-content.v-list {
     width: 180px;
-    .v-list-item__title{
+
+    .v-list-item__title {
         color: $textDark !important;
     }
 }
-.v-list-item__icon.h__icons{
+
+.v-list-item__icon.h__icons {
     margin-top: 0;
     margin-bottom: 0;
+
     img {
         width: 25px;
         height: 25px;
     }
 }
+
 .dropdown-img {
-    
+
     img.user-img {
         width: 50px;
     }
@@ -175,6 +177,5 @@ export default {
     }
 }
 
-@media only screen and (max-width: 480px) {
-}
+@media only screen and (max-width: 480px) {}
 </style>

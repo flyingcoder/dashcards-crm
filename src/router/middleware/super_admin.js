@@ -8,8 +8,9 @@ export default function super_admin({ next, store }) {
         })
     }
     if (!store.getters.user.is_buzzooka_super_admin) {
+        // store.
         return next({
-            name: 'dashboard'
+            name: 'not_found'
         })
     }
     return next()

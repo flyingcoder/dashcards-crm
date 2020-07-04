@@ -83,7 +83,7 @@ export default {
                 type: 'h6',
                 tag: 'h6',
                 description: 'Heading 6',
-                text: '',
+                text: 'Title...',
                 hover: false,
                 icon: 'mdi-format-header-6',
                 align: 'left'
@@ -93,7 +93,7 @@ export default {
                 type: 'label',
                 tag: 'label',
                 description: 'Normal',
-                text: 'Title...',
+                text: 'Text...',
                 hover: false,
                 icon: 'mdi-format-letter-case'
             }
