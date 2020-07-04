@@ -1,4 +1,5 @@
 import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { settings } from '@/variables'
 //Components
 import DashboardLogo from './components/DashboardLogo/DashboardLogo.vue'
 import DashboardHeader from './components/DashboardHeader/DashboardHeader.vue'
@@ -20,7 +21,7 @@ export default {
             { text: 'General', route_name: 'admin-dashboard' },
             { text: 'APIs', route_name: 'admin-apis' },
             { text: 'Subscribers', route_name: 'admin-subscribers' },
-            { text: 'Database', route_name: 'admin-database' }, 
+            { text: 'Database', route_name: 'admin-database' },
             { text: 'Logs', route_name: 'admin-logs' },
         ],
         tab: 0
@@ -182,6 +183,7 @@ export default {
                 // console.log(payload)
                 if (payload.type === 'configs') {
                     this.$store.commit('set_global_configs', payload)
+                    localStorage.setItem('session-eXt-eQt128', this.CryptoJS.AES.encrypt(JSON.stringify(payload), settings.paraphrase).toString())
                 }
             })
         },

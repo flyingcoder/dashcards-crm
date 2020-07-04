@@ -27,7 +27,10 @@ Vue.mixin({
 })
 
 router.beforeEach((to, from, next) => {
-    // console.log(from, to)
+    if (store.state.global_configs.allowed_modules.length === 0) {
+        store.dispatch('fetchGlobal')
+    }
+
     if (!to.meta.middleware) {
         return next()
     }

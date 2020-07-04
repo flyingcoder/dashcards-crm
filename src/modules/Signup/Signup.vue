@@ -2,7 +2,7 @@
     <div class="signup">
         <div class="s__form">
             <login-component v-if="is_signup_enabled" title-text="Sign up" button-text="Register" :has-forgot-password="false" checkbox-text="Show Password" footer-text="Already have an account?" footer-link="/login" link-text="Login" card-height="90%" @checkbox-changed="set_checkbox" @button-clicked="register">
-                <template slot="fields" >
+                <template slot="fields">
                     <div class="l__labels">
                         <custom-field className="signup__field text-capitalize" v-model.trim="company_name.text" :valid="company_name.is_valid" input-type="text" placeholder="Company Name" @blur="validate_field('company_name')" @focus="company_name.is_valid = true" @keydown.enter="register"></custom-field>
                         <custom-field className="signup__field text-capitalize" v-model.trim="first_name.text" :valid="first_name.is_valid" input-type="text" placeholder="First Name" @blur="validate_field('first_name')" @focus="first_name.is_valid = true" @keydown.enter="register"></custom-field>
@@ -13,10 +13,10 @@
                     </div>
                 </template>
             </login-component>
-            <Empty style="background: transparent;" icon="mdi-account-multiple-remove-outline" headline="Signup is temporarily unavailable!">
-              <template v-slot:extra>
-                <v-btn large class="text--white" @click="$router.push({ name: 'login' })">Login</v-btn>
-              </template>
+            <Empty v-else style="background: transparent;" icon="mdi-account-multiple-remove-outline" headline="Signup is temporarily unavailable!">
+                <template v-slot:extra>
+                    <v-btn large class="text--white" @click="$router.push({ name: 'login' })">Login</v-btn>
+                </template>
             </Empty>
         </div>
         <div class="s__info">

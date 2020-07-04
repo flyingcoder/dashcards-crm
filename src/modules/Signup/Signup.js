@@ -1,7 +1,8 @@
 import LoginComponent from '@/common/LoginComponent/LoginComponent.vue'
 import CustomField from '@/common/CustomField/CustomField.vue'
 import { validations } from './local-mixins/validations'
-import request from '@/services/axios_instance'
+import { mapGetters } from 'vuex' 
+
 export default {
     name: 'Signup',
     mixins: [validations],
@@ -49,14 +50,12 @@ export default {
             validations: ['matchPassword']
         },
         input_type: 'password',
-        is_signup_enabled: false
     }),
-
-    created() {
-        request.get('api/configs/allowed_modules')
-        .then(({data}) => {
-            this.is_signup_enabled = data.allowed_modules.includes('signup') || false
-        })
+    computed: {
+        ...mapGetters(['global_configs']),
+        is_signup_enabled(){
+            return this.global_configs.allowed_modules.includes('signup')
+        }
     },
     methods: {
         set_checkbox(new_value) {

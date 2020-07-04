@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import modules from './modules'
 import VueCryptojs from 'vue-cryptojs'
 import request from '@/services/axios_instance'
-// import { settings } from '@/variables'
+import { settings } from '@/variables'
 
 Vue.use(VueCryptojs)
 Vue.use(Vuex)
@@ -17,7 +17,9 @@ export default new Vuex.Store({
             message: ''
         },
         show_floating_button: true,
-        global_configs: {}
+        global_configs: {
+            allowed_modules: []
+        }
     },
     getters: {
         custom_loader: state => state.custom_loader,
@@ -25,7 +27,7 @@ export default new Vuex.Store({
         user: state => state.user,
         snackbar: state => state.snackbar,
         show_floating_button: state => state.show_floating_button,
-        global_configs: state => state.global_configs //JSON.parse(Vue.CryptoJS.AES.decrypt(state.global_configs, settings.paraphrase ).toString(Vue.CryptoJS.enc.Utf8))
+        global_configs: state => state.global_configs
     },
     mutations: {
         set_user: (state, payload) => (state.user = payload),
@@ -41,10 +43,7 @@ export default new Vuex.Store({
         open_snackbar: (state, payload) => (state.snackbar = payload),
         set_custom_loader: (state, payload) => (state.custom_loader = payload),
         set_floating_button: (state, payload) => (state.show_floating_button = payload),
-        set_global_configs: (state, payload) => {
-            state.global_configs = payload
-            // localStorage.setItem('session-eXt-eQt128', JSON.stringify(payload))
-        }
+        set_global_configs: (state, payload) => ( state.global_configs = payload )
     },
     actions: {
         login({ commit }, payload) {
@@ -57,6 +56,7 @@ export default new Vuex.Store({
             request.get(`api/configs`)
             .then(({ data }) => {
                 commit('set_global_configs', data)
+                localStorage.setItem('session-eXt-eQt128', Vue.CryptoJS.AES.encrypt(JSON.stringify(data), settings.paraphrase).toString())
             })
         }
     },
