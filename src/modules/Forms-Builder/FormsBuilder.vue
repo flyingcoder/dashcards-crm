@@ -4,26 +4,21 @@
             <div class="forms-page-content">
                 <div class="form">
                     <div class="form-header">
-                        <v-row no-gutters>
-                            <v-col md="3" sm="4" xs="12">
+                        <v-row no-gutters class="align-center">
+                            <v-col md="9" sm="9" xs="12">
                                 <v-select clearable @change="structures = $event" :items="list" item-value="questions" item-text="title" placeholder="Copy Form From ..." solo dense hide-details="auto" class="ma-1" flat></v-select>
                             </v-col>
                             <v-spacer></v-spacer>
-                            <v-tooltip left>
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-btn class="mx-1" v-bind="attrs" v-on="on" fab small @click="clearAll">
-                                        <v-icon>mdi-delete</v-icon>
-                                    </v-btn>
-                                </template>
-                                <span>Clear All</span>
-                            </v-tooltip>
+                            <v-btn class="dialog-button" v-bind="attrs" v-on="on" @click="clearAll">
+                                <v-icon>delete</v-icon> Clear All
+                            </v-btn>
                         </v-row>
                     </div>
                     <v-row no-gutters class="form-body">
                         <v-col md="9">
                             <Empty icon="mdi-border-none-variant" v-if="structures.length === 0" headline="Add a title to get started!">
                                 <template v-slot:extra>
-                                    <v-btn dark depressed color="#3b589e" @click="setProperty(headings.h1)">Add title</v-btn>
+                                    <v-btn class="primary-btn" @click="setProperty(headings.h1)">Add title</v-btn>
                                 </template>
                             </Empty>
                             <v-card flat v-else>
@@ -110,7 +105,7 @@
                                             <v-spacer></v-spacer>
                                             <v-tooltip left>
                                                 <template v-slot:activator="{ on, attrs }">
-                                                    <v-btn icon depressed tile v-bind="attrs" v-on="on" @click="addDivider()">
+                                                    <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs" v-on="on" @click="addDivider()">
                                                         <v-icon small>mdi-border-horizontal</v-icon>
                                                     </v-btn>
                                                 </template>
@@ -118,7 +113,7 @@
                                             </v-tooltip>
                                             <v-menu bottom left>
                                                 <template v-slot:activator="{ on, attrs }">
-                                                    <v-btn depressed icon v-bind="attrs" v-on="on">
+                                                    <v-btn class="section-tools-btn" depressed icon v-bind="attrs" v-on="on">
                                                         <v-icon small>mdi-format-header-pound</v-icon>
                                                     </v-btn>
                                                 </template>
@@ -132,7 +127,7 @@
                                             </v-menu>
                                             <v-tooltip left>
                                                 <template v-slot:activator="{ on, attrs }">
-                                                    <v-btn icon depressed tile v-bind="attrs" v-on="on" @click="setProperty(paragraph)">
+                                                    <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs" v-on="on" @click="setProperty(paragraph)">
                                                         <v-icon small>mdi-format-paragraph</v-icon>
                                                     </v-btn>
                                                 </template>
@@ -140,7 +135,7 @@
                                             </v-tooltip>
                                             <v-tooltip left>
                                                 <template v-slot:activator="{ on, attrs }">
-                                                    <v-btn icon depressed tile v-bind="attrs" v-on="on" @click="setProperty(image)">
+                                                    <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs" v-on="on" @click="setProperty(image)">
                                                         <v-icon small>mdi-image</v-icon>
                                                     </v-btn>
                                                 </template>
@@ -148,7 +143,7 @@
                                             </v-tooltip>
                                             <v-tooltip left>
                                                 <template v-slot:activator="{ on, attrs }">
-                                                    <v-btn icon depressed tile v-bind="attrs" v-on="on" @click="setProperty(video)">
+                                                    <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs" v-on="on" @click="setProperty(video)">
                                                         <v-icon small>mdi-youtube</v-icon>
                                                     </v-btn>
                                                 </template>
@@ -156,7 +151,7 @@
                                             </v-tooltip>
                                             <v-tooltip left v-for="form in formInputs" :key="form.type">
                                                 <template v-slot:activator="{ on, attrs }">
-                                                    <v-btn icon depressed tile v-bind="attrs" v-on="on" @click="setProperty(form)">
+                                                    <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs" v-on="on" @click="setProperty(form)">
                                                         <v-icon small>{{ form.icon }}</v-icon>
                                                     </v-btn>
                                                 </template>
@@ -174,76 +169,72 @@
                                     <v-tab href="#Element" style="display:none;height:0"></v-tab>
                                     <v-tab href="#Property" style="display:none;height:0"></v-tab>
                                     <v-tab-item value="Element">
-                                        <v-card flat tile>
-                                            <v-card-text>
-                                                <v-list dense>
-                                                    <v-subheader>Media Elements</v-subheader>
-                                                    <v-list-item-group>
-                                                        <v-list-item @click="addDivider(false)">
-                                                            <v-list-item-icon>
-                                                                <v-icon left>mdi-border-horizontal</v-icon>
-                                                            </v-list-item-icon>
-                                                            <v-list-item-content>
-                                                                <v-list-item-title>Divider</v-list-item-title>
-                                                            </v-list-item-content>
-                                                        </v-list-item>
-                                                        <v-list-group no-action dense>
-                                                            <template v-slot:activator>
-                                                                <v-list-item-icon>
-                                                                    <v-icon left>mdi-format-size</v-icon>
-                                                                </v-list-item-icon>
-                                                                <v-list-item-content>
-                                                                    <v-list-item-title>Heading</v-list-item-title>
-                                                                </v-list-item-content>
-                                                            </template>
-                                                            <v-list-item v-for="(item, i) in headingList" :key="i" @click="setProperty(item)">
-                                                                <v-list-item-icon>
-                                                                    <v-icon left>{{item.icon}}</v-icon>
-                                                                </v-list-item-icon>
-                                                                <v-list-item-content>
-                                                                    <v-list-item-title>{{item.description | ucwords}}</v-list-item-title>
-                                                                </v-list-item-content>
-                                                            </v-list-item>
-                                                        </v-list-group>
-                                                        <v-list-item @click="setProperty(paragraph)">
-                                                            <v-list-item-icon>
-                                                                <v-icon left>mdi-format-paragraph</v-icon>
-                                                            </v-list-item-icon>
-                                                            <v-list-item-content>
-                                                                <v-list-item-title>Paragraph</v-list-item-title>
-                                                            </v-list-item-content>
-                                                        </v-list-item>
-                                                        <v-list-item @click="setProperty(image)">
-                                                            <v-list-item-icon>
-                                                                <v-icon left>mdi-image</v-icon>
-                                                            </v-list-item-icon>
-                                                            <v-list-item-content>
-                                                                <v-list-item-title>Image</v-list-item-title>
-                                                            </v-list-item-content>
-                                                        </v-list-item>
-                                                        <v-list-item @click="setProperty(video)">
-                                                            <v-list-item-icon>
-                                                                <v-icon left>mdi-youtube</v-icon>
-                                                            </v-list-item-icon>
-                                                            <v-list-item-content>
-                                                                <v-list-item-title>Video</v-list-item-title>
-                                                            </v-list-item-content>
-                                                        </v-list-item>
-                                                    </v-list-item-group>
-                                                    <v-subheader>Form Elements</v-subheader>
-                                                    <v-list-item-group>
-                                                        <v-list-item v-for="form in formInputs" :key="form.type" @click="setProperty(form)">
-                                                            <v-list-item-icon>
-                                                                <v-icon v-text="form.icon"></v-icon>
-                                                            </v-list-item-icon>
-                                                            <v-list-item-content>
-                                                                <v-list-item-title>{{ form.type | snakeCaseToNormal | removeSlug | ucwords}}</v-list-item-title>
-                                                            </v-list-item-content>
-                                                        </v-list-item>
-                                                    </v-list-item-group>
-                                                </v-list>
-                                            </v-card-text>
-                                        </v-card>
+                                        <v-list class="elements" dense>
+                                            <v-subheader>Media Elements</v-subheader>
+                                            <v-list-item-group>
+                                                <v-list-item class="element-item" @click="addDivider(false)">
+                                                    <v-list-item-icon>
+                                                        <v-icon left>mdi-border-horizontal</v-icon>
+                                                    </v-list-item-icon>
+                                                    <v-list-item-content>
+                                                        <v-list-item-title>Divider</v-list-item-title>
+                                                    </v-list-item-content>
+                                                </v-list-item>
+                                                <v-list-group no-action dense>
+                                                    <template v-slot:activator>
+                                                        <v-list-item-icon>
+                                                            <v-icon left>mdi-format-size</v-icon>
+                                                        </v-list-item-icon>
+                                                        <v-list-item-content>
+                                                            <v-list-item-title>Heading</v-list-item-title>
+                                                        </v-list-item-content>
+                                                    </template>
+                                                    <v-list-item class="element-item" v-for="(item, i) in headingList" :key="i" @click="setProperty(item)">
+                                                        <v-list-item-icon>
+                                                            <v-icon left>{{item.icon}}</v-icon>
+                                                        </v-list-item-icon>
+                                                        <v-list-item-content>
+                                                            <v-list-item-title>{{item.description | ucwords}}</v-list-item-title>
+                                                        </v-list-item-content>
+                                                    </v-list-item>
+                                                </v-list-group>
+                                                <v-list-item class="element-item" @click="setProperty(paragraph)">
+                                                    <v-list-item-icon>
+                                                        <v-icon left>mdi-format-paragraph</v-icon>
+                                                    </v-list-item-icon>
+                                                    <v-list-item-content>
+                                                        <v-list-item-title>Paragraph</v-list-item-title>
+                                                    </v-list-item-content>
+                                                </v-list-item>
+                                                <v-list-item class="element-item" @click="setProperty(image)">
+                                                    <v-list-item-icon>
+                                                        <v-icon left>mdi-image</v-icon>
+                                                    </v-list-item-icon>
+                                                    <v-list-item-content>
+                                                        <v-list-item-title>Image</v-list-item-title>
+                                                    </v-list-item-content>
+                                                </v-list-item>
+                                                <v-list-item class="element-item" @click="setProperty(video)">
+                                                    <v-list-item-icon>
+                                                        <v-icon left>mdi-youtube</v-icon>
+                                                    </v-list-item-icon>
+                                                    <v-list-item-content>
+                                                        <v-list-item-title>Video</v-list-item-title>
+                                                    </v-list-item-content>
+                                                </v-list-item>
+                                            </v-list-item-group>
+                                            <v-subheader>Form Elements</v-subheader>
+                                            <v-list-item-group>
+                                                <v-list-item class="element-item" v-for="form in formInputs" :key="form.type" @click="setProperty(form)">
+                                                    <v-list-item-icon>
+                                                        <v-icon v-text="form.icon"></v-icon>
+                                                    </v-list-item-icon>
+                                                    <v-list-item-content>
+                                                        <v-list-item-title>{{ form.type | snakeCaseToNormal | removeSlug | ucwords}}</v-list-item-title>
+                                                    </v-list-item-content>
+                                                </v-list-item>
+                                            </v-list-item-group>
+                                        </v-list>
                                     </v-tab-item>
                                     <v-tab-item value="Property">
                                     </v-tab-item>
@@ -323,10 +314,10 @@
                                     <v-select v-model="status" :items="['active', 'inactive']" menu-props="auto" hide-details="auto" single-line dense filled></v-select>
                                 </v-card-text>
                                 <v-card-actions>
-                                    <v-btn text v-if="!isFormEdit" block @click="save" :disabled="disabled || saving" :loading="saving">
+                                    <v-btn class="primary-btn" text v-if="!isFormEdit" block @click="save" :disabled="disabled || saving" :loading="saving">
                                         <v-icon left>mdi-content-save</v-icon> Save Form
                                     </v-btn>
-                                    <v-btn text v-else block @click="update" :disabled="disabled || saving" :loading="saving">
+                                    <v-btn class="primary-btn" text v-else block @click="update" :disabled="disabled || saving" :loading="saving">
                                         <v-icon left>mdi-content-save</v-icon> Update Form
                                     </v-btn>
                                 </v-card-actions>
@@ -351,56 +342,4 @@
     </div>
 </template>
 <script src="./FormsBuilder.js"></script>
-<style lang="scss" scoped src="./FormsBuilder.scss"></style>
-<style scoped>
-.border-dots {
-    border: 1px dotted grey;
-}
-
-.row-type {
-    cursor: pointer;
-    min-height: 40px;
-}
-
-.row-type:hover {
-    cursor: pointer;
-    border: 1px dotted grey;
-}
-
-.row-type.active {
-    border: 1px dotted blue;
-    cursor: pointer;
-}
-
-.head-tools {
-    position: relative;
-    right: -93%;
-    top: -5px;
-}
-
-.section-tools {
-    display: block;
-    margin-top: 5px;
-    width: 100%;
-}
-
-.hr-action {
-    font-size: 16px;
-    position: relative;
-    right: -95%;
-    top: -5px;
-    height: 0px;
-}
-
-.hr-action .v-icon {
-    margin-left: 3px;
-}
-
-.child-btn {
-    margin: 0 1px;
-}
-
-.parent-btn {
-    margin: 0 2px;
-}
-</style>
+<style lang="scss" src="./FormsBuilder.scss"></style>

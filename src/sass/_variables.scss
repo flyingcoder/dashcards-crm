@@ -1,3 +1,5 @@
+@import 'normalize';
+
 // Typography
 $lato: "lato";
 $lato-semi: "lato semibold";
@@ -7,18 +9,18 @@ $myriad: "myriad pro";
 
 // Fonts
     
-h1{font-size:2rem}
-h2{font-size:1.5rem}
-h3{font-size:1.25rem}
-h4{font-size:1rem}
-h5{font-size:.875rem}
-h6{font-size:.75rem}
-//h1, h2, h3, h4, h5, h6 {
-//    font-weight: 600;
-//    line-height: 1.25;
+h1{font-size:2em}
+h2{font-size:1.5em}
+h3{font-size:1.25em}
+h4{font-size:1em}
+h5{font-size:.875em}
+h6{font-size:.75em}
+h1, h2, h3, h4, h5, h6 {
+   font-weight: 600;
+   line-height: 1.25;
 //    margin-top: 1em;
 //    margin-bottom: .5em;
-//}
+}
 blockquote, dl, ol, p, pre, ul {
     margin-top: 1em;
     margin-bottom: 1em;
@@ -104,15 +106,6 @@ $darkBoxShadow: 0 3px 1px -2px rgba(0, 0, 0, .2),
 $darkBoxShadow-2: 0 8px 9px -5px rgba(0,0,0,.2),0 15px 22px 2px rgba(0,0,0,.14),0 6px 28px 5px rgba(0,0,0,.12);
 $darkBoxShadow-3: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
 
-.v-application .primary--text{
-    color: $blue !important;
-    caret-color: $blue !important;
-}
-
-.flex{
-    margin-right: 0;
-}
-
 // @font-face {
 //   font-family: "Digital-7";
 //   src: url("~@/assets/fonts/digital-7.ttf") format("ttf");
@@ -133,13 +126,43 @@ $darkBoxShadow-3: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.1
     /* iOS 4.1- */
 }
 
+
 //Custom Global Class
 .page-title {
-    color: #667381;
+    color: $textDark-3;
     text-align: left;
-    font-size: 30px;
+    font-size: 1.5em;
+}
+.v-application .primary--text{
+    color: $blue !important;
+    caret-color: $blue !important;
+}
+.primary-btn.v-btn{
+    background-color: $blue !important;
+    color: $white;
+    text-transform: capitalize;
+
+    &.v-btn--disabled{
+        color: $white !important;
+        opacity: 0.5 !important;
+        .v-icon{
+            color: $white !important;
+            opacity: 0.5;
+        }
+    }
+}
+.flex{
+    margin-right: 0;
 }
 
+.dialog-button.v-btn {
+    border-radius: 5px;
+    border: 1px solid $borderLightGray;
+    color: $modalTitle;
+    background-color: $white !important;
+    height: auto;
+    text-transform: capitalize;
+}
 
 // Mixin for styled Tabs
 @mixin styledMenuTabs($selector){

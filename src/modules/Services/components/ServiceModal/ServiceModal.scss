@@ -86,28 +86,28 @@
     margin-bottom: 0;
 }
 
-  .d__btn {
-    width: 170px;
-    height: 47px;
-    padding: 5px 10px;
-    font-size: 18px;
-    background-color: $white;
-    color: $textDark;
-    border-radius: 4px 4px 0 0;
+.d__btn {
+  width: 170px;
+  height: 47px;
+  padding: 5px 10px;
+  font-size: 18px;
+  background-color: $white;
+  color: $textDark;
+  border-radius: 4px 4px 0 0;
 
-    .d__icon {
-      width: 27px;
-      fill: $textDark;
-      margin-right: 10px;
-      margin-top: 3px;
-    }
-
-    .d__title {
-      text-transform: capitalize;
-      white-space: normal;
-      font-size: 15px;
-      letter-spacing: 0;
-    }
+  .d__icon {
+    width: 27px;
+    fill: $textDark;
+    margin-right: 10px;
+    margin-top: 3px;
   }
+
+  .d__title {
+    text-transform: capitalize;
+    white-space: normal;
+    font-size: 15px;
+    letter-spacing: 0;
+  }
+}
 
   @include actionButtonsDialog('.dialog__actions')
