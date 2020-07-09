@@ -11,12 +11,14 @@
           clearable
           disable-lookup 
           item-text="title" 
-          placeholder="Start typing to search..." 
-          prepend-inner-icon="mdi-select-search" 
+          placeholder="Start typing to search..."
+          append-outer-icon="search"
+          @click:append-outer="navigate_search"
+          solo
+          flat
           persistent-hint 
           @click:clear="globalSearchResult = []" 
           :menu-props="menuprops"
-          color="#3b589e"
         >
             <template v-slot:no-data>
                 <v-list-item>
@@ -50,4 +52,4 @@
     </div>
 </template>
 <script src="./HeaderSearch.js"></script>
-<style lang="scss" scoped src="./HeaderSearch.scss"></style>
+<style lang="scss" src="./HeaderSearch.scss"></style>

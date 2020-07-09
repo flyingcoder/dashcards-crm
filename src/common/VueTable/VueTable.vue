@@ -3,8 +3,8 @@
         <v-container fluid class="custom-table-inner">
             <v-data-table v-model="selected" :headers="headers" :items="items" :disable-sort="sortingEnable" :show-select="showSelect" class="custom-table" v-bind="$attrs" shaped hide-default-footer :items-per-page="itemsPerPage" :loading="loading">
                 <template v-slot:top v-if="showTopHeader">
-                    <v-toolbar flat>
-                        <v-toolbar-title class="custom-table-title">
+                    <v-toolbar flat class="custom-table-title">
+                        <v-toolbar-title>
                             {{ title | ucwords}}
                         </v-toolbar-title>
                         <v-spacer></v-spacer>

@@ -45,10 +45,15 @@
         background-color: $white;
     }
 
-    .custom-table-title {
-        color: $tableTitleBlue;
-        text-align: left;
-        font-size: 30px;
+    .custom-table-title.v-toolbar {
+        .v-toolbar__content{
+            padding: 0 0 0 0.5em;
+        }
+        .v-toolbar__title{
+            color: $tableTitleBlue;
+            font-size: 1.5em;
+            text-transform: capitalize;      
+        }
     }
 
     .theme--light.v-data-table {

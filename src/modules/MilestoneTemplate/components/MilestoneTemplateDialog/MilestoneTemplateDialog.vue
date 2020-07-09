@@ -14,7 +14,8 @@
         v-model.trim="name"
         color="#667187"
         filled
-        hide-details
+        counter
+        maxlength="30"
       ></v-text-field>
     </template>
   </custom-dialog>

@@ -6,9 +6,11 @@
     background: $white;
     justify-content: space-between;
     align-items: center;
-    padding-left: 20px;
 }
-
+.logo {
+    max-width: 190px;
+    margin: 0 0.5em;
+}
 .h__hamburger {
     display: flex;
     align-items: center;
@@ -19,6 +21,10 @@
         padding: 0;
         text-transform: capitalize;
         color: $textDark !important;
+        
+        .v-breadcrumbs__divider{
+            padding: 0 0.25em;
+        }
     }
 }
 

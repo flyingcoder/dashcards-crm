@@ -1,13 +1,31 @@
-// .search{
-//   width: 100%;
-  
-//   .search-field{
-//     padding: 0;
-//     margin: 0 auto;
-//     width: 90%;
-//   }
-// }
+@import "~@/sass/_variables";
+
 .search-field.v-text-field{
-  padding-top: 0;
   margin-top: 0;
+  border-radius: 50px;
+  background: $white;
+  padding: 0 0.5em;
+  border: thin solid $borderLightGray;
+
+  .v-input__slot{
+    padding-right: 0 !important;
+  }
+
+  .v-select__slot{
+    border-right: 1px dotted $gray;
+  }
+  
+  .v-input__append-outer{
+    margin: 0.5em;
+
+    .v-input__icon{
+      width: 4rem;
+      height: 2em;
+      border-radius: 20px;
+    }
+    .v-input__icon:hover{
+      background: rgba(59, 88, 158,.2);
+      color: $blue;
+    }
+  }
 }

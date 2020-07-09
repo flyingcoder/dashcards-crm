@@ -4,7 +4,8 @@ export default {
     name: 'DashboardSidebar',
     data() {
         return {
-            selected_route_name: 'default-content'
+            selected_route_name: 'default-content',
+            mini: true
         }
     },
 
