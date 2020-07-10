@@ -2,33 +2,25 @@
     <div class="table-header">
         <v-tooltip top v-if="!noButton">
             <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on" fab small dark color="#3b589e" class="add__btn mr-2" @click="$emit('click')">
-                    <v-icon>mdi-plus</v-icon>
-                </v-btn>
+                <v-icon v-bind="attrs" v-on="on" fab class="add__btn ml-2" @click="$emit('click')">add_circle_outline</v-icon>
             </template>
             <span>Create new</span>
         </v-tooltip>
         <v-tooltip top v-if="!noSortButton">
             <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on" fab small dark color="#3b589e" class="add__btn mr-2" @click="$emit('click-sort-by')">
-                    <v-icon>sort</v-icon>
-                </v-btn>
+                <v-icon v-bind="attrs" v-on="on" fab class="add__btn ml-2" @click="$emit('click-sort-by')">sort</v-icon>
             </template>
             <span>Sort</span>
         </v-tooltip>
         <v-tooltip top v-if="!noListButton">
             <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on" fab small dark color="#3b589e" class="add__btn mr-2" @click="$emit('click-list-view')">
-                    <v-icon>mdi-view-sequential</v-icon>
-                </v-btn>
+                <v-icon v-bind="attrs" v-on="on" fab class="add__btn ml-2" @click="$emit('click-list-view')">mdi-view-sequential</v-icon>
             </template>
             <span>List view</span>
         </v-tooltip>
         <v-tooltip top v-if="!noGridButton">
             <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on" fab small dark color="#3b589e" class="add__btn mr-2" @click="$emit('click-grid-view')">
-                    <v-icon>mdi-view-module</v-icon>
-                </v-btn>
+                <v-icon v-bind="attrs" v-on="on" fab class="add__btn ml-2" @click="$emit('click-grid-view')">mdi-view-module</v-icon>
             </template>
             <span>Grid view</span>
         </v-tooltip>
@@ -64,20 +56,15 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+.add__btn.v-icon{
+    color: $btnGray;
 
-    button.add__btn {
-        .v-icon {
-            font-size: 24px;
-        }
+    &:hover{
+        color: $textDark;
     }
 }
 
 @media only screen and (max-width: 480px) {
-    .table-header {
-        button.add__btn.v-btn.v-btn--floating.v-btn--small {
-            height: 30px;
-            width: 30px;
-        }
-    }
 }
 </style>

@@ -1,21 +1,16 @@
 @import '~@/sass/_variables';
 
 .dynamic-card {
-  .action {
-    background-color: $tableBlueBg;
-    border: 1px solid $tableBorderBlue;
-    .v-btn__content .v-icon {
-      color: $tableTitleBlue;
-    }
+  .actions{
+    color: $textDark;
   }
-
   .tasks-progress {
     height: 15px;
-    background: darkgreen;
+    background: $lightBlue-2;
 
     > .fill {
       height: 100%;
-      background: lightgreen;
+      background: $blue;
     }
   }
 
@@ -53,41 +48,43 @@
         .assignee__col,
         .project__col {
           padding: 10px;
-          font-size: 17px;
+          font-size: .75rem;
           font-weight: 400;
+          color: $textDark;
         }
 
         .status__col {
-          font-size: 12px;
+          font-size: 10px;
           font-weight: 400;
           opacity: 0.8;
-          color: $textGray;
+          color: $white;
+          text-transform: capitalize;
 
           .status__completed {
-            height: 4px;
-            width: 60px;
-            border-radius: 10px;
+            display: inline-block;
+            padding: 5px 6px;
+            border-radius: 2px;
             background-color: $green;
           }
 
           .status__pending {
-            height: 4px;
-            width: 60px;
-            border-radius: 10px;
+            display: inline-block;
+            padding: 5px 6px;
+            border-radius: 2px;
             background-color: $orange;
           }
 
           .status__behind {
-            height: 4px;
-            width: 60px;
-            border-radius: 10px;
+            display: inline-block;
+            padding: 5px 6px;
+            border-radius: 2px;
             background-color: $red;
           }
 
           .status__open {
-            height: 4px;
-            width: 60px;
-            border-radius: 10px;
+            display: inline-block;
+            padding: 5px 6px;
+            border-radius: 2px;
             background-color: $textGray;
           }
         }
@@ -98,7 +95,7 @@
   .task-icon {
     cursor: pointer;
     font-size: 1.5em;
-    color: $red;
+    color: $btnGray;
     margin-left: 10px;
   }
 
@@ -106,21 +103,4 @@
     font-size: 12px;
   }
 }
-@media only screen and (max-width: 480px) {
-  .dynamic-card {
-    .actions {
-      .v-btn--floating.v-btn--small {
-        height: 30px;
-        width: 30px;
-      }
-      .v-btn {
-        margin: 6px;
-      }
-    }
-  }
-  .content {
-  }
-  .add__new_btn {
-    font-size: 12px;
-  }
-}
+@media only screen and (max-width: 480px) {}

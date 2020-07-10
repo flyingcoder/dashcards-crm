@@ -14,20 +14,20 @@
         <DocsViewer ref="doc_viewer_dialog" :media="selected_media"></DocsViewer>
         <IframeViewer ref="iframe_viewer_dialog" :media="selected_media"></IframeViewer>
         <OtherViewer ref="other_viewer_dialog" :media="selected_media"></OtherViewer>
-        <v-card class="p-2">
-            <v-row no-gutters class="pa-3">
+        <v-card outlined class="files__tab-content p-2">
+            <v-row no-gutters class="pa-5 files-header">
                 <v-col md="11" sm="9" xs="12">
                     <ToolbarItem v-for="item of toolbarItems" :key="item.id" :icon="item.icon" :icon-text="item.iconText" :icon-class="item.className" :is-active="item.type === filter" @click="filter = item.type"></ToolbarItem>
                 </v-col>
                 <v-spacer></v-spacer>
                 <v-btn icon text right @click="setPreferredView('list')">
-                    <v-icon :color="view == 'list' ? 'primary' : ''">list</v-icon>
+                    <v-icon :class="view == 'list' ? 'active' : ''">list</v-icon>
                 </v-btn>
                 <v-btn icon text right @click="setPreferredView('grid')">
-                    <v-icon :color="view == 'grid' ? 'primary' : ''">grid_on</v-icon>
+                    <v-icon :class="view == 'grid' ? 'active' : ''">grid_on</v-icon>
                 </v-btn>
             </v-row>
-            <v-card v-if="view == 'grid'">
+            <v-card outlined v-if="view == 'grid'" class="grid-view">
                 <v-container fluid grid-list-md>
                     <v-layout wrap v-if="filteredItems.length">
                         <v-col v-for="item in filteredItems" :key="item.id" xs="12" sm="4" md="3">
@@ -169,7 +169,7 @@
     </div>
 </template>
 <script src="./BuzzookaTab.js"></script>
-<style lang="scss" scoped src="./BuzzookaTab.scss"></style>
+<style lang="scss" src="./BuzzookaTab.scss"></style>
 <style scoped>
 >>>.content__wrapper .buzz__tables .buzz__tablesTwo {
     padding: 0;

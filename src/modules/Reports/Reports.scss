@@ -23,7 +23,15 @@
         background-color: $white;
         border: 1px solid $tableBorderBlue;
         max-width: 100%;
-        padding: 20px 10px;
+        padding: 1.5rem;
+        border-radius: 10px;
+
+        .reports-inner{
+            border: 1px solid $tableBorderBlue;
+        }
+        .reports-tab{
+            border-bottom: 1px solid $tableBorderBlue;
+        }
 
         .tab-img {
             max-height: 30px;
@@ -32,20 +40,23 @@
 
         .reports-actions {
             text-align: right;
-            margin-bottom: 20px;
+            margin-bottom: 1rem;
+
+            .v-icon{
+                color: $btnGray;
+
+                &:hover{
+                    color: $textDark;
+                }
+            }
         }
 
         .v-tab {
             color: $tableBlueText !important;
         }
 
-        .reports-content {
-            background-color: $white;
-        }
-
         .site-preview {
             border: 1px solid $tableBorderBlue;
-            margin: 5px 10px;
 
             iframe {
                 min-height: 100vh;

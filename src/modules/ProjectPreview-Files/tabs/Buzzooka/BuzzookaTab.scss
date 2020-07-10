@@ -12,7 +12,28 @@
 }
 
 .files__tab {
-    padding: 24px;
+    padding: 1.5rem;
+
+    .files__tab-content{
+        .custom-table-wrapper{
+            border-radius: 0 !important;
+            border: none !important;
+        }
+        
+        .grid-view{
+            border-radius: 0;
+            border: none;
+        }
+    }
+    .files-header{
+        .v-icon{
+            color: $btnGray;
+
+            &:hover, &.active{
+                color: $textDark;
+            }
+        }
+    }
 
     .file-name {
         max-width: 500px;

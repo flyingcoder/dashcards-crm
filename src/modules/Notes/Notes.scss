@@ -3,26 +3,16 @@
 @include pagePadding ('.notes');
 
 .notes {
-
     @include emptyTable('.empty-notes');
-
     .notes-wrapper {
-        margin: 10px;
         background-color: $white;
         border: 1px solid $tableBorderBlue;
         border-radius: 10px;
         padding: 20px;
-    }
-
-    .notes-content {
-        background-color: $tableBlueBg;
-        border: 1px solid $tableBorderBlue;
-        padding: 15px;
 
         .notes-action {
             display: grid;
             justify-content: flex-end;
-            margin-bottom: 20px;
         }
         
         .notes-body{
@@ -31,6 +21,4 @@
             grid-gap: 20px;
         }
     }
-    
-
 }

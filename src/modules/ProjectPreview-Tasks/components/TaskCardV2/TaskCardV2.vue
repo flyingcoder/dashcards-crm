@@ -4,10 +4,10 @@
       <v-card class="mx-auto pa-4">
         <v-row no-gutters>
           <v-col class="bordered"
-            ><v-btn :height="60" block large tile text>My Tasks</v-btn></v-col
+            ><v-btn :height="45" block large tile text>My Tasks</v-btn></v-col
           >
           <v-col class="bordered"
-            ><v-btn :height="60" block large tile text>All Tasks</v-btn></v-col
+            ><v-btn :height="45" block large tile text>All Tasks</v-btn></v-col
           >
           <v-col md="12" class="bordered-x">
             <task-chips

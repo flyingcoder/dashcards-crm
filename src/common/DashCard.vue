@@ -1,32 +1,18 @@
 <template>
     <div class="dash__card">
-        <v-row wrap no-gutters class="card__header" align-center>
-            <v-col xs="6" md="6" class="card__title ">
-                {{ title }}
-            </v-col>
+        <div class="card__header">
+            <h3 class="card__title">{{ title }}</h3>
             <slot name="actions" v-if="dashboard">
-                <v-col xs="6" md="6" class="actions">
-                    <v-btn fab small text class="action" v-if="hasListView" @click="$emit('list-view')">
-                        <v-icon>list</v-icon>
-                    </v-btn>
-                    <v-btn fab small text class="action" v-if="hasGridView" @click="$emit('grid-view')">
-                        <v-icon>grid_on</v-icon>
-                    </v-btn>
-                    <v-btn fab small text class="action" v-if="hasRemove" @click="$emit('remove')">
-                        <v-icon>remove</v-icon>
-                    </v-btn>
-                    <v-btn fab small text class="action" v-if="hasAdd" @click="$emit('add')">
-                        <v-icon>add</v-icon>
-                    </v-btn>
-                    <v-btn fab small text class="action" v-if="hasExpand" @click="$emit('expand')">
-                        <v-icon>zoom_out_map</v-icon>
-                    </v-btn>
-                    <v-btn fab small text class="action" v-if="hasClose" @click="$emit('close')">
-                        <v-icon>close</v-icon>
-                    </v-btn>
-                </v-col>
+                <div class="actions">
+                    <v-icon fab class="action" v-if="hasListView" @click="$emit('list-view')">list</v-icon>
+                    <v-icon fab class="action" v-if="hasGridView" @click="$emit('grid-view')">grid_on</v-icon>
+                    <v-icon fab class="action" v-if="hasRemove" @click="$emit('remove')">remove</v-icon>
+                    <v-icon fab class="action" v-if="hasAdd" @click="$emit('add')">add</v-icon>
+                    <v-icon fab class="action" v-if="hasExpand" @click="$emit('expand')">zoom_out_map</v-icon>
+                    <v-icon fab class="action" v-if="hasClose" @click="$emit('close')">close</v-icon>
+                </div>
             </slot>
-        </v-row>
+        </div>
         <div class="card__content">
             <slot name="content"></slot>
         </div>

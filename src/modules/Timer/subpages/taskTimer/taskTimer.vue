@@ -12,7 +12,7 @@
         <VueTable :items="items" :headers="headers" :showRowActions="true" @load-more="load_more" :loading="loading" icon="widgets" title="Task Timers" :key="componentKey" :noMoreData="noMoreData" :showSelect="false">
             <template v-slot:header-toolbar>
                 <v-col>
-                    <v-select flat :items="task_status" label="Task Status" solo :value="filter_task" class="mt-7" @change="filterTask"></v-select>
+                    <v-select flat :items="task_status" label="Task Status" hide-details filled :value="filter_task" @change="filterTask"></v-select>
                 </v-col>
                 <v-btn-toggle class="tab-buttons" mandatory v-model="timer_tab" :value="timer_tab" @change="handleChangeTab">
                     <v-btn text class="px-5" value="task-timers">

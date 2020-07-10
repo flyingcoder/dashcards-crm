@@ -1,6 +1,6 @@
 <template>
-    <v-card class="mx-auto users-list" :width="240">
-        <v-toolbar color="#3b589e" dark>
+    <v-card outlined class="mx-auto users-list" :width="240">
+        <v-toolbar flat color="#3b589e" height="45" dark>
             <v-icon large left>mdi-wechat</v-icon>
             <v-toolbar-title class="subtitle">Team</v-toolbar-title>
             <v-spacer></v-spacer>

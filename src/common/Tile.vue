@@ -25,7 +25,7 @@ export default {
         },
         imgWidth: {
             type: String,
-            default: '40px'
+            default: '25px'
         },
         imgBackground: String,
         counter: [Number, String],
@@ -39,7 +39,7 @@ export default {
 .tile {
     display: grid;
     grid-template-columns: 1.5fr 2.5fr;
-    height: 60px;
+    height: 45px;
     border-radius: 9px;
     overflow: hidden;
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
@@ -56,24 +56,26 @@ export default {
         background-color: $white;
         padding: 0;
         text-align: center;
-        display: grid;
+        display: flex;
+        flex-direction: column;
         align-items: center;
+        justify-content: center;
 
-        .text-counter,
-        .text-title {
+        .text-counter {
             color: $titleDarkBlue;
-            font-size: 20px;
+            font-size: 0.865em;
         }
 
         .text-title {
-            font-size: 16px;
+            color: $titleDarkBlue;
+            font-size: 0.75em;
         }
     }
 }
 
 @media only screen and (max-width: 500px) {
     .tile {
-        height: 45px;
+        height: 40px;
 
         .tile-icon {
             padding: 5px;
@@ -81,11 +83,11 @@ export default {
 
         .tile-content {
             .text-counter {
-                font-size: 16px;
+                font-size: 0.5em;
             }
 
             .text-title {
-                font-size: 12px;
+                font-size: 0.5em;
             }
         }
     }

@@ -19,7 +19,7 @@ export default {
 <style>
   .iframe-vue {
     width: 100%;
-    height: 1000px;
+    height: 100vh;
   }
 </style>
 <style lang="scss" scoped>

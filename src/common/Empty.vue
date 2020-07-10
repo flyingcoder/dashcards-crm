@@ -1,5 +1,5 @@
 <template>
-    <div class="empty my-1" :id="slug">
+    <div class="empty" :id="slug">
         <div class="empty-content">
             <div class="center-wrapper">
                 <div class="empty-svg">
@@ -36,7 +36,6 @@ export default {
 }
 
 .empty {
-    margin: 5px;
     height: 100%;
 }
 
@@ -47,6 +46,9 @@ export default {
 
 .empty-div {
     margin: 5px;
+}
+.empty-svg .v-icon{
+    color: $btnGray;
 }
 
 .empty-content {

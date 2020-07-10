@@ -1,12 +1,9 @@
 <template>
     <div class="cloud">
         <div class="cloud-wrapper">
-            <div class="cloud-content">
                 <div class="cloud-header">
-                    <div class="page-title">Apps &amp; Integrations</div>
-                    <v-btn icon>
-                        <v-icon>mdi-magnify</v-icon>
-                    </v-btn>
+                    <h3 class="page-title">Apps &amp; Integrations</h3>
+                    <v-icon>mdi-magnify</v-icon>
                 </div>
                 <div class="cloud-body">
                     <v-row>
@@ -212,7 +209,6 @@
                         </v-col>
                     </v-row>
                 </div>
-            </div> <!-- .cloud-content -->
         </div> <!-- .cloud-wrapper -->
     </div> <!-- .cloud -->
 </template>

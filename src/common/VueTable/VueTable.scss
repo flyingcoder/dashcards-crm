@@ -5,35 +5,26 @@
 .custom-table-wrapper {
     padding: 20px;
     background-color: $white;
-    border: 1px solid $tableBorderBlue;
-    border-radius: 10px;
+    border: 1px solid $tableBorderBlue !important;
+    border-radius: 10px !important;
+    color: $textDark !important;
 
-    .custom-table-inner {
-        padding: 20px;
-        background-color: $tableBlueBg;
-        border: 1px solid $tableBorderBlue;
-        border-radius: 10px;
-    }
-
-    .custom-table {
-        background-color: $tableBlueBg;
-
-    }
-
-    .custom-table header {
-        background-color: $tableBlueBg !important;
+    .custom-table-header{
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 0.75em;
+        align-items: center;
     }
 
     .v-data-table__wrapper {
         border-right: 1px solid $tableBorderBlue;
         border-bottom: 1px solid $tableBorderBlue;
         border-left: 1px solid $tableBorderBlue;
-        min-height: 350px;
+        min-height: 280px;
 
         .clickable-td {
-            color: #3b589e;
+            color: $blue;
             cursor: pointer;
-            font-weight: bold;
         }
     }
 
@@ -45,22 +36,17 @@
         background-color: $white;
     }
 
-    .custom-table-title.v-toolbar {
-        .v-toolbar__content{
-            padding: 0 0 0 0.5em;
-        }
-        .v-toolbar__title{
-            color: $tableTitleBlue;
-            font-size: 1.5em;
-            text-transform: capitalize;      
-        }
+    .custom-table-title {
+        color: $tableTitleBlue;
+        font-size: 1.25em;
+        text-transform: capitalize;
     }
 
     .theme--light.v-data-table {
         color: $tableDarkText;
     }
 
-    tbody tr:nth-child(even) {
-        background-color: $white;
+    tbody tr:nth-child(odd) {
+        background-color: $tableBlueBg;
     }
 }

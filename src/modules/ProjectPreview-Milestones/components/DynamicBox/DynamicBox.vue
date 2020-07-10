@@ -9,12 +9,8 @@
                     '/' +
                     box.tasks.length
                     }}
-                    <v-btn fab text small class="action">
-                        <v-icon @click="$emit('edit', box)">edit</v-icon>
-                    </v-btn>
-                    <v-btn fab text small class="action">
-                        <v-icon @click="$emit('delete', box.id)">close</v-icon>
-                    </v-btn>
+                    <v-icon class="action" @click="$emit('edit', box)">edit</v-icon>
+                    <v-icon class="action" @click="$emit('delete', box.id)">close</v-icon>
                 </v-flex>
             </template>
             <div class="content" slot="content">
@@ -32,37 +28,34 @@
                             <v-flex xs6 class="project__col">
                                 <v-tooltip left>
                                     <template v-slot:activator="{ on }">
-                                        <span dark v-on="on">{{ task.title | truncate(20) }}</span>
+                                        <span dark v-on="on">{{ task.title | truncate(30) }}</span>
                                     </template>
                                     <span>{{ task.title }}</span>
                                 </v-tooltip>
                             </v-flex>
                             <v-flex xs3 class="status__col">
-                                {{ task.status }}
                                 <div v-if="task.status === 'completed'">
-                                    <div class="status__completed"></div>
+                                    <div class="status__completed">{{ task.status }}</div>
                                 </div>
                                 <div v-if="task.status === 'pending'">
-                                    <div class="status__pending"></div>
+                                    <div class="status__pending">{{ task.status }}</div>
                                 </div>
                                 <div v-if="task.status === 'behind'">
-                                    <div class="status__behind"></div>
+                                    <div class="status__behind">{{ task.status }}</div>
                                 </div>
                                 <div v-if="task.status === 'open'">
-                                    <div class="status__open"></div>
+                                    <div class="status__open">{{ task.status }}</div>
                                 </div>
                             </v-flex>
                             <v-tooltip left>
                                 <template v-slot:activator="{ on }">
-                                    <v-icon color="primary" v-on="on" class="task-icon" @click="edit_task_clicked(task, index)">edit</v-icon>
+                                    <v-icon v-on="on" class="task-icon" @click="edit_task_clicked(task, index)">edit</v-icon>
                                 </template>
                                 <span>Edit Task</span>
                             </v-tooltip>
                             <v-tooltip left>
                                 <template v-slot:activator="{ on }">
-                                    <v-icon color="danger" v-on="on" class="task-icon" @click="
-                      openDeleteDialog({ task_index: index, task_id: task.id })
-                    ">close</v-icon>
+                                    <v-icon v-on="on" class="task-icon" @click="openDeleteDialog({ task_index: index, task_id: task.id })">close</v-icon>
                                 </template>
                                 <span>Remove Task</span>
                             </v-tooltip>
@@ -70,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            <v-btn large slot="footer" rounded class="add__new_btn mt-1" color="#3b589e" dark @click="$emit('add-task', box.id)">
+            <v-btn slot="footer" rounded class="add__new_btn mt-2" color="#3b589e" dark @click="$emit('add-task', box.id)">
                 ADD NEW
             </v-btn>
         </dash-card>

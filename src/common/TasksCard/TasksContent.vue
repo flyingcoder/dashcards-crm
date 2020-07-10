@@ -1,6 +1,6 @@
 <template>
   <div class="tasks-content">
-    <v-tabs class="task__tabs" centered grow hide-slider v-model="active_tab">
+    <v-tabs class="task__tabs" height="45" centered grow hide-slider v-model="active_tab">
       <v-tab v-for="tab in tabs" :key="tab.name" :href="`#${tab.name}`">
         <span>{{ tab.name }}</span>
       </v-tab>
@@ -53,6 +53,8 @@ export default {
 .tasks-content {
   border: 1px solid $borderGray;
   margin: 5px;
+
+  @include styledMenuTabs('.task__tabs');
 
   .task__tabs {
     border-bottom: 1px solid $borderGray;

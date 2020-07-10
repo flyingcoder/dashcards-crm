@@ -1,7 +1,8 @@
 <template>
     <div class="notes-list">
         <div class="note-header">
-            Notes
+            <h3>Notes</h3>
+            <slot name="action-btn"></slot>
         </div>
         <div class="notes-body">
             <v-list v-if="notes.length == 0">

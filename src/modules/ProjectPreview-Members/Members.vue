@@ -7,15 +7,9 @@
         <VueTable v-if="view === 'list'" :items="items" :headers="headers" :showRowActions="true" :title="tableTitle" :loading="loading" :key="componentKey" :noMoreData="noMoreData" @load-more="load_more_members" @delete-selected="open_bulk_delete_dialog($event)">
             <template slot="header-toolbar">
                 <div class="members-tab-action">
-                    <v-btn fab small dark color="#3b589e" class="mr-1" @click="add_dialog = true">
-                        <v-icon>add</v-icon>
-                    </v-btn>
-                    <v-btn fab small dark color="#3b589e" class="mr-1" @click="setPreferredView('list')">
-                        <v-icon>list</v-icon>
-                    </v-btn>
-                    <v-btn fab small dark color="#3b589e" class="mr-1" @click="setPreferredView('grid')">
-                        <v-icon>mdi-view-dashboard</v-icon>
-                    </v-btn>
+                    <v-icon fab class="mr-1" @click="add_dialog = true">add_circle_outline</v-icon>
+                    <v-icon fab class="mr-1" @click="setPreferredView('list')">list</v-icon>
+                    <v-icon fab class="mr-1" @click="setPreferredView('grid')">mdi-view-dashboard</v-icon>
                 </div>
             </template>
             <template v-slot:row-slot="{ item }">

@@ -3,23 +3,23 @@
         <v-menu bottom left>
             <template v-slot:activator="{ on, attrs }">
                 <v-btn :outlined="outlined" icon v-bind="attrs" v-on="on">
-                    <v-icon>{{mainIcon}}</v-icon>
+                    <v-icon small>{{mainIcon}}</v-icon>
                 </v-btn>
             </template>
-            <v-list>
+            <v-list class="table-action-dropdown">
                 <v-list-item v-if="hasEdit" v-show="can_edit" @click="handle_action('edit')">
                     <v-list-item-title>
-                    <v-icon left>{{ editIcon }}</v-icon> Edit
+                    <v-icon left small>{{ editIcon }}</v-icon> Edit
                     </v-list-item-title>
                 </v-list-item>
                 <v-list-item v-if="hasDelete" v-show="can_delete" @click="handle_action('delete')">
                     <v-list-item-title>
-                    <v-icon left>{{ deleteIcon }}</v-icon> Delete
+                    <v-icon left small>{{ deleteIcon }}</v-icon> Delete
                     </v-list-item-title>
                 </v-list-item>
                 <v-list-item v-if="hasView" v-show="can_view" @click="handle_action('view')">
                     <v-list-item-title>
-                    <v-icon left>{{ viewIcon }}</v-icon> View
+                    <v-icon left small>{{ viewIcon }}</v-icon> View
                     </v-list-item-title>
                 </v-list-item>
                 <slot name="extra"></slot>
@@ -40,7 +40,7 @@ export default {
                 view: true
             })
         },
-        mainIcon: { type: String, default: 'mdi-progress-wrench' },
+        mainIcon: { type: String, default: 'settings' },
         editIcon: { type: String, default: 'mdi-content-save-edit' },
         viewIcon: { type: String, default: 'mdi-file-search' },
         deleteIcon: { type: String, default: 'mdi-delete-alert' },
@@ -83,12 +83,26 @@ export default {
 </script>
 <style lang="scss">
 @import '~@/sass/_variables';
+.table-action-dropdown.v-list{
+    padding: 0;
+    .v-list-item__title{
+        font-size: 0.75em;
+        color: $tableDarkText;
+    }
 
-.table-actions .theme--light.v-icon {
-    color: $btnGray;
+    .v-icon{
+        color: $btnGray;
+    }
+    .v-list-item:hover .v-icon {
+        color: $textDark;
+    }
 }
 
-.table-actions .theme--light.v-icon:hover {
-    color: $tableDarkText;
+.table-actions .v-btn .v-icon {
+    color: $btnGray;
+
+    &:hover {
+        color: $textDark;
+    }
 }
 </style>

@@ -20,7 +20,7 @@ export default {
             if (!this.user) return []
             const user = this.user
             return [{
-                    title: 'Projects',
+                    title: 'My Projects',
                     value: 'projects',
                     color: '#ed8564',
                     icon: require('@/assets/icons/sidebar/projects.svg'),
@@ -31,7 +31,7 @@ export default {
                     route: '/dashboard/projects'
                 },
                 {
-                    title: 'Open Tasks',
+                    title: 'My Tasks',
                     value: 'tasks',
                     color: '#50b4aa',
                     icon: require('@/assets/icons/sidebar/templates.svg'),
@@ -43,7 +43,7 @@ export default {
                     route: null
                 },
                 {
-                    title: 'Calendar',
+                    title: 'My Events',
                     value: 'calendars',
                     color: '#a085d5',
                     icon: require('@/assets/icons/sidebar/calendar.svg'),

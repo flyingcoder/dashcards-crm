@@ -11,7 +11,20 @@
                 <td>
                     {{ item.milestone.title }}
                 </td>
-                <td class="text-cap">{{ item.status }}</td>
+                <td class="text-cap status__col">
+                    <template v-if="item.status === 'completed'">
+                        <div class="status__completed">{{ item.status }}</div>
+                    </template>
+                    <template v-if="item.status === 'pending'">
+                        <div class="status__pending">{{ item.status }}</div>
+                    </template>
+                    <template v-if="item.status === 'behind'">
+                        <div class="status__behind">{{ item.status }}</div>
+                    </template>
+                    <template v-if="item.status === 'open'">
+                        <div class="status__open">{{ item.status }}</div>
+                    </template>
+                </td>
                 <td>
                     <PlayPause :item="item" @row-item-updated="item = $event"></PlayPause>
                 </td>

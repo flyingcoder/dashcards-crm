@@ -9,12 +9,11 @@
         <groups-dialog ref="add_group_dialog" title="Add New Group" @save="save_new_user_group" />
         <ServiceListDialog :dialog.sync="add_new_service_list_dialog" ref="add_new_service_list_dialog" title="Add New Service(s)" @save="save_new_services_list($event)" ></ServiceListDialog>
         <v-card class="grid-view" v-if="view === `grid`">
-            <div class="grid-wrapper">
-                <v-toolbar flat>
-                    <v-toolbar-title class="grid-view-title">Campaigns </v-toolbar-title>
+                <div class="custom-table-header">
+                    <h3 class="custom-grid-title">Campaigns</h3>
                     <v-spacer></v-spacer>
                     <table-header :noListButton="false" :noGridButton="false" @click="open_add_dialog" @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')" />
-                </v-toolbar>
+                </div>
                 <v-progress-linear v-show="loading" :indeterminate="true"></v-progress-linear>
                 <v-container class="pa-0">
                     <v-row v-if="items.length > 0">
@@ -112,7 +111,6 @@
                     <v-btn tile text :loading="btnloading" v-else @click="load_more">LOAD MORE</v-btn>
                     <v-spacer></v-spacer>
                 </v-card-actions>
-            </div>
         </v-card>
         <VueTable v-else :items="items" :headers="headers" :showRowActions="true" @load-more="load_more" @delete-selected="open_bulk_delete_dialog($event)" icon="widgets" title="Campaigns" :key="componentKey" :noMoreData="noMoreData" :showSelect="false" :loading="loading">
             <template slot="header-toolbar">

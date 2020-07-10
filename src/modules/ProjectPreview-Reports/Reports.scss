@@ -2,6 +2,14 @@
 
 @include emptyTable('.empty-reports');
 
+.empty-wrapper{
+  margin: 1.25rem;
+  padding: 1.25rem;
+  background-color: $white;
+  border-radius: 10px;
+  border: 1px solid $tableBorderBlue;
+}
+
 .custom-dialog {
   .dialog__link, .dialog__textfield{
     margin: 10px 5px;
@@ -25,6 +33,23 @@
 }
 .reports-tab{
 
+  .reports__body{
+    padding: 0px !important;
+    
+    .site-preview{
+      margin: 0;
+      border: none;
+    }
+  }
+  .reports-actions{
+    .v-icon{
+      color: $btnGray;
+      &:hover{
+        color: $textDark;
+      }
+    }
+  }
+
   .tab-img{
     max-height: 30px; 
     max-width: 100px;
@@ -33,7 +58,13 @@
     color: $tableBlueText !important;
   }
   .reports-tab-content{
-      margin: 24px;
+      margin: 1.25rem;
+      background-color: transparent;
+      .v-card{
+        border-radius: 10px;
+        border: 1px solid $tableBorderBlue;
+      }
+      
   }
 }
 .reports-tab.v-card.v-sheet.theme--light{
@@ -41,9 +72,7 @@
 }
 
 
-.reports__body{
-  padding: 0px;
-}
+
 
 .reports-actions{
   text-align: right;
@@ -51,29 +80,7 @@
 }
 
 @media only screen and (max-width: 768px){
-  .reports__tab {
-    padding: 7px;
-  }
-  .body-wrapper{
-    padding: 15px;
-
-    .reports__body{
-      padding: 0px;
-    }
-  }
 }
 
 @media only screen and (max-width: 599px){
-  .body-wrapper{
-    padding: 10px;
-
-    .reports__body{
-      padding: 10px;
-    }
-    
-    .v-btn--floating.v-btn--small{
-      height: 35px;
-      width: 35px;
-    }
-  }
 }

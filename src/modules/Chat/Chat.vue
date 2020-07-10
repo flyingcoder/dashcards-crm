@@ -6,8 +6,8 @@
         <div class="chat-container">
             <v-layout wrap class="chat__content">
                 <v-flex md4 sm5 xs12 class="chat__sidebar">
-                    <v-card text class="chatlist">
-                        <v-app-bar>
+                    <v-card outlined class="chatlist">
+                        <v-app-bar flat>
                             <v-img :src="loggeduser.image_url" class="chat__owner_img"></v-img>
                             <span class="chat__owner_name">{{ loggeduser.first_name }} {{ loggeduser.last_name }}</span>
                             <v-spacer></v-spacer>
@@ -20,7 +20,7 @@
                                 <span>New Group Chat</span>
                             </v-tooltip>
                         </v-app-bar>
-                        <v-card text class="mx-auto">
+                        <v-card outlined class="mx-auto">
                             <div class="friend__list">
                                 <v-skeleton-loader v-if="userLoading" v-for="n in [1, 2, 3, 4, 5]" :key="n" ref="skeleton" type="list-item-avatar-two-line" class="mx-auto"></v-skeleton-loader>
                                 <v-list subheader dense v-if="all_groups.length > 0">
@@ -75,10 +75,10 @@
                     </v-card>
                 </v-flex>
                 <v-flex md8 sm7 xs12 class="chat__message">
-                    <v-card class="mx-auto message__content" v-if="!activeChat && !cardLoading" style="height: 100%;background:#f5f7fa;">
+                    <v-card outlined class="message__content" v-if="!activeChat && !cardLoading" style="height: 100%;background:#f5f7fa;">
                         <Empty icon="mdi-message-plus-outline" headline="Send a message now"></Empty>
                     </v-card>
-                    <v-card text class="mx-auto message__content" v-else-if="activeChat">
+                    <v-card outlined class="mx-auto message__content" v-else-if="activeChat">
                         <v-toolbar color="#3b589e">
                             <v-layout wrap class="message__header">
                                 <v-flex xs2 class="sender__img">

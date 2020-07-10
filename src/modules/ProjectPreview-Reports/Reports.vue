@@ -27,19 +27,13 @@
                 </v-tabs>
                 <v-tabs-items v-model="active_report" class="reports-tab-content">
                     <v-tab-item v-for="(report,i) in reports" :key="i">
-                        <v-card>
+                        <v-card flat>
                             <v-card-text>
                                 <div class="reports-actions">
                                     <v-spacer></v-spacer>
-                                    <v-btn color="#3b589e" small dark fab @click="open_dialog">
-                                        <v-icon>add</v-icon>
-                                    </v-btn>
-                                    <v-btn color="#3b589e" small dark fab class="ml-1" @click="openEditDialog(report, report.id)">
-                                        <v-icon>edit</v-icon>
-                                    </v-btn>
-                                    <v-btn color="#3b589e" small dark fab class="ml-1" @click="openDeleteDialog(report.id)">
-                                        <v-icon>delete</v-icon>
-                                    </v-btn>
+                                    <v-icon @click="open_dialog">add_circle_outline</v-icon>
+                                    <v-icon class="ml-1" @click="openEditDialog(report, report.id)">edit</v-icon>
+                                    <v-icon class="ml-1" @click="openDeleteDialog(report.id)">delete</v-icon>
                                 </div>
                                 <div class="reports-content">
                                     <div class="site-preview">
@@ -93,15 +87,17 @@
             </div>
         </v-col>
         <v-col md="12" xs="12" class="ma-0 pa-0" v-else>
-            <Empty headline="No reports yet" icon="mdi-file-compare">
-                <template v-slot:extra>
-                    <v-btn large dark color="#3b589e" v-if="!loading" @click="open_dialog">Add New Report
-                    </v-btn>
-                </template>
-            </Empty>
+            <div class="empty-wrapper">
+                <Empty headline="No reports yet" icon="mdi-file-compare">
+                    <template v-slot:extra>
+                        <v-btn large dark color="#3b589e" v-if="!loading" @click="open_dialog">Add New Report
+                        </v-btn>
+                    </template>
+                </Empty>
+            </div>
         </v-col>
     </v-row>
 </template>
 <script src="./Reports.js"></script>
-<style lang="scss" scoped src="./Reports.scss"></style>
+<style lang="scss" src="./Reports.scss"></style>
 <style scoped></style>

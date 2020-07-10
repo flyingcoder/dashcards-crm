@@ -3,7 +3,7 @@
         <delete-dialog :open-dialog.sync="delete_file_dialog" title="Delete File" text-content="Are you sure you want to delete this file?<br> This will also be deleted in Google Drive" @delete="handleDeletes"></delete-dialog>
         <FolderDialog ref="folder_dialog" @save="createFolder"></FolderDialog>
         <GDriveFolderDialog ref="gdrive_dialog" :currentFolders="project_folders" @folder-removed="folderRemovedFromDB" @save="saveFolders"></GDriveFolderDialog>
-        <v-card>
+        <v-card outlined class="gdrive-content">
             <v-card-title class="py-1">
                 <v-col md="12" v-if="isGoogleAuthorized">
                     <Uploader v-if="project_folders.length > 0 && activeFolderId !== 'root'" :folder="activeFolder" @upload-files="handleUploads" @open-create-folder-dialog="openCreateFolderDialog"></Uploader>
@@ -11,8 +11,8 @@
                         Select folder to upload file(s).
                     </v-alert>
                 </v-col>
-                <v-col class="headline">
-                    <v-icon left>mdi-google-drive</v-icon> Google Drive
+                <v-col>
+                    <h3 class="page-title"><v-icon left>mdi-google-drive</v-icon> Google Drive</h3>
                 </v-col>
                 <v-spacer></v-spacer>
                 <v-btn large text outlined @click="openAddFolderDialog" v-if="can_manage_folders && isGoogleAuthorized">
@@ -122,17 +122,29 @@
 </template>
 <script src="./GoogleDriveTab.js"></script>
 <style lang="scss">
+@import '~@/sass/variables';
 .files__tab {
-    padding: 24px;
+    padding: 1.25rem;
+
+    .gdrive-content{
+        border-radius: 10px;
+        border: 1px solid $borderLightGray;
+    }
 
     .folder:hover {
         cursor: pointer;
-        border: 1px solid grey;
+        border: 1px solid $borderLightGray;
     }
 
     .cursor:hover {
         cursor: pointer;
-        color: blue;
+        color: $blue;
+    }
+
+    .gdrive-content .page-title{
+        .v-icon{
+            color: $textDark;
+        }
     }
 }
 </style>
