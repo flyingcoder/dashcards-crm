@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import modules from './modules'
 import VueCryptojs from 'vue-cryptojs'
 import request from '@/services/axios_instance'
-import { settings } from '@/variables'
+import {settings} from '@/variables'
 
 Vue.use(VueCryptojs)
 Vue.use(Vuex)
@@ -43,21 +43,21 @@ export default new Vuex.Store({
         open_snackbar: (state, payload) => (state.snackbar = payload),
         set_custom_loader: (state, payload) => (state.custom_loader = payload),
         set_floating_button: (state, payload) => (state.show_floating_button = payload),
-        set_global_configs: (state, payload) => ( state.global_configs = payload )
+        set_global_configs: (state, payload) => (state.global_configs = payload)
     },
     actions: {
-        login({ commit }, payload) {
+        login({commit}, payload) {
             commit('set_user', payload.user)
         },
-        logout({ commit }) {
+        logout({commit}) {
             commit('remove_user')
         },
-        fetchGlobal({ commit }) {
+        fetchGlobal({commit}) {
             request.get(`api/configs`)
-            .then(({ data }) => {
-                commit('set_global_configs', data)
-                localStorage.setItem('session-eXt-eQt128', Vue.CryptoJS.AES.encrypt(JSON.stringify(data), settings.paraphrase).toString())
-            })
+                .then(({data}) => {
+                    commit('set_global_configs', data)
+                    localStorage.setItem('session-eXt-eQt128', Vue.CryptoJS.AES.encrypt(JSON.stringify(data), settings.paraphrase).toString())
+                })
         }
     },
     modules,

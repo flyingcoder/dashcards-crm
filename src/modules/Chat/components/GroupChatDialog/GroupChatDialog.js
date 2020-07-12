@@ -36,12 +36,12 @@ export default {
     save_group() {
       if (this.validate_form()) {
         this.btnloading = true
-        var payload = {
+        let payload = {
           group_name: this.group_name,
           users: this.all_selected.map(value => {
             return value.id
           })
-        }
+        };
         api_to
           .save_group(payload)
           .then(response => {

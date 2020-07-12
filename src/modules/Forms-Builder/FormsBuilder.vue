@@ -24,7 +24,7 @@
                             <v-card flat v-else>
                                 <v-card-text>
                                     <draggable class="row form-drag" v-model="structures" scroll-sensitivity="300" force-fallback="true">
-                                        <v-col class="row-type" @mouseover="item.hover = true" @mouseleave="item.hover = false" :class="{ active: activeType.id === item.id }" md="12" v-for="(item, pIndex) in structures" :key="item.id" @click="activeType = item">
+                                        <v-col class="row-type" @mouseover="item.hover = true" @mouseleave="item.hover = false" :class="{ active: activeType && activeType.id === item.id }" md="12" v-for="(item, pIndex) in structures" :key="item.id" @click="activeType = item">
                                             <div class="hr-action">
                                                 <v-icon small @click="remove(pIndex)" v-if="item.hover">mdi-delete</v-icon>
                                                 <v-icon class="parent-btn" small @click="edit(item)" v-if="item.hover">edit</v-icon>
@@ -335,7 +335,7 @@
             </v-col>
             <v-col md="5">
                 <pre>
-                    <code class="fullwidth pa-4">isEditing: {{isEditing}} <br> Parent : {{ parent }} <br> ActiveType : {{ activeType }} <br></code>
+                    <code class="fullwidth pa-4">isEditing: {{isEditing}} <br> ActiveType : {{ activeType }} <br> formToEdit: {{formToEdit}} <br></code>
                 </pre>
             </v-col>
         </v-row> -->

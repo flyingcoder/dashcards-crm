@@ -1,4 +1,3 @@
-import merge from 'lodash/merge'
 import request from '@/services/axios_instance'
 
 const state = {
@@ -47,7 +46,7 @@ const mutations = {
 }
 
 const actions = {
-    get_tasks({ commit, state }, payload) {
+    get_tasks({commit, state}, payload) {
         commit('set_loading', true)
 
         let api_url = 'api/task'
@@ -58,7 +57,7 @@ const actions = {
 
         request
             .get(api_url)
-            .then(({ data }) => {
+            .then(({data}) => {
                 commit('set_tasks_res', data)
                 commit('set_tasks', data.data)
                 commit('set_total', data.total)
@@ -66,12 +65,12 @@ const actions = {
             })
             .finally(() => commit('set_loading', false))
     },
-    see_more({ commit, state }) {
+    see_more({commit, state}) {
         commit('set_loading', true)
         commit('set_btnloading', true)
         request
             .get(state.see_more_url)
-            .then(({ data }) => {
+            .then(({data}) => {
                 let ctasks = state.tasks_res.data
                 commit('set_tasks', ctasks.concat(data.data))
                 commit('set_see_more_url', data.next_page_url)
@@ -83,4 +82,4 @@ const actions = {
     }
 }
 
-export { state, getters, mutations, actions }
+export {state, getters, mutations, actions}

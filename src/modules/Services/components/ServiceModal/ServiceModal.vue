@@ -24,11 +24,11 @@
                                     </v-list-item>
                                     <v-list-item v-for="(item, index) in client.items" :key="index" @click="clientSelected(item)">
                                         <v-list-item-avatar>
-                                            <v-img :src="item.image_url"></v-img>
+                                            <v-img :src="item.image_url" />
                                         </v-list-item-avatar>
                                         <v-list-item-content>
-                                            <v-list-item-title v-html="item.fullname"></v-list-item-title>
-                                            <v-list-item-subtitle v-html="item.company_name"></v-list-item-subtitle>
+                                            <v-list-item-title v-html="item.fullname" />
+                                            <v-list-item-subtitle v-html="item.company_name" />
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-list>
@@ -36,7 +36,7 @@
                             <div class="choosen" v-if="client.selected">
                                 <v-chip close @click:close="client.selected = null" outlined label class="mt-1 tile">
                                     <v-avatar left>
-                                        <v-img :src="client.selected.image_url"></v-img>
+                                        <v-img :src="client.selected.image_url" />
                                     </v-avatar>
                                     {{ client.selected.fullname }}
                                 </v-chip>
@@ -56,11 +56,11 @@
                                         </div>
                                     </v-btn>
                                 </template>
-                                <v-date-picker :max="date_pickers.end_date" v-model="date_pickers.start_date" no-title scrollable></v-date-picker>
+                                <v-date-picker :max="date_pickers.end_date" v-model="date_pickers.start_date" no-title scrollable />
                             </v-menu>
                             <div class="choosen" v-if="date_pickers.start_date">
                                 <v-chip block outlined label class="mt-1" close @click:close="date_pickers.start_date = null">
-                                    <v-icon></v-icon>
+                                    <v-icon />
                                     Start : {{ date_pickers.start_date | format('MMMM D, YYYY') }}
                                 </v-chip>
                             </div>
@@ -79,11 +79,11 @@
                                         </div>
                                     </v-btn>
                                 </template>
-                                <v-date-picker :min="date_pickers.start_date" v-model="date_pickers.end_date" no-title scrollable></v-date-picker>
+                                <v-date-picker :min="date_pickers.start_date" v-model="date_pickers.end_date" no-title scrollable />
                             </v-menu>
                             <div class="choosen" v-if="date_pickers.end_date">
                                 <v-chip block outlined label class="mt-1" close @click:close="date_pickers.end_date = null">
-                                    <v-icon></v-icon>
+                                    <v-icon />
                                     End : {{ date_pickers.end_date | format('MMMM D, YYYY') }}
                                 </v-chip>
                             </div>
@@ -109,11 +109,11 @@
                                     </v-list-item>
                                     <v-list-item v-for="(item, index) in manager.items" :key="index" @click="add_to_selected_managers(item)">
                                         <v-list-item-avatar>
-                                            <v-img :src="item.image_url"></v-img>
+                                            <v-img :src="item.image_url" />
                                         </v-list-item-avatar>
                                         <v-list-item-content>
-                                            <v-list-item-title v-html="item.fullname"></v-list-item-title>
-                                            <v-list-item-subtitle>{{item.job_title | ucwords}}</v-list-item-subtitle>
+                                            <v-list-item-title v-html="item.fullname" />
+                                            <v-list-item-subtitle>{{ item.job_title | ucwords }}</v-list-item-subtitle>
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-list>
@@ -121,7 +121,7 @@
                             <div class="choosen" v-if="manager.selected.length > 0">
                                 <v-chip outlined class="mt-1 tile" v-for="(item, i) in manager.selected" :key="i" close label @click:close="remove_from_selected_managers(item)">
                                     <v-avatar left>
-                                        <v-img :src="item.image_url"></v-img>
+                                        <v-img :src="item.image_url" />
                                     </v-avatar>
                                     {{ item.fullname | truncate(14) }}
                                 </v-chip>
@@ -148,11 +148,11 @@
                                     </v-list-item>
                                     <v-list-item v-for="item in members.items" :key="item.user_id" @click="add_to_selected_members(item)">
                                         <v-list-item-avatar>
-                                            <v-img :src="item.image_url"></v-img>
+                                            <v-img :src="item.image_url" />
                                         </v-list-item-avatar>
                                         <v-list-item-content>
-                                            <v-list-item-title v-html="item.fullname"></v-list-item-title>
-                                            <v-list-item-subtitle>{{item.job_title | ucwords}}</v-list-item-subtitle>
+                                            <v-list-item-title v-html="item.fullname" />
+                                            <v-list-item-subtitle>{{ item.job_title | ucwords }}</v-list-item-subtitle>
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-list>
@@ -160,7 +160,7 @@
                             <div class="choosen" v-if="members.selected.length > 0">
                                 <v-chip outlined class="mt-1 tile" v-for="(item, j) in members.selected" :key="j" close label @click:close="remove_from_selected_members(item)">
                                     <v-avatar left>
-                                        <v-img :src="item.image_url"></v-img>
+                                        <v-img :src="item.image_url" />
                                     </v-avatar>
                                     {{ item.fullname | truncate(14) }}
                                 </v-chip>
@@ -181,7 +181,7 @@
                                 <v-list dense>
                                     <v-list-item v-for="item in statuses" :key="item" @click="status = item">
                                         <v-list-item-content>
-                                            <v-list-item-title v-text="item"></v-list-item-title>
+                                            <v-list-item-title v-text="item" />
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-list>
@@ -196,7 +196,7 @@
                     <v-row no-gutters class="align-center">
                         <v-col md="4" sm="12">
                             <div class="fullwidth mx-auto">
-                                <v-img v-if="icon" :src="icon"></v-img>
+                                <v-img v-if="icon" :src="icon" />
                                 <v-btn block class="mt-2 d__btn" @click="$refs.uploadModal.openDialog()">
                                     <v-icon class="d__icon">mdi-image-edit-outline</v-icon> 
                                     <div class="d__title">
@@ -208,18 +208,18 @@
                         <v-col md="8" sm="12">
                             <v-col md="12">
                                 <!-- <TextField prepend-inner-icon="mdi-alpha-s-box-outline" dense :value.sync="name" label="Service Name *" color="#657186" filled></TextField> -->
-                                <v-select required clearable prepend-inner-icon="mdi-alpha-s-box-outline" append-outer-icon="mdi-plus" filled hide-details="auto" placeholder="Select Service *"  v-model="service.selected" :items="service.items" return-object item-text="name" @click:close="service.selected = null" @click:append-outer="open_add_new_service_list"></v-select>
+                                <v-select required clearable prepend-inner-icon="mdi-alpha-s-box-outline" append-outer-icon="mdi-plus" filled hide-details="auto" placeholder="Select Service *" v-model="service.selected" :items="service.items" return-object item-text="name" @click:close="service.selected = null" @click:append-outer="open_add_new_service_list" />
                             </v-col>
                             <v-col md="12" sm="12">
-                                <TextField required clearable prepend-inner-icon="mdi-office-building" v-model="business_name" label="Business Name *" color="#657186" filled></TextField>
+                                <TextField required clearable prepend-inner-icon="mdi-office-building" v-model="business_name" label="Business Name *" color="#657186" filled />
                             </v-col>
                             <v-col md="12" sm="12">
-                                <TextField required clearable prepend-inner-icon="mdi-map-marker" dense v-model="location" label="Location" color="#657186" filled></TextField>
+                                <TextField required clearable prepend-inner-icon="mdi-map-marker" dense v-model="location" label="Location" color="#657186" filled />
                             </v-col>
                         </v-col>
                         <v-col md="12" class="service__description">
                             <div class="service__description">
-                                <Editor :hasFloatingTools="false" v-model="description" :content="description" placeholder="Campaign Description *"></Editor>
+                                <Editor :hasFloatingTools="false" v-model="description" :content="description" placeholder="Campaign Description *" />
                             </div>
                         </v-col>
                     </v-row>
@@ -229,7 +229,7 @@
                 <v-btn :disabled="disabled" :loading="btnloading" @click="save">Save</v-btn>
             </template>
         </custom-dialog>
-        <ImgUpload ref="uploadModal" @onConfirm="setIcon"></ImgUpload>
+        <ImgUpload ref="uploadModal" @onConfirm="setIcon" />
     </div>
 </template>
 <script src="./ServiceModal.js"></script>

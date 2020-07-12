@@ -1,8 +1,8 @@
 <template>
     <v-app class="buzzooka" id="buzzooka">
         <custom-loader />
-        <snackbar></snackbar>
-        <router-view></router-view>
+        <snackbar />
+        <router-view />
     </v-app>
 </template>
 <script>

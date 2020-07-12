@@ -51,6 +51,8 @@ import { admin_subscribers } from './routes/admins/adminSubscribers'
 import { admin_apis } from './routes/admins/adminApis'
 import { admin_logs } from './routes/admins/adminLogs'
 import { admin_database } from './routes/admins/adminDatabase'
+import { admin_payments } from './routes/admins/adminPayments'
+import { admin_templates } from './routes/admins/adminTemplates'
 Vue.use(Router)
 
 export default new Router({
@@ -116,6 +118,8 @@ export default new Router({
                 admin_apis, //path: admin-dashboard/apis
                 admin_logs, //path: admin-dashboard/logs
                 admin_database, //path: admin-dashboard/database
+                admin_payments, //path: admin-dashboard/payments
+                admin_templates, //path: admin-dashboard/templates
             ]
         }
     ],

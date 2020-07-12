@@ -1,0 +1,25 @@
+@import '~@/sass/_variables';
+
+@include pagePadding('.payments');
+
+.payments {
+    @include customTableRow;
+}
+.payments-wrapper{
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+    padding: 20px
+}
+.payments-content {
+    background-color: $bgLightBlue-2;
+    border: 1px solid $tableBorderBlue;
+    padding: 20px;
+
+    .payments-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+}

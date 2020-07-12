@@ -37,8 +37,7 @@
                                 </div>
                                 <div class="reports-content">
                                     <div class="site-preview">
-                                        <!-- <ReportsSection :iframe_src="report.url" @iframe-loaded="iframeLoaded" /> -->
-                                        <ReportsSection v-if="report.props && report.props.canIframe" :iframeSrc="report.url" @iframe-loaded="iframe_loaded" />
+                                        <ReportsSection v-if="report.props && report.props.canIframe" :iframeSrc="report.url" />
                                         <v-card class="mx-auto" v-else-if="report.props && report.props.image" flat>
                                             <v-list-item>
                                                 <v-list-item-content>
@@ -46,7 +45,8 @@
                                                         <v-row align="center">
                                                             <v-col class="grow">We are unable to load the site content because of the website restrictions.</v-col>
                                                             <v-col class="shrink">
-                                                                <v-btn :href="report.url" target="_blank">Go to Site <v-icon right>mdi-arrow-right-bold</v-icon></v-btn>
+                                                                <v-btn :href="report.url" target="_blank">Go to Site <v-icon right>mdi-arrow-right-bold</v-icon>
+                                                                </v-btn>
                                                             </v-col>
                                                         </v-row>
                                                     </v-alert>
@@ -69,13 +69,14 @@
                                         <Empty v-else icon="mdi-link-off" headline="">
                                             <template v-slot:extra>
                                                 <v-alert prominent type="warning">
-                                                        <v-row align="center">
-                                                            <v-col class="grow">We are unable to load the site content because of the website restrictions.</v-col>
-                                                            <v-col class="shrink">
-                                                                <v-btn :href="report.url" target="_blank">Go to Site <v-icon right>mdi-arrow-right-bold</v-icon></v-btn>
-                                                            </v-col>
-                                                        </v-row>
-                                                    </v-alert>
+                                                    <v-row align="center">
+                                                        <v-col class="grow">We are unable to load the site content because of the website restrictions.</v-col>
+                                                        <v-col class="shrink">
+                                                            <v-btn :href="report.url" target="_blank">Go to Site <v-icon right>mdi-arrow-right-bold</v-icon>
+                                                            </v-btn>
+                                                        </v-col>
+                                                    </v-row>
+                                                </v-alert>
                                             </template>
                                         </Empty>
                                     </div>

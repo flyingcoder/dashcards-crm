@@ -1,4 +1,4 @@
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 import request from '@/services/axios_instance'
 
 export const config_utils = {
@@ -19,7 +19,7 @@ export const config_utils = {
         sendRequest(key, payload) {
             this[`${key}_btn`] = true
             request.post(`api/configs`, payload)
-                .then(({ data }) => {
+                .then(({data}) => {
                     this[key] = data.value
                     this.$event.$emit('open_snackbar', 'Settings updated!')
                 })
@@ -28,7 +28,7 @@ export const config_utils = {
         getAllConfig(cb) {
             this.loading = true
             request.get(`api/configs`)
-                .then(({ data }) => {
+                .then(({data}) => {
                     if (typeof cb === 'function') {
                         cb(data)
                     }

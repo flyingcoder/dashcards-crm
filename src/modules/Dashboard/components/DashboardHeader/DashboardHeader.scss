@@ -7,22 +7,26 @@
     justify-content: space-between;
     align-items: center;
 }
+
 .logo {
     max-width: 190px;
     margin: 0 0.5em;
 }
+
 .h__hamburger {
     display: flex;
     align-items: center;
 }
-.h__pagetitle{
+
+.h__pagetitle {
     flex-basis: 50%;
+
     .b-breadcrumbs.v-breadcrumbs {
         padding: 0;
         text-transform: capitalize;
         color: $textDark !important;
-        
-        .v-breadcrumbs__divider{
+
+        .v-breadcrumbs__divider {
             padding: 0 0.25em;
         }
     }
@@ -43,6 +47,7 @@
 
 .h__search {
     min-width: 150px;
+    width: 150px;
     margin: 0 20px;
     flex-basis: 100%;
 }

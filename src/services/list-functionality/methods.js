@@ -91,8 +91,8 @@ export const methods = {
                 })
             }
 
-            makeRequestTo[api_name]({ data: payload })
-                .then(({ data }) => {
+            makeRequestTo[api_name]({data: payload})
+                .then(({data}) => {
                     this.selected.forEach(item => {
                         const index = this.items.findIndex(
                             data_item => data_item.id === item.id
@@ -114,8 +114,8 @@ export const methods = {
                 })
             }
             request
-                .delete(url, { data: payload })
-                .then(({ data }) => {
+                .delete(url, {data: payload})
+                .then(({data}) => {
                     this.selected.forEach(item => {
                         const index = this.items.findIndex(
                             data_item => data_item.id === item.id
@@ -168,12 +168,12 @@ export const methods = {
         },
         fill_table_via_url(url, nested_response = true, cb) {
             this.loading = true
-            var payload = { page: this.pagination.current }
+            var payload = {page: this.pagination.current}
             if (!url.includes('per_page')) {
                 payload.per_page = this.$store.getters['configs/general_page_limits']
             }
             request
-                .get(url, { params: payload })
+                .get(url, {params: payload})
                 .then(response => {
                     this.items_response = response.data
                     if (nested_response) {
@@ -196,10 +196,10 @@ export const methods = {
         },
         load_more_on_table(api_name) {
             this.loading = true
-            var payload = { page: this.pagination.current + 1 }
+            var payload = {page: this.pagination.current + 1}
 
-            makeRequestTo[api_name]({ params: payload })
-                .then(({ data }) => {
+            makeRequestTo[api_name]({params: payload})
+                .then(({data}) => {
                     this.items_response = data.data
                     data.data.forEach(item => {
                         this.items.push(item)
@@ -217,13 +217,13 @@ export const methods = {
         },
         load_more_via_url(url, cb) {
             this.loading = true
-            var payload = { page: this.pagination.current + 1 }
+            var payload = {page: this.pagination.current + 1}
             if (!url.includes('per_page')) {
                 payload.per_page = this.$store.getters['configs/general_page_limits']
             }
             request
-                .get(url, { params: payload })
-                .then(({ data }) => {
+                .get(url, {params: payload})
+                .then(({data}) => {
                     this.items_response = data.data
                     data.data.forEach(item => {
                         this.items.push(item)
@@ -317,7 +317,7 @@ export const methods = {
                 }
             }, 1)
         },
-        debounce: _debounce(function(value) {
+        debounce: _debounce(function (value) {
             this.search = value
         }, 500)
     }

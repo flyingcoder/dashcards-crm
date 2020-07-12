@@ -3,8 +3,8 @@
         <div class="profile mt-1">
             <div class="profile-content">
                     <div class="background">
-                         <v-icon class="camera" v-if="can_update">camera_alt</v-icon>
-                        <v-menu bottom left v-if="can_update">
+                         <!-- <v-icon class="camera" v-if="can_update">camera_alt</v-icon> -->
+                        <!-- <v-menu bottom left v-if="can_update">
                             <template v-slot:activator="{ on }">
                                 <v-btn dark icon v-on="on" class="settings">
                                     <v-icon large>settings</v-icon>
@@ -21,7 +21,7 @@
                                         <v-icon left>lock</v-icon> Update Password
                                     </v-list-item-title>
                                 </v-list-item>
-                            </v-list>
+                            </v-list> -->
                         </v-menu> 
                     </div>
                     <div class="profile-logo" v-if="company">
@@ -76,7 +76,7 @@
                     </v-row>
             </div>
         </div>
-        <AddPicture :pictureDialog="open_add_picture" @compay-logo-change="company_logo = $event"></AddPicture>
+        <AddPicture :pictureDialog="open_add_picture" @company-logo-change="company_logo = $event"></AddPicture>
     </div>
 </template>
 <script src="./Company.js"></script>

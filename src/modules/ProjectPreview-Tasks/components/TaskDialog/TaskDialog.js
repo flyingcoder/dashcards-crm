@@ -59,6 +59,9 @@ export default {
                 !val && this.$emit('close')
                 this.$emit('update:dialog', val)
             }
+        },
+        disabled() {
+            return this.title ? false : true
         }
     },
 
@@ -84,7 +87,7 @@ export default {
             this.dialog = false
         },
 
-        setTask(task){
+        setTask(task) {
             this.task = task
         },
 
@@ -99,6 +102,7 @@ export default {
         save() {
             this.btnloading = true
             const fields_to_save = {
+                project_id: this.id,
                 milestone_id: this.milestones.selected,
                 title: this.title,
                 description: this.description,
@@ -125,7 +129,7 @@ export default {
         clear_and_close() {
             this.title = this.description = this.start_date = this.end_date = null
             this.members.selected = [];
-            this.milestones.selected = null 
+            this.milestones.selected = null
             this.$refs.editor.setValue(null)
             this.cancel()
         },

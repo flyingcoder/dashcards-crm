@@ -1,25 +1,6 @@
 <template>
     <div class="search">
-        <v-autocomplete 
-          class="search-field" 
-          hide-details 
-          :items="globalSearchResult" 
-          :loading="isGlobalFetching" 
-          v-model="globalSearchbox" 
-          :search-input.sync="globalSearch" 
-          no-filter 
-          clearable
-          disable-lookup 
-          item-text="title" 
-          placeholder="Start typing to search..."
-          append-outer-icon="search"
-          @click:append-outer="navigate_search"
-          solo
-          flat
-          persistent-hint 
-          @click:clear="globalSearchResult = []" 
-          :menu-props="menuprops"
-        >
+        <v-autocomplete class="search-field" hide-details :items="globalSearchResult" :loading="isGlobalFetching" v-model="globalSearchbox" :search-input.sync="globalSearch" no-filter clearable disable-lookup item-text="title" placeholder="Start typing to search..." append-outer-icon="search" @click:append-outer="navigate_search" solo flat persistent-hint @click:clear="globalSearchResult = []" :menu-props="menuprops">
             <template v-slot:no-data>
                 <v-list-item>
                     <v-list-item-title>

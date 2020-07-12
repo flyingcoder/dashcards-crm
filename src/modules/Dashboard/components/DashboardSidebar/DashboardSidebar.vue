@@ -1,18 +1,20 @@
 <template>
-    <v-navigation-drawer
-        v-model="drawer"
-        :mini-variant.sync="mini"
-        permanent
-        width="200"
-        mini-variant-width="80"
-        class="sidebar-drawer"
-    >
+    <v-navigation-drawer v-model="drawer" expand-on-hover :mini-variant.sync="mini" permanent width="200" mini-variant-width="80" class="sidebar-drawer">
         <v-list-item class="px-2 hamburger">
+            <v-list-item-avatar v-if="!mini">
+                <v-img v-if="user.company.company_logo" :src="user.company.company_logo"></v-img>
+                <v-icon large v-else>mdi-copyright</v-icon>
+            </v-list-item-avatar>
+            <v-list-item-content v-if="!mini">
+                <v-list-item-title>{{user.company.name | ucwords | truncate }}</v-list-item-title>
+            </v-list-item-content>
+            <v-list-item-action>
             <v-btn icon @click.stop="mini = !mini">
                 <v-icon> {{mini ? 'menu' : 'chevron_left'}} </v-icon>
             </v-btn>
+            </v-list-item-action>
         </v-list-item>
-        <v-divider></v-divider>
+        <!-- <v-divider></v-divider> -->
         <v-list class="sidebar">
             <div class="sidebar-inner" v-for="(item, index) in items" :data-nav="item.title" :key="item.index" @click="sidebar_item_clicked(item.action)" tile :class="{ active: item.action === selected_route_name }">
                 <v-list class="s__list" :key="index" :class="{ active: item.action === selected_route_name }" v-if="item.can_view() && item.title != 'Timers' && item.title != 'Templates'">

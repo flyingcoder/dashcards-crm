@@ -78,7 +78,8 @@
                                             </td>
                                             <td>{{ item.subject_type }}</td>
                                             <td>
-                                                <Avatar :user="item.causer_user" iconOnly></Avatar>
+                                                <Avatar v-if="item.causer_user" :user="item.causer_user" iconOnly></Avatar>
+                                                <v-icon v-else large title="System">mdi-monitor-star</v-icon>
                                             </td>
                                             <td>{{ item.created_at }}</td>
                                             <!-- <Actions :item="item" :permissions="$_permissions.get('hq_members')" :hasEdit="can_edit(item)" :hasDelete="can_delete(item)" @delete="open_delete_dialog(item)" @edit="open_edit_dialog(item)" @view="navigate_to_view_profile(item)"></Actions> -->

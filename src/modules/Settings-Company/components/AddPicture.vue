@@ -110,7 +110,7 @@ export default {
                 'open_snackbar',
                 'Profile picture uploaded successfully!'
             )
-            this.$emit('compay-logo-change', response.data.company_logo)
+            this.$emit('company-logo-change', response.data.company_logo)
             this.$refs.picture_dialog.clear_and_close()
             Object.assign(this.$data, this.$options.data.apply(this))
         },

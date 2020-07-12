@@ -118,6 +118,7 @@ export default {
         save() {
             this.btnloading = true
             const fields_to_save = {
+                project_id: this.id,
                 title: this.title,
                 description: this.description,
                 status: this.status,

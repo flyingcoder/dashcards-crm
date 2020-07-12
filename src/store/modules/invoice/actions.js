@@ -1,5 +1,5 @@
 export const actions = {
-    type_changed_to_monthly({ commit }) {
+    type_changed_to_monthly({commit}) {
         commit('clear_rows')
         commit('set_selected_project', null)
         commit('set_total_amount', 0)
@@ -7,7 +7,7 @@ export const actions = {
         commit('set_billed_from', null)
     },
 
-    set_table_rows({ commit }, payload) {
+    set_table_rows({commit}, payload) {
         commit('set_billed_to', payload.billed_to.id)
         commit('set_billed_from', payload.billed_from.id)
         const rows = payload.tasks.map(task => ({

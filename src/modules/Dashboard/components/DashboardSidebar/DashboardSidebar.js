@@ -5,7 +5,8 @@ export default {
     data() {
         return {
             selected_route_name: 'default-content',
-            mini: true
+            mini: true,
+            drawer: null
         }
     },
 

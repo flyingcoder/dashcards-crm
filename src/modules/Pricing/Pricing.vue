@@ -1,7 +1,7 @@
 <template>
     <div class="dashboard__container pricing">
         <div class="d__logo">
-            <dashboard-logo></dashboard-logo>
+            <!-- <dashboard-logo></dashboard-logo> -->
         </div>
         <div class="d__header">
             <dashboard-header></dashboard-header>

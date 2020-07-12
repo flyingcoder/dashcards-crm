@@ -57,10 +57,10 @@
                             <v-col md="8" cols="12" class="c-field">
                                 <v-text-field :rules="notif_rules" outlined type="number" placeholder="1000" dense class="fullwidth" hide-details="auto" flat v-model="current.notif_duration" :value="current.notif_duration"></v-text-field>
                             </v-col>
-                            <v-col md="4" cols="12" class="c-label">Product Purchase Key <br> (license key)</v-col>
+                            <!-- <v-col md="4" cols="12" class="c-label">Product Purchase Key <br> (license key)</v-col>
                             <v-col md="8" cols="12" class="c-field">
                                 <v-text-field outlined placeholder="XXXX-XXXX-XXXX-XXXX-XX" dense class="fullwidth" hide-details solo flat v-model="current.license_key" :value="current.license_key"></v-text-field>
-                            </v-col>
+                            </v-col> -->
                             <v-col md="12" cols="12" class="text-right">
                                 <!-- <v-btn class="update-btn" :disabled="update_btn_loading || reset_btn_loading" :loading="reset_btn_loading" @click="reset_settings">
                                     <v-icon left small>mdi-database-refresh</v-icon>Reset Default Settings

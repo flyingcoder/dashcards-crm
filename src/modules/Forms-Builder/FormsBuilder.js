@@ -325,6 +325,7 @@ export default {
     }),
     mounted() {
         this.$event.$emit('path-change', this.paths)
+        this.form_notif_receivers = this.user.email
         if (this.$route.params.id > 0) {
             this.getForm(this.$route.params.id)
         } else {
@@ -332,7 +333,6 @@ export default {
             this.setProperty(this.paragraph)
         }
         this.getFormsTemplate()
-        this.form_notif_receivers = this.user.email
     },
     computed: {
         user() {
@@ -553,6 +553,7 @@ export default {
             request.get(`api/forms/${id}`)
                 .then(({ data }) => {
                     if (data) {
+                        this.activeType = null
                         this.formToEdit = data
                         this.isFormEdit = true
                         this.status = data.status

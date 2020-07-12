@@ -9,7 +9,7 @@ const original = {
     timeline_display_limits: 15,
     general_page_limits: 12,
     messages_page_limits: 10,
-    currency: { currency_code: 'USD', symbol: '$', text: 'US Dollar' },
+    currency: {currency_code: 'USD', symbol: '$', text: 'US Dollar'},
     info_tips: 'No',
     client_registration: 'No',
     notif_duration: 1800,
@@ -18,7 +18,7 @@ const original = {
     square_logo: require('@/assets/logo/mini-blue.png'),
 }
 
-const state = Object.assign({}, _cloneDeep(original), { original: _cloneDeep(original) })
+const state = Object.assign({}, _cloneDeep(original), {original: _cloneDeep(original)})
 
 const getters = {
     current: state => _cloneDeep(state),
@@ -57,7 +57,7 @@ const mutations = {
 }
 
 const actions = {
-    updateSettings({ commit }, payload) {
+    updateSettings({commit}, payload) {
         commit('set_title', payload.title)
         commit('set_lang', payload.lang)
         commit('set_theme', payload.theme)
@@ -71,9 +71,9 @@ const actions = {
         commit('set_notif_duration', payload.notif_duration)
         commit('set_license_key', payload.license_key)
     },
-    fetchSettings({ commit }, payload) {
+    fetchSettings({commit}, payload) {
         request.get(`api/company/${payload.company_id}/settings`)
-            .then(({ data }) => {
+            .then(({data}) => {
                 commit('set_title', data.title)
                 commit('set_lang', data.lang)
                 commit('set_theme', data.theme)
@@ -90,4 +90,4 @@ const actions = {
     }
 }
 
-export { state, getters, mutations, actions }
+export {state, getters, mutations, actions}

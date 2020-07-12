@@ -1,28 +1,31 @@
-import { mapGetters, mapMutations, mapActions } from 'vuex'
-import { settings } from '@/variables'
+import {mapActions, mapGetters, mapMutations} from 'vuex'
+import {settings} from '@/variables'
 //Components
-import DashboardLogo from './components/DashboardLogo/DashboardLogo.vue'
-import DashboardHeader from './components/DashboardHeader/DashboardHeader.vue'
-import DashboardSidebar from './components/DashboardSidebar/DashboardSidebar.vue'
-import FloatingChatButton from '../.././common/FloatingChatButton/FloatingChatButton.vue'
-
+import DashboardLogo from '@/modules/Dashboard/components/DashboardLogo/DashboardLogo.vue'
+import DashboardHeader from '@/modules/Dashboard/components/DashboardHeader/DashboardHeader.vue'
+import DashboardSidebar from '@/modules/Dashboard/components/DashboardSidebar/DashboardSidebar.vue'
+import FloatingChatButton from '@/common/FloatingChatButton/FloatingChatButton.vue'
+import GlobalEmailer from "./components/GlobalEmailer/GlobalEmailer";
 export default {
     name: 'MainDashboard',
     components: {
         DashboardLogo,
         DashboardHeader,
         DashboardSidebar,
-        FloatingChatButton
+        FloatingChatButton,
+        GlobalEmailer
     },
 
     data: () => ({
         mini_sidebar: false,
         admintabs: [
-            { text: 'General', route_name: 'admin-dashboard' },
-            { text: 'APIs', route_name: 'admin-apis' },
-            { text: 'Subscribers', route_name: 'admin-subscribers' },
-            { text: 'Database', route_name: 'admin-database' },
-            { text: 'Logs', route_name: 'admin-logs' },
+            {text: 'General', route_name: 'admin-dashboard'},
+            {text: 'APIs', route_name: 'admin-apis'},
+            {text: 'Subscribers', route_name: 'admin-subscribers'},
+            {text: 'Payments', route_name: 'admin-payments'},
+            {text: 'Templates', route_name: 'admin-templates'},
+            {text: 'Database', route_name: 'admin-database'},
+            {text: 'Logs', route_name: 'admin-logs'},
         ],
         tab: 0
     }),
@@ -61,6 +64,13 @@ export default {
     created() {
         this.subscribe()
         this.fetch_chat()
+        this.$event.$on('open_emailer', (user) => {
+            // console.log(user)
+            this.$refs.global_emailer.openEmailer(user)
+        })
+        this.$event.$on('close_emailer', () => {
+            this.$refs.global_emailer.closeEmailer()
+        })
     },
 
     methods: {
@@ -105,20 +115,20 @@ export default {
         chat_channel(channel) {
             channel.bind(
                 `App\\Events\\PrivateChatSent`,
-                ({ message, sender, receiver }) => {
+                ({message, sender, receiver}) => {
                     const conv = this.all_conversations.find(
                         conv => conv.id === sender.id
                     )
                     if (conv && receiver.id === this.user.id) {
                         this.handle_unread_message(sender)
-                        this.add_message_to_conv({ id: sender.id, message })
+                        this.add_message_to_conv({id: sender.id, message})
                     }
                 }
             )
         },
 
         friends_channel(channel) {
-            channel.bind('pusher:subscription_succeeded', ({ members }) => {
+            channel.bind('pusher:subscription_succeeded', ({members}) => {
                 let all_users = []
                 Object.entries(members).forEach(([key, value]) => {
                     all_users.push({
@@ -131,7 +141,7 @@ export default {
                 this.set_all_users(all_users)
             })
 
-            channel.bind('pusher:member_added', ({ info: member }) => {
+            channel.bind('pusher:member_added', ({info: member}) => {
                 this.$store.commit('onlineUsers/user_logged_in', {
                     id: member.id,
                     name: `${member.first_name}, ${member.last_name}`,
@@ -140,7 +150,7 @@ export default {
                 })
             })
 
-            channel.bind('pusher:member_removed', ({ info: member }) => {
+            channel.bind('pusher:member_removed', ({info: member}) => {
                 const index = this.all_users.findIndex(
                     on_user => on_user.id === member.id
                 )
@@ -149,7 +159,7 @@ export default {
                 }
             })
 
-            channel.bind('App\\Events\\ProjectTaskNotification', ({ payload }) => {
+            channel.bind('App\\Events\\ProjectTaskNotification', ({payload}) => {
                 let index = payload.receivers.findIndex(i => i === this.user.id)
                 if (~index) {
                     let notification = new Notification(payload.title, {
@@ -159,7 +169,7 @@ export default {
                 }
             })
 
-            channel.bind('App\\Events\\CompanyNotification', ({ data }) => {
+            channel.bind('App\\Events\\CompanyNotification', ({data}) => {
                 console.log(data)
             })
 
@@ -169,7 +179,7 @@ export default {
         },
 
         chat_notification_channel(channel) {
-            channel.bind('App\\Events\\ChatNotification', ({ notification }) => {
+            channel.bind('App\\Events\\ChatNotification', ({notification}) => {
                 const sender_id = notification.sender.id
                 const conv = this.all_conversations.find(conv => conv.id === sender_id)
                 if (!conv || !conv.open) {
@@ -195,7 +205,7 @@ export default {
             }
         },
         navigate() {
-            this.$router.push({ name: this.admintabs[this.tab].route_name })
+            this.$router.push({name: this.admintabs[this.tab].route_name})
         }
     }
 }

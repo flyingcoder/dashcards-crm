@@ -17,7 +17,11 @@ export default {
         ChatIcon,
         ConnectApp
     },
-    
+    computed:{
+        company_is_subscribed(){
+            return true;
+        }
+    },
     methods: {
         go_to_pricing_page() {
             this.$router.push({ name: 'pricing' })
