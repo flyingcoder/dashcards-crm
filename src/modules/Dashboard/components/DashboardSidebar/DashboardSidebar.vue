@@ -9,9 +9,9 @@
                 <v-list-item-title>{{ user.company.name | ucwords | truncate }}</v-list-item-title>
             </v-list-item-content>
             <v-list-item-action>
-            <v-btn icon @click.stop="mini = !mini">
-                <v-icon> {{ mini ? 'menu' : 'chevron_left' }} </v-icon>
-            </v-btn>
+                <v-btn icon @click.stop="mini = !mini">
+                    <v-icon> {{ mini ? 'menu' : 'chevron_left' }} </v-icon>
+                </v-btn>
             </v-list-item-action>
         </v-list-item>
         <!-- <v-divider></v-divider> -->
