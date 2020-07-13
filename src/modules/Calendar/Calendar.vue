@@ -39,7 +39,7 @@
                     <div class="calendar_label" v-if="calendar">
                         <div class="label_left">
                             <h3>Events</h3>
-                            <div class="event-item" v-for="elabel in calendar.event_types">
+                            <div class="event-item" v-for="elabel in calendar.event_types" :key="elabel.name">
                                 <v-avatar width="15" height="15" min-width="15" :color="elabel.properties.color"><span></span></v-avatar>
                                 <div class="event-title">{{ elabel.name }}</div>
                             </div>
