@@ -1,16 +1,16 @@
 <template>
-    <v-navigation-drawer v-model="drawer" expand-on-hover :mini-variant.sync="mini" permanent width="200" mini-variant-width="80" class="sidebar-drawer">
+    <v-navigation-drawer v-model="drawer" :mini-variant="mini" permanent width="200" mini-variant-width="80" class="sidebar-drawer">
         <v-list-item class="px-2 hamburger">
             <v-list-item-avatar v-if="!mini">
-                <v-img v-if="user.company.company_logo" :src="user.company.company_logo"></v-img>
+                <v-img v-if="user.company.company_logo" :src="user.company.company_logo" />
                 <v-icon large v-else>mdi-copyright</v-icon>
             </v-list-item-avatar>
             <v-list-item-content v-if="!mini">
-                <v-list-item-title>{{user.company.name | ucwords | truncate }}</v-list-item-title>
+                <v-list-item-title>{{ user.company.name | ucwords | truncate }}</v-list-item-title>
             </v-list-item-content>
             <v-list-item-action>
             <v-btn icon @click.stop="mini = !mini">
-                <v-icon> {{mini ? 'menu' : 'chevron_left'}} </v-icon>
+                <v-icon> {{ mini ? 'menu' : 'chevron_left' }} </v-icon>
             </v-btn>
             </v-list-item-action>
         </v-list-item>
