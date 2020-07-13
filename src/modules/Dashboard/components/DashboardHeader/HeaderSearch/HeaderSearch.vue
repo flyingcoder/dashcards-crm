@@ -11,12 +11,12 @@
             <template v-slot:item="{ item }" class="find">
                 <v-list-item v-if="item.modelType === 'user'" @click="navigate_search(item)">
                     <v-list-item-avatar>
-                        <v-img v-if="item.image_url" :src="item.image_url"></v-img>
+                        <v-img v-if="item.image_url" :src="item.image_url" />
                         <v-icon large v-else>mdi-account</v-icon>
                     </v-list-item-avatar>
                     <v-list-item-content>
-                        <v-list-item-title :inner-html.prop="item.fullname | truncate(25)"></v-list-item-title>
-                        <v-list-item-subtitle :inner-html.prop="item.job_title | truncate(25)"></v-list-item-subtitle>
+                        <v-list-item-title :inner-html.prop="item.fullname | truncate(25)" />
+                        <v-list-item-subtitle :inner-html.prop="item.job_title | truncate(25)" />
                     </v-list-item-content>
                 </v-list-item>
                 <v-list-item v-else-if="item.modelType === 'project'" @click="navigate_search(item)">
@@ -24,8 +24,8 @@
                         <v-icon large>mdi-book</v-icon>
                     </v-list-item-avatar>
                     <v-list-item-content>
-                        <v-list-item-title :inner-html.prop="item.title | truncate(25)"></v-list-item-title>
-                        <v-list-item-subtitle :inner-html.prop="item.description | truncate(25)"></v-list-item-subtitle>
+                        <v-list-item-title :inner-html.prop="item.title | truncate(25)" />
+                        <v-list-item-subtitle :inner-html.prop="item.description | truncate(25)" />
                     </v-list-item-content>
                 </v-list-item>
             </template>
