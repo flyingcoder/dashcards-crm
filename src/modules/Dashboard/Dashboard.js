@@ -6,6 +6,7 @@ import DashboardHeader from '@/modules/Dashboard/components/DashboardHeader/Dash
 import DashboardSidebar from '@/modules/Dashboard/components/DashboardSidebar/DashboardSidebar.vue'
 import FloatingChatButton from '@/common/FloatingChatButton/FloatingChatButton.vue'
 import GlobalEmailer from "./components/GlobalEmailer/GlobalEmailer";
+
 export default {
     name: 'MainDashboard',
     components: {
@@ -65,7 +66,6 @@ export default {
         this.subscribe()
         this.fetch_chat()
         this.$event.$on('open_emailer', (user) => {
-            // console.log(user)
             this.$refs.global_emailer.openEmailer(user)
         })
         this.$event.$on('close_emailer', () => {
@@ -169,8 +169,10 @@ export default {
                 }
             })
 
-            channel.bind('App\\Events\\CompanyNotification', ({data}) => {
-                console.log(data)
+            channel.bind('App\\Events\\CompanyEvent', payload => {
+                if (payload.type === 'configs') {
+                    this.$store.commit('set_user_company', payload)
+                }
             })
 
             channel.bind('pusher:subscription_error', (status) => {

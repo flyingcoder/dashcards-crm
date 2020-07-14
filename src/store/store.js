@@ -33,11 +33,15 @@ export default new Vuex.Store({
         set_user: (state, payload) => (state.user = payload),
         set_login_user: (state, payload) => {
             state.user = payload
-            localStorage.setItem('user', JSON.stringify(state.user))
+            localStorage.setItem('user', Vue.CryptoJS.AES.encrypt(JSON.stringify(payload), settings.paraphrase).toString())
         },
         set_user_image: (state, payload) => {
             state.user.image_url = payload
-            localStorage.setItem('user', JSON.stringify(state.user))
+            localStorage.setItem('user', Vue.CryptoJS.AES.encrypt(JSON.stringify(state.user), settings.paraphrase).toString())
+        },
+        set_user_company: (state, payload) => {
+            state.user.company = payload
+            localStorage.setItem('user', Vue.CryptoJS.AES.encrypt(JSON.stringify(state.user), settings.paraphrase).toString())
         },
         remove_user: state => (state.user = null),
         open_snackbar: (state, payload) => (state.snackbar = payload),
@@ -57,6 +61,13 @@ export default new Vuex.Store({
                 .then(({data}) => {
                     commit('set_global_configs', data)
                     localStorage.setItem('session-eXt-eQt128', Vue.CryptoJS.AES.encrypt(JSON.stringify(data), settings.paraphrase).toString())
+                })
+        },
+        fetchUser({commit}) {
+            request.get(`api/user`)
+                .then(({data}) => {
+                    commit('set_user', data)
+                    localStorage.setItem('user', Vue.CryptoJS.AES.encrypt(JSON.stringify(data), settings.paraphrase).toString())
                 })
         }
     },

@@ -1,6 +1,6 @@
 import makeRequestTo from '@/services/makeRequestTo'
-import { settings } from '@/variables.js'
-import { mapGetters } from 'vuex'
+import {settings} from '@/variables.js'
+import {mapGetters} from 'vuex'
 // Create a Stripe client.
 // eslint-disable-next-line
 const stripe = Stripe(settings.stripe.pub_key)
@@ -35,7 +35,8 @@ export default {
     },
 
     data: () => ({
-        card: null
+        card: null,
+        submitting: false
     }),
 
     computed: {
@@ -49,17 +50,17 @@ export default {
     },
     beforeRouteEnter(to, from, next) {
         next(vm => {
-            if (!vm.plan) next({ name: 'not_found' })
+            if (!vm.plan) next({name: 'not_found'})
             else next()
         })
     },
 
     mounted() {
-        this.card = elements.create('card', { style: style })
+        this.card = elements.create('card', {style: style})
         this.card.mount('#card-element')
 
         // Handle real-time validation errors from the card Element.
-        this.card.addEventListener('change', function(event) {
+        this.card.addEventListener('change', function (event) {
             let displayError = document.getElementById('card-errors')
             if (event.error) {
                 displayError.textContent = event.error.message
@@ -76,28 +77,30 @@ export default {
     methods: {
         back_to_pricing() {
             this.card.destroy(this.$refs.checkout);
-            this.$router.push({ name: 'pricing' })
+            this.$router.push({name: 'pricing'})
         },
         submit_payment() {
             var _this = this
+            _this.submitting = true
             stripe.createToken(this.card)
-                .then(function(result) {
+                .then(function (result) {
                     if (result.error) {
                         let errorElement = document.getElementById('card-errors')
                         errorElement.textContent = result.error.message
                     } else {
-                        makeRequestTo.checkout({ token: result.token.id, plan: _this.plan.id })
+                        makeRequestTo.checkout({token: result.token.id, plan: _this.plan.id})
                             .then(response => {
                                 if (response.status === 200) {
+                                    _this.$store.dispatch('fetchUser')
                                     _this.$event.$emit('open_snackbar', 'Successfully subscribed to ' + _this.plan.nickname, 'success')
-                                    _this.$router.push({ name: 'default-content' })
+                                    _this.$router.push({name: 'default-content'})
                                 } else {
                                     _this.$event.$emit('open_snackbar', response.statusText, 'error')
                                 }
                             })
-
                     }
                 })
+                .finally(() => _this.submitting = false)
         }
     }
 }

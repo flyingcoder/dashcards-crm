@@ -1,15 +1,14 @@
 <template>
-    <div class="b-header">
-        
-        <img class="logo" src="@/assets/logo/buzzooka-blue.png" />
-        <div class="h__pagetitle">
-            <v-breadcrumbs class="b-breadcrumbs" :items="paths"></v-breadcrumbs>
+    <div class="b-header">        
+        <img class="logo" :src="company_logo" />
+        <div class="h__pagetitle" v-if="$route.name !== 'pricing'">
+            <v-breadcrumbs class="b-breadcrumbs" :items="paths" />
         </div>
-        <div class="h__search">
-            <header-search></header-search>
+        <div class="h__search" v-if="user">
+            <header-search />
         </div>
         <div class="h__menu">
-            <header-menu></header-menu>
+            <header-menu />
         </div>
     </div>
 </template>

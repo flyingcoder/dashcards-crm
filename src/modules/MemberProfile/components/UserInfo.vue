@@ -1,103 +1,110 @@
 <template>
-  <div class="user-info">
-    <div class="loading" v-if="user_loading">
-      <v-progress-linear :indeterminate="true" />
+    <div class="user-info">
+        <div class="loading" v-if="user_loading">
+            <v-progress-linear :indeterminate="true" />
+        </div>
+
+        <template v-else-if="user">
+            <div class="info-div">
+                <div class="hour">Time Worked This Week</div>
+                <div class="value">{{ user.week_hours }}</div>
+            </div>
+
+            <div class="info-div">
+                <h4 class="name">{{ user.first_name }} {{ user.last_name }}</h4>
+                <div class="job-title">{{ user.job_title }}</div>
+                <div class="address" v-if="user.meta.address">
+                    <v-icon>place</v-icon>
+                    {{ user.meta.address.value }}
+                </div>
+            </div>
+
+            <div class="info-div">
+                <div class="hour">Per Hour</div>
+                <div class="value" v-if="user.meta.rate">
+                    {{ currency.symbol }} {{ user.meta.rate.value }}
+                </div>
+                <div class="value" v-if="!user.meta.rate">{{ currency.symbol }} 0</div>
+            </div>
+        </template>
     </div>
-
-    <template v-else>
-      <div class="info-div">
-        <div class="hour">Time Worked This Week</div>
-        <div class="value">{{ user.week_hours }}</div>
-      </div>
-
-      <div class="info-div">
-        <h4 class="name">{{ user.first_name }} {{ user.last_name }}</h4>
-        <div class="job-title">{{ user.job_title }}</div>
-        <div class="address" v-if="user.meta.address">
-          <v-icon>place</v-icon>
-          {{ user.meta.address.value }}
-        </div>
-      </div>
-
-      <div class="info-div">
-        <div class="hour">Per Hour</div>
-        <div class="value" v-if="user.meta.rate">
-          {{ currency.symbol }} {{ user.meta.rate.value }}
-        </div>
-        <div class="value" v-if="!user.meta.rate">{{ currency.symbol }} 0</div>
-      </div>
-    </template>
-  </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { settings } from '@/variables'
+    import {mapGetters} from 'vuex'
+    import {settings} from "@/variables";
 
-export default {
-  data: () => ({
-    currency: settings.defaultCurrency //TODO features allow admin to set their default currency
-  }),
-  computed: {
-    ...mapGetters('memberProfile', ['user', 'user_loading'])
-  }
-}
+    export default {
+        computed: {
+            ...mapGetters('memberProfile', ['user', 'user_loading']),
+            currency() {
+                if (this.user && this.user.company) {
+                    return this.user.company.currency
+                }
+                return settings.defaultCurrency
+            }
+        }
+    }
 </script>
 
 <style lang="scss" scoped>
-@import '~@/sass/variables';
+    @import '~@/sass/variables';
 
-.user-info {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  background-color: $white;
-  padding: 20px;
-  align-items: center;
+    .user-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        background-color: $white;
+        padding: 20px;
+        align-items: center;
 
-  .loading {
-    grid-column: 1 / -1;
-  }
+        .loading {
+            grid-column: 1 / -1;
+        }
 
-  .info-div {
-    text-align: center;
-  }
+        .info-div {
+            text-align: center;
+        }
 
-  .hour {
-    font-size: 14px;
-    color: $textGray;
-  }
-  .value {
-    font-size: 30px;
-    color: $black;
-  }
-  .name {
-    font-size: 22px;
-    color: $black;
-    text-transform: capitalize;
-  }
-  .job-title {
-    font-size: 18px;
-    color: $black;
-    margin-bottom: 10px;
-  }
-  .address {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    color: $textGray;
-    opacity: 0.7;
+        .hour {
+            font-size: 14px;
+            color: $textGray;
+        }
 
-    .v-icon {
-      color: $textGray;
-      opacity: 0.7;
+        .value {
+            font-size: 30px;
+            color: $black;
+        }
+
+        .name {
+            font-size: 22px;
+            color: $black;
+            text-transform: capitalize;
+        }
+
+        .job-title {
+            font-size: 18px;
+            color: $black;
+            margin-bottom: 10px;
+        }
+
+        .address {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            color: $textGray;
+            opacity: 0.7;
+
+            .v-icon {
+                color: $textGray;
+                opacity: 0.7;
+            }
+        }
     }
-  }
-}
 
-@media only screen and (max-width: 768px) {
-  .user-info {
-    padding: 15px;
-  }
-}
+    @media only screen and (max-width: 768px) {
+        .user-info {
+            padding: 15px;
+        }
+    }
 </style>
