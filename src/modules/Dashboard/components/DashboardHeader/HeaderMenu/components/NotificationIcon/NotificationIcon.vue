@@ -39,10 +39,10 @@ export default {
 
   computed: {
     notificationIcon() {
-      return require('@/assets/icons/header/notification__default.png')
+      return require('@/assets/icons/header/not_def.png')
     },
     hoveredNotificationIcon() {
-      return require('@/assets/icons/header/notification.png')
+      return require('@/assets/icons/header/not.png')
     }
   }
 }

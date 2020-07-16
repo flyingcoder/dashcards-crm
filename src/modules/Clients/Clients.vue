@@ -33,6 +33,5 @@
         </VueGrid>
     </div>
 </template>
-</template>
 <script src="./Clients.js"></script>
 <style lang="scss" scoped src="./Clients.scss"></style>
