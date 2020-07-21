@@ -4,7 +4,7 @@
             <v-card class="custom__dialog event-dialog">
                 <v-card-title class="dialog__header">
                     <h3 class="dialog__title">{{ dialogTitle }}</h3>
-                    <v-spacer></v-spacer>
+                    <v-spacer />
                     <v-btn fab small depressed class="close__dialog" @click="clear_and_close">
                         <v-icon>close</v-icon>
                     </v-btn>
@@ -12,25 +12,24 @@
                 <v-card-text class="dialog__body">
                     <v-row>
                         <v-col md="4" sm="6" xs="12" class="d__btn">
-                            <MembersPicker @input="members.selected = $event" :maxHeight="300" :isBtnBlock="true">
-                            </MembersPicker>
+                            <MembersPicker buttonLabel="Participants" @input="members.selected = $event" :maxHeight="300" :isBtnBlock="true" />
                             <div class="choosen" v-if="members.selected.length > 0">
                                 <v-chip outlined class="mt-1" v-for="item in members.selected" :key="item.id" :close="clearable(item)" label @click:close="remove_from_selected_members(item)">
                                     <v-avatar left>
-                                        <v-img :src="item.image_url"></v-img>
+                                        <v-img :src="item.image_url" />
                                     </v-avatar>
                                     {{ item.fullname }}
                                 </v-chip>
                             </div>
                         </v-col>
                         <v-col md="4" sm="6" xs="12" class="d__btn">
-                            <DatePicker @input="start_date = $event" :isBtnBlock="true"></DatePicker>
+                            <DatePicker @input="start_date = $event" :isBtnBlock="true" />
                             <div class="choosen" v-if="start_date">
                                 <div class="c-inner mt-1 text-center">{{ start_date | readableFormat }}</div>
                             </div>
                         </v-col>
                         <v-col md="4" sm="6" xs="12" class="d__btn">
-                            <TimePicker @input="time = $event" :isBtnBlock="true"></TimePicker>
+                            <TimePicker @input="time = $event" :isBtnBlock="true" />
                             <div class="choosen" v-if="displayTime">
                                 <div v-if="time.alarm" class="c-inner mt-1 text-center">
                                     <v-icon small left>mdi-alarm</v-icon>{{ displayTime }}
@@ -39,10 +38,10 @@
                             </div>
                         </v-col>
                         <v-col md="12" xs="12">
-                            <TextField :value.sync="title" filled label="Event Title" color="#657186"></TextField>
+                            <TextField dense :value.sync="title" filled label="Event Title" color="#657186" />
                         </v-col>
                         <v-col md="12" xs="12">
-                            <TextField :value.sync="link" filled label="Event Link (Optional)" color="#657186">
+                            <TextField dense :value.sync="link" filled label="Event Link (Optional)" color="#657186">
                                 <template v-slot:append>
                                     <v-tooltip left>
                                         <template v-slot:activator="{ on, attrs }">
@@ -54,7 +53,7 @@
                             </TextField>
                         </v-col>
                         <v-col md="8" xs="12">
-                            <v-select v-model="event_type" v-if="calendar" :items="calendar.event_types" menu-props="auto" label="Select Event Category" hide-details return-object item-text="name" item-value="id" filled single-line>
+                            <v-select dense filled v-model="event_type" v-if="calendar" :items="calendar.event_types" menu-props="auto" label="Select Event Category" hide-details="auto" return-object item-text="name" item-value="id" single-line>
                                 <template v-slot:item="{ item }">
                                     <span>
                                         <v-icon left :color="item.properties.color">mdi-circle</v-icon>
@@ -64,12 +63,12 @@
                             </v-select>
                         </v-col>
                         <v-col md="4" xs="12" class="d__btn">
-                            <v-btn :height="47" block @click="$emit('open-custom-event-type')">
+                            <v-btn :height="40" block @click="$emit('open-custom-event-type')">
                                 <v-icon left>mdi-calendar-plus</v-icon> Custom Event
                             </v-btn>
                         </v-col>
                         <v-col md="12" xs="12">
-                            <Editor ref="editor" :key="dialogKey" :hasFloatingTools="false" v-model="description" :content="description" placeholder="Event Description"></Editor>
+                            <Editor ref="editor" :key="dialogKey" :hasFloatingTools="false" v-model="description" :content="description" placeholder="Event Description" />
                         </v-col>
                     </v-row>
                 </v-card-text>

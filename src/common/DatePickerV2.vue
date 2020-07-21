@@ -10,11 +10,11 @@
             </template>
             <v-card class="pa-0">
                 <v-date-picker style="width:100%;" clearable color="#657186" v-model="picker_date" :max="max" :min="min" :no-title="noTitle" scrollable>
-                    <v-spacer></v-spacer>
+                    <v-spacer />
                     <v-btn text outlined color="#657186" @click="cancel">Cancel</v-btn>
                     <v-btn text outlined color="#657186" @click="clear">Clear</v-btn>
                     <v-btn text outlined color="primary" @click="save">Save</v-btn>
-                    <v-spacer></v-spacer>
+                    <v-spacer />
                 </v-date-picker>
             </v-card>
         </v-menu>

@@ -22,9 +22,9 @@ export default {
     }),
     mounted() {
         this.$event.$emit('path-change', this.paths)
-        this.activeType = this.tabs[0] || null
         this.getTemplates()
         this.getCoreTemplates()
+        this.activeType = this.tabs[0] || null
     },
     computed: {
         user() {
@@ -45,24 +45,31 @@ export default {
             if (~index) {
                 this.content = this.templates[index].meta.template.value
             }
-            this.$refs.editor.setValue(this.content || '')
+            if (this.$refs.editor)
+                this.$refs.editor.setValue(this.content || '')
         },
         saveChanges() {
+            if (this.content.trim() === '' || this.content.trim() === '<p></p>') {
+                this.$event.$emit('open_snackbar', 'Template cannot be empty', 'error')
+                return
+            }
             this.submitting = true
             let payload = {
                 name: this.activeType.type,
-                value: this.content.trim() === '<p></p>' ? '' : this.content
-            };
+                value: this.content.trim() === "<p></p>" ? '' : this.content
+            }
             api_to.save_changes(payload)
                 .then(({data}) => {
-
+                    // console.log(data)
                     let index = this.templates.findIndex(i => i.id === data.id)
                     if (~index) {
                         this.templates.splice(index, 1, data)
+                        this.$event.$emit('open_snackbar', 'Template saved.')
                     }
-                    this.$event.$emit('open_snackbar', 'Template saved.')
                 })
-                .finally(() => this.submitting = false)
+                .finally(() => {
+                    this.submitting = false
+                })
         },
         getTemplates() {
             this.loading = true
@@ -70,7 +77,9 @@ export default {
                 .then(({data}) => {
                     this.templates = data
                 })
-                .finally(() => this.loading = false)
+                .finally(() => {
+                    this.loading = false
+                })
         },
         getCoreTemplates() {
             this.loading = true
@@ -78,7 +87,9 @@ export default {
                 .then(({data}) => {
                     this.core_templates = data
                 })
-                .finally(() => this.loading = false)
+                .finally(() => {
+                    this.loading = false
+                })
         }
     }
 }

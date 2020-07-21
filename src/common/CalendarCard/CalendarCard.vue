@@ -15,14 +15,10 @@
                     <v-row no-gutters>
                         <v-col md="6">
                             <div class="date">
-                                <div class="date_icon">
-                                    <svg viewBox="0 0 250 250">
-                                        <path class="icon" :d="icon"></path>
-                                    </svg>
-                                </div>
+                                <v-icon class="mdi-48px">mdi-calendar-clock</v-icon>
                                 <div class="date_text">
                                     <h3>Today</h3>
-                                    <div>{{ today }}</div>
+                                    <span>{{ today }}</span>
                                 </div>
                             </div>
                         </v-col>

@@ -52,19 +52,21 @@
                                             </v-card>
                                         </v-col>
                                         <v-col grow>
-                                            <v-card v-if="activeType" flat>
-                                                <v-card-text>
+                                            <v-card flat v-show="activeType">
+                                                <v-card-text v-if="activeType">
                                                     <span class="subtitle-2">{{ activeType.title }}</span><br>
                                                     <small class="caption">{{ activeType.description }}</small>
                                                 </v-card-text>
                                                 <v-card-text>
                                                     <p>Available placeholder:</p>
-                                                    <v-chip depressed @click="append(slot)" label class="mr-1 mb-1"
-                                                            v-for="slot in activeType.slots" :key="slot"
-                                                    >
-                                                        {{ slot }}
-                                                        <v-icon small right>mdi-plus</v-icon>
-                                                    </v-chip>
+                                                    <template v-if="activeType">
+                                                        <v-chip depressed @click="append(slot)" label class="mr-1 mb-1"
+                                                                v-for="slot in activeType.slots" :key="slot"
+                                                        >
+                                                            {{ slot }}
+                                                            <v-icon small right>mdi-plus</v-icon>
+                                                        </v-chip>
+                                                    </template>
                                                     <Editor ref="editor" v-model="content" :content="content"
                                                             :hasFloatingTools="false"
                                                     />
@@ -78,7 +80,7 @@
                                                     </v-btn>
                                                 </v-card-actions>
                                             </v-card>
-                                            <Empty v-else headline="Select from the left" />
+                                            <Empty v-if="!activeType" headline="Select from the left" />
                                         </v-col>
                                     </v-row>
                                 </v-expansion-panel-content>

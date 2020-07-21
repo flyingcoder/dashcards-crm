@@ -56,7 +56,7 @@ export default {
                 let api = 'api/timer/start'
                 if (this.timer_status === 'pause') api = 'api/timer/back'
                 this.is_timer_disabled = true
-                request.post(api, { type: 'task', id: this.content.id }).then(() => {
+                request.post(api, {type: 'task', id: this.content.id}).then(() => {
                     this.is_timer_disabled = false
                     this.timer_status = 'ongoing'
                     this.$emit('timer-started')
@@ -87,7 +87,7 @@ export default {
         pause_timer() {
             this.is_timer_disabled = true
             request
-                .post('api/timer/pause', { type: 'task', id: this.content.id })
+                .post('api/timer/pause', {type: 'task', id: this.content.id})
                 .then(() => {
                     clearInterval(this.interval)
                     this.is_timer_disabled = false

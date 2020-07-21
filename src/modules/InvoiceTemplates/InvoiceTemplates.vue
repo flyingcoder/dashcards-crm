@@ -10,7 +10,7 @@
                 </v-tooltip>
                 <v-tooltip left>
                     <template v-slot:activator="{ on, attrs }">
-                        <v-icon fab class="ml-2 action-btn" v-bind="attrs" v-on="on" @click="open_help_dialog">mdi-help-rhombus-outline</v-icon>
+                        <v-icon fab class="ml-2 action-btn" v-bind="attrs" v-on="on" @click="open_help_dialog">mdi-help-circle-outline</v-icon>
                     </template>
                     <span>Invoice Template Guide and Rules</span>
                 </v-tooltip>

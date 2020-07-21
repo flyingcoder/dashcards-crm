@@ -59,8 +59,7 @@ export default {
     methods: {
         can_delete_comment(comment) {
             if (this.user.is_admin) return true
-            if (comment.causer.id === this.user.id) return true
-            return false
+            return comment.causer.id === this.user.id;
         },
         confirm_delete_comment(item) {
             this.activeComment = item
@@ -71,7 +70,7 @@ export default {
                 return
             }
             this.btnloading = true
-            var payload = { comment: this.comment, body: this.comment }
+            let payload = {comment: this.comment, body: this.comment};
             request
                 .post(this.addApi, payload)
                 .then(({ data }) => {

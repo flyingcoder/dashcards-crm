@@ -9,6 +9,7 @@
             <v-flex xs2 class="task__tableHead text-center">Action</v-flex>
         </v-layout>
         <div class="task_body" :style="{ height: bodyMaxHeight }">
+            <template v-if="tasks.length > 0">
             <v-layout align-center class="task-row" :class="['task__tableBody', { active: task.id === active_task_id }]" v-for="task in tasks" :key="task.id" @click="task_view_action(task)">
                 <v-flex xs3 class="assignee__col" v-if="tab == 'All Tasks'">
                     <Avatars v-if="task.assignee.length > 0" :deep="false" :items="task.assignee" :count="1" style="display: inline-block;"></Avatars>
@@ -74,6 +75,8 @@
                     </v-menu>
                 </v-flex>
             </v-layout>
+            </template>
+            <Empty v-else icon="mdi-clipboard-list-outline" headline="No task yet" />
         </div>
     </div>
 </template>

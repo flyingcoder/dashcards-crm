@@ -7,7 +7,7 @@
                     <v-icon fab class="action" v-if="hasListView" @click="$emit('list-view')">list</v-icon>
                     <v-icon fab class="action" v-if="hasGridView" @click="$emit('grid-view')">grid_on</v-icon>
                     <v-icon fab class="action" v-if="hasRemove" @click="$emit('remove')">remove</v-icon>
-                    <v-icon fab class="action" v-if="hasAdd" @click="$emit('add')">add</v-icon>
+                    <v-icon fab class="action" v-if="hasAdd" @click="$emit('add')">mdi-plus-circle-outline</v-icon>
                     <v-icon fab class="action" v-if="hasExpand" @click="$emit('expand')">zoom_out_map</v-icon>
                     <v-icon fab class="action" v-if="hasClose" @click="$emit('close')">close</v-icon>
                 </div>

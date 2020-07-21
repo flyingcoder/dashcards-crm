@@ -1,7 +1,7 @@
 export const is_screen_medium_and_down = {
-  computed: {
-    is_screen_medium_and_down() {
-      return this.$vuetify.breakpoint.mdAndDown
+    computed: {
+        is_screen_medium_and_down() {
+            return this.$vuetify.breakpoint.mdAndDown
+        }
     }
-  }
 }

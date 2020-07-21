@@ -1,13 +1,28 @@
 <template>
-    <custom-dialog :title="dialogTitle" ref="dialog" :open.sync="open" button2-text="Save" @button1="cancel" @button2="save">
+    <custom-dialog :title="dialogTitle" ref="dialog" :open.sync="open" button2-text="Save" @button1="cancel"
+                   @button2="save"
+    >
         <template slot="content">
-            <v-text-field class="dialog__textfield d-field" label="Add task title" v-model.trim="title" color="#667187" filled counter maxlength="30"></v-text-field>
+            <v-text-field class="dialog__textfield d-field" hide-details="auto" dense label="Task Title *"
+                          v-model.trim="title" color="#667187"
+                          filled counter maxlength="30"
+            />
             <!--<v-select class="dialog__selectfield d-field" label="Select Group" v-model.trim="selected_group" :items="group_items" item-text="name" item-value="id" color="#667187" filled hide-details></v-select> -->
-            <v-checkbox v-model="disabled" class="mx-2" label="No Specific Days"></v-checkbox>
-            <v-text-field class="dialog__textfield d-field" label="Add days" v-model.number="days" type="number" min="0" color="#667187" filled hide-details :disabled="disabled"></v-text-field>
-            <div class="dialog__textarea d-field">
-                <Editor ref="editor" :hasFloatingTools="false" v-model="quill_editor.description" :content="quill_editor.description" placeholder="Add task description" ></Editor>
-            </div>
+
+            <Editor ref="editor" :hasFloatingTools="false" v-model="quill_editor.description"
+                    :content="quill_editor.description" placeholder="Task Description"
+            />
+            <v-row>
+                <v-col cols="6">
+                    <v-checkbox v-model="disabled" class="mx-2" label="No Specific Days"/>
+                </v-col>
+                <v-col cols="6">
+                    <v-text-field filled dense class="dialog__textfield d-field" label="Task coverage"
+                                  v-model.number="days" type="number"
+                                  min="0" color="#667187" hide-details="auto" :disabled="disabled"
+                    />
+                </v-col>
+            </v-row>
         </template>
     </custom-dialog>
 </template>

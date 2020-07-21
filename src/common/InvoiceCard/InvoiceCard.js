@@ -85,7 +85,7 @@ export default {
             this.loading = true
             request.get( `/api/company/invoices/statistics?client_only=true&page=${this.pagination.current + 1}`)
                 .then(({ data }) => {
-                    for (var i = data.data.length - 1; i >= 0; i--) {
+                    for (let i = data.data.length - 1; i >= 0; i--) {
                         this.items.push(data.data[i])
                     }
                     this.uniquekey += 1

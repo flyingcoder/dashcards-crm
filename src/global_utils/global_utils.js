@@ -1,6 +1,4 @@
-import moment from 'moment'
-import timezone from 'moment-timezone'
-import { settings } from '@/variables'
+import {settings} from '@/variables'
 
 export const global_utils = {
     methods: {
@@ -40,8 +38,8 @@ export const global_utils = {
             }
         },
         generate_random(qty, min, max) {
-            var items = []
-            for (var i = 0; i < qty; i++) {
+            const items = [];
+            for (let i = 0; i < qty; i++) {
                 items.push(parseInt((Math.random() * (max - min) + min).toFixed(0)))
             }
             return items
@@ -55,40 +53,38 @@ export const global_utils = {
             text = text.toString().toLowerCase().trim()
 
             const sets = [
-                { to: "a", from: "[ÀÁÂÃÅÆĀĂĄẠẢẤẦẨẪẬẮẰẲẴẶ]" },
-                { to: "ae", from: "[Ä]" },
-                { to: "c", from: "[ÇĆĈČ]" },
-                { to: "d", from: "[ÐĎĐÞ]" },
-                { to: "e", from: "[ÈÉÊËĒĔĖĘĚẸẺẼẾỀỂỄỆ]" },
-                { to: "g", from: "[ĜĞĢǴ]" },
-                { to: "h", from: "[ĤḦ]" },
-                { to: "i", from: "[ÌÍÎÏĨĪĮİỈỊ]" },
-                { to: "j", from: "[Ĵ]" },
-                { to: "ij", from: "[Ĳ]" },
-                { to: "k", from: "[Ķ]" },
-                { to: "l", from: "[ĹĻĽŁ]" },
-                { to: "m", from: "[Ḿ]" },
-                { to: "n", from: "[ÑŃŅŇ]" },
-                { to: "o", from: "[ÒÓÔÕØŌŎŐỌỎỐỒỔỖỘỚỜỞỠỢǪǬƠ]" },
-                { to: "oe", from: "[ŒÖ]" },
-                { to: "p", from: "[ṕ]" },
-                { to: "r", from: "[ŔŖŘ]" },
-                { to: "s", from: "[ŚŜŞŠ]" },
-                { to: "ss", from: "[ß]" },
-                { to: "t", from: "[ŢŤ]" },
-                { to: "u", from: "[ÙÚÛŨŪŬŮŰŲỤỦỨỪỬỮỰƯ]" },
-                { to: "ue", from: "[Ü]" },
-                { to: "w", from: "[ẂŴẀẄ]" },
-                { to: "x", from: "[ẍ]" },
-                { to: "y", from: "[ÝŶŸỲỴỶỸ]" },
-                { to: "z", from: "[ŹŻŽ]" },
-                { to: "-", from: "[·/_,:;']" },
+                {to: "a", from: "[ÀÁÂÃÅÆĀĂĄẠẢẤẦẨẪẬẮẰẲẴẶ]"},
+                {to: "ae", from: "[Ä]"},
+                {to: "c", from: "[ÇĆĈČ]"},
+                {to: "d", from: "[ÐĎĐÞ]"},
+                {to: "e", from: "[ÈÉÊËĒĔĖĘĚẸẺẼẾỀỂỄỆ]"},
+                {to: "g", from: "[ĜĞĢǴ]"},
+                {to: "h", from: "[ĤḦ]"},
+                {to: "i", from: "[ÌÍÎÏĨĪĮİỈỊ]"},
+                {to: "j", from: "[Ĵ]"},
+                {to: "ij", from: "[Ĳ]"},
+                {to: "k", from: "[Ķ]"},
+                {to: "l", from: "[ĹĻĽŁ]"},
+                {to: "m", from: "[Ḿ]"},
+                {to: "n", from: "[ÑŃŅŇ]"},
+                {to: "o", from: "[ÒÓÔÕØŌŎŐỌỎỐỒỔỖỘỚỜỞỠỢǪǬƠ]"},
+                {to: "oe", from: "[ŒÖ]"},
+                {to: "p", from: "[ṕ]"},
+                {to: "r", from: "[ŔŖŘ]"},
+                {to: "s", from: "[ŚŜŞŠ]"},
+                {to: "ss", from: "[ß]"},
+                {to: "t", from: "[ŢŤ]"},
+                {to: "u", from: "[ÙÚÛŨŪŬŮŰŲỤỦỨỪỬỮỰƯ]"},
+                {to: "ue", from: "[Ü]"},
+                {to: "w", from: "[ẂŴẀẄ]"},
+                {to: "x", from: "[ẍ]"},
+                {to: "y", from: "[ÝŶŸỲỴỶỸ]"},
+                {to: "z", from: "[ŹŻŽ]"},
+                {to: "-", from: "[·/_,:;']"},
             ]
-
             sets.forEach((set) => {
                 text = text.replace(new RegExp(set.from, "gi"), set.to)
             })
-
             text = text
                 .toString()
                 .toLowerCase()
@@ -102,8 +98,22 @@ export const global_utils = {
             if (typeof separator !== "undefined" && separator !== "-") {
                 text = text.replace(/-/g, separator)
             }
-
             return text
-        }
+        },
+        validateEmail(email) {
+            const regExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return regExp.test(String(email).toLowerCase())
+        },
+        getOrdinalNum(number) {
+            return number + (number > 0 ? ['th', 'st', 'nd', 'rd'][(number > 3 && number < 21) || number % 10 > 3 ? 0 : number % 10] : '')
+        },
+        weekdays() {
+            return [
+                'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
+            ]
+        },
+        snakeCaseToNormal(text) {
+            return text.split('_').join(' ')
+        },
     }
 }

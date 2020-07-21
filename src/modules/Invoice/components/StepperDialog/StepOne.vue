@@ -27,7 +27,7 @@
         </v-col>
         <v-col cols="12" md="3" sm="4" xs="12">Billed From <span class="required">*</span></v-col>
         <v-col cols="12" md="9" sm="8" xs="12">
-            <v-autocomplete class="value" color="#657186" hide-details v-model="billed_from" :items="members" chips item-text="fullname" item-value="id" solo full-width outlined flat dense :value="billed_from" prepend-inner-icon="mdi-account-plus" @click:prepend-inner="show_add_member_dialog('billed_from')">
+            <v-autocomplete class="value" color="#657186" hide-details v-model="billed_from" :items="members" chips item-text="fullname" item-value="id" solo full-width outlined flat dense :value="billed_from" append-outer-icon="mdi-account-plus" @click:append-outer="show_add_member_dialog('billed_from')">
                 <template v-slot:selection="data">
                     <v-chip v-bind="data.attrs" tile outlined>
                         <v-avatar left>
@@ -51,7 +51,7 @@
         </v-col>
         <v-col cols="12" md="3" sm="4" xs="12">Billed To <span class="required">*</span></v-col>
         <v-col cols="12" md="9" sm="8" xs="12">
-            <v-autocomplete class="value" color="#657186" hide-details v-model="billed_to" :items="members" chips item-text="fullname" item-value="id" solo full-width outlined flat dense :value="billed_to" prepend-inner-icon="mdi-account-plus" @click:prepend-inner="show_add_member_dialog('billed_to')">
+            <v-autocomplete class="value" color="#657186" hide-details v-model="billed_to" :items="members" chips item-text="fullname" item-value="id" solo full-width outlined flat dense :value="billed_to" append-outer-icon="mdi-account-plus" @click:append-outer="show_add_member_dialog('billed_to')">
                 <template v-slot:selection="data">
                     <v-chip v-bind="data.attrs" tile outlined>
                         <v-avatar left>

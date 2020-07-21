@@ -14,82 +14,82 @@
     </div>
 </template>
 <script>
-export default {
-    functional: true,
-    inheritAttrs: false,
-    props: {
-        imgSrc: String,
-        imgHeight: {
-            type: String,
-            default: 'auto'
-        },
-        imgWidth: {
-            type: String,
-            default: '25px'
-        },
-        imgBackground: String,
-        counter: [Number, String],
-        title: String
+    export default {
+        functional: true,
+        inheritAttrs: false,
+        props: {
+            imgSrc: String,
+            imgHeight: {
+                type: String,
+                default: 'auto'
+            },
+            imgWidth: {
+                type: String,
+                default: '25px'
+            },
+            imgBackground: String,
+            counter: [Number, String],
+            title: String
+        }
     }
-}
 </script>
 <style lang="scss" scoped>
-@import '~@/sass/_variables';
+    @import '~@/sass/_variables';
 
-.tile {
-    display: grid;
-    grid-template-columns: 1.5fr 2.5fr;
-    height: 45px;
-    border-radius: 9px;
-    overflow: hidden;
-    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    .tile {
+        display: grid;
+        grid-template-columns: 1.5fr 2.5fr;
+        height: 45px;
+        border-radius: 9px;
+        overflow: hidden;
+        box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
         0 1px 5px 0 rgba(0, 0, 0, 0.12);
 
-    .tile-icon {
-        display: grid;
-        justify-content: center;
-        align-items: center;
-        padding: 0 10px;
-    }
-
-    .tile-content {
-        background-color: $white;
-        padding: 0;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-        .text-counter {
-            color: $titleDarkBlue;
-            font-size: 0.865em;
-        }
-
-        .text-title {
-            color: $titleDarkBlue;
-            font-size: 0.75em;
-        }
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    .tile {
-        height: 40px;
-
         .tile-icon {
-            padding: 5px;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10px;
         }
 
         .tile-content {
+            background-color: $white;
+            padding: 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
             .text-counter {
-                font-size: 0.5em;
+                color: $titleDarkBlue;
+                font-size: 0.865em;
             }
 
             .text-title {
-                font-size: 0.5em;
+                color: $titleDarkBlue;
+                font-size: 0.75em;
             }
         }
     }
-}
+
+    @media only screen and (max-width: 500px) {
+        .tile {
+            height: 40px;
+
+            .tile-icon {
+                padding: 5px;
+            }
+
+            .tile-content {
+                .text-counter {
+                    font-size: 0.5em;
+                }
+
+                .text-title {
+                    font-size: 0.5em;
+                }
+            }
+        }
+    }
 </style>

@@ -1,8 +1,7 @@
-import request from '@/services/axios_instance'
 import moment from 'moment'
-import { global_utils } from '@/global_utils/global_utils'
-import { list_functionality } from '@/services/list-functionality/list-functionality'
-//Components 
+import {global_utils} from '@/global_utils/global_utils'
+import {list_functionality} from '@/services/list-functionality/list-functionality'
+//Components
 import DashCard from '@/common/DashCard.vue'
 import vcarousel from 'vue-owl-carousel'
 import FilesPreview from '@/common/FilesPreview.vue'
@@ -11,7 +10,7 @@ export default {
     name: 'TimelineCard',
     mixins: [global_utils, list_functionality],
     components: {
-        DashCard, 
+        DashCard,
         vcarousel,
         FilesPreview
     },
@@ -20,7 +19,7 @@ export default {
         id: [Number, String],
         dashboard: Boolean,
         viewMoreLink: Object,
-        type: { type: String, default: 'projects' }, //or campaigns
+        type: {type: String, default: 'projects'}, //or campaigns
         isExpanded: {
             type: Boolean,
             default: false

@@ -2,7 +2,7 @@ import CustomField from '@/common/CustomField/CustomField.vue'
 
 export default {
     name: 'LoginComponent',
-    components: { CustomField },
+    components: {CustomField},
     props: {
         'title-text': String,
         'button-text': String,

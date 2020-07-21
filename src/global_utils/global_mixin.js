@@ -4,7 +4,7 @@ export default {
     verifyProject: (to, from, next) => {
         request
             .get(`api/verify/is-belong-to?type=project&id=${to.params.id}`)
-            .then(({ data }) => {
+            .then(({data}) => {
                 if (data.belong) {
                     next()
                 } else {
@@ -17,7 +17,7 @@ export default {
     verifyService: (to, from, next) => {
         request
             .get(`api/verify/is-belong-to?type=service&id=${to.params.id}`)
-            .then(({ data }) => {
+            .then(({data}) => {
                 if (data.belong) {
                     next()
                 } else {
@@ -30,7 +30,7 @@ export default {
     verifyUser: (to, from, next) => {
         request
             .get(`api/verify/is-belong-to?type=user&id=${to.params.user_id}`)
-            .then(({ data }) => {
+            .then(({data}) => {
                 if (data.belong) {
                     next()
                 } else {

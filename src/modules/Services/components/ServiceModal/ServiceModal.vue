@@ -20,7 +20,7 @@
                                 </template>
                                 <v-list dense>
                                     <v-list-item @click="open_add_new_client">
-                                        <v-icon left>add</v-icon> Add new client
+                                        <v-icon left>mdi-plus-circle-outline</v-icon> Add new client
                                     </v-list-item>
                                     <v-list-item v-for="(item, index) in client.items" :key="index" @click="clientSelected(item)">
                                         <v-list-item-avatar>
@@ -105,7 +105,7 @@
                                 </template>
                                 <v-list dense>
                                     <v-list-item @click="open_add_new_member_dialog">
-                                        <v-icon left>add</v-icon> Add new manager
+                                        <v-icon left>mdi-plus-circle-outline</v-icon> Add new manager
                                     </v-list-item>
                                     <v-list-item v-for="(item, index) in manager.items" :key="index" @click="add_to_selected_managers(item)">
                                         <v-list-item-avatar>
@@ -144,7 +144,7 @@
                                 </template>
                                 <v-list dense>
                                     <v-list-item @click="open_add_new_member_dialog">
-                                        <v-icon left>add</v-icon> Add new member
+                                        <v-icon left>mdi-plus-circle-outline</v-icon> Add new member
                                     </v-list-item>
                                     <v-list-item v-for="item in members.items" :key="item.user_id" @click="add_to_selected_members(item)">
                                         <v-list-item-avatar>
@@ -208,7 +208,7 @@
                         <v-col md="8" sm="12">
                             <v-col md="12">
                                 <!-- <TextField prepend-inner-icon="mdi-alpha-s-box-outline" dense :value.sync="name" label="Service Name *" color="#657186" filled></TextField> -->
-                                <v-select required clearable prepend-inner-icon="mdi-alpha-s-box-outline" append-outer-icon="mdi-plus" filled hide-details="auto" placeholder="Select Service *" v-model="service.selected" :items="service.items" return-object item-text="name" @click:close="service.selected = null" @click:append-outer="open_add_new_service_list" />
+                                <v-select required clearable prepend-inner-icon="mdi-alpha-s-box-outline" append-outer-icon="mdi-plus-circle-outline" filled hide-details="auto" placeholder="Select Service *" v-model="service.selected" :items="service.items" return-object item-text="name" @click:close="service.selected = null" @click:append-outer="open_add_new_service_list" />
                             </v-col>
                             <v-col md="12" sm="12">
                                 <TextField required clearable prepend-inner-icon="mdi-office-building" v-model="business_name" label="Business Name *" color="#657186" filled />

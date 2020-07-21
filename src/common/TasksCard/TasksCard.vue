@@ -77,6 +77,7 @@ export default {
         active_task_id: {
             get: function() {
                 if (this.task) return this.task.id
+                return  null
             },
             set: function(val) {
                 return val
@@ -261,7 +262,7 @@ export default {
         },
 
         confirm_mark_as_complete_task() {
-            var payload = { status: 'completed', notify_complete: this.notifytaskcomplete }
+            let payload = {status: 'completed', notify_complete: this.notifytaskcomplete};
 
             apiTo.mark_as_complete_task(this.task.id, payload)
                 .then(({ data }) => {

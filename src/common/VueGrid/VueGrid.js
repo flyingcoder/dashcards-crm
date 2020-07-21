@@ -84,7 +84,7 @@ export default {
         },
         is_online(item) {
             let index = this.onlineUsers.findIndex(i => i.id === item.id)
-            return ~index ? true : false
+            return !!(~index)
         }
     }
 }

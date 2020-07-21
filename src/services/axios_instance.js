@@ -46,7 +46,7 @@ request.interceptors.response.use(
             if (typeof res.data.errors != 'undefined') {
                 let errors = Object.values(res.data.errors)
                 errors = errors.flat()
-                for (var i = errors.length - 1; i >= 0; i--) {
+                for (let i = errors.length - 1; i >= 0; i--) {
                     message = message + `\n` + errors[i]
                 }
             }

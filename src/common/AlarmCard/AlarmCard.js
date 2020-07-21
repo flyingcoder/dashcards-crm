@@ -1,8 +1,8 @@
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 import request from '@/services/axios_instance'
 import moment from 'moment'
-import { calendar_utils } from '@/services/calendar/calendar_utils'
-import { list_functionality } from '@/services/list-functionality/list-functionality'
+import {calendar_utils} from '@/services/calendar/calendar_utils'
+import {list_functionality} from '@/services/list-functionality/list-functionality'
 import * as apiTo from '@/modules/Calendar/api'
 
 import DashCard from '@/common/DashCard.vue'
@@ -45,37 +45,35 @@ export default {
             dateNow: moment().format('LL')
         }
     },
-    computed: {
-        ...mapGetters(['user'])
-    },
     created() {
-        this.getTimers()
-        apiTo.myCalendar().then(({ data }) => {
+        this.getTimers();
+        apiTo.myCalendar().then(({data}) => {
             this.calendar = data.calendar
-        })
+        });
         setInterval(() => {
             this.timeNow = new Date().toLocaleTimeString()
         }, 1000)
     },
     computed: {
+        ...mapGetters(['user']),
         logged() {
             return this.$store.getters.user
         }
     },
     filters: {
         format(value, format) {
-            var forms = format || 'MMM D YYYY | HH:mm A'
+            const forms = format || 'MMM D YYYY | HH:mm A';
             return moment(value).format(forms)
         }
     },
     methods: {
         getTimers() {
-            this.loading = true
+            this.loading = true;
             request
                 .get(`/api/events?alarm=true&page=${this.pagination.current}`)
                 .then(response => {
-                    this.items = response.data.data
-                    this.pagination.current = response.data.current_page
+                    this.items = response.data.data;
+                    this.pagination.current = response.data.current_page;
                     this.pagination.total = response.data.last_page
                 })
                 .finally(() => (this.loading = false))

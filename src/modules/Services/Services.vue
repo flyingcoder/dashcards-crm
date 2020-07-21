@@ -103,7 +103,7 @@
                             </v-card>
                         </v-col>
                     </v-row>
-                    <Empty v-else headline="No campaign yet"></Empty>
+                    <Empty icon="widgets" v-else headline="No campaign yet"></Empty>
                 </v-container>
                 <v-card-actions>
                     <v-spacer></v-spacer>
@@ -143,7 +143,7 @@
                 <Actions :item="item" :hasEdit="can_edit(item)" :hasDelete="can_delete(item)" @delete="open_delete_dialog(item)" @edit="open_edit_dialog(item)" @view="navigate_to_view_service(item.id)"></Actions>
             </template>
             <template v-slot:empty-slot>
-                <v-btn dark color="#3b589e" @click="add_dialog = true">Add Service</v-btn>
+                <v-btn dark color="#3b589e" @click="add_dialog = true">Add Campaign</v-btn>
             </template>
         </VueTable>
     </div>

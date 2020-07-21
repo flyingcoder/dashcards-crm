@@ -9,20 +9,18 @@
         <template v-slot:activator="{ on }">
             <div v-on="on">
                 <v-avatar color="grey" :size="size">
-                    <v-img :src="user.image_url" class="hover"></v-img>
+                    <v-img :src="user.image_url" class="hover" />
                 </v-avatar>
                 <v-icon
                         x-small
                         v-on="on"
                         :color="is_online ? `success` : `grey`"
                         class="status"
-                >mdi-circle
-                </v-icon
                 >
-                <span class="ml-1" v-if="!iconOnly">{{
-          displayName | ucwords | truncate(20)
-        }}</span>
-                <slot></slot>
+                    mdi-circle
+                </v-icon>
+                <span class="ml-1" v-if="!iconOnly">{{ displayName | ucwords | truncate(20) }}</span>
+                <slot />
             </div>
         </template>
         <v-card>
@@ -31,10 +29,11 @@
                     <v-list-item-content>
                         <v-row>
                             <v-col md="3">
-                                <v-img :src="user.image_url"></v-img>
+                                <v-img :src="user.image_url" />
                             </v-col>
                             <v-col md="9">
-                                <v-list-item-title :title="user.fullname" class="title">{{
+                                <v-list-item-title :title="user.fullname" class="title">
+                                    {{
                                     user.fullname | ucwords
                                     }}
                                 </v-list-item-title>
@@ -55,7 +54,7 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-list>
-            <v-divider></v-divider>
+            <v-divider />
             <v-card-actions>
                 <v-btn @click="navigate_to_profile" text small class="caption">
                     <v-icon small left>person</v-icon>
@@ -97,8 +96,8 @@
                 return this.$store.getters['onlineUsers/all_users']
             },
             is_online() {
-                var is_online = this.onlineUsers.findIndex(ou => ou.id === this.user.id)
-                return ~is_online ? true : false
+                const is_online = this.onlineUsers.findIndex(ou => ou.id === this.user.id);
+                return !!(~is_online)
             }
         },
 

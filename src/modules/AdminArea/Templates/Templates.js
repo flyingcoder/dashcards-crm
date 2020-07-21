@@ -1,6 +1,6 @@
 import {config_utils} from '@/services/configs/config_utils'
-import request from '@/services/axios_instance'
 import {list_functionality} from '@/services/list-functionality/list-functionality'
+import request from '@/services/axios_instance'
 
 import Editor from '@/common/Editor/Editor.vue'
 
@@ -63,13 +63,13 @@ export default {
                 name: this.activeType.type,
                 value: this.content
             };
-            request.post(`api/template/email-templates/global`, payload)(payload)
+            request.post(`api/template/email-templates/global`, payload)
                 .then(({data}) => {
                     let index = this.templates.findIndex(i => i.id === data.id)
                     if (~index) {
                         this.templates.splice(index, 1, data)
+                        this.$event.$emit('open_snackbar', 'Template saved.')
                     }
-                    this.$event.$emit('open_snackbar', 'Template saved.')
                 })
                 .finally(() => {
                     this.submitting = false

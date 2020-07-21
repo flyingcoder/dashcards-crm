@@ -107,7 +107,7 @@ export default {
             let ind = task.assignee.findIndex(
                 i => i.id === this.$auth.logged_user().id
             )
-            return ~ind ? true : false
+            return !!(~ind)
         },
         getUserTimers() {
             request

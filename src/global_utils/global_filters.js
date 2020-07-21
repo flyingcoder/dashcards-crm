@@ -1,6 +1,5 @@
 import moment from 'moment'
 import timezone from 'moment-timezone'
-import { settings } from '@/variables'
 
 export const global_filters = {
     bzFromNow(date) {
@@ -42,8 +41,8 @@ export const global_filters = {
         if (!value || typeof value !== 'string') {
             return '-'
         }
-        var form = typeof format === 'undefined' ? 'MMM D YYYY' : format
-        var result = moment(value).format(form)
+        let form = typeof format === 'undefined' ? 'MMM D YYYY' : format;
+        let result = moment(value).format(form);
         return result === 'Invalid date' ? '' : result
     },
 
@@ -52,24 +51,24 @@ export const global_filters = {
     },
 
     ucwords(value) {
-        return (value + '').replace(/^(.)|\s+(.)/g, function($1) {
+        return (value + '').replace(/^(.)|\s+(.)/g, function ($1) {
             return $1.toUpperCase()
         })
     },
 
     money(value, currency) {
-        var formatter = new Intl.NumberFormat('en-US', {
+        let formatter = new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: currency || 'USD'
-        })
+        });
 
         return formatter.format(value)
     },
 
     bytesToSize(bytes) {
-        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
-        if (bytes == 0) return '0 Byte'
-        var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)))
+        let sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        if (bytes === 0) return '0 Byte'
+        let i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
         return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i]
     },
 
@@ -85,5 +84,5 @@ export const global_filters = {
     snakeCaseToNormal(text) {
         return text.split('_').join(' ')
     },
-    
+
 }
