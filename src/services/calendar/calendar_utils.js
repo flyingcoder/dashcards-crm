@@ -1,7 +1,6 @@
 import moment from 'moment'
-import { list_functionality } from '@/services/list-functionality/list-functionality'
+import {list_functionality} from '@/services/list-functionality/list-functionality'
 import * as apiTo from '@/modules/Calendar/api'
-import _cloneDeep from 'lodash/cloneDeep'
 import request from '@/services/axios_instance'
 
 export const calendar_utils = {
@@ -34,18 +33,18 @@ export const calendar_utils = {
     },
     methods: {
         load_attributes() {
-            apiTo.myCalendarAttributes().then(({ data }) => {
+            apiTo.myCalendarAttributes().then(({data}) => {
                 this.attributes = data
             })
         },
         load_events() {
             this.loading = true
-            var payload = Object.assign({ page: this.pagination.current, per_page: 10 },
+            var payload = Object.assign({page: this.pagination.current, per_page: 10},
                 this.filters
             )
             request
-                .get(`api/events`, { params: payload })
-                .then(({ data }) => {
+                .get(`api/events`, {params: payload})
+                .then(({data}) => {
                     this.items_response = data
                     this.items = data.data
                     this.pagination.current = data.current_page
@@ -59,12 +58,12 @@ export const calendar_utils = {
         },
         load_more_events() {
             this.loading = true
-            var payload = Object.assign({ page: this.pagination.current + 1 },
+            var payload = Object.assign({page: this.pagination.current + 1},
                 this.filters
             )
             request
-                .get(`api/events`, { params: payload })
-                .then(({ data }) => {
+                .get(`api/events`, {params: payload})
+                .then(({data}) => {
                     this.items_response = data.data
                     data.data.forEach(item => {
                         this.items.push(item)
@@ -156,7 +155,7 @@ export const calendar_utils = {
         leaveEvent(event, user_id) {
             apiTo
                 .leaveEvent(event.id, user_id)
-                .then(({ data }) => {
+                .then(({data}) => {
                     let idx = this.items.findIndex(item => item.id === event.id)
                     if (idx > -1) {
                         this.items.splice(idx, 1)

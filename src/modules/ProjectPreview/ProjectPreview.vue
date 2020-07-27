@@ -1,6 +1,6 @@
 <template>
     <div class="project-preview">
-        <v-tabs class="tabs" centered grow height="60px" v-model="active_tab" hide-slider :show-arrows="is_screen_medium_and_down">
+        <v-tabs class="tabs" centered grow height="48px" v-model="active_tab" hide-slider :show-arrows="is_screen_medium_and_down">
             <v-tab v-for="tab in tabs" :key="tab.id" :to="tab.route" exact>
                 {{ tab.name }}
             </v-tab>

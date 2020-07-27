@@ -1,0 +1,25 @@
+@import '~@/sass/_variables';
+
+@include pagePadding('.api-configs');
+
+.api-configs {
+    @include customTableRow;
+}
+.api-configs-wrapper{
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+    padding: 20px
+}
+.api-configs-content {
+    background-color: $bgLightBlue-2;
+    border: 1px solid $tableBorderBlue;
+    padding: 20px;
+
+    .api-configs-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+}

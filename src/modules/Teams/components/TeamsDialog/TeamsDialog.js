@@ -1,4 +1,4 @@
-import { validations } from './validations'
+import {validations} from './validations'
 import makeRequestTo from '@/services/makeRequestTo'
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 
@@ -14,7 +14,8 @@ export default {
         },
         fieldsToEdit: {
             type: Object,
-            default: () => {}
+            default: () => {
+            }
         }
     },
 
@@ -83,7 +84,7 @@ export default {
             this.loading = false
             makeRequestTo
                 .get_all_groups()
-                .then(({ data }) => {
+                .then(({data}) => {
                     this.group_items = data.filter(i => !i.slug.includes('client'))
                 })
                 .finally(() => (this.loading = false))
@@ -103,10 +104,9 @@ export default {
             }
         },
 
-        update_fields({ fields }) {
+        update_fields({fields}) {
             fields['rate'] = 'rate' in fields.meta ? fields.meta.rate.value : ''
-            fields['address'] =
-                'address' in fields.meta ? fields.meta.address.value : ''
+            fields['address'] = 'address' in fields.meta ? fields.meta.address.value : ''
             this.password = 'dummypassword1'
             this.repeat_password = 'dummypassword1'
             const new_fields = Object.assign({}, fields)

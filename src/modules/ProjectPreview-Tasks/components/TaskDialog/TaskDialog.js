@@ -59,6 +59,9 @@ export default {
                 !val && this.$emit('close')
                 this.$emit('update:dialog', val)
             }
+        },
+        disabled() {
+            return !this.title
         }
     },
 
@@ -84,7 +87,7 @@ export default {
             this.dialog = false
         },
 
-        setTask(task){
+        setTask(task) {
             this.task = task
         },
 
@@ -99,6 +102,7 @@ export default {
         save() {
             this.btnloading = true
             const fields_to_save = {
+                project_id: this.id,
                 milestone_id: this.milestones.selected,
                 title: this.title,
                 description: this.description,
@@ -112,29 +116,29 @@ export default {
 
         update_fields(fields) {
             const task = _cloneDeep(fields)
-            console.log(task, 'eoo')
             this.title = task.title
             this.description = task.description
             this.start_date = task.started_at
             this.end_date = task.end_at
             this.milestones.selected = task.milestone_id
             //this.members.selected = task.assigned_ids
-            this.$set(this.members, 'selected', task.assignee)
+            this.$set(this.members, 'selected', task.assigned)
         },
 
         clear_and_close() {
             this.title = this.description = this.start_date = this.end_date = null
             this.members.selected = [];
-            this.milestones.selected = null 
+            this.milestones.selected = null
             this.$refs.editor.setValue(null)
             this.cancel()
         },
 
         async fill_dropdowns() {
             this.loading = true
+            let projectId = this.task ? this.task.project_id : this.id
             const [members, milestones] = await Promise.all([
-                apiTo.get_project_members(this.id),
-                apiTo.get_project_milestones(this.id)
+                apiTo.get_project_members(projectId),
+                apiTo.get_project_milestones(projectId)
             ])
             this.loading = false
             this.members.all_items = members.data

@@ -13,14 +13,14 @@
   font-weight: 500;
 }
 
-.l__divider{
+.l__divider {
   width: 35px;
   height: 4px;
   border-radius: 5px;
   background-color: $white;
 }
 
-.l__labels{
+.l__labels {
   display: flex;
   // height: 40px;
   width: 100%;
@@ -28,10 +28,11 @@
   justify-content: space-evenly;
   margin-top: 20px;
 }
-.field__icon{
-  &:first-child{
-    .v-icon{
-      img{
+
+.field__icon {
+  &:first-child {
+    .v-icon {
+      img {
         width: auto;
         height: auto;
       }
@@ -40,7 +41,8 @@
 }
 
 .l__tools {
-  margin:20px 0;
+  margin: 20px 0;
+
   .checkbox {
     label {
       position: relative;
@@ -48,11 +50,12 @@
       margin-left: 10px;
     }
   }
+
   .forgot__password {
-      a{
-        font-size: 14px;
-        color: $white;
-        text-decoration: none;
+    a {
+      font-size: 14px;
+      color: $white;
+      text-decoration: none;
     }
   }
 }
@@ -61,6 +64,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   button {
     width: 100%;
     padding: 15px 0;
@@ -75,7 +79,7 @@
     text-align: center;
     outline: none;
     border-radius: 10px;
-    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
   }
 }
 
@@ -92,7 +96,8 @@
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  a{
+
+  a {
     color: $white;
   }
 }
@@ -137,12 +142,12 @@
 
 //Tablet View
 @media(max-width: 600px) {
-  
+
 }
 
-@media (max-width: 480px){
+@media (max-width: 480px) {
   .login__card {
-    .login__cardIn{
+    .login__cardIn {
       margin: 77px 0;
     }
   }

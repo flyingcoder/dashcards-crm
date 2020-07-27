@@ -30,8 +30,8 @@ export const initial_state = () => ({
             show: false
         },
         props: {
-          template: 1,
-          send_email: 'no'
+            template: 1,
+            send_email: 'no'
         },
         parent: null,
         is_recurring: 0

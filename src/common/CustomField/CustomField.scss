@@ -15,7 +15,7 @@
     background: $blue;
     border-radius: 5px 0 0 5px;
   }
- 
+
   input {
     flex-basis: 80%;
     height: 100%;
@@ -30,31 +30,33 @@
     outline: none;
     border: solid 1px $borderLightGray;
     border-radius: 0 5px 5px 0;
-    transition : border 500ms ease-out; 
-    &::placeholder{
+    transition: border 500ms ease-out;
+
+    &::placeholder {
       text-indent: 12px;
       font-weight: 300;
       color: #b3b3b3;
     }
-    
+
   }
 
   input.invalid {
     border: 2px solid $red;
-    transition : border 500ms ease-out; 
+    transition: border 500ms ease-out;
   }
-  
+
 }
 
-.text-capitalize input{
-    text-transform: capitalize;
+.text-capitalize input {
+  text-transform: capitalize;
 }
 
 .signup__field {
   .v-icon {
     display: none
   }
-  input{
+
+  input {
     flex-basis: 100%;
   }
 }
@@ -62,8 +64,8 @@
 //Tablet View
 @media(max-width: 768px) {
   .field {
-    .v-icon{
-       flex-basis: 40px;
+    .v-icon {
+      flex-basis: 40px;
     }
   }
 }

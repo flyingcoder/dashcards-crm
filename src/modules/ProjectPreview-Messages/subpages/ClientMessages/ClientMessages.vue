@@ -2,8 +2,7 @@
     <div class="message__body team-messages">
         <v-system-bar lights-out :height="40" v-if="can_manage_members">
             <v-spacer></v-spacer>
-            <v-btn text small @click="open_manage_member_dialog">Manage Members <v-icon right>settings</v-icon>
-            </v-btn>
+            <v-btn text small class="primary-btn" @click="open_manage_member_dialog"><v-icon left>settings</v-icon> Manage Members</v-btn>
         </v-system-bar>
         <div class="messages" ref="messages-container">
             <v-row no-gutters class="pa-3" v-if="can_send_message">

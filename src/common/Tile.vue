@@ -1,98 +1,95 @@
 <template functional>
-  <div class="tile" v-on="listeners">
-    <div class="tile-icon" :style="{ background: props.imgBackground }">
-      <slot name="tile-icon">
-        <v-img
-          :src="props.imgSrc"
-          :height="props.imgHeight"
-          :width="props.imgWidth"
-        />
-      </slot>
+    <div class="tile" v-on="listeners">
+        <div class="tile-icon" :style="{ background: props.imgBackground }">
+            <slot name="tile-icon">
+                <v-img :src="props.imgSrc" :height="props.imgHeight" :width="props.imgWidth" />
+            </slot>
+        </div>
+        <div class="tile-content">
+            <slot name="tile-content">
+                <h2 class="text-counter subtitle-2">{{ props.counter }}</h2>
+                <div class="text-title body-2">{{ props.title }}</div>
+            </slot>
+        </div>
     </div>
-
-    <div class="tile-content">
-      <slot name="tile-content">
-        <h2 class="text-counter">{{ props.counter }}</h2>
-        <div class="text-title">{{ props.title }}</div>
-      </slot>
-    </div>
-  </div>
 </template>
-
 <script>
-export default {
-  functional: true,
-  inheritAttrs: false,
-  props: {
-    imgSrc: String,
-    imgHeight: {
-      type: String,
-      default: 'auto'
-    },
-    imgWidth: {
-      type: String,
-      default: '40px'
-    },
-    imgBackground: String,
-    counter: [Number, String],
-    title: String
-  }
-}
+    export default {
+        functional: true,
+        inheritAttrs: false,
+        props: {
+            imgSrc: String,
+            imgHeight: {
+                type: String,
+                default: 'auto'
+            },
+            imgWidth: {
+                type: String,
+                default: '25px'
+            },
+            imgBackground: String,
+            counter: [Number, String],
+            title: String
+        }
+    }
 </script>
-
 <style lang="scss" scoped>
-@import '~@/sass/_variables';
-.tile {
-  display: grid;
-  grid-template-columns: 1.5fr 2.5fr;
-  height: 60px;
-  border-radius: 9px;
-  overflow: hidden;
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    @import '~@/sass/_variables';
 
-  .tile-icon {
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    padding: 0 10px;
-  }
+    .tile {
+        display: grid;
+        grid-template-columns: 1.5fr 2.5fr;
+        height: 45px;
+        border-radius: 9px;
+        overflow: hidden;
+        box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+        0 1px 5px 0 rgba(0, 0, 0, 0.12);
 
-  .tile-content {
-    background-color: $white;
-    padding: 0;
-    text-align: center;
-    display: grid;
-    align-items: center;
+        .tile-icon {
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10px;
+        }
 
-    .text-counter,
-    .text-title {
-      color: $titleDarkBlue;
-      font-size: 20px;
+        .tile-content {
+            background-color: $white;
+            padding: 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .text-counter {
+                color: $titleDarkBlue;
+                font-size: 0.865em;
+            }
+
+            .text-title {
+                color: $titleDarkBlue;
+                font-size: 0.75em;
+            }
+        }
     }
 
-    .text-title {
-      font-size: 16px;
-    }
-  }
-}
+    @media only screen and (max-width: 500px) {
+        .tile {
+            height: 40px;
 
-@media only screen and (max-width: 500px) {
-  .tile {
-    height: 45px;
+            .tile-icon {
+                padding: 5px;
+            }
 
-    .tile-icon {
-      padding: 5px;
-    }
+            .tile-content {
+                .text-counter {
+                    font-size: 0.5em;
+                }
 
-    .tile-content {
-      .text-counter {
-        font-size: 16px;
-      }
-      .text-title {
-        font-size: 12px;
-      }
+                .text-title {
+                    font-size: 0.5em;
+                }
+            }
+        }
     }
-  }
-}
 </style>

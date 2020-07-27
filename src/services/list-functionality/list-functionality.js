@@ -1,4 +1,4 @@
-import { methods } from './methods'
+import {methods} from './methods'
 
 export const list_functionality = {
     mixins: [methods],

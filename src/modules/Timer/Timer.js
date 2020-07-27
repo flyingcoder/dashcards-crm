@@ -1,5 +1,5 @@
 import { table_functionality } from '@/services/table-functionality/table-functionality'
-import { is_screen_medium_and_down } from '@/global_utils/is_screen_medium_and_down'
+import { is_screen_utils } from '@/global_utils/is_screen_utils'
 import isEmpty from 'lodash/isEmpty'
 //Components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
@@ -7,7 +7,7 @@ import Breadcrumb from '@/common/Breadcrumb.vue'
 
 export default {
     name: 'Timer',
-    mixins: [table_functionality, is_screen_medium_and_down],
+    mixins: [table_functionality, is_screen_utils],
     components: {
         CustomTable,
         Breadcrumb

@@ -71,21 +71,21 @@ export default {
     },
     computed: {
         full_name() {
-            if (!this.content || !this.content.assignee.length) return 'Unassigned'
+            if (!this.content || !this.content.assigned.length) return 'Unassigned'
             return (
-                this.content.assignee[0].first_name +
+                this.content.assigned[0].first_name +
                 ' ' +
-                this.content.assignee[0].last_name
+                this.content.assigned[0].last_name
             )
         },
         assignee_url() {
-            if (!this.content || !this.content.assignee.length) return null
-            return this.content.assignee[0].image_url
+            if (!this.content || !this.content.assigned.length) return null
+            return this.content.assigned[0].image_url
         },
         job_title() {
-            if (!this.content || !this.content.assignee.length) return null
+            if (!this.content || !this.content.assigned.length) return null
 
-            return this.content.assignee[0].job_title
+            return this.content.assigned[0].job_title
         },
         user() {
             return this.$store.getters.user

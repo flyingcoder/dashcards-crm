@@ -21,11 +21,12 @@ export default {
         template_name: '',
         paths: [
             { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-            { text: 'Templates', disabled: false, router_name: 'templates' },
+            { text: 'Milestone Templates', disabled: false, router_name: 'templates' },
             { text: 'Milestones', disabled: true, router_name: null }
         ],
         headers: [
             { text: 'Title', value: 'title' },
+            { text: 'Tasks', value: 'tasks_count'},
             { text: 'Status', value: 'status' },
             { text: 'Days', value: 'days' },
             { text: 'Action', value: 'action', align: 'center' }

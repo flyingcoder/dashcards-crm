@@ -17,7 +17,7 @@ import router from './router/router'
 import store from './store/store'
 import middlewarePipeline from './router/middlewarePipeline'
 import methods from '@/global_utils/global_mixin'
-import { global_filters } from '@/global_utils/global_filters'
+import {global_filters} from '@/global_utils/global_filters'
 
 Vue.config.productionTip = false
 
@@ -27,14 +27,17 @@ Vue.mixin({
 })
 
 router.beforeEach((to, from, next) => {
-    // console.log(from, to)
+    if (store.state.global_configs.allowed_modules.length === 0) {
+        store.dispatch('fetchGlobal')
+    }
+
     if (!to.meta.middleware) {
         return next()
     }
 
     const middleware = to.meta.middleware
 
-    const context = { to, from, next, store }
+    const context = {to, from, next, store}
 
     return middleware[0]({
         ...context,

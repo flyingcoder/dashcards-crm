@@ -92,7 +92,7 @@ export default {
 
     methods: {
         short_description_text(text) {
-            return text.length > 12 ? text.slice(0, 11) + '...' : text
+            return text.length > 20 ? text.slice(0, 19) + '...' : text
         },
         load_more() {
             this.load_more_via_url(this.dynamic_api)

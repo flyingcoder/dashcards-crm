@@ -22,9 +22,12 @@ export default {
         dialog: Boolean,
         dialogTitle: String,
         isEditDialog: Boolean,
-        fieldsToEdit: { type: Object, default: () => {} },
+        fieldsToEdit: {
+            type: Object, default: () => {
+            }
+        },
         milestoneStartDate: String,
-        btnloading: { type: Boolean, default: false }
+        btnloading: {type: Boolean, default: false}
     },
 
     data: () => ({
@@ -49,10 +52,10 @@ export default {
 
     computed: {
         days: {
-            get: function() {
+            get: function () {
                 return this.days_init_value
             },
-            set: function(newValue) {
+            set: function (newValue) {
                 if (!this.start_date && !this.end_date) {
                     this.days_init_value = newValue
                     return
@@ -118,6 +121,7 @@ export default {
         save() {
             this.btnloading = true
             const fields_to_save = {
+                project_id: this.id,
                 title: this.title,
                 description: this.description,
                 status: this.status,
@@ -129,7 +133,7 @@ export default {
             this.$emit('save', fields_to_save)
         },
 
-        update_fields({ fields }) {
+        update_fields({fields}) {
             const new_fields = Object.assign({}, fields)
             this.title = new_fields.title
             this.description = new_fields.description
@@ -137,7 +141,7 @@ export default {
             this.days = new_fields.days
             this.start_date = new_fields.started_at
             this.end_date = new_fields.end_at
-            this.$set(this.members, 'selected', new_fields.assignee)
+            this.$set(this.members, 'selected', new_fields.assigned)
         },
 
         clear_and_close() {
@@ -163,7 +167,7 @@ export default {
             this.loading = true
             makeRequestTo
                 .get_project_members(this.id)
-                .then(({ data }) => {
+                .then(({data}) => {
                     this.members.all_items = data
                     this.members.items = data
                 })

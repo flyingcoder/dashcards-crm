@@ -14,6 +14,41 @@
       font-size: 24px;
     }
   }
+  .status__col {
+    font-size: 10px;
+    font-weight: 400;
+    opacity: 0.8;
+    color: $white;
+    text-transform: capitalize;
+
+    .status__completed {
+      display: inline-block;
+      padding: 5px 6px;
+      border-radius: 2px;
+      background-color: $green;
+    }
+
+    .status__pending {
+      display: inline-block;
+      padding: 5px 6px;
+      border-radius: 2px;
+      background-color: $orange;
+    }
+
+    .status__behind {
+      display: inline-block;
+      padding: 5px 6px;
+      border-radius: 2px;
+      background-color: $red;
+    }
+
+    .status__open {
+      display: inline-block;
+      padding: 5px 6px;
+      border-radius: 2px;
+      background-color: $textGray;
+    }
+  }
 
   .table__toolbar-title{
     color: $tableTitleBlue;

@@ -1,18 +1,17 @@
 <template>
     <v-card flat class="custom-table-wrapper">
-        <v-container fluid class="custom-table-inner">
             <v-data-table v-model="selected" :headers="headers" :items="items" :disable-sort="sortingEnable" :show-select="showSelect" class="custom-table" v-bind="$attrs" shaped hide-default-footer :items-per-page="itemsPerPage" :loading="loading">
                 <template v-slot:top v-if="showTopHeader">
-                    <v-toolbar flat>
-                        <v-toolbar-title class="custom-table-title">
+                    <div class="custom-table-header">
+                        <h3 class="custom-table-title">
                             {{ title | ucwords}}
-                        </v-toolbar-title>
+                        </h3>
                         <v-spacer></v-spacer>
                         <v-col sm="12" md="3" v-if="hasSearch">
                             <v-text-field width="100" v-model="search" append-icon="mdi-magnify" label="Search" dense hide-details solo></v-text-field>
                         </v-col>
                         <slot name="header-toolbar"></slot>
-                    </v-toolbar>
+                    </div>
                     <slot name="header"></slot>
                     <v-divider></v-divider>
                 </template>
@@ -51,7 +50,6 @@
                     </v-row>
                 </template>
             </v-data-table>
-        </v-container>
     </v-card>
 </template>
 <script src="./VueTable.js"></script>

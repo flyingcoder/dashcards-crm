@@ -16,7 +16,7 @@
                             </v-flex>
                             <v-flex xs2 class="text-xs-right">
                                 <v-btn class="addService__btn" :depressed="!name" @click="add_service">
-                                    <v-icon :disabled="!name" dark>add</v-icon>
+                                    <v-icon :disabled="!name" dark>mdi-plus-circle-outline</v-icon>
                                 </v-btn>
                             </v-flex>
                         </v-layout>

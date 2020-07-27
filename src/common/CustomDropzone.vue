@@ -18,14 +18,14 @@
         </v-row>
         <v-row no-gutters v-if="needConfirmation" class="py-1">
             <v-btn dark v-if="hasAddLink" class="mr-1" color="#3b589e" @click="$emit('open-add-link-dialog')">
-                Add Link <v-icon right>link</v-icon>
+                <v-icon left>mdi-link-plus</v-icon> Add Link
             </v-btn>
             <v-spacer></v-spacer>
             <v-btn color="success" :disabled="counts < 1" class="mr-1" @click="$emit('upload-this-files')">
-                Upload Selected Files <v-icon right dark>cloud_upload</v-icon>
+               <v-icon left dark>mdi-cloud-upload-outline</v-icon> Upload Selected Files
             </v-btn>
             <v-btn :disabled="counts < 1" class="mr-1" color="error" @click="remove_all_files()">
-                Remove All Files <v-icon right>delete</v-icon>
+               <v-icon left>mdi-delete-circle-outline</v-icon> Remove All Files
             </v-btn>
             <v-spacer></v-spacer>
             <v-tooltip left>

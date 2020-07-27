@@ -20,10 +20,11 @@ export default {
     data: () => ({
         paths: [
             { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-            { text: 'Templates', disabled: true, router_name: null }
+            { text: 'Milestone Templates', disabled: true, router_name: null }
         ],
         headers: [
             { text: 'Name', value: 'name' },
+            { text: 'Milestones', value: 'milestones_count'},
             { text: 'Status', value: 'status' },
             { text: 'Action', value: 'action', align: 'center' }
         ],

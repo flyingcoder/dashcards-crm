@@ -1,4 +1,4 @@
 export const initial_state = () => ({
-  cards: [],
-  dash_items: []
+    cards: [],
+    dash_items: []
 })

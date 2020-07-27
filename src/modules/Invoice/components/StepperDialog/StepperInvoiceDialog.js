@@ -74,16 +74,11 @@ export default {
             this.set_dialog({ type: null })
         },
         stepOneRules() {
-            if (this.billed_from && this.billed_to && this.due_date && this.date && this.title) {
-                return true
-            }
-            return false
+            return !!(this.billed_from && this.billed_to && this.due_date && this.date && this.title);
+
         },
         stepTwoRules() {
-            if (this.rows.length > 0) {
-                return true
-            }
-            return false
+            return this.rows.length > 0;
         },
         save_invoice() {
             if (!this.can_submit) return
@@ -134,13 +129,13 @@ export default {
             formData.append('parent', this.invoice.parent)
             formData.append('is_recurring', this.invoice.is_recurring)
 
-            var tax = this.calculate_field(this.invoice, 'tax')
-            var discount = this.calculate_field(this.invoice, 'discount')
-            var shipping = this.calculate_field(this.invoice, 'shipping')
-            formData.append('tax', tax == 0 ? 0 : tax.value)
-            formData.append('discount', discount == 0 ? 0 : discount.value)
-            formData.append('shipping', shipping == 0 ? 0 : shipping.value)
-            formData.append('symbol', tax == 0 ? '' : tax.symbol)
+            let tax = this.calculate_field(this.invoice, 'tax');
+            let discount = this.calculate_field(this.invoice, 'discount');
+            let shipping = this.calculate_field(this.invoice, 'shipping');
+            formData.append('tax', tax === 0 ? 0 : tax.value)
+            formData.append('discount', discount === 0 ? 0 : discount.value)
+            formData.append('shipping', shipping === 0 ? 0 : shipping.value)
+            formData.append('symbol', tax === 0 ? '' : tax.symbol)
             formData.append('send_email', this.invoice.props.send_email)
             formData.append('template', this.invoice.props.template)
             return formData

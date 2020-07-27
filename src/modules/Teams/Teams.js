@@ -1,7 +1,5 @@
-import { list_functionality } from '@/services/list-functionality/list-functionality'
-import isEmpty from 'lodash/isEmpty'
+import {list_functionality} from '@/services/list-functionality/list-functionality'
 import request from '@/services/axios_instance'
-
 //Components
 import VueGrid from '@/common/VueGrid/VueGrid.vue'
 import VueTable from '@/common/VueTable/VueTable.vue'
@@ -26,23 +24,23 @@ export default {
 
     data: () => ({
         paths: [
-            { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-            { text: 'Teams', disabled: true, router_name: null }
+            {text: 'Dashboard', disabled: false, router_name: 'default-content'},
+            {text: 'Teams', disabled: true, router_name: null}
         ],
         sortList: [
-            { title: 'Sort by member' },
-            { title: 'Sort by position' },
-            { title: 'Sort by location' },
-            { title: 'Sort by total hours' },
-            { title: 'Sort by total amount' }
+            {title: 'Sort by member'},
+            {title: 'Sort by position'},
+            {title: 'Sort by location'},
+            {title: 'Sort by total hours'},
+            {title: 'Sort by total amount'}
         ],
 
         headers: [
-            { text: 'Member', align: 'left', value: 'name', sortable: false },
-            { text: 'Position', value: 'position' },
-            { text: 'Location', value: 'location' },
-            { text: 'Tasks', value: 'tasks' },
-            { text: 'Projects', value: 'projects' },
+            {text: 'Member', align: 'left', value: 'name', sortable: false},
+            {text: 'Position', value: 'position'},
+            {text: 'Location', value: 'location'},
+            {text: 'Tasks', value: 'tasks'},
+            {text: 'Projects', value: 'projects'},
             {
                 text: 'Action',
                 value: 'actions',
@@ -76,7 +74,10 @@ export default {
         },
         permissions() {
             return this.$_permissions.get('hq_members')
-        }
+        },
+        can_add() {
+            return this.logged_user.is_admin || this.logged_user.is_manager
+        },
     },
 
     methods: {
@@ -117,7 +118,7 @@ export default {
         },
 
         go_to_groups_page() {
-            this.$router.push({ path: 'settings?tab=groups' })
+            this.$router.push({path: 'settings?tab=groups'})
         },
 
         navigate_to_view_profile(user) {
@@ -136,7 +137,7 @@ export default {
             }
             request
                 .post('api/groups', item)
-                .then(({ data }) => {
+                .then(({data}) => {
                     this.$event.$emit('new-user-group-added', data)
                     this.$event.$emit('open_snackbar', 'New user group created')
                 })

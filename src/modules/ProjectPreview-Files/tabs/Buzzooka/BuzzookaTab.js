@@ -79,49 +79,49 @@ export default {
                 id: 1,
                 className: 'all',
                 type: 'all',
-                icon: 'select_all',
+                icon: 'mdi-file-cabinet',
                 iconText: 'All'
             },
             {
                 id: 2,
                 className: 'image',
                 type: 'image',
-                icon: 'image',
+                icon: 'mdi-file-image-outline',
                 iconText: 'Image'
             },
             {
                 id: 3,
                 className: 'video',
                 type: 'video',
-                icon: 'video_library',
+                icon: 'mdi-file-video-outline',
                 iconText: 'Video'
             },
             {
                 id: 4,
                 className: 'docs',
                 type: 'document',
-                icon: 'file_copy',
+                icon: 'mdi-file-pdf-outline',
                 iconText: 'Docs'
             },
             {
                 id: 5,
                 className: 'links',
                 type: 'link',
-                icon: 'link',
+                icon: 'mdi-file-link-outline',
                 iconText: 'Links'
             },
             {
                 id: 6,
                 className: 'other',
                 type: 'other',
-                icon: 'settings_applications',
+                icon: 'mdi-file-table-outline',
                 iconText: 'Other'
             },
             {
                 id: 7,
                 className: 'approval',
                 type: 'approval',
-                icon: 'mdi-thumb-up',
+                icon: 'mdi-file-check-outline',
                 iconText: 'Approval'
             }
         ],
@@ -199,7 +199,7 @@ export default {
             return (
                 this.permissionsOwn &&
                 this.permissionsOwn.delete &&
-                this.is_file_owner(file)
+                this.is_file_owner(item)
             )
         },
         is_file_owner(file) {
@@ -210,10 +210,10 @@ export default {
         },
         get_files() {
             this.item = []
-            var payload = {
+            let payload = {
                 page: 1,
                 type: this.filter
-            }
+            };
             apiTo
                 .getFilesByTypes(this.id, payload)
                 .then(({ data }) => {
@@ -230,10 +230,10 @@ export default {
 
         get_more_files() {
             this.item = []
-            var payload = {
+            let payload = {
                 page: this.pagination.current + 1,
                 type: 'all'
-            }
+            };
             apiTo
                 .getFilesByTypes(this.id, payload)
                 .then(({ data }) => {
@@ -265,7 +265,7 @@ export default {
 
         file_added(emitted) {
             this.$event.$emit('open_snackbar', 'File(s) uploaded successfully')
-            var fileUploaded = typeof emitted.response === 'string' ? JSON.parse(emitted.response) : emitted.response
+            let fileUploaded = typeof emitted.response === 'string' ? JSON.parse(emitted.response) : emitted.response;
             this.items.unshift(fileUploaded)
             this.$refs.dropzone.remove_file(emitted.file)
             this.clear_selected()
@@ -352,7 +352,7 @@ export default {
             return list.filter(i => { return i.id !== item.approved || i.id === 1 })
         },
         update_status(item, action) {
-            var payload = { action: action.id }
+            let payload = {action: action.id};
             apiTo.updateMediaStatus(item.id, payload)
                 .then(({ data }) => {
                     let index = this.items.findIndex(i => i.id === item.id)

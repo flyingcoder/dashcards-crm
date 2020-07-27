@@ -1,4 +1,5 @@
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
+
 export default {
     props: {
         miniSidebar: {
@@ -6,8 +7,8 @@ export default {
             default: false
         }
     },
-    computed:{
-      ...mapGetters('configs', ['long_logo', 'square_logo'])
+    computed: {
+        ...mapGetters('configs', ['long_logo', 'square_logo']),
     },
     methods: {
         rotateIcon() {

@@ -31,18 +31,9 @@
         margin: 0;
         box-shadow: none;
         padding: 20px;
-    }
-
-    .grid-wrapper {
-        width: 100%;
-        padding: 20px;
-        background: $tableBlueBg;
-        border: 1px solid $borderLightGray;
-        margin: 0;
-
-        .v-toolbar.v-sheet {
-            background: $tableBlueBg;
-        }
+        border: 1px solid $tableBorderBlue;
+        border-radius: 10px;
+        
 
         .description-wrapper {
             overflow-y: auto;
@@ -52,12 +43,17 @@
                 max-width: 100%;
             }
         }
+        .custom-table-header{
+            margin-bottom: 0.75em;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
     }
 
-    .grid-view-title {
+    .custom-grid-title {
         color: #667381;
         text-align: left;
-        font-size: 30px;
     }
 
     @include customTableRow;

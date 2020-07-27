@@ -1,3 +1,4 @@
+import { mapGetters } from 'vuex'
 export default {
     name: 'ConnectApp',
 
@@ -6,7 +7,7 @@ export default {
         activeApp: false,
         apps: [
             {
-                id: 'google-drive',
+                id: 'google_drive',
                 logo: require('@/assets/appIcons/google-drive-icon.svg'),
                 name: "Google Drive"
             },
@@ -21,12 +22,12 @@ export default {
                 name: "Paypal"
             },
             {
-                id: 'dropdown',
+                id: 'dropbox',
                 logo: require('@/assets/appIcons/dropbox-icon.svg'),
                 name: "Dropbox"
             },
             {
-                id: 'google-meet',
+                id: 'google_meet',
                 logo: require('@/assets/appIcons/google-meet-icon.svg'),
                 name: "Google Meet"
             },
@@ -36,7 +37,7 @@ export default {
                 name: "Zoom"
             },
             {
-                id: 'seo-profiler',
+                id: 'seo_profiler',
                 logo: require('@/assets/appIcons/seoprofiler-icon.png'),
                 name: "SEOprofiler"
             },
@@ -56,7 +57,7 @@ export default {
                 name: "BrightLocal"
             },
             {
-                id: 'google-calendar',
+                id: 'google_calendar',
                 logo: require('@/assets/appIcons/google-calendar-icon.png'),
                 name: "Google Calendar"
             },
@@ -67,6 +68,12 @@ export default {
             },
         ]
     }),
+    computed:{
+        ...mapGetters(['global_configs']),
+        connects(){
+            return this.global_configs.connects
+        }
+    },
     methods: {
         connect(id) {
             this.$router.push({ name : 'connect' , query : { id : id }})

@@ -4,9 +4,9 @@
 .dashboard__container {
     min-height: 100%;
     display: grid;
-    grid-template-areas: 'sidebar header''sidebar content';
+    grid-template-areas: 'header header''sidebar content';
     grid-template-columns: auto 1fr;
-    grid-template-rows: 60px 1fr;
+    grid-template-rows: 70px 1fr;
 
     .d__sidebar {
         width: 100%;
@@ -17,7 +17,7 @@
 
     .d__header {
         grid-area: header;
-        height: 60px;
+        height: 70px;
     }
 
     .d__content {

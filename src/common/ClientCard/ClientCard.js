@@ -1,4 +1,3 @@
-import request from '@/services/axios_instance'
 import { global_utils } from '@/global_utils/global_utils'
 import { list_functionality } from '@/services/list-functionality/list-functionality'
 //components

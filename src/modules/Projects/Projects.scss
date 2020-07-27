@@ -31,18 +31,8 @@
         margin: 0;
         box-shadow: none;
         padding: 20px;
-    }
-
-    .grid-wrapper {
-        width: 100%;
-        padding: 20px;
-        background: $tableBlueBg;
-        border: 1px solid $borderLightGray;
-        margin: 0;
-
-        .v-toolbar.v-sheet {
-            background: $tableBlueBg;
-        }
+        border: 1px solid $tableBorderBlue;
+        border-radius: 10px;
 
         .description-wrapper {
             overflow-y: auto;
@@ -53,11 +43,19 @@
             }
         }
     }
+    .custom-table-header{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
 
-    .grid-view-title {
-        color: #667381;
+    .v-card__subtitle, .v-card__text, .v-card__title {
+        padding: 0.5em;
+    }
+
+    .custom-grid-title {
+        color: $textDark;
         text-align: left;
-        font-size: 30px;
     }
 
     @include customTableRow;
@@ -82,16 +80,28 @@
 
     .client-name{
         color: $textDark;
-        font-size: 16px;
+        font-size: 0.7em;
+    }
+
+    .project-title{
+        color: $textDark;
+        padding: 0.5em 0.25em;
     }
 
     .caption {
-        color: $textDark;
+        color: $textDark-2;
     }
     .card-footer{
         .goto.v-btn{
             color: $white;
             background-color: $blue;
         }
-    }   
+    }
+    .v-icon {
+        color: $btnGray;
+
+        &:hover{
+            color: $textDark;
+        }
+    }
 }

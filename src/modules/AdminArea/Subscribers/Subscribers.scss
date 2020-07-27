@@ -1,0 +1,33 @@
+@import '~@/sass/_variables';
+
+@include pagePadding('.subscribers');
+
+.subscribers {
+    @include customTableRow;
+}
+.subscribers-wrapper{
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+    padding: 20px
+}
+.subscribers-content {
+    background-color: $bgLightBlue-2;
+    border: 1px solid $tableBorderBlue;
+    padding: 20px;
+
+    .subscribers-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+}
+
+.d__tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-gap: 20px;
+    cursor: pointer;
+    justify-content: space-between;
+}

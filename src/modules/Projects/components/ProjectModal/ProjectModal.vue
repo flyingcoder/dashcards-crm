@@ -12,7 +12,7 @@
                 <v-card-text class="dialog__body">
                     <v-row no-gutter class="dialog__buttons">
                         <v-col md="4" sm="6">
-                            <v-menu bottom close-on-content-click transition="slide-y-transition" bottom max-height="300">
+                            <v-menu bottom close-on-content-click transition="slide-y-transition" max-height="300">
                                 <template v-slot:activator="{ on }">
                                     <v-btn v-on="on" class="d__btn" block>
                                         <div class="d__icon">
@@ -27,7 +27,7 @@
                                 </template>
                                 <v-list dense>
                                     <v-list-item @click="open_add_new_client">
-                                        <v-icon left>add</v-icon> Add new client
+                                        <v-icon left>mdi-plus-circle-outline</v-icon> Add new client
                                     </v-list-item>
                                     <v-list-item v-for="(item, index) in client.items" :key="index" @click="client.selected = item">
                                         <v-list-item-avatar>
@@ -110,7 +110,7 @@
                                 </template>
                                 <v-list dense>
                                     <v-list-item @click="open_add_new_member_dialog">
-                                        <v-icon left>add</v-icon> Add new manager
+                                        <v-icon left>mdi-plus-circle-outline</v-icon> Add new manager
                                     </v-list-item>
                                     <v-list-item v-for="(item, index) in manager.items" :key="index" @click="add_to_selected_managers(item)">
                                         <v-list-item-avatar>
@@ -147,7 +147,7 @@
                                 </template>
                                 <v-list dense>
                                     <v-list-item @click="open_add_new_member_dialog">
-                                        <v-icon left>add</v-icon> Add new member
+                                        <v-icon left>mdi-plus-circle-outline</v-icon> Add new member
                                     </v-list-item>
                                     <v-list-item v-for="(item, index) in members.items" :key="index" @click="add_to_selected_members(item)">
                                         <v-list-item-avatar>

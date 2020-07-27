@@ -70,14 +70,12 @@ export default {
             {
                 text: 'Managers',
                 sortable: false,
-                align: 'center',
-                sortable: false
+                align: 'center'
             },
             {
                 text: 'Team',
                 sortable: false,
-                align: 'center',
-                sortable: false
+                align: 'center'
             },
             {
                 text: 'Start Date',

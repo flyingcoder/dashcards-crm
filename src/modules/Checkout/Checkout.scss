@@ -12,27 +12,26 @@
   padding: 35px;
   background: #dae1e7;
 
-   button {
-     //TODO review by Klent.this css is copy paste from stripe.fit it to your needs
-     border: none;
-     outline: none;
-     color: #fff;
-     background: #32325d;
-     white-space: nowrap;
-     display: inline-block;
-     height: 40px;
-     line-height: 40px;
-     padding: 0 14px;
-     box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
-     border-radius: 4px;
-     font-size: 15px;
-     font-weight: 600;
-     letter-spacing: 0.025em;
-     text-decoration: none;
-     -webkit-transition: all 150ms ease;
-     transition: all 150ms ease;
-     float: left;
-     margin-top: 28px;
+  button {
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #32325d;
+    white-space: nowrap;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 14px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    text-decoration: none;
+    -webkit-transition: all 150ms ease;
+    transition: all 150ms ease;
+    float: left;
+    margin-top: 28px;
 
     &:hover {
       background-color: #43458b;

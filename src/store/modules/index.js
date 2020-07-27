@@ -5,7 +5,7 @@
 import camelCase from 'lodash/camelCase'
 
 const moduleCache = {}
-const root = { modules: {} };
+const root = {modules: {}};
 (function updateModules() {
     // Allow us to dynamically require all Vuex module files.
     // https://webpack.js.org/guides/dependency-management/#require-context
@@ -41,7 +41,7 @@ const root = { modules: {} };
             .map(camelCase)
 
         // Get the modules object for the current path.
-        const { modules } = getNamespace(root, modulePath)
+        const {modules} = getNamespace(root, modulePath)
 
         // Add the module to our modules object.
         modules[modulePath.pop()] = {
@@ -58,7 +58,7 @@ const root = { modules: {} };
             // Update `root.modules` with the latest definitions.
             updateModules()
             // Trigger a hot update in the store.
-            require('../store').default.hotUpdate({ modules: root.modules })
+            require('../store').default.hotUpdate({modules: root.modules})
         })
     }
 })()

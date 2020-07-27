@@ -1,7 +1,7 @@
 @import '~@/sass/_variables';
 
 .dash__card {
-    padding: 15px;
+    padding: 1em;
     border: 1px solid $tableBorderBlue;
     border-radius: 10px;
     background-color: $white;
@@ -11,26 +11,26 @@
         margin-bottom: 10px;
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
 
         .card__title {
-            color: $tableTitleBlue;
-            font-size: 24px;
+            color: $textDark;
             font-weight: 500;
             text-transform: capitalize;
-            letter-spacing: .02em !important;
-            font-family: Roboto, sans-serif !important;
         }
 
         .actions {
-            text-align: right;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: flex-end;
 
             .action {
-                background-color: $tableBlueBg;
-                border: 1px solid $tableBorderBlue;
-                margin: 0 0 10px 10px;
-
-                .v-btn__content .v-icon {
-                    color: $tableTitleBlue;
+                margin-left: 10px;
+                color: $btnGray;
+                &:hover{
+                    color: $textDark;
                 }
             }
         }
@@ -67,19 +67,6 @@
 @media only screen and (max-width: 480px) {
     .dash__card {
         padding: 10px 15px 15px 15px;
-
-        .card__header {
-            .card__title {
-                font-size: 16px;
-            }
-
-            .actions {
-                .v-btn--floating.v-btn--small {
-                    height: 30px;
-                    width: 30px;
-                }
-            }
-        }
 
         .card__content {
             margin-bottom: 18px;

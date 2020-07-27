@@ -5,6 +5,12 @@ import router from '@/router/router';
 import { settings } from '@/variables'
 
 (function() {
+    const configs = localStorage.getItem('session-eXt-eQt128')
+    if (configs) {
+        store.commit('set_global_configs', JSON.parse(Vue.CryptoJS.AES.decrypt(configs, settings.paraphrase ).toString(Vue.CryptoJS.enc.Utf8)))
+    } else {
+        store.dispatch('fetchGlobal')
+    }
     //for setting the user when the page refreshes
     const user = localStorage.getItem('user')
     if (user) {

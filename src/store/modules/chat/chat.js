@@ -18,11 +18,11 @@ const getters = {
 
 const mutations = {
     add_conversation: (state, payload) => state.conversations.push(payload),
-    add_message_to_conv(state, { id, message }) {
+    add_message_to_conv(state, {id, message}) {
         const index = state.conversations.findIndex(conv => conv.id === id)
         state.conversations[index].messages.push(message)
     },
-    replace_message(state, { id, message }) {
+    replace_message(state, {id, message}) {
         const index = state.conversations.findIndex(conv => conv.id === id)
         const msg_index = state.conversations[index].messages.findIndex(
             m => m.id === 'temporary'
@@ -60,12 +60,12 @@ const mutations = {
         const index = state.unread_messages.findIndex(obj => obj.id === id)
         if (~index) {
             const count = state.unread_messages[index].count + 1
-            state.unread_messages.splice(index, 1, { id, count })
+            state.unread_messages.splice(index, 1, {id, count})
         } else {
-            state.unread_messages.push({ id, count: 1 })
+            state.unread_messages.push({id, count: 1})
         }
     },
-    add_older_messages(state, { id, data }) {
+    add_older_messages(state, {id, data}) {
         const index = state.conversations.findIndex(conv => conv.id === id)
         if (~index) {
             state.conversations[index].messages.unshift(...data.data.reverse())
@@ -75,13 +75,14 @@ const mutations = {
 }
 
 const actions = {
-    open_conversation({ commit, state }, user) {
-        commit('notifications/removeChat', user, { root: true })
-        commit('headerIcons/removeChatNotification', null, { root: true })
+    open_conversation({commit, state}, user) {
+        commit('notifications/removeChat', user, {root: true})
+        commit('headerIcons/removeChatNotification', null, {root: true})
         const index = state.conversations.findIndex(conv => conv.id === user.id)
         if (~index) commit('activate_conversation', index)
         else {
-            makeRequestTo.get_conversation(user.id).then(({ data }) => {
+            makeRequestTo.get_conversation(user.id)
+                .then(({data}) => {
                 commit('add_conversation', {
                     id: user.id,
                     user,
@@ -96,4 +97,4 @@ const actions = {
     }
 }
 
-export { state, getters, mutations, actions }
+export {state, getters, mutations, actions}

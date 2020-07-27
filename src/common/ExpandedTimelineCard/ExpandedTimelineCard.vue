@@ -15,41 +15,40 @@
         </v-layout>
         <v-row>
             <v-col cols="12">
-                <timeline-card isExpanded />
+                <timeline-card isExpanded/>
             </v-col>
         </v-row>
     </div>
 </template>
 <script>
-import Breadcrumb from '@/common/Breadcrumb.vue'
-import TimelineCard from '@/common/TimelineCard/TimelineCard.vue'
+    import TimelineCard from '@/common/TimelineCard/TimelineCard.vue'
 
-export default {
-    name: 'ExpandedTimelineCard',
-    components: { Breadcrumb, TimelineCard },
+    export default {
+        name: 'ExpandedTimelineCard',
+        components: {TimelineCard},
 
-    data: () => ({
-        paths: [
-            { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-            { text: 'Expanded Timeline', disabled: true, router_name: null }
-        ]
-    }),
+        data: () => ({
+            paths: [
+                {text: 'Dashboard', disabled: false, router_name: 'default-content'},
+                {text: 'Expanded Timeline', disabled: true, router_name: null}
+            ]
+        }),
 
-    methods: {
-        minimize() {
-            this.$router.push({ name: 'default-content' })
+        methods: {
+            minimize() {
+                this.$router.push({name: 'default-content'})
+            }
         }
     }
-}
 </script>
 <style lang="scss">
-@import '~@/sass/_variables';
+    @import '~@/sass/_variables';
 
-@include pagePadding('.expanded-timeline-card');
+    @include pagePadding('.expanded-timeline-card');
 
-.expanded-timeline-card {
-    .dash__card .card__content {
-        height: 100%;
+    .expanded-timeline-card {
+        .dash__card .card__content {
+            height: 100%;
+        }
     }
-}
 </style>

@@ -11,16 +11,17 @@
     border-radius: 10px;
     padding: 20px
 }
-.cloud-content {
-    background-color: $bgLightBlue-2;
-    border: 1px solid $tableBorderBlue;
-    padding: 20px;
+.cloud-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .75rem;
+    .v-icon{
+        color: $btnGray;
 
-    .cloud-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 16px;
+        &:hover{
+            color: $textDark;
+        }
     }
 }
 .gdrive{

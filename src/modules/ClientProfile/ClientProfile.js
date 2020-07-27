@@ -1,4 +1,4 @@
-import { mapMutations, mapActions } from 'vuex'
+import {mapActions, mapMutations} from 'vuex'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
 import Upper from './components/Upper/Upper.vue'
@@ -17,9 +17,9 @@ export default {
 
     data: () => ({
         paths: [
-            { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-            { text: 'Client', disabled: false, router_name: 'clients' },
-            { text: 'Profile', disabled: true, router_name: null }
+            {text: 'Dashboard', disabled: false, router_name: 'default-content'},
+            {text: 'Client', disabled: false, router_name: 'clients'},
+            {text: 'Profile', disabled: true, router_name: null}
         ]
     }),
 

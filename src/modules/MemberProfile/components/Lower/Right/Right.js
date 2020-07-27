@@ -1,8 +1,8 @@
-import { is_screen_medium_and_down } from '@/global_utils/is_screen_medium_and_down'
+import { is_screen_utils } from '@/global_utils/is_screen_utils'
 
 export default {
     name: 'ProfileRight',
-    mixins: [is_screen_medium_and_down],
+    mixins: [is_screen_utils],
 
     data: () => ({
         tabs: [{
@@ -20,11 +20,11 @@ export default {
                 icon:'mdi-facebook'
             },
             {
-                content: 'This is your Twitter.',
+                content: 'This is your Twitter tweets.',
                 icon:'mdi-twitter'
             },
             {
-                content: 'This is your Instagram.',
+                content: 'This is your Instagram feed.',
                 icon:'mdi-instagram'
             }
         ]

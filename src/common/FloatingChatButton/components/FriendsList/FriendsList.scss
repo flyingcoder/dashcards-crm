@@ -1,67 +1,67 @@
 @import '~@/sass/_variables';
 
-.chat__button{
+.chat__button {
   position: relative;
   margin: 10px;
 }
-.chat__position{
+
+.chat__position {
   bottom: 0;
   right: 0;
 
 }
 
 .chat__button[data-notify]:after {
-  content:attr(data-notify);
-  position:absolute;
-  top:0px;
-  right:0px;
-  font-size:.7em;
-  background:$green;
-  color:$white;
-  width:18px;
-  height:18px;
-  text-align:center;
-  line-height:18px;
-  border-radius:50%;
-  font-size:12px;
+  content: attr(data-notify);
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: $green;
+  color: $white;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 50%;
+  font-size: 12px;
 }
 
-.chat__inbox{
+.chat__inbox {
   background-color: $white;
   border: 1px solid $tableBorderBlue;
   border-radius: 5px;
   min-width: 200px;
   margin-right: 150px;
 
-  .inbox__title{
+  .inbox__title {
     padding: 5px;
     background-color: $tableBlueBg;
     color: $titleDarkBlue;
     border-bottom: 1px solid $tableBorderBlue;
   }
 
-  .user{
+  .user {
     display: flex;
     flex-direction: row;
     align-items: center;
     border-bottom: 1px solid $tableBorderBlue;
     padding: 5px;
 
-    &:hover{
+    &:hover {
       background-color: $white;
     }
 
-    @include userImgWithStatus ('.user__img');
+    @include userImgWithStatus('.user__img');
 
-    .user__detail{
+    .user__detail {
       margin-left: 10px;
-      width : 130px;
-      cursor:pointer;
+      width: 130px;
+      cursor: pointer;
 
-      .user__name{
-        width : 130px;
-        overflow:hidden;
-        display:inline-block;
+      .user__name {
+        width: 130px;
+        overflow: hidden;
+        display: inline-block;
         text-overflow: ellipsis;
         white-space: nowrap;
         font-size: 14px;
@@ -69,7 +69,8 @@
     }
 
   }
-  .new__message{
+
+  .new__message {
     background-color: $tableBlueBg;
   }
 

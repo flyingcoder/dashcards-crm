@@ -27,24 +27,17 @@
                 </v-tabs>
                 <v-tabs-items v-model="active_report" class="reports-tab-content">
                     <v-tab-item v-for="(report,i) in reports" :key="i">
-                        <v-card>
+                        <v-card flat>
                             <v-card-text>
                                 <div class="reports-actions">
                                     <v-spacer></v-spacer>
-                                    <v-btn color="#3b589e" small dark fab @click="open_dialog">
-                                        <v-icon>add</v-icon>
-                                    </v-btn>
-                                    <v-btn color="#3b589e" small dark fab class="ml-1" @click="openEditDialog(report, report.id)">
-                                        <v-icon>edit</v-icon>
-                                    </v-btn>
-                                    <v-btn color="#3b589e" small dark fab class="ml-1" @click="openDeleteDialog(report.id)">
-                                        <v-icon>delete</v-icon>
-                                    </v-btn>
+                                    <v-icon @click="open_dialog">add_circle_outline</v-icon>
+                                    <v-icon class="ml-1" @click="openEditDialog(report, report.id)">edit</v-icon>
+                                    <v-icon class="ml-1" @click="openDeleteDialog(report.id)">delete</v-icon>
                                 </div>
                                 <div class="reports-content">
                                     <div class="site-preview">
-                                        <!-- <ReportsSection :iframe_src="report.url" @iframe-loaded="iframeLoaded" /> -->
-                                        <ReportsSection v-if="report.props && report.props.canIframe" :iframeSrc="report.url" @iframe-loaded="iframe_loaded" />
+                                        <ReportsSection v-if="report.props && report.props.canIframe" :iframeSrc="report.url" />
                                         <v-card class="mx-auto" v-else-if="report.props && report.props.image" flat>
                                             <v-list-item>
                                                 <v-list-item-content>
@@ -52,7 +45,8 @@
                                                         <v-row align="center">
                                                             <v-col class="grow">We are unable to load the site content because of the website restrictions.</v-col>
                                                             <v-col class="shrink">
-                                                                <v-btn :href="report.url" target="_blank">Go to Site <v-icon right>mdi-arrow-right-bold</v-icon></v-btn>
+                                                                <v-btn :href="report.url" target="_blank">Go to Site <v-icon right>mdi-arrow-right-bold</v-icon>
+                                                                </v-btn>
                                                             </v-col>
                                                         </v-row>
                                                     </v-alert>
@@ -75,13 +69,14 @@
                                         <Empty v-else icon="mdi-link-off" headline="">
                                             <template v-slot:extra>
                                                 <v-alert prominent type="warning">
-                                                        <v-row align="center">
-                                                            <v-col class="grow">We are unable to load the site content because of the website restrictions.</v-col>
-                                                            <v-col class="shrink">
-                                                                <v-btn :href="report.url" target="_blank">Go to Site <v-icon right>mdi-arrow-right-bold</v-icon></v-btn>
-                                                            </v-col>
-                                                        </v-row>
-                                                    </v-alert>
+                                                    <v-row align="center">
+                                                        <v-col class="grow">We are unable to load the site content because of the website restrictions.</v-col>
+                                                        <v-col class="shrink">
+                                                            <v-btn :href="report.url" target="_blank">Go to Site <v-icon right>mdi-arrow-right-bold</v-icon>
+                                                            </v-btn>
+                                                        </v-col>
+                                                    </v-row>
+                                                </v-alert>
                                             </template>
                                         </Empty>
                                     </div>
@@ -93,15 +88,17 @@
             </div>
         </v-col>
         <v-col md="12" xs="12" class="ma-0 pa-0" v-else>
-            <Empty headline="No reports yet" icon="mdi-file-compare">
-                <template v-slot:extra>
-                    <v-btn large dark color="#3b589e" v-if="!loading" @click="open_dialog">Add New Report
-                    </v-btn>
-                </template>
-            </Empty>
+            <div class="empty-wrapper">
+                <Empty headline="No reports yet" icon="mdi-file-compare">
+                    <template v-slot:extra>
+                        <v-btn large dark color="#3b589e" v-if="!loading" @click="open_dialog">Add New Report
+                        </v-btn>
+                    </template>
+                </Empty>
+            </div>
         </v-col>
     </v-row>
 </template>
 <script src="./Reports.js"></script>
-<style lang="scss" scoped src="./Reports.scss"></style>
+<style lang="scss" src="./Reports.scss"></style>
 <style scoped></style>

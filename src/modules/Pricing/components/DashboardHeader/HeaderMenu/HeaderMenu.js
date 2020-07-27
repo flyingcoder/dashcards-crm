@@ -17,8 +17,9 @@ export default {
         icon: require('@/assets/icons/header/user/help.svg')
       },
       {
-        title: 'Lock',
-        icon: require('@/assets/icons/header/user/lock.svg')
+        title: 'Dashboard',
+        icon: require('@/assets/icons/header/user/lock.svg'),
+        action: 'dashboard'
       },
       {
         title: 'Logout',
@@ -34,6 +35,9 @@ export default {
     },
     logout() {
       this.$auth.logout()
+    },
+    dashboard(){
+      this.$router.push({name: 'default-content'})
     }
   }
 }

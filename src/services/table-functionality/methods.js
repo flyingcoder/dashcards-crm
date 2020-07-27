@@ -161,7 +161,7 @@ export const methods = {
             else this.selected = this.items.slice()
         },
 
-        debounce: _debounce(function(value) {
+        debounce: _debounce(function (value) {
             this.search = value
         }, 500)
     }

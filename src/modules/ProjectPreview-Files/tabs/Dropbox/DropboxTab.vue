@@ -1,9 +1,9 @@
 <template>
     <div class="files__tab">
-        <v-card>
+        <v-card outlined class="dropbox-content">
             <v-card-title class="py-1">
-                <v-col class="headline">
-                    <v-icon left>mdi-dropbox</v-icon> Dropbox
+                <v-col>
+                    <h3 class="page-title"><v-icon left>mdi-dropbox</v-icon> Dropbox</h3>
                 </v-col>
                 <v-spacer></v-spacer>
                 <v-col>
@@ -11,14 +11,24 @@
                 </v-col>
             </v-card-title>
             <v-card-text>
-                <Empty headline="Under Construction!"></Empty>
+                <Empty icon="mdi-hammer-wrench" headline="Under Construction!"></Empty>
             </v-card-text>
         </v-card>
     </div>
 </template>
 <style lang="scss">
+@import '~@/sass/variables';
 .files__tab {
-    padding: 24px;
+    padding: 1.25rem;
+
+    .dropbox-content{
+        border-radius: 10px !important;
+        border: 1px solid $borderLightGray;
+    }
+    
+    .page-title .v-icon{
+        color: $textDark;
+    }
 }
 </style>
 <script> 

@@ -76,8 +76,8 @@ export default {
             )
         },
         can_run_timer(item) {
-            let find = item.assignee.find(u => u.id === this.loggeduser.id)
-            return find ? true : false
+            let find = item.assigned.find(u => u.id === this.loggeduser.id)
+            return !!find
         },
         handleChangeTab(event) {
             if (this.timer_tab === 'global-timers')

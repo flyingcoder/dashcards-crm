@@ -2,6 +2,7 @@ import TasksCard from '@/common/TasksCard/TasksCard.vue'
 import TimelineCard from '@/common/TimelineCard/TimelineCard.vue'
 import ProjectOverviewCard from './components/ProjectOverviewCard/ProjectOverviewCard.vue'
 import InvoiceTable from './components/InvoiceTable/InvoiceTable.vue'
+import {mapMutations} from "vuex";
 
 export default {
     components: {
@@ -29,8 +30,14 @@ export default {
             ]
         }
     },
+    created(){
+      this.set_id(this.id)
+    },
     mounted() {
         this.$event.$emit('path-change', this.paths)
+    },
+    methods:{
+        ...mapMutations('taskCards', ['set_id'])
     },
     beforeRouteEnter(to, from, next) {
         next(vm => {

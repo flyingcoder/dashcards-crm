@@ -1,69 +1,69 @@
-import { is_screen_medium_and_down } from '@/global_utils/is_screen_medium_and_down'
+import {is_screen_utils} from '@/global_utils/is_screen_utils'
 
 export default {
-  name: 'ProjectPreview',
-  mixins: [is_screen_medium_and_down],
+    name: 'ProjectPreview',
+    mixins: [is_screen_utils],
 
-  props: {
-    id: [Number, String], //from route prop
-    type: { type : String, default: 'project'}
-  },
+    props: {
+        id: [Number, String], //from route prop
+        type: {type: String, default: 'project'}
+    },
 
-  data() {
-    return {
-      active_tab: null,
-      tabs: [
-        {
-          id: 1,
-          name: 'HQ',
-          route: `/dashboard/${this.type}/preview/${this.id}`
-        },
-        {
-          id: 2,
-          name: 'Files',
-          route: `/dashboard/${this.type}/preview/${this.id}/files`
-        },
-        {
-          id: 3,
-          name: 'Members',
-          route: `/dashboard/${this.type}/preview/${this.id}/members`
-        },
-        {
-          id: 4,
-          name: 'Messages',
-          route: `/dashboard/${this.type}/preview/${this.id}/messages`
-        },
-        {
-          id: 5,
-          name: 'Milestones',
-          route: `/dashboard/${this.type}/preview/${this.id}/milestones`
-        },
-        {
-          id: 6,
-          name: 'Tasks',
-          route: `/dashboard/${this.type}/preview/${this.id}/tasks`
-        },
-        {
-          id: 7,
-          name: 'Reports',
-          route: `/dashboard/${this.type}/preview/${this.id}/reports`
-        },
-        {
-          id: 8,
-          name: 'Timer',
-          route: `/dashboard/${this.type}/preview/${this.id}/timer`
-        },
-        {
-          id: 9,
-          name: 'Invoice',
-          route: `/dashboard/${this.type}/preview/${this.id}/invoice`
+    data() {
+        return {
+            active_tab: null,
+            tabs: [
+                {
+                    id: 1,
+                    name: 'HQ',
+                    route: `/dashboard/${this.type}/preview/${this.id}`
+                },
+                {
+                    id: 2,
+                    name: 'Files',
+                    route: `/dashboard/${this.type}/preview/${this.id}/files`
+                },
+                {
+                    id: 3,
+                    name: 'Members',
+                    route: `/dashboard/${this.type}/preview/${this.id}/members`
+                },
+                {
+                    id: 4,
+                    name: 'Messages',
+                    route: `/dashboard/${this.type}/preview/${this.id}/messages`
+                },
+                {
+                    id: 5,
+                    name: 'Milestones',
+                    route: `/dashboard/${this.type}/preview/${this.id}/milestones`
+                },
+                {
+                    id: 6,
+                    name: 'Tasks',
+                    route: `/dashboard/${this.type}/preview/${this.id}/tasks`
+                },
+                {
+                    id: 7,
+                    name: 'Reports',
+                    route: `/dashboard/${this.type}/preview/${this.id}/reports`
+                },
+                {
+                    id: 8,
+                    name: 'Timer',
+                    route: `/dashboard/${this.type}/preview/${this.id}/timer`
+                },
+                {
+                    id: 9,
+                    name: 'Invoice',
+                    route: `/dashboard/${this.type}/preview/${this.id}/invoice`
+                }
+            ]
         }
-      ]
+    },
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            vm.verifyProject(to, from, next, 'project')
+        })
     }
-  },
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      vm.verifyProject(to, from, next, 'project')
-    })
-  }
 }

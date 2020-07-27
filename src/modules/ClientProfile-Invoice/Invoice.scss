@@ -1,6 +1,6 @@
 @import '~@/sass/_variables';
 
 .invoice {
-  padding: 20px;
-  @include emptyTable('.empty-invoice');
+    padding: 20px;
+    @include emptyTable('.empty-invoice');
 }
