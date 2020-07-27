@@ -1,68 +1,57 @@
+import {list_functionality} from "../../services/list-functionality/list-functionality";
+import api from "./api";
+//components
 import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
-import StaffDialog from './StaffDialog/StaffDialog.vue'
-import { table_functionality } from '@/services/table-functionality/table-functionality'
+import StaffDialog from '@/modules/Teams/components/TeamsDialog/TeamsDialog.vue'
+import VueGrid from "@/common/VueGrid/VueGrid.vue"
+import TableHeader from "@/common/TableHeader.vue"
 
 export default {
-  name: 'MembersTab',
-  mixins: [table_functionality],
-  components: {
-    CustomTable,
-    StaffDialog,
-    DeleteDialog
-  },
-  inheritAttrs: false,
+    name: 'MembersTab',
+    mixins: [list_functionality],
+    components: {
+        CustomTable,
+        StaffDialog,
+        DeleteDialog,
+        VueGrid,
+        TableHeader
 
-  props: {
-    id: [Number, String]
-  },
+    },
+    inheritAttrs: false,
+    props: {
+        user_id: [Number, String]
+    },
+    data: () => ({
+        add_dialog: false,
+        staff_id: '',
+    }),
 
-  data: () => ({
-    add_dialog: false,
-    staff_id: '',
-    headers: [
-      { text: 'Member', value: 'member' },
-      { text: 'Email', value: 'email' },
-      { text: 'Telephone', value: 'telephone' },
-      { text: 'Position', value: 'position' },
-      { text: 'Tasks', value: 'tasks' },
-      { id: 4, is_action: true }
-    ],
-    table_config: {
-      route_name: 'client_profile',
-      add_message: 'New Members(s) added successfully!',
-      delete_message: 'Members deleted successfully!',
-      refresh_table_message: 'Table refreshed',
-      refresh_table_api_name: 'paginate_tab_members_table'
-    }
-  }),
-
-  computed: {
-    dynamic_api() {
-      return `api/clients/${this.id}/staffs`
-    }
-  },
-
-  created() {
-    this.$router.replace({
-      name: 'client_profile',
-      query: { tab: 'Staffs' }
-    })
-    this.fill_table('get_members', true, this.dynamic_api)
-  },
-
-  methods: {
-    can_be_deleted(item) {
-      return !(
-        item.job_title === 'Administrator' || item.job_title === 'Client'
-      )
+    computed: {
+        dynamic_api() {
+            return `api/clients/${this.user_id}/staffs`
+        }
     },
 
-    navigate_to_view_profile(id) {
-      this.$router.push({
-        name: 'client_profile',
-        params: { user_id: id }
-      })
+    created() {
+        this.fill_table_via_url(this.dynamic_api)
+    },
+
+    methods: {
+        can_be_deleted(item) {
+            return !(item.is_admin || item.is_client)
+        },
+        load_more_users() {
+            this.load_more_via_url(this.dynamic_api)
+        },
+        navigate_to_view_profile(id) {
+            this.$router.push({name: 'client_profile', params: {user_id: id}})
+        },
+        handleAddStaff(payload) {
+            api.add_new_staff(this.user_id, payload)
+                .then(({data}) => {
+                    this.items.push(data)
+                })
+        }
     }
-  }
 }

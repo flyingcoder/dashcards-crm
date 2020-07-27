@@ -18,7 +18,7 @@
         </div>
         <v-row no-gutters class="card__footer">
             <slot name="footer">
-                <v-btn v-if="viewMoreBtn" text :loading="btnloading" class="view__more_btn mx-auto" @click="$emit('view-more')">
+                <v-btn v-if="viewMoreBtn" text :loading="btnloading2" class="view__more_btn mx-auto" @click="$emit('view-more')">
                     VIEW MORE
                 </v-btn>
             </slot>
@@ -40,11 +40,11 @@ export default {
         hasClose: { type: Boolean, default: true }
     },
     data: () => ({
-        btnloading: false
+        btnloading2: false
     }),
     created() {
         this.$event.$on('btnloading_off', () => {
-            this.btnloading = false
+            this.btnloading2 = false
         })
     }
 }

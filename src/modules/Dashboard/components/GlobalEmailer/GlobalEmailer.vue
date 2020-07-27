@@ -3,13 +3,13 @@
         <template v-slot:content>
             <v-row no-gutters v-if="user">
                 <v-col md="12" class="mb-2">
-                    <v-text-field required v-model="payload.to" placeholder="To: *" type="text"
-                                  dense filled hide-details="auto"
+                    <v-text-field required v-model="payload.to" label="To: *" type="text"
+                                  dense filled hide-details="auto" prepend-inner-icon="mdi-email-plus-outline"
                     />
                 </v-col>
                 <v-col md="12" class="mb-2">
-                    <v-text-field required v-model="payload.subject" placeholder="Subject: *" type="text" dense filled
-                                  hide-details="auto"
+                    <v-text-field required v-model="payload.subject" label="Subject: *" type="text" dense filled
+                                  hide-details="auto" prepend-inner-icon="mdi-email-newsletter"
                     />
                 </v-col>
                 <v-col md="12">

@@ -4,7 +4,7 @@
             <template #content>
                 <v-row class="custom-dialog" no-gutters>
                     <v-col md="12">
-                        <v-text-field v-model.trim="payload.title" label="Add Title" class="dialog__textfield d-field" color="#667187" solo clearable hide-details>
+                        <v-text-field v-model.trim="payload.title" label="Add Title" class="dialog__textfield d-field" color="#667187" filled clearable hide-details="auto">
                         </v-text-field>
                     </v-col>
                     <v-col md="12">

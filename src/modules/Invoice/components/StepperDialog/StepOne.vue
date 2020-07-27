@@ -2,20 +2,20 @@
     <v-row align="center" no-gutters class="step-one">
         <v-col cols="12" md="3" sm="12" class="label" v-if="!(dialog.type === 'create')">Invoice ID</v-col>
         <v-col cols="12" md="9" sm="12" class="value" v-if="!(dialog.type === 'create')">
-            <v-text-field :disabled="dialog.type === 'edit'" outlined dense class="textfield" color="#657186" solo hide-details flat placeholder="#" :value="`#INV-` + invoice_id"></v-text-field>
+            <v-text-field :disabled="dialog.type === 'edit'" outlined dense class="textfield" color="#657186" solo hide-details flat placeholder="#" :value="`#INV-` + invoice_id" />
         </v-col>
         <v-col cols="12" md="3" sm="4" xs="12" class="label">Invoice Title <span class="required">*</span></v-col>
         <v-col cols="12" md="9" sm="8" xs="12" class="value">
-            <v-text-field class="titlefield" color="#657186" solo hide-details flat dense outlined placeholder="Add Invoice Title *" v-model.trim="title"></v-text-field>
+            <v-text-field class="titlefield" color="#657186" solo hide-details flat dense outlined placeholder="Add Invoice Title *" v-model.trim="title" />
         </v-col>
 
         <v-col cols="12" md="3" sm="4" xs="12" class="label">Select Type <span class="required">*</span></v-col>
         <v-col cols="12" md="9" sm="8" xs="12" class="value">
-            <v-select :disabled="projectLock" solo outlined full-width dense hide-details color="#657186" flat :items="['hourly', 'monthly']" v-model="type" placeholder="Select Invoice Type"></v-select>
+            <v-select :disabled="projectLock" solo outlined full-width dense hide-details color="#657186" flat :items="['hourly', 'monthly']" v-model="type" placeholder="Select Invoice Type" />
         </v-col>
         <v-col cols="12" md="3" sm="4" xs="12" class="label" v-if="type === 'hourly'">Project/Campaign <span class="required">*</span></v-col>
         <v-col cols="12" md="9" sm="8" xs="12" class="value" v-if="type === 'hourly'">
-            <v-select :disabled="projectLock" :clearable="!projectLock" solo hide-details color="#657186" flat full-width outlined dense :items="projects" :value="selected_project" @change="setBillingTargets" item-text="title" item-value="id" placeholder="Select Project/Campaign"></v-select>
+            <v-select :disabled="projectLock" :clearable="!projectLock" solo hide-details color="#657186" flat full-width outlined dense :items="projects" :value="selected_project" @change="setBillingTargets" item-text="title" item-value="id" placeholder="Select Project/Campaign" />
         </v-col>
         <v-col cols="12" md="3" sm="4" xs="12" class="label">Invoice Date <span class="required">*</span></v-col>
         <v-col cols="12" md="9" sm="8" xs="12" class="value">
@@ -39,11 +39,11 @@
                 <template v-slot:item="{ item }">
                     <template>
                         <v-list-item-avatar>
-                            <img :src="item.image_url" />
+                            <img :src="item.image_url">
                         </v-list-item-avatar>
                         <v-list-item-content>
-                            <v-list-item-title v-html="item.fullname"></v-list-item-title>
-                            <v-list-item-subtitle v-html="item.job_title"></v-list-item-subtitle>
+                            <v-list-item-title v-html="item.fullname" />
+                            <v-list-item-subtitle v-html="item.job_title" />
                         </v-list-item-content>
                     </template>
                 </template>
@@ -57,21 +57,21 @@
                         <v-avatar left>
                             <v-icon>mdi-account-circle</v-icon>
                         </v-avatar>
-                        {{ data.item.fullname }}
+                        {{ data.item.fullname | ucwords }}
                     </v-chip>
                 </template>
                 <template v-slot:item="{ item }">
                     <v-list-item-avatar>
-                        <img :src="item.image_url" />
+                        <img :src="item.image_url">
                     </v-list-item-avatar>
                     <v-list-item-content>
-                        <v-list-item-title v-html="item.fullname"></v-list-item-title>
-                        <v-list-item-subtitle v-html="item.job_title"></v-list-item-subtitle>
+                        <v-list-item-title v-html="item.fullname" />
+                        <v-list-item-subtitle v-html="item.job_title" />
                     </v-list-item-content>
                 </template>
             </v-autocomplete>
         </v-col>
-        <teams-dialog ref="add_dialog" title="Add New Member" :dialog.sync="add_dialog" @save="add_member" @close-dialog="add_dialog = false"></teams-dialog>
+        <teams-dialog ref="add_dialog" title="Add New Member" :dialog.sync="add_dialog" @save="add_member" @close-dialog="add_dialog = false" />
     </v-row>
 </template>
 <script>

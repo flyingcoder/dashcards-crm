@@ -5,9 +5,8 @@ export const chat_api = {
         return request.get('api/chat/unread')
     },
 
-    get_conversation(id) {
-        var per_page = this.$store.getters['configs/messages_page_limits']
-        return request.get(`api/chat/private/${id}?per_page=${per_page}`)
+    get_conversation(id ) {
+        return request.get(`api/chat/private/${id}`)
     },
 
     send_message(payload) {

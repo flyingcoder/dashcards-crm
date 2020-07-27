@@ -17,7 +17,7 @@
                 @click="listeners['update:activeChip']('completed')"
         >
             <v-avatar left class="task__avatar">{{ props.countCompleted }}</v-avatar>
-            Done
+            Completed
         </v-chip>
 
         <v-chip
@@ -39,6 +39,15 @@
             <v-avatar left class="task__avatar">{{ props.countBehind }}</v-avatar>
             Behind
         </v-chip>
+        <v-chip
+                small
+                class="mx-1"
+                :class="['task__chip', { active: props.activeChip === 'urgent' }]"
+                @click="listeners['update:activeChip']('urgent')"
+        >
+            <v-avatar left class="task__avatar">{{ props.countUrgent }}</v-avatar>
+            Urgent
+        </v-chip>
     </div>
 </template>
 
@@ -46,11 +55,12 @@
     export default {
         name: 'TaskChips',
         props: {
-            countAll: Number,
-            countCompleted: Number,
-            countPending: Number,
-            countBehind: Number,
-            activeChip: String
+            countAll: { type: Number, default: 0 },
+            countCompleted: { type: Number, default: 0 },
+            countPending: { type: Number, default: 0 },
+            countBehind: { type: Number, default: 0 },
+            countUrgent: { type: Number, default: 0 },
+            activeChip: { type: String, default: 'all' }
         }
     }
 </script>

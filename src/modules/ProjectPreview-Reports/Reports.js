@@ -1,6 +1,6 @@
 import makeRequestTo from '@/services/makeRequestTo'
 import apiTo from './api'
-import { is_screen_medium_and_down } from '@/global_utils/is_screen_medium_and_down'
+import { is_screen_utils } from '@/global_utils/is_screen_utils'
 //Components
 import ReportsList from './components/ReportsList/ReportsList.vue'
 import ReportsDialog from './components/ReportsDialog.vue'
@@ -10,7 +10,7 @@ import DeleteDialog from '@/common/DeleteDialog.vue'
 
 export default {
     name: 'ReportsTab',
-    mixins: [is_screen_medium_and_down],
+    mixins: [is_screen_utils],
     components: {
         ReportsList,
         ReportsDialog,

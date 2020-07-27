@@ -1,7 +1,7 @@
 <template>
     <div class="header-icon">
-        <img v-if="imageSrc" :src="imageSrc" class="responsive-img icon default"/>
-        <img v-if="hoveredImageSrc" :src="hoveredImageSrc" class="responsive-img icon hovered"/>
+        <img v-if="imageSrc" :src="imageSrc" class="responsive-img icon default" alt="" >
+        <img v-if="hoveredImageSrc" :src="hoveredImageSrc" class="responsive-img icon hovered" alt="" >
     </div>
 </template>
 <script>

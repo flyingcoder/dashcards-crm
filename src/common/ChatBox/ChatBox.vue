@@ -39,13 +39,14 @@
                     </div>
 
                     <template v-else v-for="message of conv.messages">
-                        <div class="message me" :key="message.id" v-if="message.user_id === user.id">
+                        <div class="single-message me" :key="message.id" v-if="message.user_id === user.id">
                             <div class="sender">
                                 <div class="sender__img">
                                     <v-img :src="message.sender.image_url" />
                                     <span class="status online" />
                                 </div>
                                 <h5 class="sender__name">Me</h5>
+                                <v-spacer />
                                 <span class="date">  {{ message.created_at | chat_format }}  </span>
                             </div>
                             <div class="sender__message">
@@ -61,13 +62,14 @@
                             </div>
                         </div>
 
-                        <div class="message" :key="message.id" v-else>
+                        <div class="single-message" :key="message.id" v-else>
                             <div class="sender">
                                 <div class="sender__img">
                                     <v-img :src="message.sender.image_url" />
                                     <span :class="[ 'status', conv.user.is_online ? 'online' : 'offline' ]" />
                                 </div>
                                 <h5 class="sender__name">{{ conv.user.name }}</h5>
+                                <v-spacer />
                                 <span class="date"> {{ message.created_at | chat_format }} </span>
                             </div>
                             <div class="sender__message">

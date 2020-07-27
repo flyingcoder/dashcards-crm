@@ -1,16 +1,5 @@
 <template>
     <v-col md="12" class="pa-0 ma-0">
-        <div class="loading" v-if="loading">
-            <v-progress-linear :indeterminate="true"></v-progress-linear>
-        </div>
-
-<!--        <div class="no-data" v-if="!loading && tasks_are_empty">-->
-<!--            <div class="empty-content">-->
-<!--                <v-icon class="empty-icon">list</v-icon>-->
-<!--                <p class="empty-text">List Empty</p>-->
-<!--            </div>-->
-<!--        </div>-->
-
         <div class="tasks-tab">
             <task-chips
                     :count-all="total"
@@ -18,10 +7,13 @@
                     :count-pending="counter.pending"
                     :count-behind="counter.behind"
                     :count-open="counter.open"
+                    :count-urgent="counter.urgent"
                     :active-chip.sync="active_chip"
-            ></task-chips>
-
-            <task-custom-table :tasks="filtered_tasks" :tab="tab"></task-custom-table>
+            />
+            <task-custom-table :tasks="filtered_tasks" :tab="tab" :showProject="showProject" />
+            <div class="loading" v-if="loading">
+                <v-progress-linear :indeterminate="true" />
+            </div>
         </div>
     </v-col>
 </template>
@@ -35,7 +27,8 @@
         name: 'TasksTab',
         components: {TaskChips, TaskCustomTable},
         props: {
-            tab: String
+            tab: String,
+            showProject: {type: Boolean, default: false},
         },
 
         data: () => ({
@@ -47,7 +40,7 @@
             filtered_tasks() {
                 if (this.active_chip === 'all') return this.tasks
                 return this.tasks.filter(
-                    task => task.status.toLowerCase() === this.active_chip
+                    task => task.status.toLowerCase() === this.active_chip.toLowerCase()
                 )
             },
             tasks_are_empty() {
@@ -56,16 +49,9 @@
         },
 
         watch: {
-            active_chip: {
-                handler(val) {
-                    //console.log(this.tasks)
-                }
-            },
             tab: {
                 handler(val) {
-                    //api_url += '?all=true'
                     this.get_tasks(val)
-                    //console.log(this.tasks)
                 },
                 immediate: true
             }

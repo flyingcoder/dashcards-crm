@@ -1,6 +1,6 @@
-import { is_screen_medium_and_down } from '@/global_utils/is_screen_medium_and_down'
+import {is_screen_utils} from '@/global_utils/is_screen_utils'
 
 export default {
-  name: 'ProfileRight',
-  mixins: [is_screen_medium_and_down]
+    name: 'ProfileRight',
+    mixins: [is_screen_utils]
 }

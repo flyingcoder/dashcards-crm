@@ -3,10 +3,10 @@
         <div class="loading" v-if="user_loading">
             <v-progress-linear :indeterminate="true" />
         </div>
-        <template v-else>
+        <template v-else-if="user">
             <div class="info-div">
                 <div class="hour">Invoices</div>
-                <div class="value">{{ user.no_invoices }}</div>
+                <div class="value headline">{{ user.hasOwnProperty('no_invoices') ? user.no_invoices: 0 }}</div>
             </div>
             <div class="info-div">
                 <h4 class="name">{{ user.first_name }} {{ user.last_name }}</h4>
@@ -14,7 +14,7 @@
                     {{ user.company.name | ucwords }}
                 </div>
                 <div class="job-title" v-else>Client</div>
-                <div class="address" >
+                <div class="address">
                     <v-icon>place</v-icon>
                     <span v-if="user.props.location">{{ user.props.location | ucwords }}</span>
                     <span v-else-if="user.company.address">{{ user.company.address | ucwords }}</span>
@@ -23,9 +23,14 @@
             </div>
             <div class="info-div">
                 <div class="hour">Amount Paid</div>
-                <div class="value">
+                <div class="value headline">
                     {{ currency.symbol }}
                     {{ user.total_amount_paid }}
+                </div>
+                <div class="hour">Amount Unpaid</div>
+                <div class="value headline">
+                    {{ currency.symbol }}
+                    {{ user.total_amount_unpaid }}
                 </div>
             </div>
         </template>

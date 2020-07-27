@@ -108,7 +108,7 @@
                         <v-btn text block @click="load_more">Load More</v-btn>
                     </v-col>
                 </v-row>
-                <Empty v-else-if="!loading && project_folders.length === 0" headline="No folder found!">
+                <Empty v-else-if="!loading && project_folders.length === 0" icon="mdi-folder-remove-outline" headline="No folder found!">
                     <template v-slot:extra v-if="can_manage_folders && isGoogleAuthorized">
                         <v-btn large dark color="#3b589e" @click="openAddFolderDialog">
                             <v-icon left>mdi-google-drive</v-icon> Add Google Folder Link

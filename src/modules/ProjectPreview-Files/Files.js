@@ -1,4 +1,4 @@
-import { is_screen_medium_and_down } from '@/global_utils/is_screen_medium_and_down'
+import { is_screen_utils } from '@/global_utils/is_screen_utils'
 
 //components
 import BuzzookaTab from '@/modules/ProjectPreview-Files/tabs/Buzzooka/BuzzookaTab.vue'
@@ -7,7 +7,7 @@ import DropboxTab from '@/modules/ProjectPreview-Files/tabs/Dropbox/DropboxTab.v
 
 export default {
     name: 'FilesTab',
-    mixins: [is_screen_medium_and_down],
+    mixins: [is_screen_utils],
     components: {
         BuzzookaTab,
         GoogleDriveTab,

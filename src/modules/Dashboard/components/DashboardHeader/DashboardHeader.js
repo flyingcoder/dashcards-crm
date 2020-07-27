@@ -13,12 +13,12 @@ export default {
     }),
     computed: {
         ...mapGetters(['user']),
-        company_logo(){
-            if (this.user && this.user.company.company_logo) {
-                return this.user.company.company_logo
-            } else {
-                return require('@/assets/logo/buzzooka-blue.png')
-            }
+        company_logo() {
+            // if (this.user && this.user.company.company_logo) {
+            //     return this.user.company.company_logo
+            // } else {
+            // }
+            return require('@/assets/logo/buzzooka-blue.png')
         }
     },
     mounted() {

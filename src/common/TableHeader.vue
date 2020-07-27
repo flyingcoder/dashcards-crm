@@ -3,7 +3,7 @@
         <v-tooltip top v-if="!noButton">
             <template v-slot:activator="{ on, attrs }">
                 <v-icon v-bind="attrs" v-on="on" fab class="add__btn ml-2" @click="$emit('click')">
-                    add_circle_outline
+                    mdi-plus-circle-outline
                 </v-icon>
             </template>
             <span>Create new</span>
@@ -34,7 +34,6 @@
     </div>
 </template>
 <script>
-    import Breadcrumb from '@/common/Breadcrumb.vue'
 
     export default {
         name: 'TableHeader',
@@ -50,9 +49,6 @@
                 fab: true
             }
         },
-        components: {
-            Breadcrumb
-        }
     }
 </script>
 <style lang="scss" scoped>

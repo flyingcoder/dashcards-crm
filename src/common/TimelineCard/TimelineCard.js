@@ -66,9 +66,7 @@ export default {
                 'mdi-airballoon',
                 'mdi-access-point'
             ]
-            let icon = items[Math.floor(Math.random() * items.length)]
-            //todo set icon by types
-            return icon
+            return items[Math.floor(Math.random() * items.length)]
         },
         expand() {
             this.$router.push({

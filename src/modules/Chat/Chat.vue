@@ -101,7 +101,7 @@
                     </v-card>
                     <v-card outlined class="mx-auto message__content" v-else-if="activeChat">
                         <v-toolbar color="#3b589e">
-                            <v-layout wrap class="message__header">
+                            <v-row class="message__header">
                                 <v-flex xs2 class="sender__img">
                                     <svg viewBox="0 0 250 250" v-if="activeChat.type === 'group'">
                                         <path class="icon" :d="group_icon"/>
@@ -199,7 +199,7 @@
                                         </div>
                                     </v-card>
                                 </v-menu>
-                            </v-layout>
+                            </v-row>
                         </v-toolbar>
                         <v-flex xs12 sm12 class="message__body">
                             <v-skeleton-loader v-if="cardLoading" ref="skeleton" type="card-avatar"

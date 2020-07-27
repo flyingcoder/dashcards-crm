@@ -22,10 +22,14 @@ export const api_to = {
     },
 
     get_all_projects() {
-        return request.get('api/projects?all=true')
+        return request.get('api/projects?for=invoice&all=true')
     },
 
     get_projects_tasks(id) {
-        return request.get(`api/projects/${id}/tasks-for-invoice`)
+        return request.get(`api/projects/${id}/tasks-for-invoice?limit=10`)
+    },
+
+    bulk_remind(payload) {
+        return request.post(`api/invoice/bulk-remind`, payload)
     }
 }

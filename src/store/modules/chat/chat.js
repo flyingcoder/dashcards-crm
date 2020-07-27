@@ -81,7 +81,8 @@ const actions = {
         const index = state.conversations.findIndex(conv => conv.id === user.id)
         if (~index) commit('activate_conversation', index)
         else {
-            makeRequestTo.get_conversation(user.id).then(({data}) => {
+            makeRequestTo.get_conversation(user.id)
+                .then(({data}) => {
                 commit('add_conversation', {
                     id: user.id,
                     user,

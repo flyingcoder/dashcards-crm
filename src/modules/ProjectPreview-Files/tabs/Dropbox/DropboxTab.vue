@@ -11,7 +11,7 @@
                 </v-col>
             </v-card-title>
             <v-card-text>
-                <Empty headline="Under Construction!"></Empty>
+                <Empty icon="mdi-hammer-wrench" headline="Under Construction!"></Empty>
             </v-card-text>
         </v-card>
     </div>

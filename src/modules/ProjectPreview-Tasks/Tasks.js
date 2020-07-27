@@ -2,14 +2,17 @@ import request from '@/services/axios_instance'
 //Components
 import TasksCard from '@/common/TasksCard/TasksCard.vue'
 import PreviewCard from './components/TaskTabPreviewCard/TaskTabPreviewCard.vue'
-import Avatars from '@/common/Avatars' 
+import Avatars from '@/common/Avatars'
+import TasksContent from "@/common/TasksCard/TasksContent";
+import {mapMutations} from "vuex";
 
 export default {
     name: 'TasksTab',
     components: {
         TasksCard,
         PreviewCard,
-        Avatars, 
+        Avatars,
+        TasksContent
     },
 
     props: {
@@ -27,41 +30,36 @@ export default {
         searchResult: [],
         timeout: null
     }),
+
     computed: {
         type() {
             return this.$route.params.type || 'project'
         },
         paths() {
             return [
-                { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-                { text: this.type, disabled: true, router_name: null },
-                { text: 'Tasks', disabled: true, router_name: null }
+                {text: 'Dashboard', disabled: false, router_name: 'default-content'},
+                {text: this.type, disabled: true, router_name: null},
+                {text: 'Tasks', disabled: true, router_name: null}
             ]
-        }
+        },
     },
     mounted() {
         this.$event.$emit('path-change', this.paths)
         this.$event.$on('show-task-side-preview', task => {
             this.active_task_id = task.id
         })
+        this.set_page(this.page)
+        this.set_id(this.id)
     },
-
     provide() {
         const properties = {}
         Object.defineProperty(properties, 'loading', {
             get: () => this.loading
         })
-        return { properties, bodyMaxHeight: 'auto' }
+        return {properties, bodyMaxHeight: 'auto'}
     },
 
     watch: {
-        selected_tab: {
-            handler(val) {
-                //if (val === 'My Tasks') this.get_own_tasks()
-                //else this.get_all_tasks()
-            },
-            immediate: true
-        },
         search(val) {
             if (!val || val.length < 2 || this.isFetching) return
             this.isFetching = true
@@ -72,10 +70,11 @@ export default {
         },
     },
     methods: {
+        ...mapMutations('taskCards', ['set_page', 'set_id']),
         fetchEntries(val) {
             this.searchResult = []
             request.get(`api/projects/${this.id}/tasks/search?keyword=${val}`)
-                .then(({ data }) => {
+                .then(({data}) => {
                     this.searchResult = data.data
                 })
                 .finally(() => (this.isFetching = false))

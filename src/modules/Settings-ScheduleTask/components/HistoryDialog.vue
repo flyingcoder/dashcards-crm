@@ -12,9 +12,12 @@
                                     <v-icon left>mdi-email-check-outline</v-icon>
                                     {{ history.props.name | ucwords }}
                                 </v-col>
-                                <v-col cols="6">
-                                    {{ snakeCaseToNormal(history.interval_type) | ucwords }}
-                                    <span v-if="history.interval_at">{{ history.interval_at }}</span>
+                                <v-col cols="3">
+                                    <small class="caption">{{ snakeCaseToNormal(history.interval_type) | ucwords }}
+                                        <span v-if="history.interval_at">{{ history.interval_at }}</span></small>
+                                </v-col>
+                                <v-col cols="3">
+                                    <small class="caption"> {{ history.run_at }}</small>
                                 </v-col>
                             </v-row>
                         </v-expansion-panel-header>

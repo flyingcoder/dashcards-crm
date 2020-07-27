@@ -5,7 +5,7 @@
                   :loading="loading">
             <template v-slot:row-slot="{ item }">
                 <td>
-                    <Avatars :items="item.assignee" :deep="false" :count="5"></Avatars>
+                    <Avatars :items="item.assigned" :deep="false" :count="5"></Avatars>
                 </td>
                 <td class="text-cap clickable-td" @click="set_and_view_task(item)">
                     {{ item.title }}

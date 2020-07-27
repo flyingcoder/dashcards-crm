@@ -37,7 +37,7 @@
             </template>
             <template v-slot:row-slot="{ item }">
                 <td>
-                    <Avatars v-if="item.assignee.length > 0" :items="item.assignee" :count="1"
+                    <Avatars v-if="item.assigned.length > 0" :items="item.assigned" :count="1"
                              style="display:inline-block"/>
                     <v-tooltip right v-else>
                         <template v-slot:activator="{ on, attrs }">

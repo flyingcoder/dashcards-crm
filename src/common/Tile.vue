@@ -7,8 +7,8 @@
         </div>
         <div class="tile-content">
             <slot name="tile-content">
-                <h2 class="text-counter">{{ props.counter }}</h2>
-                <div class="text-title">{{ props.title }}</div>
+                <h2 class="text-counter subtitle-2">{{ props.counter }}</h2>
+                <div class="text-title body-2">{{ props.title }}</div>
             </slot>
         </div>
     </div>

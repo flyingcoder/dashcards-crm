@@ -45,7 +45,7 @@
 </template>
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import axios from '@/services/axios_instance'
+import request from '@/services/axios_instance'
 
 export default {
     name: 'StepThree',
@@ -54,7 +54,15 @@ export default {
         image_preview: null,
     }),
     computed: {
-        ...mapGetters('invoice', ['props', 'dialog', 'company_logo', 'type', 'parent', 'is_recurring']),
+        ...mapGetters('invoice', ['props', 'dialog', 'company_logo', 'type', 'parent']),
+        is_recurring: {
+            get() {
+                return this.$store.getters['invoice/is_recurring']
+            },
+            set(val){
+                this.set_is_recurring(val)
+            }
+        }
     },
     watch: {
         company_logo(val) {
@@ -72,19 +80,18 @@ export default {
                 this.image_preview = val
             }
         },
-        is_recurring(val) {
-            this.$store.commit('invoice/set_is_recurring', val)
-        }
+
     },
     mounted() {
         this.getTemplates()
     },
     methods: {
+        ...mapMutations('invoice', ['set_is_recurring']),
         file_selected(event) {
             if (event.target.files && event.target.files[0]) {
                 let formData = new FormData()
                 formData.append('file', event.target.files[0])
-                axios
+                request
                     .post(`api/file/image-upload`, formData, {
                         headers: { 'Content-Type': 'multipart/form-data' }
                     })
@@ -94,7 +101,7 @@ export default {
             }
         },
         getTemplates() {
-            axios.get(`api/template/invoices`)
+            request.get(`api/template/invoices`)
                 .then(({ data }) => {
                     this.templates = data.data
                 })

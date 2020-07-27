@@ -1,38 +1,52 @@
 <template>
     <div class="files__tab">
         <LinkDialog ref="link_dialog" @save="addLink" />
-        <delete-dialog :open-dialog.sync="delete_dialog" title="Delete File" text-content="Are you sure you want to delete this file?" @delete="delete_item" />
-        <delete-dialog :open-dialog.sync="bulk_delete_dialog" title="Delete Selected Files" text-content="Are you sure you want to delete these files? <br>This can't be undone." @delete="bulk_delete_files"></delete-dialog>
+        <delete-dialog :open-dialog.sync="delete_dialog" title="Delete File"
+                       text-content="Are you sure you want to delete this file?" @delete="delete_item"
+        />
+        <delete-dialog :open-dialog.sync="bulk_delete_dialog" title="Delete Selected Files"
+                       text-content="Are you sure you want to delete these files? <br>This can't be undone."
+                       @delete="bulk_delete_files"
+        />
         <div class="drop__files">
             <div class="drop__files_body">
-                <CustomDropzone ref="dropzone" :needConfirmation="true" :duplicateCheck="true" :options="dropzoneOptions" :useCustomSlot="true" dictFileTooBig="File too big" dictInvalidFileType="Invalid file type" @success="file_added" @failed="file_failed" @open-add-link-dialog="open_link_dialog" @upload-this-files="manual_upload" />
+                <CustomDropzone ref="dropzone" :needConfirmation="true" :duplicateCheck="true"
+                                :options="dropzoneOptions" :useCustomSlot="true" dictFileTooBig="File too big"
+                                dictInvalidFileType="Invalid file type" @success="file_added" @failed="file_failed"
+                                @open-add-link-dialog="open_link_dialog" @upload-this-files="manual_upload"
+                />
             </div>
         </div>
-        <EmbedViewer ref="embed_viewer_dialog" :media="selected_media"></EmbedViewer>
-        <VideoViewer ref="video_viewer_dialog" :media="selected_media" previewFrom="files"></VideoViewer>
-        <ImageViewer ref="image_viewer_dialog" :media="selected_media" previewFrom="files"></ImageViewer>
-        <DocsViewer ref="doc_viewer_dialog" :media="selected_media"></DocsViewer>
-        <IframeViewer ref="iframe_viewer_dialog" :media="selected_media"></IframeViewer>
-        <OtherViewer ref="other_viewer_dialog" :media="selected_media"></OtherViewer>
+        <EmbedViewer ref="embed_viewer_dialog" :media="selected_media" />
+        <VideoViewer ref="video_viewer_dialog" :media="selected_media" previewFrom="files" />
+        <ImageViewer ref="image_viewer_dialog" :media="selected_media" previewFrom="files" />
+        <DocsViewer ref="doc_viewer_dialog" :media="selected_media" />
+        <IframeViewer ref="iframe_viewer_dialog" :media="selected_media" />
+        <OtherViewer ref="other_viewer_dialog" :media="selected_media" />
         <v-card outlined class="files__tab-content p-2">
             <v-row no-gutters class="pa-5 files-header">
                 <v-col md="11" sm="9" xs="12">
-                    <ToolbarItem v-for="item of toolbarItems" :key="item.id" :icon="item.icon" :icon-text="item.iconText" :icon-class="item.className" :is-active="item.type === filter" @click="filter = item.type"></ToolbarItem>
+                    <ToolbarItem v-for="item of toolbarItems" :key="item.id" :icon="item.icon"
+                                 :icon-text="item.iconText" :icon-class="item.className"
+                                 :is-active="item.type === filter" @click="filter = item.type"
+                    />
                 </v-col>
-                <v-spacer></v-spacer>
+                <v-spacer />
                 <v-btn icon text right @click="setPreferredView('list')">
-                    <v-icon :class="view == 'list' ? 'active' : ''">list</v-icon>
+                    <v-icon :class="view === 'list' ? 'active' : ''">mdi-view-sequential</v-icon>
                 </v-btn>
                 <v-btn icon text right @click="setPreferredView('grid')">
-                    <v-icon :class="view == 'grid' ? 'active' : ''">grid_on</v-icon>
+                    <v-icon :class="view === 'grid' ? 'active' : ''">mdi-view-module</v-icon>
                 </v-btn>
             </v-row>
-            <v-card outlined v-if="view == 'grid'" class="grid-view">
+            <v-card outlined v-if="view === 'grid'" class="grid-view">
                 <v-container fluid grid-list-md>
                     <v-layout wrap v-if="filteredItems.length">
                         <v-col v-for="item in filteredItems" :key="item.id" xs="12" sm="4" md="3">
                             <v-card>
-                                <Media :height="150" :media="item" @click-alt="openViewer(item)" @click-main="openViewer(item)"></Media>
+                                <Media :height="150" :media="item" @click-alt="openViewer(item)"
+                                       @click-main="openViewer(item)"
+                                />
                                 <v-card-text>
                                     <v-list dense class="pa-0">
                                         <v-list-item two-line class="pa-0">
@@ -53,12 +67,14 @@
                                 </v-card-text>
                                 <v-card-actions>
                                     <span class="overline">{{ item.custom_properties.ext }}</span>
-                                    <v-spacer></v-spacer>
+                                    <v-spacer />
                                     <v-menu top v-if="item.category === 'videos' || item.category === 'images'">
                                         <template v-slot:activator="{ on: menu }">
                                             <v-tooltip top>
                                                 <template v-slot:activator="{ on: tooltip }">
-                                                    <v-btn class="ml-1" small v-on="{ ...tooltip, ...menu }" depressed text title="Approval">
+                                                    <v-btn class="ml-1" small v-on="{ ...tooltip, ...menu }" depressed
+                                                           text title="Approval"
+                                                    >
                                                         <v-icon small>mdi-file-question-outline</v-icon>
                                                     </v-btn>
                                                 </template>
@@ -66,14 +82,21 @@
                                             </v-tooltip>
                                         </template>
                                         <v-list>
-                                            <v-list-item v-for="(action, i) in approval_actions(item)" :key="i" @click="update_status(item, action)">
-                                                <v-list-item-title><v-icon left>{{action.icon}}</v-icon>{{ action.title }}</v-list-item-title>
+                                            <v-list-item v-for="(action, i) in approval_actions(item)" :key="i"
+                                                         @click="update_status(item, action)"
+                                            >
+                                                <v-list-item-title>
+                                                    <v-icon left>{{ action.icon }}</v-icon>
+                                                    {{ action.title }}
+                                                </v-list-item-title>
                                             </v-list-item>
                                         </v-list>
                                     </v-menu>
                                     <v-tooltip top v-if="item.mime_type !== 'link'">
                                         <template v-slot:activator="{ on }">
-                                            <v-btn class="ml-1" v-on="on" small depressed text :href="item.download_url">
+                                            <v-btn class="ml-1" v-on="on" small depressed text
+                                                   :href="item.download_url"
+                                            >
                                                 <v-icon small>cloud_download</v-icon>
                                             </v-btn>
                                         </template>
@@ -81,7 +104,9 @@
                                     </v-tooltip>
                                     <v-tooltip top v-else>
                                         <template v-slot:activator="{ on }">
-                                            <v-btn class="ml-1" text small depressed v-on="on" @click="goto_link(item.download_url)">
+                                            <v-btn class="ml-1" text small depressed v-on="on"
+                                                   @click="goto_link(item.download_url)"
+                                            >
                                                 <v-icon small>link</v-icon>
                                             </v-btn>
                                         </template>
@@ -89,7 +114,9 @@
                                     </v-tooltip>
                                     <v-tooltip top v-if="can_delete(item)">
                                         <template v-slot:activator="{ on }">
-                                            <v-btn class="ml-1" v-on="on" @click="open_delete_dialog(item)" small text depressed>
+                                            <v-btn class="ml-1" v-on="on" @click="open_delete_dialog(item)" small text
+                                                   depressed
+                                            >
                                                 <v-icon small>delete</v-icon>
                                             </v-btn>
                                         </template>
@@ -100,20 +127,26 @@
                         </v-col>
                     </v-layout>
                     <v-row no-gutters v-if="filteredItems.length">
-                        <v-spacer></v-spacer>
+                        <v-spacer />
                         <v-card-actions class="py-2">
                             <v-btn tile text v-if="noMoreData === true" disabled>NO MORE DATA</v-btn>
                             <v-btn tile text :loading="btnloading" v-else @click="get_more_files">LOAD MORE</v-btn>
                         </v-card-actions>
-                        <v-spacer></v-spacer>
+                        <v-spacer />
                     </v-row>
-                    <Empty  icon="mdi-file-alert-outline" headline="No file found" v-else></Empty>
+                    <Empty icon="mdi-file-alert-outline" headline="No file found" v-else />
                 </v-container>
             </v-card>
-            <VueTable v-else-if="view == 'list'" :items="filteredItems" :headers="headers" :showRowActions="true" @load-more="get_more_files" icon="mdi-file-alert-outline" title="Files" :loading="loading" :key="componentKey" :noMoreData="noMoreData" :showSelect="user.is_admin" @delete-selected="confirmBulkDeleteFiles">
+            <VueTable v-else-if="view === 'list'" :items="filteredItems" :headers="headers" :showRowActions="true"
+                      @load-more="get_more_files" icon="mdi-file-alert-outline" title="Files" :loading="loading"
+                      :key="componentKey" :noMoreData="noMoreData" :showSelect="user.is_admin"
+                      @delete-selected="confirmBulkDeleteFiles"
+            >
                 <template v-slot:row-slot="{ item }">
                     <td>
-                        <Media :height="50" :width="50" :media="item" size="lg" @click-alt="openViewer(item)" @click-main="openViewer(item)"></Media>
+                        <Media :height="50" :width="50" :media="item" size="lg" @click-alt="openViewer(item)"
+                               @click-main="openViewer(item)"
+                        />
                     </td>
                     <td class="text-upper">{{ item.custom_properties.ext }}</td>
                     <td class="text-cap">{{ item.name }}</td>
@@ -133,8 +166,13 @@
                                 </v-tooltip>
                             </template>
                             <v-list>
-                                <v-list-item v-for="(action, i) in approval_actions(item)" :key="i" @click="update_status(item, action)">
-                                    <v-list-item-title><v-icon left>{{action.icon}}</v-icon> {{ action.title }}</v-list-item-title>
+                                <v-list-item v-for="(action, i) in approval_actions(item)" :key="i"
+                                             @click="update_status(item, action)"
+                                >
+                                    <v-list-item-title>
+                                        <v-icon left>{{ action.icon }}</v-icon>
+                                        {{ action.title }}
+                                    </v-list-item-title>
                                 </v-list-item>
                             </v-list>
                         </v-menu>
@@ -171,9 +209,9 @@
 <script src="./BuzzookaTab.js"></script>
 <style lang="scss" src="./BuzzookaTab.scss"></style>
 <style scoped>
->>>.content__wrapper .buzz__tables .buzz__tablesTwo {
-    padding: 0;
-    border: none;
-    background-color: #fff;
-}
+    >>> .content__wrapper .buzz__tables .buzz__tablesTwo {
+        padding: 0;
+        border: none;
+        background-color: #fff;
+    }
 </style>

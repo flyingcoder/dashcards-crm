@@ -1,6 +1,7 @@
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 import _cloneDeep from 'lodash/cloneDeep'
 import request from '@/services/axios_instance'
+import {is_screen_utils} from "@/global_utils/is_screen_utils";
 
 //Components
 import TasksCard from '@/common/TasksCard/TasksCard.vue'
@@ -19,6 +20,7 @@ import AlarmCard from '@/common/AlarmCard/AlarmCard.vue'
 
 export default {
     name: 'DashboardContent',
+    mixins: [is_screen_utils],
     components: {
         TasksCard,
         TimelineCard,
@@ -56,7 +58,6 @@ export default {
     data: () => ({
         loading: true,
         init: true,
-        paths: [{ text: 'Dashboard', disabled: true, router_name: null }],
         isRequestInProgress: false,
         args: {
             dashboard: true
@@ -128,11 +129,13 @@ export default {
     },
     created() {
         this.fill_cards().finally(() => (this.loading = false))
+        this.set_id(null)
     },
 
     methods: {
         ...mapActions('cards', ['fill_cards', 'update_cards']),
         ...mapMutations('cards', ['set_cards']),
+        ...mapMutations('taskCards', ['set_id']),
         close(id) {
             if (this.isRequestInProgress) return
             this.isRequestInProgress = true
@@ -151,7 +154,7 @@ export default {
             )
         },
         can_view_timeline(user) {
-            return user ? true : false
+            return !!user
         },
         can_view_client(user) {
             return user.is_admin
@@ -171,7 +174,7 @@ export default {
             )
         },
         can_view_payment(user) {
-            return user ? true : false
+            return !!user
         },
         can_view_invoice(user) {
             return user.can.hasOwnProperty('invoices') || user.is_admin
@@ -184,7 +187,7 @@ export default {
             )
         },
         can_view_passbox(user) {
-            return user ? true : false
+            return !!user
         },
 
         is_dashcard_enabled(slug){

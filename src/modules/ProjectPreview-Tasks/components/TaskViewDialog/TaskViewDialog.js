@@ -14,7 +14,7 @@ export default {
         ConfirmDialog
     },
     props: {
-        task: {type: Object, default: null}
+        task: Object
     },
     created() {
         if (this.task) {

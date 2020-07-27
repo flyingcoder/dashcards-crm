@@ -69,7 +69,7 @@
     // Tablet View
     @media only screen and (max-width: 768px) {
         .breadcrumb-wrapper {
-            //TODO add styling for breadcrumb
+
             ul.v-breadcrumbs.theme--light {
                 li.page__title {
                     font-size: 20px;

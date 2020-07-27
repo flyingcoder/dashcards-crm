@@ -10,7 +10,7 @@
                         <v-timeline-item v-for="item of items" :key="item.id" small :icon="set_icon(item)" fill-dot>
                             <v-row class="pt-1" no-gutters>
                                 <v-col>
-                                    <strong>{{ item.created_at | from_now }}</strong>
+                                    <strong class="subtitle-2">{{ item.created_at | from_now | ucwords }}</strong>
                                     <div class="caption mb-2">{{ item.description }}</div>
                                     <FilesPreview v-if="!isExpanded" :item="item" :limit="5" />
                                 </v-col>

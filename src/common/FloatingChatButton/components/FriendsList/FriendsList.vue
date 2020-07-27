@@ -23,7 +23,7 @@
         </v-btn>
 
         <v-card class="chat__inbox">
-            <div class="inbox__title">Online Friends ({{ online_users.length }})</div>
+            <div class="inbox__title">Online ({{ online_users.length }})</div>
             <div
                     class="user new__message"
                     v-for="user of online_users"
@@ -31,7 +31,7 @@
                     @click="open_chat_box(user)"
             >
                 <div class="user__img">
-                    <v-img :src="user.image_url" />
+                    <v-img :src="user.image_url"/>
                     <span
                             class="status"
                             :class="[user.is_online ? 'online' : 'offline']"

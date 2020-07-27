@@ -6,22 +6,26 @@
             offset-y
             :max-width="350"
     >
-        <template v-slot:activator="{ on }">
-            <div v-on="on">
-                <v-avatar color="grey" :size="size">
-                    <v-img :src="user.image_url" class="hover" />
-                </v-avatar>
-                <v-icon
-                        x-small
-                        v-on="on"
-                        :color="is_online ? `success` : `grey`"
-                        class="status"
-                >
-                    mdi-circle
-                </v-icon>
-                <span class="ml-1" v-if="!iconOnly">{{ displayName | ucwords | truncate(20) }}</span>
-                <slot />
-            </div>
+        <template v-slot:activator="{ on: menu, attrs }">
+            <v-tooltip top>
+                <template v-slot:activator="{ on: tooltip }">
+                    <div v-bind="attrs" v-on="{ ...tooltip, ...menu }">
+                        <v-avatar color="grey" :size="size">
+                            <v-img :src="user.image_url" class="hover" />
+                        </v-avatar>
+                        <v-icon
+                                x-small
+                                :color="is_online ? `success` : `grey`"
+                                class="status"
+                        >
+                            mdi-circle
+                        </v-icon>
+                        <span class="ml-1" v-if="!iconOnly">{{ displayName | ucwords | truncate(20) }}</span>
+                        <slot />
+                    </div>
+                </template>
+                <span>{{ displayName | ucwords }}</span>
+            </v-tooltip>
         </template>
         <v-card>
             <v-list>
@@ -58,13 +62,13 @@
             <v-card-actions>
                 <v-btn @click="navigate_to_profile" text small class="caption">
                     <v-icon small left>person</v-icon>
-                    View Profile
+                    {{ !self ? 'View Profile' : 'View Self Profile' }}
                 </v-btn>
-                <v-btn @click="open_mailer" text small class="caption">
+                <v-btn v-if="!self" @click="open_mailer" text small class="caption">
                     <v-icon small left>email</v-icon>
                     Email
                 </v-btn>
-                <v-btn @click="navigate_to_chat" text small class="caption">
+                <v-btn v-if="!self" @click="navigate_to_chat" text small class="caption">
                     <v-icon small left>message</v-icon>
                     Chat
                 </v-btn>
@@ -73,7 +77,6 @@
     </v-menu>
 </template>
 <script>
-
     export default {
         inheritAttrs: false,
         props: {
@@ -98,6 +101,9 @@
             is_online() {
                 const is_online = this.onlineUsers.findIndex(ou => ou.id === this.user.id);
                 return !!(~is_online)
+            },
+            self() {
+                return this.$store.getters.user.id === this.user.id
             }
         },
 

@@ -91,7 +91,7 @@
                                     <v-row no-gutters>
                                         <v-col class="body-2" md="6">
                                             <v-icon :color="item.event_type.properties.color" small>mdi-circle</v-icon>
-                                            {{ item.title }}
+                                            {{ item.title | ucwords}}
                                         </v-col>
                                         <v-col class="body-2" md="5">{{ item.start | format }}</v-col>
                                         <v-col class="body-2" md="1">

@@ -61,7 +61,7 @@ export default {
             }
         },
         disabled() {
-            return this.title ? false : true
+            return !this.title
         }
     },
 
@@ -116,14 +116,13 @@ export default {
 
         update_fields(fields) {
             const task = _cloneDeep(fields)
-            console.log(task, 'eoo')
             this.title = task.title
             this.description = task.description
             this.start_date = task.started_at
             this.end_date = task.end_at
             this.milestones.selected = task.milestone_id
             //this.members.selected = task.assigned_ids
-            this.$set(this.members, 'selected', task.assignee)
+            this.$set(this.members, 'selected', task.assigned)
         },
 
         clear_and_close() {
@@ -136,9 +135,10 @@ export default {
 
         async fill_dropdowns() {
             this.loading = true
+            let projectId = this.task ? this.task.project_id : this.id
             const [members, milestones] = await Promise.all([
-                apiTo.get_project_members(this.id),
-                apiTo.get_project_milestones(this.id)
+                apiTo.get_project_members(projectId),
+                apiTo.get_project_milestones(projectId)
             ])
             this.loading = false
             this.members.all_items = members.data

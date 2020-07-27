@@ -74,7 +74,10 @@ export default {
         },
         permissions() {
             return this.$_permissions.get('hq_members')
-        }
+        },
+        can_add() {
+            return this.logged_user.is_admin || this.logged_user.is_manager
+        },
     },
 
     methods: {

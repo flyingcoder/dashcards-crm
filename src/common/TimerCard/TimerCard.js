@@ -103,8 +103,8 @@ export default {
 
     methods: {
         task_belongs_to_logged_user(task) {
-            if (!task.assignee.length) return
-            let ind = task.assignee.findIndex(
+            if (!task.assigned.length) return
+            let ind = task.assigned.findIndex(
                 i => i.id === this.$auth.logged_user().id
             )
             return !!(~ind)

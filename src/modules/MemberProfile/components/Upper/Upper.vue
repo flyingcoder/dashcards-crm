@@ -5,7 +5,7 @@
             <v-menu bottom left v-if="can_edit">
                 <template v-slot:activator="{ on }">
                     <v-btn dark icon v-on="on" class="settings">
-                        <v-icon large>settings</v-icon>
+                        <v-icon>settings</v-icon>
                     </v-btn>
                 </template>
                 <v-list>

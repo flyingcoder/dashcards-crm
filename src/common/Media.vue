@@ -11,12 +11,13 @@
         />
         <v-img v-else :height="height" :width="width" @click="$emit('click-alt')">
             <div class="default-img-wrapper">
-                <span class="fiv-icon fiv-sqo"
+                <span class="fiv-icon fiv-sqo" v-if="media.custom_properties.ext"
                       :class="[ `fiv-icon-` + media.custom_properties.ext, `fiv-size-` + size ]"
                 />
+                <v-icon v-else x-large>mdi-image-off-outline</v-icon>
             </div>
         </v-img>
-        <slot/>
+        <slot />
     </div>
 </template>
 
