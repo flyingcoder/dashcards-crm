@@ -84,7 +84,7 @@
                 if (this.user.is_buzzooka_super_admin) {
                     list.push({
                         title: 'Admin Area',
-                        icon: 'mdi-account-key-outline', //require('@/assets/icons/header/user/logout.svg'),
+                        icon: 'mdi-account-lock-outline', //require('@/assets/icons/header/user/logout.svg'),
                         action: 'adminDashboard'
                     })
                 }

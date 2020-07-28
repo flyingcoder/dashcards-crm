@@ -1,10 +1,11 @@
 <template functional>
     <v-btn :class="['button', { active: props.isActive }]" color="#b3b7c3" medium text v-on="listeners" class="mr-1">
-        <v-icon dark small left :class="props.iconClass">{{ props.icon }}</v-icon>
+        <v-icon left :class="props.iconClass">{{ props.icon }}</v-icon>
         {{ props.iconText }}
     </v-btn>
 </template>
 <script>
+    //todo using is_screen_utils hide btn text on mobile
 export default {
     props: {
         icon: String,

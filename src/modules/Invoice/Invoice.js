@@ -10,7 +10,7 @@ import DeleteDialog from '@/common/DeleteDialog.vue'
 import EmailDialog from './components/EmailDialog/EmailDialog.vue'
 import InvoiceDialog from './components/InvoiceDialog/InvoiceDialog.vue'
 import ViewInvoice from './components/ViewInvoice/ViewInvoice.vue'
-import Actions from '@/common/VueTable/Actions.vue'
+import Actions from '@/common/VueTable/ActionDropdown.vue'
 import VueTable from '@/common/VueTable/VueTable.vue'
 import StepperInvoiceDialog from './components/StepperDialog/StepperInvoiceDialog.vue'
 
@@ -42,13 +42,7 @@ export default {
             {text: 'Billed To', sortable: false},
             {text: 'Status', sortable: false},
             {text: 'Amount', sortable: false},
-            {
-                text: 'Action',
-                value: 'actions',
-                sortable: false,
-                width: '180px',
-                align: 'center'
-            }
+            {text: 'Action', sortable: false, width: '40px', align: 'center'}
         ],
         view_item: null,
         table_config: {
@@ -60,7 +54,7 @@ export default {
         filter: {
             status: 'all'
         },
-        btn_reminding: false
+        btn_reminding: false,
     }),
 
     created() {
@@ -90,7 +84,7 @@ export default {
             'set_props'
         ]),
         can_pay(item) {
-            return item.billed_to === this.user.id
+            return item.billed_to.id === this.user.id
         },
         navigatePayment(item) {
             this.$router.push({name: 'pay-invoice', params: {id: item.id}})

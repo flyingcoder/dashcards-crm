@@ -32,11 +32,11 @@
                     />
                 </v-col>
                 <v-spacer />
-                <v-btn icon text right @click="setPreferredView('list')">
-                    <v-icon :class="view === 'list' ? 'active' : ''">mdi-view-sequential</v-icon>
+                <v-btn icon right @click="setPreferredView('list')">
+                    <v-icon :class="{ active: view === 'list' }">mdi-view-sequential</v-icon>
                 </v-btn>
-                <v-btn icon text right @click="setPreferredView('grid')">
-                    <v-icon :class="view === 'grid' ? 'active' : ''">mdi-view-module</v-icon>
+                <v-btn icon right @click="setPreferredView('grid')">
+                    <v-icon :class="{ active:view === 'grid' }">mdi-view-module</v-icon>
                 </v-btn>
             </v-row>
             <v-card outlined v-if="view === 'grid'" class="grid-view">
@@ -72,10 +72,8 @@
                                         <template v-slot:activator="{ on: menu }">
                                             <v-tooltip top>
                                                 <template v-slot:activator="{ on: tooltip }">
-                                                    <v-btn class="ml-1" small v-on="{ ...tooltip, ...menu }" depressed
-                                                           text title="Approval"
-                                                    >
-                                                        <v-icon small>mdi-file-question-outline</v-icon>
+                                                    <v-btn class="ml-1" icon v-on="{ ...tooltip, ...menu }" depressed>
+                                                        <v-icon>mdi-clipboard-pulse-outline</v-icon>
                                                     </v-btn>
                                                 </template>
                                                 <span>Approval Status</span>
@@ -94,30 +92,30 @@
                                     </v-menu>
                                     <v-tooltip top v-if="item.mime_type !== 'link'">
                                         <template v-slot:activator="{ on }">
-                                            <v-btn class="ml-1" v-on="on" small depressed text
+                                            <v-btn class="ml-1" v-on="on" depressed icon
                                                    :href="item.download_url"
                                             >
-                                                <v-icon small>cloud_download</v-icon>
+                                                <v-icon>mdi-cloud-download-outline</v-icon>
                                             </v-btn>
                                         </template>
                                         <span>Download File</span>
                                     </v-tooltip>
                                     <v-tooltip top v-else>
                                         <template v-slot:activator="{ on }">
-                                            <v-btn class="ml-1" text small depressed v-on="on"
+                                            <v-btn icon class="ml-1" depressed v-on="on"
                                                    @click="goto_link(item.download_url)"
-                                            >
-                                                <v-icon small>link</v-icon>
+>
+                                                <v-icon>mdi-link-box-variant-outline</v-icon>
                                             </v-btn>
                                         </template>
                                         <span>Go to link</span>
                                     </v-tooltip>
                                     <v-tooltip top v-if="can_delete(item)">
                                         <template v-slot:activator="{ on }">
-                                            <v-btn class="ml-1" v-on="on" @click="open_delete_dialog(item)" small text
+                                            <v-btn class="ml-1" v-on="on" @click="open_delete_dialog(item)" icon
                                                    depressed
                                             >
-                                                <v-icon small>delete</v-icon>
+                                                <v-icon>mdi-delete-circle-outline</v-icon>
                                             </v-btn>
                                         </template>
                                         <span>Delete File</span>
@@ -129,7 +127,7 @@
                     <v-row no-gutters v-if="filteredItems.length">
                         <v-spacer />
                         <v-card-actions class="py-2">
-                            <v-btn tile text v-if="noMoreData === true" disabled>NO MORE DATA</v-btn>
+                            <v-btn tile text v-if="noMoreData" disabled>NO MORE DATA</v-btn>
                             <v-btn tile text :loading="btnloading" v-else @click="get_more_files">LOAD MORE</v-btn>
                         </v-card-actions>
                         <v-spacer />
@@ -158,8 +156,8 @@
                             <template v-slot:activator="{ on: menu }">
                                 <v-tooltip left>
                                     <template v-slot:activator="{ on: tooltip }">
-                                        <v-btn fab small v-on="{ ...tooltip, ...menu }" depressed text title="Approval">
-                                            <v-icon small>mdi-file-question-outline</v-icon>
+                                        <v-btn icon v-on="{ ...tooltip, ...menu }" depressed>
+                                            <v-icon>mdi-clipboard-pulse-outline</v-icon>
                                         </v-btn>
                                     </template>
                                     <span>Approval Status</span>
@@ -178,24 +176,24 @@
                         </v-menu>
                         <v-tooltip left v-if="item.mime_type !== 'link'">
                             <template v-slot:activator="{ on }">
-                                <v-btn v-on="on" fab small depressed :href="item.download_url">
-                                    <v-icon small>cloud_download</v-icon>
+                                <v-btn v-on="on" icon depressed :href="item.download_url">
+                                    <v-icon>mdi-cloud-download-outline</v-icon>
                                 </v-btn>
                             </template>
                             <span>Download File</span>
                         </v-tooltip>
                         <v-tooltip left v-else>
                             <template v-slot:activator="{ on }">
-                                <v-btn fab text small depressed v-on="on" @click="goto_link(item.download_url)">
-                                    <v-icon small>link</v-icon>
+                                <v-btn icon depressed v-on="on" @click="goto_link(item.download_url)">
+                                    <v-icon>mdi-link-box-variant-outline</v-icon>
                                 </v-btn>
                             </template>
                             <span>Go to link</span>
                         </v-tooltip>
                         <v-tooltip left v-if="can_delete(item)">
                             <template v-slot:activator="{ on }">
-                                <v-btn v-on="on" @click="open_delete_dialog(item)" fab small text depressed>
-                                    <v-icon small>delete</v-icon>
+                                <v-btn v-on="on" @click="open_delete_dialog(item)" icon depressed>
+                                    <v-icon>mdi-delete-circle-outline</v-icon>
                                 </v-btn>
                             </template>
                             <span>Delete File</span>

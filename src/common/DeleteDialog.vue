@@ -10,11 +10,14 @@
                 @button2="delete_clicked"
         >
             <template v-slot:content>
-                <v-alert outlined type="warning" prominent class="my-4">
-                    <v-row align="center">
-                        <v-col class="grow" v-html="textContent"></v-col>
-                    </v-row>
-                </v-alert>
+                <v-banner two-line outlined tile flat>
+                    <v-avatar slot="icon" color="red accent-4" size="40">
+                        <v-icon icon="mdi-lock" color="white">
+                            mdi-shield-alert-outline
+                        </v-icon>
+                    </v-avatar>
+                    <p class="title" v-html="textContent" />
+                </v-banner>
             </template>
         </custom-dialog>
     </div>

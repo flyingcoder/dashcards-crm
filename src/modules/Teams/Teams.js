@@ -76,7 +76,10 @@ export default {
             return this.$_permissions.get('hq_members')
         },
         can_add() {
-            return this.logged_user.is_admin || this.logged_user.is_manager
+            if(this.logged_user.is_admin || this.logged_user.is_manager) {
+                return true
+            }
+            return this.permissions && this.permissions.create
         },
     },
 

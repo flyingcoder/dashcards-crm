@@ -48,7 +48,7 @@
                  @delete="open_delete_dialog" @edit="open_edit_dialog"
         >
             <template slot="header-toolbar" class="icons">
-                <table-header :noButton="!permissions.create" :noListButton="false" :noGridButton="false"
+                <table-header :noButton="!can_add" :noListButton="false" :noGridButton="false"
                               @click="add_dialog = true"
                               @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')"
                 />

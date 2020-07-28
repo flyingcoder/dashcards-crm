@@ -49,22 +49,18 @@
                          @edit="open_edit_dialog(item)" @view="open_view_dialog(item)"
                 >
                     <template v-slot:extra>
-                        <v-tooltip left v-if="can_pay(item)">
-                            <template v-slot:activator="{ on }">
-                                <v-btn dense v-on="on" icon @click="navigatePayment(item)">
-                                    <v-icon>mdi-cash</v-icon>
-                                </v-btn>
-                            </template>
-                            <span>Pay</span>
-                        </v-tooltip>
-                        <v-tooltip left v-if="item.status !== 'paid'">
-                            <template v-slot:activator="{ on }">
-                                <v-btn :loading="item.extra.btnloading" dense v-on="on" icon @click="remind_invoice(item)">
-                                    <v-icon>mdi-bell-circle-outline</v-icon>
-                                </v-btn>
-                            </template>
-                            <span>Remind</span>
-                        </v-tooltip>
+                        <v-list-item v-if="can_pay(item)" @click="navigatePayment(item)">
+                            <v-list-item-title>
+                                <v-icon left>mdi-cash</v-icon>
+                                Pay
+                            </v-list-item-title>
+                        </v-list-item>
+                        <v-list-item v-if="item.status !== 'paid'" @click="remind_invoice(item)">
+                            <v-list-item-title>
+                                <v-icon left>mdi-bell-circle-outline</v-icon>
+                                Remind
+                            </v-list-item-title>
+                        </v-list-item>
                     </template>
                 </Actions>
             </template>

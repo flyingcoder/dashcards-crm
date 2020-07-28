@@ -71,7 +71,7 @@
                     <v-tooltip left>
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn icon class="mx-1" v-bind="attrs" v-on="on" @click="none">
-                                <v-icon small>mdi-arrow-collapse-up</v-icon>
+                                <v-icon>mdi-arrow-collapse-vertical</v-icon>
                             </v-btn>
                         </template>
                         <span>Hide All</span>

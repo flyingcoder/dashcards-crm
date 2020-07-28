@@ -41,24 +41,28 @@ export default {
         headers: [{
                 text: 'Thumbnail',
                 value: 'thumbnail',
-                sortable: false
+                sortable: false,
+                width: 80
             },
             {
                 text: 'Filetype',
-                value: 'filetype'
+                value: 'filetype',
+                sortable: false,
+                width: 30
             },
             {
                 text: 'Filename',
                 value: 'filename',
-                width: '35%'
+                sortable: false
             },
             {
                 text: 'Added by',
-                value: 'member'
+                value: 'member',
+                sortable: false,
+                width: 100
             },
             {
                 text: 'Action',
-                value: 'action',
                 sortable: false,
                 align: 'center',
                 width: '180px'

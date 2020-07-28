@@ -4,13 +4,6 @@
             <v-progress-linear :indeterminate="true" />
         </div>
 
-        <div class="no-data" v-else-if="tasks_are_empty">
-            <div class="empty-content">
-                <v-icon class="empty-icon">list</v-icon>
-                <p class="empty-text">List Empty</p>
-            </div>
-        </div>
-
         <div class="tasks-tab" v-show="!user_loading">
             <tasks-content :hasTabs="false" hasLoadMoreBtn showProject />
         </div>
