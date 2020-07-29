@@ -9,20 +9,20 @@
             <v-tabs-items v-model="active_tab">
                 <v-tab-item v-for="tab of tabs" :key="tab.id" :value="tab.name">
                     <v-card flat>
-                        <tasks-tab :tab="active_tab" :showProject="showProject" v-if="active_tab === tab.name"/>
+                        <tasks-tab :tab="active_tab" :showProject="showProject" v-if="active_tab === tab.name" />
                     </v-card>
                 </v-tab-item>
             </v-tabs-items>
         </template>
         <template v-else>
-            <tasks-tab tab="My Tasks" :showProject="showProject"/>
+            <tasks-tab tab="My Tasks" :showProject="showProject" />
         </template>
         <v-card-actions v-if="hasLoadMoreBtn">
-            <v-spacer/>
+            <v-spacer />
             <v-btn text class="view__more_btn" :disabled="!has_see_more_url" @click="loadMore">
                 VIEW MORE
             </v-btn>
-            <v-spacer/>
+            <v-spacer />
         </v-card-actions>
         <TaskDialog ref="add_task_dialog" dialog-title="Add Task" :id="project_id" @save="create_new_task($event)"
                     @close="closeAddDialog()"
@@ -41,14 +41,14 @@
                 <v-row no-gutters>
                     <v-col md="12" class="title">
                         <v-banner two-line outlined tile>
-                            <v-avatar slot="icon" color="deep-purple accent-4" size="40" >
+                            <v-avatar slot="icon" color="deep-purple accent-4" size="40">
                                 <v-icon icon="mdi-lock" color="white">
                                     mdi-clipboard-check-outline
                                 </v-icon>
                             </v-avatar>
                             <p>Mark task as completed?</p>
                             <p class="body-2">
-                                <v-checkbox v-model="notify_task_complete" label="Notify next task assignee."/>
+                                <v-checkbox v-model="notify_task_complete" label="Notify project members" />
                             </p>
                         </v-banner>
                     </v-col>
@@ -62,7 +62,7 @@
                 <v-row no-gutters>
                     <v-col md="12" class="title">
                         <v-banner two-line outlined tile>
-                            <v-avatar slot="icon" color="deep-purple accent-4" size="40" >
+                            <v-avatar slot="icon" color="deep-purple accent-4" size="40">
                                 <v-icon icon="mdi-lock" color="white">
                                     mdi-clipboard-alert-outline
                                 </v-icon>
