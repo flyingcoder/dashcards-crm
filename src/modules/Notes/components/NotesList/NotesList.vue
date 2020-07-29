@@ -8,7 +8,7 @@
             <v-list v-if="notes.length == 0">
                 <v-list-item>
                     <v-list-item-content>
-                        <Empty headline="No notes yet"></Empty>
+                        <Empty headline="No notes yet" icon="mdi-book-outline"></Empty>
                     </v-list-item-content>
                 </v-list-item>
             </v-list>

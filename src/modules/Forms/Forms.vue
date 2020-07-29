@@ -1,19 +1,27 @@
 <template>
     <div class="forms">
-        <VueTable :items="items" :headers="headers" :showRowActions="true" @load-more="load_more" :loading="loading" title="Forms" :key="componentKey" :noMoreData="noMoreData" :showSelect="false" @delete-selected="open_bulk_delete_dialog($event)">
+        <VueTable :items="items" :headers="headers" :showRowActions="true" @load-more="load_more" :loading="loading"
+                  title="Forms" :key="componentKey" :noMoreData="noMoreData" :showSelect="false"
+                  @delete-selected="open_bulk_delete_dialog($event)" icon="mdi-file-table"
+        >
             <template slot="header-toolbar">
-                <table-header :noListButton="true" :noGridButton="true" @click="go_to_form_builder" @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')" />
+                <table-header :noListButton="true" :noGridButton="true" @click="go_to_form_builder"
+                              @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')"
+                />
             </template>
             <template v-slot:row-slot="{ item }">
                 <td>{{ item.id }}</td>
                 <td class="subtitle-2">{{ item.title | ucwords }}</td>
                 <td>
-                    <Avatar :user="item.user"></Avatar>
+                    <Avatar :user="item.user" />
                 </td>
                 <td>{{ item.status | ucwords }}</td>
                 <td class="text-center">{{ item.responses_count }}</td>
                 <td>{{ item.created_at | format }}</td>
-                <Actions :item="item" :permissions="$_permissions.get('forms')" :hasEdit="can_edit(item)" :hasDelete="can_delete(item)" @delete="open_delete_dialog(item)" @edit="go_to_form_edit(item)" @view="go_to_form_preview(item)">
+                <Actions :item="item" :permissions="$_permissions.get('forms')" :hasEdit="can_edit(item)"
+                         :hasDelete="can_delete(item)" @delete="open_delete_dialog(item)" @edit="go_to_form_edit(item)"
+                         @view="go_to_form_preview(item)"
+                >
                     <template v-slot:extra>
                         <v-tooltip left v-if="item.status === 'active'">
                             <template v-slot:activator="{ on }">
@@ -38,13 +46,14 @@
                 <v-btn dark color="#3b589e" @click="go_to_form_builder">Create New Form</v-btn>
             </template>
         </VueTable>
-        <delete-dialog :open-dialog.sync="delete_dialog" title="Delete Form" text-content="Are you sure you want to delete this form?" @delete="delete_form" />
-        <SendFormDialog ref="send_dialog"></SendFormDialog>
+        <delete-dialog :open-dialog.sync="delete_dialog" title="Delete Form"
+                       text-content="Are you sure you want to delete this form?" @delete="delete_form"
+        />
+        <SendFormDialog ref="send_dialog" />
     </div>
 </template>
 <script src="./Forms.js"></script>
 <style lang="scss" scoped>
-@import '~@/sass/_variables';
-
-@include pagePadding('.forms');
+    @import '~@/sass/_variables';
+    @include pagePadding('.forms');
 </style>

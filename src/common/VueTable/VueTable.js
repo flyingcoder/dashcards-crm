@@ -12,6 +12,7 @@ export default {
         hasHeader: {type: Boolean, default: true},
         showSelect: {type: Boolean, default: true},
         icon: String,
+        emptyText: String,
         noMoreData: {type: Boolean, default: false},
         noRowEdit: {type: Boolean, default: false},
         noRowDelete: {type: Boolean, default: false},

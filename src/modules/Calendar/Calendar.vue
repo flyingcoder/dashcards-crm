@@ -17,7 +17,7 @@
                      :fieldsToEdit="eventToEdit" :calendar="calendar" @new-event-added="insert_new_event"
                      @event-updated="updated_event" @open-custom-event-type="open_add_event_type_dialog"
         />
-        <EventTypeDialog ref="event_type_dialog" :calendar="calendar" @new-event-type-added="insert_new_event_type" />
+        <EventTypeDialog ref="event_type_dialog" :calendar="calendar" @new-event-type-added="insert_new_event_type"/>
         <EventDetailDialog ref="event_detail_dialog" :event="eventToEdit"
                            @edit-event="open_add_event_dialog(true, eventToEdit)"
                            @delete-event="open_delete_dialog(eventToEdit)"
@@ -26,7 +26,7 @@
         <AddParticipantDialog ref="add_participant_dialog" :event="eventToEdit"
                               @participants-refresh="refreshParticipants"
         />
-        <table-header :paths="paths" :noButton="true" v-if="hasBreadCrumbs" />
+        <table-header :paths="paths" :noButton="true" v-if="hasBreadCrumbs"/>
         <div class="calendar-wrapper">
             <div class="calendar_header">
                 <div class="left_option">
@@ -68,14 +68,14 @@
                             <h3>Events</h3>
                             <div class="event-item" v-for="elabel in calendar.event_types" :key="elabel.name">
                                 <v-avatar width="15" height="15" min-width="15" :color="elabel.properties.color">
-                                    <span />
+                                    <span/>
                                 </v-avatar>
                                 <div class="event-title">{{ elabel.name }}</div>
                             </div>
                         </div>
                         <div class="label_right">
                             <h3>Calendars</h3>
-                            <v-checkbox hide-details input-value="true" value disabled :label="calendar.title" />
+                            <v-checkbox hide-details input-value="true" value disabled :label="calendar.title"/>
                         </div>
                     </div>
                 </div>
@@ -86,21 +86,24 @@
                             <v-tab key="today" @click="tabFilter('today')">Today</v-tab>
                         </v-tabs>
                     </div>
-                    <div class="grid-view mt-1" v-if="view === 'grid'">
-                        <EventCard v-for="event in items" :event="event" :key="event.id"
-                                   @edit-event="open_add_event_dialog(true, event)"
-                                   @delete-event="open_delete_dialog(event)"
-                                   @leave-event="open_confirm_leave_dialog(event)"
-                                   @view-event="open_event_detail_dialog(event)"
-                                   @add-participant="open_add_participant_dialog(event)"
-                        />
-                        <v-btn class="load-more my-2" v-if="!noMoreData" :loading="btnloading"
-                               @click="load_more_events"
-                        >
-                            Load More
-                        </v-btn>
+                    <div class="grid-view mt-1" v-if="view === 'grid' && items.length > 0">
+                        <template >
+                            <EventCard v-for="event in items" :event="event" :key="event.id"
+                                       @edit-event="open_add_event_dialog(true, event)"
+                                       @delete-event="open_delete_dialog(event)"
+                                       @leave-event="open_confirm_leave_dialog(event)"
+                                       @view-event="open_event_detail_dialog(event)"
+                                       @add-participant="open_add_participant_dialog(event)"
+                            />
+                            <v-btn class="load-more my-2" v-if="!noMoreData" :loading="btnloading"
+                                   @click="load_more_events"
+                            >
+                                Load More
+                            </v-btn>
+                        </template>
                     </div>
-                    <div class="list-view" v-if="view == 'list'">
+                    <Empty v-else-if="view === 'grid'" class="my-3" icon="mdi-calendar-remove-outline" headline="No event yet" />
+                    <div class="list-view" v-if="view === 'list'">
                         <VueTable :items="items" :headers="headers" :showRowActions="true" @load-more="load_more_events"
                                   @delete-selected="open_bulk_delete_dialog($event)" icon="widgets"
                                   :showTopHeader="false" :key="componentKey" :noMoreData="noMoreData"
@@ -110,7 +113,7 @@
                                 <td>{{ item.title | ucwords }}</td>
                                 <td>{{ datetimedisplay(item) }}</td>
                                 <td>
-                                    <Avatars :items="item.participants" :count="1" :deep="true" />
+                                    <Avatars :items="item.participants" :count="1" :deep="true"/>
                                 </td>
                                 <Actions :item="item" @delete="open_delete_dialog(item)"
                                          @edit="open_add_event_dialog(true, item)"

@@ -115,7 +115,7 @@
                         </v-card>
                     </v-col>
                 </v-row>
-                <Empty icon="widgets" v-else headline="No campaign yet" />
+                <Empty icon="mdi-alpha-c-box-outline" v-else headline="No campaign yet" />
             </v-container>
             <v-card-actions>
                 <v-spacer />
@@ -125,8 +125,8 @@
             </v-card-actions>
         </v-card>
         <VueTable v-else :items="items" :headers="headers" :showRowActions="true" @load-more="load_more"
-                  @delete-selected="open_bulk_delete_dialog($event)" icon="widgets" title="Campaigns"
-                  :key="componentKey" :noMoreData="noMoreData" :showSelect="false" :loading="loading"
+                  @delete-selected="open_bulk_delete_dialog($event)" icon="mdi-alpha-c-box-outline" title="Campaigns"
+                  :key="componentKey" :noMoreData="noMoreData" emptyText="No campaign yet" :showSelect="false" :loading="loading"
         >
             <template slot="header-toolbar">
                 <table-header :noListButton="false" :noGridButton="false" @click="open_add_dialog"

@@ -12,15 +12,15 @@
             <Editor ref="editor" :hasFloatingTools="false" v-model="quill_editor.description"
                     :content="quill_editor.description" placeholder="Task Description"
             />
-            <v-row>
+            <v-row no-gutters>
                 <v-col cols="6">
-                    <v-checkbox v-model="disabled" class="mx-2" label="No Specific Days"/>
-                </v-col>
-                <v-col cols="6">
-                    <v-text-field filled dense class="dialog__textfield d-field" label="Task coverage"
+                    <v-text-field filled dense class="dialog__textfield d-field" label="Days"
                                   v-model.number="days" type="number"
                                   min="0" color="#667187" hide-details="auto" :disabled="disabled"
                     />
+                </v-col>
+                <v-col cols="6">
+                    <v-checkbox v-model="disabled" class="mx-2" label="No Specific Days"/>
                 </v-col>
             </v-row>
         </template>

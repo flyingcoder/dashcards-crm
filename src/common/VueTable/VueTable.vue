@@ -35,7 +35,7 @@
                 <v-skeleton-loader ref="skeleton" :boilerplate="false" type="table-tbody" class="mx-auto mt-3" />
             </template>
             <template v-slot:no-data v-if="!loading">
-                <Empty :icon="icon">
+                <Empty :icon="icon" :headline="emptyText">
                     <slot slot="extra" name="empty-slot" />
                 </Empty>
             </template>
