@@ -5,7 +5,7 @@
         <template slot="content">
             <v-text-field class="dialog__textfield d-field" hide-details="auto" dense label="Task Title *"
                           v-model.trim="title" color="#667187"
-                          filled counter maxlength="30"
+                          filled counter maxlength="60"
             />
             <!--<v-select class="dialog__selectfield d-field" label="Select Group" v-model.trim="selected_group" :items="group_items" item-text="name" item-value="id" color="#667187" filled hide-details></v-select> -->
 
