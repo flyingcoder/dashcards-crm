@@ -2,11 +2,11 @@
     <div class="invoice">
         <!-- <InvoiceDialog type="create" @created="items.unshift($event)" /> -->
         <!-- <InvoiceDialog type="edit" @updated="invoice_updated" /> -->
-        <StepperInvoiceDialog ref="invoiceEditDialog" type="edit" @updated="invoice_updated"/>
+        <StepperInvoiceDialog ref="invoiceEditDialog" type="edit" @updated="invoice_updated" />
         <StepperInvoiceDialog ref="invoiceCreateDialog" type="create"
                               @created="items.unshift($event)"
         />
-        <ViewInvoice ref="view_invoice_dialog" :item="view_item"/>
+        <ViewInvoice ref="view_invoice_dialog" :item="view_item" />
         <delete-dialog :open-dialog.sync="delete_dialog" title="Delete Invoice"
                        text-content="Are you sure you want to delete this invoice?" @delete="delete_invoice"
         />
@@ -14,13 +14,14 @@
                        text-content="Are you sure you want to delete these invoices? This can't be undone."
                        @delete="bulk_delete('bulk_delete_invoices')"
         />
-        <VueTable :items="items" :headers="headers" :showRowActions="true" icon="list" :loading="loading"
+        <VueTable :items="items" :headers="headers" :showRowActions="true" icon="mdi-alpha-i-box-outline"
+                  emptyText="No invoice yet" :loading="loading"
                   title="Invoice" :key="componentKey" :noMoreData="noMoreData" :showSelect="true"
                   @delete-selected="open_bulk_delete_dialog($event)" @load-more="load_more"
                   @selected="selected = $event"
         >
             <template slot="header-toolbar">
-                <table-header @click="open_create_dialog"/>
+                <table-header @click="open_create_dialog" />
                 <v-btn-toggle class="ml-3" v-model="filter.status" mandatory dense>
                     <v-btn value="all" text @click="showInvoice('all')">All</v-btn>
                     <v-btn value="paid" text @click="showInvoice('paid')">Paid</v-btn>
@@ -38,10 +39,10 @@
                     </v-tooltip>
                 </td>
                 <td>
-                    <Avatar :user="item.billed_from"/>
+                    <Avatar :user="item.billed_from" />
                 </td>
                 <td>
-                    <Avatar :user="item.billed_to"/>
+                    <Avatar :user="item.billed_to" />
                 </td>
                 <td>{{ item.status | ucwords }}</td>
                 <td>{{ item.total_amount | money }}</td>
@@ -71,7 +72,8 @@
             </template>
             <template v-slot:extra-bulk-buttons>
                 <v-btn v-if="selected.length > 0" :loading="btn_reminding" class="ml-2" dark color="#3b589e"
-                       @click="remind_invoices">
+                       @click="remind_invoices"
+                >
                     <v-icon left>mdi-bell-circle-outline</v-icon>
                     Remind
                 </v-btn>

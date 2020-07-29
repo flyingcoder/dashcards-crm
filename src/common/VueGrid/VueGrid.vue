@@ -80,7 +80,7 @@
                 </v-card>
             </v-col>
         </v-row>
-        <Empty v-else headline="No data found" />
+        <Empty v-else :headline="emptyText" class="my-3" :icon="icon" />
         <v-card-actions class="py-2" v-if="hasFooter && items.length > 0">
             <v-spacer />
             <v-btn tile text v-if="noMoreData === true" disabled>NO MORE DATA</v-btn>

@@ -38,7 +38,7 @@
                         <v-icon color="white">mdi-bookmark-multiple-outline</v-icon>
                     </v-btn>
                 </template>
-                <span>Create Milestone From Templates</span>
+                <span>Add Milestone From Templates</span>
             </v-tooltip>
         </v-layout>
         <v-layout wrap class="boxes__wrapper">

@@ -81,7 +81,7 @@
             </div>
         </div>
         <div class="body-wrapper" v-else>
-            <Empty headline="No reports yet">
+            <Empty headline="No reports yet" icon="mdi-alpha-r-box-outline">
                 <template v-slot:extra>
                     <v-btn large dark color="#3b589e" @click="open_dialog">Add Report
                     </v-btn>

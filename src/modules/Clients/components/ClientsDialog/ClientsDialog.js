@@ -71,10 +71,13 @@ export default {
             this.open = false
         },
         validation_passed() {
+            let tel_is_valid = true
+            if (this.telephone) {
+                tel_is_valid = this.telephone_is_valid
+            }
             if (!this.isEditDialog) {
                 return (
-                    this.telephone_is_valid &&
-                    this.telephone &&
+                    tel_is_valid &&
                     this.password &&
                     this.repeat_password &&
                     this.first_name &&
@@ -85,9 +88,9 @@ export default {
                     this.contact_name
                 )
             }
+
             return (
-                this.telephone_is_valid &&
-                this.telephone &&
+                tel_is_valid &&
                 this.first_name &&
                 this.last_name &&
                 this.company_name &&

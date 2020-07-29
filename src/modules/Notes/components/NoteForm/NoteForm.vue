@@ -1,6 +1,6 @@
 <template>
     <div class="no-data" v-if="!loading && !note">
-        <Empty headline="No notes yet"></Empty>
+        <Empty headline="No notes yet" icon="mdi-book-outline"></Empty>
     </div>
     <v-progress-linear v-else-if="loading" :indeterminate="true"></v-progress-linear>
     <div class="note-form" v-else>

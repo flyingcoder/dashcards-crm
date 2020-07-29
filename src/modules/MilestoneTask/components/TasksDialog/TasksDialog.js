@@ -93,7 +93,8 @@ export default {
             this.status = new_fields.status
             this.days = this.disabled ? 0 : new_fields.days
             this.selected_group = new_fields.role_id
-            this.$refs.editor.setValue(new_fields.description)
+            if (this.$refs.editor)
+                this.$refs.editor.setValue(new_fields.description)
         },
 
         clear_and_close() {

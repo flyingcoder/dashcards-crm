@@ -39,7 +39,7 @@
                     <v-icon :class="{ active:view === 'grid' }">mdi-view-module</v-icon>
                 </v-btn>
             </v-row>
-            <v-card outlined v-if="view === 'grid'" class="grid-view">
+            <v-card v-if="view === 'grid'" class="grid-view" flat>
                 <v-container fluid grid-list-md>
                     <v-layout wrap v-if="filteredItems.length">
                         <v-col v-for="item in filteredItems" :key="item.id" xs="12" sm="4" md="3">

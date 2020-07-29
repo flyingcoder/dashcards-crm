@@ -5,6 +5,8 @@ export default {
     mixins: [global_utils],
     props: {
         items: Array,
+        icon: String,
+        emptyText:{type: String, default: 'No data yet'},
         title: { type: String, default: 'Members' },
         hasDelete: { type: Boolean, default: true },
         hasEdit: { type: Boolean, default: true },

@@ -92,6 +92,7 @@ export default {
 
     methods: {
         short_description_text(text) {
+            if (!text || typeof text === 'undefined') return ''
             return text.length > 20 ? text.slice(0, 19) + '...' : text
         },
         load_more() {
