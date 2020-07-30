@@ -41,8 +41,8 @@
                 <span>Add Milestone From Templates</span>
             </v-tooltip>
         </v-layout>
-        <v-layout wrap class="boxes__wrapper">
-            <v-progress-linear class="my-5" v-show="loading" :indeterminate="true" />
+        <v-progress-linear class="my-5" v-show="loading" :indeterminate="true"/>
+        <v-layout wrap class="boxes__wrapper" v-if="boxes.length > 0">
             <v-flex md6 xs12 class="milestone__box" v-for="(box, index) of boxes" :key="box.id">
                 <div class="milestone__dynamic_box">
                     <dynamic-box :id="id" :box="box" :loading="box.id === boxIdInProgress" @edit="open_edit_dialog"
@@ -52,6 +52,14 @@
                 </div>
             </v-flex>
         </v-layout>
+        <Empty v-else class="mt-3" icon="mdi-bookmark-remove-outline" headline="No milestone yet">
+            <template v-slot:extra>
+                <v-btn large dark color="#3b589e" @click="add_dialog = true">
+                    <v-icon left>mdi-bookmark-plus-outline</v-icon>
+                    Add milestone
+                </v-btn>
+            </template>
+        </Empty>
     </div>
 </template>
 <script src="./Milestones.js"></script>

@@ -1,20 +1,20 @@
-import { list_functionality } from '@/services/list-functionality/list-functionality'
-import { global_utils } from '@/global_utils/global_utils'
+import {list_functionality} from '@/services/list-functionality/list-functionality'
+import {global_utils} from '@/global_utils/global_utils'
 import apiTo from './api'
-import isEmpty from 'lodash/isEmpty'
 import request from '@/services/axios_instance'
 //Components
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import ClientsDialog from '@/modules/Clients/components/ClientsDialog/ClientsDialog.vue'
-import TeamsDialog from '@/modules/Teams/components/TeamsDialog/TeamsDialog.vue' 
+import TeamsDialog from '@/modules/Teams/components/TeamsDialog/TeamsDialog.vue'
 import VueTable from '@/common/VueTable/VueTable.vue'
 import Actions from '@/common/VueTable/ActionDropdown.vue'
 import ServiceModal from './components/ServiceModal/ServiceModal.vue'
 import GroupsDialog from '@/modules/Settings-Groups/components/GroupsDialog/GroupsDialog.vue'
 import Avatars from '@/common/Avatars.vue'
 import ServiceListDialog from '@/modules/Services-List/components/ServicesAddDialog/ServicesAddDialog.vue'
+
 export default {
     name: 'Campaign', //Campaign
     mixins: [list_functionality, global_utils],
@@ -24,7 +24,7 @@ export default {
         GroupsDialog,
         DeleteDialog,
         ClientsDialog,
-        TeamsDialog, 
+        TeamsDialog,
         VueTable,
         Actions,
         ServiceModal,//campaign modal
@@ -38,13 +38,15 @@ export default {
         add_new_member_dialog: false,
         add_new_service_list_dialog: false,
         paths: [
-            { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-            { text: 'Campaigns', disabled: true, router_name: null }
+            {text: 'Dashboard', disabled: false, router_name: 'default-content'},
+            {text: 'Campaigns', disabled: true, router_name: null}
         ],
-        headers: [{
+        headers: [
+            {
                 text: '',
                 sortable: false,
-                align: 'left'
+                align: 'left',
+                width: 50
             },
             {
                 text: 'Service Name',
@@ -55,7 +57,7 @@ export default {
                 text: 'Client',
                 sortable: false,
                 align: 'left',
-                width: '90px'
+                width: 90
             },
             {
                 text: 'Business Name',
@@ -89,6 +91,7 @@ export default {
             },
             {
                 text: 'Action',
+                value: 'action',
                 sortable: false,
                 align: 'center',
                 width: '40px'
@@ -138,16 +141,16 @@ export default {
             let found = serv.managers.find(
                 ii => ii.user_id === this.loggeduser.id
             )
-            if (found) return true
-            return false
+            return !!found;
+
         },
         can_delete(serv) {
             if (this.loggeduser.is_admin) {
                 return true
             }
             let found = serv.managers.find(ii => ii.user_id === this.loggeduser.id)
-            if (found) return true
-            return false
+            return !!found;
+
         },
         load_more() {
             this.load_more_via_url(`api/services`)
@@ -158,11 +161,11 @@ export default {
         navigate_to_view_service(id) {
             this.$router.push({
                 name: 'preview',
-                params: { id: id, type: 'campaign' }
+                params: {id: id, type: 'campaign'}
             })
         },
         save_new_services(datus) {
-            apiTo.add_new_services(datus).then(({ data }) => {
+            apiTo.add_new_services(datus).then(({data}) => {
                 this.$event.$emit('new_services_added', data)
                 this.add_new_service_dialog = false
             })
@@ -170,7 +173,7 @@ export default {
         save_new_client(datus) {
             apiTo
                 .add_new_client(datus)
-                .then(({ data }) => {
+                .then(({data}) => {
                     this.$event.$emit('new_client_added', data)
                     this.$refs.add_client_dialog.$refs.dialog.clear_and_close()
                 })
@@ -180,7 +183,7 @@ export default {
         save_new_member(datus) {
             apiTo
                 .add_new_member(datus)
-                .then(({ data }) => {
+                .then(({data}) => {
                     this.$event.$emit('new_manager_added', data)
                     this.$event.$emit('new_member_added', data)
                     this.$refs.add_member_dialog.$refs.dialog.clear_and_close()
@@ -213,7 +216,7 @@ export default {
             }
             request
                 .post('api/groups', item)
-                .then(({ data }) => {
+                .then(({data}) => {
                     this.$event.$emit('new-user-group-added', data)
                     this.$event.$emit('open_snackbar', 'New user group created')
                 })
@@ -221,10 +224,10 @@ export default {
                     this.$refs.add_group_dialog.cancel()
                 })
         },
-        save_new_services_list(items){
+        save_new_services_list(items) {
             request
-                .post('api/services-list', { names : items.map(i => i.name) })
-                .then(({ data }) => {
+                .post('api/services-list', {names: items.map(i => i.name)})
+                .then(({data}) => {
                     this.$event.$emit('new-services-list-added', data)
                 })
                 .finally(() => {

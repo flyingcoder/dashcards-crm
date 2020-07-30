@@ -10,20 +10,10 @@
                         {{ tab.name }}
                     </v-tab>
                 </v-tabs>
-                <router-view></router-view>
+                <router-view />
             </v-col>
         </v-row>
     </div>
 </template>
-<script>
-export default {
-    data() {
-        return {
-            tab: null,
-            text: ''
-        }
-    }
-}
-</script>
 <script src="./Messages.js"></script>
 <style lang="scss" scoped src="./Messages.scss"></style>

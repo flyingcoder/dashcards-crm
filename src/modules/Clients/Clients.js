@@ -39,7 +39,7 @@ export default {
             { text: 'Status'},
             {
                 text: 'Action',
-                value: 'actions',
+                value: 'action',
                 sortable: false,
                 align: 'center',
                 width: '140px'

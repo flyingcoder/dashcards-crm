@@ -1,7 +1,7 @@
 import _cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
 import axios from 'axios'
-import { settings } from '@/variables'
+import {settings} from '@/variables'
 //Components
 import makeRequestTo from '@/services/makeRequestTo'
 import TextField from '@/common/BaseComponents/TextField.vue'
@@ -11,6 +11,7 @@ import MembersDropdown from '@/modules/Projects/components/MembersDropdown/Membe
 import Editor from '@/common/Editor/Editor.vue'
 import ImgUpload from '@/common/Editor/components/ImgModal.vue'
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
+
 export default {
     name: 'CampaignModal', //from old servicemodal
     components: {
@@ -88,7 +89,7 @@ export default {
         })
 
         this.$event.$on('new_member_added', data => {
-            makeRequestTo.getAllNormalMembers().then(({ data }) => {
+            makeRequestTo.getAllNormalMembers().then(({data}) => {
                 this.members.all_items = data || []
                 this.members.items = _cloneDeep(this.members.all_items)
                 setTimeout(() => {
@@ -101,7 +102,7 @@ export default {
         })
 
         this.$event.$on('new_manager_added', data => {
-            makeRequestTo.getManagerMembers().then(({ data }) => {
+            makeRequestTo.getManagerMembers().then(({data}) => {
                 this.manager.all_items = data || []
                 this.manager.items = _cloneDeep(this.manager.all_items)
                 setTimeout(() => {
@@ -116,22 +117,28 @@ export default {
 
     computed: {
         disabled() {
-            if (
-                isEmpty(this.client.selected) ||
+            return isEmpty(this.client.selected) ||
                 isEmpty(this.manager.selected) ||
                 isEmpty(this.service.selected) ||
-                !this.description ||
                 !this.business_name ||
-                !this.date_pickers.start_date
-            ) {
-                return true
-            }
-
-            return false
+                !this.date_pickers.start_date;
         },
         title() {
             return this.isEditDialog ? 'Edit Campaign' : 'Create Campaign'
+        },
+        non_selected_managers() {
+            return this.manager.items.filter(i => {
+                let index = this.manager.selected.findIndex(c => c.id === i.id)
+                return (!~index)
+            })
+        },
+        non_selected_members() {
+            return this.members.items.filter(i => {
+                let index = this.members.selected.findIndex(c => c.id === i.id)
+                return (!~index)
+            })
         }
+
     },
 
     methods: {
@@ -140,6 +147,8 @@ export default {
             this.fieldsToEdit = fieldsToEdit
             if (isEdit) {
                 this.update_fields(fieldsToEdit)
+            } else {
+                this.reset()
             }
             this.init_dropdowns()
             this.open = true
@@ -220,12 +229,23 @@ export default {
         },
 
         clear_and_close() {
-            this.members.selected = this.manager.selected = []
-            this.client.selected = this.status = this.business_name = this.location = null
-            this.description = this.name = this.date_pickers.start_date = this.date_pickers.end_date = ''
+            this.reset()
             this.cancel() //close the modal
         },
-
+        reset() {
+            this.members.selected = []
+            this.manager.selected = []
+            this.client.selected = null
+            this.status = 'Active'
+            this.business_name = null
+            this.location = null
+            this.description = ''
+            this.name = ''
+            this.date_pickers.start_date = ''
+            this.date_pickers.end_date = null
+            if (this.$refs.editor)
+                this.$refs.editor.setValue('')
+        },
         filter_dropdown_items(data_prop, search) {
             let items = _cloneDeep(this[data_prop].all_items)
             if (!search) {

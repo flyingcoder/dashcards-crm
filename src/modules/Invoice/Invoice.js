@@ -42,7 +42,7 @@ export default {
             {text: 'Billed To', sortable: false},
             {text: 'Status', sortable: false},
             {text: 'Amount', sortable: false},
-            {text: 'Action', sortable: false, width: '40px', align: 'center'}
+            {text: 'Action', sortable: false, value: 'action', width: '40px', align: 'center'}
         ],
         view_item: null,
         table_config: {

@@ -52,9 +52,9 @@ export default {
         },
         paths() {
             return [
-                { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-                { text: this.type, disabled: true, router_name: null },
-                { text: 'Milestones', disabled: true, router_name: null }
+                {text: 'Dashboard', disabled: false, router_name: 'default-content'},
+                {text: this.type, disabled: true, router_name: null},
+                {text: 'Milestones', disabled: true, router_name: null}
             ]
         }
     },
@@ -68,7 +68,7 @@ export default {
             this.loading = true
             request
                 .get(`api/project/${this.id}/milestone?all=true`)
-                .then(({ data }) => (this.boxes = data))
+                .then(({data}) => (this.boxes = data))
                 .finally(() => (this.loading = false))
         },
 
@@ -77,7 +77,7 @@ export default {
             this.$refs.add_dialog.clear_and_close()
             await request
                 .post(`api/project/${this.id}/milestone`, milestone)
-                .then(({ data }) => {
+                .then(({data}) => {
                     this.boxes.push(data)
                     this.$event.$emit('open_snackbar', 'New Milestone added successfully')
                 })
@@ -99,9 +99,9 @@ export default {
                 .delete(`api/project/${this.id}/milestone/${this.id_to_delete}`)
                 .then(
                     () =>
-                    (this.boxes = this.boxes.filter(
-                        item => item.id !== this.id_to_delete
-                    ))
+                        (this.boxes = this.boxes.filter(
+                            item => item.id !== this.id_to_delete
+                        ))
                 )
                 .finally(() => (this.loading = false))
             this.$event.$emit('open_snackbar', 'Milestone deleted successfully')
@@ -110,9 +110,9 @@ export default {
         },
 
         open_edit_dialog(item_to_edit) {
-            const { id, title, status, days, started_at, end_at } = item_to_edit
+            const {id, title, status, days, started_at, end_at} = item_to_edit
             this.edit_item.id = id
-            this.edit_item.fields = { title, status, days, started_at, end_at }
+            this.edit_item.fields = {title, status, days, started_at, end_at}
             this.edit_dialog = true
         },
 
@@ -124,7 +124,7 @@ export default {
                     `api/project/${this.id}/milestone/${this.edit_item.id}`,
                     updated_fields
                 )
-                .then(({ data }) => {
+                .then(({data}) => {
                     const index = this.boxes.findIndex(item => item.id === data.id)
                     if (~index) this.boxes.splice(index, 1, data)
                 })
@@ -139,24 +139,25 @@ export default {
 
         open_select_template_dialog() {
             // if (this.boxes.length > 0) return
-            this.$refs.select_template_dialog.open() 
+            this.$refs.select_template_dialog.open()
         },
 
         add_template(templates) {
-            this.loading = true
+            this.$store.commit('set_custom_loader', true)
             request.post(`api/projects/${this.id}/milestone-import`, {
-                    milestone_ids: templates.map(i => i.id)
-                })
-                .then(({ data }) => {
+                milestone_ids: templates.map(i => i.id)
+            })
+                .then(({data}) => {
                     this.get_dynamic_boxes()
                 })
                 .finally(() => {
-                    this.$refs.select_template_dialog.cancel() 
+                    this.$refs.select_template_dialog.cancel()
                     this.$event.$emit('btnloading_off', false)
+                    this.$store.commit('set_custom_loader', false)
                 })
         },
 
-        edit_task({ task, index, box_id }) {
+        edit_task({task, index, box_id}) {
             this.edit_task_dialog = true
             this.edit_task_item = {
                 id: task.id,
@@ -166,7 +167,7 @@ export default {
             }
         },
 
-        remove_task(box_index, { task_index, task_id }) {
+        remove_task(box_index, {task_index, task_id}) {
             this.boxIdInProgress = this.boxes[box_index].id
             request
                 .delete(`api/task/${task_id}`)
@@ -187,7 +188,7 @@ export default {
             makeRequestTo
                 .edit_milestone_task(this.edit_task_item.id, task, `api/task`)
                 .then(res => {
-                    const { index, box_id } = this.edit_task_item
+                    const {index, box_id} = this.edit_task_item
                     let boxes = _cloneDeep(this.boxes)
                     const box_index = boxes.findIndex(box => box.id === box_id)
                     if (~box_index) {
@@ -222,7 +223,7 @@ export default {
             this.$refs.add_task_dialog.clear_and_close()
             request
                 .post(`api/milestone/${this.box_id_to_add_task}/task`, payload)
-                .then(({ data }) => {
+                .then(({data}) => {
                     const box_index = this.boxes.findIndex(
                         box => box.id === this.box_id_to_add_task
                     )

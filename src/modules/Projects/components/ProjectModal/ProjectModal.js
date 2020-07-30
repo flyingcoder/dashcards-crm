@@ -50,8 +50,8 @@ export default {
         },
         comment: '',
         date_pickers: {
-            start_date: '',
-            end_date: '',
+            start_date: null,
+            end_date: null,
             show: true
         },
         dates: [],
@@ -102,18 +102,24 @@ export default {
             })
         })
     },
-
     computed: {
         disabled() {
-            if (
-                isEmpty(this.client.selected) ||
+            return isEmpty(this.client.selected) ||
                 isEmpty(this.manager.selected) ||
-                !this.project_title ||
-                !this.quill_editor.content
-            )
-                return true
-
-            return false
+                !this.project_title.trim() ||
+                !this.date_pickers.start_date;
+        },
+        non_selected_managers() {
+            return this.manager.items.filter(i => {
+                let index = this.manager.selected.findIndex(c => c.id === i.id)
+                return (!~index)
+            })
+        },
+        non_selected_members() {
+            return this.members.items.filter(i => {
+                let index = this.members.selected.findIndex(c => c.id === i.id)
+                return (!~index)
+            })
         }
     },
 
@@ -136,14 +142,6 @@ export default {
     },
 
     methods: {
-        setDatesAndCloseMenu(val, field) {
-            var y = new Date(val)
-            this.date_pickers.
-            this.rangemenu = false
-        },
-        closemenu() {
-            this.shown = false
-        },
         init_dropdowns() {
             this.dropdown_loading = true
             axios
@@ -169,11 +167,8 @@ export default {
             const members = this.members.all_items.filter(memb =>
                 ids.includes(memb.id)
             )
-            let string = members.reduce((acc, cur) => {
-                return (acc += cur.name.replace(',', '') + ', ')
-            }, '')
-            string = string.slice(0, -2)
-            return string
+            let string = members.reduce((acc, cur) => { return (acc += cur.name.replace(',', '') + ', ') }, '')
+            return string.slice(0, -2)
         },
 
         cancel() {
@@ -221,13 +216,23 @@ export default {
         },
 
         clear_and_close() {
-            this.members.selected = this.manager.selected = []
-            this.client.selected = this.project_status = this.business_name = this.location = null
-            this.quill_editor.content = this.project_title = '';
-            (this.date_pickers.start_date = this.date_pickers.end_date = '')
+            this.reset()
             this.cancel() //close the modal
         },
-
+        reset() {
+            this.members.selected = []
+            this.manager.selected = []
+            this.client.selected = null
+            this.project_status = 'Active'
+            this.business_name = null
+            this.location = null
+            this.quill_editor.content = ''
+            this.project_title = ''
+            this.date_pickers.start_date = null
+            this.date_pickers.end_date = null
+            if (this.$refs.editor)
+                this.$refs.editor.setValue('')
+        },
         filter_dropdown_items(data_prop, search) {
             let items = _cloneDeep(this[data_prop].all_items)
             if (!search) {
@@ -273,6 +278,11 @@ export default {
             if (~index) {
                 this.manager.selected.splice(index, 1)
             }
+        },
+        clientSelected(client) {
+            this.client.selected = client
+            this.business_name = client.company ? client.company.name : this.business_name
+            this.location = client.company ? client.company.address : this.location
         }
     }
 }

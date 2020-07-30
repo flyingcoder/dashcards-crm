@@ -2,7 +2,7 @@ import { list_functionality } from '@/services/list-functionality/list-functiona
 import { global_utils } from '@/global_utils/global_utils'
 import { settings } from '@/variables'
 import * as apiTo from './api'
-
+import {mapGetters} from "vuex";
 //Components
 import VueTable from '@/common/VueTable/VueTable.vue'
 import CustomDropzone from '@/common/CustomDropzone.vue'
@@ -15,6 +15,7 @@ import ImageViewer from '@/common/Viewer/ImageViewer.vue'
 import DocsViewer from '@/common/Viewer/DocsViewer.vue'
 import IframeViewer from '@/common/Viewer/IframeViewer.vue'
 import OtherViewer from '@/common/Viewer/OtherViewer.vue'
+
 
 export default {
     name: 'BuzzookaTab',
@@ -135,7 +136,7 @@ export default {
     }),
 
     computed: {
-
+        ...mapGetters(['user']),
         permissionsAll() {
             return this.$_permissions.get('hq_files')
         },
@@ -150,10 +151,6 @@ export default {
                 return this.items.filter(item => item.approved === 1 && (item.category === 'videos' || item.category === 'images'))
             }
             return this.items.filter(item => item.category.includes(this.filter))
-        },
-
-        user() {
-            return this.$store.getters.user
         },
 
         dropzoneOptions() {
@@ -241,9 +238,7 @@ export default {
             apiTo
                 .getFilesByTypes(this.id, payload)
                 .then(({ data }) => {
-                    data.data.forEach(item => {
-                        this.items.push(item)
-                    })
+                    this.items.push(...data.data)
                     this.pagination.current = data.current_page
                     this.pagination.total = data.last_page
                     this.hasMoreData()
@@ -318,6 +313,7 @@ export default {
         },
 
         file_failed([file, response]) {
+            // console.log(response.errors.file)
             this.$event.$emit(
                 'open_snackbar',
                 typeof response === 'object' ? response[0] : response,

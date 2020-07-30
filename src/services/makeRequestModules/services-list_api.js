@@ -8,4 +8,8 @@ export const services_list_api = {
     update_services_list(id, payload) {
         return request.put(`api/services-list/${id}`, payload)
     },
+
+    delete_service_list(id){
+        return request.delete(`api/services-list/${id}`)
+    }
 }

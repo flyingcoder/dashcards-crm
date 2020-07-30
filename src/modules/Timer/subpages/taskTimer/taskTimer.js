@@ -46,7 +46,8 @@ export default {
             {
                 text: 'Total Time',
                 sortable: false,
-                align: 'center'
+                align: 'center',
+                width: 240
             }
         ],
         timer_tab: 'task-timers',
@@ -55,7 +56,8 @@ export default {
             { text: 'All', value: 'all' },
             { text: 'Open', value: 'open' },
             { text: 'Behind', value: 'behind' },
-            { text: 'Completed', value: 'completed' }
+            { text: 'Completed', value: 'completed' },
+            { text: 'Urgent', value: 'urgent' }
         ],
         filter_task: 'all',
         task: null

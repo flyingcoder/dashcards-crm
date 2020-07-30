@@ -8,7 +8,7 @@
                 <v-icon>close</v-icon>
             </v-btn>
         </div>
-        <TaskViewDialog ref="view_task_dialog" :task="task" @close-task-preview="closeViewDialog"/>
+        <TaskViewDialog ref="view_task_dialog" :task="task" @close-task-preview="closeViewDialog" />
         <VueTable :items="items" :headers="headers" :showRowActions="true" @load-more="load_more" :loading="loading"
                   icon="widgets" title="Task Timers" :key="componentKey" :noMoreData="noMoreData" :showSelect="false"
         >
@@ -38,7 +38,8 @@
             <template v-slot:row-slot="{ item }">
                 <td>
                     <Avatars v-if="item.assigned.length > 0" :items="item.assigned" :count="1"
-                             style="display:inline-block"/>
+                             style="display:inline-block"
+/>
                     <v-tooltip right v-else>
                         <template v-slot:activator="{ on, attrs }">
                             <v-avatar v-bind="attrs" v-on="on">
@@ -67,7 +68,7 @@
                 <td>{{ item.timer.timer_created | format('MMM D YYYY HH:mm:ss') }}</td>
                 <td>{{ timerEnd(item) }}</td>
                 <td>
-                    <PlayPause :item="item" @row-item-updated="item = $event"/>
+                    <PlayPause :item="item" @row-item-updated="item = $event" />
                 </td>
             </template>
         </VueTable>

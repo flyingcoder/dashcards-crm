@@ -17,7 +17,7 @@ export default {
     },
 
     data() {
-        var _this = this
+        const _this = this;
         return {
             active_tab: null,
             tabs: _this.getTabs(),
@@ -44,7 +44,7 @@ export default {
 
     methods: {
         getTabs() {
-            var type = this.$route.params.type || 'project'
+            let type = this.$route.params.type || 'project';
             return [{
                     name: 'Client Messages',
                     route: `/dashboard/${type}/preview/${this.id}/messages`

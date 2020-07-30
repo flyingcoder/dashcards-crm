@@ -81,7 +81,7 @@
                 </form>
                 <template v-else>
                     <v-btn class="menububble__button" @click="showLinkMenu(getMarkAttrs('link'))" :class="{ 'is-active': isActive.link() }">
-                        <span>{{ isActive.link() ? 'Update Link' : 'Add Link'}}</span>
+                        <span>{{ isActive.link() ? 'Update Link' : 'Add Link' }}</span>
                         <v-icon small right>mdi-link</v-icon>
                     </v-btn>
                 </template>

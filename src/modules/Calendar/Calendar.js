@@ -1,9 +1,6 @@
-import moment from 'moment'
 import { list_functionality } from '@/services/list-functionality/list-functionality'
 import { calendar_utils } from '@/services/calendar/calendar_utils'
 import * as apiTo from '@/modules/Calendar/api'
-import _cloneDeep from 'lodash/cloneDeep'
-import request from '@/services/axios_instance'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
 import CalendarDialog from './components/CalendarDialog/CalendarDialog.vue'
@@ -61,7 +58,7 @@ export default {
             },
             {
                 text: 'Action',
-                value: 'actions',
+                value: 'action',
                 sortable: false,
                 align: 'center',
                 width: '40px'

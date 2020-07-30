@@ -20,7 +20,9 @@
                 <slot name="header" />
                 <v-divider />
             </template>
-
+            <template slot="header.action">
+                <v-icon>mdi-account-cog-outline</v-icon>
+            </template>
             <template v-slot:item="{ item }">
                 <tr>
                     <td v-if="showSelect && !noRowDelete">
@@ -34,7 +36,7 @@
             <template v-slot:loading>
                 <v-skeleton-loader ref="skeleton" :boilerplate="false" type="table-tbody" class="mx-auto mt-3" />
             </template>
-            <template v-slot:no-data v-if="!loading">
+            <template v-slot:no-data>
                 <Empty :icon="icon" :headline="emptyText">
                     <slot slot="extra" name="empty-slot" />
                 </Empty>

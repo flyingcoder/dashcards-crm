@@ -53,7 +53,7 @@ export default {
         editable: { type: Boolean, default: true }
     },
     data() {
-        var self = this
+        const self = this;
         return {
             linkUrl: null,
             linkMenuIsActive: false,
