@@ -33,7 +33,7 @@ export default {
             { text: 'Index', value: 'index', width: '10%' },
             { text: 'Group Name', value: 'group_name', width: '20%' },
             { text: 'Description', value: 'description', width: '40%' },
-            { text: 'Action', width: '30%', sortable: false, align: 'center' }
+            { text: 'Action', width: '30%', value: 'action', sortable: false, align: 'center' }
         ],
         actions: [{
                 value: 'edit_settings',

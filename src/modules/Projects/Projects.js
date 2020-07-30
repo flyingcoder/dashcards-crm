@@ -80,7 +80,13 @@ export default {
                 align: 'left'
             },
             {
+                text: 'Tasks',
+                sortable: false,
+                align: 'left'
+            },
+            {
                 text: 'Action',
+                value: 'action',
                 sortable: false,
                 align: 'center',
                 width: '40px'

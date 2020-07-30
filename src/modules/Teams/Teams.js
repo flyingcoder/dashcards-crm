@@ -43,7 +43,7 @@ export default {
             {text: 'Projects', value: 'projects'},
             {
                 text: 'Action',
-                value: 'actions',
+                value: 'action',
                 sortable: false,
                 align: 'center',
                 width: '40px'

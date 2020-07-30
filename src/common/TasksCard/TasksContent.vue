@@ -48,7 +48,7 @@
                             </v-avatar>
                             <p>Mark task as completed?</p>
                             <p class="body-2">
-                                <v-checkbox v-model="notify_task_complete" label="Notify project members" />
+                                <v-checkbox v-model="notify_task_complete" label="Notify project|campaign members" />
                             </p>
                         </v-banner>
                     </v-col>

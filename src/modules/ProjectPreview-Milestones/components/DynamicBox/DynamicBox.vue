@@ -48,6 +48,11 @@
                                     >
                                         mdi-clipboard-alert-outline
                                     </v-icon>
+                                    <v-icon small left color="red"
+                                            v-else-if="task.status.toLowerCase() === 'urgent'"
+                                    >
+                                        mdi-clipboard-alert-outline
+                                    </v-icon>
                                     <v-icon small left color="info" v-else-if="task.status.toLowerCase() === 'open'">
                                         mdi-clipboard-text-play-outline
                                     </v-icon>

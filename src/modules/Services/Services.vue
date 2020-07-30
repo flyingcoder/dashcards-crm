@@ -38,28 +38,26 @@
                                         </template>
                                     </Avatar>
                                     <v-spacer />
-                                    <v-menu bottom offset-y>
+                                    <v-menu bottom left offset-y>
                                         <template v-slot:activator="{ on }">
-                                            <v-btn icon v-on="on">
-                                                <v-icon>settings</v-icon>
-                                            </v-btn>
+                                            <v-icon v-on="on">mdi-dots-horizontal-circle-outline</v-icon>
                                         </template>
                                         <v-list dense>
                                             <v-list-item v-if="can_edit(item)" @click="open_edit_dialog(item)">
                                                 <v-list-item-title>
-                                                    <v-icon small left>edit</v-icon>
+                                                    <v-icon left>mdi-circle-edit-outline</v-icon>
                                                     Edit
                                                 </v-list-item-title>
                                             </v-list-item>
                                             <v-list-item v-if="can_delete(item)" @click="open_delete_dialog(item)">
                                                 <v-list-item-title>
-                                                    <v-icon small left>delete</v-icon>
+                                                    <v-icon left>mdi-delete-circle-outline</v-icon>
                                                     Delete
                                                 </v-list-item-title>
                                             </v-list-item>
                                             <v-list-item @click="navigate_to_view_service(item.id)">
                                                 <v-list-item-title>
-                                                    <v-icon small left>pageview</v-icon>
+                                                    <v-icon left>mdi-eye-circle-outline</v-icon>
                                                     View
                                                 </v-list-item-title>
                                             </v-list-item>
@@ -107,7 +105,8 @@
                                 <div v-show="item.expand" class="description-wrapper">
                                     <v-divider />
                                     <v-card-text>
-                                        <p>Location: {{ item.props.location || '' }}</p>
+                                        <p>Location: {{ item.props.location || '' }}<br/>
+                                            Tasks: {{ item.tasks_count || 0 }}</p>
                                         <p v-html="item.description" />
                                     </v-card-text>
                                 </div>
@@ -126,7 +125,8 @@
         </v-card>
         <VueTable v-else :items="items" :headers="headers" :showRowActions="true" @load-more="load_more"
                   @delete-selected="open_bulk_delete_dialog($event)" icon="mdi-alpha-c-box-outline" title="Campaigns"
-                  :key="componentKey" :noMoreData="noMoreData" emptyText="No campaign yet" :showSelect="false" :loading="loading"
+                  :key="componentKey" :noMoreData="noMoreData" emptyText="No campaign yet" :showSelect="false"
+                  :loading="loading"
         >
             <template slot="header-toolbar">
                 <table-header :noListButton="false" :noGridButton="false" @click="open_add_dialog"
@@ -144,10 +144,10 @@
                     {{ item.title | ucwords }}
                 </td>
                 <td>
-                    <Avatar :user="item.client[0]" iconOnly />
+                    <Avatar v-if="item.client.length" :user="item.client[0]" iconOnly />
                 </td>
                 <td>{{ item.props.business_name | ucwords }}</td>
-                <td>{{ item.props.location | ucwords }}</td>
+                <td>{{ item.props.location || '' | ucwords }}</td>
                 <td>
                     <Avatars :items="item.managers" :count="1" />
                 </td>
@@ -157,7 +157,8 @@
                 <td>{{ item.started_at | format }}</td>
                 <td v-if="item.end_at">{{ item.end_at | format }}</td>
                 <td v-else>Ongoing</td>
-                <Actions :item="item" :hasEdit="can_edit(item)" :hasDelete="can_delete(item)"
+                <Actions :item="item" :permissions="$_permissions.get('projects')" :hasEdit="can_edit(item)"
+                         :hasDelete="can_delete(item)"
                          @delete="open_delete_dialog(item)" @edit="open_edit_dialog(item)"
                          @view="navigate_to_view_service(item.id)"
                 />

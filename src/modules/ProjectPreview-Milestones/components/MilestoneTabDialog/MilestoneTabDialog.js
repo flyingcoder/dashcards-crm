@@ -13,7 +13,10 @@ export default {
         dialog: Boolean,
         dialogTitle: String,
         isEditDialog: Boolean,
-        fieldsToEdit: { type: Object, default: () => {} }
+        fieldsToEdit: {
+            type: Object, default: () => {
+            }
+        }
     },
 
     data: () => ({
@@ -22,16 +25,24 @@ export default {
         start_date: null,
         end_date: null,
         status: 'active',
-        days_init_value: 0
+        days_init_value: 0,
+        btnloading: false
     }),
-
+    created() {
+        this.$event.$on('btnloading_off', () => {
+            this.btnloading = false
+        })
+    },
     computed: {
+        disabled() {
+            return !this.title
+        },
         days: {
-            get: function() {
+            get: function () {
                 if (!this.start_date || !this.end_date) return this.days_init_value
                 return moment(this.end_date).diff(moment(this.start_date), 'days')
             },
-            set: function(newValue) {
+            set: function (newValue) {
                 if (!this.start_date && !this.end_date) {
                     this.days_init_value = newValue
                     return
@@ -53,6 +64,7 @@ export default {
 
     watch: {
         dialog(new_val) {
+            this.btnloading = false
             this.open = new_val
         },
         open(new_val) {
@@ -100,7 +112,7 @@ export default {
             this.$emit('save', fields_to_save)
         },
 
-        update_fields({ fields }) {
+        update_fields({fields}) {
             const new_fields = Object.assign({}, fields)
             this.title = new_fields.title
             this.status = new_fields.status

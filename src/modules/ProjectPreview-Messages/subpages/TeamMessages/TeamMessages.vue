@@ -3,23 +3,23 @@
         <div class="messages" ref="messages-container">
             <v-row no-gutters class="pa-3" v-if="noMoreData === false && !loading">
                 <v-col md="12" xs="12">
-                    <v-spacer></v-spacer>
+                    <v-spacer />
                     <v-btn text block class="view__more_btn overline" @click="load_previous">Load Previous Messages</v-btn>
-                    <v-spacer></v-spacer>
+                    <v-spacer />
                 </v-col>
             </v-row>
-            <v-progress-linear v-if="loading" :indeterminate="true"></v-progress-linear>
+            <v-progress-linear v-if="loading" :indeterminate="true" />
             <v-row no-gutters v-if="items.length">
                 <v-col md="12" class="px-3 py-2" style="min-height: 350px;">
-                    <Message v-for="message in messages(items)" :message="message" :key="message.id"></Message>
+                    <Message v-for="message in messages(items)" :message="message" :key="message.id" />
                 </v-col>
             </v-row>
             <div class="no-messages" v-else>
-                <Empty  icon="mdi-cellphone-message-off" headline="No messages yet"></Empty>
+                <Empty class="ma-3" icon="mdi-cellphone-message-off" headline="No messages yet" />
             </div>
         </div>
         <div class="write px-3">
-            <ChatField class="mt-2" :mentionables="mentionables" @typing="" @send-message="sendMessage"></ChatField>
+            <ChatField class="mt-2" :mentionables="mentionables" @typing="" @send-message="sendMessage" />
         </div>
     </div>
 </template>

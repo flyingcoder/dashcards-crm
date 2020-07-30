@@ -4,7 +4,7 @@
             <v-card class="custom__dialog">
                 <div class="dialog__header">
                     <h3 class="dialog__title">{{ title }}</h3>
-                    <v-spacer/>
+                    <v-spacer />
                     <v-btn fab small depressed class="close__dialog" @click="clear_and_close">
                         <v-icon>close</v-icon>
                     </v-btn>
@@ -33,14 +33,14 @@
                                         Add new client
                                     </v-list-item>
                                     <v-list-item v-for="(item, index) in client.items" :key="index"
-                                                 @click="client.selected = item"
+                                                 @click="clientSelected(item)"
                                     >
                                         <v-list-item-avatar>
-                                            <v-img :src="item.image_url"/>
+                                            <v-img :src="item.image_url" />
                                         </v-list-item-avatar>
                                         <v-list-item-content>
-                                            <v-list-item-title v-html="item.fullname"/>
-                                            <v-list-item-subtitle v-html="item.company.name"/>
+                                            <v-list-item-title v-html="item.fullname" />
+                                            <v-list-item-subtitle v-html="item.company.name" />
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-list>
@@ -48,7 +48,7 @@
                             <div class="choosen" v-if="client.selected">
                                 <v-chip close @click:close="client.selected = null" outlined label class="mt-1 tile">
                                     <v-avatar left>
-                                        <v-img :src="client.selected.image_url"/>
+                                        <v-img :src="client.selected.image_url" />
                                     </v-avatar>
                                     {{ client.selected.fullname }}
                                 </v-chip>
@@ -80,7 +80,6 @@
                                 <v-chip block outlined label class="mt-1" close
                                         @click:close="date_pickers.start_date = null"
                                 >
-                                    <v-icon/>
                                     Start : {{ date_pickers.start_date | format('MMMM D, YYYY') }}
                                 </v-chip>
                             </div>
@@ -104,7 +103,7 @@
                                     </v-btn>
                                 </template>
                                 <v-date-picker :min="date_pickers.start_date" v-model="date_pickers.end_date" no-title
-                                               scrollable no-title
+                                               scrollable
                                 />
                             </v-menu>
                             <div class="choosen">
@@ -138,14 +137,14 @@
                                         <v-icon left>mdi-plus-circle-outline</v-icon>
                                         Add new manager
                                     </v-list-item>
-                                    <v-list-item v-for="(item, index) in manager.items" :key="index"
+                                    <v-list-item v-for="(item, index) in non_selected_managers" :key="index"
                                                  @click="add_to_selected_managers(item)"
                                     >
                                         <v-list-item-avatar>
-                                            <v-img :src="item.image_url"/>
+                                            <v-img :src="item.image_url" />
                                         </v-list-item-avatar>
                                         <v-list-item-content>
-                                            <v-list-item-title v-html="item.fullname"/>
+                                            <v-list-item-title v-html="item.fullname" />
                                             <v-list-item-subtitle>{{ item.job_title | ucwords }}</v-list-item-subtitle>
                                         </v-list-item-content>
                                     </v-list-item>
@@ -156,7 +155,7 @@
                                         label @click:close="remove_from_selected_managers(item)"
                                 >
                                     <v-avatar left>
-                                        <v-img :src="item.image_url"/>
+                                        <v-img :src="item.image_url" />
                                     </v-avatar>
                                     {{ item.fullname | truncate(14) }}
                                 </v-chip>
@@ -182,14 +181,14 @@
                                         <v-icon left>mdi-plus-circle-outline</v-icon>
                                         Add new member
                                     </v-list-item>
-                                    <v-list-item v-for="(item, index) in members.items" :key="index"
+                                    <v-list-item v-for="(item, index) in non_selected_members" :key="index"
                                                  @click="add_to_selected_members(item)"
                                     >
                                         <v-list-item-avatar>
-                                            <v-img :src="item.image_url"/>
+                                            <v-img :src="item.image_url" />
                                         </v-list-item-avatar>
                                         <v-list-item-content>
-                                            <v-list-item-title v-html="item.fullname"/>
+                                            <v-list-item-title v-html="item.fullname" />
                                             <v-list-item-subtitle>{{ item.job_title | ucwords }}</v-list-item-subtitle>
                                         </v-list-item-content>
                                     </v-list-item>
@@ -200,7 +199,7 @@
                                         :key="index" close label @click:close="remove_from_selected_members(item)"
                                 >
                                     <v-avatar left>
-                                        <v-img :src="item.image_url"/>
+                                        <v-img :src="item.image_url" />
                                     </v-avatar>
                                     {{ item.fullname | truncate(14) }}
                                 </v-chip>
@@ -223,7 +222,7 @@
                                 <v-list dense>
                                     <v-list-item v-for="item in statuses" :key="item" @click="project_status = item">
                                         <v-list-item-content>
-                                            <v-list-item-title v-text="item"/>
+                                            <v-list-item-title v-text="item" />
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-list>

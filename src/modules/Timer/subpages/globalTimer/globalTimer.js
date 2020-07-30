@@ -44,7 +44,8 @@ export default {
             {
                 text: 'Total Time',
                 sortable: true,
-                align: 'center'
+                align: 'center',
+                width: 250
             }
         ],
         timer_tab: 'global-timers',

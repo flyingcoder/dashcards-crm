@@ -29,11 +29,11 @@ export default {
             { title: 'Sort by Date' }
         ],
         headers: [
-            { text: 'Assigned To', sortable: false },
+            { text: 'Assigned To', sortable: false , width: 150 },
             { text: 'Task', sortable: false },
             { text: 'Milestone', sortable: false },
-            { text: 'Status', sortable: false },
-            { text: 'Total Time', sortable: false }
+            { text: 'Status', sortable: false, width: 100},
+            { text: 'Total Time', sortable: false , width: 200}
         ],
         task: null,
     }),
