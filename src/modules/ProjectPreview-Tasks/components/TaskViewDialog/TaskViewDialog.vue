@@ -3,7 +3,7 @@
         <v-dialog scrollable max-width="800" v-model="dialog" transition="dialog-bottom-transition">
             <v-card flat>
                 <v-card-title class="py-1">
-                    <v-col class="title" v-if="task"><span v-if="task.project">{{ task.project.title | ucwords }} :</span> {{ task.title | ucwords | truncate }}</v-col>
+                    <v-col class="title" v-if="task"><span v-if="task.project">{{ task.project.title | ucwords }}</v-col>
                     <v-spacer />
                     <v-btn icon @click="close_dialog">
                         <v-icon large>mdi-close-circle-outline</v-icon>

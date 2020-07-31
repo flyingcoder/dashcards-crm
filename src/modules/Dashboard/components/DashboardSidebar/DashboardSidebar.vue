@@ -66,7 +66,7 @@
                     </v-list-item>
                     <v-list-item :class="{ active: selected_route_name === 'alarm' }" sub-group class="submenu-item" @click.stop="sidebar_item_clicked('alarm')">
                         <v-list-item-action class="s__icons">
-                            <v-icon>mdi-clock-digital</v-icon>
+                            <v-icon>mdi-alarm-multiple</v-icon>
                             <div class="mini-title">
                                 Alarms
                             </div>

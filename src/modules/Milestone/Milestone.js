@@ -6,7 +6,7 @@ import Actions from '@/common/VueTable/Actions.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import MilestoneDialog from './components/MilestoneDialog/MilestoneDialog.vue'
-import makerequest from '@/services/makeRequestTo'
+import makeRequestTo from "../../services/makeRequestTo";
 
 export default {
     name: 'Milestone',
@@ -26,10 +26,10 @@ export default {
         ],
         headers: [
             { text: 'Title', value: 'title' },
-            { text: 'Tasks', value: 'tasks_count'},
-            { text: 'Status', value: 'status' },
-            { text: 'Days', value: 'days' },
-            { text: 'Action', value: 'action', align: 'center' }
+            { text: 'Tasks', value: 'tasks_count', width: 100},
+            { text: 'Status', value: 'status', width: 100 },
+            { text: 'Days', value: 'days', width: 100 },
+            { text: 'Action', value: 'action', align: 'center', width: 180, sortable: false}
         ],
         table_config: {
             route_name: 'templates/milestone',
@@ -42,12 +42,15 @@ export default {
     computed: {
         dynamic_api() {
             return `api/template/${this.id}/milestone`
-        }
+        },
+        dynamic_bulk_delete_api() {
+            return `api/template/${this.id}/milestone/bulk-delete`
+        },
     },
 
     created() {
         this.fill_table_via_url(this.dynamic_api)
-        makerequest
+        makeRequestTo
             .get_milestones(`api/template/${this.id}`)
             .then(({ data }) => (this.template_name = data.name))
             .finally(() => (this.loading = false))

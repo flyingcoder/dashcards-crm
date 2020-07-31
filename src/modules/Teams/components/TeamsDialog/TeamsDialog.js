@@ -30,7 +30,11 @@ export default {
             this.group_items.push(data)
         })
     },
-
+    computed: {
+        disabled_btn() {
+            return this.$v.$invalid && (this.telephone && !this.telephone_is_valid)
+        }
+    },
     data: () => ({
         btnloading: false,
         open: false,
@@ -52,7 +56,11 @@ export default {
         loading: false,
         telephone_is_valid: false,
         show_create_password: false,
-        show_create_password_label: 'Let user set their password'
+        show_create_password_label: [
+            {text: 'Let user set their password', value: false},
+            {text: 'Manually set user password', value: true}
+        ]
+
     }),
 
     watch: {
@@ -73,9 +81,6 @@ export default {
             if (!this.show_create_password) {
                 this.password = this.repeat_password = ''
             }
-            this.show_create_password_label = !this.show_create_password ?
-                'Let user set their password' :
-                'Let admin set their password'
         }
     },
 

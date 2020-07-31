@@ -15,11 +15,17 @@
                 :fields-to-edit="edit_item"
                 @save="update_item('edit_milestone', $event, dynamic_api)"
         />
+        <delete-dialog
+                :open-dialog.sync="bulk_delete_dialog"
+                title="Delete Milestone"
+                text-content="This will also deletes all tasks associated with this milestones. <br>Are you sure you want to delete this milestones?"
+                @delete="bulk_delete_via_url(dynamic_bulk_delete_api)"
+        />
 
         <delete-dialog
                 :open-dialog.sync="delete_dialog"
                 title="Delete Milestone"
-                text-content="Are you sure you want to delete this milestone?"
+                text-content="This will also deletes all tasks associated with this milestone. <br>Are you sure you want to delete this milestone?"
                 @delete="delete_item('delete_milestone', dynamic_api)"
         />
 
@@ -37,9 +43,7 @@
                         @delete-selected="open_bulk_delete_dialog($event)"
                 >
                     <template slot="header-toolbar">
-                        <table-header
-                                @click="add_dialog = true"
-                        />
+                        <table-header @click="add_dialog = true" />
                     </template>
 
                     <template v-slot:row-slot="{ item }">

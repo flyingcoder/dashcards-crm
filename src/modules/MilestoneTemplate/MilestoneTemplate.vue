@@ -19,14 +19,14 @@
         <delete-dialog
                 :open-dialog.sync="delete_dialog"
                 title="Delete Template"
-                text-content="Are you sure you want to delete this template?"
+                text-content="This will also deletes milestones associated with this template. Are you sure you want to delete these template? "
                 @delete="delete_item('delete_milestone_template')"
         />
 
         <delete-dialog
                 :open-dialog.sync="bulk_delete_dialog"
                 title="Delete Templates"
-                text-content="Are you sure you want to delete these template? This can't be undone."
+                text-content="This will also deletes milestones associated with these templates. Are you sure you want to delete these templates? "
                 @delete="bulk_delete('bulk_delete_milestone_template')"
         />
         <VueTable

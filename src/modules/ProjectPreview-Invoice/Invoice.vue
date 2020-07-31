@@ -4,7 +4,7 @@
                               @updated="invoice_updated"
         />
 
-        <ViewInvoice ref="view_invoice_dialog" :item="view_item" />
+        <ViewInvoice ref="view_invoice_dialog" :item="view_item"/>
 
         <delete-dialog
                 :open-dialog.sync="delete_dialog"
@@ -24,7 +24,8 @@
                 :headers="headers"
                 :showRowActions="true"
                 @load-more="getMoreInvoices"
-                icon="list"
+                icon="mdi-alpha-i-box-outline"
+                emptyText="No invoice yet"
                 :loading="loading"
                 :title="tableTitle"
                 :key="componentKey"
@@ -35,20 +36,13 @@
             <template v-slot:row-slot="{ item }">
                 <td>{{ item.title }}</td>
                 <td>
-                    <v-tooltip top>
-                        <template v-slot:activator="{ on }">
-                            <v-avatar color="teal" v-on="on" size="35">
-                                <v-img :src="item.billed_to.image_url" />
-                            </v-avatar>
-                        </template>
-                        <span>{{ item.billed_to.fullname }}</span>
-                    </v-tooltip>
-                    {{ item.billed_to.fullname }}
+                    <Avatar :user="item.billed_to" />
                 </td>
                 <td>{{ item.due_date | format }}</td>
                 <td>{{ item.total_amount | money }}</td>
                 <Actions
                         :item="item"
+                        :permissions="$_permissions.get('invoices')"
                         @delete="open_delete_dialog(item)"
                         @edit="open_edit_dialog(item)"
                         @view="open_view_dialog(item)"

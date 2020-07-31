@@ -1,10 +1,10 @@
 <template>
     <div class="services">
-        <ServiceModal ref="add_dialog" @save="handleSaveService" />
-        <ServiceModal ref="edit_dialog" @save="handleUpdateService" />
-        <delete-dialog :open-dialog.sync="delete_dialog" title="Delete Service"
-                       text-content="Are you sure you want to delete this service? "
-                       @delete="delete_item('delete_service')"
+        <ServiceModal ref="add_dialog" @save="handleSaveCampaign" />
+        <ServiceModal ref="edit_dialog" @save="handleUpdateCampaign" />
+        <delete-dialog :open-dialog.sync="delete_dialog" title="Delete Campaign"
+                       text-content="Are you sure you want to delete this campaign? "
+                       @delete="handleDeleteCampaign"
         />
         <!-- <delete-dialog :open-dialog.sync="bulk_delete_dialog" title="Delete Services" text-content="Are you sure you want to delete these services? This can't be undone." @delete="bulk_delete('bulk_delete_service')" /> -->
         <clients-dialog :dialog.sync="add_new_client_dialog" ref="add_client_dialog" dialogTitle="Add New Client"

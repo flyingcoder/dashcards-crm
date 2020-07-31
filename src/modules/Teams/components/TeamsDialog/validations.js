@@ -22,9 +22,6 @@ export const validations = {
         rate: {
             numeric
         },
-        contact_number: {
-            required
-        },
 
         password: {
             required: requiredIf(function () {
@@ -50,10 +47,7 @@ export const validations = {
         on_blur_field(field) {
             this.$v[field].$touch()
             if (this.$v[field].$invalid) {
-                const field_name = field
-                    .split('_')
-                    .map(upperFirst)
-                    .join(' ')
+                const field_name = field.split('_').map(upperFirst).join(' ')
                 this.$event.$emit('open_snackbar', `${field_name} is invalid`, 'error')
             }
         },
@@ -61,23 +55,16 @@ export const validations = {
             this.telephone_is_valid = payload.isValid
             this.telephone = payload.isValid ? payload : null
         },
-        telephone_on_blur() {
-            if (!this.telephone_is_valid) {
-                this.$event.$emit('open_snackbar', 'Invalid Phone format', 'error')
-            }
-        },
         all_validations_passed() {
             this.$v.$touch()
-
-            if (this.$v.$invalid || !this.telephone_is_valid) {
-                this.$event.$emit(
-                    'open_snackbar',
-                    'Please fill fields correctly!',
-                    'error'
-                )
+            if (this.telephone && !this.telephone_is_valid) {
+                this.$event.$emit('open_snackbar', 'Invalid Phone format', 'error')
                 return false
             }
-
+            if (this.$v.$invalid) {
+                this.$event.$emit('open_snackbar', 'Please fill fields correctly!', 'error')
+                return false
+            }
             return true
         }
     }

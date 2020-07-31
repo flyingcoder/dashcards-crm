@@ -17,7 +17,7 @@
                 <v-icon v-else x-large>mdi-image-off-outline</v-icon>
             </div>
         </v-img>
-        <slot />
+        <slot/>
     </div>
 </template>
 
@@ -41,8 +41,15 @@
             wclass: {type: String, default: 'img-wrapper'},
             size: {type: String, default: 'xl'}
         },
-        data: () => ({
-            image_exist: true
-        })
+        computed: {
+            image_exist: {
+                get() {
+                    return this.media.thumb_url && this.media.thumb_url.trim() !== ''
+                },
+                set(val) {
+                    //
+                }
+            }
+        }
     }
 </script>

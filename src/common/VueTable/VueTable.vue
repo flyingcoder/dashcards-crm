@@ -26,9 +26,7 @@
             <template v-slot:item="{ item }">
                 <tr>
                     <td v-if="showSelect && !noRowDelete">
-                        <v-checkbox on-icon="mdi-check-circle" off-icon="mdi-checkbox-blank-circle-outline"
-                                    v-model="selected" style="margin:0px;padding:0px" :value="item" hide-details
-                        />
+                        <v-checkbox v-model="selected" class="pa-0 ma-0" :value="item" hide-details />
                     </td>
                     <slot name="row-slot" :item="item" />
                 </tr>

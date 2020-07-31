@@ -29,9 +29,9 @@ export default {
         headers: [
             { text: 'Title', value: 'title' },
             { text: 'Description', value: 'description' },
-            { text: 'Status', value: 'status' },
-            { text: 'Days', value: 'days' },
-            { text: 'Action', value: 'action', width: '140px', align: 'center' }
+            { text: 'Status', value: 'status', width: 100 },
+            { text: 'Days', value: 'days', width: 100 },
+            { text: 'Action', value: 'action', width: 150, align: 'center', sortable: false }
         ],
         table_config: {
             route_name: 'templates/milestone/task',

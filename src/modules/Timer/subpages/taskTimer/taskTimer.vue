@@ -30,7 +30,7 @@
                         Global Timers
                     </v-btn>
                     <v-btn text class="px-5" value="alarm">
-                        <v-icon left>mdi-clock-digital</v-icon>
+                        <v-icon left>mdi-alarm-multiple</v-icon>
                         Alarms
                     </v-btn>
                 </v-btn-toggle>
@@ -39,7 +39,7 @@
                 <td>
                     <Avatars v-if="item.assigned.length > 0" :items="item.assigned" :count="1"
                              style="display:inline-block"
-/>
+                    />
                     <v-tooltip right v-else>
                         <template v-slot:activator="{ on, attrs }">
                             <v-avatar v-bind="attrs" v-on="on">
@@ -68,7 +68,8 @@
                 <td>{{ item.timer.timer_created | format('MMM D YYYY HH:mm:ss') }}</td>
                 <td>{{ timerEnd(item) }}</td>
                 <td>
-                    <PlayPause :item="item" @row-item-updated="item = $event" />
+                    <PlayPause v-if="item.assigned.length" :item="item" @row-item-updated="item = $event" />
+                    <v-chip label small outlined v-else>Unassigned</v-chip>
                 </td>
             </template>
         </VueTable>

@@ -33,6 +33,7 @@
                 </td>
                 <td>
                     <PlayPause v-if="item.assigned.length" :item="item" @row-item-updated="item = $event" />
+                    <v-chip label small outlined v-else>Unassigned</v-chip>
                 </td>
             </template>
         </VueTable>
