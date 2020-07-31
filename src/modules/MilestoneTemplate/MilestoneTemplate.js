@@ -1,6 +1,5 @@
 import { list_functionality } from '@/services/list-functionality/list-functionality'
 //Components
-import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import MilestoneTemplateDialog from './components/MilestoneTemplateDialog/MilestoneTemplateDialog.vue'
@@ -24,9 +23,9 @@ export default {
         ],
         headers: [
             { text: 'Name', value: 'name' },
-            { text: 'Milestones', value: 'milestones_count'},
-            { text: 'Status', value: 'status' },
-            { text: 'Action', value: 'action', align: 'center' }
+            { text: 'Milestones', value: 'milestones_count', width: 120},
+            { text: 'Status', value: 'status', width: 100 },
+            { text: 'Action', value: 'action', align: 'center', sortable: false, width: 180 }
         ],
         table_config: {
             route_name: 'templates',

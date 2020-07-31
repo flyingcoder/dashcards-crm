@@ -70,7 +70,7 @@ export const methods = {
                 .finally(() => this.$event.$emit('btnloading_off', false))
         },
 
-        delete_item(api_name, dynamic_api = null) {
+        delete_item(api_name, dynamic_api = null, cb) {
             makeRequestTo[api_name](this.delete_item_id, dynamic_api)
                 .then(() => {
                     const index = this.items.findIndex(
@@ -81,15 +81,18 @@ export const methods = {
                     this.delete_dialog = false
                     this.clear_selected()
                     this.$event.$emit('open_snackbar', this.table_config.delete_message)
+                    if (typeof cb === 'function') {
+                        cb(response)
+                    }
                 })
                 .finally(() => this.$event.$emit('btnloading_off', false))
         },
         bulk_delete(api_name) {
-            var payload = {
+            let payload = {
                 ids: this.selected.map(ii => {
                     return ii.id
                 })
-            }
+            };
 
             makeRequestTo[api_name]({data: payload})
                 .then(({data}) => {
@@ -108,11 +111,11 @@ export const methods = {
                 })
         },
         bulk_delete_via_url(url) {
-            var payload = {
+            let payload = {
                 ids: this.selected.map(ii => {
                     return ii.id
                 })
-            }
+            };
             request
                 .delete(url, {data: payload})
                 .then(({data}) => {

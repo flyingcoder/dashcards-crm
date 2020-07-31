@@ -10,7 +10,7 @@
         </div>
 
         <VueTable :items="items" :headers="headers" :showRowActions="true" @load-more="load_more" :loading="loading"
-                  title="Alarms" icon="mdi-clock-digital" emptyText="No alarm yet" :key="componentKey" :noMoreData="noMoreData" :showSelect="false"
+                  title="Alarms" icon="mdi-alarm-off" emptyText="No alarm yet" :key="componentKey" :noMoreData="noMoreData" :showSelect="false"
         >
             <template v-slot:header-toolbar>
                 <v-btn-toggle class="tab-buttons" mandatory v-model="timer_tab" :value="timer_tab"
@@ -25,7 +25,7 @@
                         Global Timers
                     </v-btn>
                     <v-btn text class="px-5" value="alarm">
-                        <v-icon left>mdi-clock-digital</v-icon>
+                        <v-icon left>mdi-alarm-multiple</v-icon>
                         Alarms
                     </v-btn>
                 </v-btn-toggle>

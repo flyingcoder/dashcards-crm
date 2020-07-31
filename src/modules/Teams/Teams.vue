@@ -14,7 +14,7 @@
                        @delete="delete_item('delete_team', $event)"
         />
         <delete-dialog :open-dialog.sync="bulk_delete_dialog" title="Delete Members"
-                       text-content="Are you sure you want to delete these members? This can't be undone."
+                       text-content="Are you sure you want to delete these members?"
                        @delete="bulk_delete('bulk_delete_member')"
         />
         <groups-dialog ref="add_group_dialog" title="Add New Group" @save="save_new_user_group" />

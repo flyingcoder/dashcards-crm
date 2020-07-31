@@ -29,11 +29,11 @@ export default {
 
     data: () => ({
         headers: [
-            { text: 'Invoice', value: 'invoice', width: '30%' },
-            { text: 'Client', value: 'client', width: '20%' },
-            { text: 'Due Date', value: 'due_date', width: '20%' },
-            { text: 'Amount', value: 'amount', width: '10%' },
-            { text: 'Actions', value: 'action', width: '20%', align: 'center' }
+            { text: 'Invoice', value: 'invoice' },
+            { text: 'Client', value: 'client', width: 120, sortable: false },
+            { text: 'Due Date', value: 'due_date', width: 150 },
+            { text: 'Amount', value: 'amount', width: 120 },
+            { text: 'Actions', value: 'action', width: 150, align: 'center', sortable: false}
         ],
         view_invoice_dialog: false,
         view_item: null,

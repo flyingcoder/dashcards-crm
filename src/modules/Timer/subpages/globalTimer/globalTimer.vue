@@ -21,7 +21,7 @@
                         <v-icon left>mdi-account-clock</v-icon> Global Timers
                     </v-btn>
                     <v-btn text class="px-5" value="alarm">
-                        <v-icon left>mdi-clock-digital</v-icon> Alarms
+                        <v-icon left>mdi-alarm-multiple</v-icon> Alarms
                     </v-btn>
                 </v-btn-toggle>
             </template>

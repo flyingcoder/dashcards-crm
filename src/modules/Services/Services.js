@@ -195,15 +195,18 @@ export default {
             //todo
         },
 
-        handleSaveService(event) {
+        handleSaveCampaign(event) {
             this.add_item('add_new_service', event, null, (response) => {
                 this.$refs.add_dialog.$refs.dialog.clear_and_close()
             })
         },
-        handleUpdateService(event) {
+        handleUpdateCampaign(event) {
             this.update_item('update_service', event, null, (response) => {
                 this.$refs.edit_dialog.$refs.dialog.clear_and_close()
             })
+        },
+        handleDeleteCampaign(event) {
+            this.delete_item('delete_service')
         },
         show_add_group_dialog() {
             this.$refs.add_group_dialog.openDialog()

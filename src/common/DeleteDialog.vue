@@ -11,12 +11,10 @@
         >
             <template v-slot:content>
                 <v-banner two-line outlined tile flat>
-                    <v-avatar slot="icon" color="red accent-4" size="90">
-                        <v-icon icon="mdi-lock" large color="white">
-                            mdi-shield-alert-outline
-                        </v-icon>
-                    </v-avatar>
-                    <p class="title" v-html="textContent" />
+                    <v-icon slot="icon" x-large color="red accent-4">
+                        mdi-alert-octagram
+                    </v-icon>
+                    <p class="subtitle-1" v-html="textContent" />
                 </v-banner>
             </template>
         </custom-dialog>
