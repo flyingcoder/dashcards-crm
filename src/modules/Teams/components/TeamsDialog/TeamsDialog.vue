@@ -2,7 +2,7 @@
     <custom-dialog :title="title" :max-width="800" ref="dialog" :open.sync="open">
         <template slot="content">
             <v-progress-linear v-if="loading" slot="progress" color="blue" indeterminate/>
-            <v-row no-gutters v-show="!loading">
+            <v-row no-gutters v-show="!loading" >
                 <v-col xs="12" sm="6">
                     <v-text-field prepend-inner-icon="mdi-account-settings-outline"
                                   class="dialog__textfield d-field"

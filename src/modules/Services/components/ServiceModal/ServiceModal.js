@@ -2,6 +2,7 @@ import _cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
 import axios from 'axios'
 import {settings} from '@/variables'
+import * as moment from "moment"
 //Components
 import makeRequestTo from '@/services/makeRequestTo'
 import TextField from '@/common/BaseComponents/TextField.vue'
@@ -9,7 +10,6 @@ import TextArea from '@/common/BaseComponents/TextArea.vue'
 import DatePicker from '@/common/DatePickerV2.vue'
 import MembersDropdown from '@/modules/Projects/components/MembersDropdown/MembersDropdown.vue'
 import Editor from '@/common/Editor/Editor.vue'
-import ImgUpload from '@/common/Editor/components/ImgModal.vue'
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 
 export default {
@@ -20,7 +20,6 @@ export default {
         TextField,
         TextArea,
         Editor,
-        ImgUpload,
         CustomDialog
     },
 
@@ -56,7 +55,7 @@ export default {
         },
         comment: '',
         date_pickers: {
-            start_date: '',
+            start_date: null,
             end_date: '',
             show: true
         },
@@ -176,10 +175,6 @@ export default {
                     })
                 )
                 .finally(() => (this.dropdown_loading = false))
-        },
-
-        setIcon(data) {
-            this.icon = data.src
         },
 
         cancel() {

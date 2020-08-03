@@ -1,6 +1,5 @@
-import { list_functionality } from '@/services/list-functionality/list-functionality'
+import {list_functionality} from '@/services/list-functionality/list-functionality'
 import request from '@/services/axios_instance'
-
 //components
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import AddDialog from './components/AddDialog/AddDialog.vue'
@@ -8,6 +7,7 @@ import VueTable from '@/common/VueTable/VueTable.vue'
 import Actions from '@/common/VueTable/Actions.vue'
 import VueGrid from '@/common/VueGrid/VueGrid.vue'
 import TableHeader from '@/common/TableHeader.vue'
+import {mapGetters} from "vuex";
 
 export default {
     name: 'MembersTab',
@@ -28,19 +28,19 @@ export default {
 
     data: () => ({
         headers: [
-            { text: 'Member', value: 'member' },
-            { text: 'Email', value: 'email' },
-            { text: 'Telephone', value: 'telephone' },
-            { text: 'Position', value: 'position' },
-            { text: 'Tasks', value: 'tasks' },
-            { text: 'Action', value: 'action', align: 'center', width: '140px' }
+            {text: 'Member', sortable: false},
+            {text: 'Email', value: 'email'},
+            {text: 'Telephone', sortable: false},
+            {text: 'Position', value: 'position'},
+            {text: 'Tasks', value: 'tasks'},
+            {text: 'Action', value: 'action', align: 'center', width: '140px'}
         ],
         sortList: [
-            { title: 'Sort by member' },
-            { title: 'Sort by email' },
-            { title: 'Sort by telephone' },
-            { title: 'Sort by position' },
-            { title: 'Sort by tasks' }
+            {title: 'Sort by member'},
+            {title: 'Sort by email'},
+            {title: 'Sort by telephone'},
+            {title: 'Sort by position'},
+            {title: 'Sort by tasks'}
         ],
         table_config: {
             route_name: 'project_preview',
@@ -52,25 +52,32 @@ export default {
     }),
 
     computed: {
+        ...mapGetters(['user']),
         dynamic_api() {
             return `api/projects/${this.id}/member`
         },
         permissions() {
             return this.$_permissions.get('hq_members')
         },
-        type(){
+        type() {
             return this.$route.params.type || 'project'
         },
-        tableTitle(){
+        tableTitle() {
             return this.type === 'project' ? `Project Members` : 'Service Members'
         },
         paths() {
             return [
-                { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-                { text: this.type, disabled: true, router_name: null },
-                { text: 'Members', disabled: true, router_name: null }
+                {text: 'Dashboard', disabled: false, router_name: 'default-content'},
+                {text: this.type, disabled: true, router_name: null},
+                {text: 'Members', disabled: true, router_name: null}
             ]
-        }
+        },
+        can_add() {
+            if(this.user.is_admin || this.user.is_manager) {
+                return true
+            }
+            return this.permissions && this.permissions.create
+        },
     },
 
     mounted() {
@@ -87,14 +94,14 @@ export default {
             this.load_more_via_url(this.dynamic_api)
         },
         bulk_remove_members() {
-            var payload = {
+            let payload = {
                 ids: this.selected.map(ii => {
                     return ii.id
                 })
             }
             request
-                .delete(`api/projects/${this.id}/member/bulk-delete`, { data: payload })
-                .then(({ data }) => {
+                .delete(`api/projects/${this.id}/member/bulk-delete`, {data: payload})
+                .then(({data}) => {
                     data.ids.forEach(item => {
                         const index = this.items.findIndex(
                             data_item => data_item.id === item.user_id

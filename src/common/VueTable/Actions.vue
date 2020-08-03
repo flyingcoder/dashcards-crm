@@ -8,14 +8,6 @@
             </template>
             <span>Edit</span>
         </v-tooltip>
-        <v-tooltip left v-if="hasDelete" v-show="can_delete">
-            <template v-slot:activator="{ on }">
-                <v-btn dense v-on="on" icon @click="handle_action('delete')">
-                    <v-icon>{{ deleteIcon }}</v-icon>
-                </v-btn>
-            </template>
-            <span>Delete</span>
-        </v-tooltip>
         <v-tooltip left v-if="hasView" v-show="can_view">
             <template v-slot:activator="{ on }">
                 <v-btn dense v-on="on" icon @click="handle_action('view')">
@@ -23,6 +15,14 @@
                 </v-btn>
             </template>
             <span>View</span>
+        </v-tooltip>
+        <v-tooltip left v-if="hasDelete" v-show="can_delete">
+            <template v-slot:activator="{ on }">
+                <v-btn dense v-on="on" icon @click="handle_action('delete')">
+                    <v-icon>{{ deleteIcon }}</v-icon>
+                </v-btn>
+            </template>
+            <span>Delete</span>
         </v-tooltip>
         <slot name="extra" />
     </td>

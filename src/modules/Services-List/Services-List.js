@@ -1,7 +1,6 @@
-import { list_functionality } from '@/services/list-functionality/list-functionality'
-import isEmpty from 'lodash/isEmpty'
+import {list_functionality} from '@/services/list-functionality/list-functionality'
 import request from '@/services/axios_instance'
-import { global_utils } from '@/global_utils/global_utils'
+import {global_utils} from '@/global_utils/global_utils'
 //Components
 import VueTable from '@/common/VueTable/VueTable.vue'
 import Breadcrumb from '@/common/Breadcrumb.vue'
@@ -10,6 +9,7 @@ import ServicesEditDialog from './components/ServicesEditDialog/ServicesEditDial
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import Actions from '@/common/VueTable/Actions.vue'
+import IconUploader from "@/common/BaseComponents/IconUploader.vue";
 
 export default {
     name: 'Services',
@@ -21,20 +21,21 @@ export default {
         ServicesEditDialog,
         DeleteDialog,
         TableHeader,
-        Actions
+        Actions,
+        IconUploader
     },
 
     data() {
         return {
             paths: [
-                { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-                { text: 'Services', disabled: true, router_name: null }
+                {text: 'Dashboard', disabled: false, router_name: 'default-content'},
+                {text: 'Services', disabled: true, router_name: null}
             ],
             headers: [
-                { text: '', sortable: false , width: 40 },
-                { text: 'Service Name', value: 'name', sortable: true },
-                { text: 'Created By',value: 'campaigns_count',  sortable: true },
-                { text: 'Campaigns Created', value: 'created_at', sortable: true, align: 'center' },
+                {text: '', sortable: false, width: 40},
+                {text: 'Service Name', value: 'name', sortable: true},
+                {text: 'Created By', value: 'campaigns_count', sortable: true},
+                {text: 'Campaigns Created', value: 'created_at', sortable: true, align: 'center'},
                 {
                     text: 'Date Created',
                     value: 'created_at',
@@ -55,7 +56,8 @@ export default {
                 delete_message: 'Service deleted successfully!',
                 refresh_table_message: 'Table refreshed',
                 refresh_table_api_name: 'paginate_services_table'
-            }
+            },
+            activeService: null
         }
     },
 
@@ -75,15 +77,32 @@ export default {
         load_more_services() {
             this.load_more_via_url(`api/services-list`)
         },
-        save_new_services_list(items){
+        save_new_services_list(items) {
             request
-                .post('api/services-list', { names : items.map(i => i.name) })
-                .then(({ data }) => {
+                .post('api/services-list', {names: items.map(i => i.name)})
+                .then(({data}) => {
                     this.items.push(...data)
                     this.$event.$emit('open_snackbar', 'New service(s) added!')
                 })
                 .finally(() => {
                     this.add_dialog = false
+                })
+        },
+        openIconModal(item) {
+            this.activeService = item
+            this.$refs.uploadModal.openDialog()
+        },
+        setIcon(data) {
+            this.icon = data.url
+            request.post(`api/services-list/set-icon`, {source_url: this.icon, id: this.activeService.id})
+                .then(({data}) => {
+                    let index = this.items.findIndex(i => i.id === this.activeService.id)
+                    if (~index) {
+                        this.items[index].icon = this.icon
+                    }
+                })
+                .finally(() => {
+                    this.activeService = null
                 })
         },
     }

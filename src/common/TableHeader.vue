@@ -1,8 +1,9 @@
 <template>
     <div class="table-header">
+        <slot name="prepends" />
         <v-tooltip top v-if="!noButton">
             <template v-slot:activator="{ on, attrs }">
-                <v-icon v-bind="attrs" v-on="on" fab class="add__btn ml-2" @click="$emit('click')">
+                <v-icon v-bind="attrs" v-on="on" class="add__btn ml-2" @click="$emit('click')">
                     mdi-plus-circle-outline
                 </v-icon>
             </template>
@@ -10,7 +11,7 @@
         </v-tooltip>
         <v-tooltip top v-if="!noSortButton">
             <template v-slot:activator="{ on, attrs }">
-                <v-icon v-bind="attrs" v-on="on" fab class="view-btn add__btn ml-2" @click="$emit('click-sort-by')">
+                <v-icon v-bind="attrs" v-on="on" class="view-btn add__btn ml-2" @click="$emit('click-sort-by')">
                     sort
                 </v-icon>
             </template>
@@ -18,7 +19,7 @@
         </v-tooltip>
         <v-tooltip top v-if="!noListButton">
             <template v-slot:activator="{ on, attrs }">
-                <v-icon v-bind="attrs" v-on="on" fab :color="activeView === 'list' ? 'primary' : ''"
+                <v-icon v-bind="attrs" v-on="on" :color="activeView === 'list' ? 'primary' : ''"
                         class="view-btn add__btn ml-2" @click="$emit('click-list-view')"
                 >
                     mdi-view-list

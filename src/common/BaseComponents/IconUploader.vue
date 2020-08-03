@@ -2,12 +2,11 @@
     <div class="add-picture">
         <CustomDialog
                 ref="picture_dialog"
-                title="Upload New Profile Picture"
-                button2-text="Save"
-                @button1="cancel"
+                :title="title"
                 :open.sync="dialog"
+                @button1="cancel"
         >
-            <template #content>
+            <template v-slot:content>
                 <div class="content">
                     <Loader :loading="loading"/>
                     <CropImage
@@ -21,7 +20,7 @@
                             v-else
                             ref="dropzone"
                             :duplicateCheck="true"
-                            acceptedFiles="validFileType"
+                            :acceptedFiles="validFileType"
                             :options="dropzoneOptions"
                             :useCustomSlot="true"
                             dictFileTooBig="File too big"
@@ -30,16 +29,17 @@
                     />
                 </div>
             </template>
-            <template #button2>
-                <v-btn @click="get_cropped_image" :disabled="!file_uploaded">Save</v-btn>
+            <template v-slot:button2>
+                <v-btn @click="get_cropped_image" :disabled="!file_uploaded">
+                    {{ mainBtnText }}
+                </v-btn>
             </template>
         </CustomDialog>
     </div>
 </template>
 
 <script>
-    import {mapGetters, mapMutations} from 'vuex'
-    import {api_to} from '../../api'
+    import request from '@/services/axios_instance'
     //Components
     import Loader from '@/common/BaseComponents/Loader.vue'
     import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
@@ -48,65 +48,72 @@
     import {settings} from '@/variables'
 
     export default {
+        name: 'IconUploader',
         components: {
             Loader,
             CustomDialog,
             CustomDropzone,
             CropImage
         },
-
+        props: {
+            title: {type: String, default: 'Upload Icon'},
+            mainBtnText: {type: String, default: 'Save'},
+            imageWidth: {type: Number, default: 200},
+            imageHeight: {type: Number, default: 200},
+            imageType: {type: String, default: 'circle'},
+            extraData: Object
+        },
         data: () => ({
             file_uploaded: false,
             image64: null,
             loading: false,
-            validFileType: settings.allowedImageType,
-            croppie: {
-                options: {
-                    viewport: {width: 200, height: 200, type: 'circle'},
-                    showZoomer: false,
-                    boundary: {width: 300, height: 300},
-                    enableOrientation: true
-                },
-                result: 'blob'
-            }
+            open: false
         }),
 
         computed: {
-            ...mapGetters('memberProfile', [
-                'picture_dialog_is_open',
-                'user_id',
-                'user'
-            ]),
-
-            ...mapGetters({
-                logged_user: 'user'
-            }),
-
+            validFileType() {
+                return settings.allowedImageType
+            },
             dialog: {
                 get() {
-                    return this.picture_dialog_is_open
+                    return this.open
                 },
                 set(val) {
-                    this.set_picture_dialog(val)
+                    this.open = val
                 }
             },
-
             dropzoneOptions() {
                 return {
                     maxFiles: 1,
                     thumbnailWidth: 150,
                     addRemoveLinks: true,
-                    url: settings.apiHostBaseURL + `/api/company/clients/${this.user_id}`,
+                    url: settings.apiHostBaseURL + `/api/file/image-upload`,
                     headers: {Authorization: 'Bearer ' + localStorage.getItem('token')},
                     method: 'put',
                     autoProcessQueue: false
+                }
+            },
+            croppie() {
+                return {
+                    options: {
+                        viewport: {
+                            width: this.imageWidth,
+                            height: this.imageHeight,
+                            type: this.imageType
+                        },
+                        showZoomer: true,
+                        boundary: {width: 300, height: 300},
+                        enableOrientation: true
+                    },
+                    result: 'blob'
                 }
             }
         },
 
         methods: {
-            ...mapMutations('memberProfile', ['set_picture_dialog', 'set_user']),
-
+            openDialog() {
+                this.dialog = true
+            },
             file_added([file]) {
                 const reader = new FileReader()
                 if (this.validFileType.includes(file.type)) {
@@ -123,33 +130,25 @@
             },
 
             get_cropped_image() {
-                this.$refs.croppie.get_result().then(this.upload_image)
+                this.$refs.croppie.get_result()
+                    .then(this.upload_image)
             },
 
             upload_image(image) {
                 let formData = new FormData()
                 formData.append('file', image)
+                formData.append('extra', this.extraData)
                 this.loading = true
-                api_to
-                    .upload_image(this.user_id, formData)
-                    .then(this.image_uploaded)
+                request.post(`api/file/image-upload`, formData)
+                    .then(({data}) => {
+                        this.$refs.croppie.clear_component()
+                        this.$emit('uploaded', data)
+                        this.$refs.picture_dialog.clear_and_close()
+                        Object.assign(this.$data, this.$options.data.apply(this))
+                    })
                     .finally(() => (this.loading = false))
             },
 
-            image_uploaded(response) {
-                this.$refs.croppie.clear_component()
-                this.$event.$emit(
-                    'open_snackbar',
-                    'Profile picture uploaded successfully!'
-                )
-                this.set_user(response.data)
-                if (Number(this.user_id) === Number(this.logged_user.id)) {
-                    /* if we modify the logged user */
-                    this.$store.commit('set_user_image', response.data.image_url)
-                }
-                this.$refs.picture_dialog.clear_and_close()
-                Object.assign(this.$data, this.$options.data.apply(this))
-            },
             cancel() {
                 this.dialog = false
                 this.file_uploaded = false

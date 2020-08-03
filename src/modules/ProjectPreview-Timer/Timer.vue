@@ -15,7 +15,7 @@
                     {{ item.title | ucwords }}
                 </td>
                 <td>
-                    {{ item.milestone.title | ucwords }}
+                    {{ item.milestone ? item.milestone.title : '' | ucwords }}
                 </td>
                 <td class="text-cap status__col">
                     <template v-if="item.status.toLowerCase() === 'completed'">

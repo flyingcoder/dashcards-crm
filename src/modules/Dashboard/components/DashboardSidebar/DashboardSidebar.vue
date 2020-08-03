@@ -17,7 +17,7 @@
         <!-- <v-divider></v-divider> -->
         <v-list class="sidebar">
             <div class="sidebar-inner" v-for="(item, index) in items" :data-nav="item.title" :key="item.index" @click="sidebar_item_clicked(item.action)" tile :class="{ active: item.action === selected_route_name }">
-                <v-list class="s__list" :key="index" :class="{ active: item.action === selected_route_name }" v-if="item.can_view() && item.title != 'Timers' && item.title != 'Templates'">
+                <v-list class="s__list" :key="index" :class="{ active: item.action === selected_route_name }" v-if="item.can_view() && item.title != 'Timers'">
                     <v-list-item-action class="s__icons">
                         <svg viewBox="0 0 250 250">
                             <path class="icon" :d="item.icon" />
@@ -74,7 +74,7 @@
                         <v-list-item-title>Alarms</v-list-item-title>
                     </v-list-item>
                 </v-list-group>
-                <v-list-group class="s_submenu" v-if="item.can_view() && item.title === 'Templates'">
+                <!--<v-list-group class="s_submenu" v-if="item.can_view() && item.title === 'Templates'">
                     <template v-slot:activator>
                         <v-list-item class="s__list-group" :key="index" :class="{ active: item.action === selected_route_name }">
                             <v-list-item-action class="s__icons">
@@ -108,7 +108,7 @@
                         </v-list-item-action>
                         <v-list-item-title>Invoices</v-list-item-title>
                     </v-list-item>
-                </v-list-group>
+                </v-list-group>-->
             </div>
         </v-list>
     </v-navigation-drawer>

@@ -99,7 +99,7 @@
                                                scrollable
                                 />
                             </v-menu>
-                            <div class="choosen" >
+                            <div class="choosen">
                                 <v-chip block outlined label class="mt-1" close v-if="date_pickers.end_date"
                                         @click:close="date_pickers.end_date = null"
                                 >
@@ -235,39 +235,26 @@
                             </div>
                         </v-col>
                     </v-row>
-                    <v-row no-gutters class="align-center">
-                        <v-col md="4" sm="12">
-                            <div class="fullwidth mx-auto">
-                                <v-img v-if="icon" :src="icon"/>
-                                <v-btn block class="mt-2 d__btn" @click="$refs.uploadModal.openDialog()">
-                                    <v-icon class="d__icon">mdi-image-edit-outline</v-icon>
-                                    <div class="d__title">
-                                        <span>Change Icon</span>
-                                    </div>
-                                </v-btn>
-                            </div>
+                    <v-row class="align-center">
+                        <v-col md="12" sm="12">
+                            <!-- <TextField prepend-inner-icon="mdi-alpha-s-box-outline" dense :value.sync="name" label="Service Name *" color="#657186" filled></TextField> -->
+                            <v-select required clearable prepend-inner-icon="mdi-alpha-s-box-outline"
+                                      append-outer-icon="mdi-plus-circle-outline" filled hide-details="auto"
+                                      label="Select Service *" v-model="service.selected"
+                                      :items="service.items" return-object item-text="name"
+                                      @click:close="service.selected = null"
+                                      @click:append-outer="open_add_new_service_list"
+                            />
                         </v-col>
-                        <v-col md="8" sm="12">
-                            <v-col md="12">
-                                <!-- <TextField prepend-inner-icon="mdi-alpha-s-box-outline" dense :value.sync="name" label="Service Name *" color="#657186" filled></TextField> -->
-                                <v-select required clearable prepend-inner-icon="mdi-alpha-s-box-outline"
-                                          append-outer-icon="mdi-plus-circle-outline" filled hide-details="auto"
-                                          placeholder="Select Service *" v-model="service.selected"
-                                          :items="service.items" return-object item-text="name"
-                                          @click:close="service.selected = null"
-                                          @click:append-outer="open_add_new_service_list"
-                                />
-                            </v-col>
-                            <v-col md="12" sm="12">
-                                <TextField required clearable prepend-inner-icon="mdi-office-building"
-                                           v-model="business_name" label="Business Name *" color="#657186" filled
-                                />
-                            </v-col>
-                            <v-col md="12" sm="12">
-                                <TextField required clearable prepend-inner-icon="mdi-map-marker" dense
-                                           v-model="location" label="Location" color="#657186" filled
-                                />
-                            </v-col>
+                        <v-col md="6" sm="12" >
+                            <TextField required clearable prepend-inner-icon="mdi-office-building"
+                                       v-model="business_name" dense label="Business Name *" color="#657186" filled
+                            />
+                        </v-col>
+                        <v-col md="6" sm="12" >
+                            <TextField required clearable prepend-inner-icon="mdi-map-marker" dense
+                                       v-model="location" label="Location" color="#657186" filled
+                            />
                         </v-col>
                         <v-col md="12" class="service__description">
                             <div class="service__description">
@@ -283,7 +270,6 @@
                 <v-btn :disabled="disabled" :loading="btnloading" @click="save">Save</v-btn>
             </template>
         </custom-dialog>
-        <ImgUpload ref="uploadModal" @onConfirm="setIcon"/>
     </div>
 </template>
 <script src="./ServiceModal.js"></script>

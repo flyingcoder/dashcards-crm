@@ -22,7 +22,7 @@
             <div class="info-div">
                 <div class="hour">Per Hour</div>
                 <div class="value" v-if="user.meta.rate">
-                    {{ currency.symbol }} {{ user.meta.rate.value }}
+                    {{ currency.symbol }} {{ user.meta.rate.value || 0 }}
                 </div>
                 <div class="value" v-if="!user.meta.rate">{{ currency.symbol }} 0</div>
             </div>

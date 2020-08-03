@@ -1,0 +1,11 @@
+@import '~@/sass/_variables';
+
+@include pagePadding('.templates');
+
+.milestone-template {
+    @include customTableRow; //css used for styling the last row of the table
+
+    @include firstColumnHover;
+
+    @include emptyTable('.empty-template');
+}
