@@ -2,6 +2,7 @@ import {list_functionality} from '@/services/list-functionality/list-functionali
 import {global_utils} from '@/global_utils/global_utils'
 import apiTo from './api'
 import request from '@/services/axios_instance'
+import makeRequestTo from '@/services/makeRequestTo'
 //Components
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import TableHeader from '@/common/TableHeader.vue'
@@ -14,6 +15,7 @@ import ServiceModal from './components/ServiceModal/ServiceModal.vue'
 import GroupsDialog from '@/modules/Settings-Groups/components/GroupsDialog/GroupsDialog.vue'
 import Avatars from '@/common/Avatars.vue'
 import ServiceListDialog from '@/modules/Services-List/components/ServicesAddDialog/ServicesAddDialog.vue'
+
 
 export default {
     name: 'Campaign', //Campaign
@@ -97,17 +99,22 @@ export default {
                 width: '40px'
             }
         ],
-
         table_config: {
             add_message: 'New campaign added successfully!',
             update_message: 'Campaign updated successfully!',
             delete_message: 'Campaign deleted successfully!',
             refresh_table_message: 'Table refreshed'
-        }
+        },
+        activeService: {
+            id: 'all',
+            name: 'All Services'
+        },
+        serviceList: [{id: 'all', name: 'All Services'}]
     }),
     mounted() {
         this.$event.$emit('path-change', this.paths)
         this.load_services()
+        this.get_service_list()
     },
     created() {
         this.view = this.getPreferredView()
@@ -129,34 +136,40 @@ export default {
         )
     },
     computed: {
-        loggeduser() {
+        logged_user() {
             return this.$store.getters.user
         }
     },
     methods: {
         can_edit(serv) {
-            if (this.loggeduser.is_admin) {
+            if (this.logged_user.is_admin) {
                 return true
             }
             let found = serv.managers.find(
-                ii => ii.user_id === this.loggeduser.id
+                ii => ii.user_id === this.logged_user.id
             )
             return !!found;
 
         },
         can_delete(serv) {
-            if (this.loggeduser.is_admin) {
+            if (this.logged_user.is_admin) {
                 return true
             }
-            let found = serv.managers.find(ii => ii.user_id === this.loggeduser.id)
+            let found = serv.managers.find(ii => ii.user_id === this.logged_user.id)
             return !!found;
 
         },
         load_more() {
-            this.load_more_via_url(`api/services`)
+            this.load_more_via_url(`api/services?service=${this.activeService.id}`)
         },
         load_services() {
-            this.fill_table_via_url(`api/services`)
+            this.fill_table_via_url(`api/services?service=${this.activeService.id}`)
+        },
+        get_service_list() {
+            makeRequestTo.get_all_services_list()
+                .then(({data}) => {
+                    this.serviceList.push(...data)
+                })
         },
         navigate_to_view_service(id) {
             this.$router.push({
@@ -243,7 +256,10 @@ export default {
         },
         open_add_dialog() {
             this.$refs.add_dialog.open_dialog(false, null)
+        },
+        filterByService(service) {
+            this.activeService = service
+            this.load_services()
         }
-
     }
 }

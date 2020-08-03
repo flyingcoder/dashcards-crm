@@ -24,13 +24,13 @@
         </div>
         <div class="icons" v-if="user">
             <div class="user-img" @click="image_clicked">
-                <img :src="user.image_url" alt="User" width="100%" height="auto" />
+                <img :src="user.image_url" alt="User" width="100%" height="auto">
             </div>
         </div>
         <teams-dialog ref="edit_dialog" title="Edit Member" :dialog.sync="edit_dialog" :fields-to-edit="edit_item" :is-edit-dialog="edit_dialog" @save="update_user_profile($event)" />
-        <UpdatePasswordDialog title="Update Password" ref="update_password_dialog" :fieldsToEdit="edit_item"></UpdatePasswordDialog>
-        <AddPicture></AddPicture>
-        <UserInfo></UserInfo>
+        <UpdatePasswordDialog title="Update Password" ref="update_password_dialog" :fieldsToEdit="edit_item" />
+        <AddPicture />
+        <UserInfo />
     </div>
 </template>
 <style lang="scss" scoped src="./Upper.scss"></style>

@@ -59,8 +59,7 @@ export default {
         show_create_password_label: [
             {text: 'Let user set their password', value: false},
             {text: 'Manually set user password', value: true}
-        ]
-
+        ],
     }),
 
     watch: {
@@ -69,6 +68,7 @@ export default {
             new_val && this.fill_group_items()
         },
         open(new_val) {
+            this.$v.$reset()
             this.$emit('update:dialog', new_val)
         },
         fieldsToEdit: {

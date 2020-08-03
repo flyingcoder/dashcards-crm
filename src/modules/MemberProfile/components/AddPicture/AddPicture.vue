@@ -31,10 +31,7 @@
                 </div>
             </template>
             <template #button2>
-                <v-btn @click="get_cropped_image" :disabled="!file_uploaded"
-                >Save
-                </v-btn
-                >
+                <v-btn @click="get_cropped_image" :disabled="!file_uploaded">Save</v-btn>
             </template>
         </CustomDialog>
     </div>

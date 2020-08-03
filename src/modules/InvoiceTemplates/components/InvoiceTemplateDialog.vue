@@ -35,8 +35,8 @@
                             <v-subheader inset class="subtitle-2">Placeholder</v-subheader>
                             <v-list-item style="min-height:25px;" v-for="(info, field) in invoicefields" :key="field">
                                 <v-list-item-content>
-                                    <v-list-item-title v-text="`{`+field+`}`" />
-                                    <v-list-item-subtitle v-html="info.description" />
+                                    <v-list-item-title v-text="`{`+field+`}`"/>
+                                    <v-list-item-subtitle v-html="info.description"/>
                                 </v-list-item-content>
                                 <!-- <v-list-item-icon>
                                     <v-tooltip left>
@@ -106,7 +106,7 @@
                 return this.html
             },
             can_submit() {
-                return !this.title || !this.html
+                return !this.title || !this.html || !isHtml(this.html)
             }
         },
 
@@ -144,6 +144,7 @@
 
             save() {
                 if (!isHtml(this.html)) {
+                    this.$event.$emit('open_snackbar', 'Not valid HTML', 'error')
                     return
                 }
 
@@ -163,7 +164,7 @@
             },
 
             preview() {
-                this.$emit('preview', {name: this.title, template: this.html})
+                this.$emit('preview', {name: this.title, template: this.html, replica_type: 'App\\Invoice'})
             },
 
             show_guides() {

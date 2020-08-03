@@ -23,7 +23,7 @@
                   :noMoreData="noMoreData" :showSelect="true" @delete-selected="open_bulk_delete_dialog($event)"
         >
             <template slot="header-toolbar">
-                <table-header :noListButton="false" :noGridButton="false" @click="add_dialog = true"
+                <table-header :noListButton="false" :noButton="!can_add" :noGridButton="false" @click="add_dialog = true"
                               @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')"
                 />
             </template>

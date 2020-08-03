@@ -24,7 +24,8 @@ export const methods = {
                         this.items.push(new_items)
                     }
                     this.clear_selected()
-                    this.$refs.add_dialog.clear_and_close()
+                    if (this.$refs.add_dialog)
+                        this.$refs.add_dialog.clear_and_close()
                     this.$event.$emit('open_snackbar', this.table_config.add_message)
                     if (typeof cb === 'function') {
                         cb(response)

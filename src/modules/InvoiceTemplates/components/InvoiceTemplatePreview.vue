@@ -4,7 +4,7 @@
             <template v-slot:content>
                 <v-row wrap class="custom-dialog">
                     <v-col grow v-if="item">
-                        <iframe class="iframe" :style="style" :srcdoc="parseTemplate" @onload="resizeIframe"></iframe>
+                        <iframe class="iframe" :style="style" :srcdoc="parseTemplate" @onload="resizeIframe" />
                     </v-col>
                 </v-row>
             </template>
@@ -12,12 +12,10 @@
     </div>
 </template>
 <script>
-import Editor from '@/common/Editor/Editor.vue'
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
 
 export default {
     components: {
-        Editor,
         CustomDialog,
     },
 
@@ -52,6 +50,7 @@ export default {
             return this.item ? this.item.name : 'View Template'
         },
         parseTemplate() {
+            if (!this.item.template) return ''
             let template = this.item.template
             const keys = Object.keys(this.invoicefields)
             for (const key of keys) {

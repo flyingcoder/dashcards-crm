@@ -23,7 +23,35 @@
                 <v-spacer />
                 <table-header :noListButton="false" :noGridButton="false" @click="open_add_dialog"
                               @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')"
-                />
+                >
+                    <template v-slot:prepends>
+                        <v-menu bottom offset-y left>
+                            <template v-slot:activator="{ on: menu, attrs }">
+                                <v-tooltip top>
+                                    <template v-slot:activator="{ on: tooltip }">
+                                        <v-btn class="ml-3 text-none" text dense
+                                               v-bind="attrs"
+                                               v-on="{ ...tooltip, ...menu }"
+                                        >
+                                            <div class="subtitle-2">{{ activeService.name |ucwords }}</div>
+                                            <v-icon right>mdi-menu-swap</v-icon>
+                                        </v-btn>
+                                    </template>
+                                    <span>Filter</span>
+                                </v-tooltip>
+                            </template>
+                            <v-list dense max-height="500">
+                                <v-list-item
+                                        v-for="(item, index) in serviceList"
+                                        :key="index"
+                                        @click="filterByService(item)"
+                                >
+                                    <v-list-item-title>{{ item.name }}</v-list-item-title>
+                                </v-list-item>
+                            </v-list>
+                        </v-menu>
+                    </template>
+                </table-header>
             </div>
             <v-progress-linear v-show="loading" :indeterminate="true" />
             <v-container class="pa-0">
@@ -105,8 +133,10 @@
                                 <div v-show="item.expand" class="description-wrapper">
                                     <v-divider />
                                     <v-card-text>
-                                        <p>Location: {{ item.props.location || '' }}<br/>
-                                            Tasks: {{ item.tasks_count || 0 }}</p>
+                                        <p>
+                                            Location: {{ item.props.location || '' }}<br>
+                                            Tasks: {{ item.tasks_count || 0 }}
+                                        </p>
                                         <p v-html="item.description" />
                                     </v-card-text>
                                 </div>
@@ -129,14 +159,44 @@
                   :loading="loading"
         >
             <template slot="header-toolbar">
+                <v-col cols="3" />
+                <v-spacer />
                 <table-header :noListButton="false" :noGridButton="false" @click="open_add_dialog"
                               @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')"
-                />
+                >
+                    <template v-slot:prepends>
+                        <v-menu bottom offset-y left>
+                            <template v-slot:activator="{ on: menu, attrs }">
+                                <v-tooltip top>
+                                    <template v-slot:activator="{ on: tooltip }">
+                                        <v-btn class="ml-3 text-none" text dense
+                                               v-bind="attrs"
+                                               v-on="{ ...tooltip, ...menu }"
+                                        >
+                                            <div class="subtitle-2">{{ activeService.name |ucwords }}</div>
+                                            <v-icon right>mdi-menu-swap</v-icon>
+                                        </v-btn>
+                                    </template>
+                                    <span>Filter</span>
+                                </v-tooltip>
+                            </template>
+                            <v-list dense max-height="500">
+                                <v-list-item
+                                        v-for="(item, index) in serviceList"
+                                        :key="index"
+                                        @click="filterByService(item)"
+                                >
+                                    <v-list-item-title>{{ item.name }}</v-list-item-title>
+                                </v-list-item>
+                            </v-list>
+                        </v-menu>
+                    </template>
+                </table-header>
             </template>
             <template v-slot:row-slot="{ item }">
                 <td>
                     <v-avatar :size="40">
-                        <v-img :src="item.props.icon" v-if="item.props.icon" :width="50" />
+                        <v-img v-if="item.service.icon" :src="item.service.icon" />
                         <v-icon v-else large>mdi-alpha-s-circle-outline</v-icon>
                     </v-avatar>
                 </td>

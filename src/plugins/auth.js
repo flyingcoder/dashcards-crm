@@ -40,6 +40,7 @@ export const auth = {
             response => {
                 localStorage.removeItem('token')
                 localStorage.removeItem('user')
+                localStorage.removeItem('session-eXt-eQt128')
                 if (typeof success === 'function') success(response)
             },
             error => {

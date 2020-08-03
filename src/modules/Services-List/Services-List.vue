@@ -11,6 +11,7 @@
                        text-content="Are you sure you want to delete this service? This will also delete projects and campaigns associated with this service."
                        @delete="delete_item('delete_service_list')"
         />
+        <IconUploader ref="uploadModal" @uploaded="setIcon" />
 
         <VueTable :headers="headers" :items="items" :loading="loading" title="Services"
                   :permission="$_permissions.get('services')" :key="componentKey" :noMoreData="noMoreData"
@@ -18,18 +19,23 @@
                   icon="mdi-alpha-s-box-outline" emptyText="No service yet"
         >
             <template slot="header-toolbar">
-                <table-header @click="add_dialog = true" />
+                <table-header @click="add_dialog = true"/>
             </template>
             <template v-slot:row-slot="{ item }">
-                <td>
-                    <v-avatar>
-                        <v-icon v-if="!item.icon">mdi-layers-triple-outline</v-icon>
-                        <v-img v-else :src="item.icon" />
-                    </v-avatar>
+                <td class="clickable-td">
+                    <v-tooltip right>
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-avatar :size="40" v-bind="attrs" v-on="on" @click="openIconModal(item)">
+                                <v-icon v-if="!item.icon">mdi-image-plus</v-icon>
+                                <v-img v-else :src="item.icon" />
+                            </v-avatar>
+                        </template>
+                        <span>Change Icon</span>
+                    </v-tooltip>
                 </td>
                 <td class="service__name text-cap">{{ item.name | ucwords }}</td>
                 <td class="text-cap">
-                    <Avatar :user="item.creator" />
+                    <Avatar :user="item.creator"/>
                 </td>
                 <td class="text-center">{{ item.campaigns_count }}</td>
                 <td>{{ item.service_created_at | bzFromNow }}</td>
