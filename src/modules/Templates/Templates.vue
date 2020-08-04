@@ -67,13 +67,22 @@
                         </template>
                         <v-list dense>
                             <v-list-item @click="open_template_add_dialog('milestone')">
-                                <v-list-item-title><v-icon left>mdi-plus-circle-outline</v-icon>New Milestone Template</v-list-item-title>
+                                <v-list-item-title>
+                                    <v-icon left>mdi-plus-circle-outline</v-icon>
+                                    New Milestone Template
+                                </v-list-item-title>
                             </v-list-item>
                             <v-list-item @click="open_template_add_dialog('invoice')">
-                                <v-list-item-title><v-icon left>mdi-plus-circle-outline</v-icon>New Invoice Template</v-list-item-title>
+                                <v-list-item-title>
+                                    <v-icon left>mdi-plus-circle-outline</v-icon>
+                                    New Invoice Template
+                                </v-list-item-title>
                             </v-list-item>
                             <v-list-item @click="open_template_add_dialog('report')">
-                                <v-list-item-title><v-icon left>mdi-plus-circle-outline</v-icon>New Report Template</v-list-item-title>
+                                <v-list-item-title>
+                                    <v-icon left>mdi-plus-circle-outline</v-icon>
+                                    New Report Template
+                                </v-list-item-title>
                             </v-list-item>
                         </v-list>
                     </v-menu>
@@ -97,7 +106,7 @@
                 <td class="text-cap">{{ item.replica_type | remove_app }}</td>
                 <td class="text-cap clickable-td "
                     @click="open_template_view(item)"
->
+                >
                     {{ item.name | ucwords }}
                 </td>
                 <td class="text-cap text-center">{{ item.milestones_count || '' }}</td>
@@ -142,13 +151,22 @@
                     </template>
                     <v-list dense>
                         <v-list-item @click="open_template_add_dialog('milestone')">
-                            <v-list-item-title><v-icon left>mdi-plus-circle-outline</v-icon>New Milestone Template</v-list-item-title>
+                            <v-list-item-title>
+                                <v-icon left>mdi-plus-circle-outline</v-icon>
+                                New Milestone Template
+                            </v-list-item-title>
                         </v-list-item>
                         <v-list-item @click="open_template_add_dialog('invoice')">
-                            <v-list-item-title><v-icon left>mdi-plus-circle-outline</v-icon>New Invoice Template</v-list-item-title>
+                            <v-list-item-title>
+                                <v-icon left>mdi-plus-circle-outline</v-icon>
+                                New Invoice Template
+                            </v-list-item-title>
                         </v-list-item>
                         <v-list-item @click="open_template_add_dialog('report')">
-                            <v-list-item-title><v-icon left>mdi-plus-circle-outline</v-icon>New Report Template</v-list-item-title>
+                            <v-list-item-title>
+                                <v-icon left>mdi-plus-circle-outline</v-icon>
+                                New Report Template
+                            </v-list-item-title>
                         </v-list-item>
                     </v-list>
                 </v-menu>
