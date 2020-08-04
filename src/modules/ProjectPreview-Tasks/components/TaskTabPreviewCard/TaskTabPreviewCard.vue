@@ -12,7 +12,7 @@
                                 <v-avatar size="30" tile>
                                     <v-icon large left>mdi-file-document-outline</v-icon>
                                 </v-avatar>
-                                <span class="title">&nbsp;{{ content.title | ucwords | truncate }}</span>
+                                <span class="title">&nbsp;{{ content.title | ucwords | truncate(40) }}</span>
                             </v-list-item-title>
                         </v-col>
                         <v-col md="1" xs="2">
