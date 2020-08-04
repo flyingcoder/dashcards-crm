@@ -23,18 +23,18 @@
                          @view="go_to_form_preview(item)"
                 >
                     <template v-slot:extra>
-                        <v-tooltip left v-if="item.status === 'active'">
+                        <v-tooltip top v-if="item.status === 'active'">
                             <template v-slot:activator="{ on }">
                                 <v-btn dense v-on="on" icon @click="open_send_dialog(item)">
-                                    <v-icon small>mdi-email-send-outline</v-icon>
+                                    <v-icon>mdi-email-send-outline</v-icon>
                                 </v-btn>
                             </template>
                             <span>Send to email</span>
                         </v-tooltip>
-                        <v-tooltip left>
+                        <v-tooltip top>
                             <template v-slot:activator="{ on }">
                                 <v-btn dense v-on="on" icon @click="go_to_form_responses(item)">
-                                    <v-icon small>mdi-email-receive-outline</v-icon>
+                                    <v-icon>mdi-email-receive-outline</v-icon>
                                 </v-btn>
                             </template>
                             <span>Responses</span>
@@ -55,5 +55,6 @@
 <script src="./Forms.js"></script>
 <style lang="scss" scoped>
     @import '~@/sass/_variables';
+
     @include pagePadding('.forms');
 </style>

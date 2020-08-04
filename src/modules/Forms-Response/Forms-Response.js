@@ -1,15 +1,22 @@
-import { global_utils } from '@/global_utils/global_utils'
+
 import axios from 'axios'
 import request from '@/services/axios_instance'
+import {mapGetters} from "vuex";
+//components
+import Preview from "@/modules/Forms-Builder/components/Builder/Preview.vue";
+import Response from "@/modules/Forms-Builder/components/Builder/Response.vue";
 
 export default {
     name: 'FormResponses',
-    mixins: [global_utils],
+    components: {
+        Preview,
+        Response
+    },
     data: () => ({
         paths: [
-            { text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
-            { text: 'Forms', disabled: false, route: {name: 'forms'}},
-            { text: 'Response', disabled: true, router_name: null }
+            {text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
+            {text: 'Forms', disabled: false, route: {name: 'forms'}},
+            {text: 'Response', disabled: true, router_name: null}
         ],
         form: null,
         loading: false,
@@ -26,29 +33,20 @@ export default {
         this.$event.$emit('path-change', this.paths)
     },
     computed: {
-        textfield() {
-            return ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'label']
-        },
-        user() {
-            return this.$store.getters.user
+        ...mapGetters(['user']),
+        responses_count() {
+            if (!this.form)
+                return '0'
+            return this.form.responses_count || '0'
         }
     },
     methods: {
-        alignClass(align) {
-            if (align === 'right') return 'ml-auto'
-            else if (align === 'center') return 'mx-auto'
-            else return 'mr-auto'
-        },
-        getEmbed(src) {
-            let youtubeID = this.youtubeParser(src)
-            return `https://www.youtube.com/embed/${youtubeID}`
-        },
         getForm(id) {
             this.loading = true
             axios.all([
-                    request.get(`api/forms/${id}`),
-                    request.get(`api/forms/${id}/responses`)
-                ])
+                request.get(`api/forms/${id}`),
+                request.get(`api/forms/${id}/responses`)
+            ])
                 .then(
                     axios.spread((res1, res2) => {
                         this.form = res1.data
@@ -62,7 +60,7 @@ export default {
         load_more_response() {
             this.loading_more = true
             request.get(this.next_url)
-                .then(({ data }) => {
+                .then(({data}) => {
                     this.responses.push(...data.data)
                     this.next_url = data.next_page_url
                 })
