@@ -27,8 +27,8 @@ export default {
 
     data: () => ({
         paths: [
-            {text: 'Dashboard', disabled: false, router_name: 'default-content'},
-            {text: 'Templates', disabled: true, router_name: null}
+            {text: 'Dashboard', disabled: false, route: {name: 'default-content'} },
+            {text: 'Templates', disabled: true, route: null}
         ],
         headers: [
             {text: 'Type', value: 'replica_type', width: 100},

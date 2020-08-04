@@ -21,7 +21,7 @@
             <div class="custom-table-header">
                 <h3 class="custom-grid-title">Campaigns</h3>
                 <v-spacer />
-                <table-header :noListButton="false" :noGridButton="false" @click="open_add_dialog"
+                <table-header :noListButton="false" :noButton="!can_add" :noGridButton="false" @click="open_add_dialog"
                               @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')"
                 >
                     <template v-slot:prepends>
@@ -33,14 +33,14 @@
                                                v-bind="attrs"
                                                v-on="{ ...tooltip, ...menu }"
                                         >
-                                            <div class="subtitle-2">{{ activeService.name |ucwords }}</div>
+                                            <div class="subtitle-2">{{ activeService.name | ucwords }}</div>
                                             <v-icon right>mdi-menu-swap</v-icon>
                                         </v-btn>
                                     </template>
                                     <span>Filter</span>
                                 </v-tooltip>
                             </template>
-                            <v-list dense max-height="500">
+                            <v-list dense max-height="400" style="overflow-y: auto;">
                                 <v-list-item
                                         v-for="(item, index) in serviceList"
                                         :key="index"
@@ -161,7 +161,7 @@
             <template slot="header-toolbar">
                 <v-col cols="3" />
                 <v-spacer />
-                <table-header :noListButton="false" :noGridButton="false" @click="open_add_dialog"
+                <table-header :noListButton="false" :noButton="!can_add" :noGridButton="false" @click="open_add_dialog"
                               @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')"
                 >
                     <template v-slot:prepends>

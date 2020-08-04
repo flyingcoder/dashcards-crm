@@ -26,8 +26,8 @@ export default {
     data: () => ({
         group_id: null,
         paths: [
-            { text: 'Settings', disabled: false, router_name: null },
-            { text: 'Groups', disabled: true, router_name: null }
+            { text: 'Settings', disabled: false, route: {name: 'settings'} },
+            { text: 'Groups', disabled: true, route: null }
         ],
         headers: [
             { text: 'Index', value: 'index', width: '10%' },

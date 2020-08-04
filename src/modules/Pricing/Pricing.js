@@ -5,7 +5,10 @@ import { mapGetters } from 'vuex'
 export default {
     components: { DashboardLogo, DashboardHeader, PricingCards },
     data: () => ({
-        //
+        paths: [
+            { text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
+            { text: 'Pricing', disabled: true, router_name: null }
+        ],
     }),
     computed: {
         ...mapGetters(['global_configs']),
@@ -15,6 +18,9 @@ export default {
             }
             return this.global_configs.stripe_app_plan.plans
         }
+    },
+    mounted(){
+        this.$event.$emit('path-change', this.paths)
     },
     methods: {
         go_to_checkout(price_card) {

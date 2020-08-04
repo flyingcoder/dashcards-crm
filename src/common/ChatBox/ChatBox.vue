@@ -7,7 +7,7 @@
                     <span :class="['status', conv.user.is_online ? 'online' : 'offline']" />
                 </div>
                 <div class="user__detail">
-                    <div class="user__name">{{ conv.user.name }}</div>
+                    <div class="user__name">{{ conv.user.name | ucwords}}</div>
                 </div>
             </div>
             <v-badge right color="#f56c6c" v-show="unread_message">

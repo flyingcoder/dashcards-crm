@@ -57,8 +57,8 @@ export default {
         groups: [],
         selected_group: null,
         paths: [
-            { text: 'Settings', disabled: false, router_name: 'settings' },
-            { text: 'Permission', disabled: true, router_name: null }
+            { text: 'Settings', disabled: false, route: {name: 'settings'} },
+            { text: 'Permission', disabled: true, route: null }
         ],
     }),
 
@@ -135,6 +135,9 @@ export default {
                 .finally(() => {
                     this.selected_group = this.groups[0].value
                 })
+        },
+        getCapability(item, base) {
+            return this.capability_column(item.slug) === base ? 'success' : 'grey'
         }
     },
 

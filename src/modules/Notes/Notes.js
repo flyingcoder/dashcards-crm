@@ -1,5 +1,5 @@
-import { api_to } from './api'
-import { list_functionality } from '@/services/list-functionality/list-functionality'
+import {api_to} from './api'
+import {list_functionality} from '@/services/list-functionality/list-functionality'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
 import NotesList from './components/NotesList/NotesList.vue'
@@ -8,7 +8,7 @@ import NotesDialog from './components/NotesDialog/NotesDialog'
 import EditNotesDialog from './components/NotesDialog/EditNotesDialog'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import CollaboratorDialog from './components/CollaboratorDialog/CollaboratorDialog.vue'
-import { cloneDeep } from 'lodash'
+import {cloneDeep} from 'lodash'
 
 export default {
     name: 'Notes',
@@ -24,16 +24,9 @@ export default {
     },
 
     data: () => ({
-        paths: [{
-                text: 'Dashboard',
-                disabled: false,
-                router_name: 'default-content'
-            },
-            {
-                text: 'Notes',
-                disabled: true,
-                router_name: null
-            }
+        paths: [
+            {text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
+            {text: 'Notes', disabled: true, route: null}
         ],
         notes_dialog: false,
         edit_note_dialog: false,
@@ -63,7 +56,7 @@ export default {
         save(payload) {
             api_to
                 .add_new_note(payload)
-                .then(({ data }) => {
+                .then(({data}) => {
                     this.items.unshift(data)
                     this.$event.$emit('open_snackbar', 'Note Added Successfully')
                     this.notes_dialog = false
@@ -84,7 +77,7 @@ export default {
                     })
             }
         },
-        update_notes({ data }) {
+        update_notes({data}) {
             if (this.note_to_edit) {
                 let index = this.items.findIndex(note => note.id === this.note_to_edit.id)
                 if (~index) {
@@ -129,7 +122,7 @@ export default {
             this.edit_note_dialog = true
         },
 
-        update_collaborators({ data }) {
+        update_collaborators({data}) {
             const index = this.items.findIndex(
                 note => note.id === this.selected_note.id
             )
@@ -141,13 +134,13 @@ export default {
                 )
             }
         },
-        toggle_pin({ note, index }) {
+        toggle_pin({note, index}) {
             if (this.pin_api) return
             this.pin_api = true
             const text = note.pivot.is_pinned ? 'Unpinned' : 'Pinned'
             api_to
                 .toggle_pin(note)
-                .then(({ data }) =>
+                .then(({data}) =>
                     this.$set(this.items[index].pivot, 'is_pinned', data)
                 )
                 .finally(() => {
@@ -164,7 +157,7 @@ export default {
         delete_note() {
             api_to
                 .deleteNote(this.note_to_delete)
-                .then(({ data }) => {
+                .then(({data}) => {
                     const index = this.items.findIndex(
                         note => note.id === this.note_to_delete.id
                     )

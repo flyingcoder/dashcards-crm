@@ -1,0 +1,233 @@
+@import '~@/sass/_variables';
+
+.form-btn {
+    .v-btn {
+        margin-left: 10px;
+    }
+
+    .v-btn--outlined .v-btn__content .v-icon {
+        color: $btnGray;
+    }
+
+    .v-btn--outlined {
+        border: thin solid $btnGray;
+        background-color: $white;
+    }
+}
+
+.forms-page-wrapper {
+    background-color: $white;
+    border: 1px solid $tableBorderBlue;
+    border-radius: 10px;
+    padding: 1.5em;
+    color: $textDark;
+
+    .v-icon{
+        color: $btnGray;
+
+        &:hover{
+            color: $textDark;
+        }
+    }
+
+    .subtitle-2{
+        color: $textDark;
+
+        .v-icon{
+            color: $textDark;
+        }
+    }
+}
+.row-type{
+    border: 1px dotted transparent;
+    position: relative;
+
+    &:hover{
+        border: 1px dotted $btnGray;
+    }
+    &.active{
+        border: 1px dotted $blue;
+    }
+}
+.form {
+    color: $textDark-3;
+    border-radius: 10px;
+    margin: 0;
+
+    .form-header {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        background-color: $blue;
+        padding: 10px;
+
+        .v-btn--outlined .v-btn__content .v-icon {
+            color: $btnGray;
+        }
+
+        .v-btn--outlined {
+            border: thin solid $btnGray;
+            background-color: $white;
+        }
+    }
+
+    .title-field {
+        border: 1px solid $tableBorderBlue;
+
+        .f-title.v-input {
+            margin: 0 10px;
+        }
+    }
+
+    .desc-field {
+        border: 1px solid $tableBorderBlue;
+
+        .v-input {
+            margin: 0 10px;
+        }
+    }
+
+    .field-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px;
+        border: 1px solid $tableBorderBlue;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+
+        .v-icon {
+            color: $btnGray;
+        }
+
+        .left-action,
+        .right-action {
+            display: flex;
+        }
+
+        .switch-field {
+            display: flex;
+            align-items: center;
+
+            span {
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .form-options {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px;
+        background-color: $blue;
+        border-radius: 10px;
+        margin-top: 10px;
+
+        .v-icon {
+            color: $btnGray;
+        }
+    }
+
+    .element-item.v-list-item.v-list-item--link.theme--light, .v-list-group__header.v-list-item.v-list-item--link.theme--light{
+        i, .v-list-item__title{
+            color: $textDark-3;
+        }
+    }
+}
+
+.elements .v-subheader{
+    font-weight: 500;
+    color: $textDark-3;
+    padding: 0 .5em;
+}
+#Property h3.subtitle-2{
+    color: $textDark-3;
+
+    i{
+        color: $textDark-3;
+    }
+}
+.bv-list-itemorder-dots {
+    border: 1px dotted $gray;
+}
+
+.section {
+    /*min-height: 200px;*/
+    border: 1px dotted $gray;
+    cursor: pointer;
+}
+
+.section .head-tools {
+    position: relative;
+    right: -93%;
+    top: -5px;
+}
+
+.section .section-tools {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1px;
+
+    .section-tools-btn.v-btn{
+        color: $btnGray;
+
+        &:hover{
+            color: $textDark;
+        }
+    }
+}
+
+.section.active {
+    border-color: $blue;
+}
+
+.hr-action {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+
+    .v-icon{
+        margin-left: 5px;
+    }
+}
+
+.child-btn {
+    margin: 0 1px;
+}
+.form-single-item{
+    position: relative;
+    // padding: 0.5em 1em;
+    border: 1px solid transparent;
+    transition: 0.2s ease all;
+
+    &:hover{
+        border: 1px solid $blue;
+        border-radius: 4px;
+    }
+}
+.floating-btn{
+    position: absolute;
+    top: 3px;
+    right: 2px;
+}
+.delete-btn.v-icon, .add-btn.v-icon, .edit-btn.v-icon, .grey-btn.v-icon{
+    border-radius: 50%;
+    padding: 4px;
+}
+.delete-btn.v-icon{
+    color: $red;
+
+    &:hover{
+        color: $white;
+        background-color: $red;
+    }
+}
+.add-btn.v-icon, .edit-btn.v-icon{
+    color: $green;
+
+    &:hover{
+        color: $white;
+        background-color: $green;
+    }
+}

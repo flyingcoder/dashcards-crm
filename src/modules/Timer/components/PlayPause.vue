@@ -9,7 +9,7 @@
                 <template v-slot:activator="{ on }">
                     <v-icon color="error" v-on="on">mdi-clock-alert-outline</v-icon>
                 </template>
-                <span>Task is done!</span>
+                <span>Task is completed!</span>
             </v-tooltip>
             <v-tooltip left v-else-if="!timer_started && can_start_timer">
                 <template v-slot:activator="{ on }">
@@ -96,7 +96,7 @@
                 return moment(this.item.timer.timer_stopped, 'YYYY-MM-DD') < moment()
             },
             task_is_done() {
-                return !(this.item.status === 'Open' || this.item.status === 'open')
+                return this.item.status.toLowerCase() === 'completed'
             },
             last_date_action() {
                 return moment(this.item.timer.latest_timer.created_at).format(

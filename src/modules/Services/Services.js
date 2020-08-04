@@ -40,8 +40,8 @@ export default {
         add_new_member_dialog: false,
         add_new_service_list_dialog: false,
         paths: [
-            {text: 'Dashboard', disabled: false, router_name: 'default-content'},
-            {text: 'Campaigns', disabled: true, router_name: null}
+            {text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
+            {text: 'Campaigns', disabled: true, route: null}
         ],
         headers: [
             {
@@ -138,24 +138,27 @@ export default {
     computed: {
         logged_user() {
             return this.$store.getters.user
+        },
+        can_add() {
+            return (this.logged_user.is_admin || this.logged_user.is_manager)
         }
     },
     methods: {
-        can_edit(serv) {
+        can_edit(campaign) {
             if (this.logged_user.is_admin) {
                 return true
             }
-            let found = serv.managers.find(
+            let found = campaign.managers.find(
                 ii => ii.user_id === this.logged_user.id
             )
             return !!found;
 
         },
-        can_delete(serv) {
+        can_delete(campaign) {
             if (this.logged_user.is_admin) {
                 return true
             }
-            let found = serv.managers.find(ii => ii.user_id === this.logged_user.id)
+            let found = campaign.managers.find(ii => ii.user_id === this.logged_user.id)
             return !!found;
 
         },

@@ -20,18 +20,18 @@
         <teams-dialog ref="add_member_dialog" title="Add New Member" :dialog.sync="add_new_member_dialog"
                       @save="save_new_member($event)" @add-new-group="show_add_group_dialog"
         />
-        <groups-dialog ref="add_group_dialog" title="Add New Group" @save="save_new_user_group"/>
+        <groups-dialog ref="add_group_dialog" title="Add New Group" @save="save_new_user_group" />
         <v-card class="grid-view" v-if="view === `grid`">
             <div class="custom-table-header">
                 <h3 class="custom-grid-title">
                     Projects
                 </h3>
-                <v-spacer/>
-                <table-header :noListButton="false" :noGridButton="false" @click="add_dialog = true"
+                <v-spacer />
+                <table-header :noListButton="false" :noButton="!can_add" :noGridButton="false" @click="add_dialog = true"
                               @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')"
                 />
             </div>
-            <v-progress-linear v-show="loading" :indeterminate="true"/>
+            <v-progress-linear v-show="loading" :indeterminate="true" />
             <v-container class="pa-0">
                 <v-row v-if="items.length > 0">
                     <v-col md="3" sm="4" xs="12" v-for="item in items" :key="item.id">
@@ -42,7 +42,7 @@
                                         <span :title="item.client[0].fullname" class="client-name">{{ item.client[0].fullname | truncate(15) }}</span>
                                     </template>
                                 </Avatar>
-                                <v-spacer/>
+                                <v-spacer />
                                 <v-menu bottom left offset-y>
                                     <template v-slot:activator="{ on }">
                                         <v-icon v-on="on">mdi-dots-horizontal-circle-outline</v-icon>
@@ -69,7 +69,7 @@
                                     </v-list>
                                 </v-menu>
                             </v-card-title>
-                            <v-divider/>
+                            <v-divider />
                             <v-card-text class="text-center card-body">
                                 <h4 class="project-title cursor-pointer mb-2"
                                     @click="navigate_to_view_project(item.id)"
@@ -82,20 +82,20 @@
                                 <v-row no-gutters>
                                     <v-col>
                                         <h6 class="text-center caption">Managers</h6>
-                                        <Avatars :items="item.manager" :count="1"/>
+                                        <Avatars :items="item.manager" :count="1" />
                                     </v-col>
                                     <v-col>
                                         <h6 class="text-center caption">Members</h6>
-                                        <Avatars :items="item.members" :count="1"/>
+                                        <Avatars :items="item.members" :count="1" />
                                     </v-col>
                                 </v-row>
                             </v-card-text>
-                            <v-divider/>
+                            <v-divider />
                             <v-card-actions class="card-footer">
                                 <v-btn class="goto" text small @click="navigate_to_view_project(item.id)">
                                     Go to Project
                                 </v-btn>
-                                <v-spacer/>
+                                <v-spacer />
                                 <v-tooltip left>
                                     <template v-slot:activator="{ on }">
                                         <v-icon icon @click="item.expand = !item.expand" v-on="on">
@@ -108,21 +108,21 @@
                             </v-card-actions>
                             <v-expand-transition>
                                 <div v-show="item.expand" class="description-wrapper">
-                                    <v-divider/>
+                                    <v-divider />
                                     <v-card-text>Tasks: {{ item.tasks_count || 0 }}</v-card-text>
-                                    <v-card-text v-html="item.description"/>
+                                    <v-card-text v-html="item.description" />
                                 </div>
                             </v-expand-transition>
                         </v-card>
                     </v-col>
                 </v-row>
-                <Empty v-else icon="mdi-alpha-p-box-outline" class="my-3" headline="No project yet"/>
+                <Empty v-else icon="mdi-alpha-p-box-outline" class="my-3" headline="No project yet" />
             </v-container>
             <v-card-actions>
-                <v-spacer/>
+                <v-spacer />
                 <v-btn tile text v-if="noMoreData === true" disabled>NO MORE DATA</v-btn>
                 <v-btn tile text :loading="btnloading" v-else @click="load_more">LOAD MORE</v-btn>
-                <v-spacer/>
+                <v-spacer />
             </v-card-actions>
         </v-card>
         <VueTable v-else :items="items" icon="mdi-alpha-p-box-outline" emptyText="No project yet" :headers="headers"
@@ -131,7 +131,7 @@
                   :loading="loading"
         >
             <template slot="header-toolbar">
-                <table-header :noListButton="false" :noGridButton="false" @click="add_dialog = true"
+                <table-header :noListButton="false" :noButton="!can_add" :noGridButton="false" @click="add_dialog = true"
                               @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')"
                 />
             </template>
@@ -140,14 +140,14 @@
                     {{ item.title | ucwords }}
                 </td>
                 <td>
-                    <Avatar :user="item.client[0]" iconOnly :count="1"/>
+                    <Avatar :user="item.client[0]" iconOnly :count="1" />
                 </td>
                 <td>{{ item.company_name }}</td>
                 <td>
-                    <Avatars deep :items="item.manager" :count="1"/>
+                    <Avatars deep :items="item.manager" :count="1" />
                 </td>
                 <td>
-                    <Avatars deep :items="item.members" :count="1"/>
+                    <Avatars deep :items="item.members" :count="1" />
                 </td>
                 <td>{{ item.started_at | format }}</td>
                 <td v-if="item.end_at">{{ item.end_at | format }}</td>
@@ -161,7 +161,7 @@
                 />
             </template>
             <template v-slot:empty-slot>
-                <v-btn dark color="#3b589e" @click="add_dialog = true">Add Project</v-btn>
+                <v-btn v-if="can_add" dark color="#3b589e" @click="add_dialog = true">Add Project</v-btn>
             </template>
         </VueTable>
     </div>

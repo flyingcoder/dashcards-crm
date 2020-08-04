@@ -1,5 +1,4 @@
-import { list_functionality } from '@/services/list-functionality/list-functionality'
-import isEmpty from 'lodash/isEmpty'
+import {list_functionality} from '@/services/list-functionality/list-functionality'
 import moment from 'moment'
 //Components
 import VueTable from '@/common/VueTable/VueTable.vue'
@@ -21,26 +20,26 @@ export default {
 
     data: () => ({
         paths: [
-            { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-            { text: 'Timer', disabled: true, router_name: null },
-            { text: 'Global', disabled: true, router_name: null }
+            {text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
+            {text: 'Timer', disabled: true, route: null},
+            {text: 'Global', disabled: true, route: null}
         ],
         sortList: [
-            { title: 'Sort by Client' },
-            { title: 'Sort by Task' },
-            { title: 'Sort by Services' },
-            { title: 'Sort by Time' },
-            { title: 'Sort by Date' }
+            {title: 'Sort by Client'},
+            {title: 'Sort by Task'},
+            {title: 'Sort by Services'},
+            {title: 'Sort by Time'},
+            {title: 'Sort by Date'}
         ],
         headers: [
-            { text: 'Member', sortable: true, align: 'left' },
-            { text: 'Position', sortable: true, align: 'left' },
+            {text: 'Member', sortable: true, align: 'left'},
+            {text: 'Position', sortable: true, align: 'left'},
             {
                 text: 'Time Start',
                 sortable: true,
                 align: 'left'
             },
-            { text: 'Time End', value: 'time_end', sortable: true, align: 'left' },
+            {text: 'Time End', value: 'time_end', sortable: true, align: 'left'},
             {
                 text: 'Total Time',
                 sortable: true,
@@ -84,8 +83,8 @@ export default {
         },
         handleChangeTab(event) {
             if (this.timer_tab === 'task-timers')
-                this.$router.push({ name: 'taskTimer' })
-            if (this.timer_tab === 'alarm') this.$router.push({ name: 'alarm' })
+                this.$router.push({name: 'taskTimer'})
+            if (this.timer_tab === 'alarm') this.$router.push({name: 'alarm'})
         },
         handleChangeDate(value) {
             this.resetPagination()
@@ -106,7 +105,7 @@ export default {
 
         },
         minimize() {
-            this.$router.push({ name: 'default-content' })
+            this.$router.push({name: 'default-content'})
         }
     }
 }

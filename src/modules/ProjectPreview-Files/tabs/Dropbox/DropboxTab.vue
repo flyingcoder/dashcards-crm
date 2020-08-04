@@ -34,16 +34,19 @@
 <script> 
 
 export default {
-    name: 'DropboxTab', 
+    name: 'DropboxTab',
+    props: {
+        projectId: [Number, String]
+    },
     computed:{
         type() {
             return this.$route.params.type || 'project'
         },
         paths() {
             return [
-                { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-                { text: this.type, disabled: true, router_name: null },
-                { text: 'Dropbox', disabled: true, router_name: null }
+                { text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
+                { text: this.type, disabled: false, route: {path: `/dashboard/${this.type}/preview/${this.projectId}`}},
+                { text: 'Dropbox', disabled: true, route: null }
             ]
         }
     },

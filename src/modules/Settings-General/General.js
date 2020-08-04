@@ -7,8 +7,8 @@ export default {
     name: 'General',
     data: () => ({
         paths: [
-            { text: 'Settings', disabled: true, router_name: null },
-            { text: 'General', disabled: true, router_name: null }
+            { text: 'Settings', disabled: false, route: {name: 'settings'} },
+            { text: 'General', disabled: true, route: null }
         ],
         update_btn_loading: false,
         reset_btn_loading: false,

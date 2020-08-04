@@ -19,8 +19,8 @@ export default {
     },
     data: () => ({
         paths: [
-            {text: 'Settings', disabled: false, router_name: 'settings'},
-            {text: 'Schedule Tasks', disabled: true, router_name: null}
+            {text: 'Settings', disabled: false, route: {name: 'settings'} },
+            {text: 'Schedule Tasks', disabled: true, route: null}
         ],
         members: [],
         activeType: null,

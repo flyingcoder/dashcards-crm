@@ -1,5 +1,4 @@
-import { list_functionality } from '@/services/list-functionality/list-functionality'
-
+import {list_functionality} from '@/services/list-functionality/list-functionality'
 //Components
 import VueTable from '@/common/VueTable/VueTable.vue'
 import Actions from '@/common/VueTable/Actions.vue'
@@ -11,7 +10,7 @@ import makeRequestTo from "../../services/makeRequestTo";
 export default {
     name: 'Milestone',
     mixins: [list_functionality],
-    components: { VueTable, MilestoneDialog, DeleteDialog, TableHeader, Actions },
+    components: {VueTable, MilestoneDialog, DeleteDialog, TableHeader, Actions},
 
     props: {
         id: [Number, String] //route param
@@ -20,16 +19,16 @@ export default {
     data: () => ({
         template_name: '',
         paths: [
-            { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-            { text: 'Milestone Templates', disabled: false, router_name: 'templates' },
-            { text: 'Milestones', disabled: true, router_name: null }
+            {text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
+            {text: 'Templates', disabled: false, route: {name: 'templates'}},
+            {text: 'Milestones', disabled: true}
         ],
         headers: [
-            { text: 'Title', value: 'title' },
-            { text: 'Tasks', value: 'tasks_count', width: 100},
-            { text: 'Status', value: 'status', width: 100 },
-            { text: 'Days', value: 'days', width: 100 },
-            { text: 'Action', value: 'action', align: 'center', width: 180, sortable: false}
+            {text: 'Title', value: 'title'},
+            {text: 'Tasks', value: 'tasks_count', width: 100},
+            {text: 'Status', value: 'status', width: 100},
+            {text: 'Days', value: 'days', width: 100},
+            {text: 'Action', value: 'action', align: 'center', width: 180, sortable: false}
         ],
         table_config: {
             route_name: 'templates/milestone',
@@ -52,7 +51,7 @@ export default {
         this.fill_table_via_url(this.dynamic_api)
         makeRequestTo
             .get_milestones(`api/template/${this.id}`)
-            .then(({ data }) => (this.template_name = data.name))
+            .then(({data}) => (this.template_name = data.name))
             .finally(() => (this.loading = false))
     },
     mounted() {

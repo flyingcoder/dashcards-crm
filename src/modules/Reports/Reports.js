@@ -30,8 +30,8 @@ export default {
 
     data: () => ({
         paths: [
-            { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-            { text: 'Reports', disabled: true, router_name: null }
+            { text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
+            { text: 'Reports', disabled: true, route: null }
         ],
         reports: [],
         loading: false,

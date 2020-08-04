@@ -27,9 +27,9 @@
                                     </v-col>
                                     <v-col :md="is_my_task_tab ? 8 : 6" class="project__col">
                                         <p class="subtitle-2">
-                                            {{ task.title | ucwords }}<br>
-                                            <small v-if="showProject && task.project" class="caption">{{ task.project.title|ucwords|truncate(30) }} | </small>
-                                            <small class="caption" v-if="task.milestone">{{ task.milestone.title|ucwords|truncate(25) }}</small>
+                                            {{ task.title | ucwords | truncate(35) }}<br>
+                                            <small v-if="showProject && task.project" class="caption">{{ task.project.title|ucwords|truncate(20) }} | </small>
+                                            <small class="caption" v-if="task.milestone">{{ task.milestone.title|ucwords|truncate(20) }}</small>
                                         </p>
                                     </v-col>
                                     <v-col md="2" sm="2" class="status__col text-center">

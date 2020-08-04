@@ -6,7 +6,8 @@
         <dash-card :title="validate_title(box.title)" :dashboard="true">
             <template slot="actions">
                 <v-flex xs4 class="actions text-xs-right">
-                    {{ box.tasks.filter(i => i.status === 'completed').length + '/' + box.tasks.length }}
+                    {{ boxProgress }}
+                    <v-icon class="action" @click="$emit('add-task', box.id)">mdi-plus-circle-outline</v-icon>
                     <v-icon class="action" @click="$emit('edit', box)">mdi-circle-edit-outline</v-icon>
                     <v-icon class="action" @click="$emit('delete', box.id)">mdi-close-circle-outline</v-icon>
                 </v-flex>

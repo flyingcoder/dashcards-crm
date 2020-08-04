@@ -1,6 +1,6 @@
 <template>
     <td class="table-actions" align="center">
-        <v-tooltip left v-if="hasEdit" v-show="can_edit">
+        <v-tooltip top v-if="hasEdit" v-show="can_edit">
             <template v-slot:activator="{ on }">
                 <v-btn dense v-on="on" icon @click="handle_action('edit')">
                     <v-icon>{{ editIcon }}</v-icon>
@@ -8,7 +8,7 @@
             </template>
             <span>Edit</span>
         </v-tooltip>
-        <v-tooltip left v-if="hasView" v-show="can_view">
+        <v-tooltip top v-if="hasView" v-show="can_view">
             <template v-slot:activator="{ on }">
                 <v-btn dense v-on="on" icon @click="handle_action('view')">
                     <v-icon>{{ viewIcon }}</v-icon>
@@ -16,7 +16,7 @@
             </template>
             <span>View</span>
         </v-tooltip>
-        <v-tooltip left v-if="hasDelete" v-show="can_delete">
+        <v-tooltip top v-if="hasDelete" v-show="can_delete">
             <template v-slot:activator="{ on }">
                 <v-btn dense v-on="on" icon @click="handle_action('delete')">
                     <v-icon>{{ deleteIcon }}</v-icon>

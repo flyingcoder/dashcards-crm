@@ -1,12 +1,5 @@
 <template>
     <div class="timer-icon">
-        <!--     <v-switch
-      v-model="status"
-      :disabled="disabled"
-      @change="switch1_changed"
-      dense
-      color="#3b589e"
-    ></v-switch> -->
         <v-tooltip bottom>
             <template v-slot:activator="{ on }">
                 <v-btn :loading="requesting" icon v-on="on" tile class="mx-1" @click="switch1_changed">
@@ -21,7 +14,7 @@
 import makeRequestTo from '@/services/makeRequestTo'
 
 export default {
-    name: 'LogOnLable',
+    name: 'LogOnLabel',
 
     data: () => ({
         status: false,
@@ -33,10 +26,10 @@ export default {
             return this.status === true ? 'Log On' : 'Log Off'
         },
         timer_icon() {
-            return this.status === true ? 'mdi-timer-off' : 'mdi-timer'
+            return this.status === true ? 'mdi-clock-check-outline' : 'mdi-clock-outline'
         },
         timer_tip() {
-            return this.status === true ? 'Stop current timer' : 'Start the timer'
+            return this.status === true ? 'Timer is running...Click to stop' : 'Timer is not running...Click to start'
         },
         timer_color() {
             return this.status === true ? 'success' : ''
@@ -77,7 +70,7 @@ export default {
                     this.$event.$emit(
                         'open_snackbar',
                         `Timer ${timer_message}`,
-                        'notification'
+                        'success'
                     )
                 })
                 .finally(() => this.requesting = false)
