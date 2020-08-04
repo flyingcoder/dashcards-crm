@@ -138,24 +138,27 @@ export default {
     computed: {
         logged_user() {
             return this.$store.getters.user
+        },
+        can_add() {
+            return (this.logged_user.is_admin || this.logged_user.is_manager)
         }
     },
     methods: {
-        can_edit(serv) {
+        can_edit(campaign) {
             if (this.logged_user.is_admin) {
                 return true
             }
-            let found = serv.managers.find(
+            let found = campaign.managers.find(
                 ii => ii.user_id === this.logged_user.id
             )
             return !!found;
 
         },
-        can_delete(serv) {
+        can_delete(campaign) {
             if (this.logged_user.is_admin) {
                 return true
             }
-            let found = serv.managers.find(ii => ii.user_id === this.logged_user.id)
+            let found = campaign.managers.find(ii => ii.user_id === this.logged_user.id)
             return !!found;
 
         },

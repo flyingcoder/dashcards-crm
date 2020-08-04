@@ -123,28 +123,31 @@ export default {
     computed: {
         loggeduser() {
             return this.$store.getters.user
+        },
+        can_add() {
+            return (this.loggeduser.is_admin || this.loggeduser.is_manager)
         }
     },
     methods: {
-        can_edit(proj) {
+        can_edit(project) {
             if (this.loggeduser.is_admin) {
                 return true
             }
-            let found = proj.manager.find(
+            let found = project.manager.find(
                 ii => ii.user_id === this.loggeduser.id
             )
-            if (found) return true
-            return false
+            return !!found;
+
         },
-        can_delete(proj) {
+        can_delete(project) {
             if (this.loggeduser.is_admin) {
                 return true
             }
-            let found = proj.manager.find(
+            let found = project.manager.find(
                 ii => ii.user_id === this.loggeduser.id
             )
-            if (found) return true
-            return false
+            return !!found;
+
         },
         load_more() {
             this.load_more_via_url(`api/projects`)

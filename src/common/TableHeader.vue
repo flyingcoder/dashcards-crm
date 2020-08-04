@@ -9,6 +9,7 @@
             </template>
             <span>Create new</span>
         </v-tooltip>
+        <slot name="center" />
         <v-tooltip top v-if="!noSortButton">
             <template v-slot:activator="{ on, attrs }">
                 <v-icon v-bind="attrs" v-on="on" class="view-btn add__btn ml-2" @click="$emit('click-sort-by')">
