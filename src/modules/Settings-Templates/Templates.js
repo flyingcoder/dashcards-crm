@@ -11,8 +11,8 @@ export default {
     },
     data: () => ({
         paths: [
-            {text: 'Settings', disabled: false, router_name: 'settings'},
-            {text: 'Email Templates', disabled: true, router_name: null}
+            {text: 'Settings', disabled: false, route: {name: 'settings'} },
+            {text: 'Email Templates', disabled: true, route: null}
         ],
         activeType: null,
         templates: null,

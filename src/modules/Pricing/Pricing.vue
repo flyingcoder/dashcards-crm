@@ -4,7 +4,7 @@
             <!-- <dashboard-logo></dashboard-logo> -->
         </div>
         <div class="d__header">
-            <dashboard-header></dashboard-header>
+            <dashboard-header />
         </div>
         <div class="d__content">
             <div class="content ">
@@ -14,10 +14,10 @@
                         <span>The fastest way to engage your customer</span>
                     </div>
                     <div class="cover__photo">
-                        <img src="@/assets/icons/pricing/cover.png" class="responsive-img" alt="cover" />
+                        <img src="@/assets/icons/pricing/cover.png" class="responsive-img" alt="cover">
                     </div>
                 </div>
-                <pricing-cards :pricing-cards="pricing_cards" @click="go_to_checkout"></pricing-cards>
+                <pricing-cards :pricing-cards="pricing_cards" @click="go_to_checkout" />
             </div>
         </div>
     </div>

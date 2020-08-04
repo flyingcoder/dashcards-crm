@@ -66,9 +66,9 @@ export default {
         },
         paths() {
             return [
-                { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-                { text: this.type, disabled: true, router_name: null },
-                { text: 'Team Message', disabled: true, router_name: null }
+                { text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
+                { text: this.type, disabled: false, route: {path: `/dashboard/${this.type}/preview/${this.id}`}},
+                { text: 'Team Message', disabled: true, route: null }
             ]
         }
     },

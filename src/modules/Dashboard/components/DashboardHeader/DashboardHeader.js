@@ -26,4 +26,9 @@ export default {
             this.paths = data
         })
     },
+    methods: {
+        go_to(item) {
+            this.$router.push(item.route)
+        }
+    }
 }

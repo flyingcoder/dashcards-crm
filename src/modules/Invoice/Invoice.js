@@ -32,8 +32,8 @@ export default {
     data: () => ({
         view_invoice_dialog: false,
         paths: [
-            {text: 'Dashboard', disabled: false, router_name: 'default-content'},
-            {text: 'Invoice', disabled: true, router_name: null}
+            {text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
+            {text: 'Invoice', disabled: true, route: null}
         ],
         headers: [
             {text: 'Due Date', sortable: false},

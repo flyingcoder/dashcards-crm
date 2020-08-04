@@ -25,8 +25,8 @@ export default {
         },
         paths() {
             return [
-                { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-                { text: `${this.type} HQ`, disabled: true, router_name: null }
+                { text: 'Dashboard', disabled: false, route: {name: 'default-content' }},
+                { text: `${this.type} HQ`, disabled: true, route: null }
             ]
         }
     },

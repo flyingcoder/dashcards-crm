@@ -24,7 +24,7 @@ export default {
 
     data: () => ({
         paths: [
-            {text: 'Dashboard', disabled: false, router_name: 'default-content'},
+            {text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
             {text: 'Teams', disabled: true, router_name: null}
         ],
         sortList: [

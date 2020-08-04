@@ -15,8 +15,8 @@
                         <v-icon large v-else>mdi-account</v-icon>
                     </v-list-item-avatar>
                     <v-list-item-content>
-                        <v-list-item-title :inner-html.prop="item.fullname | truncate(25)" />
-                        <v-list-item-subtitle :inner-html.prop="item.job_title | truncate(25)" />
+                        <v-list-item-title :inner-html.prop="item.fullname | ucwords | truncate(25)" />
+                        <v-list-item-subtitle :inner-html.prop="item.job_title | ucwords | truncate(25)" />
                     </v-list-item-content>
                 </v-list-item>
                 <v-list-item v-else-if="item.modelType === 'project'" @click="navigate_search(item)">

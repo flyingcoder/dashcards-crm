@@ -1,5 +1,4 @@
-import { list_functionality } from '@/services/list-functionality/list-functionality'
-
+import {list_functionality} from '@/services/list-functionality/list-functionality'
 //Components
 import VueTable from '@/common/VueTable/VueTable.vue'
 import Actions from '@/common/VueTable/Actions.vue'
@@ -27,11 +26,11 @@ export default {
         template_name: '',
         milestone_name: '',
         headers: [
-            { text: 'Title', value: 'title' },
-            { text: 'Description', value: 'description' },
-            { text: 'Status', value: 'status', width: 100 },
-            { text: 'Days', value: 'days', width: 100 },
-            { text: 'Action', value: 'action', width: 150, align: 'center', sortable: false }
+            {text: 'Title', value: 'title'},
+            {text: 'Description', value: 'description'},
+            {text: 'Status', value: 'status', width: 100},
+            {text: 'Days', value: 'days', width: 100},
+            {text: 'Action', value: 'action', width: 150, align: 'center', sortable: false}
         ],
         table_config: {
             route_name: 'templates/milestone/task',
@@ -50,15 +49,14 @@ export default {
         },
         paths() {
             return [
-                { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-                { text: 'Templates', disabled: false, router_name: 'templates' },
+                {text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
+                {text: 'Templates', disabled: false, route: {name: 'templates'}},
                 {
                     text: 'Milestones',
                     disabled: false,
-                    router_name: null,
-                    path: `/dashboard/templates/${this.template_id}/milestone`
+                    route: {path: `/dashboard/templates/${this.template_id}/milestone`}
                 },
-                { text: 'Tasks', disabled: true, router_name: null }
+                {text: 'Tasks', disabled: true, route: null}
             ]
         },
         table_title() {
@@ -75,7 +73,7 @@ export default {
         this.fill_table_via_url(this.dynamic_api, true)
         makerequest
             .get_milestones(`api/template/${this.template_id}`)
-            .then(({ data }) => {
+            .then(({data}) => {
                 this.template_name = data.name
             })
             .finally(() => (this.loading = false))
@@ -84,7 +82,7 @@ export default {
             .get_milestones(
                 `api/template/${this.template_id}/milestone/${this.milestone_id}`
             )
-            .then(({ data }) => {
+            .then(({data}) => {
                 this.milestone_name = data.title
             })
             .finally(() => (this.loading = false))

@@ -40,8 +40,8 @@ export default {
         add_new_member_dialog: false,
         add_new_service_list_dialog: false,
         paths: [
-            {text: 'Dashboard', disabled: false, router_name: 'default-content'},
-            {text: 'Campaigns', disabled: true, router_name: null}
+            {text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
+            {text: 'Campaigns', disabled: true, route: null}
         ],
         headers: [
             {

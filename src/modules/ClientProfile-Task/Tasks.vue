@@ -1,7 +1,7 @@
 <template>
     <div class="tasks">
         <div class="loading" v-if="loading">
-            <v-progress-linear :indeterminate="true"></v-progress-linear>
+            <v-progress-linear :indeterminate="true"/>
         </div>
 
         <tasks-content :hasTabs="false" hasLoadMoreBtn showProject />
@@ -20,13 +20,11 @@
 <script>
     import apiTo from './api'
     //Components
-    import PreviewCard from '@/modules/ProjectPreview-Tasks/components/TaskTabPreviewCard/TaskTabPreviewCard.vue'
-    import TasksContent from "@/common/TasksCard/TasksContent";
+     import TasksContent from "@/common/TasksCard/TasksContent";
 
     export default {
         components: {
-            TasksContent,
-            PreviewCard
+            TasksContent
         },
         props: {
             user_id: [Number, String]
@@ -59,6 +57,9 @@
             },
             count_open_tasks() {
                 return this.tasks.filter(task => task.status === 'open').length
+            },
+            count_urgent_tasks() {
+                return this.tasks.filter(task => task.status === 'urgent').length
             }
         },
 

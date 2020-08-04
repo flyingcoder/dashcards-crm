@@ -1,8 +1,18 @@
 <template>
     <div class="b-header">        
-        <img class="logo" :src="company_logo" />
+        <img class="logo" :src="company_logo" >
         <div class="h__pagetitle" v-if="$route.name !== 'pricing'">
-            <v-breadcrumbs class="b-breadcrumbs" :items="paths" />
+            <v-breadcrumbs class="b-breadcrumbs" :items="paths" >
+                <template v-slot:item="{ item }">
+                    <v-breadcrumbs-item
+                            :class="{'cursor-pointer' : item.route }"
+                            @click="go_to(item)"
+                            :disabled="item.disabled"
+                    >
+                        {{ item.text | truncate(10) }}
+                    </v-breadcrumbs-item>
+                </template>
+            </v-breadcrumbs>
         </div>
         <div class="h__search" v-if="user">
             <header-search />

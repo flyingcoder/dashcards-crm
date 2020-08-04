@@ -1,5 +1,4 @@
-import { list_functionality } from '@/services/list-functionality/list-functionality'
-import isEmpty from 'lodash/isEmpty'
+import {list_functionality} from '@/services/list-functionality/list-functionality'
 //Components
 import VueTable from '@/common/VueTable/VueTable.vue'
 import Actions from '@/common/VueTable/Actions.vue'
@@ -22,27 +21,27 @@ export default {
 
     data: () => ({
         paths: [
-            { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-            { text: 'Timers', disabled: true, router_name: null },
-            { text: 'Task', disabled: true, router_name: null }
+            {text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
+            {text: 'Timers', disabled: true, route: null},
+            {text: 'Task', disabled: true, route: null}
         ],
         sortList: [
-            { title: 'Sort by Client' },
-            { title: 'Sort by Task' },
-            { title: 'Sort by Services' },
-            { title: 'Sort by Time' },
-            { title: 'Sort by Date' }
+            {title: 'Sort by Client'},
+            {title: 'Sort by Task'},
+            {title: 'Sort by Services'},
+            {title: 'Sort by Time'},
+            {title: 'Sort by Date'}
         ],
         headers: [
-            { text: 'Assigned To', sortable: false, align: 'left', width: 150 },
-            { text: 'Task', sortable: false, align: 'left' },
-            { text: 'Project | Campaign', sortable: false, align: 'left' },
+            {text: 'Assigned To', sortable: false, align: 'left', width: 150},
+            {text: 'Task', sortable: false, align: 'left'},
+            {text: 'Project | Campaign', sortable: false, align: 'left'},
             {
                 text: 'Time Start',
                 sortable: false,
                 align: 'left'
             },
-            { text: 'Time End', value: 'time_end', sortable: false, align: 'left' },
+            {text: 'Time End', value: 'time_end', sortable: false, align: 'left'},
             {
                 text: 'Total Time',
                 sortable: false,
@@ -53,11 +52,11 @@ export default {
         timer_tab: 'task-timers',
         currentTab: 'task-timers',
         task_status: [
-            { text: 'All', value: 'all' },
-            { text: 'Open', value: 'open' },
-            { text: 'Behind', value: 'behind' },
-            { text: 'Completed', value: 'completed' },
-            { text: 'Urgent', value: 'urgent' }
+            {text: 'All', value: 'all'},
+            {text: 'Open', value: 'open'},
+            {text: 'Behind', value: 'behind'},
+            {text: 'Completed', value: 'completed'},
+            {text: 'Urgent', value: 'urgent'}
         ],
         filter_task: 'all',
         task: null
@@ -83,8 +82,8 @@ export default {
         },
         handleChangeTab(event) {
             if (this.timer_tab === 'global-timers')
-                this.$router.push({ name: 'globalTimer' })
-            if (this.timer_tab === 'alarm') this.$router.push({ name: 'alarm' })
+                this.$router.push({name: 'globalTimer'})
+            if (this.timer_tab === 'alarm') this.$router.push({name: 'alarm'})
         },
         timerEnd(item) {
             if (item.timer.timer_status === 'ongoing') {
@@ -110,7 +109,7 @@ export default {
             this.$refs.view_task_dialog.open_dialog()
         },
         minimize() {
-            this.$router.push({ name: 'default-content' })
+            this.$router.push({name: 'default-content'})
         }
     }
 }

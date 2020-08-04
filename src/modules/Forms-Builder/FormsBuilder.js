@@ -16,9 +16,9 @@ export default {
     },
     data: () => ({
         paths: [
-            { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-            { text: 'Forms', disabled: false, router_name: 'forms' },
-            { text: 'Builder', disabled: true, router_name: null }
+            { text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
+            { text: 'Forms', disabled: false, route: {name: 'forms'}},
+            { text: 'Builder', disabled: true, route: null }
         ],
         divider: {
             id: null,

@@ -11,7 +11,7 @@
                                           hide-details="auto" class="ma-1" flat/>
                             </v-col>
                             <v-spacer/>
-                            <v-btn class="dialog-button" v-bind="attrs" v-on="on" @click="clearAll">
+                            <v-btn class="dialog-button" @click="clearAll">
                                 <v-icon>delete</v-icon>
                                 Clear All
                             </v-btn>

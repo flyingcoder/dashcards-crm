@@ -7,8 +7,8 @@ export default {
 
     data: () => ({
         paths: [
-            { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-            { text: 'Connect', disabled: true, router_name: null }
+            { text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
+            { text: 'Connect', disabled: true, route: null }
         ],
         isGoogleSignIn: false,
         googleUser: null,

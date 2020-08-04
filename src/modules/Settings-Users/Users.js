@@ -14,8 +14,8 @@ export default {
     },
     data: () => ({
         paths: [
-            { text: 'Settings', disabled: false, router_name: 'settings' },
-            { text: 'Users & Roles', disabled: true, router_name: null }
+            { text: 'Settings', disabled: false, route: {name: 'settings'} },
+            { text: 'Users & Roles', disabled: true, route: null }
         ],
         roles: [{ name: 'All', slug: 'all' }],
         permissions: null,

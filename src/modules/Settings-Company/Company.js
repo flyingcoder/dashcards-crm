@@ -18,8 +18,8 @@ export default {
     },
     data: () => ({
         paths: [
-            { text: 'Settings', disabled: false, router_name: 'settings' },
-            { text: 'Company', disabled: true, router_name: null }
+            { text: 'Settings', disabled: false, route: {name: 'settings'} },
+            { text: 'Company', disabled: true, route: null }
         ],
         company: null,
         search: '',

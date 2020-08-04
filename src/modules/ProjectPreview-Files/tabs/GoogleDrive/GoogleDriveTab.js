@@ -1,5 +1,5 @@
 import request from '@/services/axios_instance'
-//components 
+//components
 import Uploader from '@/modules/ProjectPreview-Files/components/Uploader.vue'
 import FolderDialog from '@/modules/ProjectPreview-Files/components/FolderDialog.vue'
 import GDriveFolderDialog from '@/modules/ProjectPreview-Files/components/GoogleDriveFolderDialog.vue'
@@ -7,7 +7,7 @@ import DeleteDialog from '@/common/DeleteDialog.vue'
 
 export default {
     name: 'GoogleDriveTab',
-    components: { 
+    components: {
         Uploader,
         DeleteDialog,
         FolderDialog,
@@ -41,14 +41,14 @@ export default {
         this.$event.$emit('path-change', this.paths)
         this.getGoogleDriveFolders(this.projectId, () => {
             this.$gapi.isSignedIn().then(result => {
-                    this.isGoogleAuthorized = result
-                    if (result) {
-                        this.getRootFiles()
-                        this.$gapi.currentUser().then(user => {
-                            this.googleUser = user
-                        })
-                    }
-                })
+                this.isGoogleAuthorized = result
+                if (result) {
+                    this.getRootFiles()
+                    this.$gapi.currentUser().then(user => {
+                        this.googleUser = user
+                    })
+                }
+            })
                 .finally(() => {
                     this.loading = false
                 })
@@ -86,28 +86,28 @@ export default {
             return this.$store.getters.user
         },
         can_manage_folders() {
-            if (this.user.is_admin || this.user.is_client || this.user.is_manager) return true
-            return false
+            return !!(this.user.is_admin || this.user.is_client || this.user.is_manager);
+
         },
         type() {
             return this.$route.params.type || 'project'
         },
         paths() {
             return [
-                { text: 'Dashboard', disabled: false, router_name: 'default-content' },
-                { text: this.type, disabled: true, router_name: null },
-                { text: 'Google Drive', disabled: true, router_name: null }
+                {text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
+                { text: this.type, disabled: false, route: {path: `/dashboard/${this.type}/preview/${this.projectId}`}},
+                {text: 'Google Drive', disabled: true, route: null}
             ]
         }
     },
     methods: {
         saveFolders(data) {
-            var payload = {
+            let payload = {
                 folders: data.folders
-            }
+            };
             request
                 .post(`api/projects/${this.projectId}/folder/google-drive`, payload)
-                .then(({ data }) => {
+                .then(({data}) => {
                     this.$refs.gdrive_dialog.closeAndClearDialog()
                 })
                 .finally(() => {
@@ -117,7 +117,7 @@ export default {
         },
         getGoogleDriveFolders(id, cb) {
             request.get(`api/projects/${id}/folder/google-drive`)
-                .then(({ data }) => {
+                .then(({data}) => {
                     this.project_folders = data
                     if (typeof cb === 'function') {
                         cb()
@@ -235,11 +235,10 @@ export default {
             if (this.project_folders.length > 0) {
                 this.loading = true
                 this.project_folders.forEach((folder, index) => {
-                    var id = folder.hasOwnProperty('folder_id') ?
-                        folder.folder_id :
-                        folder.id
+                    let id = folder.hasOwnProperty('folder_id') ? folder.folder_id :  folder.id;
                     this.getFile(id, file => {
-                        if (file === 'error') {} else if (file) {
+                        if (file === 'error') {
+                        } else if (file) {
                             this.files.push(file)
                             this.project_folders[index] = file
                         }
@@ -334,7 +333,7 @@ export default {
                 })
         },
         handleUploads(files) {
-            var count = 0
+            let count = 0;
             files.forEach(file => {
                 this.sendRequestOld(file)
                 count += 1
@@ -351,10 +350,10 @@ export default {
             this.$refs.folder_dialog.openDialog()
         },
         createFolder(data) {
-            var metadata = {
+            let metadata = {
                 name: data.name,
                 mimeType: 'application/vnd.google-apps.folder'
-            }
+            };
             if (this.activeFolderId && this.activeFolderId !== 'root') {
                 metadata.parents = [this.activeFolderId]
             }
@@ -392,7 +391,7 @@ export default {
             initResumable.setRequestHeader('Content-Type', 'application/json')
             initResumable.setRequestHeader('X-Upload-Content-Length', file.size)
             initResumable.setRequestHeader('X-Upload-Content-Type', contentType)
-            initResumable.onreadystatechange = function() {
+            initResumable.onreadystatechange = function () {
                 if (
                     initResumable.readyState === XMLHttpRequest.DONE &&
                     initResumable.status === 200
@@ -407,7 +406,7 @@ export default {
                             'X-Upload-Content-Type',
                             contentType
                         )
-                        uploadResumable.onreadystatechange = function() {
+                        uploadResumable.onreadystatechange = function () {
                             if (
                                 uploadResumable.readyState === XMLHttpRequest.DONE &&
                                 uploadResumable.status === 200
@@ -420,12 +419,12 @@ export default {
                     reader.readAsArrayBuffer(file)
                 }
             }
-            var metadata = {
+            let metadata = {
                 name: file.name,
                 mimeType: contentType,
                 'Content-Type': contentType,
                 'Content-Length': file.size
-            }
+            };
             if (_this.activeFolderId && _this.activeFolderId !== 'root') {
                 metadata.parents = [_this.activeFolderId]
             }
