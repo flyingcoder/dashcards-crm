@@ -21,7 +21,7 @@
                 <v-divider />
             </template>
             <template slot="header.action">
-                <v-icon>mdi-account-cog-outline</v-icon>
+                <v-icon>mdi-menu</v-icon>
             </template>
             <template v-slot:item="{ item }">
                 <tr>
