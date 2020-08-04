@@ -24,6 +24,9 @@ export default {
             const completedTasks = box.tasks.filter(t => t.status.toLowerCase() === 'completed').length
             const allTasks = box.tasks.length
             return (completedTasks / allTasks) * 100
+        },
+        boxProgress(){
+            return this.box.tasks.filter(i => i.status === 'completed').length + '/' + this.box.tasks.length
         }
     },
 
