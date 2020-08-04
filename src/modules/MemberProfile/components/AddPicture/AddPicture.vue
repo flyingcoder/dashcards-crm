@@ -63,7 +63,7 @@
             croppie: {
                 options: {
                     viewport: {width: 200, height: 200, type: 'circle'},
-                    showZoomer: false,
+                    showZoomer: true,
                     boundary: {width: 300, height: 300},
                     enableOrientation: true
                 },

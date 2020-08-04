@@ -71,7 +71,7 @@ export default {
                     value: 'inbound',
                     color: '#00a7e5',
                     icon: require('@/assets/icons/sidebar/templates.svg'),
-                    can_view: () => user.is_admin && this.is_tile_enabled('inbound'),
+                    can_view: () => (user.is_admin || user.is_manager) && this.is_tile_enabled('inbound'),
                     route: '/dashboard/forms'
                 },
                 {
@@ -79,7 +79,7 @@ export default {
                     value: 'outbound',
                     color: '#ff7f7e',
                     icon: require('@/assets/icons/sidebar/templates.svg'),
-                    can_view: () => user.is_admin && this.is_tile_enabled('outbound'),
+                    can_view: () => (user.is_admin || user.is_manager) && this.is_tile_enabled('outbound'),
                     route: '/dashboard/forms'
                 }
             ]
