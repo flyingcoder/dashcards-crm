@@ -10,6 +10,7 @@ import MilestoneTemplateDialog
 import InvoiceTemplateDialog from "@/modules/InvoiceTemplates/components/InvoiceTemplateDialog.vue"
 import InvoiceTemplateHelp from "@/modules/InvoiceTemplates/components/InvoiceTemplateHelp.vue"
 import InvoiceTemplatePreview from "@/modules/InvoiceTemplates/components/InvoiceTemplatePreview.vue"
+import ViewReportTemplate from "./components/ViewReportTemplate.vue";
 
 export default {
     name: 'Templates',
@@ -23,11 +24,12 @@ export default {
         InvoiceTemplateDialog,
         InvoiceTemplatePreview,
         InvoiceTemplateHelp,
+        ViewReportTemplate
     },
 
     data: () => ({
         paths: [
-            {text: 'Dashboard', disabled: false, route: {name: 'default-content'} },
+            {text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
             {text: 'Templates', disabled: true, route: null}
         ],
         headers: [
@@ -52,9 +54,8 @@ export default {
         invoice_add_dialog: false,
         invoice_edit_dialog: false,
         invoice_delete_dialog: false,
-        report_add_dialog: false,
-        report_edit_dialog: false,
         report_delete_dialog: false,
+        report_view_dialog: false,
         invoice_fields: []
     }),
     filters: {
@@ -84,8 +85,11 @@ export default {
             } else {
                 return []
             }
+        },
+        structures() {
+            if (!this.activeTemplate) return []
+            return this.activeTemplate.meta.template.value
         }
-
     },
     methods: {
         getType(item) {
@@ -110,13 +114,13 @@ export default {
                 this.invoice_edit_dialog = false
                 this.$refs.invoice_add_edit_dialog.open_dialog(false, null)
             } else { //report
-                this.report_add_dialog = true
-                this.report_edit_dialog = false
+                this.$router.push({name: 'report-builder-create'})
             }
         },
         open_template_delete_dialog(item) {
             let type = this.getType(item)
             this.activeTemplate = item
+            this.delete_item_id = item.id
             if (type === 'milestone') {
                 this.milestone_delete_dialog = true
             } else if (type === 'invoice') {
@@ -137,8 +141,7 @@ export default {
                 this.invoice_add_dialog = false
                 this.$refs.invoice_add_edit_dialog.open_dialog(true, item)
             } else { //report
-                this.report_edit_dialog = true
-                this.report_add_dialog = false
+                this.$router.push({name: 'report-builder-edit', params: {id: item.id}})
             }
         },
         open_template_view(item) {
@@ -149,7 +152,7 @@ export default {
             } else if (type === 'invoice') {
                 this.$refs.invoice_template_view_dialog.open_dialog(item)
             } else { //report
-                //todo
+                this.report_view_dialog = true
             }
         },
         open_help_dialog() {
@@ -202,5 +205,8 @@ export default {
         close_invoice_delete_dialog() {
             this.invoice_delete_dialog = false
         },
+        close_report_delete_dialog() {
+            this.report_delete_dialog = false
+        }
     }
 }

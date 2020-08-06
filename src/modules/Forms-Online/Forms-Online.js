@@ -1,5 +1,5 @@
 import request from '@/services/axios_instance'
-import { global_utils } from '@/global_utils/global_utils'
+import {global_utils} from '@/global_utils/global_utils'
 
 export default {
     name: 'FormOnline',
@@ -7,9 +7,9 @@ export default {
     data: () => ({
         form: null,
         date_formats: [
-            { value: 'D-M-Y', text: 'D-M-Y e.g 01-12-2020' },
-            { value: 'Y-M-D', text: 'Y-M-D e.g 2020-12-01' },
-            { value: 'M-D-Y', text: 'M-D-Y e.g 12-01-2020' }
+            {value: 'D-M-Y', text: 'D-M-Y e.g 01-12-2020'},
+            {value: 'Y-M-D', text: 'Y-M-D e.g 2020-12-01'},
+            {value: 'M-D-Y', text: 'M-D-Y e.g 12-01-2020'}
         ],
         viewMode: false,
         submitting: false,
@@ -19,7 +19,7 @@ export default {
         if (this.$route.params.slug) {
             this.getForm(this.$route.params.slug)
         } else {
-            this.$router.push({ name: 'not_found' })
+            this.$router.push({name: 'not_found'})
         }
         if (this.$route.params.view) {
             this.viewMode = true
@@ -33,7 +33,7 @@ export default {
             if (!this.form) {
                 return true
             }
-            for (var i = 0; i < this.form.questions.length; i++) {
+            for (let i = 0; i < this.form.questions.length; i++) {
                 if (this.form.questions[i].required && !this.form.questions[i].value) {
                     return true
                 }
@@ -52,14 +52,14 @@ export default {
         },
         getForm(slug) {
             request.get(`api/form/${slug}/online`)
-                .then(({ data }) => {
+                .then(({data}) => {
                     if (data) {
                         this.form = data
                     }
                 })
         },
         getEmbed(src) {
-            let youtubeID = this.youtubeParser(src)
+            let youtubeID = src ? this.youtubeParser(src) : ''
             return `https://www.youtube.com/embed/${youtubeID}`
         },
         formValid() {
@@ -68,7 +68,7 @@ export default {
                 return false
             }
             let error = []
-            for (var i = 0; i < this.form.questions.length; i++) {
+            for (let i = 0; i < this.form.questions.length; i++) {
                 if (this.form.questions[i].required && !this.form.questions[i].value) {
                     error.push(`${this.form.questions[i]} should have valid value!`)
                 }
@@ -85,12 +85,12 @@ export default {
                 return
             }
             this.submitting = true
-            var payload = { data: this.form.questions }
+            let payload = {data: this.form.questions};
             if (this.user) {
-                payload.user_id  = this.user.id
+                payload.user_id = this.user.id
             }
             request.post(`api/form/${this.form.id}/online`, payload)
-                .then(({ data }) => {
+                .then(({data}) => {
                     this.submitted = true
                 })
                 .finally(() => {

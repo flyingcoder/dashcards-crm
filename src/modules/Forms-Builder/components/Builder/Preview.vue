@@ -118,7 +118,7 @@
                 else return 'mr-auto'
             },
             getEmbed(src) {
-                let youtubeID = this.youtubeParser(src)
+                let youtubeID = src ? this.youtubeParser(src) : ''
                 return `https://www.youtube.com/embed/${youtubeID}`
             },
         }

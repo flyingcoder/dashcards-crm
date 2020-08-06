@@ -24,4 +24,8 @@ export const templates_api = {
     delete_invoice_template(id) {
         return request.delete(`api/template/invoices/${id}`)
     },
+
+    delete_report_template(id) {
+        return request.delete(`api/template/reports/${id}`)
+    },
 }

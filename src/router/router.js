@@ -11,7 +11,7 @@ import { notFound } from './routes/notFound'
 import { pricing } from './routes/pricing'
 import { dashboard } from './routes/dashboard'
 import { clients } from './routes/clients'
-import { templates } from './routes/templates'
+import { templates, report_builder, report_builder_edit } from './routes/templates'
 import { milestones } from './routes/milestones'
 import { milestoneTasks } from './routes/milestoneTasks'
 import { projects } from './routes/projects'
@@ -97,7 +97,9 @@ export default new Router({
                 expanded_tasks, //path: /dashboard/expanded-timeline
                 bugs, // path: /dashboard/bugs
                 invoice_templates, //path: dashboard/invoice-templates
-                servicesList //path: /dashboard/services
+                servicesList, //path: /dashboard/services,
+                report_builder,  //path: /dashboard/report/builder,
+                report_builder_edit //path: /dashboard/report/builder/:id/edit,
             ]
         },
         setPassword, // path: /set-password

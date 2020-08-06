@@ -1,7 +1,7 @@
 <template>
     <v-row no-gutters class="form-body">
         <v-col cols="9">
-            <v-card flat>
+            <v-card flat id="structure-content">
                 <v-card-text>
                     <draggable class="row form-drag" v-model="structures" scroll-sensitivity="300"
                                force-fallback="true"
@@ -220,108 +220,110 @@
             </v-card>
         </v-col>
         <v-col cols="3">
-            <v-card flat tile>
-                <v-card-text v-if="activeType">
-                    <h3 class="subtitle-2 mb-2 text-center">
-                        <v-icon left>{{ activeType.icon }}</v-icon>
-                        {{ activeType.type | snakeCaseToNormal | removeSlug | ucwords }} Property
-                    </h3>
-                    <v-text-field v-model="activeType.label" label="Question" hide-details="auto"
-                                  filled dense v-if="activeType.hasOwnProperty('label')"
+            <affix class="sidebar-menu" relative-element-selector="#structure-content" style="width: 300px;">
+                <v-card flat tile>
+                    <v-card-text v-if="activeType">
+                        <h3 class="subtitle-2 mb-2 text-center">
+                            <v-icon left>{{ activeType.icon }}</v-icon>
+                            {{ activeType.type | snakeCaseToNormal | removeSlug | ucwords }} Property
+                        </h3>
+                        <v-text-field v-model="activeType.label" label="Question" hide-details="auto"
+                                      filled dense v-if="activeType.hasOwnProperty('label')"
+                                      class="mb-1"
+                        />
+                        <v-text-field v-model="activeType.text" label="Value" hide-details="auto" dense
+                                      filled
+                                      v-if="activeType.type !== 'paragraph' && activeType.hasOwnProperty('text')"
+                                      class="mb-1"
+                        />
+                        <v-textarea v-model="activeType.text" rows="3"
+                                    v-if="activeType.type === 'paragraph'" label="Value"
+                                    hide-details="auto" dense filled class="mb-1"
+                        />
+                        <v-text-field v-model="activeType.src" append-icon="mdi-cloud-upload-outline"
+                                      label="Source URL *" hide-details="auto" dense filled
+                                      v-if="activeType.hasOwnProperty('src')" class="mb-1"
+                        />
+                        <v-text-field v-model="activeType.alt" label="Alternate text"
+                                      hide-details="auto" dense filled
+                                      v-if="activeType.hasOwnProperty('alt')" class="mb-1"
+                        />
+                        <v-text-field v-model="activeType.rows" label="Textarea rows"
+                                      hide-details="auto" dense filled
+                                      v-if="activeType.hasOwnProperty('rows')" class="mb-1"
+                                      type="number"
+                        />
+                        <v-text-field v-model="activeType.itemwidth" label="Element Width"
+                                      hide-details="auto" dense filled
+                                      v-if="activeType.hasOwnProperty('itemwidth')" class="mb-1"
+                                      type="number"
+                        />
+                        <v-text-field v-model="activeType.itemheight" label="Element Height"
+                                      hide-details="auto" dense filled
+                                      v-if="activeType.hasOwnProperty('itemheight')" class="mb-1"
+                                      type="number"
+                        />
+                        <v-text-field v-model="activeType.placeholder" label="Placeholder"
+                                      hide-details="auto" dense filled
+                                      v-if="activeType.hasOwnProperty('placeholder')" class="mb-1"
+                        />
+                        <v-select v-model="activeType.width" label="Width (# of columns)"
+                                  :items="Array.from(Array(12), (_, i) => i + 1)" menu-props="auto"
+                                  hide-details single-line v-if="activeType.hasOwnProperty('width')"
+                                  dense filled class="mb-1"
+                        />
+                        <v-select v-model="activeType.date_format" item-value="value"
+                                  label="Date format" :items="date_formats" menu-props="auto"
+                                  hide-details single-line
+                                  v-if="activeType.hasOwnProperty('date_format')" dense filled
                                   class="mb-1"
-                    />
-                    <v-text-field v-model="activeType.text" label="Value" hide-details="auto" dense
-                                  filled
-                                  v-if="activeType.type !== 'paragraph' && activeType.hasOwnProperty('text')"
-                                  class="mb-1"
-                    />
-                    <v-textarea v-model="activeType.text" rows="3"
-                                v-if="activeType.type === 'paragraph'" label="Value"
-                                hide-details="auto" dense filled class="mb-1"
-                    />
-                    <v-text-field v-model="activeType.src" append-icon="mdi-cloud-upload-outline"
-                                  label="Source URL *" hide-details="auto" dense filled
-                                  v-if="activeType.hasOwnProperty('src')" class="mb-1"
-                    />
-                    <v-text-field v-model="activeType.alt" label="Alternate text"
-                                  hide-details="auto" dense filled
-                                  v-if="activeType.hasOwnProperty('alt')" class="mb-1"
-                    />
-                    <v-text-field v-model="activeType.rows" label="Textarea rows"
-                                  hide-details="auto" dense filled
-                                  v-if="activeType.hasOwnProperty('rows')" class="mb-1"
-                                  type="number"
-                    />
-                    <v-text-field v-model="activeType.itemwidth" label="Element Width"
-                                  hide-details="auto" dense filled
-                                  v-if="activeType.hasOwnProperty('itemwidth')" class="mb-1"
-                                  type="number"
-                    />
-                    <v-text-field v-model="activeType.itemheight" label="Element Height"
-                                  hide-details="auto" dense filled
-                                  v-if="activeType.hasOwnProperty('itemheight')" class="mb-1"
-                                  type="number"
-                    />
-                    <v-text-field v-model="activeType.placeholder" label="Placeholder"
-                                  hide-details="auto" dense filled
-                                  v-if="activeType.hasOwnProperty('placeholder')" class="mb-1"
-                    />
-                    <v-select v-model="activeType.width" label="Width (# of columns)"
-                              :items="Array.from(Array(12), (_, i) => i + 1)" menu-props="auto"
-                              hide-details single-line v-if="activeType.hasOwnProperty('width')"
-                              dense filled class="mb-1"
-                    />
-                    <v-select v-model="activeType.date_format" item-value="value"
-                              label="Date format" :items="date_formats" menu-props="auto"
-                              hide-details single-line
-                              v-if="activeType.hasOwnProperty('date_format')" dense filled
-                              class="mb-1"
-                    />
-                    <v-select v-model="activeType.align" label="Date format"
-                              append-icon="mdi-align-horizontal-center" item-value="value"
-                              :items="alignItems" menu-props="auto" hide-details single-line
-                              v-if="activeType.hasOwnProperty('align')" dense filled class="mb-1"
-                    />
-                    <v-checkbox v-model="activeType.required" label="Required?" hide-details="auto"
-                                v-if="activeType.hasOwnProperty('required')"
-                    />
-                    <div v-if="activeType.hasOwnProperty('items')">
-                        <small>Options</small>
-                        <div v-for="(item, index) in activeType.items" :key="index">
-                            <v-text-field label="Enter option" v-model="activeType.items[index]"
-                                          hide-details="auto" dense filled class="mb-1"
+                        />
+                        <v-select v-model="activeType.align" label="Date format"
+                                  append-icon="mdi-align-horizontal-center" item-value="value"
+                                  :items="alignItems" menu-props="auto" hide-details single-line
+                                  v-if="activeType.hasOwnProperty('align')" dense filled class="mb-1"
+                        />
+                        <v-checkbox v-model="activeType.required" label="Required?" hide-details="auto"
+                                    v-if="activeType.hasOwnProperty('required')"
+                        />
+                        <div v-if="activeType.hasOwnProperty('items')">
+                            <small>Options</small>
+                            <div v-for="(item, index) in activeType.items" :key="index">
+                                <v-text-field label="Enter option" v-model="activeType.items[index]"
+                                              hide-details="auto" dense filled class="mb-1"
+                                >
+                                    <template v-slot:append-outer>
+                                        <v-icon @click="removeFromItems(index)">mdi-delete</v-icon>
+                                    </template>
+                                </v-text-field>
+                            </div>
+                            <v-text-field label="Enter option" v-model="new_option" hide-details="auto"
+                                          dense filled class="mb-1"
                             >
                                 <template v-slot:append-outer>
-                                    <v-icon @click="removeFromItems(index)">mdi-delete</v-icon>
+                                    <v-icon :disabled="!new_option"
+                                            :color="new_option ? `success` : `grey`" @click="addToItem"
+                                    >
+                                        mdi-check-circle-outline
+                                    </v-icon>
                                 </template>
                             </v-text-field>
                         </div>
-                        <v-text-field label="Enter option" v-model="new_option" hide-details="auto"
-                                      dense filled class="mb-1"
-                        >
-                            <template v-slot:append-outer>
-                                <v-icon :disabled="!new_option"
-                                        :color="new_option ? `success` : `grey`" @click="addToItem"
-                                >
-                                    mdi-check-circle-outline
-                                </v-icon>
-                            </template>
-                        </v-text-field>
-                    </div>
-                    <div v-if="activeType.hasOwnProperty('direction')">
-                        <small>Direction</small>
-                        <v-radio-group v-model="activeType.direction" row>
-                            <v-radio label="Row" value="row"/>
-                            <v-radio label="Column" value="column"/>
-                        </v-radio-group>
-                    </div>
-                    <!-- buttons -->
-                    <!-- <v-btn text class="mt-2" v-if="!isEditing" depressed @click="insertTextContent">Insert</v-btn> -->
-                    <!-- <v-btn text class="mt-2" v-else depressed @click="updateTextContent">Update</v-btn> -->
-                    <!-- <v-btn text depressed @click="cancelTextContent">Cancel</v-btn> -->
-                </v-card-text>
-            </v-card>
-            <slot name="right-bottom"/>
+                        <div v-if="activeType.hasOwnProperty('direction')">
+                            <small>Direction</small>
+                            <v-radio-group v-model="activeType.direction" row>
+                                <v-radio label="Row" value="row"/>
+                                <v-radio label="Column" value="column"/>
+                            </v-radio-group>
+                        </div>
+                        <!-- buttons -->
+                        <!-- <v-btn text class="mt-2" v-if="!isEditing" depressed @click="insertTextContent">Insert</v-btn> -->
+                        <!-- <v-btn text class="mt-2" v-else depressed @click="updateTextContent">Update</v-btn> -->
+                        <!-- <v-btn text depressed @click="cancelTextContent">Cancel</v-btn> -->
+                    </v-card-text>
+                </v-card>
+                <slot name="right-bottom"/>
+            </affix>
         </v-col>
         <!--<v-col cols="12">
             <v-row no-gutters class="debuggger">
@@ -346,12 +348,14 @@
     import _cloneDeep from "lodash/cloneDeep";
     //components
     import draggable from 'vuedraggable'
+    import {Affix} from 'vue-affix'
 
     export default {
         name: "Builder",
         mixins: [global_utils],
         components: {
-            draggable
+            draggable,
+            Affix
         },
         props: {
             value: Array
@@ -786,6 +790,8 @@
             },
             remove(index) {
                 this.structures.splice(index, 1)
+                if (this.structures.length === 0)
+                    this.activeType = null
             },
             removeChild(pindex, cIndex) {
                 this.structures[pindex].children.splice(cIndex, 1)
@@ -820,7 +826,7 @@
                 }
             },
             getEmbed(src) {
-                let youtubeID = this.youtubeParser(src)
+                let youtubeID = src ? this.youtubeParser(src) : ''
                 return `https://www.youtube.com/embed/${youtubeID}`
             },
         }
