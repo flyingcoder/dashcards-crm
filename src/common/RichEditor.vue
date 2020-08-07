@@ -70,7 +70,7 @@
                     )
                     return
                 }
-                var formData = new FormData()
+                let formData = new FormData();
                 formData.append('file', file)
 
                 request

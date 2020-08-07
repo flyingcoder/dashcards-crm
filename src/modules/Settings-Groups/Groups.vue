@@ -51,14 +51,13 @@
                             />
                         </template>
                         <template v-slot:row-slot="{ item }">
-                            <td>{{ item.index }}</td>
                             <td class="text-cap">{{ item.name }}</td>
                             <td>{{ item.description }}</td>
                             <Actions
                                     :item="item"
                                     :hasView="false"
                                     :hasEdit="item.company_id > 0"
-                                    :hasDelete="item.company_id > 0"
+                                    :hasDelete="allowedDelete(item)"
                                     editIcon="vpn_key"
                                     :permissions="$_permissions.get('settings_group')"
                                     @delete="open_delete_dialog(item)"

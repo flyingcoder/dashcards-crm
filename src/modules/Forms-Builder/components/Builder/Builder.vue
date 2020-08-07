@@ -1,7 +1,7 @@
 <template>
     <v-row no-gutters class="form-body">
         <v-col cols="9">
-            <v-card flat>
+            <v-card flat id="structure-content">
                 <v-card-text>
                     <draggable class="row form-drag" v-model="structures" scroll-sensitivity="300"
                                force-fallback="true"
@@ -13,12 +13,22 @@
                                @click="activeType = item"
                         >
                             <div class="hr-action">
-                                <v-icon small @click="remove(pIndex)" v-if="item.hover">
-                                    mdi-delete
-                                </v-icon>
-                                <v-icon class="parent-btn" small @click="edit(item)" v-if="item.hover">
-                                    edit
-                                </v-icon>
+                                <v-tooltip top v-if="item.hover">
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-icon v-bind="attrs" v-on="on" small @click="remove(pIndex)">
+                                            mdi-delete-circle-outline
+                                        </v-icon>
+                                    </template>
+                                    <span>Remove</span>
+                                </v-tooltip>
+                                <v-tooltip top v-if="item.hover">
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-icon v-bind="attrs" v-on="on" class="parent-btn" small @click="edit(item)">
+                                            mdi-circle-edit-outline
+                                        </v-icon>
+                                    </template>
+                                    <span>Edit Properties</span>
+                                </v-tooltip>
                             </div>
                             <div v-if="item.type === 'divider'">
                                 <hr>
@@ -68,9 +78,8 @@
                                 </v-menu>
                             </div>
                             <div v-else-if="item.type === `time`">
-                                <label v-if="item.label">{{ item.label }}</label><sup
-                                    v-if="item.required"
-                            >*</sup>
+                                <label v-if="item.label">{{ item.label }}</label>
+                                <sup v-if="item.required">*</sup>
                                 <v-menu v-model="item.popover" :close-on-content-click="false"
                                         :nudge-right="40" transition="scale-transition" offset-y
                                         max-width="100%" min-width="250px"
@@ -131,6 +140,23 @@
                                     </v-col>
                                 </v-row>
                             </div>
+                            <div v-else-if="item.type === `file_upload`">
+                                <label v-if="item.label">{{ item.label }}</label>
+                                <sup v-if="item.required">*</sup>
+                                <v-file-input clearable clear-icon="mdi-close-circle-outline" filled counter
+                                              :multiple="item.multiple" :placeholder="item.placeholder"
+                                              hide-details="auto" :required="item.required" v-model="item.value"
+                                >
+                                    <template v-slot:selection="{ index, text }">
+                                        <v-chip v-if="index < 3" color="deep-purple accent-5" dark label small>
+                                            {{ text }}
+                                        </v-chip>
+                                        <span v-else-if="index === 3" class="overline grey--text text--darken-3 mx-2">
+                                            + {{ (item.value.length - 2) }} File(s)
+                                        </span>
+                                    </template>
+                                </v-file-input>
+                            </div>
                             <div v-else>
                                 <label v-if="item.label">{{ item.label }}</label>
                                 <sup v-if="item.required">*</sup>
@@ -144,8 +170,8 @@
                     </draggable>
                     <div class="section-tools mx-auto">
                         <v-row no-gutters>
-                            <v-spacer/>
-                            <v-tooltip left>
+                            <v-spacer />
+                            <v-tooltip bottom>
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs"
                                            v-on="on" @click="addDivider()"
@@ -173,7 +199,7 @@
                                     </v-list-item>
                                 </v-list>
                             </v-menu>
-                            <v-tooltip left>
+                            <v-tooltip bottom>
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs"
                                            v-on="on" @click="setProperty(paragraph)"
@@ -183,7 +209,7 @@
                                 </template>
                                 <span>Add Paragraph</span>
                             </v-tooltip>
-                            <v-tooltip left>
+                            <v-tooltip bottom>
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs"
                                            v-on="on" @click="setProperty(image)"
@@ -193,7 +219,7 @@
                                 </template>
                                 <span>Add Image</span>
                             </v-tooltip>
-                            <v-tooltip left>
+                            <v-tooltip bottom>
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs"
                                            v-on="on" @click="setProperty(video)"
@@ -203,7 +229,7 @@
                                 </template>
                                 <span>Add Video</span>
                             </v-tooltip>
-                            <v-tooltip left v-for="form in formInputs" :key="form.type">
+                            <v-tooltip bottom v-for="form in formInputs" :key="form.type">
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs"
                                            v-on="on" @click="setProperty(form)"
@@ -213,118 +239,125 @@
                                 </template>
                                 <span>Add {{ form.type | snakeCaseToNormal | removeSlug | ucwords }} Field</span>
                             </v-tooltip>
-                            <v-spacer/>
+                            <v-spacer />
                         </v-row>
                     </div>
                 </v-card-text>
             </v-card>
         </v-col>
         <v-col cols="3">
-            <v-card flat tile>
-                <v-card-text v-if="activeType">
-                    <h3 class="subtitle-2 mb-2 text-center">
-                        <v-icon left>{{ activeType.icon }}</v-icon>
-                        {{ activeType.type | snakeCaseToNormal | removeSlug | ucwords }} Property
-                    </h3>
-                    <v-text-field v-model="activeType.label" label="Question" hide-details="auto"
-                                  filled dense v-if="activeType.hasOwnProperty('label')"
+            <affix class="sidebar-menu" relative-element-selector="#structure-content" style="width: 300px;">
+                <v-card flat tile>
+                    <v-card-text v-if="activeType">
+                        <h3 class="subtitle-2 mb-2 text-center">
+                            <v-icon left>{{ activeType.icon }}</v-icon>
+                            {{ activeType.type | snakeCaseToNormal | removeSlug | ucwords }} Property
+                        </h3>
+                        <v-text-field v-model="activeType.label" label="Question" hide-details="auto"
+                                      filled dense v-if="activeType.hasOwnProperty('label')"
+                                      class="mb-1"
+                        />
+                        <v-text-field v-model="activeType.text" label="Value" hide-details="auto" dense
+                                      filled
+                                      v-if="activeType.type !== 'paragraph' && activeType.hasOwnProperty('text')"
+                                      class="mb-1"
+                        />
+                        <v-textarea v-model="activeType.text" rows="3"
+                                    v-if="activeType.type === 'paragraph'" label="Value"
+                                    hide-details="auto" dense filled class="mb-1"
+                        />
+                        <v-text-field v-model="activeType.src" append-icon="mdi-cloud-upload-outline"
+                                      label="Source URL *" hide-details="auto" dense filled
+                                      v-if="activeType.hasOwnProperty('src')" class="mb-1"
+                        />
+                        <v-text-field v-model="activeType.alt" label="Alternate text"
+                                      hide-details="auto" dense filled
+                                      v-if="activeType.hasOwnProperty('alt')" class="mb-1"
+                        />
+                        <v-text-field v-model="activeType.rows" label="Textarea rows"
+                                      hide-details="auto" dense filled
+                                      v-if="activeType.hasOwnProperty('rows')" class="mb-1"
+                                      type="number"
+                        />
+                        <v-text-field v-model="activeType.itemwidth" label="Element Width"
+                                      hide-details="auto" dense filled
+                                      v-if="activeType.hasOwnProperty('itemwidth')" class="mb-1"
+                                      type="number"
+                        />
+                        <v-text-field v-model="activeType.itemheight" label="Element Height"
+                                      hide-details="auto" dense filled
+                                      v-if="activeType.hasOwnProperty('itemheight')" class="mb-1"
+                                      type="number"
+                        />
+                        <v-text-field v-model="activeType.placeholder" label="Placeholder"
+                                      hide-details="auto" dense filled
+                                      v-if="activeType.hasOwnProperty('placeholder')" class="mb-1"
+                        />
+                        <v-select v-model="activeType.width" label="Width (# of columns)"
+                                  :items="Array.from(Array(12), (_, i) => i + 1)" menu-props="auto"
+                                  hide-details single-line v-if="activeType.hasOwnProperty('width')"
+                                  dense filled class="mb-1"
+                        />
+                        <v-select v-model="activeType.date_format" item-value="value"
+                                  label="Date format" :items="date_formats" menu-props="auto"
+                                  hide-details single-line
+                                  v-if="activeType.hasOwnProperty('date_format')" dense filled
                                   class="mb-1"
-                    />
-                    <v-text-field v-model="activeType.text" label="Value" hide-details="auto" dense
-                                  filled
-                                  v-if="activeType.type !== 'paragraph' && activeType.hasOwnProperty('text')"
-                                  class="mb-1"
-                    />
-                    <v-textarea v-model="activeType.text" rows="3"
-                                v-if="activeType.type === 'paragraph'" label="Value"
-                                hide-details="auto" dense filled class="mb-1"
-                    />
-                    <v-text-field v-model="activeType.src" append-icon="mdi-cloud-upload-outline"
-                                  label="Source URL *" hide-details="auto" dense filled
-                                  v-if="activeType.hasOwnProperty('src')" class="mb-1"
-                    />
-                    <v-text-field v-model="activeType.alt" label="Alternate text"
-                                  hide-details="auto" dense filled
-                                  v-if="activeType.hasOwnProperty('alt')" class="mb-1"
-                    />
-                    <v-text-field v-model="activeType.rows" label="Textarea rows"
-                                  hide-details="auto" dense filled
-                                  v-if="activeType.hasOwnProperty('rows')" class="mb-1"
-                                  type="number"
-                    />
-                    <v-text-field v-model="activeType.itemwidth" label="Element Width"
-                                  hide-details="auto" dense filled
-                                  v-if="activeType.hasOwnProperty('itemwidth')" class="mb-1"
-                                  type="number"
-                    />
-                    <v-text-field v-model="activeType.itemheight" label="Element Height"
-                                  hide-details="auto" dense filled
-                                  v-if="activeType.hasOwnProperty('itemheight')" class="mb-1"
-                                  type="number"
-                    />
-                    <v-text-field v-model="activeType.placeholder" label="Placeholder"
-                                  hide-details="auto" dense filled
-                                  v-if="activeType.hasOwnProperty('placeholder')" class="mb-1"
-                    />
-                    <v-select v-model="activeType.width" label="Width (# of columns)"
-                              :items="Array.from(Array(12), (_, i) => i + 1)" menu-props="auto"
-                              hide-details single-line v-if="activeType.hasOwnProperty('width')"
-                              dense filled class="mb-1"
-                    />
-                    <v-select v-model="activeType.date_format" item-value="value"
-                              label="Date format" :items="date_formats" menu-props="auto"
-                              hide-details single-line
-                              v-if="activeType.hasOwnProperty('date_format')" dense filled
-                              class="mb-1"
-                    />
-                    <v-select v-model="activeType.align" label="Date format"
-                              append-icon="mdi-align-horizontal-center" item-value="value"
-                              :items="alignItems" menu-props="auto" hide-details single-line
-                              v-if="activeType.hasOwnProperty('align')" dense filled class="mb-1"
-                    />
-                    <v-checkbox v-model="activeType.required" label="Required?" hide-details="auto"
-                                v-if="activeType.hasOwnProperty('required')"
-                    />
-                    <div v-if="activeType.hasOwnProperty('items')">
-                        <small>Options</small>
-                        <div v-for="(item, index) in activeType.items" :key="index">
-                            <v-text-field label="Enter option" v-model="activeType.items[index]"
-                                          hide-details="auto" dense filled class="mb-1"
+                        />
+                        <v-select v-model="activeType.align" label="Date format"
+                                  append-icon="mdi-align-horizontal-center" item-value="value"
+                                  :items="alignItems" menu-props="auto" hide-details single-line
+                                  v-if="activeType.hasOwnProperty('align')" dense filled class="mb-1"
+                        />
+                        <v-checkbox v-model="activeType.multiple" label="Multiple File Upload?" hide-details="auto"
+                                    v-if="activeType.type ==='file_upload' && activeType.hasOwnProperty('multiple')"
+                        />
+                        <v-text-field v-model="activeType.max" label="Number of Files Allowed"
+                                      hide-details="auto" dense filled
+                                      :rules="multiple_count_rules"
+                                      v-if="activeType.multiple && activeType.hasOwnProperty('max')" class="my-1"
+                                      type="number"
+                        />
+                        <v-checkbox v-model="activeType.required" label="Required?" hide-details="auto"
+                                    v-if="activeType.hasOwnProperty('required')"
+                        />
+                        <div v-if="activeType.hasOwnProperty('items')">
+                            <small>Options</small>
+                            <div v-for="(item, index) in activeType.items" :key="index">
+                                <v-text-field label="Enter option" v-model="activeType.items[index]"
+                                              hide-details="auto" dense filled class="mb-1"
+                                >
+                                    <template v-slot:append-outer>
+                                        <v-icon @click="removeFromItems(index)">mdi-delete</v-icon>
+                                    </template>
+                                </v-text-field>
+                            </div>
+                            <v-text-field label="Enter option" v-model="new_option" hide-details="auto"
+                                          dense filled class="mb-1"
                             >
                                 <template v-slot:append-outer>
-                                    <v-icon @click="removeFromItems(index)">mdi-delete</v-icon>
+                                    <v-icon :disabled="!new_option"
+                                            :color="new_option ? `success` : `grey`" @click="addToItem"
+                                    >
+                                        mdi-check-circle-outline
+                                    </v-icon>
                                 </template>
                             </v-text-field>
                         </div>
-                        <v-text-field label="Enter option" v-model="new_option" hide-details="auto"
-                                      dense filled class="mb-1"
-                        >
-                            <template v-slot:append-outer>
-                                <v-icon :disabled="!new_option"
-                                        :color="new_option ? `success` : `grey`" @click="addToItem"
-                                >
-                                    mdi-check-circle-outline
-                                </v-icon>
-                            </template>
-                        </v-text-field>
-                    </div>
-                    <div v-if="activeType.hasOwnProperty('direction')">
-                        <small>Direction</small>
-                        <v-radio-group v-model="activeType.direction" row>
-                            <v-radio label="Row" value="row"/>
-                            <v-radio label="Column" value="column"/>
-                        </v-radio-group>
-                    </div>
-                    <!-- buttons -->
-                    <!-- <v-btn text class="mt-2" v-if="!isEditing" depressed @click="insertTextContent">Insert</v-btn> -->
-                    <!-- <v-btn text class="mt-2" v-else depressed @click="updateTextContent">Update</v-btn> -->
-                    <!-- <v-btn text depressed @click="cancelTextContent">Cancel</v-btn> -->
-                </v-card-text>
-            </v-card>
-            <slot name="right-bottom"/>
+                        <div v-if="activeType.hasOwnProperty('direction')">
+                            <small>Direction</small>
+                            <v-radio-group v-model="activeType.direction" row>
+                                <v-radio label="Row" value="row" />
+                                <v-radio label="Column" value="column" />
+                            </v-radio-group>
+                        </div> 
+                    </v-card-text>
+                </v-card>
+                <slot name="right-bottom" />
+            </affix>
         </v-col>
-        <!--<v-col cols="12">
-            <v-row no-gutters class="debuggger">
+        <v-col cols="12" v-if="debug_on">
+            <v-row no-gutters class="debugger">
                 <v-col md="7">
                 <pre>
                     <code class="fullwidth pa-4">Structure : {{ structures }}<br> </code>
@@ -336,7 +369,7 @@
                 </pre>
                 </v-col>
             </v-row>
-        </v-col>-->
+        </v-col>
     </v-row>
 </template>
 
@@ -346,21 +379,25 @@
     import _cloneDeep from "lodash/cloneDeep";
     //components
     import draggable from 'vuedraggable'
+    import {Affix} from 'vue-affix'
 
     export default {
         name: "Builder",
         mixins: [global_utils],
         components: {
-            draggable
+            draggable,
+            Affix
         },
         props: {
-            value: Array
+            value: Array,
+            hasFileUpload: {type: Boolean, default: false}
         },
         created() {
             this.setProperty(this.headings.h1)
             this.setProperty(this.paragraph)
         },
         data: () => ({
+            debug_on: false,
             divider: {
                 id: null,
                 type: 'divider',
@@ -538,6 +575,21 @@
                 required: false,
                 hover: false
             },
+            file_upload: {
+                id: null,
+                type: 'file_upload',
+                tag: 'v-file-input',
+                tag_type: 'file',
+                label: 'Upload file',
+                icon: 'mdi-paperclip',
+                show_icon: false,
+                placeholder: 'Select file',
+                value: [],
+                required: false,
+                hover: false,
+                multiple: false,
+                max: 1
+            },
             link: {
                 id: null,
                 type: 'link',
@@ -594,7 +646,7 @@
                 id: null,
                 type: 'dropdown',
                 tag: 'v-select',
-                label: "Select From the ff:",
+                label: "Select",
                 icon: 'mdi-arrow-down-drop-circle-outline',
                 show_icon: false,
                 placeholder: 'Select your answer',
@@ -650,6 +702,11 @@
                 {value: 'center', text: 'Center Align'},
                 {value: 'right', text: 'Right Align'}
             ],
+            multiple_count_rules: [
+                v => !!v || 'Required',
+                v => v >= 0 || 'Minimum value allowed: 1',
+                v => v <= 5 || 'Maximum value allowed: 5',
+            ],
             structures: [],
             sidetab: 'Element',
             activeType: null,
@@ -669,7 +726,7 @@
                 return ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'label']
             },
             formInputs() {
-                return [
+                let allowed = [
                     this.date,
                     this.time,
                     this.text,
@@ -683,6 +740,10 @@
                     this.checkboxes,
                     this.checkbox
                 ]
+                if (this.hasFileUpload) {
+                    allowed.push(this.file_upload)
+                }
+                return allowed
             },
         },
         watch: {
@@ -786,6 +847,8 @@
             },
             remove(index) {
                 this.structures.splice(index, 1)
+                if (this.structures.length === 0)
+                    this.activeType = null
             },
             removeChild(pindex, cIndex) {
                 this.structures[pindex].children.splice(cIndex, 1)
@@ -820,7 +883,7 @@
                 }
             },
             getEmbed(src) {
-                let youtubeID = this.youtubeParser(src)
+                let youtubeID = src ? this.youtubeParser(src) : ''
                 return `https://www.youtube.com/embed/${youtubeID}`
             },
         }

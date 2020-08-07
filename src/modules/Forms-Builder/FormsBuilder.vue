@@ -18,7 +18,7 @@
                             </v-btn>
                         </v-row>
                     </div>
-                    <Builder v-model="structures" ref="builder">
+                    <Builder v-model="structures" has-file-upload ref="builder">
                         <template v-slot:right-bottom>
                             <v-divider />
                             <v-card-text>

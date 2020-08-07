@@ -1,9 +1,8 @@
-import { list_functionality } from '@/services/list-functionality/list-functionality'
+import {list_functionality} from '@/services/list-functionality/list-functionality'
 import _cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
 import request from '@/services/axios_instance'
 //Components
-import CustomTable from '@/common/CustomTable/CustomTable.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import GroupsDialog from './components/GroupsDialog/GroupsDialog.vue'
@@ -26,20 +25,19 @@ export default {
     data: () => ({
         group_id: null,
         paths: [
-            { text: 'Settings', disabled: false, route: {name: 'settings'} },
-            { text: 'Groups', disabled: true, route: null }
+            {text: 'Settings', disabled: false, route: {name: 'settings'}},
+            {text: 'Groups', disabled: true, route: null}
         ],
         headers: [
-            { text: 'Index', value: 'index', width: '10%' },
-            { text: 'Group Name', value: 'group_name', width: '20%' },
-            { text: 'Description', value: 'description', width: '40%' },
-            { text: 'Action', width: '30%', value: 'action', sortable: false, align: 'center' }
+            {text: 'Group Name', value: 'group_name', width: 200},
+            {text: 'Description', value: 'description' },
+            {text: 'Action', width: 120, value: 'action', sortable: false, align: 'center'}
         ],
         actions: [{
-                value: 'edit_settings',
-                tooltip: 'Edit Settings',
-                icon: require(`@/${'assets/icons/groups/edit.svg'}`)
-            },
+            value: 'edit_settings',
+            tooltip: 'Edit Settings',
+            icon: require(`@/${'assets/icons/groups/edit.svg'}`)
+        },
             {
                 value: 'delete_group',
                 tooltip: 'Delete Group',
@@ -118,7 +116,7 @@ export default {
 
     mounted() {
         this.$event.$emit('path-change', this.paths)
-        const query = { ...this.$route.query }
+        const query = {...this.$route.query}
         if (isEmpty(query)) {
             this.fill_table('get_groups', true)
         } else {
@@ -140,6 +138,11 @@ export default {
                     this.$emit('open_snackbar', data.message, data.type)
                     this.$event.$emit('btnloading_off', false)
                 })
-        }
+        },
+
+        allowedDelete(item) {
+            if (item.company_id === 0) return false
+            return !['admin', 'manager', 'member', 'client'].includes(item.name.toLowerCase());
+        },
     }
 }

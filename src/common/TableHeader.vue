@@ -1,6 +1,9 @@
 <template>
     <div class="table-header">
         <slot name="prepends" />
+        <v-text-field dense v-if="hasSearch" outlined clearable clear-icon="mdi-close-circle-outline" solo flat
+                      append-icon="search" v-model="keyword" hide-details
+        />
         <v-tooltip top v-if="!noButton">
             <template v-slot:activator="{ on, attrs }">
                 <v-icon v-bind="attrs" v-on="on" class="add__btn ml-2" @click="$emit('click')">
@@ -30,7 +33,7 @@
         </v-tooltip>
         <v-tooltip top v-if="!noGridButton">
             <template v-slot:activator="{ on, attrs }">
-                <v-icon v-bind="attrs" v-on="on" fab :color="activeView === 'grid' ? 'primary' : ''"
+                <v-icon v-bind="attrs" v-on="on" :color="activeView === 'grid' ? 'primary' : ''"
                         class="add__btn ml-2" @click="$emit('click-grid-view')"
                 >
                     mdi-view-grid
@@ -47,6 +50,7 @@
         name: 'TableHeader',
         props: {
             // paths: { type: Array, default: [] },
+            hasSearch: {type: Boolean, default: false},
             noButton: {type: Boolean, default: false},
             noListButton: {type: Boolean, default: true},
             noGridButton: {type: Boolean, default: true},
@@ -54,7 +58,17 @@
         },
         data() {
             return {
-                fab: true
+                fab: true,
+                keyword: '',
+                debounce: null
+            }
+        },
+        watch: {
+            keyword(val) {
+                clearTimeout(this.debounce)
+                this.debounce = setTimeout(() => {
+                    this.$emit('search', val)
+                }, 600)
             }
         },
         computed: {

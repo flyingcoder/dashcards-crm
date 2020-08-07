@@ -18,7 +18,7 @@
                                 prepend-inner-icon="mdi-link-plus"
                                 hide-details="auto"
                                 color="#657186"
-                        ></v-text-field>
+                        />
                     </v-flex>
                 </v-layout>
             </template>
@@ -44,7 +44,7 @@
             url: null
         }),
         computed: {
-            disabled(){
+            disabled() {
                 return !this.validateUrl(this.url)
             }
         },

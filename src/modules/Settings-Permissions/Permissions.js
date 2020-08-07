@@ -7,10 +7,11 @@ import DeleteDialog from '@/common/DeleteDialog.vue'
 import PermissionsDialog from './components/PermissionsDialog/PermissionsDialog.vue'
 import VueTable from '@/common/VueTable/VueTable.vue'
 import Actions from '@/common/VueTable/Actions.vue'
+import {global_utils} from "../../global_utils/global_utils";
 
 export default {
     name: 'PermissionsTable',
-    mixins: [list_functionality],
+    mixins: [list_functionality, global_utils],
     components: {
         VueTable,
         Breadcrumb,
@@ -137,7 +138,7 @@ export default {
                 })
         },
         getCapability(item, base) {
-            return this.capability_column(item.slug) === base ? 'success' : 'grey'
+            return this.capability_column(item.slug) >= base ? 'success' : 'grey'
         }
     },
 

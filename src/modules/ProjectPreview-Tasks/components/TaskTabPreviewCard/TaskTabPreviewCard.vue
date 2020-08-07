@@ -48,11 +48,12 @@
                             </v-btn>
                         </v-col>
                         <v-col xs="12">
-                            <v-btn disabled outlined block :height="45">
+                            <v-btn outlined disabled block :height="45">
                                 <v-icon left color="success" v-if="content.status.toLowerCase() === 'completed'">
                                     mdi-clipboard-check-outline
                                 </v-icon>
-                                <v-icon left color="warning" v-else-if="content.status.toLowerCase() === 'pending'">
+                                <v-icon left color="warning"
+                                        v-else-if="content.status.toLowerCase() === 'pending' || content.status.toLowerCase() === 'urgent'">
                                     mdi-clipboard-pulse-outline
                                 </v-icon>
                                 <v-icon left color="danger" v-else-if="content.status.toLowerCase() === 'behind'">
@@ -75,6 +76,7 @@
                             </v-btn>
                         </v-col>
                         <v-col md="12">
+                            <p class='title' v-html="content.title"/>
                             <p v-html="content.description" class="body-2 description-wrapper"/>
                         </v-col>
                         <v-col md="12" v-if="content.assigned.length > 0">

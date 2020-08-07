@@ -19,7 +19,7 @@
 
         <delete-dialog
                 :open-dialog.sync="milestone_delete_dialog"
-                title="Delete Template"
+                title="Delete Milestone Template"
                 text-content="This will also deletes milestones associated with this template. Are you sure you want to delete these template? "
                 @delete="delete_item('delete_milestone_template', null, null, close_milestone_delete_dialog())"
         />
@@ -31,16 +31,16 @@
         <InvoiceTemplatePreview ref="invoice_template_view_dialog" :item="activeTemplate"
                                 :invoicefields="invoice_fields"
         />
-        <InvoiceTemplateHelp ref="help_dialog" :invoicefields="invoice_fields" />
-        <delete-dialog :open-dialog.sync="invoice_delete_dialog" title="Delete Template"
+        <InvoiceTemplateHelp ref="help_dialog" :invoicefields="invoice_fields"/>
+        <delete-dialog :open-dialog.sync="invoice_delete_dialog" title="Delete Invoice Template"
                        text-content="Are you sure you want to delete this invoice template?"
                        @delete="delete_item('delete_invoice_template', $event, null,close_invoice_delete_dialog())"
         />
-        <delete-dialog :open-dialog.sync="report_add_dialog" title="New Report Template">
-            <template v-slot:content>
-                <Empty headline="Under construction!" icon="mdi-hammer-wrench" />
-            </template>
-        </delete-dialog>
+        <delete-dialog :open-dialog.sync="report_delete_dialog" title="Delete Report Template"
+                       text-content="Are you sure you want to delete this report template?"
+                       @delete="delete_item('delete_report_template', $event, null,close_report_delete_dialog())"
+        />
+        <view-report-template :open-dialog.sync="report_view_dialog" :structures="structures"/>
         <VueTable
                 :items="items"
                 :headers="headers"
@@ -111,7 +111,7 @@
                 </td>
                 <td class="text-cap text-center">{{ item.milestones_count || '' }}</td>
                 <td v-if="item.creator">
-                    <Avatar :user="item.creator" iconOnly />
+                    <Avatar :user="item.creator" iconOnly/>
                 </td>
                 <td v-else>
                     <v-tooltip top>

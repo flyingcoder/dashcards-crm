@@ -1,86 +1,97 @@
 @import '~@/sass/_variables';
 
+@include pagePadding('.reports');
+
 @include emptyTable('.empty-reports');
 
-.empty-wrapper{
-  margin: 1.25rem;
-  padding: 1.25rem;
-  background-color: $white;
-  border-radius: 10px;
-  border: 1px solid $tableBorderBlue;
-}
-
 .custom-dialog {
-  .dialog__link, .dialog__textfield{
-    margin: 10px 5px;
-  }
-}
 
-.actions {
-  padding-bottom: 12px;
-  .v-btn{
-    margin-right: 8px;
-  }
-}
-.add-btn{
-  margin-right: 10px;
+    .dialog__link,
+    .dialog__textfield {
+        margin: 10px 5px;
+    }
 }
 
 @include actionButtonsDialog('.disable-btn');
 
-.theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat){
-  background-color: $white;
+.theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat) {
+    background-color: $white;
 }
-.reports-tab{
 
-  .reports__body{
-    padding: 0px !important;
-    
-    .site-preview{
-      margin: 0;
-      border: none;
-    }
-  }
-  .reports-actions{
-    .v-icon{
-      color: $btnGray;
-      &:hover{
-        color: $textDark;
-      }
-    }
-  }
-
-  .tab-img{
-    max-height: 30px; 
-    max-width: 100px;
-  }
-  .v-tab {
-    color: $tableBlueText !important;
-  }
-  .reports-tab-content{
-      margin: 1.25rem;
-      background-color: transparent;
-      .v-card{
-        border-radius: 10px;
+.reports {
+    .body-wrapper {
+        background-color: $white;
         border: 1px solid $tableBorderBlue;
-      }
-      
-  }
+        max-width: 100%;
+        padding: 1.5rem;
+        border-radius: 10px;
+
+        .reports-inner {
+            border: 1px solid $tableBorderBlue;
+        }
+
+        .reports-tab {
+            border-bottom: 1px solid $tableBorderBlue;
+        }
+
+        .tab-img {
+            max-height: 30px;
+            max-width: 100px;
+        }
+
+        .reports-actions {
+            text-align: right;
+            margin-bottom: 1rem;
+
+            .v-icon {
+                color: $btnGray;
+
+                &:hover {
+                    color: $textDark;
+                }
+            }
+        }
+
+        .v-tab {
+            color: $tableBlueText !important;
+        }
+
+        .site-preview {
+            border: 1px solid $tableBorderBlue;
+
+            iframe {
+                min-height: 100vh;
+            }
+        }
+    }
 }
-.reports-tab.v-card.v-sheet.theme--light{
-  background-color: $dashboardBg;
+
+@media only screen and (max-width: 768px) {
+    .reports {
+        padding: 7px 14px;
+    }
+
+    .body-wrapper {
+        padding: 15px;
+
+        .reports__body {
+            padding: 18px;
+
+        }
+    }
 }
 
+@media only screen and (max-width: 599px) {
+    .body-wrapper {
+        padding: 10px;
 
+        .reports__body {
+            padding: 10px;
+        }
 
-
-.reports-actions{
-  text-align: right;
-  margin-bottom: 20px;
-}
-
-@media only screen and (max-width: 768px){
-}
-
-@media only screen and (max-width: 599px){
+        .v-btn--floating.v-btn--small {
+            height: 35px;
+            width: 35px;
+        }
+    }
 }

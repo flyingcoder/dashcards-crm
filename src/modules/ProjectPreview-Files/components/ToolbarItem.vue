@@ -6,68 +6,68 @@
 </template>
 <script>
     //todo using is_screen_utils hide btn text on mobile
-export default {
-    props: {
-        icon: String,
-        iconText: String,
-        iconClass: String,
-        isActive: Boolean
+    export default {
+        props: {
+            icon: String,
+            iconText: String,
+            iconClass: String,
+            isActive: Boolean
+        }
     }
-}
 </script>
 <style lang="scss" scoped>
-@import '~@/sass/variables';
+    @import '~@/sass/variables';
 
-.button {
-    border: 1px solid $btnGray;
-    border-radius: 5px;
-    height: 50px;
-    width: 125px;
-
-    &:hover,
-    &.active {
-        .all.v-icon {
-            color: $violet;
-        }
-
-        .image.v-icon {
-            color: $green;
-        }
-
-        .video.v-icon {
-            color: $red;
-        }
-
-        .docs.v-icon {
-            color: $lightBlue;
-        }
-
-        .links.v-icon {
-            color: $blue;
-        }
-
-        .other.v-icon {
-            color: $lightGreen;
-        }
-
-        .approval.v-icon {
-            color: $lightBlue;
-        }
-    }
-}
-
-@media only screen and (max-width: 768px) and (min-width: 481px) {
     .button {
-        font-size: 12px;
-        height: 35px;
-    }
-}
-
-@media only screen and (max-width: 480px) {
-    .button {
-        font-size: 12px;
-        height: 30px;
+        border: 1px solid $btnGray;
+        border-radius: 5px;
+        height: 50px;
         width: 125px;
+
+        &:hover,
+        &.active {
+            .all.v-icon {
+                color: $violet;
+            }
+
+            .image.v-icon {
+                color: $green;
+            }
+
+            .video.v-icon {
+                color: $red;
+            }
+
+            .docs.v-icon {
+                color: $lightBlue;
+            }
+
+            .links.v-icon {
+                color: $blue;
+            }
+
+            .other.v-icon {
+                color: $lightGreen;
+            }
+
+            .approval.v-icon {
+                color: $lightBlue;
+            }
+        }
     }
-}
+
+    @media only screen and (max-width: 768px) and (min-width: 481px) {
+        .button {
+            font-size: 12px;
+            height: 35px;
+        }
+    }
+
+    @media only screen and (max-width: 480px) {
+        .button {
+            font-size: 12px;
+            height: 30px;
+            width: 125px;
+        }
+    }
 </style>
