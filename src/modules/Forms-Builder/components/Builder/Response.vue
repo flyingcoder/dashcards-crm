@@ -21,7 +21,7 @@
                                     class="mr-2 my-1" label
                             >
                                 <v-avatar class="mr-3">
-                                    <v-img v-if="is_image(item.filetype)" :src="item.url" />
+                                    <v-img v-if="is_image(item.filetype)" :src="item.url_inline" />
                                     <span class="fiv-icon fiv-sqo fiv-size-sm" v-else
                                           :class="[ `fiv-icon-` + get_extension(item.filename)]"
                                     />
@@ -29,7 +29,7 @@
                                 {{ item.filename }} ({{ item.filesize | bytesToSize }})
                                 <v-tooltip top>
                                     <template v-slot:activator="{ on, attrs }">
-                                        <v-icon color="mr-2" @click="openLink(item.url)" right v-bind="attrs" v-on="on">
+                                        <v-icon color="mr-2" @click="openLink(`${item.url}?disposition=attachment`)" right v-bind="attrs" v-on="on">
                                             mdi-cloud-download-outline
                                         </v-icon>
                                     </template>
