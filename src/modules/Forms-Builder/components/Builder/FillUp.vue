@@ -40,7 +40,8 @@
                             />
                         </template>
                         <v-date-picker ref="picker" v-model="questions[index].value" :max="item.max_date"
-                                       :min="item.min_date"/>
+                                       :min="item.min_date"
+                        />
                     </v-menu>
                 </div>
                 <div v-else-if="item.type === `time`">
@@ -54,21 +55,22 @@
                                           readonly v-bind="attrs" v-on="on"
                             />
                         </template>
-                        <v-time-picker v-model="questions[index].value" full-width @click:minute="item.popover= false"/>
+                        <v-time-picker v-model="questions[index].value" full-width @click:minute="item.popover= false" />
                     </v-menu>
                 </div>
                 <div v-else-if="item.type === `checkbox`">
                     <label v-if="item.label">{{ item.label }}</label><sup v-if="item.required">*</sup>
-                    <v-checkbox dense hide-details="auto" :label="item.text" v-model="questions[index].value"/>
+                    <v-checkbox dense hide-details="auto" :label="item.text" v-model="questions[index].value" />
                 </div>
                 <div v-else-if="item.type === `radio_group`">
                     <label v-if="item.label">{{ item.label }}</label><sup v-if="item.required">*</sup>
                     <v-radio-group v-model="questions[index].value" v-if="item.direction === 'row'" row
-                                   :mandatory="item.required">
-                        <v-radio v-for="(option,i) in item.items" :key="i" :label="option" :value="option"/>
+                                   :mandatory="item.required"
+                    >
+                        <v-radio v-for="(option,i) in item.items" :key="i" :label="option" :value="option" />
                     </v-radio-group>
                     <v-radio-group v-model="questions[index].value" v-else column :mandatory="item.required">
-                        <v-radio v-for="(option,i) in item.items" :key="i" :label="option" :value="option"/>
+                        <v-radio v-for="(option,i) in item.items" :key="i" :label="option" :value="option" />
                     </v-radio-group>
                 </div>
                 <div v-else-if="item.type === `checkboxes`">
@@ -113,7 +115,7 @@
                     <v-file-input clearable clear-icon="mdi-close-circle-outline" filled counter
                                   :multiple="item.multiple" :placeholder="item.placeholder"
                                   hide-details="auto" :required="item.required" v-model="item.value"
-                                  @change="onchange($event, index)"
+                                  @change="onchange($event, index)" :error="item.error"
                     >
                         <template v-slot:selection="{ index, text }">
                             <v-chip v-if="index < 3" color="deep-purple accent-5" dark label small>
@@ -139,6 +141,8 @@
 </template>
 
 <script>
+    import request from '@/services/axios_instance'
+
     export default {
         name: "FillUp",
         props: {
@@ -180,11 +184,20 @@
                 return `https://www.youtube.com/embed/${youtubeID}`
             },
             onchange(files, index) {
-                if (!this.uploaded[index]) {
-                    this.uploaded[index] = []
-                }
-                this.uploaded[index] = files
-                this.$emit('files-added', this.uploaded)
+                this.questions[index].value = []
+                this.questions[index].error = false
+                files.forEach(file => {
+                    let formData = new FormData()
+                    formData.append('file', file)
+                    request.post(`api/attachments/dropzone`, formData)
+                        .then(({data}) => {
+                            this.questions[index].value.push(data)
+                        }, (error) => {
+                            this.questions[index].error = true
+                            console.log(error)
+                        })
+                })
+                this.$emit('files-added', files)
             }
         }
     }

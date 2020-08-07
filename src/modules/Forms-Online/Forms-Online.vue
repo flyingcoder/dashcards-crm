@@ -138,9 +138,17 @@
                                 <sup v-if="item.required">*</sup>
                                 <v-file-input clearable clear-icon="mdi-close-circle-outline" filled counter
                                               :multiple="item.multiple" :placeholder="item.placeholder"
-                                              hide-details="auto" :required="item.required" v-model="item.value"
-                                              @change="onchange($event, index)"
+                                              hide-details="auto" :required="item.required"
+                                              @change="onchange($event, index)" :error="item.error"
                                 >
+                                    <template v-slot:append>
+                                        <v-tooltip top>
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-icon v-bind="attrs" v-on="on">mdi-cloud-question</v-icon>
+                                            </template>
+                                            <span>Max file size upload : 10MB<br> Allowed files: image, video, office and compressed files</span>
+                                        </v-tooltip>
+                                    </template>
                                     <template v-slot:selection="{ index, text }">
                                         <v-chip v-if="index < 3" color="deep-purple accent-5" dark label small>
                                             {{ text }}

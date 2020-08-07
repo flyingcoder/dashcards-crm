@@ -1,9 +1,7 @@
 <template>
     <custom-dialog
-            :title="title"
-            :open.sync="open"
-            :hasFooter="true"
-            maxWidth="900"
+            :title="title" :open.sync="open" :hasFooter="true" maxWidth="900" button1-text="Cancel"
+            @button1="closeDialog"
     >
         <template v-slot:content>
             <v-card flat>
@@ -43,18 +41,15 @@
                             </v-select>
                         </v-col>
                     </v-row>
-                    <FillUp :key="keyy" v-model="structures" :value="structures" />
+                    <FillUp :key="keyy" v-model="structures" :value="structures"/>
                     <Empty v-if="!hasStructures" headline="Select a template or create one first"
                            icon="mdi-clipboard-outline"
                     />
                 </v-card-text>
             </v-card>
         </template>
-        <template v-slot:entire-actions>
-            <v-spacer />
-            <v-btn @click="$emit('cancel')" :disabled="btnloading">Cancel</v-btn>
+        <template v-slot:button2>
             <v-btn @click="save_report" :disabled="isDisabled" :loading="btnloading">{{ btn_label }}</v-btn>
-            <v-spacer />
         </template>
     </custom-dialog>
 </template>

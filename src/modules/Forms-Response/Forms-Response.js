@@ -1,4 +1,3 @@
-
 import axios from 'axios'
 import request from '@/services/axios_instance'
 import {mapGetters} from "vuex";
@@ -24,7 +23,8 @@ export default {
         responses: [],
         next_url: null,
         activeResponder: null,
-        loading_more: false
+        loading_more: false,
+        response_counts: 0
     }),
     mounted() {
         if (this.$route.params.id > 0) {
@@ -34,13 +34,33 @@ export default {
     },
     computed: {
         ...mapGetters(['user']),
-        responses_count() {
-            if (!this.form)
-                return '0'
-            return this.form.responses_count || '0'
+        responses_count: {
+            get() {
+                return this.response_counts || '0'
+            },
+            set(val) {
+                this.response_counts = val
+            }
+        }
+    },
+    watch: {
+        responses: {
+            handler(val) {
+                this.responses_count = val.length
+            },
+            immediate: true,
+            deep: true
         }
     },
     methods: {
+        refresh() {
+            this.loading = true
+            request.get(`api/forms/${this.$route.params.id}/responses`)
+                .then(({data}) => {
+                    this.responses = data.data
+                })
+                .finally(() => (this.loading = false))
+        },
         getForm(id) {
             this.loading = true
             axios.all([

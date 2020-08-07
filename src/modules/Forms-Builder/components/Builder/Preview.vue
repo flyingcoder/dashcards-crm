@@ -85,6 +85,23 @@
                         </v-col>
                     </v-row>
                 </div>
+                <div v-else-if="item.type === `file_upload`">
+                    <label v-if="item.label">{{ item.label }}</label>
+                    <sup v-if="item.required">*</sup>
+                    <v-file-input clearable clear-icon="mdi-close-circle-outline" filled counter
+                                  :multiple="item.multiple" :placeholder="item.placeholder"
+                                  hide-details :required="item.required" v-model="item.value"
+                    >
+                        <template v-slot:selection="{ index, text }">
+                            <v-chip v-if="index < 3" color="deep-purple accent-5" dark label small>
+                                {{ text }}
+                            </v-chip>
+                            <span v-else-if="index === 3" class="overline grey--text text--darken-3 mx-2">
+                                            + {{ (item.value.length - 2) }} File(s)
+                                        </span>
+                        </template>
+                    </v-file-input>
+                </div>
                 <div v-else>
                     <label v-if="item.label">{{ item.label }}</label>
                     <component :placeholder="item.placeholder" :type="item.tag_type" v-model="item.value" filled
