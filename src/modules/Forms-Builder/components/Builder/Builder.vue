@@ -170,7 +170,7 @@
                     </draggable>
                     <div class="section-tools mx-auto">
                         <v-row no-gutters>
-                            <v-spacer />
+                            <v-spacer/>
                             <v-tooltip bottom>
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs"
@@ -239,7 +239,7 @@
                                 </template>
                                 <span>Add {{ form.type | snakeCaseToNormal | removeSlug | ucwords }} Field</span>
                             </v-tooltip>
-                            <v-spacer />
+                            <v-spacer/>
                         </v-row>
                     </div>
                 </v-card-text>
@@ -347,13 +347,13 @@
                         <div v-if="activeType.hasOwnProperty('direction')">
                             <small>Direction</small>
                             <v-radio-group v-model="activeType.direction" row>
-                                <v-radio label="Row" value="row" />
-                                <v-radio label="Column" value="column" />
+                                <v-radio label="Row" value="row"/>
+                                <v-radio label="Column" value="column"/>
                             </v-radio-group>
-                        </div> 
+                        </div>
                     </v-card-text>
                 </v-card>
-                <slot name="right-bottom" />
+                <slot name="right-bottom"/>
             </affix>
         </v-col>
         <v-col cols="12" v-if="debug_on">
@@ -584,9 +584,11 @@
                 icon: 'mdi-paperclip',
                 show_icon: false,
                 placeholder: 'Select file',
-                value: [],
+                value: null,
+                props: [],
                 required: false,
                 hover: false,
+                error: false,
                 multiple: false,
                 max: 1
             },

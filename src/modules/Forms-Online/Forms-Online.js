@@ -71,7 +71,7 @@ export default {
             }
             let error = []
             for (let i = 0; i < this.form.questions.length; i++) {
-                if (this.form.questions[i].required && !this.form.questions[i].value) {
+                if (this.form.questions[i].required && (!this.form.questions[i].value || this.form.questions[i].value.length === 0)) {
                     error.push(`${this.form.questions[i]} should have valid value!`)
                 }
             }
@@ -87,22 +87,12 @@ export default {
                 return
             }
             this.submitting = true
-            let formData = new FormData();
-            formData.append('data', JSON.stringify(_cloneDeep(this.form.questions)))
-            if (this.user) {
-                formData.append('user_id', this.user.id)
-            }
-            this.uploaded.forEach((item, index) => {
-                if (Array.isArray(item) && item.length > 0) {
-                    item.forEach(file => {
-                        formData.append(`file_${index}[]`, file)
-                    })
-                } else {
-                    formData.append(`file_${index}[]`, null)
-                }
-            })
             this.$store.commit('set_custom_loader', true)
-            request.post(`api/form/${this.form.id}/online`, formData)
+            let payload = { data: _cloneDeep(this.form.questions)};
+            if (this.user) {
+                payload.user_id = this.user.id
+            }
+            request.post(`api/form/${this.form.id}/online`, payload)
                 .then(({data}) => {
                     this.submitted = true
                 })
@@ -115,10 +105,19 @@ export default {
             this.$router.go()
         },
         onchange(files, index) {
-            if (!this.uploaded[index]) {
-                this.uploaded[index] = []
-            }
-            this.uploaded[index] = files
+            this.form.questions[index].value = []
+            this.form.questions[index].error = false
+            files.forEach(file => {
+                let formData = new FormData()
+                formData.append('file', file)
+                request.post(`api/attachments/dropzone`, formData)
+                    .then(({data}) => {
+                        this.form.questions[index].value.push(data)
+                    }, (error) => {
+                        this.form.questions[index].error = true
+                        console.log(error)
+                    })
+            })
         }
     }
 }
