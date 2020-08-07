@@ -1,6 +1,6 @@
 <template>
     <div class="timer__tab">
-        <VueTable :items="items" :headers="headers" :showRowActions="true" @load-more="get_more_timers" icon="mdi-clock"
+        <VueTable :items="items" :headers="headers" :showRowActions="true" @load-more="get_more_timers" icon="mdi-clock-alert-outline"
                   :title="tableTitle" :key="componentKey" :noMoreData="noMoreData" :hasFooter="true" :showSelect="false"
                   :loading="loading"
         >

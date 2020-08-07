@@ -14,7 +14,7 @@
                         </v-list-item-content>
                     </v-list-item>
                     <v-card-text v-if="form && !submitted">
-                        <v-col md="12" v-for="item in form.questions" :key="item.id">
+                        <v-col md="12" v-for="(item, index) in form.questions" :key="item.id">
                             <div v-if="item.type === 'divider'">
                                 <hr>
                             </div>
@@ -37,7 +37,7 @@
                                     {{ item.text }}
                                 </p>
                             </div>
-                            <div v-else-if="textfield.includes(item.type)">
+                            <div v-else-if="text_fields.includes(item.type)">
                                 <component :is="item.tag" :style="`text-align:`+item.align">
                                     {{ item.text }}
                                 </component>
@@ -132,6 +132,24 @@
                                         />
                                     </v-col>
                                 </v-row>
+                            </div>
+                            <div v-else-if="item.type === `file_upload`">
+                                <label v-if="item.label">{{ item.label }}</label>
+                                <sup v-if="item.required">*</sup>
+                                <v-file-input clearable clear-icon="mdi-close-circle-outline" filled counter
+                                              :multiple="item.multiple" :placeholder="item.placeholder"
+                                              hide-details="auto" :required="item.required" v-model="item.value"
+                                              @change="onchange($event, index)"
+                                >
+                                    <template v-slot:selection="{ index, text }">
+                                        <v-chip v-if="index < 3" color="deep-purple accent-5" dark label small>
+                                            {{ text }}
+                                        </v-chip>
+                                        <span v-else-if="index === 3" class="overline grey--text text--darken-3 mx-2">
+                                            + {{ (item.value.length - 2) }} File(s)
+                                        </span>
+                                    </template>
+                                </v-file-input>
                             </div>
                             <div v-else>
                                 <label v-if="item.label">{{ item.label }}</label><sup v-if="item.required">*</sup>

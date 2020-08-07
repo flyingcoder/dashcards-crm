@@ -13,12 +13,22 @@
                                @click="activeType = item"
                         >
                             <div class="hr-action">
-                                <v-icon small @click="remove(pIndex)" v-if="item.hover">
-                                    mdi-delete
-                                </v-icon>
-                                <v-icon class="parent-btn" small @click="edit(item)" v-if="item.hover">
-                                    edit
-                                </v-icon>
+                                <v-tooltip top v-if="item.hover">
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-icon v-bind="attrs" v-on="on" small @click="remove(pIndex)">
+                                            mdi-delete-circle-outline
+                                        </v-icon>
+                                    </template>
+                                    <span>Remove</span>
+                                </v-tooltip>
+                                <v-tooltip top v-if="item.hover">
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-icon v-bind="attrs" v-on="on" class="parent-btn" small @click="edit(item)">
+                                            mdi-circle-edit-outline
+                                        </v-icon>
+                                    </template>
+                                    <span>Edit Properties</span>
+                                </v-tooltip>
                             </div>
                             <div v-if="item.type === 'divider'">
                                 <hr>
@@ -68,9 +78,8 @@
                                 </v-menu>
                             </div>
                             <div v-else-if="item.type === `time`">
-                                <label v-if="item.label">{{ item.label }}</label><sup
-                                    v-if="item.required"
-                            >*</sup>
+                                <label v-if="item.label">{{ item.label }}</label>
+                                <sup v-if="item.required">*</sup>
                                 <v-menu v-model="item.popover" :close-on-content-click="false"
                                         :nudge-right="40" transition="scale-transition" offset-y
                                         max-width="100%" min-width="250px"
@@ -131,6 +140,23 @@
                                     </v-col>
                                 </v-row>
                             </div>
+                            <div v-else-if="item.type === `file_upload`">
+                                <label v-if="item.label">{{ item.label }}</label>
+                                <sup v-if="item.required">*</sup>
+                                <v-file-input clearable clear-icon="mdi-close-circle-outline" filled counter
+                                              :multiple="item.multiple" :placeholder="item.placeholder"
+                                              hide-details="auto" :required="item.required" v-model="item.value"
+                                >
+                                    <template v-slot:selection="{ index, text }">
+                                        <v-chip v-if="index < 3" color="deep-purple accent-5" dark label small>
+                                            {{ text }}
+                                        </v-chip>
+                                        <span v-else-if="index === 3" class="overline grey--text text--darken-3 mx-2">
+                                            + {{ (item.value.length - 2) }} File(s)
+                                        </span>
+                                    </template>
+                                </v-file-input>
+                            </div>
                             <div v-else>
                                 <label v-if="item.label">{{ item.label }}</label>
                                 <sup v-if="item.required">*</sup>
@@ -144,8 +170,8 @@
                     </draggable>
                     <div class="section-tools mx-auto">
                         <v-row no-gutters>
-                            <v-spacer/>
-                            <v-tooltip left>
+                            <v-spacer />
+                            <v-tooltip bottom>
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs"
                                            v-on="on" @click="addDivider()"
@@ -173,7 +199,7 @@
                                     </v-list-item>
                                 </v-list>
                             </v-menu>
-                            <v-tooltip left>
+                            <v-tooltip bottom>
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs"
                                            v-on="on" @click="setProperty(paragraph)"
@@ -183,7 +209,7 @@
                                 </template>
                                 <span>Add Paragraph</span>
                             </v-tooltip>
-                            <v-tooltip left>
+                            <v-tooltip bottom>
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs"
                                            v-on="on" @click="setProperty(image)"
@@ -193,7 +219,7 @@
                                 </template>
                                 <span>Add Image</span>
                             </v-tooltip>
-                            <v-tooltip left>
+                            <v-tooltip bottom>
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs"
                                            v-on="on" @click="setProperty(video)"
@@ -203,7 +229,7 @@
                                 </template>
                                 <span>Add Video</span>
                             </v-tooltip>
-                            <v-tooltip left v-for="form in formInputs" :key="form.type">
+                            <v-tooltip bottom v-for="form in formInputs" :key="form.type">
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs"
                                            v-on="on" @click="setProperty(form)"
@@ -213,7 +239,7 @@
                                 </template>
                                 <span>Add {{ form.type | snakeCaseToNormal | removeSlug | ucwords }} Field</span>
                             </v-tooltip>
-                            <v-spacer/>
+                            <v-spacer />
                         </v-row>
                     </div>
                 </v-card-text>
@@ -283,6 +309,15 @@
                                   :items="alignItems" menu-props="auto" hide-details single-line
                                   v-if="activeType.hasOwnProperty('align')" dense filled class="mb-1"
                         />
+                        <v-checkbox v-model="activeType.multiple" label="Multiple File Upload?" hide-details="auto"
+                                    v-if="activeType.type ==='file_upload' && activeType.hasOwnProperty('multiple')"
+                        />
+                        <v-text-field v-model="activeType.max" label="Number of Files Allowed"
+                                      hide-details="auto" dense filled
+                                      :rules="multiple_count_rules"
+                                      v-if="activeType.multiple && activeType.hasOwnProperty('max')" class="my-1"
+                                      type="number"
+                        />
                         <v-checkbox v-model="activeType.required" label="Required?" hide-details="auto"
                                     v-if="activeType.hasOwnProperty('required')"
                         />
@@ -312,21 +347,17 @@
                         <div v-if="activeType.hasOwnProperty('direction')">
                             <small>Direction</small>
                             <v-radio-group v-model="activeType.direction" row>
-                                <v-radio label="Row" value="row"/>
-                                <v-radio label="Column" value="column"/>
+                                <v-radio label="Row" value="row" />
+                                <v-radio label="Column" value="column" />
                             </v-radio-group>
-                        </div>
-                        <!-- buttons -->
-                        <!-- <v-btn text class="mt-2" v-if="!isEditing" depressed @click="insertTextContent">Insert</v-btn> -->
-                        <!-- <v-btn text class="mt-2" v-else depressed @click="updateTextContent">Update</v-btn> -->
-                        <!-- <v-btn text depressed @click="cancelTextContent">Cancel</v-btn> -->
+                        </div> 
                     </v-card-text>
                 </v-card>
-                <slot name="right-bottom"/>
+                <slot name="right-bottom" />
             </affix>
         </v-col>
-        <!--<v-col cols="12">
-            <v-row no-gutters class="debuggger">
+        <v-col cols="12" v-if="debug_on">
+            <v-row no-gutters class="debugger">
                 <v-col md="7">
                 <pre>
                     <code class="fullwidth pa-4">Structure : {{ structures }}<br> </code>
@@ -338,7 +369,7 @@
                 </pre>
                 </v-col>
             </v-row>
-        </v-col>-->
+        </v-col>
     </v-row>
 </template>
 
@@ -358,13 +389,15 @@
             Affix
         },
         props: {
-            value: Array
+            value: Array,
+            hasFileUpload: {type: Boolean, default: false}
         },
         created() {
             this.setProperty(this.headings.h1)
             this.setProperty(this.paragraph)
         },
         data: () => ({
+            debug_on: false,
             divider: {
                 id: null,
                 type: 'divider',
@@ -542,6 +575,21 @@
                 required: false,
                 hover: false
             },
+            file_upload: {
+                id: null,
+                type: 'file_upload',
+                tag: 'v-file-input',
+                tag_type: 'file',
+                label: 'Upload file',
+                icon: 'mdi-paperclip',
+                show_icon: false,
+                placeholder: 'Select file',
+                value: [],
+                required: false,
+                hover: false,
+                multiple: false,
+                max: 1
+            },
             link: {
                 id: null,
                 type: 'link',
@@ -598,7 +646,7 @@
                 id: null,
                 type: 'dropdown',
                 tag: 'v-select',
-                label: "Select From the ff:",
+                label: "Select",
                 icon: 'mdi-arrow-down-drop-circle-outline',
                 show_icon: false,
                 placeholder: 'Select your answer',
@@ -654,6 +702,11 @@
                 {value: 'center', text: 'Center Align'},
                 {value: 'right', text: 'Right Align'}
             ],
+            multiple_count_rules: [
+                v => !!v || 'Required',
+                v => v >= 0 || 'Minimum value allowed: 1',
+                v => v <= 5 || 'Maximum value allowed: 5',
+            ],
             structures: [],
             sidetab: 'Element',
             activeType: null,
@@ -673,7 +726,7 @@
                 return ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'label']
             },
             formInputs() {
-                return [
+                let allowed = [
                     this.date,
                     this.time,
                     this.text,
@@ -687,6 +740,10 @@
                     this.checkboxes,
                     this.checkbox
                 ]
+                if (this.hasFileUpload) {
+                    allowed.push(this.file_upload)
+                }
+                return allowed
             },
         },
         watch: {

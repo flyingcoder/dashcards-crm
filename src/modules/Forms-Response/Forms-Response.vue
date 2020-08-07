@@ -33,10 +33,10 @@
                         </v-tab-item>
                         <v-tab-item value="responses">
                             <v-divider />
-                            <v-card flat max-width="1000" v-if="responses.length > 0">
+                            <v-card flat max-width="1000" class="mx-auto" v-if="responses.length > 0">
                                 <v-row no-gutters>
                                     <v-col cols="9" v-if="activeResponder">
-                                        <Response :items="activeResponder.data" />
+                                        <Response :attachments="activeResponder.attachments" :items="activeResponder.data" />
                                     </v-col>
                                     <v-col md="3">
                                         <v-list subheader dense class="responses-list">

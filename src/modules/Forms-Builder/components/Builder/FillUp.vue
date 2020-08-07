@@ -107,6 +107,24 @@
                         </v-col>
                     </v-row>
                 </div>
+                <div v-else-if="item.type === `file_upload`">
+                    <label v-if="item.label">{{ item.label }}</label>
+                    <sup v-if="item.required">*</sup>
+                    <v-file-input clearable clear-icon="mdi-close-circle-outline" filled counter
+                                  :multiple="item.multiple" :placeholder="item.placeholder"
+                                  hide-details="auto" :required="item.required" v-model="item.value"
+                                  @change="onchange($event, index)"
+                    >
+                        <template v-slot:selection="{ index, text }">
+                            <v-chip v-if="index < 3" color="deep-purple accent-5" dark label small>
+                                {{ text }}
+                            </v-chip>
+                            <span v-else-if="index === 3" class="overline grey--text text--darken-3 mx-2">
+                                            + {{ (item.value.length - 2) }} File(s)
+                                        </span>
+                        </template>
+                    </v-file-input>
+                </div>
                 <div v-else>
                     <label v-if="item.label">{{ item.label }}</label><sup v-if="item.required">*</sup>
                     <component :placeholder="item.placeholder" :type="item.tag_type" v-model="questions[index].value"
@@ -161,6 +179,13 @@
                 let youtubeID = src ? this.youtubeParser(src) : ''
                 return `https://www.youtube.com/embed/${youtubeID}`
             },
+            onchange(files, index) {
+                if (!this.uploaded[index]) {
+                    this.uploaded[index] = []
+                }
+                this.uploaded[index] = files
+                this.$emit('files-added', this.uploaded)
+            }
         }
     }
 </script>

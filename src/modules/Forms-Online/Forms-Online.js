@@ -1,5 +1,6 @@
 import request from '@/services/axios_instance'
 import {global_utils} from '@/global_utils/global_utils'
+import _cloneDeep from 'lodash/cloneDeep'
 
 export default {
     name: 'FormOnline',
@@ -13,7 +14,8 @@ export default {
         ],
         viewMode: false,
         submitting: false,
-        submitted: false
+        submitted: false,
+        uploaded: []
     }),
     created() {
         if (this.$route.params.slug) {
@@ -26,7 +28,7 @@ export default {
         }
     },
     computed: {
-        textfield() {
+        text_fields() {
             return ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'label']
         },
         disabled() {
@@ -85,20 +87,38 @@ export default {
                 return
             }
             this.submitting = true
-            let payload = {data: this.form.questions};
+            let formData = new FormData();
+            formData.append('data', JSON.stringify(_cloneDeep(this.form.questions)))
             if (this.user) {
-                payload.user_id = this.user.id
+                formData.append('user_id', this.user.id)
             }
-            request.post(`api/form/${this.form.id}/online`, payload)
+            this.uploaded.forEach((item, index) => {
+                if (Array.isArray(item) && item.length > 0) {
+                    item.forEach(file => {
+                        formData.append(`file_${index}[]`, file)
+                    })
+                } else {
+                    formData.append(`file_${index}[]`, null)
+                }
+            })
+            this.$store.commit('set_custom_loader', true)
+            request.post(`api/form/${this.form.id}/online`, formData)
                 .then(({data}) => {
                     this.submitted = true
                 })
                 .finally(() => {
                     this.submitting = false
+                    this.$store.commit('set_custom_loader', false)
                 })
         },
         submit_another() {
             this.$router.go()
+        },
+        onchange(files, index) {
+            if (!this.uploaded[index]) {
+                this.uploaded[index] = []
+            }
+            this.uploaded[index] = files
         }
     }
 }
