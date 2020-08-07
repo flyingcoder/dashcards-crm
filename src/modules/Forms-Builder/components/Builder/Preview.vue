@@ -39,7 +39,7 @@
                                           readonly v-bind="attrs" v-on="on"
                             />
                         </template>
-                        <v-date-picker ref="picker" v-model="item.value" :max="item.max_date" :min="item.min_date"/>
+                        <v-date-picker ref="picker" v-model="item.value" :max="item.max_date" :min="item.min_date" />
                     </v-menu>
                 </div>
                 <div v-else-if="item.type === `time`">
@@ -52,20 +52,20 @@
                                           readonly v-bind="attrs" v-on="on"
                             />
                         </template>
-                        <v-time-picker v-model="item.value" full-width @click:minute="item.popover= false"/>
+                        <v-time-picker v-model="item.value" full-width @click:minute="item.popover= false" />
                     </v-menu>
                 </div>
                 <div v-else-if="item.type === `checkbox`">
                     <label v-if="item.label">{{ item.label }}</label>
-                    <v-checkbox dense hide-details="auto" :label="item.text" v-model="item.value"/>
+                    <v-checkbox dense hide-details="auto" :label="item.text" v-model="item.value" />
                 </div>
                 <div v-else-if="item.type === `radio_group`">
                     <label v-if="item.label">{{ item.label }}</label>
                     <v-radio-group v-model="item.value" v-if="item.direction === 'row'" row :mandatory="item.required">
-                        <v-radio v-for="(option,i) in item.items" :key="i" :label="option" :value="option"/>
+                        <v-radio v-for="(option,i) in item.items" :key="i" :label="option" :value="option" />
                     </v-radio-group>
                     <v-radio-group v-model="item.value" v-else column :mandatory="item.required">
-                        <v-radio v-for="(option,i) in item.items" :key="i" :label="option" :value="option"/>
+                        <v-radio v-for="(option,i) in item.items" :key="i" :label="option" :value="option" />
                     </v-radio-group>
                 </div>
                 <div v-else-if="item.type === `checkboxes`">

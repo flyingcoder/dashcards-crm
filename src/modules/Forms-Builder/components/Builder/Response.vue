@@ -16,19 +16,20 @@
                         <span class="subtitle-2" v-if="data.label">{{ data.label }}</span>
                     </p>
                     <p class="subtitle-1">
-                        <template v-if="data.value.length > 0">
-                            <v-chip v-for="(item, index) in getAttachments(data.id)" :key="index"
+                        <template v-if="data.value && data.value.length > 0">
+                            <v-chip v-for="(item, index) in data.value" :key="index"
                                     class="mr-2 my-1" label
                             >
                                 <v-avatar class="mr-3">
-                                    <v-img :src="item.file_url">
-                                        <v-icon v-if="!item.file_url">mdi-file-outline</v-icon>
-                                    </v-img>
+                                    <v-img v-if="is_image(item.filetype)" :src="item.url" />
+                                    <span class="fiv-icon fiv-sqo fiv-size-sm" v-else
+                                          :class="[ `fiv-icon-` + get_extension(item.filename)]"
+                                    />
                                 </v-avatar>
                                 {{ item.filename }} ({{ item.filesize | bytesToSize }})
                                 <v-tooltip top>
                                     <template v-slot:activator="{ on, attrs }">
-                                        <v-icon @click="openLink(item.file_url)" right v-bind="attrs" v-on="on">
+                                        <v-icon color="mr-2" @click="openLink(item.url)" right v-bind="attrs" v-on="on">
                                             mdi-cloud-download-outline
                                         </v-icon>
                                     </template>
@@ -54,7 +55,7 @@
                         <p v-if="data.label">{{ data.label }}</p>
                         <iframe style="max-width: 100%;display:block;"
                                 :class="alignClass(data.align)"
-                                allow="fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen allowusermedia
                                 :src="getEmbed(data.src)" :width="data.itemwidth"
                                 :height="data.itemheight"
                         />
@@ -108,7 +109,15 @@
             },
             openLink(link) {
                 window.open(link, 'blank')
-            }
+            },
+            is_image(mimeType) {
+                return !!mimeType.includes('image')
+            },
+            get_extension(filename) {
+                if (!filename) return 'rar'
+                let split = filename.split('.')
+                return split[split.length - 1].toLowerCase()
+            },
         }
     }
 </script>

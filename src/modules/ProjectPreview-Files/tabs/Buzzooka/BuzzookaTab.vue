@@ -104,7 +104,7 @@
                                         <template v-slot:activator="{ on }">
                                             <v-btn icon class="ml-1" depressed v-on="on"
                                                    @click="goto_link(item.download_url)"
->
+                                            >
                                                 <v-icon>mdi-link-box-variant-outline</v-icon>
                                             </v-btn>
                                         </template>
