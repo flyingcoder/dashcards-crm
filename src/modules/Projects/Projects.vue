@@ -27,8 +27,8 @@
                     Projects
                 </h3>
                 <v-spacer />
-                <table-header :noListButton="false" :noButton="!can_add" :noGridButton="false" @click="add_dialog = true"
-                              @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')"
+                <table-header :noListButton="false" hasSearch :noButton="!can_add" :noGridButton="false" @click="add_dialog = true"
+                              @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')" @search="searchProject"
                 />
             </div>
             <v-progress-linear v-show="loading" :indeterminate="true" />
@@ -131,8 +131,8 @@
                   :loading="loading"
         >
             <template slot="header-toolbar">
-                <table-header :noListButton="false" :noButton="!can_add" :noGridButton="false" @click="add_dialog = true"
-                              @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')"
+                <table-header :noListButton="false" hasSearch :noButton="!can_add" :noGridButton="false" @click="add_dialog = true"
+                              @click-list-view="setPreferredView('list')" @click-grid-view="setPreferredView('grid')" @search="searchProject"
                 />
             </template>
             <template v-slot:row-slot="{ item }">

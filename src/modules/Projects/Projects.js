@@ -149,6 +149,9 @@ export default {
             return !!found;
 
         },
+        searchProject(keyword) {
+            this.fill_table_via_url(`api/projects?search=${keyword}`)
+        },
         load_more() {
             this.load_more_via_url(`api/projects`)
         },
