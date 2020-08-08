@@ -21,12 +21,12 @@
                                         <v-icon left>lock</v-icon> Update Password
                                     </v-list-item-title>
                                 </v-list-item>
-                            </v-list> -->
-                        </v-menu> 
+                            </v-list>
+                        </v-menu> -->
                     </div>
                     <div class="profile-logo" v-if="company">
                         <div class="user-img" @click="image_clicked">
-                            <img v-if="true" :src="company_logo" width="100%" height="auto"/>
+                            <v-img contain v-if="true" :src="company_logo" width="100%" height="auto"/>
                             <v-icon v-else x-large>mdi-camera</v-icon>
                             <v-icon class="user-img-hover" x-large>mdi-camera</v-icon>
                         </div>
