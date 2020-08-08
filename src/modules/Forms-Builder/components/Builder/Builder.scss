@@ -22,33 +22,36 @@
     padding: 1.5em;
     color: $textDark;
 
-    .v-icon{
+    .v-icon {
         color: $btnGray;
 
-        &:hover{
+        &:hover {
             color: $textDark;
         }
     }
 
-    .subtitle-2{
+    .subtitle-2 {
         color: $textDark;
 
-        .v-icon{
+        .v-icon {
             color: $textDark;
         }
     }
 }
-.row-type{
+
+.row-type {
     border: 1px dotted transparent;
     position: relative;
 
-    &:hover{
+    &:hover {
         border: 1px dotted $btnGray;
     }
-    &.active{
+
+    &.active {
         border: 1px dotted $blue;
     }
 }
+
 .form {
     color: $textDark-3;
     border-radius: 10px;
@@ -128,25 +131,27 @@
         }
     }
 
-    .element-item.v-list-item.v-list-item--link.theme--light, .v-list-group__header.v-list-item.v-list-item--link.theme--light{
-        i, .v-list-item__title{
+    .element-item.v-list-item.v-list-item--link.theme--light, .v-list-group__header.v-list-item.v-list-item--link.theme--light {
+        i, .v-list-item__title {
             color: $textDark-3;
         }
     }
 }
 
-.elements .v-subheader{
+.elements .v-subheader {
     font-weight: 500;
     color: $textDark-3;
     padding: 0 .5em;
 }
-#Property h3.subtitle-2{
+
+#Property h3.subtitle-2 {
     color: $textDark-3;
 
-    i{
+    i {
         color: $textDark-3;
     }
 }
+
 .bv-list-itemorder-dots {
     border: 1px dotted $gray;
 }
@@ -169,10 +174,10 @@
     align-items: center;
     margin-top: 1px;
 
-    .section-tools-btn.v-btn{
+    .section-tools-btn.v-btn {
         color: $btnGray;
 
-        &:hover{
+        &:hover {
             color: $textDark;
         }
     }
@@ -186,8 +191,9 @@
     position: absolute;
     right: 5px;
     top: 5px;
+    z-index: 20;
 
-    .v-icon{
+    .v-icon {
         margin-left: 5px;
     }
 }
@@ -195,38 +201,43 @@
 .child-btn {
     margin: 0 1px;
 }
-.form-single-item{
+
+.form-single-item {
     position: relative;
     // padding: 0.5em 1em;
     border: 1px solid transparent;
     transition: 0.2s ease all;
 
-    &:hover{
+    &:hover {
         border: 1px solid $blue;
         border-radius: 4px;
     }
 }
-.floating-btn{
+
+.floating-btn {
     position: absolute;
     top: 3px;
     right: 2px;
 }
-.delete-btn.v-icon, .add-btn.v-icon, .edit-btn.v-icon, .grey-btn.v-icon{
+
+.delete-btn.v-icon, .add-btn.v-icon, .edit-btn.v-icon, .grey-btn.v-icon {
     border-radius: 50%;
     padding: 4px;
 }
-.delete-btn.v-icon{
+
+.delete-btn.v-icon {
     color: $red;
 
-    &:hover{
+    &:hover {
         color: $white;
         background-color: $red;
     }
 }
-.add-btn.v-icon, .edit-btn.v-icon{
+
+.add-btn.v-icon, .edit-btn.v-icon {
     color: $green;
 
-    &:hover{
+    &:hover {
         color: $white;
         background-color: $green;
     }

@@ -3,7 +3,7 @@
     max-width: 100%;
     margin: 0.5rem auto 1rem auto;
     padding: 1px;
-    
+
     &__floating-menu {
         position: absolute;
         z-index: 1;
@@ -13,7 +13,7 @@
         transition: opacity 0.2s, visibility 0.2s;
         border: 1px solid $color-light-grey;
         border-radius: 5px;
-        
+
         &.is-active {
             opacity: 1;
             visibility: visible;
@@ -57,9 +57,9 @@
             padding-left: 1rem;
         }
 
-        li>p,
-        li>ol,
-        li>ul {
+        li > p,
+        li > ol,
+        li > ul {
             margin: 0;
         }
 
@@ -99,7 +99,7 @@
                 box-sizing: border-box;
                 position: relative;
 
-                >* {
+                > * {
                     margin-bottom: 0;
                 }
             }
@@ -142,9 +142,9 @@
                 table-layout: fixed;
                 width: 100%;
                 margin: 0;
+                overflow: hidden;
 
-                overflow: hidden td,
-                th {
+                td, th {
                     min-width: 1em;
                     border: 2px solid #ddd;
                     padding: 3px 5px;
@@ -154,8 +154,8 @@
                     position: relative
                 }
 
-                td>*,
-                th>* {
+                td > *,
+                th > * {
                     margin-bottom: 0
                 }
 
@@ -201,7 +201,7 @@
     .menubar {
         border: 1px solid $color-light-grey;
         border-radius: 5px;
-        border-bottom:none;
+        border-bottom: none;
         margin-bottom: 0px;
         border-bottom-left-radius: initial;
         border-bottom-right-radius: initial;

@@ -8,14 +8,18 @@
                                  v-for="(item, index) in comments" :key="item.id"
                     >
                         <v-list-item-avatar>
-                            <v-img :src="item.causer.image_url" />
+                            <v-img :src="item.causer.image_url"/>
                         </v-list-item-avatar>
                         <v-list-item-content>
-                            <v-list-item-title v-html="item.causer.fullname" />
+                            <v-list-item-title v-html="item.causer.fullname"/>
                             <v-list-item-subtitle class="caption">
                                 {{ item.created_at | from_now }}
                             </v-list-item-subtitle>
-                            <v-list-item-subtitle v-html="item.body" />
+                            <v-list-item-subtitle>
+                                <Editor :has-tools="false" :has-floating-tools="false"
+                                        :content="item.body" :editable="false"
+                                />
+                            </v-list-item-subtitle>
                         </v-list-item-content>
                         <v-list-item-action>
                             <v-btn icon v-show="hover && can_delete_comment(item)"
@@ -27,7 +31,7 @@
                     </v-list-item>
                 </template>
                 <template v-else>
-                    <Empty headline="No comment yet" />
+                    <Empty headline="No comment yet"/>
                 </template>
             </v-list>
             <v-btn dense text block v-if="next_page_url" @click="fetchMoreComments">Load More</v-btn>
@@ -35,7 +39,7 @@
         <v-col md="12" class="comment-field-wrapper">
             <v-row>
                 <v-avatar size="40">
-                    <v-img :src="user.image_url" :alt="user.fullname" />
+                    <v-img :src="user.image_url" :alt="user.fullname"/>
                 </v-avatar>
                 <v-col grow class="pr-3 pl-4">
                     <div class="comment-field">
