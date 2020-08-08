@@ -10,7 +10,7 @@ import HoursBox from '@/common/HoursBox/HoursBox.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import Avatars from '@/common/Avatars.vue'
 import Comment from '@/common/Comment/Comment.vue'
-
+import Editor from "@/common/Editor/Editor.vue";
 export default {
     name: 'TaskTabPreviewCard',
     mixins: [global_utils],
@@ -38,7 +38,8 @@ export default {
                     children
                 )
             }
-        }
+        },
+        Editor
     },
     props: {
         activeId: [Number, String],
