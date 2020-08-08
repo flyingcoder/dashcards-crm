@@ -33,11 +33,11 @@
         <v-chip
                 small
                 class="mx-1"
-                :class="['task__chip', { active: props.activeChip === 'behind' }]"
-                @click="listeners['update:activeChip']('behind')"
+                :class="['task__chip', { active: props.activeChip === 'open' }]"
+                @click="listeners['update:activeChip']('open')"
         >
-            <v-avatar left class="task__avatar">{{ props.countBehind }}</v-avatar>
-            Behind
+            <v-avatar left class="task__avatar">{{ props.countOpen }}</v-avatar>
+            Open
         </v-chip>
         <v-chip
                 small
@@ -60,6 +60,7 @@
             countPending: { type: Number, default: 0 },
             countBehind: { type: Number, default: 0 },
             countUrgent: { type: Number, default: 0 },
+            countOpen: { type: Number, default: 0 },
             activeChip: { type: String, default: 'all' }
         }
     }
