@@ -26,81 +26,89 @@
     font-style: italic;
 }
 
-.ProseMirror {
-    border: 1px solid $color-light-grey;
-    border-radius: 5px;
-    background: #fff;
-    min-height: 200px;
-    padding: 5px;
-    border-top-left-radius: initial;
-    border-top-right-radius: initial;
+.editor__content {
+    .ProseMirror {
+        border: 1px solid $color-light-grey;
+        border-radius: 5px;
+        background: #fff;
+        min-height: 200px;
+        padding: 5px;
+        border-top-left-radius: initial;
+        border-top-right-radius: initial;
 
-    &:focus {
-        outline: none;
-    }
-
-    img,
-    iframe {
-        max-width: 100%;
-    }
-
-    .yt-iframe {
-        max-width: 100%;
-    }
-
-    ul[data-type="todo_list"] {
-        padding-left: 0;
-
-        li[data-type="todo_item"] {
-            display: flex;
-            flex-direction: row;
-
-            .todo-checkbox {
-                border: 2px solid $color-black;
-                height: 0.9em;
-                width: 0.9em;
-                box-sizing: border-box;
-                margin-right: 10px;
-                margin-top: 0.3rem;
-                user-select: none;
-                -webkit-user-select: none;
-                cursor: pointer;
-                border-radius: 0.2em;
-                background-color: transparent;
-                transition: 0.4s background;
-            }
-
-            .todo-content {
-                flex: 1;
-
-                >p:last-of-type {
-                    margin-bottom: 0;
-                }
-
-                >ul[data-type="todo_list"] {
-                    margin: .5rem 0;
-                }
-            }
+        &:focus {
+            outline: none;
         }
 
-        li[data-done="true"] {
-            >.todo-content {
-                >p {
-                    text-decoration: line-through;
+        img,
+        iframe {
+            max-width: 100%;
+        }
+
+        .yt-iframe {
+            max-width: 100%;
+        }
+
+        ul[data-type="todo_list"] {
+            padding-left: 0;
+
+            li[data-type="todo_item"] {
+                display: flex;
+                flex-direction: row;
+
+                .todo-checkbox {
+                    border: 2px solid $color-black;
+                    height: 0.9em;
+                    width: 0.9em;
+                    box-sizing: border-box;
+                    margin-right: 10px;
+                    margin-top: 0.3rem;
+                    user-select: none;
+                    -webkit-user-select: none;
+                    cursor: pointer;
+                    border-radius: 0.2em;
+                    background-color: transparent;
+                    transition: 0.4s background;
+                }
+
+                .todo-content {
+                    flex: 1;
+
+                    > p:last-of-type {
+                        margin-bottom: 0;
+                    }
+
+                    > ul[data-type="todo_list"] {
+                        margin: .5rem 0;
+                    }
                 }
             }
 
-            >.todo-checkbox {
-                background-color: $color-black;
-            }
-        }
+            li[data-done="true"] {
+                > .todo-content {
+                    > p {
+                        text-decoration: line-through;
+                    }
+                }
 
-        li[data-done="false"] {
-            text-decoration: none;
+                > .todo-checkbox {
+                    background-color: $color-black;
+                }
+            }
+
+            li[data-done="false"] {
+                text-decoration: none;
+            }
         }
     }
 }
 
+.editor__content.for-display {
+    .ProseMirror{
+        border: none;
+        min-height: 100%;
+    }
+}
 .editor p.is-editor-empty:first-child::before {
     content: attr(data-empty-text);
     float: left;

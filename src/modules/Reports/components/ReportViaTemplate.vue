@@ -41,7 +41,7 @@
                             </v-select>
                         </v-col>
                     </v-row>
-                    <FillUp :key="keyy" v-model="structures" :value="structures"/>
+                    <FillUp :key="keyy" v-model="structures" :structures="structures"/>
                     <Empty v-if="!hasStructures" headline="Select a template or create one first"
                            icon="mdi-clipboard-outline"
                     />
@@ -56,6 +56,7 @@
 
 <script>
     import request from "@/services/axios_instance";
+    import _cloneDeep from 'lodash/cloneDeep'
     //components
     import CustomDialog from "@/common/BaseComponents/CustomDialog/CustomDialog.vue";
     import FillUp from "@/modules/Forms-Builder/components/Builder/FillUp.vue";
@@ -141,7 +142,7 @@
             set_update_fields(report) {
                 if (report) {
                     this.report_title = report.title
-                    this.datus = report.props.template
+                    this.datus = _cloneDeep(report.props.template)
                     this.keyy += 1
                 }
             },

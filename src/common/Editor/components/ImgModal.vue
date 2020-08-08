@@ -1,7 +1,7 @@
 <template>
     <CustomDialog ref="dialog" :open.sync="dialog" title="Image URL" button1-text="Cancel" @button1="close_dialog"
                   button2-text="Insert Image" @button2="insertImage"
->
+    >
         <template v-slot:content>
             <v-card flat>
                 <v-tabs fixed-tabs dense v-model="tab" centered>
@@ -15,8 +15,8 @@
                             <v-card-text>
                                 <label class="mb-3 subtitle-2">Paste your Image URL:</label>
                                 <v-text-field label="Image URL" placeholder="https://" v-model.trim="url" type="url"
-                                              flat outlined hide-details color="#657186"
-/>
+                                              flat filled hide-details color="#657186"
+                                />
                             </v-card-text>
                         </v-card>
                     </v-tab-item>
@@ -27,7 +27,7 @@
                                                 :options="dropzoneOptions" :useCustomSlot="true"
                                                 dictFileTooBig="File too big" dictInvalidFileType="Invalid file type"
                                                 @success="fileChange" @file-added="file_added"
-/>
+                                />
                             </v-card-text>
                         </v-card>
                     </v-tab-item>

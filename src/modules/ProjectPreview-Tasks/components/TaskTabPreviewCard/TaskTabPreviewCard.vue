@@ -16,7 +16,7 @@
                             </v-list-item-title>
                         </v-col>
                         <v-col md="1" xs="2">
-                            <v-spacer/>
+                            <v-spacer />
                             <v-menu offset-y left>
                                 <template v-slot:activator="{ on }">
                                     <v-btn icon small v-on="on">
@@ -53,7 +53,8 @@
                                     mdi-clipboard-check-outline
                                 </v-icon>
                                 <v-icon left color="warning"
-                                        v-else-if="content.status.toLowerCase() === 'pending' || content.status.toLowerCase() === 'urgent'">
+                                        v-else-if="content.status.toLowerCase() === 'pending' || content.status.toLowerCase() === 'urgent'"
+                                >
                                     mdi-clipboard-pulse-outline
                                 </v-icon>
                                 <v-icon left color="danger" v-else-if="content.status.toLowerCase() === 'behind'">
@@ -65,7 +66,7 @@
                                 {{ content.status }}
                             </v-btn>
                         </v-col>
-                        <v-spacer/>
+                        <v-spacer />
                         <v-col xs="12">
                             <hours-box :content="content" v-if="content.status.toLowerCase() !== 'completed'"
                                        @timer-started="timerStarted" @timer-paused="timerPaused"
@@ -76,17 +77,19 @@
                             </v-btn>
                         </v-col>
                         <v-col md="12">
-                            <p class='title' v-html="content.title"/>
-                            <p v-html="content.description" class="body-2 description-wrapper"/>
+                            <p class="title" v-html="content.title" />
+                            <editor class="body-2 description-wrapper" :has-tools="false" :content="content.description"
+                                    :has-floating-tools="false" :editable="false"
+                            />
                         </v-col>
                         <v-col md="12" v-if="content.assigned.length > 0">
                             <h5 class="body-2 mb-3">Assigned to:</h5>
-                            <Avatars :deep="false" :items="content.assigned" :count="6" style="display: inline-block;"/>
+                            <Avatars :deep="false" :items="content.assigned" :count="6" style="display: inline-block;" />
                         </v-col>
                     </v-row>
                 </v-card-text>
                 <v-card-actions class="px-4">
-                    <Comment :items="all_comments" :deleteApi="delApi" :addApi="addApi" :uploadApi="uploadApi"/>
+                    <Comment :items="all_comments" :deleteApi="delApi" :addApi="addApi" :uploadApi="uploadApi" />
                 </v-card-actions>
             </v-card>
         </v-col>

@@ -45,6 +45,7 @@ export default {
         reports_selected: null,
         add_report_via_template: false,
         edit_report_via_template: false,
+        next_url: null
     }),
 
     computed: {
@@ -81,8 +82,21 @@ export default {
             apiTo.get_reports(this.id)
                 .then(({data}) => {
                     this.reports = data.data
+                    this.next_url = data.next_page_url
                 })
                 .finally(() => (this.loading = false))
+        },
+        load_more() {
+            this.loading = true
+            apiTo.get_more_reports(this.next_url)
+                .then(({data}) => {
+                    this.reports.push(...data.data)
+                    this.next_url = data.next_page_url
+                })
+                .finally(() => {
+                    this.loading = false
+                    this.reports_selected = this.reports[this.reports.length - 1].id || 0
+                })
         },
         open_dialog() {
             this.$refs.dialog.open_dialog()

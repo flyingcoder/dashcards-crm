@@ -2,16 +2,29 @@
     <div class="report-builder">
         <v-card>
             <v-card-text>
-                <v-text-field dense filled hide-details label="Report Template Name *" v-model="report_template_name"
+                <v-text-field class="col-md-9 col-sm-12" dense filled hide-details label="Report Template Name *"
+                              v-model="report_template_name"
                               prepend-inner-icon="mdi-format-color-highlight"
                 />
                 <Builder v-model="structures" />
             </v-card-text>
             <v-card-actions>
                 <v-card-text>
-                    <v-btn :loading="btnloading" :disabled="!is_valid" @click="saveTemplate">
-                        {{ button_label }}
-                    </v-btn>
+                    <v-row>
+                        <v-col md="9" sm="12">
+                            <v-row>
+                                <v-spacer />
+                                <v-btn @click="$router.push({name: 'templates'})" color="#e4e4e4" class="mx-2" >
+                                    Cancel
+                                </v-btn>
+                                <v-btn dark color="#3b589e" :loading="btnloading" :disabled="!is_valid"
+                                       @click="saveTemplate"
+                                >
+                                    {{ button_label }}
+                                </v-btn>
+                            </v-row>
+                        </v-col>
+                    </v-row>
                 </v-card-text>
             </v-card-actions>
         </v-card>
@@ -31,7 +44,7 @@
         data: () => ({
             existing: [],
             structures: [],
-            report_template_name: null,
+            report_template_name: 'Untitled Report Template',
             isEdit: false,
             reportId: null,
             reportToEdit: null,

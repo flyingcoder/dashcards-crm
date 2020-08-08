@@ -1,8 +1,5 @@
-import _cloneDeep from 'lodash/cloneDeep'
-import isEmpty from 'lodash/isEmpty'
 import moment from 'moment'
 import makeRequestTo from '@/services/makeRequestTo'
-import * as apiTo from '@/modules/Calendar/api'
 //components
 import TextField from '@/common/BaseComponents/TextField.vue'
 import Avatars from '@/common/Avatars.vue'

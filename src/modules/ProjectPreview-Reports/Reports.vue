@@ -6,11 +6,11 @@
                         prev-icon="mdi-arrow-left-bold-circle-outline" :show-arrows="is_screen_medium_and_down"
                         class="reports-tab" v-model="reports_selected"
                 >
-                    <v-tab class="text-none" v-for="(report, index) in reports" :key="index">
-                        <img class="tab-img mr-2" :src="getIconFromUrl(report)">
+                    <v-tab class="text-none" v-for="report in reports" :key="report.id">
+                        <v-img class="tab-img mr-2" contain :max-width="30" :src="getIconFromUrl(report)" />
                         {{ report.title | ucwords }}
                     </v-tab>
-                    <v-tab v-for="btn in calculated_btn" class="reports-tab" :key="btn">
+                    <v-tab v-for="btn in calculated_btn" class="reports-tab" :key="btn+999">
                         <v-menu bottom left offset-y>
                             <template v-slot:activator="{ on: menu, attrs }">
                                 <v-tooltip top>
@@ -42,6 +42,12 @@
                                 </v-list-item>
                             </v-list>
                         </v-menu>
+                    </v-tab>
+                    <v-tab class="text-none" v-if="next_url" @click.stop="load_more">
+                        <v-icon class="mr-2" color="#8090aa">
+                            mdi-arrow-right-bold-outline
+                        </v-icon>
+                        Load More...
                     </v-tab>
                 </v-tabs>
                 <v-tabs-items v-model="reports_selected">
@@ -94,14 +100,16 @@
                                         <v-card class="mx-auto" v-else-if="report.props && report.props.image" flat>
                                             <v-list-item>
                                                 <v-list-item-content>
-                                                    <v-alert prominent type="warning">
+                                                    <v-alert prominent outlined type="warning">
                                                         <v-row align="center">
                                                             <v-col class="grow">
                                                                 We are unable to load the site content
                                                                 because of the website restrictions.
                                                             </v-col>
                                                             <v-col class="shrink">
-                                                                <v-btn :href="report.url" target="_blank">
+                                                                <v-btn dark color="#3b589e" :href="report.url"
+                                                                       target="_blank"
+                                                                >
                                                                     Go to Site
                                                                     <v-icon right>mdi-arrow-right-bold</v-icon>
                                                                 </v-btn>
@@ -129,14 +137,16 @@
                                         </v-card>
                                         <Empty v-else icon="mdi-link-off" headline="">
                                             <template v-slot:extra>
-                                                <v-alert prominent type="warning">
+                                                <v-alert prominent type="warning" outlined>
                                                     <v-row align="center">
                                                         <v-col class="grow">
                                                             We are unable to load the site content
                                                             because of the website restrictions.
                                                         </v-col>
                                                         <v-col class="shrink">
-                                                            <v-btn :href="report.url" target="_blank">
+                                                            <v-btn :href="report.url" dark color="#3b589e"
+                                                                   target="_blank"
+                                                            >
                                                                 Go to Site
                                                                 <v-icon right>mdi-arrow-right-bold</v-icon>
                                                             </v-btn>

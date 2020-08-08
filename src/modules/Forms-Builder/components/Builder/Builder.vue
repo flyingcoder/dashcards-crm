@@ -15,7 +15,7 @@
                             <div class="hr-action">
                                 <v-tooltip top v-if="item.hover">
                                     <template v-slot:activator="{ on, attrs }">
-                                        <v-icon v-bind="attrs" v-on="on" small @click="remove(pIndex)">
+                                        <v-icon v-bind="attrs" v-on="on" @click="remove(pIndex)">
                                             mdi-delete-circle-outline
                                         </v-icon>
                                     </template>
@@ -23,7 +23,7 @@
                                 </v-tooltip>
                                 <v-tooltip top v-if="item.hover">
                                     <template v-slot:activator="{ on, attrs }">
-                                        <v-icon v-bind="attrs" v-on="on" class="parent-btn" small @click="edit(item)">
+                                        <v-icon v-bind="attrs" v-on="on" class="parent-btn" @click="edit(item)">
                                             mdi-circle-edit-outline
                                         </v-icon>
                                     </template>
@@ -35,16 +35,15 @@
                             </div>
                             <div v-else-if="item.type === 'image'">
                                 <p v-if="item.label">{{ item.label }}</p>
-                                <v-img style="max-width: 100%;" :width="item.itemwidth"
+                                <v-img style="max-width: 100%;" contain :width="item.itemwidth" class="cursor-pointer"
                                        :class="alignClass(item.align)" :height="item.itemheight"
-                                       :src="item.src" :alt="item.alt"
+                                       :src="item.src" :alt="item.alt" @click="$refs.imgModal.openDialog(null)"
                                 />
                             </div>
                             <div v-else-if="item.type === 'video'">
                                 <p v-if="item.label">{{ item.label }} </p>
                                 <iframe style="max-width: 100%;display:block;"
-                                        :class="alignClass(item.align)"
-                                        allow="fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        :class="alignClass(item.align)" allowusermedia allowfullscreen
                                         :src="getEmbed(item.src)" :width="item.itemwidth"
                                         :height="item.itemheight"
                                 />
@@ -157,6 +156,11 @@
                                     </template>
                                 </v-file-input>
                             </div>
+                            <div v-else-if="item.type === `editor`">
+                                <label v-if="item.label">{{ item.label }}</label>
+                                <sup v-if="item.required">*</sup>
+                                <editor :has-floating-tools="false" :placeholder="item.placeholder" />
+                            </div>
                             <div v-else>
                                 <label v-if="item.label">{{ item.label }}</label>
                                 <sup v-if="item.required">*</sup>
@@ -168,25 +172,25 @@
                             </div>
                         </v-col>
                     </draggable>
-                    <div class="section-tools mx-auto">
+                    <div class="section-tools mx-auto mt-2">
                         <v-row no-gutters>
-                            <v-spacer/>
+                            <v-spacer />
                             <v-tooltip bottom>
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs"
                                            v-on="on" @click="addDivider()"
                                     >
-                                        <v-icon small>mdi-border-horizontal</v-icon>
+                                        <v-icon>mdi-minus</v-icon>
                                     </v-btn>
                                 </template>
-                                <span>Add Divider</span>
+                                <span>Add Horizontal Line</span>
                             </v-tooltip>
                             <v-menu bottom left>
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn class="section-tools-btn" depressed icon v-bind="attrs"
                                            v-on="on"
                                     >
-                                        <v-icon small>mdi-format-header-pound</v-icon>
+                                        <v-icon>mdi-format-header-pound</v-icon>
                                     </v-btn>
                                 </template>
                                 <v-list>
@@ -194,7 +198,7 @@
                                                  @click="setProperty(item)"
                                     >
                                         <v-list-item-title>
-                                            <v-icon small>{{ item.icon }}</v-icon>
+                                            <v-icon>{{ item.icon }}</v-icon>
                                         </v-list-item-title>
                                     </v-list-item>
                                 </v-list>
@@ -204,7 +208,7 @@
                                     <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs"
                                            v-on="on" @click="setProperty(paragraph)"
                                     >
-                                        <v-icon small>mdi-format-paragraph</v-icon>
+                                        <v-icon>mdi-format-paragraph</v-icon>
                                     </v-btn>
                                 </template>
                                 <span>Add Paragraph</span>
@@ -214,7 +218,7 @@
                                     <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs"
                                            v-on="on" @click="setProperty(image)"
                                     >
-                                        <v-icon small>mdi-image</v-icon>
+                                        <v-icon>mdi-image</v-icon>
                                     </v-btn>
                                 </template>
                                 <span>Add Image</span>
@@ -224,22 +228,23 @@
                                     <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs"
                                            v-on="on" @click="setProperty(video)"
                                     >
-                                        <v-icon small>mdi-youtube</v-icon>
+                                        <v-icon>mdi-youtube</v-icon>
                                     </v-btn>
                                 </template>
                                 <span>Add Video</span>
                             </v-tooltip>
+                            <v-divider vertical />
                             <v-tooltip bottom v-for="form in formInputs" :key="form.type">
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn class="section-tools-btn" icon depressed tile v-bind="attrs"
                                            v-on="on" @click="setProperty(form)"
                                     >
-                                        <v-icon small>{{ form.icon }}</v-icon>
+                                        <v-icon>{{ form.icon }}</v-icon>
                                     </v-btn>
                                 </template>
                                 <span>Add {{ form.type | snakeCaseToNormal | removeSlug | ucwords }} Field</span>
                             </v-tooltip>
-                            <v-spacer/>
+                            <v-spacer />
                         </v-row>
                     </div>
                 </v-card-text>
@@ -251,7 +256,7 @@
                     <v-card-text v-if="activeType">
                         <h3 class="subtitle-2 mb-2 text-center">
                             <v-icon left>{{ activeType.icon }}</v-icon>
-                            {{ activeType.type | snakeCaseToNormal | removeSlug | ucwords }} Property
+                            {{ activeType.type | snakeCaseToNormal | removeSlug | ucwords }} Properties
                         </h3>
                         <v-text-field v-model="activeType.label" label="Question" hide-details="auto"
                                       filled dense v-if="activeType.hasOwnProperty('label')"
@@ -267,28 +272,39 @@
                                     hide-details="auto" dense filled class="mb-1"
                         />
                         <v-text-field v-model="activeType.src" append-icon="mdi-cloud-upload-outline"
-                                      label="Source URL *" hide-details="auto" dense filled
-                                      v-if="activeType.hasOwnProperty('src')" class="mb-1"
+                                      label="Image Source URL *" hide-details="auto" dense filled
+                                      v-if="activeType.hasOwnProperty('src') && activeType.type === 'image'"
+                                      class="mb-1"
+                                      @click:append="$refs.imgModal.openDialog(null)"
                         />
-                        <v-text-field v-model="activeType.alt" label="Alternate text"
-                                      hide-details="auto" dense filled
-                                      v-if="activeType.hasOwnProperty('alt')" class="mb-1"
+                        <v-text-field v-model="activeType.src" label="Source URL *" hide-details="auto" dense filled
+                                      v-else-if="activeType.hasOwnProperty('src')" class="mb-1"
                         />
+                        <!--                        <v-text-field v-model="activeType.alt" label="Alternate text"-->
+                        <!--                                      hide-details="auto" dense filled-->
+                        <!--                                      v-if="activeType.hasOwnProperty('alt')" class="mb-1"-->
+                        <!--                        />-->
                         <v-text-field v-model="activeType.rows" label="Textarea rows"
                                       hide-details="auto" dense filled
                                       v-if="activeType.hasOwnProperty('rows')" class="mb-1"
                                       type="number"
                         />
-                        <v-text-field v-model="activeType.itemwidth" label="Element Width"
-                                      hide-details="auto" dense filled
-                                      v-if="activeType.hasOwnProperty('itemwidth')" class="mb-1"
-                                      type="number"
-                        />
-                        <v-text-field v-model="activeType.itemheight" label="Element Height"
-                                      hide-details="auto" dense filled
-                                      v-if="activeType.hasOwnProperty('itemheight')" class="mb-1"
-                                      type="number"
-                        />
+                        <v-row no-gutters>
+                            <v-col cols="6">
+                                <v-text-field v-model="activeType.itemwidth" :label="`${getType(activeType)} Width`"
+                                              hide-details="auto" dense filled
+                                              v-if="activeType.hasOwnProperty('itemwidth')" class="mb-1"
+                                              type="number"
+                                />
+                            </v-col>
+                            <v-col cols="6">
+                                <v-text-field v-model="activeType.itemheight" :label="`${getType(activeType)} Height`"
+                                              hide-details="auto" dense filled
+                                              v-if="activeType.hasOwnProperty('itemheight')" class="mb-1"
+                                              type="number"
+                                />
+                            </v-col>
+                        </v-row>
                         <v-text-field v-model="activeType.placeholder" label="Placeholder"
                                       hide-details="auto" dense filled
                                       v-if="activeType.hasOwnProperty('placeholder')" class="mb-1"
@@ -304,9 +320,9 @@
                                   v-if="activeType.hasOwnProperty('date_format')" dense filled
                                   class="mb-1"
                         />
-                        <v-select v-model="activeType.align" label="Date format"
+                        <v-select v-model="activeType.align" label="Alignment"
                                   append-icon="mdi-align-horizontal-center" item-value="value"
-                                  :items="alignItems" menu-props="auto" hide-details single-line
+                                  :items="alignItems" menu-props="auto" hide-details
                                   v-if="activeType.hasOwnProperty('align')" dense filled class="mb-1"
                         />
                         <v-checkbox v-model="activeType.multiple" label="Multiple File Upload?" hide-details="auto"
@@ -347,13 +363,13 @@
                         <div v-if="activeType.hasOwnProperty('direction')">
                             <small>Direction</small>
                             <v-radio-group v-model="activeType.direction" row>
-                                <v-radio label="Row" value="row"/>
-                                <v-radio label="Column" value="column"/>
+                                <v-radio label="Row" value="row" />
+                                <v-radio label="Column" value="column" />
                             </v-radio-group>
                         </div>
                     </v-card-text>
                 </v-card>
-                <slot name="right-bottom"/>
+                <slot name="right-bottom" />
             </affix>
         </v-col>
         <v-col cols="12" v-if="debug_on">
@@ -370,6 +386,7 @@
                 </v-col>
             </v-row>
         </v-col>
+        <ImgModal ref="imgModal" @onConfirm="addImgCommand" />
     </v-row>
 </template>
 
@@ -380,17 +397,22 @@
     //components
     import draggable from 'vuedraggable'
     import {Affix} from 'vue-affix'
+    import Editor from "@/common/Editor/Editor.vue";
+    import ImgModal from "@/common/Editor/components/ImgModal.vue";
 
     export default {
         name: "Builder",
         mixins: [global_utils],
         components: {
+            Editor,
             draggable,
-            Affix
+            Affix,
+            ImgModal
         },
         props: {
             value: Array,
-            hasFileUpload: {type: Boolean, default: false}
+            hasFileUpload: {type: Boolean, default: false},
+            hasEditor: {type: Boolean, default: true}
         },
         created() {
             this.setProperty(this.headings.h1)
@@ -496,7 +518,7 @@
                 id: null,
                 type: 'image',
                 tag: 'img',
-                src: 'https://via.placeholder.com/200x150.png?text=No+Image+Source+Found',
+                src: 'https://via.placeholder.com/300x120.png?text=Click+to+replace',
                 itemheight: '120',
                 itemwidth: '300',
                 maxWidth: '100%',
@@ -554,7 +576,7 @@
                 type: 'text',
                 tag: 'v-text-field',
                 tag_type: 'text',
-                label: 'Untitle Question',
+                label: 'Untitled Question',
                 icon: 'mdi-alpha-t-box-outline',
                 show_icon: false,
                 placeholder: 'Your answer',
@@ -567,7 +589,7 @@
                 type: 'number',
                 tag: 'v-text-field',
                 tag_type: 'number',
-                label: 'Untitle Question',
+                label: 'Untitled Question',
                 icon: 'mdi-alpha-n-box-outline',
                 show_icon: false,
                 placeholder: 'Your answer',
@@ -598,7 +620,7 @@
                 tag: 'v-text-field',
                 tag_type: 'url',
                 label: 'URL',
-                icon: 'mdi-link-plus',
+                icon: 'mdi-link-box-outline',
                 show_icon: false,
                 placeholder: 'https://',
                 value: null,
@@ -610,8 +632,8 @@
                 type: 'email',
                 tag: 'v-text-field',
                 tag_type: 'email',
-                label: 'Untitle Question',
-                icon: 'mdi-email-outline',
+                label: 'Untitled Question',
+                icon: 'mdi-email-plus-outline',
                 show_icon: false,
                 placeholder: 'user@site.com',
                 value: null,
@@ -623,7 +645,7 @@
                 type: 'phone',
                 tag: 'vue-phone-number-input',
                 tag_type: 'phone',
-                label: 'Untitle Question',
+                label: 'Untitled Question',
                 icon: 'mdi-file-phone-outline',
                 show_icon: false,
                 placeholder: '123-4568',
@@ -635,12 +657,24 @@
                 id: null,
                 type: 'textarea',
                 tag: 'v-textarea',
-                label: 'Untitle Question',
-                icon: 'mdi-reorder-horizontal',
+                label: 'Untitled Question',
+                icon: 'mdi-format-line-weight',
                 show_icon: false,
                 placeholder: 'Your answer',
                 value: null,
                 rows: 3,
+                required: false,
+                hover: false
+            },
+            editor: {
+                id: null,
+                type: 'editor',
+                tag: 'editor',
+                label: 'Untitled Question',
+                icon: 'mdi-alpha-e-box-outline',
+                show_icon: false,
+                placeholder: 'Your answer',
+                value: '',
                 required: false,
                 hover: false
             },
@@ -744,6 +778,9 @@
                 ]
                 if (this.hasFileUpload) {
                     allowed.push(this.file_upload)
+                }
+                if (this.hasEditor) {
+                    allowed.push(this.editor)
                 }
                 return allowed
             },
@@ -888,6 +925,14 @@
                 let youtubeID = src ? this.youtubeParser(src) : ''
                 return `https://www.youtube.com/embed/${youtubeID}`
             },
+            addImgCommand(data) {
+                this.activeType.src = data.src
+            },
+            getType(item) {
+                return (item.type + '').replace(/^(.)|\s+(.)/g, function ($1) {
+                    return $1.toUpperCase()
+                })
+            }
         }
     }
 </script>

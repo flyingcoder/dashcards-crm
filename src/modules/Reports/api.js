@@ -12,5 +12,8 @@ export default {
     },
     updateReportViaTemplate(id, payload) {
         return request.put(`api/report/${id}/via-template`, payload)
-    }
+    },
+    get_more_reports(next_url) {
+        return request.get(next_url)
+    },
 }
