@@ -1,4 +1,3 @@
-//TODO DRY, uses the same code as ReportsTab
 import makeRequestTo from '@/services/makeRequestTo'
 import apiTo from './api'
 import {is_screen_utils} from '@/global_utils/is_screen_utils'
@@ -51,6 +50,7 @@ export default {
         reports_selected: null,
         add_report_via_template: false,
         edit_report_via_template: false,
+        next_url: null
     }),
 
     computed: {
@@ -73,8 +73,21 @@ export default {
             makeRequestTo.get_reports()
                 .then(({data}) => {
                     this.reports = data.data
+                    this.next_url = data.next_page_url
                 })
                 .finally(() => (this.loading = false))
+        },
+        load_more() {
+            this.loading = true
+            apiTo.get_more_reports(this.next_url)
+                .then(({data}) => {
+                    this.reports.push(...data.data)
+                    this.next_url = data.next_page_url
+                })
+                .finally(() => {
+                    this.loading = false
+                    this.reports_selected = this.reports[this.reports.length - 1].id
+                })
         },
         open_dialog() {
             this.$refs.dialog.open_dialog()

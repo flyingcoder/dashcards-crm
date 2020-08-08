@@ -4,6 +4,9 @@ export default {
     get_reports(id) {
         return request.get(`api/projects/${id}/report`)
     },
+    get_more_reports(next_url) {
+        return request.get(next_url)
+    },
     add_project_report(id, report) {
         return request.post(`api/projects/${id}/report`, report)
     },
