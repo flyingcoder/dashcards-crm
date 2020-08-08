@@ -1,9 +1,12 @@
 import request from '@/services/axios_instance'
 import {global_utils} from '@/global_utils/global_utils'
 import _cloneDeep from 'lodash/cloneDeep'
-
+import Editor from "@/common/Editor/Editor.vue";
 export default {
     name: 'FormOnline',
+    components:{
+        Editor
+    },
     mixins: [global_utils],
     data: () => ({
         form: null,

@@ -2,7 +2,7 @@
     <v-card flat>
         <v-card-text v-if="items">
             <template v-for="(data, i) in items">
-                <div class="pa-2" :key="i" v-if="data.type !== 'file_upload' && data.hasOwnProperty('value')">
+                <div class="pa-2" :key="i" v-if="!['file_upload', 'editor'].includes(data.type) && data.hasOwnProperty('value')">
                     <p class="subtitle-2">
                         <span class="subtitle-2" v-if="data.label">{{ data.label }}</span>
                     </p>
@@ -40,13 +40,19 @@
                         <span v-else>No file uploaded.</span>
                     </p>
                 </div>
+                <div v-else-if="data.type === 'editor'" :key="i">
+                    <p class="subtitle-2">
+                        <span class="subtitle-2" v-if="data.label">{{ data.label }}</span>
+                    </p>
+                    <editor v-model="data.value" :has-tools="false" :content="data.value" :has-floating-tools="false" :editable="false" />
+                </div>
                 <div class="pa-2" :key="i" v-else>
                     <div v-if="data.type === 'divider'">
                         <hr>
                     </div>
                     <div v-else-if="data.type === 'image'">
                         <p v-if="data.label">{{ data.label }}</p>
-                        <v-img style="max-width: 100%;" :class="alignClass(data.align)"
+                        <v-img style="max-width: 100%;" contain :class="alignClass(data.align)"
                                :width="data.itemwidth" :height="data.itemheight"
                                :src="data.src" :alt="data.alt"
                         />
@@ -78,10 +84,13 @@
 
 <script>
     import {global_utils} from '@/global_utils/global_utils'
-
+    import Editor from "@/common/Editor/Editor.vue";
     export default {
         name: "Response",
         mixins: [global_utils],
+        components:{
+            Editor
+        },
         props: {
             items: Array,
             attachments: Array

@@ -4,7 +4,7 @@
             <v-col md="8" class="mx-auto py-5">
                 <v-card>
                     <v-list-item v-if="form">
-                        <v-list-item-avatar tile color="grey">
+                        <v-list-item-avatar width="75" height="50" tile color="grey">
                             <v-img v-if="form.company.company_logo" :src="form.company.company_logo" />
                             <v-icon v-else color="white">mdi-alpha-c-circle-outline</v-icon>
                         </v-list-item-avatar>
@@ -158,6 +158,11 @@
                                         </span>
                                     </template>
                                 </v-file-input>
+                            </div>
+                            <div v-else-if="item.type === `editor`">
+                                <label v-if="item.label">{{ item.label }}</label>
+                                <sup v-if="item.required">*</sup>
+                                <editor v-model="item.value" :has-floating-tools="false" :placeholder="item.placeholder" />
                             </div>
                             <div v-else>
                                 <label v-if="item.label">{{ item.label }}</label><sup v-if="item.required">*</sup>

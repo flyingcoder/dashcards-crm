@@ -7,7 +7,7 @@
                 </div>
                 <div v-else-if="item.type === 'image'">
                     <p v-if="item.label">{{ item.label }}</p>
-                    <v-img style="max-width: 100%;" :class="alignClass(item.align)" :width="item.itemwidth"
+                    <v-img style="max-width: 100%;" contain :class="alignClass(item.align)" :width="item.itemwidth"
                            :height="item.itemheight" :src="item.src" :alt="item.alt"
                     />
                 </div>
@@ -55,22 +55,22 @@
                                           readonly v-bind="attrs" v-on="on"
                             />
                         </template>
-                        <v-time-picker v-model="questions[index].value" full-width @click:minute="item.popover= false" />
+                        <v-time-picker v-model="questions[index].value" full-width @click:minute="item.popover= false"/>
                     </v-menu>
                 </div>
                 <div v-else-if="item.type === `checkbox`">
                     <label v-if="item.label">{{ item.label }}</label><sup v-if="item.required">*</sup>
-                    <v-checkbox dense hide-details="auto" :label="item.text" v-model="questions[index].value" />
+                    <v-checkbox dense hide-details="auto" :label="item.text" v-model="questions[index].value"/>
                 </div>
                 <div v-else-if="item.type === `radio_group`">
                     <label v-if="item.label">{{ item.label }}</label><sup v-if="item.required">*</sup>
                     <v-radio-group v-model="questions[index].value" v-if="item.direction === 'row'" row
                                    :mandatory="item.required"
                     >
-                        <v-radio v-for="(option,i) in item.items" :key="i" :label="option" :value="option" />
+                        <v-radio v-for="(option,i) in item.items" :key="i" :label="option" :value="option"/>
                     </v-radio-group>
                     <v-radio-group v-model="questions[index].value" v-else column :mandatory="item.required">
-                        <v-radio v-for="(option,i) in item.items" :key="i" :label="option" :value="option" />
+                        <v-radio v-for="(option,i) in item.items" :key="i" :label="option" :value="option"/>
                     </v-radio-group>
                 </div>
                 <div v-else-if="item.type === `checkboxes`">
@@ -127,6 +127,12 @@
                         </template>
                     </v-file-input>
                 </div>
+                <div v-else-if="item.type === `editor`">
+                    <label v-if="item.label">{{ item.label }}</label>
+                    <sup v-if="item.required">*</sup>
+                    <editor v-model="item.value" :content="item.value" :has-floating-tools="false"
+                            :placeholder="item.placeholder"/>
+                </div>
                 <div v-else>
                     <label v-if="item.label">{{ item.label }}</label><sup v-if="item.required">*</sup>
                     <component :placeholder="item.placeholder" :type="item.tag_type" v-model="questions[index].value"
@@ -142,11 +148,15 @@
 
 <script>
     import request from '@/services/axios_instance'
-
+    import Editor from "@/common/Editor/Editor.vue";
+    // import __cloneDash from
     export default {
         name: "FillUp",
+        components: {
+            Editor
+        },
         props: {
-            value: Array
+            structures: Array
         },
         data: () => ({
             questions: [],
@@ -159,18 +169,18 @@
         computed: {
             text_fields() {
                 return ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'label']
-            }
+            },
         },
         watch: {
-            value: {
+            questions(val) {
+                this.$emit('input', val)
+            },
+            structures:{
                 handler(val) {
                     this.questions = val
                 },
                 immediate: true,
                 deep: true
-            },
-            questions(val) {
-                this.$emit('input', val)
             }
         },
         methods: {

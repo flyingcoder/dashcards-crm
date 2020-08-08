@@ -8,7 +8,7 @@
                 </div>
                 <div v-else-if="item.type === 'image'">
                     <p v-if="item.label">{{ item.label }}</p>
-                    <v-img style="max-width: 100%;" :class="alignClass(item.align)" :width="item.itemwidth"
+                    <v-img style="max-width: 100%;" contain :class="alignClass(item.align)" :width="item.itemwidth"
                            :height="item.itemheight" :src="item.src" :alt="item.alt"
                     />
                 </div>
@@ -102,6 +102,11 @@
                         </template>
                     </v-file-input>
                 </div>
+                <div v-else-if="item.type === `editor`">
+                    <label v-if="item.label">{{ item.label }}</label>
+                    <sup v-if="item.required">*</sup>
+                    <editor v-model="item.value" :has-floating-tools="false" :placeholder="item.placeholder" />
+                </div>
                 <div v-else>
                     <label v-if="item.label">{{ item.label }}</label>
                     <component :placeholder="item.placeholder" :type="item.tag_type" v-model="item.value" filled
@@ -116,10 +121,13 @@
 
 <script>
     import {global_utils} from '@/global_utils/global_utils'
-
+    import Editor from "@/common/Editor/Editor.vue";
     export default {
         name: "Preview",
         mixins: [global_utils],
+        components:{
+            Editor
+        },
         props: {
             questions: Array
         },
