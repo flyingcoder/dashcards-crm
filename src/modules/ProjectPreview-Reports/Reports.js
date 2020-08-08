@@ -92,9 +92,11 @@ export default {
                 .then(({data}) => {
                     this.reports.push(...data.data)
                     this.next_url = data.next_page_url
-                    this.reports_selected = this.reports_selected.length - 1
                 })
-                .finally(() => (this.loading = false))
+                .finally(() => {
+                    this.loading = false
+                    this.reports_selected = this.reports[this.reports.length - 1].id || 0
+                })
         },
         open_dialog() {
             this.$refs.dialog.open_dialog()

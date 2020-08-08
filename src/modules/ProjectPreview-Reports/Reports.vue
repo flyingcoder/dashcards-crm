@@ -7,7 +7,7 @@
                         class="reports-tab" v-model="reports_selected"
                 >
                     <v-tab class="text-none" v-for="report in reports" :key="report.id">
-                        <img class="tab-img mr-2" :src="getIconFromUrl(report)">
+                        <v-img class="tab-img mr-2" contain :max-width="30" :src="getIconFromUrl(report)" />
                         {{ report.title | ucwords }}
                     </v-tab>
                     <v-tab v-for="btn in calculated_btn" class="reports-tab" :key="btn+999">
@@ -100,14 +100,16 @@
                                         <v-card class="mx-auto" v-else-if="report.props && report.props.image" flat>
                                             <v-list-item>
                                                 <v-list-item-content>
-                                                    <v-alert prominent type="warning">
+                                                    <v-alert prominent outlined type="warning">
                                                         <v-row align="center">
                                                             <v-col class="grow">
                                                                 We are unable to load the site content
                                                                 because of the website restrictions.
                                                             </v-col>
                                                             <v-col class="shrink">
-                                                                <v-btn :href="report.url" target="_blank">
+                                                                <v-btn dark color="#3b589e" :href="report.url"
+                                                                       target="_blank"
+                                                                >
                                                                     Go to Site
                                                                     <v-icon right>mdi-arrow-right-bold</v-icon>
                                                                 </v-btn>
@@ -135,14 +137,16 @@
                                         </v-card>
                                         <Empty v-else icon="mdi-link-off" headline="">
                                             <template v-slot:extra>
-                                                <v-alert prominent type="warning">
+                                                <v-alert prominent type="warning" outlined>
                                                     <v-row align="center">
                                                         <v-col class="grow">
                                                             We are unable to load the site content
                                                             because of the website restrictions.
                                                         </v-col>
                                                         <v-col class="shrink">
-                                                            <v-btn :href="report.url" target="_blank">
+                                                            <v-btn :href="report.url" dark color="#3b589e"
+                                                                   target="_blank"
+                                                            >
                                                                 Go to Site
                                                                 <v-icon right>mdi-arrow-right-bold</v-icon>
                                                             </v-btn>

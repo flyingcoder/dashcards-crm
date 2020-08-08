@@ -86,7 +86,7 @@ export default {
                 })
                 .finally(() => {
                     this.loading = false
-                    this.reports_selected = this.reports[this.reports.length - 1].id
+                    this.reports_selected = this.reports[this.reports.length - 1].id || 0
                 })
         },
         open_dialog() {
