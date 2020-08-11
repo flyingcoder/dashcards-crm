@@ -32,21 +32,23 @@
                                         <v-icon left>mdi-plus-circle-outline</v-icon>
                                         Add new client
                                     </v-list-item>
-                                    <v-list-item v-for="(item, index) in client.items" :key="index"
-                                                 @click="clientSelected(item)"
-                                    >
-                                        <v-list-item-avatar>
-                                            <v-img :src="item.image_url" />
-                                        </v-list-item-avatar>
-                                        <v-list-item-content>
-                                            <v-list-item-title v-html="item.fullname" />
-                                            <v-list-item-subtitle v-html="item.company.name" />
-                                        </v-list-item-content>
-                                    </v-list-item>
+                                    <template v-for="item in client.items">
+                                        <v-list-item v-for="company in item.client_companies" :key="company.id"
+                                                     @click="clientSelected(item, company)"
+                                        >
+                                            <v-list-item-avatar>
+                                                <v-img :src="item.image_url" />
+                                            </v-list-item-avatar>
+                                            <v-list-item-content>
+                                                <v-list-item-title v-html="company.name" />
+                                                <v-list-item-subtitle v-html="item.fullname" />
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </template>
                                 </v-list>
                             </v-menu>
                             <div class="choosen" v-if="client.selected">
-                                <v-chip close @click:close="client.selected = null" outlined label class="mt-1 tile">
+                                <v-chip close @click:close="removeClient" outlined label class="mt-1 tile">
                                     <v-avatar left>
                                         <v-img :src="client.selected.image_url" />
                                     </v-avatar>
@@ -73,7 +75,7 @@
                                     </v-btn>
                                 </template>
                                 <v-date-picker :max="date_pickers.end_date" v-model="date_pickers.start_date" no-title
-                                               scrollable no-title
+                                               scrollable
                                 />
                             </v-menu>
                             <div class="choosen" v-if="date_pickers.start_date">
@@ -119,7 +121,7 @@
                         </v-col>
                         <!-- Managers -->
                         <v-col md="4" sm="6">
-                            <v-menu bottom close-on-content-click transition="slide-y-transition" bottom
+                            <v-menu bottom close-on-content-click transition="slide-y-transition"
                                     max-height="300" offset-y
                             >
                                 <template v-slot:activator="{ on }">

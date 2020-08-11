@@ -1,14 +1,14 @@
 <template>
-  <div class="member-profile">
-    <!-- <table-header :paths="paths" :no-button="true" /> -->
+    <div class="member-profile">
+        <!-- <table-header :paths="paths" :no-button="true" /> -->
 
-    <div class="profile mt-1">
-      <div class="profile-content">
-        <Upper :currentuserid="user_id" />
-        <Lower />
-      </div>
+        <div class="profile mt-1">
+            <div class="profile-content">
+                <Upper :currentuserid="user_id" />
+                <Lower />
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script src="./MemberProfile.js"></script>

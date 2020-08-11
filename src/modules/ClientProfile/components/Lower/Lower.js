@@ -26,16 +26,22 @@ export default {
                 },
                 {
                     id: 3,
-                    name: 'Staffs',
-                    icon: 'mdi-account-group-outline',
-                    route: `/dashboard/clients/profile/${this.user_id}/staffs`
+                    name: 'Projects & Campaigns',
+                    icon: 'mdi-dresser-outline',
+                    route: `/dashboard/clients/profile/${this.user_id}/projects-campaigns`
                 },
                 {
                     id: 4,
                     name: 'Company',
                     icon: 'mdi-city-variant-outline',
                     route: `/dashboard/clients/profile/${this.user_id}/company`
-                }
+                },
+                /*{
+                    id: 5,
+                    name: 'Staffs',
+                    icon: 'mdi-account-group-outline',
+                    route: `/dashboard/clients/profile/${this.user_id}/staffs`
+                },*/
             ]
         }
     }

@@ -19,9 +19,15 @@ export const methods = {
                 .then(response => {
                     const new_items = response.data
                     if (Array.isArray(new_items)) {
-                        new_items.reverse().forEach(new_item => this.items.push(new_item))
+                        //new_items.reverse().forEach(new_item => this.items.push(new_item))
+                        this.items.push(...new_items.reverse())
                     } else {
-                        this.items.push(new_items)
+                        let index = this.items.findIndex(item => item.id === new_items.id)
+                        if (~index) {
+                            this.items.splice(index,1, new_items)
+                        } else {
+                            this.items.push(new_items)
+                        }
                     }
                     this.clear_selected()
                     if (this.$refs.add_dialog)

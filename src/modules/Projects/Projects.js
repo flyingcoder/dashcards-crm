@@ -175,6 +175,7 @@ export default {
                 .add_new_client(datus)
                 .then(({data}) => {
                     this.$event.$emit('new_client_added', data)
+                    this.$event.$emit('open_snackbar', 'New client added')
                     this.$refs.add_client_dialog.$refs.dialog.clear_and_close()
                 })
                 .finally(() => this.$event.$emit('btnloading_off', false))
@@ -186,6 +187,7 @@ export default {
                 .then(({data}) => {
                     this.$event.$emit('new_manager_added', data)
                     this.$event.$emit('new_member_added', data)
+                    this.$event.$emit('open_snackbar', 'New member added')
                     this.$refs.add_member_dialog.$refs.dialog.clear_and_close()
                 })
                 .finally(() => this.$event.$emit('btnloading_off', false))

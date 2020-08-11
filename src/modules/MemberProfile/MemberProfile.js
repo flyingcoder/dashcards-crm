@@ -6,7 +6,7 @@ import Lower from './components/Lower/Lower.vue'
 
 export default {
     props: {
-        user_id: [Number, String] //from route
+        user_id: { type : [Number, String], required: true } //from route
     },
 
     components: {

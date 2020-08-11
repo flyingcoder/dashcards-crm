@@ -1,26 +1,18 @@
 <template>
     <div class="tasks">
         <div class="loading" v-if="loading">
-            <v-progress-linear :indeterminate="true"/>
+            <v-progress-linear :indeterminate="true" />
         </div>
-
-        <tasks-content :hasTabs="false" hasLoadMoreBtn showProject />
-
-    <!--    <v-flex class="task-preview-wrapper">
-            <PreviewCard
-                    v-if="selected_task"
-                    :activeId="selected_task.id"
-                    :id="user_id"
-                    :task="selected_task"
-            />
-        </v-flex>-->
-    </div>
+        <v-card flat class="pa-2">
+            <tasks-content :hasTabs="false" hasLoadMoreBtn showProject />
+        </v-card>
+</div>
 </template>
 
 <script>
     import apiTo from './api'
     //Components
-     import TasksContent from "@/common/TasksCard/TasksContent";
+    import TasksContent from "@/common/TasksCard/TasksContent";
 
     export default {
         components: {

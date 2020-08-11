@@ -31,10 +31,10 @@
                 <td class="clickable-td">
                     <Avatar :user="item" />
                 </td>
-                <td v-if="item.company && item.company.name">{{ item.company.name | ucwords }}</td>
-                <td v-else />
-                <td>{{ item.telephone ? item.telephone.formatInternational : '-' }}</td>
-                <td v-if="item.company && item.company.address">{{ item.company.address | ucwords }}</td>
+                <td>{{ item.email }}</td>
+                <td v-if="item.telephone">
+                    +{{ item.telephone.countryCallingCode }} {{ item.telephone.formatNational }}
+                </td>
                 <td v-else />
                 <td>{{ item.props ? item.props.status : 'Active' }}</td>
                 <Actions :item="item" :permissions="$_permissions.get('clients')" @delete="open_delete_dialog(item)"

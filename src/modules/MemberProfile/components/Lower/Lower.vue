@@ -1,5 +1,5 @@
 <template>
-  <div class="profile-lower">
+  <div class="profile-lower px-1">
     <left />
     <right />
   </div>
