@@ -180,7 +180,7 @@
                                     <span>Filter</span>
                                 </v-tooltip>
                             </template>
-                            <v-list dense max-height="500">
+                            <v-list dense max-height="400" style="overflow-y: auto;">
                                 <v-list-item
                                         v-for="(item, index) in serviceList"
                                         :key="index"
