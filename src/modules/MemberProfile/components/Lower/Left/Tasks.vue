@@ -39,19 +39,23 @@
             },
             count_completed_tasks() {
                 if (!this.tasks) return 0
-                return this.tasks.filter(task => task.status === 'completed').length
+                return this.tasks.filter(task => task.status.toLowerCase() === 'completed').length
             },
             count_pending_tasks() {
                 if (!this.tasks) return 0
-                return this.tasks.filter(task => task.status === 'pending').length
+                return this.tasks.filter(task => task.status.toLowerCase() === 'pending').length
             },
             count_behind_tasks() {
                 if (!this.tasks) return 0
-                return this.tasks.filter(task => task.status === 'behind').length
+                return this.tasks.filter(task => task.status.toLowerCase() === 'behind').length
             },
             count_open_tasks() {
                 if (!this.tasks) return 0
-                return this.tasks.filter(task => task.status === 'open').length
+                return this.tasks.filter(task => task.status.toLowerCase() === 'open').length
+            },
+            count_urgent_tasks() {
+                if (!this.tasks) return 0
+                return this.tasks.filter(task => task.status.toLowerCase() === 'urgent').length
             },
         },
         methods: {

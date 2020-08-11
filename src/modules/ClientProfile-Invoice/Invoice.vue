@@ -2,7 +2,7 @@
     <div class="invoice">
         <VueTable v-if="items.length > 0" :items="items" :headers="headers" :showRowActions="true" icon="list"
                   :loading="loading"
-                  title="Invoice" :key="componentKey" :noMoreData="noMoreData" :showSelect="false"
+                  title="Invoices" :key="componentKey" :noMoreData="noMoreData" :showSelect="false"
                   @delete-selected="open_bulk_delete_dialog($event)" @load-more="load_more"
 >
             <template slot="header-toolbar">

@@ -1,6 +1,6 @@
 <template>
     <div class="loading" v-if="properties.loading">
-        <v-progress-linear :indeterminate="true"/>
+        <v-progress-linear :indeterminate="true" />
     </div>
 
     <div class="no-data" v-else-if="tasks_are_empty">
@@ -17,10 +17,11 @@
                 :count-pending="count_pending_tasks"
                 :count-behind="count_behind_tasks"
                 :count-open="count_open_tasks"
+                :count-urgent="count_urgent_tasks"
                 :active-chip.sync="active_chip"
         />
 
-        <task-custom-table :tasks="filtered_tasks"/>
+        <task-custom-table :tasks="filtered_tasks" />
     </div>
 </template>
 
@@ -51,16 +52,19 @@
                 return !this.loading && this.tasks.length === 0
             },
             count_completed_tasks() {
-                return this.tasks.filter(task => task.status === 'completed').length
+                return this.tasks.filter(task => task.status.toLowerCase() === 'completed').length
             },
             count_pending_tasks() {
-                return this.tasks.filter(task => task.status === 'pending').length
+                return this.tasks.filter(task => task.status.toLowerCase() === 'pending').length
             },
             count_behind_tasks() {
-                return this.tasks.filter(task => task.status === 'behind').length
+                return this.tasks.filter(task => task.status.toLowerCase() === 'behind').length
             },
             count_open_tasks() {
-                return this.tasks.filter(task => task.status === 'open').length
+                return this.tasks.filter(task => task.status.toLowerCase() === 'open').length
+            },
+            count_urgent_tasks() {
+                return this.tasks.filter(task => task.status.toLowerCase() === 'urgent').length
             }
         }
     }

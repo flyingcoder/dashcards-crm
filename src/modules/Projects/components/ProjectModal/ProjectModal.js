@@ -23,7 +23,10 @@ export default {
         dialog: Boolean,
         title: String,
         isEditDialog: Boolean,
-        fieldsToEdit: { type: Object, default: () => {} }
+        fieldsToEdit: {
+            type: Object, default: () => {
+            }
+        }
     },
 
     data: () => ({
@@ -35,7 +38,8 @@ export default {
             selected: null,
             items: [],
             all_items: [],
-            show: false
+            show: false,
+            company: null
         },
         members: {
             all_items: [],
@@ -73,12 +77,14 @@ export default {
         // this.init_dropdowns()
         this.$event.$on('btnloading_off', status => (this.btnloading = false))
         this.$event.$on('new_client_added', data => {
-            this.client.items.push(data)
-            this.client.all_items.push(data)
-            this.client.selected = data
+            makeRequestTo.get_all_clients_per_company()
+                .then(({data}) => {
+                    this.client.items = data
+                    this.client.all_items = data
+                })
         })
         this.$event.$on('new_member_added', data => {
-            makeRequestTo.getAllNormalMembers().then(({ data }) => {
+            makeRequestTo.getAllNormalMembers().then(({data}) => {
                 this.members.all_items = data || []
                 this.members.items = _cloneDeep(this.members.all_items)
                 setTimeout(() => {
@@ -90,7 +96,7 @@ export default {
             })
         })
         this.$event.$on('new_manager_added', data => {
-            makeRequestTo.getManagerMembers().then(({ data }) => {
+            makeRequestTo.getManagerMembers().then(({data}) => {
                 this.manager.all_items = data || []
                 this.manager.items = _cloneDeep(this.manager.all_items)
                 setTimeout(() => {
@@ -146,7 +152,7 @@ export default {
             this.dropdown_loading = true
             axios
                 .all([
-                    makeRequestTo.get_all_clients(),
+                    makeRequestTo.get_all_clients_per_company(),
                     makeRequestTo.getAllNormalMembers(),
                     makeRequestTo.getManagerMembers()
                 ])
@@ -161,14 +167,6 @@ export default {
                     })
                 )
                 .finally(() => (this.dropdown_loading = false))
-        },
-
-        get_by_id(ids) {
-            const members = this.members.all_items.filter(memb =>
-                ids.includes(memb.id)
-            )
-            let string = members.reduce((acc, cur) => { return (acc += cur.name.replace(',', '') + ', ') }, '')
-            return string.slice(0, -2)
         },
 
         cancel() {
@@ -201,7 +199,7 @@ export default {
             this.$emit('save', fields_to_save)
         },
 
-        update_fields({ fields }) {
+        update_fields({fields}) {
             const new_fields = _cloneDeep(fields)
             this.$set(this.date_pickers, 'start_date', new_fields.started_at)
             this.$set(this.date_pickers, 'end_date', new_fields.end_at)
@@ -223,6 +221,7 @@ export default {
             this.members.selected = []
             this.manager.selected = []
             this.client.selected = null
+            this.client.company = null
             this.project_status = 'Active'
             this.business_name = null
             this.location = null
@@ -279,10 +278,15 @@ export default {
                 this.manager.selected.splice(index, 1)
             }
         },
-        clientSelected(client) {
+        removeClient() {
+            this.client.selected = null
+            this.client.company = null
+        },
+        clientSelected(client, company) {
             this.client.selected = client
-            this.business_name = client.company ? client.company.name : this.business_name
-            this.location = client.company ? client.company.address : this.location
+            this.client.company = company
+            this.business_name = company ? company.name : this.business_name
+            this.location = company ? company.address : this.location
         }
     }
 }

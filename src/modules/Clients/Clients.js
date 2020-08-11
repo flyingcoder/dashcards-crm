@@ -1,6 +1,4 @@
-import { list_functionality } from '@/services/list-functionality/list-functionality'
-import request from '@/services/axios_instance'
-
+import {list_functionality} from '@/services/list-functionality/list-functionality'
 //Components
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import VueTable from '@/common/VueTable/VueTable.vue'
@@ -9,6 +7,7 @@ import DeleteDialog from '@/common/DeleteDialog.vue'
 import Actions from '@/common/VueTable/Actions.vue'
 import TableHeader from '@/common/TableHeader.vue'
 import VueGrid from '@/common/VueGrid/VueGrid.vue'
+
 export default {
     name: 'Clients',
     mixins: [list_functionality],
@@ -28,22 +27,15 @@ export default {
     },
     data: () => ({
         paths: [
-            { text: 'Dashboard', disabled: false, route: {name:'default-content'} },
-            { text: 'Clients', disabled: true, router_name: null }
+            {text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
+            {text: 'Clients', disabled: true, router_name: null}
         ],
         headers: [
-            { text: 'Client', align: 'left'},
-            { text: 'Business Name', align: 'left'},
-            { text: 'Contact No.'},
-            { text: 'Location'},
-            { text: 'Status'},
-            {
-                text: 'Action',
-                value: 'action',
-                sortable: false,
-                align: 'center',
-                width: '140px'
-            }
+            {text: 'Client', align: 'left'},
+            {text: 'Email', align: 'left'},
+            {text: 'Contact No.'},
+            {text: 'Status'},
+            {text: 'Action', value: 'action', sortable: false, align: 'center', width: '140px'}
         ],
         table_config: {
             route_name: 'clients',
@@ -56,7 +48,7 @@ export default {
     }),
 
     filters: {
-        phoneDisplayForm: function(value) {
+        phoneDisplayForm: function (value) {
             return value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2 $3')
         }
     },

@@ -1,37 +1,28 @@
 import request from '@/services/axios_instance'
-import { global_utils } from '@/global_utils/global_utils'
+import {global_utils} from '@/global_utils/global_utils'
 import moment from 'moment'
-
 //Components
-import DashCard from '@/common/DashCard.vue'
-import RichEditor from '@/common/RichEditor.vue'
-import EmojiPicker from '@/common/EmojiPicker/EmojiPicker.vue'
 import HoursBox from '@/common/HoursBox/HoursBox.vue'
-import DeleteDialog from '@/common/DeleteDialog.vue'
 import Avatars from '@/common/Avatars.vue'
 import Comment from '@/common/Comment/Comment.vue'
 import Editor from "@/common/Editor/Editor.vue";
+
 export default {
     name: 'TaskTabPreviewCard',
     mixins: [global_utils],
     components: {
-        DashCard,
-        RichEditor,
         HoursBox,
-        EmojiPicker,
-        DeleteDialog,
         Avatars,
         Comment,
         VBoilerplate: {
             functional: true,
-
-            render(h, { data, props, children }) {
+            render(h, {data, props, children}) {
                 return h(
                     'v-skeleton-loader', {
                         ...data,
                         props: {
                             boilerplate: true,
-                            elevation: 2,
+                            elevation: 0,
                             ...props
                         }
                     },
@@ -52,10 +43,6 @@ export default {
         loading: false,
         all_comments: [],
         comment: '',
-        dropdown_actions: [
-            { id: 1, text: 'Edit', value: 'edit', icon: 'mdi-file-document-edit-outline' },
-            { id: 2, text: 'Delete', value: 'delete', icon: 'mdi-delete-alert-outline' }
-        ],
         commenter: null,
         hover: false,
         activeComment: null,
@@ -63,7 +50,6 @@ export default {
         btnloading: false
     }),
     mounted() {
-        this.commenter = this.$store.getters.user
         this.$event.$on('task-is-updated', task => {
             if (this.activeId === task.id) {
                 this.content = task
@@ -71,23 +57,6 @@ export default {
         })
     },
     computed: {
-        full_name() {
-            if (!this.content || !this.content.assigned.length) return 'Unassigned'
-            return (
-                this.content.assigned[0].first_name +
-                ' ' +
-                this.content.assigned[0].last_name
-            )
-        },
-        assignee_url() {
-            if (!this.content || !this.content.assigned.length) return null
-            return this.content.assigned[0].image_url
-        },
-        job_title() {
-            if (!this.content || !this.content.assigned.length) return null
-
-            return this.content.assigned[0].job_title
-        },
         user() {
             return this.$store.getters.user
         },
@@ -110,6 +79,22 @@ export default {
         },
         uploadApi() {
             return `api/projects/${this.id}/file`
+        },
+        dropdown_actions() {
+            let actions = [
+                {id: 1, text: 'Edit Task', value: 'edit', icon: 'mdi-file-document-edit-outline'},
+                {id: 2, text: 'Delete Task', value: 'delete', icon: 'mdi-delete-alert-outline'}
+            ]
+            let status = this.content.status.toLowerCase()
+            if (status !== 'completed') {
+                actions.push({id: 3, text: 'Mark as Complete', value: 'mark-as-complete', icon: 'mdi-clipboard-check'})
+            }
+            if (status !== 'completed' && status !== 'urgent') {
+                actions.push({id: 4, text: 'Mark as Urgent', value: 'mark-as-urgent', icon: 'mdi-clipboard-alert-outline'})
+            } else if (status !== 'completed' && status === 'urgent') {
+                actions.push({id: 4, text: 'Mark as Non-urgent', value: 'mark-as-urgent', icon: 'mdi-clipboard-alert-outline'})
+            }
+            return actions
         }
     },
     watch: {
@@ -121,19 +106,10 @@ export default {
                     .then(response => {
                         this.content = response.data
                         this.all_comments = response.data.comments
-                        this.set_mark_complete_action(response.data)
                     })
                     .finally(() => (this.loading = false))
-
-                //if(this.content.project_id != this.id)
-                //  this.loading = true
             },
             immediate: true
-        },
-        'content.status': {
-            handler() {
-                this.set_mark_complete_action(this.content)
-            }
         }
     },
 
@@ -143,62 +119,16 @@ export default {
         },
         can_delete_comment(comment) {
             if (this.user.is_admin) return true
-            if (comment.causer.id === this.user.id) return true
-            return false
+            return comment.causer.id === this.user.id;
         },
         date_created(date) {
             return moment(date).format('MMMM DD, YYYY')
         },
-
-        add_new_comment() {
-            this.btnloading = true
-            if (!this.comment || this.isRequestInProgress) return
-            this.isRequestInProgress = true
-            request
-                .post(`api/task/${this.activeId}/comments`, { body: this.comment })
-                .then(response => {
-                    this.comment = ''
-                    this.all_comments.push(response.data)
-                })
-                .finally(() => {
-                    this.btnloading = false
-                    this.isRequestInProgress = false
-                })
+        timerStarted() {
+            this.$event.$emit('task-timer-started', this.activeId)
         },
-
-        emoji_added(emoji) {
-            this.$refs.editor.$refs.richEditor.quill.focus()
-            const selection = this.$refs.editor.$refs.richEditor.quill.getSelection()
-            this.$refs.editor.$refs.richEditor.quill.insertText(
-                selection.index,
-                emoji
-            )
-        },
-        set_mark_complete_action(item) {
-            var xtra_action = {
-                id: 3,
-                text: 'Mark as Complete',
-                value: 'mark-as-complete',
-                icon: 'mdi-clipboard-check'
-            }
-            var index = this.dropdown_actions.findIndex(function(item) {
-                return item.id === 3
-            })
-            if (~index) {
-                if (item.status.toLowerCase() === 'completed') {
-                    this.dropdown_actions.splice(index, 1)
-                }
-            } else {
-                if (item.status.toLowerCase() !== 'completed') {
-                    this.dropdown_actions.push(xtra_action)
-                }
-            }
-        },
-        timerStarted(){
-          this.$event.$emit('task-timer-started', this.activeId)
-        },
-        timerPaused(){
-          this.$event.$emit('task-timer-paused', this.activeId)
+        timerPaused() {
+            this.$event.$emit('task-timer-paused', this.activeId)
         }
     }
 }

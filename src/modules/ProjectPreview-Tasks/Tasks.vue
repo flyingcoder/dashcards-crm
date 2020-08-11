@@ -31,6 +31,27 @@
                             </v-list-item>
                         </template>
                     </v-autocomplete>
+                    <!--<v-autocomplete class="col-md-5" hide-details dense solo flat :items="searchResult"
+                                    :loading="isFetching" v-model="filterMilestone" :search-input.sync="search" clearable
+                                    cache-items item-text="title" placeholder="Start typing to Search"
+                                    prepend-inner-icon="search" outlined
+                    >
+                        <template v-slot:no-data>
+                            <v-list-item>
+                                <v-list-item-title>
+                                    No Milestone Yet
+                                </v-list-item-title>
+                            </v-list-item>
+                        </template>
+                        <template v-slot:item="{ item }">
+                            <v-list-item @click="showTask(item)">
+                                <v-list-item-content>
+                                    <v-list-item-title :inner-html.prop="item.title | truncate(25)" />
+                                    <v-list-item-subtitle :inner-html.prop="item.description | truncate(25)" />
+                                </v-list-item-content>
+                            </v-list-item>
+                        </template>
+                    </v-autocomplete>-->
                     <v-spacer />
                     <v-tooltip left>
                         <template v-slot:activator="{ on, attrs }">

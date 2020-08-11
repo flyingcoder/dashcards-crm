@@ -28,7 +28,13 @@
                                     <v-col :md="is_my_task_tab ? 8 : 6" class="project__col">
                                         <p class="subtitle-2">
                                             {{ task.title | ucwords | truncate(35) }}<br>
-                                            <small v-if="showProject && task.project" class="caption">{{ task.project.title|ucwords|truncate(20) }} | </small>
+                                            <router-link :to="get_project_url(task.project)"
+                                                         v-if="showProject && task.project"
+                                                         @click.native="$event.stopImmediatePropagation()"
+                                            >
+                                                <small class="caption">{{ task.project.title | ucwords | truncate(20) }}
+                                                    | </small>
+                                            </router-link>
                                             <small class="caption" v-if="task.milestone">{{ task.milestone.title|ucwords|truncate(20) }}</small>
                                         </p>
                                     </v-col>
@@ -48,7 +54,7 @@
                                         <v-icon color="red" v-else-if="task.status.toLowerCase() === 'urgent'">
                                             mdi-clipboard-alert-outline
                                         </v-icon>
-                                        <br/>
+                                        <br>
                                         {{ task.status | ucwords }}
                                     </v-col>
                                     <v-col md="2" sm="2" class="action__col">
@@ -66,7 +72,7 @@
                                                 </v-tooltip>
                                             </template>
                                             <v-list dense>
-                                                <v-list-item v-if="task.status !== 'completed' && can_edit_task"
+                                                <v-list-item v-if="task.status.toLowerCase() !== 'completed' && can_edit_task"
                                                              @click="task_action(task, 'task-edit')"
                                                 >
                                                     <v-list-item-title>
@@ -90,7 +96,7 @@
                                                         View Task
                                                     </v-list-item-title>
                                                 </v-list-item>
-                                                <v-list-item v-if="task.status !== 'completed' && can_edit_task"
+                                                <v-list-item v-if="task.status.toLowerCase() !== 'completed' && can_edit_task"
                                                              @click="task_action(task, 'task-mark-as-complete')"
                                                 >
                                                     <v-list-item-title>
@@ -98,12 +104,12 @@
                                                         Mark as Complete
                                                     </v-list-item-title>
                                                 </v-list-item>
-                                                <v-list-item v-if="task.status !== 'completed' && can_edit_task"
+                                                <v-list-item v-if="task.status.toLowerCase() !== 'completed' && can_edit_task"
                                                              @click="task_action(task, 'task-mark-as-urgent')"
                                                 >
                                                     <v-list-item-title>
                                                         <v-icon color="grey" left>mdi-clipboard-alert-outline</v-icon>
-                                                        {{ task.status === 'urgent' ? 'Mark as Non-urgent' : 'Mark as Urgent' }}
+                                                        {{ task.status.toLowerCase() === 'urgent' ? `Mark as Non-urgent` : `Mark as Urgent` }}
                                                     </v-list-item-title>
                                                 </v-list-item>
                                             </v-list>
@@ -115,14 +121,14 @@
                     </v-list-item>
                 </template>
             </v-list>
-            <Empty v-else icon="mdi-clipboard-list-outline" headline="No task found!"/>
+            <Empty v-else icon="mdi-clipboard-list-outline" headline="No task found!" />
         </div>
     </div>
 </template>
 <script>
     import apiTo from '@/modules/ProjectPreview-Tasks/api'
     import Avatars from '@/common/Avatars.vue'
-    import {mapGetters} from 'vuex'
+    import {mapGetters, mapMutations} from 'vuex'
 
     export default {
         name: 'TaskCustomTable',
@@ -163,7 +169,7 @@
             })
 
             this.$event.$on('task-is-updated', task => {
-                this.replace_task(task, task.id)
+                this.replace_task(task)
             })
         },
         computed: {
@@ -191,6 +197,7 @@
             }
         },
         methods: {
+            ...mapMutations('taskCards', ['replace_task']),
             row_clicked(row) {
                 this.active_task_id = row.id
                 // this.$event.$emit('task-row-clicked', row)
@@ -203,12 +210,12 @@
                 if (this.page === 'project-preview') this.row_clicked(item)
                 else this.task_action(item, 'task-view')
             },
-            replace_task(task, id) {
+            /*replace_task(task, id) {
                 let index = this.tasks.findIndex(item => item.id === id)
                 if (~index) {
                     this.tasks.splice(index, 1, task)
                 }
-            },
+            },*/
             remove_task(id) {
                 let index = this.tasks.findIndex(item => item.id === id)
                 if (~index) {
@@ -220,7 +227,7 @@
                 apiTo
                     .mark_as_complete_task(this.active_task_id, payload)
                     .then(({data}) => {
-                        this.replace_task(data, this.active_task_id)
+                        this.replace_task(data)
                         this.$event.$emit('btnloading_off', false)
                         this.$event.$emit('open_snackbar', 'Task is completed')
                         this.$event.$emit('close_confirm_dialog', true)
@@ -233,6 +240,9 @@
                     this.$event.$emit('close_delete_dialog', true)
                     this.$event.$emit('open_snackbar', 'Task is deleted')
                 })
+            },
+            get_project_url(project) {
+                return `/dashboard/${project.type}/preview/${project.id}`
             }
         }
     }

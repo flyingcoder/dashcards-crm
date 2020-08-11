@@ -7,7 +7,7 @@
             <v-tab-item v-for="(text, index) in texts" :value="'tab-' + index" :key="index">
                 <v-card flat>
                     <v-card-text>
-                      <Empty :icon="text.icon" :headline="text.content"></Empty>
+                      <Empty :icon="text.icon" :headline="text.content" />
                     </v-card-text>
                 </v-card>
             </v-tab-item>

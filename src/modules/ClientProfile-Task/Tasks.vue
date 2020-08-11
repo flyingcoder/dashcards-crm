@@ -1,26 +1,18 @@
 <template>
     <div class="tasks">
         <div class="loading" v-if="loading">
-            <v-progress-linear :indeterminate="true"/>
+            <v-progress-linear :indeterminate="true" />
         </div>
-
-        <tasks-content :hasTabs="false" hasLoadMoreBtn showProject />
-
-    <!--    <v-flex class="task-preview-wrapper">
-            <PreviewCard
-                    v-if="selected_task"
-                    :activeId="selected_task.id"
-                    :id="user_id"
-                    :task="selected_task"
-            />
-        </v-flex>-->
-    </div>
+        <v-card flat class="pa-2">
+            <tasks-content :hasTabs="false" hasLoadMoreBtn showProject />
+        </v-card>
+</div>
 </template>
 
 <script>
     import apiTo from './api'
     //Components
-     import TasksContent from "@/common/TasksCard/TasksContent";
+    import TasksContent from "@/common/TasksCard/TasksContent";
 
     export default {
         components: {
@@ -47,19 +39,19 @@
                 return !this.loading && this.tasks.length === 0
             },
             count_completed_tasks() {
-                return this.tasks.filter(task => task.status === 'completed').length
+                return this.tasks.filter(task => task.status.toLowerCase() === 'completed').length
             },
             count_pending_tasks() {
-                return this.tasks.filter(task => task.status === 'pending').length
+                return this.tasks.filter(task => task.status.toLowerCase() === 'pending').length
             },
             count_behind_tasks() {
-                return this.tasks.filter(task => task.status === 'behind').length
+                return this.tasks.filter(task => task.status.toLowerCase() === 'behind').length
             },
             count_open_tasks() {
-                return this.tasks.filter(task => task.status === 'open').length
+                return this.tasks.filter(task => task.status.toLowerCase() === 'open').length
             },
             count_urgent_tasks() {
-                return this.tasks.filter(task => task.status === 'urgent').length
+                return this.tasks.filter(task => task.status.toLowerCase() === 'urgent').length
             }
         },
 

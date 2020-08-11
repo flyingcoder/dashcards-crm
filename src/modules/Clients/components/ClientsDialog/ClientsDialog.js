@@ -1,4 +1,5 @@
 import CustomDialog from '@/common/BaseComponents/CustomDialog/CustomDialog.vue'
+import request from "@/services/axios_instance";
 
 export default {
     name: 'ClientsDialog',
@@ -13,7 +14,8 @@ export default {
         isEditDialog: Boolean,
         fieldsToEdit: {
             type: Object,
-            default: () => {}
+            default: () => {
+            }
         }
     },
 
@@ -28,15 +30,15 @@ export default {
         contact_number: null,
         contact_name: null,
         email: null,
-        status: null,
+        status: 'Active',
         location: null,
         password: null,
         repeat_password: null,
         status_items: [{
-                id: 1,
-                text: 'Active',
-                value: 'Active'
-            },
+            id: 1,
+            text: 'Active',
+            value: 'Active'
+        },
             {
                 id: 2,
                 text: 'Inactive',
@@ -44,9 +46,18 @@ export default {
             }
         ],
         telephone_is_valid: false,
-        defaultCountryCode: null
+        defaultCountryCode: 'CA',
+        is_new_client: true,
+        is_new_client_items: [
+            {text: 'Add as new client', value: true},
+            {text: 'Attach to existing client', value: false}
+        ],
+        clients_list: [],
+        existing_client: null
     }),
-
+    created() {
+        this.get_all_clients()
+    },
     watch: {
         dialog(new_val) {
             this.open = new_val
@@ -59,11 +70,17 @@ export default {
                 this.isEditDialog && this.update_fields(new_val)
             },
             deep: true
+        },
+        is_new_client(val) {
+            if (val) this.existing_client = null
         }
     },
     computed: {
         readyForSubmit() {
             return this.validation_passed()
+        },
+        exists_client_label() {
+            return this.is_new_client ? 'Enter client details below' : 'Select from existing clients *'
         }
     },
     methods: {
@@ -71,6 +88,9 @@ export default {
             this.open = false
         },
         validation_passed() {
+            if (!this.is_new_client) {
+                return this.existing_client && this.company_name
+            }
             let tel_is_valid = true
             if (this.telephone) {
                 tel_is_valid = this.telephone_is_valid
@@ -84,8 +104,7 @@ export default {
                     this.last_name &&
                     this.company_name &&
                     this.email &&
-                    this.status &&
-                    this.contact_name
+                    this.status
                 )
             }
 
@@ -95,11 +114,14 @@ export default {
                 this.last_name &&
                 this.company_name &&
                 this.email &&
-                this.status &&
-                this.contact_name
+                this.status
             )
         },
         save() {
+            if (!this.is_new_client) {
+                this.$emit('save', {company_name: this.company_name, client_id: this.existing_client.id})
+                return
+            }
             const fields_to_save = {
                 first_name: this.first_name,
                 last_name: this.last_name,
@@ -123,7 +145,7 @@ export default {
             this.$emit('save', fields_to_save)
         },
 
-        update_fields({ fields }) {
+        update_fields({fields}) {
             const new_fields = Object.assign({}, fields)
             this.first_name = new_fields.first_name
             this.last_name = new_fields.last_name
@@ -141,14 +163,26 @@ export default {
                 this.contact_number = null
                 this.defaultCountryCode = null
             }
+            this.is_new_client = true
         },
-
-        clear_and_close() {
-            this.first_name = this.last_name = this.company_name = this.location = this.contact_name =
-                ''
+        clearAll() {
+            this.first_name = ''
+            this.last_name = ''
+            this.company_name = ''
+            this.location = ''
+            this.contact_name = ''
             this.telephone = null
-            this.email = this.status = this.password = this.repeat_password = ''
+            this.email = ''
+            this.status = 'Active'
+            this.password = ''
+            this.repeat_password = ''
             this.telephone_is_valid = false
+            this.existing_client = null
+            this.is_new_client = true
+
+        },
+        clear_and_close() {
+            this.clearAll()
             this.cancel() //close the modal
         },
         showUpdate(payload) {
@@ -159,6 +193,12 @@ export default {
             if (!this.telephone_is_valid) {
                 this.$event.$emit('open_snackbar', 'Invalid Phone format', 'error')
             }
+        },
+        get_all_clients() {
+            request.get(`api/company/clients`)
+                .then(({data}) => {
+                    this.clients_list = data
+                })
         }
     }
 }

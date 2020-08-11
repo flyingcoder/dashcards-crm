@@ -38,7 +38,7 @@
                     <Avatar :user="item.creator"/>
                 </td>
                 <td class="text-center">{{ item.campaigns_count }}</td>
-                <td>{{ item.service_created_at | bzFromNow }}</td>
+                <td>{{ item.created_at | bzFromNow }}</td>
                 <Actions :item="item" :hasView="false" :permissions="$_permissions.get('services')"
                          @delete="open_delete_dialog(item)" @edit="open_edit_dialog(item)"
                 />

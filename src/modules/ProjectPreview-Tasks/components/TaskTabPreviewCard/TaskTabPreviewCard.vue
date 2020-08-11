@@ -1,44 +1,49 @@
 <template>
     <v-row no-gutters class="task__tab_preview_card" v-if="activeId">
         <v-col md="12">
-            <v-boilerplate v-if="loading" class="mb-6"
-                           type="list-item-avatar, divider, list-item-three-line, card-heading, image, actions"
-            />
-            <v-card class="mx-auto" v-else-if="content && !loading" style="box-shadow: none;">
-                <v-card-title>
-                    <v-row>
-                        <v-col>
-                            <v-list-item-title class="body-2 font-weight-medium">
-                                <v-avatar size="30" tile>
-                                    <v-icon large left>mdi-file-document-outline</v-icon>
-                                </v-avatar>
-                                <span class="title">&nbsp;{{ content.title | ucwords | truncate(40) }}</span>
-                            </v-list-item-title>
-                        </v-col>
-                        <v-col md="1" xs="2">
-                            <v-spacer />
-                            <v-menu offset-y left>
-                                <template v-slot:activator="{ on }">
-                                    <v-btn icon small v-on="on">
-                                        <v-icon large>mdi-dots-horizontal-circle-outline</v-icon>
-                                    </v-btn>
-                                </template>
-                                <v-list dense>
-                                    <v-list-item v-for="item of dropdown_actions" :key="item.id"
-                                                 @click="dropdownAction(item.value)"
-                                    >
-                                        <v-list-item-content>
-                                            <v-list-item-title>
-                                                <v-icon left>{{ item.icon }}</v-icon>
-                                                {{ item.text }}
-                                            </v-list-item-title>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                </v-list>
-                            </v-menu>
-                        </v-col>
-                    </v-row>
-                </v-card-title>
+            <v-card flat v-if="loading">
+                <v-card-text>
+                    <v-boilerplate class="mb-6"
+                                   type="list-item-avatar, divider, list-item-three-line, card-heading, image, actions"
+                    />
+                </v-card-text>
+            </v-card>
+            <v-card flat class="mx-auto" v-else-if="content && !loading" style="box-shadow: none;">
+                <v-card-text>
+                    <v-list>
+                        <v-list-item>
+                            <v-list-item-avatar>
+                                <v-icon large>mdi-file-document-outline</v-icon>
+                            </v-list-item-avatar>
+                            <v-list-item-content class="body-2 font-weight-medium">
+                                <v-list-item-title>
+                                    <span class="title">&nbsp;{{ content.title | ucwords | truncate(35) }}</span>
+                                </v-list-item-title>
+                            </v-list-item-content>
+                            <v-list-item-action>
+                                <v-menu offset-y left>
+                                    <template v-slot:activator="{ on }">
+                                        <v-btn icon small v-on="on">
+                                            <v-icon large>mdi-dots-horizontal-circle-outline</v-icon>
+                                        </v-btn>
+                                    </template>
+                                    <v-list dense>
+                                        <v-list-item v-for="item of dropdown_actions" :key="item.id"
+                                                     @click="dropdownAction(item.value)"
+                                        >
+                                            <v-list-item-content>
+                                                <v-list-item-title>
+                                                    <v-icon left>{{ item.icon }}</v-icon>
+                                                    {{ item.text }}
+                                                </v-list-item-title>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </v-list>
+                                </v-menu>
+                            </v-list-item-action>
+                        </v-list-item>
+                    </v-list>
+                </v-card-text>
                 <v-card-text class="px-4">
                     <v-row class="px-4" v-if="content">
                         <v-col xs="12">

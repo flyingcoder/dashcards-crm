@@ -1,9 +1,14 @@
 <template>
     <div class="profile-left">
         <v-tabs class="tabs" centered grow hide-slider v-model="active_tab" height="60px">
-            <v-tab class="tab-item" v-for="tab in tabs" :key="tab.name" :href="`#${tab.name}`">
-                <v-icon large>{{ tab.icon }}</v-icon>
-            </v-tab>
+            <v-tooltip top v-for="tab in tabs" :key="tab.name">
+                <template v-slot:activator="{ on, attrs }">
+                    <v-tab class="tab-item" v-bind="attrs" v-on="on" :href="`#${tab.name}`">
+                        <v-icon large>{{ tab.icon }}</v-icon>
+                    </v-tab>
+                </template>
+                <span>{{ tab.name }}</span>
+            </v-tooltip>
         </v-tabs>
         <v-tabs-items v-model="active_tab">
             <v-tab-item key="1" value="Tasks">
@@ -14,31 +19,46 @@
             <v-tab-item key="2" value="Timer">
                 <TimerContent />
             </v-tab-item>
+            <v-tab-item key="3" value="Projects & Campaigns">
+                <Projects :user_id="user_id" />
+            </v-tab-item>
         </v-tabs-items>
     </div>
 </template>
 <script>
     import TasksTab from './Tasks.vue'
+    import Projects from './Projects.vue'
     import TimerContent from "@/common/TimerCard/TimerContent.vue";
+    // import {mapGetters} from "vuex";
 
     export default {
         name: 'TasksContent',
         components: {
             TimerContent,
-            TasksTab
+            TasksTab,
+            Projects
         },
-
+        created() {
+            this.user_id = this.$route.params.user_id
+        },
         data: () => ({
-            active_tab: 'Tasks',
-            tabs: [{
-                id: 1,
-                name: 'Tasks',
-                icon: 'mdi-clipboard-file-outline'
-            },
+            user_id: null,
+            active_tab: 'Projects & Campaigns',
+            tabs: [
+                {
+                    id: 1,
+                    name: 'Tasks',
+                    icon: 'mdi-clipboard-file-outline'
+                },
                 {
                     id: 2,
                     name: 'Timer',
                     icon: 'mdi-timetable'
+                },
+                {
+                    id: 3,
+                    name: 'Projects & Campaigns',
+                    icon: 'mdi-dresser-outline'
                 }
             ]
         })

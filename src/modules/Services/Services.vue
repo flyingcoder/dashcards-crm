@@ -180,7 +180,7 @@
                                     <span>Filter</span>
                                 </v-tooltip>
                             </template>
-                            <v-list dense max-height="500">
+                            <v-list dense max-height="400" style="overflow-y: auto;">
                                 <v-list-item
                                         v-for="(item, index) in serviceList"
                                         :key="index"
@@ -224,7 +224,7 @@
                 />
             </template>
             <template v-slot:empty-slot>
-                <v-btn dark color="#3b589e" @click="open_add_dialog">Add Campaign</v-btn>
+                <v-btn dark color="#3b589e" v-if="can_add" @click="open_add_dialog">Add Campaign</v-btn>
             </template>
         </VueTable>
     </div>

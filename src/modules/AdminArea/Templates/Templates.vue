@@ -83,6 +83,36 @@
                                             <Empty v-if="!activeType" headline="Select from the left" />
                                         </v-col>
                                     </v-row>
+                                    <v-divider />
+                                    <v-row no-gutters>
+                                        <v-col cols="12">
+                                            <v-card flat>
+                                                <v-card-title class="subtitle-2">
+                                                    <span class="subtitle-2">Email Events</span>
+                                                    <v-spacer />
+                                                    <v-btn text outlined :loading="email_event_btn"
+                                                           :disabled="email_event_btn" @click="save_allowed_email_event"
+                                                           small
+                                                    >
+                                                        save changes
+                                                    </v-btn>
+                                                </v-card-title>
+                                                <v-card-text>
+                                                    <v-row>
+                                                        <v-col v-for="(module, index) in events" :key="index">
+                                                            <v-checkbox on-icon="mdi-puzzle"
+                                                                        off-icon="mdi-puzzle-outline"
+                                                                        :label="module"
+                                                                        v-model="email_event.value[module]"
+                                                                        :value="email_event.value[module]"
+                                                                        hide-details="auto"
+                                                            />
+                                                        </v-col>
+                                                    </v-row>
+                                                </v-card-text>
+                                            </v-card>
+                                        </v-col>
+                                    </v-row>
                                 </v-expansion-panel-content>
                             </v-expansion-panel>
                         </v-expansion-panels>

@@ -19,16 +19,23 @@ export default {
         templates: null,
         submitting: false,
         content: '',
-        core_templates: []
+        core_templates: [],
+        email_event: null,
+        email_event_btn: false,
     }),
     computed: {
         tabs() {
             return this.core_templates
-        }
+        },
+        events() {
+            if (!this.email_event) return []
+            return Object.keys(this.email_event.value)
+        },
     },
     created() {
         this.getGlobalTemplates()
         this.getCoreTemplates()
+        this.getEmailEvents()
     },
     mounted() {
         this.$event.$emit('path-change', this.paths)
@@ -82,6 +89,15 @@ export default {
                     this.core_templates = data
                 })
                 .finally(() => this.loading = false)
+        },
+        getEmailEvents() {
+            request.get(`api/configs/email_events`)
+                .then(({data}) => {
+                    this.email_event = data
+                })
+        },
+        save_allowed_email_event() {
+            this.sendRequest('email_events', { key: 'email_events', value: this.email_event.value, type: 'object' })
         }
     }
 }

@@ -25,23 +25,25 @@
                                         <v-icon left>mdi-plus-circle-outline</v-icon>
                                         Add new client
                                     </v-list-item>
-                                    <v-list-item v-for="(item, index) in client.items" :key="index"
-                                                 @click="clientSelected(item)"
-                                    >
-                                        <v-list-item-avatar>
-                                            <v-img :src="item.image_url"/>
-                                        </v-list-item-avatar>
-                                        <v-list-item-content>
-                                            <v-list-item-title v-html="item.fullname"/>
-                                            <v-list-item-subtitle v-html="item.company_name"/>
-                                        </v-list-item-content>
-                                    </v-list-item>
+                                    <template v-for="item in client.items">
+                                        <v-list-item v-for="company in item.client_companies" :key="company.id"
+                                                     @click="clientSelected(item, company)"
+                                        >
+                                            <v-list-item-avatar>
+                                                <v-img :src="item.image_url" />
+                                            </v-list-item-avatar>
+                                            <v-list-item-content>
+                                                <v-list-item-title v-html="company.name" />
+                                                <v-list-item-subtitle v-html="item.fullname" />
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </template>
                                 </v-list>
                             </v-menu>
                             <div class="choosen" v-if="client.selected">
-                                <v-chip close @click:close="client.selected = null" outlined label class="mt-1 tile">
+                                <v-chip close @click:close="removeClient" outlined label class="mt-1 tile">
                                     <v-avatar left>
-                                        <v-img :src="client.selected.image_url"/>
+                                        <v-img :src="client.selected.image_url" />
                                     </v-avatar>
                                     {{ client.selected.fullname }}
                                 </v-chip>
@@ -138,10 +140,10 @@
                                                  @click="add_to_selected_managers(item)"
                                     >
                                         <v-list-item-avatar>
-                                            <v-img :src="item.image_url"/>
+                                            <v-img :src="item.image_url" />
                                         </v-list-item-avatar>
                                         <v-list-item-content>
-                                            <v-list-item-title v-html="item.fullname"/>
+                                            <v-list-item-title v-html="item.fullname" />
                                             <v-list-item-subtitle>{{ item.job_title | ucwords }}</v-list-item-subtitle>
                                         </v-list-item-content>
                                     </v-list-item>
@@ -152,7 +154,7 @@
                                         label @click:close="remove_from_selected_managers(item)"
                                 >
                                     <v-avatar left>
-                                        <v-img :src="item.image_url"/>
+                                        <v-img :src="item.image_url" />
                                     </v-avatar>
                                     {{ item.fullname | truncate(14) }}
                                 </v-chip>
@@ -186,10 +188,10 @@
                                                  @click="add_to_selected_members(item)"
                                     >
                                         <v-list-item-avatar>
-                                            <v-img :src="item.image_url"/>
+                                            <v-img :src="item.image_url" />
                                         </v-list-item-avatar>
                                         <v-list-item-content>
-                                            <v-list-item-title v-html="item.fullname"/>
+                                            <v-list-item-title v-html="item.fullname" />
                                             <v-list-item-subtitle>{{ item.job_title | ucwords }}</v-list-item-subtitle>
                                         </v-list-item-content>
                                     </v-list-item>
@@ -200,7 +202,7 @@
                                         label @click:close="remove_from_selected_members(item)"
                                 >
                                     <v-avatar left>
-                                        <v-img :src="item.image_url"/>
+                                        <v-img :src="item.image_url" />
                                     </v-avatar>
                                     {{ item.fullname | truncate(14) }}
                                 </v-chip>
@@ -223,7 +225,7 @@
                                 <v-list dense>
                                     <v-list-item v-for="item in statuses" :key="item" @click="status = item">
                                         <v-list-item-content>
-                                            <v-list-item-title v-text="item"/>
+                                            <v-list-item-title v-text="item" />
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-list>
@@ -246,12 +248,12 @@
                                       @click:append-outer="open_add_new_service_list"
                             />
                         </v-col>
-                        <v-col md="6" sm="12" >
+                        <v-col md="6" sm="12">
                             <TextField required clearable prepend-inner-icon="mdi-office-building"
                                        v-model="business_name" dense label="Business Name *" color="#657186" filled
                             />
                         </v-col>
-                        <v-col md="6" sm="12" >
+                        <v-col md="6" sm="12">
                             <TextField required clearable prepend-inner-icon="mdi-map-marker" dense
                                        v-model="location" label="Location" color="#657186" filled
                             />

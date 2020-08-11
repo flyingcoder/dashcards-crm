@@ -51,7 +51,7 @@
         watch: {
             tab: {
                 handler(val) {
-                    this.get_tasks(val)
+                    this.get_tasks({ tab: val, filter: this.active_chip})
                 },
                 immediate: true
             }

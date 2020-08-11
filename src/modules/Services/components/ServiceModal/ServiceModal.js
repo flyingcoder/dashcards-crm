@@ -32,6 +32,7 @@ export default {
         dropdown_loading: false,
         client: {
             selected: null,
+            company: null,
             items: [],
             all_items: [],
             show: false
@@ -76,9 +77,11 @@ export default {
         this.$event.$on('btnloading_off', status => (this.btnloading = false))
 
         this.$event.$on('new_client_added', data => {
-            this.client.items.push(data)
-            this.client.all_items.push(data)
-            this.client.selected = data
+            makeRequestTo.get_all_clients_per_company()
+                .then(({data}) => {
+                    this.client.items = data
+                    this.client.all_items = data
+                })
         })
 
         this.$event.$on('new-services-list-added', data => {
@@ -157,7 +160,7 @@ export default {
             this.dropdown_loading = true
             axios
                 .all([
-                    makeRequestTo.get_all_clients(),
+                    makeRequestTo.get_all_clients_per_company(),
                     makeRequestTo.getAllNormalMembers(),
                     makeRequestTo.getManagerMembers(),
                     makeRequestTo.get_all_services_list()
@@ -291,10 +294,15 @@ export default {
                 this.manager.selected.splice(index, 1)
             }
         },
-        clientSelected(client) {
+        removeClient() {
+            this.client.selected = null
+            this.client.company = null
+        },
+        clientSelected(client, company) {
             this.client.selected = client
-            this.business_name = client.company ? client.company.name : this.business_name
-            this.location = client.company ? client.company.address : this.location
+            this.client.company = company
+            this.business_name = company ? company.name : this.business_name
+            this.location = company ? company.address : this.location
         }
     }
 }

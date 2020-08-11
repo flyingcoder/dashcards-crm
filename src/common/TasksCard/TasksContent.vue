@@ -67,9 +67,11 @@
                                     mdi-clipboard-alert-outline
                                 </v-icon>
                             </v-avatar>
-                            <p v-if="task && task.status !== 'urgent'">Mark task as urgent?</p>
+                            <p v-if="task && task.status.toLowerCase() !== 'urgent'">Mark task as urgent?</p>
                             <p v-else>Mark task as not urgent?</p>
-                            <p class="body-2">Setting task to urgent will notify assigned user(s)</p>
+                            <p class="body-2" v-if="task && task.status.toLowerCase() !== 'urgent'">
+                                Setting task to urgent will notify assigned user(s)
+                            </p>
                         </v-banner>
                     </v-col>
                 </v-row>

@@ -1,36 +1,30 @@
 import PreviewCard from '@/modules/ProjectPreview-Tasks/components/TaskTabPreviewCard/TaskTabPreviewCard.vue'
-import TasksCard from '@/common/TasksCard/TasksCard.vue'
-import TaskDialog from '@/modules/ProjectPreview-Tasks/components/TaskDialog/TaskDialog.vue'
-import DeleteDialog from '@/common/DeleteDialog.vue'
-import ConfirmDialog from '@/common/ConfirmDialog.vue'
 
 export default {
     name: 'TaskViewDialog',
     components: {
-        PreviewCard,
-        TasksCard,
-        TaskDialog,
-        DeleteDialog,
-        ConfirmDialog
+        PreviewCard
     },
     props: {
         task: Object
-    },
-    created() {
-        if (this.task) {
-            this.id = this.task.id
-        }
     },
     data: () => ({
         dialog: false,
         delete_task_dialog: false,
         confirm_mark_as_complete_dialog: false,
-        id: null,
         componentKey: 0
     }),
-
+    watch: {
+        task: {
+            handler() {
+              this.force_render()
+            },
+            immediate: true,
+            deep: true
+        }
+    },
     methods: {
-        forcerender() {
+        force_render() {
             this.componentKey += 1
         },
         open_dialog() {
@@ -51,6 +45,9 @@ export default {
         },
         open_mark_as_complete_task_dialog() {
             this.$event.$emit('task-mark-as-complete', this.task)
+        },
+        open_mark_as_urgent_task_dialog() {
+            this.$event.$emit('task-mark-as-urgent', this.task)
         }
     }
 }

@@ -57,13 +57,12 @@ const mutations = {
 const actions = {
     get_tasks({commit, state}, payload) {
         commit('set_loading', true)
-
         let api_url = 'api/task'
         if (state.id) {
             api_url = `api/projects/${state.id}/tasks`
         }
-        if (payload === 'My Tasks') api_url += '/mine'
-
+        if (payload.tab === 'My Tasks') api_url += '/mine'
+        api_url += '?filter='+payload.filter
         request
             .get(api_url)
             .then(({data}) => {

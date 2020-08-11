@@ -143,7 +143,7 @@ export default {
         deleteReport() {
             this.$store.commit('set_custom_loader', true)
             apiTo
-                .deleteReport(this.deleteReportId)
+                .deleteProjectReport(this.id, this.deleteReportId)
                 .then(() => {
                     const index = this.reports.findIndex(
                         r => r.id === this.deleteReportId

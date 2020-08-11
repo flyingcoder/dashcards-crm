@@ -8,7 +8,9 @@ export const clients_api = {
     get_all_clients() {
         return request.get('api/clients?all=true')
     },
-
+    get_all_clients_per_company() {
+        return request.get('api/clients/per-company')
+    },
     get_clients() {
         return request.get('api/clients')
     },
