@@ -224,7 +224,7 @@
                 />
             </template>
             <template v-slot:empty-slot>
-                <v-btn dark color="#3b589e" @click="open_add_dialog">Add Campaign</v-btn>
+                <v-btn dark color="#3b589e" v-if="can_add" @click="open_add_dialog">Add Campaign</v-btn>
             </template>
         </VueTable>
     </div>
