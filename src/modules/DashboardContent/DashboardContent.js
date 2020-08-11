@@ -43,7 +43,7 @@ export default {
                         ...data,
                         props: {
                             boilerplate: true,
-                            elevation: 2,
+                            elevation: 0,
                             ...props
                         }
                     },

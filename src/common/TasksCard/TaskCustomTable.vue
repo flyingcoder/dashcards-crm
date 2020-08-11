@@ -72,7 +72,7 @@
                                                 </v-tooltip>
                                             </template>
                                             <v-list dense>
-                                                <v-list-item v-if="task.status !== 'completed' && can_edit_task"
+                                                <v-list-item v-if="task.status.toLowerCase() !== 'completed' && can_edit_task"
                                                              @click="task_action(task, 'task-edit')"
                                                 >
                                                     <v-list-item-title>
@@ -96,7 +96,7 @@
                                                         View Task
                                                     </v-list-item-title>
                                                 </v-list-item>
-                                                <v-list-item v-if="task.status !== 'completed' && can_edit_task"
+                                                <v-list-item v-if="task.status.toLowerCase() !== 'completed' && can_edit_task"
                                                              @click="task_action(task, 'task-mark-as-complete')"
                                                 >
                                                     <v-list-item-title>
@@ -104,13 +104,12 @@
                                                         Mark as Complete
                                                     </v-list-item-title>
                                                 </v-list-item>
-                                                <v-list-item v-if="task.status !== 'completed' && can_edit_task"
+                                                <v-list-item v-if="task.status.toLowerCase() !== 'completed' && can_edit_task"
                                                              @click="task_action(task, 'task-mark-as-urgent')"
                                                 >
                                                     <v-list-item-title>
                                                         <v-icon color="grey" left>mdi-clipboard-alert-outline</v-icon>
-                                                        {{ task.status === 'urgent' ? `Mark as Non-urgent` : `Mark as
-                                                        Urgent` }}
+                                                        {{ task.status.toLowerCase() === 'urgent' ? `Mark as Non-urgent` : `Mark as Urgent` }}
                                                     </v-list-item-title>
                                                 </v-list-item>
                                             </v-list>
