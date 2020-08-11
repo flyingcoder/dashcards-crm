@@ -35,6 +35,7 @@
 
     .empty {
         height: auto;
+        background-color: transparent !important;
     }
 
     .justify-content-center {

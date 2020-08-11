@@ -9,7 +9,7 @@
     border-radius: 10px !important;
     color: $textDark !important;
 
-    .custom-table-header{
+    .custom-table-header {
         display: flex;
         flex-wrap: wrap;
         margin-bottom: 0.75em;
@@ -20,7 +20,7 @@
         border-right: 1px solid $tableBorderBlue;
         border-bottom: 1px solid $tableBorderBlue;
         border-left: 1px solid $tableBorderBlue;
-        min-height: 280px;
+        min-height: 100%;
 
         .clickable-td {
             color: $blue;
