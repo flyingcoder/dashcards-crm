@@ -1,6 +1,8 @@
-.milestones__tab {
-    padding: 1.5rem .75rem;
+@import '~@/sass/_variables';
 
+@include pagePadding('.milestones__tab');
+
+.milestones__tab {
     .milestone__dynamic_box {
         margin: .75rem;
     }

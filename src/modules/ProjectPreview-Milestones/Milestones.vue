@@ -52,14 +52,17 @@
                 </div>
             </v-flex>
         </v-layout>
-        <Empty v-else class="mt-3" icon="mdi-bookmark-remove-outline" headline="No milestone yet">
-            <template v-slot:extra>
-                <v-btn large dark color="#3b589e" @click="add_dialog = true">
-                    <v-icon left>mdi-bookmark-plus-outline</v-icon>
-                    Add milestone
-                </v-btn>
-            </template>
-        </Empty>
+        <v-card flat v-else>
+            <Empty class="mt-3" icon="mdi-bookmark-remove-outline" headline="No milestone yet">
+                <template v-slot:extra>
+                    <v-btn large dark color="#3b589e" @click="add_dialog = true">
+                        <v-icon left>mdi-bookmark-plus-outline</v-icon>
+                        Add milestone
+                    </v-btn>
+                </template>
+            </Empty>
+        </v-card>
+
     </div>
 </template>
 <script src="./Milestones.js"></script>

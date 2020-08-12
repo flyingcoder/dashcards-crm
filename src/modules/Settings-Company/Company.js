@@ -1,12 +1,10 @@
 import { list_functionality } from '@/services/list-functionality/list-functionality'
-import isEmpty from 'lodash/isEmpty'
 import { api_to } from './api'
 //Components
 import Breadcrumb from '@/common/Breadcrumb.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
 import TableHeader from '@/common/TableHeader.vue'
-import AddPicture from './components/AddPicture.vue'
-
+import IconUploader from "@/common/Uploaders/IconUploader.vue";
 export default {
     name: 'Company',
     mixins: [list_functionality],
@@ -14,7 +12,7 @@ export default {
         Breadcrumb,
         DeleteDialog,
         TableHeader,
-        AddPicture
+        IconUploader
     },
     data: () => ({
         paths: [
@@ -38,8 +36,10 @@ export default {
             return this.$store.getters.user
         },
         can_update() {
-            if (this.user.is_company_owner || this.user.is_admin || this.user.is_manager) return true
-            return false
+            return !!(this.user.is_company_owner || this.user.is_admin || this.user.is_manager);
+        },
+        filename() {
+            return this.company ? this.company.name : ''
         },
         company_logo: {
             get() {
@@ -60,10 +60,21 @@ export default {
         image_clicked() {
             this.open_add_picture = true
         },
+        updateIcon(data) {
+            this.company_logo = data.url
+            let payload = {url: data.url, logo_details: data};
+            api_to.upload_image_via_url(this.company.id,payload)
+                .then(({data}) => {
+                    this.company = data
+                    this.$store.commit('set_user_company', data)
+                    this.open_add_picture = false
+                })
+        },
         getCompanyDetails() {
             api_to.get_company_info(this.user.company_id)
                 .then(({ data }) => {
                     this.company = data
+                    this.$store.commit('set_user_company', data)
                 })
         },
         showUpdate(payload) {

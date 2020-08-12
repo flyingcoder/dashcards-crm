@@ -57,10 +57,12 @@
                                 item.fullname | ucwords }}</strong>
                         </div>
                         <div class="card-actions">
-                            <div class="fullwidth" v-if="item.is_client && item.company">
-                                <v-icon small left>mdi-office-building</v-icon>
-                                {{ item.company.name | ucwords }}
-                            </div>
+                            <template v-if="item.is_client && item.companies">
+                                <div class="fullwidth" v-for="company in item.companies" :key="company.id" >
+                                    <v-icon small left>mdi-office-building</v-icon>
+                                    {{ company.name | ucwords }}
+                                </div>
+                            </template>
                             <div class="fullwidth">
                                 <v-icon small left>mdi-email</v-icon>
                                 {{ item.email }}

@@ -165,13 +165,13 @@
                                     <v-card-actions class="mb-3 mr-2 py-3">
                                         <small>* Required</small>
                                         <v-spacer />
-                                        <v-btn class="px-5" v-if="editting" :disabled="!validScheduleTask "
+                                        <v-btn dark color="#3b589e" class="px-5" v-if="editting" :disabled="!validScheduleTask "
                                                :loading="submitting"
                                                @click="saveChanges"
                                         >
                                             Update Schedule Task
                                         </v-btn>
-                                        <v-btn class="px-5" v-if="!editting" :disabled="!validScheduleTask"
+                                        <v-btn dark color="#3b589e" class="px-5" v-if="!editting" :disabled="!validScheduleTask"
                                                :loading="submitting"
                                                @click="addNewScheduleTask"
                                         >

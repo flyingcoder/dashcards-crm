@@ -37,12 +37,12 @@ export default {
         filteredUsers() {
             return this.items.filter(item => {
                 if (this.filter === 'all') return true
-                var roles = Object.values(item.user_roles)
+                let roles = Object.values(item.user_roles);
                 return roles.includes(this.filter)
             })
         },
         currentUserRoles() {
-            var values = Object.values(this.activeUser.user_roles)
+            let values = Object.values(this.activeUser.user_roles);
             return this.roles.filter(item => {
                 return values.includes(item.slug) || item.slug.includes(values)
             })

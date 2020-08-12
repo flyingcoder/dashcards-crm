@@ -48,7 +48,7 @@
                                     </v-card-text>
                                     <v-card-actions class="mb-3 mr-2">
                                         <v-spacer/>
-                                        <v-btn dark class="px-5" :loading="submitting" @click="saveChanges">
+                                        <v-btn dark color="#3b589e" class="px-5" :loading="submitting" @click="saveChanges">
                                             Save Changes
                                         </v-btn>
                                     </v-card-actions>

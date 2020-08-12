@@ -101,16 +101,18 @@
                 border-width: 3px;
                 border-radius: 10px;
                 background-color: $white;
-                height: 150px;
-                width: 200px;
+                height: auto;
+                width: auto;
+                min-height: 50px;
+                min-width: 50px;
                 overflow: hidden;
 
                 .user-img-hover{
                     display: none;
                     border-radius: 10px;
                     background-color: $gray;
-                    height: 150px;
-                    width: 200px;
+                    height: 100px;
+                    width: 100px;
                     color: $black;
                     opacity: 0.5;
                     position: absolute;
