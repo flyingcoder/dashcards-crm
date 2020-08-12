@@ -92,6 +92,11 @@ export default {
         }
     },
     methods: {
+        remove_from_selected_members(item) {
+            let index = this.members.selected.findIndex(i => i.id === item.id)
+            if (~index)
+                this.members.selected.splice(index, 1)
+        },
         openDialog(item) {
             this.dialog = true
             this.fieldsToEdit = item || null
@@ -130,7 +135,7 @@ export default {
         },
         save() {
             this.btnloading = true
-            var payload = {
+            let payload = {
                 title: this.title,
                 notify: this.notify,
                 start_date: this.getDateTime(),
@@ -142,7 +147,7 @@ export default {
                 alarm: this.time.alarm,
                 time: this.time,
                 link: this.link
-            }
+            };
 
             if (this.members.selected.length > 0) {
                 payload.participants = this.members.selected.map(o => {
