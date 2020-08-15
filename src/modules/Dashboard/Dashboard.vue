@@ -23,7 +23,7 @@
             <router-view :key="$route.fullPath" />
 
             <!--Global components-->
-            <floating-chat-button />
+            <floating-chat-button v-show="$route.name !== 'chat'" />
             <GlobalEmailer ref="global_emailer" />
         </div>
     </div>

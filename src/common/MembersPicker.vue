@@ -139,7 +139,8 @@
         },
         methods: {
             getMembers() {
-                makeRequestTo.getAllMembers().then(({data}) => {
+                makeRequestTo.getAllMembers()
+                    .then(({data}) => {
                     this.original = _cloneDeep(data)
                     this.members = data
                 })

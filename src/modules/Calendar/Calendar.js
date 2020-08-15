@@ -1,11 +1,10 @@
 import { list_functionality } from '@/services/list-functionality/list-functionality'
 import { calendar_utils } from '@/services/calendar/calendar_utils'
-import * as apiTo from '@/modules/Calendar/api'
 //Components
 import TableHeader from '@/common/TableHeader.vue'
 import CalendarDialog from './components/CalendarDialog/CalendarDialog.vue'
 import EventCard from './components/EventCard/EventCard.vue'
-import EventDialog from './components/EventDialog/EventDialog.vue'
+import EventDialogV2 from "./components/EventDialogV2/EventDialogV2";
 import EventTypeDialog from './components/EventTypeDialog/EventTypeDialog.vue'
 import EventDetailDialog from './components/EventDetailDialog/EventDetailDialog.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
@@ -24,7 +23,7 @@ export default {
         DeleteDialog,
         ConfirmDialog,
         EventCard,
-        EventDialog,
+        EventDialogV2,
         EventTypeDialog,
         VueTable,
         Actions,
@@ -49,19 +48,20 @@ export default {
                 text: 'Date & Time',
                 sortable: false,
                 align: 'left',
-                width: '171px'
+                width: 190
             },
             {
                 text: 'Members',
                 sortable: false,
-                align: 'left'
+                align: 'center',
+                width: 150
             },
             {
                 text: 'Action',
                 value: 'action',
                 sortable: false,
                 align: 'center',
-                width: '40px'
+                width: 20
             }
         ],
         table_config: {
@@ -72,12 +72,9 @@ export default {
             refresh_table_api_name: 'paginate_clients_table'
         }
     }),
+
     mounted() {
         this.view = this.getPreferredView()
-        apiTo.myCalendar().then(({ data }) => {
-            this.calendar = data.calendar
-            this.attributes = data.attributes
-        })
         this.load_events()
         this.$event.$emit('path-change', this.paths)
     }

@@ -27,11 +27,7 @@
                         @scroll="on_scroll"
                 >
                     <div class="message-loader">
-                        <v-progress-circular
-                                indeterminate
-                                color="primary"
-                                v-if="scroll_load"
-                        />
+                        <v-progress-circular indeterminate  color="primary"  v-if="scroll_load" />
                     </div>
 
                     <div class="no-messages" v-if="!conv.messages.length">

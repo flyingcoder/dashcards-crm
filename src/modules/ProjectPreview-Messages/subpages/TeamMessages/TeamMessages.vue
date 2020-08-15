@@ -119,7 +119,7 @@ export default {
         user_can_message(can) {
             this.can_message = can
             if (can) console.log('Client chat connected')
-            else this.$event.$emit('open_snackbar', 'Team chat unavailable.', 'error')
+            //else this.$event.$emit('open_snackbar', 'Team chat unavailable.', 'error')
         },
         subscribePusher() {
             const team_message_channel = this.$pusher.subscribe(

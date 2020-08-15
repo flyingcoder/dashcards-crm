@@ -1,58 +1,80 @@
 import makeRequestTo from '@/services/makeRequestTo'
 //components
 import TextField from '@/common/BaseComponents/TextField.vue'
-import MembersPicker from '@/common/MembersPicker.vue'
+import _cloneDeep from "lodash/cloneDeep";
+import _diffBy from 'lodash/differenceBy'
+import {mapGetters} from "vuex";
 
 export default {
     name: 'AddParticipantDialog',
     components: {
         TextField,
-        MembersPicker
     },
     props: {
-        dialogTitle: { type: String, default: 'Add New Participants' },
-        event: { type: Object }
+        dialogTitle: {type: String, default: 'Manage Participants'},
+        event: {type: Object}
     },
 
     data: () => ({
         dialog: false,
         btnloading: false,
-        to_be_added: []
+        members: {
+            items: [],
+            original: [],
+            selected: []
+        }
     }),
+    watch: {
+        dialog: {
+            handler(value) {
+                if (value) {
+                    this.getAllMembers()
+                }
+                if (value && this.event && this.event.hasOwnProperty('users')) {
+                    this.members.selected = _cloneDeep(this.event.users)
+                }
+            },
+            immediate: true
+        }
+    },
     computed: {
+        ...mapGetters(['users']),
         disabled() {
-            if (this.to_be_added.length === 0) {
-                return true
-            }
-            return false
+            return this.members.selected.length === 0;
         },
-        loggeduser() {
-            return this.$store.getters.user
-        },
-        user_participants() {
-            return this.event.participants.map(ii => {
-                return ii.user
-            })
+        available() {
+            return _diffBy(this.members.items, this.members.selected, 'id')
         }
     },
     methods: {
         openDialog() {
             this.dialog = true
         },
+        getAllMembers() {
+            if (!this.users || this.users.length === 0) {
+                this.$store.dispatch('fetchUsers')
+                    .then(() => {
+                        let users = this.$store.getters.users
+                        this.members.items = _cloneDeep(users)
+                        this.members.original = _cloneDeep(users)
+                    })
+            } else {
+                this.members.items = _cloneDeep(this.users)
+                this.members.original = _cloneDeep(this.users)
+            }
+        },
         save() {
             this.btnloading = true
-            var payload = {
-                participants: this.to_be_added.map(o => {
-                    return o.id
+            let payload = {
+                participants: this.members.selected.map(user => {
+                    return user.id
                 })
-            }
+            };
             makeRequestTo
                 .addParticipants(this.event.id, payload)
-                .then(({ data }) => {
-                    this.$emit('participants-refresh', {
-                        event_id: this.event.id,
-                        data: data
-                    })
+                .then(({data}) => {
+                    this.$emit('participants-refresh', {event_id: this.event.id, data: data})
+                    this.$event.$emit('open_snackbar', 'Participants updated')
                     this.clear_and_close()
                 })
                 .finally(() => {
@@ -60,21 +82,20 @@ export default {
                 })
         },
         clear_and_close() {
-            this.to_be_added = []
+            this.members.selected = []
+            this.members.items = this.members.original
             this.dialog = false
         },
-        remove_from_selected_members(item) {
-            let index = this.to_be_added.findIndex(user => user.id === item.id)
-            if (~index) {
-                this.to_be_added.splice(index, 1)
-                this.$event.$emit('remove-from-selected', item)
-            }
-        },
         clearable(item) {
-            if (item.id === this.event.properties.creator) {
-                return false
-            }
-            return true
+            return item.id !== this.event.properties.creator;
+        },
+        add_to(user, index) {
+            this.members.selected.push(user)
+            this.members.items.splice(index, 1)
+        },
+        remove_from(user, index) {
+            this.members.items.push(user)
+            this.members.selected.splice(index, 1)
         }
     }
 }

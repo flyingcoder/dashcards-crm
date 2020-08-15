@@ -8,17 +8,15 @@
             :close-on-content-click="false"
             v-model="dropdownVisible"
     >
-        <template v-slot:activator="{ on }">
-
-        </template>
+        <template v-slot:activator="{ on }"/>
         <template v-slot:activator="{ on: menu, attrs }">
             <v-tooltip bottom>
                 <template v-slot:activator="{ on: tooltip }">
-                    <div class="chat__button" :data-notify="chat_counts === 0 ? false : chat_counts"
-                            v-bind="attrs"
-                            v-on="{ ...tooltip, ...menu }"
+                    <div class="chat__button" :data-notify="chat_counts"
+                         v-bind="attrs"
+                         v-on="{ ...tooltip, ...menu }"
                     >
-                        <HeaderIcon :image-src="chatIcon" :hovered-image-src="hoveredChatIcon" />
+                        <HeaderIcon :image-src="chatIcon" :hovered-image-src="hoveredChatIcon"/>
                     </div>
                 </template>
                 <span>Messages</span>
@@ -29,7 +27,7 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex'
+    import {mapActions, mapGetters} from 'vuex'
     // Components
     import HeaderIcon from '@/common/HeaderIcon.vue'
     import ChatDropdown from './ChatDropdown.vue'
@@ -40,16 +38,21 @@
         data: () => ({
             dropdownVisible: false
         }),
-
+        created() {
+            this.fetch_chat()
+        },
         computed: {
             ...mapGetters('headerIcons', ['chat']),
-            ...mapGetters('notifications', ['chat_counts']),
+            ...mapGetters('chatNotifications', ['chat_counts']),
             chatIcon() {
                 return require('@/assets/icons/header/chat__default.png')
             },
             hoveredChatIcon() {
                 return require('@/assets/icons/header/chat.png')
             }
+        },
+        methods: {
+            ...mapActions('chatNotifications', ['fetch_chat'])
         }
     }
 </script>

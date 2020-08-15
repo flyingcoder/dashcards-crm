@@ -33,7 +33,6 @@ export default {
         counterReset: 0
     }),
     mounted() {
-        this.comments = this.items
         if (this.fetchApi !== '') {
             this.fetchComments()
         }
@@ -46,6 +45,14 @@ export default {
                 }
             },
             deep: true,
+            immediate: true
+        },
+        items: {
+            handler(val) {
+                this.comments = val
+            },
+            deep: true,
+            immediate: true
         }
     },
     computed: {

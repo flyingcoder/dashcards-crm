@@ -4,7 +4,8 @@ import _cloneDeep from 'lodash/cloneDeep'
 export default {
     name: 'ManageMemberDialog',
     props: {
-        conversation: Object
+        conversation: Object,
+        userList: Array
     },
     data() {
         return {
@@ -16,40 +17,61 @@ export default {
             btnloading: false
         }
     },
+    computed: {},
+    watch: {
+        conversation: {
+            handler(val) {
+                if (val && val.type) {
+                    this.all_users = _cloneDeep(this.userList)
+                    this.filter_users()
+                }
+            },
+            immediate: true,
+            deep: true
+        }
+    },
     methods: {
         open_dialog() {
             this.dialog = true
-            this.all_selected = _cloneDeep(this.conversation.members)
-            this.get_chat_list()
+            if (this.conversation.users)
+                this.all_selected = _cloneDeep(this.conversation.users)
+            else
+                this.all_selected = []
         },
         clear_and_close() {
             this.dialog = false
         },
         get_chat_list() {
-            api_to.get_chat_list().then(({data}) => {
-                this.filtered_by_search = this.filter_users_for_selected(data)
-                this.all_users = _cloneDeep(data)
-            })
+            api_to.get_chat_list()
+                .then(({data}) => {
+                    this.filtered_by_search = this.filter_users_for_selected(data)
+                    this.all_users = _cloneDeep(data)
+                })
         },
         update_members() {
+            if (this.all_selected.length < 2) {
+                this.$event.$emit('open_snackbar', 'Conversation must have atleast 2 members', 'error')
+                return
+            }
             this.btnloading = true
             let payload = {
-                convo_id: this.conversation.id,
+                conversation_id: this.conversation.id,
                 users: this.all_selected.map(value => {
                     return value.id
                 })
             };
-            api_to
-                .update_members_list(payload)
+            api_to.update_members_list(this.conversation.id, payload)
                 .then(({data}) => {
-                    this.conversation.members = data
+                    this.$emit('conversation-updated', data)
+                    this.$event.$emit('open_snackbar', 'Conversation members updated')
                     this.clear_and_close()
                 })
                 .finally(() => (this.btnloading = false))
         },
         can_be_remove(user) {
+            if (typeof user === 'undefined') return false
+            if (!this.conversation.type || !this.conversation.data) return false
             return user.id !== this.conversation.data.group_creator.id;
-
         },
         select(item, value) {
             let index = this.filtered_by_search.findIndex(user => item.id === user.id)
@@ -69,7 +91,7 @@ export default {
         },
 
         filter_users_for_selected(items) {
-            let selected_ids = this.conversation.members.map(value => {
+            let selected_ids = this.conversation.users.map(value => {
                 return value.id
             });
             return items.map(item =>

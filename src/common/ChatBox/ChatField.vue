@@ -2,13 +2,8 @@
     <v-row no-gutters class="chat-field">
         <v-col md="12" class="mb-1" v-if="files.length > 0">
             <span class="caption">Files :</span>
-            <v-chip
-                    dense
-                    small
-                    close
-                    v-for="(file, inx) in files"
-                    :key="inx"
-                    class="mx-1"
+            <v-chip dense small close v-for="(file, inx) in files"
+                    :key="inx" class="mx-1"
                     @click:close="removeFile(file, inx)"
             >
                 <v-icon left>mdi-file</v-icon>
@@ -17,15 +12,12 @@
         </v-col>
         <v-col class="avatar--wrapper" v-if="hasAvatar">
             <v-avatar size="45">
-                <v-img :src="loggedUser.image_url" />
+                <v-img :src="loggedUser.image_url"/>
             </v-avatar>
         </v-col>
         <v-col class="textfield--wrapper">
-            <input
-                    type="file"
-                    ref="hidden_input"
-                    @change="file_selected"
-                    class="hidden-input"
+            <input type="file" ref="hidden_input"
+                   @change="file_selected" class="hidden-input"
             >
             <at-ta
                     :members="mentionables"
@@ -35,20 +27,23 @@
             >
                 <template slot="item" slot-scope="{ item }">
                     <img :src="item.image_url" class="mention-img">
-                    <span v-text="item.fullname" />
+                    <span v-text="item.fullname"/>
                 </template>
                 <textarea
                         class="write__msg solo"
                         placeholder="Type a message...@name..."
                         :rows="1"
+                        style="resize: none; overflow-y: hidden;"
                         @keydown.exact="$emit('typing')"
-                        @keydown.enter="$emit('key-enter')"
+                        @keydown.enter.exact.prevent
+                        @keyup.enter.exact="sendMessage"
+                        @keydown.enter.shift.exact="newline"
                 />
             </at-ta>
         </v-col>
-        <v-col class="action--wrapper" v-if="!small">
+        <template v-if="!small">
             <v-btn icon class="action ml-1">
-                <EmojiPicker @emoji-selected="appendEmoji" />
+                <EmojiPicker @emoji-selected="appendEmoji"/>
             </v-btn>
             <v-btn icon class="action ml-1" @click="$refs.hidden_input.click()">
                 <v-icon>attach_file</v-icon>
@@ -62,24 +57,20 @@
             >
                 <v-icon color="primary">send</v-icon>
             </v-btn>
-        </v-col>
-        <v-col v-else md="12" style="display:flex;">
-            <v-btn icon>
-                <EmojiPicker @emoji-selected="appendEmoji" />
+        </template>
+        <template v-else >
+            <v-btn depressed icon>
+                <EmojiPicker @emoji-selected="appendEmoji"/>
             </v-btn>
-            <v-btn icon class="action ml-1" @click="$refs.hidden_input.click()">
+            <v-btn depressed icon @click="$refs.hidden_input.click()">
                 <v-icon>attach_file</v-icon>
             </v-btn>
-            <v-spacer />
-            <v-btn
-                    :disabled="disabled"
-                    :loading="btnsending"
-                    icon
-                    @click="sendMessage(message)"
+            <v-btn depressed :disabled="disabled" :loading="btnsending" icon
+                   @click="sendMessage"
             >
                 <v-icon color="primary">send</v-icon>
             </v-btn>
-        </v-col>
+        </template>
     </v-row>
 </template>
 
@@ -122,11 +113,11 @@
             }
         },
         methods: {
-            sendMessage(text) {
-                if (
-                    this.btnsending ||
-                    (this.message.trim() === '' && this.files.length <= 0)
-                ) {
+            newline() {
+                this.message = `${this.message}\n`;
+            },
+            sendMessage() {
+                if (this.btnsending || (this.message.trim() === '' && this.files.length <= 0)) {
                     this.$event.$emit('open_snackbar', 'Message cannot be empty.', 'error')
                     return
                 }

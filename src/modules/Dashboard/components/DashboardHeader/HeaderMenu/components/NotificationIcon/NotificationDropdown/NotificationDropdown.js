@@ -1,15 +1,13 @@
-import * as apiTo from '../api'
-import { mapGetters } from 'vuex'
-import { cloneDeep } from 'lodash'
-import { global_utils } from '@/global_utils/global_utils'
+import {mapActions} from 'vuex'
+import {global_utils} from '@/global_utils/global_utils'
 // Components
 import SingleNotification from './SingleNotification.vue'
 
 export default {
     mixins: [global_utils],
-    components: { SingleNotification },
+    components: {SingleNotification},
     props: {
-        visible: { type: Number, default: 0 }
+        visible: {type: Number, default: 0}
     },
 
     data: () => ({
@@ -22,69 +20,40 @@ export default {
         noMoreData: false,
         current_page: 1,
         total_page: 0,
-        total_counts: 0
     }),
     computed: {
-        ...mapGetters('notifications', { notifications: 'notification' })
-    },
-    created() {
-        if (this.current_page === 1) {
-            this.visible > 0 &&
-                !this.notificationsFetched &&
-                this.fetchNotifications()
+        notifications() {
+            return this.$store.getters['chatNotifications/notification']
+        },
+        total_counts() {
+            return this.$store.getters['chatNotifications/notification_counts']
+        },
+        hasMoreNotification() {
+            return this.$store.getters['chatNotifications/has_more_notification']
         }
     },
-    /*watch: {
-      visible(val) {
-        val > 0 && !this.notificationsFetched && this.fetchNotifications()
-      }
-    },*/
-
     methods: {
-        fetchNotifications() {
-            this.notificationsFetched = true
-            apiTo
-                .getUnreadNotifications({ page: this.current_page })
-                .then(({ data }) => {
-                    this.$store.commit('notifications/setNotification', data.data)
-                    this.current_page = data.current_page
-                    this.total_page = data.last_page
-                    this.total_counts = data.total
-                })
-                .finally(() => {
-                    this.notificationsFetched = false
-                    this.btnloading = false
-                    if (this.current_page >= this.total_page) {
-                        this.noMoreData = true
-                    }
-                })
-        },
+        ...mapActions('chatNotifications', ['fetch_more_notification']),
         fetchMoreNotifications() {
             this.notificationsFetched = true
-            this.btnloading = true
-            apiTo
-                .getUnreadNotifications({ page: this.current_page + 1 })
-                .then(({ data }) => {
-                    this.$store.commit('notifications/addMoreNotification', data.data)
-                    this.current_page = data.current_page
-                    this.total_page = data.last_page
-                    this.total_counts = data.total
-                })
-                .finally(() => {
+            this.fetch_more_notification()
+                .then(() => {
                     this.notificationsFetched = false
-                    this.btnloading = false
-                    if (this.current_page >= this.total_page) {
-                        this.noMoreData = true
-                    }
                 })
         },
         notificationClicked(notification, index) {
-            this.$emit('notification-clicked')
-            apiTo.markReadNotification(notification.id).then(() => {
-                let notifications = cloneDeep(this.notifications)
-                notifications[index].read = true
-                this.$store.commit('notifications/setNotification', notifications)
-            })
+            this.$store.dispatch('chatNotifications/mark_as_read_notification', notification.id)
+                .then(() => {
+                    if (notification.data.url)
+                        this.$router.push({path: notification.data.url})
+                })
+        },
+        mark_all_as_read_notification() {
+            this.notificationsFetched = true
+            this.$store.dispatch('chatNotifications/mark_all_as_read', 'company')
+                .then(() => {
+                    this.notificationsFetched = false
+                })
         }
     }
 }

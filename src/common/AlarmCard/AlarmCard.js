@@ -7,8 +7,7 @@ import * as apiTo from '@/modules/Calendar/api'
 
 import DashCard from '@/common/DashCard.vue'
 import Avatars from '@/common/Avatars.vue'
-import Empty from '@/common/Empty'
-import EventDialog from '@/modules/Calendar/components/EventDialog/EventDialog.vue'
+import EventDialogV2 from '@/modules/Calendar/components/EventDialogV2/EventDialogV2.vue'
 import EventTypeDialog from '@/modules/Calendar/components/EventTypeDialog/EventTypeDialog.vue'
 import EventDetailDialog from '@/modules/Calendar/components/EventDetailDialog/EventDetailDialog.vue'
 import DeleteDialog from '@/common/DeleteDialog.vue'
@@ -21,10 +20,9 @@ export default {
     components: {
         DashCard,
         Avatars,
-        Empty,
         DeleteDialog,
         ConfirmDialog,
-        EventDialog,
+        EventDialogV2,
         EventTypeDialog,
         EventDetailDialog,
         AddParticipantDialog
@@ -47,18 +45,29 @@ export default {
     },
     created() {
         this.getTimers();
-        apiTo.myCalendar().then(({data}) => {
+        apiTo.myCalendar()
+            .then(({data}) => {
             this.calendar = data.calendar
         });
         setInterval(() => {
             this.timeNow = new Date().toLocaleTimeString()
         }, 1000)
+
+        this.$event.$on('add-participant', (event) => {
+            this.open_add_participant_dialog(event)
+        })
+        this.$event.$on('delete-event', (event) => {
+            this.open_delete_dialog(event)
+        })
+        this.$event.$on('edit-event', (event) => {
+            this.open_add_event_dialog(true, event)
+        })
+        this.$event.$on('add-event', (event) => {
+            this.open_add_event_dialog(false, null)
+        })
     },
     computed: {
-        ...mapGetters(['user']),
-        logged() {
-            return this.$store.getters.user
-        }
+        ...mapGetters(['user'])
     },
     filters: {
         format(value, format) {
@@ -82,12 +91,10 @@ export default {
             this.getTimers()
         },
         is_owner(item) {
-            return item.properties.creator === this.logged.id
+            return item.properties.creator === this.user.id
         },
         expand() {
-            this.$router.push({
-                name: 'alarm'
-            })
+            this.$router.push({  name: 'alarm'  })
         }
     }
 }

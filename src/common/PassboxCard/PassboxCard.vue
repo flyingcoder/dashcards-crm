@@ -37,7 +37,7 @@
                         </div>
                         <div class="passbox-body">
                             <v-expansion-panels v-show="true">
-                                <v-expansion-panel v-for="(item, i) in 6" :key="i">
+                                <v-expansion-panel v-for="item in 6" :key="item">
                                     <v-expansion-panel-header>
                                         <v-avatar max-width="50" class="mr-5">
                                             <img src="@/assets/temp/user2.png" alt="John">
