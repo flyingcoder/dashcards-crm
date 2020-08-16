@@ -59,7 +59,7 @@
                                                     close
                                                 </v-icon>
                                             </v-list-item-icon>
-                                            <v-list-item-icon v-if="item.id === conversation.data.group_creator.id">
+                                            <v-list-item-icon v-if="item.id === conversation.data.group_creator">
                                                 <v-icon small title="Group owner">lock</v-icon>
                                             </v-list-item-icon>
                                         </v-list-item>

@@ -10,7 +10,7 @@ export default {
         ...mapGetters(['user']),
         online_users() {
             return this.all_users.filter(
-                user => user.is_online && user.id !== this.user.id
+                user => user.id !== this.user.id
             )
         }
     },

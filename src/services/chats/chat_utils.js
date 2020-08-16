@@ -16,24 +16,19 @@ export const chat_utils = {
         contact_list_loading: false,
         scrolling: false
     }),
-    created() {
-        //this.subscribeToChat()
-    },
+
     computed: {
         ...mapGetters(['user']),
         onlineUsers() {
             return this.$store.getters['onlineUsers/all_users']
         },
-        sortByOnlineStatus() {
-            return this.sortByStatus(this.user_list)
-        },
         mentionable_list() {
             if (!this.active_chat) return []
-            if (this.active_chat.type)
+            if (this.active_chat.type && this.active_chat.users)
                 return this.active_chat.users.filter(item => {
                     return item.id !== this.user.id
                 })
-            return [this.active_chat.user]
+            return this.active_chat.user ? [this.active_chat.user] : []
         },
         is_group_creator() {
             if (!this.active_chat) return false
@@ -47,22 +42,17 @@ export const chat_utils = {
         }
     },
     methods: {
-        subscribeToChat() {
-            //this.chat_notification_channel = this.$pusher.subscribe(`presence-chat-notification.${this.user.id}`)
-            /*this.chat_notification_channel.bind('App\\Events\\ChatNotification', ({message, sender, receiver}) => {
-                console.log(message)
-                // this.add_chat(message)
-            })*/
-            /*this.chat_notification_channel.bind('.App\\Events\\ChatNotification', payload => {
-                console.log(payload)
-                // this.add_chat(message)
-            })*/
-        },
-        sortByStatus(users) {
-            if (!users || users.length === 0) return []
-            return users.slice().sort(function (userA, userB) {
-                return userA.is_online - userB.is_online
-            }).reverse()
+        showNotification(message) {
+            let user = this.$store.getters.user
+            if (message.sender.id !== user.id) {
+                let notification = new Notification(`New message from ${message.sender.first_name}`, {
+                    icon: require('@/assets/logo/mini-blue.png'),
+                    body: message.body
+                })
+                /*notification.onclick = function (event) {
+                    this.$router.push({name: 'chat', params: {conversation_id: message.conversation.id}})
+                }*/
+            }
         },
         get_conversation_list(cb) {
             this.contact_list_loading = true
@@ -82,20 +72,45 @@ export const chat_utils = {
         },
         open_conversation(conversation, fetch_message) {
             this.active_chat = conversation
+            this.mark_read_conversation(conversation)
             if (fetch_message)
                 this.get_conversation_messages(conversation)
+
+            this.$event.$emit('conversation-opened', conversation)
+        },
+        mark_read_conversation(conversation) {
+            if (conversation) {
+                request.post(`api/chat/conversations/${conversation.id}/mark-as-read`)
+                    .then(({data}) => {
+                        if (!conversation.type) {
+                            let index = this.user_list.findIndex(item => item.conversation.id === conversation.id)
+                            if (~index) {
+                                this.user_list[index].message_count = 0
+                            }
+                        } else {
+                            let index = this.group_list.findIndex(item => item.id === conversation.id)
+                            if (~index) {
+                                this.group_list[index].message_count = 0
+                            }
+                        }
+
+                    })
+            }
         },
         get_conversation_messages(conversation) {
-            this.message_loading = true
-            request.get(`api/chat/conversations/${conversation.id}/messages?page=1`)
-                .then(({data}) => {
-                    this.messages = data.data
-                    this.next_url = data.next_page_url
-                })
-                .finally(() => {
-                    this.message_loading = false
-                    this.scrollToEnd('.messages-wrapper')
-                })
+            if (conversation) {
+                this.messages = []
+                this.message_loading = true
+                request.get(`api/chat/conversations/${conversation.id}/messages?page=1`)
+                    .then(({data}) => {
+                        this.messages = data.data
+                        this.next_url = data.next_page_url
+                    })
+                    .finally(() => {
+                        this.message_loading = false
+                        this.scrollToEnd('.messages-wrapper')
+                    })
+            }
         },
         get_previous_conversation_messages() {
             let el = this.$refs.chat_wrapper
@@ -135,6 +150,11 @@ export const chat_utils = {
                     this.sending = false
                     this.$event.$emit('btnsending_off', false)
                 })
+        },
+        add_new_message(message) {
+            if (!this.messages.some(msg => msg.id === message.id)) {
+                this.messages.push(message)
+            }
         },
         typing() {
             //todo actual typing notif on opposite side

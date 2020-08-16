@@ -26,7 +26,13 @@ export const global_filters = {
         if (!text) return ''
         return text.slice(0, stop) + (stop < text.length ? clamp || '...' : '')
     },
-
+    trunc_mid(str, firstCharCount = str.length, endCharCount = 0, dotCount = 3) {
+        let convertedStr = "";
+        convertedStr+=str.substring(0, firstCharCount);
+        convertedStr += ".".repeat(dotCount);
+        convertedStr+=str.substring(str.length-endCharCount, str.length);
+        return convertedStr;
+    },
     str_limit(value, size) {
         if (!value) return ''
         value = value.toString()

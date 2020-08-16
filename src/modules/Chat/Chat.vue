@@ -5,8 +5,9 @@
                 <v-row>
                     <v-col cols="4">
                         <ChatList :loading="contact_list_loading"
-                                  :user_list="sortByOnlineStatus"
+                                  :user_list="user_list"
                                   :group_list="group_list"
+                                  :selected="active_chat"
                                   @open-chat="open_conversation"
                                   @add-new-chat-group="$refs.create_group_chat.open_dialog()"
                         />
@@ -49,7 +50,15 @@
         mixins: [chat_utils],
         name: "Chat",
         created() {
-            this.get_conversation_list()
+            this.get_conversation_list(() => {
+                if (this.$route && this.$route.params.conversation_id) {
+                    this.set_active_base_on_param(this.$route.params.conversation_id)
+                }
+            })
+        },
+        beforeRouteUpdate (to, from, next) {
+            this.set_active_base_on_param(to.params.conversation_id)
+            //next()
         },
         data: () => ({
             chatHeight: 500
@@ -70,6 +79,18 @@
             },
         },
         methods: {
+            set_active_base_on_param(conversation_id){
+                let index1 = this.user_list.findIndex(i => i.conversation.id === conversation_id)
+                if (~index1) {
+                    this.active_chat = this.user_list[index1].conversation
+                    this.open_conversation(this.user_list[index1].conversation)
+                }
+                let index2 = this.group_list.findIndex(i => i.id === conversation_id)
+                if (~index2) {
+                    this.active_chat = this.group_list[index1]
+                    this.open_conversation(this.group_list[index1])
+                }
+            },
             open_manage_members_dialog() {
                 this.$refs.manage_group_members_dialog.open_dialog()
             },

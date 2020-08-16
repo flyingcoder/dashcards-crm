@@ -285,9 +285,7 @@
                 apiTo.mark_as_urgent_task(this.task.id, payload)
                     .then(({data}) => {
                         this.confirm_mark_as_urgent_dialog = false
-                        this.$event.$emit('open_snackbar', 'Task is now urgent')
-                        //this.update_task(data, this.task.id, 'all_tasks')
-                        //this.update_task(data, this.task.id, 'tasks_own')
+                        this.$event.$emit('open_snackbar', 'Task updated')
                         this.replace_task(data)
                         this.$event.$emit('btnloading_off', false)
                         this.$event.$emit('task-is-updated', data)

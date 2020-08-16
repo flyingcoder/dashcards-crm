@@ -21,7 +21,9 @@ const getters = {
 const mutations = {
     set_chat: (state, payload) => {
         state.chat = payload
-        state.chat_counts = payload.length
+    },
+    set_chat_counts: (state, payload) => {
+        state.chat_counts = payload
     },
     add_chat: (state, payload) => {
         let index = state.chat.findIndex(item => item.conversation_id === payload.conversation_id)
@@ -30,9 +32,6 @@ const mutations = {
         } else {
             state.chat.unshift(payload)
         }
-        state.chat_counts = state.chat.filter(i => {
-            return !i.read_at
-        }).length
     },
     add_bulk_chat: (state, payload) => {
         payload.forEach(message => {
@@ -43,21 +42,8 @@ const mutations = {
                 state.chat.unshift(message)
             }
         })
-        state.chat_counts = state.chat.filter(i => {
-            return !i.read_at
-        }).length
     },
-    remove_chat: (state, convo) => {
-        if (state.chat.length > 0) {
-            const index = state.chat.findIndex(n => n.conversation_id === convo.conversation_id)
-            if (~index) {
-                state.chat.splice(index, 1)
-            }
-            state.chat_counts = state.chat.filter(i => {
-                return !i.read_at
-            }).length
-        }
-    },
+
     set_notification: (state, payload) => {
         state.notification = payload
         state.notification_counts = payload.filter(i => {
@@ -112,6 +98,12 @@ const mutations = {
 }
 
 const actions = {
+    fetch_unread_chat_counts({commit}) {
+        request.get(`api/notifications/chat/count`)
+            .then(({data}) => {
+                commit('set_chat_counts', data.count)
+            })
+    },
     fetch_chat({commit}) {
         request.get(`api/notifications?type=chat-notification`)
             .then(({data}) => {

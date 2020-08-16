@@ -27,7 +27,10 @@ export default {
             {text: 'Database', route_name: 'admin-database'},
             {text: 'Logs', route_name: 'admin-logs'},
         ],
-        tab: 0
+        tab: 0,
+        companyChannel: null,
+        userChannel: null,
+        appChannel: null
     }),
 
     computed: {
@@ -64,7 +67,8 @@ export default {
     created() {
         this.$pusher.authenticate();
         this.subscribeToApp()
-        this.subscribePresence()
+        this.subscribeToCompany()
+        this.subscribeToUser()
         this.fetch_chat()
         this.$event.$on('open_emailer', (user) => {
             this.$refs.global_emailer.openEmailer(user)
@@ -77,31 +81,32 @@ export default {
     methods: {
         ...mapMutations('chatNotifications', ['add_chat']),
         ...mapMutations('onlineUsers', ['set_all_users']),
+        ...mapActions('onlineUsers', ['user_logged_in', 'user_logged_out']),
         ...mapMutations('chat', ['add_unread_messages', 'add_message_to_conv']),
         ...mapActions('notifications', ['fetch_chat']),
         ...mapActions(['fetchUsers']),
-        subscribePresence() {
-            const presence_channel = this.$pusher.subscribe(`presence-friend-list-${this.user.company_id}`)
-
-            presence_channel.bind('pusher:member_added', ({info: member}) => {
-                this.$store.commit('onlineUsers/user_logged_in', {
-                    id: member.id,
-                    name: `${member.first_name}, ${member.last_name}`,
-                    is_online: !!member.is_online,
-                    image_url: member.image_url
-                })
+        subscribeToUser() {
+            this.userChannel = this.$pusher.subscribe(`presence-as-user.${this.user.id}`)
+            this.userChannel.bind('pusher:subscription_succeeded', ({members}) => {
+                console.log('Connected to as-user channel.')
             })
-
-            presence_channel.bind('pusher:member_removed', ({info: member}) => {
-                const index = this.all_users.findIndex(
-                    on_user => on_user.id === member.id
-                )
-                if (~index) {
-                    this.$store.commit('onlineUsers/user_logged_out', index)
+            this.userChannel.bind('pusher:subscription_error', (status) => {
+                console.log('Disconnected to as-user channel', status)
+            })
+            this.userChannel.bind('App\\Events\\ChatMessageSent', ({message}) => {
+                this.$event.$emit('new-chat-message-received', message)
+                if (message.sender.id !== this.user.id && this.$route.name !== 'chat') {
+                    let notification = new Notification(`New message from ${message.sender.first_name}`, {
+                        icon: require('@/assets/logo/mini-blue.png'),
+                        body: message.body
+                    })
                 }
             })
+        },
+        subscribeToCompany() {
+            this.companyChannel = this.$pusher.subscribe(`presence-as-company.${this.user.company_id}`)
 
-            presence_channel.bind('App\\Events\\ProjectTaskNotification', ({payload}) => {
+            this.companyChannel.bind('App\\Events\\ProjectTaskNotification', ({payload}) => {
                 let index = payload.receivers.findIndex(i => i === this.user.id)
                 if (~index) {
                     new Notification(payload.title, {
@@ -111,50 +116,64 @@ export default {
                 }
             })
 
-            presence_channel.bind('App\\Events\\CompanyEvent', payload => {
+            this.companyChannel.bind('App\\Events\\CompanyEvent', payload => {
                 if (payload.type === 'configs') {
                     this.$store.commit('set_user_company', payload)
                 }
             })
 
-            presence_channel.bind('Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', payload => {
+            this.companyChannel.bind('Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', payload => {
+                console.log(payload)
                 if (payload.type.includes('CompanyNotification'))
                     this.handleNotificationPayload(payload, 'notification')
             })
 
-            presence_channel.bind('App\\Events\\ChatNotification', payload => {
+            this.companyChannel.bind('App\\Events\\ChatNotification', payload => {
                 this.handleChatPayload(payload)
             })
 
-            presence_channel.bind('pusher:subscription_succeeded', ({members}) => {
-                let all_users = []
-                Object.entries(members).forEach(([key, value]) => {
-                    all_users.push({
-                        id: Number(key),
-                        name: `${value.first_name}, ${value.last_name}`,
-                        is_online: !!value.is_online,
-                        image_url: value.image_url
-                    })
-                })
-                this.set_all_users(all_users)
+            this.companyChannel.bind('pusher:subscription_succeeded', ({members}) => {
+                console.log('Connected to as-company channel.')
+                this.set_all_users(Object.values(members))
             })
 
-            presence_channel.bind('pusher:subscription_error', (status) => {
-                console.log('Subscription error', status)
+            this.companyChannel.bind('pusher:member_added', ({info}) => {
+                this.user_logged_in(info).then(() => {
+                    this.$event.$emit('user-is-logged-in', info)
+                    //this.$event.$emit('open_snackbar', `${info.fullname} is now online`)
+                })
+            })
+
+            this.companyChannel.bind('pusher:member_removed', ({info}) => {
+                this.user_logged_out(info).then(() => {
+                    this.$event.$emit('user-is-logged-out', info)
+                    //this.$event.$emit('open_snackbar', `${info.fullname} is now offline`)
+                })
+            })
+
+            this.companyChannel.bind('pusher:subscription_error', (status) => {
+                console.log('Disconnected to as-company channel', status)
             })
         },
         subscribeToApp() {
-            this.app_channel = this.$pusher.subscribe(`apps`)
-            this.app_channel.bind('App\\Events\\GlobalEvent', payload => {
+            this.appChannel = this.$pusher.subscribe(`as-apps`)
+            this.appChannel.bind('pusher:subscription_succeeded', (payload) => {
+                console.log('Connected to global app channel.')
+            })
+            this.appChannel.bind('pusher:subscription_error', (status) => {
+                console.log('Disconnected to global app channel', status)
+            })
+            this.appChannel.bind('App\\Events\\GlobalEvent', payload => {
                 if (payload.type === 'configs') {
                     this.$store.commit('set_global_configs', payload)
                     localStorage.setItem('session-eXt-eQt128', this.CryptoJS.AES.encrypt(JSON.stringify(payload), settings.paraphrase).toString())
                 }
             })
         },
+
         handleNotificationPayload(payload, type) {
             if (payload.data && payload.data.targets.length > 0 && payload.data.title) {
-                if (payload.targets.includes(this.user.id)) {
+                if (payload.data.targets.includes(this.user.id)) {
                     this.$store.commit(`chatNotifications/add_${type}`, payload)
                     new Notification(payload.data.title, {
                         icon: require('@/assets/logo/mini-blue.png'),
@@ -171,7 +190,6 @@ export default {
                 }
             }
         },
-
         handleChatPayload(payload) {
             console.log(payload)
             let index = payload.receivers.findIndex(user => user.id === this.user.id)

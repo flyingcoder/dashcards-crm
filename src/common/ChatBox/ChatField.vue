@@ -7,12 +7,12 @@
                     @click:close="removeFile(file, inx)"
             >
                 <v-icon left>mdi-file</v-icon>
-                {{ file.name }}
+                {{ file.name | trunc_mid(5,8) }}
             </v-chip>
         </v-col>
         <v-col class="avatar--wrapper" v-if="hasAvatar">
             <v-avatar size="45">
-                <v-img :src="loggedUser.image_url"/>
+                <v-img :src="loggedUser.image_url" />
             </v-avatar>
         </v-col>
         <v-col class="textfield--wrapper">
@@ -27,13 +27,13 @@
             >
                 <template slot="item" slot-scope="{ item }">
                     <img :src="item.image_url" class="mention-img">
-                    <span v-text="item.fullname"/>
+                    <span v-text="item.fullname" />
                 </template>
                 <textarea
                         class="write__msg solo"
-                        placeholder="Type a message...@name..."
+                        :placeholder="placeholder"
                         :rows="1"
-                        style="resize: none; overflow-y: hidden;"
+                        style="resize: none; overflow-y: hidden;outline: none;"
                         @keydown.exact="$emit('typing')"
                         @keydown.enter.exact.prevent
                         @keyup.enter.exact="sendMessage"
@@ -43,7 +43,7 @@
         </v-col>
         <template v-if="!small">
             <v-btn icon class="action ml-1">
-                <EmojiPicker @emoji-selected="appendEmoji"/>
+                <EmojiPicker @emoji-selected="appendEmoji" />
             </v-btn>
             <v-btn icon class="action ml-1" @click="$refs.hidden_input.click()">
                 <v-icon>attach_file</v-icon>
@@ -58,13 +58,24 @@
                 <v-icon color="primary">send</v-icon>
             </v-btn>
         </template>
-        <template v-else >
-            <v-btn depressed icon>
-                <EmojiPicker @emoji-selected="appendEmoji"/>
-            </v-btn>
-            <v-btn depressed icon @click="$refs.hidden_input.click()">
-                <v-icon>attach_file</v-icon>
-            </v-btn>
+        <template v-else>
+            <v-menu top left offset-y>
+                <template v-slot:activator="{ on, attrs }">
+                    <v-btn icon v-bind="attrs" v-on="on">
+                        <v-icon>mdi-dots-vertical</v-icon>
+                    </v-btn>
+                </template>
+                <v-card dense flat>
+                    <v-card-text class="py-1">
+                        <v-btn depressed icon>
+                            <EmojiPicker @emoji-selected="appendEmoji" />
+                        </v-btn>
+                        <v-btn depressed icon @click="$refs.hidden_input.click()">
+                            <v-icon>attach_file</v-icon>
+                        </v-btn>
+                    </v-card-text>
+                </v-card>
+            </v-menu>
             <v-btn depressed :disabled="disabled" :loading="btnsending" icon
                    @click="sendMessage"
             >
@@ -110,6 +121,9 @@
                     this.btnsending ||
                     (this.message.trim() === '' && this.files.length <= 0)
                 )
+            },
+            placeholder() {
+                return this.small ? 'Write something...' : 'Type a message...@name...'
             }
         },
         methods: {

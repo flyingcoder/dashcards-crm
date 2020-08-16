@@ -49,8 +49,7 @@ const mutations = {
         let conv = _cloneDeep(state.conversations)
         const index = conv.findIndex(conv => conv.id === id)
         if (~index) {
-            conv[index].active = false
-            conv[index].open = false
+            conv.splice(index, 1)
             state.conversations = conv
             state.latest_active_id = null
         }
@@ -76,12 +75,10 @@ const mutations = {
 
 const actions = {
     open_conversation({commit, state}, user) {
-        commit('notifications/removeChat', user, {root: true})
-        commit('headerIcons/removeChatNotification', null, {root: true})
         const index = state.conversations.findIndex(conv => conv.id === user.id)
         if (~index) commit('activate_conversation', index)
         else {
-            makeRequestTo.get_conversation(user.id)
+            makeRequestTo.get_conversation_by_user(user.id)
                 .then(({data}) => {
                 commit('add_conversation', {
                     id: user.id,

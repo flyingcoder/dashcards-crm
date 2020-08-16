@@ -1,7 +1,7 @@
 <template>
     <div class="pa-2">
         <Media :media="media" size="md" style="display:inline-block;">
-            <small class="caption">{{ media.file_name }}</small>
+            <small class="caption" :title="media.file_name">{{ media.file_name | trunc_mid(10,10) }}</small>
         </Media>
         <v-tooltip top>
             <template v-slot:activator="{ on }">

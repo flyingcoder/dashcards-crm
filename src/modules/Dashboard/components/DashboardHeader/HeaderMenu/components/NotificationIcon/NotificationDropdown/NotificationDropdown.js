@@ -44,8 +44,8 @@ export default {
         notificationClicked(notification, index) {
             this.$store.dispatch('chatNotifications/mark_as_read_notification', notification.id)
                 .then(() => {
-                    if (notification.data.url)
-                        this.$router.push({path: notification.data.url})
+                    if (notification.data.path)
+                        this.$router.push({path: notification.data.path}).catch(err => {})
                 })
         },
         mark_all_as_read_notification() {

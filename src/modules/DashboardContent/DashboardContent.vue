@@ -5,6 +5,7 @@
         <v-row v-if="loading">
             <v-progress-linear height="10" indeterminate />
         </v-row>
+
         <NoCards v-if="!cards.length && !loading" />
         <v-layout class="dashcard-content">
             <div v-if="is_screen_medium_and_up" class="desktop-cards">

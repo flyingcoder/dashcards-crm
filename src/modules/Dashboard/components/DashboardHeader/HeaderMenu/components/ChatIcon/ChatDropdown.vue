@@ -32,13 +32,19 @@
 
         <v-card-text class="pa-0" style="max-height: 300px; overflow-x:hidden;overflow-y:auto;">
             <v-list dense class="pa-0">
-                <v-list-item v-if="chats.length === 0" class="new__message">
+                <v-list-item v-if="chats.length === 0 && !notificationsFetched" class="new__message">
                     <v-list-item-content>
                         <empty headline="No Messages" icon="mdi-chat-alert-outline" />
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item :class="{unread:is_unread(message)}" v-else v-for="message of chats"
-                             :key="message.id"
+                <template v-else-if="notificationsFetched">
+                    <v-skeleton-loader type="list-item-avatar-three-line" v-for="repeat in 4" tile :key="repeat"
+                                       class="mx-auto"
+                    />
+                </template>
+                <v-list-item :class="{unread:is_unread(message)}" v-else-if="!notificationsFetched"
+                             v-for="message of chats"
+                             :key="message.conversation.id"
                              @click="open_chat_box(message)"
                 >
                     <v-list-item-avatar>
@@ -58,12 +64,12 @@
                         </v-list-item-title>
                         <v-list-item-subtitle v-if="!is_group_chat(message)">
                             <span v-if="is_self_sender(message)">You: </span>
-                            {{ message.body }}
+                            <span :inner-html.prop="message.body | truncate(20)" />
                         </v-list-item-subtitle>
                         <v-list-item-subtitle v-else>
                             <span v-if="is_self_sender(message)">You : </span>
                             <span v-else> {{ message.sender.first_name }} : </span>
-                            {{ message.body }}
+                            <span :inner-html.prop="message.body | truncate(20)" />
                         </v-list-item-subtitle>
                     </v-list-item-content>
                     <v-list-item-action>
@@ -110,31 +116,32 @@
         data: () => ({
             notificationsFetched: false
         }),
-
+        created() {
+            //trigger in chat_utils when open a conversation
+            this.$event.$on('conversation-opened', (conversation) => {
+                this.fetch_chat()
+            })
+        },
         methods: {
-            ...mapActions('chatNotifications', ['fetch_more_chat']),
+            ...mapActions('chatNotifications', ['fetch_chat', 'fetch_more_chat']),
             fetchMoreChat() {
                 this.notificationsFetched = true
-                this.fetch_more_chat()
-                    .then(() => {
-                        this.notificationsFetched = false
-                    })
+                this.fetch_more_chat().then(() => {
+                    this.notificationsFetched = false
+                })
             },
             open_chat_box(notification) {
-                this.$store.dispatch('chatNotifications/mark_as_read_chat', notification.id)
+                this.$emit('select')
+                this.$store.dispatch('chatNotifications/mark_as_read_chat', notification.conversation.id)
                     .then(() => {
                         let sender = notification.sender
                         let is_online = this.is_user_online(sender.id)
                         if (is_online && this.$route.name !== 'chat') {
-                            this.$store.dispatch('chat/open_conversation', {
-                                id: sender.id,
-                                is_online: is_online,
-                                name: `${sender.first_name}, ${sender.last_name}`
-                            })
-                            this.$emit('close')
+                            this.$store.dispatch('chat/open_conversation', sender)
                         } else {
-                            this.go_to_chat(notification.conversation_id)
+                            this.go_to_chat(notification.conversation.id)
                         }
+                        this.$emit('close')
                     })
             },
             is_user_online(id) {
@@ -142,13 +149,13 @@
                 if (!user) return false
                 return user.is_online
             },
-            go_to_chat(id) {
-                this.$router.push({name: 'chat', params: {target: id}})
-                this.$emit('close')
+            go_to_chat(conversation_id) {
+                if (this.$route.name !== 'chat' || (this.$route.name === 'chat' && this.$route.params.conversation_id !== conversation_id))
+                    this.$router.push({name: 'chat', params: {conversation_id: conversation_id}}).catch(err => {})
             },
             is_unread(message) {
                 if (message.hasOwnProperty('notification') && message.notification)
-                    return !!message.notification.updated_at
+                    return message.notification.is_seen === 0
                 return message.sender.id !== this.loggedUser.id
             },
             is_group_chat(message) {

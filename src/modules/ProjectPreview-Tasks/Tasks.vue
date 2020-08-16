@@ -66,8 +66,8 @@
                     <tasks-content hasLoadMoreBtn :id="id" />
                 </v-card-text>
             </v-card>
-            <preview-card v-if="active_task_id" :id="id" :activeId="active_task_id" />
-            <Empty headline="Add more task..." v-else>
+            <preview-card v-show="active_task_id" :id="id" :active-id="active_task_id" />
+            <Empty headline="Add more task..." v-if="!active_task_id">
                 <template v-slot:extra>
                     <v-btn large dark color="#3b589e" @click="open_new_task_dialog">
                         <v-icon left> mdi-plus-circle-outline</v-icon>

@@ -19,9 +19,9 @@
                          :style="`height:${messageHeight}px;overflow-y:auto;`"
                          @scroll="on_scroll_top"
             >
-                <v-progress-linear color="primary" class="mb-1" indeterminate reverse v-show="scrolling" />
-                <empty style="height: 100%;" headline="No Message yet" icon="mdi-chat" v-if="messages.length === 0" />
-                <template v-else>
+                <v-progress-linear color="primary" class="mb-1" indeterminate reverse v-show="scrolling || message_loading" />
+                <empty style="height: 100%;" headline="No Message yet" icon="mdi-chat" v-if="messages.length === 0 && !(scrolling || message_loading)" />
+                <template v-else-if="sorted_messages.length > 0">
                     <Message v-for="message in sorted_messages" :message="message" :key="message.id" />
                 </template>
             </v-card-text>
@@ -65,6 +65,16 @@
                     ? document.getElementById('chat-input-wrapper').offsetHeight
                     : 0
             }
+        },
+        mounted() {
+            //emit from Dashboard.js
+            this.$event.$on('new-chat-message-received', message => {
+                if (this.active_chat && this.active_chat.id === message.conversation.id) {
+                    this.add_new_message(message)
+                    this.scrollToEnd('.messages-wrapper')
+                }
+                this.showNotification(message)
+            })
         },
         watch: {
             conversation: {

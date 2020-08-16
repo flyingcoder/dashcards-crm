@@ -71,7 +71,7 @@ export default {
         can_be_remove(user) {
             if (typeof user === 'undefined') return false
             if (!this.conversation.type || !this.conversation.data) return false
-            return user.id !== this.conversation.data.group_creator.id;
+            return user.id !== this.conversation.data.group_creator;
         },
         select(item, value) {
             let index = this.filtered_by_search.findIndex(user => item.id === user.id)

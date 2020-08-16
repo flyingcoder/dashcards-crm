@@ -90,9 +90,19 @@ export default {
                 actions.push({id: 3, text: 'Mark as Complete', value: 'mark-as-complete', icon: 'mdi-clipboard-check'})
             }
             if (status !== 'completed' && status !== 'urgent') {
-                actions.push({id: 4, text: 'Mark as Urgent', value: 'mark-as-urgent', icon: 'mdi-clipboard-alert-outline'})
+                actions.push({
+                    id: 4,
+                    text: 'Mark as Urgent',
+                    value: 'mark-as-urgent',
+                    icon: 'mdi-clipboard-alert-outline'
+                })
             } else if (status !== 'completed' && status === 'urgent') {
-                actions.push({id: 4, text: 'Mark as Non-urgent', value: 'mark-as-urgent', icon: 'mdi-clipboard-alert-outline'})
+                actions.push({
+                    id: 4,
+                    text: 'Mark as Non-urgent',
+                    value: 'mark-as-urgent',
+                    icon: 'mdi-clipboard-alert-outline'
+                })
             }
             return actions
         }
@@ -100,14 +110,15 @@ export default {
     watch: {
         activeId: {
             handler(task_id) {
-                this.loading = true
-                request
-                    .get(`api/task/${task_id}`)
-                    .then(response => {
-                        this.content = response.data
-                        this.all_comments = response.data.comments
-                    })
-                    .finally(() => (this.loading = false))
+                if (task_id) {
+                    this.loading = true
+                    request.get(`api/task/${task_id}`)
+                        .then(response => {
+                            this.content = response.data
+                            this.all_comments = response.data.comments
+                        })
+                        .finally(() => (this.loading = false))
+                }
             },
             immediate: true
         }
