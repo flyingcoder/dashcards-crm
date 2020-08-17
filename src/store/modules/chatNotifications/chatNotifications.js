@@ -13,7 +13,12 @@ const getters = {
     chat: state => state.chat,
     chat_counts: state => state.chat_counts > 0 ? state.chat_counts : false,
     notification: state => state.notification,
-    notification_counts: state => state.notification_counts > 0 ? state.notification_counts : false,
+    notification_counts: state => {
+        let unread = state.notification.filter(n => {
+            return !n.read_at
+        })
+        return unread.length > 0 ? unread.length : false
+    },
     has_more_notification: state => !!state.next_notification_page_url,
     has_more_chat: state => !!state.next_chat_page_url,
 }
@@ -46,23 +51,14 @@ const mutations = {
 
     set_notification: (state, payload) => {
         state.notification = payload
-        state.notification_counts = payload.filter(i => {
-            return !i.read_at
-        }).length
     },
     add_notification: (state, payload) => {
         let index = state.notification.findIndex(item => item.id === payload.id)
         if (!(~index))
             state.notification.unshift(payload)
-        state.notification_counts = state.notification.filter(i => {
-            return !i.read_at
-        }).length
     },
     add_bulk_notification: (state, payload) => {
         state.notification.unshift(...payload)
-        state.notification_counts = state.notification.filter(i => {
-            return !i.read_at
-        }).length
     },
     set_next_chat_page_url: (state, payload) => {
         state.next_chat_page_url = payload
@@ -72,18 +68,23 @@ const mutations = {
     },
     set_mark_as_read_notification: (state, payload) => {
         let index = state.notification.findIndex(item => item.id === payload)
-        if (~index)
+        if (~index) {
             state.notification[index].read_at = true
+        }
     },
     set_mark_as_read_chat: (state, payload) => {
         let index = state.chat.findIndex(item => item.conversation_id === payload)
-        if (~index)
-            state.chat[index].read_at = true
+        if (~index) {
+            if (state.chat[index].notification) {
+                state.chat[index].notification.is_seen = true
+            }
+        }
     },
     set_mark_all_as_read: (state, payload) => {
         if (payload === 'chat') {
             state.chat = state.chat.map((item, index) => {
-                item.read_at = true
+                if (item.notification)
+                    item.notification.is_seen = true
                 return item;
             })
             state.chat_counts = 0

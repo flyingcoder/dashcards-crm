@@ -4,7 +4,7 @@
             <div class="user-info">
                 <div class="user__img">
                     <v-img :src="conv.user.image_url" />
-                    <span class="status online" />
+                    <span class="status" :class="{online : is_contact_online}" />
                 </div>
                 <div class="user__detail">
                     <div class="user__name">{{ conv.user.fullname | ucwords }}</div>
@@ -29,11 +29,9 @@
                     <div class="message-loader">
                         <v-progress-circular indeterminate color="primary" v-if="scroll_load" />
                     </div>
-
                     <div class="no-messages" v-if="!conv.messages.length">
                         <empty headline="No message yet! Say Hi!" icon="mdi-chat" />
                     </div>
-
                     <template v-else v-for="message of conv.messages">
                         <div class="single-message me" :key="message.id" v-if="message.user_id === user.id">
                             <div class="sender">
@@ -56,12 +54,11 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="single-message" :key="message.id" v-else>
                             <div class="sender">
                                 <div class="sender__img">
                                     <v-img :src="message.sender.image_url" />
-                                    <span class="status online" />
+                                    <span class="status" :class="{online : is_contact_online}" />
                                 </div>
                                 <h5 class="sender__name">{{ conv.user.fullname | ucwords }}</h5>
                                 <v-spacer />
@@ -80,7 +77,6 @@
                         </div>
                     </template>
                 </div>
-
                 <div :class="['typing-indicator', { active: typing }]" v-show="typing">
                     ... {{ conv.user.fullname.split(',')[1] }} is typing
                 </div>
@@ -94,28 +90,6 @@
                             @typing="user_typing"
                             @send-message="send_message"
                     />
-                    <!--  <v-text-field
-                       solo
-                       flat
-                       hide-details
-                       color="#667187"
-                       label="Type a message..."
-                       v-model.trim="message"
-                       @keydown.exact="user_typing"
-                       @keydown.enter="send_message"
-                     ></v-text-field>
-                     <v-icon
-                       color="#3b589e"
-                       class="send"
-                       @click="send_message"
-                       >attach</v-icon>
-                     <v-icon
-                       :disabled="!message"
-                       color="#3b589e"
-                       class="send"
-                       @click="send_message"
-                       >send</v-icon
-                     > -->
                 </div>
             </v-card>
         </transition>

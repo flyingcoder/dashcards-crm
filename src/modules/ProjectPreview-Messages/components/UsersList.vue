@@ -1,19 +1,23 @@
 <template>
-    <v-card outlined class="mx-auto users-list" :width="240">
+    <v-card outlined class="mx-auto users-list" flat>
         <v-toolbar flat color="#3b589e" height="45" dark>
             <v-icon large left>mdi-wechat</v-icon>
-            <v-toolbar-title class="subtitle">Team</v-toolbar-title>
+            <v-toolbar-title class="subtitle-2">{{ title }}</v-toolbar-title>
             <v-spacer/>
+            <v-icon v-if="hasManageMembers" @click="$emit('open-manage-members')">mdi-account-switch</v-icon>
         </v-toolbar>
         <v-card-text class="pa-0">
-            <!-- <v-divider></v-divider> -->
-            <v-list subheader dense>
-                <v-list-item v-for="user of users" :key="user.id">
-                    <v-list-item-content>
-                        <Avatar :user="user"/>
-                    </v-list-item-content>
-                </v-list-item>
-            </v-list>
+            <template v-if="participants.length > 0">
+                <v-list subheader dense>
+                    <v-subheader>Members</v-subheader>
+                    <v-list-item v-for="user of participants" :key="user.id">
+                        <v-list-item-content>
+                            <Avatar :user="user"/>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-list>
+            </template>
+            <empty v-else headline="No active conversation" icon="mdi-wechat"/>
         </v-card-text>
         <v-card-actions>
             <v-spacer/>
@@ -23,27 +27,14 @@
     </v-card>
 </template>
 <script>
-    import {getMembers} from '../api'
 
     export default {
         props: {
-            id: [Number, String]
+            participants: Array,
+            hasManageMembers: {type: Boolean, default: false},
+            title: {type: String, default: 'Team Chat'}
         },
 
-        data: () => ({
-            users: []
-        }),
-
-        computed: {
-            loggedUser() {
-                return this.$store.getters.user
-            }
-        },
-
-        created() {
-            getMembers(this.id)
-                .then(({data}) => (this.users = data.data))
-        }
     }
 </script>
 <style lang="scss" scoped>

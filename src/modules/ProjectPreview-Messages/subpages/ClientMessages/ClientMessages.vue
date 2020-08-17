@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="write px-3">
-            <ChatField v-if="can_send_message" class="mt-2" :mentionables="mentionables" @typing=""
+            <ChatField v-if="can_send_message" class="mt-2" :mentionables="mentionables"
                        @send-message="sendMessage"
             />
         </div>

@@ -131,13 +131,18 @@
                 })
             },
             open_chat_box(notification) {
-                this.$emit('select')
                 this.$store.dispatch('chatNotifications/mark_as_read_chat', notification.conversation.id)
                     .then(() => {
                         let sender = notification.sender
                         let is_online = this.is_user_online(sender.id)
                         if (is_online && this.$route.name !== 'chat') {
                             this.$store.dispatch('chat/open_conversation', sender)
+                        } else if(['client', 'team'].includes(notification.conversation.type)) {
+                            let path = `/dashboard/project/preview/${notification.conversation.project_id}/messages/team-messages`
+                            if (notification.conversation.type === 'client') {
+                                path = `/dashboard/project/preview/${notification.conversation.project_id}/messages`
+                            }
+                            this.$router.push({path:path}).catch(err => {})
                         } else {
                             this.go_to_chat(notification.conversation.id)
                         }
