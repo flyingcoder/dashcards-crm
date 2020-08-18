@@ -80,7 +80,7 @@
     </div>
 </template>
 <script>
-    import {mapGetters, mapMutations} from 'vuex'
+    import {mapActions, mapGetters, mapMutations} from 'vuex'
     import {list_functionality} from '@/services/list-functionality/list-functionality'
     import apiTo from '@/modules/ProjectPreview-Tasks/api'
     //components
@@ -172,6 +172,7 @@
         },
         methods: {
             ...mapMutations('taskCards', ['set_id', 'add_task', 'del_task', 'replace_task']),
+            ...mapActions('taskCards', ['see_more']),
             loadMore() {
                 this.see_more()
             },

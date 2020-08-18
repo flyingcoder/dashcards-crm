@@ -38,7 +38,7 @@ export default {
             return !this.noMoreData
         },
         per_page() {
-            var limit = this.$store.getters['configs/timeline_display_limits']
+            let limit = this.$store.getters['configs/timeline_display_limits'] || 15;
             return this.isExpanded ? Math.ceil(limit * 1.5) : Math.ceil(limit)
         }
     },
