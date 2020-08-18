@@ -32,7 +32,7 @@
                 </tr>
             </template>
             <template v-slot:loading>
-                <v-skeleton-loader ref="skeleton" :boilerplate="false" type="table-tbody" class="mx-auto mt-3" />
+                <v-skeleton-loader ref="skeleton" :boilerplate="false" type="table-tbody" class="ma-2" />
             </template>
             <template v-slot:no-data>
                 <Empty :icon="icon" :headline="emptyText">

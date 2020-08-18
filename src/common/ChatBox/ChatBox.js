@@ -44,16 +44,20 @@ export default {
             const unread = this.$store.getters['chat/unread_message'](this.conv.id)
             if (unread) return unread.count
             return 0
+        },
+        onlineUsers() {
+            return this.$store.getters['onlineUsers/all_users']
+        },
+        is_contact_online() {
+            let index = this.onlineUsers.findIndex(u => u.id === this.conv.user.id)
+            return !!(~index)
         }
     },
 
     watch: {
         conv: {
             handler(new_conv) {
-                if (
-                    !_isEqual(new_conv.messages, this.old_conv.messages) &&
-                    new_conv.next_url === this.old_conv.next_url
-                )
+                if (!_isEqual(new_conv.messages, this.old_conv.messages) && new_conv.next_url === this.old_conv.next_url)
                     this.scrollToBottom(this.$refs.chat_box)
                 this.old_conv = _cloneDeep(new_conv)
             },

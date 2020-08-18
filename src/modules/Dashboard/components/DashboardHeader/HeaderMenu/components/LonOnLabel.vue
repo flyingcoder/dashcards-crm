@@ -11,71 +11,77 @@
     </div>
 </template>
 <script>
-import makeRequestTo from '@/services/makeRequestTo'
+    import makeRequestTo from '@/services/makeRequestTo'
 
-export default {
-    name: 'LogOnLabel',
+    export default {
+        name: 'LogOnLabel',
 
-    data: () => ({
-        status: false,
-        disabled: false,
-        requesting: false
-    }),
-    computed: {
-        label() {
-            return this.status === true ? 'Log On' : 'Log Off'
+        data: () => ({
+            status: false,
+            disabled: false,
+            requesting: false
+        }),
+        computed: {
+            label() {
+                return this.status === true ? 'Log On' : 'Log Off'
+            },
+            timer_icon() {
+                return this.status === true ? 'mdi-clock-check-outline' : 'mdi-clock-outline'
+            },
+            timer_tip() {
+                return this.status === true ? 'Timer is running...Click to stop' : 'Timer is not running...Click to start'
+            },
+            timer_color() {
+                return this.status === true ? 'success' : ''
+            }
         },
-        timer_icon() {
-            return this.status === true ? 'mdi-clock-check-outline' : 'mdi-clock-outline'
-        },
-        timer_tip() {
-            return this.status === true ? 'Timer is running...Click to stop' : 'Timer is not running...Click to start'
-        },
-        timer_color() {
-            return this.status === true ? 'success' : ''
-        }
-    },
-    mounted() {
-        this.get_timer_status()
 
-        this.$event.$on('self-global-timer-updated', () => {
+        created() {
             this.get_timer_status()
-        })
-    },
-
-    methods: {
-        get_timer_status() {
-            this.requesting = true
-            makeRequestTo.timer_status()
-                .then(({ data }) => {
-                    if (data) {
-                        this.status = data.action === 'start' ? true : false
-                    }
-                })
-                .finally(() => this.requesting = false)
         },
-        switch1_changed() {
-            const type = !this.status ? 'start' : 'stop'
-            this.disabled = true
-            this.requesting = true
-            makeRequestTo.change_timer(type).then(() => {
-                    this.disabled = false
-                    this.status = !this.status
-                    const timer_message = this.status ? 'started' : 'stopped'
 
-                    this.$event.$emit(
-                        this.status ? 'global-timer-started' : 'global-timer-stopped'
-                    )
+        mounted() {
+            this.$event.$on('self-global-timer-updated', () => {
+                this.get_timer_status()
+            })
+        },
 
-                    this.$event.$emit(
-                        'open_snackbar',
-                        `Timer ${timer_message}`,
-                        'success'
-                    )
-                })
-                .finally(() => this.requesting = false)
+        methods: {
+            get_timer_status() {
+                if (this.requesting) {
+                    return
+                }
+
+                this.requesting = true
+                this.disabled = true
+                makeRequestTo.timer_status(false)
+                    .then(({data}) => {
+                        if (data) this.status = data.action === 'start'
+                    })
+                    .finally(() => {
+                        this.disabled = false
+                        this.requesting = false
+                    })
+            },
+            switch1_changed() {
+                if (this.requesting) {
+                    return
+                }
+                const type = !this.status ? 'start' : 'stop'
+                this.disabled = true
+                this.requesting = true
+                makeRequestTo.change_timer(type)
+                    .then(() => {
+                        this.disabled = false
+                        this.status = !this.status
+                        const timer_message = this.status ? 'started' : 'stopped'
+
+                        this.$event.$emit(this.status ? 'global-timer-started' : 'global-timer-stopped')
+                        this.$event.$emit('open_snackbar', `Timer ${timer_message}`, 'success')
+                    })
+                    .finally(() => this.requesting = false)
+            }
         }
     }
-}
 </script>
 

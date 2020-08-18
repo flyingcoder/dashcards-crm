@@ -43,6 +43,10 @@ export default {
             ]
         },
     },
+    beforeRouteUpdate (to, from, next) {
+        this.active_task_id = to.params.task_id
+        //next()
+    },
     mounted() {
         this.$event.$emit('path-change', this.paths)
         this.$event.$on('show-task-side-preview', task => {

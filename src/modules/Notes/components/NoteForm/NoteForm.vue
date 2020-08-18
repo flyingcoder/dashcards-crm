@@ -22,7 +22,7 @@
                     <v-tooltip left>
                         <template v-slot:activator="{ on }">
                             <v-btn icon class="action-btn" v-on="on" @click="$emit('editNotes', note)">
-                                <v-icon color="indigo">edit</v-icon>
+                                <v-icon color="indigo">mdi-circle-edit-outline</v-icon>
                             </v-btn>
                         </template>
                         <span>Edit Note</span>
@@ -30,7 +30,7 @@
                     <v-tooltip left>
                         <template v-slot:activator="{ on }">
                             <v-btn icon class="action-btn" v-on="on" @click="$emit('deleteNotes', note)">
-                                <v-icon color="red">delete</v-icon>
+                                <v-icon color="red">mdi-delete-circle-outline</v-icon>
                             </v-btn>
                         </template>
                         <span>Delete Note</span>

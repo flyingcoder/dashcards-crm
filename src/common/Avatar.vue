@@ -1,27 +1,19 @@
 <template>
-    <v-menu
-            v-if="user"
-            v-model="menu"
-            :close-on-content-click="false"
-            offset-y
-            :max-width="350"
+    <v-menu v-if="user" v-model="menu"  :close-on-content-click="false"
+            offset-y :max-width="350"
     >
         <template v-slot:activator="{ on: menu, attrs }">
             <v-tooltip top>
                 <template v-slot:activator="{ on: tooltip }">
                     <div v-bind="attrs" v-on="{ ...tooltip, ...menu }">
                         <v-avatar color="grey" :size="size">
-                            <v-img :src="user.image_url" class="hover" />
+                            <v-img :src="user.image_url" class="hover"/>
                         </v-avatar>
-                        <v-icon
-                                x-small
-                                :color="is_online ? `success` : `grey`"
-                                class="status"
-                        >
+                        <v-icon  x-small :color="is_online ? `success` : `grey`" class="status" >
                             mdi-circle
                         </v-icon>
                         <span class="ml-1" v-if="!iconOnly">{{ displayName | ucwords | truncate(20) }}</span>
-                        <slot />
+                        <slot/>
                     </div>
                 </template>
                 <span>{{ displayName | ucwords }}</span>
@@ -33,7 +25,7 @@
                     <v-list-item-content>
                         <v-row>
                             <v-col md="3">
-                                <v-img :src="user.image_url" />
+                                <v-img :src="user.image_url"/>
                             </v-col>
                             <v-col md="9">
                                 <v-list-item-title :title="user.fullname" class="title">
@@ -58,7 +50,7 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-list>
-            <v-divider />
+            <v-divider/>
             <v-card-actions>
                 <v-btn @click="navigate_to_profile" text small class="caption">
                     <v-icon small left>person</v-icon>

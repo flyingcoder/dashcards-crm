@@ -54,7 +54,7 @@ export default {
             enableViewMore: true
         }
     },
-    mounted() {
+    created() {
         this.getInvoicesData()
     },
 

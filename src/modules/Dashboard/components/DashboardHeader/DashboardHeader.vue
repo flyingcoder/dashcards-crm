@@ -1,8 +1,8 @@
 <template>
-    <div class="b-header">        
-        <img class="logo" :src="company_logo" >
+    <div class="b-header">
+        <img class="logo" :src="company_logo">
         <div class="h__pagetitle" v-if="$route.name !== 'pricing'">
-            <v-breadcrumbs class="b-breadcrumbs" :items="paths" >
+            <v-breadcrumbs class="b-breadcrumbs" :items="paths">
                 <template v-slot:item="{ item }">
                     <v-breadcrumbs-item
                             :class="{'cursor-pointer' : item.route }"

@@ -55,12 +55,12 @@ export default {
         clients_list: [],
         existing_client: null
     }),
-    created() {
-        this.get_all_clients()
-    },
+
     watch: {
         dialog(new_val) {
             this.open = new_val
+            if (new_val)
+                this.get_all_clients()
         },
         open(new_val) {
             this.$emit('update:dialog', new_val)
@@ -112,7 +112,6 @@ export default {
                 tel_is_valid &&
                 this.first_name &&
                 this.last_name &&
-                this.company_name &&
                 this.email &&
                 this.status
             )

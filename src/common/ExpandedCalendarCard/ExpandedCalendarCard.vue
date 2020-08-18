@@ -14,16 +14,16 @@
             </div>
         </v-layout>
 
-        <Calendar :hasBreadCrumbs="false"></Calendar>
+        <Calendar :hasBreadCrumbs="false" />
     </div>
 </template>
 
 <script>
-  import Calendar from '@/modules/Calendar/Calendar.vue'
+    import Calendar from '@/modules/Calendar/Calendar.vue'
 
     export default {
         name: 'ExpandedCalendarCard',
-        components: { Calendar},
+        components: {Calendar},
 
         data: () => ({
             paths: [

@@ -9,6 +9,10 @@ export const chat_api = {
         return request.get(`api/chat/private/${id}`)
     },
 
+    get_conversation_by_user(id ) {
+        return request.get(`api/chat/conversations/user/${id}`)
+    },
+
     send_message(payload) {
         return request.post('api/chat/private', payload, {
             headers: {

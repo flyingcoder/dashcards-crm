@@ -44,7 +44,7 @@
         <clients-dialog
                 :dialog.sync="edit_dialog"
                 ref="edit_dialog"
-                title="Edit Client"
+                dialogTitle="Edit Client"
                 :is-edit-dialog="edit_dialog"
                 :fields-to-edit="edit_item"
                 @save="handle_update_client($event)"

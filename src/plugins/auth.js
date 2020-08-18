@@ -5,6 +5,7 @@ import router from '@/router/router';
 import { settings } from '@/variables'
 
 (function() {
+    store.dispatch('fetchUsers')
     const configs = localStorage.getItem('session-eXt-eQt128')
     if (configs) {
         store.commit('set_global_configs', JSON.parse(Vue.CryptoJS.AES.decrypt(configs, settings.paraphrase ).toString(Vue.CryptoJS.enc.Utf8)))

@@ -9,9 +9,11 @@ import GroupChatDialog from './components/GroupChatDialog/GroupChatDialog.vue'
 import ManageMembersDialog from './components/ManageMembersDialog/ManageMembersDialog.vue'
 import ChatField from '@/common/ChatBox/ChatField.vue'
 import Avatars from '@/common/Avatars.vue'
+import {chat_utils} from "@/services/chats/chat_utils";
 
 export default {
     name: 'Chat',
+    mixins:[chat_utils],
     components: {
         TableHeader,
         Message, 
@@ -64,15 +66,17 @@ export default {
             return [this.activeChat]
         }
     },
-    mounted() {
-        this.$event.$emit('path-change', this.paths)
-        if (typeof this.$route.params.target !== 'undefined')
+    created() {
+        if (typeof this.$route.params.target !== 'undefined') {
             this.target = parseInt(this.$route.params.target)
-
-        this.$store.commit('set_floating_button', false)
+        }
         this.subscribePusher()
-        this.get_chat_list()
-        this.get_groupchat_list()
+        this.get_conversation_list()
+    },
+
+    mounted() {
+        this.$store.commit('set_floating_button', false)
+        this.$event.$emit('path-change', this.paths)
     },
 
     beforeDestroy() {
@@ -82,52 +86,40 @@ export default {
     methods: {
         ...mapMutations('onlineUsers', ['set_all_users']),
         ...mapMutations('chat', ['add_unread_messages', 'add_message_to_conv']),
-        // ...mapMutations('notifications', ['add_to_chat']),
-        // ...mapActions('notifications', ['fetch_chat']),
-
         creator(id) {
-            var inx = this.activeChat.members.findIndex(i => i.id == id)
-            if (~inx) {
-                return this.activeChat.members[inx].fullname
+            let index = this.activeChat.members.findIndex(i => i.id === id);
+            if (~index) {
+                return this.activeChat.members[index].fullname
             }
             return ''
         },
         subscribePusher() {
             this.$pusher.authenticate()
-
             const chat_channel = this.$pusher.subscribe(
                 `private-chat.new-message.${this.loggeduser.id}`
             )
-
-            this.chat_channel(chat_channel)
+            chat_channel.bind( `App\\Events\\PrivateChatSent`, ({ message, sender, receiver }) => {
+                    const conv = this.all_messages.find(
+                        convs => convs.conversation_id === message.conversation_id
+                    )
+                    if (conv && receiver.id === this.loggeduser.id) {
+                        let messageObj = Object.assign(message, {sender: sender});
+                        this.add_new_message(messageObj)
+                        this.scrollToBottom()
+                    } else {
+                        const user_index = this.all_users.findIndex(
+                            user => user.id === sender.id
+                        )
+                        if (~user_index) {
+                            this.all_users[user_index].message_count += 1
+                        }
+                    }
+                }
+            )
         },
         subscribeToGroupChat(id) {
             const group_channel = this.$pusher.subscribe(`mc-chat-conversation.${id}`)
             this.group_chat_channel(group_channel)
-        },
-        get_chat_list() {
-            this.userLoading = true
-            api_to
-                .get_chat_list()
-                .then(({ data }) => {
-                    /*map online to list*/
-                    var users = data.map(each => {
-                        let has = this.onlineUsers.findIndex(us => us.id === each.id)
-                        each.is_online = ~has ? true : false
-                        return each
-                    })
-
-                    setTimeout(() => {
-                        this.all_users = users
-                        if (this.target) {
-                            let found = this.all_users.find(u => u.id === this.target)
-                            if (found) this.open_conversation(found)
-                        }
-                    }, 1)
-                })
-                .finally(() => {
-                    this.userLoading = false
-                })
         },
         get_groupchat_list() {
             this.userLoading = true
@@ -201,26 +193,7 @@ export default {
                 })
         },
         chat_channel(channel) {
-            channel.bind(
-                `App\\Events\\PrivateChatSent`,
-                ({ message, sender, receiver }) => {
-                    const conv = this.all_messages.find(
-                        conv => conv.conversation_id === message.conversation_id
-                    )
-                    if (conv && receiver.id === this.loggeduser.id) {
-                        var messageObj = Object.assign(message, { sender: sender })
-                        this.add_new_message(messageObj)
-                        this.scrollToBottom()
-                    } else {
-                        const usrIndx = this.all_users.findIndex(
-                            user => user.id === sender.id
-                        )
-                        if (~usrIndx) {
-                            this.all_users[usrIndx].message_count += 1
-                        }
-                    }
-                }
-            )
+
         },
         group_chat_channel(channel) {
             channel.bind(`App\\Events\\GroupChatSent`, data => {
@@ -237,27 +210,6 @@ export default {
                     }
                 }
             })
-        },
-        open_conversation(user) {
-            this.activeChat = user
-            setTimeout(() => {
-                if (user.type === 'group') {
-                    this.current_members = _cloneDeep(this.activeChat.members)
-                    this.get_group_messages()
-                    this.all_groups.forEach(cur_user => {
-                        if (cur_user.id === user.id) {
-                            cur_user.message_count = 0
-                        }
-                    })
-                } else {
-                    this.get_messages()
-                    this.all_users.forEach(cur_user => {
-                        if (cur_user.id === user.id) {
-                            cur_user.message_count = 0
-                        }
-                    })
-                }
-            }, 1)
         },
         go_to_profile(user) {
             if (user.role === 'client') {
@@ -343,14 +295,6 @@ export default {
                 return true
             }
             return false
-        },
-        sorted(arr) {
-            return arr
-                .slice()
-                .sort(function(a, b) {
-                    return a.is_online - b.is_online
-                })
-                .reverse()
         },
         handleTyping() {
             console.log('typing')

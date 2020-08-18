@@ -1,35 +1,45 @@
 import request from '@/services/axios_instance'
-import { settings } from '@/variables'
-import { mapState, mapMutations, mapGetters, mapActions } from 'vuex'
-import _cloneDeep from 'lodash/cloneDeep'
 
 export default {
     name: 'General',
     data: () => ({
         paths: [
-            { text: 'Settings', disabled: false, route: {name: 'settings'} },
-            { text: 'General', disabled: true, route: null }
+            {text: 'Settings', disabled: false, route: {name: 'settings'}},
+            {text: 'General', disabled: true, route: null}
         ],
         update_btn_loading: false,
         reset_btn_loading: false,
         languages: [
-            { value: 'english', text: 'English' }
+            {value: 'english', text: 'English'}
         ],
         themes: [
-            { value: 'default', text: 'Buzzooka Default' }
+            {value: 'default', text: 'Buzzooka Default'}
         ],
         date_formats: [
-            { value: 'D-M-Y', text: 'D-M-Y e.g 01-12-2020' },
-            { value: 'Y-M-D', text: 'Y-M-D e.g 2020-12-01' },
-            { value: 'M-D-Y', text: 'M-D-Y e.g 12-01-2020' }
+            {value: 'D-M-Y', text: 'D-M-Y e.g 01-12-2020'},
+            {value: 'Y-M-D', text: 'Y-M-D e.g 2020-12-01'},
+            {value: 'M-D-Y', text: 'M-D-Y e.g 12-01-2020'}
         ],
         currencies: [
-            { currency_code: 'USD', symbol: '$', text: 'US Dollar' },
-            { currency_code: 'CAD', symbol: '$', text: 'Canadian Dollar' },
-            { currency_code: 'EUR', symbol: '£', text: 'Euro' },
-            { currency_code: 'PHP', symbol: '₱', text: 'Philippine Peso' }
+            {currency_code: 'USD', symbol: '$', text: 'US Dollar'},
+            {currency_code: 'CAD', symbol: '$', text: 'Canadian Dollar'},
+            {currency_code: 'EUR', symbol: '£', text: 'Euro'},
+            {currency_code: 'PHP', symbol: '₱', text: 'Philippine Peso'}
         ],
-        current: null,
+        current: {
+            currency: {currency_code: 'USD', symbol: '$', text: 'US Dollar'},
+            lang: 'english',
+            theme: 'default',
+            title: 'Buzzooka Dashtiles',
+            date_format: 'Y-M-D',
+            timeline_display_limits: 20,
+            general_page_limits: 12,
+            messages_page_limits: 10,
+            info_tips: 'Yes',
+            client_registration: 'No',
+            notif_duration: 1000,
+            license_key: null,
+        },
         componentKey: 0,
         limit_rules: [
             v => !!v || 'Required',
@@ -53,14 +63,14 @@ export default {
         },
         original() {
             return this.$store.getters['configs/original']
-        }
+        },
     },
     methods: {
         isValid() {
             let error = []
-            if (!this.current.title || this.current.title.trim() === '') {
+           /* if (!this.current.title || this.current.title.trim() === '') {
                 error.push('Title is required')
-            }
+            }*/
             if (this.current.timeline_display_limits > 500 || this.current.timeline_display_limits < 1) {
                 error.push('Timeline Display Limits should be between 1 - 500')
             }
@@ -87,7 +97,7 @@ export default {
             this.reset_btn_loading = false
         },
         getPayload() {
-            var payload = {
+            let payload = {
                 title: this.current.title,
                 lang: this.current.lang,
                 theme: this.current.theme,
@@ -99,15 +109,13 @@ export default {
                 client_registration: this.current.client_registration,
                 notif_duration: this.current.notif_duration,
                 license_key: this.current.license_key,
-            }
-            let index = this.currencies.findIndex(i => i.currency_code === this.current.currency)
-            payload.currency = ~index ? this.currencies[index] : this.currencies[0]
-
+                currency: this.current.currency
+            };
             return payload
         },
         fetchSettings() {
             request.get(`api/company/${this.companyId}/settings`)
-                .then(({ data }) => {
+                .then(({data}) => {
                     if (Object.keys(data).length) {
                         this.current = data
                         this.license_key = data.license_key
@@ -120,13 +128,14 @@ export default {
             if (!this.isValid()) {
                 return
             }
-            var payload = this.getPayload()
+            let payload = this.getPayload();
             this.update_btn_loading = true
             request.post(`api/company/${this.companyId}/settings`, payload)
-                .then(({ data }) => {
-                    this.$store.dispatch('configs/updateSettings', data)
+                .then(({data}) => {
+                    this.$store.commit('set_user_company', data)
+                    this.$store.dispatch('configs/updateSettings', data.others)
                         .then(() => {
-                            this.current = this.$store.getters['configs/current']
+                            this.current = data.others
                         })
                     this.$event.$emit('open_snackbar', 'Settings updated', 'success')
                 })

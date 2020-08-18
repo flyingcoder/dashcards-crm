@@ -12,6 +12,7 @@ export default new Vuex.Store({
     state: {
         custom_loader: false,
         user: null,
+        users: [],
         snackbar: {
             status: false,
             message: ''
@@ -25,12 +26,14 @@ export default new Vuex.Store({
         custom_loader: state => state.custom_loader,
         is_user_logged: state => !!state.user,
         user: state => state.user,
+        users: state => state.users,
         snackbar: state => state.snackbar,
         show_floating_button: state => state.show_floating_button,
         global_configs: state => state.global_configs
     },
     mutations: {
         set_user: (state, payload) => (state.user = payload),
+        set_users: (state, payload) => (state.users = payload),
         set_login_user: (state, payload) => {
             state.user = payload
             localStorage.setItem('user', Vue.CryptoJS.AES.encrypt(JSON.stringify(payload), settings.paraphrase).toString())
@@ -69,7 +72,14 @@ export default new Vuex.Store({
                     commit('set_user', data)
                     localStorage.setItem('user', Vue.CryptoJS.AES.encrypt(JSON.stringify(data), settings.paraphrase).toString())
                 })
+        },
+        fetchUsers({commit}) {
+            request.get(`api/company/members?for=store`)
+                .then(({data}) => {
+                    commit('set_users', data)
+                })
         }
+
     },
     modules,
     strict: process.env.NODE_ENV !== 'production'

@@ -1,8 +1,6 @@
-import { list_functionality } from '@/services/list-functionality/list-functionality'
-import isEmpty from 'lodash/isEmpty'
+import {list_functionality} from '@/services/list-functionality/list-functionality'
 import moment from 'moment'
-import { calendar_utils } from '@/services/calendar/calendar_utils'
-
+import {calendar_utils} from '@/services/calendar/calendar_utils'
 //Components
 import VueTable from '@/common/VueTable/VueTable.vue'
 import Actions from '@/common/VueTable/Actions.vue'
@@ -10,10 +8,10 @@ import TableHeader from '@/common/TableHeader.vue'
 import DatePicker from '@/common/DatePicker.vue'
 import Avatars from '@/common/Avatars.vue'
 import CalendarDialog from '@/modules/Calendar/components/CalendarDialog/CalendarDialog.vue'
-import EventDialog from '@/modules/Calendar/components/EventDialog/EventDialog.vue'
+import EventDialogV2 from '@/modules/Calendar/components/EventDialogV2/EventDialogV2.vue'
 import EventTypeDialog from '@/modules/Calendar/components/EventTypeDialog/EventTypeDialog.vue'
 import EventDetailDialog from '@/modules/Calendar/components/EventDetailDialog/EventDetailDialog.vue'
-import DeleteDialog from '@/common/DeleteDialog.vue' 
+import DeleteDialog from '@/common/DeleteDialog.vue'
 import ConfirmDialog from '@/common/ConfirmDialog.vue'
 import AddParticipantDialog from '@/modules/Calendar/components/AddParticipantDialog/AddParticipantDialog.vue'
 import EventCard from '@/modules/Calendar/components/EventCard/EventCard.vue'
@@ -30,8 +28,8 @@ export default {
         DeleteDialog,
         ConfirmDialog,
         EventCard,
-        EventDialog,
-        EventTypeDialog, 
+        EventDialogV2,
+        EventTypeDialog,
         Avatars,
         EventDetailDialog,
         AddParticipantDialog
@@ -39,33 +37,29 @@ export default {
 
     data: () => ({
         paths: [
-            { text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
-            { text: 'Timers', disabled: true, route: null },
-            { text: 'Alarm', disabled: true, route: null }
+            {text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
+            {text: 'Timers', disabled: true, route: null},
+            {text: 'Alarm', disabled: true, route: null}
         ],
         sortList: [
-            { title: 'Sort by Client' },
-            { title: 'Sort by Task' },
-            { title: 'Sort by Services' },
-            { title: 'Sort by Time' },
-            { title: 'Sort by Date' }
+            {title: 'Sort by Client'},
+            {title: 'Sort by Task'},
+            {title: 'Sort by Services'},
+            {title: 'Sort by Time'},
+            {title: 'Sort by Date'}
         ],
         headers: [
-            { text: 'Events', sortable: true, align: 'left' },
-            { text: 'Participants', sortable: true, align: 'left' },
-            { text: 'Type', sortable: true, align: 'left' },
-            {
-                text: 'Date',
-                sortable: true,
-                align: 'left'
-            },
-            { text: 'Time', value: 'time_end', sortable: true, align: 'left' },
+            {text: 'Events', sortable: true, align: 'left', value: 'title'},
+            {text: 'Participants', sortable: false, align: 'left'},
+            {text: 'Type', sortable: false, align: 'left'},
+            { text: 'Date', sortable: true, align: 'left', value: 'start'},
+            {text: 'Time', value: 'time_end', sortable: false, align: 'left'},
             {
                 text: 'Action',
                 sortable: false,
                 align: 'center',
-                value:'action',
-                width: '100px;'
+                value: 'action',
+                width: 160
             }
         ],
         timer_tab: 'alarm',
@@ -98,9 +92,9 @@ export default {
 
         handleChangeTab(event) {
             if (this.timer_tab === 'task-timers')
-                this.$router.push({ name: 'taskTimer' })
+                this.$router.push({name: 'taskTimer'})
             if (this.timer_tab === 'global-timers')
-                this.$router.push({ name: 'globalTimer' })
+                this.$router.push({name: 'globalTimer'})
         },
 
         is_event_owner(item) {
@@ -111,7 +105,7 @@ export default {
             this.$event.$emit('open_snackbar', 'Coming soon, working on it!')
         },
         minimize() {
-            this.$router.push({ name: 'default-content' })
+            this.$router.push({name: 'default-content'})
         }
     }
 }

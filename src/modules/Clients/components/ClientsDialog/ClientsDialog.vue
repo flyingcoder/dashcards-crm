@@ -1,10 +1,10 @@
 <template>
     <custom-dialog :title="dialogTitle" ref="dialog" :open.sync="open" button2-text="Save" @button1="cancel"
-                   @button2="save" :max-width="800" :mainBtnDisabled="!readyForSubmit"
+                   @button2="save" :max-width="600" :mainBtnDisabled="!readyForSubmit"
     >
         <template slot="content">
             <v-row no-gutters class="clients__dialog">
-                <v-col xs="12" sm="12">
+                <v-col xs="12" sm="12" v-if="!isEditDialog">
                     <v-text-field prepend-inner-icon="mdi-office-building" class="dialog__textfield d-field"
                                   label="Business Name *" v-model.trim="company_name" dense filled hide-details
                                   color="#657186"

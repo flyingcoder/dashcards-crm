@@ -1,215 +1,270 @@
 <template>
-  <v-card class="pa-1" width="350">
-    <v-toolbar flat>
-      <v-icon left> mdi-message </v-icon>
-      <v-toolbar-title>Chat ({{ notifications.length || 0 }})</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-tooltip bottom>
-        <template v-slot:activator="{ on }">
-          <v-btn class="mr-1" small icon v-on="on" :to="{ name: 'chat' }"
-            ><v-icon>mdi-chat</v-icon></v-btn
-          >
-        </template>
-        <span>See all in Chat</span>
-      </v-tooltip>
-      <v-tooltip bottom>
-        <template v-slot:activator="{ on }">
-          <v-btn class="mr-1" small icon v-on="on" @click="markAllAsRead"
-            ><v-icon>mdi-book-open-page-variant</v-icon></v-btn
-          >
-        </template>
-        <span>Mark All As Read</span>
-      </v-tooltip>
-      <v-tooltip bottom>
-        <template v-slot:activator="{ on }">
-          <v-btn class="mr-1" small icon v-on="on" @click="$emit('close')"
-            ><v-icon>close</v-icon></v-btn
-          >
-        </template>
-        <span>Close</span>
-      </v-tooltip>
-    </v-toolbar>
+    <v-card class="pa-1" width="350" flat>
+        <v-toolbar flat>
+            <v-icon left> mdi-message</v-icon>
+            <v-toolbar-title>Messages ({{ total_counts || 0 }})</v-toolbar-title>
+            <v-spacer />
+            <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                    <v-btn class="mr-1" small icon v-on="on" :to="{ name: 'chat' }">
+                        <v-icon>mdi-chat</v-icon>
+                    </v-btn>
+                </template>
+                <span>See all in Chat</span>
+            </v-tooltip>
+            <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                    <v-btn class="mr-1" small icon v-on="on" @click="markAllAsReadChat">
+                        <v-icon>mdi-book-open-page-variant</v-icon>
+                    </v-btn>
+                </template>
+                <span>Mark All As Read</span>
+            </v-tooltip>
+            <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                    <v-btn class="mr-1" small icon v-on="on" @click="$emit('close')">
+                        <v-icon>close</v-icon>
+                    </v-btn>
+                </template>
+                <span>Close</span>
+            </v-tooltip>
+        </v-toolbar>
 
-    <v-card-text
-      class="pa-0"
-      style="max-height: 300px; overflow-x:hidden;overflow-y:auto;"
-    >
-      <v-list dense class="pa-0">
-        <v-list-item v-if="notifications.length === 0" class="new__message">
-          <v-list-item-content>
-            <v-list-item-title>No notification</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item
-          v-else
-          v-for="notification of notifications"
-          :key="notification.id"
-          @click="open_chat_box(notification.sender)"
-        >
-          <v-list-item-avatar color="grey">
-            <v-img :src="notification.sender.image_url"></v-img>
-          </v-list-item-avatar>
-          <v-list-item-content>
-            <v-list-item-title
-              >{{ notification | full_name }}
-              <v-icon
-                small
-                right
-                :color="
-                  is_user_online(notification.sender.id) ? `success` : `gray`
-                "
-                >mdi-circle</v-icon
-              >
-            </v-list-item-title>
-            <v-list-item-subtitle>{{ notification.body }}</v-list-item-subtitle>
-          </v-list-item-content>
-          <v-list-item-action>
-            {{ notification.created_at | from_now }}
-          </v-list-item-action>
-        </v-list-item>
-      </v-list>
-    </v-card-text>
-  </v-card>
+        <v-card-text class="pa-0" style="max-height: 300px; overflow-x:hidden;overflow-y:auto;">
+            <v-list dense class="pa-0">
+                <v-list-item v-if="chats.length === 0 && !notificationsFetched" class="new__message">
+                    <v-list-item-content>
+                        <empty headline="No Messages" icon="mdi-chat-alert-outline" />
+                    </v-list-item-content>
+                </v-list-item>
+                <template v-else-if="notificationsFetched">
+                    <v-skeleton-loader type="list-item-avatar-three-line" v-for="repeat in 4" tile :key="repeat"
+                                       class="mx-auto"
+                    />
+                </template>
+                <v-list-item :class="{unread:is_unread(message)}" v-else-if="!notificationsFetched"
+                             v-for="message of chats"
+                             :key="message.conversation.id"
+                             @click="open_chat_box(message)"
+                >
+                    <v-list-item-avatar>
+                        <v-icon v-if="is_group_chat(message)" large>mdi-account-group-outline</v-icon>
+                        <v-img v-else-if="message.user.image_url" :src="message.user.image_url" />
+                        <v-icon v-else large>mdi-image-size-select-actual</v-icon>
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                        <v-list-item-title>
+                            <span v-if="is_group_chat(message)">{{ message.conversation.data.group_name | ucwords }}</span>
+                            <span v-else>{{ message.user.fullname | ucwords }}</span>
+                            <v-icon size="10" right v-if="!is_group_chat(message)"
+                                    :color=" is_user_online(message.sender.id) ? `success` : `gray`"
+                            >
+                                mdi-circle
+                            </v-icon>
+                        </v-list-item-title>
+                        <v-list-item-subtitle v-if="!is_group_chat(message)">
+                            <span v-if="is_self_sender(message)">You: </span>
+                            <span :inner-html.prop="message.body | truncate(20)" />
+                        </v-list-item-subtitle>
+                        <v-list-item-subtitle v-else>
+                            <span v-if="is_self_sender(message)">You : </span>
+                            <span v-else> {{ message.sender.first_name }} : </span>
+                            <span :inner-html.prop="message.body | truncate(20)" />
+                        </v-list-item-subtitle>
+                    </v-list-item-content>
+                    <v-list-item-action>
+                        <small class=" caption ">{{ message.created_at | from_now }}</small>
+                    </v-list-item-action>
+                </v-list-item>
+            </v-list>
+        </v-card-text>
+        <v-card-actions>
+            <v-spacer />
+            <v-btn text :loading="false" :disabled="!hasMoreChat" @click="fetchMoreChat">
+                Load More
+            </v-btn>
+            <v-spacer />
+        </v-card-actions>
+    </v-card>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-import { global_utils } from '@/global_utils/global_utils'
-export default {
-  mixins: [global_utils],
-  computed: {
-    ...mapGetters('onlineUsers', ['all_users']),
-    ...mapGetters('headerIcons', ['chat']),
-    loggedUser() {
-      return this.$store.getters.user
-    },
-    onlineUsers() {
-      return this.all_users.filter(i => this.loggedUser.id !== i.id)
-    },
-    notifications() {
-      return this.$store.getters['notifications/chat']
-    }
-  },
+    import {mapActions, mapGetters} from 'vuex'
+    import {global_utils} from '@/global_utils/global_utils'
 
-  filters: {
-    full_name(notification) {
-      const user = notification.sender
-      return `${user.first_name} ${user.last_name}`
+    export default {
+        mixins: [global_utils],
+        computed: {
+            ...mapGetters('onlineUsers', ['all_users']),
+            ...mapGetters('headerIcons', ['chat']),
+            loggedUser() {
+                return this.$store.getters.user
+            },
+            onlineUsers() {
+                return this.all_users.filter(i => this.loggedUser.id !== i.id)
+            },
+            chats() {
+                return this.$store.getters['chatNotifications/chat']
+            },
+            total_counts() {
+                return this.$store.getters['chatNotifications/chat_counts']
+            },
+            hasMoreChat() {
+                return this.$store.getters['chatNotifications/has_more_chat']
+            }
+        },
+        data: () => ({
+            notificationsFetched: false
+        }),
+        created() {
+            //trigger in chat_utils when open a conversation
+            this.$event.$on('conversation-opened', (conversation) => {
+                this.fetch_chat()
+            })
+        },
+        methods: {
+            ...mapActions('chatNotifications', ['fetch_chat', 'fetch_more_chat']),
+            fetchMoreChat() {
+                this.notificationsFetched = true
+                this.fetch_more_chat().then(() => {
+                    this.notificationsFetched = false
+                })
+            },
+            open_chat_box(notification) {
+                this.$store.dispatch('chatNotifications/mark_as_read_chat', notification.conversation.id)
+                    .then(() => {
+                        let sender = notification.sender
+                        let is_online = this.is_user_online(sender.id)
+                        if (is_online && this.$route.name !== 'chat') {
+                            this.$store.dispatch('chat/open_conversation', sender)
+                        } else if(['client', 'team'].includes(notification.conversation.type)) {
+                            let path = `/dashboard/project/preview/${notification.conversation.project_id}/messages/team-messages`
+                            if (notification.conversation.type === 'client') {
+                                path = `/dashboard/project/preview/${notification.conversation.project_id}/messages`
+                            }
+                            this.$router.push({path:path}).catch(err => {})
+                        } else {
+                            this.go_to_chat(notification.conversation.id)
+                        }
+                        this.$emit('close')
+                    })
+            },
+            is_user_online(id) {
+                const user = this.all_users.find(user => user.id === id)
+                if (!user) return false
+                return user.is_online
+            },
+            go_to_chat(conversation_id) {
+                if (this.$route.name !== 'chat' || (this.$route.name === 'chat' && this.$route.params.conversation_id !== conversation_id))
+                    this.$router.push({name: 'chat', params: {conversation_id: conversation_id}}).catch(err => {})
+            },
+            is_unread(message) {
+                if (message.hasOwnProperty('notification') && message.notification)
+                    return message.notification.is_seen === 0
+                return message.sender.id !== this.loggedUser.id
+            },
+            is_group_chat(message) {
+                return message.conversation.type && ['group', 'team', 'client'].includes(message.conversation.type)
+            },
+            is_self_sender(message) {
+                return message.sender.id === this.loggedUser.id
+            },
+            markAllAsReadChat() {
+                this.notificationsFetched = true
+                this.$store.dispatch('chatNotifications/mark_all_as_read', 'chat')
+                    .then(() => {
+                        this.notificationsFetched = false
+                    })
+            }
+        }
     }
-  },
-
-  methods: {
-    ...mapActions('notifications', ['markAllAsRead']),
-    open_chat_box(user) {
-      let is_online = this.is_user_online(user.id)
-      if (is_online && this.$route.name !== 'chat') {
-        this.$store.dispatch('chat/open_conversation', {
-          id: user.id,
-          is_online: is_online,
-          name: `${user.first_name}, ${user.last_name}`
-        })
-        this.$emit('close')
-      } else {
-        // console.log(user)
-        this.go_to_chat(user.id)
-      }
-    },
-    is_user_online(id) {
-      const user = this.all_users.find(user => user.id === id)
-      if (!user) return false
-      return user.is_online
-    },
-    go_to_chat(id) {
-      this.$router.push({ name: 'chat', params: { target: id } })
-      this.$emit('close')
-    }
-  }
-}
 </script>
 
 <style lang="scss" scoped>
-@import '~@/sass/variables';
+    @import '~@/sass/variables';
 
-.chat__inbox {
-  background-color: $lightBlue-2;
-  padding: 10px 0;
-  width: 300px;
-  margin-top: 15px;
-
-  &:after {
-    content: '';
-    position: absolute;
-    border-left: 15px solid transparent;
-    border-right: 15px solid transparent;
-    border-bottom: 15px solid $lightBlue-2;
-    border-top: 15px solid transparent;
-    right: 50%;
-    top: 0;
-    margin-top: -15px;
-    z-index: 10;
-  }
-
-  .inbox__title {
-    padding: 5px;
-    color: $titleDarkBlue;
-    font-weight: 500;
-    border-bottom: 1px solid $borderGray;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-  }
-
-  @include styledScrollFor('.msg__notif');
-
-  .msg__notif {
-    max-height: 300px;
-    overflow: auto;
-
-    .user {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      border-bottom: 1px solid $borderGray;
-      padding: 5px;
-
-      &:hover {
+    .chat__inbox {
         background-color: $lightBlue-2;
-      }
+        padding: 10px 0;
+        width: 300px;
+        margin-top: 15px;
 
-      @include userImgWithStatus('.user__img');
-
-      .user__img {
-        height: 40px;
-        width: 40px;
-        min-width: 40px;
-      }
-
-      .user__detail {
-        margin-left: 10px;
-        cursor: pointer;
-
-        .user__name {
-          width: 220px;
-          overflow: hidden;
-          display: inline-block;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          font-size: 14px;
-          color: $titleDarkBlue;
+        &:after {
+            content: '';
+            position: absolute;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 15px solid $lightBlue-2;
+            border-top: 15px solid transparent;
+            right: 50%;
+            top: 0;
+            margin-top: -15px;
+            z-index: 10;
         }
-        .user__msg {
-          width: 220px;
-          overflow: hidden;
-          display: inline-block;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          color: $titleDarkBlue;
-          font-size: 12px;
+
+        .inbox__title {
+            padding: 5px;
+            color: $titleDarkBlue;
+            font-weight: 500;
+            border-bottom: 1px solid $borderGray;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
         }
-      }
+
+        @include styledScrollFor('.msg__notif');
+
+        .msg__notif {
+            max-height: 300px;
+            overflow: auto;
+
+            .user {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                border-bottom: 1px solid $borderGray;
+                padding: 5px;
+
+                &:hover {
+                    background-color: $lightBlue-2;
+                }
+
+                @include userImgWithStatus('.user__img');
+
+                .user__img {
+                    height: 40px;
+                    width: 40px;
+                    min-width: 40px;
+                }
+
+                .user__detail {
+                    margin-left: 10px;
+                    cursor: pointer;
+
+                    .user__name {
+                        width: 220px;
+                        overflow: hidden;
+                        display: inline-block;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        font-size: 14px;
+                        color: $titleDarkBlue;
+                    }
+
+                    .user__msg {
+                        width: 220px;
+                        overflow: hidden;
+                        display: inline-block;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        color: $titleDarkBlue;
+                        font-size: 12px;
+                    }
+                }
+            }
+
+            .new__message {
+                background-color: $blue-2;
+            }
+        }
     }
-    .new__message {
-      background-color: $blue-2;
-    }
-  }
-}
 </style>

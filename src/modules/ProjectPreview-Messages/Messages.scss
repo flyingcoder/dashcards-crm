@@ -1,43 +1,46 @@
 @import '~@/sass/_variables';
 
-.message__tab{
-  padding: 25px;
-  margin: 25px;
-  background-color: $white;
-  border: 1px solid $tableBorderBlue;
-  border-radius: 10px;
-  @include customTableRow;
+@include pagePadding('.message__tab');
 
-  .message__content{
-    background-color: $tableBlueBg;
+.message__tab {
+    margin: 25px;
+    background-color: $white;
     border: 1px solid $tableBorderBlue;
     border-radius: 10px;
-    padding: 15px;
-  }
-  @include styledMenuTabs('.tabs');
-  .tabs{
-    border-top: 1px solid $tableBorderBlue;
-    border-left: 1px solid $tableBorderBlue;
-    border-right: 1px solid $tableBorderBlue;
-  }
+    @include customTableRow;
 
-  .option{
-    background-color: $bgLightBlue-2;
-    border: 1px solid $borderLightGray;
-  }
+    .message__content {
+        background-color: $tableBlueBg;
+        border: 1px solid $tableBorderBlue;
+        border-radius: 10px;
+        padding: 15px;
+    }
 
-  .tab-title{
-    margin-right: 20px;
-  }
+    @include styledMenuTabs('.tabs');
 
-  .counter{
-    font-size: 12px;
-    line-height: 35px;
-    background-color: $red;
-    height: 35px;
-    width: 35px;
-    color: $white;
-    border-radius: 50%;
-  }
+    .tabs {
+        border-top: 1px solid $tableBorderBlue;
+        border-left: 1px solid $tableBorderBlue;
+        border-right: 1px solid $tableBorderBlue;
+    }
+
+    .option {
+        background-color: $bgLightBlue-2;
+        border: 1px solid $borderLightGray;
+    }
+
+    .tab-title {
+        margin-right: 20px;
+    }
+
+    .counter {
+        font-size: 12px;
+        line-height: 35px;
+        background-color: $red;
+        height: 35px;
+        width: 35px;
+        color: $white;
+        border-radius: 50%;
+    }
 
 }
