@@ -19,8 +19,9 @@ export const chat_utils = {
 
     computed: {
         ...mapGetters(['user']),
+        ...mapGetters('onlineUsers', ['user_conversations', 'all_users', 'group_conversations']),
         onlineUsers() {
-            return this.$store.getters['onlineUsers/all_users']
+            return this.all_users
         },
         mentionable_list() {
             if (!this.active_chat) return []
@@ -42,22 +43,13 @@ export const chat_utils = {
         }
     },
     methods: {
-
         get_conversation_list(cb) {
             this.contact_list_loading = true
-            request.get(`api/chat/conversations/list?has_msg_count=true`)
-                .then(({data}) => {
-                    /*map online to list*/
-                    this.user_list = data.user_list.map(each => {
-                        let has = this.onlineUsers.findIndex(us => us.id === each.id)
-                        each.is_online = !!(~has)
-                        return each
-                    });
-                    this.group_list = data.group_list
-                    if (typeof cb === 'function')
-                        cb(data)
-                })
-                .finally(() => this.contact_list_loading = false)
+            setTimeout(() => {
+                this.user_list = this.user_conversations
+                this.group_list = this.group_conversations
+            }, 1)
+            this.contact_list_loading = false
         },
         open_conversation(conversation, fetch_message) {
             this.active_chat = conversation

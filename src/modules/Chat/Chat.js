@@ -64,14 +64,14 @@ export default {
                 return this.activeChat.members
             }
             return [this.activeChat]
-        }
+        },
+
     },
     created() {
         if (typeof this.$route.params.target !== 'undefined') {
             this.target = parseInt(this.$route.params.target)
         }
         this.subscribePusher()
-        this.get_conversation_list()
     },
 
     mounted() {
