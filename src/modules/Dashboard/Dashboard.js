@@ -70,6 +70,8 @@ export default {
         this.subscribeToCompany()
         this.subscribeToUser()
         this.fetch_chat()
+        this.get_conversation_list()
+
         this.$event.$on('open_emailer', (user) => {
             this.$refs.global_emailer.openEmailer(user)
         })
@@ -81,7 +83,7 @@ export default {
     methods: {
         ...mapMutations('chatNotifications', ['add_chat']),
         ...mapMutations('onlineUsers', ['set_all_users']),
-        ...mapActions('onlineUsers', ['user_logged_in', 'user_logged_out']),
+        ...mapActions('onlineUsers', ['user_logged_in', 'user_logged_out', 'get_conversation_list']),
         ...mapMutations('chat', ['add_unread_messages', 'add_message_to_conv']),
         ...mapActions('notifications', ['fetch_chat']),
         ...mapActions(['fetchUsers']),
@@ -95,7 +97,7 @@ export default {
             })
             this.userChannel.bind('App\\Events\\ChatMessageSent', ({message}) => {
                 this.$event.$emit('new-chat-message-received', message)
-                if (message.sender.id !== this.user.id ) {
+                if (message.sender.id !== this.user.id) {
                     this.notify(`New message from ${message.sender.first_name}`, message.body)
                 }
             })

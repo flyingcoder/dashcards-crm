@@ -62,7 +62,7 @@
                                 <v-card-title class="card-header">
                                     <Avatar :user="item.client[0]" iconOnly>
                                         <template>
-                                            <span class="client-name subtitle-2">{{ item.props.business_name | truncate(15) }}</span>
+                                            <span class="client-name subtitle-2">{{ item.title  | truncate(15) }}</span>
                                         </template>
                                     </Avatar>
                                     <v-spacer />
@@ -96,7 +96,7 @@
                             <v-divider />
                             <v-card-text class="text-center card-body">
                                 <div class="title cursor-pointer mb-2" @click="navigate_to_view_service(item.id)">
-                                    {{ item.title | ucwords }}
+                                    {{ item.props.business_name | ucwords }}
                                 </div>
                                 <div class="subtitle-2">
                                     <p class="caption">
