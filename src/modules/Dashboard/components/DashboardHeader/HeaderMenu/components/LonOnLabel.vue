@@ -48,13 +48,15 @@
 
         methods: {
             get_timer_status() {
+                if (this.requesting) {
+                    return
+                }
+
                 this.requesting = true
                 this.disabled = true
-                makeRequestTo.timer_status()
+                makeRequestTo.timer_status(false)
                     .then(({data}) => {
-                        if (data) {
-                            this.status = data.action === 'start'
-                        }
+                        if (data) this.status = data.action === 'start'
                     })
                     .finally(() => {
                         this.disabled = false
@@ -62,17 +64,21 @@
                     })
             },
             switch1_changed() {
+                if (this.requesting) {
+                    return
+                }
                 const type = !this.status ? 'start' : 'stop'
                 this.disabled = true
                 this.requesting = true
-                makeRequestTo.change_timer(type).then(() => {
-                    this.disabled = false
-                    this.status = !this.status
-                    const timer_message = this.status ? 'started' : 'stopped'
+                makeRequestTo.change_timer(type)
+                    .then(() => {
+                        this.disabled = false
+                        this.status = !this.status
+                        const timer_message = this.status ? 'started' : 'stopped'
 
-                    this.$event.$emit(this.status ? 'global-timer-started' : 'global-timer-stopped')
-                    this.$event.$emit('open_snackbar', `Timer ${timer_message}`, 'success')
-                })
+                        this.$event.$emit(this.status ? 'global-timer-started' : 'global-timer-stopped')
+                        this.$event.$emit('open_snackbar', `Timer ${timer_message}`, 'success')
+                    })
                     .finally(() => this.requesting = false)
             }
         }

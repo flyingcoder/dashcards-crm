@@ -42,18 +42,7 @@ export const chat_utils = {
         }
     },
     methods: {
-        showNotification(message) {
-            let user = this.$store.getters.user
-            if (message.sender.id !== user.id) {
-                let notification = new Notification(`New message from ${message.sender.first_name}`, {
-                    icon: require('@/assets/logo/mini-blue.png'),
-                    body: message.body
-                })
-                /*notification.onclick = function (event) {
-                    this.$router.push({name: 'chat', params: {conversation_id: message.conversation.id}})
-                }*/
-            }
-        },
+
         get_conversation_list(cb) {
             this.contact_list_loading = true
             request.get(`api/chat/conversations/list?has_msg_count=true`)

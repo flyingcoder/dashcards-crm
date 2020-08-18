@@ -78,7 +78,6 @@
                     this.add_new_message(message)
                     this.scrollToEnd('.messages-wrapper')
                 }
-                this.showNotification(message)
             })
         },
         watch: {

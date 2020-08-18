@@ -4,28 +4,28 @@
             <v-subheader class="body-2">Comments:</v-subheader>
             <v-list dense three-line flat class="comments-wrapper" :max-height="maxHeight">
                 <template v-if="comments.length > 0">
-                    <v-list-item @mouseover="hover = true" @mouseleave="hover = false" class="px-0"
-                                 v-for="(item, index) in comments" :key="item.id"
+                    <v-list-item @mouseover="item.hover = true" @mouseleave="item.hover = false" class="px-0"
+                                 v-for="item in comments" :key="item.id"
                     >
                         <v-list-item-avatar>
                             <v-img :src="item.causer.image_url"/>
                         </v-list-item-avatar>
                         <v-list-item-content>
-                            <v-list-item-title v-html="item.causer.fullname"/>
-                            <v-list-item-subtitle class="caption">
-                                {{ item.created_at | from_now }}
-                            </v-list-item-subtitle>
+                            <v-list-item-title>
+                                {{ item.causer.fullname | ucwords }}
+                                <small class="caption ml-3">{{ item.created_at | from_now }}</small>
+                            </v-list-item-title>
                             <v-list-item-subtitle>
-                                <Editor :has-tools="false" :has-floating-tools="false"
+                                <Editor style="width: 100%;" :has-tools="false" :has-floating-tools="false"
                                         :content="item.body" :editable="false"
                                 />
                             </v-list-item-subtitle>
                         </v-list-item-content>
                         <v-list-item-action>
-                            <v-btn icon v-show="hover && can_delete_comment(item)"
+                            <v-btn icon v-show="item.hover && can_delete_comment(item)"
                                    @click="confirm_delete_comment(item)"
                             >
-                                <v-icon small color="grey lighten-1">delete</v-icon>
+                                <v-icon color="grey lighten-1">mdi-delete-circle-outline</v-icon>
                             </v-btn>
                         </v-list-item-action>
                     </v-list-item>

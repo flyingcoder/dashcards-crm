@@ -1,6 +1,6 @@
 <template>
     <CustomDialog ref="dialog" :maxWidth="700" :title="dialog_title" button2-text="Save" @button1="cancel"
-                  :open.sync="dialog_is_open" @click-close="cancel"
+                  :open.sync="dialog_is_open" @click-close="clear_and_close"
     >
         <template v-slot:content>
             <v-card flat v-if="calendar">
@@ -297,6 +297,7 @@
                 this.link = null
                 this.description = ''
                 this.event_type = null
+                //this.$v.$reset()
                 this.cancel()
             },
             saveEvent() {

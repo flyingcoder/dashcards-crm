@@ -95,11 +95,8 @@ export default {
             })
             this.userChannel.bind('App\\Events\\ChatMessageSent', ({message}) => {
                 this.$event.$emit('new-chat-message-received', message)
-                if (message.sender.id !== this.user.id && this.$route.name !== 'chat') {
-                    let notification = new Notification(`New message from ${message.sender.first_name}`, {
-                        icon: require('@/assets/logo/mini-blue.png'),
-                        body: message.body
-                    })
+                if (message.sender.id !== this.user.id ) {
+                    this.notify(`New message from ${message.sender.first_name}`, message.body)
                 }
             })
         },
@@ -109,10 +106,7 @@ export default {
             this.companyChannel.bind('App\\Events\\ProjectTaskNotification', ({payload}) => {
                 let index = payload.receivers.findIndex(i => i === this.user.id)
                 if (~index) {
-                    new Notification(payload.title, {
-                        icon: require('@/assets/logo/mini-blue.png'),
-                        body: payload.message
-                    })
+                    this.notify(payload.title, payload.message)
                 }
             })
 
@@ -124,8 +118,9 @@ export default {
 
             this.companyChannel.bind('Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', payload => {
                 console.log(payload)
-                if (payload.type.includes('CompanyNotification'))
+                if (payload.type.includes('CompanyNotification')) {
                     this.handleNotificationPayload(payload, 'notification')
+                }
             })
 
             this.companyChannel.bind('App\\Events\\ChatNotification', payload => {
@@ -172,23 +167,37 @@ export default {
         },
 
         handleNotificationPayload(payload, type) {
-            if (payload.data && payload.data.targets.length > 0 && payload.data.title) {
-                if (payload.data.targets.includes(this.user.id)) {
-                    this.$store.commit(`chatNotifications/add_${type}`, payload)
-                    new Notification(payload.data.title, {
-                        icon: require('@/assets/logo/mini-blue.png'),
-                        body: payload.data.message
-                    })
+            if (payload.data && payload.data.title) {
+                if (payload.data.targets.length > 0 && payload.data.targets.includes(this.user.id)) {
+                    if (payload.data.notif_only === false)
+                        this.$store.commit(`chatNotifications/add_${type}`, payload)
+
+                    this.notify(payload.data.title, payload.data.message)
+                } else if (payload.data.title) {
+                    if (payload.data.notif_only === false)
+                        this.$store.commit(`chatNotifications/add_${type}`, payload)
+
+                    this.notify(payload.data.title, payload.data.message)
                 }
             } else {
-                if (payload.data && payload.data.title) {
-                    this.$store.commit(`chatNotifications/add_${type}`, payload)
-                    new Notification(payload.data.title, {
-                        icon: require('@/assets/logo/mini-blue.png'),
-                        body: payload.data.message
-                    })
+                if (payload.targets.length > 0 && payload.targets.includes(this.user.id)) {
+                    if (payload.notif_only === false)
+                        this.$store.commit(`chatNotifications/add_${type}`, payload)
+
+                    this.notify(payload.title, payload.message)
+                } else if (payload.title) {
+                    if (payload.notif_only === false)
+                        this.$store.commit(`chatNotifications/add_${type}`, payload)
+
+                    this.notify(payload.title, payload.message)
                 }
             }
+        },
+        notify(title, body) {
+            this.$notification.show(title, {
+                icon: require('@/assets/logo/mini-blue.png'),
+                body: body
+            }, {})
         },
         handleChatPayload(payload) {
             console.log(payload)

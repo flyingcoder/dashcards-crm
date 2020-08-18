@@ -43,6 +43,7 @@
     "vue-google-api": "^0.2.0",
     "vue-google-charts": "^0.3.2",
     "vue-mention": "^0.1.7",
+    "vue-native-notification": "^1.1.1",
     "vue-owl-carousel": "^2.0.3",
     "vue-pdf": "^4.0.8",
     "vue-phone-number-input": "^1.1.9",

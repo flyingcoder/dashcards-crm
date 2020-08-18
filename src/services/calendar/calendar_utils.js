@@ -26,11 +26,7 @@ export const calendar_utils = {
         next_page_url: null
     }),
     created() {
-        apiTo.myCalendar()
-            .then(({data}) => {
-                this.calendar = data.calendar
-                this.attributes = data.attributes
-            })
+        this.load_calendar()
 
         this.$event.$on('add-participant', (event) => {
             this.open_add_participant_dialog(event)
@@ -49,7 +45,7 @@ export const calendar_utils = {
         date() {
             return moment(this.start, 'YYYY-MM-DD').format('MMMM YYYY')
         },
-        loggeduser() {
+        logged_user() {
             return this.$store.getters.user
         }
     },
@@ -62,6 +58,13 @@ export const calendar_utils = {
         }
     },
     methods: {
+        load_calendar() {
+            apiTo.myCalendar()
+                .then(({data}) => {
+                    this.calendar = data.calendar
+                    this.attributes = data.attributes
+                })
+        },
         load_attributes() {
             apiTo.myCalendarAttributes().then(({data}) => {
                 this.attributes = data
@@ -170,7 +173,7 @@ export const calendar_utils = {
             this.$refs.confirm_leave_event.showDialog()
         },
         confirmed_leave() {
-            this.leaveEvent(this.activeEvent, this.loggeduser.id)
+            this.leaveEvent(this.activeEvent, this.logged_user.id)
         },
         leaveEvent(event, user_id) {
             apiTo
