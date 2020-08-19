@@ -2,16 +2,16 @@
     <v-layout class="hq-tab">
         <v-row>
             <v-col cols="12" md="6">
-                <project-overview-card :id="id"></project-overview-card>
+                <project-overview-card :id="id" />
             </v-col>
             <v-col cols="12" md="6">
-                <timeline-card :id="id"></timeline-card>
+                <timeline-card :id="id" />
             </v-col>
             <v-col cols="12" md="6">
-                <tasks-card :showProject="false" :id="id" :view-more-link="taskPath" page="project-hq"></tasks-card>
+                <tasks-card :showProject="false" :id="id" :view-more-link="taskPath" page="project-hq" />
             </v-col>
             <v-col cols="12" md="6">
-                <invoice-table :id="id"></invoice-table>
+                <invoice-table :id="id" />
             </v-col>
         </v-row>
     </v-layout>

@@ -47,7 +47,7 @@
         <div class="sel-timer">
             <div class="timer-body">
                 <div class="pa-2" v-if="loading">
-                    <v-boilerplate type="article, actions"/>
+                    <v-boilerplate type="article, actions" />
                 </div>
                 <v-carousel hide-delimiters show-arrows height="auto" v-else-if="items.length > 0">
                     <v-carousel-item v-for="slide in items" :key="slide.id">
@@ -55,13 +55,14 @@
                             <div class="t-slide">
                                 <div class="slide-left">
                                     <div class="t-person">
-                                        <Avatars :count="2" :items="slide.assigned"/>
+                                        <Avatars :count="2" :items="slide.assigned" />
                                     </div>
                                     <div class="t-title">
-                                        <h3 class="subtitle-2 font-weight-bold">
-                                            {{ slide.title | ucwords }}
+                                        <h3 class="subtitle-2 font-weight-bold" :title="slide.title">
+                                            {{ slide.title | ucwords | truncate(30) }}
                                         </h3>
                                         <div class="caption"
+                                             :title="slide.description"
                                              :inner-html.prop="slide.description | truncate(50)"
                                         />
                                     </div>
@@ -112,8 +113,7 @@
                                         <v-btn color="#fff" v-if="slide.status === `completed`"
                                                :disabled="true" class="start-btn" tile text block
                                         >
-                                            TASK
-                                            COMPLETED
+                                            <span> TASK COMPLETED</span>
                                         </v-btn>
                                         <v-btn color="#fff" @click="timerClick(slide)"
                                                v-else-if="slide.timer.timer_started"
@@ -121,16 +121,14 @@
                                                text block
                                         >
                                             <v-icon small left>pause</v-icon>
-                                            PAUSED
-                                            TIMER
+                                            <span> PAUSED TIMER</span>
                                         </v-btn>
                                         <v-btn color="#fff" @click="timerClick(slide)" v-else
                                                :disabled="slide.timer.timer_disabled" class="start-btn" tile
                                                text block
                                         >
                                             <v-icon small left>play_arrow</v-icon>
-                                            START
-                                            TIMER
+                                            <span> START TIMER</span>
                                         </v-btn>
                                     </div>
                                 </div>
@@ -138,19 +136,19 @@
                         </v-sheet>
                     </v-carousel-item>
                 </v-carousel>
-                <Empty icon="" v-else headline="No Timer Found!"/>
+                <Empty icon="" v-else headline="No Timer Found!" />
             </div>
         </div>
     </v-card>
 </template>
 
 <script>
-    import { mapGetters } from 'vuex'
+    import {mapGetters} from 'vuex'
     import request from '@/services/axios_instance'
     import moment from 'moment'
-
     //components
     import Avatars from '@/common/Avatars.vue'
+
     export default {
         name: "TimerContent",
         components: {
@@ -172,6 +170,9 @@
                 }
             }
         },
+        props: {
+            userId: Number
+        },
         data() {
             return {
                 loading: true,
@@ -185,10 +186,10 @@
                     total: 0
                 },
                 headers: [
-                    { text: 'Task', sortable: false },
-                    { text: 'Assigned', sortable: false },
-                    { text: 'Total Time', sortable: false },
-                    { text: 'Status', sortable: false }
+                    {text: 'Task', sortable: false},
+                    {text: 'Assigned', sortable: false},
+                    {text: 'Total Time', sortable: false},
+                    {text: 'Status', sortable: false}
                 ],
                 slides: 5,
                 tab: 'timer',
@@ -233,21 +234,23 @@
         },
 
         computed: {
-            ...mapGetters(['user'])
+            ...mapGetters(['user']),
+            userOfId() {
+                return this.userId ? this.userId : this.user.id
+            }
         },
 
         methods: {
             task_belongs_to_logged_user(task) {
                 if (!task.assigned.length) return
-                let ind = task.assigned.findIndex(
-                    i => i.id === this.$auth.logged_user().id
+                let index = task.assigned.findIndex(
+                    i => i.id === this.user.id
                 )
-                return !!(~ind)
+                return !!(~index)
             },
             getUserTimers() {
-                request
-                    .get(`/api/user/${this.user.id}/global-timers`)
-                    .then(({ data }) => {
+                request.get(`/api/user/${this.userOfId}/global-timers`)
+                    .then(({data}) => {
                         this.user_today = data.today
                         this.user_monthly = data.monthly
                         this.user_global_status = data.is_started
@@ -260,11 +263,8 @@
             },
             getTaskTimers() {
                 this.loading = true
-                request
-                    .get(
-                        `/api/user/${this.user.id}/task-timers?page=${this.pagination.current}`
-                    )
-                    .then(({ data }) => {
+                request.get(`/api/user/${this.userOfId}/task-timers?page=${this.pagination.current}`)
+                    .then(({data}) => {
                         this.items = data.data
                         this.items.map(ii => {
                             if (ii.timer.timer_status === 'ongoing') {
@@ -320,16 +320,17 @@
                     let api = 'api/timer/start'
                     if (item.timer.timer_status === 'pause') api = 'api/timer/back'
                     item.timer.timer_disabled = true
-                    request.post(api, { type: 'task', id: item.id }).then(() => {
-                        item.timer.timer_disabled = false
-                        item.timer.timer_status = 'ongoing'
-                    })
+                    request.post(api, {type: 'task', id: item.id})
+                        .then(() => {
+                            item.timer.timer_disabled = false
+                            item.timer.timer_status = 'ongoing'
+                        })
                 }
             },
             pause_timer(item) {
                 item.timer.timer_disabled = true
                 request
-                    .post('api/timer/pause', { type: 'task', id: item.id })
+                    .post('api/timer/pause', {type: 'task', id: item.id})
                     .then(() => {
                         clearInterval(item.timer.timer_interval)
                         item.timer.timer_disabled = false

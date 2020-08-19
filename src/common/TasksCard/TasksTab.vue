@@ -19,7 +19,7 @@
 </template>
 
 <script>
-    import {mapActions, mapGetters} from 'vuex'
+    import {mapActions, mapGetters, mapMutations} from 'vuex'
     import TaskChips from './TaskChips.vue'
     import TaskCustomTable from './TaskCustomTable.vue'
 
@@ -36,7 +36,7 @@
         }),
 
         computed: {
-            ...mapGetters('taskCards', ['total', 'tasks', 'counter', 'loading']),
+            ...mapGetters('taskCards', ['total', 'tasks', 'counter', 'loading', 'user_id']),
             filtered_tasks() {
                 if (this.active_chip === 'all') return this.tasks
                 return this.tasks.filter(
@@ -58,6 +58,7 @@
         },
 
         methods: {
+            ...mapMutations('taskCards', ['set_user_id']),
             ...mapActions('taskCards', ['get_tasks'])
         }
     }

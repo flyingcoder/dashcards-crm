@@ -4,15 +4,15 @@
             <v-progress-linear :indeterminate="true" />
         </div>
         <v-card flat class="pa-2">
-            <tasks-content :hasTabs="false" hasLoadMoreBtn showProject />
+            <tasks-content :hasTabs="false" :userId="user_id" hasLoadMoreBtn showProject />
         </v-card>
-</div>
+    </div>
 </template>
 
 <script>
-    import apiTo from './api'
     //Components
-    import TasksContent from "@/common/TasksCard/TasksContent";
+    import TasksContent from "@/common/TasksCard/TasksContent.vue";
+    import {mapMutations} from "vuex";
 
     export default {
         components: {
@@ -27,40 +27,9 @@
             active_chip: 'all',
             selected_task: null
         }),
-
-        computed: {
-            filtered_tasks() {
-                if (this.active_chip === 'all') return this.tasks
-                return this.tasks.filter(
-                    task => task.status.toLowerCase() === this.active_chip
-                )
-            },
-            tasks_are_empty() {
-                return !this.loading && this.tasks.length === 0
-            },
-            count_completed_tasks() {
-                return this.tasks.filter(task => task.status.toLowerCase() === 'completed').length
-            },
-            count_pending_tasks() {
-                return this.tasks.filter(task => task.status.toLowerCase() === 'pending').length
-            },
-            count_behind_tasks() {
-                return this.tasks.filter(task => task.status.toLowerCase() === 'behind').length
-            },
-            count_open_tasks() {
-                return this.tasks.filter(task => task.status.toLowerCase() === 'open').length
-            },
-            count_urgent_tasks() {
-                return this.tasks.filter(task => task.status.toLowerCase() === 'urgent').length
-            }
-        },
-
         created() {
-            this.get_tasks()
-            this.$event.$on(
-                'task-row-clicked',
-                data_from_child => (this.selected_task = data_from_child)
-            )
+            this.set_user_id(this.user_id)
+            this.set_id(null)
         },
 
         beforeDestroy() {
@@ -68,13 +37,7 @@
         },
 
         methods: {
-            get_tasks() {
-                this.loading = true
-                apiTo
-                    .get_tasks(this.user_id)
-                    .then(({data}) => (this.tasks = data))
-                    .finally(() => (this.loading = false))
-            }
+            ...mapMutations('taskCards', ['set_user_id', 'set_id']),
         }
     }
 </script>

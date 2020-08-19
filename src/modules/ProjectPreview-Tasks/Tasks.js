@@ -4,7 +4,7 @@ import TasksCard from '@/common/TasksCard/TasksCard.vue'
 import PreviewCard from './components/TaskTabPreviewCard/TaskTabPreviewCard.vue'
 import Avatars from '@/common/Avatars'
 import TasksContent from "@/common/TasksCard/TasksContent";
-import {mapMutations} from "vuex";
+import {mapGetters, mapMutations} from "vuex";
 
 export default {
     name: 'TasksTab',
@@ -30,20 +30,25 @@ export default {
         searchResult: [],
         timeout: null
     }),
-
+    created() {
+        this.set_page(this.page)
+        this.set_id(this.id)
+        this.set_user_id(this.user.id)
+    },
     computed: {
+        ...mapGetters(['user']),
         type() {
             return this.$route.params.type || 'project'
         },
         paths() {
             return [
                 {text: 'Dashboard', disabled: false, route: {name: 'default-content'}},
-                { text: this.type, disabled: false, route: {path: `/dashboard/${this.type}/preview/${this.id}`}},
+                {text: this.type, disabled: false, route: {path: `/dashboard/${this.type}/preview/${this.id}`}},
                 {text: 'Tasks', disabled: true, route: null}
             ]
         },
     },
-    beforeRouteUpdate (to, from, next) {
+    beforeRouteUpdate(to, from, next) {
         this.active_task_id = to.params.task_id
         //next()
     },
@@ -52,8 +57,6 @@ export default {
         this.$event.$on('show-task-side-preview', task => {
             this.active_task_id = task.id
         })
-        this.set_page(this.page)
-        this.set_id(this.id)
     },
     provide() {
         const properties = {}
@@ -74,7 +77,7 @@ export default {
         },
     },
     methods: {
-        ...mapMutations('taskCards', ['set_page', 'set_id']),
+        ...mapMutations('taskCards', ['set_page', 'set_id', 'set_user_id']),
         fetchEntries(val) {
             this.searchResult = []
             request.get(`api/projects/${this.id}/tasks/search?keyword=${val}`)

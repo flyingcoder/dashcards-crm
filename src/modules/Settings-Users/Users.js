@@ -1,5 +1,4 @@
-import { list_functionality } from '@/services/list-functionality/list-functionality'
-import isEmpty from 'lodash/isEmpty'
+import {list_functionality} from '@/services/list-functionality/list-functionality'
 import request from '@/services/axios_instance'
 //Components
 import Breadcrumb from '@/common/Breadcrumb.vue'
@@ -14,13 +13,13 @@ export default {
     },
     data: () => ({
         paths: [
-            { text: 'Settings', disabled: false, route: {name: 'settings'} },
-            { text: 'Users & Roles', disabled: true, route: null }
+            {text: 'Settings', disabled: false, route: {name: 'settings'}},
+            {text: 'Users & Roles', disabled: true, route: null}
         ],
-        roles: [{ name: 'All', slug: 'all' }],
+        roles: [{name: 'All', slug: 'all'}],
         permissions: null,
         activeUser: null,
-        filter: 'all',
+        filter: 'All',
         currentRoles: [],
         tobeAddedRoles: [],
         search: '',
@@ -36,9 +35,9 @@ export default {
     computed: {
         filteredUsers() {
             return this.items.filter(item => {
-                if (this.filter === 'all') return true
-                let roles = Object.values(item.user_roles);
-                return roles.includes(this.filter)
+                if (this.filter === 'All') return true
+                let index = item.roles.findIndex(item => item.name.toLowerCase() === this.filter.toLowerCase() )
+                return !!(~index)
             })
         },
         currentUserRoles() {
@@ -48,7 +47,9 @@ export default {
             })
         },
         selectRoles() {
-            return this.roles.filter(i => { return i.slug !== 'all' })
+            return this.roles.filter(i => {
+                return i.slug !== 'all'
+            })
         },
         user() {
             return this.$store.getters.user
@@ -61,8 +62,8 @@ export default {
             if (this.user.is_admin && this.activeUser.is_admin) return false
             if (this.user.is_manager && this.activeUser.is_manager) return false
             if (this.activeUser.is_manager && this.user.is_admin) return true
-            if (this.activeUser.is_admin && this.user.is_manager) return false
-            return true
+            return !(this.activeUser.is_admin && this.user.is_manager);
+
         }
     },
     methods: {
@@ -74,13 +75,13 @@ export default {
         },
         getGroups() {
             request.get(`api/groups?all=true`)
-                .then(({ data }) => {
+                .then(({data}) => {
                     this.roles.push(...data)
                 })
         },
         getUserPermissions() {
             request.get(`api/permission/user/${this.activeUser.id}`)
-                .then(({ data }) => {
+                .then(({data}) => {
                     this.permissions = data
                 })
         },
@@ -97,12 +98,14 @@ export default {
                 return
             }
             this.btnloading = true
-            var payload = {
+            const payload = {
                 user: this.activeUser.id,
-                roles: this.tobeAddedRoles.map(o => { return o.id }),
-            }
+                roles: this.tobeAddedRoles.map(o => {
+                    return o.id
+                }),
+            };
             request.post(`api/groups/user/update-roles`, payload)
-                .then(({ data }) => {
+                .then(({data}) => {
                     this.activeUser = data
                     let index = this.items.findIndex(i => i.id === data.id)
                     if (~index) {
@@ -116,12 +119,12 @@ export default {
         },
         controlAccount() {
             this.restoring = true
-            var payload = {
+            let payload = {
                 action: this.activeUser.deleted_at ? 'restore' : 'delete',
                 user: this.activeUser.id
-            }
+            };
             request.post(`api/groups/user/restore-delete`, payload)
-                .then(({ data }) => {
+                .then(({data}) => {
                     this.activeUser = data
                     let index = this.items.findIndex(i => i.id === data.id)
                     if (~index) {

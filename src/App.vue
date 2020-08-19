@@ -45,7 +45,7 @@
         data: () => ({
             user_moved_mouse: 0,
             bottom_sheet: false,
-            timer_started : false
+            timer_started: false
         }),
 
         watch: {
@@ -84,11 +84,12 @@
                 this.user_moved_mouse = 0
             },
             request_notification_permission() {
-                Notification.requestPermission().then(function (permission) {
-                    if (permission === 'denied') {
-                        this.request_notification_permission()
-                    }
-                })
+                Notification.requestPermission()
+                    .then(function (permission) {
+                        if (permission === 'denied') {
+                            this.request_notification_permission()
+                        }
+                    })
             }
         }
     }

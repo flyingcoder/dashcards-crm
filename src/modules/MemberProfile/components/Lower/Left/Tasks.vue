@@ -13,57 +13,20 @@
 <script>
     import {mapGetters, mapMutations} from 'vuex'
     import TasksContent from "@/common/TasksCard/TasksContent.vue";
+
     export default {
-        components:{
+        components: {
             TasksContent
         },
-        data: () => ({
-            active_chip: 'all',
-            task: null
-        }),
         created() {
-            this.$event.$on('task-view', task => this.set_and_view_task(task))
             this.set_id(null)
+            this.set_user_id(this.$route.params.user_id)
         },
         computed: {
-            ...mapGetters('memberProfile', ['tasks', 'user_loading']),
-            filtered_tasks() {
-                if (!this.tasks) return []
-                if (this.active_chip === 'all') return this.tasks
-                return this.tasks.filter(
-                    task => task.status.toLowerCase() === this.active_chip
-                )
-            },
-            tasks_are_empty() {
-                return !this.tasks || this.tasks.length === 0
-            },
-            count_completed_tasks() {
-                if (!this.tasks) return 0
-                return this.tasks.filter(task => task.status.toLowerCase() === 'completed').length
-            },
-            count_pending_tasks() {
-                if (!this.tasks) return 0
-                return this.tasks.filter(task => task.status.toLowerCase() === 'pending').length
-            },
-            count_behind_tasks() {
-                if (!this.tasks) return 0
-                return this.tasks.filter(task => task.status.toLowerCase() === 'behind').length
-            },
-            count_open_tasks() {
-                if (!this.tasks) return 0
-                return this.tasks.filter(task => task.status.toLowerCase() === 'open').length
-            },
-            count_urgent_tasks() {
-                if (!this.tasks) return 0
-                return this.tasks.filter(task => task.status.toLowerCase() === 'urgent').length
-            },
+            ...mapGetters('memberProfile', ['user_loading']),
         },
         methods: {
-            ...mapMutations('taskCards', ['set_id']),
-            set_and_view_task(task) {
-                this.task = task
-                this.$refs.view_task_dialog.open_dialog()
-            },
+            ...mapMutations('taskCards', ['set_id', 'set_user_id']),
         }
     }
 </script>

@@ -210,12 +210,7 @@
                 if (this.page === 'project-preview') this.row_clicked(item)
                 else this.task_action(item, 'task-view')
             },
-            /*replace_task(task, id) {
-                let index = this.tasks.findIndex(item => item.id === id)
-                if (~index) {
-                    this.tasks.splice(index, 1, task)
-                }
-            },*/
+
             remove_task(id) {
                 let index = this.tasks.findIndex(item => item.id === id)
                 if (~index) {

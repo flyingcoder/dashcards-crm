@@ -1,8 +1,7 @@
-import { mapGetters, mapMutations, mapActions } from 'vuex'
+import {mapActions, mapGetters, mapMutations} from 'vuex'
 import _cloneDeep from 'lodash/cloneDeep'
 import request from '@/services/axios_instance'
 import {is_screen_utils} from "@/global_utils/is_screen_utils";
-
 //Components
 import TasksCard from '@/common/TasksCard/TasksCard.vue'
 import TimelineCard from '@/common/TimelineCard/TimelineCard.vue'
@@ -37,7 +36,7 @@ export default {
         AlarmCard,
         VBoilerplate: {
             functional: true,
-            render(h, { data, props, children }) {
+            render(h, {data, props, children}) {
                 return h(
                     'v-skeleton-loader', {
                         ...data,
@@ -63,7 +62,7 @@ export default {
             dashboard: true
         },
         paths: [
-            { text: 'Dashboard', disabled: false, router_name: 'default-content' }
+            {text: 'Dashboard', disabled: false, router_name: 'default-content'}
         ],
     }),
 
@@ -108,7 +107,7 @@ export default {
                 return card
             })
         },
-        allowed_dashcards(){
+        allowed_dashcards() {
             return this.global_configs.allowed_dashcards
         }
     },
@@ -124,25 +123,26 @@ export default {
             }
         }
     },
-    mounted(){
+    mounted() {
         this.$event.$emit('path-change', this.paths)
     },
     created() {
         this.fill_cards().finally(() => (this.loading = false))
         this.set_id(null)
+        this.set_user_id(this.user.id)
     },
 
     methods: {
         ...mapActions('cards', ['fill_cards', 'update_cards']),
         ...mapMutations('cards', ['set_cards']),
-        ...mapMutations('taskCards', ['set_id']),
+        ...mapMutations('taskCards', ['set_id', 'set_user_id']),
         close(id) {
             if (this.isRequestInProgress) return
             this.isRequestInProgress = true
             const card_ids = this.cards
                 .filter(card => card.id !== id)
                 .map(card => card.id)
-            this.update_cards({ dashitem_id: card_ids }).finally(
+            this.update_cards({dashitem_id: card_ids}).finally(
                 () => (this.isRequestInProgress = false)
             )
         },
@@ -190,7 +190,7 @@ export default {
             return !!user
         },
 
-        is_dashcard_enabled(slug){
+        is_dashcard_enabled(slug) {
             return this.allowed_dashcards.includes(slug)
         }
     }

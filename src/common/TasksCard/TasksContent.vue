@@ -9,7 +9,9 @@
             <v-tabs-items v-model="active_tab">
                 <v-tab-item v-for="tab of tabs" :key="tab.id" :value="tab.name">
                     <v-card flat>
-                        <tasks-tab :tab="active_tab" :showProject="showProject" v-if="active_tab === tab.name" />
+                        <tasks-tab :tab="active_tab" :user-id="userId" :showProject="showProject"
+                                   v-if="active_tab === tab.name"
+                        />
                     </v-card>
                 </v-tab-item>
             </v-tabs-items>
@@ -102,6 +104,7 @@
         },
 
         props: {
+            userId: [Number, String],
             id: {type: [Number, String], default: null},
             hasLoadMoreBtn: {type: Boolean, default: false},
             hasTabs: {type: Boolean, default: true},
@@ -125,9 +128,6 @@
                 set: function (val) {
                     return val
                 }
-            },
-            logged_user() {
-                return this.$store.getters.user
             },
             project_id: {
                 get: function () {
@@ -158,6 +158,9 @@
         watch: {
             id(val) {
                 this.set_id(val)
+            },
+            userId(val) {
+                this.set_user_id(parseInt(val))
             }
         },
         created() {
@@ -171,7 +174,7 @@
             this.$event.$on('task-view', task => this.set_and_view_task(task))
         },
         methods: {
-            ...mapMutations('taskCards', ['set_id', 'add_task', 'del_task', 'replace_task']),
+            ...mapMutations('taskCards', ['set_id', 'set_user_id', 'add_task', 'del_task', 'replace_task']),
             ...mapActions('taskCards', ['see_more']),
             loadMore() {
                 this.see_more()
@@ -191,8 +194,6 @@
 
             edit_task(payload) {
                 apiTo.edit_task(this.task.id, payload).then(({data}) => {
-                    //this.update_task(data, this.task.id, 'all_tasks')
-                    //this.update_task(data, this.task.id, 'tasks_own')
                     this.$refs.edit_task_dialog.$refs.dialog.clear_and_close()
                     this.$event.$emit('open_snackbar', 'Task updated successfully')
                     this.$event.$emit('task-is-updated', data)
@@ -298,8 +299,6 @@
                     .then(({data}) => {
                         this.confirm_mark_as_complete_dialog = false
                         this.$event.$emit('open_snackbar', 'Task is completed')
-                        //this.update_task(data, this.task.id, 'all_tasks')
-                        //this.update_task(data, this.task.id, 'tasks_own')
                         this.replace_task(data)
                         this.$event.$emit('btnloading_off', false)
                         this.$event.$emit('task-is-updated', data)

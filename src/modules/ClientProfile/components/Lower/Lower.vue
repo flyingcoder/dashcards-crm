@@ -1,29 +1,17 @@
 <template>
     <div class="profile-lower">
-        <v-tabs
-                class="tabs"
-                centered
-                grow
-                :hide-slider="false"
-                height="60px"
-                :show-arrows="is_screen_medium_and_down"
+        <v-tabs :hide-slider="false" :show-arrows="is_screen_medium_and_down" centered class="tabs" grow height="60px"
                 v-model="active_tab"
         >
-            <v-tab
-                    v-for="tab of tabs"
-                    :key="tab.route"
-                    :to="tab.route"
-                    class="tab-item"
-                    exact
-            >
+            <v-tab :key="tab.route" :to="tab.route" class="tab-item" exact v-for="tab of tabs">
                 <div>
-                    <v-icon small left>{{tab.icon}}</v-icon>
+                    <v-icon left small>{{ tab.icon }}</v-icon>
                     {{ tab.name }}
                 </div>
             </v-tab>
         </v-tabs>
-        <keep-alive>
-            <router-view />
+        <keep-alive :key="user_id">
+            <router-view :key="$route.fullPath" />
         </keep-alive>
     </div>
 </template>

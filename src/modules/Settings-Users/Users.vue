@@ -17,7 +17,7 @@
                             <!-- <v-text-field v-model="search" placeholder="Search user..." @keyup="filterSearch" flat dense outlined append-icon="search" clearable></v-text-field> -->
                             <!-- </v-subheader> -->
                             <v-select v-model="filter" :value="filter" solo dense flat class="px-2" item-text="name"
-                                      item-value="slug" outlined :items="roles" label="Filter Roles"
+                                      item-value="name" outlined :items="roles" label="Filter Roles"
                             />
                             <v-divider class="pa-0 ma-0" />
                             <template v-for="item in filteredUsers">

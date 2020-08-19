@@ -6,6 +6,7 @@ const state = {
     total: 0,
     loading: null,
     id: null,
+    user_id: null,
     see_more_url: null,
     page: null,
     btnloading: false,
@@ -28,11 +29,13 @@ const getters = {
     see_more_url: state => state.see_more_url,
     page: state => state.page,
     id: state => state.id,
+    user_id: state => state.user_id,
     btnloading: state => state.btnloading
 }
 
 const mutations = {
     set_id: (state, payload) => (state.id = payload),
+    set_user_id: (state, payload) => (state.user_id = payload),
     set_page: (state, payload) => (state.page = payload),
     set_tasks: (state, payload) => (state.tasks = payload),
     set_total: (state, payload) => (state.total = payload),
@@ -63,8 +66,9 @@ const actions = {
         }
         if (payload.tab === 'My Tasks') api_url += '/mine'
         api_url += '?filter='+payload.filter
-        request
-            .get(api_url)
+        if (state.user_id)
+            api_url += api_url.includes('?filter') ? `&for_user=${state.user_id}` : `?for_user=${state.user_id}`
+        request.get(api_url)
             .then(({data}) => {
                 commit('set_tasks_res', data)
                 commit('set_tasks', data.data)
@@ -77,8 +81,7 @@ const actions = {
     see_more({commit, state}) {
         commit('set_loading', true)
         commit('set_btnloading', true)
-        request
-            .get(state.see_more_url)
+        request.get(state.see_more_url)
             .then(({data}) => {
                 let current_tasks = state.tasks_res.data
                 commit('set_tasks', current_tasks.concat(data.data))
