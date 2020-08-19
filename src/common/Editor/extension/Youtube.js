@@ -13,7 +13,7 @@ export default class Youtube extends Node {
                 }
             },
             group: "block",
-            selectable: false,
+            selectable: true,
             parseDOM: [{
                 tag: "iframe",
                 getAttrs: dom => ({
@@ -23,10 +23,9 @@ export default class Youtube extends Node {
             toDOM: node => [
                 "iframe",
                 {
-                    src: `https://www.youtube.com/embed/${node.attrs.src}`,
+                    src: node.attrs.src.includes('youtube') ? `${node.attrs.src}` : `https://www.youtube.com/embed/${node.attrs.src}`,
                     frameborder: 0,
                     allowfullscreen: "true",
-                    allow: "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
                     width: 600,
                     height: 350,
                     class: 'yt-iframe mx-auto'
